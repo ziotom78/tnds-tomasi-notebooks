@@ -13134,17 +13134,17 @@ div#notebook {
 <p>Questo è un esempio di codice che gestisce entrambi gli errori:</p>
 <div class="highlight"><pre><span></span><span class="kt">int</span> <span class="nf">calc_age</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span>
     <span class="kt">int</span> <span class="n">year0</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">year1</span> <span class="o">=</span> <span class="mi">2019</span><span class="p">;</span>
+    <span class="kt">bool</span> <span class="n">ok</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
 
-    <span class="k">while</span> <span class="p">(</span><span class="n">year0</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">while</span> <span class="p">(</span><span class="o">!</span> <span class="n">ok</span><span class="p">)</span> <span class="p">{</span>
         <span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Inserisci il tuo anno di nascita: &quot;</span><span class="p">;</span>
         <span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">year0</span><span class="p">;</span>
 
         <span class="c1">// Previene errori di battitura (errore del secondo tipo)</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">year0</span> <span class="o">&lt;</span> <span class="mi">1900</span><span class="p">)</span> <span class="p">{</span>
-            <span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Errore, l&#39;anno deve essere plausibile!</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
-        <span class="p">}</span>
-        <span class="k">if</span><span class="p">(</span><span class="n">year0</span> <span class="o">&gt;</span> <span class="mi">2019</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">year0</span> <span class="o">&lt;</span> <span class="mi">1900</span> <span class="o">||</span> <span class="n">year</span> <span class="o">&gt;</span> <span class="mi">2019</span><span class="p">)</span> <span class="p">{</span>
             <span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Forse hai sbagliato, riprova!</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="n">ok</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
         <span class="p">}</span>
     <span class="p">}</span>
 
@@ -13171,6 +13171,7 @@ div#notebook {
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Rispetto al C++, i linguaggi moderni offrono maggiori possibilità di gestione delle condizioni di errore, che vanno al di là del semplice <code>assert</code> del C++. Un caso interessante è quello del linguaggio D (<a href="https://dlang.org/">https://dlang.org/</a>), un derivato del C:</p>
 <p><img src="./images/c-descendants.png" alt=""></p>
+<p>Al pari di altri linguaggi moderni (<a href="https://en.wikipedia.org/wiki/Ada_%28programming_language%29">Ada</a>, <a href="https://www.rust-lang.org/">Rust</a>, …), il linguaggio D ha adottato dei concetti avanzati di programmazione: i <em>contracts</em>, gli <em>invariants</em> e gli <em>unit tests</em>. Capire cosa sono aiuta a comprendere lo scopo degli <code>assert</code> nei programmi C++.</p>
 
 </div>
 </div>
@@ -13178,10 +13179,7 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Al pari di altri linguaggi moderni (<a href="https://en.wikipedia.org/wiki/Ada_%28programming_language%29">Ada</a>, <a href="https://www.rust-lang.org/">Rust</a>, …), il linguaggio D ha adottato dei concetti avanzati di programmazione: i <em>contracts</em>, gli <em>invariants</em> e gli <em>unit tests</em>. Capire cosa sono aiuta a comprendere lo scopo degli <code>assert</code> nei programmi C++.</p>
-<ol>
-<li>Un <code>contract</code> è una serie di asserzioni che devono valere nel momento in cui una funzione inizia la sua esecuzione (<em>in-contract</em>, e si specifica con <code>in</code>) o nel momento in cui la funzione termina e restituisce il suo risultato (<em>out-contract</em>, e si specifica con <code>out</code>):</li>
-</ol>
+<h4 id="Contracts">Contracts<a class="anchor-link" href="#Contracts">&#182;</a></h4><p>Un <code>contract</code> è una serie di asserzioni che devono valere nel momento in cui una funzione inizia la sua esecuzione (<em>in-contract</em>, e si specifica con <code>in</code>) o nel momento in cui la funzione termina e restituisce il suo risultato (<em>out-contract</em>, e si specifica con <code>out</code>):</p>
 <div class="highlight"><pre><span></span><span class="kt">double</span> <span class="n">sqrt</span><span class="p">(</span><span class="kt">double</span> <span class="n">val</span><span class="p">)</span>
 <span class="k">in</span><span class="p">(</span><span class="n">val</span> <span class="p">&gt;=</span> <span class="mf">0.0</span><span class="p">)</span>  <span class="c1">// L&#39;argomento della radice quadrata deve essere positivo</span>
 <span class="k">out</span><span class="p">(</span><span class="n">result</span><span class="p">;</span> <span class="n">result</span> <span class="p">&gt;=</span> <span class="mf">0.0</span><span class="p">)</span> <span class="c1">// Il valore di ritorno sta in &quot;result&quot;, e deve essere positivo</span>
@@ -13189,7 +13187,15 @@ div#notebook {
     <span class="kt">double</span> <span class="n">result</span><span class="p">;</span>
 
     <span class="c1">// Calcola il risultato</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">val</span> <span class="p">==</span> <span class="mf">0.0</span><span class="p">)</span>
+        <span class="k">return</span> <span class="mf">0.0</span><span class="p">;</span> <span class="c1">// Il compilatore verifica l&#39;out-invariant anche se non si restituisce esplicitamente una variabile</span>
     <span class="p">...</span>
+
+    <span class="k">if</span><span class="p">(</span><span class="n">some_var</span> <span class="p">&gt;</span> <span class="n">another_var</span><span class="p">)</span> <span class="p">{</span>
+        <span class="p">...</span>
+
+        <span class="k">return</span> <span class="n">another_result</span><span class="p">;</span> <span class="c1">// Il compilatore verifica l&#39;out-invariant anche qui</span>
+    <span class="p">}</span>    
 
     <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
 <span class="p">}</span>
@@ -13201,16 +13207,35 @@ div#notebook {
     <span class="kt">double</span> <span class="n">result</span><span class="p">;</span>
 
     <span class="c1">// Calcola il risultato</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">val</span> <span class="o">==</span> <span class="mf">0.0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">;</span>
+        <span class="n">assert</span><span class="p">(</span><span class="n">result</span> <span class="o">&gt;=</span> <span class="mf">0.0</span><span class="p">);</span> <span class="c1">// Un po&#39; assurdo!</span>
+        <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="c1">// I calcoli complicati vengono qui!</span>
     <span class="p">...</span>
 
-    <span class="n">assert</span><span class="p">(</span><span class="n">result</span><span class="p">;</span> <span class="n">result</span> <span class="o">&gt;=</span> <span class="mf">0.0</span><span class="p">)</span> <span class="c1">// Il valore di ritorno sta in &quot;result&quot;, e deve essere positivo</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">some_var</span> <span class="o">&gt;</span> <span class="n">another_var</span><span class="p">)</span> <span class="p">{</span>
+        <span class="p">...</span>
+
+        <span class="n">assert</span><span class="p">(</span><span class="n">another_result</span> <span class="o">&gt;=</span> <span class="mf">0.0</span><span class="p">);</span> <span class="c1">// Bisogna chiamare a mano assert anche qui</span>
+        <span class="k">return</span> <span class="n">another_result</span><span class="p">;</span>
+    <span class="p">}</span>    
+
+    <span class="n">assert</span><span class="p">(</span><span class="n">result</span> <span class="o">&gt;=</span> <span class="mf">0.0</span><span class="p">);</span>
     <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
-<p>Ma in D il codice è più chiaro perché sia l'<em>in-contract</em> che l'<em>out-contract</em> sono riportati immediatamente sotto il prototipo della funzione. (Il linguaggio D ha anche la possibilità di generare documentazione automatica per le funzioni, salvandola in file HTML, e in questi casi riporta i <em>contracts</em> all'interno della documentazione).</p>
-<ol>
-<li>Un <code>invariant</code> è una serie di condizioni che deve soddisfare una classe durante la sua vita. Si tratta di una serie di <code>assert</code> che vengono eseguiti dal compilatore quando un oggetto viene creato (dopo il costruttore) e viene distrutto (prima del distruttore). Un esempio è il seguente:</li>
-</ol>
+<p>Ma in D il codice è più chiaro perché sia l'<em>in-contract</em> che l'<em>out-contract</em> sono riportati immediatamente sotto il prototipo della funzione. (Il linguaggio D ha anche la possibilità di generare documentazione automatica per le funzioni, salvandola in file HTML, e in questi casi riporta i <em>contracts</em> all'interno della documentazione). Inoltre, l'<em>out-contract</em> viene eseguito per ogni istruzione <code>return</code> nel corpo della funzione, indipendentemente dal valore della variabile che viene restituito.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Invariants">Invariants<a class="anchor-link" href="#Invariants">&#182;</a></h4><p>Un <code>invariant</code> è una serie di condizioni che deve soddisfare una classe durante la sua vita. Si tratta di una serie di <code>assert</code> che vengono eseguiti dal compilatore quando un oggetto viene creato (dopo il costruttore) e viene distrutto (prima del distruttore). Un esempio è il seguente:</p>
 <div class="highlight"><pre><span></span><span class="k">class</span> <span class="n">CalendarDay</span> <span class="p">{</span>
     <span class="kt">int</span> <span class="n">month</span><span class="p">;</span>
     <span class="kt">int</span> <span class="n">day</span><span class="p">;</span>
@@ -13228,11 +13253,39 @@ div#notebook {
     <span class="p">}</span>
 <span class="p">};</span>
 </pre></div>
-<ol>
-<li>Un <em>unit test</em> è una serie di <code>assert</code> che il compilatore esegue ogni volta che il programma viene eseguito, prima del <code>main</code> (bisogna chiamare il compilatore D col flag <code>-unittest</code>, es. <code>dmd -unittest myprogram.d</code>):</li>
-</ol>
+<p>In C++, si sarebbe dovuto scrivere qualcosa del genere:</p>
+<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">CalendarDay</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">month</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">day</span><span class="p">;</span>
+
+    <span class="c1">// Questo è il modo in cui i costruttori vengono implementati in D</span>
+    <span class="n">CalendarDay</span><span class="p">(</span><span class="kt">int</span> <span class="n">m</span><span class="p">,</span> <span class="kt">int</span> <span class="n">d</span><span class="p">)</span> <span class="o">:</span> <span class="n">month</span><span class="p">{</span><span class="n">m</span><span class="p">},</span> <span class="n">day</span><span class="p">{</span><span class="n">d</span><span class="p">}</span> <span class="p">{</span>
+        <span class="n">checkInvariant</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="o">~</span><span class="n">CalendarDay</span><span class="p">()</span> <span class="p">{</span>
+        <span class="n">checkInvariant</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="c1">// Le condizioni dentro un invariant devono essere sempre vere</span>
+    <span class="kt">void</span> <span class="n">checkInvariant</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
+        <span class="n">assert</span><span class="p">(</span><span class="n">month</span> <span class="o">&gt;=</span> <span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="n">month</span> <span class="o">&lt;=</span> <span class="mi">12</span><span class="p">,</span> <span class="s">&quot;Invalid month number&quot;</span><span class="p">);</span>
+        <span class="n">assert</span><span class="p">(</span><span class="n">day</span> <span class="o">&gt;=</span> <span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="n">day</span> <span class="o">&lt;=</span> <span class="mi">31</span><span class="p">,</span> <span class="s">&quot;Invalid day number&quot;</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Unit-tests">Unit tests<a class="anchor-link" href="#Unit-tests">&#182;</a></h4><p>Un <em>unit test</em> è una serie di <code>assert</code> che il compilatore esegue ogni volta che il programma viene eseguito, prima del <code>main</code> (bisogna chiamare il compilatore D col flag <code>-unittest</code>, es. <code>dmd -unittest myprogram.d</code>):</p>
 <div class="highlight"><pre><span></span><span class="c1">/// Calcola il quadrato dell&#39;argomento</span>
-<span class="kt">int</span> <span class="n">squared</span><span class="p">(</span><span class="kt">int</span> <span class="n">val</span><span class="p">)</span> <span class="p">{</span>
+<span class="kt">int</span> <span class="n">squared</span><span class="p">(</span><span class="kt">int</span> <span class="n">val</span><span class="p">)</span>
+<span class="k">out</span><span class="p">(</span><span class="n">result</span><span class="p">;</span> <span class="n">result</span> <span class="p">&gt;=</span> <span class="mi">0</span><span class="p">)</span> <span class="c1">// Out-contract</span>
+<span class="p">{</span>
     <span class="k">return</span> <span class="n">val</span> <span class="p">*</span> <span class="n">val</span><span class="p">;</span>
 <span class="p">}</span>
 
@@ -13240,6 +13293,25 @@ div#notebook {
     <span class="c1">// Verifica che &quot;squared&quot; funzioni come previsto</span>
     <span class="k">assert</span><span class="p">(</span><span class="n">squared</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span> <span class="p">==</span> <span class="mi">16</span><span class="p">);</span>
     <span class="k">assert</span><span class="p">(</span><span class="n">squared</span><span class="p">(-</span><span class="mi">1</span><span class="p">)</span> <span class="p">==</span> <span class="mi">1</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+<p>In C++ si dovrebbe scrivere gli assert all'inizio del <code>main</code>, con lo svantaggio di doverli magari tenere separati dal corpo della funzione <code>sqrt</code> (ad esempio perché si trova in un file <code>funzioni.cpp</code>):</p>
+<div class="highlight"><pre><span></span><span class="c1">// File funzioni.cpp</span>
+<span class="kt">int</span> <span class="nf">squared</span><span class="p">(</span><span class="kt">int</span> <span class="n">val</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">val</span> <span class="o">*</span> <span class="n">val</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// File main.cpp</span>
+<span class="cp">#include</span> <span class="cpf">&quot;funzioni.hpp&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;eqdiff.hpp&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;funzionebase.hpp&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;cassert&gt;</span><span class="cp"></span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">assert</span><span class="p">(</span><span class="n">squared</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span> <span class="o">==</span> <span class="mi">16</span><span class="p">);</span>
+    <span class="n">assert</span><span class="p">(</span><span class="n">squared</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">);</span>
+    <span class="c1">// Seguono altri &quot;assert&quot; per funzioni importate da &quot;eqdiff.hpp&quot; e &quot;funzionebase.hpp&quot;</span>
+    <span class="p">...</span>
 <span class="p">}</span>
 </pre></div>
 <p>Ovviamente in C++ tutte queste funzionalità possono essere implementate a mano tramite degli <code>assert</code>; solo, la cosa è più scomoda.</p>
