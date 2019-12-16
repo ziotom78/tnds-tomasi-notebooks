@@ -13150,7 +13150,7 @@ div#notebook {
 <span class="s">Return a positive pseudo-random number distributed with a</span>
 <span class="s">probability density ``p(x) = λ e^{-λ x}``.</span>
 <span class="s">&quot;&quot;&quot;</span>
-<span class="n">randexp</span><span class="p">(</span><span class="n">glc</span><span class="o">::</span><span class="n">GLC</span><span class="p">,</span> <span class="n">λ</span><span class="p">)</span> <span class="o">=</span> <span class="o">-</span><span class="n">log</span><span class="p">(</span><span class="n">rand</span><span class="p">(</span><span class="n">glc</span><span class="p">))</span> <span class="o">*</span> <span class="n">λ</span>
+<span class="n">randexp</span><span class="p">(</span><span class="n">glc</span><span class="o">::</span><span class="n">GLC</span><span class="p">,</span> <span class="n">λ</span><span class="p">)</span> <span class="o">=</span> <span class="o">-</span><span class="n">log</span><span class="p">(</span><span class="n">rand</span><span class="p">(</span><span class="n">glc</span><span class="p">))</span> <span class="o">/</span> <span class="n">λ</span>
 
 <span class="nd">@doc</span> <span class="n">raw</span><span class="s">&quot;&quot;&quot;</span>
 <span class="s">    randgauss(glc::GLC, μ, σ)</span>
