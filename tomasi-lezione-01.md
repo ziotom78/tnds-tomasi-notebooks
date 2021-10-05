@@ -63,11 +63,36 @@ quest'ultima si indica anche con RMS (*Root Mean Square*).
 
 -   State attenti al calcolo della mediana: il 30% degli studenti alla fine del corso consegna esercizi di questa prima lezione in cui la mediana è errata.
 
--   Le soluzioni che dovete aspettarvi sono mostrate nel video seguente. Assicuratevi di ottenere gli stessi valori!
+-   Le soluzioni che dovete aspettarvi sono ricavate nel video seguente. Assicuratevi di ottenere gli stessi valori! (A meno che non usiate il fattore $N - 1$ anziché $N$ nel calcolo della varianza).
 
 ---
 
 <asciinema-player src="asciinema/julia-exercise-1.0-68×16.asciinema" cols="68" rows="16" font-size="medium"></asciinema-player>
+
+---
+
+# Risultati di riferimento
+
+```
+N = 100000:
+  - Mean               : 30.23231
+  - Variance           : 282326.76577 (corrected: 282329.58906)
+  - Standard deviation : 531.34430 (corrected: 531.34696)
+  - Median             : 12.74255
+
+N = 10:
+  - Mean               : 13.91472
+  - Variance           : 38.73156 (corrected: 43.03507)
+  - Standard deviation : 6.22347 (corrected: 6.56011)
+  - Median             : 10.58911
+
+N = 9:
+  - Mean               : 13.85262
+  - Variance           : 42.99651 (corrected: 48.37107)
+  - Standard deviation : 6.55717 (corrected: 6.95493)
+  - Median             : 9.55072
+```
+
 
 # Come svolgere gli esercizi
 
