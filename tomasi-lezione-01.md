@@ -6,17 +6,11 @@
 
 # Queste slides
 
--   All'inizio di ogni sessione di laboratorio mosterò alcune slides che
-riprendono alcuni concetti già visti a lezione.
+-   All'inizio di ogni sessione di laboratorio mosterò alcune slides che riprendono alcuni concetti già visti a lezione.
 
--   Queste slides sono disponibili all'indirizzo
-[ziotom78.github.io/tnds-tomasi-notebooks](https://ziotom78.github.io/tnds-tomasi-notebooks),
-e sono navigabili.
+-   Queste slides sono disponibili all'indirizzo [ziotom78.github.io/tnds-tomasi-notebooks](https://ziotom78.github.io/tnds-tomasi-notebooks/), e sono navigabili.
 
--   Se vi è più comodo, potete ottenere una versione PDF producendola da
-soli: basta aggiungere `?print-pdf` alla fine della URL e stampare la
-pagina da browser in un file PDF (vedi le [istruzioni
-dettagliate](https://revealjs.com/pdf-export/)).
+-   Se vi è più comodo, potete ottenere una versione PDF producendola da soli: basta aggiungere `?print-pdf` alla fine della URL e stampare la pagina da browser in un file PDF (vedi le [istruzioni dettagliate](https://revealjs.com/pdf-export/)).
 
 
 # Avvertenza generale
