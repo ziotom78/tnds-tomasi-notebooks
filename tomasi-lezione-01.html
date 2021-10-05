@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="author" content="Maurizio Tomasi">
+  <title>Laboratorio di TNDS – Lezione 1</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js@^4//dist/reset.css">
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js@^4//dist/reveal.css">
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js@^4//dist/theme/white.css" id="theme">
+  <link rel="stylesheet" href="./css/custom.css"/>
+  <link rel="stylesheet" href="./css/asciinema-player.css"/>
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide">
+  <h1 class="title">Laboratorio di TNDS – Lezione 1</h1>
+  <p class="author">Maurizio Tomasi</p>
+  <p class="date">Martedì 5 Ottobre 2021</p>
+</section>
+
+<section id="introduzione-al-corso" class="slide level1">
+<h1>Introduzione al corso</h1>
+</section>
+<section id="queste-slides" class="slide level1">
+<h1>Queste slides</h1>
+<ul>
+<li><p>All’inizio di ogni sessione di laboratorio mosterò alcune slides che riprendono alcuni concetti già visti a lezione.</p></li>
+<li><p>Queste slides sono disponibili all’indirizzo <a href="https://ziotom78.github.io/tnds-tomasi-notebooks">ziotom78.github.io/tnds-tomasi-notebooks</a>, e sono navigabili.</p></li>
+<li><p>Se vi è più comodo, potete ottenere una versione PDF producendola da soli: basta aggiungere <code>?print-pdf</code> alla fine della URL e stampare la pagina da browser in un file PDF (vedi le <a href="https://revealjs.com/pdf-export/">istruzioni dettagliate</a>).</p></li>
+</ul>
+</section>
+<section id="avvertenza-generale" class="slide level1">
+<h1>Avvertenza generale</h1>
+<ul>
+<li><p><em>Non</em> fare copia-e-incolla da slide come queste! Trascrivere a mano il codice è più utile, perché vi consente di notare alcune sottigliezze sintattiche (es., dove vengono usati i punti e virgola).</p></li>
+<li><p>In generale, trascrivere codice è un ottimo allenamento per imparare a scrivere programmi.</p></li>
+</ul>
+</section>
+<section id="esercizi-per-oggi" class="slide level1">
+<h1>Esercizi per oggi</h1>
+<ul>
+<li><p>La spiegazione dettagliata è sul sito del corso <a href="http://labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/lezione1_1819.html">labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/lezione1_1819.html</a>.</p></li>
+<li><p>Gli esercizi sono i seguenti:</p>
+<ul>
+<li>1.0: Calcolo di media, varianza e mediana dei dati letti da un file</li>
+<li>1.1: Codice di analisi con funzioni (variante del precedente)</li>
+<li>1.2: Codice di analisi con <code>Makefile</code> (variante del precedente)</li>
+<li>1.3: Codice di analisi con overloading (variante del precedente)</li>
+</ul></li>
+</ul>
+</section>
+<section id="esercizi-per-oggi-1" class="slide level1">
+<h1>Esercizi per oggi</h1>
+<pre class="text"><code>$ head -n 4 data.dat
+8.50763
+11.6275
+20.9615
+9.55072
+$ ./esercizio01.1 4 data.dat
+Media = 12.6618
+Varianza = 32.2969
+Mediana = 10.5891
+8.50763
+11.6275
+20.9615
+9.55072</code></pre>
+<p><strong>Nota</strong>: la <em>varianza</em> è il quadrato della <em>deviazione standard</em>; quest’ultima si indica anche con RMS (<em>Root Mean Square</em>).</p>
+</section>
+<section id="soluzioni-attese" class="slide level1">
+<h1>Soluzioni attese</h1>
+<ul>
+<li><p>È molto importante che verifichiate la corretta esecuzione dei vostri programmi!</p></li>
+<li><p>State attenti al calcolo della mediana: il 30% degli studenti alla fine del corso consegna esercizi di questa prima lezione in cui la mediana è errata.</p></li>
+<li><p>Le soluzioni che dovete aspettarvi sono mostrate nel video seguente. Assicuratevi di ottenere gli stessi valori!</p></li>
+</ul>
+</section>
+<section class="slide level1">
+
+<p><asciinema-player src="asciinema/julia-exercise-1.0-68×16.asciinema" cols="68" rows="16" font-size="medium"></asciinema-player></p>
+</section>
+<section id="come-svolgere-gli-esercizi" class="slide level1">
+<h1>Come svolgere gli esercizi</h1>
+<p>Potete svolgere gli esercizi in uno dei modi seguenti:</p>
+<ol type="1">
+<li>Usando il computer di laboratorio davanti a voi (per chi è in presenza);</li>
+<li>Chi segue la lezione online può connettersi ai computer del laboratorio.</li>
+<li>Se avete un portatile con un compilatore C++ installato (ragionevolmente recente), potete svolgere l’esercizio su di esso.</li>
+<li>Potete usare <a href="https://replit.com/~">Repl.it</a>: in questo caso non c’è bisogno di installare nulla, e potete usare anche un tablet (ma sarebbe meglio collegare una tastiera!).</li>
+</ol>
+</section>
+<section id="computer-di-laboratorio" class="slide level1">
+<h1>Computer di laboratorio</h1>
+<ul>
+<li><p><strong>Non</strong> premete quello che sembra essere il pulsante on/off del monitor, perché in realtà <strong>spegne il computer</strong> (e manda una segnalazione al centro di calcolo).</p></li>
+<li><p>Vi consiglio di usare come editor <a href="https://code.visualstudio.com/">Visual Studio Code</a>, che è installato sui computer del laboratorio.</p></li>
+<li><p>Potete scaricare ed installare Visual Studio Code anche sul vostro portatile: è gratuito e disponibile per Windows, Linux e Mac OS X.</p></li>
+<li><p>Di seguito c’è un breve filmato che vi mostra come scrivere ed eseguire un programma di esempio. Visual Studio Code presenta numerosi <em>plugin</em> per semplificare lo sviluppo; li vedremo meglio durante il corso.</p></li>
+</ul>
+</section>
+<section class="slide level1">
+
+<div style="padding:54.53% 0 0 0;position:relative;">
+<iframe src="https://player.vimeo.com/video/623206212?h=71f53f0f8b&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;" title="Visual Studio Code &amp;ndash; First steps with C++">
+</iframe>
+</div>
+<script src="https://player.vimeo.com/api/player.js"></script>
+</section>
+<section id="computer-del-laboratorio-12" class="slide level1">
+<h1>Computer del laboratorio (1/2)</h1>
+<p>Se usate un sistema Linux o Mac OS X, potete usare il comando <code>ssh</code> dal terminale:</p>
+<p><asciinema-player src="asciinema/connect-to-tolab-75×20.asciinema" cols="75" rows="20" font-size="medium"></asciinema-player></p>
+</section>
+<section id="computer-del-laboratorio-22" class="slide level1">
+<h1>Computer del laboratorio (2/2)</h1>
+<ul>
+<li><p>Se usate Windows, installate la versione <em>free</em> di <a href="https://mobaxterm.mobatek.net/">MobaXTerm</a>.</p></li>
+<li><p>Dovete configurare una connessione di tipo «SSH» a <code>tolab.fisica.unimi.it</code>, specificando il vostro nome utente (solitamente <code>nome.cognome</code>).</p></li>
+</ul>
+</section>
+<section id="come-usare-repl.it" class="slide level1">
+<h1>Come usare Repl.it</h1>
+<ul>
+<li><p>Una soluzione che non richiede di installare nulla è <a href="https://replit.com/~">Repl.it</a>, un ambiente di sviluppo usabile da browser.</p></li>
+<li><p>Durante l’anno scorso abbiamo svolto tutto il laboratorio usando Repl.it, quindi è fattibile impiegarlo per tutte le lezioni, anche se siete in presenza…</p></li>
+<li><p>…ma il sito non si è sempre dimostrato affidabile: a volte resta offline, altre volte è estremamente lento.</p></li>
+<li><p>Se potete usare il vostro computer o quello del laboratorio, vi suggerirei di preferire questa opzione.</p></li>
+</ul>
+</section>
+<section class="slide level1">
+
+<iframe src="https://player.vimeo.com/video/623224728?h=87f213239a&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" width="1280" height="698" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen title="Repl.it &amp;ndash; How to write C++ code">
+</iframe>
+</section>
+<section id="accorgimenti-per-repl.it" class="slide level1">
+<h1>Accorgimenti per Repl.it</h1>
+<ul>
+<li><p>Nel video si mostra come creare un <em>nuovo</em> progetto, ma nel vostro caso dovreste invece fare il <em>fork</em> del template fornito dal docente. (Vi arriverà la mail non appena termina questa spiegazione).</p></li>
+<li><p>Alla fine di ogni lezione scaricare sul proprio computer un file <code>.zip</code> che contenga ogni esercizio.</p></li>
+<li><p>Prima dell’esame scritto dovrete «consegnare» gli esercizi. Non è necessario farlo alla fine della lezione, perché potreste volerci tornare sopra più volte nel corso del semestre.</p></li>
+<li><p>Si possono consegnare gli esercizi facendo «Submit» in Repl.it, ma <strong>dovete</strong> anche copiare gli esercizi nella vostra <em>home</em> sui computer di laboratorio.</p></li>
+</ul>
+</section>
+<section id="lavoro-online" class="slide level1">
+<h1>Lavoro online</h1>
+<ul>
+<li><p>Durante la lezione useremo il sito <a href="">gather.town</a> per gestire le persone collegate online.</p></li>
+<li><p>Se siete online, per collegarvi a Gather fate click su <a href="https://gather.town/invite?token=53aE7z9bj9hXWI2nOu6RlBXbHO-qVewq">questo link</a> (che scadrà al termine della lezione): verrete connessi alla stanza <a href="https://gather.town/app/ZrvLmfvx9QMCKHFO/LaboratorioTNDS">LaboratorioTNDS</a>.</p></li>
+<li><p>Registratevi col vostro nome completo e posizionatevi in uno dei «banchi» virtuali disponibili.</p></li>
+</ul>
+</section>
+<section id="suggerimenti-vari" class="slide level1">
+<h1>Suggerimenti vari</h1>
+</section>
+<section id="uso-di-argc-e-argv" class="slide level1">
+<h1>Uso di argc e argv</h1>
+</section>
+<section id="linea-di-comando" class="slide level1">
+<h1>Linea di comando</h1>
+<ul>
+<li><p>I parametri <code>argc</code> e <code>argv</code> passati come argomenti al <code>main</code> servono per leggere parametri passati dalla linea di comando, come nel caso seguente:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> ./main 10 data.dat</span></code></pre></div></li>
+<li><p>Si possono dichiarare in più modi, tutti equivalenti:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">(</span><span class="dt">int</span> argc<span class="op">,</span> <span class="dt">char</span> <span class="op">**</span> argv<span class="op">);</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">(</span><span class="dt">int</span> argc<span class="op">,</span> <span class="dt">char</span> <span class="op">*</span>argv<span class="op">[]);</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">(</span><span class="dt">int</span> argc<span class="op">,</span> <span class="at">const</span> <span class="dt">char</span> <span class="op">**</span>argv<span class="op">);</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co">// La mia preferita, che ho usato nei video di oggi</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">(</span><span class="dt">int</span> argc<span class="op">,</span> <span class="at">const</span> <span class="dt">char</span> <span class="op">*</span>argv<span class="op">[]);</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co">// Potete usare altri nomi</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">(</span><span class="dt">int</span> num_of_arguments<span class="op">,</span> <span class="at">const</span> <span class="dt">char</span> <span class="op">*</span>args<span class="op">[]);</span></span></code></pre></div></li>
+</ul>
+</section>
+<section id="significato-di-argc-e-argv-12" class="slide level1">
+<h1>Significato di argc e argv (1/2)</h1>
+<ul>
+<li><p>Il primo parametro (<code>argc</code>) contiene il numero di parametri, <strong>incluso il nome dell’eseguibile</strong>, mentre <code>argv</code> è una lista di puntatori a caratteri (ossia stringhe) che contengono il nome dell’eseguibile seguito dal resto.</p></li>
+<li><p>Esempio:</p>
+<p><asciinema-player src="asciinema/argc-argv-60×13.asciinema" cols="60" rows="13" font-size="medium"></asciinema-player></p></li>
+</ul>
+</section>
+<section id="significato-di-argc-e-argv-12-1" class="slide level1">
+<h1>Significato di argc e argv (1/2)</h1>
+<p>Se eseguiamo più volte il programma, ecco il suo output:</p>
+<pre class="text"><code>$ ./args-example
+argc = 1
+argv[0] = ./args-example
+$ ./args-example 10
+argc = 2
+argv[0] = ./args-example
+argv[1] = 10
+$ ./args-example 10 ../data.dat
+argc = 3
+argv[0] = ./args-example
+argv[1] = 10
+argv[2] = ../data.dat</code></pre>
+</section>
+<section id="uso-di-makefile" class="slide level1">
+<h1>Uso di Makefile</h1>
+</section>
+<section id="compilare-un-programma-13" class="slide level1">
+<h1>Compilare un programma (1/3)</h1>
+<p>Prendiamo questo semplice esempio:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> calc<span class="op">(</span><span class="dt">int</span> a<span class="op">,</span> <span class="dt">int</span> b<span class="op">)</span> <span class="op">{</span> <span class="cf">return</span> a <span class="op">+</span> b<span class="op">;</span> <span class="op">}</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    <span class="bu">std::</span>cout<span class="op"> &lt;&lt;</span> <span class="st">&quot;Insert two numbers: &quot;</span><span class="op">;</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> a<span class="op">,</span> b<span class="op">;</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    <span class="bu">std::</span>cin<span class="op"> &gt;&gt;</span> a <span class="op">&gt;&gt;</span> b<span class="op">;</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>    <span class="bu">std::</span>cout<span class="op"> &lt;&lt;</span> <span class="st">&quot;The result is &quot;</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>              <span class="op">&lt;&lt;</span> calc<span class="op">(</span>a<span class="op">,</span> b<span class="op">)</span> <span class="op">&lt;&lt;</span> <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">;</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+</section>
+<section id="compilare-un-programma-23" class="slide level1">
+<h1>Compilare un programma (2/3)</h1>
+<ul>
+<li><p>Sinora abbiamo mostrato esempi in cui tutto il codice sorgente è in un unico file. Questo non è però utile, perché in futuro dovrete riciclare spesso parti di codice!</p></li>
+<li><p>Anziché usare le funzioni di copia-e-incolla, è meglio suddividere il codice in più file con estensione <code>.cpp</code>, che dovranno però poi essere compilati uno a uno e «combinati» insieme (il termine esatto è <em>linking</em>).</p></li>
+<li><p>In questo corso vi obblighiamo ad usare uno strumento piuttosto vetusto ma presente su qualsiasi sistema Unix: GNU Make.</p></li>
+</ul>
+</section>
+<section id="compilare-un-programma-33" class="slide level1">
+<h1>Compilare un programma (3/3)</h1>
+<ul>
+<li><p>Partiamo da un caso molto semplice (l’esercizio 1.2 sarà più complicato). Create un file con nome <code>Makefile</code> (attenzione alla maiuscola iniziale!), e scrivete queste righe al suo interno:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode makefile"><code class="sourceCode makefile"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="dt">CXXFLAGS </span><span class="ch">=</span><span class="st"> -g -Wall --pedantic</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="dv">main:</span><span class="dt"> main.cpp</span></span></code></pre></div></li>
+<li><p>Infine, da linea di comando eseguite il comando <code>make</code> (<code>$</code> indica il prompt):</p>
+<pre class="text"><code>$ make
+g++ -g -Wall --pedantic    main.cpp   -o main
+$ ls
+main   main.cpp   Makefile</code></pre></li>
+</ul>
+</section>
+<section id="flag-del-compilatore" class="slide level1">
+<h1>Flag del compilatore</h1>
+<ul>
+<li><p>È utile specificare dei flag aggiuntivi per la compilazione, tramite la riga</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode makefile"><code class="sourceCode makefile"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="dt">CXXFLAGS </span><span class="ch">=</span><span class="st"> -std=c++11 -g -Wall --pedantic</span></span></code></pre></div></li>
+<li><p><code>-std=c++11</code> abilita alcune caratteristiche «recenti» del C++ (nelle versioni più aggiornate del compilatore GCC è inutile).</p></li>
+<li><p><code>-g</code>: se il codice va in <em>crash</em>, stampa la riga di codice che ha causato l’errore.</p></li>
+<li><p><code>-Wall</code>: rende il compilatore C++ più brontolone del solito.</p></li>
+<li><p><code>--pedantic</code>: lo rende ancora più brontolone.</p></li>
+</ul>
+</section>
+<section id="spiegazione-del-comando-make" class="slide level1">
+<h1>Spiegazione del comando make</h1>
+<ul>
+<li><p>Il comando <code>make</code> serve per «creare» (appunto, <em>to make</em>) dei file partendo da altri. Con la scritta</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode makefile"><code class="sourceCode makefile"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="dv">main:</span><span class="dt"> main.cpp</span></span></code></pre></div>
+<p>si dice a Make che si vuole creare il file <code>main</code> (eseguibile) partendo dal file <code>main.cpp</code>.</p></li>
+<li><p>Make sa che i file con estensione <code>.cpp</code> sono programmi C++, e quindi correttamente invoca l’eseguibile <code>g++</code>, passandogli i parametri nella variabile <code>CXXFLAGS</code>.</p></li>
+</ul>
+</section>
+<section id="comandi-personalizzati" class="slide level1">
+<h1>Comandi personalizzati</h1>
+<ul>
+<li><p>Se si vuole fornire manualmente la lista dei comandi da inviare, bisogna scriverli nella riga successiva, che va indentata inserendo un carattere <strong>TAB</strong> (attenzione: <strong>non</strong> una sequenza di spazi!):</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode makefile"><code class="sourceCode makefile"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="dt">CXXFLAGS </span><span class="ch">=</span><span class="st"> -std=c++11 -g -Wall --pedantic</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="dv">main:</span><span class="dt"> main.cpp</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># You MUST use a Tab character to indent here!</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    g++ <span class="ch">$(</span><span class="dt">CXXFLAGS</span><span class="ch">)</span> main.cpp</span></code></pre></div></li>
+<li><p>Per inserire un Tab da Repl.it, impostate <em>Indent type</em> uguale a <em>Tab</em> e <em>Indent size</em> uguale a 8 in «Settings». <strong>Attenzione</strong>: su alcuni computer, Repl.it non permette di inserire un carattere Tab.</p></li>
+</ul>
+</section>
+<section id="esecuzione-di-un-makefile" class="slide level1">
+<h1>Esecuzione di un Makefile</h1>
+<ul>
+<li><p>Se eseguiamo immediatamente <code>make</code> una seconda volta, avviene una cosa interessante:</p>
+<pre class="text"><code>$ make
+$</code></pre></li>
+<li><p>In questo caso, Make non fa nulla: ha controllato le date dei file <code>main</code> e <code>main.cpp</code>, e ha visto che il primo è stato creato <em>dopo</em> il secondo: quindi non c’è bisogno di compilare nuovamente il programma.</p></li>
+<li><p>Se voleste obbligare <code>make</code> a saltare il controllo delle date e ricreare tutto da capo, basta invocarlo così: <code>make -B</code>.</p></li>
+</ul>
+</section>
+<section id="usare-più-file-sorgente" class="slide level1">
+<h1>Usare più file sorgente</h1>
+<ul>
+<li><p>Nell’esercizio 1.2 si richiede di dividere il programma tra più file, e di compilarli separatamente. In questo caso la struttura del <code>Makefile</code> si complica:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode makefile"><code class="sourceCode makefile"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="dv">esercizio1.2:</span><span class="dt"> esercizio1.2.cpp funzioni.cpp</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Con \ si può andare a capo</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    g++ esercizio1.2.cpp funzioni.cpp <span class="ch">\</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>        -o esercizio1.2 <span class="ch">$(</span><span class="dt">CXXFLAGS</span><span class="ch">)</span></span></code></pre></div>
+<p>Questo esempio crea di nuovo l’eseguibile a partire da file <code>.cpp</code>.</p></li>
+<li><p>Quanto scritto qui sopra funziona, ma <strong>non è quanto richiesto dall’esercizio</strong>: bisogna esplicitare anche il passaggio intermedio, ossia la creazione di file <code>.o</code>.</p></li>
+</ul>
+</section>
+<section id="creare-i-file-oggetto-.o" class="slide level1">
+<h1>Creare i file oggetto (<code>.o</code>)</h1>
+<ul>
+<li><p>GNU Make permette di richiedere dipendenze «intermedie», ossia dipendenze da file che devono essere creati dallo stesso GNU Make.</p></li>
+<li><p>Questo è ciò che serve per i file <code>.o</code>:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode makefile"><code class="sourceCode makefile"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="dv">esercizio1.2:</span><span class="dt"> esercizio1.2.o funzioni.o</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    g++ esercizio1.2.o funzioni.o -o esercizio1.2</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="dv">esercizio1.2.o:</span><span class="dt"> esercizio1.2.cpp funzioni.h</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>    g++ -c sercizio1.2.cpp -o esercizio1.2.o <span class="ch">$(</span><span class="dt">CXXFLAGS</span><span class="ch">)</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="dv">funzioni.o:</span><span class="dt"> funzioni.cpp funzioni.h</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>    g++ -c funzioni.cpp -o funzioni.o <span class="ch">$(</span><span class="dt">CXXFLAGS</span><span class="ch">)</span></span></code></pre></div>
+<p>(<code>CXXFLAGS</code> non serve quando si mettono insieme più file <code>.o</code>: la compilazione del codice C++ è già avvenuta).</p></li>
+</ul>
+</section>
+<section id="un-trucco" class="slide level1">
+<h1>Un trucco</h1>
+<ul>
+<li><p>GNU Make definisce alcune variabili speciali che semplificano la scrittura del <code>Makefile</code>. Una di queste è <code>$@</code>, che rappresenta il nome del file da creare.</p></li>
+<li><p>L’esempio nella slide precedente si può riscrivere così:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode makefile"><code class="sourceCode makefile"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="dv">esercizio1.2:</span><span class="dt"> esercizio1.2.o funzioni.o</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>    g++ esercizio1.2.o funzioni.o -o <span class="ch">$@</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="dv">esercizio1.2.o:</span><span class="dt"> esercizio1.2.cpp funzioni.h</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>    g++ -c esercizio1.2.cpp -o <span class="ch">$@</span> <span class="ch">$(</span><span class="dt">CXXFLAGS</span><span class="ch">)</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="dv">funzioni.o:</span><span class="dt"> funzioni.cpp funzioni.h</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>    g++ -c funzioni.cpp -o <span class="ch">$@</span> <span class="ch">$(</span><span class="dt">CXXFLAGS</span><span class="ch">)</span></span></code></pre></div></li>
+<li><p>È più facile riciclare il <code>Makefile</code> nei nuovi esercizi!</p></li>
+</ul>
+</section>
+<section id="avvertenza-su-gnu-make" class="slide level1">
+<h1>Avvertenza su GNU Make</h1>
+<ul>
+<li><p>Quando avrete svolto gli esercizi di questa lezione, vi sarà chiaro che la scrittura del <code>Makefile</code> è un processo molto lungo e verboso. Il comando <code>make</code> è stato inventato nel 1976, e all’epoca il mondo della programmazione era così!</p></li>
+<li><p>Oggi più nessuno (neppure io!) usa GNU Make direttamente per compilare codice C++. Per i vostri progetti futuri (oltre questo corso) vi converrà usare sistemi più evoluti ed agili; tra questi, il più usato in assoluto è <a href="https://cmake.org/">CMake</a>.</p></li>
+<li><p>Noi insegnamo il funzionamento di GNU Make perché pedagogicamente ci sembra utile: sistemi come CMake sono costruiti usando GNU Make come fondamento. Vediamone un esempio.</p></li>
+</ul>
+</section>
+<section id="uso-di-cmake" class="slide level1">
+<h1>Uso di CMake</h1>
+<ul>
+<li><p>CMake è lo standard <em>de facto</em> per compilare progetti in C/C++, e si basa su GNU Make. Il modo in cui si usa è il seguente:</p>
+<ol>
+<li>Si scrive un file chiamato <code>CMakeLists.txt</code> (occhio alle maiuscole!)</li>
+<li>Si esegue <code>cmake</code> da linea di comando: esso legge <code>CMakeLists.txt</code> e produce un <code>Makefile</code></li>
+<li>A questo punto si usa <code>make</code> per compilare il programma come al solito.</li>
+</ol></li>
+<li><p>La compilazione avviene quindi ancora attraverso GNU Make, ma il <code>Makefile</code> prodotto da CMake è ottimizzato (e mostra una bella barra percentuale se compilate un progetto che usa tanti file <code>.cpp</code>!).</p></li>
+<li><p>Ecco perché studiare GNU Make è ancora utile.</p></li>
+</ul>
+</section>
+<section id="esempio-di-cmake" class="slide level1">
+<h1>Esempio di CMake</h1>
+<p>Per darvi un’idea di come funzioni CMake, ecco il contenuto di <code>CMakeLists.txt</code> per l’esercizio 1.2:</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode cmake"><code class="sourceCode cmake"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="kw">cmake_minimum_required</span> (<span class="ot">VERSION</span> <span class="dt">2.8.11</span>)</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="kw">project</span> (ESERCIZIO01.2)</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="kw">add_executable</span> (esercizio01.2</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>    esercizio01.2.cpp funzioni.cpp)</span></code></pre></div>
+</section>
+<section id="esempio-di-cmake-22" class="slide level1">
+<h1>Esempio di CMake (2/2)</h1>
+<p><strong>Attenzione</strong>: se volete provare come funziona CMake, non eseguite <code>cmake</code> nella directory, altrimenti sovrascriverà il vostro <code>Makefile</code>! Fate così:</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> mkdir build <span class="kw">&amp;&amp;</span> <span class="bu">cd</span> build</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> cmake .. <span class="co"># Legge il file CMakeLists.txt da ..</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> make <span class="co"># Esegue il `Makefile` in &quot;./build&quot;</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> ./esercizio01.2 <span class="co"># L&#39;eseguibile è in &quot;./build&quot;</span></span></code></pre></div>
+</section>
+<section id="vantaggi-di-cmake" class="slide level1">
+<h1>Vantaggi di CMake</h1>
+<ul>
+<li><p>Molte meno righe da scrivere!</p></li>
+<li><p>Tracciamento automatico dei file <code>.h</code>: non è necessario dire quali file <code>.h</code> includa un file <code>.cpp</code>, perché pensa automaticamente CMake a recuperare l’informazione cercando gli <code>#include</code> nel file <code>.cpp</code>. Non è più necessario quindi indicarli manualmente come nel caso di un <code>Makefile</code>:</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode makefile"><code class="sourceCode makefile"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Non necessario se si usa CMake</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="dv">funzioni.o:</span><span class="dt"> funzioni.cpp funzioni.h</span></span></code></pre></div></li>
+<li><p>È ormai il metodo standard per includere librerie nei propri progetti: <a href="https://cliutils.gitlab.io/modern-cmake/chapters/packages/ROOT.html">ROOT</a>, <a href="https://cliutils.gitlab.io/modern-cmake/chapters/packages/Boost.html">BOOST</a>, <a href="https://cliutils.gitlab.io/modern-cmake/chapters/packages/OpenMP.html">OpenMP</a>, <a href="https://cliutils.gitlab.io/modern-cmake/chapters/packages/CUDA.html">CUDA</a>, <a href="https://cliutils.gitlab.io/modern-cmake/chapters/packages/MPI.html">MPI</a>, <a href="https://doc.qt.io/qt-5/cmake-manual.html">Qt</a>, etc.</p></li>
+</ul>
+</section>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/reveal.js@^4//dist/reveal.js"></script>
+
+  <!-- reveal.js plugins -->
+  <script src="https://unpkg.com/reveal.js@^4//plugin/notes/notes.js"></script>
+  <script src="https://unpkg.com/reveal.js@^4//plugin/search/search.js"></script>
+  <script src="https://unpkg.com/reveal.js@^4//plugin/zoom/zoom.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+      
+        // Display a presentation progress bar
+        progress: true,
+        // Display the page number of the current slide
+        slideNumber: true,
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+       // Parallax background image
+       parallaxBackgroundImage: './media/background.png', // e.g. "'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg'"
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1440,
+        height: 810,
+
+        // reveal.js plugins
+        plugins: [
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    <script src="js/asciinema-player.js"></script>
+    </body>
+</html>
