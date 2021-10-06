@@ -35,6 +35,7 @@ scrivere programmi.
     -   1.2: Codice di analisi con `Makefile` (variante del precedente)
     -   1.3: Codice di analisi con overloading (variante del precedente)
 
+-   Dovrete leggere i dati dal file [`data.dat`](./data/data.dat) (seguite il link per scaricarlo).
 
 # Esercizi per oggi
 
