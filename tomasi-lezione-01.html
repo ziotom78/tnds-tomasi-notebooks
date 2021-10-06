@@ -336,12 +336,12 @@ argv[2] = ../data.dat</code></pre>
 <h1>Compilare un programma (3/3)</h1>
 <ul>
 <li><p>Partiamo da un caso molto semplice (l’esercizio 1.2 sarà più complicato). Create un file con nome <code>Makefile</code> (attenzione alla maiuscola iniziale!), e scrivete queste righe al suo interno:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode makefile"><code class="sourceCode makefile"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="dt">CXXFLAGS </span><span class="ch">=</span><span class="st"> -g -Wall --pedantic</span></span>
+<div class="sourceCode" id="cb7"><pre class="sourceCode makefile"><code class="sourceCode makefile"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="dt">CXXFLAGS </span><span class="ch">=</span><span class="st"> -std=c++11 -g -Wall --pedantic</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="dv">main:</span><span class="dt"> main.cpp</span></span></code></pre></div></li>
 <li><p>Infine, da linea di comando eseguite il comando <code>make</code> (<code>$</code> indica il prompt):</p>
 <pre class="text"><code>$ make
-g++ -g -Wall --pedantic    main.cpp   -o main
+g++ -std=c++11 -g -Wall --pedantic    main.cpp   -o main
 $ ls
 main   main.cpp   Makefile</code></pre></li>
 </ul>

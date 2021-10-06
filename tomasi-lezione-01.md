@@ -261,7 +261,7 @@ int main() {
 -   Partiamo da un caso molto semplice (l'esercizio 1.2 sarà più complicato). Create un file con nome `Makefile` (attenzione alla maiuscola iniziale!), e scrivete queste righe al suo interno:
 
     ```makefile
-    CXXFLAGS = -g -Wall --pedantic
+    CXXFLAGS = -std=c++11 -g -Wall --pedantic
 
     main: main.cpp
     ```
@@ -271,7 +271,7 @@ prompt):
 
     ```text
     $ make
-    g++ -g -Wall --pedantic    main.cpp   -o main
+    g++ -std=c++11 -g -Wall --pedantic    main.cpp   -o main
     $ ls
     main   main.cpp   Makefile
     ```
