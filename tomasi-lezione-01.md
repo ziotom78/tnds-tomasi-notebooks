@@ -64,11 +64,7 @@ quest'ultima si indica anche con RMS (*Root Mean Square*).
 
 -   State attenti al calcolo della mediana: il 30% degli studenti alla fine del corso consegna esercizi di questa prima lezione in cui la mediana è errata.
 
--   Le soluzioni che dovete aspettarvi sono ricavate nel video seguente. Assicuratevi di ottenere gli stessi valori! (A meno che non usiate il fattore $N - 1$ anziché $N$ nel calcolo della varianza).
-
----
-
-<asciinema-player src="asciinema/julia-exercise-1.0-68×16.asciinema" cols="68" rows="16" font-size="medium"></asciinema-player>
+-   Le soluzioni che dovete aspettarvi sono ricavate nella slide seguente. Assicuratevi di ottenere gli stessi valori! (A meno che non usiate il fattore $N - 1$ anziché $N$ nel calcolo della varianza).
 
 ---
 
