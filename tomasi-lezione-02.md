@@ -12,7 +12,9 @@
 
 # Esercizi
 
--   Esercizio 2.0: creazione di una classe `Vettore`.
+-   Lo scopo della lezione di oggi è introdurre il concetto di «classe», che è un tipo di dato complesso del linguaggio C++, creando una classe `Vettore` che implementa un array «intelligente» di valori `double`.
+
+-   Esercizio 2.0: creazione della classe `Vettore`.
 
 -   Esercizio 2.1 (da consegnare per l'esame scritto): è lo stesso tipo di esercizio della scorsa lezione, ma ora occorre usare la classe `Vettore` dell'esercizio 2.0.
 
@@ -94,7 +96,7 @@ int main() {
 
 # Test automatici
 
--   Si può verificare automaticamente la correttezza del codice, usando la macro `assert`:
+-   Si può verificare automaticamente la correttezza del codice con `assert`:
 
     ```c++
     #include <cassert>
@@ -104,11 +106,33 @@ int main() {
         assert(sum(4, 6) == 10);
         assert(sum(-1, 3) == 2);
     }
-    
-    …
     ```
 
--   Il resto del codice resta uguale, ma nel `main` si deve invocare `test_sum()` prima di ogni altra cosa.
+-   Una chiamata ad `assert` viene tradotta più o meno così:
+
+    ```c++
+    // assert(sum(4, 6) == 10);
+    if (! (sum(4, 6) == 10)) {
+        make_the_program_crash();
+    }
+    ```
+
+
+# Test automatici
+
+-   Il resto del codice resta uguale, ma nel `main` si deve invocare `test_sum()` prima di ogni altra cosa:
+
+    ```c++
+    int main(int argc, const char *argv[]) {
+        // This must be the very first thing!
+        test_sum();
+        
+        // Now implement the exercise as requested
+        …
+    }
+    ```
+
+-   Potete implementare più funzioni `test_*()`, che poi chiamerete una di seguito all'altra nel `main`.
 
 
 # Test automatici
@@ -148,7 +172,7 @@ int main() {
 
 # Test sui floating-point
 
--   C'è però un problema con gli esercizi di queste prime lezioni, legato a qualcosa che alcuni di voi hanno osservato già la scorsa volta.
+-   Se provate a scrivere dei test per gli esercizi di queste prime lezioni, vi imbatterete però in un problema legato ai numeri *floating-point*.
 
 -   Considerate il risultato atteso per la varianza nel caso `N = 100000`, che è `282326.76577`. Se avete usato `std::cout <<` per stampare la varianza, avete probabilmente ottenuto `282327` (risultato arrotondato).
 
@@ -165,25 +189,23 @@ int main() {
 # Esercizio 1.1: assert
 
 ```c++
-bool are_close(double x, double y,
-    double eps = 1e-7) { return fabs(x - y) < eps; }
+bool are_close(double calculated, double expected, double epsilon = 1e-7) {
+  return fabs(calculated - expected) < epsilon;
+}
 
 void test_statistical_functions(void) {
-  double mydata[] = {1, 2, 3, 4};
+  double mydata[] = {1, 2, 3, 4};  // Use these instead of data.dat
 
   assert(are_close(CalcolaMedia(mydata, 4), 2.5));
-  // Variance: σ²
   assert(are_close(CalcolaVarianza(mydata, 4), 1.25));
-
-  // Test for an even/odd number of elements
-  assert(are_close(CalcolaMediana(mydata, 4), 2.5));
-  assert(are_close(CalcolaMediana(mydata, 3), 2));
+  assert(are_close(CalcolaMediana(mydata, 4), 2.5));  // Even
+  assert(are_close(CalcolaMediana(mydata, 3), 2));    // Odd
 
   // Continue from here …
 }
 ```
 
-Questi `assert` vanno bene anche per gli esercizi successivi, con opportuni aggiustamenti (es., usare `Vettore` anziché `double *`).
+Questi `assert` vanno bene anche per gli esercizi di oggi, con opportuni aggiustamenti (es., usare `Vettore` anziché `double *`).
 
 
 
@@ -218,25 +240,30 @@ Questi `assert` vanno bene anche per gli esercizi successivi, con opportuni aggi
 
 # Implementazione di `Vettore`
 
-# Uso di `operator[]`
+# Accesso ai dati
 
--   Nella classe `Vettore` è utile fare in modo che si possa accedere ai dati dell'array con la solita scrittura `[]`, es.:
+-   Il testo dell'esercizio richiede di implementare i metodi `GetComponent` e `SetComponent` per leggere e scrivere valori nell'array:
 
     ```c++
-    Vettore miovett(10);
-    
-    // Inizializzo l'array
-    // ...
-    
-    std::cout << "Il terzo elemento è " << miovett[3] << "\n";
+    Vettore v(2);
+    v.SetComponent(0, 162.3);
+    v.SetComponent(1, 431.7);
+    std::cout << v.GetComponent(1) << "\n";   // Print 431.7
     ```
+    
+-   Questo è però più scomodo rispetto ai semplici array:
 
--   Ma `miovett` non è un array, bensì un oggetto, quindi il C++ non sa cosa significhi `miovett[3]`.
+    ```c++
+    double v[2];
+    v[0] = 162.3;
+    v[1] = 431.7;
+    std::cout << v[1] << "\n";                // Print 431.7
+    ```
 
 
 # Uso di `operator[]`
 
--   Per rendere valida la scrittura `miovett[3]` occorre implementare un oggetto `operator[]`:
+-   Si può rendere valida la scrittura `miovett[3]` anche con oggetti di tipo `Vettore` implementando il metodo `operator[]`:
 
     ```c++
     double Vettore::operator[](int index) {
@@ -245,12 +272,7 @@ Questi `assert` vanno bene anche per gli esercizi successivi, con opportuni aggi
     }
     ```
 
--   In questo modo la linea di codice
-    ```c++
-    std::cout << miovett[5] << "\n";
-    ```
-
-    sarà equivalente a
+-   In questo modo la linea di codice `std::cout << miovett[5] << "\n"` sarà equivalente a
 
     ```c++
     assert(5 >= 0 && 5 < miovett.m_size);
@@ -270,15 +292,20 @@ Questi `assert` vanno bene anche per gli esercizi successivi, con opportuni aggi
     }
     ```
 
--   Così la scrittura seguente diventa legale:
+-   Così il programma seguente diventa legale:
 
     ```c++
-    miovett[5] = 6.0;
+    Vettore v(2);
+    v[0] = 162.3;  // Assignment, works thanks to the reference
+    v[1] = 431.7;  // Ditto
+    std::cout << v[1] << "\n";                // Print 431.7
     ```
+    
+# Uso di header files
 
 # Uso di header files
 
--   Avete già visto a lezione l'utilità degli *header files*, ossia dei file con estensione `.h`, `.hh` o `.hpp`.
+-   Avete visto a lezione l'utilità degli *header files*, ossia dei file con estensione `.h`, `.hh` o `.hpp`.
 
 -   Capita spesso che un file sia incluso più volte nel corso di una stessa compilazione.
 
@@ -287,35 +314,35 @@ Questi `assert` vanno bene anche per gli esercizi successivi, con opportuni aggi
     ```c++
     // File main.cpp
     
-    #include "vettore.hpp"
-    #include "statistiche.hpp"
+    #include "vettore.h"
+    #include "statistiche.h"
     
     int main() {
         // ...
     }
     ```
 
--   Nel `main` si usano sia le funzioni dichiarate in `vettore.hpp` che quelle dichiarate in `statistiche.hpp`, quindi ci vogliono entrambi gli `#include`.
+-   Nel `main` si usano sia le funzioni dichiarate in `vettore.h` che quelle dichiarate in `statistiche.h`, quindi ci vogliono entrambi gli `#include`.
 
 
 # Uso di header files
 
--   Supponiamo che questo sia il contenuto di `vettore.hpp`:
+-   Supponiamo che questo sia il contenuto di `vettore.h`:
 
     ```c++
-    // File vettore.hpp
+    // File vettore.h
     
     class Vettore {
         // ...
     };
     ```
 
-    e questo sia il contenuto di `statistiche.hpp`:
+    e questo sia il contenuto di `statistiche.h`:
 
     ```c++
-    // File statistiche.hpp
+    // File statistiche.h
     
-    #include "vettore.hpp"
+    #include "vettore.h"
     
     double CalcolaMedia(const Vettore & vett);
     ```
@@ -325,8 +352,19 @@ Questi `assert` vanno bene anche per gli esercizi successivi, con opportuni aggi
 Compilare il programma `main.cpp` provocherebbe un errore di compilazione:
 
 1.  Il primo `#include` definisce la classe `Vettore`;
-2.  Il secondo `#include` carica `statistiche.hpp`…
+2.  Il secondo `#include` carica `statistiche.h`…
 3.  …che a sua volta definisce di nuovo la classe `Vettore`: ma il C++ non ammette di definire due classi con lo stesso nome (neppure se sono identiche!).
+
+```c++
+// File main.cpp
+    
+#include "vettore.h"
+#include "statistiche.h"
+    
+int main() {
+    // ...
+}
+```
 
 
 # Uso di header files
@@ -334,7 +372,7 @@ Compilare il programma `main.cpp` provocherebbe un errore di compilazione:
 In pratica, `g++` è come se vedesse questo codice:
 
 ```c++
-// Questo viene da #include "vettore.hpp"
+// Questo viene da #include "vettore.h"
 class Vettore {
     // ...
 };
@@ -353,14 +391,12 @@ int main() {
 
 # *Header guards*
 
--   Questo è un problema che risale ai primordi del linguaggio C (fine anni '60), ed è stato storicamente risolto con l'uso di *header guards*.
-
--   Una *header guard* è un trucchetto che usa `#ifdef` per evitare una compilazione doppia:
+-   Questo è un problema che risale ai primordi del linguaggio C (fine anni '60), ed è stato storicamente risolto con l'uso di *header guards*:
 
     ```c++
-    // File vettore.hpp
-    #ifndef __VETTORE_HPP__
-    #define __VETTORE_HPP__
+    // File vettore.h
+    #ifndef __VETTORE_H__
+    #define __VETTORE_H__
     
     class Vettore {
         // ...
@@ -369,14 +405,14 @@ int main() {
     #endif
     ```
 
-    In questo modo la seconda volta che il file viene incluso, verrà saltato. L'identificatore `__VETTORE_HPP__` è arbitrario, e si può scegliere ciò che si vuole.
+    In questo modo, la seconda volta che il file viene incluso verrà saltato. L'identificatore `__VETTORE_H__` è arbitrario.
 
 
 # `#pragma once`
 
 -   I recenti compilatori C++, incluso il `g++`, permettono un'alternativa più semplice alle *header guards*.
 
--   la seguente scrittura è più agile e mette al riparo da errori:
+-   La seguente scrittura è più agile e mette al riparo da errori:
 
     ```c++
     #pragma once  // Questo file sarà incluso una volta sola
@@ -386,144 +422,181 @@ int main() {
     };
     ```
 
-    È più comoda perché si deve aggiungere una sola riga, non si deve inventare un identificatore e mette al riparo da pericolosi copia-e-incolla (che gli studenti fanno **sempre**!).
+    È più comoda perché si deve aggiungere una sola riga senza dover inventare un identificatore (`__VETTORE_H__`), e mette al riparo da pericolosi copia-e-incolla (che gli studenti fanno molto spesso!).
 
 
 # Costruttori, move semantics, etc.
 
+# «Costruzione» di una variabile
+
+-   Ci sono due passaggi che il compilatore C++ compie quando si introduce una variabile nel codice:
+
+    1.  Allocazione della memoria necessaria;
+    2.  Inizializzazione della memoria.
+    
+-   Esempio:
+
+    ```c++
+    int x;  // Allocation
+    x = 15; // Initialization
+    
+    int y = 30; // Shortcut, but there are still *two* operations here.
+    ```
+    
+# «Costruzione» di `Vettore`
+
+-   Le classi, a differenza di `int`, richiedono l'invocazione di un costruttore.
+
+-   Il costruttore va invocato quando si dichiara la variabile: non è possibile «differire» l'inizializzazione:
+
+    ```c++
+    int x;
+    x = 15;         // Ok, first allocate then initialize
+    
+    Vettore v;
+    v(10);          // Error, you cannot call the constructor here!
+    
+    Vettore w(10);  // Ok, allocate and initialize
+    ```
+    
+-   I costruttori possono richiedere molto tempo per essere eseguiti, ad esempio se invocano `new` (com'è il caso di `Vettore`).
+
+
 # Analogia
 
-![](images/empty_room.jpg){ width=40% }
-![](images/furnished_room.jpg){ width=40% }
+![](images/empty_room.jpg){ width=20% }
+![](images/furnished_room.jpg){ width=20% }
 
-Immaginiamo che una variabile appena creata dal compilatore C++ sia
-una stanza. *Prima* che sia invocato il costruttore è vuota, quando è
-stato invocato è invece arredata.
-
+Immaginiamo che una variabile sia un appartamento. Appena allocata è completamente spoglia: è l'edificio appena gli imbianchini e i piastrellisti hanno terminato il lavoro. Quando poi viene chiamato il costruttore della variabile, è come se la casa venisse arredata.
 
 
 # Costruttori
 
-![](images/empty_room.jpg){ width=40% }
-![](images/furnished_room.jpg){ width=40% }
+![](images/empty_room.jpg){ width=20% }
+![](images/furnished_room.jpg){ width=20% }
 
 ```c++
-Vettore::Vettore(unsigned int n) : m_N(n) {
-    m_v = new double[m_N];
-}
-
-int main() {
-    Vettore v(10);
-    // …
+Vettore::Vettore(int n) : m_N(n) {
+    m_v = new double[m_N];         // Allocate (build up the building)
+    for(int i = 0; i < m_N; ++i)   // Initialize (add the furniture)
+        m_v[i] = 0.0;
 }
 ```
 
 
-
 # Costruttori di copia
 
-![](images/empty_room.jpg){ width=40% }
-![](images/furnished_room.jpg){ width=40% }
+![](images/empty_room.jpg){ width=20% }
+![](images/furnished_room.jpg){ width=20% }
 
 Un *copy constructor* corrisponde all'azione di costruire una stanza
 vuota identica alla prima (ossia, di tipo `Vettore`), e riempirla con
-gli stessi identici mobili (ossia, assegnando lo stesso valore a `m_v`
-e `m_N`).
-
+gli stessi identici mobili (ossia, assegnando lo stesso valore a `m_N` e agli elementi di `m_v`).
 
 
 # Costruttori di copia
 
-![](images/empty_room.jpg){ width=40% }
-![](images/furnished_room.jpg){ width=40% }
+![](images/empty_room.jpg){ width=20% }
+![](images/furnished_room.jpg){ width=20% }
 
 ```c++
 Vettore::Vettore(const Vettore &vett) : m_N(vett.m_N) {
-    m_v = new double[m_N];
-    for(int i = 0; i < m_N; ++i)
-        m_v[i] = vett.m_v[i];
+    m_v = new double[m_N];        // Allocate (build up the building)
+    for(int i = 0; i < m_N; ++i)  // Initialize (add a copy of the furniture
+        m_v[i] = vett.m_v[i];     // that was used in the old building)
 }
 ```
 
 
-
 # Operazione di assegnamento
 
-![](images/empty_room.jpg){ width=40% }
-![](images/furnished_room.jpg){ width=40% }
+![](images/empty_room.jpg){ width=20% }
+![](images/furnished_room.jpg){ width=20% }
 
 Con una operazione di assegnamento (`operator=`), abbiamo due stanze
 già arredate (variabili già inizializzate), che vogliamo rendere
-identiche. Dobbiamo quindi prima *svuotare* una delle due stanze, e
-poi arredarla allo stesso modo dell'altra.
-
+identiche. Dobbiamo quindi prima *svuotare* la stanza di destinazione perché è piena, e solo dopo arredarla allo stesso modo dell'altra.
 
 
 # Operazione di assegnamento
 
-![](images/empty_room.jpg){ width=40% }
-![](images/furnished_room.jpg){ width=40% }
+![](images/empty_room.jpg){ width=20% }
+![](images/furnished_room.jpg){ width=20% }
 
 ```c++
 Vettore::operator=(const Vettore &vett) {
     m_N = vett.m_N;
-    if(m_v) delete m_v;  // Liberati dei mobili vecchi!
-    m_v = new double[m_N];
-    for(int i = 0; i < m_N; ++i) {
-        m_v[i] = vett.m_v[i];
+    if(m_v) delete m_v;             // Put the old building in the garbage!
+    m_v = new double[m_N];          // Create a new building
+    for(int i = 0; i < m_N; ++i) {  // Fill the rooms with a copy of the
+        m_v[i] = vett.m_v[i];       // old furniture
     }
 }
 ```
 
 
-
 # Operazione di assegnamento
 
-![](images/empty_room.jpg){ width=40% }
-![](images/furnished_room.jpg){ width=40% }
+![](images/empty_room.jpg){ width=20% }
+![](images/furnished_room.jpg){ width=20% }
 
 ```c++
 Vettore v1(10), v2(30);
-// …qui inizializzo v1 e v2 e le uso per un po'
+// …here I initialize v1 and v2, and I use them for some time.
 
-v1 = v2; // Assegnamento, tramite Vettore::operator=
+v1 = v2; // Assignment through Vettore::operator=
 ```
-
 
 
 # Move constructor
 
-![](images/empty_room.jpg){ width=40% }
-![](images/furnished_room.jpg){ width=40% }
+![](images/furnished_room.jpg){ width=20% }
+![](images/empty_room.jpg){ width=20% }
 
 Il *move constructor* è stato introdotto nel C++11, e corrisponde a un
-trasloco: ho una stanza già arredata e una vuota, e voglio spostare i
+**trasloco**: ho una stanza già arredata e una vuota, e voglio spostare i
 mobili dalla prima alla seconda, senza comprarne di nuovi!
 
 
 # Move constructor
 
-![](images/empty_room.jpg){ width=40% }
-![](images/furnished_room.jpg){ width=40% }
+![](images/empty_room.jpg){ width=20% }
+![](images/furnished_room.jpg){ width=20% }
 
 ```c++
 Vettore::Vettore(const Vettore && vett) : m_n(vett.m_N) {
-    // Nessun "delete vett.m_v": voglio tenere i vecchi mobili
-    m_v = vett.m_v;  // Velocissimo!
-    // Nessun ciclo "for" per copiare gli elementi
+    // No need for "delete vett.m_v": I want to keep the old furniture!
+    m_v = vett.m_v;  // No need to call "new": very fast!
+    // No "for" loop to copy the elements: very fast!
 }
 ```
 
 
 # Move constructor
 
-![](images/empty_room.jpg){ width=40% }
-![](images/furnished_room.jpg){ width=40% }
+![](images/empty_room.jpg){ width=20% }
+![](images/furnished_room.jpg){ width=20% }
 
 ```c++
-// La funzione "Read" crea un vettore e lo riempie con i dati
-// letti da un file
+// Function "Read" creates a Vector and fill it with data read from file
+Vettore Read(int ndata, const char * filename) {
+  Vettore result(ndata);
+  // …
+  return result;
+}
 
 Vettore v = Read(ndata, filename);
 ```
 
+
+# Distinguere tra i casi
+
+```c++
+Vettore v1(10);                    // Constructor
+Vettore v2(v1);                    // Copy constructor
+Vettore v3 = v1;                   // Copy constructor
+
+v3 = v1;                           // Assignment
+Vettore v4 = Read(10, "data.dat"); // Move constructor
+                                   // (at the end of the call to "Read")
+```
