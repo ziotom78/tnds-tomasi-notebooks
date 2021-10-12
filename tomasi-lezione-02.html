@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="author" content="Maurizio Tomasi">
+  <title>Laboratorio di TNDS – Lezione 2</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js@^4//dist/reset.css">
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js@^4//dist/reveal.css">
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js@^4//dist/theme/white.css" id="theme">
+  <link rel="stylesheet" href="./css/custom.css"/>
+  <link rel="stylesheet" href="./css/asciinema-player.css"/>
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide">
+  <h1 class="title">Laboratorio di TNDS – Lezione 2</h1>
+  <p class="author">Maurizio Tomasi</p>
+  <p class="date">Martedì 12 Ottobre 2021</p>
+</section>
+
+<section id="esercizi-per-oggi" class="slide level1">
+<h1>Esercizi per oggi</h1>
+</section>
+<section id="link-alle-risorse-online" class="slide level1">
+<h1>Link alle risorse online</h1>
+<ul>
+<li><p>Gli esercizi di oggi sono disponibili sul sito del corso <a href="http://labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/lezione2_1819.html">labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/lezione2_1819.html</a>.</p></li>
+<li><p>Come al solito, queste slides, che forniscono suggerimenti addizionali rispetto alla lezione di teoria, sono disponibili all’indirizzo <a href="https://ziotom78.github.io/tnds-tomasi-notebooks/">ziotom78.github.io/tnds-tomasi-notebooks</a>.</p></li>
+</ul>
+</section>
+<section id="esercizi" class="slide level1">
+<h1>Esercizi</h1>
+<ul>
+<li><p>Esercizio 2.0: creazione di una classe <code>Vettore</code>.</p></li>
+<li><p>Esercizio 2.1 (da consegnare per l’esame scritto): è lo stesso tipo di esercizio della scorsa lezione, ma ora occorre usare la classe <code>Vettore</code> dell’esercizio 2.0.</p></li>
+</ul>
+</section>
+<section id="scrittura-di-test" class="slide level1">
+<h1>Scrittura di test</h1>
+</section>
+<section id="verificate-il-vostro-codice" class="slide level1">
+<h1>Verificate il vostro codice!</h1>
+<pre><code>N = 100000:
+  - Mean               : 30.23231
+  - Variance           : 282326.76577 (corrected: 282329.58906)
+  - Standard deviation : 531.34430 (corrected: 531.34696)
+  - Median             : 12.74255
+
+N = 10:
+  - Mean               : 13.91472
+  - Variance           : 38.73156 (corrected: 43.03507)
+  - Standard deviation : 6.22347 (corrected: 6.56011)
+  - Median             : 10.58911
+
+N = 9:
+  - Mean               : 13.85262
+  - Variance           : 42.99651 (corrected: 48.37107)
+  - Standard deviation : 6.55717 (corrected: 6.95493)
+  - Median             : 9.55072</code></pre>
+</section>
+<section id="verifica-della-correttezza-dei-codici" class="slide level1">
+<h1>Verifica della correttezza dei codici</h1>
+<ul>
+<li><p>Quando si scrive un programma, è indispensabile verificare che funzioni.</p></li>
+<li><p>La scorsa settimana vi avevo fornito i risultati attesi, che avete (<strong>spero!</strong>) confrontato con l’output dei vostri programmi.</p></li>
+<li><p>Ma se nelle prossime settimane deciderete di mettere mano ai vecchi esercizi per migliorarli, dovrete ricontrollare da capo i numeri!</p></li>
+<li><p>Non sarebbe meglio se fosse il calcolatore a fare questi controlli per voi?</p></li>
+</ul>
+</section>
+<section id="un-semplice-esempio" class="slide level1">
+<h1>Un semplice esempio</h1>
+<div class="sourceCode" id="cb2"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> calc<span class="op">(</span><span class="dt">int</span> a<span class="op">,</span> <span class="dt">int</span> b<span class="op">)</span> <span class="op">{</span> <span class="cf">return</span> a <span class="op">+</span> b<span class="op">;</span> <span class="op">}</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="bu">std::</span>cout<span class="op"> &lt;&lt;</span> <span class="st">&quot;Insert two numbers: &quot;</span><span class="op">;</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> a<span class="op">,</span> b<span class="op">;</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    <span class="bu">std::</span>cin<span class="op"> &gt;&gt;</span> a <span class="op">&gt;&gt;</span> b<span class="op">;</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    <span class="bu">std::</span>cout<span class="op"> &lt;&lt;</span> <span class="st">&quot;The result is &quot;</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>              <span class="op">&lt;&lt;</span> calc<span class="op">(</span>a<span class="op">,</span> b<span class="op">)</span> <span class="op">&lt;&lt;</span> <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">;</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+</section>
+<section id="un-semplice-esempio-1" class="slide level1">
+<h1>Un semplice esempio</h1>
+<ul>
+<li><p>Per verificare la correttezza del codice, si può eseguire alcune volte il programma.</p>
+<pre class="text"><code>$ g++ test1.cpp -o test1
+$ ./test1
+Insert two numbers: 4 6
+The result is 10
+
+$ ./test1
+Insert two numbers: -1 3
+The result is 2
+
+$</code></pre></li>
+<li><p>Il conto però, come abbiamo visto, va verificato a mano ogni volta.</p></li>
+</ul>
+</section>
+<section id="test-automatici" class="slide level1">
+<h1>Test automatici</h1>
+<ul>
+<li><p>Si può verificare automaticamente la correttezza del codice, usando la macro <code>assert</code>:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;cassert&gt;</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> test_sum<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">// No need to write std::assert, as it is a macro</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="ot">assert</span><span class="op">(</span>sum<span class="op">(</span><span class="dv">4</span><span class="op">,</span> <span class="dv">6</span><span class="op">)</span> <span class="op">==</span> <span class="dv">10</span><span class="op">);</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="ot">assert</span><span class="op">(</span>sum<span class="op">(-</span><span class="dv">1</span><span class="op">,</span> <span class="dv">3</span><span class="op">)</span> <span class="op">==</span> <span class="dv">2</span><span class="op">);</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>…</span></code></pre></div></li>
+<li><p>Il resto del codice resta uguale, ma nel <code>main</code> si deve invocare <code>test_sum()</code> prima di ogni altra cosa.</p></li>
+</ul>
+</section>
+<section id="test-automatici-1" class="slide level1">
+<h1>Test automatici</h1>
+<ul>
+<li><p>Se c’è un errore, il programma si blocca con un messaggio:</p>
+<pre class="text"><code>$ ./test2
+test2.cpp:4:void test_sum():
+   Assertion `sum(-1,3) == 2&#39; failed
+Aborted (core dumped)
+$</code></pre></li>
+<li><p><strong>Avvertenza</strong>: questo output si ottiene solo se avete implementato il <a href="https://ziotom78.github.io/tnds-tomasi-notebooks/tomasi-lezione-01.html#/flag-del-compilatore">suggerimento della scorsa lezione</a> di usare il flag <code>-g</code> nel <code>Makefile</code>.</p></li>
+</ul>
+</section>
+<section id="test-automatici-2" class="slide level1">
+<h1>Test automatici</h1>
+<ul>
+<li><p>È sempre buona cosa inserire all’inizio del <code>main</code> una serie di test che verifichino il funzionamento corretto delle funzioni implementate.</p></li>
+<li><p>Il <code>main</code> dei vostri prossimi esercizi sembrerà questo:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">(</span><span class="dt">int</span> argc<span class="op">,</span> <span class="at">const</span> <span class="dt">char</span> <span class="op">*</span>argv<span class="op">[])</span> <span class="op">{</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Put the tests of the functions you&#39;re going to use</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    test_bisection<span class="op">();</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    test_simpson_integral<span class="op">();</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    test_random_generator<span class="op">();</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    test_hit_or_miss<span class="op">();</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    …</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div></li>
+<li><p>In questa e nelle lezioni successive vi fornirò una serie di comandi <code>assert</code> da inserire nei vostri codici: vi aiuteranno a verificare che l’esercizio sia corretto.</p></li>
+</ul>
+</section>
+<section id="test-sui-floating-point" class="slide level1">
+<h1>Test sui floating-point</h1>
+<ul>
+<li><p>C’è però un problema con gli esercizi di queste prime lezioni, legato a qualcosa che alcuni di voi hanno osservato già la scorsa volta.</p></li>
+<li><p>Considerate il risultato atteso per la varianza nel caso <code>N = 100000</code>, che è <code>282326.76577</code>. Se avete usato <code>std::cout &lt;&lt;</code> per stampare la varianza, avete probabilmente ottenuto <code>282327</code> (risultato arrotondato).</p></li>
+<li><p>Non si può in questo caso scrivere un test per la varianza fatto così:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ot">assert</span><span class="op">(</span>CalcolaVarianza<span class="op">(</span>mydata<span class="op">,</span> <span class="dv">100_000</span><span class="op">)</span> <span class="op">==</span> <span class="fl">282326.76577</span><span class="op">)</span></span></code></pre></div>
+<p>perché al minimo errore di arrotondamento l’uguaglianza fallisce.</p></li>
+</ul>
+</section>
+<section id="esercizio-1.1-assert" class="slide level1">
+<h1>Esercizio 1.1: assert</h1>
+<div class="sourceCode" id="cb8"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="dt">bool</span> are_close<span class="op">(</span><span class="dt">double</span> x<span class="op">,</span> <span class="dt">double</span> y<span class="op">,</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">double</span> eps <span class="op">=</span> <span class="fl">1e-7</span><span class="op">)</span> <span class="op">{</span> <span class="cf">return</span> fabs<span class="op">(</span>x <span class="op">-</span> y<span class="op">)</span> <span class="op">&lt;</span> eps<span class="op">;</span> <span class="op">}</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> test_statistical_functions<span class="op">(</span><span class="dt">void</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> mydata<span class="op">[]</span> <span class="op">=</span> <span class="op">{</span><span class="dv">1</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">3</span><span class="op">,</span> <span class="dv">4</span><span class="op">};</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  <span class="ot">assert</span><span class="op">(</span>are_close<span class="op">(</span>CalcolaMedia<span class="op">(</span>mydata<span class="op">,</span> <span class="dv">4</span><span class="op">),</span> <span class="fl">2.5</span><span class="op">));</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Variance: σ²</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>  <span class="ot">assert</span><span class="op">(</span>are_close<span class="op">(</span>CalcolaVarianza<span class="op">(</span>mydata<span class="op">,</span> <span class="dv">4</span><span class="op">),</span> <span class="fl">1.25</span><span class="op">));</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Test for an even/odd number of elements</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>  <span class="ot">assert</span><span class="op">(</span>are_close<span class="op">(</span>CalcolaMediana<span class="op">(</span>mydata<span class="op">,</span> <span class="dv">4</span><span class="op">),</span> <span class="fl">2.5</span><span class="op">));</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>  <span class="ot">assert</span><span class="op">(</span>are_close<span class="op">(</span>CalcolaMediana<span class="op">(</span>mydata<span class="op">,</span> <span class="dv">3</span><span class="op">),</span> <span class="dv">2</span><span class="op">));</span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Continue from here …</span></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p>Questi <code>assert</code> vanno bene anche per gli esercizi successivi, con opportuni aggiustamenti (es., usare <code>Vettore</code> anziché <code>double *</code>).</p>
+</section>
+<section id="esempio-di-output" class="slide level1">
+<h1>Esempio di output</h1>
+<ul>
+<li><p>Se avete sbagliato ad implementare una delle funzioni, questo è quello che accade quando eseguite il programma:</p>
+<pre class="text"><code>$ make
+esercizio01.1: esercizio01.1.cpp:53: int main(): ↲
+    Assertion `are_close(CalcolaMediana(mydata, num), 2.5)&#39; failed.
+Aborted (core dumped)
+$</code></pre></li>
+<li><p>Anche quando avete verificato che gli <code>assert</code> passano con successo, lasciateli al loro posto: non fanno male di certo, e nel caso in cui in futuro dobbiate modificare l’implementazione delle funzioni, continueranno a fungere da controllo.</p></li>
+</ul>
+</section>
+<section id="assert-negli-esercizi" class="slide level1">
+<h1>Assert negli esercizi</h1>
+<ul>
+<li><p>Le liste di <code>assert</code> che vi fornisco sono state costruite anno dopo anno, alla luce degli errori che solitamente hanno fatto i vostri precedenti colleghi.</p></li>
+<li><p>Non presentatevi all’esame finché non riuscite a far passare <strong>tutti</strong> gli <code>assert</code> di <strong>tutti</strong> gli esercizi!</p></li>
+<li><p>Molte volte degli studenti hanno presentato uno scritto in cui avevano usato librerie con errori! E quasi sempre ritrovavo commenti del genere nel codice:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Siccome non riuscivo a far passare i test, ho commentato gli assert.</span></span></code></pre></div></li>
+</ul>
+</section>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/reveal.js@^4//dist/reveal.js"></script>
+
+  <!-- reveal.js plugins -->
+  <script src="https://unpkg.com/reveal.js@^4//plugin/notes/notes.js"></script>
+  <script src="https://unpkg.com/reveal.js@^4//plugin/search/search.js"></script>
+  <script src="https://unpkg.com/reveal.js@^4//plugin/zoom/zoom.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+      
+        // Display a presentation progress bar
+        progress: true,
+        // Display the page number of the current slide
+        slideNumber: true,
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+       // Parallax background image
+       parallaxBackgroundImage: './media/background.png', // e.g. "'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg'"
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1440,
+        height: 810,
+
+        // reveal.js plugins
+        plugins: [
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    <script src="js/asciinema-player.js"></script>
+    </body>
+</html>
