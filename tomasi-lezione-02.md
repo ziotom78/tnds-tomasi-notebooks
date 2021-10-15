@@ -500,9 +500,9 @@ gli stessi identici mobili (ossia, assegnando lo stesso valore a `m_N` e agli el
 ![](images/furnished_room.jpg){ width=20% }
 
 ```c++
-Vettore::Vettore(const Vettore &vett) : m_N(vett.m_N) {
-    m_v = new double[m_N];        // Allocate (build up the building)
-    for(int i = 0; i < m_N; ++i)  // Initialize (add a copy of the furniture
+Vettore::Vettore(const Vettore &vett) : m_N(vett.m_N) {
+    m_v = new double[m_N];        // Allocate (build up the building)
+    for(int i = 0; i < m_N; ++i)  // Initialize (add a copy of the furniture
         m_v[i] = vett.m_v[i];     // that was used in the old building)
 }
 ```
@@ -524,13 +524,13 @@ identiche. Dobbiamo quindi prima *svuotare* la stanza di destinazione perché è
 ![](images/furnished_room.jpg){ width=20% }
 
 ```c++
-Vettore::operator=(const Vettore &vett) {
-    m_N = vett.m_N;
-    if(m_v) delete m_v;             // Put the old building in the garbage!
-    m_v = new double[m_N];          // Create a new building
-    for(int i = 0; i < m_N; ++i) {  // Fill the rooms with a copy of the
-        m_v[i] = vett.m_v[i];       // old furniture
-    }
+Vettore & Vettore::operator=(const Vettore &vett) {
+    m_N = vett.m_N;
+    if(m_v) delete m_v;             // Put the old building in the garbage!
+    m_v = new double[m_N];          // Create a new building
+    for(int i = 0; i < m_N; ++i) {  // Fill the rooms with a copy of the
+        m_v[i] = vett.m_v[i];       // old furniture
+    }
 }
 ```
 
@@ -564,10 +564,10 @@ mobili dalla prima alla seconda, senza comprarne di nuovi!
 ![](images/furnished_room.jpg){ width=20% }
 
 ```c++
-Vettore::Vettore(const Vettore && vett) : m_n(vett.m_N) {
-    // No need for "delete vett.m_v": I want to keep the old furniture!
-    m_v = vett.m_v;  // No need to call "new": very fast!
-    // No "for" loop to copy the elements: very fast!
+Vettore::Vettore(Vettore && vett) : m_n(vett.m_N) {
+    // No need for "delete vett.m_v": I want to keep the old furniture!
+    m_v = vett.m_v;  // No need to call "new": very fast!
+    // No "for" loop to copy the elements: very fast!
 }
 ```
 
