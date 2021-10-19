@@ -4,5 +4,6 @@
 
 - [Lezione 1](tomasi-lezione-01.html) (5 Ottobre 2021)
 - [Lezione 2](tomasi-lezione-02.html) (11 Ottobre 2021)
+- [Lezione 3](tomasi-lezione-03.html) (19 Ottobre 2021)
 
 
