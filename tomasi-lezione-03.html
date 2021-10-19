@@ -84,6 +84,22 @@
   <link rel="stylesheet" href="https://unpkg.com/reveal.js@^4//dist/theme/white.css" id="theme">
   <link rel="stylesheet" href="./css/custom.css"/>
   <link rel="stylesheet" href="./css/asciinema-player.css"/>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+   var mathElements = document.getElementsByClassName("math");
+   var macros = [];
+   for (var i = 0; i < mathElements.length; i++) {
+    var texText = mathElements[i].firstChild;
+    if (mathElements[i].tagName == "SPAN") {
+     katex.render(texText.data, mathElements[i], {
+      displayMode: mathElements[i].classList.contains('display'),
+      throwOnError: false,
+      macros: macros,
+      fleqn: false
+     });
+  }}});
+  </script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css" />
 </head>
 <body>
   <div class="reveal">
@@ -116,24 +132,24 @@
 <section id="test-con-assert" class="slide level1">
 <h1>Test con <code>assert</code></h1>
 <p>Questo è il test per l’esercizio 3.1, che usa <code>std::vector</code>; adattatelo per l’esercizio 3.0.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="dt">bool</span> are_close<span class="op">(</span><span class="dt">double</span> calculated<span class="op">,</span> <span class="dt">double</span> expected<span class="op">,</span> <span class="dt">double</span> epsilon <span class="op">=</span> <span class="fl">1e-7</span><span class="op">)</span> <span class="op">{</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> fabs<span class="op">(</span>calculated <span class="op">-</span> expected<span class="op">)</span> <span class="op">&lt;</span> epsilon<span class="op">;</span></span>
+<div class="sourceCode" id="cb1"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>bool are_close<span class="op">(</span>double calculated<span class="op">,</span> double expected<span class="op">,</span> double epsilon <span class="op">=</span> <span class="fl">1e-7</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  return fabs<span class="op">(</span>calculated <span class="op">-</span> expected<span class="op">)</span> <span class="op">&lt;</span> epsilon<span class="op">;</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> test_statistical_functions<span class="op">(</span><span class="dt">void</span><span class="op">)</span> <span class="op">{</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="op">{</span>  <span class="co">// New scope</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>      <span class="bu">std::</span>vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> mydata<span class="op">{</span><span class="dv">1</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">3</span><span class="op">,</span> <span class="dv">4</span><span class="op">};</span>  <span class="co">// Use these instead of data.dat</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>void test_statistical_functions<span class="op">(</span><span class="dt">void</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="op">{</span>  <span class="co">// New scope</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>      <span class="bu">std::</span>vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> mydata<span class="op">{</span><span class="dv">1</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">3</span><span class="op">,</span> <span class="dv">4</span><span class="op">};</span>  <span class="co">// Use these instead of data.dat</span></span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>      <span class="ot">assert</span><span class="op">(</span>are_close<span class="op">(</span>CalcolaMedia<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;(</span>mydata<span class="op">),</span> <span class="fl">2.5</span><span class="op">));</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>      <span class="ot">assert</span><span class="op">(</span>are_close<span class="op">(</span>CalcolaVarianza<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;(</span>mydata<span class="op">),</span> <span class="fl">1.25</span><span class="op">));</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>      <span class="ot">assert</span><span class="op">(</span>are_close<span class="op">(</span>CalcolaMediana<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;(</span>mydata<span class="op">),</span> <span class="fl">2.5</span><span class="op">));</span>  <span class="co">// Even</span></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>      assert<span class="op">(</span>are_close<span class="op">(</span>CalcolaMedia<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;(</span>mydata<span class="op">),</span> <span class="fl">2.5</span><span class="op">));</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>      assert<span class="op">(</span>are_close<span class="op">(</span>CalcolaVarianza<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;(</span>mydata<span class="op">),</span> <span class="fl">1.25</span><span class="op">));</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>      assert<span class="op">(</span>are_close<span class="op">(</span>CalcolaMediana<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;(</span>mydata<span class="op">),</span> <span class="fl">2.5</span><span class="op">));</span>  <span class="co">// Even</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
 <span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>  <span class="op">{</span> <span class="co">// New scope: I can declare again a variable named `mydata`</span></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>      <span class="bu">std::</span>vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> mydata<span class="op">{</span><span class="dv">1</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">3</span><span class="op">};</span>     <span class="co">// Shorter</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>  <span class="op">{</span> <span class="co">// New scope: I can declare again a variable named `mydata`</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>      <span class="bu">std::</span>vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> mydata<span class="op">{</span><span class="dv">1</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">3</span><span class="op">};</span>     <span class="co">// Shorter</span></span>
 <span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>      <span class="ot">assert</span><span class="op">(</span>are_close<span class="op">(</span>CalcolaMediana<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;(</span>mydata<span class="op">),</span> <span class="dv">2</span><span class="op">));</span>    <span class="co">// Odd</span></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>      assert<span class="op">(</span>are_close<span class="op">(</span>CalcolaMediana<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;(</span>mydata<span class="op">),</span> <span class="dv">2</span><span class="op">));</span>    <span class="co">// Odd</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
 <span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 </section>
 <section id="root" class="slide level1">
@@ -218,14 +234,14 @@
 <h1>Uso di <code>assert</code> e di <code>cerr</code></h1>
 <ul>
 <li><p>Di solito gli studenti sono abbastanza confusi dal seguente codice:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> Vettore<span class="op">::</span>GetComponent<span class="op">(</span><span class="dt">unsigned</span> <span class="dt">int</span> i<span class="op">)</span> <span class="at">const</span> <span class="op">{</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="co">// assert((m_N &gt; 1) &amp;&amp; &quot;Errore: l&#39;indice è troppo grande&quot;);</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> <span class="op">(</span>i <span class="op">&lt;</span> <span class="va">m_N</span><span class="op">)</span> <span class="op">{</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>      <span class="cf">return</span> <span class="va">m_v</span><span class="op">[</span>i<span class="op">];</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>      cerr <span class="op">&lt;&lt;</span> <span class="st">&quot;Errore: indice&quot;</span> <span class="op">&lt;&lt;</span> i <span class="op">&lt;&lt;</span> <span class="st">&quot;, dimensione &quot;</span> <span class="op">&lt;&lt;</span> <span class="va">m_N</span> <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>      exit<span class="op">(-</span><span class="dv">1</span><span class="op">);</span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<div class="sourceCode" id="cb4"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>double Vettore<span class="op">::</span>GetComponent<span class="op">(</span>unsigned int i<span class="op">)</span> const <span class="op">{</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="co">// assert((m_N &gt; 1) &amp;&amp; &quot;Errore: l&#39;indice è troppo grande&quot;);</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  if <span class="op">(</span>i <span class="op">&lt;</span> <span class="va">m_N</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>      return <span class="va">m_v</span><span class="op">[</span>i<span class="op">];</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span> else <span class="op">{</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>      cerr <span class="op">&lt;&lt;</span> <span class="st">&quot;Errore: indice&quot;</span> <span class="op">&lt;&lt;</span> i <span class="op">&lt;&lt;</span> <span class="st">&quot;, dimensione &quot;</span> <span class="op">&lt;&lt;</span> <span class="va">m_N</span> <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>      exit<span class="op">(-</span><span class="dv">1</span><span class="op">);</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
 <span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div></li>
 <li><p>Quando è meglio usare <code>assert</code>, e quando è meglio invece un messaggio di errore?</p></li>
 </ul>
@@ -443,6 +459,28 @@ $</code></pre></li>
 <span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">// If we have reached the last iteration, stop here</span></span>
 <span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>i <span class="op">==</span> <span class="dv">0</span><span class="op">)</span> <span class="cf">break</span><span class="op">;</span></span>
 <span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div></li>
+</ul>
+</section>
+<section id="iteratori-nella-stl" class="slide level1">
+<h1>Iteratori nella STL</h1>
+</section>
+<section id="funzioni-nella-stl" class="slide level1">
+<h1>Funzioni nella STL</h1>
+<ul>
+<li><p>La classe <code>std::vector</code> è un tipo di <em>container</em>, ossia un «contenitore» di altri oggetti.</p></li>
+<li><p>Oltre alla classe <code>std::vector</code>, la libreria standard C++ fornisce una serie di funzioni come <a href="https://www.cplusplus.com/reference/algorithm/sort/?kw=sort"><code>sort</code></a>, <a href="https://www.cplusplus.com/reference/algorithm/find_first_of/"><code>find_first_of</code></a> e <a href="https://www.cplusplus.com/reference/algorithm/min/"><code>min</code></a> che possono operare su un vettore o un altro tipo di <em>container</em> (es., <a href="https://www.cplusplus.com/reference/array/array/"><code>std::array</code></a>, <a href="https://www.cplusplus.com/reference/list/list/"><code>std::list</code></a>, <a href="https://www.cplusplus.com/reference/stack/stack/"><code>std::stack</code></a>, <a href="https://www.cplusplus.com/reference/set/set/"><code>std::set</code></a>, etc.)</p></li>
+<li><p>In tutti questi casi, non si deve passare alla funzione la variabile di tipo <code>std::vector</code>, ma una coppia di <strong>iteratori</strong>.</p></li>
+</ul>
+</section>
+<section id="iteratori" class="slide level1">
+<h1>Iteratori</h1>
+<ul>
+<li><p>Gli iteratori si trovano sempre in coppia, e rappresentano un’intervallo di elementi consecutivi. Se il primo elemento è <span class="math inline">x</span> e l’elemento dopo l’ultimo è <span class="math inline">y</span>, la coppia di iteratori <span class="math inline">x, y</span> corrisponde all’intervallo</p>
+<p><span class="math display">
+[x, \ldots, y)
+</span></p></li>
+<li><p>Il primo elemento di un <code>std::vector</code> si ottiene mediante il metodo <a href="https://www.cplusplus.com/reference/vector/vector/begin/"><code>std::vector::begin()</code></a>, che restituisce un <em>iteratore</em> (per ottenere il primo elemento, usare <a href="https://www.cplusplus.com/reference/vector/vector/front/"><code>std::vector::front()</code></a>).</p></li>
+<li><p>Per l’ultimo elemento si usa <a href="https://www.cplusplus.com/reference/vector/vector/end/"><code>std::vector::end()</code></a> (<em>iteratore</em>) e <a href="https://www.cplusplus.com/reference/vector/vector/back/"><code>std::vector::back()</code></a> (l’elemento stesso).</p></li>
 </ul>
 </section>
     </div>

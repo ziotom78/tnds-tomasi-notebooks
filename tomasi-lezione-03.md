@@ -25,24 +25,24 @@
 Questo è il test per l'esercizio 3.1, che usa `std::vector`; adattatelo per l'esercizio 3.0.
 
 ```c++
-bool are_close(double calculated, double expected, double epsilon = 1e-7) {
-  return fabs(calculated - expected) < epsilon;
+bool are_close(double calculated, double expected, double epsilon = 1e-7) {
+  return fabs(calculated - expected) < epsilon;
 }
 
-void test_statistical_functions(void) {
-  {  // New scope
-      std::vector<double> mydata{1, 2, 3, 4};  // Use these instead of data.dat
+void test_statistical_functions(void) {
+  {  // New scope
+      std::vector<double> mydata{1, 2, 3, 4};  // Use these instead of data.dat
 
-      assert(are_close(CalcolaMedia<double>(mydata), 2.5));
-      assert(are_close(CalcolaVarianza<double>(mydata), 1.25));
-      assert(are_close(CalcolaMediana<double>(mydata), 2.5));  // Even
-  }
+      assert(are_close(CalcolaMedia<double>(mydata), 2.5));
+      assert(are_close(CalcolaVarianza<double>(mydata), 1.25));
+      assert(are_close(CalcolaMediana<double>(mydata), 2.5));  // Even
+  }
 
-  { // New scope: I can declare again a variable named `mydata`
-      std::vector<double> mydata{1, 2, 3};     // Shorter
+  { // New scope: I can declare again a variable named `mydata`
+      std::vector<double> mydata{1, 2, 3};     // Shorter
 
-      assert(are_close(CalcolaMediana<double>(mydata), 2));    // Odd
-  }
+      assert(are_close(CalcolaMediana<double>(mydata), 2));    // Odd
+  }
 }
 ```
 
@@ -136,14 +136,14 @@ Con l'esempio seguente, è possibile usare il reindirizzamento:
 -   Di solito gli studenti sono abbastanza confusi dal seguente codice:
 
     ```c++
-    double Vettore::GetComponent(unsigned int i) const {
-      // assert((m_N > 1) && "Errore: l'indice è troppo grande");
-      if (i < m_N) {
-          return m_v[i];
-      } else {
-          cerr << "Errore: indice" << i << ", dimensione " << m_N << endl;
-          exit(-1);
-      }
+    double Vettore::GetComponent(unsigned int i) const {
+      // assert((m_N > 1) && "Errore: l'indice è troppo grande");
+      if (i < m_N) {
+          return m_v[i];
+      } else {
+          cerr << "Errore: indice" << i << ", dimensione " << m_N << endl;
+          exit(-1);
+      }
     }
     ```
 
@@ -425,3 +425,25 @@ Di conseguenza, il programmatore è «costretto» a verificare la correttezza de
         if (i == 0) break;
     }
     ```
+
+# Iteratori nella STL
+
+# Funzioni nella STL
+
+-   La classe `std::vector` è un tipo di *container*, ossia un «contenitore» di altri oggetti.
+
+-   Oltre alla classe `std::vector`, la libreria standard C++ fornisce una serie di funzioni come [`sort`](https://www.cplusplus.com/reference/algorithm/sort/?kw=sort), [`find_first_of`](https://www.cplusplus.com/reference/algorithm/find_first_of/) e [`min`](https://www.cplusplus.com/reference/algorithm/min/) che possono operare su un vettore o un altro tipo di *container* (es., [`std::array`](https://www.cplusplus.com/reference/array/array/), [`std::list`](https://www.cplusplus.com/reference/list/list/), [`std::stack`](https://www.cplusplus.com/reference/stack/stack/), [`std::set`](https://www.cplusplus.com/reference/set/set/), etc.)
+
+-   In tutti questi casi, non si deve passare alla funzione la variabile di tipo `std::vector`, ma una coppia di **iteratori**.
+
+# Iteratori
+
+-   Gli iteratori si trovano sempre in coppia, e rappresentano un'intervallo di elementi consecutivi. Se il primo elemento è $x$ e l'elemento dopo l'ultimo è $y$, la coppia di iteratori $x, y$ corrisponde all'intervallo
+
+    $$
+    [x, \ldots, y)
+    $$
+
+-   Il primo elemento di un `std::vector` si ottiene mediante il metodo [`std::vector::begin()`](https://www.cplusplus.com/reference/vector/vector/begin/), che restituisce un *iteratore* (per ottenere il primo elemento, usare [`std::vector::front()`](https://www.cplusplus.com/reference/vector/vector/front/)).
+
+-   Per l'ultimo elemento si usa [`std::vector::end()`](https://www.cplusplus.com/reference/vector/vector/end/) (*iteratore*) e [`std::vector::back()`](https://www.cplusplus.com/reference/vector/vector/back/) (l'elemento stesso).
