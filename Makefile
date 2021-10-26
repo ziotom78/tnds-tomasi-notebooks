@@ -1,8 +1,10 @@
 PANDOC := /usr/bin/pandoc
 PANDOC_IMAGINE := $(HOME)/bin/pandoc_imagine.py
-.phony: all
+.phony: all http
 
 all: \
+	tomasi-lezione-05.html \
+	tomasi-lezione-04.html \
 	tomasi-lezione-03.html \
 	tomasi-lezione-02.html \
 	tomasi-lezione-01.html \
@@ -28,3 +30,6 @@ index.html: index.md ${JS_FILES}
 		-f markdown+tex_math_single_backslash+subscript+superscript \
 		-t revealjs \
 		-o $@ $<
+
+http:
+	python3 -m http.server
