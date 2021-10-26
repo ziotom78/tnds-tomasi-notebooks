@@ -19,6 +19,8 @@
 -   Esercizio 5.1: Creazione della classe `Particella` ed `Elettrone`
 -   Esercizio 5.2: Creazione delle classi `CampoVettoriale` e `PuntoMateriale`
 -   Esercizio 5.3: Calcolo del campo elettrico generato da un dipolo (**da consegnare**)
+-   Esercizio 5.4: Campo di multipolo (approfondimento)
+-   Esercizio 5.5: Gravità dallo spazio (approfondimento)
 
 # Suggerimenti per gli esercizi
 
