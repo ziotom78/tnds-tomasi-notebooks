@@ -59,8 +59,8 @@ void test_coordinates(void) {
   assert(are_close(p.getZ(), 3.0);
   
   assert(are_close(p.getR(), 3.7416573867739));
-  assert(are_close(p.getPhi(), 0.64052231267943);
-  assert(are_close(p.getTheta(), 1.1071487177941);
+  assert(are_close(p.getPhi(), 1.1071487177941);
+  assert(are_close(p.getTheta(), 0.64052231267943);
 
   assert(are_close(p.getRho(), 2.2360679774998);
 }
