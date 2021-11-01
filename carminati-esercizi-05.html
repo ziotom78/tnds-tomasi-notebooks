@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html  lang="it-IT"  dir="ltr">
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Lezione 5: Classi ed ereditarietà</title>
+        <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+        <link rel="apple-touch-icon-precomposed" href="images/apple-touch-icon.png">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/2.26.4/css/uikit.gradient.css">
+
+        <!-- <link rel="stylesheet" href="style.css"> -->
+        <link rel="stylesheet" href="https://cdn.rawgit.com/diversen/pandoc-uikit/master/style.css">
+        <link href="https://vjs.zencdn.net/5.4.4/video-js.css" rel="stylesheet" />
+        <script src="https://code.jquery.com/jquery-2.2.1.min.js"></script>
+        <!-- <script src="uikit.js"></script> -->
+        <script src="https://cdn.rawgit.com/diversen/pandoc-uikit/master/uikit.js"></script>
+        <!-- <script src="scripts.js"></script> -->
+        <script src="https://cdn.rawgit.com/diversen/pandoc-uikit/master/scripts.js"></script>
+        <!-- <script src="jquery.sticky-kit.js "></script> -->
+        <script src="https://cdn.rawgit.com/diversen/pandoc-uikit/master/jquery.sticky-kit.js"></script>
+
+        <meta name="generator" content="pandoc-uikit" />
+                <meta name="author" content="Leonardo Carminati" />
+                <meta name="author" content="Maurizio Tomasi" />
+                        <title>Lezione 5: Classi ed ereditarietà</title>
+        <style type="text/css">code{white-space: pre;}</style>
+                        <style type="text/css">
+            pre > code.sourceCode { white-space: pre; position: relative; }
+            pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+            pre > code.sourceCode > span:empty { height: 1.2em; }
+            .sourceCode { overflow: visible; }
+            code.sourceCode > span { color: inherit; text-decoration: inherit; }
+            div.sourceCode { margin: 1em 0; }
+            pre.sourceCode { margin: 0; }
+            @media screen {
+            div.sourceCode { overflow: auto; }
+            }
+            @media print {
+            pre > code.sourceCode { white-space: pre-wrap; }
+            pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+            }
+            pre.numberSource code
+              { counter-reset: source-line 0; }
+            pre.numberSource code > span
+              { position: relative; left: -4em; counter-increment: source-line; }
+            pre.numberSource code > span > a:first-child::before
+              { content: counter(source-line);
+                position: relative; left: -1em; text-align: right; vertical-align: baseline;
+                border: none; display: inline-block;
+                -webkit-touch-callout: none; -webkit-user-select: none;
+                -khtml-user-select: none; -moz-user-select: none;
+                -ms-user-select: none; user-select: none;
+                padding: 0 4px; width: 4em;
+                color: #aaaaaa;
+              }
+            pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+            div.sourceCode
+              {   }
+            @media screen {
+            pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+            }
+            code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+            code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+            code span.at { color: #7d9029; } /* Attribute */
+            code span.bn { color: #40a070; } /* BaseN */
+            code span.bu { } /* BuiltIn */
+            code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+            code span.ch { color: #4070a0; } /* Char */
+            code span.cn { color: #880000; } /* Constant */
+            code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+            code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+            code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+            code span.dt { color: #902000; } /* DataType */
+            code span.dv { color: #40a070; } /* DecVal */
+            code span.er { color: #ff0000; font-weight: bold; } /* Error */
+            code span.ex { } /* Extension */
+            code span.fl { color: #40a070; } /* Float */
+            code span.fu { color: #06287e; } /* Function */
+            code span.im { } /* Import */
+            code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+            code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+            code span.op { color: #666666; } /* Operator */
+            code span.ot { color: #007020; } /* Other */
+            code span.pp { color: #bc7a00; } /* Preprocessor */
+            code span.sc { color: #4070a0; } /* SpecialChar */
+            code span.ss { color: #bb6688; } /* SpecialString */
+            code span.st { color: #4070a0; } /* String */
+            code span.va { color: #19177c; } /* Variable */
+            code span.vs { color: #4070a0; } /* VerbatimString */
+            code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+        </style>
+                                            <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.js"></script>
+                                            <script>document.addEventListener("DOMContentLoaded", function () {
+                                             var mathElements = document.getElementsByClassName("math");
+                                             var macros = [];
+                                             for (var i = 0; i < mathElements.length; i++) {
+                                              var texText = mathElements[i].firstChild;
+                                              if (mathElements[i].tagName == "SPAN") {
+                                               katex.render(texText.data, mathElements[i], {
+                                                displayMode: mathElements[i].classList.contains('display'),
+                                                throwOnError: false,
+                                                macros: macros,
+                                                fleqn: false
+                                               });
+                                            }}});
+                                            </script>
+                                            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css" />
+                               
+    </head>
+
+    <body oncopy="return false" oncut="return false" onpaste="return false">
+
+
+        <div class="uk-container uk-container-center uk-margin-top uk-margin-large-bottom">
+
+                        <div class="uk-grid" data-uk-grid-margin>
+                <div class="uk-width-1-1">
+                    <h1 class="uk-heading-large">Lezione 5: Classi ed ereditarietà</h1>
+                                        <h3 class="uk-heading-large">A.A. 2021−2022</p></h3>
+                                                            <p class="uk-text-large">Leonardo Carminati</p>
+                                        <p class="uk-text-large">Maurizio Tomasi</p>
+                                    </div>
+            </div>
+            
+            <div class="uk-grid" data-uk-grid-margin >          
+                <div class="uk-width-medium-1-4">
+                    <div class="uk-overflow-container" data-uk-sticky="{top:25,media: 768}">
+                        <div class="uk-panel uk-panel-box menu-begin" >
+
+                                                        <ul>
+                                                        <li><a href="#esercizio-5.0">Esercizio 5.0 - Creazione della classe <code>Posizione</code></a>
+                                                        <ul>
+                                                        <li><a href="#header-file-della-classe">Header file della classe</a></li>
+                                                        <li><a href="#file-di-implementazione-delle-classe">File di implementazione delle classe</a></li>
+                                                        <li><a href="#incapsulamento-e-data-hiding">Incapsulamento e <em>data hiding</em></a></li>
+                                                        <li><a href="#esempio-di-programma">Esempio di programma</a></li>
+                                                        </ul></li>
+                                                        <li><a href="#esercizio-5.1">Esercizio 5.1 - Creazione della classe Particella ed Elettrone</a>
+                                                        <ul>
+                                                        <li><a href="#brevi-richiami">Brevi Richiami</a></li>
+                                                        <li><a href="#esempio-di-programma-1">Esempio di programma</a></li>
+                                                        </ul></li>
+                                                        <li><a href="#esercizio-5.2">Esercizio 5.2 - Creazione delle classi <code>CampoVettoriale</code> e <code>PuntoMateriale</code></a>
+                                                        <ul>
+                                                        <li><a href="#brevi-richiami-1">Brevi Richiami</a>
+                                                        <ul>
+                                                        <li><a href="#ereditarietà-multipla">Ereditarietà multipla</a></li>
+                                                        <li><a href="#utilizzo-di-costruttori-delle-classi-madri">Utilizzo di costruttori delle classi madri</a></li>
+                                                        <li><a href="#overloading-operatori">Overloading operatori</a></li>
+                                                        </ul></li>
+                                                        </ul></li>
+                                                        <li><a href="#esercizio-5.3">Esercizio 5.3 - Calcolo del campo elettrico generato da un dipolo (da consegnare)</a>
+                                                        <ul>
+                                                        <li><a href="#esempio-di-programma-2">Esempio di programma</a></li>
+                                                        </ul></li>
+                                                        <li><a href="#esercizio-5.4">Esercizio 5.4 - Campo di multipolo (approfondimento)</a></li>
+                                                        <li><a href="#esercizio-5.5">Esercizio 5.5 - Gravità dallo spazio (approfondimento)</a>
+                                                        <ul>
+                                                        <li><a href="#leggi-di-potenza">Brevi Richiami: leggi di potenza</a></li>
+                                                        </ul></li>
+                                                        </ul>
+                            
+                        </div>
+                    </div>
+                </div>
+
+                <div class="uk-width-medium-3-4">
+<p>[La pagina con la spiegazione originale degli esercizi si trova qui: <a href="http://labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/lezione5_1819_nuova.html">labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/lezione5_1819_nuova.html</a>.]</p>
+<p>In questa quinta lezione vogliamo affrontare un semplice problema di elettrostatica utilizzando un codice numerico. In particolare, vogliamo calcolare il campo elettrico generato da un dipolo (e idealmente anche un generico multipolo). Nell’affrontare questo problema fisico approfondiremo il concetto di ereditarietà in C++. Come al solito dovremo preparare un set di classi utili per lo svolgimento dell’esercizio.</p>
+<h1 id="esercizio-5.0">Esercizio 5.0 - Creazione della classe <code>Posizione</code></h1>
+<p>Implementare una classe <code>Posizione</code> che descriva un punto nello spazio tridimensionale seguendo queste indicazioni:</p>
+<ol>
+<li>Come data membri privati usare la terna di coordinate cartesiane.</li>
+<li>Definire un costruttore di default che crei un punto di coordinate (0,0,0).</li>
+<li>Definire un costruttore che abbia come argomento una terna di <code>double</code> corrispondenti alle coordinate del punto.</li>
+<li>Definire metodi per restituire le coordinate del punto in sistemi di coordinate cartesiane, sferiche e cilindriche.</li>
+<li>Definire un metodo che calcoli la distanza da un altro punto.</li>
+</ol>
+<p>Verificare il funzionamento della classe creando un programmino che legga da riga di comando le coordinate cartesiane di un punto e ne stampi le coordinate in un sistema di coordinate sferiche e cilindriche.</p>
+<h2 id="header-file-della-classe">Header file della classe</h2>
+<p>Nell’header file <code>posizione.h</code> vanno dichiarati tutti i metodi ed i data membri. Si noti come i data membri siano tutti privati: questa modo di disegnare le classi implementa il concetto di incapsulamento e <em>data hiding</em> in C++.</p>
+<p>Un paio di punti già che vale la pena ricordare:</p>
+<ol>
+<li>Il qualificatore const dopo la dichiarazione di una funzione informa che la funzione non modificherà il contenuto dell’oggetto. In maniera simile il qualificatore const nell’argomento di Distanza specifica che il metodo Distanza con modificherà il suo argomento. È sempre utile specificare esplicitamente queste proprietà dei metodi.</li>
+<li>L’insieme dell direttive <code>#ifndef</code>, <code>#define</code>, <code>#endif</code> serve per proteggersi da inclusioni incrociate (molto comuni quando si utilizzano diverse classi che interagiscono tra di loro).</li>
+</ol>
+<div class="sourceCode" id="cb1"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#pragma once</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Posizione <span class="op">{</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span><span class="op">:</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="co">// costruttori</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  Posizione<span class="op">();</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  Posizione<span class="op">(</span><span class="dt">double</span> x<span class="op">,</span> <span class="dt">double</span> y<span class="op">,</span> <span class="dt">double</span> z<span class="op">);</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="co">// distruttore</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="op">~</span>Posizione<span class="op">();</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  <span class="co">// metodi</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> getX<span class="op">()</span> <span class="at">const</span><span class="op">;</span> <span class="co">// Coordinate cartesiane</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> getY<span class="op">()</span> <span class="at">const</span><span class="op">;</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> getZ<span class="op">()</span> <span class="at">const</span><span class="op">;</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> getR<span class="op">()</span> <span class="at">const</span><span class="op">;</span> <span class="co">// Coordinate sferiche</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> getPhi<span class="op">()</span> <span class="at">const</span><span class="op">;</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> getTheta<span class="op">()</span> <span class="at">const</span><span class="op">;</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> getRho<span class="op">()</span> <span class="at">const</span><span class="op">;</span> <span class="co">// raggio delle coordinate cilindriche</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> Distanza<span class="op">(</span><span class="at">const</span> Posizione <span class="op">&amp;)</span> <span class="at">const</span><span class="op">;</span> <span class="co">// distanza da un altro punto</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="kw">private</span><span class="op">:</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> <span class="va">m_x</span><span class="op">,</span> <span class="va">m_y</span><span class="op">,</span> <span class="va">m_z</span><span class="op">;</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code></pre></div>
+<h2 id="file-di-implementazione-delle-classe">File di implementazione delle classe</h2>
+<p>Qui vediamo un esempio di implementazione della classe (file <code>posizione.cpp</code>). Per prima cosa sono definiti i costruttori ed un distruttore, che in questo caso può esser vuoto.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;posizione.h&quot;</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;cmath&gt;</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co">// costruttore di default</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>Posizione<span class="op">::</span>Posizione<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="va">m_x</span> <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="va">m_y</span> <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="va">m_z</span> <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="co">// costruttore a partire da una terna cartesiana</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>Posizione<span class="op">::</span>Posizione<span class="op">(</span><span class="dt">double</span> x<span class="op">,</span> <span class="dt">double</span> y<span class="op">,</span> <span class="dt">double</span> z<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>  <span class="va">m_x</span> <span class="op">=</span> x<span class="op">;</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>  <span class="va">m_y</span> <span class="op">=</span> y<span class="op">;</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>  <span class="va">m_z</span> <span class="op">=</span> z<span class="op">;</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="co">// distruttore (puo&#39; essere vuoto)</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>Posizione<span class="op">::~</span>Posizione<span class="op">()</span> <span class="op">{}</span></span></code></pre></div>
+<p>E successivamente sono implementati tutti i metodi descritti nell’header file:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Coordinate cartesiane</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> Posizione<span class="op">::</span>getX<span class="op">()</span> <span class="at">const</span> <span class="op">{</span> <span class="cf">return</span> <span class="va">m_x</span><span class="op">;</span> <span class="op">}</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> Posizione<span class="op">::</span>getY<span class="op">()</span> <span class="at">const</span> <span class="op">{</span> <span class="cf">return</span> <span class="va">m_y</span><span class="op">;</span> <span class="op">}</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> Posizione<span class="op">::</span>getZ<span class="op">()</span> <span class="at">const</span> <span class="op">{</span> <span class="cf">return</span> <span class="va">m_z</span><span class="op">;</span> <span class="op">}</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co">// Coordinate sferiche</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> Posizione<span class="op">::</span>getR<span class="op">()</span> <span class="at">const</span> <span class="op">{</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> sqrt<span class="op">(</span><span class="va">m_x</span> <span class="op">*</span> <span class="va">m_x</span> <span class="op">+</span> <span class="va">m_y</span> <span class="op">*</span> <span class="va">m_y</span> <span class="op">+</span> <span class="va">m_z</span> <span class="op">*</span> <span class="va">m_z</span><span class="op">);</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> Posizione<span class="op">::</span>getPhi<span class="op">()</span> <span class="at">const</span> <span class="op">{</span> <span class="cf">return</span> atan2<span class="op">(</span><span class="va">m_y</span><span class="op">,</span> <span class="va">m_x</span><span class="op">);</span> <span class="op">}</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> Posizione<span class="op">::</span>getTheta<span class="op">()</span> <span class="at">const</span> <span class="op">{</span> <span class="cf">return</span> acos<span class="op">(</span><span class="va">m_z</span> <span class="op">/</span> getR<span class="op">());</span> <span class="op">}</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="co">// raggio delle coordinate cilindriche</span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> Posizione<span class="op">::</span>getRho<span class="op">()</span> <span class="at">const</span> <span class="op">{</span> <span class="cf">return</span> sqrt<span class="op">(</span><span class="va">m_x</span> <span class="op">*</span> <span class="va">m_x</span> <span class="op">+</span> <span class="va">m_y</span> <span class="op">*</span> <span class="va">m_y</span><span class="op">);</span> <span class="op">}</span></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a><span class="co">// distanza da un altro punto</span></span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> Posizione<span class="op">::</span>Distanza<span class="op">(</span><span class="at">const</span> Posizione <span class="op">&amp;</span>b<span class="op">)</span> <span class="at">const</span> <span class="op">{</span></span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> sqrt<span class="op">(</span>pow<span class="op">(</span>getX<span class="op">()</span> <span class="op">-</span> b<span class="op">.</span>getX<span class="op">(),</span> <span class="dv">2</span><span class="op">)</span> <span class="op">+</span> </span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>              pow<span class="op">(</span>getY<span class="op">()</span> <span class="op">-</span> b<span class="op">.</span>getY<span class="op">(),</span> <span class="dv">2</span><span class="op">)</span> <span class="op">+</span></span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>              pow<span class="op">(</span>getZ<span class="op">()</span> <span class="op">-</span> b<span class="op">.</span>getZ<span class="op">(),</span> <span class="dv">2</span><span class="op">));</span></span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<h2 id="incapsulamento-e-data-hiding">Incapsulamento e <em>data hiding</em></h2>
+<p>Proviamo ad utilizzare l’esempio della classe <code>Posizione</code> per riflettere sul concetto di <em>incapsulamento</em>. La nostra classe “nasconde” i dati principali (le tre coordinate nel caso specifico) in un set di data-membri privati. Tali data-membri non sono per definizione accessibili al programma principale in modo diretto ma solo attraverso una serie di metodi pubblici (interfacce) che proteggono il dato da un utilizzo incontrollato. Inoltre la protezione del dato dietro interfacce pubbliche mette al riparo da possibili cambiamenti o correzioni nel design di una classe: supponiamo che per qualche ragione l’autore della classe decida che è meglio rappresentare la posizione utilizzando una terna di numeri che corrispondono alle coordinate sferiche. Se l’autore della classe adegua di conseguenza le interfacce pubbliche, un eventuale utilizzatore della classe (il nostro <code>main</code>) non si accorgerebbe della variazione. Se invece il main avesse avuto libero accesso alle tre coordinate e le avesse utilizzate direttamente, il cambiamento di design della classe avrebbe richiesto rendendo pesanti cambiamenti anche nel main.</p>
+<h2 id="esempio-di-programma">Esempio di programma</h2>
+<p>(Scarica un esempio <a href="./codici/esercizio5.0.cpp">qui</a>).</p>
+<p>Questo programma utilizza la nuova classe appena creata: richiede di fornire come argomenti le tre coordinate cartesiane e poi stampa le terne di coordinate cartesiane, sferiche e cilindriche.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;posizione.h&quot;</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;cstdlib&gt;</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="kw">using</span> <span class="kw">namespace</span> std<span class="op">;</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="co">// Questo programma vuole com input da riga di comando le coordinate</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="co">// X, y e z di un punto e ne restituisce le coordinate sferiche</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="co">// e cilindiriche.</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">(</span><span class="dt">int</span> argc<span class="op">,</span> <span class="at">const</span> <span class="dt">char</span> <span class="op">*</span>argv<span class="op">[])</span> <span class="op">{</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Controlla gli argomenti</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> <span class="op">(</span>argc <span class="op">!=</span> <span class="dv">4</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>    <span class="bu">std::</span>cerr<span class="op"> &lt;&lt;</span> <span class="st">&quot;Usage: &quot;</span> <span class="op">&lt;&lt;</span> argv<span class="op">[</span><span class="dv">0</span><span class="op">]</span> <span class="op">&lt;&lt;</span> <span class="st">&quot; &lt;x&gt; &lt;y&gt; &lt;z&gt;&quot;</span> <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="op">-</span><span class="dv">1</span><span class="op">;</span></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> x <span class="op">=</span> atof<span class="op">(</span>argv<span class="op">[</span><span class="dv">1</span><span class="op">]);</span></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> y <span class="op">=</span> atof<span class="op">(</span>argv<span class="op">[</span><span class="dv">2</span><span class="op">]);</span></span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> z <span class="op">=</span> atof<span class="op">(</span>argv<span class="op">[</span><span class="dv">3</span><span class="op">]);</span></span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Crea un oggetto posizione ed accede ai vari metodi</span></span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>  Posizione P<span class="op">(</span>x<span class="op">,</span> y<span class="op">,</span> z<span class="op">);</span></span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>  cout <span class="op">&lt;&lt;</span> <span class="st">&quot;Coordinate cartesiane: &quot;</span> <span class="op">&lt;&lt;</span> P<span class="op">.</span>getX<span class="op">()</span> <span class="op">&lt;&lt;</span> <span class="st">&quot;,&quot;</span> <span class="op">&lt;&lt;</span> P<span class="op">.</span>getY<span class="op">()</span> <span class="op">&lt;&lt;</span> <span class="st">&quot;,&quot;</span></span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>       <span class="op">&lt;&lt;</span> P<span class="op">.</span>getZ<span class="op">()</span> <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>  cout <span class="op">&lt;&lt;</span> <span class="st">&quot;Coordinate cilindriche: &quot;</span> <span class="op">&lt;&lt;</span> P<span class="op">.</span>getRho<span class="op">()</span> <span class="op">&lt;&lt;</span> <span class="st">&quot;,&quot;</span> <span class="op">&lt;&lt;</span> P<span class="op">.</span>getPhi<span class="op">()</span> <span class="op">&lt;&lt;</span> <span class="st">&quot;,&quot;</span></span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>       <span class="op">&lt;&lt;</span> P<span class="op">.</span>getZ<span class="op">()</span> <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>  cout <span class="op">&lt;&lt;</span> <span class="st">&quot;Coordinate sferiche: &quot;</span> <span class="op">&lt;&lt;</span> P<span class="op">.</span>getR<span class="op">()</span> <span class="op">&lt;&lt;</span> <span class="st">&quot;,&quot;</span> <span class="op">&lt;&lt;</span> P<span class="op">.</span>getPhi<span class="op">()</span> <span class="op">&lt;&lt;</span> <span class="st">&quot;,&quot;</span></span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>       <span class="op">&lt;&lt;</span> P<span class="op">.</span>getTheta<span class="op">()</span> <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<h1 id="esercizio-5.1">Esercizio 5.1 - Creazione della classe Particella ed Elettrone</h1>
+<p>Incominciamo a definire due classi che ci permetteranno di rappresentare le sorgenti del campo (elettrico in questo caso).</p>
+<ul>
+<li><p>Costruiamo una classe <code>Particella</code> caratterizzata dall’avere una massa ed una carica, quindi dotata dei seguenti metodi:</p>
+<ol>
+<li><p>Un construttore avente come argomenti massa e carica.</p></li>
+<li><p>Dei metodi di accesso ai valori di massa e carica.</p></li>
+<li><p>Un metodo per stampare tali valori.</p></li>
+</ol></li>
+<li><p>Siccome vogliamo che questa classe sia la classe base di altre classi, dichiareremo i data membri come <em>protected</em>.</p></li>
+<li><p>Costruiamo, attraverso il meccanismo di ereditarietà, una classe derivata <code>Elettrone</code> che, essendo una <code>Particella</code> di massa e carica note (<a href="http://it.wikipedia.org/wiki/Elettrone">wikipedia</a>), ha il solo costruttore di default, che inizializza correttamente i data membri. Modifichiamo il metodo di stampa in modo che indichi che si tratta di un elettrone.</p></li>
+</ul>
+<p>Verifichiamo che le nuovi classi e l’ereditarietà funzioni correttamente:</p>
+<ol>
+<li>Istanziamo dinamicamente un oggetto per ogni classe.</li>
+<li>Verifichiamo che su tutti questi operano i metodi accessori di massa e carica di <code>Particella</code>, ma il metodo di stampa delle classi derivate.</li>
+</ol>
+<h2 id="brevi-richiami">Brevi Richiami</h2>
+<p>File header <code>particella.h</code> per la classe <code>Particella</code>:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#pragma once</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co">// Classe astratta per una generica particella</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co">// Definisce i metodi che ogni particella</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co">// deve implementare e delle funzioni di utilizzo generale.</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Particella <span class="op">{</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span><span class="op">:</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>  <span class="co">// costruttori</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>  Particella<span class="op">();</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>  Particella<span class="op">(</span><span class="dt">double</span> massa<span class="op">,</span> <span class="dt">double</span> carica<span class="op">);</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>  <span class="co">// distruttore</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>  <span class="op">~</span>Particella<span class="op">();</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>  <span class="co">// metodi</span></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> GetMassa<span class="op">()</span> <span class="at">const</span> <span class="op">{</span> <span class="cf">return</span> <span class="va">m_massa</span><span class="op">;</span> <span class="op">}</span></span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> GetCarica<span class="op">()</span> <span class="at">const</span> <span class="op">{</span> <span class="cf">return</span> <span class="va">m_carica</span><span class="op">;</span> <span class="op">}</span></span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>  <span class="dt">void</span> Print<span class="op">()</span> <span class="at">const</span><span class="op">;</span></span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a><span class="kw">protected</span><span class="op">:</span></span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> <span class="va">m_massa</span><span class="op">;</span></span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> <span class="va">m_carica</span><span class="op">;</span></span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code></pre></div>
+<p>Implementazione:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Metodi per la classe base</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>Particella<span class="op">::</span>Particella<span class="op">(</span><span class="dt">double</span> massa<span class="op">,</span> <span class="dt">double</span> carica<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="va">m_massa</span> <span class="op">=</span> massa<span class="op">;</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="va">m_carica</span> <span class="op">=</span> carica<span class="op">;</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>Particella<span class="op">::~</span>ParticellaQ<span class="op">)</span> <span class="op">{</span> <span class="op">}</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> Particella<span class="op">::</span>Print<span class="op">()</span> <span class="at">const</span> <span class="op">{</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>  cout <span class="op">&lt;&lt;</span> <span class="st">&quot;Particella: m=&quot;</span> <span class="op">&lt;&lt;</span> <span class="va">m_massa</span> <span class="op">&lt;&lt;</span> <span class="st">&quot;, q=&quot;</span> <span class="op">&lt;&lt;</span> <span class="va">m_carica</span> <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p>Classe <code>Elettrone</code>:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Implementazione concreta di una particella elementare</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co">// In questo caso tutte le proprietd della particella</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co">// sono costanti, definite nel costruttore di default.</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Elettrone <span class="op">:</span> <span class="kw">public</span> Particella <span class="op">{</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span><span class="op">:</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  <span class="co">// costruttore</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>  Elettrone<span class="op">()</span> <span class="op">:</span> Particella<span class="op">(</span><span class="fl">9.1093826e-31</span><span class="op">,</span> <span class="op">-</span><span class="fl">1.60217653e-19</span><span class="op">)</span> <span class="op">{}</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>  <span class="co">// distruttore</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>  <span class="op">~</span>Elettrone<span class="op">()</span> <span class="op">{}</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>  <span class="dt">void</span> Print<span class="op">()</span> <span class="at">const</span> <span class="op">{</span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>      cout <span class="op">&lt;&lt;</span> <span class="st">&quot;Elettrone: m=&quot;</span> <span class="op">&lt;&lt;</span> <span class="va">m_massa</span> <span class="op">&lt;&lt;</span> <span class="st">&quot;, q=&quot;</span> <span class="op">&lt;&lt;</span> <span class="va">m_carica</span> <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code></pre></div>
+<h2 id="esempio-di-programma-1">Esempio di programma</h2>
+<p>(Scarica un esempio <a href="codici/esercizio5.1.cpp">qui</a>)</p>
+<p>Questo programma utilizza le nuove classi appena create. Verifica il funzionamento dell’ereditarietà e la dereferenziazione dei puntatori a classe.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;particella.h&quot;</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="kw">using</span> <span class="kw">namespace</span> std<span class="op">;</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  Particella <span class="op">*</span>a <span class="op">=</span> <span class="kw">new</span> Particella<span class="op">(</span><span class="fl">1.</span><span class="op">,</span> <span class="fl">1.6E-19</span><span class="op">);</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  Elettrone <span class="op">*</span>e <span class="op">=</span> <span class="kw">new</span> Elettrone<span class="op">();</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Metodi della classe base</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>  cout <span class="op">&lt;&lt;</span> <span class="st">&quot;Particella &quot;</span> <span class="op">&lt;&lt;</span> a<span class="op">-&gt;</span>GetMassa<span class="op">()</span> <span class="op">&lt;&lt;</span> <span class="st">&quot;,&quot;</span> <span class="op">&lt;&lt;</span> a<span class="op">-&gt;</span>GetCarica<span class="op">()</span> <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>  a<span class="op">-&gt;</span>Print<span class="op">();</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Metodi della classe derivata</span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>  cout <span class="op">&lt;&lt;</span> <span class="st">&quot;Elettrone &quot;</span> <span class="op">&lt;&lt;</span> e<span class="op">-&gt;</span>GetMassa<span class="op">()</span> <span class="op">&lt;&lt;</span> <span class="st">&quot;,&quot;</span> <span class="op">&lt;&lt;</span> e<span class="op">-&gt;</span>GetCarica<span class="op">()</span> <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>  e<span class="op">-&gt;</span>Print<span class="op">();</span></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>  Particella b<span class="op">(*</span>a<span class="op">);</span> <span class="co">// costruisco una Particella a partire da una Particella</span></span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>  Particella d<span class="op">(*</span>e<span class="op">);</span> <span class="co">// costruisco una Particella a partire da un Elettrone</span></span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>  Elettrone f<span class="op">(</span>d<span class="op">);</span>   <span class="co">// costruisco un Elettrone a partire da una Particella</span></span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p>Il programma di esempio contiene un errore, lo trovate ?</p>
+<h1 id="esercizio-5.2">Esercizio 5.2 - Creazione delle classi <code>CampoVettoriale</code> e <code>PuntoMateriale</code></h1>
+<p>Per risolvere problemi relativi all’elettrostatica o alla gravità proviamo ad effettuare una modellizzazione basata su due elementi principali: una rappresentazione del campo vettoriale e una rappresentazione delle sorgenti dei campi vettoriali.</p>
+<ul>
+<li><p>La classe <code>CampoVettoriale</code> (scarica l’header file <a href="./codici/campovettoriale.h">qui</a>): sono molti i casi in Fisica in cui un vettore è collegato ad un punto dello spazio. Ad esempio una forza ha un punto di applicazione, o i vettori del campo elettrico e campo gravitazionale hanno un valore che varia da punto a punto dello spazio.</p></li>
+<li><p>Costruire una classe <code>CampoVettoriale</code>, che erediti dalla classe <code>Posizione</code> :</p>
+<ol>
+<li>aggiungere le tre componenti di un vettore alla posizione;</li>
+<li>implementare i metodi per accedere e/o modificare il vettore;</li>
+<li>decidere quali costruttori implementare, in particolare, implementare un costruttore <code>CampoVettoriale(const Posizione&amp;)</code> che crei un vettore nullo nella posizione assegnata;</li>
+<li>implementare un metodo <code>double Modulo()</code> che restituisca la lunghezza del vettore;</li>
+<li>fare overloading di <code>operator+</code> e <code>operator+=</code> in modo da poter facilmente sommare campi.</li>
+</ol>
+<p>Header file della classe <code>CampoVettoriale</code>:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#pragma once</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;posizione.h&quot;</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> CampoVettoriale <span class="op">:</span> <span class="kw">public</span> Posizione <span class="op">{</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span><span class="op">:</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>  CampoVettoriale<span class="op">(</span><span class="at">const</span> Posizione <span class="op">&amp;);</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>  CampoVettoriale<span class="op">(</span><span class="at">const</span> Posizione <span class="op">&amp;,</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>                  <span class="dt">double</span> Fx<span class="op">,</span> <span class="dt">double</span> Fy<span class="op">,</span> <span class="dt">double</span> Fz<span class="op">);</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>  CampoVettoriale<span class="op">(</span><span class="dt">double</span> x<span class="op">,</span> <span class="dt">double</span> y<span class="op">,</span> <span class="dt">double</span> z<span class="op">,</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>                  <span class="dt">double</span> Fx<span class="op">,</span> <span class="dt">double</span> Fy<span class="op">,</span> <span class="dt">double</span> Fz<span class="op">);</span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>  <span class="op">~</span>CampoVettoriale<span class="op">();</span></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>  CampoVettoriale <span class="op">&amp;</span><span class="kw">operator</span><span class="op">+=(</span><span class="at">const</span> CampoVettoriale <span class="op">&amp;);</span></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>  CampoVettoriale <span class="kw">operator</span><span class="op">+(</span><span class="at">const</span> CampoVettoriale <span class="op">&amp;)</span> <span class="at">const</span><span class="op">;</span></span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> getFx<span class="op">()</span> <span class="at">const</span> <span class="op">{</span> <span class="cf">return</span> <span class="va">m_Fx</span><span class="op">;</span> <span class="op">}</span></span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> getFy<span class="op">()</span> <span class="at">const</span> <span class="op">{</span> <span class="cf">return</span> <span class="va">m_Fy</span><span class="op">;</span> <span class="op">}</span></span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> getFz<span class="op">()</span> <span class="at">const</span> <span class="op">{</span> <span class="cf">return</span> <span class="va">m_Fz</span><span class="op">;</span> <span class="op">}</span></span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> Modulo<span class="op">()</span> <span class="at">const</span><span class="op">;</span></span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a><span class="kw">private</span><span class="op">:</span></span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> <span class="va">m_Fx</span><span class="op">,</span> <span class="va">m_Fy</span><span class="op">,</span> <span class="va">m_Fz</span><span class="op">;</span></span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code></pre></div></li>
+<li><p>La classe <code>PuntoMateriale</code> (scarica l’header file <a href="./codici/puntomateriale.h">qui</a>): questa classe ci servirà per rappresentare le sorgenti dei campi. Costruire la classe in modo che erediti da entrambe le classi <code>Particella</code> e <code>Posizione</code>.</p>
+<ol>
+<li>Implementare i costruttori che pensate siano utili.</li>
+<li>Implementare il metodo <code>CampoVettoriale CampoElettrico(const Posizione&amp;) const</code> che restituisca il campo elettrico generato dal <code>PuntoMateriale</code> nel punto <code>r</code> (per i più volenterosi anche il metodo <code>CampoVettoriale CampoGravitazionale(const Posizione&amp;) const</code> che restituisca il campo gravitazionale generato dal <code>PuntoMateriale</code> nel punto <code>r</code>).</li>
+</ol>
+<p>Header file della classe <code>PuntoMateriale</code>:</p></li>
+</ul>
+<div class="sourceCode" id="cb10"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#pragma once</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;particella.h&quot;</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;Posizione.h&quot;</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;CampoVettoriale.h&quot;</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> PuntoMateriale <span class="op">:</span> <span class="kw">public</span> Particella<span class="op">,</span> Posizione <span class="op">{</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span><span class="op">:</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>  PuntoMateriale<span class="op">(</span><span class="dt">double</span> massa<span class="op">,</span> <span class="dt">double</span> carica<span class="op">,</span> <span class="at">const</span> Posizione<span class="op">&amp;);</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>  PuntoMateriale<span class="op">(</span><span class="dt">double</span> massa<span class="op">,</span> <span class="dt">double</span> carica<span class="op">,</span> <span class="dt">double</span> x<span class="op">,</span> <span class="dt">double</span> y<span class="op">,</span> <span class="dt">double</span> z<span class="op">);</span></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>  <span class="op">~</span>PuntoMateriale<span class="op">();</span></span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>  CampoVettoriale CampoElettrico<span class="op">(</span><span class="at">const</span> Posizione<span class="op">&amp;)</span> <span class="at">const</span><span class="op">;</span></span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>  CampoVettoriale CampoGravitazionale<span class="op">(</span><span class="at">const</span> Posizione<span class="op">&amp;)</span> <span class="at">const</span><span class="op">;</span></span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code></pre></div>
+<p>N.B.: per entrambe le classi di cui sopra, sentitevi liberi di aggiungere tutti i metodi addizionali che ritenete utili per risolvere questo esercizio o i successivi.</p>
+<h2 id="brevi-richiami-1">Brevi Richiami</h2>
+<h3 id="ereditarietà-multipla">Ereditarietà multipla</h3>
+<p>In C++, una classe può ereditare da più di una classe madre. In questo caso mantiene le proprietà (metodi e data membri) di tutte le classi madri. Nell’header file <code>puntomateriale.h</code> vanno elencate tutte le classi da cui si vuole ereditare, specificando se sono pubbliche o private:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#pragma once</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;particella.h&quot;</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;Posizione.h&quot;</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;CampoVettoriale.h&quot;</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> PuntoMateriale <span class="op">:</span> <span class="kw">public</span> Particella<span class="op">,</span> Posizione <span class="op">{</span></span></code></pre></div>
+<p>La nuova classe avrà, per esempio, definiti sia i metodi <code>GetMassa()</code> e <code>GetCarica()</code> di <code>Particella</code> ed anche <code>X()</code>, <code>R()</code>… di <code>Posizione</code>.</p>
+<h3 id="utilizzo-di-costruttori-delle-classi-madri">Utilizzo di costruttori delle classi madri</h3>
+<p>Specialmente nel caso di ereditarietà multipla, è utile, e spesso necessario, utilizzare i costruttori già esistenti della classe madre.</p>
+<p>Tali costruttori possono venire chiamati esplicemente dando il nome della classe madre seguito dagli argomenti opportuni. Ad esempio, siccome esistono i costruttori di <code>Posizione</code> con le tre coordinate cartesiane, e di <code>Particella</code> con massa e carica, possiamo definire un costruttore:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>PuntoMateriale<span class="op">(</span><span class="dt">double</span> massa<span class="op">,</span> <span class="dt">double</span> carica<span class="op">,</span> <span class="dt">double</span> x<span class="op">,</span> <span class="dt">double</span> y<span class="op">,</span> <span class="dt">double</span> z<span class="op">);</span></span></code></pre></div>
+<p>la cui implementazione può venire data da:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>PuntoMateriale<span class="op">::</span>PuntoMateriale<span class="op">(</span><span class="dt">double</span> massa<span class="op">,</span> <span class="dt">double</span> carica<span class="op">,</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>                               <span class="dt">double</span> x<span class="op">,</span> <span class="dt">double</span> y<span class="op">,</span> <span class="dt">double</span> z<span class="op">)</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="op">:</span> Particella<span class="op">(</span>massa<span class="op">,</span> carica<span class="op">),</span> Posizione<span class="op">(</span>x<span class="op">,</span> y<span class="op">,</span> z<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<h3 id="overloading-operatori">Overloading operatori</h3>
+<p>Per risolvere facilmente questo tipo di problemi è molto utile ridefinire gli operatori <code>operator=</code> e <code>operator+=</code> per la classe <code>CampoVettoriale</code>. Di seguito una possibile implementazione comoda di questo overloading. Notate che nell’operatore <code>operator+</code> viene creato un nuovo vettore (somma) che viene restituito <em>by value</em>. Per <code>operator+=</code> invece la modifica viene effettuata sull’oggetto che chiama l’operatore. L’oggetto stesso (modificato) viene poi restituito <em>by reference</em>.</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>CampoVettoriale CampoVettoriale<span class="op">::</span><span class="kw">operator</span><span class="op">+(</span><span class="at">const</span> CampoVettoriale <span class="op">&amp;</span> v<span class="op">)</span> <span class="at">const</span> <span class="op">{</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  CampoVettoriale sum<span class="op">(</span>v<span class="op">);</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  sum<span class="op">.</span><span class="va">m_Fx</span> <span class="op">+=</span> getFx<span class="op">();</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  sum<span class="op">.</span><span class="va">m_Fy</span> <span class="op">+=</span> getFy<span class="op">();</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  sum<span class="op">.</span><span class="va">m_Fz</span> <span class="op">+=</span> getFz<span class="op">();</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> sum<span class="op">;</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>CampoVettoriale <span class="op">&amp;</span> CampoVettoriale<span class="op">::</span><span class="kw">operator</span><span class="op">+=(</span><span class="at">const</span> CampoVettoriale <span class="op">&amp;</span> v<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="op">(*</span><span class="kw">this</span><span class="op">)</span> <span class="op">=</span> <span class="op">(*</span><span class="kw">this</span><span class="op">)</span> <span class="op">+</span> v<span class="op">;</span></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<h1 id="esercizio-5.3">Esercizio 5.3 - Calcolo del campo elettrico generato da un dipolo (da consegnare)</h1>
+<p>Realizzate un programma che costuisca un dipolo costituito da un elettrone e un protone posizionati ad una distanza <span class="math inline">\delta = 10^{-10}\,\text{m}</span> e determini:</p>
+<ol>
+<li>il valore del campo elettrico di dipolo prodotto in un punto <span class="math inline">P</span> le cui coordinate sono inserite da linea di comando;</li>
+<li>disegni l’andamento del modulo del campo elettrico lungo l’asse del dipolo per una distanza da 100 a 1000 volte <span class="math inline">\delta</span>. Che tipo di andamento ha il campo? (Fate riferimento all’approfondimento seguente sulle <a href="#leggi-di-potenza">leggi di potenza</a>).</li>
+</ol>
+<h2 id="esempio-di-programma-2">Esempio di programma</h2>
+<p>Questo programma utilizza le nuove classi appena create: richiede di fornire come argomenti le tre coordinate cartesiane e poi stampa il campo elettrico di dipolo richiesto dall’esercizio [primo punto]:</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;puntomateriale.h&quot;</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;campovettoriale.h&quot;</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;cstdlib&gt;</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;fmtlib.h&quot;</span><span class="pp">         </span><span class="co">// Usa la libreria &quot;fmt::&quot; del C++20</span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="kw">using</span> <span class="kw">namespace</span> std<span class="op">;</span></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">(</span><span class="dt">int</span> argc<span class="op">,</span> <span class="at">const</span> <span class="dt">char</span> <span class="op">*</span> argv<span class="op">[])</span> <span class="op">{</span></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> <span class="op">(</span>argc <span class="op">!=</span> <span class="dv">4</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>      cerr <span class="op">&lt;&lt;</span> <span class="st">&quot;Usage: &quot;</span> <span class="op">&lt;&lt;</span> argv<span class="op">[</span><span class="dv">0</span><span class="op">]</span> <span class="op">&lt;&lt;</span> <span class="st">&quot; &lt;x&gt; &lt;y&gt; &lt;z&gt;&quot;</span> <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>      exit<span class="op">(-</span><span class="dv">1</span><span class="op">);</span></span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> x<span class="op">{</span>atof<span class="op">(</span>argv<span class="op">[</span><span class="dv">1</span><span class="op">])};</span></span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> y<span class="op">{</span>atof<span class="op">(</span>argv<span class="op">[</span><span class="dv">2</span><span class="op">])};</span></span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> z<span class="op">{</span>atof<span class="op">(</span>argv<span class="op">[</span><span class="dv">3</span><span class="op">])};</span></span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a>  Posizione r<span class="op">{</span>x<span class="op">,</span>y<span class="op">,</span>z<span class="op">};</span></span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a>  <span class="at">const</span> <span class="dt">double</span> e<span class="op">{</span><span class="fl">1.60217653E-19</span><span class="op">};</span></span>
+<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a>  <span class="at">const</span> <span class="dt">double</span> me<span class="op">{</span><span class="fl">9.1093826E-31</span><span class="op">};</span></span>
+<span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a>  <span class="at">const</span> <span class="dt">double</span> mp<span class="op">{</span><span class="fl">1.67262171E-27</span><span class="op">};</span></span>
+<span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a>  <span class="at">const</span> <span class="dt">double</span> d<span class="op">{</span><span class="fl">1.E-10</span><span class="op">};</span></span>
+<span id="cb15-24"><a href="#cb15-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-25"><a href="#cb15-25" aria-hidden="true" tabindex="-1"></a>  PuntoMateriale elettrone<span class="op">{</span>me<span class="op">,</span> <span class="op">-</span>e<span class="op">,</span> <span class="fl">0.</span><span class="op">,</span> <span class="fl">0.</span><span class="op">,</span>  d <span class="op">/</span> <span class="dv">2</span><span class="op">};</span></span>
+<span id="cb15-26"><a href="#cb15-26" aria-hidden="true" tabindex="-1"></a>  PuntoMateriale protone  <span class="op">{</span>mp<span class="op">,</span>  e<span class="op">,</span> <span class="fl">0.</span><span class="op">,</span> <span class="fl">0.</span><span class="op">,</span> <span class="op">-</span>d <span class="op">/</span> <span class="dv">2</span><span class="op">};</span></span>
+<span id="cb15-27"><a href="#cb15-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-28"><a href="#cb15-28" aria-hidden="true" tabindex="-1"></a>  CampoVettoriale E<span class="op">{</span>elettrone<span class="op">.</span>CampoElettrico<span class="op">(</span>r<span class="op">)</span> <span class="op">+</span> protone<span class="op">.</span>CampoElettrico<span class="op">(</span>r<span class="op">)};</span></span>
+<span id="cb15-29"><a href="#cb15-29" aria-hidden="true" tabindex="-1"></a>  fmt<span class="op">::</span>print<span class="op">(</span><span class="st">&quot;E = (</span><span class="sc">{}</span><span class="st">, </span><span class="sc">{}</span><span class="st">, </span><span class="sc">{}</span><span class="st">)</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">,</span> E<span class="op">.</span>getFx<span class="op">(),</span> E<span class="op">.</span>getFy<span class="op">(),</span> E<span class="op">.</span>getFz<span class="op">());</span></span>
+<span id="cb15-30"><a href="#cb15-30" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<h1 id="esercizio-5.4">Esercizio 5.4 - Campo di multipolo (approfondimento)</h1>
+<p>Scrivere un programma che calcoli il campo elettrico generato da un multipolo di ordine <span class="math inline">n</span>. In questo esercizio, un <span class="math inline">n</span>-polo (con <span class="math inline">n</span> pari) è una distribuzione di n particelle, in cui la particella i-esima ha carica <span class="math inline">(-1)^i e</span> (dove <span class="math inline">e</span> è la carica del protone) e si trova nel punto <span class="math display">
+\left(r_0 \cos\left(\frac{2\pi i}n\right), r_0 \sin\left(\frac{2\pi i}n\right)\right)
+</span> dove <span class="math inline">r_0</span> è il raggio a cui sono messe le cariche.</p>
+<p>Verificare che a grande distanza (<span class="math inline">R \gg r_0</span>) il campo elettrico varia proporzionalmente a <span class="math inline">R^{-2 - n/2}</span>.</p>
+<p>Valutare fino a quali valori di <span class="math inline">n</span> si riesce a verificare questa dipendenza.</p>
+<p>Questo è un problema abbastanza interessante, perché bisogna scegliere una distanza abbastanza grande perché sia valido il comportamento asintotico, ma abbastanza ridotta per evitare problemi di arrotondamento nella somma di molti termini di segno contrario.</p>
+<h1 id="esercizio-5.5">Esercizio 5.5 - Gravità dallo spazio (approfondimento)</h1>
+<p>Il <a href="http://www.goceitaly.asi.it/GoceIT/">satellite GOCE</a> si trova in orbita a 250 km dalla superficie terrestre e dotato di accelerometri in grado di misurare variazioni dell’accelerazione di gravità fino a <span class="math inline">\delta g / g = 10^{-13}</span>.</p>
+<p>Scopo della missione (si veda <a href="http://www.goceitaly.asi.it/GoceIT/images/stories/GOCE/Publications/064-071%20GOCE-Di%20Giorgio.pdf">questo articolo</a> su <a href="http://lescienze.espresso.repubblica.it/">Le Scienze</a>) include una mappatura dettagliata del campo gravitazionale terrestre, prodotto dalle distribuzioni non omogenee di massa. Costruire un programma che :</p>
+<ol>
+<li>calcoli l’accelerazione di gravità sul satellite per una Terra perfettamene sferica e dimensioni pari al raggio medio (<a href="http://it.wikipedia.org/wiki/Terra">wikipedia</a>).</li>
+<li>calcoli la variazione relativa di g prodotta da una catena montuosa, schematizzata come una fila di 100 sfere di 1 km di raggio poste sopra la superficie media della Terra (usare 3000 kg/m³ come densità della roccia) e produca un grafico della variazione in funzione della posizione del satellite sull’orbita.</li>
+</ol>
+<p>Per risolvere questo esercizio si costruisca dapprima il sistema di sorgenti di campo (Terra e catena montuosa). Si calcoli il campo generato da tutte le sorgenti in un punto a distanza dal centro della terra pari al raggio terrestre pi` la distanza del satellite dalla superficie terrestre. Muovere questo punto in modo che percorra tutta l’orbita (in passi da 10 Km).</p>
+<p><img src="http://labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/figure/schema_montagne.png" /></p>
+<h2 id="leggi-di-potenza">Brevi Richiami: leggi di potenza</h2>
+<p>Se un campo ha un andamento <span class="math inline">E = k R^\alpha</span>, se valutiamo il campo in due punti diversi <span class="math inline">R_1</span> e <span class="math inline">R_2</span>, possiamo ricavare <span class="math inline">\alpha</span> dalla relazione: <span class="math display">
+\alpha = \frac{\log(E_1 / E_2)}{\log(R_1 / R_2)}.
+</span></p>                    
+                </div>
+            </div>
+
+            <script src="https://vjs.zencdn.net/5.4.4/video.js"></script>
+        </div>
+    </body>
+</html>

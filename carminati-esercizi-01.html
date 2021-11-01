@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html  lang="it-IT"  dir="ltr">
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Lezione 1: Analisi dei dati (arrays)</title>
+        <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+        <link rel="apple-touch-icon-precomposed" href="images/apple-touch-icon.png">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/2.26.4/css/uikit.gradient.css">
+
+        <!-- <link rel="stylesheet" href="style.css"> -->
+        <link rel="stylesheet" href="https://cdn.rawgit.com/diversen/pandoc-uikit/master/style.css">
+        <link href="https://vjs.zencdn.net/5.4.4/video-js.css" rel="stylesheet" />
+        <script src="https://code.jquery.com/jquery-2.2.1.min.js"></script>
+        <!-- <script src="uikit.js"></script> -->
+        <script src="https://cdn.rawgit.com/diversen/pandoc-uikit/master/uikit.js"></script>
+        <!-- <script src="scripts.js"></script> -->
+        <script src="https://cdn.rawgit.com/diversen/pandoc-uikit/master/scripts.js"></script>
+        <!-- <script src="jquery.sticky-kit.js "></script> -->
+        <script src="https://cdn.rawgit.com/diversen/pandoc-uikit/master/jquery.sticky-kit.js"></script>
+
+        <meta name="generator" content="pandoc-uikit" />
+                <meta name="author" content="Leonardo Carminati" />
+                <meta name="author" content="Maurizio Tomasi" />
+                        <title>Lezione 1: Analisi dei dati (arrays)</title>
+        <style type="text/css">code{white-space: pre;}</style>
+                        <style type="text/css">
+            pre > code.sourceCode { white-space: pre; position: relative; }
+            pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+            pre > code.sourceCode > span:empty { height: 1.2em; }
+            .sourceCode { overflow: visible; }
+            code.sourceCode > span { color: inherit; text-decoration: inherit; }
+            div.sourceCode { margin: 1em 0; }
+            pre.sourceCode { margin: 0; }
+            @media screen {
+            div.sourceCode { overflow: auto; }
+            }
+            @media print {
+            pre > code.sourceCode { white-space: pre-wrap; }
+            pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+            }
+            pre.numberSource code
+              { counter-reset: source-line 0; }
+            pre.numberSource code > span
+              { position: relative; left: -4em; counter-increment: source-line; }
+            pre.numberSource code > span > a:first-child::before
+              { content: counter(source-line);
+                position: relative; left: -1em; text-align: right; vertical-align: baseline;
+                border: none; display: inline-block;
+                -webkit-touch-callout: none; -webkit-user-select: none;
+                -khtml-user-select: none; -moz-user-select: none;
+                -ms-user-select: none; user-select: none;
+                padding: 0 4px; width: 4em;
+                color: #aaaaaa;
+              }
+            pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+            div.sourceCode
+              {   }
+            @media screen {
+            pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+            }
+            code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+            code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+            code span.at { color: #7d9029; } /* Attribute */
+            code span.bn { color: #40a070; } /* BaseN */
+            code span.bu { } /* BuiltIn */
+            code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+            code span.ch { color: #4070a0; } /* Char */
+            code span.cn { color: #880000; } /* Constant */
+            code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+            code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+            code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+            code span.dt { color: #902000; } /* DataType */
+            code span.dv { color: #40a070; } /* DecVal */
+            code span.er { color: #ff0000; font-weight: bold; } /* Error */
+            code span.ex { } /* Extension */
+            code span.fl { color: #40a070; } /* Float */
+            code span.fu { color: #06287e; } /* Function */
+            code span.im { } /* Import */
+            code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+            code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+            code span.op { color: #666666; } /* Operator */
+            code span.ot { color: #007020; } /* Other */
+            code span.pp { color: #bc7a00; } /* Preprocessor */
+            code span.sc { color: #4070a0; } /* SpecialChar */
+            code span.ss { color: #bb6688; } /* SpecialString */
+            code span.st { color: #4070a0; } /* String */
+            code span.va { color: #19177c; } /* Variable */
+            code span.vs { color: #4070a0; } /* VerbatimString */
+            code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+        </style>
+                                               
+    </head>
+
+    <body oncopy="return false" oncut="return false" onpaste="return false">
+
+
+        <div class="uk-container uk-container-center uk-margin-top uk-margin-large-bottom">
+
+                        <div class="uk-grid" data-uk-grid-margin>
+                <div class="uk-width-1-1">
+                    <h1 class="uk-heading-large">Lezione 1: Analisi dei dati (arrays)</h1>
+                                        <h3 class="uk-heading-large">A.A. 2021−2022</p></h3>
+                                                            <p class="uk-text-large">Leonardo Carminati</p>
+                                        <p class="uk-text-large">Maurizio Tomasi</p>
+                                    </div>
+            </div>
+            
+            <div class="uk-grid" data-uk-grid-margin >          
+                <div class="uk-width-medium-1-4">
+                    <div class="uk-overflow-container" data-uk-sticky="{top:25,media: 768}">
+                        <div class="uk-panel uk-panel-box menu-begin" >
+
+                                                        <ul>
+                                                        <li><a href="#passaggio-di-input-da-linea-di-comando">Passaggio di input da linea di comando</a>
+                                                        <ul>
+                                                        <li><a href="#cin-cout-e-cerr">Cin, cout e cerr</a></li>
+                                                        <li><a href="#allocazione-dinamica-della-memoria">Allocazione dinamica della memoria</a></li>
+                                                        <li><a href="#fstream">Fstream</a></li>
+                                                        </ul></li>
+                                                        <li><a href="#esercizio-1.0">Esercizio 1.0 - Primo codice per analisi</a>
+                                                        <ul>
+                                                        <li><a href="#struttura-del-programma">Struttura del programma</a></li>
+                                                        <li><a href="#caricamento-elementi-da-file-1">Caricamento elementi da file (1)</a></li>
+                                                        <li><a href="#calcolo-della-media-e-della-varianza-2">Calcolo della media e della varianza (2)</a></li>
+                                                        <li><a href="#riordino-elementi-di-un-array-3">Riordino elementi di un array (3)</a></li>
+                                                        <li><a href="#calcolo-della-mediana-4">Calcolo della mediana (4)</a></li>
+                                                        <li><a href="#scrittura-elementi-su-file-5">Scrittura elementi su file (5)</a></li>
+                                                        </ul></li>
+                                                        <li><a href="#esercizio-1.1">Esercizio 1.1 - Codice di analisi con funzioni</a>
+                                                        <ul>
+                                                        <li><a href="#funzioni-con-argomenti-by-reference-by-value-e-by-pointer">Funzioni con argomenti <em>by reference</em>, <em>by value</em> e <em>by pointer</em></a></li>
+                                                        <li><a href="#struttura-del-programma-1">Struttura del programma</a></li>
+                                                        </ul></li>
+                                                        <li><a href="#esercizio-1.2">Esercizio 1.2 - Codice di analisi con funzioni e <code>Makefile</code></a>
+                                                        <ul>
+                                                        <li><a href="#il-makefile">Il <code>Makefile</code></a></li>
+                                                        </ul></li>
+                                                        <li><a href="#esercizio-1.3">Esercizio 1.3 - Overloading di funzione (da consegnare)</a>
+                                                        <ul>
+                                                        <li><a href="#overloading-di-funzioni">Overloading di funzioni</a></li>
+                                                        <li><a href="#formattazione-delloutput">Formattazione dell’output</a></li>
+                                                        <li><a href="#questione-di-stile">Questione di stile</a></li>
+                                                        </ul></li>
+                                                        </ul>
+                            
+                        </div>
+                    </div>
+                </div>
+
+                <div class="uk-width-medium-3-4">
+<p>[La pagina con la spiegazione originale degli esercizi si trova qui: <a href="http://labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/lezione1_1819.html">labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/lezione1_1819.html</a>.]</p>
+<p>In questa prima lezione proviamo a rinfrescarci la memoria sulla programmazione lavorando direttamente su un caso concreto: abbiamo a disposizione un file in cui sono immagazzinati i valori ottenuti da una certa misura e vogliamo scrivere un codice per farci sopra una analisi statistica minimale. Calcoliamo la media, la varianza e la mediana della distribuzione: il calcolo della mediana in particolare richiede che il set di dati sia ordinato e quindi ci obbliga a fare un pò di esercizio aggiuntivo. In questa lezione lavoreremo con:</p>
+<ul>
+<li>Tipo di dato da leggere è constituito da numeri <code>double</code>.</li>
+<li>Tipo di contenitore di dati è un array (dinamico) del C.</li>
+<li>Operazioni sui dati vengono svolte mediante funzioni.</li>
+</ul>
+<p>Prima di incominciare a scrivere il codice è utile ripassare rapidamente alcuni elementi base del linguaggio.</p>
+<h1 id="passaggio-di-input-da-linea-di-comando">Passaggio di input da linea di comando</h1>
+<p>È possibile passare al programma degli input direttamente da riga di comando, ad esempio:</p>
+<pre><code>./programma &lt;input1&gt; &lt;input2&gt;</code></pre>
+<p>per fare questo nella dichiarazione del main bisogna aggiungere due argomenti:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>main<span class="op">(</span><span class="dt">int</span> argc<span class="op">,</span> <span class="at">const</span> <span class="dt">char</span> <span class="op">*</span>argv<span class="op">[])</span></span></code></pre></div>
+<ul>
+<li><code>argc</code> è il numero di argomenti presenti sulla riga di comando. Il valore di <code>argc</code> è sempre maggiore di 0 poiché il primo argomento è il nome del programma.</li>
+<li><code>argv</code> è un array di <code>argc</code> elementi che contiene le stringhe di caratteri passate da riga di comando. Quindi <code>argv[0]</code> è il nome del programma, <code>argv[1]</code> il primo argomento, ecc…</li>
+</ul>
+<p>Se da riga di comando passiamo un numero, esso verrà passato tramite <code>argv</code> come una stringa di caratteri; per convertire una stringa di caratteri in un numero intero si usa la funzione <code>atoi(const char*)</code> (che è contenuta in <code>&lt;cstdlib&gt;</code>):</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> N<span class="op">;</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>N <span class="op">=</span> atoi<span class="op">(</span>argv<span class="op">[</span><span class="dv">1</span><span class="op">]);</span></span></code></pre></div>
+<p>Per completezza di informazione, la funzione corrispondente per convertire una stringa di caratteri in un numero reale è <code>atof(const char*)</code>, anch’essa disponibile in <code>&lt;cstdlib&gt;</code>.</p>
+<h2 id="cin-cout-e-cerr">Cin, cout e cerr</h2>
+<p>L’output su schermo e l’input da tastiera sono gestiti in C++ usando gli oggetti <code>cin</code>, <code>cout</code> e <code>cerr</code>, che sono definiti nella libreria <code>&lt;iostream&gt;</code>.</p>
+<p>Il principale vantaggio di questi oggetti rispetto a <code>scanf</code> e <code>printf</code> (usati nel C) è che non è necessario specificare il tipo (<code>double</code>, <code>string</code>, etc) che si sta passando all’oggetto.</p>
+<p>Uso di <code>cout</code> e di <code>cerr</code>:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Usato per messaggi</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>cout <span class="op">&lt;&lt;</span> <span class="st">&quot;A = &quot;</span> <span class="op">&lt;&lt;</span> a <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co">// Usato per segnalare condizioni di errore</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>cerr <span class="op">&lt;&lt;</span> <span class="st">&quot;Errore nel parametro a: &quot;</span> <span class="op">&lt;&lt;</span> a <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span></code></pre></div>
+<ul>
+<li><p><code>&lt;&lt;</code> serve a passare le variabili allo stream di output;</p></li>
+<li><p><code>&lt;&lt; "A = "</code> stampa <code>A =</code> (senza apici) a schermo;</p></li>
+<li><p><code>&lt;&lt; a</code> stampa il valore della variabile a a schermo, qualsiasi sia il tipo di <code>a</code>;</p></li>
+<li><p><code>&lt;&lt; endl</code> (end line) stampa la fine della riga e svuota il buffer. È necessario con <code>cerr</code>, perché altrimenti nessuna scritta appare (subito) a video. Per <code>cerr</code> si può usare <code>\n</code> (ritorno a capo):</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Ok</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>cout <span class="op">&lt;&lt;</span> <span class="st">&quot;Errore, occorre specificare un nome di file!&quot;</span> <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co">// Potrebbe non essere stampato subito, ma solo quando il programma termina</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>cout <span class="op">&lt;&lt;</span> <span class="st">&quot;Errore, occorre specificare un nome di file!</span><span class="sc">\n</span><span class="st">&quot;</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co">// Questi due casi sono equivalenti</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>cerr <span class="op">&lt;&lt;</span> <span class="st">&quot;Errore, occorre specificare un nome di file!&quot;</span> <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>cerr <span class="op">&lt;&lt;</span> <span class="st">&quot;Errore, occorre specificare un nome di file!</span><span class="sc">\n</span><span class="st">&quot;</span></span></code></pre></div></li>
+</ul>
+<p>Uso di <code>cin</code>:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>cin <span class="op">&gt;&gt;</span> a<span class="op">;</span></span></code></pre></div>
+<ul>
+<li><code>&gt;&gt;</code> serve a prendere le variabili dallo stream di input;</li>
+<li><code>&gt;&gt; a</code> legge da video un contenuto appropriato e lo salva nella variabile a.</li>
+</ul>
+<p><strong>Attenzione</strong>: se <code>a</code> è una variabile <code>int</code> e voi a schermo digitate 2.34, il valore di <code>a</code> sarà convertito a 2. Se digitate a schermo “pippo”, non sarà possibile convertirlo in un numero, ed il valore di <code>a</code> rimarrà inalterato.</p>
+<h2 id="allocazione-dinamica-della-memoria">Allocazione dinamica della memoria</h2>
+<p>L’allocazione dinamica della memoria consente di decidere al momento dell’esecuzione, ossia a <em>runtime</em> e non al momento della compilazione, quanta memoria il programma deve allocare.</p>
+<p>In C++ l’allocazione e la deallocazione dinamica della memoria viene effettuata rispettivamente con gli operatori <code>new</code> e <code>delete</code>. Il comando</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> <span class="op">*</span>x <span class="op">=</span> <span class="kw">new</span> <span class="dt">double</span><span class="op">[</span>N<span class="op">];</span></span></code></pre></div>
+<p>crea un puntatore <code>x</code> a una zona di memoria di <code>N</code> double (cioè a un array di <code>double</code> con <code>N</code> elementi). Il comando</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">delete</span><span class="op">[]</span> x<span class="op">;</span></span></code></pre></div>
+<p>dealloca la memoria; ciò vuol dire che un tentativo di accedere agli elementi di <code>x</code> dopo il comando delete risulterà in un errore di <em>segmentation violation</em>.</p>
+<p>È estremamente importante ricordarsi di deallocare la memoria. Infatti in programmi complessi che utilizzano molta memoria (o in cicli che continuano ad allocare memoria), l’assenza della deallocazione può portare a consumare progressivamente tutta la memoria RAM della macchina (<em>memory leak</em>), causando un blocco del sistema.</p>
+<p>Nel caso si allochino vettori (come nel nostro caso), la presenza delle parantesi <code>[]</code> dopo <code>delete</code> indica che bisogna deallocare tutta la zona di memoria. Il comando</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">delete</span> x<span class="op">;</span></span></code></pre></div>
+<p>crea un <em>memory leak</em>, perché dealloca solo lo spazio della prima componente del vettore, non di tutto il vettore.</p>
+<h2 id="fstream">Fstream</h2>
+<p>L’input e l’output da files è gestito in C++ dalla libreria <code>fstream</code>. I principali oggetti sono <code>ifstream</code> (<em>input file stream</em>) e <code>ofstream</code> (<em>output file stream</em>). Gli stream vengono dichiarati e inizializati come:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;fstream&gt;</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="kw">using</span> <span class="kw">namespace</span> std<span class="op">;</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>ifstream inputFile<span class="op">(</span><span class="st">&quot;nomeInput.txt&quot;</span><span class="op">);</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>ofstream outputFile<span class="op">(</span><span class="st">&quot;nomeOutput.txt&quot;</span><span class="op">);</span></span></code></pre></div>
+<p>Per controllare che il file sia stato aperto con successo si può usare il seguente codice</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span><span class="op">(!</span> inputFile<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  cerr <span class="op">&lt;&lt;</span> <span class="st">&quot;Error ....</span><span class="sc">\n</span><span class="st">&quot;</span>l<span class="op">;</span> <span class="co">//stampa un messaggio</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="dv">1</span><span class="op">;</span> <span class="co">// Ritorna un valore diverso da quello usuale</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p>L’utilizzo degli stream per scrivere su un file di output o per caricare da un file di input è uguale all’uso di <code>cin</code>, <code>cout</code> e <code>cerr</code>:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>inputFile <span class="op">&gt;&gt;</span> a<span class="op">;</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>outputFile <span class="op">&lt;&lt;</span> <span class="st">&quot;pippo &quot;</span> <span class="op">&lt;&lt;</span> a <span class="op">&lt;&lt;</span> <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">;</span></span></code></pre></div>
+<p>Nei file non è di solito rilevante la differenza tra <code>endl</code> e <code>"\n"</code>.</p>
+<p>Un metodo estremamente utile di <code>ifstream</code> è</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>inputFile<span class="op">.</span>eof<span class="op">();</span></span></code></pre></div>
+<p>che restituisce vero se si è raggiunta la fine del file e falso altrimenti. Dopo l’utilizzo del file è possibile chiuderlo con il metodo <code>close()</code>:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>inputFile<span class="op">.</span>close<span class="op">();</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>outputFile<span class="op">.</span>close<span class="op">();</span></span></code></pre></div>
+<p>Questo metodo viene però invocato automaticamente dal compilatore C++, quindi questa funzione:</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> readDoubleFromFile<span class="op">(</span><span class="at">const</span> string <span class="op">&amp;</span> file_name<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  ifstream inputFile<span class="op">(</span>file_name<span class="op">);</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> a</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  inputFile <span class="op">&gt;&gt;</span> a<span class="op">;</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>  inputFile<span class="op">.</span>close<span class="op">();</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> a<span class="op">;</span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p>è esattamente uguale a questa:</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> readDoubleFromFile<span class="op">(</span><span class="at">const</span> string <span class="op">&amp;</span> file_name<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  ifstream inputFile<span class="op">(</span>file_name<span class="op">);</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> a</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  inputFile <span class="op">&gt;&gt;</span> a<span class="op">;</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Non c&#39;è bisogno di chiamare inputFile.close(), ci pensa il compilatore</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> a<span class="op">;</span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<h1 id="esercizio-1.0">Esercizio 1.0 - Primo codice per analisi</h1>
+<p>Proviamo a scrivere un unico codice che legga dati da file, li immagazzini in un array dinamico, calcoli la media, la varianza e la mediana dei dati raccolti. Scriviamo su un file di output i dati riordinati in ordine crescente. Il numero di elementi da caricare e il nome del file in cui trovare i dati sono passati da tastiera nel momento in cui il programma viene eseguito. Cerchiamo di costruire il codice passo passo.</p>
+<h2 id="struttura-del-programma">Struttura del programma</h2>
+<p>Per questo primo esercizio ripassiamo la struttura generale di un programma:</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;cstdlib&gt;</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;fstream&gt;</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="kw">using</span> <span class="kw">namespace</span> std<span class="op">;</span></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">(</span><span class="dt">int</span> argc<span class="op">,</span> <span class="at">const</span> <span class="dt">char</span> <span class="op">*</span>argv<span class="op">[])</span> <span class="op">{</span></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> <span class="op">(</span>argc <span class="op">&lt;</span> <span class="dv">3</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>      cerr <span class="op">&lt;&lt;</span> <span class="st">&quot;Uso del programma: &quot;</span> <span class="op">&lt;&lt;</span> argv<span class="op">[</span><span class="dv">0</span><span class="op">]</span> <span class="op">&lt;&lt;</span> <span class="st">&quot; &lt;n_data&gt; &lt;filename&gt;</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">;</span></span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>      <span class="cf">return</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>  <span class="dt">int</span> ndata <span class="op">=</span> atoi<span class="op">(</span>argv<span class="op">[</span><span class="dv">1</span><span class="op">]);</span></span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> <span class="op">*</span> data <span class="op">=</span> <span class="kw">new</span> <span class="dt">double</span><span class="op">[</span>ndata<span class="op">];</span></span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">const</span> <span class="dt">char</span> <span class="op">*</span> filename <span class="op">=</span> argv<span class="op">[</span><span class="dv">2</span><span class="op">];</span></span>
+<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a>  <span class="co">// 1) leggi i dati da file e caricali nel c-array data</span></span>
+<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a>  <span class="co">// ...</span></span>
+<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-20"><a href="#cb17-20" aria-hidden="true" tabindex="-1"></a>  <span class="co">// dopo averli caricati, visualizzali a video</span></span>
+<span id="cb17-21"><a href="#cb17-21" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span><span class="op">(</span><span class="dt">int</span> k <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> k <span class="op">&lt;</span> ndata<span class="op">;</span> <span class="op">++</span>k<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb17-22"><a href="#cb17-22" aria-hidden="true" tabindex="-1"></a>      cout <span class="op">&lt;&lt;</span> data<span class="op">[</span>k<span class="op">]</span> <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span>
+<span id="cb17-23"><a href="#cb17-23" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb17-24"><a href="#cb17-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-25"><a href="#cb17-25" aria-hidden="true" tabindex="-1"></a>  <span class="co">// 2) calcola la media e la varianza degli elementi caricati</span></span>
+<span id="cb17-26"><a href="#cb17-26" aria-hidden="true" tabindex="-1"></a>  <span class="co">// ...</span></span>
+<span id="cb17-27"><a href="#cb17-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-28"><a href="#cb17-28" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Stampa il risultato</span></span>
+<span id="cb17-29"><a href="#cb17-29" aria-hidden="true" tabindex="-1"></a>  cout <span class="op">&lt;&lt;</span> <span class="st">&quot;Media = &quot;</span> <span class="op">&lt;&lt;</span> media <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span>
+<span id="cb17-30"><a href="#cb17-30" aria-hidden="true" tabindex="-1"></a>  cout <span class="op">&lt;&lt;</span> <span class="st">&quot;Varianza = &quot;</span> <span class="op">&lt;&lt;</span> varianza <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span>
+<span id="cb17-31"><a href="#cb17-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-32"><a href="#cb17-32" aria-hidden="true" tabindex="-1"></a>  <span class="co">// calcola la mediana: prima crea una copia del vettore di partenza</span></span>
+<span id="cb17-33"><a href="#cb17-33" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> <span class="op">*</span> vcopy <span class="op">=</span> <span class="kw">new</span> <span class="dt">double</span><span class="op">[</span>ndata<span class="op">];</span></span>
+<span id="cb17-34"><a href="#cb17-34" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span><span class="op">(</span><span class="dt">int</span> k <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> k <span class="op">&lt;</span> ndata<span class="op">;</span> <span class="op">++</span>k<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb17-35"><a href="#cb17-35" aria-hidden="true" tabindex="-1"></a>      vcopy<span class="op">[</span>k<span class="op">]</span> <span class="op">=</span> data<span class="op">[</span>k<span class="op">];</span></span>
+<span id="cb17-36"><a href="#cb17-36" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb17-37"><a href="#cb17-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-38"><a href="#cb17-38" aria-hidden="true" tabindex="-1"></a>  <span class="co">// 3) riordina gli elementi del vettore `vcopy` dal minore al maggiore</span></span>
+<span id="cb17-39"><a href="#cb17-39" aria-hidden="true" tabindex="-1"></a>  <span class="co">// ...</span></span>
+<span id="cb17-40"><a href="#cb17-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-41"><a href="#cb17-41" aria-hidden="true" tabindex="-1"></a>  <span class="co">// dopo averli riordinati, stampali a video</span></span>
+<span id="cb17-42"><a href="#cb17-42" aria-hidden="true" tabindex="-1"></a>  cout <span class="op">&lt;&lt;</span> <span class="st">&quot;Valori riordinati:&quot;</span> <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span>
+<span id="cb17-43"><a href="#cb17-43" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span><span class="op">(</span><span class="dt">int</span> k <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> k <span class="op">&lt;</span> ndata<span class="op">;</span> <span class="op">++</span>k<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb17-44"><a href="#cb17-44" aria-hidden="true" tabindex="-1"></a>      cout <span class="op">&lt;&lt;</span> vcopy<span class="op">[</span>k<span class="op">]</span> <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span>
+<span id="cb17-45"><a href="#cb17-45" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb17-46"><a href="#cb17-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-47"><a href="#cb17-47" aria-hidden="true" tabindex="-1"></a>  <span class="co">// 4) prendi il valore centrale (se `ndata` è dispari) o la media</span></span>
+<span id="cb17-48"><a href="#cb17-48" aria-hidden="true" tabindex="-1"></a>  <span class="co">// tra i due centrali (se `ndata` è pari) dell&#39;array ordinato `vcopy`</span></span>
+<span id="cb17-49"><a href="#cb17-49" aria-hidden="true" tabindex="-1"></a>  <span class="co">// ...</span></span>
+<span id="cb17-50"><a href="#cb17-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-51"><a href="#cb17-51" aria-hidden="true" tabindex="-1"></a>  cout <span class="op">&lt;&lt;</span> <span class="st">&quot;Mediana = &quot;</span> <span class="op">&lt;&lt;</span> mediana <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span>
+<span id="cb17-52"><a href="#cb17-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-53"><a href="#cb17-53" aria-hidden="true" tabindex="-1"></a>  <span class="co">// visualizza l&#39;array originale per verificare che non è stato</span></span>
+<span id="cb17-54"><a href="#cb17-54" aria-hidden="true" tabindex="-1"></a>  <span class="co">// riordinato</span></span>
+<span id="cb17-55"><a href="#cb17-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-56"><a href="#cb17-56" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span><span class="op">(</span><span class="dt">int</span> k <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> k <span class="op">&lt;</span> ndata<span class="op">;</span> <span class="op">++</span>k<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb17-57"><a href="#cb17-57" aria-hidden="true" tabindex="-1"></a>      cout <span class="op">&lt;&lt;</span> data<span class="op">[</span>k<span class="op">]</span> <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span>
+<span id="cb17-58"><a href="#cb17-58" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb17-59"><a href="#cb17-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-60"><a href="#cb17-60" aria-hidden="true" tabindex="-1"></a>  <span class="co">// 5) scrivi i dati riordinati su un file</span></span>
+<span id="cb17-61"><a href="#cb17-61" aria-hidden="true" tabindex="-1"></a>  <span class="co">// ...</span></span>
+<span id="cb17-62"><a href="#cb17-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-63"><a href="#cb17-63" aria-hidden="true" tabindex="-1"></a>  <span class="kw">delete</span><span class="op">[]</span> vcopy<span class="op">;</span></span>
+<span id="cb17-64"><a href="#cb17-64" aria-hidden="true" tabindex="-1"></a>  <span class="kw">delete</span><span class="op">[]</span> data<span class="op">;</span></span>
+<span id="cb17-65"><a href="#cb17-65" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p>Provate ad implementare le parti mancanti. Se non ci riuscite sbirciate pure sotto.</p>
+<h2 id="caricamento-elementi-da-file-1">Caricamento elementi da file (1)</h2>
+<p>In questo frammento di codice apriamo un file utilizzando un <code>ifstream</code> e carichiamo <code>ndata</code> elementi:</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co">// leggi dati da file e caricali nel c-array data</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>ifstream fin<span class="op">(</span>filename<span class="op">);</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="op">(!</span>fin<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>    cerr <span class="op">&lt;&lt;</span> <span class="st">&quot;Non riesco ad aprire il file &quot;</span> <span class="op">&lt;&lt;</span> filename <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>    exit<span class="op">(</span><span class="dv">1</span><span class="op">);</span></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span><span class="op">(</span><span class="dt">int</span> k <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> k <span class="op">&lt;</span> ndata<span class="op">;</span> <span class="op">++</span>k<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>        fin <span class="op">&gt;&gt;</span> data<span class="op">[</span>k<span class="op">];</span></span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span>fin<span class="op">.</span>eof<span class="op">())</span> <span class="op">{</span></span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>            cerr <span class="op">&lt;&lt;</span> <span class="st">&quot;Raggiunta la fine del file prima di aver letto &quot;</span> <span class="op">&lt;&lt;</span> ndata <span class="op">&lt;&lt;</span> <span class="st">&quot;dati, esco</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">;</span></span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>            exit<span class="op">(</span><span class="dv">1</span><span class="op">);</span></span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<h2 id="calcolo-della-media-e-della-varianza-2">Calcolo della media e della varianza (2)</h2>
+<p>In questo frammento di codice calcoliamo la media degli elementi immagazzinati nell’array data. Costruite voi usando lo stesso schema il frammento di codice per il calcolo della varianza.</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co">// calcolo la media degli elementi caricati</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> media <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span><span class="op">(</span><span class="dt">int</span> k <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> k <span class="op">&lt;</span> ndata<span class="op">;</span> <span class="op">++</span>k<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>    media <span class="op">+=</span> data<span class="op">[</span>k<span class="op">];</span></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a><span class="co">// un `double` (media) diviso per un intero è un double:</span></span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a><span class="co">// tutto ok, nessun arrotondamento!</span></span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>media <span class="op">/=</span> ndata<span class="op">;</span></span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>cout <span class="op">&lt;&lt;</span> <span class="st">&quot;Valore medio del set di dati caricato: &quot;</span> <span class="op">&lt;&lt;</span> media <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span></code></pre></div>
+<h2 id="riordino-elementi-di-un-array-3">Riordino elementi di un array (3)</h2>
+<p>In questo frammento di codice riordiniamo gli elementi dell’array data in ordine crescente. Utilizziamo un semplice algoritmo di riordinamento che dovreste già conoscere, il <a href="https://it.wikipedia.org/wiki/Selection_sort"><em>selection sort</em></a>.</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co">// prima riordino gli elementi del vettore dal minore al maggiore</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="co">// devo farne una copia in modo che il vettore originale resti</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="co">// inalterato</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> <span class="op">*</span> vcopy <span class="op">=</span> <span class="kw">new</span> <span class="dt">double</span><span class="op">[</span>ndata<span class="op">];</span></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span><span class="op">(</span><span class="dt">int</span> k <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> k <span class="op">&lt;</span> ndata<span class="op">;</span> <span class="op">++</span>k<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>    vcopy<span class="op">[</span>k<span class="op">]</span> <span class="op">=</span> data<span class="op">[</span>k<span class="op">];</span></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> imin <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> min <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span><span class="op">(</span><span class="dt">int</span> j <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> j <span class="op">&lt;</span> ndata <span class="op">-</span> <span class="dv">1</span><span class="op">;</span> <span class="op">++</span>j<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>    imin <span class="op">=</span> j<span class="op">;</span></span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a>    min <span class="op">=</span> vcopy<span class="op">[</span>imin<span class="op">];</span></span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span><span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> j <span class="op">+</span> <span class="dv">1</span><span class="op">;</span> i <span class="op">&lt;</span> ndata<span class="op">;</span> <span class="op">++</span>i<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span><span class="op">(</span>vcopy<span class="op">[</span>i<span class="op">]</span> <span class="op">&lt;</span> min<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a>            min <span class="op">=</span> vcopy<span class="op">[</span>i<span class="op">];</span></span>
+<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a>            imin <span class="op">=</span> i<span class="op">;</span></span>
+<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
+<span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb20-21"><a href="#cb20-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-22"><a href="#cb20-22" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Scambia vcopy[j] con vcopy[imin]</span></span>
+<span id="cb20-23"><a href="#cb20-23" aria-hidden="true" tabindex="-1"></a>    <span class="dt">double</span> c <span class="op">=</span> vcopy<span class="op">[</span>j<span class="op">];</span></span>
+<span id="cb20-24"><a href="#cb20-24" aria-hidden="true" tabindex="-1"></a>    vcopy<span class="op">[</span>k<span class="op">]</span> <span class="op">=</span> vcopy<span class="op">[</span>imin<span class="op">];</span></span>
+<span id="cb20-25"><a href="#cb20-25" aria-hidden="true" tabindex="-1"></a>    vcopy<span class="op">[</span>imin<span class="op">]</span> <span class="op">=</span> c<span class="op">;</span></span>
+<span id="cb20-26"><a href="#cb20-26" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<h2 id="calcolo-della-mediana-4">Calcolo della mediana (4)</h2>
+<p>In questo frammento di codice calcoliamo la mediana lavorando sull’array ordinato <code>vcopy</code>:</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co">// prendo il valore centrale (`ndata` dispari) o la media tra i due</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="co">// centrali (`ndata` pari) dell&#39;array ordinato</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> mediana <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="op">(</span>ndata <span class="op">%</span> <span class="dv">2</span> <span class="op">==</span> <span class="dv">0</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>    mediana <span class="op">=</span> <span class="op">(</span>vcopy<span class="op">[</span>ndata <span class="op">/</span> <span class="dv">2</span> <span class="op">-</span> <span class="dv">1</span><span class="op">]</span> <span class="op">+</span> vcopy<span class="op">[</span>ndata <span class="op">/</span> <span class="dv">2</span><span class="op">])</span> <span class="op">/</span> <span class="dv">2</span><span class="op">;</span></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>    mediana <span class="op">=</span> vcopy<span class="op">[</span>ndata <span class="op">/</span> <span class="dv">2</span><span class="op">];</span></span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>cout <span class="op">&lt;&lt;</span> <span class="st">&quot;Mediana = &quot;</span> <span class="op">&lt;&lt;</span> mediana <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span></code></pre></div>
+<h2 id="scrittura-elementi-su-file-5">Scrittura elementi su file (5)</h2>
+<p>Infine scriviamo il vettore ordinato su un file <code>output_file.txt</code>:</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>ofstream fout<span class="op">(</span><span class="st">&quot;output_file.txt&quot;</span><span class="op">);</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span><span class="op">(</span><span class="dt">int</span> k <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> k <span class="op">&lt;</span> ndata<span class="op">;</span> <span class="op">++</span>k<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>    fout <span class="op">&lt;&lt;</span> vcopy<span class="op">[</span>k<span class="op">]</span> <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>fout<span class="op">.</span>close<span class="op">();</span></span></code></pre></div>
+<ul>
+<li><p>Compiliamo il programma invocando come al solito <code>g++</code>:</p>
+<pre><code>g++ main.cpp -o main</code></pre></li>
+<li><p>Eseguiamo il programma:</p>
+<pre><code>./main 1000000 data.dat</code></pre></li>
+</ul>
+<h1 id="esercizio-1.1">Esercizio 1.1 - Codice di analisi con funzioni</h1>
+<p>Vogliamo ora riorganizzare il codice precedente per renderlo più modulare e facilmente riutilizzabile. Per capirci meglio: il calcolo della media è una operazione generale che può essere immaginata come un blocco di codice che accetta in input un array di dati e una dimensione e restituisce un valore (la media, appunto). Se in uno stesso codice principale dobbiamo calcolare più volte la media di array di dati diversi, non vogliamo ripetere più volte il frammento di codice relativo; lo stesso vale per la lettura di un set di dati da un file o per il calcolo della mediana. Il codice dovrebbe avere quindi una struttura del tipo:</p>
+<ul>
+<li>Dichiarazione di tutte le funzioni che verranno utilizzate.</li>
+<li>Programma vero e proprio <code>int main() {...}</code> in cui le funzioni vengono utilizzate.</li>
+<li>Al termine del programma principale l’implementazione di tutte le funzioni dichiarate.</li>
+</ul>
+<p>Dal momento che abbiamo deciso di spezzare il codice in funzioni proviamo a fare uso di una funzione dedicata che scambi tra loro due elementi di un array. In questo caso ripassiamo prima rapidamente come funziona il passaggio di dati in una funzione.</p>
+<h2 id="funzioni-con-argomenti-by-reference-by-value-e-by-pointer">Funzioni con argomenti <em>by reference</em>, <em>by value</em> e <em>by pointer</em></h2>
+<p>Il passaggio di valori a una funzione può avvenire <em>by value</em>, <em>by reference</em> o <em>by pointer</em>.</p>
+<p>Ad esempio, se vogliamo scrivere una funzione che incrementi di uno il valore di una variabile intera abbiamo tre possibilità:</p>
+<table>
+<thead>
+<tr>
+<td>
+Tipo
+</td>
+<td>
+<em>By value</em> (C e C++)
+</td>
+<td>
+<em>By reference</em> (C++)
+</td>
+<td>
+<em>By pointer</em> (C e C++)
+</td>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Implementazione
+</td>
+<td>
+<div class="sourceCode" id="cb25"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> incrementa<span class="op">(</span><span class="dt">int</span> a<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  a<span class="op">++;</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+</td>
+<td>
+<div class="sourceCode" id="cb26"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> incrementa<span class="op">(</span><span class="dt">int</span> <span class="op">&amp;</span>a<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  a<span class="op">++;</span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+</td>
+<td>
+<div class="sourceCode" id="cb27"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> incrementa<span class="op">(</span><span class="dt">int</span> <span class="op">*</span>a<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>  <span class="op">(*</span>a<span class="op">)++;</span></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+</td>
+</tr>
+<tr>
+<td>
+Chiamata
+</td>
+<td>
+<div class="sourceCode" id="cb28"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> a <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>incrementa<span class="op">(</span>a<span class="op">);</span></span></code></pre></div>
+</td>
+<td>
+<div class="sourceCode" id="cb29"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> a <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>incrementa<span class="op">(</span>a<span class="op">);</span></span></code></pre></div>
+</td>
+<td>
+<div class="sourceCode" id="cb30"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> a <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>incrementa<span class="op">(&amp;</span>a<span class="op">);</span></span></code></pre></div>
+</td>
+</tr>
+<tr>
+<td>
+Effetto
+</td>
+<td>
+<code>a</code> <strong>non</strong> viene incrementato
+</td>
+<td>
+<code>a</code> viene incrementato
+</td>
+<td>
+<code>a</code> viene incrementato
+</td>
+</tr>
+</tbody>
+</table>
+<p>Il passaggio dei parametri <em>by value</em> non funziona poiché alla funzione vengono passate copie dei parametri, e la funzione chiamata opera su queste copie dei parametri. Qualunque cambiamento apportato alle copie non ha alcun effetto sui valori originali dei parametri presenti nella funzione chiamante.</p>
+<p>Le chiamate <em>by pointer</em> e <em>by reference</em> passano alla funzione l’indirizzo di memoria in cui il programma ha memorizzato la variabile <code>a</code>. Per cui la funzione agisce direttamente sulla variabile <code>a</code> e non su una copia.</p>
+<p>Vediamo ora passo passo come fare.</p>
+<h2 id="struttura-del-programma-1">Struttura del programma</h2>
+<p>Ecco come potrebbe diventare il vostro codice dopo la cura:</p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;cstdlib&gt;</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;fstream&gt;</span></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a><span class="kw">using</span> <span class="kw">namespace</span> std<span class="op">;</span></span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> CalcolaMedia<span class="op">(</span><span class="dt">double</span><span class="op">*,</span> <span class="dt">int</span><span class="op">);</span></span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> CalcolaVarianza<span class="op">(</span><span class="dt">double</span><span class="op">*,</span> <span class="dt">int</span><span class="op">);</span></span>
+<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> CalcolaMediana<span class="op">(</span><span class="dt">double</span><span class="op">[],</span> <span class="dt">int</span><span class="op">);</span></span>
+<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> <span class="op">*</span> ReadDataFromFile<span class="op">(</span><span class="at">const</span> <span class="dt">char</span> <span class="op">*,</span> <span class="dt">int</span><span class="op">);</span></span>
+<span id="cb31-11"><a href="#cb31-11" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> Print<span class="op">(</span><span class="at">const</span> <span class="dt">char</span> <span class="op">*,</span> <span class="dt">double</span> <span class="op">*,</span> <span class="dt">int</span><span class="op">);</span></span>
+<span id="cb31-12"><a href="#cb31-12" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> scambiaByValue<span class="op">(</span><span class="dt">double</span><span class="op">,</span> <span class="dt">double</span><span class="op">);</span></span>
+<span id="cb31-13"><a href="#cb31-13" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> scambiaByRef<span class="op">(</span><span class="dt">double</span> <span class="op">&amp;,</span> <span class="dt">double</span> <span class="op">&amp;);</span></span>
+<span id="cb31-14"><a href="#cb31-14" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> scambiaByPointer<span class="op">(</span><span class="dt">double</span> <span class="op">*,</span> <span class="dt">double</span> <span class="op">*);</span></span>
+<span id="cb31-15"><a href="#cb31-15" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> selection_sort<span class="op">(</span><span class="dt">double</span> <span class="op">*,</span> <span class="dt">int</span><span class="op">);</span></span>
+<span id="cb31-16"><a href="#cb31-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-17"><a href="#cb31-17" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">(</span><span class="dt">int</span> argc<span class="op">,</span> <span class="at">const</span> <span class="dt">char</span> <span class="op">*</span>argv<span class="op">[])</span> <span class="op">{</span></span>
+<span id="cb31-18"><a href="#cb31-18" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> <span class="op">(</span>argc <span class="op">&lt;</span> <span class="dv">3</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb31-19"><a href="#cb31-19" aria-hidden="true" tabindex="-1"></a>      cerr <span class="op">&lt;&lt;</span> <span class="st">&quot;Uso del programma: &quot;</span> <span class="op">&lt;&lt;</span> argv<span class="op">[</span><span class="dv">0</span><span class="op">]</span> <span class="op">&lt;&lt;</span> <span class="st">&quot; &lt;n_data&gt; &lt;filename&gt;</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">;</span></span>
+<span id="cb31-20"><a href="#cb31-20" aria-hidden="true" tabindex="-1"></a>      <span class="cf">return</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb31-21"><a href="#cb31-21" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb31-22"><a href="#cb31-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-23"><a href="#cb31-23" aria-hidden="true" tabindex="-1"></a>  <span class="dt">int</span> ndata <span class="op">=</span> atoi<span class="op">(</span>argv<span class="op">[</span><span class="dv">1</span><span class="op">]);</span></span>
+<span id="cb31-24"><a href="#cb31-24" aria-hidden="true" tabindex="-1"></a>  <span class="at">const</span> <span class="dt">char</span> <span class="op">*</span> filename <span class="op">=</span> argv<span class="op">[</span><span class="dv">2</span><span class="op">];</span></span>
+<span id="cb31-25"><a href="#cb31-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-26"><a href="#cb31-26" aria-hidden="true" tabindex="-1"></a>  <span class="co">// uso la funzione per leggere gli elementi da un file</span></span>
+<span id="cb31-27"><a href="#cb31-27" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> <span class="op">*</span> data <span class="op">=</span> ReadDataFromFile<span class="op">(</span>filename<span class="op">,</span> ndata<span class="op">);</span></span>
+<span id="cb31-28"><a href="#cb31-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-29"><a href="#cb31-29" aria-hidden="true" tabindex="-1"></a>  <span class="co">// dopo averli caricati, visualizzali a video</span></span>
+<span id="cb31-30"><a href="#cb31-30" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span><span class="op">(</span><span class="dt">int</span> k <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> k <span class="op">&lt;</span> ndata<span class="op">;</span> <span class="op">++</span>k<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb31-31"><a href="#cb31-31" aria-hidden="true" tabindex="-1"></a>      cout <span class="op">&lt;&lt;</span> data<span class="op">[</span>k<span class="op">]</span> <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span>
+<span id="cb31-32"><a href="#cb31-32" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb31-33"><a href="#cb31-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-34"><a href="#cb31-34" aria-hidden="true" tabindex="-1"></a>  <span class="co">// calcola la media e la varianza degli elementi caricati</span></span>
+<span id="cb31-35"><a href="#cb31-35" aria-hidden="true" tabindex="-1"></a>  cout <span class="op">&lt;&lt;</span> <span class="st">&quot;Media = &quot;</span> <span class="op">&lt;&lt;</span> CalcolaMedia<span class="op">(</span>data<span class="op">,</span> ndata<span class="op">)</span> <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span>
+<span id="cb31-36"><a href="#cb31-36" aria-hidden="true" tabindex="-1"></a>  cout <span class="op">&lt;&lt;</span> <span class="st">&quot;Varianza = &quot;</span> <span class="op">&lt;&lt;</span> CalcolaVarianza<span class="op">(</span>data<span class="op">,</span> ndata<span class="op">)</span> <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span>
+<span id="cb31-37"><a href="#cb31-37" aria-hidden="true" tabindex="-1"></a>  cout <span class="op">&lt;&lt;</span> <span class="st">&quot;Mediana = &quot;</span> <span class="op">&lt;&lt;</span> CalcolaMediana<span class="op">(</span>data<span class="op">,</span> ndata<span class="op">)</span> <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span>
+<span id="cb31-38"><a href="#cb31-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-39"><a href="#cb31-39" aria-hidden="true" tabindex="-1"></a>  <span class="co">// scrivi i dati riordinati su un file</span></span>
+<span id="cb31-40"><a href="#cb31-40" aria-hidden="true" tabindex="-1"></a>  Print<span class="op">(</span><span class="st">&quot;fileout.txt&quot;</span><span class="op">,</span> data<span class="op">,</span> ndata<span class="op">);</span></span>
+<span id="cb31-41"><a href="#cb31-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-42"><a href="#cb31-42" aria-hidden="true" tabindex="-1"></a>  <span class="kw">delete</span><span class="op">[]</span> data<span class="op">;</span></span>
+<span id="cb31-43"><a href="#cb31-43" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p>Queste le funzioni da definire a parte:</p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> <span class="op">*</span> ReadDataFromFile<span class="op">(</span><span class="at">const</span> <span class="dt">char</span> <span class="op">*</span> filename<span class="op">,</span> <span class="dt">int</span> size<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> <span class="op">*</span> data <span class="op">=</span> <span class="kw">new</span> <span class="dt">double</span><span class="op">[</span>size<span class="op">];</span></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>  <span class="co">// ...</span></span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> data<span class="op">;</span></span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> Print<span class="op">(</span><span class="at">const</span> <span class="dt">char</span> <span class="op">*</span> filename<span class="op">,</span> <span class="dt">double</span> <span class="op">*</span> data<span class="op">,</span> <span class="dt">int</span> size<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a>  <span class="co">// ..</span></span>
+<span id="cb32-11"><a href="#cb32-11" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb32-12"><a href="#cb32-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-13"><a href="#cb32-13" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> CalcolaMedia<span class="op">(</span><span class="dt">double</span> <span class="op">*</span> data<span class="op">,</span> <span class="dt">int</span> size<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb32-14"><a href="#cb32-14" aria-hidden="true" tabindex="-1"></a>  <span class="co">// ..</span></span>
+<span id="cb32-15"><a href="#cb32-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-16"><a href="#cb32-16" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> media<span class="op">;</span></span>
+<span id="cb32-17"><a href="#cb32-17" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb32-18"><a href="#cb32-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-19"><a href="#cb32-19" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> CalcolaVarianza<span class="op">(</span><span class="dt">double</span> <span class="op">*</span> data<span class="op">,</span> <span class="dt">int</span> size<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb32-20"><a href="#cb32-20" aria-hidden="true" tabindex="-1"></a>  <span class="co">// ..</span></span>
+<span id="cb32-21"><a href="#cb32-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-22"><a href="#cb32-22" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> varianza<span class="op">;</span></span>
+<span id="cb32-23"><a href="#cb32-23" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb32-24"><a href="#cb32-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-25"><a href="#cb32-25" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> scambiaByValue<span class="op">(</span><span class="dt">double</span> a<span class="op">,</span> <span class="dt">double</span> b<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb32-26"><a href="#cb32-26" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> c <span class="op">=</span> a<span class="op">;</span></span>
+<span id="cb32-27"><a href="#cb32-27" aria-hidden="true" tabindex="-1"></a>  a <span class="op">=</span> b<span class="op">;</span></span>
+<span id="cb32-28"><a href="#cb32-28" aria-hidden="true" tabindex="-1"></a>  b <span class="op">=</span> c<span class="op">;</span></span>
+<span id="cb32-29"><a href="#cb32-29" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb32-30"><a href="#cb32-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-31"><a href="#cb32-31" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> scambiaByRef<span class="op">(</span><span class="dt">double</span> <span class="op">&amp;</span>a<span class="op">,</span> <span class="dt">double</span> <span class="op">&amp;</span>b<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb32-32"><a href="#cb32-32" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> c <span class="op">=</span> a<span class="op">;</span></span>
+<span id="cb32-33"><a href="#cb32-33" aria-hidden="true" tabindex="-1"></a>  a <span class="op">=</span> b<span class="op">;</span></span>
+<span id="cb32-34"><a href="#cb32-34" aria-hidden="true" tabindex="-1"></a>  b <span class="op">=</span> c<span class="op">;</span></span>
+<span id="cb32-35"><a href="#cb32-35" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb32-36"><a href="#cb32-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-37"><a href="#cb32-37" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> scambiaByPointer<span class="op">(</span><span class="dt">double</span> <span class="op">*</span>a<span class="op">,</span> <span class="dt">double</span> <span class="op">*</span>b<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb32-38"><a href="#cb32-38" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> c <span class="op">=</span> <span class="op">*</span>a<span class="op">;</span></span>
+<span id="cb32-39"><a href="#cb32-39" aria-hidden="true" tabindex="-1"></a>  <span class="op">*</span>a <span class="op">=</span> <span class="op">*</span>b<span class="op">;</span></span>
+<span id="cb32-40"><a href="#cb32-40" aria-hidden="true" tabindex="-1"></a>  <span class="op">*</span>b <span class="op">=</span> c<span class="op">;</span></span>
+<span id="cb32-41"><a href="#cb32-41" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb32-42"><a href="#cb32-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-43"><a href="#cb32-43" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> selection_sort<span class="op">(</span><span class="dt">double</span> <span class="op">*</span> vec<span class="op">,</span> <span class="dt">int</span> size<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb32-44"><a href="#cb32-44" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span><span class="op">(</span><span class="dt">int</span> j <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> j <span class="op">&lt;</span> size <span class="op">-</span> <span class="dv">1</span><span class="op">;</span> <span class="op">++</span>j<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb32-45"><a href="#cb32-45" aria-hidden="true" tabindex="-1"></a>      <span class="dt">int</span> imin <span class="op">=</span> j<span class="op">;</span></span>
+<span id="cb32-46"><a href="#cb32-46" aria-hidden="true" tabindex="-1"></a>      <span class="dt">double</span> min <span class="op">=</span> vec<span class="op">[</span>imin<span class="op">];</span></span>
+<span id="cb32-47"><a href="#cb32-47" aria-hidden="true" tabindex="-1"></a>      <span class="cf">for</span><span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> j <span class="op">+</span> <span class="dv">1</span><span class="op">;</span> i <span class="op">&lt;</span> size<span class="op">;</span> <span class="op">++</span>i<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb32-48"><a href="#cb32-48" aria-hidden="true" tabindex="-1"></a>          <span class="cf">if</span><span class="op">(</span>vec<span class="op">[</span>i<span class="op">]</span> <span class="op">&lt;</span> min<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb32-49"><a href="#cb32-49" aria-hidden="true" tabindex="-1"></a>              min <span class="op">=</span> vec<span class="op">[</span>i<span class="op">];</span></span>
+<span id="cb32-50"><a href="#cb32-50" aria-hidden="true" tabindex="-1"></a>              imin <span class="op">=</span> i<span class="op">;</span></span>
+<span id="cb32-51"><a href="#cb32-51" aria-hidden="true" tabindex="-1"></a>          <span class="op">}</span></span>
+<span id="cb32-52"><a href="#cb32-52" aria-hidden="true" tabindex="-1"></a>      <span class="op">}</span></span>
+<span id="cb32-53"><a href="#cb32-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-54"><a href="#cb32-54" aria-hidden="true" tabindex="-1"></a>      scambiaByRef<span class="op">(</span>vec<span class="op">[</span>j<span class="op">],</span> vec<span class="op">[</span>imin<span class="op">]);</span></span>
+<span id="cb32-55"><a href="#cb32-55" aria-hidden="true" tabindex="-1"></a>      <span class="co">// equivalente:</span></span>
+<span id="cb32-56"><a href="#cb32-56" aria-hidden="true" tabindex="-1"></a>      <span class="co">// scambiaByPointer(vec + j, vec + imin);</span></span>
+<span id="cb32-57"><a href="#cb32-57" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb32-58"><a href="#cb32-58" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb32-59"><a href="#cb32-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-60"><a href="#cb32-60" aria-hidden="true" tabindex="-1"></a><span class="co">// Calcola la mediana di un array `vec` di dimensione `size`.</span></span>
+<span id="cb32-61"><a href="#cb32-61" aria-hidden="true" tabindex="-1"></a><span class="co">// Prima crea una copia dell&#39;array, poi lo riordina e quindi</span></span>
+<span id="cb32-62"><a href="#cb32-62" aria-hidden="true" tabindex="-1"></a><span class="co">// calcola la mediana</span></span>
+<span id="cb32-63"><a href="#cb32-63" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> CalcolaMediana<span class="op">(</span><span class="dt">double</span> <span class="op">*</span> data<span class="op">,</span> <span class="dt">int</span> size<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb32-64"><a href="#cb32-64" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> <span class="op">*</span> vcopy <span class="op">=</span> <span class="kw">new</span> <span class="dt">double</span><span class="op">[</span>size<span class="op">];</span></span>
+<span id="cb32-65"><a href="#cb32-65" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span><span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> size<span class="op">;</span> <span class="op">++</span>i<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb32-66"><a href="#cb32-66" aria-hidden="true" tabindex="-1"></a>      vcopy<span class="op">[</span>i<span class="op">]</span> <span class="op">=</span> vec<span class="op">[</span>i<span class="op">];</span></span>
+<span id="cb32-67"><a href="#cb32-67" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb32-68"><a href="#cb32-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-69"><a href="#cb32-69" aria-hidden="true" tabindex="-1"></a>  selection_sort<span class="op">(</span>vcopy<span class="op">,</span> size<span class="op">);</span></span>
+<span id="cb32-70"><a href="#cb32-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-71"><a href="#cb32-71" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> mediana <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb32-72"><a href="#cb32-72" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-73"><a href="#cb32-73" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span><span class="op">(</span>size <span class="op">%</span> <span class="dv">2</span> <span class="op">==</span> <span class="dv">0</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb32-74"><a href="#cb32-74" aria-hidden="true" tabindex="-1"></a>      mediana <span class="op">=</span> <span class="op">(</span>vcopy<span class="op">[</span>size <span class="op">/</span> <span class="dv">2</span> <span class="op">-</span> <span class="dv">1</span><span class="op">]</span> <span class="op">+</span> vcopy<span class="op">[</span>size <span class="op">/</span> <span class="dv">2</span><span class="op">])</span> <span class="op">/</span> <span class="dv">2</span><span class="op">;</span></span>
+<span id="cb32-75"><a href="#cb32-75" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
+<span id="cb32-76"><a href="#cb32-76" aria-hidden="true" tabindex="-1"></a>      mediana <span class="op">=</span> vcopy<span class="op">[</span>size <span class="op">/</span> <span class="dv">2</span><span class="op">];</span></span>
+<span id="cb32-77"><a href="#cb32-77" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb32-78"><a href="#cb32-78" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-79"><a href="#cb32-79" aria-hidden="true" tabindex="-1"></a>  <span class="kw">delete</span><span class="op">[]</span> vcopy<span class="op">;</span></span>
+<span id="cb32-80"><a href="#cb32-80" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-81"><a href="#cb32-81" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> mediana<span class="op">;</span></span>
+<span id="cb32-82"><a href="#cb32-82" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p>Il <code>main</code> è ora decisamente più compatto e leggibile. Quasi tutte le principali funzionalità del codice sono state scorporate in un opportuno set di funzioni.</p>
+<p>Come nel caso dell’esercizio precedente compiliamo il programma invocando come al solito <code>g++</code>:</p>
+<pre><code>g++ main.cpp -o main</code></pre>
+<p>Eseguiamo il programma :</p>
+<pre><code>./main 1000000 data.dat</code></pre>
+<h1 id="esercizio-1.2">Esercizio 1.2 - Codice di analisi con funzioni e <code>Makefile</code></h1>
+<p>In questo esercizio terminiamo il processo di riorganizzazione dell’esercizio 1.0. Procederemo in questo modo:</p>
+<ul>
+<li>Tutte le dichiarazioni di variabili che abbiamo messo in testa al programma le spostiamo in un file separato <code>funzioni.h</code>.</li>
+<li>Tutte le implementazioni delle funzioni in coda al programma le spostiamo in un file separato <code>funzioni.cpp</code>.</li>
+<li>Ricordiamoci di includere il file <code>funzioni.h</code> sia in <code>main.cpp</code> sia in <code>funzioni.cpp</code> tramite il solito <code>#include "funzioni.h"</code></li>
+<li>Compiliamo separatamente <code>main.cpp</code> e <code>funzioni.cpp</code> utilizzando un <code>Makefile</code></li>
+</ul>
+<p>Prima di incominciare, rivediamo rapidamente come si scrive un <code>Makefile</code>:</p>
+<h2 id="il-makefile">Il <code>Makefile</code></h2>
+<p>Vogliamo creare un <code>Makefile</code> che ci permetta di compilare il nostro programma quando questo è composto/spezzato in diversi file sorgenti. Supponiamo di avere un codice spezzato in tre file:</p>
+<ol>
+<li><code>main.cpp</code></li>
+<li><code>funzioni.cpp</code></li>
+<li><code>funzioni.h</code></li>
+</ol>
+<p>Ovviamente possiamo compilare il tutto con</p>
+<pre><code>g++ main.cpp funzioni.cpp -o main</code></pre>
+<p>ma possiamo farlo in maniera molto più efficace. La struttura/sintassi del <code>Makefile</code> è la seguente:</p>
+<pre><code>target: dipendenze
+[tab] system command</code></pre>
+<p>Nel nostro caso</p>
+<div class="sourceCode" id="cb37"><pre class="sourceCode makefile"><code class="sourceCode makefile"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="dv">main:</span><span class="dt"> funzioni.cpp main.cpp</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>    g++ funzioni.cpp main.cpp -o main</span></code></pre></div>
+<p>lanciando il comando <code>make</code> tutto viene compilato.</p>
+<p>Possiamo scriverlo anche esplicitando le dipendenze in modo che anche quando cambiamo il file <code>.h</code> il tutto venga propriamente ricompilato. In questo caso il <code>Makefile</code> diventa:</p>
+<div class="sourceCode" id="cb38"><pre class="sourceCode makefile"><code class="sourceCode makefile"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="dv">main:</span><span class="dt"> main.o funzioni.o</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>    g++ -g -Wall --pedantic -std=c++11 main.o funzioni.o -o main</span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a><span class="dv">main.o:</span><span class="dt"> main.cpp funzioni.h</span></span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>    g++ -g -Wall --pedantic -std=c++11 -c main.cpp -o main.o</span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a><span class="dv">funzioni.o:</span><span class="dt"> funzioni.cpp funzioni.h</span></span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a>    g++ -g -Wall --pedantic -std=c++11 -c funzioni.cpp -o funzioni.o</span></code></pre></div>
+<p>Notate però quanto il <code>Makefile</code> sia ripetitivo. È possibile definire delle <em>variabili</em> nel Makefile per semplificarlo:</p>
+<div class="sourceCode" id="cb39"><pre class="sourceCode makefile"><code class="sourceCode makefile"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="dt">CXXFLAGS </span><span class="ch">=</span><span class="st"> -g -Wall --pedantic -std=c++11</span></span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a><span class="dv">main:</span><span class="dt"> main.o funzioni.o</span></span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>    g++ main.o funzioni.o -o main <span class="ch">$(</span><span class="dt">CXXFLAGS</span><span class="ch">)</span></span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a><span class="dv">main.o:</span><span class="dt"> main.cpp funzioni.h</span></span>
+<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a>    g++ -c main.cpp -o main.o <span class="ch">$(</span><span class="dt">CXXFLAGS</span><span class="ch">)</span></span>
+<span id="cb39-8"><a href="#cb39-8" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb39-9"><a href="#cb39-9" aria-hidden="true" tabindex="-1"></a><span class="dv">funzioni.o:</span><span class="dt"> funzioni.cpp funzioni.h</span></span>
+<span id="cb39-10"><a href="#cb39-10" aria-hidden="true" tabindex="-1"></a>    g++ -c funzioni.cpp -o funzioni.o <span class="ch">$(</span><span class="dt">CXXFLAGS</span><span class="ch">)</span></span></code></pre></div>
+<p>La variabile <code>$@</code> è una cosiddetta <em>variabile implicita</em>, e viene sostituita di volta in volta col nome del <em>target</em> corrente (che nell’esempio sopra è <code>main</code>, <code>main.o</code> e infine <code>funzioni.o</code>). I flag <code>-g -Wall --pedantic -std=c++11</code> servono per rendere la compilazione e l’esecuzione del codice più sicura, perché abilitano dei controlli addizionali, spiegati nelle <a href="tomasi-lezione-01.html#flag-del-compilatore">slide</a>.</p>
+<h1 id="esercizio-1.3">Esercizio 1.3 - Overloading di funzione (da consegnare)</h1>
+<p>Aggiungete alla vostra libreria di funzioni una funzione <code>void Print(const double *, int)</code> che permetta di scrivere gli elementi di un array a video. Questo è possibile grazie all’<em>overloading</em> (funzioni con stesso nome, ma con argomenti differenti).</p>
+<h2 id="overloading-di-funzioni">Overloading di funzioni</h2>
+<p>L’overloading delle funzioni è una funzionalità specifica del C++ che non è presente in C. Questa funzionalità permette di poter utilizzare lo stesso nome per funzioni diverse (cioè che compiono operazioni diverse) all’interno dello stesso programma, a patto però che gli argomenti forniti alla funzione siano differenti. In maniera automatica, il compilatore sceglierà la funzione appropriata a seconda del tipo di argomenti passati. In pratica:</p>
+<div class="sourceCode" id="cb40"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> Print<span class="op">(</span><span class="at">const</span> <span class="dt">double</span> <span class="op">*</span>  data<span class="op">,</span> <span class="dt">int</span> ndata<span class="op">)</span> <span class="op">{...}</span></span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> Print<span class="op">(</span><span class="at">const</span> <span class="dt">char</span> <span class="op">*</span> filename<span class="op">,</span> <span class="at">const</span> <span class="dt">double</span> <span class="op">*</span> data<span class="op">,</span> <span class="dt">int</span> ndata<span class="op">)</span> <span class="op">{...}</span></span></code></pre></div>
+<p>Le due funzioni hanno lo stesso nome, ma ovviamente il codice al loro interno dovrà essere differente! Si noti che per poter fare l’overloading di una funzione non basta che soltanto il tipo restituito dalla funzione sia differente, ma occorre che siano diversi i tipi e/o il numero dei parametri passati alla funzione.</p>
+<p>Seguono ulteriori suggerimenti.</p>
+<h2 id="formattazione-delloutput">Formattazione dell’output</h2>
+<p>La C++ Standard Library permette di manipolare la formattazione dell’output utilizzando i manipolatori, alcuni dei quali sono dichiarati nell’header <code>&lt;iomanip&gt;</code>. In generale i manipolatori modificano lo stato di uno stream (<code>cout</code>, <code>cin</code>, <code>cerr</code>, <code>ofstream</code>, <code>ifstream</code>…).</p>
+<p>I manipolatori che ci serviranno per modificare l’output di numeri floating-point sono:</p>
+<ul>
+<li><code>fixed</code>: stampa i numeri senza l’uso di esponenti, ove possibile</li>
+<li><code>scientific</code>: stampa i numeri utilizzando gli esponenti</li>
+<li><code>setprecision(int n)</code>: stampa <code>n</code> cifre dopo la virgola</li>
+</ul>
+<p>Esempio:</p>
+<div class="sourceCode" id="cb41"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>cout <span class="op">&lt;&lt;</span> <span class="st">&quot;double number: &quot;</span> <span class="op">&lt;&lt;</span> setprecision<span class="op">(</span><span class="dv">4</span><span class="op">)</span> <span class="op">&lt;&lt;</span> double_number<span class="op">;</span></span></code></pre></div>
+<p>Utili per stampare i dati in una tabella sono</p>
+<ul>
+<li><code>setw(int n)</code>: imposta la larghezza di un campo ad n</li>
+<li><code>setfill(char c)</code>: usa c come carattere di riempimento (quello di default è lo spazio)</li>
+</ul>
+<p>Ad esempio:</p>
+<div class="sourceCode" id="cb42"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>cout <span class="op">&lt;&lt;</span> setw<span class="op">(</span><span class="dv">5</span><span class="op">)</span> <span class="op">&lt;&lt;</span> <span class="st">&quot;0.132&quot;</span> <span class="op">&lt;&lt;</span> setw<span class="op">(</span><span class="dv">5</span><span class="op">)</span> <span class="op">&lt;&lt;</span> <span class="st">&quot;234&quot;</span> <span class="op">&lt;&lt;</span> endl</span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>     <span class="op">&lt;&lt;</span> setw<span class="op">(</span><span class="dv">5</span><span class="op">)</span> <span class="op">&lt;&lt;</span> <span class="st">&quot;10&quot;</span> <span class="op">&lt;&lt;</span> setw<span class="op">(</span><span class="dv">5</span><span class="op">)</span> <span class="op">&lt;&lt;</span> <span class="st">&quot;12&quot;</span> <span class="op">&lt;&lt;</span> endl</span></code></pre></div>
+<p>stampa i numeri in due colonne allineate.</p>
+<h2 id="questione-di-stile">Questione di stile</h2>
+<p>Proviamo a vedere alcune possibili varianti per le funzioni relative al calcolo della media e della varianza:</p>
+<div class="sourceCode" id="cb43"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Versione 1</span></span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> CalcolaMedia<span class="op">(</span><span class="dt">double</span> <span class="op">*</span> data<span class="op">,</span> <span class="dt">int</span> size<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> accumulo <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span><span class="op">(</span>size <span class="op">==</span> <span class="dv">0</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb43-6"><a href="#cb43-6" aria-hidden="true" tabindex="-1"></a>      <span class="cf">return</span> accumulo<span class="op">;</span></span>
+<span id="cb43-7"><a href="#cb43-7" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb43-8"><a href="#cb43-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-9"><a href="#cb43-9" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span><span class="op">(</span><span class="dt">int</span> k <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> k <span class="op">&lt;</span> size<span class="op">;</span> <span class="op">++</span>k<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb43-10"><a href="#cb43-10" aria-hidden="true" tabindex="-1"></a>      accumulo <span class="op">+=</span> data<span class="op">[</span>k<span class="op">];</span></span>
+<span id="cb43-11"><a href="#cb43-11" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb43-12"><a href="#cb43-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-13"><a href="#cb43-13" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="fl">1.0</span> <span class="op">/</span> <span class="kw">static_cast</span><span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;(</span>size<span class="op">)</span> <span class="op">*</span> accumulo<span class="op">;</span></span>
+<span id="cb43-14"><a href="#cb43-14" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb43-15"><a href="#cb43-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-16"><a href="#cb43-16" aria-hidden="true" tabindex="-1"></a><span class="co">// Versione 2</span></span>
+<span id="cb43-17"><a href="#cb43-17" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> CalcolaMedia<span class="op">(</span><span class="dt">double</span> <span class="op">*</span> data<span class="op">,</span> <span class="dt">int</span> size<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb43-18"><a href="#cb43-18" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> accumulo <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb43-19"><a href="#cb43-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-20"><a href="#cb43-20" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span><span class="op">(</span>size <span class="op">==</span> <span class="dv">0</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb43-21"><a href="#cb43-21" aria-hidden="true" tabindex="-1"></a>      <span class="cf">return</span> accumulo<span class="op">;</span></span>
+<span id="cb43-22"><a href="#cb43-22" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb43-23"><a href="#cb43-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-24"><a href="#cb43-24" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span><span class="op">(</span><span class="dt">int</span> k <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> k <span class="op">&lt;</span> size<span class="op">;</span> <span class="op">++</span>k<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb43-25"><a href="#cb43-25" aria-hidden="true" tabindex="-1"></a>      accumulo <span class="op">=</span> <span class="kw">static_cast</span><span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;(</span>k<span class="op">)</span> <span class="op">/</span> <span class="kw">static_cast</span><span class="op">&lt;</span><span class="dt">double</span><span class="op">(</span>k <span class="op">+</span> <span class="dv">1</span><span class="op">)</span> <span class="op">*</span> accumulo <span class="op">+</span></span>
+<span id="cb43-26"><a href="#cb43-26" aria-hidden="true" tabindex="-1"></a>          <span class="fl">1.0</span> <span class="op">/</span> <span class="kw">static_cast</span><span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;(</span>k <span class="op">+</span> <span class="dv">1</span><span class="op">)</span> <span class="op">*</span> data<span class="op">[</span>k<span class="op">];</span></span>
+<span id="cb43-27"><a href="#cb43-27" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb43-28"><a href="#cb43-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-29"><a href="#cb43-29" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> accumulo<span class="op">;</span></span>
+<span id="cb43-30"><a href="#cb43-30" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p>La prima funzione implementa il calcolo in modo intuitivo. La seconda è meno ovvia ma se ci pensate ha lo stesso effetto con il grosso vantaggio di non conservare la somma di tutti i valori che potrebbe diventare troppo grande.</p>
+<div class="sourceCode" id="cb44"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Versione 1</span></span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> CalcolaVarianza<span class="op">(</span><span class="dt">double</span> <span class="op">*</span> data<span class="op">,</span> <span class="dt">int</span> size<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> result <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span><span class="op">(</span>size <span class="op">==</span> <span class="dv">0</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a>      <span class="cf">return</span> result<span class="op">;</span></span>
+<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb44-7"><a href="#cb44-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-8"><a href="#cb44-8" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> sumx <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb44-9"><a href="#cb44-9" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> sumx2 <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb44-10"><a href="#cb44-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-11"><a href="#cb44-11" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span><span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> size<span class="op">;</span> <span class="op">++</span>i<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb44-12"><a href="#cb44-12" aria-hidden="true" tabindex="-1"></a>      sumx <span class="op">+=</span> data<span class="op">[</span>i<span class="op">];</span></span>
+<span id="cb44-13"><a href="#cb44-13" aria-hidden="true" tabindex="-1"></a>      sumx2 <span class="op">+=</span> data<span class="op">[</span>i<span class="op">]</span> <span class="op">*</span> data<span class="op">[</span>i<span class="op">];</span></span>
+<span id="cb44-14"><a href="#cb44-14" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb44-15"><a href="#cb44-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-16"><a href="#cb44-16" aria-hidden="true" tabindex="-1"></a>  result <span class="op">=</span> <span class="fl">1.0</span> <span class="op">/</span> <span class="kw">static_cast</span><span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;(</span>size<span class="op">)</span> <span class="op">*</span> <span class="op">(</span>sumx2 <span class="op">-</span> <span class="op">(</span>sumx <span class="op">*</span> sumx <span class="op">/</span> <span class="kw">static_cast</span><span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;(</span>size<span class="op">)));</span></span>
+<span id="cb44-17"><a href="#cb44-17" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> result<span class="op">;</span></span>
+<span id="cb44-18"><a href="#cb44-18" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb44-19"><a href="#cb44-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-20"><a href="#cb44-20" aria-hidden="true" tabindex="-1"></a><span class="co">// Versione 2</span></span>
+<span id="cb44-21"><a href="#cb44-21" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> CalcolaVarianza<span class="op">(</span><span class="dt">double</span> <span class="op">*</span> data<span class="op">,</span> <span class="dt">int</span> size<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb44-22"><a href="#cb44-22" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> result <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb44-23"><a href="#cb44-23" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span><span class="op">(</span>size <span class="op">==</span> <span class="dv">0</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb44-24"><a href="#cb44-24" aria-hidden="true" tabindex="-1"></a>      <span class="cf">return</span> result<span class="op">;</span></span>
+<span id="cb44-25"><a href="#cb44-25" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb44-26"><a href="#cb44-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-27"><a href="#cb44-27" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> old_average<span class="op">;</span></span>
+<span id="cb44-28"><a href="#cb44-28" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> average <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb44-29"><a href="#cb44-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-30"><a href="#cb44-30" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span><span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> size<span class="op">;</span> <span class="op">++</span>i<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb44-31"><a href="#cb44-31" aria-hidden="true" tabindex="-1"></a>      old_average <span class="op">=</span> average<span class="op">;</span></span>
+<span id="cb44-32"><a href="#cb44-32" aria-hidden="true" tabindex="-1"></a>      average <span class="op">=</span> <span class="kw">static_cast</span><span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;(</span>i<span class="op">)</span> <span class="op">/</span> <span class="kw">static_cast</span><span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;(</span>i <span class="op">+</span> <span class="dv">1</span><span class="op">)</span> <span class="op">*</span> average <span class="op">+</span></span>
+<span id="cb44-33"><a href="#cb44-33" aria-hidden="true" tabindex="-1"></a>          <span class="fl">1.0</span> <span class="op">/</span> <span class="kw">static_cast</span><span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;(</span>i <span class="op">+</span> <span class="dv">1</span><span class="op">)</span> <span class="op">*</span> data<span class="op">[</span>i<span class="op">];</span></span>
+<span id="cb44-34"><a href="#cb44-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-35"><a href="#cb44-35" aria-hidden="true" tabindex="-1"></a>      result <span class="op">=</span> <span class="fl">1.0</span> <span class="op">/</span> <span class="kw">static_cast</span><span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;(</span>i <span class="op">+</span> <span class="dv">1</span><span class="op">)</span> <span class="op">*</span></span>
+<span id="cb44-36"><a href="#cb44-36" aria-hidden="true" tabindex="-1"></a>          <span class="op">(</span><span class="kw">static_cast</span><span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;(</span>i<span class="op">)</span> <span class="op">*</span> result <span class="op">+</span></span>
+<span id="cb44-37"><a href="#cb44-37" aria-hidden="true" tabindex="-1"></a>           data<span class="op">[</span>i<span class="op">]</span> <span class="op">*</span> data<span class="op">[</span>i<span class="op">]</span> <span class="op">+</span></span>
+<span id="cb44-38"><a href="#cb44-38" aria-hidden="true" tabindex="-1"></a>           <span class="kw">static_cast</span><span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;(</span>i<span class="op">)</span> <span class="op">*</span> old_average <span class="op">*</span> old_average<span class="op">)</span> <span class="op">-</span></span>
+<span id="cb44-39"><a href="#cb44-39" aria-hidden="true" tabindex="-1"></a>          average <span class="op">*</span> average<span class="op">;</span></span>
+<span id="cb44-40"><a href="#cb44-40" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb44-41"><a href="#cb44-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-42"><a href="#cb44-42" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> result<span class="op">;</span></span>
+<span id="cb44-43"><a href="#cb44-43" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p>Nel caso della varianza la prima implementazione richiede una chiamata alla funzione CalcolaMedia() mentre la seconda no. La terza infine implementa il calcolo nello stesso modo visto per la media, ovvero evitando di immagazzinare somme troppo elevate.</p>                    
+                </div>
+            </div>
+
+            <script src="https://vjs.zencdn.net/5.4.4/video.js"></script>
+        </div>
+    </body>
+</html>

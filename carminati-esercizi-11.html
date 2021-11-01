@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html  lang="it-IT"  dir="ltr">
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Lezione 12: Metodi Monte Carlo</title>
+        <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+        <link rel="apple-touch-icon-precomposed" href="images/apple-touch-icon.png">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/2.26.4/css/uikit.gradient.css">
+
+        <!-- <link rel="stylesheet" href="style.css"> -->
+        <link rel="stylesheet" href="https://cdn.rawgit.com/diversen/pandoc-uikit/master/style.css">
+        <link href="https://vjs.zencdn.net/5.4.4/video-js.css" rel="stylesheet" />
+        <script src="https://code.jquery.com/jquery-2.2.1.min.js"></script>
+        <!-- <script src="uikit.js"></script> -->
+        <script src="https://cdn.rawgit.com/diversen/pandoc-uikit/master/uikit.js"></script>
+        <!-- <script src="scripts.js"></script> -->
+        <script src="https://cdn.rawgit.com/diversen/pandoc-uikit/master/scripts.js"></script>
+        <!-- <script src="jquery.sticky-kit.js "></script> -->
+        <script src="https://cdn.rawgit.com/diversen/pandoc-uikit/master/jquery.sticky-kit.js"></script>
+
+        <meta name="generator" content="pandoc-uikit" />
+                <meta name="author" content="Leonardo Carminati" />
+                <meta name="author" content="Maurizio Tomasi" />
+                        <title>Lezione 12: Metodi Monte Carlo</title>
+        <style type="text/css">code{white-space: pre;}</style>
+                        <style type="text/css">
+            pre > code.sourceCode { white-space: pre; position: relative; }
+            pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+            pre > code.sourceCode > span:empty { height: 1.2em; }
+            .sourceCode { overflow: visible; }
+            code.sourceCode > span { color: inherit; text-decoration: inherit; }
+            div.sourceCode { margin: 1em 0; }
+            pre.sourceCode { margin: 0; }
+            @media screen {
+            div.sourceCode { overflow: auto; }
+            }
+            @media print {
+            pre > code.sourceCode { white-space: pre-wrap; }
+            pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+            }
+            pre.numberSource code
+              { counter-reset: source-line 0; }
+            pre.numberSource code > span
+              { position: relative; left: -4em; counter-increment: source-line; }
+            pre.numberSource code > span > a:first-child::before
+              { content: counter(source-line);
+                position: relative; left: -1em; text-align: right; vertical-align: baseline;
+                border: none; display: inline-block;
+                -webkit-touch-callout: none; -webkit-user-select: none;
+                -khtml-user-select: none; -moz-user-select: none;
+                -ms-user-select: none; user-select: none;
+                padding: 0 4px; width: 4em;
+                color: #aaaaaa;
+              }
+            pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+            div.sourceCode
+              {   }
+            @media screen {
+            pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+            }
+            code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+            code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+            code span.at { color: #7d9029; } /* Attribute */
+            code span.bn { color: #40a070; } /* BaseN */
+            code span.bu { } /* BuiltIn */
+            code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+            code span.ch { color: #4070a0; } /* Char */
+            code span.cn { color: #880000; } /* Constant */
+            code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+            code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+            code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+            code span.dt { color: #902000; } /* DataType */
+            code span.dv { color: #40a070; } /* DecVal */
+            code span.er { color: #ff0000; font-weight: bold; } /* Error */
+            code span.ex { } /* Extension */
+            code span.fl { color: #40a070; } /* Float */
+            code span.fu { color: #06287e; } /* Function */
+            code span.im { } /* Import */
+            code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+            code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+            code span.op { color: #666666; } /* Operator */
+            code span.ot { color: #007020; } /* Other */
+            code span.pp { color: #bc7a00; } /* Preprocessor */
+            code span.sc { color: #4070a0; } /* SpecialChar */
+            code span.ss { color: #bb6688; } /* SpecialString */
+            code span.st { color: #4070a0; } /* String */
+            code span.va { color: #19177c; } /* Variable */
+            code span.vs { color: #4070a0; } /* VerbatimString */
+            code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+        </style>
+                                            <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.js"></script>
+                                            <script>document.addEventListener("DOMContentLoaded", function () {
+                                             var mathElements = document.getElementsByClassName("math");
+                                             var macros = [];
+                                             for (var i = 0; i < mathElements.length; i++) {
+                                              var texText = mathElements[i].firstChild;
+                                              if (mathElements[i].tagName == "SPAN") {
+                                               katex.render(texText.data, mathElements[i], {
+                                                displayMode: mathElements[i].classList.contains('display'),
+                                                throwOnError: false,
+                                                macros: macros,
+                                                fleqn: false
+                                               });
+                                            }}});
+                                            </script>
+                                            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css" />
+                               
+    </head>
+
+    <body oncopy="return false" oncut="return false" onpaste="return false">
+
+
+        <div class="uk-container uk-container-center uk-margin-top uk-margin-large-bottom">
+
+                        <div class="uk-grid" data-uk-grid-margin>
+                <div class="uk-width-1-1">
+                    <h1 class="uk-heading-large">Lezione 12: Metodi Monte Carlo</h1>
+                                        <h3 class="uk-heading-large">A.A. 2021−2022</p></h3>
+                                                            <p class="uk-text-large">Leonardo Carminati</p>
+                                        <p class="uk-text-large">Maurizio Tomasi</p>
+                                    </div>
+            </div>
+            
+            <div class="uk-grid" data-uk-grid-margin >          
+                <div class="uk-width-medium-1-4">
+                    <div class="uk-overflow-container" data-uk-sticky="{top:25,media: 768}">
+                        <div class="uk-panel uk-panel-box menu-begin" >
+
+                                                        <ul>
+                                                        <li><a href="#esercizio-11.0">Esercizio 11.0 - Simulazione dell’esperienza dello spettrometro a prisma (da consegnare)</a>
+                                                        <ul>
+                                                        <li><a href="#parte-i">Parte I</a></li>
+                                                        <li><a href="#parte-ii">Parte II</a></li>
+                                                        <li><a href="#la-classe-esperimentoprisma">La classe EsperimentoPrisma</a></li>
+                                                        <li><a href="#istrogrammi-bidimensionali">Istrogrammi bidimensionali</a></li>
+                                                        <li><a href="#calcolo-del-coefficiente-di-correlazione">Calcolo del coefficiente di correlazione</a></li>
+                                                        <li><a href="#risultati-attesi">Risultati attesi</a></li>
+                                                        </ul></li>
+                                                        <li><a href="#esercizio-11.1">Esercizio 11.1 - Attrito viscoso (facoltativo)</a></li>
+                                                        </ul>
+                            
+                        </div>
+                    </div>
+                </div>
+
+                <div class="uk-width-medium-3-4">
+<p>[La pagina con la spiegazione originale dell’esercizio si trova qui: <a href="http://labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/lezione11_1819.html">labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/lezione11_1819.html</a>]</p>
+<p>In questa lezione vedremo una applicazione delle tecniche Monte Carlo per la simulazione di una delle esperienze dei laboratori di fisica.</p>
+<h1 id="esercizio-11.0">Esercizio 11.0 - Simulazione dell’esperienza dello spettrometro a prisma (da consegnare)</h1>
+<p>La dipendenza dell’indice di rifrazione dalla lunghezza d’onda della luce incidente viene descritta dalla legge di Cauchy:</p>
+<p><span class="math display">
+n(\lambda) = \sqrt{A + \frac{B}{\lambda^2}}.
+</span></p>
+<p>L’esperienza dello spettrometro a prisma si propone di misurare l’indice di rifrazione del materiale di un prisma per le diverse lunghezze d’onda di una lampada al mercurio onde determinare i parametri A e B che caratterizzano tale materiale.</p>
+<p>L’apparato sperimentale consiste in un goniometro sul quale viene posizionato il prisma. Una lampada a vapori di mercurio viene posizioneta da un lato del canocchiale con due collimatori per produrre un fascio luminoso che incide sul prisma. Il fascio di luce riflesso o rifratto viene osservato tramite un altro canocchiale. Gli angoli corrispondeni all’orientamento del supporto sul goniometro ed alla posizione dei canocchiali sono leggibili su di un nonio.</p>
+<p><img src="http://labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/figure/SchemaPrisma.png" /></p>
+<p>La nostra simulazione consiste nell’assumere dei valori verosimili dei parametri della legge di Cauchy, vedere come questi si traducono in quantità osservabili e stimare se la nostra procedura di misura e di analisi dei dati ci permette di derivare correttamente i valori utilizzati come ingresso nella simulazione e con quale incertezza.</p>
+<p>Nell’esperimento l’unico tipo di grandezze misurate sono gli angoli, per cui possiamo assumere un’incertezza uguale per tutte le misure angolari e pari a <span class="math inline">\sigma_\theta = 0.3\,\text{mrad}</span>.</p>
+<p>Nell’esperienza di laboratorio, l’angolo di apertura del prisma <span class="math inline">\alpha = 60^\circ</span> ed il materiale del prisma ha valori dei parametri di Cauchy <span class="math inline">A = 2.7</span>, <span class="math inline">B=6 \times 10^4\,\text{nm}^2</span>. Consideriamo le due lunghezze d’onda estreme della lampada al mercurio, il giallo, <span class="math inline">\lambda_1 = 579.1\,\text{nm}</span>, ed il viola, <span class="math inline">\lambda_2 = 404.7\,\text{nm}</span>.</p>
+<p>La misura sperimentale consiste nella determinazione:</p>
+<ol>
+<li>dell’angolo <span class="math inline">\theta_0</span> corrispondente al fascio non deflesso in assenza del prisma;</li>
+<li>dell’angolo <span class="math inline">\theta_m(\lambda_1)</span> corrispondente alla deviazione minima della riga del giallo;</li>
+<li>dell’angolo <span class="math inline">\theta_m(\lambda_2)</span> corrispondente alla deviazione minima della riga del viola.</li>
+</ol>
+<p>L’analisi dati consiste nella seguente procedura:</p>
+<ol>
+<li><p>determinazione degli angoli di deviazione minima:</p>
+<p><span class="math display">
+\begin{aligned}
+\delta_m(\lambda_1) &amp;= \theta_m(\lambda_1) - \theta_0,\\
+\delta_m(\lambda_2) &amp;= \theta_m(\lambda_2) - \theta_0.\\
+\end{aligned}
+</span></p></li>
+<li><p>calcolo degli indici di rifrazione <span class="math inline">n(\lambda)</span> dalla relazione</p>
+<p><span class="math display">
+n(\lambda) = \frac{\sin\frac{\delta_m(\lambda) + \alpha}2}{\sin\frac\alpha2}.
+</span></p></li>
+<li><p>calcolo dei parametri A e B dalle formule</p>
+<p><span class="math display">
+\begin{aligned}
+A &amp;= \frac{\lambda_2^2 n^2(\lambda_2) - \lambda_1^2 n^2(\lambda_1)}{\lambda_2^2 - \lambda_1^2},\\
+B &amp;= \frac{n^2(\lambda_2) - n^2(\lambda_1)}{\frac1{\lambda_2^2} - \frac1{\lambda_1^2}}.
+\end{aligned}
+</span></p></li>
+</ol>
+<h2 id="parte-i">Parte I</h2>
+<p>Costruire una classe <code>EsperimentoPrisma</code> con le seguenti caratteristiche:</p>
+<ul>
+<li><p>come data membri deve avere sia i valori veri che i valori misurati di tutte le quantità ed in più un generatore di numeri casuali <code>RandomGen</code> (vedi <a href="carminati-esercizi-10.html#esercizio-10.0---generatore-di-numeri-casuali-da-consegnare">lezione 8</a>);</p></li>
+<li><p>nel costruttore deve definire tutti i valori <em>di ingresso</em> delle quantità misurabili a partire dai parametri <span class="math inline">A</span>, <span class="math inline">B</span>, <span class="math inline">\alpha</span> e dalle lunghezze d’onda;</p>
+<p>N.B.: il valore di <span class="math inline">\theta_0</span> è arbitrario, ma, una volta definito, i <span class="math inline">\theta_m</span> sono fissati.</p></li>
+<li><p>un metodo Esegui() che effettua la misura sperimentale e determina dei valori misurati di <span class="math inline">\theta_0</span>, <span class="math inline">\theta_m(\lambda_1)</span>, <span class="math inline">\theta_m (\lambda_2)</span>;</p>
+<p>N.B.: il valore misurato di un angolo si ottiene estraendo un numero distribuito in maniera gaussiana intorno al suo valore di ingresso nella simulazione e deviazione standard <span class="math inline">\sigma_\theta</span>.</p></li>
+<li><p>i metodi necessari per accedere ai valori dei data membri, sia di ingresso che misurati..</p></li>
+</ul>
+<p>Scrivere un programma che esegua 10000 volte l’esperimento, faccia un istogramma dei valori misurati, e calcoli media e deviazione standard di tali valori.</p>
+<p>N.B.: Per il calcolo di medie e varianze potete decidere di immagazzinare i dati in un contenitore (<code>std::vector</code> o <code>Vettore</code>) e utilizzare le funzioni sviluppate nelle prime lezioni, oppure accedervi direttamente dagli istogrammi di ROOT come mostrato <a href="http://labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/lezioneROOT_1819.html#testoROOT_a2">qui</a> ma ricordandosi di aggiungere <code>histo.StatOverflows(kTRUE);</code> in modo da forzare l’utilizzo di eventuali underflow e overflow per calcoli statistici.</p>
+<h2 id="parte-ii">Parte II</h2>
+<p>Aggiungere alla classe un metodo <code>Analizza()</code> che faccia i calcoli relativi all’analisi dati ed estendere il programma in modo da eseguire l’analisi dati dei 10000 esperimenti e fare istogrammi di:</p>
+<ol>
+<li>differenza tra i valori misurati e quelli attesi di <span class="math inline">\delta m(\lambda_1)</span>$ e <span class="math inline">\delta m(\lambda_2)</span>, quello bidimensionale delle differenze per le due lunghezze d’onda, e calcolare il coefficiente di correlazione.</li>
+<li>differenza tra i valori misurati e quelli attesi di <span class="math inline">n(\lambda_1)</span> e <span class="math inline">n(\lambda_2)</span>, quello bidimensionale delle differenze per le due lunghezze d’onda, e calcolare il coefficiente di correlazione.</li>
+<li>differenza tra i valori misurati e quelli attesi di <span class="math inline">A</span> e <span class="math inline">B</span>, quello bidimensionale delle differenze, e calcolare il coefficiente di correlazione.</li>
+</ol>
+<p>In tutti i casi, se possibile, confrontate il risultato della simulazione con quello ottenuto dalla propagazione degli errori.</p>
+<h2 id="la-classe-esperimentoprisma">La classe EsperimentoPrisma</h2>
+<p>La classe <code>EsperimentoPrisma</code> deve contenere al suo interno un generatore di numeri casuali per la simulazione del processo di misura, tutti i parametri che definiscono l’esperimento e, per le quantità misurate, sia il valore assunto nella simulazione, che il valore ottenuto dal processo di esecuzione ed analisi dati dell’esperimento.</p>
+<p>Il suo header file, potrà pertanto essere del tipo:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#pragma once</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;randomgen.h&quot;</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> EsperimentoPrisma <span class="op">{</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span><span class="op">:</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  EsperimentoPrisma<span class="op">();</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="op">~</span>EsperimentoPrisma<span class="op">();</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="dt">void</span> Esegui<span class="op">();</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="dt">void</span> Analizza<span class="op">();</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="kw">private</span><span class="op">:</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  <span class="co">// generatore di numeri casuali</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>  RandomGen <span class="va">m_rgen</span><span class="op">;</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>  <span class="co">// parametri dell&#39;apparato sperimentale</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> <span class="va">m_lambdal</span><span class="op">,</span> <span class="va">m_lambda2</span><span class="op">,</span> <span class="va">m_alpha</span><span class="op">,</span> <span class="va">m_sigmat</span><span class="op">;</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>  <span class="co">// valori delle quantita&#39; misurabili :</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>  <span class="co">// _input    : valori assunti come ipotesi nella simulazione</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>  <span class="co">// _misurato : valore dopo la simulazione di misura</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> <span class="va">m_A_input</span><span class="op">,</span> <span class="va">m_A_misurato</span><span class="op">;</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> <span class="va">m_B_input</span><span class="op">,</span> <span class="va">m_B_misurato</span><span class="op">;</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> <span class="va">m_n1_input</span><span class="op">,</span> <span class="va">m_n1_misurato</span><span class="op">;</span></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> <span class="va">m_n2_input</span><span class="op">,</span> <span class="va">m_n2_misurato</span><span class="op">;</span></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> <span class="va">m_th0_input</span><span class="op">,</span> <span class="va">m_th0_misurato</span><span class="op">;</span></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> <span class="va">m_thl_input</span><span class="op">,</span> <span class="va">m_thl_misurato</span><span class="op">;</span></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> <span class="va">m_th2_input</span><span class="op">,</span> <span class="va">m_th2_misurato</span><span class="op">;</span></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code></pre></div>
+<p>N.B.: in questo header mancano i metodi <code>Get…</code> per accedere ai data membri.</p>
+<p>La configurazione dell’esperimento, con il calcolo di tutti i valori assunti per le quantità misurabili, può venire fatta nel costruttore di default della classe, che in questo caso risulta più complicato del solito:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>EsperimentoPrisma<span class="op">:</span> <span class="op">:</span>EsperimentoPrisma<span class="op">()</span> <span class="op">:</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="va">m_rgen</span><span class="op">{</span><span class="dv">1</span><span class="op">},</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="va">m_lambdal</span><span class="op">{</span><span class="fl">579.1e-9</span><span class="op">},</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="va">m_lambda2</span><span class="op">{</span><span class="fl">404.7e-9</span><span class="op">},</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="va">m_alpha</span><span class="op">{</span><span class="dv">60</span> <span class="op">*</span> M_PI <span class="op">/</span> <span class="dv">180</span><span class="op">},</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="va">m_sigmat</span><span class="op">{</span><span class="fl">0.3e-3</span><span class="op">},</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="va">m_A_input</span><span class="op">{</span><span class="fl">2.7</span><span class="op">},</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="va">m_B_input</span><span class="op">{</span><span class="fl">60000E-18</span><span class="op">}</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="co">// calcolo degli indici di rifrazione attesi</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  <span class="va">m_nl_input</span> <span class="op">=</span> sqrt<span class="op">(</span><span class="va">m_A_input</span> <span class="op">+</span> <span class="va">m_B_input</span> <span class="op">/</span> <span class="op">(</span><span class="va">m_lambdal</span> <span class="op">*</span> <span class="va">m_lambdal</span><span class="op">));</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>  <span class="va">m_n2_input</span> <span class="op">=</span> sqrt<span class="op">(</span><span class="va">m_A_input</span> <span class="op">+</span> <span class="va">m_B_input</span> <span class="op">/</span> <span class="op">(</span><span class="va">m_lambda2</span> <span class="op">*</span> <span class="va">m_lambda2</span><span class="op">));</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>  <span class="co">// theta0 e&#39; arbitrario, scelgo M_PI/2.</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>  <span class="va">m_th0_input</span> <span class="op">=</span> M_P1 <span class="op">/</span> <span class="dv">2</span><span class="op">;</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>  <span class="co">// determino thetal e theta2</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> dm<span class="op">;</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>  dm <span class="op">=</span> <span class="dv">2</span> <span class="op">*</span> asin<span class="op">(</span><span class="va">m_nl_input</span> <span class="op">*</span> sin<span class="op">(</span><span class="fl">0.5</span> <span class="op">*</span> <span class="va">m_alpha</span><span class="op">))</span> <span class="op">-</span> <span class="va">m_alpha</span><span class="op">;</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>  <span class="va">m_th1_input</span> <span class="op">=</span> <span class="va">m_th0_input</span> <span class="op">+</span> dm<span class="op">;</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>  dm <span class="op">=</span> <span class="dv">2</span> <span class="op">*</span> asin<span class="op">(</span><span class="va">m_n2_input</span> <span class="op">*</span> sin<span class="op">(</span><span class="fl">0.5</span> <span class="op">*</span> <span class="va">m_alpha</span><span class="op">))</span> <span class="op">-</span> <span class="va">m_alpha</span><span class="op">;</span></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>  <span class="va">m_th2_input</span> <span class="op">=</span> <span class="va">m_th0_input</span> <span class="op">+</span> dm<span class="op">;</span></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p>Notate l’uso della lista di inizializzazione nel costruttore: questa permette di inizializzare direttamente i valori dei data membri anziché procedere all’assegnazione dei valori nel costruttore dopo che i data membri siano stati costruiti. Nel nostro caso particolare diventa utile per inizializzare l’oggetto <code>m_rgen</code> invocando il costruttore opportuno (altrimenti avrebbe usato il costruttore senza argomenti, che nel nostro caso non esiste). Potete trovare una buona spiegazione dell’utilizzo delle liste di inizializzazione <a href="https://www.learncpp.com/cpp-tutorial/8-5a-constructor-member-initializer-lists/">qui</a>, ma erano state già spiegate durante le <a href="tomasi-lezione-04.html#inizializzazione-di-variabili-membro">esercitazioni</a>.</p>
+<h2 id="istrogrammi-bidimensionali">Istrogrammi bidimensionali</h2>
+<p>Per verificare le correlazioni tra due variabili, è utile utilizzare istogrammi bidimensionali, in cui i canali sono definiti da range di valori sia di una variabile che dell’altra.</p>
+<p>Per costruire questi istogrammi, si può usare la classe <code>TH2F</code> di ROOT. Questa ha un costruttore che premette di dividere in canali sia la coordinata <span class="math inline">x</span> che la <span class="math inline">y</span> dell’istogramma:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>TH2F<span class="op">::</span>TH2F<span class="op">(</span><span class="dt">char</span> <span class="op">*</span> nome<span class="op">,</span> <span class="dt">char</span> <span class="op">*</span> titolo<span class="op">,</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>           <span class="dt">int</span> canali_x<span class="op">,</span> <span class="dt">double</span> xmin<span class="op">,</span> <span class="dt">double</span> xmax<span class="op">,</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>           <span class="dt">int</span> canali_y<span class="op">,</span> <span class="dt">double</span> ymin<span class="op">,</span> <span class="dt">double</span> ymax<span class="op">);</span></span></code></pre></div>
+<p>La classe <code>TH2F</code> ha gli stessi metodi <code>Fill</code> e <code>Draw</code> della classe <code>TH1F</code>; l’unica differenza è che ora <code>Fill</code> ha bisogno della coppia completa di valori per decidere il canale in cui viene collocato l’evento:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>TH2F<span class="op">::</span>Fill<span class="op">(</span><span class="dt">double</span> x<span class="op">,</span> <span class="dt">double</span> y<span class="op">);</span></span></code></pre></div>
+<h2 id="calcolo-del-coefficiente-di-correlazione">Calcolo del coefficiente di correlazione</h2>
+<p>Il coefficiente di correlazione <span class="math inline">\rho(x, y)</span> tra due variabili <span class="math inline">x</span> e <span class="math inline">y</span>, può venire espresso come <span class="math display">
+\rho(x, y) = \frac{\left&lt;x y\right&gt; - \left&lt;x\right&gt;\left&lt;y\right&gt;}{\sigma_x\cdot\sigma_y}.
+</span> Si noti che dalla relazione: <span class="math display">
+\sigma_x^2 = \left&lt;x^2\right&gt; - \left&lt;x\right&gt;^2
+</span> risulta che può essere più conveniente nel ciclo di esperimenti calcolare le sommatorie di <span class="math inline">x</span>, <span class="math inline">y</span>, <span class="math inline">x^2</span>, <span class="math inline">y^2</span> e <span class="math inline">x\cdot y</span>, ed al termine del ciclo effettuare le medie e trovare incertezze e correlazioni. Il tutto non richiede strettamente di immagazinare tutti i dati dei 10000 esperimenti.</p>
+<h2 id="risultati-attesi">Risultati attesi</h2>
+<p>Nella seguente tabella sono riportati i valori numerici attesi per le varie quantità ed i grafici ottenuti per una simulazione. Si noti come le varie quantità sono fortemente correlate.</p>
+<table>
+<thead>
+<tr>
+<td width="25%">
+Parametri
+</td>
+<td width="75%">
+Grafici
+</td>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<span class="math display">
+\begin{aligned}
+\theta_0 &amp;= 1.5708\quad\text{(arbitrario)},\\
+\theta_1 &amp;= 2.5494,\\
+\theta_2 &amp;= 2.6567,\\
+\sigma(\theta_i) &amp;= 0.0003,\quad i = 0, 1, 2.
+\end{aligned}
+</span>
+</td>
+<td>
+<img src="http://labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/figure/delta.png" />
+</td>
+</tr>
+<tr>
+<td>
+<span class="math display">
+\begin{aligned}
+\delta_{m, 1} &amp;= 0.97860\,\text{rad}\\
+\delta_{m, 2} &amp;= 1.08594\,\text{rad}\\
+\sigma(\delta_{m, i}) &amp;= 0.00043\,\text{rad},\\
+\rho(\delta_{m, 1}, \delta_{m, 2}) &amp;= 50\,\%
+\end{aligned}
+</span>
+</td>
+<td>
+<img src="http://labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/figure/nrifr.png" />
+</td>
+</tr>
+<tr>
+<td>
+<span class="math display">
+\begin{aligned}
+n_1 &amp;= 1.69674\\
+\sigma(n_1) &amp;= 0.00022\\
+n_2 &amp;= 1.75110\\
+\sigma(n_2) &amp;= 0.00021\\
+\rho(n_1, n_2) &amp;= 50\,\%.
+\end{aligned}
+</span>
+</td>
+<td>
+<img src="http://labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/figure/AB.png" />
+</td>
+</tr>
+<tr>
+<td>
+<span class="math display">
+\begin{aligned}
+A &amp;= 2.70002\\
+\sigma(A) &amp;= 0.0013\\
+B &amp;= 60000\,\text{nm}^2\\
+\sigma(B) &amp;= 240\,\text{nm}^2\\
+\rho(A,B) &amp;= -87\,\%.
+\end{aligned}
+</span>
+</td>
+<td>
+<img src="http://labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/figure/AB.png" />
+</td>
+</tr>
+</tbody>
+</table>
+<h1 id="esercizio-11.1">Esercizio 11.1 - Attrito viscoso (facoltativo)</h1>
+<p>Svolgere il tema d’esame sulla simulazione di un esperimento per la misura della viscosità di un materiale: <a href="http://labmaster.mi.infn.it/Laboratorio2/Compiti/Compito_lab2_pre09_6.pdf">preappello del gennaio 2009, esercizio 6</a>.</p>                    
+                </div>
+            </div>
+
+            <script src="https://vjs.zencdn.net/5.4.4/video.js"></script>
+        </div>
+    </body>
+</html>

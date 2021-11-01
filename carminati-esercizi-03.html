@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html  lang="it-IT"  dir="ltr">
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Lezione 3: Analisi dei dati (template e vector)</title>
+        <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+        <link rel="apple-touch-icon-precomposed" href="images/apple-touch-icon.png">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/2.26.4/css/uikit.gradient.css">
+
+        <!-- <link rel="stylesheet" href="style.css"> -->
+        <link rel="stylesheet" href="https://cdn.rawgit.com/diversen/pandoc-uikit/master/style.css">
+        <link href="https://vjs.zencdn.net/5.4.4/video-js.css" rel="stylesheet" />
+        <script src="https://code.jquery.com/jquery-2.2.1.min.js"></script>
+        <!-- <script src="uikit.js"></script> -->
+        <script src="https://cdn.rawgit.com/diversen/pandoc-uikit/master/uikit.js"></script>
+        <!-- <script src="scripts.js"></script> -->
+        <script src="https://cdn.rawgit.com/diversen/pandoc-uikit/master/scripts.js"></script>
+        <!-- <script src="jquery.sticky-kit.js "></script> -->
+        <script src="https://cdn.rawgit.com/diversen/pandoc-uikit/master/jquery.sticky-kit.js"></script>
+
+        <meta name="generator" content="pandoc-uikit" />
+                <meta name="author" content="Leonardo Carminati" />
+                <meta name="author" content="Maurizio Tomasi" />
+                        <title>Lezione 3: Analisi dei dati (template e vector)</title>
+        <style type="text/css">code{white-space: pre;}</style>
+                        <style type="text/css">
+            pre > code.sourceCode { white-space: pre; position: relative; }
+            pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+            pre > code.sourceCode > span:empty { height: 1.2em; }
+            .sourceCode { overflow: visible; }
+            code.sourceCode > span { color: inherit; text-decoration: inherit; }
+            div.sourceCode { margin: 1em 0; }
+            pre.sourceCode { margin: 0; }
+            @media screen {
+            div.sourceCode { overflow: auto; }
+            }
+            @media print {
+            pre > code.sourceCode { white-space: pre-wrap; }
+            pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+            }
+            pre.numberSource code
+              { counter-reset: source-line 0; }
+            pre.numberSource code > span
+              { position: relative; left: -4em; counter-increment: source-line; }
+            pre.numberSource code > span > a:first-child::before
+              { content: counter(source-line);
+                position: relative; left: -1em; text-align: right; vertical-align: baseline;
+                border: none; display: inline-block;
+                -webkit-touch-callout: none; -webkit-user-select: none;
+                -khtml-user-select: none; -moz-user-select: none;
+                -ms-user-select: none; user-select: none;
+                padding: 0 4px; width: 4em;
+                color: #aaaaaa;
+              }
+            pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+            div.sourceCode
+              {   }
+            @media screen {
+            pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+            }
+            code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+            code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+            code span.at { color: #7d9029; } /* Attribute */
+            code span.bn { color: #40a070; } /* BaseN */
+            code span.bu { } /* BuiltIn */
+            code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+            code span.ch { color: #4070a0; } /* Char */
+            code span.cn { color: #880000; } /* Constant */
+            code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+            code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+            code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+            code span.dt { color: #902000; } /* DataType */
+            code span.dv { color: #40a070; } /* DecVal */
+            code span.er { color: #ff0000; font-weight: bold; } /* Error */
+            code span.ex { } /* Extension */
+            code span.fl { color: #40a070; } /* Float */
+            code span.fu { color: #06287e; } /* Function */
+            code span.im { } /* Import */
+            code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+            code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+            code span.op { color: #666666; } /* Operator */
+            code span.ot { color: #007020; } /* Other */
+            code span.pp { color: #bc7a00; } /* Preprocessor */
+            code span.sc { color: #4070a0; } /* SpecialChar */
+            code span.ss { color: #bb6688; } /* SpecialString */
+            code span.st { color: #4070a0; } /* String */
+            code span.va { color: #19177c; } /* Variable */
+            code span.vs { color: #4070a0; } /* VerbatimString */
+            code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+        </style>
+                                               
+    </head>
+
+    <body oncopy="return false" oncut="return false" onpaste="return false">
+
+
+        <div class="uk-container uk-container-center uk-margin-top uk-margin-large-bottom">
+
+                        <div class="uk-grid" data-uk-grid-margin>
+                <div class="uk-width-1-1">
+                    <h1 class="uk-heading-large">Lezione 3: Analisi dei dati (template e vector)</h1>
+                                        <h3 class="uk-heading-large">A.A. 2021−2022</p></h3>
+                                                            <p class="uk-text-large">Leonardo Carminati</p>
+                                        <p class="uk-text-large">Maurizio Tomasi</p>
+                                    </div>
+            </div>
+            
+            <div class="uk-grid" data-uk-grid-margin >          
+                <div class="uk-width-medium-1-4">
+                    <div class="uk-overflow-container" data-uk-sticky="{top:25,media: 768}">
+                        <div class="uk-panel uk-panel-box menu-begin" >
+
+                                                        <ul>
+                                                        <li><a href="#funzioni-e-classi-template">Funzioni e classi template</a></li>
+                                                        <li><a href="#esercizio-3.0">Esercizio 3.0 - Evoluzione della classe <code>Vettore</code> in una classe template (da consegnare)</a>
+                                                        <ul>
+                                                        <li><a href="#generalizzazione-classe-vettore">Generalizzazione classe <code>Vettore</code></a></li>
+                                                        <li><a href="#adeguamento-funzioni">Adeguamento funzioni</a></li>
+                                                        <li><a href="#struttura-del-programma">Struttura del programma</a></li>
+                                                        <li><a href="#commenti-sulla-compilazione">Commenti sulla compilazione</a></li>
+                                                        </ul></li>
+                                                        <li><a href="#esercizio-3.1">Esercizio 3.1 - Codice di analisi dati utilizzando la classe <code>vector</code> (da consegnare)</a>
+                                                        <ul>
+                                                        <li><a href="#adeguamento-funzioni-1">Adeguamento funzioni</a></li>
+                                                        <li><a href="#il-codice-principale">Il codice principale</a></li>
+                                                        <li><a href="#il-makefile">Il Makefile</a></li>
+                                                        <li><a href="#riempire-un-vettore-da-file">Riempire un vettore da file</a></li>
+                                                        <li><a href="#approfondimento-sulla-stl-facoltativo">Approfondimento sulla STL (facoltativo)</a></li>
+                                                        </ul></li>
+                                                        <li><a href="#esercizio-3.2">Esercizio 3.2 - Analisi dati con vector e visualizzazione dei dati (da consegnare)</a>
+                                                        <ul>
+                                                        <li><a href="#programma-principale">Programma principale</a></li>
+                                                        <li><a href="#makefile-modificato">Makefile modificato</a></li>
+                                                        </ul></li>
+                                                        </ul>
+                            
+                        </div>
+                    </div>
+                </div>
+
+                <div class="uk-width-medium-3-4">
+<p>[La pagina con la spiegazione originale degli esercizi si trova qui: <a href="http://labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/lezione3_1819.html">labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/lezione3_1819.html</a>.]</p>
+<p>In questa terza lezione affronteremo di nuovo gli stessi problemi della prima e seconda lezione (lettura di dati da un file, calcolo di media e mediana) utilizzando una evoluzione del contenitore di dati <code>Vettore</code>: possiamo rendere questa classe più flessibile in modo che sia capace di immagazzinare qualsiasi tipo di dato ( e non necessariamente dei numeri <code>double</code>)? Nella seconda parte spingeremo ancora oltre la generalizzazione imparando ad usare il contenitore vector della <a href="http://www.cplusplus.com/reference/stl/">STL</a>. Quindi, in sintesi:</p>
+<ul>
+<li>Tipo di dato da leggere è constituito da numeri <code>double</code>.</li>
+<li>Tipo di contenitore di dati è una generalizzazione della classe <code>Vettore</code> della lezione 2 o il contenitore vector della STL.</li>
+<li>Operazioni sui dati vengono svolte mediante funzioni che agiscono su oggetti di tipo <code>Vettore</code> o <code>vector</code>.</li>
+</ul>
+<p>Per incominciare, ripassiamo brevemente cosa sono le funzioni e le classi template.</p>
+<h2 id="funzioni-e-classi-template">Funzioni e classi template</h2>
+<p>Le funzioni o le classi <code>template</code> sono costruite in modo tale che possano operare con tipi generici. Cosa significa? Consideriamo la nostra classe <code>Vettore</code>: essa è disegnata per immagazzinare un set di numeri <code>double</code>. Ma cosa ci vieta di renderla più generale e fare in modo che sia in grado di contenere oggetti di tipo generico <code>T</code>? Allo stesso modo possiamo pensare di generalizzare le funzioni che abbiamo scritto in modo che possano lavorare su oggetti generici. Considerate la funzione <code>selection_sort</code>: l’algoritmo di riordinamento è valido per qualunque tipo di oggetto per cui sia definita una relazione d’ordine tra due elementi.</p>
+<p>Vediamo un paio di esempi.</p>
+<p>Supponiamo di voler dichiarare una classe <code>Vettore</code> che al suo interno possa immagazzinare oggetti generici di tipo <code>T</code>. Nell’<em>header file</em> dovrò modificare la dichiarazione della classe in questo modo:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">template</span> <span class="op">&lt;</span><span class="kw">typename</span> T<span class="op">&gt;</span> <span class="kw">class</span> Vettore <span class="op">{</span> <span class="op">...</span> <span class="op">};</span></span></code></pre></div>
+<p>mentre quando dovrò creare nel main un oggetto di tipo <code>Vettore</code> per immagazzinare dei <code>double</code> farò:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>Vettore <span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> v<span class="op">;</span></span></code></pre></div>
+<p>L’istruzione indicata qui sopra crea effettivamente una istanza della classe <code>Vettore</code> specializzata per lavorare con dei <code>double</code>. Analogamente se pensiamo per esempio alla funzione <code>CalcolaMedia()</code> possiamo scrivere</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">template</span> <span class="op">&lt;</span><span class="kw">typename</span> T<span class="op">&gt;</span> <span class="dt">double</span> CalcolaMedia <span class="op">(</span><span class="at">const</span> Vettore<span class="op">&lt;</span>T<span class="op">&gt;</span> <span class="op">&amp;</span>v<span class="op">,</span> <span class="dt">size_t</span> ndata<span class="op">)</span> <span class="op">{...}</span></span></code></pre></div>
+<p>e possiamo quindi utilizzare la funzione <code>CalcolaMedia</code> nel <code>main</code> nel modo seguente:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>cout <span class="op">&lt;&lt;</span> <span class="st">&quot;media    = &quot;</span> <span class="op">&lt;&lt;</span> CalcolaMedia<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;(</span> v  <span class="op">)</span> <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co">// È valido anche omettere `&lt;double&gt;`, perché il compilatore può</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co">// capire da solo cosa mettere in `&lt;…&gt;` basandosi sul tipo di `v`</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co">// cout &lt;&lt; &quot;media    = &quot; &lt;&lt; CalcolaMedia( v  ) &lt;&lt; endl;</span></span></code></pre></div>
+<p>Si possono trovare più dettagli a <a href="http://www.cplusplus.com/doc/oldtutorial/templates/">questo link</a>.</p>
+<h1 id="esercizio-3.0">Esercizio 3.0 - Evoluzione della classe <code>Vettore</code> in una classe template (da consegnare)</h1>
+<p>Proviamo a rendere la classe <code>Vettore</code> della lezione scorsa una classe <code>template</code>, in modo che possa in linea di principio immagazzinare oggeti di un tipo generico <code>T</code>. Notate che quando usiamo classi o funzioni template non applichiamo la separazione tra header file (<code>.h</code>) e file di implementazione (<code>.cpp</code>), ma codifichiamo tutto dentro l’<em>header file</em>. Questo perché non sarebbe possibile per il compilatore compilare separatamente un set di funzioni o una classe senza sapere i tipi esatti con cui verranno utilizzati.</p>
+<p>Vediamo come fare passo passo.</p>
+<h2 id="generalizzazione-classe-vettore">Generalizzazione classe <code>Vettore</code></h2>
+<p>Provate a lavorare sulla generalizzazione della classe <code>Vettore</code> in modo che diventi un contenitore di oggetti generici di tipo <code>T</code>. Provate a completare voi le parti mancanti. Ricordatevi che in questo caso particolare tutto va fatto nell’<em>header file</em> della classe.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#pragma once</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;cassert&gt;</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="kw">using</span> <span class="kw">namespace</span> std<span class="op">;</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="kw">template</span> <span class="op">&lt;</span><span class="kw">typename</span> T<span class="op">&gt;</span> <span class="kw">class</span> Vettore <span class="op">{</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span><span class="op">:</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>  Vettore<span class="op">()</span> <span class="op">{</span> <span class="co">// costruttore senza argomenti</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>      <span class="co">// ...</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>  Vettore<span class="op">(</span><span class="dt">size_t</span> N<span class="op">)</span> <span class="op">{</span> <span class="co">// costruttore</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>      <span class="co">// ..</span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>  Vettore<span class="op">(</span><span class="at">const</span> Vettore<span class="op">&amp;</span> V<span class="op">)</span> <span class="op">{</span> <span class="co">// copy constructor</span></span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>      <span class="co">// ...</span></span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>  Vettore<span class="op">&amp;</span> <span class="kw">operator</span><span class="op">=(</span><span class="at">const</span> Vettore<span class="op">&amp;</span> V<span class="op">)</span> <span class="op">{</span> <span class="co">// operatore di assegnazione</span></span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>      <span class="co">// ...</span></span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>  <span class="op">~</span>Vettore<span class="op">()</span> <span class="op">{</span> <span class="kw">delete</span> <span class="op">[]</span> <span class="va">m_v</span><span class="op">;</span>  <span class="op">}</span></span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a>  <span class="dt">size_t</span> GetN<span class="op">()</span> <span class="at">const</span> <span class="op">{</span> <span class="cf">return</span> <span class="va">m_N</span><span class="op">;</span> <span class="op">}</span></span>
+<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a>  <span class="dt">void</span> SetComponent<span class="op">(</span>size i <span class="op">,</span> T a<span class="op">)</span> <span class="op">{</span> <span class="co">// modifica una componente</span></span>
+<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a>      <span class="co">// ...</span></span>
+<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-34"><a href="#cb5-34" aria-hidden="true" tabindex="-1"></a>  T GetComponent<span class="op">(</span><span class="dt">size_t</span> i <span class="op">)</span> <span class="at">const</span> <span class="op">{</span> <span class="co">// accedi ad una componente</span></span>
+<span id="cb5-35"><a href="#cb5-35" aria-hidden="true" tabindex="-1"></a>      <span class="co">// ...</span></span>
+<span id="cb5-36"><a href="#cb5-36" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb5-37"><a href="#cb5-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-38"><a href="#cb5-38" aria-hidden="true" tabindex="-1"></a>  <span class="dt">void</span> Scambia<span class="op">(</span><span class="dt">size_t</span> primo<span class="op">,</span> <span class="dt">size_t</span> secondo <span class="op">)</span> <span class="op">{</span> <span class="co">// scambia due elementi</span></span>
+<span id="cb5-39"><a href="#cb5-39" aria-hidden="true" tabindex="-1"></a>      <span class="co">// ...</span></span>
+<span id="cb5-40"><a href="#cb5-40" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb5-41"><a href="#cb5-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-42"><a href="#cb5-42" aria-hidden="true" tabindex="-1"></a>  T<span class="op">&amp;</span> <span class="kw">operator</span><span class="op">[](</span><span class="dt">size_t</span> i <span class="op">)</span> <span class="op">{</span> <span class="co">// accede all&#39;elemento i-esimo</span></span>
+<span id="cb5-43"><a href="#cb5-43" aria-hidden="true" tabindex="-1"></a>      <span class="co">// ...</span></span>
+<span id="cb5-44"><a href="#cb5-44" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb5-45"><a href="#cb5-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-46"><a href="#cb5-46" aria-hidden="true" tabindex="-1"></a><span class="kw">private</span><span class="op">:</span></span>
+<span id="cb5-47"><a href="#cb5-47" aria-hidden="true" tabindex="-1"></a>  <span class="dt">size_t</span> <span class="va">m_N</span><span class="op">;</span></span>
+<span id="cb5-48"><a href="#cb5-48" aria-hidden="true" tabindex="-1"></a>  T <span class="op">*</span> <span class="va">m_v</span><span class="op">;</span></span>
+<span id="cb5-49"><a href="#cb5-49" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code></pre></div>
+<h2 id="adeguamento-funzioni">Adeguamento funzioni</h2>
+<p>Analogamente a quanto fatto sopra, adattiamo il file di funzioni in modo tale che possano lavorare con contenitori <code>Vettore</code> di tipo <code>template</code>. Come già ricordato, tutto deve essere codificato nell’<em>header file</em> della classe e non nel file <code>.cpp</code>.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;fstream&gt;</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;Vettore.h&quot;</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="kw">using</span> <span class="kw">namespace</span> std<span class="op">;</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="kw">template</span> <span class="op">&lt;</span><span class="kw">typename</span> T<span class="op">&gt;</span> Vettore<span class="op">&lt;</span>T<span class="op">&gt;</span> Read <span class="op">(</span><span class="dt">size_t</span> N <span class="op">,</span> <span class="at">const</span> <span class="dt">char</span> <span class="op">*</span> filename<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  ifstream in<span class="op">{</span>filename<span class="op">};</span>   <span class="co">// Parentesi graffe: uniform initialization</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  Vettore<span class="op">&lt;</span>T<span class="op">&gt;</span> v<span class="op">{</span>N<span class="op">};</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span><span class="op">(!</span> in<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>      cerr <span class="op">&lt;&lt;</span> <span class="st">&quot;Il file di input non esiste</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">;</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>      exit<span class="op">(</span><span class="dv">1</span><span class="op">);</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> <span class="op">(</span><span class="dt">size_t</span> i<span class="op">{};</span> i <span class="op">&lt;</span> N<span class="op">;</span> i<span class="op">++)</span> <span class="op">{</span></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>      T val<span class="op">{};</span></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>      in <span class="op">&gt;&gt;</span> val <span class="op">;</span></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>      v<span class="op">.</span>SetComponent<span class="op">(</span>i<span class="op">,</span> val<span class="op">);</span></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>      <span class="cf">if</span><span class="op">(</span>in<span class="op">.</span>eof<span class="op">())</span> <span class="op">{</span></span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>        cerr <span class="op">&lt;&lt;</span> <span class="st">&quot;Fine del file inattesa</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">;</span></span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>        exit<span class="op">(</span><span class="dv">1</span><span class="op">);</span></span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>      <span class="op">}</span></span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> v<span class="op">;</span></span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a><span class="kw">template</span> <span class="op">&lt;</span><span class="kw">typename</span> T<span class="op">&gt;</span> <span class="dt">void</span> Print<span class="op">(</span><span class="at">const</span> Vettore<span class="op">&lt;</span>T<span class="op">&gt;</span> <span class="op">&amp;</span> v<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> <span class="op">(</span><span class="dt">size_t</span> k<span class="op">{};</span> k <span class="op">&lt;</span> v<span class="op">.</span>GetN<span class="op">();</span> k<span class="op">++)</span> <span class="op">{</span></span>
+<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a>      cout <span class="op">&lt;&lt;</span> v<span class="op">.</span>GetComponent<span class="op">(</span>k<span class="op">)</span> <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span>
+<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a><span class="kw">template</span> <span class="op">&lt;</span><span class="kw">typename</span> T<span class="op">&gt;</span> <span class="dt">void</span> Print<span class="op">(</span><span class="at">const</span> Vettore<span class="op">&lt;</span>T<span class="op">&gt;</span> <span class="op">&amp;</span> v<span class="op">,</span> <span class="at">const</span> <span class="dt">char</span> <span class="op">*</span> filename<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a>  ofstream out<span class="op">(</span>filename<span class="op">);</span></span>
+<span id="cb6-36"><a href="#cb6-36" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span><span class="op">(!</span> out<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb6-37"><a href="#cb6-37" aria-hidden="true" tabindex="-1"></a>    cerr <span class="op">&lt;&lt;</span> <span class="st">&quot;Non posso creare il file &quot;</span> <span class="op">&lt;&lt;</span> filename <span class="op">&lt;&lt;</span> <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">;</span></span>
+<span id="cb6-38"><a href="#cb6-38" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span><span class="op">;</span></span>
+<span id="cb6-39"><a href="#cb6-39" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb6-40"><a href="#cb6-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-41"><a href="#cb6-41" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> <span class="op">(</span><span class="dt">size_t</span> i<span class="op">{};</span> i <span class="op">&lt;</span> v<span class="op">.</span>GetN<span class="op">();</span> i<span class="op">++)</span> <span class="op">{</span></span>
+<span id="cb6-42"><a href="#cb6-42" aria-hidden="true" tabindex="-1"></a>      out <span class="op">&lt;&lt;</span> v<span class="op">.</span>GetComponent<span class="op">(</span>i<span class="op">)</span> <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span>
+<span id="cb6-43"><a href="#cb6-43" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb6-44"><a href="#cb6-44" aria-hidden="true" tabindex="-1"></a>  out<span class="op">.</span>close<span class="op">(</span>Q<span class="op">);</span></span>
+<span id="cb6-45"><a href="#cb6-45" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p>Provate voi ad modificare le funzioni che mancano.</p>
+<h2 id="struttura-del-programma">Struttura del programma</h2>
+<p>Ecco l’aspetto che potrebbe avere il <code>main</code>: come vedete, usiamo il contenitore <code>Vettore</code> per immagazzinare un set di <code>double</code>.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;cstdlib&gt;</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;fstream&gt;</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;vettore.h&quot;</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;funzioni.h&quot;</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main <span class="op">(</span><span class="dt">int</span> argc<span class="op">,</span> <span class="at">const</span> <span class="dt">char</span> <span class="op">*</span> argv<span class="op">[])</span> <span class="op">{</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span><span class="op">(</span>argc <span class="op">&lt;</span> <span class="dv">3</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>      cerr <span class="op">&lt;&lt;</span> <span class="st">&quot;Uso del programma: &quot;</span> <span class="op">&lt;&lt;</span> argv<span class="op">[</span><span class="dv">0</span><span class="op">]</span> <span class="op">&lt;&lt;</span> <span class="st">&quot; &lt;n_data&gt; &lt;filename&gt;</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">;</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>      <span class="cf">return</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>  <span class="dt">int</span> ndata<span class="op">{</span>atoiCargv<span class="op">[</span><span class="dv">1</span><span class="op">])};</span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">const</span> <span class="dt">char</span> <span class="op">*</span> filename<span class="op">{</span>argv<span class="op">[</span><span class="dv">2</span><span class="op">]};</span></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>  <span class="co">// usiamo il contenitore Vettore per immagazzinare double !</span></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>  Vettore <span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> v<span class="op">{</span>Read<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;(</span>ndata<span class="op">,</span> filename<span class="op">)};</span></span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>  Print<span class="op">(</span>v<span class="op">);</span></span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>  cout <span class="op">&lt;&lt;</span> <span class="st">&quot;media = &quot;</span> <span class="op">&lt;&lt;</span> CalcolaMedia<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;(</span> v <span class="op">)</span> <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>  cout <span class="op">&lt;&lt;</span> <span class="st">&quot;varianza = &quot;</span> <span class="op">&lt;&lt;</span> CalcolaVarianza<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;(</span> v <span class="op">)</span> <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>  cout <span class="op">&lt;&lt;</span> <span class="st">&quot;mediana = &quot;</span> <span class="op">&lt;&lt;</span> CalcolaMediana<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;(</span> v <span class="op">)</span> <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a>  Print<span class="op">(</span>v<span class="op">);</span></span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<h2 id="commenti-sulla-compilazione">Commenti sulla compilazione</h2>
+<p>Nel caso si utilizzino classi o funzioni <code>template</code>, la dichiarazione e l’implementazione vanno codificate entrambe nell’<em>header file</em>. Come si potrebbe infatti compilare una classe template senza sapere con che tipi di dato verrà utilizzata? Di conseguenza la compilazione si riduce alla singola istruzione:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode makefile"><code class="sourceCode makefile"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="dt">CXXFLAGS </span><span class="ch">=</span><span class="st"> -g -Wall --pedantic -std=c++11</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="dv">esercizio3.0:</span><span class="dt"> esercizio3.0.cpp funzioni.h Vettore.h</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    g++ -o <span class="ch">$@</span> esercizio3.0.cpp <span class="ch">$(</span><span class="dt">CXXFLAGS</span><span class="ch">)</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="dv">clean:</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    rm -f esercizio3.0 *.o</span></code></pre></div>
+<h1 id="esercizio-3.1">Esercizio 3.1 - Codice di analisi dati utilizzando la classe <code>vector</code> (da consegnare)</h1>
+<ul>
+<li>Vediamo come possiamo ora fare uso di un contenitore “ufficiale” del c++, la classe <code>vector</code>. Questo particolare contenitore non è altro che una classe <code>template</code> sulla falsariga della nostra <code>Vettore</code>. La particolarità di questa classe sta nel fatto che la sua dimensione può non essere nota a priori: la costruzione del vettore può avvenire “aggiungendo in coda” con <code>push_back(x)</code> gli elementi <code>x</code> man mano che si rendono disponibili. Vedremo nel seguito alcuni esempi; è possibile trovare più materiale in <a href="http://www.cplusplus.com/reference/vector/vector/">questa referenza</a>.</li>
+<li>Notate anche che per contenitori della STL (come <code>vector</code>) che stiamo andando ad utilizzare, esistono delle funzioni standard che possono essere utilizzate (vedi nel nostro esempio la funzione <code>sort</code>).</li>
+</ul>
+<p>Vediamo passo passo come si può procedere.</p>
+<h2 id="adeguamento-funzioni-1">Adeguamento funzioni</h2>
+<p>Analogamente a quanto fatto sopra, adattiamo il file di funzioni in modo che ciascuna possa lavorare con contenitori <code>vector</code>. Come già ricordato, tutto deve essere codificato nell’<em>header file</em> della classe. Vediamo qualche funzione (quelle mancanti dovreste essere in grado di farle da soli):</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;algorithm&gt;</span><span class="pp"> </span><span class="co">// funzioni</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;cassert&gt;</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;fstream&gt;</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;vector&gt;</span><span class="pp"> </span><span class="co">// contenitore</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="kw">using</span> <span class="kw">namespace</span> std<span class="op">;</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="kw">template</span> <span class="op">&lt;</span><span class="kw">typename</span> T<span class="op">&gt;</span> vector<span class="op">&lt;</span>T<span class="op">&gt;</span> Read<span class="op">(</span><span class="dt">size_t</span> N<span class="op">,</span> <span class="at">const</span> <span class="dt">char</span><span class="op">*</span> filename<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>  vector<span class="op">&lt;</span>T<span class="op">&gt;</span> v<span class="op">;</span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>  ifstream in<span class="op">{</span>filename<span class="op">};</span></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span><span class="op">(</span>in<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>      cerr <span class="op">&lt;&lt;</span> <span class="st">&quot;Impossibile aprire il file &quot;</span> <span class="op">&lt;&lt;</span> filename <span class="op">&lt;&lt;</span> <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">;</span></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>      exit<span class="op">(</span><span class="dv">1</span><span class="op">);</span></span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> <span class="op">(</span><span class="dt">size_t</span> i<span class="op">{};</span> i <span class="op">&lt;</span> N<span class="op">;</span> i<span class="op">++)</span> <span class="op">{</span></span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>      T val<span class="op">{};</span></span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>      in <span class="op">&gt;&gt;</span> val<span class="op">;</span></span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>      v<span class="op">.</span>push_back<span class="op">(</span>val<span class="op">);</span></span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>      <span class="cf">if</span><span class="op">(</span>in<span class="op">.</span>eof<span class="op">())</span> <span class="op">{</span></span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>          cerr <span class="op">&lt;&lt;</span> <span class="st">&quot;Fine del file raggiunta prematuramente</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">;</span></span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>          exit<span class="op">(</span><span class="dv">1</span><span class="op">);</span></span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a>      <span class="op">}</span></span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> v<span class="op">;</span></span>
+<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a><span class="kw">template</span> <span class="op">&lt;</span><span class="kw">typename</span> T<span class="op">&gt;</span> <span class="dt">void</span> Print<span class="op">(</span><span class="at">const</span> vector<span class="op">&lt;</span>T<span class="op">&gt;</span> <span class="op">&amp;</span> v<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> <span class="op">(</span><span class="dt">size_t</span> i<span class="op">{};</span> i <span class="op">&lt;</span> v<span class="op">.</span>size<span class="op">();</span> i<span class="op">++)</span> <span class="op">{</span></span>
+<span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a>      cout <span class="op">&lt;&lt;</span> v<span class="op">[</span>i<span class="op">]</span> <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span>
+<span id="cb9-34"><a href="#cb9-34" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb9-35"><a href="#cb9-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-36"><a href="#cb9-36" aria-hidden="true" tabindex="-1"></a><span class="kw">template</span> <span class="op">&lt;</span><span class="kw">typename</span> T<span class="op">&gt;</span> <span class="dt">void</span> Print<span class="op">(</span><span class="at">const</span> vector<span class="op">&lt;</span>T<span class="op">&gt;</span> <span class="op">&amp;</span> v<span class="op">,</span> <span class="at">const</span> <span class="dt">char</span> <span class="op">*</span> filename<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb9-37"><a href="#cb9-37" aria-hidden="true" tabindex="-1"></a>  ofstream out<span class="op">(</span>filename<span class="op">);</span></span>
+<span id="cb9-38"><a href="#cb9-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-39"><a href="#cb9-39" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span><span class="op">(!</span> out<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb9-40"><a href="#cb9-40" aria-hidden="true" tabindex="-1"></a>      cerr <span class="op">&lt;&lt;</span> <span class="st">&quot;Non posso creare il file &quot;</span> <span class="op">&lt;&lt;</span> filename <span class="op">&lt;&lt;</span> <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">;</span></span>
+<span id="cb9-41"><a href="#cb9-41" aria-hidden="true" tabindex="-1"></a>      <span class="cf">return</span><span class="op">;</span></span>
+<span id="cb9-42"><a href="#cb9-42" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb9-43"><a href="#cb9-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-44"><a href="#cb9-44" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> <span class="op">(</span><span class="dt">size_t</span> i<span class="op">{};</span> i <span class="op">&lt;</span> v<span class="op">.</span>size<span class="op">();</span> i<span class="op">++)</span> <span class="op">{</span></span>
+<span id="cb9-45"><a href="#cb9-45" aria-hidden="true" tabindex="-1"></a>      out <span class="op">&lt;&lt;</span> v<span class="op">[</span>i<span class="op">]</span> <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span>
+<span id="cb9-46"><a href="#cb9-46" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb9-47"><a href="#cb9-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-48"><a href="#cb9-48" aria-hidden="true" tabindex="-1"></a>  out<span class="op">.</span>close<span class="op">();</span></span>
+<span id="cb9-49"><a href="#cb9-49" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p><strong>Attenzione</strong>: c’è una particolarità nell’invocazione del costruttore per oggetti <code>std::vector</code>:</p>
+<ul>
+<li>La scrittura <code>std::vector&lt;int&gt; v(10)</code> (parentesi tonde) inizializza il vettore riservando spazio per 10 elementi.</li>
+<li>La scrittura <code>std::vector&lt;int&gt; v{10}</code> (parentesi tonde) inizializza il vettore aggiungendo un elemento di valore 10.</li>
+</ul>
+<p>In altre parole, le parentesi graffe usate con un <code>std::vector</code> indicano <em>l’elenco degli elementi da inserire</em>, e non il numero di elementi da allocare! Nelle future lezioni vedremo che ciò è molto utile, ma è importante ricordarsi della differenza!</p>
+<p>Ecco l’esempio della funzione <code>CalcolaMediana</code>: notate l’utilizzo della funzione <code>sort()</code> della STL per ordinare gli elementi di un contenitore. Quando possibile, usiamo funzioni e algoritmi ufficiali! La funzione <code>sort()</code> lavora con un iteratore al primo elemento del contenitore (<code>v.begin()</code>) e uno all’ultimo (+1) (<code>v.end()</code>). I contenitori della STL come <code>vector</code> hanno i due metodi <code>begin()</code> e <code>end()</code>, e le funzioni STL in genere lavorano con iteratori: in questo modo la funzione può lavorare indifferentemente su ogni tipo di contenitore, indipendentemente dalla struttura interna del contenitore.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="kw">template</span> <span class="op">&lt;</span><span class="kw">typename</span> T<span class="op">&gt;</span> <span class="dt">double</span> CalcolaMediana<span class="op">(</span>vector<span class="op">&lt;</span>T<span class="op">&gt;</span> v<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  sort<span class="op">(</span>v<span class="op">.</span>begin<span class="op">(),</span> v<span class="op">.</span>end<span class="op">())</span> <span class="op">;</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> mediana<span class="op">{};</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> <span class="op">(</span>v<span class="op">.</span>size<span class="op">()</span> <span class="op">%</span> <span class="dv">2</span> <span class="op">==</span> <span class="dv">0</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>      mediana <span class="op">=</span> <span class="op">(</span>v<span class="op">[</span>v<span class="op">.</span>size<span class="op">()</span> <span class="op">/</span><span class="dv">2</span> <span class="op">-</span> <span class="dv">1</span><span class="op">]</span> <span class="op">+</span> v<span class="op">[</span>v<span class="op">.</span>size<span class="op">(</span>D<span class="op">)</span> <span class="op">/</span> <span class="dv">2</span><span class="op">])</span> <span class="op">/</span> <span class="dv">2</span><span class="op">;</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>      mediana <span class="op">=</span> v<span class="op">[</span>v<span class="op">.</span>size<span class="op">()</span> <span class="op">/</span> <span class="dv">2</span><span class="op">];</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> mediana<span class="op">;</span></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<h2 id="il-codice-principale">Il codice principale</h2>
+<p>Ecco l’aspetto che potrebbe avere il nostro nuovo codice:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;funzioni.h&quot;</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;cstdlib&gt;</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;fstream&gt;</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">(</span><span class="dt">int</span> argc<span class="op">,</span> <span class="at">const</span> <span class="dt">char</span> <span class="op">*</span> argv<span class="op">[])</span> <span class="op">{</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span><span class="op">(</span>argc <span class="op">&lt;</span> <span class="dv">3</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>      cerr <span class="op">&lt;&lt;</span> <span class="st">&quot;Uso del programma: &quot;</span> <span class="op">&lt;&lt;</span> argv<span class="op">[</span><span class="dv">0</span><span class="op">]</span> <span class="op">&lt;&lt;</span> <span class="st">&quot; &lt;n_data&gt; &lt;filename&gt;</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">;;</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>      <span class="cf">return</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>  vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> v<span class="op">{</span>Read<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;(</span>atoi<span class="op">(</span>argv<span class="op">[</span><span class="dv">1</span><span class="op">]),</span> argv<span class="op">[</span><span class="dv">2</span><span class="op">])};</span></span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>  Print<span class="op">(</span>v<span class="op">);</span></span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>  cout <span class="op">&lt;&lt;</span> <span class="st">&quot;media &quot;</span> <span class="op">&lt;&lt;</span> CalcolaMedia<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;(</span>v<span class="op">)</span> <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>  cout <span class="op">&lt;&lt;</span> <span class="st">&quot;varianza &quot;</span> <span class="op">&lt;&lt;</span> CalcolaVarianza<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;(</span>v<span class="op">)</span> <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a>  cout <span class="op">&lt;&lt;</span> <span class="st">&quot;mediana &quot;</span> <span class="op">&lt;&lt;</span> CalcolaMediana<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;(</span>v<span class="op">)</span> <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a>  Print<span class="op">(</span>v<span class="op">);</span></span>
+<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<h2 id="il-makefile">Il Makefile</h2>
+<p>Ecco il <code>Makefile</code>:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode makefile"><code class="sourceCode makefile"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="dt">CXXFLAGS </span><span class="ch">=</span><span class="st"> -g -Wall --pedantic -std=c++11</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="dv">esercizio3.1:</span><span class="dt"> esercizio3.1.cpp funzioni.h</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>    g++ -o esercizio3.1 esercizio3.1.cpp <span class="ch">$(</span><span class="dt">CXXFLAGS</span><span class="ch">)</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="dv">clean:</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>    rm -f esercizio3.1</span></code></pre></div>
+<p>Notate che la classe <code>vector</code> ci libera completamente dalla necessità di conoscere in anticipo la quantità di dati da caricare. Questo ci permette per esempio di scrivere una funzione che legga automaticamente tutti i dati che trova in un file senza sapere a priori quanti sono.</p>
+<h2 id="riempire-un-vettore-da-file">Riempire un vettore da file</h2>
+<p>In questa funzione creiamo un vettore, lo riempiamo con tutti i dati letti da un file aggiungendo di volta in volta una componente. Il processo si ferma al termine del file:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="kw">template</span> <span class="op">&lt;</span><span class="kw">typename</span> T<span class="op">&gt;</span> vector<span class="op">&lt;</span>T<span class="op">&gt;</span> Read<span class="op">(</span><span class="at">const</span> <span class="dt">char</span><span class="op">*</span> filename<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  vector<span class="op">&lt;</span>T<span class="op">&gt;</span> v<span class="op">;</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  ifstream in<span class="op">{</span>filename<span class="op">};</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span><span class="op">(!</span> in<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>      cerr <span class="op">&lt;&lt;</span> <span class="st">&quot;Impossibile aprire il file &quot;</span> <span class="op">&lt;&lt;</span> filename <span class="op">&lt;&lt;</span> <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">;</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>      exit<span class="op">(</span><span class="dv">1</span><span class="op">);</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>  <span class="cf">while</span><span class="op">(!</span> in<span class="op">.</span>eof<span class="op">())</span> <span class="op">{</span></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>      T val<span class="op">;</span></span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>      in <span class="op">&gt;&gt;</span> val<span class="op">;</span></span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>      v<span class="op">.</span>push_back<span class="op">(</span>val<span class="op">);</span></span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> v<span class="op">;</span></span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<h2 id="approfondimento-sulla-stl-facoltativo">Approfondimento sulla STL (facoltativo)</h2>
+<p>Proviamo a usare meglio le funzionalità offerte dalla Standard Template Library (STL): ecco <a href="http://labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/funzioni_stlstyle.h">qui</a> un esempio di come si potrebbe fare.</p>
+<h1 id="esercizio-3.2">Esercizio 3.2 - Analisi dati con vector e visualizzazione dei dati (da consegnare)</h1>
+<p>Proviamo ora ad aggiungere all’esercizio precedente la possibilità di visualizzare i dati letti da file.</p>
+<p>Un modo semplice per visualizzare graficamente la distribuzione di un set di dati è quello di usare un istogramma (<code>TH1F</code>) di ROOT. Le classi di ROOT sono molto comode da usare, perché possiamo facilmente utilizzarle in un codice C++. Per fare questo dobbiamo ricordarci di:</p>
+<ul>
+<li>Includere l’header file (<code>.h</code>) di ogni oggetto di ROOT che pensiamo di utilizzare (<code>TApplication</code>, <code>TH1F</code>, <code>TGraph</code>, <code>TCanvas</code>).</li>
+<li>Modificare il <code>Makefile</code> in modo che sia in grado da solo di trovare il path degli header files necessari (<code>$INCS</code>) e le librerie precompilate da linkare (<code>$LIBS</code>).</li>
+</ul>
+<p>Per una rapida panoramica dei principali oggetti di ROOT che ci potranno interessare potete dare un’occhiata <a href="http://labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/lezioneROOT_1819.html">qui</a>.</p>
+<p>Vediamo come si potrebbe fare.</p>
+<h2 id="programma-principale">Programma principale</h2>
+<p>Possiamo usare questo codice come esempio per l’utilizzo di un qualsiasi oggetto di ROOT:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;TApplication.h&quot;</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;TCanvas.h&quot;</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;TH1F.h&quot;</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;funzioni.h&quot;</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;cstdlib&gt;</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;fstream&gt;</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">(</span><span class="dt">int</span> argc<span class="op">,</span> <span class="at">const</span> <span class="dt">char</span> <span class="op">*</span> argv<span class="op">[])</span> <span class="op">{</span></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span><span class="op">(</span>argc <span class="op">&lt;</span> <span class="dv">3</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>      cerr <span class="op">&lt;&lt;</span> <span class="st">&quot;Uso del programma: &quot;</span> <span class="op">&lt;&lt;</span> argv<span class="op">[</span><span class="dv">0</span><span class="op">]</span> <span class="op">&lt;&lt;</span> <span class="st">&quot; &lt;n_data&gt; &lt;filename&gt;</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">;</span></span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>      <span class="cf">return</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>  <span class="co">// creo un processo &quot;app&quot; che lascia il programma attivo ( app.Run() ) in modo</span></span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>  <span class="co">// da permettermi di vedere gli outputs grafici</span></span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a>  TApplication app<span class="op">{</span><span class="st">&quot;app&quot;</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">0</span><span class="op">};</span></span>
+<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a>  <span class="co">// leggo dati da file</span></span>
+<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a>  vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> v<span class="op">{</span>Read<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;(</span> atoi<span class="op">(</span>argv<span class="op">[</span><span class="dv">1</span><span class="op">])</span> <span class="op">,</span> argv<span class="op">[</span><span class="dv">2</span><span class="op">]};</span></span>
+<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-23"><a href="#cb14-23" aria-hidden="true" tabindex="-1"></a>  <span class="co">// creo e riempio il vettore. L&#39;opzione StatOverflows permette di calcolalare</span></span>
+<span id="cb14-24"><a href="#cb14-24" aria-hidden="true" tabindex="-1"></a>  <span class="co">// le informazioni statistiche anche se il dato sta fuori dal range di definizione</span></span>
+<span id="cb14-25"><a href="#cb14-25" aria-hidden="true" tabindex="-1"></a>  <span class="co">// dell&#39;istogramma</span></span>
+<span id="cb14-26"><a href="#cb14-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-27"><a href="#cb14-27" aria-hidden="true" tabindex="-1"></a>  TH1F histo<span class="op">{</span><span class="st">&quot;histo&quot;</span><span class="op">,</span> <span class="st">&quot;histo&quot;</span><span class="op">,</span> <span class="dv">100</span><span class="op">,</span> <span class="op">-</span><span class="dv">10</span><span class="op">,</span> <span class="dv">100</span><span class="op">};</span></span>
+<span id="cb14-28"><a href="#cb14-28" aria-hidden="true" tabindex="-1"></a>  histo<span class="op">.</span>StatOverflows<span class="op">(</span>kTRUE<span class="op">);</span></span>
+<span id="cb14-29"><a href="#cb14-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-30"><a href="#cb14-30" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> <span class="op">(</span><span class="dt">size_t</span> k<span class="op">{};</span> k <span class="op">&lt;</span> v<span class="op">.</span>size<span class="op">();</span> k<span class="op">++</span> <span class="op">)</span> <span class="op">{</span></span>
+<span id="cb14-31"><a href="#cb14-31" aria-hidden="true" tabindex="-1"></a>      histo<span class="op">.</span>Fill<span class="op">(</span>v<span class="op">[</span>k<span class="op">]);</span></span>
+<span id="cb14-32"><a href="#cb14-32" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb14-33"><a href="#cb14-33" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb14-34"><a href="#cb14-34" aria-hidden="true" tabindex="-1"></a>  <span class="co">// accedo a informazioni statistiche</span></span>
+<span id="cb14-35"><a href="#cb14-35" aria-hidden="true" tabindex="-1"></a>  cout <span class="op">&lt;&lt;</span> <span class="st">&quot;Media dei valori caricati = &quot;</span> <span class="op">&lt;&lt;</span> histo<span class="op">.</span>GetMean<span class="op">()</span> <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span>
+<span id="cb14-36"><a href="#cb14-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-37"><a href="#cb14-37" aria-hidden="true" tabindex="-1"></a>  <span class="co">// disegno</span></span>
+<span id="cb14-38"><a href="#cb14-38" aria-hidden="true" tabindex="-1"></a>  TCanvas mycanvas<span class="op">{</span><span class="st">&quot;Histo&quot;</span><span class="op">,</span> <span class="st">&quot;Histo&quot;</span><span class="op">};</span></span>
+<span id="cb14-39"><a href="#cb14-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-40"><a href="#cb14-40" aria-hidden="true" tabindex="-1"></a>  histo<span class="op">.</span>Draw<span class="op">();</span></span>
+<span id="cb14-41"><a href="#cb14-41" aria-hidden="true" tabindex="-1"></a>  histo<span class="op">.</span>GetXaxis<span class="op">()-&gt;</span>SetTitle<span class="op">(</span><span class="st">&quot;measurement&quot;</span><span class="op">);</span></span>
+<span id="cb14-42"><a href="#cb14-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-43"><a href="#cb14-43" aria-hidden="true" tabindex="-1"></a>  app<span class="op">.</span>Run<span class="op">();</span></span>
+<span id="cb14-44"><a href="#cb14-44" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<h2 id="makefile-modificato">Makefile modificato</h2>
+<p>Ecco come dobbiamo modificare il <code>Makefile</code> per compilare includendo oggetti di ROOT:</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>LIBS <span class="op">:=</span> <span class="er">`</span>root<span class="op">-</span>config <span class="op">--</span>libs<span class="er">`</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>CXXFLAGS <span class="op">:=</span> <span class="op">-</span>g <span class="op">-</span>Wall <span class="op">--</span>pedantic <span class="op">-</span>std<span class="op">=</span>c<span class="op">++</span><span class="dv">11</span> <span class="er">`</span>root<span class="op">-</span>config <span class="op">--</span>cflags<span class="er">`</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>esercizio3<span class="fl">.2</span><span class="op">:</span> esercizio3<span class="fl">.2</span><span class="er">.cpp</span> funzioni<span class="op">.</span>h</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>    g<span class="op">++</span> <span class="op">-</span>o esercizio3<span class="fl">.2</span> esercizio3<span class="fl">.2</span><span class="er">.cpp</span> <span class="er">$</span><span class="op">{</span>CXXFLAGS<span class="op">}</span> <span class="er">$</span><span class="op">{</span>LIBS<span class="op">}</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>clean<span class="op">:</span></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>    rm <span class="op">-</span>f esercizio3<span class="fl">.2</span></span></code></pre></div>
+<p>Notate l’utilizzo dei comandi <code>root-config --libs</code> e <code>root-config --cflags</code>, che restituiscono rispettivamente il path per raggiungere le librerie di ROOT e il gli header files, come potete provare anche dalla linea di comando:</p>
+<pre><code>$ root-config --cflags
+-pthread -std=c++14 -m64 -I/usr/include/root
+$ root-config --libs
+-L/usr/lib64/root -lCore -lImt -lRIO -lNet -lHist -lGraf -lGraf3d -lGpad -lROOTVecOps -lTree -lTreePlayer -lRint -lPostscript -lMatrix -lPhysics -lMathCore -lThread -lMultiProc -lROOTDataFrame -pthread -lm -ldl -rdynamic</code></pre>
+<p>(il risultato sui vostri computer potrebbe essere differente).</p>
+<p>I path vengono memorizzati nelle variabili <code>LIBS</code> e <code>CXXFLAGS</code>. Queste due variabili vengono poi passate al comando <code>g++</code> in modo che il compilatore abbia a disposizione tutti gli ingredienti per una corretta compilazione.</p>                    
+                </div>
+            </div>
+
+            <script src="https://vjs.zencdn.net/5.4.4/video.js"></script>
+        </div>
+    </body>
+</html>

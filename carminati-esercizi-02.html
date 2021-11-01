@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html  lang="it-IT"  dir="ltr">
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Lezione 2: Analisi dei dati (classe Vettore)</title>
+        <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+        <link rel="apple-touch-icon-precomposed" href="images/apple-touch-icon.png">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/2.26.4/css/uikit.gradient.css">
+
+        <!-- <link rel="stylesheet" href="style.css"> -->
+        <link rel="stylesheet" href="https://cdn.rawgit.com/diversen/pandoc-uikit/master/style.css">
+        <link href="https://vjs.zencdn.net/5.4.4/video-js.css" rel="stylesheet" />
+        <script src="https://code.jquery.com/jquery-2.2.1.min.js"></script>
+        <!-- <script src="uikit.js"></script> -->
+        <script src="https://cdn.rawgit.com/diversen/pandoc-uikit/master/uikit.js"></script>
+        <!-- <script src="scripts.js"></script> -->
+        <script src="https://cdn.rawgit.com/diversen/pandoc-uikit/master/scripts.js"></script>
+        <!-- <script src="jquery.sticky-kit.js "></script> -->
+        <script src="https://cdn.rawgit.com/diversen/pandoc-uikit/master/jquery.sticky-kit.js"></script>
+
+        <meta name="generator" content="pandoc-uikit" />
+                <meta name="author" content="Leonardo Carminati" />
+                <meta name="author" content="Maurizio Tomasi" />
+                        <title>Lezione 2: Analisi dei dati (classe Vettore)</title>
+        <style type="text/css">code{white-space: pre;}</style>
+                        <style type="text/css">
+            pre > code.sourceCode { white-space: pre; position: relative; }
+            pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+            pre > code.sourceCode > span:empty { height: 1.2em; }
+            .sourceCode { overflow: visible; }
+            code.sourceCode > span { color: inherit; text-decoration: inherit; }
+            div.sourceCode { margin: 1em 0; }
+            pre.sourceCode { margin: 0; }
+            @media screen {
+            div.sourceCode { overflow: auto; }
+            }
+            @media print {
+            pre > code.sourceCode { white-space: pre-wrap; }
+            pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+            }
+            pre.numberSource code
+              { counter-reset: source-line 0; }
+            pre.numberSource code > span
+              { position: relative; left: -4em; counter-increment: source-line; }
+            pre.numberSource code > span > a:first-child::before
+              { content: counter(source-line);
+                position: relative; left: -1em; text-align: right; vertical-align: baseline;
+                border: none; display: inline-block;
+                -webkit-touch-callout: none; -webkit-user-select: none;
+                -khtml-user-select: none; -moz-user-select: none;
+                -ms-user-select: none; user-select: none;
+                padding: 0 4px; width: 4em;
+                color: #aaaaaa;
+              }
+            pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+            div.sourceCode
+              {   }
+            @media screen {
+            pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+            }
+            code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+            code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+            code span.at { color: #7d9029; } /* Attribute */
+            code span.bn { color: #40a070; } /* BaseN */
+            code span.bu { } /* BuiltIn */
+            code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+            code span.ch { color: #4070a0; } /* Char */
+            code span.cn { color: #880000; } /* Constant */
+            code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+            code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+            code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+            code span.dt { color: #902000; } /* DataType */
+            code span.dv { color: #40a070; } /* DecVal */
+            code span.er { color: #ff0000; font-weight: bold; } /* Error */
+            code span.ex { } /* Extension */
+            code span.fl { color: #40a070; } /* Float */
+            code span.fu { color: #06287e; } /* Function */
+            code span.im { } /* Import */
+            code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+            code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+            code span.op { color: #666666; } /* Operator */
+            code span.ot { color: #007020; } /* Other */
+            code span.pp { color: #bc7a00; } /* Preprocessor */
+            code span.sc { color: #4070a0; } /* SpecialChar */
+            code span.ss { color: #bb6688; } /* SpecialString */
+            code span.st { color: #4070a0; } /* String */
+            code span.va { color: #19177c; } /* Variable */
+            code span.vs { color: #4070a0; } /* VerbatimString */
+            code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+        </style>
+                                               
+    </head>
+
+    <body oncopy="return false" oncut="return false" onpaste="return false">
+
+
+        <div class="uk-container uk-container-center uk-margin-top uk-margin-large-bottom">
+
+                        <div class="uk-grid" data-uk-grid-margin>
+                <div class="uk-width-1-1">
+                    <h1 class="uk-heading-large">Lezione 2: Analisi dei dati (classe Vettore)</h1>
+                                        <h3 class="uk-heading-large">A.A. 2021−2022</p></h3>
+                                                            <p class="uk-text-large">Leonardo Carminati</p>
+                                        <p class="uk-text-large">Maurizio Tomasi</p>
+                                    </div>
+            </div>
+            
+            <div class="uk-grid" data-uk-grid-margin >          
+                <div class="uk-width-medium-1-4">
+                    <div class="uk-overflow-container" data-uk-sticky="{top:25,media: 768}">
+                        <div class="uk-panel uk-panel-box menu-begin" >
+
+                                                        <ul>
+                                                        <li><a href="#esercizio-2.0">Esercizio 2.0 - Creazione della classe Vettore</a>
+                                                        <ul>
+                                                        <li><a href="#header-file-della-classe">Header file della classe</a></li>
+                                                        <li><a href="#esempio-di-implementazione-della-classe">Esempio di implementazione della classe</a></li>
+                                                        <li><a href="#programma-di-test">Programma di test</a></li>
+                                                        <li><a href="#modifiche-allheader-file">Modifiche all’header file</a></li>
+                                                        <li><a href="#copy-constructor"><em>Copy constructor</em></a></li>
+                                                        <li><a href="#operatore-di-assegnazione">Operatore di assegnazione</a></li>
+                                                        <li><a href="#il-puntatore-this">Il puntatore <code>this</code></a></li>
+                                                        </ul></li>
+                                                        <li><a href="#esercizio-2.1">Esercizio 2.1 - Codice di analisi dati utilizzando la classe <code>Vettore</code> (da consegnare)</a>
+                                                        <ul>
+                                                        <li><a href="#struttura-del-programma">Struttura del programma</a></li>
+                                                        <li><a href="#le-funzioni">Le funzioni</a></li>
+                                                        <li><a href="#makefile">Makefile</a></li>
+                                                        <li><a href="#only-for-curious-kids-the-move-semantic">Only for curious kids: the <em>move semantic</em></a></li>
+                                                        </ul></li>
+                                                        </ul>
+                            
+                        </div>
+                    </div>
+                </div>
+
+                <div class="uk-width-medium-3-4">
+<p>[La pagina con la spiegazione originale degli esercizi si trova qui: <a href="http://labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/lezione2_1819.html">labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/lezione2_1819.html</a>.]</p>
+<p>In questa seconda lezione affronteremo gli stessi problemi della prima lezione (lettura di dati da un file, calcolo di media e mediana) utilizzando un contenitore di dati più evoluto del semplice array del C. A questo proposito nella prima parte della lezione costruiremo la nostra prima classe, la classe <code>Vettore</code>. Nella seconda parte adatteremo le funzioni già scritte nella lezione scorsa in modo che possano funzionare con oggetti di tipo <code>Vettore</code>. Quindi in sintesi:</p>
+<ul>
+<li>Tipo di dato da leggere è constituito da numeri <code>double</code>.</li>
+<li>Tipo di contenitore di dati è una classe <code>Vettore</code> che scriveremo noi.</li>
+<li>Operazioni sui dati vengono svolte mediante funzioni che agiscono su oggetti di tipo <code>Vettore</code>.</li>
+</ul>
+<h1 id="esercizio-2.0">Esercizio 2.0 - Creazione della classe Vettore</h1>
+<p>Implementare una classe che abbia come data membri (privati) un intero (dimensione del vettore) ed un puntatore a <code>double</code> (puntatore alla zona di memoria dove sono immagazzinati i dati). Implementare:</p>
+<ul>
+<li>Un costruttore di default, che assegni valori nulli alla lunghezza del vettore ed al puntatore.</li>
+<li>Un costruttore che abbia come argomento un intero: questo deve creare un vettore di lunghezza uguale all’intero e tutte le componenti nulle (usando un <code>new</code> per allocare la memoria necessaria).</li>
+<li>Un distruttore: deve chiaramente deallocare con <code>delete[]</code> la zona di memoria allocata con new.</li>
+<li>Dei metodi per inserire e leggere i valori della componenti: questi metodi devono controllare che l’indice delle componenti richieste sia compatibile con la lunghezza del vettore.</li>
+</ul>
+<h2 id="header-file-della-classe">Header file della classe</h2>
+<p>L’header file della classe iniziale (<code>vettore.h</code>) potrebbe essere così:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#pragma once</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co">// La scrittura `#pragma once` è equivalente a scrivere:</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co">//</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co">//    #ifndef __vettore_h__</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co">//    #define __vettore_h__</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co">//    ...</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co">//    #endif</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co">//</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co">// ma basta una riga anziché tre, ed evita di dover ricopiare</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co">// `__vettore_h__` due volte</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Vettore <span class="op">{</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span><span class="op">:</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>  Vettore<span class="op">();</span>                     <span class="co">// costruttore di default</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>  Vettore<span class="op">(</span><span class="dt">size_t</span> N<span class="op">);</span>             <span class="co">// costruttore con dimensione del vettore</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>  <span class="op">~</span>Vettore<span class="op">();</span>                    <span class="co">// distruttore</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>  <span class="dt">size_t</span> GetN<span class="op">()</span> <span class="at">const</span> <span class="op">{</span>          <span class="co">// restituisce la dimensione del vettore</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>      <span class="cf">return</span> N<span class="op">;</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Modifica la componente i-esima</span></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>  <span class="dt">void</span> SetComponent<span class="op">(</span><span class="dt">size_t</span><span class="op">,</span> <span class="dt">double</span><span class="op">);</span></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Accede alla componente i-esima</span></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> GetComponent<span class="op">(</span><span class="dt">size_t</span><span class="op">)</span> <span class="at">const</span><span class="op">;</span></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>  <span class="dt">void</span> Scambia<span class="op">(</span><span class="dt">size_t</span><span class="op">,</span> <span class="dt">size_t</span><span class="op">);</span></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a><span class="kw">private</span><span class="op">:</span></span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>  <span class="dt">size_t</span> <span class="va">m_N</span><span class="op">;</span>                    <span class="co">// dimensione del vettore</span></span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> <span class="op">*</span> <span class="va">m_v</span><span class="op">;</span>                  <span class="co">// puntatore all&#39;array dei dati</span></span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a><span class="op">};</span> <span class="co">// Necessario usare `;` dopo la parentesi graffa *solo* quando si chiude una classe!</span></span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a></span></code></pre></div>
+<ul>
+<li>L’utilizzo del costrutto <code>#ifndef</code>…<code>#define</code>…<code>#endif</code> al posto di <code>#pragma once</code> merita una spiegazione. Queste direttive di preprocessore sono normalmente utilizzate per evitare inclusioni multiple di uno stesso header file che, nel caso specifico, porterebbero ad una doppia dichiarazione della classe <code>Vettore</code>. Immaginate infatti di voler compilare un codice <code>main.cpp</code> insieme ad un file <code>funzioni.cpp</code> e che entrambi i codici sorgente contengano una istruzione <code>#include "vettore.h"</code>: in fase di compilazione il compilatore si lamenterebbe per una doppia dichiarazione della classe <code>Vettore</code>. Con il meccanismo indicato, alla prima inclusione di <code>vettore.h</code>, viene creata una variabile globale <code>__vettore_h__</code> (meglio: una <em>macro</em>). Al secondo tentativo di inclusione l’esistenza di <code>__vettore_h__</code> globale forza il compilatore a saltare tutte le righe tra <code>#define</code> ed <code>#endif</code>, di fatto evitando la seconda inclusione del file <code>vettore.h</code>. La scrittura <code>#pragma once</code> non è nello standard C++, ma è così comoda che è implementata su tutti i compilatori C++ in commercio. Notate inoltre l’impementazione in-line del metodo <code>GetN()</code>: i metodi di una classe possono essere anche implementati direttamente nell’header file e non nel file <code>.cpp</code>. L’implementazione inline implica che il compilatore metta una copia della funzione ogni volta che questa viene chiamata: in questo modo il codice diventa più lungo ma vengono ottimizzate le performance in quanto non si deve effettuare una chiamata alla funzione. In genere l’implementazione inline viene effettuata per funzioni brevi.</li>
+</ul>
+<h2 id="esempio-di-implementazione-della-classe">Esempio di implementazione della classe</h2>
+<div class="sourceCode" id="cb2"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;vettore.h&quot;</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;iomanip&gt;</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;cmath&gt;</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;cstdlib&gt;</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;cassert&gt;</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>Vettore<span class="op">::</span>Vettore<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  cout <span class="op">&lt;&lt;</span> <span class="st">&quot;Invocazione del costruttore di default&quot;</span> <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  <span class="va">m_N</span> <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="va">m_v</span> <span class="op">=</span> <span class="kw">nullptr</span><span class="op">;</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>Vettore<span class="op">::</span>Vettore<span class="op">(</span><span class="dt">size_t</span> N<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>  cout <span class="op">&lt;&lt;</span> <span class="st">&quot;Invocazione del costruttore con argomenti&quot;</span> <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>  <span class="va">m_N</span> <span class="op">=</span> N<span class="op">;</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>  <span class="va">m_v</span> <span class="op">=</span> <span class="kw">new</span> <span class="dt">double</span><span class="op">[</span>N<span class="op">];</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span><span class="op">(</span><span class="dt">size_t</span> k <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> k <span class="op">&lt;</span> N<span class="op">;</span> <span class="op">++</span>k<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>      <span class="va">m_v</span><span class="op">[</span>k<span class="op">]</span> <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>Vettore<span class="op">::~</span>Vettore<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>  cout <span class="op">&lt;&lt;</span> <span class="st">&quot;Invocazione del distruttore&quot;</span> <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>  <span class="kw">delete</span><span class="op">[]</span> <span class="va">m_v</span><span class="op">;</span></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> Vettore<span class="op">::</span>SetComponent<span class="op">(</span><span class="dt">size_t</span> i<span class="op">,</span> <span class="dt">double</span> a<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>  <span class="ot">assert</span><span class="op">((</span>i <span class="op">&lt;</span> <span class="va">m_N</span><span class="op">)</span> <span class="op">&amp;&amp;</span> <span class="st">&quot;Errore: l&#39;indice è troppo grande&quot;</span><span class="op">);</span></span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>  <span class="va">m_v</span><span class="op">[</span>i<span class="op">]</span> <span class="op">=</span> a<span class="op">;</span></span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> Vettore<span class="op">::</span>GetComponent<span class="op">(</span><span class="dt">size_t</span> i<span class="op">)</span> <span class="at">const</span> <span class="op">{</span></span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>  <span class="ot">assert</span><span class="op">((</span>i <span class="op">&lt;</span> <span class="va">m_N</span><span class="op">)</span> <span class="op">&amp;&amp;</span> <span class="st">&quot;Errore: l&#39;indice è troppo grande&quot;</span><span class="op">);</span></span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="va">m_v</span><span class="op">[</span>i<span class="op">];</span></span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> Vettore<span class="op">::</span>Scambia<span class="op">(</span><span class="dt">size_t</span> primo<span class="op">,</span> <span class="dt">size_t</span> secondo<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> temp <span class="op">=</span> <span class="va">m_v</span><span class="op">[</span>primo<span class="op">];</span></span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>  <span class="va">m_v</span><span class="op">[</span>primo<span class="op">]</span> <span class="op">=</span> <span class="va">m_v</span><span class="op">[</span>secondo<span class="op">];</span></span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>  <span class="va">m_v</span><span class="op">[</span>secondo<span class="op">]</span> <span class="op">=</span> temp<span class="op">;</span></span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Equivalente a:</span></span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a>  <span class="co">//</span></span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a>  <span class="co">//     double temp = GetComponent(primo);</span></span>
+<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a>  <span class="co">//     SetComponent(primo, GetComponent(secondo));</span></span>
+<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a>  <span class="co">//     SetComponent(secondo, temp);</span></span>
+<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> <span class="op">&amp;</span> Vettore<span class="op">::</span><span class="kw">operator</span><span class="op">[](</span><span class="dt">size_t</span> i<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a>  <span class="ot">assert</span><span class="op">((</span>i <span class="op">&lt;</span> <span class="va">m_N</span><span class="op">)</span> <span class="op">&amp;&amp;</span> <span class="st">&quot;Errore: l&#39;indice è troppo grande&quot;</span><span class="op">);</span></span>
+<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="va">m_v</span><span class="op">[</span>i<span class="op">];</span></span>
+<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<ul>
+<li><p>Notate l’uso della macro <code>assert()</code>: questa macro (ricordarsi di includere la libreria <code>cassert</code>) può rivelarsi estremamente utile per scoprire errori nel nostro programma in fase di realizzazione del programma.</p>
+<pre><code>assert((i &lt; m_N) &amp;&amp; &quot;Errore : l&#39;indice e&#39; troppo grande&quot;);</code></pre>
+<p>farà abortire il programma se si verifica la condizione <code>m_N &gt; i</code>, ovvero se si tenta di riempire una componente di indice maggiore della dimensione del Vettore. Prima della chiusura del programma viene mostrato a video il messaggio impostato:</p>
+<pre><code>Assertion failed: (( m_N &gt; i ) &amp;&amp; &quot;Errore : l&#39;indice e&#39; troppo grande&quot;), function SetComponent, file vettore.cpp, line 31.</code></pre>
+<p>che indica molto chiaramente cosa ha esattamente causato il problema. Normalmente quando la fase di debugging e’ terminata tutti gli assert utilizzati possono essere disabilitati mediante la definizione di una macro <code>#define NDEBUG</code>: questa istruzione fa si che tutti gli assert dichiarati vengano ignorati e il flusso del programma ritorna ad essere quello normale. [<em>Nota: ma la «fase di debugging» termina quando si è certi che il proprio programma non contiene alcun errore. Si è mai certi di ciò?</em>]</p></li>
+<li><p>Notate l’ultimo metodo implementato (dovete ovviamente aggiungerlo anche nell’header file della classe) che rappresenta l’overloading dell’operatore di accesso <code>[]</code> ad un elemento (eg. <code>double a = v[2]</code> se <code>v</code> è un oggetto di tipo <code>Vettore</code>). Questo è spiegato anche sulle <a href="tomasi-lezione-02.html#operator-array">slide addizionali</a>.</p></li>
+</ul>
+<h2 id="programma-di-test">Programma di test</h2>
+<p>Questo programma usa un copy constructor per creare il <code>Vettore c</code> ed un’assegnazione per il <code>Vettore b</code>.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;vettore.h&quot;</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="co">// costruttore senza argomenti → crea un vettore di dimensione nulla</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  Vettore vnull<span class="op">;</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  cout <span class="op">&lt;&lt;</span> <span class="st">&quot;Vettore vnull: dimensione = &quot;</span> <span class="op">&lt;&lt;</span> vnull<span class="op">.</span>GetN<span class="op">()</span> <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>  <span class="co">// costruttore con intero: costruisco un vettore di lunghezza 10</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>  Vettore v<span class="op">(</span><span class="dv">10</span><span class="op">);</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>  cout <span class="op">&lt;&lt;</span> <span class="st">&quot;Vettore v: dimensione = &quot;</span> <span class="op">&lt;&lt;</span> v<span class="op">.</span>GetN<span class="op">()</span> <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span><span class="op">(</span><span class="dt">size_t</span> k <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> k <span class="op">&lt;</span> v<span class="op">.</span>GetN<span class="op">();</span> <span class="op">++</span>k<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>      cout <span class="op">&lt;&lt;</span> v<span class="op">.</span>GetComponent<span class="op">(</span>k<span class="op">)</span> <span class="op">&lt;&lt;</span> <span class="st">&quot; &quot;</span><span class="op">;</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>  cout <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>  <span class="co">// cambio il contenuto di v</span></span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span><span class="op">(</span><span class="dt">size_t</span> k <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> k <span class="op">&lt;</span> v<span class="op">.</span>GetN<span class="op">();</span> <span class="op">++</span>k<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>      v<span class="op">.</span>SetComponent<span class="op">(</span>k<span class="op">,</span> k <span class="op">+</span> <span class="dv">2</span><span class="op">);</span></span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>  cout <span class="op">&lt;&lt;</span> <span class="st">&quot;Vettore v (dopo le modifiche): dimensione = &quot;</span> <span class="op">&lt;&lt;</span> v<span class="op">.</span>GetN<span class="op">()</span> <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span><span class="op">(</span><span class="dt">size_t</span> k <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> k <span class="op">&lt;</span> v<span class="op">.</span>GetN<span class="op">();</span> <span class="op">++</span>k<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>      cout <span class="op">&lt;&lt;</span> v<span class="op">.</span>GetComponent<span class="op">(</span>k<span class="op">)</span> <span class="op">&lt;&lt;</span> <span class="st">&quot; &quot;</span><span class="op">;</span></span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a>  cout <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span>
+<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a>  <span class="co">// uso il copy constructor per costruire w</span></span>
+<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a>  Vettore w<span class="op">(</span>v<span class="op">);</span>  <span class="co">// Equivalente: Vettore w = v;</span></span>
+<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a>  cout <span class="op">&lt;&lt;</span> <span class="st">&quot;Vettore w: dimensione = &quot;</span> <span class="op">&lt;&lt;</span> w<span class="op">.</span>GetN<span class="op">()</span> <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span>
+<span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span><span class="op">(</span><span class="dt">size_t</span> k <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> k <span class="op">&lt;</span> w<span class="op">.</span>GetN<span class="op">();</span> <span class="op">++</span>k<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb5-34"><a href="#cb5-34" aria-hidden="true" tabindex="-1"></a>      cout <span class="op">&lt;&lt;</span> w<span class="op">.</span>GetComponent<span class="op">(</span>k<span class="op">)</span> <span class="op">&lt;&lt;</span> <span class="st">&quot; &quot;</span><span class="op">;</span></span>
+<span id="cb5-35"><a href="#cb5-35" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb5-36"><a href="#cb5-36" aria-hidden="true" tabindex="-1"></a>  cout <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span>
+<span id="cb5-37"><a href="#cb5-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-38"><a href="#cb5-38" aria-hidden="true" tabindex="-1"></a>  cout <span class="op">&lt;&lt;</span> <span class="st">&quot;Cambio una componente di v&quot;</span> <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span>
+<span id="cb5-39"><a href="#cb5-39" aria-hidden="true" tabindex="-1"></a>  v<span class="op">.</span>SetComponent<span class="op">(</span><span class="dv">4</span><span class="op">,</span> <span class="dv">99</span><span class="op">);</span> <span class="co">// Cambio una componente di v</span></span>
+<span id="cb5-40"><a href="#cb5-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-41"><a href="#cb5-41" aria-hidden="true" tabindex="-1"></a>  cout <span class="op">&lt;&lt;</span> <span class="st">&quot;Vettore v: dimensione = &quot;</span> <span class="op">&lt;&lt;</span> w<span class="op">.</span>GetN<span class="op">()</span> <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span>
+<span id="cb5-42"><a href="#cb5-42" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span><span class="op">(</span><span class="dt">size_t</span> k <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> k <span class="op">&lt;</span> v<span class="op">.</span>GetN<span class="op">();</span> <span class="op">++</span>k<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb5-43"><a href="#cb5-43" aria-hidden="true" tabindex="-1"></a>      cout <span class="op">&lt;&lt;</span> v<span class="op">.</span>GetComponent<span class="op">(</span>k<span class="op">)</span> <span class="op">&lt;&lt;</span> <span class="st">&quot; &quot;</span><span class="op">;</span></span>
+<span id="cb5-44"><a href="#cb5-44" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb5-45"><a href="#cb5-45" aria-hidden="true" tabindex="-1"></a>  cout <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span>
+<span id="cb5-46"><a href="#cb5-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-47"><a href="#cb5-47" aria-hidden="true" tabindex="-1"></a>  cout <span class="op">&lt;&lt;</span> <span class="st">&quot;Vettore w: dimensione = &quot;</span> <span class="op">&lt;&lt;</span> w<span class="op">.</span>GetN<span class="op">()</span> <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span>
+<span id="cb5-48"><a href="#cb5-48" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span><span class="op">(</span><span class="dt">size_t</span> k <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> k <span class="op">&lt;</span> w<span class="op">.</span>GetN<span class="op">();</span> <span class="op">++</span>k<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb5-49"><a href="#cb5-49" aria-hidden="true" tabindex="-1"></a>      cout <span class="op">&lt;&lt;</span> w<span class="op">.</span>GetComponent<span class="op">(</span>k<span class="op">)</span> <span class="op">&lt;&lt;</span> <span class="st">&quot; &quot;</span><span class="op">;</span></span>
+<span id="cb5-50"><a href="#cb5-50" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb5-51"><a href="#cb5-51" aria-hidden="true" tabindex="-1"></a>  cout <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span>
+<span id="cb5-52"><a href="#cb5-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-53"><a href="#cb5-53" aria-hidden="true" tabindex="-1"></a>  <span class="co">// operatore di assegnazione</span></span>
+<span id="cb5-54"><a href="#cb5-54" aria-hidden="true" tabindex="-1"></a>  Vettore z<span class="op">(</span><span class="dv">10</span><span class="op">);</span></span>
+<span id="cb5-55"><a href="#cb5-55" aria-hidden="true" tabindex="-1"></a>  z <span class="op">=</span> w<span class="op">;</span></span>
+<span id="cb5-56"><a href="#cb5-56" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p>Se eseguito, questo programma mostrerà una sovrascrittura inattesa dei dati del Vettore a ed una corruzione di memoria.</p>
+<p>Si verifichi che una classe realizzata in questo modo si comporta in modo strano se usiamo l’operatore di assegnazione. Questo è un problema generico quando abbiamo classi con puntatori come data membri: bisogna assicurarsi che ciascuna istanza della classe abbia la propria zona di memoria. Affinché la classe si comporti in maniera consistente, è necessario implementare anche:</p>
+<ol>
+<li>un costruttore che abbia come argomento un altro vettore (<em>copy constructor</em>): deve creare una copia del vettore argomento.</li>
+<li>l’overloading dell’operatore di assegnazione, assicurandosi che i dati vengano copiati dal vettore di partenza a quello di arrivo.</li>
+</ol>
+<h2 id="modifiche-allheader-file">Modifiche all’header file</h2>
+<p>Per la seconda parte dell’esercizio, bisognerà aggiungere il <em>copy constructor</em> e l’operatore di assegnazione <code>operator=</code>:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>Vettore<span class="op">(</span><span class="at">const</span> Vettore <span class="op">&amp;);</span> <span class="co">// Copy constructor</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>Vettore<span class="op">&amp;</span> <span class="kw">operator</span><span class="op">=(</span><span class="at">const</span> Vettore <span class="op">&amp;);</span> <span class="co">// Operatore di assegnazione</span></span></code></pre></div>
+<p>Questo va chiaramente aggiunto all’header file della classe <code>vettore.h</code>.</p>
+<h2 id="copy-constructor"><em>Copy constructor</em></h2>
+<p>Il <em>copy constructor</em> viene invocato ogni volta che utilizziamo sintassi come:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>Vettore a<span class="op">;</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>Vettore b<span class="op">=</span>a<span class="op">;</span></span></code></pre></div>
+<p>oppure la sintassi equivalente:</p>
+<pre><code>Vettore a;
+Vettore b(a);</code></pre>
+<p>ed in tutti i casi in cui si passa un oggetto per valore. Esso viene dichiarate nell’header con la sintassi:</p>
+<pre><code>Vettore(const Vettore&amp;);</code></pre>
+<p>e nella sua implementazione dobbiamo assicurarci che l’oggetto costruito abbia la sua zone di memoria riservata:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">// overloading operatore di copia</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>Vettore<span class="op">::</span>Vettore<span class="op">(</span><span class="at">const</span> Vettore <span class="op">&amp;</span> v<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="va">m_N</span> <span class="op">=</span> V<span class="op">.</span>GetN<span class="op">();</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="va">m_v</span> <span class="op">=</span> <span class="kw">new</span> <span class="dt">double</span><span class="op">[</span><span class="va">m_N</span><span class="op">];</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span><span class="op">(</span><span class="dt">size_t</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> <span class="va">m_N</span><span class="op">;</span> <span class="op">++</span>i<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>      <span class="va">m_v</span><span class="op">[</span>i<span class="op">]</span> <span class="op">=</span> V<span class="op">.</span>GetComponent<span class="op">(</span>i<span class="op">);</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<h2 id="operatore-di-assegnazione">Operatore di assegnazione</h2>
+<p>Quando scriviamo</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> b<span class="op">;</span></span></code></pre></div>
+<p>e <code>a</code> e <code>b</code> sono oggetti della stessa classe, di fatto l’assegnazione non è altro che un abbreviazione per indicare la chiamata ad un metodo della classe di nome <code>operator=</code>:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>a<span class="op">.</span><span class="kw">operator</span><span class="op">=(</span>b<span class="op">);</span>   <span class="co">// così è come il C++ vede l&#39;istruzione `a = b`</span></span></code></pre></div>
+<p>Il compilatore fornisce un’implementazione di default di questo operatore, che corrisponde ad un assegnazione membro a membro di tutti i data membri. Ma questo non funziona se alcuni data membri sono puntatori, perché dopo l’assegnazione avremmo più oggetti che condividono la stessa area di memoria. Dobbiamo quindi realizzare un’implementazione sicura dell’assegnazione, facendo una copia dei dati in una nuova locazione di memoria.</p>
+<p>L’header file dovrà contenere una dichiarazione:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>Vettore<span class="op">&amp;</span> <span class="kw">operator</span><span class="op">=(</span><span class="at">const</span> Vettore<span class="op">&amp;);</span></span></code></pre></div>
+<p>Una possibile implementazione è data qui sotto:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co">// overloading operatore di assegnazione</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>Vettore<span class="op">&amp;</span> Vettore<span class="op">::</span><span class="kw">operator</span><span class="op">=(</span><span class="at">const</span> Vettore<span class="op">&amp;</span> v<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="va">m_N</span> <span class="op">=</span> V<span class="op">.</span>GetN<span class="op">();</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> <span class="op">(</span><span class="va">m_v</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>      <span class="kw">delete</span><span class="op">[]</span> <span class="va">m_v</span><span class="op">;</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>  <span class="va">m_v</span> <span class="op">=</span> <span class="kw">new</span> <span class="dt">double</span><span class="op">[</span><span class="va">m_N</span><span class="op">];</span></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> <span class="op">(</span><span class="dt">size_t</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> <span class="va">m_N</span><span class="op">;</span> i<span class="op">++)</span> <span class="op">{</span></span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>      <span class="va">m_v</span><span class="op">[</span>i<span class="op">]</span> <span class="op">=</span> V<span class="op">.</span>GetComponent<span class="op">(</span>i<span class="op">);</span></span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="op">*</span><span class="kw">this</span><span class="op">;</span></span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<h2 id="il-puntatore-this">Il puntatore <code>this</code></h2>
+<p>Il puntatore <code>this</code> indica un puntatore all’oggetto cui si sta applicando un metodo. È particolarmente utile in alcune occasioni, come nel caso dell’operatore di assegnazione, in cui si deve restituire una copia dell’oggetto corrente.</p>
+<h1 id="esercizio-2.1">Esercizio 2.1 - Codice di analisi dati utilizzando la classe <code>Vettore</code> (da consegnare)</h1>
+<p>Proviamo ora a riscrivere il codice della prima lezione utilizzando un contenitore di dati più raffinato: la classe <code>Vettore</code> ci permetterà di riempire il contenitore dati controllando per esempio che non stiamo sforando la dimensione allocata. Il <code>Vettore</code> inoltre si porta dietro anche la sua dimensione: se dobbiamo calcolare la media degli elementi di un <code>Vettore</code> non dobbiamo più passare la dimensione come argomento esterno.</p>
+<p>Per svolgere questo esercizio dobbiamo :</p>
+<ol>
+<li>modificare tutte le funzioni in <code>funzioni.h</code> e <code>funzioni.cpp</code>, in modo che lavorino con oggetti di tipo <code>Vettore</code> invece che con semplici array del C.</li>
+<li>modificare il <code>main</code> in modo che utilizzi la nuova classe <code>Vettore</code> e le nuove funzioni.</li>
+<li>modificare il <code>Makefile</code></li>
+</ol>
+<p>Se non ci riuscite da soli potete dare un’occhiata ai suggerimenti qui sotto.</p>
+<h2 id="struttura-del-programma">Struttura del programma</h2>
+<p>Ecco l’aspetto che potrebbe avere il nostro nuovo codice:</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co">// includo la dichiarazione della classe Vettore</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;vettore.h&quot;</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="co">// includo la dichiarazione delle funzioni</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;funzioni.h&quot;</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;cstdlib&gt;</span></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;fstream&gt;</span></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main <span class="op">(</span><span class="dt">int</span> argc<span class="op">,</span> <span class="at">const</span> <span class="dt">char</span><span class="op">*</span> argv<span class="op">[])</span> <span class="op">{</span></span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span><span class="op">(</span>argc <span class="op">&lt;</span> <span class="dv">3</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>      cerr <span class="op">&lt;&lt;</span> <span class="st">&quot;Uso del programma : &quot;</span> <span class="op">&lt;&lt;</span> argv<span class="op">[</span><span class="dv">0</span><span class="op">]</span> <span class="op">&lt;&lt;</span> <span class="st">&quot; &lt;ndata&gt; &lt;filename&gt;&quot;</span> <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>      <span class="cf">return</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a>  <span class="dt">int</span> ndata <span class="op">=</span> atoi<span class="op">(</span>argv<span class="op">[</span><span class="dv">1</span><span class="op">]);</span></span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">const</span> <span class="dt">char</span> <span class="op">*</span> filename <span class="op">=</span> argv<span class="op">[</span><span class="dv">2</span><span class="op">];</span></span>
+<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a>  Vettore v<span class="op">(</span>Read<span class="op">(</span>ndata<span class="op">,</span> filename<span class="op">));</span></span>
+<span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a>  cout <span class="op">&lt;&lt;</span> v<span class="op">[</span><span class="dv">3</span><span class="op">]</span> <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span>
+<span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-24"><a href="#cb15-24" aria-hidden="true" tabindex="-1"></a>  Print<span class="op">(</span>v<span class="op">);</span></span>
+<span id="cb15-25"><a href="#cb15-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-26"><a href="#cb15-26" aria-hidden="true" tabindex="-1"></a>  cout <span class="op">&lt;&lt;</span> <span class="st">&quot;media = &quot;</span> <span class="op">&lt;&lt;</span> CalcolaMedia<span class="op">(</span>v<span class="op">)</span> <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span>
+<span id="cb15-27"><a href="#cb15-27" aria-hidden="true" tabindex="-1"></a>  cout <span class="op">&lt;&lt;</span> <span class="st">&quot;varianza = &quot;</span> <span class="op">&lt;&lt;</span> CalcolaVarianza<span class="op">(</span>v<span class="op">)</span> <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span>
+<span id="cb15-28"><a href="#cb15-28" aria-hidden="true" tabindex="-1"></a>  cout <span class="op">&lt;&lt;</span> <span class="st">&quot;mediana = &quot;</span> <span class="op">&lt;&lt;</span> CalcolaMediana<span class="op">(</span>v<span class="op">)</span> <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span>
+<span id="cb15-29"><a href="#cb15-29" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb15-30"><a href="#cb15-30" aria-hidden="true" tabindex="-1"></a>  Print<span class="op">(</span>v<span class="op">);</span></span>
+<span id="cb15-31"><a href="#cb15-31" aria-hidden="true" tabindex="-1"></a>  Print<span class="op">(</span>v<span class="op">,</span> <span class="st">&quot;data_out.txt&quot;</span><span class="op">);</span></span>
+<span id="cb15-32"><a href="#cb15-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-33"><a href="#cb15-33" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb15-34"><a href="#cb15-34" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<h2 id="le-funzioni">Le funzioni</h2>
+<p>L’header file (<code>.h</code>) potrebbe risultare così:</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;fstream&gt;</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;vettore.h&quot;</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="kw">using</span> <span class="kw">namespace</span> std<span class="op">;</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>Vettore Read<span class="op">(</span><span class="dt">int</span><span class="op">,</span> <span class="at">const</span> <span class="dt">char</span><span class="op">*);</span></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> CalcolaMedia<span class="op">(</span><span class="at">const</span> Vettore <span class="op">&amp;);</span></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> CalcolaVarianza<span class="op">(</span><span class="at">const</span> Vettore <span class="op">&amp;);</span></span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> CalcolaMediana<span class="op">(</span>Vettore<span class="op">);</span></span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> Print<span class="op">(</span><span class="at">const</span> Vettore <span class="op">&amp;)</span> <span class="op">;</span></span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> Print<span class="op">(</span><span class="at">const</span> Vettore <span class="op">&amp;,</span> <span class="at">const</span> <span class="dt">char</span><span class="op">*);</span></span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> selection_sort<span class="op">(</span>Vettore <span class="op">&amp;);</span></span></code></pre></div>
+<p>Il file di implementazione delle funzioni (<code>.cpp</code>) potrebbe risultare così (qui e’ svolto solo il caso della media, l’estensione alle altre funzioni dovrebbe essere immediata):</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;funzioni.h&quot;</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> CalcolaMedia<span class="op">(</span> <span class="at">const</span> Vettore <span class="op">&amp;</span> v <span class="op">)</span> <span class="op">{</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> accumulo <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> <span class="op">(</span>v<span class="op">.</span>GetN<span class="op">()</span> <span class="op">==</span> <span class="dv">0</span><span class="op">)</span></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>      <span class="cf">return</span> accumulo<span class="op">;</span></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> <span class="op">(</span><span class="dt">size_t</span> k <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> k <span class="op">&lt;</span> v<span class="op">.</span>GetN<span class="op">();</span> k<span class="op">++</span> <span class="op">)</span> <span class="op">{</span></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>      accumulo <span class="op">+=</span> v<span class="op">.</span>GetComponent<span class="op">(</span>k<span class="op">);</span></span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> accumulo <span class="op">/</span> <span class="kw">static_cast</span><span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;(</span>v<span class="op">.</span>GetN<span class="op">());</span></span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<h2 id="makefile">Makefile</h2>
+<p>Il makefile va modificato aggiungendo la compilazione della classe <code>Vettore</code>:</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode makefile"><code class="sourceCode makefile"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="dt">CXXFLAGS </span><span class="ch">=</span><span class="st"> -g -Wall --pedantic -std=c++11</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="dv">main:</span><span class="dt"> main.o vettore.o funzioni.o</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>    g++ -o <span class="ch">$@</span> main.o vettore.o funzioni.o <span class="ch">$(</span><span class="dt">CXXFLAGS</span><span class="ch">)</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a><span class="dv">main.o:</span><span class="dt"> main.cpp funzioni.h</span></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>    g++ -c -o <span class="ch">$@</span> main.cpp <span class="ch">$(</span><span class="dt">CXXFLAGS</span><span class="ch">)</span></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a><span class="dv">funzioni.o:</span><span class="dt"> funzioni.cpp funzioni.h</span></span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>    g++ -c -o <span class="ch">$@</span> funzioni.cpp <span class="ch">$(</span><span class="dt">CXXFLAGS</span><span class="ch">)</span></span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a><span class="dv">vettore.o:</span><span class="dt"> vettore.cpp vettore.h</span></span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>    g++ -c -o <span class="ch">$@</span> vettore.cpp <span class="ch">$(</span><span class="dt">CXXFLAGS</span><span class="ch">)</span></span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a><span class="dv">clean:</span></span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a>    rm -f *.o</span>
+<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a><span class="dv">cleanall:</span><span class="dt"> clean</span></span>
+<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a>    rm -f main</span></code></pre></div>
+<p>Perchè <code>CalcolaMedia</code> vuole in input un <code>const Vettore &amp;</code>, mentre CalcolaMediana semplicemente un <code>Vettore</code>?</p>
+<ul>
+<li>Nel caso di <code>CalcolaMedia(...)</code> o <code>CalcolaVarianza(...)</code>, il passaggio del parametro avviene <em>by reference</em> per ottimizzare l’uso della memoria. Con questa modalità di passaggio dati la funzione lavora direttamente sul <code>Vettore</code> del <code>main</code>, e pertanto una modifica accidentale del <code>Vettore</code> di input all’interno della funzione ha un effetto anche nel <code>main</code>. Il qualificatore <code>const</code> vieta alla funzione di fare qualsiasi operazione di cambiamento del contenuto del vettore di input, pena un errore di compilazione.</li>
+<li>Nel caso invece di <code>CalcolaMediana(...)</code>, il passaggio e’ effettuato <em>by value</em> e senza il qualificatore <code>const</code>: in questo modo permettiamo che il metodo proceda al riodinamento del <code>Vettore</code>. Dal momento che con il passaggio <em>by value</em> il <code>Vettore</code> nella funzione è una copia del <code>Vettore</code> di input, ogni cambiamento effettuato nella funzione non si ripercuote sul <code>main</code>.</li>
+</ul>
+<h2 id="only-for-curious-kids-the-move-semantic">Only for curious kids: the <em>move semantic</em></h2>
+<p><em>Move semantics</em> è un nuovo modo, introdotto col C++11, di spostare le risorse in un modo ottimale evitando di creare copie non necessarie di oggetti temporanei ed è basato sulle <em>r-value references</em>. La potenza della <em>move semantics</em> si può capire affrontando il caso in cui si voglia costruire un oggetto della classe <code>Vettore</code> a partire dall’output di una funzione:</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>Vettore v <span class="op">=</span> Read<span class="op">(</span>ndata<span class="op">,</span> filename<span class="op">);</span></span></code></pre></div>
+<p>La funzione <code>Read()</code> restituirà un oggetto temporaneo di tipo <code>Vettore</code> che poi verrà utilizzato come input del costruttore di copia per la creazione di <code>v</code>. Chiaramente, questo riduce notevolmente le <em>performance</em> del nostro codice. Perché non realizzare un costruttore di copia (e un operatore di assegnazione) che siano in grado di «rubare» i data membri all’oggetto temporaneo senza dover copiare dati? Questo è lo spirito del <em>move constructor</em> e <em>move assignment operator</em>:</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co">// move constructor</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>Vettore<span class="op">::</span>Vettore<span class="op">(</span> Vettore<span class="op">&amp;&amp;</span> V<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>  cout <span class="op">&lt;&lt;</span> <span class="st">&quot;Invocazione del move constructor&quot;</span> <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>  <span class="va">m_N</span> <span class="op">=</span> V<span class="op">.</span><span class="va">m_N</span><span class="op">;</span></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>  <span class="va">m_v</span> <span class="op">=</span> V<span class="op">.</span><span class="va">m_v</span><span class="op">;</span></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>  V<span class="op">.</span><span class="va">m_N</span> <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>  V<span class="op">.</span><span class="va">m_v</span> <span class="op">=</span> <span class="kw">nullptr</span><span class="op">;</span></span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>  cout <span class="op">&lt;&lt;</span> <span class="st">&quot;Move constructor chiamato&quot;</span> <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a><span class="co">// move assigment operator</span></span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a>Vettore<span class="op">&amp;</span> Vettore<span class="op">::</span><span class="kw">operator</span><span class="op">=(</span>Vettore<span class="op">&amp;&amp;</span> V<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a>  cout <span class="op">&lt;&lt;</span> <span class="st">&quot;Invocazione del move assignment operator&quot;</span> <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span>
+<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a>  <span class="kw">delete</span> <span class="op">[]</span> <span class="va">m_v</span> <span class="op">;</span></span>
+<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a>  <span class="va">m_N</span> <span class="op">=</span> V<span class="op">.</span><span class="va">m_N</span><span class="op">;</span></span>
+<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a>  <span class="va">m_v</span> <span class="op">=</span> V<span class="op">.</span><span class="va">m_v</span><span class="op">;</span></span>
+<span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb20-21"><a href="#cb20-21" aria-hidden="true" tabindex="-1"></a>  V<span class="op">.</span><span class="va">m_N</span> <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb20-22"><a href="#cb20-22" aria-hidden="true" tabindex="-1"></a>  V<span class="op">.</span><span class="va">m_v</span> <span class="op">=</span> <span class="kw">nullptr</span><span class="op">;</span></span>
+<span id="cb20-23"><a href="#cb20-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-24"><a href="#cb20-24" aria-hidden="true" tabindex="-1"></a>  cout <span class="op">&lt;&lt;</span> <span class="st">&quot;Move assignment operator invocato&quot;</span> <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span>
+<span id="cb20-25"><a href="#cb20-25" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="op">*</span><span class="kw">this</span><span class="op">;</span></span>
+<span id="cb20-26"><a href="#cb20-26" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<ul>
+<li>Notare la doppia <code>&amp;&amp;</code> al vettore in input: qui stiamo sfruttando la referenza ad un <em>rvalue</em>.</li>
+<li>Il <em>move constructor</em> e <em>move assignment operator</em> semplicemente rubano i dati all’oggetto temporaneo (non c’è copia elemento per elemento).</li>
+<li>Il puntatore dell’oggetto di input viene sganciato dai dati.</li>
+<li>Per vedere il move constructor all’opera potrebbe essere necessario aggiungere la flag <code>-fno-elide-constructors</code> per disattivare eventuali ottimizzazioni interne del compilatore che maschererebbero l’uso del <em>move constructor</em>.</li>
+<li>Per ulteriori spiegazioni, vedere anche le <a href="tomasi-lezione-02.html#move-semantics">slide addizionali</a>.</li>
+</ul>                    
+                </div>
+            </div>
+
+            <script src="https://vjs.zencdn.net/5.4.4/video.js"></script>
+        </div>
+    </body>
+</html>

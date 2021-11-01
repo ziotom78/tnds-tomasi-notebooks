@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html  lang="it-IT"  dir="ltr">
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Lezione 8: Quadratura numerica</title>
+        <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+        <link rel="apple-touch-icon-precomposed" href="images/apple-touch-icon.png">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/2.26.4/css/uikit.gradient.css">
+
+        <!-- <link rel="stylesheet" href="style.css"> -->
+        <link rel="stylesheet" href="https://cdn.rawgit.com/diversen/pandoc-uikit/master/style.css">
+        <link href="https://vjs.zencdn.net/5.4.4/video-js.css" rel="stylesheet" />
+        <script src="https://code.jquery.com/jquery-2.2.1.min.js"></script>
+        <!-- <script src="uikit.js"></script> -->
+        <script src="https://cdn.rawgit.com/diversen/pandoc-uikit/master/uikit.js"></script>
+        <!-- <script src="scripts.js"></script> -->
+        <script src="https://cdn.rawgit.com/diversen/pandoc-uikit/master/scripts.js"></script>
+        <!-- <script src="jquery.sticky-kit.js "></script> -->
+        <script src="https://cdn.rawgit.com/diversen/pandoc-uikit/master/jquery.sticky-kit.js"></script>
+
+        <meta name="generator" content="pandoc-uikit" />
+                <meta name="author" content="Leonardo Carminati" />
+                <meta name="author" content="Maurizio Tomasi" />
+                        <title>Lezione 8: Quadratura numerica</title>
+        <style type="text/css">code{white-space: pre;}</style>
+                        <style type="text/css">
+            pre > code.sourceCode { white-space: pre; position: relative; }
+            pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+            pre > code.sourceCode > span:empty { height: 1.2em; }
+            .sourceCode { overflow: visible; }
+            code.sourceCode > span { color: inherit; text-decoration: inherit; }
+            div.sourceCode { margin: 1em 0; }
+            pre.sourceCode { margin: 0; }
+            @media screen {
+            div.sourceCode { overflow: auto; }
+            }
+            @media print {
+            pre > code.sourceCode { white-space: pre-wrap; }
+            pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+            }
+            pre.numberSource code
+              { counter-reset: source-line 0; }
+            pre.numberSource code > span
+              { position: relative; left: -4em; counter-increment: source-line; }
+            pre.numberSource code > span > a:first-child::before
+              { content: counter(source-line);
+                position: relative; left: -1em; text-align: right; vertical-align: baseline;
+                border: none; display: inline-block;
+                -webkit-touch-callout: none; -webkit-user-select: none;
+                -khtml-user-select: none; -moz-user-select: none;
+                -ms-user-select: none; user-select: none;
+                padding: 0 4px; width: 4em;
+                color: #aaaaaa;
+              }
+            pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+            div.sourceCode
+              {   }
+            @media screen {
+            pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+            }
+            code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+            code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+            code span.at { color: #7d9029; } /* Attribute */
+            code span.bn { color: #40a070; } /* BaseN */
+            code span.bu { } /* BuiltIn */
+            code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+            code span.ch { color: #4070a0; } /* Char */
+            code span.cn { color: #880000; } /* Constant */
+            code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+            code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+            code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+            code span.dt { color: #902000; } /* DataType */
+            code span.dv { color: #40a070; } /* DecVal */
+            code span.er { color: #ff0000; font-weight: bold; } /* Error */
+            code span.ex { } /* Extension */
+            code span.fl { color: #40a070; } /* Float */
+            code span.fu { color: #06287e; } /* Function */
+            code span.im { } /* Import */
+            code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+            code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+            code span.op { color: #666666; } /* Operator */
+            code span.ot { color: #007020; } /* Other */
+            code span.pp { color: #bc7a00; } /* Preprocessor */
+            code span.sc { color: #4070a0; } /* SpecialChar */
+            code span.ss { color: #bb6688; } /* SpecialString */
+            code span.st { color: #4070a0; } /* String */
+            code span.va { color: #19177c; } /* Variable */
+            code span.vs { color: #4070a0; } /* VerbatimString */
+            code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+        </style>
+                                            <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.js"></script>
+                                            <script>document.addEventListener("DOMContentLoaded", function () {
+                                             var mathElements = document.getElementsByClassName("math");
+                                             var macros = [];
+                                             for (var i = 0; i < mathElements.length; i++) {
+                                              var texText = mathElements[i].firstChild;
+                                              if (mathElements[i].tagName == "SPAN") {
+                                               katex.render(texText.data, mathElements[i], {
+                                                displayMode: mathElements[i].classList.contains('display'),
+                                                throwOnError: false,
+                                                macros: macros,
+                                                fleqn: false
+                                               });
+                                            }}});
+                                            </script>
+                                            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css" />
+                               
+    </head>
+
+    <body oncopy="return false" oncut="return false" onpaste="return false">
+
+
+        <div class="uk-container uk-container-center uk-margin-top uk-margin-large-bottom">
+
+                        <div class="uk-grid" data-uk-grid-margin>
+                <div class="uk-width-1-1">
+                    <h1 class="uk-heading-large">Lezione 8: Quadratura numerica</h1>
+                                        <h3 class="uk-heading-large">A.A. 2021−2022</p></h3>
+                                                            <p class="uk-text-large">Leonardo Carminati</p>
+                                        <p class="uk-text-large">Maurizio Tomasi</p>
+                                    </div>
+            </div>
+            
+            <div class="uk-grid" data-uk-grid-margin >          
+                <div class="uk-width-medium-1-4">
+                    <div class="uk-overflow-container" data-uk-sticky="{top:25,media: 768}">
+                        <div class="uk-panel uk-panel-box menu-begin" >
+
+                                                        <ul>
+                                                        <li><a href="#esercizio-8.0">Esercizio 8.0 - Integrazione con la formula del mid-point</a>
+                                                        <ul>
+                                                        <li><a href="#il-metodo-del-mid-point">Il metodo del mid-point</a></li>
+                                                        <li><a href="#cenni-sullimplementazione">Cenni sull’implementazione</a></li>
+                                                        </ul></li>
+                                                        <li><a href="#esercizio-8.1">Esercizio 8.1 - Integrazione alla Simpson (da consegnare)</a>
+                                                        <ul>
+                                                        <li><a href="#il-metodo-simpson">Il metodo Simpson</a></li>
+                                                        </ul></li>
+                                                        <li><a href="#esercizio-8.2">Esercizio 8.2 - Integrazione con la formula dei trapezi con precisione fissata (da consegnare)</a>
+                                                        <ul>
+                                                        <li><a href="#stima-runtime-dellerrore">Stima runtime dell’errore</a></li>
+                                                        <li><a href="#cenni-sullimplementazione-1">Cenni sull’implementazione</a></li>
+                                                        </ul></li>
+                                                        </ul>
+                            
+                        </div>
+                    </div>
+                </div>
+
+                <div class="uk-width-medium-3-4">
+<p>[La pagina con la spiegazione originale degli esercizi si trova qui: <a href="http://labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/lezione8_1819.html">labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/lezione8_1819.html</a>.]</p>
+<p>In questa lezione implementeremo alcuni algoritmi per la quadratura numerica, cioè per il calcolo di integrali definiti di funzioni in un intervallo chiuso e la valutazione dell’errore commesso nel calcolo dell’integrale stesso. Questo si rende necessario quando non sappiamo valutare analiticamente l’integrale in esame, quando non si riesce ad esprimere la primitiva in funzioni elementari, quando la soluzione analitica è molto complicata ed il calcolo numerico è molto più semplice, oppure quando la funzione è conosciuta in un numeri finito di punti.</p>
+<h1 id="esercizio-8.0">Esercizio 8.0 - Integrazione con la formula del mid-point</h1>
+<p>Implementare un codice per il calcolo della funzione <span class="math inline">\sin(x)</span> su <span class="math inline">[0, \pi]</span> con il metodo del mid-point, con un numero di passi fissato passato da riga di comando. Per controllare la precisione ottenuta con un numero di passi fissato si richiede di stampare una tabella con la differenza tra il risultato numerico ed il valore esatto analitico in funzione del numero di passi (o della lunghezza del passo <span class="math inline">h</span>).</p>
+<p>In aggiunta alla tabella, si può rappresentare l’andamento dell’errore in funzione della lunghezza del passo <span class="math inline">h</span> con un <code>TGraph</code> di ROOT (una traccia su come visualizzare i dati usando un TGraph di ROOT si può trovare <a href="./codici/test_tgraph.cpp">qui</a>).</p>
+<h2 id="il-metodo-del-mid-point">Il metodo del mid-point</h2>
+<p>Ricordiamo che in questo metodo l’approssimazione dell’integrale è definita dalla formula</p>
+<p><span class="math display">
+\int_a^b f(x)\,\mathrm{d}x = \bigl(f(x_0) + f(x_1) + \ldots + f(x_{N - 1})\bigl),\quad h = \frac{b - a}N, \quad x_k = a + \left(k + \frac12\right) h,
+</span></p>
+<p>che fornisce un’accuratezza dell’integrale di <span class="math inline">O(h^2)</span>. Notate che questo metodo non richiede il calcolo della funzione negli estremi di integrazione.</p>
+<h2 id="cenni-sullimplementazione">Cenni sull’implementazione</h2>
+<p>L’algoritmo è implementato all’interno di una classe che inizializza le variabili necessarie all’algoritmo. Qui ne vediamo l’esempio di un possibile <em>header</em>. Il costruttore prende in ingresso gli estremi di integrazione ed il numero di passi richiesto per eseguire l’integrale. Sono già dichiarati i metodi di integrazione del mid-point e di Simpson. Al costruttore è passata la funzione integranda usando la classe <code>FunzioneBase</code> definita nelle lezioni precedenti.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#pragma once</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;funzioni.h&quot;</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Integral <span class="op">{</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span><span class="op">:</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  Integral<span class="op">(</span><span class="dt">double</span> a<span class="op">,</span> <span class="dt">double</span> b<span class="op">,</span> <span class="at">const</span> FunzioneBase <span class="op">*</span> f<span class="op">);</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> Midpoint<span class="op">(</span><span class="dt">unsigned</span> <span class="dt">int</span> nstep<span class="op">);</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> Simpson<span class="op">(</span><span class="dt">unsigned</span> <span class="dt">int</span> nstep<span class="op">);</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="kw">private</span><span class="op">:</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> <span class="va">m_a</span><span class="op">,</span> <span class="va">m_b</span><span class="op">;</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> <span class="va">m_sum</span><span class="op">;</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> <span class="va">m_h</span><span class="op">;</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>  <span class="dt">int</span> <span class="va">m_sign</span><span class="op">;</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> <span class="va">m_integral</span><span class="op">;</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">const</span> FunzioneBase <span class="op">*</span> <span class="va">m_f</span><span class="op">;</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code></pre></div>
+<p>La classe invece è così implementata:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;integrale.h&quot;</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;algorithm&gt;</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="kw">using</span> <span class="kw">namespace</span> std<span class="op">;</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>Integral<span class="op">::</span>Integral<span class="op">(</span><span class="dt">double</span> a<span class="op">,</span> <span class="dt">double</span> b<span class="op">,</span> <span class="at">const</span> FunzioneBase <span class="op">*</span> f<span class="op">)</span> <span class="op">:</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="va">m_a</span><span class="op">{</span>min<span class="op">(</span>a<span class="op">,</span> b<span class="op">)},</span> <span class="va">m_b</span><span class="op">{</span>max<span class="op">(</span>a<span class="op">,</span> b<span class="op">)},</span> <span class="va">m_f</span><span class="op">{</span>f<span class="op">}</span> <span class="op">{</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Assegna a `m_sign` il valore 1 se a &gt; b, −1 altrimenti</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  <span class="va">m_sign</span> <span class="op">=</span> a <span class="op">&gt;</span> b <span class="op">?</span> <span class="dv">1</span> <span class="op">:</span> <span class="op">-</span><span class="dv">1</span><span class="op">;</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> Integral<span class="op">::</span>Midpoint<span class="op">(</span><span class="dt">unsigned</span> <span class="dt">int</span> nstep<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>  <span class="va">m_h</span> <span class="op">=</span> <span class="op">(</span><span class="va">m_b</span> <span class="op">-</span> <span class="va">m_a</span><span class="op">)</span> <span class="op">/</span> nstep<span class="op">;</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>  <span class="va">m_sum</span> <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> <span class="op">(</span><span class="dt">unsigned</span> <span class="dt">int</span> i<span class="op">{};</span> i <span class="op">&lt;</span> nstep<span class="op">;</span> i<span class="op">++)</span> <span class="op">{</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>      <span class="va">m_sum</span> <span class="op">+=</span> <span class="va">m_f</span><span class="op">-&gt;</span>Eval<span class="op">(</span><span class="va">m_a</span> <span class="op">+</span> <span class="op">(</span>i <span class="op">+</span> <span class="fl">0.5</span><span class="op">)</span> <span class="op">*</span> <span class="va">m_h</span><span class="op">);</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>  <span class="va">m_integral</span> <span class="op">=</span> <span class="va">m_sign</span><span class="op">*</span><span class="va">m_sum</span><span class="op">*</span><span class="va">m_h</span><span class="op">;</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="va">m_integral</span><span class="op">;</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p>dove gli estremi di integrazione vengono controllati, messi in ordine e viene poi implementato il metodo del mid-point secondo la formula appropriata.</p>
+<p><strong>Caccia all’errore</strong>: l’implementazione contiene un errore. Per metterlo in evidenza, provate ad integrare <span class="math inline">f(x) = \sin x</span> tra <span class="math inline">\pi / 2</span> e <span class="math inline">\pi</span>: vedrete che la convergenza non è <span class="math inline">O(h^2)</span>, ma solo <span class="math inline">O(h)</span>. Se applicate correttamente l’algoritmo, dovete riscontrare il comportamento atteso.</p>
+<p>Un esempio di codice di test per la classe integratore può quindi essere il seguente:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;cmath&gt;</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;iomanip&gt;</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;fmtlib.h&quot;</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;funzioni.h&quot;</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;integrale.h&quot;</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="kw">using</span> <span class="kw">namespace</span> std<span class="op">;</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">(</span><span class="dt">int</span> argc<span class="op">,</span> <span class="at">const</span> <span class="dt">char</span> <span class="op">*</span> argv<span class="op">[])</span> <span class="op">{</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span><span class="op">(</span>argc <span class="op">!=</span> <span class="dv">2</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>      cerr <span class="op">&lt;&lt;</span> <span class="st">&quot;Usage : ./esercizio8.0 nstep&quot;</span> <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>      <span class="cf">return</span> <span class="op">-</span><span class="dv">1</span><span class="op">;</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> a<span class="op">{};</span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> b<span class="op">{</span>M_PI<span class="op">};</span></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>  <span class="dt">int</span> nstep<span class="op">{</span>atoi<span class="op">(</span>argv<span class="op">[</span><span class="dv">1</span><span class="op">])};</span></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>  Seno <span class="op">*</span> mysin<span class="op">{</span><span class="kw">new</span> Seno<span class="op">()};</span></span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>  Integral <span class="op">*</span> integrator<span class="op">{</span><span class="kw">new</span> Integral<span class="op">(</span>a<span class="op">,</span> b<span class="op">,</span> mysin<span class="op">)};</span></span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>  fmt<span class="op">::</span>print<span class="op">(</span><span class="st">&quot;midpoint: </span><span class="sc">{:.12f}\n</span><span class="st">&quot;</span><span class="op">,</span> integrator<span class="op">-&gt;</span>Midpoint<span class="op">(</span>nstep<span class="op">));</span></span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>  fmt<span class="op">::</span>print<span class="op">(</span><span class="st">&quot;Simpson : </span><span class="sc">{:.12f}\n</span><span class="st">&quot;</span><span class="op">,</span> integrator<span class="op">-&gt;</span>Simpson<span class="op">(</span>nstep<span class="op">));</span></span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Senza usare fmtlib.h:</span></span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>  <span class="co">// cout &lt;&lt; setprecision(12) &lt;&lt; integrator-&gt;Midpoint(nstep) &lt;&lt; endl;</span></span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>  <span class="co">// cout &lt;&lt; setprecision(12) &lt;&lt; integrator-&gt;Simpson(nstep) &lt;&lt; endl;</span></span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p>dove abbiamo utilizzato una classe <code>Seno</code> che eredita dalla classe astratta <code>FunzioneBase</code>.</p>
+<h1 id="esercizio-8.1">Esercizio 8.1 - Integrazione alla Simpson (da consegnare)</h1>
+<p>Implementare l’integrazione con il metodo di Simpson con un numero di passi definito (è possibile farlo all’interno della classe già precedentemente costruita aggiungendo nuovi metodi e, se necessario, costruttori). Come nell’<a href="#esercizio-8.0">Esercizio 8.0</a>, stampare una tabella (o costruire un <code>TGraph</code> di ROOT) con la precisione raggiunta in funzione del numero di passi.</p>
+<h2 id="il-metodo-simpson">Il metodo Simpson</h2>
+<p>Nel metodo di integrazione alla Simpson, la funzione integranda è approssimata, negli intervalli <span class="math inline">[x_k, x_{k + 2}]</span> (dove <span class="math inline">k</span> è un intero pari e <span class="math inline">x_k = a + k h</span>) con un polinomio di secondo grado i cui nodi sono nei punti <span class="math inline">\bigl(x_k, f(x_k)\bigr)</span>, <span class="math inline">\bigl(x_{k + 1}, f(x_{k + 1})\bigr)</span>, <span class="math inline">\bigl(x_{k + 2}, f(x_{k + 2})\bigr)</span>. Esso fornisce una valutazione dell’integrale con una precisione pari a <span class="math inline">h^4</span>. La sua applicazione richiede che il numero di passi sia pari e la formula che approssima l’integrale è</p>
+<p><span class="math display">
+\int_a^b f(x)\,\mathrm{d}x = h \cdot \left(
+\frac13 f(x_o) + \frac43 f(x_1) + \frac23 f(x_2) + \frac43 f(x_3) + \ldots
++ \frac23 f(x_{N - 2}) + \frac43 f(x_{N - 1}) + \frac13 f(x_N)\bigl)
+\right), \quad h = \frac{b - a}N, \quad x_k = a + k h.
+</span></p>
+<h1 id="esercizio-8.2">Esercizio 8.2 - Integrazione con la formula dei trapezi con precisione fissata (da consegnare)</h1>
+<p>Implementare l’integrazione della funzione <span class="math inline">\sin(x)</span> su <span class="math inline">[0, \pi]</span> con il metodo dei trapezi e con precisione fissata all’interno della classe definita in precedenza. Occorrerà definire un costruttore che prenda in ingresso gli estremi di integrazione e la precisione desiderata passata dalla riga di comando.</p>
+<h2 id="stima-runtime-dellerrore">Stima runtime dell’errore</h2>
+<p>Come possiamo fare a stimare l’errore che stiamo commettendo nel calcolo di un integrale se non conosciamo il valore vero I dell’integrale? Partendo dalla conoscenza dell’andamento teorico dell’errore in funzione del passo h possiamo trovare un modo semplice per la stima dell’errore che stiamo commettendo. Nel caso della regola dei trapezi, l’adamento dell’errore è <span class="math inline">\epsilon = k h^2</span>. Calcolando l’integrale <span class="math inline">I_N</span> utilizzando un passo <span class="math inline">h</span> e successivamente l’intgrale <span class="math inline">I_{2N}</span> con un passo <span class="math inline">h/2</span> possiamo scrivere il seguente sistema di equazioni: <span class="math display">
+\begin{cases}
+I - I_N = k h^2,
+I - I_{2N} = k\left(\frac{h}2\right)^2.
+\end{cases}
+</span></p>
+<p>Sottraendo la prima equazione alla seconda, si ricava che una stima dell’errore è pari a <span class="math display">
+\epsilon(N) = \frac43 \left|I_{2N} - I_N\right|.
+</span></p>
+<h2 id="cenni-sullimplementazione-1">Cenni sull’implementazione</h2>
+<p>La condizione di uscita dell’algoritmo è basata sul confronto del risultato di due passaggi successivi. Se la differenza della stima dell’integrale tra due passaggi consecutivi è più piccola della precisione richiesta allora l’algoritmo si ferma. Questo poichè l’integrale calcolato con una partizione più fine è sempre una stima migliore dell’approssimazione con la partizione originaria. Nel costruttore calcoliamo la prima approssimazione:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>sum0 <span class="op">=</span> <span class="op">(</span>f<span class="op">[</span>a<span class="op">]</span> <span class="op">+</span> f<span class="op">[</span>b<span class="op">])</span> <span class="op">/</span> <span class="dv">2</span><span class="op">;</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>I0 <span class="op">=</span> sum0 <span class="op">*</span> <span class="op">(</span>b <span class="op">-</span> a<span class="op">);</span></span></code></pre></div>
+<p>Al primo passaggio dell’algoritmo suddividiamo l’intervallo in due:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>sum1 <span class="op">=</span> sum0 <span class="op">+</span> f<span class="op">[</span>x11<span class="op">];</span> </span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>I1 <span class="op">=</span> sum1 <span class="op">*</span> <span class="op">(</span>b <span class="op">-</span> a<span class="op">)</span> <span class="op">/</span> <span class="dv">2</span><span class="op">;</span></span></code></pre></div>
+<p>e così secondo lo schema in figura:</p>
+<p><img src="http://labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/figure/intervallo.png" /></p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>sum2 <span class="op">=</span> sum1 <span class="op">+</span> f<span class="op">[</span>x21<span class="op">]</span> <span class="op">+</span> f<span class="op">[</span>x22<span class="op">];</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>I2 <span class="op">=</span> sum2 <span class="op">*</span> <span class="op">(</span>b <span class="op">-</span> a<span class="op">)</span> <span class="op">/</span> <span class="dv">4</span><span class="op">;</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>sum3 <span class="op">=</span> sum2 <span class="op">+</span> f<span class="op">[</span>x31<span class="op">]</span> <span class="op">+</span> f<span class="op">[</span>x32<span class="op">]</span> <span class="op">+</span> f<span class="op">[</span>x33<span class="op">]</span> <span class="op">+</span> f<span class="op">[</span>x34<span class="op">];</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>I3 <span class="op">=</span> sum3 <span class="op">*</span> <span class="op">(</span>b <span class="op">-</span> a<span class="op">)</span> <span class="op">/</span> <span class="dv">8</span><span class="op">;</span></span></code></pre></div>
+<p>I valori dell’ultima approssimazione dell’integrale e dell’ultima somma calcolata sono memorizzati all’interno dell’oggetto. In questo modo, se viene richiesto di ricalcolare l’integrale, non è necessario ricominciare da capo.</p>                    
+                </div>
+            </div>
+
+            <script src="https://vjs.zencdn.net/5.4.4/video.js"></script>
+        </div>
+    </body>
+</html>
