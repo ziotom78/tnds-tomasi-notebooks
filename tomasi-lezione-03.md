@@ -1,23 +1,32 @@
-% Laboratorio di TNDS -- Lezione 3
-% Maurizio Tomasi
-% Martedì 19 Ottobre 2021
+---
+title: Laboratorio di TNDS -- Lezione 3
+author: Maurizio Tomasi
+date: Martedì 19 Ottobre 2021
+theme: white
+progress: true
+slideNumber: true
+background-image: ./media/background.png
+width: 1440
+height: 810
+css:
+- ./css/custom.css
+- ./css/asciinema-player.css
+...
 
 # Esercizi per oggi
 
 # Link alle risorse online
 
--   Gli esercizi di oggi sono disponibili sul sito del corso [labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/lezione3_1819.html](http://labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/lezione3_1819.html).
+-   La spiegazione dettagliata degli esercizi si trova qui: [carminati-esercizi-03.html](carminati-esercizi-03.html).
 
 -   Come al solito, queste slides, che forniscono suggerimenti addizionali rispetto alla lezione di teoria, sono disponibili all'indirizzo [ziotom78.github.io/tnds-tomasi-notebooks](https://ziotom78.github.io/tnds-tomasi-notebooks/).
 
 
 # Esercizi
 
--   3.0: Evoluzione della classe Vettore in una classe template (da consegnare)
-
--   3.1: Codice di analisi dati utilizzando la classe vector (da consegnare)
-
--   3.2: Analisi dati con vector e visualizzazione dei dati (da consegnare)
+-   [Esercizio 3.0](carminati-esercizi-03.html#esercizio-3.0): Evoluzione della classe `Vettore` in una classe `template` (da consegnare)
+-   [Esercizio 3.1](carminati-esercizi-03.html#esercizio-3.1): Codice di analisi dati utilizzando la classe `vector` (da consegnare)
+-   [Esercizio 3.2](carminati-esercizi-03.html#esercizio-3.2): Analisi dati con `vector` e visualizzazione dei dati (da consegnare)
 
 
 # Test con `assert`
@@ -73,7 +82,7 @@ void test_statistical_functions(void) {
 <iframe src="https://player.vimeo.com/video/630209637?h=fcc3022dd1&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" width="854" height="642" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen title="How to reduce the size of Intellisense cache"></iframe>
 
 
-# `cout` e `cerr`
+# `cout` e `cerr` {#cout-e-cerr}
 
 # Scrittura a video
 
@@ -129,7 +138,7 @@ Con l'esempio seguente, è possibile usare il reindirizzamento:
 
 -   In generale, stampate su `cerr` tutto ciò che bisogna mostrare all'utente *subito*, e non ha senso salvare in un file per essere eventualmente guardato dopo.
 
-# Tipi di errore
+# Tipi di errore {#tipi-di-errore}
 
 # Uso di `assert` e di `cerr`
 

@@ -1,6 +1,18 @@
-% Laboratorio di TNDS -- Lezione 1
-% Maurizio Tomasi
-% Martedì 5 Ottobre 2021
+---
+title: Laboratorio di TNDS -- Lezione 1
+author: Maurizio Tomasi
+date: Martedì 5 Ottobre 2021
+lang: it-IT
+theme: white
+progress: true
+slideNumber: true
+background-image: ./media/background.png
+width: 1440
+height: 810
+css:
+- css/custom.css
+- css/asciinema-player.css
+...
 
 # Introduzione al corso
 
@@ -15,27 +27,23 @@
 
 # Avvertenza generale
 
--   *Non* fare copia-e-incolla da slide come queste! Trascrivere a mano il
-codice è più utile, perché vi consente di notare alcune sottigliezze
-sintattiche (es., dove vengono usati i punti e virgola).
+-   *Non* fare copia-e-incolla da slide come queste! Trascrivere a mano il codice è più utile, perché vi consente di notare alcune sottigliezze sintattiche (es., dove vengono usati i punti e virgola).
 
--   In generale, trascrivere codice è un ottimo allenamento per imparare a
-scrivere programmi.
+-   In generale, trascrivere codice è un ottimo allenamento per imparare a scrivere programmi.
 
 
 # Esercizi per oggi
 
--   La spiegazione dettagliata è sul sito del corso
-[labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/lezione1_1819.html](http://labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/lezione1_1819.html).
+-   La spiegazione dettagliata degli esercizi si trova qui: [carminati-esercizi-01.html](carminati-esercizi-01.html).
 
 -   Gli esercizi sono i seguenti:
 
-    -   1.0: Calcolo di media, varianza e mediana dei dati letti da un file
-    -   1.1: Codice di analisi con funzioni (variante del precedente)
-    -   1.2: Codice di analisi con `Makefile` (variante del precedente)
-    -   1.3: Codice di analisi con overloading (variante del precedente)
+    -   [Esercizio 1.0](carminati-esercizi-01.html#esercizio-1.0): Calcolo di media, varianza e mediana dei dati letti da un file
+    -   [Esercizio 1.1](carminati-esercizi-01.html#esercizio-1.1): Codice di analisi con funzioni (variante del precedente)
+    -   [Esercizio 1.2](carminati-esercizi-01.html#esercizio-1.2): Codice di analisi con `Makefile` (variante del precedente)
+    -   [Esercizio 1.3](carminati-esercizi-01.html#esercizio-1.3): Codice di analisi con overloading (variante del precedente)
 
--   Dovrete leggere i dati dal file [`data.dat`](./data/data.dat) (seguite il link per scaricarlo).
+-   Dovrete leggere i dati dal file [`data.dat`](./data/data.dat) (fate click col tasto destro e salvate il link sul vostro computer).
 
 # Esercizi per oggi
 
@@ -277,7 +285,7 @@ prompt):
     ```
 
 
-# Flag del compilatore
+# Flag del compilatore {#flag-del-compilatore}
 
 
 -   È utile specificare dei flag aggiuntivi per la compilazione, tramite la riga

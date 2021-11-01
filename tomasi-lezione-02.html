@@ -82,8 +82,8 @@
     code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
   </style>
   <link rel="stylesheet" href="https://unpkg.com/reveal.js@^4//dist/theme/white.css" id="theme">
-  <link rel="stylesheet" href="./css/custom.css"/>
-  <link rel="stylesheet" href="./css/asciinema-player.css"/>
+  <link rel="stylesheet" href="css/custom.css"/>
+  <link rel="stylesheet" href="css/asciinema-player.css"/>
 </head>
 <body>
   <div class="reveal">
@@ -101,7 +101,7 @@
 <section id="link-alle-risorse-online" class="slide level1">
 <h1>Link alle risorse online</h1>
 <ul>
-<li><p>Gli esercizi di oggi sono disponibili sul sito del corso <a href="http://labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/lezione2_1819.html">labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/lezione2_1819.html</a>.</p></li>
+<li><p>La spiegazione dettagliata degli esercizi si trova qui: <a href="carminati-esercizi-02.html">carminati-esercizi-02.html</a>.</p></li>
 <li><p>Come al solito, queste slides, che forniscono suggerimenti addizionali rispetto alla lezione di teoria, sono disponibili all’indirizzo <a href="https://ziotom78.github.io/tnds-tomasi-notebooks/">ziotom78.github.io/tnds-tomasi-notebooks</a>.</p></li>
 </ul>
 </section>
@@ -109,8 +109,8 @@
 <h1>Esercizi</h1>
 <ul>
 <li><p>Lo scopo della lezione di oggi è introdurre il concetto di «classe», che è un tipo di dato complesso del linguaggio C++, creando una classe <code>Vettore</code> che implementa un array «intelligente» di valori <code>double</code>.</p></li>
-<li><p>Esercizio 2.0: creazione della classe <code>Vettore</code>.</p></li>
-<li><p>Esercizio 2.1 (da consegnare per l’esame scritto): è lo stesso tipo di esercizio della scorsa lezione, ma ora occorre usare la classe <code>Vettore</code> dell’esercizio 2.0.</p></li>
+<li><p><a href="carminati-esercizi-02.html#esercizio-2.0">Esercizio 2.0</a>: creazione della classe <code>Vettore</code>.</p></li>
+<li><p><a href="carminati-esercizi-02.html#esercizio-2.1">Esercizio 2.1</a> (da consegnare per l’esame scritto): è lo stesso tipo di esercizio della scorsa lezione, ma ora occorre usare la classe <code>Vettore</code> dell’esercizio 2.0.</p></li>
 </ul>
 </section>
 <section id="scrittura-di-test" class="slide level1">
@@ -152,15 +152,14 @@ N = 9:
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> calc<span class="op">(</span><span class="dt">int</span> a<span class="op">,</span> <span class="dt">int</span> b<span class="op">)</span> <span class="op">{</span> <span class="cf">return</span> a <span class="op">+</span> b<span class="op">;</span> <span class="op">}</span></span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="bu">std::</span>cout<span class="op"> &lt;&lt;</span> <span class="st">&quot;Insert two numbers: &quot;</span><span class="op">;</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="bu">std::</span>cout<span class="op"> &lt;&lt;</span> <span class="st">&quot;Inserisci due numeri: &quot;</span><span class="op">;</span></span>
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> a<span class="op">,</span> b<span class="op">;</span></span>
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    <span class="bu">std::</span>cin<span class="op"> &gt;&gt;</span> a <span class="op">&gt;&gt;</span> b<span class="op">;</span></span>
 <span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    <span class="bu">std::</span>cout<span class="op"> &lt;&lt;</span> <span class="st">&quot;The result is &quot;</span></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>              <span class="op">&lt;&lt;</span> calc<span class="op">(</span>a<span class="op">,</span> b<span class="op">)</span> <span class="op">&lt;&lt;</span> <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">;</span></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    <span class="bu">std::</span>cout<span class="op"> &lt;&lt;</span> <span class="st">&quot;Il risultato è &quot;</span> <span class="op">&lt;&lt;</span> calc<span class="op">(</span>a<span class="op">,</span> b<span class="op">)</span> <span class="op">&lt;&lt;</span> <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">;</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 </section>
 <section id="un-semplice-esempio-1" class="slide level1">
 <h1>Un semplice esempio</h1>
@@ -291,19 +290,19 @@ $</code></pre></li>
 <section id="implementazione-di-vettore" class="slide level1">
 <h1>Implementazione di <code>Vettore</code></h1>
 </section>
-<section id="accesso-ai-dati" class="slide level1">
+<section id="operator-array" class="slide level1">
 <h1>Accesso ai dati</h1>
 <ul>
 <li><p>Il testo dell’esercizio richiede di implementare i metodi <code>GetComponent</code> e <code>SetComponent</code> per leggere e scrivere valori nell’array:</p>
 <div class="sourceCode" id="cb13"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>Vettore v<span class="op">(</span><span class="dv">2</span><span class="op">);</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>v<span class="op">.</span>SetComponent<span class="op">(</span><span class="dv">0</span><span class="op">,</span> <span class="fl">162.3</span><span class="op">);</span></span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>v<span class="op">.</span>SetComponent<span class="op">(</span><span class="dv">1</span><span class="op">,</span> <span class="fl">431.7</span><span class="op">);</span></span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="bu">std::</span>cout<span class="op"> &lt;&lt;</span> v<span class="op">.</span>GetComponent<span class="op">(</span><span class="dv">1</span><span class="op">)</span> <span class="op">&lt;&lt;</span> <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">;</span>   <span class="co">// Print 431.7</span></span></code></pre></div></li>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="bu">std::</span>cout<span class="op"> &lt;&lt;</span> v<span class="op">.</span>GetComponent<span class="op">(</span><span class="dv">1</span><span class="op">)</span> <span class="op">&lt;&lt;</span> endl<span class="op">;</span>   <span class="co">// Print 431.7</span></span></code></pre></div></li>
 <li><p>Questo è però più scomodo rispetto ai semplici array:</p>
 <div class="sourceCode" id="cb14"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> v<span class="op">[</span><span class="dv">2</span><span class="op">];</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>v<span class="op">[</span><span class="dv">0</span><span class="op">]</span> <span class="op">=</span> <span class="fl">162.3</span><span class="op">;</span></span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>v<span class="op">[</span><span class="dv">1</span><span class="op">]</span> <span class="op">=</span> <span class="fl">431.7</span><span class="op">;</span></span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="bu">std::</span>cout<span class="op"> &lt;&lt;</span> v<span class="op">[</span><span class="dv">1</span><span class="op">]</span> <span class="op">&lt;&lt;</span> <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">;</span>                <span class="co">// Print 431.7</span></span></code></pre></div></li>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="bu">std::</span>cout<span class="op"> &lt;&lt;</span> v<span class="op">[</span><span class="dv">1</span><span class="op">]</span> <span class="op">&lt;&lt;</span> endl<span class="op">;</span>                <span class="co">// Print 431.7</span></span></code></pre></div></li>
 </ul>
 </section>
 <section id="uso-di-operator" class="slide level1">
@@ -316,7 +315,7 @@ $</code></pre></li>
 <span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div></li>
 <li><p>In questo modo la linea di codice <code>std::cout &lt;&lt; miovett[5] &lt;&lt; "\n"</code> sarà equivalente a</p>
 <div class="sourceCode" id="cb16"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="ot">assert</span><span class="op">(</span><span class="dv">5</span> <span class="op">&gt;=</span> <span class="dv">0</span> <span class="op">&amp;&amp;</span> <span class="dv">5</span> <span class="op">&lt;</span> miovett<span class="op">.</span><span class="va">m_size</span><span class="op">);</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="bu">std::</span>cout<span class="op"> &lt;&lt;</span> miovett<span class="op">.</span><span class="va">m_arr</span><span class="op">[</span><span class="dv">5</span><span class="op">]</span> <span class="op">&lt;&lt;</span> <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">;</span></span></code></pre></div></li>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="bu">std::</span>cout<span class="op"> &lt;&lt;</span> miovett<span class="op">.</span><span class="va">m_arr</span><span class="op">[</span><span class="dv">5</span><span class="op">]</span> <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span></code></pre></div></li>
 </ul>
 </section>
 <section id="uso-di-operator-1" class="slide level1">
@@ -332,7 +331,7 @@ $</code></pre></li>
 <div class="sourceCode" id="cb18"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>Vettore v<span class="op">(</span><span class="dv">2</span><span class="op">);</span></span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>v<span class="op">[</span><span class="dv">0</span><span class="op">]</span> <span class="op">=</span> <span class="fl">162.3</span><span class="op">;</span>  <span class="co">// Assignment, works thanks to the reference</span></span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>v<span class="op">[</span><span class="dv">1</span><span class="op">]</span> <span class="op">=</span> <span class="fl">431.7</span><span class="op">;</span>  <span class="co">// Ditto</span></span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="bu">std::</span>cout<span class="op"> &lt;&lt;</span> v<span class="op">[</span><span class="dv">1</span><span class="op">]</span> <span class="op">&lt;&lt;</span> <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">;</span>                <span class="co">// Print 431.7</span></span></code></pre></div></li>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="bu">std::</span>cout<span class="op"> &lt;&lt;</span> v<span class="op">[</span><span class="dv">1</span><span class="op">]</span> <span class="op">&lt;&lt;</span> endl<span class="op">;</span>                <span class="co">// Print 431.7</span></span></code></pre></div></li>
 </ul>
 </section>
 <section id="uso-di-header-files" class="slide level1">
@@ -437,7 +436,7 @@ $</code></pre></li>
 <p>È più comoda perché si deve aggiungere una sola riga senza dover inventare un identificatore (<code>__VETTORE_H__</code>), e mette al riparo da pericolosi copia-e-incolla (che gli studenti fanno molto spesso!).</p></li>
 </ul>
 </section>
-<section id="costruttori-move-semantics-etc." class="slide level1">
+<section id="move-semantics" class="slide level1">
 <h1>Costruttori, move semantics, etc.</h1>
 </section>
 <section id="costruzione-di-una-variabile" class="slide level1">
@@ -574,20 +573,154 @@ $</code></pre></li>
       // Full list of configuration options available at:
       // https://revealjs.com/config/
       Reveal.initialize({
-      
+        // Display controls in the bottom right corner
+        controls: true,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: true,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'bottom-right',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
         // Display a presentation progress bar
         progress: true,
+
         // Display the page number of the current slide
         slideNumber: true,
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
         // Add the current slide number to the URL hash so that reloading the
         // page/copying the URL will return you to the same slide
-        hash: true,
+        hash: false,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: false,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: true,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'default',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: true,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'slide',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'fade',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
        // Parallax background image
        parallaxBackgroundImage: './media/background.png', // e.g. "'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg'"
+
         // The "normal" size of the presentation, aspect ratio will be preserved
         // when the presentation is scaled to fit different resolutions. Can be
         // specified using percentage units.
         width: 1440,
+
         height: 810,
 
         // reveal.js plugins

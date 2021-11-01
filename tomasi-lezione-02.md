@@ -1,12 +1,23 @@
-% Laboratorio di TNDS -- Lezione 2
-% Maurizio Tomasi
-% Martedì 12 Ottobre 2021
+---
+title: Laboratorio di TNDS -- Lezione 2
+author: Maurizio Tomasi
+date: Martedì 12 Ottobre 2021
+css:
+- css/custom.css
+- css/asciinema-player.css
+theme: white
+progress: true
+slideNumber: true
+background-image: ./media/background.png
+width: 1440
+height: 810
+...
 
 # Esercizi per oggi
 
 # Link alle risorse online
 
--   Gli esercizi di oggi sono disponibili sul sito del corso [labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/lezione2_1819.html](http://labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/lezione2_1819.html).
+-   La spiegazione dettagliata degli esercizi si trova qui: [carminati-esercizi-02.html](carminati-esercizi-02.html).
 
 -   Come al solito, queste slides, che forniscono suggerimenti addizionali rispetto alla lezione di teoria, sono disponibili all'indirizzo [ziotom78.github.io/tnds-tomasi-notebooks](https://ziotom78.github.io/tnds-tomasi-notebooks/).
 
@@ -14,9 +25,8 @@
 
 -   Lo scopo della lezione di oggi è introdurre il concetto di «classe», che è un tipo di dato complesso del linguaggio C++, creando una classe `Vettore` che implementa un array «intelligente» di valori `double`.
 
--   Esercizio 2.0: creazione della classe `Vettore`.
-
--   Esercizio 2.1 (da consegnare per l'esame scritto): è lo stesso tipo di esercizio della scorsa lezione, ma ora occorre usare la classe `Vettore` dell'esercizio 2.0.
+-   [Esercizio 2.0](carminati-esercizi-02.html#esercizio-2.0): creazione della classe `Vettore`.
+-   [Esercizio 2.1](carminati-esercizi-02.html#esercizio-2.1) (da consegnare per l'esame scritto): è lo stesso tipo di esercizio della scorsa lezione, ma ora occorre usare la classe `Vettore` dell'esercizio 2.0.
 
 
 # Scrittura di test
@@ -63,13 +73,12 @@ N = 9:
 int calc(int a, int b) { return a + b; }
 
 int main() {
-    std::cout << "Insert two numbers: ";
+    std::cout << "Inserisci due numeri: ";
 
     int a, b;
     std::cin >> a >> b;
 
-    std::cout << "The result is "
-              << calc(a, b) << "\n";
+    std::cout << "Il risultato è " << calc(a, b) << "\n";
     return 0;
 }
 ```
@@ -240,7 +249,7 @@ Questi `assert` vanno bene anche per gli esercizi di oggi, con opportuni aggiust
 
 # Implementazione di `Vettore`
 
-# Accesso ai dati
+# Accesso ai dati {#operator-array}
 
 -   Il testo dell'esercizio richiede di implementare i metodi `GetComponent` e `SetComponent` per leggere e scrivere valori nell'array:
 
@@ -248,7 +257,7 @@ Questi `assert` vanno bene anche per gli esercizi di oggi, con opportuni aggiust
     Vettore v(2);
     v.SetComponent(0, 162.3);
     v.SetComponent(1, 431.7);
-    std::cout << v.GetComponent(1) << "\n";   // Print 431.7
+    std::cout << v.GetComponent(1) << endl;   // Print 431.7
     ```
     
 -   Questo è però più scomodo rispetto ai semplici array:
@@ -257,7 +266,7 @@ Questi `assert` vanno bene anche per gli esercizi di oggi, con opportuni aggiust
     double v[2];
     v[0] = 162.3;
     v[1] = 431.7;
-    std::cout << v[1] << "\n";                // Print 431.7
+    std::cout << v[1] << endl;                // Print 431.7
     ```
 
 
@@ -276,7 +285,7 @@ Questi `assert` vanno bene anche per gli esercizi di oggi, con opportuni aggiust
 
     ```c++
     assert(5 >= 0 && 5 < miovett.m_size);
-    std::cout << miovett.m_arr[5] << "\n";
+    std::cout << miovett.m_arr[5] << endl;
     ```
 
 
@@ -298,7 +307,7 @@ Questi `assert` vanno bene anche per gli esercizi di oggi, con opportuni aggiust
     Vettore v(2);
     v[0] = 162.3;  // Assignment, works thanks to the reference
     v[1] = 431.7;  // Ditto
-    std::cout << v[1] << "\n";                // Print 431.7
+    std::cout << v[1] << endl;                // Print 431.7
     ```
     
 # Uso di header files
@@ -425,7 +434,7 @@ int main() {
     È più comoda perché si deve aggiungere una sola riga senza dover inventare un identificatore (`__VETTORE_H__`), e mette al riparo da pericolosi copia-e-incolla (che gli studenti fanno molto spesso!).
 
 
-# Costruttori, move semantics, etc.
+# Costruttori, move semantics, etc. {#move-semantics}
 
 # «Costruzione» di una variabile
 
