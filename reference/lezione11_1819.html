@@ -1,0 +1,259 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+
+
+
+  <tdi></tdi>
+  
+  <meta content="text/html; charset=ISO-8859-1" http-equiv="content-type"><title>Lezione 11</title>
+  
+
+   
+  <script type="text/javascript" language="javascript">
+function mostra(id){
+if (document.getElementById){
+if(document.getElementById(id).style.display == 'none'){
+document.getElementById(id).style.display = 'block';
+}else{
+document.getElementById(id).style.display = 'none';
+}
+}
+}
+  </script></head><body>
+<font> </font><font> </font>
+<table style="text-align: left; width: 100%;" border="1" cellpadding="2" cellspacing="2">
+
+  <tbody>
+    <tr>
+      <td style="background-color: rgb(204, 0, 0); text-align: center;"><big><big><big>Lezione 11<br>
+      <font size="+2">Metodi Monte Carlo</font><br>
+      </big></big></big> </td>
+    </tr>
+  </tbody>
+</table>
+
+<br>
+
+<font size="+1">In questa lezione 
+vedremo una applicazione delle tecniche Monte Carlo per la simulazione di una delle esperienze dei 
+laboratori di fisica.<br>
+</font>
+<br>
+
+<font size="+1"><span style="text-decoration: underline; color: rgb(204,0, 0);">ESERCIZIO 
+11.0 - Simulazione dell'esperienza dello spettrometro a prisma (da consegnare)</span>
+<span style="color: rgb(204, 0, 0); text-decoration: underline;"> (da
+consegnare)</span><span style="color: rgb(204, 0, 0);"><a name="es11.0"></a></span>:<br>
+<br>
+La dipendenza dell'indice di rifrazione dalla lunghezza d'onda della luce incidente viene descritta dalla legge di Cauchy:
+<img style="vertical-align: middle" src="figure/ntrue.png">
+<br>
+L'esperienza dello spettrometro a prisma si propone di misurare l'indice di rifrazione del materiale di un prisma per le diverse lunghezze d'onda di una lampada al mercurio onde determinare i parametri A e B che caratterizzano tale materiale.<br>
+L'apparato sperimentale consiste in un goniometro sul quale viene posizionato il prisma. Una lampada a vapori di mercurio viene posizioneta da un lato del canocchiale con due collimatori per produrre un fascio luminoso che incide sul prisma. Il fascio di luce riflesso o rifratto viene osservato tramite un altro canocchiale. Gli angoli corrispondeni all'orientamento del supporto sul goniometro ed alla posizione dei canocchiali sono leggibili su di un nonio.<br>
+<p style="text-align: center">
+<img src="figure/SchemaPrisma.png">
+<p>
+La nostra simulazione consiste nell'assumere dei valori verosimili dei parametri della legge di Cauchy, vedere
+come questi si traducono in quantit&agrave; osservabili e stimare se la nostra procedura di misura e di analisi dei dati ci permette di derivare correttamente i valori utilizzati come ingresso nella simulazione e con quale incertezza.   
+<p>
+Nell'esperimento l'unico tipo di grandezze misurate sono gli angoli, per cui possiamo assumere un'incertezza uguale per tutte le misure angolari e pari a &sigma;<sub>&theta;</sub>=0.3&nbsp;mrad.<br>
+Nell'esperienza di laboratorio, l'angolo di apertura del prisma &alpha;=60<sup>o</sup> ed il materiale del prisma ha valori dei parametri di Cauchy A=2.7, B=60000&nbsp;nm<sup>2</sup>.<br>
+Consideriamo le due lunghezze d'onda estreme della lampada al mercurio, il giallo, &lambda;<sub>1</sub>=579.1&nbsp;nm, ed il viola, &lambda;<sub>2</sub>=404.7&nbsp;nm.<br>
+<br>
+La misura sperimentale consiste nella determinazione:
+<ol><li>dell'angolo corrispondente al fascio non deflesso in assenza del prisma: &theta;<sub>0</sub>.
+    <li>dell'angolo corrispondente alla deviazione minima della riga del giallo: 
+        &theta;<sub>m</sub>(&lambda;<sub>1</sub>). 
+    <li>dell'angolo corrispondente alla deviazione minima della riga del viola: 
+        &theta;<sub>m</sub>(&lambda;<sub>2</sub>). 
+</ol>
+L'analisi dati consiste nella seguente procedura:
+<ol><li>determinazione degli angoli di deviazione minima:<br>
+        &delta;<sub>m</sub>(&lambda;<sub>1</sub>)=&theta;<sub>m</sub>(&lambda;<sub>1</sub>)-&theta;<sub>0</sub>.<br>
+        &delta;<sub>m</sub>(&lambda;<sub>2</sub>)=&theta;<sub>m</sub>(&lambda;<sub>2</sub>)-&theta;<sub>0</sub>.
+    <li>calcolo degli indici di rifrazione n(&lambda;) dalla relazione: <img style="vertical-align: middle" src="figure/nexp.png">.
+    <li>calcolo dei parametri A e B dalle formule:<br>
+        <img src="figure/Aexp.png"><br> <img src="figure/Bexp.png">
+</ol>
+
+<b>Parte I</b><br>
+Costruire una classe <code>EsperimentoPrisma</code> con le seguenti caratteristiche:
+<ul><li>come data membri deve avere sia i valori veri che i valori misurati di tutte le quantit&agrave; ed in pi&ugrave; un generatore di numeri casuali <code>RandomGen</code> (vedi <a href="lezione8.html">lezione 8</a>);
+    <li>nel costruttore deve definire tutti i valori <i>di ingresso</i> delle quantit&agrave; 
+        misurabili a partire dai
+        parametri A, B ed &alpha; e dalle lunghezze d'onda;<br>
+        <b>N.B.:</b> il valore di &theta;<sub>0</sub> &egrave; arbitrario, ma, 
+        una volta definito, i &theta;<sub>m</sub> sono fissati.
+    <li>un metodo <code>Esegui()</code> che effettua la misura sperimentale e determina dei valori misurati 
+        di &theta;<sub>0</sub>, &theta;<sub>m</sub>(&lambda;<sub>1</sub>), 
+        &theta;<sub>m</sub>(&lambda;<sub>2</sub>);<br>
+        <b>N.B.:</b> il valore <i>misurato</i> di un angolo si ottiene estraendo un numero distribuito
+        in maniera gaussiana intorno al suo valore di ingresso nella simulazione  
+        e deviazione standard &sigma;<sub>&theta;</sub>.
+    <li>i metodi necessari per accedere ai valori dei data membri, sia quelli di ingresso che quelli misurati..
+</ul>
+Scrivere un programma che esegua 10000 volte l'esperimento, faccia un istogramma dei valori misurati, e calcoli media e deviazione standard di tali valori.<br>
+
+<b>N.B.:</b> Per il calcolo di medie e varianze potete decidere di immagazzinare i dati in un contenitore (<tt>std::vector</tt> o <tt>Vettore</tt> e utilizzare le funzioni sviluppate nelle prime lezioni oppure accedervi direttamente dagli istogrammi di ROOT come mostrato <a href="lezioneROOT_1819.html#testoROOT_a2">qui</a> (ricordandosi di aggiungere <tt>histo.StatOverflows( kTRUE );</tt> in modo da forzare l'utilizzo di eventuali underflow e overflow per calcoli statistici).<br>
+
+<br>
+<b>Parte II</b><br>
+Aggiungere alla classe un metodo <code>Analizza()</code> che faccia i calcoli relativi all'analisi dati ed estendere il programma in modo da eseguire l'analisi dati dei 10000 esperimenti e fare istogrammi di:
+<ol>
+<li>differenza tra i valori misurati e quelli attesi di &delta;<sub>m</sub>(&lambda;<sub>1</sub>) e &delta;<sub>m</sub>(&lambda;<sub>2</sub>), quello bidimensionale delle differenze per le due lunghezze d'onda, e calcolare il coefficiente di correlazione.
+<li>differenza tra i valori misurati e quelli attesi di n(&lambda;<sub>1</sub>) e n(&lambda;<sub>2</sub>), quello bidimensionale delle differenze per le due lunghezze d'onda, e calcolare il coefficiente di correlazione.
+<li>differenza tra i valori misurati e quelli attesi di A e B, quello bidimensionale delle differenze, e calcolare il coefficiente di correlazione.
+</ol>
+In tutti i casi, se possibile, confrontate il risultato della simulazione con quello ottenuto dalla propagazione degli errori. 
+<!--Il caso 1) &egrave; banale, il caso 2) un po' pi&ugrave; difficile, il caso 3) potrebbe presentare delle sorprese...   --> 
+<br>
+<br>
+<font size="+1">
+<span style="text-decoration: underline;">Brevi Richiami</span></font><br>
+<!-- altro div -->
+<font size="+1"><a href="#" onclick="mostra('testo9.0a'); return false;">La classe <code>EsperimentoPrisma</code>
+</a></font><br>
+<div style="display: none;" id="testo9.0a">
+<table style="text-align: left; width: 967px; height: 41px;" border="1" cellpadding="2" cellspacing="2">
+ <tbody>
+   <tr>
+     <td style="background-color: rgb(233, 229, 255);">
+     La classe <code>EsperimentoPrisma</code> deve contenere al suo interno un generatore di numeri casuali
+     per la simulazione del processo di misura, tutti i parametri che definiscono l'esperimento
+     e, per le quantità misurate, sia il valore assunto nella simulazione, che il valore ottenuto dal processo 
+     di esecuzione ed analisi dati dell'esperimento.<br>
+     Il suo header file, potr&agrave; pertanto essere del tipo:<br>
+     <br>
+     <img src="figure/PrismaHeader.PNG" alt="EsperimentoPrisma.h" width="900"><br>
+     <br>
+     <b>N.B.:</b> in questo header mancano i metodi tipo <code>Get</code> per accedere ai data membri.<br>
+     <br>
+     La configurazione dell'esperimento, con il calcolo di tutti i valori assunti per le quantit&agrave;
+     misurabili, pu&ograve; venire fatta nel costruttore di default della classe, che in questo caso 
+     risulta pi&ugrave; complicato del solito:<br>
+     <br><img src="figure/PrismaCostruttore.PNG" alt="EsperimentoPrisma()" width="900">
+<br><br>
+     Notate l'uso della <tt>lista di inizializzazione</tt> nel costruttore: questa permette di inizializzare direttamente i valori dei data membri anzich&grave; procedere all'assegnazione dei valori nel costruttore dopo che i data membri siano stati costruiti. Nel nostro caso particolare diventa utile per inizializzare l'oggetto <tt>m_rgen</tt> invocando il costruttore opportuno ( altrimenti avrebbe usato il costruttore senza argomenti che nel nostro caso non esiste ). Potete trovare una buona spiegazione dell'utilizzo delle liste di inizializzazione in <a href="https://www.learncpp.com/cpp-tutorial/8-5a-constructor-member-initializer-lists/">qui</a>.
+<br> 
+    </td>
+   </tr>
+ </tbody>
+</table>
+</div>
+<br>
+<!-- altro div -->
+<font size="+1"><a href="#" onclick="mostra('testo9.0b'); return false;">Istrogrammi bidimensionali
+</a></font><br>
+<div style="display: none;" id="testo9.0b">
+<table style="text-align: left; width: 967px; height: 41px;" border="1" cellpadding="2" cellspacing="2">
+ <tbody>
+   <tr>
+     <td style="background-color: rgb(233, 229, 255);">
+     Per verificare le correlazioni tra due variabili, &egrave; utile utilizzare istogrammi bidimensionali,
+     in cui i canali sono definiti da range di valori sia di una variabile che dell'altra<br>
+     Per costruire questi istogrammi, utilizzeremo la classe <code>    
+<a href="https://root.cern.ch/doc/master/classTH2F.html"<code>TH2F<code></a>
+di ROOT.<br>
+     Questa ha un costruttore che premette di dividere in canali sia la coordinata x che la y dell'istogramma:
+     <br>
+     <pre>
+     TH2F::TH2F(char* nome, char* titolo, int canali_x, double xmin, double xmax, int canali_y, double ymin, double ymax);
+     </pre>
+     <br>
+     La classe <code>TH2F</code> ha gli stessi metodi <code>Fill</code> e <code>Draw</code> della classe <code>TH1F</code>, l'unica differenza &egrave; che ora <code>Fill</code> ha bisogno della coppia completa di valori per decidere il canale in cui viene collocato l'evento:<br>
+     <pre>
+     TH2F::Fill(double x, double y);
+     </pre>
+     </td>
+   </tr>
+ </tbody>
+</table>
+</div>
+<br>
+<!-- altro div -->
+<font size="+1"><a href="#" onclick="mostra('testo9.0c'); return false;">Calcolo del coefficiente di correlazione
+</a></font><br>
+<div style="display: none;" id="testo9.0c">
+<table style="text-align: left; width: 967px; height: 41px;" border="1" cellpadding="2" cellspacing="2">
+ <tbody>
+   <tr>
+     <td style="background-color: rgb(233, 229, 255);">
+     Il coefficiente di correlazione &rho; tra due variabili <i>x</i> e <i>y</i>, può venire espresso 
+     come:<br>
+     (&lt;<i>xy</i>&gt; - &lt;<i>x</i>&gt; &lt;<i>y</i>&gt;)/&sigma;<sub><i>x</i></sub>&sigma;<sub><i>y</i></sub><br>
+     Si noti che dalla relazione: <br>
+     &sigma;<sup>2</sup><sub><i>x</i></sub> = &lt;<i>x</i><sup>2</sup>&gt;-&lt;<i>x</i>&gt;<sup>2</sup><br>
+     risulta che pu&ograve; essere più conveniente nel ciclo di esperimenti calcolare le sommatorie di 
+     <i>x</i>, <i>y</i>, <i>x</i><sup>2</sup>, <i>y</i><sup>2</sup> e <i>xy</i>, ed al termine del ciclo 
+     effettuare le medie e trovare incertezze e correlazioni. Il tutto non richiede strettamente di 
+     immagazinare tutti i dati dei 10000 esperimenti.
+     </td>
+   </tr>
+ </tbody>
+</table>
+</div>
+<br>
+<!-- altro div -->
+<font size="+1"><a href="#" onclick="mostra('testo9.0d'); return false;">Risultati attesi
+</a></font><br>
+<div style="display: none;" id="testo9.0d">
+<table style="text-align: left; width: 967px; height: 41px;" border="1" cellpadding="2" cellspacing="2">
+ <tbody>
+   <tr>
+     <td style="background-color: rgb(233, 229, 255);" colspan="2">
+     Nella seguente tabella sono riportati i valori numerici attesi per le varie quantità ed i grafici ottenuti 
+     per una simulazione. Si noti come le varie quantità sono fortemente correlate.     
+     </td>
+   </tr>
+   <tr><td style="vertical-align: middle">
+       &theta;<sub>0</sub> = 1.5708 (arbitrario)<br>
+       &theta;<sub>1</sub> = 2.5494 (conta solo la differenza<br>
+       &theta;<sub>2</sub> = 2.6567 rispetto a &theta;<sub>0</sub>)<br>
+       &sigma;(&theta;<sub>i</sub>) = 0.0003 (i=0,1,2)
+       <td><img src="figure/theta.png" width="600px">
+   <tr><td style="vertical-align: middle">
+       &delta;<sub>m,1</sub> = 0.97860 rad<br>
+       &delta;<sub>m,2</sub> = 1.08594 rad<br>
+       &sigma;(&delta;<sub>m,i</sub>) = 0.00043 rad (i=1,2)<br>
+       &rho;(&delta;<sub>m,1</sub>,&delta;<sub>m,2</sub>) = 50%<br>
+       <td><img src="figure/delta.png" width="600px">
+   <tr><td style="vertical-align: middle">
+       n<sub>1</sub> = 1.69674 <br>
+       &sigma;(n<sub>1</sub>) = 0.00022<br>
+       n<sub>2</sub> = 1.75110 <br>
+       &sigma;(n<sub>2</sub>) = 0.00021<br>
+       &rho;(n<sub>1</sub>,n<sub>2</sub>) = 50%<br>
+       <td><img src="figure/nrifr.png" width="600px">
+   <tr><td style="vertical-align: middle">
+       A = 2.70002 <br>
+       &sigma;(A) = 0.0013<br>
+       B = 60000 nm<sup>2</sub> <br>
+       &sigma;(B) = 240 nm<sup>2</sup> <br>
+       &rho;(A,B) = -87%<br>
+       <td><img src="figure/AB.png" width="600px">
+ </tbody>
+</table>
+</div>
+
+<br>
+<br>
+<br>
+
+<font size="+1"><span style="text-decoration: underline; color: rgb(50, 50, 50);">ESERCIZIO
+11.1 - Attrito viscoso (facoltativo)
+</span><span style="color: rgb(204, 0, 0);"><a name="es11.1"></a></span>:<br>
+<br>
+Svolgere il tema d'esame sulla simulazione di un esperimento per la misura della viscosit&agrave; di un materiale:<br>
+<a href="http://labmaster.mi.infn.it/Laboratorio2/Compiti/Compito_lab2_pre09_6.pdf">preappello del gennaio 2009, esercizio 6</a>
+
+<!-- fine div -->
+
+
+<br>
+<br>
+<br>
+<div style="text-align: center;"><font size="+1"><a href="../index.html"><img title="Back to Home Page" style="border: 0px solid ; width: 40px; height: 40px;" alt="Back to Home Page" src="../button-home.jpg"></a><br>
+</font></div>
+
+
+</body></html>

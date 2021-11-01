@@ -1,0 +1,252 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" 
+"http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+
+
+
+  <tdi></tdi>
+  
+  <meta content="text/html; charset=ISO-8859-1" http-equiv="content-type"><title>Lezione 8</title>
+  
+
+   
+  <script type="text/javascript" language="javascript">
+function mostra(id){
+if (document.getElementById){
+if(document.getElementById(id).style.display == 'none'){
+document.getElementById(id).style.display = 'block';
+}else{
+document.getElementById(id).style.display = 'none';
+}
+}
+}
+  </script></head><body>
+<font> </font><font> </font>
+<table style="text-align: left; width: 100%;" border="1" cellpadding="2" cellspacing="2">
+
+  <tbody>
+    <tr>
+      <td style="background-color: rgb(204, 0, 0); text-align: center;"><big><big><big>Lezione 8<br>
+      <font size="+2">Quadratura Numerica</font><br>
+      </big></big></big> </td>
+    </tr>
+  </tbody>
+</table>
+
+<br>
+
+<font size="+1">In questa lezione 
+implementeremo alcuni algoritmi per la quadratura numerica, cio&egrave per il calcolo di
+integrali definiti di funzioni in un intervallo chiuso e la valutazione dell'errore
+commesso nel calcolo dell'integrale stesso. Questo si rende necessario quando non sappiamo valutare
+analiticamente l'integrale in esame, quando non si riesce ad esprimere la primitiva in funzioni 
+elementari, quando la soluzione analitica &egrave molto complicata ed il calcolo numerico 
+&egrave molto pi&ugrave semplice, oppure quando la funzione &egrave conosciuta in un numeri finito di punti.
+<br>
+</font>
+<br>
+<font size="+1"><span style="text-decoration: underline; color: rgb(0, 153, 0);">ESERCIZIO 
+8.0 - Integrazione con la formula del mid-point</span><a name="es8.0"></a>:<br>
+Implementare un codice per il calcolo della funzione sin(x) tra
+[0,&#960;] con il metodo del mid-point, con un numero di passi fissato
+passato da riga di comando. Per controllare la precisione ottenuta con un numero di passi
+fissato si richiede di stampare una tabella con la differenza tra il risultato numerico ed 
+il valore esatto analitico in funzione del numero di passi (o della lunghezza del passo <I>h</I>).
+In aggiunta alla tabella si pu&ograve; rappresentare l'andamento dell'errore in funzione della lunghezza del passo <I>h</I> con un TGraph di ROOT (una traccia su come visualizzare i dati usando un TGraph di ROOT si pu&ograve trovare <a href="test_Tgraph.cpp">qui</a>).
+<br>    
+<br>
+<span style="text-decoration: underline;">Brevi Richiami</span><br>
+<a href="#" onclick="mostra('testo8.0a'); return false;">Il metodo del mid-point
+
+</a><br>
+
+<div style="display: none;" id="testo8.0a">
+<table style="text-align: left; width: 967px; height: 41px;" border="1" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="background-color: rgb(233, 229, 255);"> 
+Ricordiamo che in questo metodo l'approssimazione dell'integrale &egrave definita dalla formula<br>
+<img style="width:568px; height: 58px;" src="./figure/midpoint_formula2.png"><br>
+che fornisce un'accuratezza dell'integrale di <I>O(h<sup>2</sup>)</I>. Notate
+che questo metodo non richiede il calcolo della funzione negli estremi di integrazione.
+      </td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<br>
+
+<!-- altro div -->
+<a href="#" onclick="mostra('testo8.1a'); return false;"> Cenni sull'implementazione
+</a><br>
+<div style="display: none;" id="testo8.1a">
+<table style="text-align: left; width: 967px; height: 41px;" border="1" cellpadding="2" cellspacing="2">
+ <tbody>
+   <tr>
+     <td style="background-color: rgb(233, 229, 255);">
+L'algoritmo &egrave implementato all'interno di una classe che inizializza le variabili necessarie
+all'algoritmo. Qui ne vediamo l'esempio di un possibile <I>header</I>.
+Il costruttore prende in ingresso gli estremi di integrazione ed il
+       numero di passi richiesto per eseguire l'integrale. Sono
+       gi&agrave dichiarati i metodi di integrazione del mid-point e
+       di Simpson. Al costruttore &egrave passata la funzione
+       integranda usando la classe <code>FunzioneBase</code> definita nelle
+       lezioni precedenti.<br>
+
+
+<img alt="classe integratore header" src="./figure/integratore_h.png" width="900"><br>
+
+La classe invece &egrave cos&igrave implementata<br>
+       
+<img alt="classe integratore" src="./figure/integratore_cc.png" width="900"><br>
+
+dove gli estremi di integrazione vengono controllati, messi in
+ordine e viene poi implementato il metodo del mid-point secondo la
+       formula appropriata.<br>
+<b>Caccia all'errore:</b> l'implementazione contiene un errore. Per metterlo in evidenza, provate ad integrare il seno tra &pi;/2 e &pi;: vedrete che la convergenza non &egrave; O(<i>h</i><sup>2</sup>), ma solo O(<i>h</i>). Se applicate correttamente l'algoritmo, dovete riscontrare il comportamento atteso.
+ 
+<br>
+
+Un esempio di codice di test per la classe <code>integratore</code>
+       pu&ograve quindi essere il seguente<br>
+
+<img alt="test" src="./figure/esempio_codice_integr.png" width="900"><br>
+dove abbiamo utilizzato una classe <code>Seno</code> che eredita dalla classe
+astratta <code>FunzioneBase</code>.
+<!-- <b>Caccia all'errore:</b> nel codice sopra manca l'inclusione di un header file. Quale? -->      
+
+     </td>
+   </tr>
+ </tbody>
+</table>
+</div>
+<br>
+<!-- fine div -->
+
+<font size="+1"><span style="text-decoration: underline; color: rgb(204, 0, 0);">ESERCIZIO
+8.1 - Integrazione alla Simpson
+</span><span style="color: rgb(204, 0, 0);"></span><span style="color: rgb(204, 0, 0); text-decoration: underline;"> (da
+consegnare)</span><span style="color: rgb(204, 0, 0);"><a name="es8.1"></a></span>:<br>
+
+Implementare l'integrazione con il metodo di Simpson con un numero di passi definito
+(&egrave possibile farlo all'interno della classe gi&agrave precedentemente
+costruita aggiungendo nuovi metodi e, se necessario, costruttori). Come nell'esercizio 8.0 
+stampare una tabella ( o costruire un TGraph di ROOT) con la precisione raggiunta in funzione del numero di passi. 
+<br>
+
+
+</font>
+<br>
+<span style="text-decoration: underline;">Brevi richiami</span><br>
+<a href="#" onclick="mostra('testo8.2a'); return false;">Il metodo Simpson</a><br>
+
+<div style="display: none;" id="testo8.2a">
+<table style="text-align: left; width: 967px; heigth: 41px;" border="1" cellpadding="2" cellspacing="2">
+<tbody>
+  <tr>
+    <td style="background-color: rgb(233,229,255);">
+Nel metodo di integrazione alla Simpson, la funzione integranda &egrave approssimata, negli intervalli [<i>x<sub>k</sub>,x<sub>k+2</sub></i>] (dove <i>k</i> &egrave; un intero pari e <i>x<sub>k</sub>=a+kh</i>) con un polinomio di 
+secondo grado i cui nodi sono nei punti <I>(x<sub>k</sub>,f(x<sub>k</sub>))</I>, <I>(x<sub>k+1</sub>,f(x<sub>k+1</sub>)</I> e <I>(x<sub>k+2</sub>,f(x<sub>k+2</sub>))</I>.
+Esso fornisce una valutazione dell'integrale con una precisione pari a <I>h<sup>4</sup></I>.<br>
+La sua applicazione richiede che il numero di passi sia pari e la formula che approssima
+l'integrale &egrave<br>
+<img src="./figure/simpson.png"><br>
+    </td>
+  </tr>
+</tbody>
+</table>
+</div>
+<br>
+
+
+<font size="+1"><span style="text-decoration: underline; color: rgb(204, 0, 0);">ESERCIZIO
+8.2 - Integrazione con la formula dei trapezi con precisione fissata
+</span><span style="color: rgb(204, 0, 0);"></span><span style="color: rgb(204, 0, 0); text-decoration: underline;"> (da
+consegnare)</span><span style="color: rgb(204, 0, 0);"><a name="es8.2"></a></span>:<br>
+
+Implementare l'integrazione della funzione sin(x) tra
+[0,&#960;] con il metodo dei trapezi e con precisione fissata
+all'interno della classe definita in precedenza. Occorrer&agrave
+definire un costruttore che prenda in ingresso gli estremi di
+integrazione e la precisione desiderata passata dalla riga di comando.
+
+
+</font>
+<br>
+<br>
+<span style="text-decoration: underline;">Brevi richiami</span><br>
+<a href="#" onclick="mostra('testo8.2f'); return false;">Stima runtime dell'errore</a><br>
+<div style="display: none;" id="testo8.2f">
+<table style="text-align: left; width: 967px; heigth: 41px;" border="1" cellpadding="2" cellspacing="2">
+<tbody>
+  <tr>
+    <td style="background-color: rgb(233,229,255);">
+Come possiamo fare a stimare l'errore che stiamo commettendo nel calcolo di un integrale se non conosciamo il valore vero <I>I</I> dell'integrale ? Partendo dalla conoscenza dell'andamento teorico dell'errore in funzione del passo <I>h</I> possiamo trovare un modo semplice per la stima dell'errore che stiamo commettendo. Nel caso della regola dei trapezi l'adamento dell'errore &egrave; <i>err= k h<sup>2</sup></i>. Calcolando l'integrale <i> I <sub>N</sub> </i> utilizzando un passo <I>h</I> e successivamente l'intgrale <i> I <sub>2N</sub> </i> con un passo <I>h/2</I> possiamo scrivere il seguente sistema di equazioni: <br>
+
+<i>I - I <sub>N</sub> = k h<sup>2</sup> </i> <br>
+
+<i>I - I <sub>2N</sub> = k (h/2)<sup>2</sup> </i> <br>
+
+Sottraendo per esempio la prima equazione alla seconda, non &egrave; difficile ricavare che una stima dell'errore &grave; pari a <br>
+
+<i> err(N) = 4./3. fabs(I<sub>2N</sub> - I <sub>N</sub>) 
+
+    </td>
+  </tr>
+</tbody>
+</table>
+</div>
+<br>
+
+
+
+
+
+
+<a href="#" onclick="mostra('testo8.3a'); return false;"> Cenni sull'implementazione
+</a><br>
+<div style="display: none;" id="testo8.3a">
+<table style="text-align: left; width: 967px; height: 41px;" border="1" cellpadding="2" cellspacing="2">
+ <tbody>
+   <tr>
+     <td style="background-color: rgb(233, 229, 255);">
+La condizione di uscita dell'algoritmo &egrave basata sul confronto del risultato di due passaggi 
+successivi. Se la differenza della stima dell'integrale tra due passaggi consecutivi &egrave 
+pi&ugrave piccola della precisione richiesta allora l'algoritmo si ferma. Questo poich&egrave 
+l'integrale calcolato con una partizione pi&ugrave; fine &egrave sempre una stima migliore 
+dell'approssimazione con la partizione originaria.<br> 
+
+Nel costruttore calcoliamo la prima approssimazione:<br>
+
+<PRE>sum0<B><FONT COLOR="#663300"> = (</FONT></B>f<B><FONT COLOR="#663300">[</FONT></B>a<B><FONT COLOR="#663300">] +</FONT></B> f<B><FONT COLOR="#663300">[</FONT></B>b<B><FONT COLOR="#663300">]) /</FONT></B><FONT COLOR="#999900"> 2</FONT><B><FONT COLOR="#663300">;</FONT></B> I0<B><FONT COLOR="#663300"> =</FONT></B> sum0<B><FONT COLOR="#663300"> * (</FONT></B>b<B><FONT COLOR="#663300">-</FONT></B>a<B><FONT COLOR="#663300">)</FONT></B></PRE>
+
+Al primo passaggio dell'algoritmo suddividiamo l'intervallo in due:<br>
+<PRE>sum1<B><FONT COLOR="#663300"> =</FONT></B> sum0<B><FONT COLOR="#663300"> +</FONT></B> f<B><FONT COLOR="#663300">[</FONT></B>x11<B><FONT COLOR="#663300">];</FONT></B> I1<B><FONT COLOR="#663300"> =</FONT></B> sum1<B><FONT COLOR="#663300"> * (</FONT></B>b<B><FONT COLOR="#663300">-</FONT></B>a<B><FONT COLOR="#663300">)/</FONT></B><FONT COLOR="#999900">2</FONT></PRE>
+
+e cos&igrave secondo lo schema in figura<br>
+
+<img style="width: 628px; height: 123px;" alt="Intervallo" src="./figure/intervallo.png"><br>
+
+<PRE>sum2<B><FONT COLOR="#663300"> =</FONT></B> sum1<B><FONT COLOR="#663300"> +</FONT></B> f<B><FONT COLOR="#663300">[</FONT></B>x21<B><FONT COLOR="#663300">] +</FONT></B> f<B><FONT COLOR="#663300">[</FONT></B>x22<B><FONT COLOR="#663300">] ;</FONT></B> I2<B><FONT COLOR="#663300"> =</FONT></B> sum2<B><FONT COLOR="#663300"> * (</FONT></B>b<B><FONT COLOR="#663300">-</FONT></B>a<B><FONT COLOR="#663300">)/</FONT></B><FONT COLOR="#999900">4</FONT>
+
+sum3<B><FONT COLOR="#663300"> =</FONT></B> sum2<B><FONT COLOR="#663300"> +</FONT></B> f<B><FONT COLOR="#663300">[</FONT></B>x31<B><FONT COLOR="#663300">] +</FONT></B> f<B><FONT COLOR="#663300">[</FONT></B>x32<B><FONT COLOR="#663300">] +</FONT></B> f<B><FONT COLOR="#663300">[</FONT></B>x33<B><FONT COLOR="#663300">] +</FONT></B> f<B><FONT COLOR="#663300">[</FONT></B>x34<B><FONT COLOR="#663300">];</FONT></B> I3<B><FONT COLOR="#663300"> =</FONT></B> sum3<B><FONT COLOR="#663300"> * (</FONT></B>b<B><FONT COLOR="#663300">-</FONT></B>a<B><FONT COLOR="#663300">)/</FONT></B><FONT COLOR="#999900">8</FONT></PRE>
+
+I valori dell'ultima approssimazione dell'integrale e dell'ultima somma calcolata sono memorizzati all'interno
+dell'oggetto. In questo modo, se viene richiesto di ricalcolare l'integrale, non &egrave necessario ricominciare da capo.
+     </td>
+   </tr>
+ </tbody>
+</table>
+</div>
+<br>
+       
+      
+<br>
+
+
+<br>
+<div style="text-align: center;"><font size="+1"><a href="../index.html"><img title="Back to Home Page" style="border: 0px solid ; width: 40px; height: 40px;" alt="Back to Home Page" src="../button-home.jpg"></a><br>
+</font></div>
+
+
+</body></html>

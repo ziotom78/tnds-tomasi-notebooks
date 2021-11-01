@@ -1,0 +1,317 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+  <tdi></tdi>
+  
+  <meta content="text/html; charset=ISO-8859-1" http-equiv="content-type">
+  <title>ROOT HOW-TO</title>
+
+  
+  
+  <script type="text/javascript" language="javascript">
+function mostra(id){
+if (document.getElementById){
+if(document.getElementById(id).style.display == 'none'){
+document.getElementById(id).style.display = 'block';
+}else{
+document.getElementById(id).style.display = 'none';
+}
+}
+}
+  </script>
+</head><body>
+<font> </font><font> </font>
+<table style="text-align: left; width: 100%;" border="1" cellpadding="2" cellspacing="2">
+
+  <tbody>
+    <tr>
+      <td style="background-color: rgb(204, 0, 0); text-align: center;"><big><big><big>ROOT survival guide<br>
+      <font size="+2">Alcuni esempi di utilizzo delle principali classi di ROOT</font><br>
+      </big></big></big> </td>
+    </tr>
+  </tbody>
+</table>
+
+<br>
+
+<font size="+1"> In questa breve pagina riportiamo tre esempi concreti su come utilizzare senza tanti fronzoli le principali classi di ROOT che sono funzionali al programma del corso: funzioni monodimensionali, istogrammi monodimensionali e grafici. Ovviamente tutta la documentazione dettagliata si pu&ograve; trovare sul sito di <a href="https://root.cern.ch/">ROOT</a> 
+<br>
+
+
+<br>
+<font size="+1">
+<!-- inzio div--> <a href="lezioneROOT_1819.html#" onclick="mostra('testoROOT_a1'); return false">Funzioni monodimensionali (TF1)</a></font><br>
+<br>
+<div style="display: none;" id="testoROOT_a1">
+<table style="text-align: left; width: 967px; height: 41px;" border="1" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top; background-color: rgb(233, 229, 255);">
+In questo breve esempio vogliamo mettere in evidenza come definire e disegnare delle funzioni monodimensionali utilizzando la classe <a href="https://root.cern.ch/root/html600/TF1.html">TF1</a> di ROOT.
+<pre> 
+// Utilizzo della classe TF1 e TCanvas
+
+#include "TCanvas.h"
+#include "TF1.h"
+#include "TApplication.h"
+#include &lt;iostream&gt;
+#include &lt;cmath&gt;
+
+using namespace std;
+
+#define EPS 1.e-10
+
+double lorentzianPeak(double x[], double par[]){
+
+  double Den = (x[0]-par[2])*(x[0]-par[2]) + par[1]*par[1]/4.;
+  if ( Den < EPS ) Den = EPS;
+  return ( par[0]*par[1]/(2.*M_PI) )/ Den;
+
+}
+
+int main (int argc, char**argv)
+{
+  
+  TApplication app("App",0,0);
+
+  // =========================================================================================
+  // Definizione di una funzione f1
+  // =========================================================================================
+  
+  TF1 *f1 = new TF1("f1","sin(x)/x",0.,10.);
+  cout << "Plotting function -------" << endl;
+  
+  // Creo un oggetto della classe TCanvas: e' la finestra grafica
+  // sulla quale metto il disegno
+  
+  TCanvas *c1 = new TCanvas("c1","funzione",600,400);  
+  
+  // Disegna la funzione sul canvas
+  
+  f1->Draw();                           
+  
+  cout << "Il valore di f1 in 1 vale       -->> " << f1->Eval(1.) << endl;          // Valutarla in un punto  
+  cout << "La derivata di f1 in 1 vale     -->> " << f1->Derivative(1.) << endl;    // Valutarne la derivata in un punto  
+  cout << "L'integrale di f1 in [0,1] vale -->> " << f1->Integral(0.,1.) << endl;   // Calcolare l'integrale definito
+
+  // =========================================================================================
+  // Definizione una funzione con parametri
+  // =========================================================================================
+  
+  TF1 *f3 = new TF1("f3","[0]*x*sin([1]*x)",-3.,3.);
+  TCanvas *c3 = new TCanvas("c3","funzione",600,400);
+  f3->SetParameter(0,10.);     // Definire il parametro [0] a 10.
+  f3->SetParameters(10.,5.);   // Definire [0] -> 10. e [1] a 5.
+  f3->Draw();
+  
+  // =========================================================================================
+  // Oppure...
+  // =========================================================================================
+  
+  TF1 *lp = new TF1("lp",lorentzianPeak,-3.,3.,3);  // L'ultimo intero definisce il numero di parametri
+  TCanvas *c4 = new TCanvas("c4","Lorentzian Peak",600,400);
+  lp->SetParameters(1.,1.,0.);
+  lp->Draw();
+
+  app.Run();
+
+  return 0;
+
+}
+
+</pre>
+
+
+<br>
+</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<!-- fine div ======================================================================== -->
+
+<font size="+1">
+<!-- inzio div--> <a href="lezioneROOT_1819.html#" onclick="mostra('testoROOT_a2'); return false">Istogrammi monodimensionali (THF1)</a></font><br>
+<br>
+<div style="display: none;" id="testoROOT_a2">
+<table style="text-align: left; width: 967px; height: 41px;" border="1" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top; background-color: rgb(233, 229, 255);">
+In questo breve esempio vogliamo mettere in evidenza come manipolare degli istogrammi monidimensionali utilizzando la classe <a href="https://root.cern.ch/doc/master/classTH1F.html">TH1F</a> di ROOT. Nell'esempio si prova anche a fare un fit dei dati con una funzione gaussiana.
+<pre> 
+
+#include "TCanvas.h"
+#include "TApplication.h"
+#include "TH1F.h"
+#include "TF1.h"
+  
+#include &lt;iostream&gt;
+#include &lt;fstream&gt;
+ 
+using namespace std;
+ 
+int main (int argc, char**argv)
+{
+   
+  TApplication app("App",0,0);
+
+// Definizione di un istogramma monodimensionale da riempire con float
+
+  TH1F *h1 = new TH1F("h1","Istogramma 1D",100,-5.,5.);
+  h1.StatOverflows( kTRUE ); // utilizza underflow e overflow per calcoli statistici
+  
+// assumo di avere dei numeri immagazzinati in un file gaus.dat
+
+  fstream f ;
+  f.open("gaus.dat",ios::in);
+  double x ;
+  while ( f >> x ) {
+    h1->Fill(x);  // riempimento
+  }
+  f.close();
+  
+  // creazione del canvas
+
+  TCanvas *c1 = new TCanvas("c1","Istogramma 1D",600,400);
+  
+  // disegno.
+
+  h1->Draw();
+  h1->GetXaxis()->SetTitle("Titolo sull'asse X");
+  h1->GetYaxis()->SetTitle("Titolo sull'asse Y");
+  h1->Draw();
+  
+  // Puoi prendere le informazioni che ti interessano
+  
+  cout << "La media dell'istrogramma h1 vale -->>  " << h1->GetMean() << endl;
+  cout << "L'RMS dell'istogramma h1 vale     -->>  " << h1->GetRMS() << endl;
+  
+  // Puoi fittare l'istogramma con una funzione gaussiana (e' gia' predefinita in ROOT)
+
+  h1->Fit("gaus");
+  
+  // e recuperare i risultati
+  
+  TF1 *FitFun = h1->GetFunction("gaus");
+  cout << "Ecco i parametri del fit " << endl;
+  cout << "Media della gaussiana --->>> " << FitFun->GetParameter(1) << endl;
+  cout << "Sigma della gaussiana --->>> " << FitFun->GetParameter(2) << endl;
+  cout << "Chi2 del fit          --->>> " << FitFun->GetChisquare() << endl;
+  
+  c1->Print("HistoFit.pdf");
+  
+  app.Run();
+  return 0;
+  
+}
+
+
+</pre>
+
+
+<br>
+</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+<!-- fine div ======================================================================== -->
+
+
+<font size="+1">
+<!-- inzio div--> <a href="lezioneROOT_1819.html#" onclick="mostra('testoROOT_a3'); return false">Grafici (TGraph)</a></font><br>
+<br>
+<div style="display: none;" id="testoROOT_a3">
+<table style="text-align: left; width: 967px; height: 41px;" border="1" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top; background-color: rgb(233, 229, 255);">
+In questo breve esempio vogliamo mettere in evidenza come manipolare dei grafici (x,y) utilizzando la classe <a href="https://root.cern.ch/doc/master/classTGraph.html">TGraph</a> di ROOT. Si effettua anche un fit del grafico con una funzione sinusoidale.
+<pre> 
+
+#include "TCanvas.h"
+#include "TApplication.h"
+#include "TGraph.h"
+#include "TF1.h"
+
+#include &lt;cmath&gt;
+#include &lt;iostream&gt;
+#include &lt;fstream&gt;
+
+using namespace std;
+
+int main (int argc, char**argv)
+{
+  
+  TApplication app("App",0,0);
+
+  // construisco il grafico
+
+  TGraph * g = new TGraph() ;
+  
+  // riempio il vettore con dei punti costruiti artificialmente
+
+  for (int i = 0; i < 20; i++){   
+    double x = 0.5 * i;
+    double y = 10.*sin( x+0.2 );		      
+    g->SetPoint(i, x , y);
+  }
+    
+  // Disegnare il grafico (N.B.: viene creato automaticamente un TCanvas di nome c1)
+  
+  TCanvas *mygraph = new TCanvas("mygraph","Grafico") ;
+  g->Draw("AL*");   // A = Disegna gli assi
+                    // L = Congiunge i punti con una linea spezzata
+                    // * = Segna i punti con un *
+  
+
+  TF1 *f1 = new TF1("f1","[0]*sin([1]*x+[2])",0.,10.);
+
+  f1->SetParameter(0,10.);     // Definire il parametro [0] a 10.
+  f1->SetParameters(5.,1.,0.1);   // Definire [0] -> 10. e [1] a 5.
+
+  g->Fit(f1);
+  cout << "Parametro 0 del fit : " << f1->GetParameter(0) << endl;
+  cout << "Parametro 1 del fit : " << f1->GetParameter(1) << endl;
+  cout << "Parametro 2 del fit : " << f1->GetParameter(2) << endl;
+
+  // Cambiare il tipo di punto
+  
+  TCanvas *mygraph1 = new TCanvas("mygraph1","Grafico") ;
+  g->SetMarkerStyle(21);
+  g->SetMarkerColor(9);
+  g->Draw("ALP");   // P = Segna i punti con il punto corrente
+  
+  // Sovrapporre un altro grafico
+
+  TGraph *h = new TGraph("punti.dat");
+  h->SetMarkerStyle(20);
+  h->SetMarkerColor(3);
+  h->Draw("CP");    // C = Congiunge i punti con una linea continua  
+
+  app.Run();
+
+  return 0;
+
+}
+
+
+</pre>
+
+
+<br>
+</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+<div style="text-align: center;"><a href="../index.html"><img title="Back to Home Page" style="border: 0px solid ; width: 40px; height: 40px;" alt="Back to Home Page" src="../button-home.jpg"></a><br>
+</div>
+
+</body></html>

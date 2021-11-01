@@ -1,0 +1,415 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+
+
+
+  <tdi></tdi>
+  
+  <meta content="text/html; charset=ISO-8859-1" http-equiv="content-type"><title>Lezione 3</title>
+  
+
+   
+  <script type="text/javascript" language="javascript">
+function mostra(id){
+if (document.getElementById){
+if(document.getElementById(id).style.display == 'none'){
+document.getElementById(id).style.display = 'block';
+}else{
+document.getElementById(id).style.display = 'none';
+}
+}
+}
+  </script></head><body>
+<font> </font><font> </font>
+<table style="text-align: left; width: 100%;" border="1" cellpadding="2" cellspacing="2">
+
+  <tbody>
+    <tr>
+      <td style="background-color: rgb(204, 0, 0); text-align: center;"><big><big><big>Lezione 3<br>
+      <font size="+2">Evoluzione della classe <tt>Vettore</tt> e uso di <tt>vector</tt></font><br>
+      </big></big></big> </td>
+    </tr>
+  </tbody>
+</table>
+
+<br>
+
+<font size="+1">In questa terza lezione affronteremo di nuovo gli stessi problemi della prima e seconda lezione (lettura di dati da un file, calcolo di media e mediana) utilizzando una evoluzione del contenitore di dati <tt>Vettore</tt>: possiamo rendere questa classe pi&ugrave; flessibile in modo che sia capace di immagazzinare qualsiasi tipo di dato ( e non necessariamente dei numeri double ) ? Nella seconda parte spingeremo ancora oltre la generalizzazione imparando ad usare il contenitore <tt>vector</tt> della <a href="http://www.cplusplus.com/reference/stl/">STL</a> . Quindi in sintesi :
+
+<ul>
+<li> Tipo di dato da leggere &egrave constituito da numeri <tt>double</tt>. </a>
+<li> Tipo di contenitore di dati &egrave una generalizzazione della classe <tt>Vettore</tt> della lezione 2 o il contenitore <tt>vector</tt> della STL. </a>
+<li> Operazioni sui dati vengono svolte mediante funzioni che agiscono su oggetti di tipo <tt>Vettore</tt> o <tt>vector</tt>. </a>
+</ul>
+
+<br>
+
+Per incominciare ripassiamo brevemente cosa sono le funzioni e le classi <tt>template</tt>. 
+
+<br>
+<br>
+<font size="+1">
+<!-- inzio div--> <a href="lezione1.html#" onclick="mostra('testo3.0_a1'); return false">Funzioni e classi template</a></font><br>
+<br>
+<div style="display: none;" id="testo3.0_a1">
+<table style="text-align: left; width: 967px; height: 41px;" border="1" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top; background-color: rgb(233, 229, 255);">
+
+
+Le funzioni o le classi <tt>template</tt> sono costruite in modo tale che possano operare con tipi generici. Cosa significa ? Consideriamo la nostra classe <tt>Vettore</tt>: essa e' disegnata per immagazzinare un set di numeri <tt>double</tt>. Ma cosa ci vieta di renderla pi&ugrave; generale e fare in modo che sia in grado di contenere oggetti di tipo generico <tt>T</tt> ? Allo stesso modo possiamo pensare di generalizzare le funzioni che abbiamo scritto in modo che possano lavorare su oggetti generici. Considerate la funzione <tt>selection_sort</tt>: l'algoritmo di riordinamento &egrave; valido per qualunque tipo di oggetto per cui sia definita una relazione d'ordine tra due elementi. <br>
+Vediamo un paio di esempi.
+<br>
+<br>
+
+Supponiamo di voler dichiarare una classe Vettore che al suo interno possa immagazzinare oggetti generici di tipo <tt>T </tt>. Nell'header file dovr&ograve; modificare la dichiarazione della classe in questo modo
+
+<pre> template  < typename T > class Vettore { ... };  </pre>
+
+mentre quando dovr&ograve; creare nel <tt>main</tt> un oggetto di tipo <tt>Vettore</tt> per immagazzinare dei <tt>double</tt> far&ograve; :
+
+<pre> Vettore < double > v;  </pre>
+
+L'istruzione indicata qui sopra crea effettivamente una istanza della classe <tt>Vettore</tt> specializzata per lavorare con dei <tt>double</tt>.
+
+Analogamente se pensiamo per esempio alla funzione <tt>CalcolaMedia()</tt> possiamo scrivere 
+
+<pre>template < typename T > double CalcolaMedia ( const Vettore< T > & v , unsigned int ndata ) {...} </pre>
+
+e possiamo quindi utilizzare la funzione <tt>CalcolaMedia</tt> nel <tt>main</tt> nel modo seguente :
+
+<pre >cout << "media    = " << CalcolaMedia< double >( v  ) << endl; </pre>
+
+Si possono trovare pi&ugrave; dettagli a questo <a href="http://www.cplusplus.com/doc/oldtutorial/templates/"> link. </a>  
+
+<br>
+</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+</font>
+<br>
+<font size="+1"><span style="text-decoration: underline; color: rgb(204, 0, 0);">ESERCIZIO 
+3.0 - Evoluzione della classe <code>Vettore</code> in una classe <tt>template</tt> (da consegnare)</span><a name="es3.0"></a>:<br>
+Proviamo a rendere la classe <tt>Vettore</tt> della lezione scorsa una classe <tt>template</tt> in modo che possa in linea di principio immagazzinare oggeti di un tipo generico <tt>T</tt>.
+Notate che quando usiamo classi o funzioni template non applichiamo la separazione tra header file (.h) e file di implementazione (.cxx) ma codifichiamo tutto dentro l'header file. Questo perch&egrave; non sarebbe possibile per il compilatore compilare separatamente un set di funzioni o una classe senza sapere i tipi esatti con cui verranno utilizzati. <br>
+<br>
+Vediamo come fare passo passo. 
+<br>
+<br>
+<!-- inizio div ================================================================== -->
+<a href="#" onclick="mostra('testo3.0a');  return false;">Generalizzazione classe <tt>Vettore</tt>:</a><br>
+</font>
+<div style="display: none;" id="testo3.0a">
+<table style="text-align: left; width: 967px; height: 41px;" border="1" cellpadding="2" cellspacing="2"> 
+
+  <tbody>
+    <tr>
+      <td style="vertical-align: top; background-color: rgb(233, 229, 255);">Provate a lavorare sulla generalizzazione della classe <tt>Vettore</tt> in modo che diventi un contenitore di oggetti generici di tipo <tt>T</tt>. Provate a completare voi le parti mancanti. Ricordatevi che in questo caso particolare tutto va fatto nell'header file della classe.<br>
+      <br>
+<img src="figure/esercizio3.0_vettore.png" width="900" >
+       <br>
+<br> 
+</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<!-- fine div ================================================================== -->
+
+<br>
+<font size="+1">
+<!-- inizio div ================================================================== -->
+<a href="#" onclick="mostra('testo3.0b');  return false;">Adeguamento funzioni:</a><br>
+</font>
+<div style="display: none;" id="testo3.0b">
+<table style="text-align: left; width: 967px; height: 41px;" border="1" cellpadding="2" cellspacing="2"> 
+
+  <tbody>
+    <tr>
+      <td style="vertical-align: top; background-color: rgb(233, 229, 255);">Analogamente a quanto fatto sopra adattiamo il file di funzioni in modo tale che possano lavorare con contenitori <tt>Vettore</tt> di tipo <tt>template</tt>:<br>. Come gi&agrave; ricordato tutto deve essere codificato nell'header file della classe.
+      <br>
+<img src="figure/esercizio3.0_funzioni1.png" width="900" >
+<!--<br>
+<img src="figure/esercizio3.0_funzioni2.png" width="900" >
+-->
+<br>
+<br>
+Provate voi ad modificare le funzioni che mancano.
+       <br>
+<br> 
+</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<!-- fine div ================================================================== -->
+
+<br>
+<font size="+1">
+<!-- inizio div ================================================================== -->
+<a href="#" onclick="mostra('testo3.0c');  return false;">Struttura del programma:</a><br>
+</font>
+<div style="display: none;" id="testo3.0c">
+<table style="text-align: left; width: 967px; height: 41px;" border="1" cellpadding="2" cellspacing="2"> 
+
+  <tbody>
+    <tr>
+      <td style="vertical-align: top; background-color: rgb(233, 229, 255);">Ecco l'aspetto che potrebbe avere il <tt>main</tt>: come vedete usiamo il contenitore <tt>Vettore</tt> per immagazzinare un set di <tt>double</tt><br>
+      <br>
+<img src="figure/esercizio3.0_main.png" width="900" >
+       <br>
+<br> 
+</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<!-- fine div ================================================================== -->
+
+<br>
+<font size="+1">
+<!-- inizio div ================================================================== -->
+<a href="#" onclick="mostra('testo3.0d');  return false;">Commenti sulla compilazione :</a><br>
+</font>
+<div style="display: none;" id="testo3.0d">
+<table style="text-align: left; width: 967px; height: 41px;" border="1" cellpadding="2" cellspacing="2"> 
+
+  <tbody>
+    <tr>
+      <td style="vertical-align: top; background-color: rgb(233, 229, 255);">Nel caso si utilizzino classi o funzioni template la dichiarazione e l'implementazione vanno codificate entrambe nell'header file. Come si potrebbe compilare una classe <tt>template</tt> senza sapere con che tipi di dato verr&agrave; utilizzata ? Di conseguenza la compilazione si riduce alla singola istruzione :<br>
+      <br>
+<img src="figure/esercizio3.0_makefile.png" width="900" >
+       <br>
+<br> 
+</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<!-- fine div ================================================================== -->
+
+<br>
+
+<font size="+1"><span style="text-decoration: underline; color: rgb(204, 0, 0);">ESERCIZIO 3.1 
+- Codice di analisi dati utilizzando la classe <tt>vector</tt> (da consegnare)</span><a name="es3.1"></a>: 
+<br>
+
+<ul>
+<li>Vediamo come possiamo ora fare uso di un contenitore "ufficiale" del c++, la classe <tt>vector</tt>. Questo particolare contenitore non &egrave; altro che una classe <tt>template</tt> sulla falsariga della nostra <tt>Vettore</tt>. La particolarit&agrave di questa classe sta nel fatto che la sua dimensione pu&ograve; non essere nota a priori: la costruzione del vettore pu&ograve; avvenire "aggiungendo in coda" (<tt>push_back(x)</tt>) gli elementi man mano che si rendono disponibili. Vedremo nel seguito alcuni esempi, in caso &egrave; possibile trovare pi&ugrave; materiale per esempio in questa
+<a href="http://www.cplusplus.com/reference/vector/vector/"> referenza</a>. 
+<li> Notate anche che per contenitori della STL (come il <tt>vector</tt>) che stiamo andando ad utilizzare, esistono delle funzioni standard che possono essere utilizzate senza sforzo ( vedi nel nostro esempio la funzione <tt>sort</tt> ).
+</ul>
+<br>
+Vediamo passo passo come si pu&ograve; procedere. 
+<br>
+<br>
+<font size="+1">
+<!-- inizio div ================================================================== -->
+<a href="#" onclick="mostra('testo3.1a');  return false;">Adeguamento funzioni:</a><br>
+</font>
+<div style="display: none;" id="testo3.1a">
+<table style="text-align: left; width: 967px; height: 41px;" border="1" cellpadding="2" cellspacing="2"> 
+
+  <tbody>
+    <tr>
+      <td style="vertical-align: top; background-color: rgb(233, 229, 255);">Analogamente a quanto fatto sopra adattiamo il file di funzioni in modo tale che possano lavorare con contenitori <tt>vector</tt>. Come gi&agrave; ricordato tutto deve essere codificato nell'header file della classe. Vediamo qualche funzione (quelle mancanti dovreste essere in grado di farle da soli):
+      <br>
+<img src="figure/esercizio3.1_funzioni1.png" width="900" >
+<br>
+Ecco l'esempio della funzione <tt>CalcolaMediana</tt>: notate l'utilizzo della funzione <tt>sort()</tt> della STL per ordinare gli elementi di un contenitore. Quando possibile usiamo funzioni e algoritmi ufficiali ! La funzione <tt>sort()</tt> lavora con un <tt>iteratore</tt> al primo elemento del contenitore (<tt>v.begin()</tt>) e uno all'ultimo (+1) (<tt>v.end()</tt>). I contenitori della STL hanno i due metodi <tt>begin()</tt> e <tt>end()</tt> e le funzioni STL in genere lavorano con iteratori: in questo modo la funzione pu&ograve; lavorare indifferentemente su ogni tipo di contenitore indipendentemente dalla struttura interna del contenitore.
+<br>
+<img src="figure/esercizio3.1_funzioni2.png" width="900" >
+       <br>
+<br> 
+</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<!-- fine div ================================================================== -->
+
+<br>
+
+<font size="+1">
+<!-- inizio div ================================================================== -->
+<a href="#" onclick="mostra('testo3.1b');  return false;">Il codice principale:</a><br>
+</font>
+<div style="display: none;" id="testo3.1b">
+<table style="text-align: left; width: 967px; height: 41px;" border="1" cellpadding="2" cellspacing="2"> 
+
+  <tbody>
+    <tr>
+      <td style="vertical-align: top; background-color: rgb(233, 229, 255);">Ecco l'aspetto che potrebbe avere il nostro nuovo codice:<br>
+      <br>
+<img src="figure/esercizio3.1_main.png" width="900" >
+       <br>
+<br> 
+</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<!-- fine div ================================================================== -->
+
+<br>
+
+<font size="+1">
+<!-- inizio div ================================================================== -->
+<a href="#" onclick="mostra('testo3.1c');  return false;">Il makefile:</a><br>
+</font>
+<div style="display: none;" id="testo3.1c">
+<table style="text-align: left; width: 967px; height: 41px;" border="1" cellpadding="2" cellspacing="2"> 
+
+  <tbody>
+    <tr>
+      <td style="vertical-align: top; background-color: rgb(233, 229, 255);">Il <tt>Makefile</tt> <br>
+      <br>
+<img src="figure/Makefile_es3.1.png" width="900" >
+</tr>
+
+<br> 
+</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<!-- fine div ================================================================== -->
+
+<br>
+
+Notate che la classe <tt>vector</tt> ci libera completamente dalla necessit&agrave; di conoscere in anticipo la quantit&agrave; di dati da caricare. Questo ci permette per esempio di scrivere una funzione che legga automaticamente tutti i dati che trova in un file senza sapere a priori quanti sono. 
+
+<br>
+<br>
+
+<font size="+1">
+<!-- inizio div ================================================================== -->
+<a href="#" onclick="mostra('testo3.1d');  return false;">Riempire un vettore da file</a><br>
+</font>
+<div style="display: none;" id="testo3.1d">
+<table style="text-align: left; width: 967px; height: 41px;" border="1" cellpadding="2" cellspacing="2"> 
+
+  <tbody>
+    <tr>
+      <td style="vertical-align: top; background-color: rgb(233, 229, 255);">In questa funzione creiamo un vettore, lo riempiamo con tutti i dati letti da un file aggiungendo di volta in volta una componente. Il processo si ferma al termine del file:<br>
+      <br>
+<img src="figure/esercizio3.2_while_eof.png" width="900" >
+</tr>
+
+<br> 
+</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<!-- fine div ================================================================== -->
+
+<br>
+<font size="+1">
+<!-- inizio div ================================================================== -->
+<a href="#" onclick="mostra('testo3.1f');  return false;">Per chi volesse approfondire le funzionalit&agrave; della STL (facoltativo):</a><br>
+</font>
+<div style="display: none;" id="testo3.1f">
+<table style="text-align: left; width: 967px; height: 41px;" border="1" cellpadding="2" cellspacing="2"> 
+
+  <tbody>
+    <tr>
+      <td style="vertical-align: top; background-color: rgb(233, 229, 255);">Proviamo a usare meglio le funzionalit&agrave; offerte dalla
+Standard Template Library: ecco <a href="funzioni_stlstyle.h">qui</a><br> un esempio di come si potrebbe fare.
+
+<br>
+      <br>
+</tr>
+
+<br> 
+</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<!-- fine div ================================================================== -->
+
+
+</font>
+<br>
+<br>
+<font size="+1"><span style="text-decoration: underline; color: rgb(204, 0, 0);">ESERCIZIO 
+3.2 - Analisi dati con <tt>vector</tt> e visualizzazione dei dati (da consegnare)</span><a name="es3.2"></a>:<br>
+Proviamo ora ad aggiungere all'esercizio precedente la possibilit&agrave; di visualizzare i dati letti da file.
+<br>
+Un modo semplice per visualizzare graficamente la distribuzione di un set di dati &egrave; quello di usare un istrogramma (<a href="https://root.cern.ch/doc/master/classTH1F.html">TH1F</a>) di <a href="https://root.cern.ch/">ROOT</a>. Le classi di ROOT sono molto comode da usare perch&egrave; possiamo facilmente utilizzarle in un codice <tt>C++</tt>
+Per fare questo dobbiamo ricordarci di :
+<br>
+<ul>
+<li> Includere l'header file (.h) di ogni oggetto di ROOT che pensiamo di utilizzare (TApplication, TH1F, TGraph, TCanvas).
+<li> Modificare il <tt>Makefile</tt> in modo che sia in grado da solo di trovare il path degli header files necessari ($INCS) e le librerie precompilate da linkare ($LIBS).
+</ul>
+<br>
+Per una rapida panoramica dei principali oggetti di ROOT che ci potranno interessare potete dare un'occhiata <a href="lezioneROOT_1819.html"> qui </a>.
+<br>
+<br>
+Vediamo come si potrebbe fare :
+<br>
+<br>
+
+<font size="+1">
+<!-- inizio div ================================================================== -->
+<a href="#" onclick="mostra('testo3.2a');  return false;">Programma principale:</a><br>
+</font>
+<div style="display: none;" id="testo3.2a">
+<table style="text-align: left; width: 967px; height: 41px;" border="1" cellpadding="2" cellspacing="2"> 
+
+  <tbody>
+    <tr>
+      <td style="vertical-align: top; background-color: rgb(233, 229, 255);">Possiamo usare questo codice come esempio per l'utilizzo di un qualsiasi oggetto di ROOT:<br>
+      <br>
+<img src="figure/esercizio3.2_main.png" width="900" >
+</tr>
+
+<br> 
+</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<!-- fine div ================================================================== -->
+
+<br>
+
+<font size="+1">
+<!-- inizio div ================================================================== -->
+<a href="#" onclick="mostra('testo3.2b');  return false;">Makefile modificato:</a><br>
+</font>
+<div style="display: none;" id="testo3.2b">
+<table style="text-align: left; width: 967px; height: 41px;" border="1" cellpadding="2" cellspacing="2"> 
+
+  <tbody>
+    <tr>
+      <td style="vertical-align: top; background-color: rgb(233, 229, 255);">Ecco come dobbiamo modificare il Makefile per compilare includendo oggetti di ROOT:<br>
+      <br>
+<img src="figure/Makefile_es3.2.png" width="900" >
+<br>
+Notate l'utilizzo dei comandi <tt>root-config --libs</tt> e <tt>root-config --cflags</tt> che restituiscono rispettivamente il path per raggiungere le librerie di ROOT e il gli header files. I path vengono memorizzati nelle variabili <tt>LIBS</tt> e <tt>INCS</tt>. Queste due variabili vengono poi passati al comando <tt>g++</tt> in modo che il compilatore abbia a disposizione tutti gli ingredienti per una corretta compilazione.
+
+</tr>
+
+<br> 
+</td>
+
+    </tr>
+
+  </tbody>
+</table>
+</div>
+<!-- fine div ================================================================== -->
+
+
+<div style="text-align: center;"><font size="+1"><a href="../index.html"><img title="Back to Home Page" style="border: 0px solid ; width: 40px; height: 40px;" alt="Back to Home Page" src="../button-home.jpg"></a><br>
+</font></div>
+
+
+</body></html>

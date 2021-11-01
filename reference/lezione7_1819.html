@@ -1,0 +1,362 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+
+
+
+  <tdi></tdi>
+  
+  <meta content="text/html; charset=ISO-8859-1" http-equiv="content-type"><title>Lezione 7</title>
+  
+
+   
+  <script type="text/javascript" language="javascript">
+function mostra(id){
+if (document.getElementById){
+if(document.getElementById(id).style.display == 'none'){
+document.getElementById(id).style.display = 'block';
+}else{
+document.getElementById(id).style.display = 'none';
+}
+}
+}
+  </script></head><body>
+<font> </font><font> </font>
+<table style="text-align: left; width: 100%;" border="1" cellpadding="2" cellspacing="2">
+
+  <tbody>
+    <tr>
+      <td style="background-color: rgb(204, 0, 0); text-align: center;"><big><big><big>Lezione
+7<br>
+      <font size="+2">Ricerca di zeri</font><br>
+      </big></big></big> </td>
+    </tr>
+  </tbody>
+</table>
+
+<br>
+
+<font size="+1">In questa settima lezione 
+affronteremo il problema della ricerca di zeri di una funzione. Per fare questo realizzeremo due <i>classi astratte</i>
+per rappresentare rispettivamente una generica funzione di una variabile, ed un metodo generico per la ricerca di zeri.<br>
+</font>
+<br>
+
+<font size="+1"><span style="text-decoration: underline; color: rgb(0, 153, 0);">ESERCIZIO 
+7.0 - Metodi <code>virtual</code> </span><a name="es7.0"></a>:<br>
+Considerare le classi <code>Particella</code> e la sue derivata <code>Elettrone</code>
+costruite nella <a href="lezione5_1819_nuova.html">lezione 5</a>.
+<br> 
+Implementare ed eseguite il seguente programma:<br>
+<img alt="Programma da eseguire" src="figure/Esercizio7.0.main.PNG" width="900">
+<br>
+<br>
+Si dovrebbe vedere che viene invocato il metodo <code>Print()</code> della classe madre, anche quando gli oggetti 
+riferiti dai puntatori sono classi figlie.<br>
+Aggiungere ora negli <i>header file</i> delle classi il qualificatore <code>virtual</code> davanti alla dichiarazione
+del metodo  <code>Print()</code>.<br>
+Ricompilando e rigirando il programma si dovrebbe adesso vedere che per ciascun oggetto viene invocato il metodo 
+corrispondente alla sua vera classe.
+<br>    
+<br>
+<span style="text-decoration: underline;">Brevi Richiami</span><br><br>
+</font>
+
+<font size="+1"><font size="+1">
+<a href="#" onclick="mostra('testo7.0'); return false;">Parola chiave <code>virtual</code>
+</a><br>
+</font><div style="display: none;" id="testo7.0">
+<table style="text-align: left; width: 967px; height: 41px;" border="1" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="background-color: rgb(233, 229, 255);"> 
+      La parola chiave <code>virtual</code> informa il compilatore che il metodo indicato potr&agrave; venire sovrascritto
+      dalle classi figlie.<br> 
+      Se essa viene fornita, durante l'esecuzione del programma, al momento di chiamare il metodo a partire da un puntatore 
+      alla classe madre, il programma valuter&agrave; se l'oggetto indirizzato &egrave; del tipo classe madre o una delle
+      figlie. In quest'ultimo caso, invocher&agrave; il metodo appropriato della classe figlia reale.
+      <br>
+      Un metodo <i>virtuale</i> pu&ograve; anche essere posto a 0 (vedi prossimo esercizio), in tal caso &egrave; <b>obbligatorio</b>
+      per le classi figlie implementarlo.
+</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<br><br>
+
+<font size="+1"><span style="text-decoration: underline; color: rgb(0, 153, 0);">ESERCIZIO 
+7.1 - Classe astratta <code>FunzioneBase</code> </span><a name="es5.1"></a>:<br>
+In questo e nei prossimi esercizi avremo a che fare con diverse funzioni di una sola variabile, magari dipendenti da 
+parametri, e di effettuare delle operazioni generiche su queste funzioni (come trovarne gli zeri, o farne l'integrale).<br>
+In questo caso &egrave; utile definire una <i>classe astratta</i> che definisce le propriet&agrave; generali della classe,
+con metodi puramente virtuali, e poi lasciare alle classi derivate il compito di implementare tutti questi metodi 
+e quelli aggiuntivi necessari.<br>
+<ol>
+<li>Definire la classe astratta <code>FunzioneBase</code>:<br>
+    <img alt="FunzioneBase" src="figure/FunzioneBase.PNG"  >  
+<li>Implementare una classe derivata <code>Parabola</code> che descriva una funzione del tipo <i>y=ax<sup>2</sup>+bx+c</i>
+    (chiaramente questa classe dovr&agrave; avere i data membri per i parameteri <i>a</i>, <i>b</i> e <i>c</i>, ed i metodi
+    per definirli e accederci).
+<li>Verificare il funzionamento della classe <code>Parabola</code> costruendo un programmino che, dati i parametri di una
+    parabola, ne stampi il valore della <i>y</i> nel vertice <i>x<sub>v</sub>=-b/2a</i>.
+</ol>
+<br>    
+<br>
+<span style="text-decoration: underline;">Brevi Richiami</span><br><br>
+</font>
+
+<font size="+1">
+<a href="#" onclick="mostra('testo7.1a'); return false;">Classi astratte
+</a><br>
+</font><div style="display: none;" id="testo7.1a">
+<table style="text-align: left; width: 967px; height: 41px;" border="1" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="background-color: rgb(233, 229, 255);"> 
+      Quando dichiariamo nullo un metodo <code>virtual</code>, la classe difetta dell'implementazione di tale metodo, e quindi non 
+      si possono creare oggetti di quella classe. Solo le sue classi derivate implementeranno il metodo, e possono essere
+      implementate.<br>
+      Siccome non si possono costruire oggetti di tale classe, non &egrave; necessario definire dei costruttori.<br>
+      Se una classe astratta implementa solo metodi virtuali nulli, come in questo caso, non &egrave; neanche necessario realizzare un
+      file di implementazione, n&eacute; creare un file oggetto, dato che tutta l'informazione &egrave; contenuta nell'header.
+</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<br>
+
+<font size="+1">
+<a href="#" onclick="mostra('testo7.1b'); return false;">Classe <code>Parabola</code>
+</a><br>
+</font><div style="display: none;" id="testo7.1b">
+<table style="text-align: left; width: 967px; height: 41px;" border="1" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="background-color: rgb(233, 229, 255);"> 
+      Questa &egrave; una possibile dichiarazione per la classe <code>Parabola</code>:<br><br>
+      <img alt="Parabola" src="figure/Parabola.PNG" width="900">     
+    <br><br>
+
+</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<br><br>
+
+<font size="+1"><span style="text-decoration: underline; color: rgb(204, 0, 0);">ESERCIZIO 
+7.2 - Metodo della bisezione (da consegnare)</span><a name="es7.2"></a>:<br>
+Scrivere un programma che calcoli gli zeri della funzione &#402;(<i>x</i>) = 3<i>x</i><sup>2</sup>+5<i>x</i>-2.
+<br> Il programma legge da riga di comando gli
+estremi dell'intervallo in cui cercare lo zero e la precisione richiesta.<br>
+Per calcolare gli zeri, implementare una classe astratta <code>Solutore</code> ed una classe concreta che realizza uno dei due
+metodi visti a lezione: quello della <i>bisezione</i> o quello della <i>secante</i>.<br>
+Si richiede <b>obbligatoriamente</b> che il programma stampi l'ascissa dello zero con un numero di cifre significative 
+corrispondente alla precisione immessa.<br> 
+<br>
+<br>
+<span style="text-decoration: underline;">Brevi Richiami</span><br><br>
+<!-- inzio div-->
+<a href="#" onclick="mostra('testo7.2a'); return false">Il metodo
+  della bisezione</a><br>
+</font>
+
+<div style="display:none;" id="testo7.2a">
+<table style="text-align: left; width: 967px; height: 41px;" border="1" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top; background-color: rgb(233, 229, 255);">
+Data una funzione &#402;(x), si dice zero, o radice, di &#402; un elemento x<sub>0</sub>
+del suo dominio tale che &#402;(x<sub>0</sub>) = 0.<br>
+<br>
+Ci proponiamo di trovare gli zeri della funzione &#402;(x) = x<sup>2</sup>-2
+utilizzando il metodo di bisezione. &Egrave; l'algoritmo pi&ugrave; semplice: consiste in una procedura iterativa che, ad ogni ciclo, dimezza l'intervallo in cui si
+trova lo zero. <br>
+<br>
+Dal teorema di Bolzano (o degli zeri) sappiamo che data una 
+funzione &#402; continua sull'intervallo chiuso [a,b] a valori in &#8476;
+tale che &#402;(a)*&#402;(b) &lt; 0, <br>allora esiste un punto
+x<sub>0</sub> all'interno di [a,b] tale che &#402;(x<sub>0</sub>) = 0.<br>
+<br>
+Definiamo intervallo di incertezza di &#402; un intervallo [a,b] che
+soddisfa il Teorema 
+di Bolzano.
+<br>
+L'idea di base dell'algoritmo &egrave; che se esiste un intervalo di
+incertezza [a,b] per  
+una funzione &#402;, allora ne esiste uno pi&ugrave; piccolo (esattamente
+la met&agrave;). <br>L'algoritmo deve avere in input
+l'intervallo di incertezza di partenza [a,b] ed una precisione (o tolleranza) 
+ &#949; con cui si vuole trovare lo zero di &#402; tale che |b -
+a| &lt; &#949;. 
+<br><br>
+Si parte quindi dividendo in due l'intervallo trovando 
+il punto medio c = a + 0.5*(b-a) per cui avremo due intervalli [a,c] e [c,b].<br>
+Ora se &#402;(c) = 0 siamo fortunati e abbiamo trovato lo zero.<br>
+Altrimenti si deve valutare &#402;(a)*&#402;(c) e &#402;(c)*&#402;(b) e 
+ripetere la procedura sull'intervallo in cui &#402; cambia di segno. 
+<br>
+La procedura va ripetuta finch&egrave; la larghezza dell'intervallo finale non &egrave; minore di &#949;.
+<br>
+<br>
+Ci sono alcuni caveat. Se l'intervallo contiene pi&ugrave; di una
+radice il metodo della bisezione ne trover&agrave; solo
+una. <br>Nell'implementazione delle condizioni 
+di ricerca dall'intervallo di incertezza occorre prestare attenzione alle
+operazioni tra floating 
+point soprattutto in prossimit&agrave; della radice.<br>
+Ad esempio le espressioni &#402;(a)*&#402;(c) e &#402;(c)*&#402;(b)
+hanno una buona probabilit&agrave; di essere approssimata a zero dal
+momento che entrambi gli argomenti convergono a una radice di
+&#402;. Per evitare questa eventualit&agrave;, &egrave; meglio valutare,
+il prodotto dei segni sign(&#402;(a))*sign(&#402;(c))
+e sign(&#402;(c))*sign(&#402;(b)).<br>
+Un altro controllo utile &egrave; contare il numero di iterazioni 
+dell'algoritmo e stampare un avviso nel caso queste siano troppo grandi.<br>
+In tal modo ci si accorge se ci sono possibili problemi nel ciclo 
+(errori o richiesta di precisione troppo alta)   
+
+      <br>
+</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<!-- fine div -->
+<!-- inzio div-->
+
+<font size="+1"><br>
+<a href="#" onclick="mostra('testo7.2b'); return false">Precisione sulle cifre significative</a><br>
+</font>
+
+<div style="display:none;" id="testo7.2b">
+<table style="text-align: left; width: 967px; height: 41px;" border="1" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top; background-color: rgb(233, 229, 255);">
+Poich&eacute; la precisione richiesta all'algoritmo &egrave; passata
+al programma <i>runtime</i>, abbiamo bisogno di determinare <i>runtime</i> quante
+cifre significative stampare nel nostro risultato. &Egrave; facile
+rendersi conto che il numero di cifre significative &egrave; dato
+da <br>
+<PRE><FONT COLOR="#FF6633">int</FONT> cifre_significative<B><FONT COLOR="#663300"> = -</FONT></B>log10<B><FONT COLOR="#663300">(</FONT></B>precision<B><FONT COLOR="#663300">);</FONT></B></PRE>
+
+Per cui per impostare il numero di cifre significative nella scrittura
+a video il codice sar&agrave;
+<PRE>cout<B><FONT COLOR="#663300"> &lt;&lt;</FONT></B>fixed<B><FONT COLOR="#663300">;</FONT></B>
+cout<B><FONT COLOR="#663300"> &lt;&lt;</FONT></B>setprecision<B><FONT COLOR="#663300">(</FONT></B>cifre_significative<B><FONT COLOR="#663300">) &lt;&lt;</FONT></B>zero<B><FONT COLOR="#663300"> &lt;&lt;</FONT></B>endl<B><FONT COLOR="#663300">;</FONT></B></PRE>
+</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<br>
+<!-- fine div -->
+<!-- inzio div--><font size="+1">
+<font size="+1">
+<a href="#" onclick="mostra('testo7.2c'); return false">La funzione segno</a><br>
+</font>
+
+<div style="display:none;" id="testo7.2c">
+<table style="text-align: left; width: 967px; height: 41px;" border="1" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top; background-color: rgb(233, 229,
+  255);">
+La funzione sign(x) non &egrave; codificata nelle <code>cstdlib</code>,
+poich&egrave; l'informazione sul segno &egrave; gi&agrave; contenuta
+nella variabile di tipo <code>int</code>, <code>float</code>, <code>double</code>.
+<br
+<ol>
+<li> Una possibile implementazione della funzione segno &egrave;
+<PRE><FONT COLOR="#FF6633">int</FONT> sign<B><FONT COLOR="#663300">(</FONT></B><FONT COLOR="#FF6633">double</FONT> x<B><FONT COLOR="#663300">){</FONT></B><FONT COLOR="#FF0000">
+
+ if</FONT><B><FONT COLOR="#663300">(</FONT></B>x<B><FONT COLOR="#663300">&lt;</FONT></B><FONT COLOR="#999900">0</FONT><B><FONT COLOR="#663300">)</FONT></B><FONT COLOR="#FF0000">
+   return</FONT><B><FONT COLOR="#663300"> -</FONT></B><FONT COLOR="#999900">1</FONT><B><FONT COLOR="#663300">;</FONT></B><FONT COLOR="#FF0000">
+ else 
+   return</FONT><FONT COLOR="#999900"> 1</FONT><B><FONT COLOR="#663300">;
+}</FONT></B></PRE>
+<li> Una implementazione equivalente ma molto pi&ugrave; compatta &egrave;
+
+<PRE><FONT COLOR="#FF6633">double</FONT> sign(<FONT COLOR="#FF6633">double</FONT> x){<FONT COLOR="#FF6633">return</FONT> (x==0.?0.:(x>0?1.:-1)); };
+
+</ol>
+
+Usando questa funzione la condizione richiesta dall'algoritmo di
+bisezione sar&agrave;
+<PRE><FONT COLOR="#FF0000">if</FONT><B><FONT COLOR="#663300">((</FONT></B>sign<B><FONT COLOR="#663300">(</FONT></B>f<B><FONT COLOR="#663300">(</FONT></B>a<B><FONT COLOR="#663300">))*</FONT></B>sign<B><FONT COLOR="#663300">(</FONT></B>f<B><FONT COLOR="#663300">(</FONT></B>c<B><FONT COLOR="#663300">)))&lt;</FONT></B><FONT COLOR="#999900">0</FONT><B><FONT COLOR="#663300">)
+  ......</FONT></B><FONT COLOR="#FF0000">
+
+else if</FONT><B><FONT COLOR="#663300">((</FONT></B>sign<B><FONT COLOR="#663300">(</FONT></B>f<B><FONT COLOR="#663300">(</FONT></B>b<B><FONT COLOR="#663300">))*</FONT></B>sign<B><FONT COLOR="#663300">(</FONT></B>f<B><FONT COLOR="#663300">(</FONT></B>c<B><FONT COLOR="#663300">)))&lt;</FONT></B><FONT COLOR="#999900">0</FONT><B><FONT COLOR="#663300">)
+  ......</FONT></B><FONT COLOR="#FF0000">
+
+else</FONT><B><FONT COLOR="#663300">
+  ......</FONT></B></PRE>
+
+</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<font size="+1">
+<br>
+<a href="#" onclick="mostra('testo7.2d'); return false;">Classe astratta <code>Solutore</code>
+</a><br>
+</font><div style="display: none;" id="testo7.2d">
+<table style="text-align: left; width: 967px; height: 41px;" border="1" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="background-color: rgb(233, 229, 255);"> 
+      <ol>
+      <li> La classe astratta <code>Solutore</code> potrebbe avere un metodo virtuale, corrispondente alla chiamate dell'algoritmo
+      che cercher&agrave; di determinare gli zeri di una generica <code>FunzioneBase</code>, passata come puntatore.<br>
+      <li> Inoltre possiamo definire dei metodi per configurare la precisione richiesta: tale precisione pu&ograve; essere definita nel costruttore, tramite un metodo dedicato o direttamente nella chiamata al metodo CercaZeri. Lo stesso discorso vale per il numero massimo di iterazioni. <br>
+      <li> Secondo il principio dell'incapsulamento possiamo anche copiare il puntatore a FunzioneBase in un puntatore interno alla classe m_f;
+      <li> Infine, in vista di potenziali sviluppi, possiamo definire dei data membri che contengono lo stato corrente dell'intervallo in cui si 
+      sono limitati gli zeri della funzione. 
+      <ol>
+      <img alt="Solutore" src="figure/Solutore.PNG" width="900">      
+      L'implementazione dell'algoritmo di bisezione dovr&agrave; necessariamente avvenire costruendo una classe dedicata <code>Bisezione</code> che erediti da <code>Solutore</code> e implementi una versione concreta del metodo <code>CercaZeri</code>.
+      <img alt="Solutore" src="figure/Bisezione.PNG" width="900">
+
+</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<br><br>
+
+<font size="+1"><span style="text-decoration: underline; color: rgb(204, 0, 0);">ESERCIZIO
+7.3 - Equazioni non risolubili analiticamente (da consegnare)</span><a name="es7.3"></a>:<br>
+
+In problemi di meccanica quantistica che verranno studiati nel prossimo anno, ci si pu&ograve; imbattere in equazioni del tipo:<br>
+<i>x</i> = tan<i>x</i><br>
+&Egrave; facile rendersi conto che tale equazione ha una soluzione in ciascuno degli intervalli (<i>n</i>&pi;,<i>n</i>&pi;+&pi;/2),
+<i>n</i>=1,2,3... Calcolare con una precisione di almeno 10<sup>-6</sup> i valori delle soluzioni per <i>n</i> da 1 a 20.<br>
+Suggerimento: riscrivere l'equazione come sin<i>x</i>-<i>x</i>cos<i>x</i>=0.
+</font><br>
+<br>
+
+<font size="+1"><span style="text-decoration: underline; color: rgb(50, 50, 50);">ESERCIZIO
+7.4 - Miglioramenti di <code>Solutore</code></span>:<br>
+
+Aggiungere a <code>Solutore</code> due nuovi metodi virtuali:<br>
+<img alt="Nuovi metodi di Solutore" src="figure/Solutore2.PNG">      
+<br>
+Il primo dovr&agrave; restituire vero o falso a seconda che lo zero sia stato effettivamente trovato o meno. Ad esempio se un algoritmo non riesce
+a convergere per via delle cattive condizioni iniziali <code>Trovato()</code> dovr&agrave; restituire <code>false</code>.<br>
+Il secondo dovr&agrave; restituire l'incertezza effettiva sull'ascissa dello zero stimato, che di solito &egrave; migliore del minimo requisito sulla precisione immagazzinato in <code>_prec</code>.<br>
+Implementare questi metodi nelle classi concrete usate per gli altri esercizi di questa lezione.
+</font>
+
+
+<br>
+<br>
+<div style="text-align: center;"><font size="+1"><a href="../index.html"><img title="Back to Home Page" style="border: 0px solid ; width: 40px; height: 40px;" alt="Back to Home Page" src="../button-home.jpg"></a><br>
+</font></div>
+
+
+</body></html>

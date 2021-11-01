@@ -1,0 +1,695 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+
+
+
+  <tdi></tdi>
+  
+  <meta content="text/html; charset=ISO-8859-1" http-equiv="content-type"><title>Lezione 4 e 5</title>
+  
+
+   
+  <script type="text/javascript" language="javascript">
+function mostra(id){
+if (document.getElementById){
+if(document.getElementById(id).style.display == 'none'){
+document.getElementById(id).style.display = 'block';
+}else{
+document.getElementById(id).style.display = 'none';
+}
+}
+}
+  </script></head><body>
+<font> </font><font> </font>
+<table style="text-align: left; width: 100%;" border="1" cellpadding="2" cellspacing="2">
+
+  <tbody>
+    <tr>
+      <td style="background-color: rgb(204, 0, 0); text-align: center;"><big><big><big>Lezione 4 e 5<br>
+      <font size="+2">Classi, Ereditariet&agrave</font><br>
+      </big></big></big> </td>
+    </tr>
+  </tbody>
+</table>
+
+<br>
+
+<font size="+1">In questa quinta lezione vogliamo affrontare un semplice problema di elettrostatica utilizzando un codice numerico. In particolare vogliamo calcolare il campo elettrico generato da un dipolo ( e idealmente anche un generico multi-polo). Nell'affrontare questo problema fisico approfondiremo il concetto di ereditariet&agrave; in C++. Come al solito dovremo preparare un set di classi utili per lo svolgimento dell'esercizio.
+<br>
+</font>
+<br>
+<font size="+1"><span style="text-decoration: underline; color: rgb(0, 153, 0);">ESERCIZIO 
+5.0 - Creazione della classe <tt>Posizione</tt> </span><a name="es3.0"></a>:   <br>
+<br>
+Implementare una classe <tt>Posizione</tt> <!-- (scarica l'header file <a href="code/Posizione.h">qui</a>) --> che descriva un punto nello spazio tridimensionale seguendo queste indicazioni:
+<ol>
+<li>Come data membri privati usare la terna di coordinate cartesiane.
+<li>Definire un costruttore di default che crei un punto di coordinate (0,0,0).
+<li>Definire un costruttore che abbia come argomento una terna di <code>double</code> corrispondenti alle coordinate del punto.
+<li>Definire metodi per restituire le coordinate del punto in sistemi di coordinate cartesiane, sferiche e cilindriche.
+<li>Definire un metodo che calcoli la distanza da un altro punto.
+</ol>
+Verificare il funzionamento della classe creando un programmino che legga da riga di comando le coordinate cartesiane di un punto e ne stampi le coordinate
+in un sistema di coordinate sferiche e cilindriche.
+<br>    
+<br>
+<!-- <span style="text-decoration: underline;">Brevi Richiami</span><br><br>
+</font> -->
+<!-- inzio div-->
+<font size="+1">
+<a href="#" onclick="mostra('testo5.0a'); return false;">Header file della classe: 
+</a><br>
+</font>
+
+<div style="display: none;" id="testo5.0a">
+<table style="text-align: left; width: 700px;" border="1" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="background-color: rgb(233, 229, 255);"> 
+      Nell'header file <code>Posizione.h</code> vanno dichiarati tutti i metodi ed i data membri. Si noti come i data membri siano tutti privati: questa modo di disegnare le classi implementa il concetto di incapsulamento e data hiding in C++.
+<br>
+Un paio di punti gi&agrave; che vale la pena ricordare:
+<ul>
+<li> Il qualificatore <code>const</code> dopo la dichiarazione di una funzione informa che la funzione non modificher&agrave; il contenuto dell'oggetto. In maniera simile il qualificatore <code>const</code> nell'argomento di <code>Distanza</code> specifica che il metodo <code>Distanza</code> con modificher&agrave; il suo argomento. &Egrave; sempre utile specificare esplicitamente queste propriet&agrave; dei metodi.<br>
+<li> L'insieme dell direttive <code>#ifndef</code>, <code>#define</code>, <code>#endif</code> serve per proteggersi da inclusioni incrociate (molto comuni quando si utilizzano diverse classi che interagiscono tra di loro).<br> 
+</ul>
+<img alt="Esempio di codice" src="figure/Posizione.h.PNG" width="900"><br>
+      <br>
+</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<br>
+<!-- altro div -->
+<a href="#" onclick="mostra('testo5.0b'); return false;">File di implementazione delle classe
+</a><br>
+<div style="display: none;" id="testo5.0b">
+<table style="text-align: left; width: 700px;" border="1" cellpadding="2" cellspacing="2">
+ <tbody>
+   <tr>
+     <td style="background-color: rgb(233, 229, 255);">
+Qui vediamo un esempio di implementazione della classe (file <code>Posizione.cxx</code>). <br>
+Per prima cosa sono definiti i costruttori ed un distruttore, che in questo caso pu&ograve; esser vuoto.<br>
+<img alt="Classe Posizione" src="figure/Posizione_1.cxx.PNG" width="900"><br>
+E successivamente sono implementati tutti i metodi descritti nell'header file:<br>
+<img alt="Classe Posizione" src="figure/Posizione_2.cxx.PNG" width="900"><br>
+     </td>
+   </tr>
+ </tbody>
+</table>
+</div>
+
+<!--
+<br>
+<a href="#" onclick="mostra('testo5.0d'); return false;">Coordinate sferiche e cilindriche.
+</a><br>
+<div style="display: none;" id="testo5.0d">
+<table style="text-align: left; width: 700px;" border="1" cellpadding="2" cellspacing="2">
+<tbody>
+  <tr>
+    <td style="background-color: rgb(233, 229, 255);">
+La relazione tra la terna di coordinate cartesiane (<i>x</i>,<i>y</i>,<i>z</i>) e quelle sferiche  (<i>R</i>,<i>&phi;</i>,<i>&theta;</i>) &egrave;: <br>
+<i>x</i>=<i>R</i> cos<i>&phi;</i> sin<i>&theta;</i> <br>
+<i>y</i>=<i>R</i> sin<i>&phi;</i> sin<i>&theta;</i> <br>
+<i>z</i>=<i>R</i> cos<i>&theta;</i> <br>
+<br>
+La relazione tra la terna di coordinate cartesiane (<i>x</i>,<i>y</i>,<i>z</i>) e quelle cilindriche  (<i>&rho;</i>,<i>&phi;</i>,<i>z</i>) &egrave;: <br>
+<i>x</i>=<i>&rho;</i> cos<i>&phi;</i> <br>
+<i>y</i>=<i>&rho;</i> sin<i>&phi;</i> <br>
+<i>z</i>=<i>z</i><br>
+    </td>
+  </tr>
+</tbody>
+</table>
+</div>
+-->
+<br>
+
+<a href="#" onclick="mostra('testo5.1r'); return false;"><span style="text-decoration: underline;">Incapsulamento e data hiding</span>
+</a><br>
+<div style="display: none;" id="testo5.1r">
+<table style="text-align: left; width=700px;" border="1" cellpadding="2" cellspacing="2">
+<tbody>
+  <tr>
+    <td style="background-color: rgb(233, 229, 255);">
+   
+Proviamo ad utilizzare l'esempio della classe <tt>Posizione</tt> per riflettere sul concetto di <b>incapsulamento</b>. 
+La nostra classe "nasconde" i dati principali ( le tre coordinate nel caso specifico ) in un set di data-membri privati.
+Tali data-membri non sono per definizione accessibili al programma principale in modo diretto ma solo
+attraverso una serie di metodi pubblici (interfacce) che proteggono il dato da un utilizzo incontrollato. Inoltre la protezione
+del dato dietro interfacce pubbliche mette al riparo da possibili cambiamenti o correzioni nel design di una classe: supponiamo 
+che per qualche ragione l'autore della classe decida che &egrave; meglio rappresentare la posizione utilizzando una 
+terna di numeri che corrispondono alle coordinate sferiche. Se l'autore della classe adegua di conseguenza le interfacce pubbliche,
+un eventuale utilizzatore della classe ( il nostro <tt>main</tt> ) non si accorgerebbe della variazione. Se invece il main 
+avesse avuto libero accesso alle tre coordinate e le avesse utilizzate direttamente, il cambiamento di design della classe
+avrebbe richiesto rendendo pesanti cambiamenti anche nel main.
+    </td>
+  </tr>
+</tbody>
+</table>
+</div>
+
+
+<br>
+<!-- fine div -->
+<a href="#" onclick="mostra('testo5.0c'); return false;">Esempio di programma</a> (scarica un esempio <a href="code/esercizio5.0.cxx">qui</a> ) <br>
+<div style="display: none;" id="testo5.0c">
+<table style="text-align: left; width: 700px;" border="1" cellpadding="2" cellspacing="2">
+<tbody>
+  <tr>
+    <td style="background-color: rgb(233, 229, 255);">
+Questo programma utilizza la nuova classe appena creata: richiede di fornire come argomenti le tre coordinate cartesiane e poi stampa le terne di coordinate cartesiane, sferiche e cilindriche.<br>
+<!-- Si noti che per effettuare la conversione degli argomenti che sono dei testi (<code>char&nbsp;*</code>) in <code>double</code>, abbiamo usato la funzione <code>atof</code> delle <code>cstdlib</code> (simile ad <code>atoi</code> usata nella <a href="lezione2.html">lezione 2</a>, ma che converte in <code>double</code> anzich&eacute; in <code>int</code>).<br> -->
+<img alt="Funzione main" src="figure/Esercizio5.0.cxx.PNG" width="900">
+    </td>
+  </tr>
+</tbody>
+</table>
+</div>
+
+<!--
+<br>
+<font size="+1"><span style="text-decoration: underline; color: rgb(204, 0, 0);">ESERCIZIO
+5.1 - Prova di incapsulamento (da consegnare)</span><a name="es5.1"></a>:<br>
+
+Modificare la classe <code>Posizione</code> in modo che i suoi data membri
+corrispondano ora alle coordinate sferiche. I <b>prototipi</b> di tutti i metodi
+(compresi i costruttori) devono rimanere invariati. In particolare il 
+costruttore con una terna di coordinate cartesiane deve continuare a funzionare
+correttamente. Va invece modificata l'<b>implementazione</b> dei metodi.
+Verificare la nuova implementazione usando la stessa funzione <code>main</code> dell'Esercizio 5.0: il programma deve avere lo stesso comportamento con entrambe le implementazioni 
+della classe <code>Posizione</code>.
+<br>
+<br>
+<a href="#" onclick="mostra('testo5.1r'); return false;"><span style="text-decoration: underline;">Incapsulamento e data hiding</span>
+</a><br>
+<div style="display: none;" id="testo5.1r">
+<table style="text-align: left; width=700px;" border="1" cellpadding="2" cellspacing="2">
+<tbody>
+  <tr>
+    <td style="background-color: rgb(233, 229, 255);">
+   
+Proviamo ad utilizzare l'esempio della classe <tt>Posizione</tt> per riflettere sul concetto di <b>incapsulamento</b>. 
+La nostra classe "nasconde" i dati principali ( le tre coordinate nel caso specifico ) in un set di data-membri privati.
+Tali data-membri non sono per definizione accessibili al programma principale in modo diretto ma solo
+attraverso una serie di metodi pubblici (interfacce) che proteggono il dato da un utilizzo incontrollato. Inoltre la protezione
+del dato dietro interfacce pubbliche mette al riparo da possibili cambiamenti o correzioni nel design di una classe: supponiamo 
+che per qualche ragione l'autore della classe decida che &egrave; meglio rappresentare la posizione utilizzando una 
+terna di numeri che corrispondono alle coordinate sferiche. Se l'autore della classe adegua di conseguenza le interfacce pubbliche,
+un eventuale utilizzatore della classe ( il nostro <tt>main</tt> ) non si accorgerebbe della variazione. Se invece il main 
+avesse avuto libero accesso alle tre coordinate e le avesse utilizzate direttamente, il cambiamento di design della classe
+avrebbe richiesto rendendo pesanti cambiamenti anche nel main.
+    </td>
+  </tr>
+</tbody>
+</table>
+</div>
+-->
+
+<br><br>
+<font size="+1"><span style="text-decoration: underline; color: rgb(0, 153, 0);">ESERCIZIO 
+5.1 - Creazione della classe <code>Particella</code> ed <code>Elettrone</code></span><a name="es5.1"></a>:<br>
+<br>
+Incominciamo a definire due classi che ci permetteranno di rappresentare le sorgenti del campo (elettrico in questo caso). 
+
+<ul>
+<li> Costruiamo una classe <code>Particella</code> <!-- (scarica l'header file <a href="code/Particella.h">qui</a>)--> caratterizzata dall'avere 
+una massa ed una carica, quindi dotata dei seguenti metodi:
+<ol>
+<li>Un construttore avente come argomenti massa e carica.
+<li>Dei metodi di accesso ai valori di massa e carica.
+<li>Un metodo per stampare tali valori.
+</ol>
+Siccome vogliamo che questa classe sia la classe base di altre classi, 
+dichiareremo i data membri come <code>protected</code>.<br>
+<li> Costruiamo, attraverso il meccanismo di ereditariet&agrave;, una classe derivata <code>Elettrone</code> che, essendo una <code>Particella</code> di 
+massa e carica note (<a href="http://it.wikipedia.org/wiki/Elettrone">wikipedia</a>), ha il solo costruttore di default, che inizializza correttamente i data membri. Modifichiamo il metodo di stampa in modo che indichi che si tratta di un elettrone.<br>
+
+</ul>
+<!--
+Costruiamo una classe <code>CorpoCeleste</code>, caratterizzato dall'essere una
+<code>Particella</code> con carica nulla, ma dotata di nome e raggio. Aggiungere metodi per modificare massa, nome e raggio del <code>CorpoCeleste</code>. Modifichiamo il metodo di stampa in modo che stampi anche le informazioni aggiuntive
+(e non stampi la carica, che non ci interessa).<br>
+-->
+Verifichiamo che le nuovi classi e l'ereditariet&agrave; funzioni correttamente:<ol>
+<li>Istanziamo dinamicamente un oggetto per ogni classe.
+<li>Verifichiamo che su tutti questi operano i metodi accessori di massa e carica di  <code>Particella</code>, ma il metodo di stampa delle classi derivate.
+</ol>
+<br>
+<span style="text-decoration: underline;">Brevi Richiami</span><br><br>
+
+<a href="#" onclick="mostra('testo5.2a'); return false;">Classe <code>Particella</code>
+</a><br>
+<div style="display: none;" id="testo5.2a">
+<table style="text-align: left; width=700px;" border="1" cellpadding="2" cellspacing="2">
+<tbody>
+  <tr>
+    <td style="background-color: rgb(233, 229, 255);">
+Header:<br>
+<img alt="Particella.h" src="figure/Particella.h.PNG" width="900"><br>
+Implementazione:<br>
+<img alt="Particella.cxx" src="figure/Particella.cxx.PNG"  width="900"><br>
+    </td>
+  </tr>
+</tbody>
+</table>
+</div>
+<br>
+
+<a href="#" onclick="mostra('testo5.2b'); return false;">Classe <code>Elettrone</code>
+</a><br>
+<div style="display: none;" id="testo5.2b">
+<table style="text-align: left; width=700px;" border="1" cellpadding="2" cellspacing="2">
+<tbody>
+  <tr>
+    <td style="background-color: rgb(233, 229, 255);">
+Header:<br>
+<img alt="Elettrone.h" src="figure/Elettrone.h.PNG"  width="900"><br>
+Implementazione:<br>
+<img alt="Elettrone.cxx" src="figure/Elettrone.cxx.PNG"  width="900"><br>
+    </td>
+  </tr>
+</tbody>
+</table>
+</div>
+<br>
+<!--
+<a href="#" onclick="mostra('testo5.2c'); return false;">Classe <code>CorpoCeleste</code>
+</a><br>
+<div style="display: none;" id="testo5.2c">
+<table style="text-align: left; width=700px;" border="1" cellpadding="2" cellspacing="2">
+<tbody>
+  <tr>
+    <td style="background-color: rgb(233, 229, 255);">
+Header:<br>
+<img alt="CorpoCeleste.h" src="figure/CorpoCeleste.h.PNG"  width="900"><br>
+Implementazione:<br>
+<img alt="CorpoCeleste.cxx" src="figure/CorpoCeleste.cxx.PNG"  width="900"><br>
+    </td>
+  </tr>
+</tbody>
+</table>
+</div>
+-->
+
+<a href="#" onclick="mostra('testo5.2.d'); return false;">Esempio di programma</a> (scarica un esempio <a href="code/esercizio5.1.cxx">qui</a> )<br>
+<div style="display: none;" id="testo5.2.d">
+<table style="text-align: left; width=700px;" border="1" cellpadding="2" cellspacing="2">
+<tbody>
+  <tr>
+    <td style="background-color: rgb(233, 229, 255);">
+Questo programma utilizza le nuove classi appena create. Verifica il funzionamento dell'ereditariet&agrave; e la dereferenziazione dei puntatori a classe.<br>
+<img alt="Funzione main" src="figure/Esercizio5.1.cxx.new.PNG"  width="900"><br>
+Il programma di esempio contiene un errore, lo trovate ?<br> 
+    </td>
+  </tr>
+</tbody>
+</table>
+</div>
+<br>
+<font size="+1"><span style="text-decoration: underline; color: rgb(0, 153, 0);">ESERCIZIO 
+5.2 - Creazione delle classi <code>CampoVettoriale</code> e <code>PuntoMateriale</code> </span><a name="es6.0"></a>:<br>
+
+Per risolvere problemi relativi all'elettrostatica o alla gravit&agrave; proviamo ad effettuare una modellizzazione basata su
+due elementi principali: una rappresentazione del campo vettoriale e una rappresentazione delle sorgenti dei campi vettoriali.
+
+<ul>
+
+<li> La classe <tt>CampoVettoriale</tt> (scarica l'header file <a href="code/CampoVettoriale.h">qui</a>): sono molti i casi in Fisica in cui un vettore &egrave; collegato ad un punto dello spazio. Ad esempio una forza ha
+un punto di applicazione, o i vettori del campo elettrico e campo gravitazionale hanno un valore che varia da punto 
+a punto dello spazio. 
+<br>
+Costruire una classe
+<code>CampoVettoriale</code>, che erediti dalla classe <code>Posizione</code> :  
+<ol>
+<li>aggiungere le tre componenti di un vettore alla posizione
+<li>implementare i metodi per accedere e/o modificare il vettore
+<li>decidere quali costruttori implementare, in particolare, implementare un costruttore <tt>CampoVettoriale(const Posizione&)</tt>
+che crei un vettore nullo nella posizione assegnata
+<li>implementare un metodo <tt>double Modulo()</tt> che restituisca la lunghezza del vettore
+<li>fare overloading di <tt>operator+</tt> e <tt>operator+=</tt> in modo da poter facilmente sommare campi. 
+</ol>
+<br>
+
+<!-- altro div -->
+<a href="#" onclick="mostra('testo6.0l'); return false;">Header file della classe CampoVettoriale:
+</a><br>
+<div style="display: none;" id="testo6.0l">
+<table style="text-align: left; width: 700px;" border="1" cellpadding="2" cellspacing="2">
+ <tbody>
+   <tr>
+     <td style="background-color: rgb(233, 229, 255);">
+     <img alt="Header file della classe CampoVettoriale" src="figure/CampoVettoriale_h.png" width="900"><br>
+     </td>
+   </tr>
+ </tbody>
+</table>
+</div>
+<br>
+<li>
+La classe <code>PuntoMateriale</code> (scarica l'header file <a href="code/PuntoMateriale.h">qui</a>): questa classe ci servir&agrave; per rappresentare le sorgenti dei campi. Costruire la classe in modo 
+che erediti da entrambe le classi <code>Particella</code> e <code>Posizione</code>. 
+<br>
+<ol>
+<li>Implementare i costruttori che pensate siano utili.
+<li>Implementare il metodo <tt>CampoVettoriale CampoElettrico(const Posizione&) const</tt> che restituisca il campo elettrico 
+generato dal PuntoMateriale nel punto <b>r</b> (per i pi&ugrave; volenterosi anche il metodo <tt> CampoVettoriale CampoGravitazionale(const Posizione&) const  </tt> che restituisca il campo gravitazionale generato dal PuntoMateriale nel punto <b>r</b>). 
+</ol>
+<br>
+
+
+<!-- altro div -->
+<a href="#" onclick="mostra('testo6.0m'); return false;">Header file della classe PuntoMateriale:
+</a><br>
+<div style="display: none;" id="testo6.0m">
+<table style="text-align: left; width: 700px;" border="1" cellpadding="2" cellspacing="2">
+ <tbody>
+   <tr>
+     <td style="background-color: rgb(233, 229, 255);">
+     <img alt="Header file della classe PuntoMateriale" src="figure/PuntoMateriale_h.png" width="900"><br>
+     </td>
+   </tr>
+ </tbody>
+</table>
+</div>
+</ul>
+
+<b>N.B.:</b> per entrambe le classi di cui sopra, sentitevi liberi di aggiungere tutti i metodi addizionali che ritenete utili per risolvere
+questo esercizio o i successivi.<br>
+
+<br>
+<span style="text-decoration: underline;">Brevi Richiami</span><br><br>
+<!-- inzio div-->
+<font size="+1">
+<a href="#" onclick="mostra('testo4.0a'); return false;">Ereditariet&agrave; multipla
+</a><br>
+</font>
+
+<div style="display: none;" id="testo4.0a">
+<table style="text-align: left; width: 700px;" border="1" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="background-color: rgb(233, 229, 255);">
+      In C++, una classe pu&ograve; ereditare da pi&ugrave; di una classe madre. In questo caso mantiene le propriet&agrave;
+      (metodi e data membri) di tutte le classi madri.<br>
+      Nell'header file <code>PuntoMateriale.h</code> vanno elencate tutte le classi da cui si vuole ereditare, specificando se sono
+      pubbliche o private:<br>
+<img alt="Esempio di codice" src="figure/PuntoMateriale.2.PNG"><br>
+      La nuova classe avr&agrave;, per esempio, definiti sia i metodi <code>GetMassa()</code> e <code>GetCarica()</code> di
+      <code>Particella</code> ed anche <code>X()</code>, <code>R()</code>... di <code>Posizione</code>
+</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<br>
+<!-- altro div -->
+<a href="#" onclick="mostra('testo4.0b'); return false;">Utilizzo di costruttori delle classi madri
+</a><br>
+<div style="display: none;" id="testo4.0b">
+<table style="text-align: left; width: 700px;" border="1" cellpadding="2" cellspacing="2">
+ <tbody>
+   <tr>
+     <td style="background-color: rgb(233, 229, 255);">
+     Specialmente nel caso di ereditariet&agrave; multipla, &egrave; utile, e spesso necessario,
+     utilizzare i costruttori gi&agrave; esistenti della classe madre.<br>
+     Tali costruttori possono venire chiamati esplicemente dando il nome della classe madre seguito dagli argomenti opportuni.
+     Ad esempio, siccome esistono i costruttori di <code>Posizione</code> con le tre coordinate cartesiane, e di
+     <code>Particella</code> con massa e carica, possiamo definire un costruttore:<br>
+     <img alt="Costruttore di PuntoMateriale" src="figure/PuntoMateriale.3.PNG"><br>
+     la cui implementazione &egrave; pu&ograve; venire data da:<br>
+     <img alt="Costruttore di PuntoMateriale" src="figure/PuntoMateriale.4.PNG"><br>
+     </td>
+   </tr>
+ </tbody>
+</table>
+</div>
+
+<br>
+<!-- altro div -->
+<a href="#" onclick="mostra('testo4.0j'); return false;">Overloading operatori
+</a><br>
+<div style="display: none;" id="testo4.0j">
+<table style="text-align: left; width: 700px;" border="1" cellpadding="2" cellspacing="2">
+ <tbody>
+   <tr>
+     <td style="background-color: rgb(233, 229, 255);">
+       Per risolvere facilmente questo tipo di problemi &egrave; molto utile ridefinire gli operatori <tt>operator=</tt> e <tt>operator+=</tt> per la classe CampoVettoriale. Di seguito una possibile implementazione comoda di questo overloading. Notate che nell'operatore <tt>operator+</tt> viene creato un nuovo vettore (somma) che viene restituito "by value". Per <tt>operator+=</tt> invece la modifica viene effettuata sull'oggetto che chiama l'operatore. L'oggetto stesso (modificato) viene poi restituito "by reference".
+     <img alt="Overloaded Operators" src="figure/OverloadedOperators_cxx.png" width="900"><br>
+     </td>
+   </tr>
+ </tbody>
+</table>
+</div>
+
+<br>
+
+<br>
+
+<font size="+1"><span style="text-decoration: underline; color: rgb(204, 0, 0);">ESERCIZIO
+5.3 - Calcolo del campo elettrico generato da un dipolo (da consegnare)</span><a name="es5.3"></a>:<br>
+
+Realizzate un programma che costuisca un dipolo costituito da un elettrone e un protone posizionati ad una distanza &delta;= 10<sup>-10</sup>&nbsp;m.<br> e determini:
+<ol>
+<li>il valore del campo elettrico di dipolo prodotto in un punto P le cui coordinate sono inserite da linea di comando
+<li>disegni l'andamento del modulo del campo elettrico lungo l'asse del dipolo per una distanza da 100 a 1000 volte &delta;. Che tipo di andamento ha il campo ? (fate riferimento all'approfondimento seguente sulle leggi di potenza)
+</ol>
+
+<!-- fine div -->
+<a href="#" onclick="mostra('testo4.0c'); return false;">Esempio di programma
+</a><br>
+<div style="display: none;" id="testo4.0c">
+<table style="text-align: left; width=700px;" border="1" cellpadding="2" cellspacing="2">
+<tbody>
+  <tr>
+    <td style="background-color: rgb(233, 229, 255);">
+Questo programma utilizza le nuove classi appena create: richiede di fornire come argomenti le tre coordinate cartesiane e poi stampa il campo elettrico di dipolo richiesto dall'esercizio:<br>
+<img alt="Funzione main" src="figure/Esercizio6.0.PNG" width="900"><br>
+
+    </td>
+  </tr>
+</tbody>
+</table>
+</div>
+
+<br><br>
+
+<font size="+1"><span style="text-decoration: underline; color: rgb(50, 50, 50);">ESERCIZIO
+5.4 - Campo di multipolo (approfondimento)</span><a name="es5.4"></a>:<br>
+Scrivere un programma che calcoli il campo elettrico generato da un multipolo di ordine <i>n</i>.<br>
+In questo esercizio, un <i>n</i>-polo (con <i>n</i> pari) &egrave; una distribuzione di <i>n</i> particelle, in cui
+la particella <i>i</i>-esima ha carica (-1)<sup>i</sup><i>e</i> (dove <i>e</i> &egrave; la carica del protone) e
+si trova nel punto:<br>
+(<i>r</i><sub>0</sub>cos(2&pi;<i>i</i>/<i>n</i>),<i>r</i><sub>0</sub>sin(2&pi;<i>i</i>/<i>n</i>))<br>
+dove <i>r</i><sub>0</sub> &egrave; il raggio a cui sono messe le cariche.<br>
+Verificare che a grande distanza (<i>R&gt;&gt;r</i><sub>0</sub>) il campo elettrico varia proporzionalmente a <i>R</i><sup>-2-<i>n</i>/2</sup>.
+<br>
+Valutare fino a quali valori di <i>n</i> si riesce a verificare questa dipendenza.<br>
+Questo &egrave; un problema abbastanza interessante, perch&eacute; bisogna scegliere una distanza abbastanza grande perch&eacute;
+sia valido il comportamento asintotico, ma abbastanza ridotta per evitare problemi di arrotondamento nella somma di molti termini
+di segno contrario.
+<br><br>
+
+<br>
+
+
+
+<font size="+1"><span style="text-decoration: underline; color: rgb(50, 50, 50);">ESERCIZIO
+5.5 - Gravit&agrave; dallo spazio (approfondimento)</span><a name="es6.2"></a>:<br>
+
+Il <a href="http://www.goceitaly.asi.it/GoceIT/">satellite GOCE</a> si trova in orbita a 250&nbsp;km dalla superficie terrestre
+e dotato di accelerometri in grado di misurare variazioni dell'accelerazione di gravit&agrave; fino a &delta;<i>g</i>/<i>g</i>=10<sup>-13</sup>.
+<br>
+Scopo della missione (si veda
+<a href="http://www.goceitaly.asi.it/GoceIT/images/stories/GOCE/Publications/064-071%20GOCE-Di%20Giorgio.pdf">questo articolo</a>
+su <a href="http://lescienze.espresso.repubblica.it/">Le Scienze</a>) include una mappatura dettagliata del campo gravitazionale
+terrestre, prodotto dalle distribuzioni non omogenee di massa.<br>
+Costruire un programma che :
+<ol>
+<li> calcoli l'accelerazione di gravit&agrave; sul satellite per una Terra perfettamene sferica e dimensioni pari al raggio medio
+(<a href="http://it.wikipedia.org/wiki/Terra">wikipedia</a>).<br>
+<li> calcoli la variazione relativa di <i>g</i> prodotta da una catena montuosa, schematizzata come una fila di 100 sfere di 1&nbsp;km di raggio
+poste sopra la superficie media della Terra (usare 3000&nbsp;kg/m<sup>3</sup> come densit&agrave; della roccia) e produca un grafico
+della variazione in funzione della posizione del satellite sull'orbita. <br>
+</ol>
+Per risolvere questo esercizio si costruisca dapprima il sistema di sorgenti di campo (Terra e catena montuosa). Si calcoli il campo generato
+da tutte le sorgenti in un punto a distanza dal centro della terra pari al raggio terrestre pi&grave; la distanza del satellite dalla
+superficie terrestre. Muovere questo punto in modo che percorra tutta ll'orbita ( in passi da 10 Km ). <br><br>
+
+
+<!-- altro div -->
+<a href="#" onclick="mostra('testo4.0x'); return false;">Schema
+</a><br>
+<div style="display: none;" id="testo4.0x">
+<table style="text-align: left; width: 700px;" border="1" cellpadding="2" cellspacing="2">
+ <tbody>
+   <tr>
+     <td style="background-color: rgb(233, 229, 255);">
+     <img alt="Montagne" src="figure/schema_montagne.png" width="400"><br>
+     </td>
+   </tr>
+ </tbody>
+</table>
+</div>
+
+
+
+<br>
+<span style="text-decoration: underline;">Brevi Richiami</span><br><br>
+
+<!-- inzio div
+<font size="+1">
+<a href="#" onclick="mostra('testo4.0a'); return false;">Ereditariet&agrave; multipla
+</a><br>
+</font>
+
+<div style="display: none;" id="testo4.0a">
+<table style="text-align: left; width: 700px;" border="1" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="background-color: rgb(233, 229, 255);"> 
+      In C++, una classe pu&ograve; ereditare da pi&ugrave; di una classe madre. In questo caso mantiene le propriet&agrave;
+      (metodi e data membri) di tutte le classi madri.<br>
+      Nell'header file <code>PuntoMateriale.h</code> vanno elencate tutte le classi da cui si vuole ereditare, specificando se sono 
+      pubbliche o private:<br> 
+<img alt="Esempio di codice" src="figure/PuntoMateriale.2.PNG"><br>
+      La nuova classe avr&agrave;, per esempio, definiti sia i metodi <code>GetMassa()</code> e <code>GetCarica()</code> di 
+      <code>Particella</code> ed anche <code>X()</code>, <code>R()</code>... di <code>Posizione</code>
+</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<br>
+-->
+<!-- altro div 
+<a href="#" onclick="mostra('testo4.0b'); return false;">Utilizzo di costruttori delle classi madri
+</a><br>
+<div style="display: none;" id="testo4.0b">
+<table style="text-align: left; width: 700px;" border="1" cellpadding="2" cellspacing="2">
+ <tbody>
+   <tr>
+     <td style="background-color: rgb(233, 229, 255);">
+     Specialmente nel caso di ereditariet&agrave; multipla, &egrave; utile, e spesso necessario, 
+     utilizzare i costruttori gi&agrave; esistenti della classe madre.<br>
+     Tali costruttori possono venire chiamati esplicemente dando il nome della classe madre seguito dagli argomenti opportuni.
+     Ad esempio, siccome esistono i costruttori di <code>Posizione</code> con le tre coordinate cartesiane, e di 
+     <code>Particella</code> con massa e carica, possiamo definire un costruttore:<br>
+     <img alt="Costruttore di PuntoMateriale" src="figure/PuntoMateriale.3.PNG"><br>
+     la cui implementazione &egrave; pu&ograve; venire data da:<br>
+     <img alt="Costruttore di PuntoMateriale" src="figure/PuntoMateriale.4.PNG"><br>
+     </td>
+   </tr>
+ </tbody>
+</table>
+</div>
+-->
+
+<!-- altro div 
+<a href="#" onclick="mostra('testo4.0j'); return false;">Overloading operatori
+</a><br>
+<div style="display: none;" id="testo4.0j">
+<table style="text-align: left; width: 700px;" border="1" cellpadding="2" cellspacing="2">
+ <tbody>
+   <tr>
+     <td style="background-color: rgb(233, 229, 255);">
+       Per risolvere facilmente questo tipo di problemi &egrave; molto utile ridefinire gli operatori <tt>operator=</tt> e <tt>operator+=</tt> per la classe CampoVettoriale. Di seguito una possibile implementazione comoda di questo overloading. Notate che nell'operatore <tt>operator+</tt> viene creato un nuovo vettore (somma) che viene restituito "by value". Per <tt>operator+=</tt> invece la modifica viene effettuata sull'oggetto che chiama l'operatore. L'oggetto stesso (modificato) viene poi restituito "by reference".
+     <img alt="Overloaded Operators" src="figure/OverloadedOperators_cxx.png" width="900"><br>
+     </td>
+   </tr>
+ </tbody>
+</table>
+</div>
+-->
+
+<a href="#" onclick="mostra('testo4.1'); return false;">Leggi di potenza <a name="potenza">
+</a><br>
+<div style="display: none;" id="testo4.1">
+<table style="text-align: left; width=700px;" border="1" cellpadding="2" cellspacing="2">
+<tbody>
+  <tr>
+    <td style="background-color: rgb(233, 229, 255);">
+    Se un campo ha un andamento <i>E</i>=<i>kR</i><sup>&alpha;</sup>, se valutiamo il campo in due punti diversi <i>R</i><sub>1</sub> e
+    <i>R</i><sub>2</sub>, possiamo ricavare &alpha; dalla relazione:<br>
+    &alpha; = log(<i>E</i><sub>1</sub>/<i>E</i><sub>2</sub>)/log(<i>R</i><sub>1</sub>/<i>R</i><sub>2</sub>)
+    </td>
+  </tr>
+</tbody>
+</table>
+</div>
+<br>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--
+<br>
+<font size="+1"><span style="text-decoration: underline; color: rgb(204, 0, 0);">ESERCIZIO
+5.3 - Classi come data membri (da consegnare)</span><a name="es5.3"></a>:<br>
+Modificare la classe <code>CorpoCeleste</code> in modo da aggiungere
+ai suoi data membri anche un'istanza della classe <code>Posizione</code>.<br>
+Fornire anche i metodi per accedere e modificare questa posizione.<br>
+Aggiungere anche un metodo che dando una <code>Posizione</code> <b>r</b>, 
+restituisca il potenziale gravitazionale generato dal corpo celeste in 
+<b>r</b>.<br>
+Come applicazione, rispondere alla domanda: il potenziale gravitazionale 
+prodotto dal Sole sulla Luna &egrave; pi&ugrave; o meno grande di quello prodotto 
+dalla Terra?
+<br><br>
+
+<a href="#" onclick="mostra('testo5.3'); return false;"><span style="text-decoration: underline;">Brevi Richiami</span>
+</a><br>
+<div style="display: none;" id="testo5.3">
+<table style="text-align: left; width=700px;" border="1" cellpadding="2" cellspacing="2">
+<tbody>
+  <tr>
+    <td style="background-color: rgb(233, 229, 255);">
+    Per inizializzare o modificare il valore del data membro posizione, 
+    pu&ograve; essere utile ricordare che il C++ definisce automaticamente
+    un costruttore che crea un oggetto della classe a partire
+    da un oggetto esistente (<i>copy constructor</i>).<br>
+    Per esempio &egrave; possibile utilizzare delle istruzioni come:<br>
+    <code>
+    Posizione a(1.,0.,5.);<br>
+    Posizione b(a);<br>
+    </code> Dove <code>b</code> &egrave; inizializzato ad essere 
+    una copia di <code>a</code><br>
+    <br>
+    Allo stesso modo il C++ definisce automaticamente
+    l'operatore di assegnazione <code>=</code> ed &egrave; pertanto possibile
+    usare istruzioni come:<br>
+    <code>
+    Posizione b;<br>
+    Posizione a(1.,0.,5.);<br>
+    b=a;<br>
+    </code>    <br>
+    Nella prossima lezione vedremo come il <i>copy constructor</i> e 
+    l'operatore <code>=</code> automatici non siano sempre adeguati e in 
+    alcuni casi devono essere implementati direttamente dal creatore delle 
+    classi. 
+    </td>
+  </tr>
+</tbody>
+</table>
+</div>
+<br>
+-->
+
+<div style="text-align: center;"><font size="+1"><a href="../index.html"><img title="Back to Home Page" style="border: 0px solid ; width: 40px; height: 40px;" alt="Back to Home Page" src="../button-home.jpg"></a><br>
+</font></div>
+
+
+</body></html>

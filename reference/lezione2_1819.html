@@ -1,0 +1,454 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+
+
+
+  <tdi></tdi>
+  
+  <meta content="text/html; charset=ISO-8859-1" http-equiv="content-type"><title>Lezione 2</title>
+  
+
+   
+  <script type="text/javascript" language="javascript">
+function mostra(id){
+if (document.getElementById){
+if(document.getElementById(id).style.display == 'none'){
+document.getElementById(id).style.display = 'block';
+}else{
+document.getElementById(id).style.display = 'none';
+}
+}
+}
+  </script></head><body>
+<font> </font><font> </font>
+<table style="text-align: left; width: 100%;" border="1" cellpadding="2" cellspacing="2">
+
+  <tbody>
+    <tr>
+      <td style="background-color: rgb(204, 0, 0); text-align: center;"><big><big><big>Lezione 2<br>
+      <font size="+2">La classe Vettore</font><br>
+      </big></big></big> </td>
+    </tr>
+  </tbody>
+</table>
+
+<br>
+
+<font size="+1">In questa seconda lezione affronteremo gli stessi problemi della prima lezione (lettura di dati da un file, calcolo di media e mediana) utilizzando un contenitore di dati pi&ugrave; evoluto del semplice array del C. A questo proposito nella prima parte della lezione costruiremo la nostra prima classe, la classe <tt>Vettore</tt>. Nella seconda parte adatteremo le funzioni gi&agrave; scritte nella lezione scorsa in modo che possano funzionare con oggetti di tipo <tt>Vettore</tt>. Quindi in sintesi :
+
+<ul>
+<li> Tipo di dato da leggere &egrave constituito da numeri <tt>double</tt>. </a>
+<li> Tipo di contenitore di dati &egrave una classe <tt>Vettore</tt> che scriveremo noi. </a>
+<li> Operazioni sui dati vengono svolte mediante funzioni che agiscono su oggetti di tipo <tt>Vettore</tt>. </a>
+</ul>
+
+</font>
+<br>
+<br>
+<font size="+1"><span style="text-decoration: underline; color: rgb(0, 153, 0);">ESERCIZIO 
+2.0 - Creazione della classe <code>Vettore</code> </span><a name="es6.0"></a>:<br>
+Implementare una classe che abbia come data membri (privati) un intero (dimensione del vettore) ed un puntatore a <code>double</code> (puntatore alla zona di memoria dove sono immagazzinati i dati). 
+<br>
+Implementare:
+<ol>
+<li>Un costruttore di default, che assegni valori nulli alla lunghezza del vettore ed al puntatore.
+<li>Un costruttore che abbia come argomento un intero: questo deve creare un vettore di lunghezza uguale all'intero e tutte le componenti nulle (usando un 
+<code>new</code> per allocare la memoria necessaria).
+<li>Un distruttore: deve chiaramente deallocare con <code>delete[]</code> la zona di memoria allocata con <code>new</code>.
+<li>Dei metodi per inserire e leggere i valori della componenti: questi metodi devono controllare che l'indice delle componenti richieste sia compatibile con la lunghezza del vettore.
+</ol>
+
+
+<!-- inzio div ========================================================================== -->
+<font size="+1">
+<a href="#" onclick="mostra('testo2.0a'); return false;">Header file della classe: 
+</a><br>
+</font>
+
+<div style="display: none;" id="testo2.0a">
+<table style="text-align: left;" border="1" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="background-color: rgb(233, 229, 255);"> 
+L'header file della classe iniziale &egrave;  (Vettore.h) potrebbe essere cos&igrave; :<br><br>
+
+<img alt="Esempio di codice" src="./figure/VettoreClass.h.png" width="900" ><br>
+      <br>
+
+<ul>
+<li> Notate l'utilizzo del costrutto <tt>#ifndef .... #define .... #endif</tt>. <br>
+Queste direttive di preprocessore sono normalmente utilizzate per evitare inclusioni multiple di uno stesso header file che, nel caso specifico, porterebbero ad una doppia dichiarazione della classe <tt>Vettore</tt>. Immaginate infatti di voler compilare un codice <tt>main.cxx</tt> insieme ad un file <tt>funzioni.cxx</tt> e che entrambi i codici sorgente contengano una istruzione <tt>#include "Vettore.h"</tt>: in fase di compilazione il compilatore si lamenterebbe per una doppia dichiarazione della classe <tt>Vettore</tt>. Con il meccanismo indicato, alla prima inclusione di <tt>Vettore.h</tt>, viene creata una variabile globale <tt>__Vettore_h__</tt>. Al secondo tentativo di inclusione l'esistenza della variabile globale forza il compilatore a saltare tutte le righe tra <tt>#define .... #endif</tt>, di fatto evitando la seconda inclusione del file <tt>Vettore.h</tt>.  
+<li> Notate inoltre l'impementazione <it>in-line<it> del metodo <tt>GetN()</tt>: i metodi di una classe possono essere anche implementati direttamente nell'header file e non nel <tt>.cxx</tt>. L'implementazione inline implica che il compilatore metta una copia della funzione ogni volta che questa viene chiamata: in questo modo il codice diventa pi&ugrave; lungo ma vengono ottimizzate le performance in quanto non si deve effettuare una chiamata alla funzione. In genere l'implementazione inline viene effettuata per funzioni brevi. 
+</ul>
+</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<!-- fine div ========================================================================== -->
+
+<br>
+
+<!-- inizio div ========================================================================== -->
+
+<font size="+1">
+<a href="#" onclick="mostra('testo2.0_c1'); return false;">Esempio di implementazione della classe:
+</a><br>
+</font>
+
+<div style="display: none;" id="testo2.0_c1">
+<table style="text-align: left;" border="1" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="background-color: rgb(233, 229, 255);">
+<img alt="Esempio di codice" src="./figure/VettoreClass.cxx.png" width="900" > <br>
+
+<ul>
+<li> Notate l'uso della macro <tt>assert()</tt>: questa macro ( ricordarsi di includere la libreria <tt>assert.h</tt> ) pu&ograve; rivelarsi estremamente utile per scoprire errori nel nostro programma in fase di realizzazione del programma. <br>
+<pre> assert( ( m_N > i ) && "Errore : l'indice e' troppo grande");  </pre>
+far&agrave; abortire il programma se si verifica la condizione <tt>m_N > i</tt> ovvero se si tenta di riempire una componente di indice maggiore della dimensione del Vettore. Prima della chiusura del programma viene mostrato a video il messaggio impostato :<br>
+<pre> Assertion failed: (( m_N > i ) && "Errore : l'indice e' troppo grande"), function SetComponent, file Vettore.cxx, line 31. </pre>
+che indica molto chiaramente cosa ha esattamente causato il problema. Normalmente quando la fase di debugging e' terminata tutti gli <tt>assert</tt> utilizzati possono essere disabilitati mediante la definizione di una macro <tt># define NDEBUG</tt>: questa istruzione fa si che tutti gli assert dichiarati vengano ignorati e il flusso del programma ritorna ad essere quello normale.
+<li> Notate l'ultimo metodo implementato (dovete ovviamente aggiungerlo anche nell'header file della classe) che rappresenta l'overloading dell'operatore di accesso [] ad un elemento (eg. <tt> double a = v[2] </tt> se <tt>v</tt> &egrave; un oggetto di tipo <tt>Vettore</tt>). 
+</ul>
+      <br>
+</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<!-- fine div ========================================================================== -->
+
+<br>
+
+<!-- inzio div ========================================================================== -->
+
+<font size="+1">
+<a href="#" onclick="mostra('testo4.0c'); return false;">Programma di test
+</a><br>
+</font>
+
+<div style="display: none;" id="testo4.0c">
+<table style="text-align: left;" border="1" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="background-color: rgb(233, 229, 255);">
+Questo programma usa un copy constructor per creare il <code>Vettore c</code>
+ed un assegnazione per il <code>Vettore b</code>.<br>  
+<img alt="Esempio di codice" src="./figure/Esercizio2.0.png" width="900"><br>
+Se eseguito, questo programma mostrer&agrave; una sovrascrittura inattesa 
+dei dati del <code>Vettore a</code> ed una corruzione di memoria.
+      <br>
+</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<!-- fine div ========================================================================== -->
+
+<br>
+
+
+Si verifichi che una classe realizzata in questo modo si comporta in modo strano se usiamo l'operatore di assegnazione. Questo &egrave; un problema generico
+quando abbiamo classi con puntatori come data membri: bisogna assicurarsi che 
+ciascuna istanza della classe abbia la propria zona di memoria.<br>
+Affinch&eacute; la classe si comporti in maniera consistente, &egrave; necessario implementare anche:
+<ol>
+<li>un costruttore che abbia come argomento un altro vettore (<it>copy constructor</it>): deve creare una copia del vettore argomento.
+<li>l'overloading dell'operatore di assegnazione, assicurandosi che i dati vengano copiati dal vettore di partenza a quello di arrivo.
+</ol>
+
+<br>
+
+<!-- inzio div ========================================================================== -->
+
+<font size="+1">
+<a href="#" onclick="mostra('testo4.0_01'); return false;">Modifiche all'header file
+</a><br>
+</font>
+
+<div style="display: none;" id="testo4.0_01">
+<table style="text-align: left;" border="1" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="background-color: rgb(233, 229, 255);">
+
+Per la seconda parte dell'esercizio, bisogner&agrave; aggiungere il <i>copy constructor</i> e 
+l'operatore di assegnazione <i>operator=</i>: <br><br>
+<img alt="Costruttori addizionale" src="./figure/VettoreConstructors.h.PNG" width="900"><br>
+Questo va chiaramente aggiunto all'header file della classe <tt>Vettore.h</tt>
+      <br>
+</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<!-- fine div ========================================================================== -->
+
+<br>
+
+<!-- inzio div ========================================================================== -->
+
+<font size="+1">
+<a href="#" onclick="mostra('testo4.0d'); return false;">Copy constructor
+</a><br>
+</font>
+
+<div style="display: none;" id="testo4.0d">
+<table style="text-align: left;" border="1" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="background-color: rgb(233, 229, 255);">
+Il <i>copy constructor</i> viene invocato ogni colta che utilizziamo sintassi 
+come:<br>
+<code>Vettore a;<br>Vettore b=a;</code><br> 
+oppure la sintassi equivalente:<br>
+<code>Vettore a;<br>Vettore b(a);</code><br>
+ed in tutti i casi in cui si passa un oggetto per valore.<br>
+Esso viene dichiarate nell'header con una sintassi:<br>
+<code>Vettore(const Vettore& );</code><br>
+e nella sua implementazione dobbiamo assicurarci che l'oggetto costruito abbia 
+la sua zone di memoria riservata:<br><br>
+<img alt="Esempio di codice" src="./figure/CopyConstructor.cxx.png" width="900" ><br>
+</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<!-- fine div ========================================================================== -->
+
+<br>
+
+<!-- inzio div ========================================================================== -->
+
+<font size="+1">
+<a href="#" onclick="mostra('testo4.0e'); return false;">Operatore di assegnazione
+</a><br>
+</font>
+<div style="display: none;" id="testo4.0e">
+<table style="text-align: left;" border="1" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="background-color: rgb(233, 229, 255);">
+Quando scriviamo<br>
+<code>a=b;</code><br>
+e <code>a</code> e <code>b</code> sono oggetti della stessa classe, di fatto 
+l'assegnazione non &egrave; altro che un abbreviazione per indicare la chiamata
+ad un metodo della classe di nome <code>operator=</code>:<br>
+<code>a.operator=(b);</code><br>
+Il compilatore fornisce un'implementazione di default di questo operatore, che corrisponde ad un assegnazione membro a membro di tutti i data membri. Ma questo non funzione se alcuni data membri sono puntatori, perch&eacute; avremmo diversi oggetti che condividono la stessa area di memoria.<br> 
+Dobbiamo quindi realizzare un'implementazione sicura dell'assegnazione, facendo una copia dei dati in una nuova locazione di memoria.<br>
+L'header file dovr&agrave; contenere una dichiarazione:<br>
+<code>Vettore& operator=(const Vettore& )</code><br>
+Una possibile implementazione &egrave; data qui sotto:<br><br>
+<img alt="Esempio di codice" src="./figure/Assignment.cxx.png" width="900"><br>
+      <br>
+</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<!-- fine div ========================================================================== -->
+
+<br>
+
+<!-- inzio div ========================================================================== -->
+
+<font size="+1">
+<a href="#" onclick="mostra('testo4.0f'); return false;">Il puntatore <code>this</code>
+</a><br>
+</font>
+<div style="display: none;" id="testo4.0f">
+<table style="text-align: left;" border="1" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="background-color: rgb(233, 229, 255);">
+Il puntatore <code>this</code> indica un puntatore all'oggetto cui si sta 
+applicando un metodo. E' particolarmente utile in alcune occasioni, 
+come nel caso dell'operatore di assegnazione, in cui si deve restituire una
+copia dell'oggetto corrente.
+</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<!-- inzio div ========================================================================== -->
+
+<br>
+
+<font size="+1"><span style="text-decoration: underline; color: rgb(204, 0, 0);">ESERCIZIO 2.1 
+- Codice di analisi dati utilizzando la classe <tt>Vettore</tt> (da consegnare) </span><a name="es2.1"></a>: 
+<br>
+Proviamo ora a riscrivere il codice della prima lezione utilizzando un contenitore di dati pi&ugrave; raffinato: la classe <tt>Vettore</tt> ci permetter&agrave; di riempire il contenitore dati controllando per esempio che non stiamo sforando la dimensione allocata. Il <tt>Vettore</tt> inoltre si porta dietro anche la sua dimensione: se dobbiamo calcolare la media degli elementi di un <tt>Vettore</tt> non dobbiamo pi&ugrave; passare la dimensione come argomento esterno. <br>
+Per svolgere questo esercizio dobbiamo :
+<ol>
+<li> modificare tutte le funzioni in <tt>funzioni.h</tt> e <tt>funzioni.cxx</tt> in modo che lavorino con oggetti di tipo <tt>Vettore</tt> invece che con semplici array del C.
+<li> modificare il main in modo che utilizzi la nuova classe <tt>Vettore</tt> e le nuove funzioni. 
+<li> modificare il <tt>Makefile</tt> 
+</ol>
+
+Se non ci riuscite da soli potete dare un'occhiata ai suggerimenti qui sotto. <br>
+
+<br>
+<font size="+1">
+<!-- inizio div ================================================================== -->
+<a href="#" onclick="mostra('testo2.1a');  return false;">Struttura del programma:</a><br>
+</font>
+<div style="display: none;" id="testo2.1a">
+<table style="text-align: left; width: 967px; height: 41px;" border="1" cellpadding="2" cellspacing="2"> 
+
+  <tbody>
+    <tr>
+      <td style="vertical-align: top; background-color: rgb(233, 229, 255);">Ecco l'aspetto che potrebbe avere il nostro nuovo codice:<br>
+      <br>
+<img src="figure/Esercizio2.1.cxx.png" width="900" >
+       <br>
+<br> 
+</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<!-- fine div ================================================================== -->
+
+<br>
+<font size="+1">
+<!-- inizio div ================================================================== -->
+<a href="#" onclick="mostra('testo2.1b');  return false;">Le funzioni:</a><br>
+</font>
+<div style="display: none;" id="testo2.1b">
+<table style="text-align: left; width: 967px; height: 41px;" border="1" cellpadding="2" cellspacing="2"> 
+
+  <tbody>
+    <tr>
+      <td style="vertical-align: top; background-color: rgb(233, 229, 255);">L'header file (.h) potrebbe risultare cos&igrave;:<br>
+      <br>
+<img src="figure/Esercizio2.1_funzioni.h.png" width="900" >
+</tr>
+
+<br>
+  <td style="vertical-align: top; background-color: rgb(233, 229, 255);">Il file di implementazione delle funzioni (.cxx) potrebbe risultare cos&igrave; (qui e' svolto solo il caso della media, l'estensione alle altre funzioni dovrebbe essere immediata) :<br>
+<br>
+<img src="figure/Esercizio2.1_funzioni.cxx.png" width="900" >
+       <br>
+<br> 
+</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<!-- fine div ================================================================== -->
+
+<br>
+<font size="+1">
+<!-- inizio div ================================================================== -->
+<a href="#" onclick="mostra('testo2.1c');  return false;">Makefile:</a><br>
+</font>
+<div style="display: none;" id="testo2.1c">
+<table style="text-align: left; width: 967px; height: 41px;" border="1" cellpadding="2" cellspacing="2"> 
+
+  <tbody>
+    <tr>
+      <td style="vertical-align: top; background-color: rgb(233, 229, 255);">Il makefile va modificato aggiungendo la compilazione della classe <tt>Vettore</tt>:<br>
+      <br>
+<img src="figure/Makefile_es2.1_repl.png" width="900" >
+       <br>
+<br> 
+</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<!-- fine div ================================================================== -->
+
+<br>
+<!--
+</font><font size="+1"><span style="text-decoration: underline; color: rgb(204, 0, 0);">
+Domanda: &egrave; chiaro perch&egrave; <tt>CalcolaMedia</tt> vuole in input un <tt>(const Vettore &)</tt> mentre <tt>CalcolaMediana</tt> semplicemente un <tt>(Vettore)</tt> ?
+</font>
+<br>
+<br>
+-->
+
+<!-- inzio div ========================================================================== -->
+
+<font size="+1">
+<a href="#" onclick="mostra('testo2.1f'); return false;">Perch&egrave; <tt>CalcolaMedia</tt> vuole in input un <tt>(const Vettore &)</tt> mentre <tt>CalcolaMediana</tt> semplicemente un <tt>(Vettore)</tt> ? :
+</a><br>
+<br>
+</font>
+<div style="display: none;" id="testo2.1f">
+<table style="text-align: left;" border="1" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="background-color: rgb(233, 229, 255);">
+
+<ul>
+<li>Nel caso di <tt>CalcolaMedia(...)</tt> o <tt>CalcolaVarianza(...)</tt> il passaggio avviene <it>by reference</it> per ottimizzare l'uso della memoria. Con questa modalit&agrave; di passaggio dati la funzione lavora sul <tt>Vettore</tt> del <tt>main</tt> e pertanto una modifica accidentale del <tt>Vettore</tt> di input all'interno della funzione ha un effetto anche nel <tt>main</tt>. Il qualificatore <tt>const</tt> vieta alla funzione di fare qualsiasi operazione di cambiamento del contenuto del vettore di input pena un errore di compilazione.
+<li>Nel caso invece di <tt>CalcolaMediana(...)</tt> il passaggio e' effettuato <it>by value</it> e senza il qualificatore <tt>const</tt>: in questo modo permettiamo che il metodo proceda al riodinamento del Vettore. Dal momento che con il passaggio <it>by value</it> il Vettore nella funzione &egrave; una copia del Vettore di input ogni cambiamento effettuato nella funzione non si ripercuote sul main.
+</ul>
+
+</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<hr>
+
+<font size="+1">
+<a href="#" onclick="mostra('testo2.2g'); return false;">Only for curious kids : the move semantic :
+</a><br>
+<br>
+</font>
+<div style="display: none;" id="testo2.2g">
+<table style="text-align: left;" border="1" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="background-color: rgb(233, 229, 255);">
+
+Move semantics &egrave; un nuovo modo (dal C++11) di spostare le risorse in un modo ottimale evitando di creare copie non necessarie di oggetti temporanei ed &egrave; basato sulle r-value references. La potenza della move semantic si pu&ograve; capire affrontando il caso in cui si voglia costruire un oggetto della classe <tt>Vettore</tt> a partire dall'output di una funzione :
+<br>
+<tt>Vettore v = Read(ndata, filename);</tt>
+<br>
+La funzione <tt>Read()</tt> restituir&agrave; un oggetto temporaneo di tipo <tt>Vettore</tt> che poi verr&agrave; utilizzato come input del costruttore di copia per la creazione di <tt>v</tt>. Chiaramente questo riduce notevolmente le performance del nostro codice. Perch&egrave; non realizzare un costruttore di copia (e un operatore di assegnazione) che siano in grado di rubare i data membri all'oggetto temporaneo senza dover copiare dati ? Questo &egrave; lo spirito del <tt>move constructor</tt> e <tt>move assignment operator</tt>:
+<br>
+<img src="figure/Lezione2_move.png" width="900" >
+<br>
+ 
+<ul>
+<li> Notare la doppia && al vettore in input, qui stiamo sfruttando la referenza ad un rvalue
+<li> Il move constructor e move assignment operator semplicemente rubano i dati all'oggetto temporaneo ( non c'&egrave; copia elemento per elemento )
+<li> Il puntatore dell'oggetto di input viene sganciato dai dati
+<li> Per vedere il move constructor all'opera potrebbe essere necessario aggiungere la flag <tt>-fno-elide-constructors</tt> per disattivare eventuali ottimizzazioni interne del compilatore che maschererebbero l'uso del move constructor
+</ul>
+
+</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+<br>
+
+   
+
+
+
+
+<br>
+<br>
+<div style="text-align: center;"><font size="+1"><a href="../index.html"><img title="Back to Home Page" style="border: 0px solid ; width: 40px; height: 40px;" alt="Back to Home Page" src="../button-home.jpg"></a><br>
+</font></div>
+
+
+</body></html>

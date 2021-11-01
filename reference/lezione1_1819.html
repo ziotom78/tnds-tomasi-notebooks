@@ -1,0 +1,784 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+  <tdi></tdi>
+  
+  <meta content="text/html; charset=ISO-8859-1" http-equiv="content-type">
+  <title>Lezione 1</title>
+
+  
+  
+  <script type="text/javascript" language="javascript">
+function mostra(id){
+if (document.getElementById){
+if(document.getElementById(id).style.display == 'none'){
+document.getElementById(id).style.display = 'block';
+}else{
+document.getElementById(id).style.display = 'none';
+}
+}
+}
+  </script>
+</head><body>
+<font> </font><font> </font>
+<table style="text-align: left; width: 100%;" border="1" cellpadding="2" cellspacing="2">
+
+  <tbody>
+    <tr>
+      <td style="background-color: rgb(204, 0, 0); text-align: center;"><big><big><big>Lezione
+1<br>
+      <font size="+2">Introduzione all'analisi dati e ripasso dei costrutti del C(++)</font><br>
+      </big></big></big> </td>
+    </tr>
+  </tbody>
+</table>
+
+<br>
+
+<font size="+1">In questa prima lezione proviamo a rinfrescarci la memoria sulla programmazione lavorando direttamente su un caso concreto: abbiamo a disposizione un file in cui sono immagazzinati i valori ottenuti da una certa misura e vogliamo scrivere un codice per farci sopra una analisi statistica minimale. Calcoliamo la media, la varianza e la mediana della distribuzione: il calcolo della mediana in particolare richiede che il set di dati sia ordinato e quindi ci obbliga a fare un p&ograve; di esercizio aggiuntivo. In questa lezione lavoreremo con :
+
+<tr><td>
+<ul>
+<li> Tipo di dato da leggere &egrave constituito da numeri <tt>double</tt>. </a>
+<li> Tipo di contenitore di dati &egrave un array (dinamico) del C. </a>
+<li> Operazioni sui dati vengono svolte mediante funzioni. </a>
+</ul>
+
+Prima di incominciare a scrivere il codice &egrave; utile ripassare rapidamente alcuni elementi base del linguaggio :
+
+<br>
+
+<!-- inzio div ======================================================================== -->
+
+<font size="+1"><br>
+<a href="#" onclick="mostra('testo2.2b'); return false">Passaggio di
+  input da linea di comando</a><br>
+</font>
+<div style="display: none;" id="testo2.2b">
+<table style="text-align: left; width: 967px; height: 41px;" border="1" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top; background-color: rgb(233, 229, 255);">
+&Egrave; possibile passare al programma degli input direttamente da
+riga di comando, ad esempio: <br>
+<br>
+<span style="font-family: Courier New;"> ./programma &lt;input1&gt; &lt;input2&gt;</span><br>
+<br>
+per fare questo nella dichiarazione del main bisogna aggiungere due
+argomenti:<br>
+<br>
+<pre><font color="#990000">main</font><b><font color="#663300">(</font></b><font color="#ff6633">int</font> argc<b><font color="#663300">,</font></b><font color="#ff6633"> char</font><b><font color="#663300"> **</font></b>argv<b><font color="#663300">)</font></b></pre>
+<br>
+<code> argc </code> &nbsp;&egrave; il numero di argomenti presenti sulla riga di
+comando. Il valore di <tt>argc</tt> &egrave; sempre maggiore di 0 poich&eacute; il primo argomento
+<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  &egrave; il nome del programma.<br>
+<code>argv</code> &nbsp;&egrave; un array di <tt>argc</tt> elementi che contiene le stringhe di
+caratteri passate da riga di comando. Quindi <tt>argv[0]</tt> &egrave; <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; il nome
+del programma, <tt>argv[1]</tt> il primo argomento, ecc..<br>
+<br>
+Se da riga di comando passiamo un numero, esso verr&agrave;
+passato tramite <tt>argv</tt> come una stringa di caratteri, per convertire una
+stringa di caratteri in un numero intero si usa la funzione
+<tt>atoi(char*)</tt> (che &egrave; contenuta in <tt>&lt;cstdlib&gt;</tt>):<br>
+<pre><font color="#ff6633">int</font> N<b><font color="#663300">;</font></b>
+N<b><font color="#663300"> =</font></b> atoi<b><font color="#663300">(</font></b>argv<b><font color="#663300">[</font></b><font color="#999900">1</font><b><font color="#663300">]);</font></b></pre>
+<br>
+Per completezza di informazione, la funzione corrispondente per convertire una 
+stringa di caratteri in un numero reale &egrave; <tt>atof(char*)</tt>, 
+anch'essa disponibile in <tt>&lt;cstdlib&gt;</tt>.
+      <br>
+</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<!-- fine div ======================================================================== -->
+
+<!-- inzio div ========================================================================-->
+<font size="+1"><br>
+<a href="#" onclick="mostra('testo1.0b'); return false"><tt>cin</tt> e <tt>cout</tt></a><br>
+</font>
+<div style="display: none;" id="testo1.0b">
+<table style="text-align: left; width: 967px; height: 41px;" border="1" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top; background-color: rgb(233, 229, 255);">L'output
+su schermo e l'input da tastiera sono gestiti in C++ usando gli oggetti<span style="font-weight: bold;">cin</span>
+e <span style="font-weight: bold;">cout</span>, che sono definiti
+nella
+libreria <tt>iostream.h</tt> (che si include con <tt>#include &lt;iostream&gt;</tt> senza
+il <tt>.h</tt>!).<br>
+Il principale vantaggio di questi oggetti rispetto a <span style="font-weight: bold;">scanf</span> e <span style="font-weight: bold;">printf</span> (usati nel C) &egrave; che non &egrave;
+necessario specificare il tipo (double, string, etc) che si sta
+passando all'oggetto.<br>
+      <br>
+Uso di <span style="font-weight: bold;">cout</span>:<br>
+      <pre>cout<b><font color="#663300"> &lt;&lt;</font></b><font color="#009900">"A = "</font><b><font color="#663300"> &lt;&lt;</font></b>a<b><font color="#663300"> &lt;&lt;</font></b>endl<b><font color="#663300">;</font></b></pre>
+<code>&lt;&lt;</code> serve a passare le variabili allo stream di output;<br>
+<code>&lt;&lt;"A = "</code> stampa "A = " (senza apici) a schermo;<br>
+<code>&lt;&lt;a </code> stampa il valore della variabile a a schermo,
+qualsiasi sia il tipo di a;<br>
+<code>&lt;&lt;endl </code>(end line) stampa la fine della riga e svuota il
+buffer. In generale, senza <tt>endl</tt> nessuna scritta appare a video.<br>
+      <br>
+Uso di <span style="font-weight: bold;">cin</span>:<br>
+      <pre>cin<b><font color="#663300"> &gt;&gt; </font></b>a;</pre>
+<code>&gt;&gt;</code> serve a prendere le variabili dallo stream di input;<br>
+<code>&gt;&gt;a </code>legge da video un contenuto appropriato e lo salva nella variabile <tt>a</tt>.<br>
+ATTENZIONE se <tt>a</tt> &egrave; una variabile <tt>int</tt> e voi a schermo digitate 
+2.34, il valore di <tt>a</tt> sar&agrave; convertito a 2. Se digitate a schermo
+"pippo", non sar&agrave; possibile convertirlo in un numero, ed il valore di <tt>a</tt> rimarr&agrave; inalterato.
+</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<!-- fine div ======================================================================== -->
+
+<!-- inzio div ======================================================================== -->
+
+<font size="+1"><br>
+<a href="#" onclick="mostra('testo1.2b'); return false;">Allocazione dinamica della memoria</a></font><br>
+
+<div style="display: none;" id="testo1.2b">
+<table style="text-align: left; width: 967px; height: 41px;" border="1" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="background-color: rgb(233, 229, 255);">L'allocazione
+dinamica della memoria consente di decidere al momento dell'esecuzion, <i>runtime</i> (e non a livello di
+compilazione) quanta memoria il programma deve allocare.<br>
+In C++ l'allocazione (e la deallocazione) dinamica della memoria viene
+effettuata con gli operatori <span style="font-weight: bold;">new</span>
+e <span style="font-weight: bold;">delete</span>:<br>
+Il comando <br>
+      <pre><font color="#ff6633">double</font><b><font color="#663300"> *</font></b>x<b><font color="#663300"> =</font></b><font color="#990000"> new</font><font color="#ff6633"> double</font><span style="font-family: mon;"><span style="font-weight: bold;"></span></span><span style="font-family: mon;"><span style="font-weight: bold;">[</span></span>N<span style="font-family: mon;"><span style="font-weight: bold;">]<font color="#663300">;</font></span></span></pre>
+crea un puntatore <span style="font-weight: bold;">x</span> a una zona
+di memoria di <span style="font-weight: bold;">N</span> double (cio&egrave; a
+un array di double con <span style="font-weight: bold;">N</span>
+elementi)<br>
+Il comando
+      <pre><font color="#990000">delete</font><span style="font-family: mon;"><span style="font-weight: bold;">[]</span></span> x<b><font color="#663300">;</font></b></pre>
+dealloca la memoria. Ci&ograve; vuol dire che un tentativo di accedere agli
+elementi di <span style="font-weight: bold;">x</span> dopo il comando <span style="font-weight: bold;">delete</span> risulter&agrave; in un errore
+di segmentation violation.<br>
+      <br>
+&Egrave; estremamente importante ricordarsi di deallocare la memoria. Infatti
+in programmi complessi che utilizzano molta memoria (o in cicli che
+continuano ad allocare memoria), l'assenza della deallocazione pu&ograve;
+portare a consumare progressivamente tutta la memoria RAM della macchina
+(<i>memory leak</i>),
+causando un blocco del sistema. <br>
+Nel caso si allochino vettori (come nel nostro caso), la presenza delle
+parantesi <tt>[]</tt> dopo <tt>delete</tt> indica che bisogna deallocare tutta la zona
+di memoria. Il comando<br>
+      <pre><font color="#990000">delete</font><span style="font-family: mon;"><span style="font-weight: bold;"></span></span> x<b><font><b><font color="#663300">;</font></b></font></b><br></pre>
+crea un memory leak, perch&eacute; dealloca solo lo spazio della prima componente del vettore, non di tutto il vettore.
+</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<!-- inzio div ======================================================================== -->
+
+<font size="+1"><br>
+<a href="#" onclick="mostra('testo1.2a'); return false;"><tt>fstream</tt></a><br>
+</font>
+<div style="display: none;" id="testo1.2a">
+<table style="text-align: left; width: 967px; height: 41px;" border="1" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="background-color: rgb(233, 229, 255);"> L'input e
+l'output da files &egrave; gestito in C++ dalla libreria <tt>fstream.h</tt>.<br>
+I principali oggetti sono <tt>ifstream</tt> (input file stream) e <tt>ofstream</tt>
+(output file stream).<br>
+Gli stream vengono dichiarati e inizializati come:<br>
+      <pre><font color="#000099">#include &lt;fstream&gt;<br></font><font color="#990000"><br>using namespace</font> std<b><font color="#663300">;</font></b><br><br>ifstream inputFile<b><font color="#663300">(</font></b><font color="#009900">"nomeInput.txt"</font><b><font color="#663300">)</font></b><br>ofstream outputFile<b><font color="#663300">(</font></b><font color="#009900">"nomeOutput.txt"</font><b><font color="#663300">)</font></b></pre>
+Per controllare che il file sia stato aperto con successo si pu&ograve; usare
+il seguente codice<br>
+      <pre><font color="#ff0000">if</font><b><font color="#663300">(!</font></b>inputFile<b><font color="#663300">){</font></b><br>  cout<b><font color="#663300"> &lt;&lt;</font></b><font color="#009900">"Error ...."</font><b><font color="#663300"> &lt;&lt;</font></b>endl<b><font color="#663300">;</font></b><i><font color="#999999"> //stampa un messaggio<br></font></i><font color="#ff0000">  return</font><b><font color="#663300"> -</font></b><font color="#999900">1</font><b><font color="#663300">;</font></b><i><font color="#999999"> //ritorna un valore diverso da quello usuale<br></font></i><b><font color="#663300">}</font></b></pre>
+      <br>
+L'utilizzo della stream per scrivere su un file di output o per caricare
+da un file di input &egrave; uguale all'uso di cin e cout<br>
+      <pre>inputFile<b><font color="#663300"> &gt;&gt;</font></b>a<b><font color="#663300">;</font></b><br>outputFile<b><font color="#663300"> &lt;&lt;</font></b><font color="#009900">"pippo "</font><b><font color="#663300"> &lt;&lt;</font></b>a<b><font color="#663300"> &lt;&lt;</font></b>endl<b><font color="#663300">;</font></b></pre>
+Un metodo estremamente utile di ifstream &egrave; <br>
+      <pre>inputFile<b><font color="#663300">.</font></b>eof<b><font color="#663300">();</font></b></pre>
+che restituisce vero se si &egrave; raggiunta la fine del file e falso
+altrimenti.<br>
+Dopo l'utilizzo del file e' buona norma chiuderlo con il metodo close()<br>
+      <pre>inputFile<b><font color="#663300">.</font></b>close<b><font color="#663300">();</font></b><br>outputFile<b><font color="#663300">.</font></b>close<b><font color="#663300">();</font></b></pre>
+
+</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<br>
+
+<!-- fine div ======================================================================== -->
+
+<span style="text-decoration: underline; color: rgb(0, 153, 0);">ESERCIZIO 1.0 - Primo codice per analisi </span>:<br>
+Proviamo a scrivere un unico codice che legga dati da file, li immagazzini in un array dinamico, calcoli
+la media, la varianza e la mediana dei dati raccolti. Scriviamo su un file di output i dati riordinati
+in ordine crescente. Il numero di elementi da caricare e il nome del file in cui trovare i dati sono 
+passati da tastiera nel momento in cui il programma viene eseguito. 
+Cerchiamo di costruire il codice passo passo.
+<br>
+<br>
+
+<!-- inzio div ======================================================================== -->
+<a href="#" onclick="mostra('testo1.0a');  return false;">Struttura del programma</a><br>
+</font>
+<div style="display: none;" id="testo1.0a">
+<table style="text-align: left; width: 967px; height: 41px;" border="1" cellpadding="2" cellspacing="2"> 
+
+  <tbody>
+    <tr>
+      <td style="vertical-align: top; background-color: rgb(233, 229, 255);">Per questo primo esercizio ripassiamo la struttura generale di un programma:<br>
+      <br>
+<!--      <img src="figures/Esercizio1.0_p1.png" height="1000" width="900" > -->
+<img src="figure/Esercizio1.0_p1.png" width="900" >
+       <br>
+
+<br> 
+</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<!-- fine div ======================================================================== -->
+
+<br>
+<font size="+1">
+Provate ad implementare le parti mancanti. Se non ci riuscite sbirciate pure sotto.
+<br><br>
+
+<!-- inzio div ======================================================================== -->
+<a href="#" onclick="mostra('testo1.0a_1'); return false;">1) Caricamento elementi da file</a><br>
+</font>
+<div style="display: none;" id="testo1.0a_1">
+<table style="text-align: left; width: 967px; height: 41px;" border="1" cellpadding="2" cellspacing="2"> 
+
+  <tbody>
+    <tr>
+      <td style="vertical-align: top; background-color: rgb(233, 229, 255);">In questo frammento di codice apriamo un file utilizzando un <tt>ifstream</tt> e carichiamo <tt>ndata</tt> elementi:<br>
+      <br>
+<!--      <img src="figures/Esercizio1.0_sub1.png" height="300" width="400" > -->
+<img src="figure/Esercizio1.0_sub1.png" width="900" >
+      <br>
+<!--      <br> Provate ad implementare le parti mancanti. Se non ci riuscite sbirciate pure sotto. -->
+<br> 
+</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<!-- fine div ======================================================================== -->
+
+
+<br>
+<font size="+1">
+<!-- inzio div ======================================================================== -->
+<a href="#" onclick="mostra('testo1.0a_2'); return false;">2) Calcolo della media e della varianza</a><br>
+</font>
+<div style="display: none;" id="testo1.0a_2">
+<table style="text-align: left; width: 967px; height: 41px;" border="1" cellpadding="2" cellspacing="2"> 
+
+  <tbody>
+    <tr>
+      <td style="vertical-align: top; background-color: rgb(233, 229, 255);">In questo frammento di codice calcoliamo la media degli elementi immagazzinati nell'array <tt>data</tt>. Costruite voi usando lo stesso schema il frammento di codice per il calcolo della varianza. <br>
+      <br>
+      <img src="figure/Esercizio1.0_sub2.png" width="900"  >
+      <br>
+<br> 
+</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<!-- fine div ======================================================================== -->
+
+
+
+
+
+<br>
+<font size="+1">
+<!-- inzio div ======================================================================== -->
+<a href="#" onclick="mostra('testo1.0a_3'); return false;">3) Riordino elementi di un array </a><br>
+</font>
+<div style="display: none;" id="testo1.0a_3">
+<table style="text-align: left; width: 967px; height: 41px;" border="1" cellpadding="2" cellspacing="2"> 
+
+  <tbody>
+    <tr>
+      <td style="vertical-align: top; background-color: rgb(233, 229, 255);">In questo frammento di codice riordiniamo gli elementi dell'array <tt>data</tt> in ordine crescente. Utilizziamo un semplice algoritmo di riordinamento che dovreste gi&agrave; conoscere il <a href="https://it.wikipedia.org/wiki/Selection_sort"><tt>selection sort</tt></a :<br>
+      <br>
+      <img src="figure/Esercizio1.0_sub3.png" width="900"  >
+      <br>
+<br> 
+</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<!-- fine div ======================================================================== -->
+
+<br>
+<font size="+1">
+<!-- inzio div ======================================================================== -->
+<a href="#" onclick="mostra('testo1.0a_4'); return false;">4) Calcolo della mediana</a><br>
+</font>
+<div style="display: none;" id="testo1.0a_4">
+<table style="text-align: left; width: 967px; height: 41px;" border="1" cellpadding="2" cellspacing="2"> 
+
+  <tbody>
+    <tr>
+      <td style="vertical-align: top; background-color: rgb(233, 229, 255);">In questo frammento di codice calcoliamo la mediana lavorando sull'array ordinato <tt>vcopy</tt>:<br>
+      <br>
+      <img src="figure/Esercizio1.0_sub4.png" width="900"  >
+      <br>
+<br> 
+</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<!-- fine div ======================================================================== -->
+<br>
+<font size="+1">
+<!-- inzio div ======================================================================== -->
+<!--
+<a href="#" onclick="mostra('testo1.0a_5') return false;">5) Scrittura elementi su file</a><br>
+</font>
+<div style="display: none;" id="testo1.0a_5">
+<table style="text-align: left; width: 967px; height: 41px;" border="1" cellpadding="2" cellspacing="2"> 
+
+  <tbody>
+    <tr>
+      <td style="vertical-align: top; background-color: rgb(233, 229, 255);">Infine scriviamo il vettore ordinato su un file <tt>output_file.txt</tt>:<br>
+      <br>
+      <img src="figure/Esercizio1.0_sub5.png" width="900"  >
+      <br>
+<br> 
+</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+-->
+<!-- fine div ======================================================================== -->
+
+
+
+<!-- inzio div ======================================================================== -->
+
+<font size="+1">
+<a href="#" onclick="mostra('testo1.0a_5'); return false;">5) Scrittura elementi su file</a><br>
+</font>
+<div style="display: none;" id="testo1.0a_5">
+<table style="text-align: left; width: 967px; height: 41px;" border="1" cellpadding="2" cellspacing="2"> 
+
+  <tbody>
+    <tr>
+      <td style="vertical-align: top; background-color: rgb(233, 229, 255);">Infine scriviamo il vettore ordinato su un file <tt>output_file.txt</tt>:<br>
+      <br>
+      <img src="figure/Esercizio1.0_sub5.png" width="900"  >
+      <br>
+<br> 
+</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<!-- fine div ======================================================================== -->
+<br>
+
+
+
+
+
+
+
+
+
+<font size="+1"><br>
+- Compiliamo il programma invocando al solito <tt>g++</tt>:  <br>
+ <tt> g++ main.cpp -o main </tt> <br>
+<br>
+- Eseguiamo il programma : <br>
+ <tt> ./main 1000000 data.dat </tt> <br>
+
+
+<font size="+1"><br>
+<br>
+<span style="text-decoration: underline; color: rgb(0, 153, 0);">ESERCIZIO
+1.1 - Codice di analisi con funzioni: </span>:<br>
+Vogliamo ora riorganizzare il codice precedente per renderlo pi&ugrave; modulare e facilmente
+riutilizzabile. Per capirci meglio: il calcolo della media e' una operazione generale che 
+pu&ograve; essere immaginata come un blocco di codice che accetta in input un array di dati
+e una dimensione e restituisce un valore ( la media appunto ). Se in uno stesso codice principale
+dobbiamo calcolare pi&ugrave; volte la media di array di dati diversi non vogliamo ripetere 
+pi&ugrave; volte il frammento di codice relativo. Lo stesso vale per la lettura di un set
+di dati da un file o per il calcolo della mediana. Il codice dovrebbe avere quindi una 
+struttura del tipo
+
+<ul>
+<li> Dichiarazione di tutte le funzioni che verranno utilizzate. </a>
+<li> Programma vero e proprio <tt> int main() {....} </tt> in cui le funzioni vengono utilizzate. </a>
+<li> Al termine del programma principale l'implementazione di tutte le funzioni dichiarate. </a>
+</ul>
+
+Dal momento che abbiamo deciso di spezzare il codice in funzioni proviamo a fare uso di una funzione dedicata che scambi
+tra loro due elementi di un array. In questo caso ripassiamo prima rapidamente come funziona il passaggio di dati
+in una funzione. <br>
+
+<!-- inzio div ======================================================================== -->
+
+<font size="+1"><br>
+<a href="#" onclick="mostra('testo1.1funzioni'); return false">Funzioni con argomenti
+<i>by reference</i> e <i>by value</i> (e <i>by pointer</i>)</a><br>
+</font>
+<div style="display: none;" id="testo1.1funzioni">
+<table style="text-align: left; width: 967px; height: 41px;" border="1" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top; background-color: rgb(233, 229, 255);">Il
+passaggio di valori a una funzione pu&ograve; avvenire <i>by value</i>, <i>by reference</i>
+o <i>by pointer</i>.<br>
+      <br>
+Ad esempio vogliamo scrivere una funzione che incrementi di uno il
+valore di una variabile intera, abbiamo tre possibilit&agrave;:<br>
+      <br>
+      <table style="text-align: left; width: 956px; height: 58px;" border="1" cellpadding="2" cellspacing="2">
+        <tbody>
+          <tr>
+            <td style="vertical-align: top; width: 198px;">Tipo<br>
+</td>
+            <td style="vertical-align: top; text-align: center; width: 239px;">by value (C and C++)<br>
+
+</td>
+            <td style="vertical-align: top; text-align: center; width: 243px;">by
+reference (C++ only)<br>
+
+</td>
+            <td style="vertical-align: top; text-align: center; width: 240px;">by
+pointer (C and C++)<br>
+
+</td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top; width: 198px;">Implementazione<br>
+
+</td>
+            <td style="vertical-align: top; width: 239px;">
+            <pre><font color="#ff6633">void</font> incrementa<b><font color="#663300">(</font></b><font color="#ff6633">int</font> a<b><font color="#663300">){</font></b><br>  a<b><font color="#663300">++;</font></b><b><font color="#663300"><br>}</font></b></pre>
+
+</td>
+            <td style="vertical-align: top; width: 243px;">
+            <pre><font color="#ff6633">void</font> incrementa<b><font color="#663300">(</font></b><font color="#ff6633">int</font><b><font color="#663300"> &amp;</font></b>a<b><font color="#663300">){</font></b><br>  a<b><font color="#663300">++;</font></b><font color="#663300"><b><br>}</b></font><br>            </pre>
+
+</td>
+            <td style="vertical-align: top; width: 240px;">
+            <pre><font color="#ff6633">void</font> incrementa<b><font color="#663300">(</font></b><font color="#ff6633">int</font><b><font color="#663300"> *</font></b>a<b><font color="#663300">){<br>  (*</font></b>a<b><font color="#663300">)++;</font></b><b><font color="#663300"><br>}</font></b><br>            </pre>
+
+</td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top; width: 198px;">Chiamata<br>
+
+</td>
+            <td style="vertical-align: top; width: 239px;">
+            <pre><font color="#ff6633">int</font> a<b><font color="#663300"> =</font></b><font color="#999900"> 0</font><b><font color="#663300">;</font></b><br>incrementa<b><font color="#663300">(</font></b>a<b><font color="#663300">);</font></b></pre>
+
+</td>
+            <td style="vertical-align: top; width: 243px;">
+            <pre><font color="#ff6633">int</font> a<b><font color="#663300"> =</font></b><font color="#999900"> 0</font><b><font color="#663300">;</font></b><br>incrementa<b><font color="#663300">(</font></b>a<b><font color="#663300">);</font></b><br>            </pre>
+
+</td>
+            <td style="vertical-align: top; width: 240px;">
+            <pre><font color="#ff6633">int</font> a<b><font color="#663300"> =</font></b><font color="#999900"> 0</font><b><font color="#663300">;</font></b><br>incrementa<b><font color="#663300">(</font></b><b><font><b><font color="#663300">&amp;</font></b></font></b>a<b><font color="#663300">);</font></b><br>            </pre>
+
+</td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top; width: 198px;">Effetto<br>
+
+</td>
+            <td style="vertical-align: top; width: 239px;"><tt>a</tt> <span style="text-decoration: underline;">NON</span> viene incrementato<br>
+
+</td>
+            <td style="vertical-align: top; width: 243px;"><tt>a</tt> viene
+incrementato<br>
+
+</td>
+            <td style="vertical-align: top; width: 240px;"><tt>a</tt> viene
+incrementato<br>
+
+</td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+Il passaggio dei parametri <i>by value</i> non funziona poich&eacute; alla funzione
+vengono passate copie dei parametri.
+La funzione chiamata opera su queste copie dei parametri. Qualunque
+cambiamento apportato alle copie non ha
+alcun effetto sui valori originali dei parametri presenti nella
+funzione chiamante. <br>
+Le chiamate <i>by pointer</i> e <i>by reference</i> passano alla funzione l'indirizzo
+di memoria in cui il programma ha memorizzato la variabile <tt>a</tt>. Per cui
+la funzione agisce direttamente sulla variabile <tt>a</tt> e non su una copia.
+</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<!-- fine div ======================================================================== -->
+
+
+<br>
+
+Vediamo passo passo come fare :
+<br>
+<br>
+
+<!-- inzio div ======================================================================== -->
+<a href="#" onclick="mostra('testo1.1a'); return false;">Struttura del programma</a><br>
+</font>
+<div style="display: none;" id="testo1.1a">
+<table style="text-align: left; width: 967px; height: 41px;" border="1" cellpadding="2" cellspacing="2"> 
+
+  <tbody>
+    <tr>
+      <td style="vertical-align: top; background-color: rgb(233, 229, 255);">Ecco come potrebbe diventare il vostro codice dopo la cura: <br>
+      <br>
+<!--      <img src="figures/Esercizio1.0_p1.png" height="1000" width="900" > -->
+<img src="figure/Esercizio1.1_p1.png" width="900" >
+<img src="figure/Esercizio1.1_sub1.png" width="900" >
+<img src="figure/Esercizio1.1_sub2.png" width="900" >
+<img src="figure/Esercizio1.1_sub3.png" width="900" >
+
+       <br>
+      <br> Il <tt>main</tt> &egrave; ora decisamente pi&ugrave; compatto e leggibile. Quasi tutte le principali funzionalit&agrave; del codice sono state scorporate in un opportuno set di funzioni.
+<br> 
+</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<!-- fine div ======================================================================== -->
+
+<br>
+<font size="+1"><br>
+- Come nel caso dell'esercizio precedente compiliamo il programma invocando al solito <tt>g++</tt>:  <br>
+ <tt> g++ main.cpp -o main </tt> <br>
+<br>
+- Eseguiamo il programma : <br>
+ <tt> ./main 1000000 data.dat </tt> <br>
+
+<!-- ================================================================================  -->
+
+<br>
+<font size="+1"><span style="text-decoration: underline; color: rgb(0, 153, 0);">ESERCIZIO
+1.2 - Codice di analisi con funzioni e Makefile.</span><a name="es1.2"></a>:<br>
+In questo esercizio terminiamo il processo di riorganizzazione dell'esercizio 1.0. Procederemo in questo modo:
+
+<ul>
+<li> Tutte le dichiarazioni di variabili che abbiamo messo in testa al programma le spostiamo in un file separato <tt>funzioni.h</tt>. </a>
+<li> Tutte le implementazioni delle funzioni in coda al programma le spostiamo in un file separato <tt>funzioni.cpp</tt>. </a>
+<li> Ricordiamoci di includere il file <tt>funzioni.h</tt> sia in <tt>main.cpp</tt> sia in <tt>funzioni.cpp</tt> tramite il solito <tt>#include "funzioni.h"</tt> 
+<li> Compiliamo separatamente <tt>main.cpp</tt> e <tt>funzioni.cpp</tt> utilizzando un Makefile</a>
+</ul>
+
+Prima di incominciare rivediamo rapidamente come si scrive un Makefile: <br><br>
+
+<!-- inzio div  ================================================================================ -->
+
+<a href="#" onclick="mostra('testo1.3a'); return false">Il Makefile</a><br>
+</font>
+<div style="display: none;" id="testo1.3a">
+<table style="text-align: left; width: 967px; height: 41px;" border="1" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top; background-color: rgb(233, 229, 255);">Vogliamo
+creare un Makefile (<span style="font-family: Courier New;">Makefile</span>)
+che ci permetta di compilare il nostro programma quando questo &egrave; <br>
+composto/spezzato in diversi
+file sorgenti. Supponiamo di avere un codice spezzato in <br>
+      <span style="font-family: Courier New;"><br>
+main.cpp
+funzioni.cpp
+funzioni.h</span> <br>
+      <br>
+Ovviamente possiamo compilare il tutto con<br>
+      <br>
+      <span style="font-family: Courier New;">&gt; 
+ g++ main.cpp funzioni.cpp -o main </span><br>
+      <br>
+ma possiamo farlo in maniera molto pi&ugrave; efficace.
+La struttura/sintassi del Makefile &egrave; la seguente: <br>
+      <br>
+      <code>target: dipendenze <br>
+[tab] system command <br>
+      <br>
+      </code>Nel nostro caso <br>
+      <br>
+      <code>main: funzioni.cpp main.cpp <br>
+&nbsp;&nbsp;&nbsp;&nbsp;g++ funzioni.cpp main.cpp -o main <br>
+      <br>
+      </code>lanciando il comando <tt>make</tt> tutto viene compilato. <br>
+Possiamo scriverlo anche esplicitando le dipendenze in modo che anche
+quando cambiamo il .h il tutto venga propriamente ricompilato
+In questo caso
+il Makefile diventa<br>
+      <br>
+      <code>main: main.o funzioni.o <br>
+&nbsp;&nbsp;&nbsp;&nbsp;g++ main.o funzioni.o -o main <br>
+main.o: main.cpp funzioni.h <br>
+&nbsp;&nbsp;&nbsp;&nbsp;g++ -c main.cpp -o main.o <br>
+funzioni.o : funzioni.cpp funzioni.h <br>
+&nbsp;&nbsp;&nbsp;&nbsp;g++ -c funzioni.cpp -o funzioni.o</code> <br>
+</td>
+    </tr>
+  </tbody>
+</table>
+<br>
+</div>
+
+<!-- fine div ================================================================================  -->
+
+<br>
+
+<font style="text-decoration: underline;" size="+1"><br>
+</font><font size="+1"><span style="text-decoration: underline; color: rgb(204, 0, 0);">ESERCIZIO
+1.3 - Overloading di funzione</span><span style="color: rgb(204, 0, 0);"></span><span style="text-decoration: underline; color: rgb(204, 0, 0);"> (da
+consegnare)</span><span style="color: black;">:<a name="es1.3"></a></span></font><span style="color: rgb(204, 0, 0);"></span><font size="+1"><span style="color: rgb(204, 0, 0);"></span></font><br>
+
+<font size="+1"> Aggiungete alla vostra libreria di funzioni una funzione <tt>void Print(double *, int)</tt> che permetta di scrivere gli elementi di un array a video. Questo &egrave; possibile grazie all'<tt>overloading</tt> (funzioni con stesso nome, ma con argomenti differenti). <br>
+</font><br>
+
+<!-- inzio div--> <a href="lezione1.html#" onclick="mostra('testo1.4a'); return false">Overloading
+di
+funzioni</a></font><br>
+
+<div style="display: none;" id="testo1.4a">
+<table style="text-align: left; width: 967px; height: 41px;" border="1" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top; background-color: rgb(233, 229, 255);">L'overloading
+delle funzioni &egrave; una funzionalit&agrave; specifica del C++ che non &egrave; presente
+in C. Questa funzionalit&agrave; permette di poter utilizzare lo stesso nome
+per funzioni diverse (cio&egrave; che compiono operazioni
+diverse) all'interno dello stesso programma, a patto per&ograve; che gli
+argomenti forniti alla funzione siano differenti. In maniera
+automatica, il compilatore sceglier&agrave; la funzione appropriata a seconda
+del tipo di argomenti passati. In pratica:<br>
+ <pre><font color="#ff6633">void</font> Print<b><font color="#663300">(</font></b><font color="#ff6633">double * </font> data<b><font color="#663300"> </font></b><font color="#ff6633"> int </font> ndata<b><font color="#663300">) {...}
+</font></b><font color="#ff6633"><br></font><font color="#ff6633">void</font> Print<b><font color="#663300">(</font></b><font color="#ff6633">const char *</font> filename<b><font color="#663300">, </font></b><font color="#ff6633">double *</font> data<b><font color="#663300"> , </font></b><font color="#ff6633"> int </font> ndata<b><font color="#663300">) {...}
+</font></b></pre>
+Le due funzioni hanno lo stesso nome, ma ovviamente
+il codice al
+loro interno dovr&agrave; essere differente! <br>
+Si noti che per poter fare l'overloading di una
+funzione non basta che soltanto il tipo restituito dalla funzione sia
+differente, ma occorre
+che siano diversi i tipi e/o il numero dei parametri passati alla funzione.
+<br>
+</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<font size="+1"><br>
+
+<br>
+
+Ulteriori suggerimenti :
+<br>
+<br>
+
+<!-- fine div -->
+
+
+<a href="lezione1.html#" onclick="mostra('testo1.4b'); return false">Formattazione
+dell'output</a></font><br>
+
+<div style="display: none;" id="testo1.4b">
+<table style="text-align: left; width: 967px; height: 41px;" border="1" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="background-color: rgb(233, 229, 255);">La C++ Standard
+Library permette di manipolare la formattazione dell'output utilizzando
+i manipolatori, alcuni dei quali sono dichiarati nell'header
+&lt;iomanip&gt;.<br>
+In generale i manipolatori modificano lo stato di uno stream (cout,
+cin, ofstream, ifstream...). <br>
+      <br>
+I manipolatori che ci serviranno per modificare l'output di numeri
+floating-point sono: <br>
+      <br>
+      <span style="font-family: Courier New;">fixed</span>: stampa i
+numeri senza l'uso di esponenti, ove possibile<br>
+      <span style="font-family: Courier New;">scientific</span>: stampa
+i numeri utilizzando gli esponenti<br>
+      <span style="font-family: Courier New;">setprecision(int </span><span style="font-weight: bold; font-family: Courier New;">n</span><span style="font-family: Courier New;">)</span>: stampa <span style="font-weight: bold;">n</span> cifre dopo la virgola<br>
+      <br>
+Esempio:<br>
+      <pre>cout<b><font color="#663300"> &lt;&lt;</font></b><font color="#009900"> "double number: "</font><b><font color="#663300"> &lt;&lt;</font></b> setprecision<b><font color="#663300">(</font></b><font color="#999900">4</font><b><font color="#663300">) &lt;&lt;</font></b> double_number<b><font color="#663300">;</font></b> </pre>
+      <br>
+Utili per stampare i dati in una tabella sono <br>
+      <br>
+      <span style="font-family: Courier New;">setw(int </span><span style="font-weight: bold; font-family: Courier New;">n</span><span style="font-family: Courier New;">)</span>: imposta la
+larghezza di un campo ad <span style="font-weight: bold;">n</span><br>
+      <span style="font-family: Courier New;">setfill(char </span><span style="font-weight: bold; font-family: Courier New;">c</span><span style="font-family: Courier New;">)</span>: usa <span style="font-weight: bold;">c</span> come carattere di riempimento
+(quello di default &egrave; lo spazio)<br>
+      <br>
+Ad esempio<br>
+      <pre>cout<b><font color="#663300"> &lt;&lt;</font></b>setw<b><font color="#663300">(</font></b><font color="#999900">5</font><b><font color="#663300">) &lt;&lt;</font></b><font color="#009900">"0.132"</font><b><font color="#663300"> &lt;&lt;</font></b>setw<b><font color="#663300">(</font></b><font color="#999900">5</font><b><font color="#663300">) &lt;&lt;</font></b><font color="#009900">"234"</font><b><font color="#663300"> &lt;&lt;</font></b>endl<b><font color="#663300"><br>     &lt;&lt;</font></b>setw<b><font color="#663300">(</font></b><font color="#999900">5</font><b><font color="#663300">) &lt;&lt;</font></b><font color="#009900">"10"</font><b><font color="#663300"> &lt;&lt;</font></b>setw<b><font color="#663300">(</font></b><font color="#999900">5</font><b><font color="#663300">) &lt;&lt;</font></b><font color="#009900">"12"</font><b><font color="#663300"> &lt;&lt;</font></b>endl</pre>
+stampa i numeri in due colonne allineate
+
+</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<br>
+
+<!-- inzio div ======================================================================== -->
+<a href="#" onclick="mostra('testo1.3c'); return false;">Questione di stile</a><br>
+</font>
+<div style="display: none;" id="testo1.3c">
+<table style="text-align: left; width: 967px; height: 41px;" border="1" cellpadding="2" cellspacing="2"> 
+
+  <tbody>
+    <tr>
+      <td style="vertical-align: top; background-color: rgb(233, 229, 255);">Proviamo a vedere alcune possibili varianti per le funzioni relative al calcolo della media e della varianza: <br>
+      <br>
+<!--      <img src="figures/Esercizio1.0_p1.png" height="1000" width="900" > -->
+<img src="figure/lezione1_style_media.png" width="900" >
+<br>
+La prima funzione implementa il calcolo in modo intuitivo. La seconda &egrave; meno ovvia ma se ci pensate ha lo stesso effetto con il grosso vantaggio di non conservare la somma di tutti i valori che potrebbe diventare troppo grande. 
+<br>
+<img src="figure/lezione1_style_varianza.png" width="900" >
+       <br>
+      <br> Nel caso della varianza la prima implementazione richiede una chiamata alla funzione <tt>CalcolaMedia()</tt> mentre la seconda no. La terza infine implementa il calcolo nello stesso modo visto per la media, ovvero evitando di immagazzinare somme troppo elevate.
+
+<br> 
+</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<!-- fine div ======================================================================== -->
+
+
+<div style="text-align: center;"><a href="../index.html"><img title="Back to Home Page" style="border: 0px solid ; width: 40px; height: 40px;" alt="Back to Home Page" src="../button-home.jpg"></a><br>
+</div>
+
+</body></html>

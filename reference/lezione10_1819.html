@@ -1,0 +1,602 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+<style>
+.fr { display: inline; vertical-align: middle;
+            font-size: 90%; text-align: center;}
+.fr span { display: block; }
+.fd { padding-top: .05em; border-top: .125em black solid; }
+</style>
+
+
+
+  <tdi></tdi>
+  
+  <meta content="text/html; charset=ISO-8859-1" http-equiv="content-type"><title>Lezione 10</title>
+  
+
+   
+  <script type="text/javascript" language="javascript">
+function mostra(id){
+if (document.getElementById){
+if(document.getElementById(id).style.display == 'none'){
+document.getElementById(id).style.display = 'block';
+}else{
+document.getElementById(id).style.display = 'none';
+}
+}
+}
+  </script></head><body>
+<font> </font><font> </font>
+<table style="text-align: left; width: 100%;" border="1" cellpadding="2" cellspacing="2">
+
+  <tbody>
+    <tr>
+      <td style="background-color: rgb(204, 0, 0); text-align: center;"><big><big><big>Lezione 10<br>
+      <font size="+2">Numeri Casuali</font><br>
+      </big></big></big> </td>
+    </tr>
+  </tbody>
+</table>
+
+<br>
+
+<font size="+1">In questa lezione impareremo a costruire un generatore di numeri casuali. Lo utilizzeremo quindi per generare 
+numeri secondo una distribuzione uniforme, esponenziale e Gaussiana. Come applicazione utilizzeremo la generazione di numeri
+casuali per calcolare numericamente integrali mono e multi-dimensionali.
+</font>
+<br>
+<br>
+<font size="+1"><span style="text-decoration: underline; color: rgb(204, 0, 0);">ESERCIZIO
+10.0 - Generatore di numeri casuali 
+</span><span style="color: rgb(204, 0, 0);"></span><span style="color: rgb(204, 0, 0); text-decoration: underline;"> (da
+consegnare)</span><span style="color: rgb(204, 0, 0);"><a name="es10.0"></a></span>:<br><br>
+
+Scrivere un programma che produca quattro istogrammi contenenti ciascuno 10000 numeri pseudo-casuali estratti da :
+<ol>
+<li> una distribuzione uniforme tra 5 e 10.
+<li> una distribuzione esponenziale tra 0 e + &#8734 con costante k=1.  
+<li> una distribuzione gaussiana centrata in 1 e larghezza 1 con il metodo di Box-Muller. 
+<li> una distribuzione gaussiana centrata in 1 e larghezza 1 con il metodo accept-reject.
+</ol>
+
+Per risolvere questo esercizio si pu&ograve; seguire lo schema seguente:
+
+<ul>
+<li> Scrivere una classe opportuna per la generazione di numeri casuali. 
+La classe dovr&agrave; contenere un metodo che implementi un generatore lineare congruenziale di base e tutti i metodi 
+necessari per le distribuzioni richieste. 
+<br>
+<br>
+<!-- altro div -->
+<a href="#" onclick="mostra('testo10.0a'); return false;">Header file della classe RandomGen:
+</a><br>
+<div style="display: none;" id="testo10.0a">
+<table style="text-align: left; width: 700px;" border="1" cellpadding="2" cellspacing="2">
+ <tbody>
+   <tr>
+     <td style="background-color: rgb(233, 229, 255);">
+     <img alt="Header file della classe RandomGen" src="figure/RandomGen_h.png" width="900"><br>
+     </td>
+   </tr>
+ </tbody>
+</table>
+</div>
+<br>
+
+Il costruttore si far&agrave; carico di inizializzare i parametri del generatore ai valori
+m_a = 1664525, m_c = 1013904223 e m_m = 2<sup>31</sup>. 
+<br>
+<br>
+<li> Preparare un semplice <tt>main</tt> per provare le funzionalit&agrave; della classe <tt>RandomGen</tt>. Lo schema di massima potrebbe essere il seguente :
+<br>
+<br>
+<!-- altro div -->
+<a href="#" onclick="mostra('testo10.0b'); return false;"> Main per il test del generatore RandomGen:
+</a><br>
+<div style="display: none;" id="testo10.0b">
+<table style="text-align: left; width: 700px;" border="1" cellpadding="2" cellspacing="2">
+ <tbody>
+   <tr>
+     <td style="background-color: rgb(233, 229, 255);">
+     <img alt="Main per il test del generatore RandomGen" src="figure/RandomMain_cxx.png" width="900"><br>
+     </td>
+   </tr>
+ </tbody>
+</table>
+</div>
+<br>
+
+</ul>
+
+<br>
+<span style="text-decoration: underline;">Brevi richiami</span><br>
+<br>
+<a href="#" onclick="mostra('testo10.0k'); return false;">Generatore
+  Lineare congruenziale</a><br>
+
+<div style="display:none;" id="testo10.0k">
+<table style="text-align: left; width: 967px; heigth: 41px;" border="1" cellpadding="2" cellspacing="2">
+<tbody>
+  <tr>
+    <td style="background-color: rgb(233,229,255);">
+I generatori lineari congruenziali generano una sequenza di interi
+pseudocasuali utilizzando la sequente formula:<br>
+<b>n<sub>i</sub> = mod ( a*n<sub>i-1</sub> + c, m)<br></b>
+Quindi &egrave; necessario tenere in memoria il valore del numero
+intero generato al passaggio precedente. Alla prima
+iterazione <b>n<sub>0</sub> = seed</b><br><br> 
+Per ottenere un numero floating point uniformemente distribuito tra 0
+e 1 (con 1 escluso) &egrave; sufficiente richiedere:<br>
+<b>d<sub>i</sub> = n<sub>i</sub>/m</b><br><br>
+Ricordiamo che in C++ l'operazione mod pu&ograve; essere eseguita con
+l'operatore "%" che ritorna il resto della divisione (intera), per cui
+<br>
+<b>7 % 5 = 2</b><br>
+    </td>
+  </tr>
+</tbody>
+</table>
+</div>
+<br>
+
+<a href="#" onclick="mostra('testo10.0l'); return false;">Generatore esponenziale</a><br>
+
+<div style="display:none;" id="testo10.0l">
+<table style="text-align: left; width: 967px; heigth: 41px;" border="1" cellpadding="2" cellspacing="2">
+<tbody>
+  <tr>
+    <td style="background-color: rgb(233,229,255);">
+      Per generare numeri pseudo-casuali secondo la densit&agrave; di probabilit&agrave; esponenziale p(x) = &lambda; e<sup>-&lambda; x </sup> ( per x&#8805;0 ) si pu&ograve; facilmente invertire la funzione cumulativa di p(x). A partire da un numero y estratto secondo la distribuzione uniforme tra 0 e 1,
+il numero <br> x = - 1/&lambda; ln (1-y) &egrave; distribuito proprio come la distribuzione esponenziale p(x); 
+    </td>
+  </tr>
+</tbody>
+</table>
+</div>
+<br>
+
+
+<!--
+<a href="#" onclick="mostra('testo8.0b'); return false;">Istogrammi
+  con ROOT</a><br>
+<div style="display:none;" id="testo8.0b">
+<table style="text-align: left; width: 967px; heigth: 41px;" border="1" cellpadding="2" cellspacing="2">
+<tbody>
+  <tr>
+    <td style="background-color: rgb(233,229, 255);">
+Per rappresentare gli istogrammi utilizzeremo alcune classi di <a href="http://root.cern.ch">ROOT</a>,
+un framework per l'analisi dati sviluppato dal CERN.<br>
+Per i nostri scopi utilizzeremo per ora solo tre delle (centinaia) di
+classi implementate in ROOT: TApplication, TCanvas e TH1F. L'elenco di tutte
+le classi e relativa documentazione si trova
+<a href="http://root.cern.ch/root/html512/ClassIndex.html"> qui </a>.<br><br>
+TH1F &egrave; una classe che serve a rappresentare istogrammi. La
+documentazione completa pu&ograve; essere
+trovata <a href="http://root.cern.ch/root/html512/TH1F.html"> qui </a>.<br>
+I metodi di TH1F che utilizzeremo sono il costruttore della classe 
+   <PRE>TH1F<B><FONT COLOR="#663300">::</FONT></B>TH1F<B><FONT COLOR="#663300">(</FONT></B><FONT COLOR="#FF6633">char</FONT><B><FONT COLOR="#663300">*</FONT></B> nome<B><FONT COLOR="#663300">, </FONT></B><FONT COLOR="#FF6633">char</FONT><B><FONT COLOR="#663300">*</FONT></B> titolo<B><FONT COLOR="#663300">, </FONT></B><FONT COLOR="#FF6633">int</FONT> nbins<B><FONT COLOR="#663300">, </FONT></B><FONT COLOR="#FF6633">double</FONT> min<B><FONT COLOR="#663300">, </FONT></B><FONT COLOR="#FF6633">double</FONT> max<B><FONT COLOR="#663300">)</FONT></B></PRE>
+che crea un oggetto TH1F con <b>nbins</b> bin su un asse con range
+    [<b>min</b>,<b>max</b>];<br>
+il metodo 
+<PRE>TH1F<B><FONT COLOR="#663300">::</FONT></B>Fill<B><FONT COLOR="#663300">(</FONT></B><FONT COLOR="#FF6633">double</FONT> x<B><FONT COLOR="#663300">)</FONT></B></PRE>
+che inserisce il valore <b>x</b> nell'istogramma assegnandolo al
+giusto bin ed il metodo
+<PRE>TH1F<B><FONT COLOR="#663300">::</FONT></B>Draw<B><FONT COLOR="#663300">()</FONT></B></PRE>
+che disegna il risultato.<br>
+<br>
+TCanvas crea una finestra su cui disegnare gli oggetti grafici, i
+metodi di nostro interesse sono il costruttore
+<PRE>TCanvas<B><FONT COLOR="#663300">::</FONT></B>TCanvas<B><FONT COLOR="#663300">(</FONT></B><FONT COLOR="#FF6633">char</FONT><B><FONT COLOR="#663300">*</FONT></B> nome<B><FONT COLOR="#663300">,</FONT></B><FONT COLOR="#FF6633"> char</FONT><B><FONT COLOR="#663300">*</FONT></B> titolo<B><FONT COLOR="#663300">)</FONT></B></PRE>
+che crea la canvas (dall'inglese "tela del pittore") ed il metodo
+<PRE>TCanvas<B><FONT COLOR="#663300">::</FONT></B>cd<B><FONT COLOR="#663300">()</FONT></B></PRE>
+che serve a posizionarsi nella canvas desiderata.<br>
+<br>
+TApplication &egrave; una classe che si occupa di mantenere attiva
+l'interfaccia grafica prima del return del programma. I metodi di
+TApplication che utilizzeremo sono il suo costruttore
+<PRE>TApplication<B><FONT COLOR="#663300">::</FONT></B>TApplication<B><FONT COLOR="#663300">(</FONT></B><FONT COLOR="#FF6633">char</FONT><B><FONT COLOR="#663300">*</FONT></B> name<B><FONT COLOR="#663300">,</FONT></B><FONT COLOR="#FF6633"> int</FONT><B><FONT COLOR="#663300">*</FONT></B> argc<B><FONT COLOR="#663300">,</FONT></B><FONT COLOR="#FF6633"> char</FONT><B><FONT COLOR="#663300">**</FONT></B> argv<B><FONT COLOR="#663300">)</FONT></B></PRE>
+e il metodo 
+<PRE>TApplication<B><FONT COLOR="#663300">::</FONT></B>Run<B><FONT COLOR="#663300">()</FONT></B></PRE>
+che va chiamato prima del return del main.
+<br>
+<br>
+Qui sotto un esempio della creazione di un istogramma con ROOT<br>
+<img style="width: 508px; height: 443px;" alt="TH1F" src="./figure/TH1F.png"><br>
+    </td>
+  </tr>
+<tbody>
+</table>
+</div>
+<br>
+<a href="#" onclick="mostra('testo8.0c'); return false;">Compilare
+  con classi ROOT</a><br>
+<div style="display:none;" id="testo8.0c">
+<table style="text-align: left; width: 967px; heigth: 41px;" border="1" cellpadding="2" cellspacing="2">
+<tbody>
+  <tr>
+    <td style="background-color: rgb(233,229, 255);">
+	Poich&eacute; utilizziamo classi di ROOT, che sono compilate
+	in librerie esterne al nostro programma, dobbiamo istruire il
+	compilatore su dove trovare tali librerie.<br>
+	Diamo uno sguardo al Makefile:
+<PRE>LIBS<FONT COLOR="#663300">:=</FONT>`root-config --libs`
+INCS<FONT COLOR="#663300">:=</FONT>`root-config --cflags`
+
+<FONT COLOR="#000099">all</FONT>: main
+
+<FONT COLOR="#000099">main</FONT>: main.o Random.o
+	g++ main.o Random.o -o main $<FONT 
+COLOR="#663300">{</FONT>INCS<FONT COLOR="#663300">}</FONT> $<FONT COLOR="#663300">{</FONT>LIBS<FONT COLOR="#663300">}</FONT> 
+
+<FONT COLOR="#000099">main.o</FONT>: main<FONT COLOR="#663300">.</FONT>cc Random<FONT COLOR="#663300">.</FONT>hh
+	g++ -c main.cc -o main.o $<FONT COLOR="#663300">{</FONT>INCS<FONT COLOR="#663300">}</FONT> 
+
+<FONT COLOR="#000099">Random.o</FONT>: Random.cc Random.hh
+	g++ -c Random.cc -o Random.o
+</PRE>
+All'inizio del Makefile creiamo due variabili LIBS ed INCS in cui
+salviamo i risultati dei comandi (di shell) <br>`root-config --libs` e 
+`root-config --cflags`. <br><br>
+Il comando <code>`root-config --libs`</code> restituisce <br>
+<code>
+[user @lab1 ~]% root-config --libs<br>
+-L/tools/root/lib -lCore -lCint -lHist -lGraf -lGraf3d -lGpad -lTree -lRint -lPostscript -lMatrix -lPhysics -pthread -lm -ldl -rdynamic
+<br>
+</code>
+la direttiva -L/tools/root/lib indica dove sono salvate le librerie di ROOT;<br>
+le direttive -lHist ... indicano al compilatore quali librerie
+includere nella compilazione.<br><br>
+Il comando <code>`root-config --cflags`</code> restituisce<br>
+<code>
+[user @lab1 ~]% root-config --cflags <br>
+-pthread -I/tools/root/include
+</code>
+<br>
+la direttiva -I/tools/root/include indica dove sono salvati gli header
+files delle librerie di ROOT.<br><br>
+
+Nelle varie istruzioni dei target del Makefile, tali variabili sono
+poi richiamate con la sintassi ${LIBS} e ${INCS}, per cui il
+compilatore sa dove trovare headers e librerie per compilare usando le
+librerie di ROOT.
+    </td>
+  </tr>
+</tbody>
+</table>
+</div>
+<br>
+
+-->
+
+<!--
+<font size="+1"><span style="text-decoration: underline; color: rgb(204, 0, 0);">ESERCIZIO
+8.1 - Generare numeri con distribuzione Gaussiana</span><span style="color: rgb(204, 0,0);"></span><span style="color: rgb(205, 0, 0); text-decoration: underline;">(da consegnare)</span><span style="color: rgb(204, 0, 0);"></span><a name="es8.1"></a>:<br>
+
+Aggiungere al generatore gi&agrave; creato un ulteriore metodo per generare
+numeri distribuiti come una Gaussiana di <br>media &mu; e sigma &sigma;
+utilizzando il metodo accept-reject.
+Scrivere un programma che generi 100000 numeri <br>casuali 
+con i parametri &mu; = &sigma; = 1 e con &mu;=0,&sigma;=2 e riempia due istogrammi con
+tali numeri.<br>
+
+<br>
+<span style="text-decoration: underline;">Brevi richiami</span><br>
+<a href="#" onclick="mostra('testo8.1b'); return false;">Metodo 
+  Accept-Reject</a><br>
+
+<div style="display:none;" id="testo8.1b">
+<table style="text-align: left; width: 967px; heigth: 41px;" border="1" cellpadding="2" cellspacing="2">
+<tbody>
+  <tr>
+    <td style="background-color: rgb(233,229,255);">
+      Il metodo accept-reject pu&ograve; essere utilizzato per
+      generare numeri casuali distribuiti secondo qualsivoglia forma
+      funzionale. 
+      Consideriamo di voler generare numeri nell'intervallo [a,b]
+      secondo la distribuzione &fnof;(x) in figura<br>
+      <img style="width: 608px; height: 300px;" alt="Accept-Reject"
+      src="./figure/accrej.png"><br>
+      Il metodo si basa sulla generazione di una coppia di
+      numeri <B>x</B> &isin; [a,b] e <B>y</B> &isin; [0,max] dove max
+      &egrave; un numero maggiore del massimo valore assunto da f(x)
+      nell'intervallo [a,b]. La coppia <B>x,y</B> pu&ograve; essere
+      facilmente generata a partire da due numeri <B>s</B> e <B>t</B>
+      generati uniformemente in [0,1] usando le formule<br>
+      <B>x = a + (b-a)*s; <br>
+	y = max*t. </B><br>
+      Generata la coppia <B>x,y</B> si valuta quindi &fnof;(<B>x</B>)
+      e si accetta <B>x</B> se <B>y&lt; &fnof;(x)</B>, altrimenti si
+      ripete la procedura. Cos&igrave; facendo si avr&agrave; un maggior
+      numero di punti generati laddove &fnof;(x) assume valori
+      pi&ugrave; grandi.
+    </td>
+  </tr>
+</tbody>
+</table>
+</div>
+<br>
+<font size="+1">
+<a href="#" onclick="mostra('testo8.1c'); return false;">Disegnare su
+  pi&ugrave; canvas</a><br>
+<div style="display:none;" id="testo8.1c">
+<table style="text-align: left; width: 967px; heigth: 41px;" border="1" cellpadding="2" cellspacing="2">
+<tbody>
+  <tr>
+    <td style="background-color: rgb(233,229,255);">
+      Breve esempio di codice per disegnare due diversi istogrammi su
+      due canvas:
+       <img style="width: 508px; height: 220px;" alt="canvases"
+      src="./figure/canvases.png"><br>
+    </td>
+  </tr>
+</tbody>
+</table>
+</div>
+<br>
+
+-->
+
+<a href="#" onclick="mostra('testo10.0m'); return false;">Metodo di
+  Box Muller</a><br>
+
+<div style="display:none;" id="testo10.0m">
+<table style="text-align: left; width: 967px; heigth: 41px;" border="1" cellpadding="2" cellspacing="2">
+<tbody>
+  <tr>
+    <td style="background-color: rgb(233,229,255);">
+      Siano <B>x</B> e <B>y</B> due variabili indipendenti distribuite
+      normalmente (Gaussiana con media 0 e sigma
+      1). <br>L'espressione della loro distribuzione di 
+      probabilit&agrave; (PDF) in due dimensioni &egrave;<br>
+      <B> P(x,y)
+      = 1/2 exp{-(x<sup>2</sup>+y<sup>2</sup>)/2}</B><br>
+      passando alle coordinate polari<br>
+      <B> x = r cos&theta; <br>
+	y = r sin&theta; </B><br>
+      si ha<br>
+      <B> P(R,&theta;)
+      = 1/2 exp{- r<sup>2</sup>/2}   </B><br>
+      se calcoliamo l'integrale di tale PDF per r &isin; [0,R] e &theta;
+      &isin; [0,2&pi;] otteniamo<br>
+      <B> p = 1 - exp{- R<sup>2</sup>/2}  </B><br>
+      e p &isin; [0,1]. Invertendo questa formula otteniamo<br>
+      <B> R = &radic;(-2ln(1-p))</B><br>
+      ora definendo <B>s</B> e <B>t</B> come due variabili casuali distribuite
+      uniformemente in [0,1], abbiamo<br>
+      <B> R = &radic;(-2ln(s)<br>
+	&theta;=2&pi;t</B><br>
+      per cui la variabile <B>x</B> distribuita normalmente pu&ograve;
+      essere generata a partire da una coppia <B>s</B> e <B>t</B>
+      distribuita uniformemente in [0,1], secondo la formula<br>
+      <B> x = &radic;(-2ln(s))*cos(2&pi;t)</B>.<br>
+      Da cui segue la generalizzazione nel caso di variabile <B>x</B>
+      distribuita gaussianamente con media &mu; e larghezza &sigma;<br>
+      <B> x = &mu; +&sigma;*&radic;(-2ln(s))*cos(2&pi;t)</B>.<br>
+      <br>
+      Qui sotto trovate una implementazione di tale metodo:<br>
+      <img width="900" alt="Box-Muller"
+      src="./figure/Box-Muller.png"><br>
+    
+    </td>
+  </tr>
+</tbody>
+</table>
+</div>
+<br>
+
+<a href="#" onclick="mostra('testo10.0n'); return false;">Metodo
+  Accept-Reject</a><br>
+
+<div style="display:none;" id="testo10.0n">
+<table style="text-align: left; width: 967px; heigth: 41px;" border="1" cellpadding="2" cellspacing="2">
+<tbody>
+  <tr>
+    <td style="background-color: rgb(233,229,255);">
+      Il metodo accept-reject pu&ograve; essere utilizzato per
+      generare numeri casuali distribuiti secondo qualsivoglia forma
+      funzionale.
+      Consideriamo di voler generare numeri nell'intervallo [a,b]
+      secondo la distribuzione &fnof;(x) in figura<br>
+      <img style="width: 608px; height: 300px;" alt="Accept-Reject"
+      src="./figure/accrej.png"><br>
+      Il metodo si basa sulla generazione di una coppia di
+      numeri <B>x</B> &isin; [a,b] e <B>y</B> &isin; [0,max] dove max
+      &egrave; un numero maggiore del massimo valore assunto da f(x)
+      nell'intervallo [a,b]. La coppia <B>x,y</B> pu&ograve; essere
+      facilmente generata a partire da due numeri <B>s</B> e <B>t</B>
+      generati uniformemente in [0,1] usando le formule<br>
+      <B>x = a + (b-a)*s; <br>
+        y = max*t. </B><br>
+      Generata la coppia <B>x,y</B> si valuta quindi &fnof;(<B>x</B>)
+      e si accetta <B>x</B> se <B>y&lt; &fnof;(x)</B>, altrimenti si
+      ripete la procedura. Cos&igrave; facendo si avr&agrave; un maggior
+      numero di punti generati laddove &fnof;(x) assume valori
+      pi&ugrave; grandi.
+    </td>
+  </tr>
+</tbody>
+</table>
+</div>
+<br>
+
+
+
+<font size="+1"><span style="text-decoration: underline; color: rgb(50, 50, 50);">ESERCIZIO
+10.1 - Verifica del Teorema del Limite Centrale</span><span style="color: rgb(50, 50, 50);"></span><span style="color: rgb(50, 50, 50); 
+text-decoration: underline;"> (facoltativo)</span><span style="color: rgb(50, 50, 50);"></span><a name="es10.1"></a>:<br><br>
+Generare una serie di numeri casuali uniformemente distribuiti 
+in [0,1] e calcolare la somma eseguita su un numero <B>n</B> di
+  elementi consecutivi della serie generata. 
+Calcolare la varianza della serie
+di numeri generata e della serie delle somme. Verificare che questa
+scala con <B>n</B>. Passare da
+riga di comando sia il numero di elementi della serie di partenza
+(10000 pu&ograve; essere un buon numero) ed il numero di elementi su 
+cui fare la somma. Creare due istogrammi che contengano la
+distribuzione dei numeri generata e la distribuzione delle somme.
+Verificare come cambia la distribuzione delle somme al variare
+  di <B>n</B>.<br> 
+<br>
+<span style="text-decoration: underline;">Brevi richiami</span><br>
+<a href="#" onclick="mostra('testo8.3a'); return false;">Il Teorema
+  del Limite Centrale</a><br>
+<div style="display:none;" id="testo8.3a">
+<table style="text-align: left; width: 967px; heigth: 41px;" border="1" cellpadding="2" cellspacing="2">
+<tbody>
+  <tr>
+    <td style="background-color: rgb(233,229,255);">
+I teoremi del limite centrale sono una famiglia di teoremi di
+convergenza debole nell'ambito delle teoria delle
+probabilit&agrave;. Per tutti vale l'affermazione che la distribuzione
+di probabilit&agrave; della somma  (normalizzata) di un gran numero di
+variabili casuali tende ad una data distribuzione regolare
+(attrattore), che di norma &egrave; la Gaussiana o la Lorenziana.<br>
+<br>
+Nel nostro caso, verificheremo che la somma di <B>n</B> variabili
+aleatorie <B>x_i</B> indipendenti e identicamente distribuite con
+media &mu; e varianza &sigma;<sup>2</sup>&lt;&infin;,  tende a
+distribuirsi come una variabile casuale gaussiana con media pari
+a <B>n&mu;</B> e varianza <B>n&sigma;<sup>2</sup></B>, al tendere
+di <B>n</B> a infinito. 
+</td>
+  </tr>
+</tbody>
+</table>
+</div>
+<br>
+
+<font size="+1"><span style="text-decoration: underline; color: rgb(204, 0, 0);">ESERCIZIO
+10.2 - Calcolo di integrali con metodi MonteCarlo</span><span style="color: rgb(204, 0, 0);"></span><span 
+style="color: rgb(205, 0, 0); text-decoration: underline;"> (da consegnare)</span><span style="color: rgb(204, 0, 0);"></span><a name="es10.2"></a>:<br>
+
+<ol>
+<li> Calcolare 10000 volte il valore dell'integrale di sin(x) tra [0,&#960;] utilizzando il metodo della media a 100 punti e fare un grafico ( istogramma ) della distribuzione dei valori ottenuti. 
+<li> Estendere il punto precedente calcolando 10000 volte il valore dell'integrale di sin(x) tra [0,&#960;] utilizzando il metodo della media a N punti con N pari a 100, 500, 1000, 5000, 10000   punti. Per ogni valore di N produrre il grafico della distribuzione dei 10000 valori ottenuti. [NOTA: poich&egrave; il calcolo degli integrali con N molto elevato potrebbe richiedere un 
+certo tempo, potrebbe essere utile salvare in diversi files i valori degli integrali calcolati per un determinato N e svolgere i punti successivi con un secondo programma che
+utilizzi come input i files di integrali del programma precedente.]
+<li> Stimare l'errore sul calcolo dell'integrale a 100, 500, 1000, 5000, 10000 punti come deviazione standard dei 10000 valori calcolati per ogni N. Far un grafico di questo errore in funzione di N. 
+<li> Assumendo che l'andamento dell'errore sia noto ( del tipo k/ &radic;<span style="text-decoration:overline;">N</span> )
+si determini quanti punti sono necessari per ottenere una precisione di 0.001. Si ripeta lo stesso lavoro
+con il metodo hit-or-miss.
+</ol>
+<br>
+<br>
+
+Per il calcolo di integrali con metodi MonteCarlo si pu&ograve; decidere di scrivere una nuova classe dedicata
+o estendere la classe <tt>Integral</tt> della <a href="lezione8_1819.html">lezione 8</a>. In ogni caso ci dovr&agrave;
+essere un puntatore ad un oggetto di tipo RandomGen e due metodi che implementino le due tecniche discusse. 
+A titolo di esempio si pu&ograve; considerare l'header file seguente:
+<br>
+<!-- altro div -->
+<a href="#" onclick="mostra('testo10.2n'); return false;">Integrazione Montecarlo:
+</a><br>
+<div style="display: none;" id="testo10.2n">
+<table style="text-align: left; width: 700px;" border="1" cellpadding="2" cellspacing="2">
+ <tbody>
+   <tr>
+     <td style="background-color: rgb(233, 229, 255);">
+     <img alt="Header file della classe RandomGen" src="figure/IntegraleMC.png" width="900"><br>
+     </td>
+   </tr>
+ </tbody>
+</table>
+</div>
+<br>
+
+<span style="text-decoration: underline;">Brevi richiami</span><br>
+<br>
+<a href="#" onclick="mostra('testo10.2a'); return false;">Calcolo di integrali con il metodo della media</a><br>
+
+<div style="display:none;" id="testo10.2a">
+<table style="text-align: left; width: 967px; heigth: 41px;" border="1" cellpadding="2" cellspacing="2">
+<tbody>
+  <tr>
+    <td style="background-color: rgb(233,229,255);">
+Come discusso a lezione il metodo della media consiste nel valutare la media delle valutazioni della funzione f(x) in un set 
+di N punti distribuiti uniformemente tra a (minimo estremo di integrazione) e b (massimo estremo integrazione). La stima dell'integrale
+si ottiene poi dalla seguente formula:  
+ <br>
+  <img alt="Metodo media" src="figure/Ave.png" width="250"><br>
+    </td>
+  </tr>
+</tbody>
+</table>
+</div>
+<br>
+
+<a href="#" onclick="mostra('testo10.2b'); return false;">Calcolo di integrali con il metodo hit-or-miss</a><br>
+
+<div style="display:none;" id="testo10.2b">
+<table style="text-align: left; width: 967px; heigth: 41px;" border="1" cellpadding="2" cellspacing="2">
+<tbody>
+  <tr>
+    <td style="background-color: rgb(233,229,255);">
+Il metodo hit-or-miss &egrave; si basa sulla generazione di una coppia di
+      numeri <B>x</B> &isin; [a,b] e <B>y</B> &isin; [0,f<sub>max</sub>] dove f<sub>max</sub>
+      &egrave; un numero maggiore del massimo valore assunto da f(x)
+      nell'intervallo [a,b]. 
+      Generata la coppia <B>x,y</B> si incrementa un contatore N<sub>TOT</sub> e si valuta quindi &fnof;(<B>x</B>):
+      se <B>y&lt; &fnof;(x)</B> si incrementa anche il contatore N<sub>HIT</sub>. La procedura viene ripetuta fino a che
+il numero di estrazioni &grave; pari all'N<sub>MAX</sub> richiesto. La stima dell'integrale si ottiene poi dalla seguente formula:
+<br>
+  <img alt="Metodo hit-or-miss" src="figure/HitOrMiss.png" width="250"><br>
+    </td>
+  </tr>
+</tbody>
+</table>
+</div>
+<br>
+
+
+<font size="+1"><span style="text-decoration: underline; color: rgb(50, 50, 50);">ESERCIZIO
+10.3 - Calcolo di integrali multidimensionali con metodi MonteCarlo 
+</span><span style="color: rgb(50, 50, 50);"></span><span
+style="color: rgb(50, 50, 50); text-decoration: underline;"> (facoltativo)</span><span style="color: rgb(50, 50, 50);"></span><a name="es10.3"></a>:<br>
+<br>
+Provare a risolvere il seguente integrale con una precisione di 0.01 <br>
+<img alt="Metodo hit-or-miss" src="figure/Integrale2D.png" width="320"><br>
+utilizzando per esempio il metodo della media.
+<br>
+<br>
+Suggerimento: si potrebbe costruire una classe <tt>FunzioneScalareBase</tt> astratta da cui la funzione integranda erediti. La classe <tt>FunzioneScalareBase</tt> avr&agrave; un metodo virtuale puro <br>
+<tt> virtual double Eval(const vector&#60;double&#62;&) const=0; </tt>.  <br>
+Alla classe che calcola l'integrale si dovr&agrave; aggiungere un metodo dedicato del tipo <br>
+<tt>double Media(const FunzioneScalareBase* f, const vector&#60;double&#62;& inf, const vector<double>& sup, unsigned int punti); </tt> <br>
+<br>
+<font size="+1"><span style="text-decoration: underline; color: rgb(50, 50, 50);">ESERCIZIO
+10.4 - Errore nel caso di integrali multimensionali (facoltativo)</span>
+<a name="es10.4"></a>:<br><br>
+Provare a ripetere le consegne dell'esercizio 10.2 applicate all'integrale multidimensionale dell'esercizio 10.3. In questo modo si pu&ograve; facilmente verificare che la legge con cui scala l'errore &egrave; indipendente dalla dimensione dell'integrale.
+
+<br>
+<br>
+
+<a href="#" onclick="mostra('testo10.5extra'); return false">Qualche approfondimento su generatori di numeri casuali in C++11 </a><br><br>
+</font>
+<div style="display: none;" id="testo10.5extra">
+<table style="text-align: left; width: 967px; height: 41px;" border="1" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top; background-color: rgb(233, 229, 255);">
+
+Nel C++ 11 &egrave stata inserita la libreria <random> per la generazione di numeri casuali: 
+si veda per esempio <a href="http://www.cplusplus.com/reference/random/"> qui</a>.
+Provate a dare un'occhiata a questo <a href="Random_numbers.cpp"> codice </a> per trovare
+un esempio su come utilizzare questa libreria e su come usare le librerie di ROOT ( si 
+faccia riferimento alla  
+<a href="https://root.cern.ch/doc/master/classTRandom.html"> referenza </a>. )
+<br>
+</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<br>
+<br>
+
+<div style="text-align: center;"><font size="+1"><a href="../index.html"><img title="Back to Home Page" style="border: 0px solid ; width: 40px; height: 40px;" alt="Back to Home Page" src="../button-home.jpg"></a><br>
+</font></div>
+
+
+</body></html>
