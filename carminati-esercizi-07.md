@@ -163,14 +163,16 @@ int cifre_significative = -log10(precision);
 Per cui per impostare il numero di cifre significative nella scrittura a video il codice sarà
 
 ```c++
-cout << "x = " << fixed << setprecision(cifre_significative) << zero << endl;
+#include "fmtlib.h"
+
+// {0} → valore di `zero`, {1} → valore di `cifre_significative`
+fmt::print("x0 = {0:{1}f}", zero, cifre_significative);
 ```
 
-oppure, se usate la libreria `fmt`:
+oppure, se usate `cout` e `<iomanip>`:
 
 ```c++
-// {0} → zero, {1} → cifre_significative
-fmt::print("x0 = {0:{1}f}", zero, cifre_significative);
+cout << "x0 = " << fixed << setprecision(cifre_significative) << zero << endl;
 ```
 
 

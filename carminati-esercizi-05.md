@@ -70,18 +70,10 @@ Qui vediamo un esempio di implementazione della classe (file `posizione.cpp`). P
 #include <cmath>
 
 // costruttore di default
-Posizione::Posizione() {
-  m_x = 0;
-  m_y = 0;
-  m_z = 0;
-}
+Posizione::Posizione() : m_x{}, m_y{}, m_z{} {}
 
 // costruttore a partire da una terna cartesiana
-Posizione::Posizione(double x, double y, double z) {
-  m_x = x;
-  m_y = y;
-  m_z = z;
-}
+Posizione::Posizione(double x, double y, double z) : m_x{x}, m_y{y}, m_z{z} {}
 
 // distruttore (puo' essere vuoto)
 Posizione::~Posizione() {}
@@ -131,6 +123,9 @@ Questo programma utilizza la nuova classe appena creata: richiede di fornire com
 ```c++
 #include "posizione.h"
 
+// Installarla con ./install_fmt_library.sh
+#include "fmtlib.h"
+
 #include <cstdlib>
 #include <iostream>
 
@@ -147,21 +142,20 @@ int main(int argc, const char *argv[]) {
 
     return -1;
   }
-  double x = atof(argv[1]);
-  double y = atof(argv[2]);
-  double z = atof(argv[3]);
+  double x{atof(argv[1])};
+  double y{atof(argv[2])};
+  double z{atof(argv[3])};
 
   // Crea un oggetto posizione ed accede ai vari metodi
 
-  Posizione P(x, y, z);
-  cout << "Coordinate cartesiane: " << P.getX() << "," << P.getY() << ","
-       << P.getZ() << endl;
-  cout << "Coordinate cilindriche: " << P.getRho() << "," << P.getPhi() << ","
-       << P.getZ() << endl;
-  cout << "Coordinate sferiche: " << P.getR() << "," << P.getPhi() << ","
-       << P.getTheta() << endl;
-
-  return 0;
+  Posizione P{x, y, z};
+  
+  fmt::print("Coordinate cartesiane: [x = {}, y = {}, z = {}]\n",
+             P.getX(), P.getY(), P.getZ());
+  fmt::print("Coordinate cilindriche: [ρ = {}, φ = {}, z = {}]\n",
+             P.getRho(), P.getPhi(), P.getZ());
+  fmt::print("Coordinate sferiche: [R = {}, φ = {}, θ = {}]\n",
+             P.getR(), P.getPhi(), P.getTheta());
 }
 ```
 
@@ -225,15 +219,12 @@ Implementazione:
 ```c++
 // Metodi per la classe base
 
-Particella::Particella(double massa, double carica) {
-  m_massa = massa;
-  m_carica = carica;
+Particella::Particella(double massa, double carica) : m_massa{massa}, m_carica{carica} {}
 
-}
-Particella::~ParticellaQ) { }
+Particella::~Particella() {}
 
 void Particella::Print() const {
-  cout << "Particella: m=" << m_massa << ", q=" << m_carica << endl;
+  fmt::print("Particella: m = {}, q = {}", m_massa, m_carica);
 }
 ```
 
@@ -247,13 +238,13 @@ Classe `Elettrone`:
 class Elettrone : public Particella {
 public:
   // costruttore
-  Elettrone() : Particella(9.1093826e-31, -1.60217653e-19) {}
+  Elettrone() : Particella{9.1093826e-31, -1.60217653e-19} {}
 
   // distruttore
   ~Elettrone() {}
 
   void Print() const {
-      cout << "Elettrone: m=" << m_massa << ", q=" << m_carica << endl;
+      fmt::print("Elettrone: m = {}, q = {}", m_massa, m_carica);
   }
 };
 ```
@@ -265,29 +256,33 @@ public:
 Questo programma utilizza le nuove classi appena create. Verifica il funzionamento dell'ereditarietà e la dereferenziazione dei puntatori a classe.
 
 ```c++
+#include "fmtlib.h"
 #include "particella.h"
 #include <iostream>
 
 using namespace std;
+
 int main() {
-  Particella *a = new Particella(1., 1.6E-19);
-  Elettrone *e = new Elettrone();
+  Particella *a{new Particella{1., 1.6E-19}};
+  Elettrone *e{new Elettrone{}};
 
   // Metodi della classe base
-  cout << "Particella " << a->GetMassa() << "," << a->GetCarica() << endl;
+  fmt::print("Particella con massa {} e carica {}\n", a->GetMassa(),
+             a->GetCarica());
   a->Print();
 
   // Metodi della classe derivata
-  cout << "Elettrone " << e->GetMassa() << "," << e->GetCarica() << endl;
+  fmt::print("Elettrone con massa {} e carica {}\n", e->GetMassa(),
+             e->GetCarica());
   e->Print();
 
-  Particella b(*a); // costruisco una Particella a partire da una Particella
-  Particella d(*e); // costruisco una Particella a partire da un Elettrone
-  Elettrone f(d);   // costruisco un Elettrone a partire da una Particella
+  Particella b{*a}; // costruisco una Particella a partire da una Particella
+  Particella d{*e}; // costruisco una Particella a partire da un Elettrone
+  Elettrone f{d};   // costruisco un Elettrone a partire da una Particella
 }
 ```
 
-Il programma di esempio contiene un errore, lo trovate ?
+Il programma di esempio contiene un errore, lo trovate?
 
 # Esercizio 5.2 - Creazione delle classi `CampoVettoriale` e `PuntoMateriale` {#esercizio-5.2}
 
@@ -374,6 +369,8 @@ Nell'header file `puntomateriale.h` vanno elencate tutte le classi da cui si vuo
 #include "campovettoriale.h"
 
 class PuntoMateriale : public Particella, Posizione {
+    // …
+};
 ```
 
 La nuova classe avrà, per esempio, definiti sia i metodi `GetMassa()` e `GetCarica()` di `Particella` ed anche `X()`, `R()`… di `Posizione`.
@@ -438,7 +435,7 @@ Questo programma utilizza le nuove classi appena create: richiede di fornire com
 using namespace std;
 int main(int argc, const char * argv[]) {
   if (argc != 4) {
-      cerr << "Usage: " << argv[0] << " <x> <y> <z>" << endl;
+      fmt::print(stderr, "Usage: {} <x> <y> <z>\n", argv[0]);
       exit(-1);
   }
 
