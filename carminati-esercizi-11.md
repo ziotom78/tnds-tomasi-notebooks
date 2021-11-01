@@ -150,7 +150,7 @@ EsperimentoPrisma: :EsperimentoPrisma() :
   m_nl_input = sqrt(m_A_input + m_B_input / (m_lambdal * m_lambdal));
   m_n2_input = sqrt(m_A_input + m_B_input / (m_lambda2 * m_lambda2));
   
-  // theta0 e' arbitrario, scelgo M_PI/2.
+  // theta0 è arbitrario, scelgo M_PI/2.
   m_th0_input = M_P1 / 2;
   
   // determino thetal e theta2

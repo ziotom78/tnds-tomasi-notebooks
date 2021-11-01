@@ -123,7 +123,7 @@ Analogamente a quanto fatto sopra, adattiamo il file di funzioni in modo tale ch
 ```c++
 #include <iostream>
 #include <fstream>
-#include "Vettore.h"
+#include "vettore.h"
 
 using namespace std;
 

@@ -398,7 +398,7 @@ int main() {
 }
 ```
 
-# *Header guards*
+# *Header guards* {#header-guards}
 
 -   Questo è un problema che risale ai primordi del linguaggio C (fine anni '60), ed è stato storicamente risolto con l'uso di *header guards*:
 
@@ -417,7 +417,7 @@ int main() {
     In questo modo, la seconda volta che il file viene incluso verrà saltato. L'identificatore `__VETTORE_H__` è arbitrario.
 
 
-# `#pragma once`
+# `#pragma once` {#pragma-once}
 
 -   I recenti compilatori C++, incluso il `g++`, permettono un'alternativa più semplice alle *header guards*.
 
@@ -431,7 +431,30 @@ int main() {
     };
     ```
 
-    È più comoda perché si deve aggiungere una sola riga senza dover inventare un identificatore (`__VETTORE_H__`), e mette al riparo da pericolosi copia-e-incolla (che gli studenti fanno molto spesso!).
+    È più comoda perché si deve aggiungere una sola riga senza dover inventare un identificatore (`__VETTORE_H__`).
+
+
+# Possibili errori
+
+-   L'uso di `#pragma once` mette al riparo anche da una serie di errori che gli studenti di questo corso fanno spesso.
+
+-   Primo esempio:
+
+    ```c++
+    #ifndef __vettore_h__
+    #define __vettore_h_
+    
+    #endif
+    ```
+
+-   Secondo esempio:
+
+    ```c++
+    #ifdef  __vettore_h__
+    #define __vettore_h__
+    
+    #endif
+    ```
 
 
 # Costruttori, move semantics, etc. {#move-semantics}

@@ -183,8 +183,8 @@
 <p>Nell’header file <code>posizione.h</code> vanno dichiarati tutti i metodi ed i data membri. Si noti come i data membri siano tutti privati: questa modo di disegnare le classi implementa il concetto di incapsulamento e <em>data hiding</em> in C++.</p>
 <p>Un paio di punti già che vale la pena ricordare:</p>
 <ol>
-<li>Il qualificatore const dopo la dichiarazione di una funzione informa che la funzione non modificherà il contenuto dell’oggetto. In maniera simile il qualificatore const nell’argomento di Distanza specifica che il metodo Distanza con modificherà il suo argomento. È sempre utile specificare esplicitamente queste proprietà dei metodi.</li>
-<li>L’insieme dell direttive <code>#ifndef</code>, <code>#define</code>, <code>#endif</code> serve per proteggersi da inclusioni incrociate (molto comuni quando si utilizzano diverse classi che interagiscono tra di loro).</li>
+<li>Il qualificatore const dopo la dichiarazione di una funzione informa che la funzione non modificherà il contenuto dell’oggetto. In maniera simile il qualificatore const nell’argomento di <code>Distanza</code> specifica che il metodo <code>Distanza</code> non modificherà il suo argomento. È sempre utile specificare esplicitamente queste proprietà dei metodi.</li>
+<li>L’insieme dell direttive <code>#ifndef</code>, <code>#define</code>, <code>#endif</code> serve per proteggersi da inclusioni incrociate (molto comuni quando si utilizzano diverse classi che interagiscono tra di loro). [Nelle <a href="./tomasi-lezione-02.html#header-guards">slide</a> abbiamo però visto che <code>#pragma once</code> è un modo più semplice di ottenere lo stesso risultato che mette al riparo da una serie di errori].</li>
 </ol>
 <div class="sourceCode" id="cb1"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#pragma once</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>

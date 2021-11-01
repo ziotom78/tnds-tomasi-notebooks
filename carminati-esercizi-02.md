@@ -135,16 +135,16 @@ double & Vettore::operator[](size_t i) {
 -   Notate l'uso della macro `assert()`: questa macro (ricordarsi di includere la libreria `cassert`) può rivelarsi estremamente utile per scoprire errori nel nostro programma in fase di realizzazione del programma.
 
     ```
-    assert((i < m_N) && "Errore : l'indice e' troppo grande");
+    assert((i < m_N) && "Errore : l'indice è troppo grande");
     ```
 
     farà abortire il programma se si verifica la condizione `m_N > i`, ovvero se si tenta di riempire una componente di indice maggiore della dimensione del Vettore. Prima della chiusura del programma viene mostrato a video il messaggio impostato:
 
     ```
-    Assertion failed: (( m_N > i ) && "Errore : l'indice e' troppo grande"), function SetComponent, file vettore.cpp, line 31.
+    Assertion failed: (( m_N > i ) && "Errore : l'indice è troppo grande"), function SetComponent, file vettore.cpp, line 31.
     ```
 
-    che indica molto chiaramente cosa ha esattamente causato il problema. Normalmente quando la fase di debugging e' terminata tutti gli assert utilizzati possono essere disabilitati mediante la definizione di una macro `#define NDEBUG`: questa istruzione fa si che tutti gli assert dichiarati vengano ignorati e il flusso del programma ritorna ad essere quello normale. [*Nota: ma la «fase di debugging» termina quando si è certi che il proprio programma non contiene alcun errore. Si è mai certi di ciò?*]
+    che indica molto chiaramente cosa ha esattamente causato il problema. Normalmente quando la fase di debugging è terminata tutti gli assert utilizzati possono essere disabilitati mediante la definizione di una macro `#define NDEBUG`: questa istruzione fa si che tutti gli assert dichiarati vengano ignorati e il flusso del programma ritorna ad essere quello normale. [*Nota: ma la «fase di debugging» termina quando si è certi che il proprio programma non contiene alcun errore. Si è mai certi di ciò?*]
 -   Notate l'ultimo metodo implementato (dovete ovviamente aggiungerlo anche nell'header file della classe) che rappresenta l'overloading dell'operatore di accesso `[]` ad un elemento (eg. `double a = v[2]` se `v` è un oggetto di tipo `Vettore`). Questo è spiegato anche sulle [slide addizionali](tomasi-lezione-02.html#operator-array).
 
 ## Programma di test
@@ -393,7 +393,7 @@ void Print(const Vettore &, const char*);
 void selection_sort(Vettore &);
 ```
 
-Il file di implementazione delle funzioni (`.cpp`) potrebbe risultare così (qui e' svolto solo il caso della media, l'estensione alle altre funzioni dovrebbe essere immediata):
+Il file di implementazione delle funzioni (`.cpp`) potrebbe risultare così (qui è svolto solo il caso della media, l'estensione alle altre funzioni dovrebbe essere immediata):
 
 ```c++
 #include "funzioni.h"
@@ -442,7 +442,7 @@ cleanall: clean
 Perchè `CalcolaMedia` vuole in input un `const Vettore &`, mentre CalcolaMediana semplicemente un `Vettore`?
 
 -   Nel caso di `CalcolaMedia(...)` o `CalcolaVarianza(...)`, il passaggio del parametro avviene *by reference* per ottimizzare l'uso della memoria. Con questa modalità di passaggio dati la funzione lavora direttamente sul `Vettore` del `main`, e pertanto una modifica accidentale del `Vettore` di input all'interno della funzione ha un effetto anche nel `main`. Il qualificatore `const` vieta alla funzione di fare qualsiasi operazione di cambiamento del contenuto del vettore di input, pena un errore di compilazione.
--   Nel caso invece di `CalcolaMediana(...)`, il passaggio e' effettuato *by value* e senza il qualificatore `const`: in questo modo permettiamo che il metodo proceda al riodinamento del `Vettore`. Dal momento che con il passaggio *by value* il `Vettore` nella funzione è una copia del `Vettore` di input, ogni cambiamento effettuato nella funzione non si ripercuote sul `main`.
+-   Nel caso invece di `CalcolaMediana(...)`, il passaggio è effettuato *by value* e senza il qualificatore `const`: in questo modo permettiamo che il metodo proceda al riodinamento del `Vettore`. Dal momento che con il passaggio *by value* il `Vettore` nella funzione è una copia del `Vettore` di input, ogni cambiamento effettuato nella funzione non si ripercuote sul `main`.
 
 ## Only for curious kids: the *move semantic*
 

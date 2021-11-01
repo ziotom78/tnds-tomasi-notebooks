@@ -31,8 +31,8 @@ Nell'header file `posizione.h` vanno dichiarati tutti i metodi ed i data membri.
 
 Un paio di punti già che vale la pena ricordare:
 
-#.  Il qualificatore const dopo la dichiarazione di una funzione informa che la funzione non modificherà il contenuto dell'oggetto. In maniera simile il qualificatore const nell'argomento di Distanza specifica che il metodo Distanza con modificherà il suo argomento. È sempre utile specificare esplicitamente queste proprietà dei metodi.
-#.  L'insieme dell direttive `#ifndef`, `#define`, `#endif` serve per proteggersi da inclusioni incrociate (molto comuni quando si utilizzano diverse classi che interagiscono tra di loro).
+#.  Il qualificatore const dopo la dichiarazione di una funzione informa che la funzione non modificherà il contenuto dell'oggetto. In maniera simile il qualificatore const nell'argomento di `Distanza` specifica che il metodo `Distanza` non modificherà il suo argomento. È sempre utile specificare esplicitamente queste proprietà dei metodi.
+#.  L'insieme dell direttive `#ifndef`, `#define`, `#endif` serve per proteggersi da inclusioni incrociate (molto comuni quando si utilizzano diverse classi che interagiscono tra di loro). [Nelle [slide](./tomasi-lezione-02.html#pragma-once) abbiamo però visto che `#pragma once` è un modo più semplice di ottenere lo stesso risultato che mette al riparo da una serie di errori].
 
 ```c++
 #pragma once
@@ -340,9 +340,9 @@ Per risolvere problemi relativi all'elettrostatica o alla gravità proviamo ad e
 #pragma once
 
 #include "particella.h"
-#include "Posizione.h"
+#include "posizione.h"
 
-#include "CampoVettoriale.h"
+#include "campovettoriale.h"
 
 class PuntoMateriale : public Particella, Posizione {
 public:
@@ -369,9 +369,9 @@ Nell'header file `puntomateriale.h` vanno elencate tutte le classi da cui si vuo
 #pragma once
 
 #include "particella.h"
-#include "Posizione.h"
+#include "posizione.h"
 
-#include "CampoVettoriale.h"
+#include "campovettoriale.h"
 
 class PuntoMateriale : public Particella, Posizione {
 ```

@@ -114,7 +114,7 @@ public:
 Una volta implementate le classi (l'implementazione di Eulero è semplicissima se si usano le operazioni di algebra vettoriale), un possibile programma per risolvere l'esercizio è il seguente:
 
 ```c++
-#include "EquazioniDifferenziali.h"
+#include "equazionidifferenziali.h"
 
 #include <iostream>
 #include <string>

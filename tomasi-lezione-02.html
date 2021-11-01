@@ -433,7 +433,23 @@ $</code></pre></li>
 <span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Vettore <span class="op">{</span></span>
 <span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">// ...</span></span>
 <span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code></pre></div>
-<p>È più comoda perché si deve aggiungere una sola riga senza dover inventare un identificatore (<code>__VETTORE_H__</code>), e mette al riparo da pericolosi copia-e-incolla (che gli studenti fanno molto spesso!).</p></li>
+<p>È più comoda perché si deve aggiungere una sola riga senza dover inventare un identificatore (<code>__VETTORE_H__</code>).</p></li>
+</ul>
+</section>
+<section id="possibili-errori" class="slide level1">
+<h1>Possibili errori</h1>
+<ul>
+<li><p>L’uso di <code>#pragma once</code> mette al riparo anche da una serie di errori che gli studenti di questo corso fanno spesso.</p></li>
+<li><p>Primo esempio:</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#ifndef __vettore_h__</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#define __vettore_h_</span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="pp">#endif</span></span></code></pre></div></li>
+<li><p>Secondo esempio:</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#ifdef  __vettore_h__</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#define __vettore_h__</span></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="pp">#endif</span></span></code></pre></div></li>
 </ul>
 </section>
 <section id="move-semantics" class="slide level1">
@@ -448,10 +464,10 @@ $</code></pre></li>
 <li>Inizializzazione della memoria.</li>
 </ol></li>
 <li><p>Esempio:</p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> x<span class="op">;</span>  <span class="co">// Allocation</span></span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="dv">15</span><span class="op">;</span> <span class="co">// Initialization</span></span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> y <span class="op">=</span> <span class="dv">30</span><span class="op">;</span> <span class="co">// Shortcut, but there are still *two* operations here.</span></span></code></pre></div></li>
+<div class="sourceCode" id="cb28"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> x<span class="op">;</span>  <span class="co">// Allocation</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="dv">15</span><span class="op">;</span> <span class="co">// Initialization</span></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> y <span class="op">=</span> <span class="dv">30</span><span class="op">;</span> <span class="co">// Shortcut, but there are still *two* operations here.</span></span></code></pre></div></li>
 </ul>
 </section>
 <section id="costruzione-di-vettore" class="slide level1">
@@ -459,13 +475,13 @@ $</code></pre></li>
 <ul>
 <li><p>Le classi, a differenza di <code>int</code>, richiedono l’invocazione di un costruttore.</p></li>
 <li><p>Il costruttore va invocato quando si dichiara la variabile: non è possibile «differire» l’inizializzazione:</p>
-<div class="sourceCode" id="cb27"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> x<span class="op">;</span></span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="dv">15</span><span class="op">;</span>         <span class="co">// Ok, first allocate then initialize</span></span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>Vettore v<span class="op">;</span></span>
-<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>v<span class="op">(</span><span class="dv">10</span><span class="op">);</span>          <span class="co">// Error, you cannot call the constructor here!</span></span>
-<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>Vettore w<span class="op">(</span><span class="dv">10</span><span class="op">);</span>  <span class="co">// Ok, allocate and initialize</span></span></code></pre></div></li>
+<div class="sourceCode" id="cb29"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> x<span class="op">;</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="dv">15</span><span class="op">;</span>         <span class="co">// Ok, first allocate then initialize</span></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>Vettore v<span class="op">;</span></span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>v<span class="op">(</span><span class="dv">10</span><span class="op">);</span>          <span class="co">// Error, you cannot call the constructor here!</span></span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>Vettore w<span class="op">(</span><span class="dv">10</span><span class="op">);</span>  <span class="co">// Ok, allocate and initialize</span></span></code></pre></div></li>
 <li><p>I costruttori possono richiedere molto tempo per essere eseguiti, ad esempio se invocano <code>new</code> (com’è il caso di <code>Vettore</code>).</p></li>
 </ul>
 </section>
@@ -477,11 +493,11 @@ $</code></pre></li>
 <section id="costruttori" class="slide level1">
 <h1>Costruttori</h1>
 <p><img data-src="images/empty_room.jpg" style="width:20.0%" /> <img data-src="images/furnished_room.jpg" style="width:20.0%" /></p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>Vettore<span class="op">::</span>Vettore<span class="op">(</span><span class="dt">int</span> n<span class="op">)</span> <span class="op">:</span> <span class="va">m_N</span><span class="op">(</span>n<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>    <span class="va">m_v</span> <span class="op">=</span> <span class="kw">new</span> <span class="dt">double</span><span class="op">[</span><span class="va">m_N</span><span class="op">];</span>         <span class="co">// Allocate (build up the building)</span></span>
-<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span><span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> <span class="va">m_N</span><span class="op">;</span> <span class="op">++</span>i<span class="op">)</span>   <span class="co">// Initialize (add the furniture)</span></span>
-<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">m_v</span><span class="op">[</span>i<span class="op">]</span> <span class="op">=</span> <span class="fl">0.0</span><span class="op">;</span></span>
-<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>Vettore<span class="op">::</span>Vettore<span class="op">(</span><span class="dt">int</span> n<span class="op">)</span> <span class="op">:</span> <span class="va">m_N</span><span class="op">(</span>n<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>    <span class="va">m_v</span> <span class="op">=</span> <span class="kw">new</span> <span class="dt">double</span><span class="op">[</span><span class="va">m_N</span><span class="op">];</span>         <span class="co">// Allocate (build up the building)</span></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span><span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> <span class="va">m_N</span><span class="op">;</span> <span class="op">++</span>i<span class="op">)</span>   <span class="co">// Initialize (add the furniture)</span></span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">m_v</span><span class="op">[</span>i<span class="op">]</span> <span class="op">=</span> <span class="fl">0.0</span><span class="op">;</span></span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 </section>
 <section id="costruttori-di-copia" class="slide level1">
 <h1>Costruttori di copia</h1>
@@ -491,11 +507,11 @@ $</code></pre></li>
 <section id="costruttori-di-copia-1" class="slide level1">
 <h1>Costruttori di copia</h1>
 <p><img data-src="images/empty_room.jpg" style="width:20.0%" /> <img data-src="images/furnished_room.jpg" style="width:20.0%" /></p>
-<div class="sourceCode" id="cb29"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>Vettore<span class="op">::</span>Vettore<span class="op">(</span>const Vettore <span class="op">&amp;</span>vett<span class="op">)</span> <span class="op">:</span> <span class="va">m_N</span><span class="op">(</span>vett<span class="op">.</span><span class="va">m_N</span><span class="op">)</span> <span class="op">{</span></span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>    <span class="va">m_v</span> <span class="op">=</span> new double<span class="op">[</span><span class="va">m_N</span><span class="op">];</span>        <span class="co">// Allocate (build up the building)</span></span>
-<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span><span class="op">(</span>int i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> <span class="va">m_N</span><span class="op">;</span> <span class="op">++</span>i<span class="op">)</span>  <span class="co">// Initialize (add a copy of the furniture</span></span>
-<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">m_v</span><span class="op">[</span>i<span class="op">]</span> <span class="op">=</span> vett<span class="op">.</span><span class="va">m_v</span><span class="op">[</span>i<span class="op">];</span>     <span class="co">// that was used in the old building)</span></span>
-<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>Vettore<span class="op">::</span>Vettore<span class="op">(</span>const Vettore <span class="op">&amp;</span>vett<span class="op">)</span> <span class="op">:</span> <span class="va">m_N</span><span class="op">(</span>vett<span class="op">.</span><span class="va">m_N</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>    <span class="va">m_v</span> <span class="op">=</span> new double<span class="op">[</span><span class="va">m_N</span><span class="op">];</span>        <span class="co">// Allocate (build up the building)</span></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span><span class="op">(</span>int i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> <span class="va">m_N</span><span class="op">;</span> <span class="op">++</span>i<span class="op">)</span>  <span class="co">// Initialize (add a copy of the furniture</span></span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">m_v</span><span class="op">[</span>i<span class="op">]</span> <span class="op">=</span> vett<span class="op">.</span><span class="va">m_v</span><span class="op">[</span>i<span class="op">];</span>     <span class="co">// that was used in the old building)</span></span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 </section>
 <section id="operazione-di-assegnamento" class="slide level1">
 <h1>Operazione di assegnamento</h1>
@@ -505,22 +521,22 @@ $</code></pre></li>
 <section id="operazione-di-assegnamento-1" class="slide level1">
 <h1>Operazione di assegnamento</h1>
 <p><img data-src="images/empty_room.jpg" style="width:20.0%" /> <img data-src="images/furnished_room.jpg" style="width:20.0%" /></p>
-<div class="sourceCode" id="cb30"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>Vettore <span class="op">&amp;</span> Vettore<span class="op">::</span><span class="kw">operator</span><span class="op">=(</span>const Vettore <span class="op">&amp;</span>vett<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>    <span class="va">m_N</span> <span class="op">=</span> vett<span class="op">.</span><span class="va">m_N</span><span class="op">;</span></span>
-<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>    if<span class="op">(</span><span class="va">m_v</span><span class="op">)</span> delete <span class="va">m_v</span><span class="op">;</span>             <span class="co">// Put the old building in the garbage!</span></span>
-<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>    <span class="va">m_v</span> <span class="op">=</span> new double<span class="op">[</span><span class="va">m_N</span><span class="op">];</span>          <span class="co">// Create a new building</span></span>
-<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>    for<span class="op">(</span>int i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> <span class="va">m_N</span><span class="op">;</span> <span class="op">++</span>i<span class="op">)</span> <span class="op">{</span>  <span class="co">// Fill the rooms with a copy of the</span></span>
-<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>        <span class="va">m_v</span><span class="op">[</span>i<span class="op">]</span> <span class="op">=</span> vett<span class="op">.</span><span class="va">m_v</span><span class="op">[</span>i<span class="op">];</span>       <span class="co">// old furniture</span></span>
-<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>Vettore <span class="op">&amp;</span> Vettore<span class="op">::</span><span class="kw">operator</span><span class="op">=(</span>const Vettore <span class="op">&amp;</span>vett<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>    <span class="va">m_N</span> <span class="op">=</span> vett<span class="op">.</span><span class="va">m_N</span><span class="op">;</span></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>    if<span class="op">(</span><span class="va">m_v</span><span class="op">)</span> delete <span class="va">m_v</span><span class="op">;</span>             <span class="co">// Put the old building in the garbage!</span></span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>    <span class="va">m_v</span> <span class="op">=</span> new double<span class="op">[</span><span class="va">m_N</span><span class="op">];</span>          <span class="co">// Create a new building</span></span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>    for<span class="op">(</span>int i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> <span class="va">m_N</span><span class="op">;</span> <span class="op">++</span>i<span class="op">)</span> <span class="op">{</span>  <span class="co">// Fill the rooms with a copy of the</span></span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>        <span class="va">m_v</span><span class="op">[</span>i<span class="op">]</span> <span class="op">=</span> vett<span class="op">.</span><span class="va">m_v</span><span class="op">[</span>i<span class="op">];</span>       <span class="co">// old furniture</span></span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 </section>
 <section id="operazione-di-assegnamento-2" class="slide level1">
 <h1>Operazione di assegnamento</h1>
 <p><img data-src="images/empty_room.jpg" style="width:20.0%" /> <img data-src="images/furnished_room.jpg" style="width:20.0%" /></p>
-<div class="sourceCode" id="cb31"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>Vettore v1<span class="op">(</span><span class="dv">10</span><span class="op">),</span> v2<span class="op">(</span><span class="dv">30</span><span class="op">);</span></span>
-<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="co">// …here I initialize v1 and v2, and I use them for some time.</span></span>
-<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>v1 <span class="op">=</span> v2<span class="op">;</span> <span class="co">// Assignment through Vettore::operator=</span></span></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>Vettore v1<span class="op">(</span><span class="dv">10</span><span class="op">),</span> v2<span class="op">(</span><span class="dv">30</span><span class="op">);</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="co">// …here I initialize v1 and v2, and I use them for some time.</span></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>v1 <span class="op">=</span> v2<span class="op">;</span> <span class="co">// Assignment through Vettore::operator=</span></span></code></pre></div>
 </section>
 <section id="move-constructor" class="slide level1">
 <h1>Move constructor</h1>
@@ -530,33 +546,33 @@ $</code></pre></li>
 <section id="move-constructor-1" class="slide level1">
 <h1>Move constructor</h1>
 <p><img data-src="images/empty_room.jpg" style="width:20.0%" /> <img data-src="images/furnished_room.jpg" style="width:20.0%" /></p>
-<div class="sourceCode" id="cb32"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>Vettore<span class="op">::</span>Vettore<span class="op">(</span>Vettore <span class="op">&amp;&amp;</span> vett<span class="op">)</span> <span class="op">:</span> <span class="va">m_n</span><span class="op">(</span>vett<span class="op">.</span><span class="va">m_N</span><span class="op">)</span> <span class="op">{</span></span>
-<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">// No need for &quot;delete vett.m_v&quot;: I want to keep the old furniture!</span></span>
-<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>    <span class="va">m_v</span> <span class="op">=</span> vett<span class="op">.</span><span class="va">m_v</span><span class="op">;</span>  <span class="co">// No need to call &quot;new&quot;: very fast!</span></span>
-<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">// No &quot;for&quot; loop to copy the elements: very fast!</span></span>
-<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>Vettore<span class="op">::</span>Vettore<span class="op">(</span>Vettore <span class="op">&amp;&amp;</span> vett<span class="op">)</span> <span class="op">:</span> <span class="va">m_n</span><span class="op">(</span>vett<span class="op">.</span><span class="va">m_N</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">// No need for &quot;delete vett.m_v&quot;: I want to keep the old furniture!</span></span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>    <span class="va">m_v</span> <span class="op">=</span> vett<span class="op">.</span><span class="va">m_v</span><span class="op">;</span>  <span class="co">// No need to call &quot;new&quot;: very fast!</span></span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">// No &quot;for&quot; loop to copy the elements: very fast!</span></span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 </section>
 <section id="move-constructor-2" class="slide level1">
 <h1>Move constructor</h1>
 <p><img data-src="images/empty_room.jpg" style="width:20.0%" /> <img data-src="images/furnished_room.jpg" style="width:20.0%" /></p>
-<div class="sourceCode" id="cb33"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Function &quot;Read&quot; creates a Vector and fill it with data read from file</span></span>
-<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>Vettore Read<span class="op">(</span><span class="dt">int</span> ndata<span class="op">,</span> <span class="at">const</span> <span class="dt">char</span> <span class="op">*</span> filename<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>  Vettore result<span class="op">(</span>ndata<span class="op">);</span></span>
-<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>  <span class="co">// …</span></span>
-<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> result<span class="op">;</span></span>
-<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
-<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a>Vettore v <span class="op">=</span> Read<span class="op">(</span>ndata<span class="op">,</span> filename<span class="op">);</span></span></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Function &quot;Read&quot; creates a Vector and fill it with data read from file</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>Vettore Read<span class="op">(</span><span class="dt">int</span> ndata<span class="op">,</span> <span class="at">const</span> <span class="dt">char</span> <span class="op">*</span> filename<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>  Vettore result<span class="op">(</span>ndata<span class="op">);</span></span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>  <span class="co">// …</span></span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> result<span class="op">;</span></span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a>Vettore v <span class="op">=</span> Read<span class="op">(</span>ndata<span class="op">,</span> filename<span class="op">);</span></span></code></pre></div>
 </section>
 <section id="distinguere-tra-i-casi" class="slide level1">
 <h1>Distinguere tra i casi</h1>
-<div class="sourceCode" id="cb34"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>Vettore v1<span class="op">(</span><span class="dv">10</span><span class="op">);</span>                    <span class="co">// Constructor</span></span>
-<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>Vettore v2<span class="op">(</span>v1<span class="op">);</span>                    <span class="co">// Copy constructor</span></span>
-<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>Vettore v3 <span class="op">=</span> v1<span class="op">;</span>                   <span class="co">// Copy constructor</span></span>
-<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>v3 <span class="op">=</span> v1<span class="op">;</span>                           <span class="co">// Assignment</span></span>
-<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>Vettore v4 <span class="op">=</span> Read<span class="op">(</span><span class="dv">10</span><span class="op">,</span> <span class="st">&quot;data.dat&quot;</span><span class="op">);</span> <span class="co">// Move constructor</span></span>
-<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a>                                   <span class="co">// (at the end of the call to &quot;Read&quot;)</span></span></code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>Vettore v1<span class="op">(</span><span class="dv">10</span><span class="op">);</span>                    <span class="co">// Constructor</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>Vettore v2<span class="op">(</span>v1<span class="op">);</span>                    <span class="co">// Copy constructor</span></span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>Vettore v3 <span class="op">=</span> v1<span class="op">;</span>                   <span class="co">// Copy constructor</span></span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>v3 <span class="op">=</span> v1<span class="op">;</span>                           <span class="co">// Assignment</span></span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a>Vettore v4 <span class="op">=</span> Read<span class="op">(</span><span class="dv">10</span><span class="op">,</span> <span class="st">&quot;data.dat&quot;</span><span class="op">);</span> <span class="co">// Move constructor</span></span>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a>                                   <span class="co">// (at the end of the call to &quot;Read&quot;)</span></span></code></pre></div>
 </section>
     </div>
   </div>

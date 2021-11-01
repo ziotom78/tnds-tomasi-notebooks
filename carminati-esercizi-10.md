@@ -58,7 +58,7 @@ Per risolvere questo esercizio si può seguire lo schema seguente:
     #include "TH1F.h"
     #include "TAxis.h"
     #include <iostream>
-    #include "RandomGen.h"
+    #include "randomgen.h"
 
     int main() {
       TApplication app{"app", 0, 0};
