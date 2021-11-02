@@ -17,7 +17,7 @@ css:
 
 # Link alle risorse online
 
--   La spiegazione dettagliata degli esercizi si trova qui: [carminati-esercizi-05.html](carminati-esercizi-05.html). È una versione estesa del testo originale sul sito del corso, che continua a restare disponibile.
+-   La spiegazione dettagliata degli esercizi si trova qui: [carminati-esercizi-05.html](carminati-esercizi-05.html). È una versione estesa del testo originale sul sito del corso, che continua a restare disponibile [al solito indirizzo](http://labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/lezione5_1819_nuova.html).
 
 -   La nuova versione ha una serie di vantaggi:
 
