@@ -390,7 +390,7 @@ la cui implementazione può venire data da:
 ```c++
 PuntoMateriale::PuntoMateriale(double massa, double carica,
                                double x, double y, double z)
-  : Particella(massa, carica), Posizione(x, y, z) {
+  : Particella{massa, carica}, Posizione{x, y, z} {
 }
 ```
 
@@ -403,8 +403,17 @@ CampoVettoriale CampoVettoriale::operator+(const CampoVettoriale & v) const {
   return CampoVettoriale{v.x + getFx(), v.y + getFy(), v.z + getFz()};
 }
 
-CampoVettoriale & CampoVettoriale::operator+=(const CampoVettoriale & v) {
-  return (*this) = (*this) + v;
+// Ricordare che, se `v` e `w` sono due oggetti di tipo `CampoVettoriale`, allora
+//
+//    v += w;
+//
+// viene considerato dal compilatore C++ come
+//
+//    v.operator+=(w);
+//
+// Nel metodo qui sotto, la variabile `v` dell'esempio corrisponde a `*this`.
+CampoVettoriale & CampoVettoriale::operator+=(const CampoVettoriale & w) {
+  return (*this) = (*this) + w;
 }
 ```
 
@@ -445,8 +454,8 @@ int main(int argc, const char * argv[]) {
   const double mp{1.67262171E-27};
   const double d{1.E-10};
 
-  PuntoMateriale elettrone{me, -e, 0., 0.,  d / 2};
-  PuntoMateriale protone  {mp,  e, 0., 0., -d / 2};
+  PuntoMateriale elettrone{me, -e, 0, 0,  d / 2};
+  PuntoMateriale protone  {mp,  e, 0, 0, -d / 2};
 
   CampoVettoriale E{elettrone.CampoElettrico(r) + protone.CampoElettrico(r)};
   fmt::print("E = ({}, {}, {})\n", E.getFx(), E.getFy(), E.getFz());
