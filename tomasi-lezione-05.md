@@ -17,21 +17,20 @@ css:
 
 # Link alle risorse online
 
--   La spiegazione dettagliata degli esercizi si trova qui: [carminati-esercizi-05.html](carminati-esercizi-05.html).
+-   La spiegazione dettagliata degli esercizi si trova qui: [carminati-esercizi-05.html](carminati-esercizi-05.html). È una versione estesa del testo originale sul sito del corso, che continua a restare disponibile.
 
--   Come al solito, queste slides, che forniscono suggerimenti addizionali rispetto alla lezione di teoria, sono disponibili all'indirizzo [ziotom78.github.io/tnds-tomasi-notebooks](https://ziotom78.github.io/tnds-tomasi-notebooks/).
+-   La nuova versione ha una serie di vantaggi:
 
+    #.   Ho inserito dei link agli approfondimenti mostrati in queste slide;
+    #.   Ho sistemato alcuni vecchi errori nel testo e nel codice;
+    #.   Mi sono sforzato di usare la *uniform initialization* ovunque, in modo che possiate abituarvi ad usarla (nel farlo ho scoperto un paio di bug nel testo!)
+    #.   Anche se gli esempi di codici sono selezionabili, il copia-e-incolla è disabilitato: sforzatevi di trascrivere il codice!
 
+# Esercizi per oggi
 
-
-# Creazione di diagrammi
-
--   Oltre a gplot++, visto nella scorsa lezione, ho sviluppato negli anni scorsi una libreria, [Monet](https://github.com/ziotom78/monet), che serve per disegnare figure arbitrarie, salvandole in file SVG. Anche Monet va usata come gplot++: basta scaricare il file `monet.h` e salvarlo dove tenete il vostro codice sorgente.
-
--   Può essere utile per chi di voi farà l'esercizio 5.4 (facoltativo) e vuole rappresentare la configurazione delle montagne.
-
--   Nella pagina seguente c'è un esempio di disegno realizzato con Monet.
-
----
-
-![](./images/spirograph.svg){width="50%"}
+-   [Esercizio 5.0](carminati-esercizi-05.html#5.0): Creazione della classe `Posizione`
+-   [Esercizio 5.1](carminati-esercizi-05.html#5.1): Creazione della classe `Particella` ed `Elettrone`
+-   [Esercizio 5.2](carminati-esercizi-05.html#5.2): Creazione delle classi `CampoVettoriale` e `PuntoMateriale`
+-   [Esercizio 5.3](carminati-esercizi-05.html#5.3): Calcolo del campo elettrico generato da un dipolo (**da consegnare**)
+-   [Esercizio 5.4](carminati-esercizi-05.html#5.4): Campo di multipolo (approfondimento)
+-   [Esercizio 5.5](carminati-esercizi-05.html#5.5): Gravità dallo spazio (approfondimento)
