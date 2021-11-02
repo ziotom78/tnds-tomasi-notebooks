@@ -480,21 +480,22 @@
 <h3 id="overloading-operatori">Overloading operatori</h3>
 <p>Per risolvere facilmente questo tipo di problemi è molto utile ridefinire gli operatori <code>operator=</code> e <code>operator+=</code> per la classe <code>CampoVettoriale</code>. Di seguito una possibile implementazione comoda di questo overloading. Notate che nell’operatore <code>operator+</code> viene creato un nuovo vettore (somma) che viene restituito <em>by value</em>. Per <code>operator+=</code> invece la modifica viene effettuata sull’oggetto che chiama l’operatore. L’oggetto stesso (modificato) viene poi restituito <em>by reference</em>.</p>
 <div class="sourceCode" id="cb14"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>CampoVettoriale CampoVettoriale<span class="op">::</span><span class="kw">operator</span><span class="op">+(</span><span class="at">const</span> CampoVettoriale <span class="op">&amp;</span> v<span class="op">)</span> <span class="at">const</span> <span class="op">{</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> CampoVettoriale<span class="op">{</span>v<span class="op">.</span>x <span class="op">+</span> getFx<span class="op">(),</span> v<span class="op">.</span>y <span class="op">+</span> getFy<span class="op">(),</span> v<span class="op">.</span>z <span class="op">+</span> getFz<span class="op">()};</span></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="co">// Ricordare che, se `v` e `w` sono due oggetti di tipo `CampoVettoriale`, allora</span></span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="co">//</span></span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="co">//    v += w;</span></span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="co">//</span></span>
-<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="co">// viene considerato dal compilatore C++ come</span></span>
-<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a><span class="co">//</span></span>
-<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a><span class="co">//    v.operator+=(w);</span></span>
-<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a><span class="co">//</span></span>
-<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a><span class="co">// Nel metodo qui sotto, la variabile `v` dell&#39;esempio corrisponde a `*this`.</span></span>
-<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>CampoVettoriale <span class="op">&amp;</span> CampoVettoriale<span class="op">::</span><span class="kw">operator</span><span class="op">+=(</span><span class="at">const</span> CampoVettoriale <span class="op">&amp;</span> w<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="op">(*</span><span class="kw">this</span><span class="op">)</span> <span class="op">=</span> <span class="op">(*</span><span class="kw">this</span><span class="op">)</span> <span class="op">+</span> w<span class="op">;</span></span>
-<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> result<span class="op">{</span>GetX<span class="op">(),</span> GetY<span class="op">(),</span> GetZ<span class="op">(),</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>                GetFx<span class="op">()</span> <span class="op">+</span> v<span class="op">.</span>GetFx<span class="op">(),</span> GetFy<span class="op">()</span> <span class="op">+</span> v<span class="op">.</span>GetFy<span class="op">(),</span> GetFz<span class="op">()</span> <span class="op">+</span> v<span class="op">.</span>GetFz<span class="op">()};</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="co">// Ricordare che, se `v` e `w` sono due oggetti di tipo `CampoVettoriale`, allora</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="co">//</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="co">//    v += w;</span></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="co">//</span></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a><span class="co">// viene considerato dal compilatore C++ come</span></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a><span class="co">//</span></span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a><span class="co">//    v.operator+=(w);</span></span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a><span class="co">//</span></span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a><span class="co">// Nel metodo qui sotto, la variabile `v` dell&#39;esempio corrisponde a `*this`.</span></span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>CampoVettoriale <span class="op">&amp;</span> CampoVettoriale<span class="op">::</span><span class="kw">operator</span><span class="op">+=(</span><span class="at">const</span> CampoVettoriale <span class="op">&amp;</span> w<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="op">(*</span><span class="kw">this</span><span class="op">)</span> <span class="op">=</span> <span class="op">(*</span><span class="kw">this</span><span class="op">)</span> <span class="op">+</span> w<span class="op">;</span></span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 <h1 id="esercizio-5.3">Esercizio 5.3 - Calcolo del campo elettrico generato da un dipolo (da consegnare)</h1>
 <p>Realizzate un programma che costuisca un dipolo costituito da un elettrone e un protone posizionati ad una distanza <span class="math inline">\delta = 10^{-10}\,\text{m}</span> e determini:</p>
 <ol>

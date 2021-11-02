@@ -400,7 +400,8 @@ Per risolvere facilmente questo tipo di problemi è molto utile ridefinire gli o
 
 ```c++
 CampoVettoriale CampoVettoriale::operator+(const CampoVettoriale & v) const {
-  return CampoVettoriale{v.x + getFx(), v.y + getFy(), v.z + getFz()};
+  return result{GetX(), GetY(), GetZ(),
+                GetFx() + v.GetFx(), GetFy() + v.GetFy(), GetFz() + v.GetFz()};
 }
 
 // Ricordare che, se `v` e `w` sono due oggetti di tipo `CampoVettoriale`, allora
