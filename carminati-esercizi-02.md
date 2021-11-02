@@ -312,11 +312,11 @@ Vettore& Vettore::operator=(const Vettore& v) {
 ```
 
 
-## Il puntatore `this`
+## Il puntatore this
 
 Il puntatore `this` indica un puntatore all'oggetto cui si sta applicando un metodo. È particolarmente utile in alcune occasioni, come nel caso dell'operatore di assegnazione, in cui si deve restituire una copia dell'oggetto corrente.
 
-# Esercizio 2.1 - Codice di analisi dati utilizzando la classe `Vettore` (da consegnare) {#esercizio-2.1}
+# Esercizio 2.1 - Codice di analisi dati utilizzando la classe Vettore (da consegnare) {#esercizio-2.1}
 
 Proviamo ora a riscrivere il codice della prima lezione utilizzando un contenitore di dati più raffinato: la classe `Vettore` ci permetterà di riempire il contenitore dati controllando per esempio che non stiamo sforando la dimensione allocata. Il `Vettore` inoltre si porta dietro anche la sua dimensione: se dobbiamo calcolare la media degli elementi di un `Vettore` non dobbiamo più passare la dimensione come argomento esterno.
 

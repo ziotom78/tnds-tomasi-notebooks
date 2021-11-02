@@ -115,14 +115,14 @@
 
                                                         <ul>
                                                         <li><a href="#funzioni-e-classi-template">Funzioni e classi template</a></li>
-                                                        <li><a href="#esercizio-3.0">Esercizio 3.0 - Evoluzione della classe <code>Vettore</code> in una classe template (da consegnare)</a>
+                                                        <li><a href="#esercizio-3.0">Esercizio 3.0 - Evoluzione della classe Vettore in una classe template (da consegnare)</a>
                                                         <ul>
-                                                        <li><a href="#generalizzazione-classe-vettore">Generalizzazione classe <code>Vettore</code></a></li>
+                                                        <li><a href="#generalizzazione-della-classe-vettore">Generalizzazione della classe Vettore</a></li>
                                                         <li><a href="#adeguamento-funzioni">Adeguamento funzioni</a></li>
                                                         <li><a href="#struttura-del-programma">Struttura del programma</a></li>
                                                         <li><a href="#commenti-sulla-compilazione">Commenti sulla compilazione</a></li>
                                                         </ul></li>
-                                                        <li><a href="#esercizio-3.1">Esercizio 3.1 - Codice di analisi dati utilizzando la classe <code>vector</code> (da consegnare)</a>
+                                                        <li><a href="#esercizio-3.1">Esercizio 3.1 - Codice di analisi dati utilizzando la classe std::vector (da consegnare)</a>
                                                         <ul>
                                                         <li><a href="#adeguamento-funzioni-1">Adeguamento funzioni</a></li>
                                                         <li><a href="#il-codice-principale">Il codice principale</a></li>
@@ -166,10 +166,10 @@
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co">// capire da solo cosa mettere in `&lt;…&gt;` basandosi sul tipo di `v`</span></span>
 <span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co">// cout &lt;&lt; &quot;media    = &quot; &lt;&lt; CalcolaMedia( v  ) &lt;&lt; endl;</span></span></code></pre></div>
 <p>Si possono trovare più dettagli a <a href="http://www.cplusplus.com/doc/oldtutorial/templates/">questo link</a>.</p>
-<h1 id="esercizio-3.0">Esercizio 3.0 - Evoluzione della classe <code>Vettore</code> in una classe template (da consegnare)</h1>
+<h1 id="esercizio-3.0">Esercizio 3.0 - Evoluzione della classe Vettore in una classe template (da consegnare)</h1>
 <p>Proviamo a rendere la classe <code>Vettore</code> della lezione scorsa una classe <code>template</code>, in modo che possa in linea di principio immagazzinare oggeti di un tipo generico <code>T</code>. Notate che quando usiamo classi o funzioni template non applichiamo la separazione tra header file (<code>.h</code>) e file di implementazione (<code>.cpp</code>), ma codifichiamo tutto dentro l’<em>header file</em>. Questo perché non sarebbe possibile per il compilatore compilare separatamente un set di funzioni o una classe senza sapere i tipi esatti con cui verranno utilizzati.</p>
 <p>Vediamo come fare passo passo.</p>
-<h2 id="generalizzazione-classe-vettore">Generalizzazione classe <code>Vettore</code></h2>
+<h2 id="generalizzazione-della-classe-vettore">Generalizzazione della classe Vettore</h2>
 <p>Provate a lavorare sulla generalizzazione della classe <code>Vettore</code> in modo che diventi un contenitore di oggetti generici di tipo <code>T</code>. Provate a completare voi le parti mancanti. Ricordatevi che in questo caso particolare tutto va fatto nell’<em>header file</em> della classe.</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#pragma once</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -306,7 +306,7 @@
 <span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="dv">clean:</span></span>
 <span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    rm -f esercizio3.0 *.o</span></code></pre></div>
-<h1 id="esercizio-3.1">Esercizio 3.1 - Codice di analisi dati utilizzando la classe <code>vector</code> (da consegnare)</h1>
+<h1 id="esercizio-3.1">Esercizio 3.1 - Codice di analisi dati utilizzando la classe std::vector (da consegnare)</h1>
 <ul>
 <li>Vediamo come possiamo ora fare uso di un contenitore “ufficiale” del c++, la classe <code>vector</code>. Questo particolare contenitore non è altro che una classe <code>template</code> sulla falsariga della nostra <code>Vettore</code>. La particolarità di questa classe sta nel fatto che la sua dimensione può non essere nota a priori: la costruzione del vettore può avvenire “aggiungendo in coda” con <code>push_back(x)</code> gli elementi <code>x</code> man mano che si rendono disponibili. Vedremo nel seguito alcuni esempi; è possibile trovare più materiale in <a href="http://www.cplusplus.com/reference/vector/vector/">questa referenza</a>.</li>
 <li>Notate anche che per contenitori della STL (come <code>vector</code>) che stiamo andando ad utilizzare, esistono delle funzioni standard che possono essere utilizzate (vedi nel nostro esempio la funzione <code>sort</code>).</li>

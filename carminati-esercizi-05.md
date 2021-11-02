@@ -11,7 +11,7 @@ lang: it-IT
 
 In questa quinta lezione vogliamo affrontare un semplice problema di elettrostatica utilizzando un codice numerico. In particolare, vogliamo calcolare il campo elettrico generato da un dipolo (e idealmente anche un generico multipolo). Nell'affrontare questo problema fisico approfondiremo il concetto di ereditarietà in C++. Come al solito dovremo preparare un set di classi utili per lo svolgimento dell'esercizio.
 
-# Esercizio 5.0 - Creazione della classe `Posizione` {#esercizio-5.0}
+# Esercizio 5.0 - Creazione della classe Posizione {#esercizio-5.0}
 
 Implementare una classe `Posizione` che descriva un punto nello spazio
       tridimensionale seguendo queste indicazioni:
@@ -174,7 +174,7 @@ Incominciamo a definire due classi che ci permetteranno di rappresentare le sorg
     
 -   Siccome vogliamo che questa classe sia la classe base di altre classi, dichiareremo i data membri come *protected*.
 
--   Costruiamo, attraverso il meccanismo di ereditarietà, una classe derivata `Elettrone` che, essendo una `Particella` di massa e carica note ([wikipedia](http://it.wikipedia.org/wiki/Elettrone)), ha il solo costruttore di default, che inizializza correttamente i data membri. Modifichiamo il metodo di stampa in modo che indichi che si tratta di un elettrone.
+-   Costruiamo, attraverso il meccanismo di ereditarietà, una classe derivata `Elettrone` che, essendo una `Particella` di massa e carica note (i cui valori sono riportati su [wikipedia](http://it.wikipedia.org/wiki/Elettrone)), ha il solo costruttore di default, che inizializza correttamente i data membri. Modifichiamo il metodo di stampa in modo che indichi che si tratta di un elettrone.
 
 Verifichiamo che le nuovi classi e l'ereditarietà funzioni correttamente:
 
@@ -232,15 +232,15 @@ Classe `Elettrone`:
 
 ```c++
 // Implementazione concreta di una particella elementare
-// In questo caso tutte le proprietd della particella
+// In questo caso tutte le proprietà della particella
 // sono costanti, definite nel costruttore di default.
 
 class Elettrone : public Particella {
 public:
-  // costruttore
+  // Costruttore
   Elettrone() : Particella{9.1093826e-31, -1.60217653e-19} {}
 
-  // distruttore
+  // Distruttore
   ~Elettrone() {}
 
   void Print() const {
@@ -284,7 +284,7 @@ int main() {
 
 Il programma di esempio contiene un errore, lo trovate?
 
-# Esercizio 5.2 - Creazione delle classi `CampoVettoriale` e `PuntoMateriale` {#esercizio-5.2}
+# Esercizio 5.2 - Creazione delle classi CampoVettoriale e PuntoMateriale {#esercizio-5.2}
 
 Per risolvere problemi relativi all'elettrostatica o alla gravità proviamo ad effettuare una modellizzazione basata su due elementi principali: una rappresentazione del campo vettoriale e una rappresentazione delle sorgenti dei campi vettoriali.
 
@@ -400,11 +400,7 @@ Per risolvere facilmente questo tipo di problemi è molto utile ridefinire gli o
 
 ```c++
 CampoVettoriale CampoVettoriale::operator+(const CampoVettoriale & v) const {
-  CampoVettoriale sum(v);
-  sum.m_Fx += getFx();
-  sum.m_Fy += getFy();
-  sum.m_Fz += getFz();
-  return sum;
+  return CampoVettoriale{v.x + getFx(), v.y + getFy(), v.z + getFz()};
 }
 
 CampoVettoriale & CampoVettoriale::operator+=(const CampoVettoriale & v) {
@@ -457,6 +453,72 @@ int main(int argc, const char * argv[]) {
 }
 ```
 
+## Creazione di plot
+
+Potete fare riferimento a [questa spiegazione](http://labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/lezioneROOT_1819.html) per produrre un grafico dell'andamento del campo usando la classe `TGraph` di ROOT.
+
+Per produrre un plot dell'andamento del campo usando [gplot++](https://github.com/ziotom78/gplotpp), si devono salvare le ascisse e le ordinate dei punti del grafico in due `std::vector`, e poi chiamare il metodo `Gnuplot::plot(x, y)`. Di seguito viene riportato un esempio:
+
+```c++
+#include "fmtlib.h"
+#include "gplot++.h"
+
+// ...
+
+using namespace std;
+
+const double delta = 1e-10;
+
+int main() {
+  vector<double> d_vec; // Vettore delle distanze (asse x)
+  vector<double> E_vec; // Vettore dei moduli del campo elettrico (asse y)
+
+  // Questo ciclo "for" calcola il valore del campo per 90 punti,
+  // da 100δ a 1000δ in passi di 10δ
+  for (double dist = 100 * delta; dist <= 1000 * delta; dist += 10 * delta) {
+    // Il vettore `d_vec` è usato per la stampa a video e il plot, non per i
+    // calcoli, quindi è meglio salvare il dato in nm anziché m (è più leggibile).
+    d_vec.push_back(dist * 1e9);
+
+    // Inserire qui il codice che calcola il modulo del campo alla distanza
+    // `dist`
+    double e_field = ...;
+
+    E_vec.push_back(e_field);
+
+    // Stampa anche a video: è sempre bene farlo per controllare i numeri!
+    fmt::print("{:.5e} {:.5e}\n", dist, e_field);
+  }
+
+  Gnuplot plt{};
+
+  // Togliere questa riga se si preferisce che il grafico appaia in una finestra
+  // interattiva (consigliato sul proprio computer o su quelli del laboratorio,
+  // sconsigliato se si usa Repl.it)
+  plt.redirect_to_png("esercizio05.3.png");
+
+  // Disegna le ascisse usando una scala bilogaritmica, così che y ∝ 1/r³ viene
+  // trasformato in una legge lineare y' = ξ − 3r', con y' = log(y), r' = log(r).
+  plt.set_logscale(Gnuplot::AxisScale::LOGXY);
+  plt.set_xlabel("Distance [nm]");
+  plt.set_ylabel("Electric field [N/C]");
+
+  plt.plot(d_vec, E_vec);
+
+  plt.show();
+}
+```
+
+Questo è il risultato atteso:
+
+![](./images/esercizio05.3.png)
+
+Notare che la pendenza della retta sul grafico bilogaritmico è −3: per un ordine di grandezza in più sull'asse $x$ (da 10 a 100&nbsp;nm) ci sono tre ordini di grandezza in meno (da $5 \times 10^5$ a $500\,\text{N/C}$) sull'asse $y$. Questo corrisponde al fatto che se $r \gg \delta$ allora
+$$
+\left|E_\text{dipolo}(r)\right| = \left|k\frac{q^+}{(r + \delta)^2} + k\frac{q^-}{(r - \delta)^2}\right|
+= \left|k\frac{e}{(r + \delta)^2} - k\frac{e}{(r - \delta)^2}\right| \approx \frac{4 k e \delta}{r^3}.
+$$
+
 # Esercizio 5.4 - Campo di multipolo (approfondimento) {#esercizio-5.4}
 
 Scrivere un programma che calcoli il campo elettrico generato da un multipolo di ordine $n$.
@@ -487,9 +549,15 @@ Per risolvere questo esercizio si costruisca dapprima il sistema di sorgenti di 
 
 ![](http://labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/figure/schema_montagne.png)
 
-## Brevi Richiami: leggi di potenza {#leggi-di-potenza}
+## Leggi di potenza {#leggi-di-potenza}
 
 Se un campo ha un andamento $E = k R^\alpha$, se valutiamo il campo in due punti diversi $R_1$ e $R_2$, possiamo ricavare $\alpha$ dalla relazione:
 $$
 \alpha = \frac{\log(E_1 / E_2)}{\log(R_1 / R_2)}.
 $$
+
+## Grafici
+
+Nel creare un grafico dell'andamento della distorsione dell'accelerazione gravitazionale $\delta g / g$ è meglio usare la scala logaritmica sull'asse $y$, visto che il valore di $\delta g/g$ varia di diversi ordini di grandezza:
+
+![](./images/esercizio05.5.png)

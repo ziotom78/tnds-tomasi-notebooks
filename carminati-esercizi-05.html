@@ -130,7 +130,7 @@
                         <div class="uk-panel uk-panel-box menu-begin" >
 
                                                         <ul>
-                                                        <li><a href="#esercizio-5.0">Esercizio 5.0 - Creazione della classe <code>Posizione</code></a>
+                                                        <li><a href="#esercizio-5.0">Esercizio 5.0 - Creazione della classe Posizione</a>
                                                         <ul>
                                                         <li><a href="#header-file-della-classe">Header file della classe</a></li>
                                                         <li><a href="#file-di-implementazione-delle-classe">File di implementazione delle classe</a></li>
@@ -142,7 +142,7 @@
                                                         <li><a href="#brevi-richiami">Brevi Richiami</a></li>
                                                         <li><a href="#esempio-di-programma-1">Esempio di programma</a></li>
                                                         </ul></li>
-                                                        <li><a href="#esercizio-5.2">Esercizio 5.2 - Creazione delle classi <code>CampoVettoriale</code> e <code>PuntoMateriale</code></a>
+                                                        <li><a href="#esercizio-5.2">Esercizio 5.2 - Creazione delle classi CampoVettoriale e PuntoMateriale</a>
                                                         <ul>
                                                         <li><a href="#brevi-richiami-1">Brevi Richiami</a>
                                                         <ul>
@@ -154,11 +154,13 @@
                                                         <li><a href="#esercizio-5.3">Esercizio 5.3 - Calcolo del campo elettrico generato da un dipolo (da consegnare)</a>
                                                         <ul>
                                                         <li><a href="#esempio-di-programma-2">Esempio di programma</a></li>
+                                                        <li><a href="#creazione-di-plot">Creazione di plot</a></li>
                                                         </ul></li>
                                                         <li><a href="#esercizio-5.4">Esercizio 5.4 - Campo di multipolo (approfondimento)</a></li>
                                                         <li><a href="#esercizio-5.5">Esercizio 5.5 - Gravità dallo spazio (approfondimento)</a>
                                                         <ul>
-                                                        <li><a href="#leggi-di-potenza">Brevi Richiami: leggi di potenza</a></li>
+                                                        <li><a href="#leggi-di-potenza">Leggi di potenza</a></li>
+                                                        <li><a href="#grafici">Grafici</a></li>
                                                         </ul></li>
                                                         </ul>
                             
@@ -169,7 +171,7 @@
                 <div class="uk-width-medium-3-4">
 <p>[La pagina con la spiegazione originale degli esercizi si trova qui: <a href="http://labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/lezione5_1819_nuova.html">labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/lezione5_1819_nuova.html</a>.]</p>
 <p>In questa quinta lezione vogliamo affrontare un semplice problema di elettrostatica utilizzando un codice numerico. In particolare, vogliamo calcolare il campo elettrico generato da un dipolo (e idealmente anche un generico multipolo). Nell’affrontare questo problema fisico approfondiremo il concetto di ereditarietà in C++. Come al solito dovremo preparare un set di classi utili per lo svolgimento dell’esercizio.</p>
-<h1 id="esercizio-5.0">Esercizio 5.0 - Creazione della classe <code>Posizione</code></h1>
+<h1 id="esercizio-5.0">Esercizio 5.0 - Creazione della classe Posizione</h1>
 <p>Implementare una classe <code>Posizione</code> che descriva un punto nello spazio tridimensionale seguendo queste indicazioni:</p>
 <ol>
 <li>Come data membri privati usare la terna di coordinate cartesiane.</li>
@@ -301,7 +303,7 @@
 <li><p>Un metodo per stampare tali valori.</p></li>
 </ol></li>
 <li><p>Siccome vogliamo che questa classe sia la classe base di altre classi, dichiareremo i data membri come <em>protected</em>.</p></li>
-<li><p>Costruiamo, attraverso il meccanismo di ereditarietà, una classe derivata <code>Elettrone</code> che, essendo una <code>Particella</code> di massa e carica note (<a href="http://it.wikipedia.org/wiki/Elettrone">wikipedia</a>), ha il solo costruttore di default, che inizializza correttamente i data membri. Modifichiamo il metodo di stampa in modo che indichi che si tratta di un elettrone.</p></li>
+<li><p>Costruiamo, attraverso il meccanismo di ereditarietà, una classe derivata <code>Elettrone</code> che, essendo una <code>Particella</code> di massa e carica note (i cui valori sono riportati su <a href="http://it.wikipedia.org/wiki/Elettrone">wikipedia</a>), ha il solo costruttore di default, che inizializza correttamente i data membri. Modifichiamo il metodo di stampa in modo che indichi che si tratta di un elettrone.</p></li>
 </ul>
 <p>Verifichiamo che le nuovi classi e l’ereditarietà funzioni correttamente:</p>
 <ol>
@@ -347,15 +349,15 @@
 <span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 <p>Classe <code>Elettrone</code>:</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Implementazione concreta di una particella elementare</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co">// In questo caso tutte le proprietd della particella</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co">// In questo caso tutte le proprietà della particella</span></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co">// sono costanti, definite nel costruttore di default.</span></span>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Elettrone <span class="op">:</span> <span class="kw">public</span> Particella <span class="op">{</span></span>
 <span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span><span class="op">:</span></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  <span class="co">// costruttore</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Costruttore</span></span>
 <span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>  Elettrone<span class="op">()</span> <span class="op">:</span> Particella<span class="op">{</span><span class="fl">9.1093826e-31</span><span class="op">,</span> <span class="op">-</span><span class="fl">1.60217653e-19</span><span class="op">}</span> <span class="op">{}</span></span>
 <span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>  <span class="co">// distruttore</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Distruttore</span></span>
 <span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>  <span class="op">~</span>Elettrone<span class="op">()</span> <span class="op">{}</span></span>
 <span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>  <span class="dt">void</span> Print<span class="op">()</span> <span class="at">const</span> <span class="op">{</span></span>
@@ -390,7 +392,7 @@
 <span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>  Elettrone f<span class="op">{</span>d<span class="op">};</span>   <span class="co">// costruisco un Elettrone a partire da una Particella</span></span>
 <span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 <p>Il programma di esempio contiene un errore, lo trovate?</p>
-<h1 id="esercizio-5.2">Esercizio 5.2 - Creazione delle classi <code>CampoVettoriale</code> e <code>PuntoMateriale</code></h1>
+<h1 id="esercizio-5.2">Esercizio 5.2 - Creazione delle classi CampoVettoriale e PuntoMateriale</h1>
 <p>Per risolvere problemi relativi all’elettrostatica o alla gravità proviamo ad effettuare una modellizzazione basata su due elementi principali: una rappresentazione del campo vettoriale e una rappresentazione delle sorgenti dei campi vettoriali.</p>
 <ul>
 <li><p>La classe <code>CampoVettoriale</code> (scarica l’header file <a href="./codici/campovettoriale.h">qui</a>): sono molti i casi in Fisica in cui un vettore è collegato ad un punto dello spazio. Ad esempio una forza ha un punto di applicazione, o i vettori del campo elettrico e campo gravitazionale hanno un valore che varia da punto a punto dello spazio.</p></li>
@@ -478,16 +480,12 @@
 <h3 id="overloading-operatori">Overloading operatori</h3>
 <p>Per risolvere facilmente questo tipo di problemi è molto utile ridefinire gli operatori <code>operator=</code> e <code>operator+=</code> per la classe <code>CampoVettoriale</code>. Di seguito una possibile implementazione comoda di questo overloading. Notate che nell’operatore <code>operator+</code> viene creato un nuovo vettore (somma) che viene restituito <em>by value</em>. Per <code>operator+=</code> invece la modifica viene effettuata sull’oggetto che chiama l’operatore. L’oggetto stesso (modificato) viene poi restituito <em>by reference</em>.</p>
 <div class="sourceCode" id="cb14"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>CampoVettoriale CampoVettoriale<span class="op">::</span><span class="kw">operator</span><span class="op">+(</span><span class="at">const</span> CampoVettoriale <span class="op">&amp;</span> v<span class="op">)</span> <span class="at">const</span> <span class="op">{</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  CampoVettoriale sum<span class="op">(</span>v<span class="op">);</span></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  sum<span class="op">.</span><span class="va">m_Fx</span> <span class="op">+=</span> getFx<span class="op">();</span></span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  sum<span class="op">.</span><span class="va">m_Fy</span> <span class="op">+=</span> getFy<span class="op">();</span></span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  sum<span class="op">.</span><span class="va">m_Fz</span> <span class="op">+=</span> getFz<span class="op">();</span></span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> sum<span class="op">;</span></span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>CampoVettoriale <span class="op">&amp;</span> CampoVettoriale<span class="op">::</span><span class="kw">operator</span><span class="op">+=(</span><span class="at">const</span> CampoVettoriale <span class="op">&amp;</span> v<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="op">(*</span><span class="kw">this</span><span class="op">)</span> <span class="op">=</span> <span class="op">(*</span><span class="kw">this</span><span class="op">)</span> <span class="op">+</span> v<span class="op">;</span></span>
-<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> CampoVettoriale<span class="op">{</span>v<span class="op">.</span>x <span class="op">+</span> getFx<span class="op">(),</span> v<span class="op">.</span>y <span class="op">+</span> getFy<span class="op">(),</span> v<span class="op">.</span>z <span class="op">+</span> getFz<span class="op">()};</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>CampoVettoriale <span class="op">&amp;</span> CampoVettoriale<span class="op">::</span><span class="kw">operator</span><span class="op">+=(</span><span class="at">const</span> CampoVettoriale <span class="op">&amp;</span> v<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="op">(*</span><span class="kw">this</span><span class="op">)</span> <span class="op">=</span> <span class="op">(*</span><span class="kw">this</span><span class="op">)</span> <span class="op">+</span> v<span class="op">;</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 <h1 id="esercizio-5.3">Esercizio 5.3 - Calcolo del campo elettrico generato da un dipolo (da consegnare)</h1>
 <p>Realizzate un programma che costuisca un dipolo costituito da un elettrone e un protone posizionati ad una distanza <span class="math inline">\delta = 10^{-10}\,\text{m}</span> e determini:</p>
 <ol>
@@ -526,6 +524,62 @@
 <span id="cb15-28"><a href="#cb15-28" aria-hidden="true" tabindex="-1"></a>  CampoVettoriale E<span class="op">{</span>elettrone<span class="op">.</span>CampoElettrico<span class="op">(</span>r<span class="op">)</span> <span class="op">+</span> protone<span class="op">.</span>CampoElettrico<span class="op">(</span>r<span class="op">)};</span></span>
 <span id="cb15-29"><a href="#cb15-29" aria-hidden="true" tabindex="-1"></a>  fmt<span class="op">::</span>print<span class="op">(</span><span class="st">&quot;E = (</span><span class="sc">{}</span><span class="st">, </span><span class="sc">{}</span><span class="st">, </span><span class="sc">{}</span><span class="st">)</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">,</span> E<span class="op">.</span>getFx<span class="op">(),</span> E<span class="op">.</span>getFy<span class="op">(),</span> E<span class="op">.</span>getFz<span class="op">());</span></span>
 <span id="cb15-30"><a href="#cb15-30" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<h2 id="creazione-di-plot">Creazione di plot</h2>
+<p>Potete fare riferimento a <a href="http://labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/lezioneROOT_1819.html">questa spiegazione</a> per produrre un grafico dell’andamento del campo usando la classe <code>TGraph</code> di ROOT.</p>
+<p>Per produrre un plot dell’andamento del campo usando <a href="https://github.com/ziotom78/gplotpp">gplot++</a>, si devono salvare le ascisse e le ordinate dei punti del grafico in due <code>std::vector</code>, e poi chiamare il metodo <code>Gnuplot::plot(x, y)</code>. Di seguito viene riportato un esempio:</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;fmtlib.h&quot;</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;gplot++.h&quot;</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="co">// ...</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="kw">using</span> <span class="kw">namespace</span> std<span class="op">;</span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="at">const</span> <span class="dt">double</span> delta <span class="op">=</span> <span class="fl">1e-10</span><span class="op">;</span></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>  vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> d_vec<span class="op">;</span> <span class="co">// Vettore delle distanze (asse x)</span></span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>  vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> E_vec<span class="op">;</span> <span class="co">// Vettore dei moduli del campo elettrico (asse y)</span></span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Questo ciclo &quot;for&quot; calcola il valore del campo per 90 punti,</span></span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>  <span class="co">// da 100δ a 1000δ in passi di 10δ</span></span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> <span class="op">(</span><span class="dt">double</span> dist <span class="op">=</span> <span class="dv">100</span> <span class="op">*</span> delta<span class="op">;</span> dist <span class="op">&lt;=</span> <span class="dv">1000</span> <span class="op">*</span> delta<span class="op">;</span> dist <span class="op">+=</span> <span class="dv">10</span> <span class="op">*</span> delta<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Il vettore `d_vec` è usato per la stampa a video e il plot, non per i</span></span>
+<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a>    <span class="co">// calcoli, quindi è meglio salvare il dato in nm anziché m (è più leggibile).</span></span>
+<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a>    d_vec<span class="op">.</span>push_back<span class="op">(</span>dist <span class="op">*</span> <span class="fl">1e9</span><span class="op">);</span></span>
+<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Inserire qui il codice che calcola il modulo del campo alla distanza</span></span>
+<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a>    <span class="co">// `dist`</span></span>
+<span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a>    <span class="dt">double</span> e_field <span class="op">=</span> <span class="op">...;</span></span>
+<span id="cb16-24"><a href="#cb16-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-25"><a href="#cb16-25" aria-hidden="true" tabindex="-1"></a>    E_vec<span class="op">.</span>push_back<span class="op">(</span>e_field<span class="op">);</span></span>
+<span id="cb16-26"><a href="#cb16-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-27"><a href="#cb16-27" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Stampa anche a video: è sempre bene farlo per controllare i numeri!</span></span>
+<span id="cb16-28"><a href="#cb16-28" aria-hidden="true" tabindex="-1"></a>    fmt<span class="op">::</span>print<span class="op">(</span><span class="st">&quot;</span><span class="sc">{:.5e}</span><span class="st"> </span><span class="sc">{:.5e}\n</span><span class="st">&quot;</span><span class="op">,</span> dist<span class="op">,</span> e_field<span class="op">);</span></span>
+<span id="cb16-29"><a href="#cb16-29" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb16-30"><a href="#cb16-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-31"><a href="#cb16-31" aria-hidden="true" tabindex="-1"></a>  Gnuplot plt<span class="op">{};</span></span>
+<span id="cb16-32"><a href="#cb16-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-33"><a href="#cb16-33" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Togliere questa riga se si preferisce che il grafico appaia in una finestra</span></span>
+<span id="cb16-34"><a href="#cb16-34" aria-hidden="true" tabindex="-1"></a>  <span class="co">// interattiva (consigliato sul proprio computer o su quelli del laboratorio,</span></span>
+<span id="cb16-35"><a href="#cb16-35" aria-hidden="true" tabindex="-1"></a>  <span class="co">// sconsigliato se si usa Repl.it)</span></span>
+<span id="cb16-36"><a href="#cb16-36" aria-hidden="true" tabindex="-1"></a>  plt<span class="op">.</span>redirect_to_png<span class="op">(</span><span class="st">&quot;esercizio05.3.png&quot;</span><span class="op">);</span></span>
+<span id="cb16-37"><a href="#cb16-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-38"><a href="#cb16-38" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Disegna le ascisse usando una scala bilogaritmica, così che y ∝ 1/r³ viene</span></span>
+<span id="cb16-39"><a href="#cb16-39" aria-hidden="true" tabindex="-1"></a>  <span class="co">// trasformato in una legge lineare y&#39; = ξ − 3r&#39;, con y&#39; = log(y), r&#39; = log(r).</span></span>
+<span id="cb16-40"><a href="#cb16-40" aria-hidden="true" tabindex="-1"></a>  plt<span class="op">.</span>set_logscale<span class="op">(</span>Gnuplot<span class="op">::</span>AxisScale<span class="op">::</span>LOGXY<span class="op">);</span></span>
+<span id="cb16-41"><a href="#cb16-41" aria-hidden="true" tabindex="-1"></a>  plt<span class="op">.</span>set_xlabel<span class="op">(</span><span class="st">&quot;Distance [nm]&quot;</span><span class="op">);</span></span>
+<span id="cb16-42"><a href="#cb16-42" aria-hidden="true" tabindex="-1"></a>  plt<span class="op">.</span>set_ylabel<span class="op">(</span><span class="st">&quot;Electric field [N/C]&quot;</span><span class="op">);</span></span>
+<span id="cb16-43"><a href="#cb16-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-44"><a href="#cb16-44" aria-hidden="true" tabindex="-1"></a>  plt<span class="op">.</span>plot<span class="op">(</span>d_vec<span class="op">,</span> E_vec<span class="op">);</span></span>
+<span id="cb16-45"><a href="#cb16-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-46"><a href="#cb16-46" aria-hidden="true" tabindex="-1"></a>  plt<span class="op">.</span>show<span class="op">();</span></span>
+<span id="cb16-47"><a href="#cb16-47" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p>Questo è il risultato atteso:</p>
+<p><img src="./images/esercizio05.3.png" /></p>
+<p>Notare che la pendenza della retta sul grafico bilogaritmico è −3: per un ordine di grandezza in più sull’asse <span class="math inline">x</span> (da 10 a 100 nm) ci sono tre ordini di grandezza in meno (da <span class="math inline">5 \times 10^5</span> a <span class="math inline">500\,\text{N/C}</span>) sull’asse <span class="math inline">y</span>. Questo corrisponde al fatto che se <span class="math inline">r \gg \delta</span> allora <span class="math display">
+\left|E_\text{dipolo}(r)\right| = \left|k\frac{q^+}{(r + \delta)^2} + k\frac{q^-}{(r - \delta)^2}\right|
+= \left|k\frac{e}{(r + \delta)^2} - k\frac{e}{(r - \delta)^2}\right| \approx \frac{4 k e \delta}{r^3}.
+</span></p>
 <h1 id="esercizio-5.4">Esercizio 5.4 - Campo di multipolo (approfondimento)</h1>
 <p>Scrivere un programma che calcoli il campo elettrico generato da un multipolo di ordine <span class="math inline">n</span>. In questo esercizio, un <span class="math inline">n</span>-polo (con <span class="math inline">n</span> pari) è una distribuzione di n particelle, in cui la particella i-esima ha carica <span class="math inline">(-1)^i e</span> (dove <span class="math inline">e</span> è la carica del protone) e si trova nel punto <span class="math display">
 \left(r_0 \cos\left(\frac{2\pi i}n\right), r_0 \sin\left(\frac{2\pi i}n\right)\right)
@@ -542,10 +596,13 @@
 </ol>
 <p>Per risolvere questo esercizio si costruisca dapprima il sistema di sorgenti di campo (Terra e catena montuosa). Si calcoli il campo generato da tutte le sorgenti in un punto a distanza dal centro della terra pari al raggio terrestre pi` la distanza del satellite dalla superficie terrestre. Muovere questo punto in modo che percorra tutta l’orbita (in passi da 10 Km).</p>
 <p><img src="http://labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/figure/schema_montagne.png" /></p>
-<h2 id="leggi-di-potenza">Brevi Richiami: leggi di potenza</h2>
+<h2 id="leggi-di-potenza">Leggi di potenza</h2>
 <p>Se un campo ha un andamento <span class="math inline">E = k R^\alpha</span>, se valutiamo il campo in due punti diversi <span class="math inline">R_1</span> e <span class="math inline">R_2</span>, possiamo ricavare <span class="math inline">\alpha</span> dalla relazione: <span class="math display">
 \alpha = \frac{\log(E_1 / E_2)}{\log(R_1 / R_2)}.
-</span></p>                    
+</span></p>
+<h2 id="grafici">Grafici</h2>
+<p>Nel creare un grafico dell’andamento della distorsione dell’accelerazione gravitazionale <span class="math inline">\delta g / g</span> è meglio usare la scala logaritmica sull’asse <span class="math inline">y</span>, visto che il valore di <span class="math inline">\delta g/g</span> varia di diversi ordini di grandezza:</p>
+<p><img src="./images/esercizio05.5.png" /></p>                    
                 </div>
             </div>
 

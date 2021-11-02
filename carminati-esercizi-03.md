@@ -54,13 +54,13 @@ cout << "media    = " << CalcolaMedia<double>( v  ) << endl;
 Si possono trovare più dettagli a [questo link](http://www.cplusplus.com/doc/oldtutorial/templates/).
 
 
-# Esercizio 3.0 - Evoluzione della classe `Vettore` in una classe template (da consegnare) {#esercizio-3.0}
+# Esercizio 3.0 - Evoluzione della classe Vettore in una classe template (da consegnare) {#esercizio-3.0}
 
 Proviamo a rendere la classe `Vettore` della lezione scorsa una classe `template`, in modo che possa in linea di principio immagazzinare oggeti di un tipo generico `T`. Notate che quando usiamo classi o funzioni template non applichiamo la separazione tra header file (`.h`) e file di implementazione (`.cpp`), ma codifichiamo tutto dentro l'*header file*. Questo perché non sarebbe possibile per il compilatore compilare separatamente un set di funzioni o una classe senza sapere i tipi esatti con cui verranno utilizzati.
 
 Vediamo come fare passo passo.
 
-## Generalizzazione classe `Vettore`
+## Generalizzazione della classe Vettore
 
 Provate a lavorare sulla generalizzazione della classe `Vettore` in modo che diventi un contenitore di oggetti generici di tipo `T`. Provate a completare voi le parti mancanti. Ricordatevi che in questo caso particolare tutto va fatto nell'*header file* della classe.
 
@@ -220,7 +220,7 @@ clean:
 ```
 
 
-# Esercizio 3.1 - Codice di analisi dati utilizzando la classe `vector` (da consegnare) {#esercizio-3.1}
+# Esercizio 3.1 - Codice di analisi dati utilizzando la classe std::vector (da consegnare) {#esercizio-3.1}
 
 -   Vediamo come possiamo ora fare uso di un contenitore “ufficiale” del c++, la classe `vector`. Questo particolare contenitore non è altro che una classe `template` sulla falsariga della nostra `Vettore`. La particolarità di questa classe sta nel fatto che la sua dimensione può non essere nota a priori: la costruzione del vettore può avvenire “aggiungendo in coda” con `push_back(x)` gli elementi `x` man mano che si rendono disponibili. Vedremo nel seguito alcuni esempi; è possibile trovare più materiale in [questa referenza](http://www.cplusplus.com/reference/vector/vector/).
 -   Notate anche che per contenitori della STL (come `vector`) che stiamo andando ad utilizzare, esistono delle funzioni standard che possono essere utilizzate (vedi nel nostro esempio la funzione `sort`).

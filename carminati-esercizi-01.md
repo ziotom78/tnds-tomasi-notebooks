@@ -624,7 +624,7 @@ Eseguiamo il programma :
 
     ./main 1000000 data.dat
 
-# Esercizio 1.2 - Codice di analisi con funzioni e `Makefile` {#esercizio-1.2}
+# Esercizio 1.2 - Codice di analisi con funzioni e Makefile {#esercizio-1.2}
 
 In questo esercizio terminiamo il processo di riorganizzazione dell'esercizio 1.0. Procederemo in questo modo:
 
@@ -635,7 +635,7 @@ In questo esercizio terminiamo il processo di riorganizzazione dell'esercizio 1
 
 Prima di incominciare, rivediamo rapidamente come si scrive un `Makefile`:
 
-## Il `Makefile`
+## Il Makefile
 
 Vogliamo creare un `Makefile` che ci permetta di compilare il nostro programma quando questo è composto/spezzato in diversi file sorgenti. Supponiamo di avere un codice spezzato in tre file:
 
