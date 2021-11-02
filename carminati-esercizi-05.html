@@ -535,7 +535,7 @@
 <span id="cb15-30"><a href="#cb15-30" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 <h2 id="creazione-di-plot">Creazione di plot</h2>
 <p>Potete fare riferimento a <a href="http://labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/lezioneROOT_1819.html">questa spiegazione</a> per produrre un grafico dell’andamento del campo usando la classe <code>TGraph</code> di ROOT.</p>
-<p>Per produrre un plot dell’andamento del campo usando <a href="https://github.com/ziotom78/gplotpp">gplot++</a>, si devono salvare le ascisse e le ordinate dei punti del grafico in due <code>std::vector</code>, e poi chiamare il metodo <code>Gnuplot::plot(x, y)</code>. Di seguito viene riportato un esempio:</p>
+<p>Se invece di ROOT preferite usare <a href="https://github.com/ziotom78/gplotpp">gplot++</a> per produrre un grafico di <span class="math inline">E = E(r)</span>, dovete salvare le ascisse e le ordinate dei punti del grafico in due <code>std::vector</code>, e poi chiamare il metodo <code>Gnuplot::plot(x, y)</code>. Di seguito viene riportato un esempio:</p>
 <div class="sourceCode" id="cb16"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;fmtlib.h&quot;</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;gplot++.h&quot;</span></span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -590,8 +590,8 @@
 = \left|k\frac{e}{(r + \delta)^2} - k\frac{e}{(r - \delta)^2}\right| \approx \frac{4 k e \delta}{r^3}.
 </span></p>
 <h1 id="esercizio-5.4">Esercizio 5.4 - Campo di multipolo (approfondimento)</h1>
-<p>Scrivere un programma che calcoli il campo elettrico generato da un multipolo di ordine <span class="math inline">n</span>. In questo esercizio, un <span class="math inline">n</span>-polo (con <span class="math inline">n</span> pari) è una distribuzione di n particelle, in cui la particella i-esima ha carica <span class="math inline">(-1)^i e</span> (dove <span class="math inline">e</span> è la carica del protone) e si trova nel punto <span class="math display">
-\left(r_0 \cos\left(\frac{2\pi i}n\right), r_0 \sin\left(\frac{2\pi i}n\right)\right)
+<p>Scrivere un programma che calcoli il campo elettrico generato da un multipolo di ordine <span class="math inline">n</span>. In questo esercizio, un <span class="math inline">n</span>-polo (con <span class="math inline">n</span> pari) è una distribuzione di n particelle, in cui la particella <span class="math inline">k</span>-esima ha carica <span class="math inline">(-1)^k e</span>, dove <span class="math inline">e</span> è la carica del protone, e si trova nel punto <span class="math display">
+P_k = \left(r_0 \cos\left(\frac{2\pi k}n\right), r_0 \sin\left(\frac{2\pi k}n\right)\right)
 </span> dove <span class="math inline">r_0</span> è il raggio a cui sono messe le cariche.</p>
 <p>Verificare che a grande distanza (<span class="math inline">R \gg r_0</span>) il campo elettrico varia proporzionalmente a <span class="math inline">R^{-2 - n/2}</span>.</p>
 <p>Valutare fino a quali valori di <span class="math inline">n</span> si riesce a verificare questa dipendenza.</p>
@@ -603,7 +603,7 @@
 <li>calcoli l’accelerazione di gravità sul satellite per una Terra perfettamene sferica e dimensioni pari al raggio medio (<a href="http://it.wikipedia.org/wiki/Terra">wikipedia</a>).</li>
 <li>calcoli la variazione relativa di g prodotta da una catena montuosa, schematizzata come una fila di 100 sfere di 1 km di raggio poste sopra la superficie media della Terra (usare 3000 kg/m³ come densità della roccia) e produca un grafico della variazione in funzione della posizione del satellite sull’orbita.</li>
 </ol>
-<p>Per risolvere questo esercizio si costruisca dapprima il sistema di sorgenti di campo (Terra e catena montuosa). Si calcoli il campo generato da tutte le sorgenti in un punto a distanza dal centro della terra pari al raggio terrestre pi` la distanza del satellite dalla superficie terrestre. Muovere questo punto in modo che percorra tutta l’orbita (in passi da 10 Km).</p>
+<p>Per risolvere questo esercizio si costruisca dapprima il sistema di sorgenti di campo (Terra e catena montuosa). Si calcoli il campo generato da tutte le sorgenti in un punto a distanza dal centro della terra pari al raggio terrestre più la distanza del satellite dalla superficie terrestre. Muovere questo punto in modo che percorra tutta l’orbita (in passi da 10 Km).</p>
 <p><img src="http://labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/figure/schema_montagne.png" /></p>
 <h2 id="leggi-di-potenza">Leggi di potenza</h2>
 <p>Se un campo ha un andamento <span class="math inline">E = k R^\alpha</span>, se valutiamo il campo in due punti diversi <span class="math inline">R_1</span> e <span class="math inline">R_2</span>, possiamo ricavare <span class="math inline">\alpha</span> dalla relazione: <span class="math display">
@@ -611,7 +611,8 @@
 </span></p>
 <h2 id="grafici">Grafici</h2>
 <p>Nel creare un grafico dell’andamento della distorsione dell’accelerazione gravitazionale <span class="math inline">\delta g / g</span> è meglio usare la scala logaritmica sull’asse <span class="math inline">y</span>, visto che il valore di <span class="math inline">\delta g/g</span> varia di diversi ordini di grandezza:</p>
-<p><img src="./images/esercizio05.5.png" /></p>                    
+<p><img src="./images/esercizio05.5.png" /></p>
+<p>La posizione del picco dipende dal punto rispetto all’angolo zero in cui sono state poste le sfere che rappresentano la catena montuosa. Nel grafico qui sopra, la montagna <span class="math inline">k</span>-esima è stata posta ad un angolo <span class="math inline">\theta_k = 90^\circ + k \delta\theta</span>, con <span class="math inline">k = 0\ldots 99</span> e <span class="math inline">\delta\theta = 1\,\text{km} / 2\pi R_T</span> l’incremento angolare associato a sfere di raggio 1 km e poste sulla superficie terrestre, con <span class="math inline">R_T</span> raggio medio della Terra.</p>                    
                 </div>
             </div>
 

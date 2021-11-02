@@ -466,7 +466,7 @@ int main(int argc, const char * argv[]) {
 
 Potete fare riferimento a [questa spiegazione](http://labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/lezioneROOT_1819.html) per produrre un grafico dell'andamento del campo usando la classe `TGraph` di ROOT.
 
-Per produrre un plot dell'andamento del campo usando [gplot++](https://github.com/ziotom78/gplotpp), si devono salvare le ascisse e le ordinate dei punti del grafico in due `std::vector`, e poi chiamare il metodo `Gnuplot::plot(x, y)`. Di seguito viene riportato un esempio:
+Se invece di ROOT preferite usare [gplot++](https://github.com/ziotom78/gplotpp) per produrre un grafico di $E = E(r)$, dovete salvare le ascisse e le ordinate dei punti del grafico in due `std::vector`, e poi chiamare il metodo `Gnuplot::plot(x, y)`. Di seguito viene riportato un esempio:
 
 ```c++
 #include "fmtlib.h"
@@ -531,9 +531,9 @@ $$
 # Esercizio 5.4 - Campo di multipolo (approfondimento) {#esercizio-5.4}
 
 Scrivere un programma che calcoli il campo elettrico generato da un multipolo di ordine $n$.
-In questo esercizio, un $n$-polo (con $n$ pari) è una distribuzione di n particelle, in cui la particella i-esima ha carica $(-1)^i e$ (dove $e$ è la carica del protone) e si trova nel punto
+In questo esercizio, un $n$-polo (con $n$ pari) è una distribuzione di n particelle, in cui la particella $k$-esima ha carica $(-1)^k e$, dove $e$ è la carica del protone, e si trova nel punto
 $$
-\left(r_0 \cos\left(\frac{2\pi i}n\right), r_0 \sin\left(\frac{2\pi i}n\right)\right)
+P_k = \left(r_0 \cos\left(\frac{2\pi k}n\right), r_0 \sin\left(\frac{2\pi k}n\right)\right)
 $$
 dove $r_0$ è il raggio a cui sono messe le cariche.
 
@@ -554,7 +554,7 @@ Costruire un programma che :
 #.  calcoli l'accelerazione di gravità sul satellite per una Terra perfettamene sferica e dimensioni pari al raggio medio ([wikipedia](http://it.wikipedia.org/wiki/Terra)).
 #.  calcoli la variazione relativa di g prodotta da una catena montuosa, schematizzata come una fila di 100 sfere di 1&nbsp;km di raggio poste sopra la superficie media della Terra (usare 3000&nbsp;kg/m³ come densità della roccia) e produca un grafico della variazione in funzione della posizione del satellite sull'orbita.
 
-Per risolvere questo esercizio si costruisca dapprima il sistema di sorgenti di campo (Terra e catena montuosa). Si calcoli il campo generato da tutte le sorgenti in un punto a distanza dal centro della terra pari al raggio terrestre pi` la distanza del satellite dalla superficie terrestre. Muovere questo punto in modo che percorra tutta l'orbita (in passi da 10&nbsp;Km).
+Per risolvere questo esercizio si costruisca dapprima il sistema di sorgenti di campo (Terra e catena montuosa). Si calcoli il campo generato da tutte le sorgenti in un punto a distanza dal centro della terra pari al raggio terrestre più la distanza del satellite dalla superficie terrestre. Muovere questo punto in modo che percorra tutta l'orbita (in passi da 10&nbsp;Km).
 
 ![](http://labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/figure/schema_montagne.png)
 
@@ -570,3 +570,5 @@ $$
 Nel creare un grafico dell'andamento della distorsione dell'accelerazione gravitazionale $\delta g / g$ è meglio usare la scala logaritmica sull'asse $y$, visto che il valore di $\delta g/g$ varia di diversi ordini di grandezza:
 
 ![](./images/esercizio05.5.png)
+
+La posizione del picco dipende dal punto rispetto all'angolo zero in cui sono state poste le sfere che rappresentano la catena montuosa. Nel grafico qui sopra, la montagna $k$-esima è stata posta ad un angolo $\theta_k = 90^\circ + k \delta\theta$, con $k = 0\ldots 99$ e $\delta\theta = 1\,\text{km} / 2\pi R_T$ l'incremento angolare associato a sfere di raggio 1&nbsp;km e poste sulla superficie terrestre, con $R_T$ raggio medio della Terra.
