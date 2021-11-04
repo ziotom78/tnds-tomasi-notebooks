@@ -437,7 +437,9 @@ int main() {
 
 -   Per installarla in Repl.it, basta eseguire `sh install_gplot++.h`.
 
--   Sui vostri laptop dovete invece scaricare il file [gplot++.h](https://raw.githubusercontent.com/ziotom78/gplotpp/master/gplot%2B%2B.h) nella cartella dove vi serve.
+-   Sui vostri laptop dovete invece scaricare il file [gplot++.h](https://raw.githubusercontent.com/ziotom78/gplotpp/master/gplot%2B%2B.h) nella cartella dove vi serve. Se usate Linux o Mac OS X, basta eseguire da terminale il seguente comando nella directory dove state svolgendo l'esercizio:
+
+    <input type="text" value="curl 'https://raw.githubusercontent.com/ziotom78/gplotpp/master/gplot%2B%2B.h' > gplot++.h" id="installGplotpp" readonly="1" size="60"><button onclick='copyFmtInstallationScript("installGplotpp")'>Copia</button> 
 
 # Vantaggi di gplot++
 

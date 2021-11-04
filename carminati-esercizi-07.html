@@ -91,23 +91,26 @@
             code span.vs { color: #4070a0; } /* VerbatimString */
             code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
         </style>
-                                            <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.js"></script>
-                                            <script>document.addEventListener("DOMContentLoaded", function () {
-                                             var mathElements = document.getElementsByClassName("math");
-                                             var macros = [];
-                                             for (var i = 0; i < mathElements.length; i++) {
-                                              var texText = mathElements[i].firstChild;
-                                              if (mathElements[i].tagName == "SPAN") {
-                                               katex.render(texText.data, mathElements[i], {
-                                                displayMode: mathElements[i].classList.contains('display'),
-                                                throwOnError: false,
-                                                macros: macros,
-                                                fleqn: false
-                                               });
-                                            }}});
-                                            </script>
-                                            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css" />
-                               
+                        <link rel="stylesheet" href="./css/custom.css" />
+                      <link rel="stylesheet" href="./css/asciinema-player.css" />
+                                          <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.js"></script>
+                                          <script>document.addEventListener("DOMContentLoaded", function () {
+                                           var mathElements = document.getElementsByClassName("math");
+                                           var macros = [];
+                                           for (var i = 0; i < mathElements.length; i++) {
+                                            var texText = mathElements[i].firstChild;
+                                            if (mathElements[i].tagName == "SPAN") {
+                                             katex.render(texText.data, mathElements[i], {
+                                              displayMode: mathElements[i].classList.contains('display'),
+                                              throwOnError: false,
+                                              macros: macros,
+                                              fleqn: false
+                                             });
+                                          }}});
+                                          </script>
+                                          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css" />
+                                          <script src="./fmtinstall.js"></script>
+                 
     </head>
 
     <body oncopy="return false" oncut="return false" onpaste="return false">
@@ -158,7 +161,7 @@
 <p>[La pagina con la spiegazione originale degli esercizi si trova qui: <a href="http://labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/lezione7_1819.html">labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/lezione7_1819.html</a>.]</p>
 <p>In questa settima lezione affronteremo il problema della ricerca di zeri di una funzione. Per fare questo realizzeremo due classi astratte per rappresentare rispettivamente una generica funzione di una variabile, ed un metodo generico per la ricerca di zeri.</p>
 <h1 id="esercizio-7.0">Esercizio 7.0 - Metodi virtuali</h1>
-<p>Considerare le classi <code>Particella</code> e la sue derivata <code>Elettrone</code> costruite nelle lezioni 4 e 5.</p>
+<p>Considerare le classi <code>Particella</code> e la sue derivata <code>Elettrone</code> costruite nelle <a href="./carminati-esercizi-05.html">lezioni 4 e 5</a>.</p>
 <p>Implementare ed eseguite il seguente programma:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  Particella <span class="op">*</span>a<span class="op">{</span><span class="kw">new</span> Particella<span class="op">{</span><span class="fl">1.</span><span class="op">,</span> <span class="fl">2.</span><span class="op">}};</span></span>
@@ -184,7 +187,7 @@
 <p>Ricompilando e rigirando il programma si dovrebbe adesso vedere che per ciascun oggetto viene invocato il metodo corrispondente alla sua vera classe.</p>
 <h2 id="parola-chiave-virtual">Parola chiave virtual</h2>
 <p>La parola chiave <code>virtual</code> informa il compilatore che il metodo indicato potrà venire sovrascritto dalle classi figlie. Se essa viene fornita, durante l’esecuzione del programma, al momento di chiamare il metodo a partire da un puntatore alla classe madre, il programma valuterà se l’oggetto indirizzato è del tipo classe madre o una delle figlie. In quest’ultimo caso, invocherà il metodo appropriato della classe figlia reale.</p>
-<p>Nelle classi figlie, se si ridefinisce un metodo che la classe madre aveva dichiarato <code>virtual</code>, occorre specificare <code>override</code> (=“sovrascrivi”).</p>
+<p>Nelle classi figlie, se si ridefinisce un metodo che la classe madre aveva dichiarato <code>virtual</code>, occorre specificare <code>override</code> (=“sovrascrivi”). Questo è spiegato con maggiore dettaglio nelle <a href="./tomasi-lezione-06.html#virtual-methods">slide</a>.</p>
 <p>Un metodo virtuale può anche essere posto a 0 (vedi prossimo esercizio), in tal caso è obbligatorio per le classi figlie implementarlo.</p>
 <h1 id="esercizio-7.1">Esercizio 7.1 - Classe astratta FunzioneBase</h1>
 <p>In questo e nei prossimi esercizi avremo a che fare con diverse funzioni <span class="math inline">y = f(x)</span> di una sola variabile, magari dipendenti da parametri, e di effettuare delle operazioni generiche su queste funzioni (come trovarne gli zeri, o farne l’integrale).</p>
@@ -252,8 +255,11 @@ f(x) = 3x^2 + 5x - 2.
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co">// {0} → valore di `zero`, {1} → valore di `cifre_significative`</span></span>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>fmt<span class="op">::</span>print<span class="op">(</span><span class="st">&quot;x0 = </span><span class="sc">{0:{1}f}</span><span class="st">&quot;</span><span class="op">,</span> zero<span class="op">,</span> cifre_significative<span class="op">);</span></span></code></pre></div>
-<p>oppure, se usate <code>cout</code> e <code>&lt;iomanip&gt;</code>:</p>
+<p>se usate la libreria <code>fmtlib.h</code>, oppure, se usate <code>cout</code> e <code>&lt;iomanip&gt;</code>:</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>cout <span class="op">&lt;&lt;</span> <span class="st">&quot;x0 = &quot;</span> <span class="op">&lt;&lt;</span> fixed <span class="op">&lt;&lt;</span> setprecision<span class="op">(</span>cifre_significative<span class="op">)</span> <span class="op">&lt;&lt;</span> zero <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span></code></pre></div>
+<p>Potete installare la libreria <code>fmtlib</code> usando lo script <a href="./install_fmt_library.sh"><code>install_fmt_library.sh</code></a>: scaricatelo nella directory dell’esercizio ed eseguitelo, oppure eseguite questo comando:</p>
+<p><input type="text" value="curl https://ziotom78.github.io/tnds-tomasi-notebooks/install_fmt_library.sh | sh" id="installFmtCommand" readonly="1" size="60"><button onclick='copyFmtInstallationScript("installFmtCommand")'>Copia</button></p>
+<p>In alternativa, scaricate questo <a href="./fmtlib.zip">file zip</a> nella directory dell’esercizio e decomprimetelo, poi aggiungete il file <code>format.cc</code> nella riga in cui compilate l’eseguibile:</p>
 <h2 id="la-funzione-segno">La funzione segno</h2>
 <p>La funzione <code>sign(x)</code> non è codificata nelle cstdlib, poiché l’informazione sul segno è già contenuta nella variabile di tipo <code>int</code>, <code>float</code>, <code>double</code>. [Nel C++11 è però disponibile la funzione <code>std::copysign</code>, definita in <code>&lt;cmath&gt;</code>, che copia il segno di una variabile <code>double</code> in un valore. Si può quindi usare questa definizione:]</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> sign<span class="op">(</span><span class="dt">double</span> x<span class="op">)</span> <span class="op">{</span></span>
@@ -317,6 +323,7 @@ f(x) = 3x^2 + 5x - 2.
 <span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="kw">override</span> <span class="dt">double</span> CercaZeri<span class="op">(</span><span class="dt">double</span> xmin<span class="op">,</span> <span class="dt">double</span> xmax<span class="op">,</span> <span class="at">const</span> FunzioneBase <span class="op">*</span> f<span class="op">);</span></span>
 <span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code></pre></div></li>
 </ol>
+<p>Per segnalare condizioni di errore potete usare i suggerimenti spiegati nelle <a href="./tomasi-lezione-06.html#use-of-nan">slide di approfondimento</a>.</p>
 <h1 id="esercizio-7.3">Esercizio 7.3 - Equazioni non risolubili analiticamente (da consegnare)</h1>
 <p>In problemi di meccanica quantistica che verranno studiati nel prossimo anno, ci si può imbattere in equazioni del tipo: <span class="math display">
 x = \tan x.

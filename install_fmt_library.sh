@@ -21,7 +21,17 @@ download_file() {
     fi
 
     printf "Downloading file '%s' (version %s)\n" "$filename" "$FMT_VERSION"
-    curl -s "https://raw.githubusercontent.com/fmtlib/fmt/${FMT_VERSION}/$filename" > "$dest"
+
+    url="https://raw.githubusercontent.com/fmtlib/fmt/${FMT_VERSION}/$filename"
+    
+    if which curl >/dev/null 2>/dev/null; then
+        curl -s "$url" > "$dest"
+    elif which wget >/dev/null 2>/dev/null; then
+        wget --quiet --output-document "$dest" "$url"
+    else
+        echo "Neither curl nor wget seem to be installed, aborting..."
+        exit 1
+    fi
 }
 
 echo "Going to download fmt library version ${FMT_VERSION} in current directory"

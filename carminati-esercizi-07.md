@@ -1,10 +1,25 @@
 ---
+title: "Laboratorio di TNDS -- Lezione 4"
+author: "Maurizio Tomasi"
+date: "Martedì 26 Ottobre 2021"
+theme: white
+progress: true
+slideNumber: true
+background-image: ./media/background.png
+width: 1440
+height: 810
+css:
+- ./css/custom.css
+- ./css/asciinema-player.css
+...
+---
 title: "Lezione 6: Ricerca di zeri"
 author:
 - "Leonardo Carminati"
 - "Maurizio Tomasi"
 date: "A.A. 2021−2022"
 lang: it-IT
+header-includes: <script src="./fmtinstall.js"></script>
 ...
 
 [La pagina con la spiegazione originale degli esercizi si trova qui: [labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/lezione7_1819.html](http://labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/lezione7_1819.html).]
@@ -13,7 +28,7 @@ In questa settima lezione affronteremo il problema della ricerca di zeri di una 
 
 # Esercizio 7.0 - Metodi virtuali {#esercizio-7.0}
 
-Considerare le classi `Particella` e la sue derivata `Elettrone` costruite nelle lezioni 4 e 5.
+Considerare le classi `Particella` e la sue derivata `Elettrone` costruite nelle [lezioni 4 e 5](./carminati-esercizi-05.html).
 
 Implementare ed eseguite il seguente programma:
 
@@ -53,7 +68,7 @@ Ricompilando e rigirando il programma si dovrebbe adesso vedere che per ciascun 
 
 La parola chiave `virtual` informa il compilatore che il metodo indicato potrà venire sovrascritto dalle classi figlie. Se essa viene fornita, durante l'esecuzione del programma, al momento di chiamare il metodo a partire da un puntatore alla classe madre, il programma valuterà se l'oggetto indirizzato è del tipo classe madre o una delle figlie. In quest'ultimo caso, invocherà il metodo appropriato della classe figlia reale.
 
-Nelle classi figlie, se si ridefinisce un metodo che la classe madre aveva dichiarato `virtual`, occorre specificare `override` (=“sovrascrivi”).
+Nelle classi figlie, se si ridefinisce un metodo che la classe madre aveva dichiarato `virtual`, occorre specificare `override` (=“sovrascrivi”). Questo è spiegato con maggiore dettaglio nelle [slide](./tomasi-lezione-06.html#virtual-methods).
 
 Un metodo virtuale può anche essere posto a 0 (vedi prossimo esercizio), in tal caso è obbligatorio per le classi figlie implementarlo.
 
@@ -169,11 +184,17 @@ Per cui per impostare il numero di cifre significative nella scrittura a video i
 fmt::print("x0 = {0:{1}f}", zero, cifre_significative);
 ```
 
-oppure, se usate `cout` e `<iomanip>`:
+se usate la libreria `fmtlib.h`, oppure, se usate `cout` e `<iomanip>`:
 
 ```c++
 cout << "x0 = " << fixed << setprecision(cifre_significative) << zero << endl;
 ```
+
+Potete installare la libreria `fmtlib` usando lo script [`install_fmt_library.sh`](./install_fmt_library.sh): scaricatelo nella directory dell'esercizio ed eseguitelo, oppure eseguite questo comando:
+
+<input type="text" value="curl https://ziotom78.github.io/tnds-tomasi-notebooks/install_fmt_library.sh | sh" id="installFmtCommand" readonly="1" size="60"><button onclick='copyFmtInstallationScript("installFmtCommand")'>Copia</button> 
+
+In alternativa, scaricate questo [file zip](./fmtlib.zip) nella directory dell'esercizio e decomprimetelo, poi aggiungete il file `format.cc` nella riga in cui compilate l'eseguibile:
 
 
 ## La funzione segno
@@ -265,6 +286,8 @@ if(sign_a * sign_c < 0) {
       override double CercaZeri(double xmin, double xmax, const FunzioneBase * f);
     };
     ```
+
+Per segnalare condizioni di errore potete usare i suggerimenti spiegati nelle [slide di approfondimento](./tomasi-lezione-06.html#use-of-nan).
 
 
 # Esercizio 7.3 - Equazioni non risolubili analiticamente (da consegnare) {#esercizio-7.3}

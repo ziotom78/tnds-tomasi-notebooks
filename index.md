@@ -3,7 +3,10 @@ title: Lezioni del corso di TNDS
 author: Maurizio Tomasi
 date: A.A. 2021−2022
 lang: it-IT
+header-includes: <script src="./fmtinstall.js"></script>
 ...
+
+# Esercizi e delle spiegazioni
 
 <center>
 | Data            | Esercizi                                                            | Spiegazione                         |
@@ -14,3 +17,23 @@ lang: it-IT
 | 26 Ottobre 2021 | [Classi ed ereditarietà](carminati-esercizi-05.html)                | [Lezione 4](tomasi-lezione-04.html) |
 | 2 Novembre 2021 | Idem                                                                | [Lezione 5](tomasi-lezione-05.html) |
 </center>
+
+# Suggerimenti vari
+
+## Uso della libreria `fmt`
+
+Siete invitati ad impratichirvi con la libreria `fmt`, che potete installare usando lo script [`install_fmt_library.sh`](./install_fmt_library.sh): scaricatelo nella directory dell'esercizio ed eseguitelo, oppure eseguite direttamente questo comando:
+
+```
+curl https://ziotom78.github.io/tnds-tomasi-notebooks/install_fmt_library.sh | sh
+```
+
+In alternativa, scaricate questo [file zip](./fmtlib.zip) nella directory dell'esercizio e decomprimetelo, poi aggiungete il file `format.cc` nella riga in cui compilate l'eseguibile. La libreria occupa molto poco spazio, quindi potete copiarla in ogni cartella in cui implementate un esercizio.
+
+## Gplot++
+
+Se avete difficoltà ad usare ROOT, potete interfacciare il vostro codice a [Gnuplot](http://www.gnuplot.info/) mediante la libreria [gplot++](https://github.com/ziotom78/gplotpp): è sufficiente scaricare il file [`gplot++.h`](https://raw.githubusercontent.com/ziotom78/gplotpp/master/gplot%2B%2B.h), oppure eseguire questo comando:
+
+```
+curl 'https://raw.githubusercontent.com/ziotom78/gplotpp/master/gplot%2B%2B.h' > gplot++.h
+```

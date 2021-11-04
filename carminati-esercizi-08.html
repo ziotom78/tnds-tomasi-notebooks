@@ -107,7 +107,8 @@
                                             }}});
                                             </script>
                                             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css" />
-                               
+                                          <script src="./fmtinstall.js"></script>
+                 
     </head>
 
     <body oncopy="return false" oncut="return false" onpaste="return false">
@@ -208,7 +209,10 @@
 <span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 <p>dove gli estremi di integrazione vengono controllati, messi in ordine e viene poi implementato il metodo del mid-point secondo la formula appropriata.</p>
 <p><strong>Caccia all’errore</strong>: l’implementazione contiene un errore. Per metterlo in evidenza, provate ad integrare <span class="math inline">f(x) = \sin x</span> tra <span class="math inline">\pi / 2</span> e <span class="math inline">\pi</span>: vedrete che la convergenza non è <span class="math inline">O(h^2)</span>, ma solo <span class="math inline">O(h)</span>. Se applicate correttamente l’algoritmo, dovete riscontrare il comportamento atteso.</p>
-<p>Un esempio di codice di test per la classe integratore può quindi essere il seguente:</p>
+<p>Viene ora fornito un codice per verificare il funzionamento di quanto implementato finora, che usa la libreria <code>fmtlib</code>. Come al solito, potete installarla usando lo script <a href="./install_fmt_library.sh"><code>install_fmt_library.sh</code></a>: scaricatelo nella directory dell’esercizio ed eseguitelo, oppure eseguite direttamente questo comando:</p>
+<p><input type="text" value="curl https://ziotom78.github.io/tnds-tomasi-notebooks/install_fmt_library.sh | sh" id="installFmtCommand" readonly="1" size="60"><button onclick='copyFmtInstallationScript("installFmtCommand")'>Copia</button></p>
+<p>In alternativa, scaricate questo <a href="./fmtlib.zip">file zip</a> nella directory dell’esercizio e decomprimetelo, poi aggiungete il file <code>format.cc</code> nella riga in cui compilate l’eseguibile.</p>
+<p>Ecco il codice di esempio:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;cmath&gt;</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;iomanip&gt;</span></span>

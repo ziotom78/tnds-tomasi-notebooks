@@ -5,6 +5,7 @@ author:
 - "Maurizio Tomasi"
 date: "A.A. 2021−2022"
 lang: it-IT
+header-includes: <script src="./fmtinstall.js"></script>
 ...
 
 [La pagina con la spiegazione originale dell'esercizio si trova qui: [labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/lezione11_1819.html](http://labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/lezione11_1819.html)]

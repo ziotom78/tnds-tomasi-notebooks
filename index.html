@@ -149,6 +149,7 @@
   <!--[if lt IE 9]>
     <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
   <![endif]-->
+  <script src="./fmtinstall.js"></script>
 </head>
 <body>
 <header id="title-block-header">
@@ -156,6 +157,7 @@
 <p class="author">Maurizio Tomasi</p>
 <p class="date">A.A. 2021−2022</p>
 </header>
+<h1 id="esercizi-e-delle-spiegazioni">Esercizi e delle spiegazioni</h1>
 <center>
 <table>
 <thead>
@@ -194,5 +196,13 @@
 </tbody>
 </table>
 </center>
+<h1 id="suggerimenti-vari">Suggerimenti vari</h1>
+<h2 id="uso-della-libreria-fmt">Uso della libreria <code>fmt</code></h2>
+<p>Siete invitati ad impratichirvi con la libreria <code>fmt</code>, che potete installare usando lo script <a href="./install_fmt_library.sh"><code>install_fmt_library.sh</code></a>: scaricatelo nella directory dell’esercizio ed eseguitelo, oppure eseguite direttamente questo comando:</p>
+<pre><code>curl https://ziotom78.github.io/tnds-tomasi-notebooks/install_fmt_library.sh | sh</code></pre>
+<p>In alternativa, scaricate questo <a href="./fmtlib.zip">file zip</a> nella directory dell’esercizio e decomprimetelo, poi aggiungete il file <code>format.cc</code> nella riga in cui compilate l’eseguibile. La libreria occupa molto poco spazio, quindi potete copiarla in ogni cartella in cui implementate un esercizio.</p>
+<h2 id="gplot">Gplot++</h2>
+<p>Se avete difficoltà ad usare ROOT, potete interfacciare il vostro codice a <a href="http://www.gnuplot.info/">Gnuplot</a> mediante la libreria <a href="https://github.com/ziotom78/gplotpp">gplot++</a>: è sufficiente scaricare il file <a href="https://raw.githubusercontent.com/ziotom78/gplotpp/master/gplot%2B%2B.h"><code>gplot++.h</code></a>, oppure eseguire questo comando:</p>
+<pre><code>curl &#39;https://raw.githubusercontent.com/ziotom78/gplotpp/master/gplot%2B%2B.h&#39; &gt; gplot++.h</code></pre>
 </body>
 </html>

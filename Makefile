@@ -3,6 +3,7 @@ PANDOC_IMAGINE := $(HOME)/bin/pandoc_imagine.py
 .phony: all http
 
 all: \
+	tomasi-lezione-06.html \
 	tomasi-lezione-05.html \
 	tomasi-lezione-04.html \
 	tomasi-lezione-03.html \

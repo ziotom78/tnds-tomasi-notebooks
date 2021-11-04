@@ -5,6 +5,7 @@ author:
 - "Maurizio Tomasi"
 date: "A.A. 2021−2022"
 lang: it-IT
+header-includes: <script src="./fmtinstall.js"></script>
 ...
 
 [La pagina con la spiegazione originale degli esercizi si trova qui: [labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/lezione5_1819_nuova.html](http://labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/lezione5_1819_nuova.html).]
@@ -118,7 +119,19 @@ Proviamo ad utilizzare l'esempio della classe `Posizione` per riflettere sul con
 
 (Scarica un esempio [qui](./codici/esercizio5.0.cpp)).
 
-Questo programma utilizza la nuova classe appena creata: richiede di fornire come argomenti le tre coordinate cartesiane e poi stampa le terne di coordinate cartesiane, sferiche e cilindriche.
+Questo programma utilizza la nuova classe appena creata: richiede di fornire come argomenti le tre coordinate cartesiane e poi stampa le terne di coordinate cartesiane, sferiche e cilindriche. Il programma è pensato per usare la libreria fmt, che potete installare usando lo script [`install_fmt_library.sh`](./install_fmt_library.sh): scaricatelo nella directory dell'esercizio ed eseguitelo, oppure eseguite questo comando:
+
+<input type="text" value="curl https://ziotom78.github.io/tnds-tomasi-notebooks/install_fmt_library.sh | sh" id="installFmtCommand" readonly="1" size="60"><button onclick='copyFmtInstallationScript("installFmtCommand")'>Copia</button> 
+
+In alternativa, scaricate questo [file zip](./fmtlib.zip) nella directory dell'esercizio e decomprimetelo, poi aggiungete il file `format.cc` nella riga in cui compilate l'eseguibile:
+
+```make
+esercizio-5.0: esercizio5.0.o
+    #                        ~~~~~~~~~ Aggiungere questo!
+    g++ -o $@ esercizio5.0.o format.cc $(CXXFLAGS)
+```
+
+Questo è il codice sorgente del programma:
 
 ```c++
 #include "posizione.h"
@@ -469,7 +482,11 @@ int main(int argc, const char * argv[]) {
 
 Potete fare riferimento a [questa spiegazione](http://labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/lezioneROOT_1819.html) per produrre un grafico dell'andamento del campo usando la classe `TGraph` di ROOT.
 
-Se invece di ROOT preferite usare [gplot++](https://github.com/ziotom78/gplotpp) per produrre un grafico di $E = E(r)$, dovete salvare le ascisse e le ordinate dei punti del grafico in due `std::vector`, e poi chiamare il metodo `Gnuplot::plot(x, y)`. Di seguito viene riportato un esempio:
+Se invece di ROOT preferite usare [gplot++](https://github.com/ziotom78/gplotpp) per produrre un grafico di $E = E(r)$, dovete salvare le ascisse e le ordinate dei punti del grafico in due `std::vector`, e poi chiamare il metodo `Gnuplot::plot(x, y)`. Per installare il file `gplot++.h` basta eseguire da linea di comando questo script:
+
+<input type="text" value="curl 'https://raw.githubusercontent.com/ziotom78/gplotpp/master/gplot%2B%2B.h' > gplot++.h" id="installGplotpp" readonly="1" size="60"><button onclick='copyFmtInstallationScript("installGplotpp")'>Copia</button> 
+
+Di seguito viene riportato un esempio:
 
 ```c++
 #include "fmtlib.h"
