@@ -93,7 +93,7 @@ class OscillatoreArmonico : public FunzioneVettorialeBase {
 public:
   OscillatoreArmonico(double omega0) : m_omega0(omega0) { }
 
-  override vector<double> Eval(double t, const vector<double> & x) const;
+  vector<double> Eval(double t, const vector<double> & x) const override;
 
 private:
   double m_omega;
@@ -107,8 +107,8 @@ public:
 
 class Eulero : public EquazioneDifferenzialeBase {
 public:
-  override vector<double> Passo(double t, const vector<double> & x,
-                                double h, FunzioneVettorialeBase *f) const;
+  vector<double> Passo(double t, const vector<double> & x,
+                       double h, FunzioneVettorialeBase *f) const override;
 };
 ```
 

@@ -181,8 +181,8 @@
 <div class="sourceCode" id="cb2"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Nella classe Particella:</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="kw">virtual</span> <span class="dt">void</span> Print<span class="op">()</span> <span class="at">const</span><span class="op">;</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co">// Nella classe Elettrone</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="kw">override</span> <span class="dt">void</span> Print<span class="op">()</span> <span class="at">const</span><span class="op">;</span></span></code></pre></div>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co">// Nella classe Elettrone; notare che &quot;override&quot; va alla fine!</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> Print<span class="op">()</span> <span class="at">const</span> <span class="kw">override</span><span class="op">;</span></span></code></pre></div>
 <p>[Il testo originale suggerisce: aggiungere ora negli header file delle classi il qualificatore <code>virtual</code> davanti alla dichiarazione del metodo <code>Print()</code>. Questo compila, ma non è più buona pratica col C++11].</p>
 <p>Ricompilando e rigirando il programma si dovrebbe adesso vedere che per ciascun oggetto viene invocato il metodo corrispondente alla sua vera classe.</p>
 <h2 id="parola-chiave-virtual">Parola chiave virtual</h2>
@@ -213,7 +213,7 @@
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  Parabola<span class="op">(</span><span class="dt">double</span> a<span class="op">,</span> <span class="dt">double</span> b<span class="op">,</span> <span class="dt">double</span> c<span class="op">);</span></span>
 <span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="op">~</span>Parabola<span class="op">();</span></span>
 <span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  <span class="kw">override</span> <span class="dt">double</span> Eval<span class="op">(</span><span class="dt">double</span> x<span class="op">)</span> <span class="at">const</span> <span class="op">{</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> Eval<span class="op">(</span><span class="dt">double</span> x<span class="op">)</span> <span class="at">const</span> <span class="kw">override</span> <span class="op">{</span></span>
 <span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>      <span class="cf">return</span> <span class="va">m_a</span><span class="op">*</span>x<span class="op">*</span>x<span class="op">+</span><span class="va">m_b</span><span class="op">*</span>x<span class="op">+</span><span class="va">m_c</span><span class="op">;</span></span>
 <span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
 <span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  </span>
@@ -320,7 +320,7 @@ f(x) = 3x^2 + 5x - 2.
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span><span class="op">:</span></span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  Bisezione<span class="op">();</span></span>
 <span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="op">~</span>Bisezione<span class="op">();</span></span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="kw">override</span> <span class="dt">double</span> CercaZeri<span class="op">(</span><span class="dt">double</span> xmin<span class="op">,</span> <span class="dt">double</span> xmax<span class="op">,</span> <span class="at">const</span> FunzioneBase <span class="op">*</span> f<span class="op">);</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> CercaZeri<span class="op">(</span><span class="dt">double</span> xmin<span class="op">,</span> <span class="dt">double</span> xmax<span class="op">,</span> <span class="at">const</span> FunzioneBase <span class="op">*</span> f<span class="op">)</span> <span class="kw">override</span><span class="op">;</span></span>
 <span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code></pre></div></li>
 </ol>
 <p>Per segnalare condizioni di errore potete usare i suggerimenti spiegati nelle <a href="./tomasi-lezione-06.html#use-of-nan">slide di approfondimento</a>.</p>

@@ -56,8 +56,8 @@ Aggiungete ora negli *header file* della classe `Particella` il qualificatore `v
 // Nella classe Particella:
 virtual void Print() const;
 
-// Nella classe Elettrone
-override void Print() const;
+// Nella classe Elettrone; notare che "override" va alla fine!
+void Print() const override;
 ```
 
 [Il testo originale suggerisce: aggiungere ora negli header file delle classi il qualificatore `virtual` davanti alla dichiarazione del metodo `Print()`. Questo compila, ma non è più buona pratica col C++11].
@@ -111,7 +111,7 @@ public:
   Parabola(double a, double b, double c);
   ~Parabola();
   
-  override double Eval(double x) const {
+  double Eval(double x) const override {
       return m_a*x*x+m_b*x+m_c;
   }
   
@@ -283,7 +283,7 @@ if(sign_a * sign_c < 0) {
     public:
       Bisezione();
       ~Bisezione();
-      override double CercaZeri(double xmin, double xmax, const FunzioneBase * f);
+      double CercaZeri(double xmin, double xmax, const FunzioneBase * f) override;
     };
     ```
 
