@@ -1,20 +1,6 @@
 ---
-title: "Laboratorio di TNDS -- Lezione 4"
-author: "Maurizio Tomasi"
-date: "Martedì 26 Ottobre 2021"
-theme: white
-progress: true
-slideNumber: true
-background-image: ./media/background.png
-width: 1440
-height: 810
-css:
-- ./css/custom.css
-- ./css/asciinema-player.css
-...
----
 title: "Lezione 6: Ricerca di zeri"
-author:
+author: 
 - "Leonardo Carminati"
 - "Maurizio Tomasi"
 date: "A.A. 2021−2022"
@@ -24,7 +10,7 @@ header-includes: <script src="./fmtinstall.js"></script>
 
 [La pagina con la spiegazione originale degli esercizi si trova qui: [labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/lezione7_1819.html](http://labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/lezione7_1819.html).]
 
-In questa settima lezione affronteremo il problema della ricerca di zeri di una funzione. Per fare questo realizzeremo due classi astratte per rappresentare rispettivamente una generica funzione di una variabile, ed un metodo generico per la ricerca di zeri.
+In questa lezione affronteremo il problema della ricerca di zeri di una funzione. Per fare questo realizzeremo due classi astratte per rappresentare rispettivamente una generica funzione $y = f(x)$, ed un metodo generico per la ricerca di zeri.
 
 # Esercizio 7.0 - Metodi virtuali {#esercizio-7.0}
 
@@ -43,8 +29,8 @@ int main() {
   b->Print(); // ???
 
   delete a;
-  delete b;
   delete e;
+  delete b;
 }
 ```
 
@@ -60,7 +46,7 @@ virtual void Print() const;
 void Print() const override;
 ```
 
-[Il testo originale suggerisce: aggiungere ora negli header file delle classi il qualificatore `virtual` davanti alla dichiarazione del metodo `Print()`. Questo compila, ma non è più buona pratica col C++11].
+[Il testo originale suggerisce: aggiungere ora negli header file delle classi il qualificatore `virtual` davanti alla dichiarazione del metodo `Print()`. Questo compila, ma non è più buona pratica col C++11, [come spiegato negli approfondimenti](tomasi-lezione-06.html#override-best-practices)].
 
 Ricompilando e rigirando il programma si dovrebbe adesso vedere che per ciascun oggetto viene invocato il metodo corrispondente alla sua vera classe.
 
@@ -86,6 +72,7 @@ In questo caso è utile definire una classe astratta che definisce le proprietà
     class FunzioneBase {
     public:
         virtual double Eval(double x) const = 0;
+        virtual ~FunzioneBase() {}
     };
     ```
 
@@ -107,12 +94,13 @@ Questa è una possibile dichiarazione per la classe `Parabola`:
 ```c++
 class Parabola : public FunzioneBase {
 public:
-  Parabola();
-  Parabola(double a, double b, double c);
-  ~Parabola();
+  Parabola() : m_a{}, m_b{}, m_c{} {}
+  Parabola(double a, double b, double c) : m_a{a}, m_b{b}, m_c{c} {}
+  ~Parabola() {}
   
   double Eval(double x) const override {
-      return m_a*x*x+m_b*x+m_c;
+      // Horner's method, see https://en.wikipedia.org/wiki/Horner%27s_method
+      return (m_a * x + m_b) * x + m_c;
   }
   
   void SetA(double a) { m_a = a; }
@@ -190,11 +178,13 @@ se usate la libreria `fmtlib.h`, oppure, se usate `cout` e `<iomanip>`:
 cout << "x0 = " << fixed << setprecision(cifre_significative) << zero << endl;
 ```
 
-Potete installare la libreria `fmtlib` usando lo script [`install_fmt_library.sh`](./install_fmt_library.sh): scaricatelo nella directory dell'esercizio ed eseguitelo, oppure eseguite questo comando:
+Potete installare la libreria `fmtlib` eseguendo questo comando:
 
 <input type="text" value="curl https://ziotom78.github.io/tnds-tomasi-notebooks/install_fmt_library.sh | sh" id="installFmtCommand" readonly="1" size="60"><button onclick='copyFmtInstallationScript("installFmtCommand")'>Copia</button> 
 
-In alternativa, scaricate questo [file zip](./fmtlib.zip) nella directory dell'esercizio e decomprimetelo, poi aggiungete il file `format.cc` nella riga in cui compilate l'eseguibile:
+e seguite poi le istruzioni fornite a video, che spiegano come aggiungere `format.cc` nel `Makefile`.
+
+In alternativa, scaricate manualmente lo script [`install_fmt_library.sh`](./install_fmt_library.sh) (click col tasto destro sul link e scegliere «Salva come…»). Lo script funziona solo sotto Linux e Mac; se usate Windows, scaricate questo [file zip](./fmtlib.zip) nella directory dell'esercizio e decomprimetelo, poi aggiungete il file `format.cc` nella riga in cui compilate l'eseguibile.
 
 
 ## La funzione segno
@@ -204,7 +194,7 @@ La funzione `sign(x)` non è codificata nelle cstdlib, poiché l'informazione su
 ```c++
 double sign(double x) {
     // Questa chiamata a copysign ritorna ±1.0 a seconda
-    // del segno di x
+    // del segno di x, oppure zero se x == 0
     return x != 0 ? std::copysign(1.0, x) : 0.0;
 }
 ```
@@ -258,8 +248,8 @@ if(sign_a * sign_c < 0) {
 ## Classe astratta Solutore
 
 #.  La classe astratta Solutore potrebbe avere un metodo virtuale, corrispondente alla chiamate dell'algoritmo che cercherà di determinare gli zeri di una generica `FunzioneBase`, passata come puntatore.
-#.  Inoltre possiamo definire dei metodi per configurare la precisione richiesta: tale precisione può essere definita nel costruttore, tramite un metodo dedicato o direttamente nella chiamata al metodo CercaZeri. Lo stesso discorso vale per il numero massimo di iterazioni.
-#.  Secondo il principio dell'incapsulamento possiamo anche copiare il puntatore a FunzioneBase in un puntatore interno alla classe m_f;
+#.  Inoltre possiamo definire dei metodi per configurare la precisione richiesta: tale precisione può essere definita nel costruttore, tramite un metodo dedicato o direttamente nella chiamata al metodo `CercaZeri`. Lo stesso discorso vale per il numero massimo di iterazioni.
+#.  Secondo il principio dell'incapsulamento possiamo anche copiare il puntatore a `FunzioneBase` in un puntatore `m_f` interno alla classe;
 #.  Infine, in vista di potenziali sviluppi, possiamo definire dei data membri che contengono lo stato corrente dell'intervallo in cui si sono limitati gli zeri della funzione.
 
     ```c++
@@ -276,7 +266,7 @@ if(sign_a * sign_c < 0) {
     };
     ```
 
-    L'implementazione dell'algoritmo di bisezione dovrà necessariamente avvenire costruendo una classe dedicata Bisezione che erediti da `Solutore` e implementi una versione concreta del metodo `CercaZeri`. 
+    L'implementazione dell'algoritmo di bisezione dovrà necessariamente avvenire costruendo una classe dedicata `Bisezione` che erediti da `Solutore` e implementi una versione concreta del metodo `CercaZeri`. 
 
     ```c++
     class Bisezione : public Solutore {
@@ -303,7 +293,7 @@ Suggerimento: riscrivere l'equazione come $\sin x - x \cos x = 0$
 
 # Esercizio 7.4 - Miglioramenti di Solutore {#esercizio-7.4}
 
-Aggiungere a Solutore due nuovi metodi virtuali:
+Aggiungere a `Solutore` due nuovi metodi virtuali puri:
 
 ```c++
 virtual bool Trovato() = 0;

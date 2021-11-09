@@ -114,7 +114,7 @@
 <section id="link-alle-risorse-online" class="slide level1">
 <h1>Link alle risorse online</h1>
 <ul>
-<li><p>La spiegazione dettagliata degli esercizi si trova qui: <a href="carminati-esercizi-06.html">carminati-esercizi-06.html</a>.</p></li>
+<li><p>La spiegazione dettagliata degli esercizi si trova qui: <a href="carminati-esercizi-07.html">carminati-esercizi-07.html</a>.</p></li>
 <li><p>Come al solito, queste slides, che forniscono suggerimenti addizionali rispetto alla lezione di teoria, sono disponibili all’indirizzo <a href="https://ziotom78.github.io/tnds-tomasi-notebooks/">ziotom78.github.io/tnds-tomasi-notebooks</a>.</p></li>
 </ul>
 </section>
@@ -187,13 +187,127 @@ $</code></pre></li>
 <li><p>Questo meccanismo si chiama <em>dynamic dispatch</em> (indirizzamento dinamico). Nel caso del C++ è un <em>dynamic</em> <strong>single</strong> <em>dispatch</em>, perché la chiamata viene decisa solo in funzione del tipo dell’oggetto puntato da <code>animal</code>. (Altri linguaggi come Julia usano tutti i tipi dei parametri della funzione, e sono quindi più versatili).</p></li>
 </ul>
 </section>
-<section id="avvertenze" class="slide level1">
-<h1>Avvertenze</h1>
-<p>L’uso di metodi <code>virtual</code> ha due difetti:</p>
+<section id="override-best-practices" class="slide level1">
+<h1><code>virtual</code> e <code>override</code></h1>
+<p>La parola <code>virtual</code> è obbligatoria solo all’interno della classe base e facoltativa nei metodi derivati:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">struct</span> Animal <span class="op">{</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">virtual</span> <span class="dt">void</span> greet<span class="op">()</span> <span class="at">const</span> <span class="op">{</span> <span class="bu">std::</span>cout<span class="op"> &lt;&lt;</span> <span class="st">&quot;?</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">;</span> <span class="op">}</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="kw">struct</span> Dog <span class="op">:</span> <span class="kw">public</span> Animal <span class="op">{</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Posso ripetere &quot;virtual&quot; qui, anche se è superfluo…</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  <span class="kw">virtual</span> <span class="dt">void</span> greet<span class="op">()</span> <span class="at">const</span> <span class="kw">override</span> <span class="op">{</span> <span class="bu">std::</span>cout<span class="op"> &lt;&lt;</span> <span class="st">&quot;Woof!</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">;</span> <span class="op">}</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="kw">struct</span> Cat <span class="op">:</span> <span class="kw">public</span> Animal <span class="op">{</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>  <span class="co">// …ma di solito si evita di ripetere &quot;virtual&quot;, perché c&#39;è già &quot;override&quot;</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>  <span class="dt">void</span> greet<span class="op">()</span> <span class="at">const</span> <span class="kw">override</span> <span class="op">{</span> <span class="bu">std::</span>cout<span class="op"> &lt;&lt;</span> <span class="st">&quot;Meow!</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">;</span> <span class="op">}</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code></pre></div>
+</section>
+<section id="virtual-e-override" class="slide level1">
+<h1><code>virtual</code> e <code>override</code></h1>
+<ul>
+<li><p>Analogamente, anche <code>override</code> può essere tralasciato:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">struct</span> Animal <span class="op">{</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">virtual</span> <span class="dt">void</span> greet<span class="op">()</span> <span class="at">const</span> <span class="op">{</span> <span class="bu">std::</span>cout<span class="op"> &lt;&lt;</span> <span class="st">&quot;?</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">;</span> <span class="op">}</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="kw">struct</span> Dog <span class="op">:</span> <span class="kw">public</span> Animal <span class="op">{</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Ok, compila e funziona come atteso</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  <span class="kw">virtual</span> <span class="dt">void</span> greet<span class="op">()</span> <span class="at">const</span> <span class="op">{</span> <span class="bu">std::</span>cout<span class="op"> &lt;&lt;</span> <span class="st">&quot;Woof!</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">;</span> <span class="op">}</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="kw">struct</span> Cat <span class="op">:</span> <span class="kw">public</span> Animal <span class="op">{</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Anche questo è ok e compila senza errori</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>  <span class="dt">void</span> greet<span class="op">()</span> <span class="at">const</span> <span class="op">{</span> <span class="bu">std::</span>cout<span class="op"> &lt;&lt;</span> <span class="st">&quot;Meow!</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">;</span> <span class="op">}</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code></pre></div></li>
+<li><p>Tralasciare sia <code>virtual</code> che <code>override</code> è però sconsigliato!</p></li>
+</ul>
+</section>
+<section id="virtual-e-override-1" class="slide level1">
+<h1><code>virtual</code> e <code>override</code></h1>
+<ul>
+<li><p>Supponiamo di avere scritto una versione più primitiva del codice, senza indicare <code>greet</code> come <code>const</code>:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">struct</span> Animal <span class="op">{</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">virtual</span> <span class="dt">void</span> greet<span class="op">()</span> <span class="op">{</span> <span class="bu">std::</span>cout<span class="op"> &lt;&lt;</span> <span class="st">&quot;?</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">;</span> <span class="op">}</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="kw">struct</span> Dog <span class="op">:</span> <span class="kw">public</span> Animal <span class="op">{</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Sono pigro, evito di scrivere `virtual` e `override`</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  <span class="dt">void</span> greet<span class="op">()</span> <span class="op">{</span> <span class="bu">std::</span>cout<span class="op"> &lt;&lt;</span> <span class="st">&quot;Woof!</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">;</span> <span class="op">}</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="kw">struct</span> Cat <span class="op">:</span> <span class="kw">public</span> Animal <span class="op">{</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>  <span class="dt">void</span> greet<span class="op">()</span> <span class="op">{</span> <span class="bu">std::</span>cout<span class="op"> &lt;&lt;</span> <span class="st">&quot;Meow!</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">;</span> <span class="op">}</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code></pre></div></li>
+<li><p>Anche questo codice compila e funziona senza problemi, ma…</p></li>
+</ul>
+</section>
+<section id="virtual-e-override-2" class="slide level1">
+<h1><code>virtual</code> e <code>override</code></h1>
+<ul>
+<li><p>Supponiamo ora di modificare il file <code>animal.h</code>:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">struct</span> Animal <span class="op">{</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">virtual</span> <span class="dt">void</span> greet<span class="op">()</span> <span class="at">const</span> <span class="op">{</span> <span class="bu">std::</span>cout<span class="op"> &lt;&lt;</span> <span class="st">&quot;?</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">;</span> <span class="op">}</span>  <span class="co">// Ho aggiunto &quot;const&quot;</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code></pre></div></li>
+<li><p>Il codice compila ancora, ma smette di funzionare:</p>
+<pre class="text"><code>$ ./test cat
+?
+$ ./test dog
+?
+$ ./test bird
+$</code></pre>
+<p>(Notate che <code>cat</code> e <code>dog</code> producono <code>?</code>, mentre <code>bird</code> non produce nulla). Cos’è successo?</p></li>
+</ul>
+</section>
+<section id="virtual-e-override-3" class="slide level1">
+<h1><code>virtual</code> e <code>override</code></h1>
+<div class="sourceCode" id="cb9"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Questo è il &quot;main&quot; del programma</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>Animal <span class="op">*</span>animal<span class="op">{};</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="bu">std::</span>string<span class="op"> </span>name<span class="op">{</span>argc <span class="op">&gt;</span> <span class="dv">1</span> <span class="op">?</span> argv<span class="op">[</span><span class="dv">1</span><span class="op">]</span> <span class="op">:</span> <span class="st">&quot;&quot;</span><span class="op">};</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="op">(</span>name <span class="op">==</span> <span class="st">&quot;cat&quot;</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>  animal <span class="op">=</span> <span class="kw">new</span> Cat<span class="op">();</span>        <span class="co">// Ok, crea un oggetto Cat…</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> <span class="cf">else</span> <span class="cf">if</span> <span class="op">(</span>name <span class="op">==</span> <span class="st">&quot;dog&quot;</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>  animal <span class="op">=</span> <span class="kw">new</span> Dog<span class="op">();</span>        <span class="co">// …o un oggetto Dog, ma…</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="op">(</span>animal<span class="op">)</span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>  animal<span class="op">-&gt;</span>greet<span class="op">();</span>           <span class="co">// …qui invoca sempre Animal::greet(), che stampa &quot;?&quot;</span></span></code></pre></div>
+</section>
+<section id="virtual-e-override-4" class="slide level1">
+<h1><code>virtual</code> e <code>override</code></h1>
+<p>Abbiamo due modi per correggere il problema:</p>
 <ol type="1">
-<li>Rallenta l’esecuzione del codice (in casi patologici fino al 10%), perché rende impossibile al compilatore usare alcune famiglie di ottimizzazioni;</li>
-<li>Nei vecchi compilatori C++ (prima del C++11) <code>override</code> non esisteva, e si usava <code>virtual</code> anche per evidenziare la volontà di sovrascrivere un metodo in una classe derivata. Questo è ancora supportato ma <strong>altamente sconsigliabile</strong>: rende il codice più confuso e permette una serie di errori con <code>const</code> molto comuni.</li>
+<li>Cercare in tutto il codice quali classi derivino da <code>Animal</code> e reimplementino <code>greet</code>, e aggiungere <code>const</code> (semplice in un programma così piccolo, ma difficile in un programma di media complessità!).</li>
+<li>Indicare <strong>sempre</strong> <code>override</code> nei metodi derivati, perché il questo modo il compilatore C++ può segnalare l’errore:</li>
 </ol>
+<pre><code>test.cpp:10:8: error: ‘void Dog::greet()’ marked ‘override’, but does not override
+   10 |   void greet() override { std::cout &lt;&lt; &quot;Woof!\n&quot;; }
+      |        ^~~~~
+test.cpp:15:8: error: ‘void Cat::greet()’ marked ‘override’, but does not override
+   15 |   void greet() override { std::cout &lt;&lt; &quot;Meow!\n&quot;; }
+      |        ^~~~~</code></pre>
+</section>
+<section id="forma-preferita" class="slide level1">
+<h1>Forma preferita</h1>
+<ul>
+<li><p>Nella classe base i metodi virtuali vanno indicati con <code>virtual</code>:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Animal <span class="op">{</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">virtual</span> <span class="dt">void</span> greet<span class="op">()</span> <span class="at">const</span><span class="op">;</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code></pre></div></li>
+<li><p>Nella classe derivata ci sono invece più possibilità:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Prima possibilità: SCONSIGLIATA!</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> greet<span class="op">()</span> <span class="at">const</span><span class="op">;</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co">// Seconda possibilità: SCONSIGLIATA!</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="kw">virtual</span> <span class="dt">void</span> greet<span class="op">()</span> <span class="at">const</span><span class="op">;</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="co">// Terza possibilità: ok (protegge da errori), ma è verbosa</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="kw">virtual</span> <span class="dt">void</span> greet<span class="op">()</span> <span class="at">const</span> <span class="kw">override</span><span class="op">;</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="co">// Quarta possibilità: la migliore! (concisa, protegge da errori)</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> greet<span class="op">()</span> <span class="at">const</span> <span class="kw">override</span><span class="op">;</span></span></code></pre></div></li>
+</ul>
 </section>
 <section id="uso-di-puntatori" class="slide level1">
 <h1>Uso di puntatori</h1>
@@ -202,9 +316,9 @@ $</code></pre></li>
 <h1>Quando usare puntatori</h1>
 <ul>
 <li><p>Nell’<a href="./carminati-esercizi-07.html#esercizio-7.0">Esercizio 7.1</a> di oggi si usano i puntatori nel seguente codice:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>Particella <span class="op">*</span> a<span class="op">{</span><span class="kw">new</span> Particella<span class="op">{</span><span class="fl">1.</span><span class="op">,</span> <span class="fl">2.</span><span class="op">}};</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>Elettrone <span class="op">*</span> b<span class="op">{</span><span class="kw">new</span> Elettrone<span class="op">{}};</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>Particella <span class="op">*</span> c<span class="op">{</span><span class="kw">new</span> Elettrone<span class="op">{}};</span></span></code></pre></div></li>
+<div class="sourceCode" id="cb13"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>Particella <span class="op">*</span> a<span class="op">{</span><span class="kw">new</span> Particella<span class="op">{</span><span class="fl">1.</span><span class="op">,</span> <span class="fl">2.</span><span class="op">}};</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>Elettrone <span class="op">*</span> b<span class="op">{</span><span class="kw">new</span> Elettrone<span class="op">{}};</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>Particella <span class="op">*</span> c<span class="op">{</span><span class="kw">new</span> Elettrone<span class="op">{}};</span></span></code></pre></div></li>
 <li><p>È indispensabile usare puntatori (o reference) quando avviene questo:</p></li>
 </ul>
 <ol type="1">
@@ -216,19 +330,19 @@ $</code></pre></li>
 <h1>Quando usare puntatori</h1>
 <ul>
 <li><p>Usando un puntatore e <code>new</code>, si possono specificare i due tipi <code>Particella</code> ed <code>Elettrone</code> separatamente:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">//   Tipo 1            Tipo 2</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>   Particella <span class="op">*</span> c<span class="op">{</span><span class="kw">new</span> Elettrone<span class="op">{}};</span></span></code></pre></div></li>
+<div class="sourceCode" id="cb14"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co">//   Tipo 1            Tipo 2</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>   Particella <span class="op">*</span> c<span class="op">{</span><span class="kw">new</span> Elettrone<span class="op">{}};</span></span></code></pre></div></li>
 <li><p>Senza puntatore, non ci sarebbe questa possibilità:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>Particella c<span class="op">{};</span>  <span class="co">// Come specificare &quot;Elettrone&quot;?</span></span></code></pre></div></li>
+<div class="sourceCode" id="cb15"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>Particella c<span class="op">{};</span>  <span class="co">// Come specificare &quot;Elettrone&quot;?</span></span></code></pre></div></li>
 </ul>
 </section>
 <section id="quando-usare-i-puntatori" class="slide level1">
 <h1>Quando usare i puntatori</h1>
 <p>Se non ci si trova nella situazione descritta, è meglio evitare di usare i puntatori: il codice è più semplice da leggere, e non c’è possibilità di avere <code>segmentation fault</code> causati dall’accesso a puntatori nulli.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Molto più semplice e sicuro!</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>Particella a<span class="op">{</span><span class="fl">1.</span><span class="op">,</span> <span class="fl">2.</span><span class="op">};</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>Elettrone b<span class="op">{};</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>Elettrone c<span class="op">{};</span></span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Molto più semplice e sicuro!</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>Particella a<span class="op">{</span><span class="fl">1.</span><span class="op">,</span> <span class="fl">2.</span><span class="op">};</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>Elettrone b<span class="op">{};</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>Elettrone c<span class="op">{};</span></span></code></pre></div>
 </section>
 <section id="esercizio-7.2-bisezione" class="slide level1">
 <h1>Esercizio 7.2 (bisezione)</h1>
@@ -244,21 +358,21 @@ x_{1/2} = \frac{-5 \pm \sqrt{25 + 24}}6 = \begin{cases} -2,\\ \frac13.
 </section>
 <section id="verifica-dellalgoritmo-1" class="slide level1">
 <h1>Verifica dell’algoritmo</h1>
-<div class="sourceCode" id="cb8"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Potreste addirittura passare un puntatore a `Solutore * s`, e invocare dal main</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co">//     test_zeroes(new Bisezione{});</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co">//     test_zeroes(new Secante{});</span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co">//     test_zeroes(new Newton{});</span></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> test_zeroes<span class="op">()</span> <span class="op">{</span></span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  Bisezione s<span class="op">{};</span></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  Parabola f<span class="op">{</span><span class="dv">3</span><span class="op">,</span> <span class="dv">5</span><span class="op">,</span> <span class="op">-</span><span class="dv">2</span><span class="op">};</span></span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>  s<span class="op">.</span>SetPrecisione<span class="op">(</span><span class="fl">1e-8</span><span class="op">);</span></span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>  <span class="ot">assert</span><span class="op">(</span>are_close<span class="op">(</span>s<span class="op">.</span>CercaZeri<span class="op">(-</span><span class="fl">3.0</span><span class="op">,</span> <span class="op">-</span><span class="fl">1.0</span><span class="op">,</span> f<span class="op">),</span> <span class="op">-</span><span class="fl">2.0</span><span class="op">));</span> <span class="co">// Lo zero è in mezzo ad [a, b]</span></span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>  <span class="ot">assert</span><span class="op">(</span>are_close<span class="op">(</span>s<span class="op">.</span>CercaZeri<span class="op">(-</span><span class="fl">2.0</span><span class="op">,</span> <span class="fl">0.0</span><span class="op">,</span> f<span class="op">),</span> <span class="op">-</span><span class="fl">2.0</span><span class="op">));</span>  <span class="co">// Lo zero è nell&#39;estremo a</span></span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>  <span class="ot">assert</span><span class="op">(</span>are_close<span class="op">(</span>s<span class="op">.</span>CercaZeri<span class="op">(-</span><span class="fl">4.0</span><span class="op">,</span> <span class="op">-</span><span class="fl">2.0</span><span class="op">,</span> f<span class="op">),</span> <span class="op">-</span><span class="fl">2.0</span><span class="op">));</span> <span class="co">// Lo zero è nell&#39;estremo b</span></span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>  <span class="ot">assert</span><span class="op">(</span>are_close<span class="op">(</span>s<span class="op">.</span>CercaZeri<span class="op">(</span><span class="fl">0.0</span><span class="op">,</span> <span class="fl">1.0</span><span class="op">,</span> f<span class="op">),</span> <span class="fl">1.0</span> <span class="op">/</span> <span class="dv">3</span><span class="op">));</span></span>
-<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Potreste addirittura passare un puntatore a `Solutore * s`, e invocare dal main</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="co">//     test_zeroes(new Bisezione{});</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="co">//     test_zeroes(new Secante{});</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="co">//     test_zeroes(new Newton{});</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> test_zeroes<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>  Bisezione s<span class="op">{};</span></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>  Parabola f<span class="op">{</span><span class="dv">3</span><span class="op">,</span> <span class="dv">5</span><span class="op">,</span> <span class="op">-</span><span class="dv">2</span><span class="op">};</span> <span class="co">// Gli zeri di questa funzione sono noti, e sono x₁ = −2, x₂ = 1/3</span></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>  s<span class="op">.</span>SetPrecisione<span class="op">(</span><span class="fl">1e-8</span><span class="op">);</span></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>  <span class="ot">assert</span><span class="op">(</span>are_close<span class="op">(</span>s<span class="op">.</span>CercaZeri<span class="op">(-</span><span class="fl">3.0</span><span class="op">,</span> <span class="op">-</span><span class="fl">1.0</span><span class="op">,</span> f<span class="op">),</span> <span class="op">-</span><span class="fl">2.0</span><span class="op">));</span> <span class="co">// Lo zero è in mezzo ad [a, b]</span></span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>  <span class="ot">assert</span><span class="op">(</span>are_close<span class="op">(</span>s<span class="op">.</span>CercaZeri<span class="op">(-</span><span class="fl">2.0</span><span class="op">,</span> <span class="fl">0.0</span><span class="op">,</span> f<span class="op">),</span> <span class="op">-</span><span class="fl">2.0</span><span class="op">));</span>  <span class="co">// Lo zero è nell&#39;estremo a</span></span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>  <span class="ot">assert</span><span class="op">(</span>are_close<span class="op">(</span>s<span class="op">.</span>CercaZeri<span class="op">(-</span><span class="fl">4.0</span><span class="op">,</span> <span class="op">-</span><span class="fl">2.0</span><span class="op">,</span> f<span class="op">),</span> <span class="op">-</span><span class="fl">2.0</span><span class="op">));</span> <span class="co">// Lo zero è nell&#39;estremo b</span></span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>  <span class="ot">assert</span><span class="op">(</span>are_close<span class="op">(</span>s<span class="op">.</span>CercaZeri<span class="op">(</span><span class="fl">0.0</span><span class="op">,</span> <span class="fl">1.0</span><span class="op">,</span> f<span class="op">),</span> <span class="fl">1.0</span> <span class="op">/</span> <span class="dv">3</span><span class="op">));</span></span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 </section>
 <section id="determinazione-del-segno" class="slide level1">
 <h1>Determinazione del segno</h1>
@@ -268,9 +382,9 @@ x_{1/2} = \frac{-5 \pm \sqrt{25 + 24}}6 = \begin{cases} -2,\\ \frac13.
 <ul>
 <li><p>Nell’algoritmo di bisezione occorre verificare quando <span class="math inline">f(a)</span> e <span class="math inline">f(b)</span> sono di segno concorde.</p></li>
 <li><p>La scrittura</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>f<span class="op">(</span>a<span class="op">)</span> <span class="op">*</span> f<span class="op">(</span>b<span class="op">)</span> <span class="op">&lt;</span> <span class="dv">0</span></span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>f<span class="op">(</span>a<span class="op">)</span> <span class="op">*</span> f<span class="op">(</span>b<span class="op">)</span> <span class="op">&lt;</span> <span class="dv">0</span></span></code></pre></div>
 <p>non è consigliabile, perché se <code>f(a)</code> o <code>f(b)</code> sono molto piccoli, il risultato potrebbe essere nullo. Meglio usare un’espressione come</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>sign<span class="op">(</span>f<span class="op">(</span>a<span class="op">))</span> <span class="op">*</span> sign<span class="op">(</span>f<span class="op">(</span>b<span class="op">))</span> <span class="op">&lt;</span> <span class="dv">0</span></span></code></pre></div></li>
+<div class="sourceCode" id="cb19"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>sign<span class="op">(</span>f<span class="op">(</span>a<span class="op">))</span> <span class="op">*</span> sign<span class="op">(</span>f<span class="op">(</span>b<span class="op">))</span> <span class="op">&lt;</span> <span class="dv">0</span></span></code></pre></div></li>
 </ul>
 </section>
 <section id="use-of-nan" class="slide level1">
@@ -283,49 +397,50 @@ x_{1/2} = \frac{-5 \pm \sqrt{25 + 24}}6 = \begin{cases} -2,\\ \frac13.
 <li><p>Scrivere un messaggio di errore e invocare <code>abort()</code>;</p></li>
 <li><p>Restituire un valore fissato (es., zero). Questo è però ambiguo!</p></li>
 <li><p>Accettare un parametro aggiuntivo <code>bool &amp;found</code> per <code>CercaZeri</code>:</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> CercaZeri<span class="op">(</span><span class="dt">double</span> xmin<span class="op">,</span> <span class="dt">double</span> xmax<span class="op">,</span> <span class="at">const</span> FunzioneBase <span class="op">*</span> f<span class="op">,</span> <span class="dt">bool</span> <span class="op">&amp;</span>found<span class="op">);</span></span></code></pre></div>
-<p>(In alternativa si può dichiarare <code>found</code> variabile membro di <code>Solutore</code>).</p></li>
+<div class="sourceCode" id="cb20"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> CercaZeri<span class="op">(</span><span class="dt">double</span> xmin<span class="op">,</span> <span class="dt">double</span> xmax<span class="op">,</span> <span class="at">const</span> FunzioneBase <span class="op">*</span> f<span class="op">,</span> <span class="dt">bool</span> <span class="op">&amp;</span>found<span class="op">);</span></span></code></pre></div>
+<p>(In alternativa si può dichiarare <code>found</code> variabile membro di <code>Solutore</code>, come suggerito nell’<a href="carminati-esercizi-07.html#esercizio-7.4">Esercizio 7.4</a>).</p></li>
 </ol>
 </section>
 <section id="condizioni-di-errore-con-nan" class="slide level1">
 <h1>Condizioni di errore con NaN</h1>
 <ul>
 <li><p>Una possibile alternativa è l’uso di un valore <em>Not-a-number</em> (NaN) come risultato della chiamata:</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;cmath&gt;</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span><span class="op">(</span>something_is_invalid<span class="op">())</span> <span class="op">{</span></span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="bu">std::</span>nan<span class="op">(</span><span class="st">&quot;&quot;</span><span class="op">);</span> <span class="co">// Restituisce un NaN</span></span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div></li>
+<div class="sourceCode" id="cb21"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;cmath&gt;</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span><span class="op">(</span>something_is_invalid<span class="op">())</span> <span class="op">{</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="bu">std::</span>nan<span class="op">(</span><span class="st">&quot;&quot;</span><span class="op">);</span> <span class="co">// Restituisce un NaN</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div></li>
 <li><p>È una implementazione dell’idea numero 2 (restituire un valore fissato in caso di errore) che non ha ambiguità.</p></li>
+<li><p>Può essere implementata in parallelo con le modifiche suggerite nell’<a href="carminati-esercizi-07.html#esercizio-7.4">Esercizio 7.4</a>).</p></li>
 </ul>
 </section>
 <section id="controllo-di-nan" class="slide level1">
 <h1>Controllo di NaN</h1>
 <ul>
 <li><p>Per controllare se il valore restituito è un NaN, si può usare la funzione <code>isnan</code> (in <code>&lt;cmath&gt;</code>):</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> x<span class="op">{</span>CercaZeri<span class="op">(</span><span class="fl">0.</span><span class="op">,</span> <span class="fl">1.</span><span class="op">,</span> f<span class="op">)};</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span><span class="op">(</span>isnan<span class="op">(</span>x<span class="op">))</span> <span class="op">{</span></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Stampa un messaggio di errore</span></span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div></li>
+<div class="sourceCode" id="cb22"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> x<span class="op">{</span>CercaZeri<span class="op">(</span><span class="fl">0.</span><span class="op">,</span> <span class="fl">1.</span><span class="op">,</span> f<span class="op">)};</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span><span class="op">(</span>isnan<span class="op">(</span>x<span class="op">))</span> <span class="op">{</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Stampa un messaggio di errore</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div></li>
 <li><p>Siccome i NaN hanno anche la proprietà che non sono uguali a se stessi (<code>NaN == NaN</code> è falso), si può usare anche questo test:</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span><span class="op">(</span>x <span class="op">!=</span> x<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Vero solo se x contiene un NaN</span></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div></li>
+<div class="sourceCode" id="cb23"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span><span class="op">(</span>x <span class="op">!=</span> x<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Vero solo se x contiene un NaN</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div></li>
 </ul>
 </section>
 <section id="vantaggi-dei-nan" class="slide level1">
 <h1>Vantaggi dei NaN</h1>
 <p>I numeri NaN sono vantaggiosi perché si «propagano»: operazioni con numeri NaN restituiscono sempre NaN.</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> x<span class="op">{</span>nan<span class="op">(</span><span class="st">&quot;&quot;</span><span class="op">)};</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>cout <span class="op">&lt;&lt;</span> x <span class="op">+</span> <span class="dv">1</span> <span class="op">&lt;&lt;</span> <span class="st">&quot;, &quot;</span> <span class="op">&lt;&lt;</span> x <span class="op">*</span> <span class="dv">2</span> <span class="op">&lt;&lt;</span> <span class="st">&quot;, &quot;</span> <span class="op">&lt;&lt;</span> x <span class="op">/</span> x <span class="op">&lt;&lt;</span> <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">;</span></span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="co">// Output: nan, nan, nan</span></span></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> x<span class="op">{</span>nan<span class="op">(</span><span class="st">&quot;&quot;</span><span class="op">)};</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>cout <span class="op">&lt;&lt;</span> x <span class="op">+</span> <span class="dv">1</span> <span class="op">&lt;&lt;</span> <span class="st">&quot;, &quot;</span> <span class="op">&lt;&lt;</span> x <span class="op">*</span> <span class="dv">2</span> <span class="op">&lt;&lt;</span> <span class="st">&quot;, &quot;</span> <span class="op">&lt;&lt;</span> x <span class="op">/</span> x <span class="op">&lt;&lt;</span> <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">;</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="co">// Output: nan, nan, nan</span></span></code></pre></div>
 <p>Inoltre hanno un comportamento molto particolare nelle operazioni di confronto:</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>cout <span class="op">&lt;&lt;</span> <span class="op">(</span>x <span class="op">&lt;</span> x<span class="op">)</span> <span class="op">&lt;&lt;</span> <span class="st">&quot;, &quot;</span><span class="op">;</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>cout <span class="op">&lt;&lt;</span> <span class="op">(</span>x <span class="op">&gt;</span> x<span class="op">)</span> <span class="op">&lt;&lt;</span> <span class="st">&quot;, &quot;</span><span class="op">;</span></span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>cout <span class="op">&lt;&lt;</span> <span class="op">(</span>x <span class="op">==</span> x<span class="op">)</span> <span class="op">&lt;&lt;</span> <span class="st">&quot;, &quot;</span><span class="op">;</span></span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>cout <span class="op">&lt;&lt;</span> <span class="op">(</span>x <span class="op">!=</span> x<span class="op">)</span> <span class="op">&lt;&lt;</span> <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">;</span>  <span class="co">// Vedi slide precedente</span></span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="co">// Output: 0, 0, 0, 1</span></span></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>cout <span class="op">&lt;&lt;</span> <span class="op">(</span>x <span class="op">&lt;</span> x<span class="op">)</span> <span class="op">&lt;&lt;</span> <span class="st">&quot;, &quot;</span><span class="op">;</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>cout <span class="op">&lt;&lt;</span> <span class="op">(</span>x <span class="op">&gt;</span> x<span class="op">)</span> <span class="op">&lt;&lt;</span> <span class="st">&quot;, &quot;</span><span class="op">;</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>cout <span class="op">&lt;&lt;</span> <span class="op">(</span>x <span class="op">==</span> x<span class="op">)</span> <span class="op">&lt;&lt;</span> <span class="st">&quot;, &quot;</span><span class="op">;</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>cout <span class="op">&lt;&lt;</span> <span class="op">(</span>x <span class="op">!=</span> x<span class="op">)</span> <span class="op">&lt;&lt;</span> <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">;</span>  <span class="co">// Vedi slide precedente</span></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a><span class="co">// Output: 0, 0, 0, 1</span></span></code></pre></div>
 </section>
     </div>
   </div>
