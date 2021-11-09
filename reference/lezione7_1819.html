@@ -90,10 +90,12 @@ In questo e nei prossimi esercizi avremo a che fare con diverse funzioni di una 
 parametri, e di effettuare delle operazioni generiche su queste funzioni (come trovarne gli zeri, o farne l'integrale).<br>
 In questo caso &egrave; utile definire una <i>classe astratta</i> che definisce le propriet&agrave; generali della classe,
 con metodi puramente virtuali, e poi lasciare alle classi derivate il compito di implementare tutti questi metodi 
-e quelli aggiuntivi necessari.<br>
+e quelli aggiuntivi necessari. Notate in questo caso che &egrave; buona prassi definire il distruttore di una classe
+madre astratta come <code> virtual </code> in modo che il distruttore della classe figlia venga invocato correttamente
+quando un oggetto di tipo classe figlia viene distrutto. <br>
 <ol>
 <li>Definire la classe astratta <code>FunzioneBase</code>:<br>
-    <img alt="FunzioneBase" src="figure/FunzioneBase.PNG"  >  
+    <img alt="FunzioneBase" src="figure/FunzioneBase1.PNG" width="900"  >  
 <li>Implementare una classe derivata <code>Parabola</code> che descriva una funzione del tipo <i>y=ax<sup>2</sup>+bx+c</i>
     (chiaramente questa classe dovr&agrave; avere i data membri per i parameteri <i>a</i>, <i>b</i> e <i>c</i>, ed i metodi
     per definirli e accederci).
@@ -135,7 +137,8 @@ e quelli aggiuntivi necessari.<br>
     <tr>
       <td style="background-color: rgb(233, 229, 255);"> 
       Questa &egrave; una possibile dichiarazione per la classe <code>Parabola</code>:<br><br>
-      <img alt="Parabola" src="figure/Parabola.PNG" width="900">     
+      <img alt="Parabola" src="figure/Parabola1.PNG" width="900">     
+      <br> <br> Notate la keyword <code>override</code> che ci avvisa con un errore se cerchiamo per errore di definire nella classe figlia il metodo virtuale della classe madre con parametri di input diversi.
     <br><br>
 
 </td>
@@ -312,15 +315,13 @@ else</FONT><B><FONT COLOR="#663300">
       <td style="background-color: rgb(233, 229, 255);"> 
       <ol>
       <li> La classe astratta <code>Solutore</code> potrebbe avere un metodo virtuale, corrispondente alla chiamate dell'algoritmo
-      che cercher&agrave; di determinare gli zeri di una generica <code>FunzioneBase</code>, passata come puntatore.<br>
-      <li> Inoltre possiamo definire dei metodi per configurare la precisione richiesta: tale precisione pu&ograve; essere definita nel costruttore, tramite un metodo dedicato o direttamente nella chiamata al metodo CercaZeri. Lo stesso discorso vale per il numero massimo di iterazioni. <br>
-      <li> Secondo il principio dell'incapsulamento possiamo anche copiare il puntatore a FunzioneBase in un puntatore interno alla classe m_f;
-      <li> Infine, in vista di potenziali sviluppi, possiamo definire dei data membri che contengono lo stato corrente dell'intervallo in cui si 
-      sono limitati gli zeri della funzione. 
+      che cercher&agrave; di determinare gli zeri di una generica <code>FunzioneBase</code>, passata come puntatore o come referenze: nell'esempio sono presentati entrambi i casi, in egenerale &egrave; preferibile usare una referenza.<br>
+      <li> Inoltre possiamo definire dei metodi per configurare la precisione richiesta: tale precisione pu&ograve; essere definita nel costruttore, tramite un metodo dedicato o direttamente nella chiamata al metodo CercaZeri. Lo stesso discorso vale per il numero massimo di iterazioni. Stesso discorso vale per il numero massimo di iterazione dell'algoritmo.<br>
+	<li> Come nel caso della <code> FunzioneBase </code> notate l'implementazione del distruttore come metodo virtuale e l'utilzzo della keyword <code> override </code>.
       <ol>
-      <img alt="Solutore" src="figure/Solutore.PNG" width="900">      
+      <img alt="Solutore" src="figure/Solutore1.PNG" width="900">      
       L'implementazione dell'algoritmo di bisezione dovr&agrave; necessariamente avvenire costruendo una classe dedicata <code>Bisezione</code> che erediti da <code>Solutore</code> e implementi una versione concreta del metodo <code>CercaZeri</code>.
-      <img alt="Solutore" src="figure/Bisezione.PNG" width="900">
+      <img alt="Solutore" src="figure/Bisezione1.PNG" width="900">
 
 </td>
     </tr>
@@ -351,6 +352,11 @@ a convergere per via delle cattive condizioni iniziali <code>Trovato()</code> do
 Il secondo dovr&agrave; restituire l'incertezza effettiva sull'ascissa dello zero stimato, che di solito &egrave; migliore del minimo requisito sulla precisione immagazzinato in <code>_prec</code>.<br>
 Implementare questi metodi nelle classi concrete usate per gli altri esercizi di questa lezione.
 </font>
+
+<br><br>
+<font size="+1"><span style="text-decoration: underline; color: rgb(50, 50, 50);">ESERCIZIO
+7.5 - Ricerca di zeri di una funzione senza uso del polimorfismo </span>:<br>
+Si provi ad implementare un algoritmo di ricerca degli zeri di una funzione senza utilizzare il polimorfismo. Prendere come spunto le soluzioni indicate nelle trasparenze finali della lezione teorica. Si potrebbe codificare il metodo della bisezione in una funzione che accetti in input una <code> std::function </code> e modellizzare la funzione di cui si vuole cercare lo zero con una funzione lambda.
 
 
 <br>

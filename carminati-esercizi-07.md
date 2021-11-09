@@ -63,7 +63,7 @@ Un metodo virtuale può anche essere posto a 0 (vedi prossimo esercizio), in tal
 
 In questo e nei prossimi esercizi avremo a che fare con diverse funzioni $y = f(x)$ di una sola variabile, magari dipendenti da parametri, e di effettuare delle operazioni generiche su queste funzioni (come trovarne gli zeri, o farne l'integrale).
 
-In questo caso è utile definire una classe astratta che definisce le proprietà generali della classe, con metodi puramente virtuali, e poi lasciare alle classi derivate il compito di implementare tutti questi metodi e quelli aggiuntivi necessari.
+In questo caso è utile definire una classe astratta che definisce le proprietà generali della classe, con metodi puramente virtuali, e poi lasciare alle classi derivate il compito di implementare tutti questi metodi e quelli aggiuntivi necessari. Notate in questo caso che è buona prassi definire il distruttore di una classe madre astratta come `virtual`, in modo che il distruttore della classe figlia venga invocato correttamente quando un oggetto di tipo classe figlia viene distrutto.
 
 #.  Definire la classe astratta FunzioneBase:
 
@@ -94,7 +94,8 @@ Questa è una possibile dichiarazione per la classe `Parabola`:
 ```c++
 class Parabola : public FunzioneBase {
 public:
-  Parabola() : m_a{}, m_b{}, m_c{} {}
+  // Default: the constant function f(x) = 1
+  Parabola() : m_a{}, m_b{}, m_c{1} {}
   Parabola(double a, double b, double c) : m_a{a}, m_b{b}, m_c{c} {}
   ~Parabola() {}
   
@@ -247,22 +248,36 @@ if(sign_a * sign_c < 0) {
 
 ## Classe astratta Solutore
 
-#.  La classe astratta Solutore potrebbe avere un metodo virtuale, corrispondente alla chiamate dell'algoritmo che cercherà di determinare gli zeri di una generica `FunzioneBase`, passata come puntatore.
+#.  La classe astratta Solutore potrebbe avere un metodo virtuale, corrispondente alla chiamate dell'algoritmo che cercherà di determinare gli zeri di una generica `FunzioneBase`, passata come puntatore o come referenza: nell'esempio sono presentati entrambi i casi, ma in generale è preferibile usare una **referenza**.
 #.  Inoltre possiamo definire dei metodi per configurare la precisione richiesta: tale precisione può essere definita nel costruttore, tramite un metodo dedicato o direttamente nella chiamata al metodo `CercaZeri`. Lo stesso discorso vale per il numero massimo di iterazioni.
-#.  Secondo il principio dell'incapsulamento possiamo anche copiare il puntatore a `FunzioneBase` in un puntatore `m_f` interno alla classe;
-#.  Infine, in vista di potenziali sviluppi, possiamo definire dei data membri che contengono lo stato corrente dell'intervallo in cui si sono limitati gli zeri della funzione.
+#.  Come nel caso di `FunzioneBase`, notate l'implementazione del distruttore come metodo virtuale e l'utilzzo della keyword `override`.
 
     ```c++
     class Solutore {
     public:
-      virtual double CercaZeri(double xmin, double xmax, const FunzioneBase * f) = 0;
+      Solutore();
+      Solutore(double prec);
+      virtual ~Solutore() {}
+      
+      // A scopo illustrativo, trovate qui due definizioni: una con il puntatore 
+      // FunzioneBase *, e una con il reference FunzioneBase &.
+      // Nel vostro codice ne basta una sola, meglio col reference
+      
+      virtual double CercaZeriPointer(double xmin, double xmax, const FunzioneBase * f,
+                                      double prec = 1e-3, unsigned int nmax = 100) = 0;
+      virtual double CercaZeriReference(double xmin, double xmax, const FunzioneBase & f,
+                                        double prec = 1e-3, unsigned int nmax = 100) = 0;
+                                        
       void SetPrecisione(double epsilon) { m_prec = epsilon; }
       double GetPrecisione() const { return m_prec;}
+      void SetNMaxIterations(unsigned int n) { m_nmax = n; }
+      int GetNMaxIterations() const { return m_nmax; }
+      unsigned int GetNiterations() const { return m_niterations; }
 
     protected:
       double m_a, m_b; // estremi della regione di ricerca
       double m_prec; // precisione della soluzione
-      const FunzioneBase * m_f;
+      unsigned int m_nmax, m_niterations;
     };
     ```
 
@@ -272,8 +287,17 @@ if(sign_a * sign_c < 0) {
     class Bisezione : public Solutore {
     public:
       Bisezione();
-      ~Bisezione();
-      double CercaZeri(double xmin, double xmax, const FunzioneBase * f) override;
+      Bisezione(double prec);
+      virtual ~Bisezione();
+
+      // Anche qui sono mostrate due versioni a scopo illustrativo. Voi dovete implementare
+      // solo quella corrispondente a quanto avete fatto nella classe madre `Solutore`
+      
+      virtual double CercaZeriPointer(double xmin, double xmax, const FunzioneBase * f,
+                                      double prec = 1e-3, unsigned int nmax = 100);
+                                      
+      virtual double CercaZeriReference(double xmin, double xmax, const FunzioneBase & f,
+                                        double prec = 1e-3, unsigned int nmax = 100);
     };
     ```
 
@@ -291,6 +315,7 @@ $$
 
 Suggerimento: riscrivere l'equazione come $\sin x - x \cos x = 0$
 
+
 # Esercizio 7.4 - Miglioramenti di Solutore {#esercizio-7.4}
 
 Aggiungere a `Solutore` due nuovi metodi virtuali puri:
@@ -305,3 +330,8 @@ Il primo dovrà restituire vero o falso a seconda che lo zero sia stato effettiv
 Il secondo dovrà restituire l'incertezza effettiva sull'ascissa dello zero stimato, che di solito è migliore del minimo requisito sulla precisione immagazzinato in `_prec`.
 
 Implementare questi metodi nelle classi concrete usate per gli altri esercizi di questa lezione.
+
+
+# Esercizio 7.5 - Ricerca di zeri di una funzione senza uso del polimorfismo {#esercizio-7.5}
+
+Si provi ad implementare un algoritmo di ricerca degli zeri di una funzione senza utilizzare il polimorfismo. Prendere come spunto le soluzioni indicate nelle trasparenze finali della lezione teorica. Si potrebbe codificare il metodo della bisezione in una funzione che accetti in input una `std::function`, e modellizzare la funzione di cui si vuole cercare lo zero con una funzione lambda.

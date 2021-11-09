@@ -26,7 +26,7 @@ css:
 -   [Esercizio 7.2](./carminati-esercizio-07.html#esercizio-7.2): Metodo della bisezione (**da consegnare**)
 -   [Esercizio 7.3](./carminati-esercizio-07.html#esercizio-7.3): Equazioni non risolubili analiticamente (**da consegnare**)
 -   [Esercizio 7.4](./carminati-esercizio-07.html#esercizio-7.4): Miglioramenti di `Solutore`
-
+-   [Esercizio 7.5](./carminati-esercizio-07.html#esercizio-7.5): Ricerca di zeri di una funzione senza uso del polimorfismo
 
 # Metodi virtuali {#virtual-methods}
 
