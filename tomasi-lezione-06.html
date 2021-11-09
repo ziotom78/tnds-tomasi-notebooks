@@ -121,12 +121,12 @@
 <section id="esercizi-per-oggi" class="slide level1">
 <h1>Esercizi per oggi</h1>
 <ul>
-<li><a href="./carminati-esercizio-07.html#esercizio-7.0">Esercizio 7.0</a>: Metodi virtuali</li>
-<li><a href="./carminati-esercizio-07.html#esercizio-7.1">Esercizio 7.1</a>: Classe astratta FunzioneBase</li>
-<li><a href="./carminati-esercizio-07.html#esercizio-7.2">Esercizio 7.2</a>: Metodo della bisezione (<strong>da consegnare</strong>)</li>
-<li><a href="./carminati-esercizio-07.html#esercizio-7.3">Esercizio 7.3</a>: Equazioni non risolubili analiticamente (<strong>da consegnare</strong>)</li>
-<li><a href="./carminati-esercizio-07.html#esercizio-7.4">Esercizio 7.4</a>: Miglioramenti di <code>Solutore</code></li>
-<li><a href="./carminati-esercizio-07.html#esercizio-7.5">Esercizio 7.5</a>: Ricerca di zeri di una funzione senza uso del polimorfismo</li>
+<li><a href="./carminati-esercizio-07.html#esercizio-6.0">Esercizio 6.0</a>: Metodi virtuali</li>
+<li><a href="./carminati-esercizio-07.html#esercizio-6.1">Esercizio 6.1</a>: Classe astratta FunzioneBase</li>
+<li><a href="./carminati-esercizio-07.html#esercizio-6.2">Esercizio 6.2</a>: Metodo della bisezione (<strong>da consegnare</strong>)</li>
+<li><a href="./carminati-esercizio-07.html#esercizio-6.3">Esercizio 6.3</a>: Equazioni non risolubili analiticamente (<strong>da consegnare</strong>)</li>
+<li><a href="./carminati-esercizio-07.html#esercizio-6.4">Esercizio 6.4</a>: Miglioramenti di <code>Solutore</code></li>
+<li><a href="./carminati-esercizio-07.html#esercizio-6.5">Esercizio 6.5</a>: Ricerca di zeri di una funzione senza uso del polimorfismo</li>
 </ul>
 </section>
 <section id="virtual-methods" class="slide level1">
@@ -316,7 +316,7 @@ test.cpp:15:8: error: ‘void Cat::greet()’ marked ‘override’, but does no
 <section id="quando-usare-puntatori" class="slide level1">
 <h1>Quando usare puntatori</h1>
 <ul>
-<li><p>Nell’<a href="./carminati-esercizi-07.html#esercizio-7.0">Esercizio 7.1</a> di oggi si usano i puntatori nel seguente codice:</p>
+<li><p>Nell’<a href="./carminati-esercizi-07.html#esercizio-6.0">Esercizio 6.1</a> di oggi si usano i puntatori nel seguente codice:</p>
 <div class="sourceCode" id="cb13"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>Particella <span class="op">*</span> a<span class="op">{</span><span class="kw">new</span> Particella<span class="op">{</span><span class="fl">1.</span><span class="op">,</span> <span class="fl">2.</span><span class="op">}};</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>Elettrone <span class="op">*</span> b<span class="op">{</span><span class="kw">new</span> Elettrone<span class="op">{}};</span></span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>Particella <span class="op">*</span> c<span class="op">{</span><span class="kw">new</span> Elettrone<span class="op">{}};</span></span></code></pre></div></li>
@@ -345,8 +345,8 @@ test.cpp:15:8: error: ‘void Cat::greet()’ marked ‘override’, but does no
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>Elettrone b<span class="op">{};</span></span>
 <span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>Elettrone c<span class="op">{};</span></span></code></pre></div>
 </section>
-<section id="esercizio-7.2-bisezione" class="slide level1">
-<h1>Esercizio 7.2 (bisezione)</h1>
+<section id="esercizio-6.2-bisezione" class="slide level1">
+<h1>Esercizio 6.2 (bisezione)</h1>
 </section>
 <section id="verifica-dellalgoritmo" class="slide level1">
 <h1>Verifica dell’algoritmo</h1>
@@ -399,7 +399,7 @@ x_{1/2} = \frac{-5 \pm \sqrt{25 + 24}}6 = \begin{cases} -2,\\ \frac13.
 <li><p>Restituire un valore fissato (es., zero). Questo è però ambiguo!</p></li>
 <li><p>Accettare un parametro aggiuntivo <code>bool &amp;found</code> per <code>CercaZeri</code>:</p>
 <div class="sourceCode" id="cb20"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> CercaZeri<span class="op">(</span><span class="dt">double</span> xmin<span class="op">,</span> <span class="dt">double</span> xmax<span class="op">,</span> <span class="at">const</span> FunzioneBase <span class="op">*</span> f<span class="op">,</span> <span class="dt">bool</span> <span class="op">&amp;</span>found<span class="op">);</span></span></code></pre></div>
-<p>(In alternativa si può dichiarare <code>found</code> variabile membro di <code>Solutore</code>, come suggerito nell’<a href="carminati-esercizi-07.html#esercizio-7.4">Esercizio 7.4</a>).</p></li>
+<p>(In alternativa si può dichiarare <code>found</code> variabile membro di <code>Solutore</code>, come suggerito nell’<a href="carminati-esercizi-07.html#esercizio-6.4">Esercizio 6.4</a>).</p></li>
 </ol>
 </section>
 <section id="condizioni-di-errore-con-nan" class="slide level1">
@@ -412,7 +412,7 @@ x_{1/2} = \frac{-5 \pm \sqrt{25 + 24}}6 = \begin{cases} -2,\\ \frac13.
 <span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="bu">std::</span>nan<span class="op">(</span><span class="st">&quot;&quot;</span><span class="op">);</span> <span class="co">// Restituisce un NaN</span></span>
 <span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div></li>
 <li><p>È una implementazione dell’idea numero 2 (restituire un valore fissato in caso di errore) che non ha ambiguità.</p></li>
-<li><p>Può essere implementata in parallelo con le modifiche suggerite nell’<a href="carminati-esercizi-07.html#esercizio-7.4">Esercizio 7.4</a>).</p></li>
+<li><p>Può essere implementata in parallelo con le modifiche suggerite nell’<a href="carminati-esercizi-07.html#esercizio-6.4">Esercizio 7.4</a>).</p></li>
 </ul>
 </section>
 <section id="controllo-di-nan" class="slide level1">

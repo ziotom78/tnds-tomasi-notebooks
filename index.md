@@ -16,7 +16,7 @@ header-includes: <script src="./fmtinstall.js"></script>
 | 19 Ottobre 2021 | [Analisi dei dati: template e `vector`](carminati-esercizi-03.html) | [Lezione 3](tomasi-lezione-03.html) |
 | 26 Ottobre 2021 | [Classi ed ereditarietà](carminati-esercizi-05.html)                | [Lezione 4](tomasi-lezione-04.html) |
 | 2 Novembre 2021 | Idem                                                                | [Lezione 5](tomasi-lezione-05.html) |
-| 9 Novembre 2021 | [Ricerca di zeri](carminati-esercizi-07.html)                       | [Lezione 6](tomasi-lezione-06.html) |
+| 9 Novembre 2021 | [Ricerca di zeri](carminati-esercizi-06.html)                       | [Lezione 6](tomasi-lezione-06.html) |
 </center>
 
 # Suggerimenti vari

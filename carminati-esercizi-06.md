@@ -8,11 +8,11 @@ lang: it-IT
 header-includes: <script src="./fmtinstall.js"></script>
 ...
 
-[La pagina con la spiegazione originale degli esercizi si trova qui: [labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/lezione7_1819.html](http://labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/lezione7_1819.html).]
+[La pagina con la spiegazione originale degli esercizi si trova qui: [labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/lezione6_2021.html](http://labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/lezione6_2021.html).
 
 In questa lezione affronteremo il problema della ricerca di zeri di una funzione. Per fare questo realizzeremo due classi astratte per rappresentare rispettivamente una generica funzione $y = f(x)$, ed un metodo generico per la ricerca di zeri.
 
-# Esercizio 7.0 - Metodi virtuali {#esercizio-7.0}
+# Esercizio 6.0 - Metodi virtuali {#esercizio-6.0}
 
 Considerare le classi `Particella` e la sue derivata `Elettrone` costruite nelle [lezioni 4 e 5](./carminati-esercizi-05.html).
 
@@ -59,7 +59,7 @@ Nelle classi figlie, se si ridefinisce un metodo che la classe madre aveva dichi
 Un metodo virtuale può anche essere posto a 0 (vedi prossimo esercizio), in tal caso è obbligatorio per le classi figlie implementarlo.
 
 
-# Esercizio 7.1 - Classe astratta FunzioneBase {#esercizio-7.1}
+# Esercizio 6.1 - Classe astratta FunzioneBase {#esercizio-6.1}
 
 In questo e nei prossimi esercizi avremo a che fare con diverse funzioni $y = f(x)$ di una sola variabile, magari dipendenti da parametri, e di effettuare delle operazioni generiche su queste funzioni (come trovarne gli zeri, o farne l'integrale).
 
@@ -118,7 +118,7 @@ private:
 ```
 
 
-# Esercizio 7.2 - Metodo della bisezione (da consegnare) {#esercizio-7.2}
+# Esercizio 6.2 - Metodo della bisezione (da consegnare) {#esercizio-6.2}
 
 Scrivere un programma che calcoli gli zeri della funzione
 $$
@@ -304,7 +304,7 @@ if(sign_a * sign_c < 0) {
 Per segnalare condizioni di errore potete usare i suggerimenti spiegati nelle [slide di approfondimento](./tomasi-lezione-06.html#use-of-nan).
 
 
-# Esercizio 7.3 - Equazioni non risolubili analiticamente (da consegnare) {#esercizio-7.3}
+# Esercizio 6.3 - Equazioni non risolubili analiticamente (da consegnare) {#esercizio-6.3}
 
 In problemi di meccanica quantistica che verranno studiati nel prossimo anno, ci si può imbattere in equazioni del tipo:
 $$
@@ -316,7 +316,7 @@ $$
 Suggerimento: riscrivere l'equazione come $\sin x - x \cos x = 0$
 
 
-# Esercizio 7.4 - Miglioramenti di Solutore {#esercizio-7.4}
+# Esercizio 6.4 - Miglioramenti di Solutore {#esercizio-6.4}
 
 Aggiungere a `Solutore` due nuovi metodi virtuali puri:
 
@@ -332,6 +332,6 @@ Il secondo dovrà restituire l'incertezza effettiva sull'ascissa dello zero stim
 Implementare questi metodi nelle classi concrete usate per gli altri esercizi di questa lezione.
 
 
-# Esercizio 7.5 - Ricerca di zeri di una funzione senza uso del polimorfismo {#esercizio-7.5}
+# Esercizio 6.5 - Ricerca di zeri di una funzione senza uso del polimorfismo {#esercizio-6.5}
 
 Si provi ad implementare un algoritmo di ricerca degli zeri di una funzione senza utilizzare il polimorfismo. Prendere come spunto le soluzioni indicate nelle trasparenze finali della lezione teorica. Si potrebbe codificare il metodo della bisezione in una funzione che accetti in input una `std::function`, e modellizzare la funzione di cui si vuole cercare lo zero con una funzione lambda.

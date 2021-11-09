@@ -21,12 +21,12 @@ css:
 
 # Esercizi per oggi
 
--   [Esercizio 7.0](./carminati-esercizio-07.html#esercizio-7.0): Metodi virtuali
--   [Esercizio 7.1](./carminati-esercizio-07.html#esercizio-7.1): Classe astratta FunzioneBase
--   [Esercizio 7.2](./carminati-esercizio-07.html#esercizio-7.2): Metodo della bisezione (**da consegnare**)
--   [Esercizio 7.3](./carminati-esercizio-07.html#esercizio-7.3): Equazioni non risolubili analiticamente (**da consegnare**)
--   [Esercizio 7.4](./carminati-esercizio-07.html#esercizio-7.4): Miglioramenti di `Solutore`
--   [Esercizio 7.5](./carminati-esercizio-07.html#esercizio-7.5): Ricerca di zeri di una funzione senza uso del polimorfismo
+-   [Esercizio 6.0](./carminati-esercizio-07.html#esercizio-6.0): Metodi virtuali
+-   [Esercizio 6.1](./carminati-esercizio-07.html#esercizio-6.1): Classe astratta FunzioneBase
+-   [Esercizio 6.2](./carminati-esercizio-07.html#esercizio-6.2): Metodo della bisezione (**da consegnare**)
+-   [Esercizio 6.3](./carminati-esercizio-07.html#esercizio-6.3): Equazioni non risolubili analiticamente (**da consegnare**)
+-   [Esercizio 6.4](./carminati-esercizio-07.html#esercizio-6.4): Miglioramenti di `Solutore`
+-   [Esercizio 6.5](./carminati-esercizio-07.html#esercizio-6.5): Ricerca di zeri di una funzione senza uso del polimorfismo
 
 # Metodi virtuali {#virtual-methods}
 
@@ -244,7 +244,7 @@ test.cpp:15:8: error: ‘void Cat::greet()’ marked ‘override’, but does no
 
 # Quando usare puntatori
 
--   Nell'[Esercizio 7.1](./carminati-esercizi-07.html#esercizio-7.0) di oggi si usano i puntatori nel seguente codice:
+-   Nell'[Esercizio 6.1](./carminati-esercizi-07.html#esercizio-6.0) di oggi si usano i puntatori nel seguente codice:
 
     ```c++
     Particella * a{new Particella{1., 2.}};
@@ -283,7 +283,7 @@ Elettrone b{};
 Elettrone c{};
 ```
 
-# Esercizio 7.2 (bisezione)
+# Esercizio 6.2 (bisezione)
 
 # Verifica dell'algoritmo
 
@@ -352,7 +352,7 @@ Il metodo di bisezione fallisce se le ipotesi del teorema degli zeri non valgono
      ```
      
      (In alternativa si può dichiarare `found` variabile membro di
-     `Solutore`, come suggerito nell'[Esercizio 7.4](carminati-esercizi-07.html#esercizio-7.4)).
+     `Solutore`, come suggerito nell'[Esercizio 6.4](carminati-esercizi-07.html#esercizio-6.4)).
 
 # Condizioni di errore con NaN
 
@@ -368,7 +368,7 @@ Il metodo di bisezione fallisce se le ipotesi del teorema degli zeri non valgono
 
 -   È una implementazione dell'idea numero 2 (restituire un valore fissato in caso di errore) che non ha ambiguità.
 
--   Può essere implementata in parallelo con le modifiche suggerite nell'[Esercizio 7.4](carminati-esercizi-07.html#esercizio-7.4)).
+-   Può essere implementata in parallelo con le modifiche suggerite nell'[Esercizio 7.4](carminati-esercizi-07.html#esercizio-6.4)).
 
 # Controllo di NaN
 
