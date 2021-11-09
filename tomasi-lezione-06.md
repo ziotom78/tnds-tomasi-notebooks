@@ -21,12 +21,12 @@ css:
 
 # Esercizi per oggi
 
--   [Esercizio 6.0](./carminati-esercizio-06.html#esercizio-6.0): Metodi virtuali
--   [Esercizio 6.1](./carminati-esercizio-06.html#esercizio-6.1): Classe astratta FunzioneBase
--   [Esercizio 6.2](./carminati-esercizio-06.html#esercizio-6.2): Metodo della bisezione (**da consegnare**)
--   [Esercizio 6.3](./carminati-esercizio-06.html#esercizio-6.3): Equazioni non risolubili analiticamente (**da consegnare**)
--   [Esercizio 6.4](./carminati-esercizio-06.html#esercizio-6.4): Miglioramenti di `Solutore`
--   [Esercizio 6.5](./carminati-esercizio-06.html#esercizio-6.5): Ricerca di zeri di una funzione senza uso del polimorfismo
+-   [Esercizio 6.0](./carminati-esercizi-06.html#esercizio-6.0): Metodi virtuali
+-   [Esercizio 6.1](./carminati-esercizi-06.html#esercizio-6.1): Classe astratta FunzioneBase
+-   [Esercizio 6.2](./carminati-esercizi-06.html#esercizio-6.2): Metodo della bisezione (**da consegnare**)
+-   [Esercizio 6.3](./carminati-esercizi-06.html#esercizio-6.3): Equazioni non risolubili analiticamente (**da consegnare**)
+-   [Esercizio 6.4](./carminati-esercizi-06.html#esercizio-6.4): Miglioramenti di `Solutore`
+-   [Esercizio 6.5](./carminati-esercizi-06.html#esercizio-6.5): Ricerca di zeri di una funzione senza uso del polimorfismo
 
 # Metodi virtuali {#virtual-methods}
 
