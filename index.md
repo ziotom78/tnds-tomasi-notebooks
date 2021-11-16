@@ -20,6 +20,8 @@ header-includes: <script src="./fmtinstall.js"></script>
 | 16 Novembre 2021 | [Quadratura numerica](carminati-esercizi-07.html)                   | [Notebook 7](tomasi-lezione-07-quadratura-numerica.html) |
 </center>
 
+Durante le sessioni di laboratorio useremo il sito [gather.town](https://gather.town) per gestire le persone collegate online.
+
 # Suggerimenti vari
 
 ## Uso della libreria `fmt`
