@@ -30,7 +30,7 @@ che fornisce un'accuratezza dell'integrale di $O(h^2)$. Notate che questo metodo
 
 ## Cenni sull'implementazione
 
-L'algoritmo è implementato all'interno di una classe che inizializza le variabili necessarie all'algoritmo. Qui ne vediamo l'esempio di un possibile *header*. Il costruttore prende in ingresso gli estremi di integrazione ed il numero di passi richiesto per eseguire l'integrale. Sono già dichiarati i metodi di integrazione del mid-point e di Simpson. Al costruttore è passata la funzione integranda usando la classe `FunzioneBase` definita nelle lezioni precedenti.
+L'algoritmo può essere implementato in molti modi; una possibilità (non certo l'unica) sfrutta lo schema *classe madre astratta*/*classe derivata*. Qui vediamo l'esempio di un possibile header, in cui viene dichiarata una classe astratta `Integral` che rappresenta un generico algoritmo di integrazione. Il metodo privato `checkInterval` prende in ingresso gli estremi di integrazione e controlla il segno. La classe implementa (tra le varie cose) un metodo `integrate`, che si preoccupa di chiamare `checkInterval` e poi invoca il metodo virtuale puro `calculate`; esso accetta in input il numero di passi con cui si desira effettuare il calcolo e una referenza alla funzione da integrare. Il metodo di integrazione `Midpoint` viene concretamente implementato in una classe derivata sovrascrivendo il metodo `integrate`.
 
 ```c++
 #pragma once
@@ -39,51 +39,53 @@ L'algoritmo è implementato all'interno di una classe che inizializza le variabi
 
 class Integral {
 public:
-  Integral(const FunzioneBase & f)
-  : m_f{f}, m_a{}, m_b{}, m_h{}, m_sign{}, m_integral{} {}
-  double Midpoint(double a, double b, unsigned int nstep);
-  double Simpson(double a, double b, unsigned int nstep);
-  
+  Integral() : m_a{}, m_b{}, m_sign{} {}
+
+  double integrate(double a, double b, unsigned int nstep, FunzioneBase &f) {
+    checkInterval(a, b);
+    return calculate(nstep, f);
+  }
+
+  double getA() const { return m_a; }
+  double getB() const { return m_b; }
+  double getSign() const { return m_sign; }
+
 private:
-  const FunzioneBase m_f;
-  
-  // Queste variabili memorizzano i parametri dell'ultimo integrale calcolato
+  // Questa è la funzione da ridefinire con `override` nelle classi derivate
+  // Notate che si può ridefinire anche se è `private`, perché è
+  // dichiarata `virtual`
+  virtual double calculate(unsigned int nstep, FunzioneBase &f) = 0;
+
+  void checkInterval(double a, double b) {
+    m_a = std::min(a, b);
+    m_b = std::max(a, b);
+    m_sign = (a < b) ? 1 : -1;
+  }
+
   double m_a, m_b;
-  double m_sum;
-  double m_h;
-  int m_sign;
-  double m_integral;
+  double m_sign;
+};
+
+// Classe derivata, implementa il metodo mid-point
+class Midpoint : public Integral {
+public:
+  Midpoint() : Integral() {}
+
+private:
+  double calculate(unsigned int nstep, FunzioneBase &f) override {
+    // Attenzione, questa implementazione ha un errore!
+    
+    double h{(getB() - getA()) / nstep};
+    double sum{};
+
+    for (unsigned int i{}; i < nstep; i++) {
+      sum += f.Eval(getA() + (i + 0.5) * h);
+    }
+
+    return getSign() * sum * h;
+  }
 };
 ```
-
-La classe invece è così implementata:
-
-```c++
-#include "integrale.h"
-#include <algorithm>
-
-using namespace std;
-
-double Integral::Midpoint(double a, double b, unsigned int nstep) {
-  m_a = a;
-  m_b = b;
-  
-  // Assegna a `m_sign` il valore 1 se a > b, −1 altrimenti
-  m_sign = a > b ? 1 : -1;
-  
-  m_h = (m_b - m_a) / nstep;
-  m_sum = 0;
-
-  for (unsigned int i{}; i < nstep; i++) {
-      m_sum += m_f.Eval(m_a + (i + 0.5) * m_h);
-  }
-  
-  m_integral = m_sign * m_sum * m_h;
-  return m_integral;
-}
-```
-
-dove gli estremi di integrazione vengono controllati, messi in ordine e viene poi implementato il metodo del mid-point secondo la formula appropriata.
 
 **Caccia all'errore**: l'implementazione contiene un errore. Per metterlo in evidenza, provate ad integrare $f(x) = \sin x$ tra $\pi / 2$ e $\pi$: vedrete che la convergenza non è $O(h^2)$, ma solo $O(h)$. Se applicate correttamente l'algoritmo, dovete riscontrare il comportamento atteso.
 
@@ -119,14 +121,14 @@ int main(int argc, const char * argv[]) {
   int nstep{atoi(argv[1])};
 
   Seno mysin{};
-  Integral * integrator{new Integral(mysin)};
+  Midpoint midpoint{};
 
-  fmt::print("midpoint: {:.12f}\n", integrator->Midpoint(a, b, nstep));
-  fmt::print("Simpson : {:.12f}\n", integrator->Simpson(a, b, nstep));
+  fmt::print("midpoint: {:.12f}\n", midpoint.integrate(a, b, nstep, mysin));
+  fmt::print("Simpson : {:.12f}\n", integrator->Simpson(a, b, nstep, mysin));
   
   // Senza usare fmtlib.h:
-  // cout << setprecision(12) << integrator->Midpoint(a, b, nstep) << endl;
-  // cout << setprecision(12) << integrator->Simpson(a, b, nstep) << endl;
+  // cout << setprecision(12) << midpoint.integrate(a, b, nstep, mysin) << endl;
+  // cout << setprecision(12) << midpoint.integrate(a, b, nstep, mysin) << endl;
 }
 ```
 

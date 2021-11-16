@@ -84,33 +84,29 @@ che questo metodo non richiede il calcolo della funzione negli estremi di integr
  <tbody>
    <tr>
      <td style="background-color: rgb(233, 229, 255);">
-L'algoritmo &egrave implementato all'interno di una classe che inizializza le variabili necessarie
-all'algoritmo. Qui ne vediamo l'esempio di un possibile <I>header</I>.
-Il costruttore prende in ingresso gli estremi di integrazione ed il
-       numero di passi richiesto per eseguire l'integrale. Sono
-       gi&agrave dichiarati i metodi di integrazione del mid-point e
-       di Simpson. Al costruttore &egrave passata la funzione
-       integranda usando la classe <code>FunzioneBase</code> definita nelle
-       lezioni precedenti.<br>
+L'algoritmo pu&ograve essere implementato con uno schema classe madre astratta e classe derivata.
+Qui vediamo l'esempio di un possibile <I>header</I>. Viene creata una classe astratta <code>Integral</code>
+che rappresenta un generico algoritmo di integrazione. Il suo costruttore prende in ingresso gli estremi di integrazione e controlla il segno. 
+La classe implementa (tra le varie cose) un metodo virtuale puro <code> Integra </code> che accetta in input il numero di passi con cui si desira effettuare
+il calcolo e una referenza alla funzione da integrare.
+Il metodo di integrazione Midpoint viene concretamente implementato in una classe derivata sovrascrivendo il metodo <code>Integra</code>. <br><br>
 
-
-<img alt="classe integratore header" src="./figure/integratore_h.png" width="900"><br>
-
+<img alt="classe integratore header" src="./figure/integratore_h_2122.png" width="900"><br>
+<!--
 La classe invece &egrave cos&igrave implementata<br>
        
 <img alt="classe integratore" src="./figure/integratore_cc.png" width="900"><br>
+-->
 
-dove gli estremi di integrazione vengono controllati, messi in
-ordine e viene poi implementato il metodo del mid-point secondo la
-       formula appropriata.<br>
+<br>
 <b>Caccia all'errore:</b> l'implementazione contiene un errore. Per metterlo in evidenza, provate ad integrare il seno tra &pi;/2 e &pi;: vedrete che la convergenza non &egrave; O(<i>h</i><sup>2</sup>), ma solo O(<i>h</i>). Se applicate correttamente l'algoritmo, dovete riscontrare il comportamento atteso.
  
 <br>
 
-Un esempio di codice di test per la classe <code>integratore</code>
-       pu&ograve quindi essere il seguente<br>
+Un esempio di codice di test per la classe <code>Midpoint</code>
+       pu&ograve quindi essere il seguente<br><br>
 
-<img alt="test" src="./figure/esempio_codice_integr.png" width="900"><br>
+<img alt="test" src="./figure/codice_integratore_2122.png" width="900"><br>
 dove abbiamo utilizzato una classe <code>Seno</code> che eredita dalla classe
 astratta <code>FunzioneBase</code>.
 <!-- <b>Caccia all'errore:</b> nel codice sopra manca l'inclusione di un header file. Quale? -->      

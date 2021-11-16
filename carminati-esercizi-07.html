@@ -164,89 +164,96 @@
 </span></p>
 <p>che fornisce un’accuratezza dell’integrale di <span class="math inline">O(h^2)</span>. Notate che questo metodo non richiede il calcolo della funzione negli estremi di integrazione.</p>
 <h2 id="cenni-sullimplementazione">Cenni sull’implementazione</h2>
-<p>L’algoritmo è implementato all’interno di una classe che inizializza le variabili necessarie all’algoritmo. Qui ne vediamo l’esempio di un possibile <em>header</em>. Il costruttore prende in ingresso gli estremi di integrazione ed il numero di passi richiesto per eseguire l’integrale. Sono già dichiarati i metodi di integrazione del mid-point e di Simpson. Al costruttore è passata la funzione integranda usando la classe <code>FunzioneBase</code> definita nelle lezioni precedenti.</p>
+<p>L’algoritmo può essere implementato in molti modi; una possibilità (non certo l’unica) sfrutta lo schema <em>classe madre astratta</em>/<em>classe derivata</em>. Qui vediamo l’esempio di un possibile header, in cui viene dichiarata una classe astratta <code>Integral</code> che rappresenta un generico algoritmo di integrazione. Il metodo privato <code>checkInterval</code> prende in ingresso gli estremi di integrazione e controlla il segno. La classe implementa (tra le varie cose) un metodo <code>integrate</code>, che si preoccupa di chiamare <code>checkInterval</code> e poi invoca il metodo virtuale puro <code>calculate</code>; esso accetta in input il numero di passi con cui si desira effettuare il calcolo e una referenza alla funzione da integrare. Il metodo di integrazione <code>Midpoint</code> viene concretamente implementato in una classe derivata sovrascrivendo il metodo <code>integrate</code>.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#pragma once</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;funzioni.h&quot;</span></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Integral <span class="op">{</span></span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span><span class="op">:</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  Integral<span class="op">(</span><span class="at">const</span> FunzioneBase <span class="op">&amp;</span> f<span class="op">)</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="op">:</span> <span class="va">m_f</span><span class="op">{</span>f<span class="op">},</span> <span class="va">m_a</span><span class="op">{},</span> <span class="va">m_b</span><span class="op">{},</span> <span class="va">m_h</span><span class="op">{},</span> <span class="va">m_sign</span><span class="op">{},</span> <span class="va">m_integral</span><span class="op">{}</span> <span class="op">{}</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> Midpoint<span class="op">(</span><span class="dt">double</span> a<span class="op">,</span> <span class="dt">double</span> b<span class="op">,</span> <span class="dt">unsigned</span> <span class="dt">int</span> nstep<span class="op">);</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> Simpson<span class="op">(</span><span class="dt">double</span> a<span class="op">,</span> <span class="dt">double</span> b<span class="op">,</span> <span class="dt">unsigned</span> <span class="dt">int</span> nstep<span class="op">);</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="kw">private</span><span class="op">:</span></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">const</span> FunzioneBase <span class="va">m_f</span><span class="op">;</span></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Queste variabili memorizzano i parametri dell&#39;ultimo integrale calcolato</span></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> <span class="va">m_a</span><span class="op">,</span> <span class="va">m_b</span><span class="op">;</span></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> <span class="va">m_sum</span><span class="op">;</span></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> <span class="va">m_h</span><span class="op">;</span></span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>  <span class="dt">int</span> <span class="va">m_sign</span><span class="op">;</span></span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> <span class="va">m_integral</span><span class="op">;</span></span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code></pre></div>
-<p>La classe invece è così implementata:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;integrale.h&quot;</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;algorithm&gt;</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="kw">using</span> <span class="kw">namespace</span> std<span class="op">;</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> Integral<span class="op">::</span>Midpoint<span class="op">(</span><span class="dt">double</span> a<span class="op">,</span> <span class="dt">double</span> b<span class="op">,</span> <span class="dt">unsigned</span> <span class="dt">int</span> nstep<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="va">m_a</span> <span class="op">=</span> a<span class="op">;</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="va">m_b</span> <span class="op">=</span> b<span class="op">;</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Assegna a `m_sign` il valore 1 se a &gt; b, −1 altrimenti</span></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  <span class="va">m_sign</span> <span class="op">=</span> a <span class="op">&gt;</span> b <span class="op">?</span> <span class="dv">1</span> <span class="op">:</span> <span class="op">-</span><span class="dv">1</span><span class="op">;</span></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>  <span class="va">m_h</span> <span class="op">=</span> <span class="op">(</span><span class="va">m_b</span> <span class="op">-</span> <span class="va">m_a</span><span class="op">)</span> <span class="op">/</span> nstep<span class="op">;</span></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>  <span class="va">m_sum</span> <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> <span class="op">(</span><span class="dt">unsigned</span> <span class="dt">int</span> i<span class="op">{};</span> i <span class="op">&lt;</span> nstep<span class="op">;</span> i<span class="op">++)</span> <span class="op">{</span></span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>      <span class="va">m_sum</span> <span class="op">+=</span> <span class="va">m_f</span><span class="op">.</span>Eval<span class="op">(</span><span class="va">m_a</span> <span class="op">+</span> <span class="op">(</span>i <span class="op">+</span> <span class="fl">0.5</span><span class="op">)</span> <span class="op">*</span> <span class="va">m_h</span><span class="op">);</span></span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>  <span class="va">m_integral</span> <span class="op">=</span> <span class="va">m_sign</span> <span class="op">*</span> <span class="va">m_sum</span> <span class="op">*</span> <span class="va">m_h</span><span class="op">;</span></span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="va">m_integral</span><span class="op">;</span></span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
-<p>dove gli estremi di integrazione vengono controllati, messi in ordine e viene poi implementato il metodo del mid-point secondo la formula appropriata.</p>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  Integral<span class="op">()</span> <span class="op">:</span> <span class="va">m_a</span><span class="op">{},</span> <span class="va">m_b</span><span class="op">{},</span> <span class="va">m_sign</span><span class="op">{}</span> <span class="op">{}</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> integrate<span class="op">(</span><span class="dt">double</span> a<span class="op">,</span> <span class="dt">double</span> b<span class="op">,</span> <span class="dt">unsigned</span> <span class="dt">int</span> nstep<span class="op">,</span> FunzioneBase <span class="op">&amp;</span>f<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    checkInterval<span class="op">(</span>a<span class="op">,</span> b<span class="op">);</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> calculate<span class="op">(</span>nstep<span class="op">,</span> f<span class="op">);</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> getA<span class="op">()</span> <span class="at">const</span> <span class="op">{</span> <span class="cf">return</span> <span class="va">m_a</span><span class="op">;</span> <span class="op">}</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> getB<span class="op">()</span> <span class="at">const</span> <span class="op">{</span> <span class="cf">return</span> <span class="va">m_b</span><span class="op">;</span> <span class="op">}</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> getSign<span class="op">()</span> <span class="at">const</span> <span class="op">{</span> <span class="cf">return</span> <span class="va">m_sign</span><span class="op">;</span> <span class="op">}</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="kw">private</span><span class="op">:</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Questa è la funzione da ridefinire con `override` nelle classi derivate</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Notate che si può ridefinire anche se è `private`, perché è</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>  <span class="co">// dichiarata `virtual`</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>  <span class="kw">virtual</span> <span class="dt">double</span> calculate<span class="op">(</span><span class="dt">unsigned</span> <span class="dt">int</span> nstep<span class="op">,</span> FunzioneBase <span class="op">&amp;</span>f<span class="op">)</span> <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>  <span class="dt">void</span> checkInterval<span class="op">(</span><span class="dt">double</span> a<span class="op">,</span> <span class="dt">double</span> b<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>    <span class="va">m_a</span> <span class="op">=</span> <span class="bu">std::</span>min<span class="op">(</span>a<span class="op">,</span> b<span class="op">);</span></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>    <span class="va">m_b</span> <span class="op">=</span> <span class="bu">std::</span>max<span class="op">(</span>a<span class="op">,</span> b<span class="op">);</span></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>    <span class="va">m_sign</span> <span class="op">=</span> <span class="op">(</span>a <span class="op">&lt;</span> b<span class="op">)</span> <span class="op">?</span> <span class="dv">1</span> <span class="op">:</span> <span class="op">-</span><span class="dv">1</span><span class="op">;</span></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> <span class="va">m_a</span><span class="op">,</span> <span class="va">m_b</span><span class="op">;</span></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> <span class="va">m_sign</span><span class="op">;</span></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a><span class="co">// Classe derivata, implementa il metodo mid-point</span></span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Midpoint <span class="op">:</span> <span class="kw">public</span> Integral <span class="op">{</span></span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span><span class="op">:</span></span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>  Midpoint<span class="op">()</span> <span class="op">:</span> Integral<span class="op">()</span> <span class="op">{}</span></span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a><span class="kw">private</span><span class="op">:</span></span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> calculate<span class="op">(</span><span class="dt">unsigned</span> <span class="dt">int</span> nstep<span class="op">,</span> FunzioneBase <span class="op">&amp;</span>f<span class="op">)</span> <span class="kw">override</span> <span class="op">{</span></span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Attenzione, questa implementazione ha un errore!</span></span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>    <span class="dt">double</span> h<span class="op">{(</span>getB<span class="op">()</span> <span class="op">-</span> getA<span class="op">())</span> <span class="op">/</span> nstep<span class="op">};</span></span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>    <span class="dt">double</span> sum<span class="op">{};</span></span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">unsigned</span> <span class="dt">int</span> i<span class="op">{};</span> i <span class="op">&lt;</span> nstep<span class="op">;</span> i<span class="op">++)</span> <span class="op">{</span></span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>      sum <span class="op">+=</span> f<span class="op">.</span>Eval<span class="op">(</span>getA<span class="op">()</span> <span class="op">+</span> <span class="op">(</span>i <span class="op">+</span> <span class="fl">0.5</span><span class="op">)</span> <span class="op">*</span> h<span class="op">);</span></span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> getSign<span class="op">()</span> <span class="op">*</span> sum <span class="op">*</span> h<span class="op">;</span></span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code></pre></div>
 <p><strong>Caccia all’errore</strong>: l’implementazione contiene un errore. Per metterlo in evidenza, provate ad integrare <span class="math inline">f(x) = \sin x</span> tra <span class="math inline">\pi / 2</span> e <span class="math inline">\pi</span>: vedrete che la convergenza non è <span class="math inline">O(h^2)</span>, ma solo <span class="math inline">O(h)</span>. Se applicate correttamente l’algoritmo, dovete riscontrare il comportamento atteso.</p>
 <p>Viene ora fornito un codice per verificare il funzionamento di quanto implementato finora, che usa la libreria <code>fmtlib</code>. Come al solito, potete installarla usando lo script <a href="./install_fmt_library.sh"><code>install_fmt_library.sh</code></a>: scaricatelo nella directory dell’esercizio ed eseguitelo, oppure eseguite direttamente questo comando:</p>
 <p><input type="text" value="curl https://ziotom78.github.io/tnds-tomasi-notebooks/install_fmt_library.sh | sh" id="installFmtCommand" readonly="1" size="60"><button onclick='copyFmtInstallationScript("installFmtCommand")'>Copia</button></p>
 <p>In alternativa, scaricate questo <a href="./fmtlib.zip">file zip</a> nella directory dell’esercizio e decomprimetelo, poi aggiungete il file <code>format.cc</code> nella riga in cui compilate l’eseguibile.</p>
 <p>Ecco il codice di esempio:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;cmath&gt;</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;iomanip&gt;</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;fmtlib.h&quot;</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;funzioni.h&quot;</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;integrale.h&quot;</span></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="kw">using</span> <span class="kw">namespace</span> std<span class="op">;</span></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">(</span><span class="dt">int</span> argc<span class="op">,</span> <span class="at">const</span> <span class="dt">char</span> <span class="op">*</span> argv<span class="op">[])</span> <span class="op">{</span></span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span><span class="op">(</span>argc <span class="op">!=</span> <span class="dv">2</span><span class="op">)</span> <span class="op">{</span></span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>      cerr <span class="op">&lt;&lt;</span> <span class="st">&quot;Usage : ./esercizio7.0 nstep&quot;</span> <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>      <span class="cf">return</span> <span class="dv">1</span><span class="op">;</span></span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> a<span class="op">{};</span></span>
-<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> b<span class="op">{</span>M_PI<span class="op">};</span></span>
-<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>  <span class="dt">int</span> nstep<span class="op">{</span>atoi<span class="op">(</span>argv<span class="op">[</span><span class="dv">1</span><span class="op">])};</span></span>
-<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>  Seno mysin<span class="op">{};</span></span>
-<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>  Integral <span class="op">*</span> integrator<span class="op">{</span><span class="kw">new</span> Integral<span class="op">(</span>mysin<span class="op">)};</span></span>
-<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>  fmt<span class="op">::</span>print<span class="op">(</span><span class="st">&quot;midpoint: </span><span class="sc">{:.12f}\n</span><span class="st">&quot;</span><span class="op">,</span> integrator<span class="op">-&gt;</span>Midpoint<span class="op">(</span>a<span class="op">,</span> b<span class="op">,</span> nstep<span class="op">));</span></span>
-<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>  fmt<span class="op">::</span>print<span class="op">(</span><span class="st">&quot;Simpson : </span><span class="sc">{:.12f}\n</span><span class="st">&quot;</span><span class="op">,</span> integrator<span class="op">-&gt;</span>Simpson<span class="op">(</span>a<span class="op">,</span> b<span class="op">,</span> nstep<span class="op">));</span></span>
-<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Senza usare fmtlib.h:</span></span>
-<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>  <span class="co">// cout &lt;&lt; setprecision(12) &lt;&lt; integrator-&gt;Midpoint(a, b, nstep) &lt;&lt; endl;</span></span>
-<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>  <span class="co">// cout &lt;&lt; setprecision(12) &lt;&lt; integrator-&gt;Simpson(a, b, nstep) &lt;&lt; endl;</span></span>
-<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;cmath&gt;</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;iomanip&gt;</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;fmtlib.h&quot;</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;funzioni.h&quot;</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;integrale.h&quot;</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="kw">using</span> <span class="kw">namespace</span> std<span class="op">;</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">(</span><span class="dt">int</span> argc<span class="op">,</span> <span class="at">const</span> <span class="dt">char</span> <span class="op">*</span> argv<span class="op">[])</span> <span class="op">{</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span><span class="op">(</span>argc <span class="op">!=</span> <span class="dv">2</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>      cerr <span class="op">&lt;&lt;</span> <span class="st">&quot;Usage : ./esercizio7.0 nstep&quot;</span> <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>      <span class="cf">return</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> a<span class="op">{};</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> b<span class="op">{</span>M_PI<span class="op">};</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>  <span class="dt">int</span> nstep<span class="op">{</span>atoi<span class="op">(</span>argv<span class="op">[</span><span class="dv">1</span><span class="op">])};</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>  Seno mysin<span class="op">{};</span></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>  Midpoint midpoint<span class="op">{};</span></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>  fmt<span class="op">::</span>print<span class="op">(</span><span class="st">&quot;midpoint: </span><span class="sc">{:.12f}\n</span><span class="st">&quot;</span><span class="op">,</span> midpoint<span class="op">.</span>integrate<span class="op">(</span>a<span class="op">,</span> b<span class="op">,</span> nstep<span class="op">,</span> mysin<span class="op">));</span></span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>  fmt<span class="op">::</span>print<span class="op">(</span><span class="st">&quot;Simpson : </span><span class="sc">{:.12f}\n</span><span class="st">&quot;</span><span class="op">,</span> integrator<span class="op">-&gt;</span>Simpson<span class="op">(</span>a<span class="op">,</span> b<span class="op">,</span> nstep<span class="op">,</span> mysin<span class="op">));</span></span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Senza usare fmtlib.h:</span></span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>  <span class="co">// cout &lt;&lt; setprecision(12) &lt;&lt; midpoint.integrate(a, b, nstep, mysin) &lt;&lt; endl;</span></span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>  <span class="co">// cout &lt;&lt; setprecision(12) &lt;&lt; midpoint.integrate(a, b, nstep, mysin) &lt;&lt; endl;</span></span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 <p>dove abbiamo utilizzato una classe <code>Seno</code> che eredita dalla classe astratta <code>FunzioneBase</code>.</p>
 <h1 id="esercizio-7.1">Esercizio 7.1 - Integrazione alla Simpson (da consegnare)</h1>
 <p>Implementare l’integrazione con il metodo di Simpson con un numero di passi definito (è possibile farlo all’interno della classe già precedentemente costruita aggiungendo nuovi metodi e, se necessario, costruttori). Come nell’<a href="#esercizio-7.0">Esercizio 7.0</a>, stampare una tabella (o costruire un <code>TGraph</code> di ROOT) con la precisione raggiunta in funzione del numero di passi.</p>
@@ -276,18 +283,18 @@ I - I_{2N} = k\left(\frac{h}2\right)^2.
 </span></p>
 <h2 id="cenni-sullimplementazione-1">Cenni sull’implementazione</h2>
 <p>La condizione di uscita dell’algoritmo è basata sul confronto del risultato di due passaggi successivi. Se la differenza della stima dell’integrale tra due passaggi consecutivi è più piccola della precisione richiesta allora l’algoritmo si ferma. Questo poichè l’integrale calcolato con una partizione più fine è sempre una stima migliore dell’approssimazione con la partizione originaria. Calcoliamo la prima approssimazione:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>sum0 <span class="op">=</span> <span class="op">(</span>f<span class="op">[</span>a<span class="op">]</span> <span class="op">+</span> f<span class="op">[</span>b<span class="op">])</span> <span class="op">/</span> <span class="dv">2</span><span class="op">;</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>I0 <span class="op">=</span> sum0 <span class="op">*</span> <span class="op">(</span>b <span class="op">-</span> a<span class="op">);</span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>sum0 <span class="op">=</span> <span class="op">(</span>f<span class="op">[</span>a<span class="op">]</span> <span class="op">+</span> f<span class="op">[</span>b<span class="op">])</span> <span class="op">/</span> <span class="dv">2</span><span class="op">;</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>I0 <span class="op">=</span> sum0 <span class="op">*</span> <span class="op">(</span>b <span class="op">-</span> a<span class="op">);</span></span></code></pre></div>
 <p>Al primo passaggio dell’algoritmo suddividiamo l’intervallo in due:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>sum1 <span class="op">=</span> sum0 <span class="op">+</span> f<span class="op">[</span>x11<span class="op">];</span> </span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>I1 <span class="op">=</span> sum1 <span class="op">*</span> <span class="op">(</span>b <span class="op">-</span> a<span class="op">)</span> <span class="op">/</span> <span class="dv">2</span><span class="op">;</span></span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>sum1 <span class="op">=</span> sum0 <span class="op">+</span> f<span class="op">[</span>x11<span class="op">];</span> </span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>I1 <span class="op">=</span> sum1 <span class="op">*</span> <span class="op">(</span>b <span class="op">-</span> a<span class="op">)</span> <span class="op">/</span> <span class="dv">2</span><span class="op">;</span></span></code></pre></div>
 <p>e così secondo lo schema in figura:</p>
 <p><img src="http://labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/figure/intervallo.png" /></p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>sum2 <span class="op">=</span> sum1 <span class="op">+</span> f<span class="op">[</span>x21<span class="op">]</span> <span class="op">+</span> f<span class="op">[</span>x22<span class="op">];</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>I2 <span class="op">=</span> sum2 <span class="op">*</span> <span class="op">(</span>b <span class="op">-</span> a<span class="op">)</span> <span class="op">/</span> <span class="dv">4</span><span class="op">;</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>sum3 <span class="op">=</span> sum2 <span class="op">+</span> f<span class="op">[</span>x31<span class="op">]</span> <span class="op">+</span> f<span class="op">[</span>x32<span class="op">]</span> <span class="op">+</span> f<span class="op">[</span>x33<span class="op">]</span> <span class="op">+</span> f<span class="op">[</span>x34<span class="op">];</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>I3 <span class="op">=</span> sum3 <span class="op">*</span> <span class="op">(</span>b <span class="op">-</span> a<span class="op">)</span> <span class="op">/</span> <span class="dv">8</span><span class="op">;</span></span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>sum2 <span class="op">=</span> sum1 <span class="op">+</span> f<span class="op">[</span>x21<span class="op">]</span> <span class="op">+</span> f<span class="op">[</span>x22<span class="op">];</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>I2 <span class="op">=</span> sum2 <span class="op">*</span> <span class="op">(</span>b <span class="op">-</span> a<span class="op">)</span> <span class="op">/</span> <span class="dv">4</span><span class="op">;</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>sum3 <span class="op">=</span> sum2 <span class="op">+</span> f<span class="op">[</span>x31<span class="op">]</span> <span class="op">+</span> f<span class="op">[</span>x32<span class="op">]</span> <span class="op">+</span> f<span class="op">[</span>x33<span class="op">]</span> <span class="op">+</span> f<span class="op">[</span>x34<span class="op">];</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>I3 <span class="op">=</span> sum3 <span class="op">*</span> <span class="op">(</span>b <span class="op">-</span> a<span class="op">)</span> <span class="op">/</span> <span class="dv">8</span><span class="op">;</span></span></code></pre></div>
 <p>I valori dell’ultima approssimazione dell’integrale e dell’ultima somma calcolata sono memorizzati all’interno dell’oggetto. In questo modo, se è necessario ricalcolare l’integrale raddoppiando i passi, come nel caso della formula che usa <span class="math inline">I_N</span> e <span class="math inline">I_{2N}</span>, non è necessario ricominciare da capo.</p>                    
                 </div>
             </div>
