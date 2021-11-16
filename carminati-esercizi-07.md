@@ -52,8 +52,7 @@ public:
 
 private:
   // Questa è la funzione da ridefinire con `override` nelle classi derivate
-  // Notate che si può ridefinire anche se è `private`, perché è
-  // dichiarata `virtual`
+  // Si può ridefinire nelle classi base anche se è `private`
   virtual double calculate(unsigned int nstep, FunzioneBase &f) = 0;
 
   void checkInterval(double a, double b) {
@@ -78,7 +77,7 @@ private:
     double h{(getB() - getA()) / nstep};
     double sum{};
 
-    for (unsigned int i{}; i < nstep; i++) {
+    for (unsigned int i{1}; i < nstep; i++) {
       sum += f.Eval(getA() + (i + 0.5) * h);
     }
 
@@ -87,7 +86,18 @@ private:
 };
 ```
 
-**Caccia all'errore**: l'implementazione contiene un errore. Per metterlo in evidenza, provate ad integrare $f(x) = \sin x$ tra $\pi / 2$ e $\pi$: vedrete che la convergenza non è $O(h^2)$, ma solo $O(h)$. Se applicate correttamente l'algoritmo, dovete riscontrare il comportamento atteso.
+Notate in che modo il codice implementa il calcolo: il metodo pubblico è `Integral::integrate`, che **non** è virtuale: esso si preoccupa di invocare `Integral::checkInterval` (privato) per verificare gli estremi di integrazione, e poi invoca il metodo privato `Integral::calculate` che fa il conto vero e proprio:
+
+```c++
+double integrate(double a, double b, unsigned int nstep, FunzioneBase &f) {
+  checkInterval(a, b);
+  return calculate(nstep, f);
+}
+```
+
+In questo modo il metodo `calculate` può usare gli estremi restituiti da `getA()`/`getB()` e il segno restituito da `getSign()` senza doversi preoccupare del caso $a < b$. Se vi stupisce che il metodo `calculate`, pur essendo dichiarato `private`, possa essere ridefinito nella classe derivata `Midpoint`, considerate che `private` indica chi può **chiamare** il metodo (solo la classe `Integrate` e non le sue derivate), ma non pone restrizioni su chi possa **ridefinirlo**.
+
+**Caccia all'errore**: l'implementazione contiene un errore. Per metterlo in evidenza, provate ad integrare $f(x) = \sin x$ tra $\pi / 2$ e $\pi$: vedrete che la convergenza non è $O(h^2)$, ma solo $O(h)$. (Potete vedere l'errore anche confrontando i risultati del programma con i numeri riportati nel [notebook Julia](tomasi-lezione-07-quadratura-numerica.html)). Se applicate correttamente l'algoritmo, dovete riscontrare il comportamento atteso.
 
 Viene ora fornito un codice per verificare il funzionamento di quanto implementato finora, che usa la libreria `fmtlib`. Come al solito, potete installarla usando lo script [`install_fmt_library.sh`](./install_fmt_library.sh): scaricatelo nella directory dell'esercizio ed eseguitelo, oppure eseguite direttamente questo comando:
 
