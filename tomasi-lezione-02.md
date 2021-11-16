@@ -21,6 +21,8 @@ height: 810
 
 -   Come al solito, queste slides, che forniscono suggerimenti addizionali rispetto alla lezione di teoria, sono disponibili all'indirizzo [ziotom78.github.io/tnds-tomasi-notebooks](https://ziotom78.github.io/tnds-tomasi-notebooks/).
 
+-   Chi è online si colleghi a Gather tramite [questo link](https://gather.town/app/etYemzL2K4Nr4o2t/LabTNDS2022).
+
 # Esercizi
 
 -   Lo scopo della lezione di oggi è introdurre il concetto di «classe», che è un tipo di dato complesso del linguaggio C++, creando una classe `Vettore` che implementa un array «intelligente» di valori `double`.

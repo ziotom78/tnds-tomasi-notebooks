@@ -166,9 +166,9 @@ dal terminale:
 
 # Lavoro online
 
--   Durante la lezione useremo il sito [gather.town]() per gestire le persone collegate online.
+-   Durante la lezione useremo il sito [gather.town](https://gather.town) per gestire le persone collegate online.
 
--   Se siete online, per collegarvi a Gather fate click su [questo link ](https://gather.town/invite?token=53aE7z9bj9hXWI2nOu6RlBXbHO-qVewq) (che scadrà al termine della lezione): verrete connessi alla stanza [LaboratorioTNDS](https://gather.town/app/ZrvLmfvx9QMCKHFO/LaboratorioTNDS).
+-   Se siete online, per collegarvi a Gather fate click su [questo link](https://gather.town/app/etYemzL2K4Nr4o2t/LabTNDS2022).
 
 -   Registratevi col vostro nome completo e posizionatevi in uno dei «banchi» virtuali disponibili.
 

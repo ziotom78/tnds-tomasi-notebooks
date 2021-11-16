@@ -21,6 +21,7 @@ css:
 
 -   Come al solito, queste slides, che forniscono suggerimenti addizionali rispetto alla lezione di teoria, sono disponibili all'indirizzo [ziotom78.github.io/tnds-tomasi-notebooks](https://ziotom78.github.io/tnds-tomasi-notebooks/).
 
+-   Chi è online si colleghi a Gather tramite [questo link](https://gather.town/app/etYemzL2K4Nr4o2t/LabTNDS2022).
 
 # Esercizi
 
