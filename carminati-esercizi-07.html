@@ -4,7 +4,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Lezione 8: Quadratura numerica</title>
+        <title>Lezione 7: Quadratura numerica</title>
         <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
         <link rel="apple-touch-icon-precomposed" href="images/apple-touch-icon.png">
 
@@ -24,7 +24,7 @@
         <meta name="generator" content="pandoc-uikit" />
                 <meta name="author" content="Leonardo Carminati" />
                 <meta name="author" content="Maurizio Tomasi" />
-                        <title>Lezione 8: Quadratura numerica</title>
+                        <title>Lezione 7: Quadratura numerica</title>
         <style type="text/css">code{white-space: pre;}</style>
                         <style type="text/css">
             pre > code.sourceCode { white-space: pre; position: relative; }
@@ -118,7 +118,7 @@
 
                         <div class="uk-grid" data-uk-grid-margin>
                 <div class="uk-width-1-1">
-                    <h1 class="uk-heading-large">Lezione 8: Quadratura numerica</h1>
+                    <h1 class="uk-heading-large">Lezione 7: Quadratura numerica</h1>
                                         <h3 class="uk-heading-large">A.A. 2021−2022</p></h3>
                                                             <p class="uk-text-large">Leonardo Carminati</p>
                                         <p class="uk-text-large">Maurizio Tomasi</p>
@@ -131,16 +131,16 @@
                         <div class="uk-panel uk-panel-box menu-begin" >
 
                                                         <ul>
-                                                        <li><a href="#esercizio-8.0">Esercizio 8.0 - Integrazione con la formula del mid-point</a>
+                                                        <li><a href="#esercizio-7.0">Esercizio 7.0 - Integrazione con la formula del mid-point</a>
                                                         <ul>
                                                         <li><a href="#il-metodo-del-mid-point">Il metodo del mid-point</a></li>
                                                         <li><a href="#cenni-sullimplementazione">Cenni sull’implementazione</a></li>
                                                         </ul></li>
-                                                        <li><a href="#esercizio-8.1">Esercizio 8.1 - Integrazione alla Simpson (da consegnare)</a>
+                                                        <li><a href="#esercizio-7.1">Esercizio 7.1 - Integrazione alla Simpson (da consegnare)</a>
                                                         <ul>
                                                         <li><a href="#il-metodo-simpson">Il metodo Simpson</a></li>
                                                         </ul></li>
-                                                        <li><a href="#esercizio-8.2">Esercizio 8.2 - Integrazione con la formula dei trapezi con precisione fissata (da consegnare)</a>
+                                                        <li><a href="#esercizio-7.2">Esercizio 7.2 - Integrazione con la formula dei trapezi con precisione fissata (da consegnare)</a>
                                                         <ul>
                                                         <li><a href="#stima-runtime-dellerrore">Stima runtime dell’errore</a></li>
                                                         <li><a href="#cenni-sullimplementazione-1">Cenni sull’implementazione</a></li>
@@ -152,9 +152,9 @@
                 </div>
 
                 <div class="uk-width-medium-3-4">
-<p>[La pagina con la spiegazione originale degli esercizi si trova qui: <a href="http://labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/lezione8_1819.html">labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/lezione8_1819.html</a>.]</p>
+<p>[La pagina con la spiegazione originale degli esercizi si trova qui: <a href="http://labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/lezione7_2122.html">labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/lezione7_2122.html</a>.</p>
 <p>In questa lezione implementeremo alcuni algoritmi per la quadratura numerica, cioè per il calcolo di integrali definiti di funzioni in un intervallo chiuso e la valutazione dell’errore commesso nel calcolo dell’integrale stesso. Questo si rende necessario quando non sappiamo valutare analiticamente l’integrale in esame, quando non si riesce ad esprimere la primitiva in funzioni elementari, quando la soluzione analitica è molto complicata ed il calcolo numerico è molto più semplice, oppure quando la funzione è conosciuta in un numeri finito di punti.</p>
-<h1 id="esercizio-8.0">Esercizio 8.0 - Integrazione con la formula del mid-point</h1>
+<h1 id="esercizio-7.0">Esercizio 7.0 - Integrazione con la formula del mid-point</h1>
 <p>Implementare un codice per il calcolo della funzione <span class="math inline">\sin(x)</span> su <span class="math inline">[0, \pi]</span> con il metodo del mid-point, con un numero di passi fissato passato da riga di comando. Per controllare la precisione ottenuta con un numero di passi fissato si richiede di stampare una tabella con la differenza tra il risultato numerico ed il valore esatto analitico in funzione del numero di passi (o della lunghezza del passo <span class="math inline">h</span>).</p>
 <p>In aggiunta alla tabella, si può rappresentare l’andamento dell’errore in funzione della lunghezza del passo <span class="math inline">h</span> con un <code>TGraph</code> di ROOT (una traccia su come visualizzare i dati usando un TGraph di ROOT si può trovare <a href="./codici/test_tgraph.cpp">qui</a>).</p>
 <h2 id="il-metodo-del-mid-point">Il metodo del mid-point</h2>
@@ -171,40 +171,42 @@
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Integral <span class="op">{</span></span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span><span class="op">:</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  Integral<span class="op">(</span><span class="dt">double</span> a<span class="op">,</span> <span class="dt">double</span> b<span class="op">,</span> <span class="at">const</span> FunzioneBase <span class="op">*</span> f<span class="op">);</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> Midpoint<span class="op">(</span><span class="dt">unsigned</span> <span class="dt">int</span> nstep<span class="op">);</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> Simpson<span class="op">(</span><span class="dt">unsigned</span> <span class="dt">int</span> nstep<span class="op">);</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="kw">private</span><span class="op">:</span></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> <span class="va">m_a</span><span class="op">,</span> <span class="va">m_b</span><span class="op">;</span></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> <span class="va">m_sum</span><span class="op">;</span></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> <span class="va">m_h</span><span class="op">;</span></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>  <span class="dt">int</span> <span class="va">m_sign</span><span class="op">;</span></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> <span class="va">m_integral</span><span class="op">;</span></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">const</span> FunzioneBase <span class="op">*</span> <span class="va">m_f</span><span class="op">;</span></span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code></pre></div>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  Integral<span class="op">(</span><span class="at">const</span> FunzioneBase <span class="op">&amp;</span> f<span class="op">)</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="op">:</span> <span class="va">m_f</span><span class="op">{</span>f<span class="op">},</span> <span class="va">m_a</span><span class="op">{},</span> <span class="va">m_b</span><span class="op">{},</span> <span class="va">m_h</span><span class="op">{},</span> <span class="va">m_sign</span><span class="op">{},</span> <span class="va">m_integral</span><span class="op">{}</span> <span class="op">{}</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> Midpoint<span class="op">(</span><span class="dt">double</span> a<span class="op">,</span> <span class="dt">double</span> b<span class="op">,</span> <span class="dt">unsigned</span> <span class="dt">int</span> nstep<span class="op">);</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> Simpson<span class="op">(</span><span class="dt">double</span> a<span class="op">,</span> <span class="dt">double</span> b<span class="op">,</span> <span class="dt">unsigned</span> <span class="dt">int</span> nstep<span class="op">);</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="kw">private</span><span class="op">:</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">const</span> FunzioneBase <span class="va">m_f</span><span class="op">;</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Queste variabili memorizzano i parametri dell&#39;ultimo integrale calcolato</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> <span class="va">m_a</span><span class="op">,</span> <span class="va">m_b</span><span class="op">;</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> <span class="va">m_sum</span><span class="op">;</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> <span class="va">m_h</span><span class="op">;</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>  <span class="dt">int</span> <span class="va">m_sign</span><span class="op">;</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> <span class="va">m_integral</span><span class="op">;</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code></pre></div>
 <p>La classe invece è così implementata:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;integrale.h&quot;</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;algorithm&gt;</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="kw">using</span> <span class="kw">namespace</span> std<span class="op">;</span></span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>Integral<span class="op">::</span>Integral<span class="op">(</span><span class="dt">double</span> a<span class="op">,</span> <span class="dt">double</span> b<span class="op">,</span> <span class="at">const</span> FunzioneBase <span class="op">*</span> f<span class="op">)</span> <span class="op">:</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="va">m_a</span><span class="op">{</span>min<span class="op">(</span>a<span class="op">,</span> b<span class="op">)},</span> <span class="va">m_b</span><span class="op">{</span>max<span class="op">(</span>a<span class="op">,</span> b<span class="op">)},</span> <span class="va">m_f</span><span class="op">{</span>f<span class="op">}</span> <span class="op">{</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Assegna a `m_sign` il valore 1 se a &gt; b, −1 altrimenti</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  <span class="va">m_sign</span> <span class="op">=</span> a <span class="op">&gt;</span> b <span class="op">?</span> <span class="dv">1</span> <span class="op">:</span> <span class="op">-</span><span class="dv">1</span><span class="op">;</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> Integral<span class="op">::</span>Midpoint<span class="op">(</span><span class="dt">unsigned</span> <span class="dt">int</span> nstep<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> Integral<span class="op">::</span>Midpoint<span class="op">(</span><span class="dt">double</span> a<span class="op">,</span> <span class="dt">double</span> b<span class="op">,</span> <span class="dt">unsigned</span> <span class="dt">int</span> nstep<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="va">m_a</span> <span class="op">=</span> a<span class="op">;</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="va">m_b</span> <span class="op">=</span> b<span class="op">;</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Assegna a `m_sign` il valore 1 se a &gt; b, −1 altrimenti</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  <span class="va">m_sign</span> <span class="op">=</span> a <span class="op">&gt;</span> b <span class="op">?</span> <span class="dv">1</span> <span class="op">:</span> <span class="op">-</span><span class="dv">1</span><span class="op">;</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>  <span class="va">m_h</span> <span class="op">=</span> <span class="op">(</span><span class="va">m_b</span> <span class="op">-</span> <span class="va">m_a</span><span class="op">)</span> <span class="op">/</span> nstep<span class="op">;</span></span>
 <span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>  <span class="va">m_sum</span> <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
 <span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> <span class="op">(</span><span class="dt">unsigned</span> <span class="dt">int</span> i<span class="op">{};</span> i <span class="op">&lt;</span> nstep<span class="op">;</span> i<span class="op">++)</span> <span class="op">{</span></span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>      <span class="va">m_sum</span> <span class="op">+=</span> <span class="va">m_f</span><span class="op">-&gt;</span>Eval<span class="op">(</span><span class="va">m_a</span> <span class="op">+</span> <span class="op">(</span>i <span class="op">+</span> <span class="fl">0.5</span><span class="op">)</span> <span class="op">*</span> <span class="va">m_h</span><span class="op">);</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>      <span class="va">m_sum</span> <span class="op">+=</span> <span class="va">m_f</span><span class="op">.</span>Eval<span class="op">(</span><span class="va">m_a</span> <span class="op">+</span> <span class="op">(</span>i <span class="op">+</span> <span class="fl">0.5</span><span class="op">)</span> <span class="op">*</span> <span class="va">m_h</span><span class="op">);</span></span>
 <span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>  <span class="va">m_integral</span> <span class="op">=</span> <span class="va">m_sign</span><span class="op">*</span><span class="va">m_sum</span><span class="op">*</span><span class="va">m_h</span><span class="op">;</span></span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>  <span class="va">m_integral</span> <span class="op">=</span> <span class="va">m_sign</span> <span class="op">*</span> <span class="va">m_sum</span> <span class="op">*</span> <span class="va">m_h</span><span class="op">;</span></span>
 <span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="va">m_integral</span><span class="op">;</span></span>
 <span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 <p>dove gli estremi di integrazione vengono controllati, messi in ordine e viene poi implementato il metodo del mid-point secondo la formula appropriata.</p>
@@ -222,43 +224,48 @@
 <span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;integrale.h&quot;</span></span>
 <span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="kw">using</span> <span class="kw">namespace</span> std<span class="op">;</span></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">(</span><span class="dt">int</span> argc<span class="op">,</span> <span class="at">const</span> <span class="dt">char</span> <span class="op">*</span> argv<span class="op">[])</span> <span class="op">{</span></span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span><span class="op">(</span>argc <span class="op">!=</span> <span class="dv">2</span><span class="op">)</span> <span class="op">{</span></span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>      cerr <span class="op">&lt;&lt;</span> <span class="st">&quot;Usage : ./esercizio8.0 nstep&quot;</span> <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>      <span class="cf">return</span> <span class="op">-</span><span class="dv">1</span><span class="op">;</span></span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> a<span class="op">{};</span></span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> b<span class="op">{</span>M_PI<span class="op">};</span></span>
-<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>  <span class="dt">int</span> nstep<span class="op">{</span>atoi<span class="op">(</span>argv<span class="op">[</span><span class="dv">1</span><span class="op">])};</span></span>
-<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>  Seno <span class="op">*</span> mysin<span class="op">{</span><span class="kw">new</span> Seno<span class="op">()};</span></span>
-<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>  Integral <span class="op">*</span> integrator<span class="op">{</span><span class="kw">new</span> Integral<span class="op">(</span>a<span class="op">,</span> b<span class="op">,</span> mysin<span class="op">)};</span></span>
-<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>  fmt<span class="op">::</span>print<span class="op">(</span><span class="st">&quot;midpoint: </span><span class="sc">{:.12f}\n</span><span class="st">&quot;</span><span class="op">,</span> integrator<span class="op">-&gt;</span>Midpoint<span class="op">(</span>nstep<span class="op">));</span></span>
-<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>  fmt<span class="op">::</span>print<span class="op">(</span><span class="st">&quot;Simpson : </span><span class="sc">{:.12f}\n</span><span class="st">&quot;</span><span class="op">,</span> integrator<span class="op">-&gt;</span>Simpson<span class="op">(</span>nstep<span class="op">));</span></span>
-<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Senza usare fmtlib.h:</span></span>
-<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>  <span class="co">// cout &lt;&lt; setprecision(12) &lt;&lt; integrator-&gt;Midpoint(nstep) &lt;&lt; endl;</span></span>
-<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>  <span class="co">// cout &lt;&lt; setprecision(12) &lt;&lt; integrator-&gt;Simpson(nstep) &lt;&lt; endl;</span></span>
-<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">(</span><span class="dt">int</span> argc<span class="op">,</span> <span class="at">const</span> <span class="dt">char</span> <span class="op">*</span> argv<span class="op">[])</span> <span class="op">{</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span><span class="op">(</span>argc <span class="op">!=</span> <span class="dv">2</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>      cerr <span class="op">&lt;&lt;</span> <span class="st">&quot;Usage : ./esercizio7.0 nstep&quot;</span> <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>      <span class="cf">return</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> a<span class="op">{};</span></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> b<span class="op">{</span>M_PI<span class="op">};</span></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>  <span class="dt">int</span> nstep<span class="op">{</span>atoi<span class="op">(</span>argv<span class="op">[</span><span class="dv">1</span><span class="op">])};</span></span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>  Seno mysin<span class="op">{};</span></span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>  Integral <span class="op">*</span> integrator<span class="op">{</span><span class="kw">new</span> Integral<span class="op">(</span>mysin<span class="op">)};</span></span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>  fmt<span class="op">::</span>print<span class="op">(</span><span class="st">&quot;midpoint: </span><span class="sc">{:.12f}\n</span><span class="st">&quot;</span><span class="op">,</span> integrator<span class="op">-&gt;</span>Midpoint<span class="op">(</span>a<span class="op">,</span> b<span class="op">,</span> nstep<span class="op">));</span></span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>  fmt<span class="op">::</span>print<span class="op">(</span><span class="st">&quot;Simpson : </span><span class="sc">{:.12f}\n</span><span class="st">&quot;</span><span class="op">,</span> integrator<span class="op">-&gt;</span>Simpson<span class="op">(</span>a<span class="op">,</span> b<span class="op">,</span> nstep<span class="op">));</span></span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Senza usare fmtlib.h:</span></span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>  <span class="co">// cout &lt;&lt; setprecision(12) &lt;&lt; integrator-&gt;Midpoint(a, b, nstep) &lt;&lt; endl;</span></span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>  <span class="co">// cout &lt;&lt; setprecision(12) &lt;&lt; integrator-&gt;Simpson(a, b, nstep) &lt;&lt; endl;</span></span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 <p>dove abbiamo utilizzato una classe <code>Seno</code> che eredita dalla classe astratta <code>FunzioneBase</code>.</p>
-<h1 id="esercizio-8.1">Esercizio 8.1 - Integrazione alla Simpson (da consegnare)</h1>
-<p>Implementare l’integrazione con il metodo di Simpson con un numero di passi definito (è possibile farlo all’interno della classe già precedentemente costruita aggiungendo nuovi metodi e, se necessario, costruttori). Come nell’<a href="#esercizio-8.0">Esercizio 8.0</a>, stampare una tabella (o costruire un <code>TGraph</code> di ROOT) con la precisione raggiunta in funzione del numero di passi.</p>
+<h1 id="esercizio-7.1">Esercizio 7.1 - Integrazione alla Simpson (da consegnare)</h1>
+<p>Implementare l’integrazione con il metodo di Simpson con un numero di passi definito (è possibile farlo all’interno della classe già precedentemente costruita aggiungendo nuovi metodi e, se necessario, costruttori). Come nell’<a href="#esercizio-7.0">Esercizio 7.0</a>, stampare una tabella (o costruire un <code>TGraph</code> di ROOT) con la precisione raggiunta in funzione del numero di passi.</p>
 <h2 id="il-metodo-simpson">Il metodo Simpson</h2>
 <p>Nel metodo di integrazione alla Simpson, la funzione integranda è approssimata, negli intervalli <span class="math inline">[x_k, x_{k + 2}]</span> (dove <span class="math inline">k</span> è un intero pari e <span class="math inline">x_k = a + k h</span>) con un polinomio di secondo grado i cui nodi sono nei punti <span class="math inline">\bigl(x_k, f(x_k)\bigr)</span>, <span class="math inline">\bigl(x_{k + 1}, f(x_{k + 1})\bigr)</span>, <span class="math inline">\bigl(x_{k + 2}, f(x_{k + 2})\bigr)</span>. Esso fornisce una valutazione dell’integrale con una precisione pari a <span class="math inline">h^4</span>. La sua applicazione richiede che il numero di passi sia pari e la formula che approssima l’integrale è</p>
 <p><span class="math display">
 \int_a^b f(x)\,\mathrm{d}x = h \cdot \left(
 \frac13 f(x_o) + \frac43 f(x_1) + \frac23 f(x_2) + \frac43 f(x_3) + \ldots
 + \frac23 f(x_{N - 2}) + \frac43 f(x_{N - 1}) + \frac13 f(x_N)\bigl)
-\right), \quad h = \frac{b - a}N, \quad x_k = a + k h.
+\right),
 </span></p>
-<h1 id="esercizio-8.2">Esercizio 8.2 - Integrazione con la formula dei trapezi con precisione fissata (da consegnare)</h1>
+<p>dove vale che</p>
+<p><span class="math display">
+h = \frac{b - a}N, \quad x_k = a + k h.
+</span></p>
+<h1 id="esercizio-7.2">Esercizio 7.2 - Integrazione con la formula dei trapezi con precisione fissata (da consegnare)</h1>
 <p>Implementare l’integrazione della funzione <span class="math inline">\sin(x)</span> su <span class="math inline">[0, \pi]</span> con il metodo dei trapezi e con precisione fissata all’interno della classe definita in precedenza. Occorrerà definire un costruttore che prenda in ingresso gli estremi di integrazione e la precisione desiderata passata dalla riga di comando.</p>
 <h2 id="stima-runtime-dellerrore">Stima runtime dell’errore</h2>
-<p>Come possiamo fare a stimare l’errore che stiamo commettendo nel calcolo di un integrale se non conosciamo il valore vero I dell’integrale? Partendo dalla conoscenza dell’andamento teorico dell’errore in funzione del passo h possiamo trovare un modo semplice per la stima dell’errore che stiamo commettendo. Nel caso della regola dei trapezi, l’adamento dell’errore è <span class="math inline">\epsilon = k h^2</span>. Calcolando l’integrale <span class="math inline">I_N</span> utilizzando un passo <span class="math inline">h</span> e successivamente l’intgrale <span class="math inline">I_{2N}</span> con un passo <span class="math inline">h/2</span> possiamo scrivere il seguente sistema di equazioni: <span class="math display">
+<p>Come possiamo fare a stimare l’errore che stiamo commettendo nel calcolo di un integrale se non conosciamo il valore vero <span class="math inline">I</span> dell’integrale? Partendo dalla conoscenza dell’andamento teorico dell’errore in funzione del passo <span class="math inline">h</span>, possiamo trovare un modo semplice per la stima dell’errore che stiamo commettendo. Nel caso della regola dei trapezi, l’adamento dell’errore è <span class="math inline">\epsilon = k h^2</span>. Calcolando l’integrale <span class="math inline">I_N</span> utilizzando un passo <span class="math inline">h</span> e successivamente l’intgrale <span class="math inline">I_{2N}</span> con un passo <span class="math inline">h/2</span>, possiamo scrivere il seguente sistema di equazioni: <span class="math display">
 \begin{cases}
 I - I_N = k h^2,
 I - I_{2N} = k\left(\frac{h}2\right)^2.
@@ -268,7 +275,7 @@ I - I_{2N} = k\left(\frac{h}2\right)^2.
 \epsilon(N) = \frac43 \left|I_{2N} - I_N\right|.
 </span></p>
 <h2 id="cenni-sullimplementazione-1">Cenni sull’implementazione</h2>
-<p>La condizione di uscita dell’algoritmo è basata sul confronto del risultato di due passaggi successivi. Se la differenza della stima dell’integrale tra due passaggi consecutivi è più piccola della precisione richiesta allora l’algoritmo si ferma. Questo poichè l’integrale calcolato con una partizione più fine è sempre una stima migliore dell’approssimazione con la partizione originaria. Nel costruttore calcoliamo la prima approssimazione:</p>
+<p>La condizione di uscita dell’algoritmo è basata sul confronto del risultato di due passaggi successivi. Se la differenza della stima dell’integrale tra due passaggi consecutivi è più piccola della precisione richiesta allora l’algoritmo si ferma. Questo poichè l’integrale calcolato con una partizione più fine è sempre una stima migliore dell’approssimazione con la partizione originaria. Calcoliamo la prima approssimazione:</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>sum0 <span class="op">=</span> <span class="op">(</span>f<span class="op">[</span>a<span class="op">]</span> <span class="op">+</span> f<span class="op">[</span>b<span class="op">])</span> <span class="op">/</span> <span class="dv">2</span><span class="op">;</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>I0 <span class="op">=</span> sum0 <span class="op">*</span> <span class="op">(</span>b <span class="op">-</span> a<span class="op">);</span></span></code></pre></div>
 <p>Al primo passaggio dell’algoritmo suddividiamo l’intervallo in due:</p>
@@ -281,7 +288,7 @@ I - I_{2N} = k\left(\frac{h}2\right)^2.
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>sum3 <span class="op">=</span> sum2 <span class="op">+</span> f<span class="op">[</span>x31<span class="op">]</span> <span class="op">+</span> f<span class="op">[</span>x32<span class="op">]</span> <span class="op">+</span> f<span class="op">[</span>x33<span class="op">]</span> <span class="op">+</span> f<span class="op">[</span>x34<span class="op">];</span></span>
 <span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>I3 <span class="op">=</span> sum3 <span class="op">*</span> <span class="op">(</span>b <span class="op">-</span> a<span class="op">)</span> <span class="op">/</span> <span class="dv">8</span><span class="op">;</span></span></code></pre></div>
-<p>I valori dell’ultima approssimazione dell’integrale e dell’ultima somma calcolata sono memorizzati all’interno dell’oggetto. In questo modo, se viene richiesto di ricalcolare l’integrale, non è necessario ricominciare da capo.</p>                    
+<p>I valori dell’ultima approssimazione dell’integrale e dell’ultima somma calcolata sono memorizzati all’interno dell’oggetto. In questo modo, se è necessario ricalcolare l’integrale raddoppiando i passi, come nel caso della formula che usa <span class="math inline">I_N</span> e <span class="math inline">I_{2N}</span>, non è necessario ricominciare da capo.</p>                    
                 </div>
             </div>
 
