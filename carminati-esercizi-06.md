@@ -170,7 +170,8 @@ Per cui per impostare il numero di cifre significative nella scrittura a video i
 #include "fmtlib.h"
 
 // {0} → valore di `zero`, {1} → valore di `cifre_significative`
-fmt::print("x0 = {0:{1}f}", zero, cifre_significative);
+// Si deve mettere il punto prima di {1} per indicare le cifre dopo la virgola
+fmt::print("x0 = {0:.{1}f}", zero, cifre_significative);
 ```
 
 se usate la libreria `fmtlib.h`, oppure, se usate `cout` e `<iomanip>`:

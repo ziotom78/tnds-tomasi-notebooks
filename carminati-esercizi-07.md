@@ -23,7 +23,7 @@ In aggiunta alla tabella, si può rappresentare l'andamento dell'errore in funzi
 Ricordiamo che in questo metodo l'approssimazione dell'integrale è definita dalla formula
 
 $$
-\int_a^b f(x)\,\mathrm{d}x = \bigl(f(x_0) + f(x_1) + \ldots + f(x_{N - 1})\bigl),\quad h = \frac{b - a}N, \quad x_k = a + \left(k + \frac12\right) h,
+\int_a^b f(x)\,\mathrm{d}x = h \cdot \bigl(f(x_0) + f(x_1) + \ldots + f(x_{N - 1})\bigl),\quad h = \frac{b - a}N, \quad x_k = a + \left(k + \frac12\right) h,
 $$
 
 che fornisce un'accuratezza dell'integrale di $O(h^2)$. Notate che questo metodo non richiede il calcolo della funzione negli estremi di integrazione.

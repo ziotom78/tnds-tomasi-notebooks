@@ -160,7 +160,7 @@
 <h2 id="il-metodo-del-mid-point">Il metodo del mid-point</h2>
 <p>Ricordiamo che in questo metodo l’approssimazione dell’integrale è definita dalla formula</p>
 <p><span class="math display">
-\int_a^b f(x)\,\mathrm{d}x = \bigl(f(x_0) + f(x_1) + \ldots + f(x_{N - 1})\bigl),\quad h = \frac{b - a}N, \quad x_k = a + \left(k + \frac12\right) h,
+\int_a^b f(x)\,\mathrm{d}x = h \cdot \bigl(f(x_0) + f(x_1) + \ldots + f(x_{N - 1})\bigl),\quad h = \frac{b - a}N, \quad x_k = a + \left(k + \frac12\right) h,
 </span></p>
 <p>che fornisce un’accuratezza dell’integrale di <span class="math inline">O(h^2)</span>. Notate che questo metodo non richiede il calcolo della funzione negli estremi di integrazione.</p>
 <h2 id="cenni-sullimplementazione">Cenni sull’implementazione</h2>

@@ -14674,7 +14674,7 @@ $$</p>
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>Il metodo del mid-point consiste nell'approssimare l'integrale con il valore del punto della funzione $f$ nel punto medio dell'intervallo:
 $$
-\int_a^b f(x)\,\text{d}x \approx \sum_{k=0}^{n - 1} f\Biggl(a + \left(k + \frac12\right)h\Biggr).
+\int_a^b f(x)\,\text{d}x \approx \sum_{k=0}^{n - 1} h \cdot f\Biggl(a + \left(k + \frac12\right)h\Biggr).
 $$</p>
 <p>In Julia non esistono classi, quindi non è possibile definire una classe <code>Integral</code>: in Julia si usa una tecnica più adatta per i calcoli che si usano in fisica, basata sul <em>multiple dispatch</em>.</p>
 <p>Non preoccupiamoci quindi di definire classi, ma implementiamo il metodo del mid-point tramite una semplice funzione <code>midpoint</code>. Non specifichiamo il tipo di <code>f</code>, né di <code>a</code> o di <code>b</code>, ma specifichiamo quello di <code>n</code>: il motivo sarà chiaro quando risolveremo l'esercizio 7.2. Il tipo <code>Integer</code> è l'analogo di una classe astratta in C++, ed è il padre di tutti quei tipi che rappresentano numeri interi (<code>Int</code>, <code>Int8</code>, <code>UInt32</code>, etc.). Stiamo in pratica dicendo a Julia che <code>midpoint</code> può accettare qualsiasi tipo di valore per <code>f</code>, <code>a</code> e <code>b</code>, ma <code>n</code> deve essere un numero intero.</p>
