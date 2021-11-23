@@ -1,5 +1,5 @@
 ---
-title: "Lezione 9: Equazioni differenziali"
+title: "Lezione 8: Equazioni differenziali"
 author:
 - "Leonardo Carminati"
 - "Maurizio Tomasi"
