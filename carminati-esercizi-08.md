@@ -8,7 +8,7 @@ lang: it-IT
 header-includes: <script src="./fmtinstall.js"></script>
 ...
 
-[La pagina con la spiegazione originale degli esercizi si trova qui: [labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/lezione9_1819_vector.html](http://labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/lezione9_1819_vector.html).]
+[La pagina con la spiegazione originale degli esercizi si trova qui: [labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/lezione8_2122.html](http://labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/lezione8_2122.html).]
 
 In questa lezione introdurremo alcuni metodi per la risoluzione di equazioni differenziali ordinarie. Implementeremo la risoluzione numerica di queste equazioni con i metodi di Eulero e di Runge-Kutta.
 
@@ -26,7 +26,7 @@ Implementare un codice per la risoluzione numerica di un'equazione differenziale
 
 Struttureremo la soluzione del problema in modo simile a quanto fatto nelle precedenti lezioni su ricerca degli zeri e integrazione numerica:
 
-![](http://labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/figure/EqDiffClassi.png)
+![](http://)
 
 -   Definiamo una classe astratta `FunzioneVettorialeBase` con un unico metodo `Eval`, puramente virtuale, che dato un `vector` ed un `double`, rappresentante il tempo, restituisce il valore della derivata prima nel punto e nell'istante considerati.
 -   Da questa classe astratta, deriviamo una classe concreta che descriva le leggi del modo di un oscillatore armonico, permettendo di definirne la frequenza, o nel construttore o con degli opportuni metodi per leggere/definire dei parametri.
