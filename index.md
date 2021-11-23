@@ -21,7 +21,7 @@ header-includes: <script src="./fmtinstall.js"></script>
 | 23 Novembre 2021 | [Equazioni differenziali](carminati-esercizi-08.html) | [Notebook 8](https://ziotom78.github.io/tnds-notebooks/lezione08/) |
 </center>
 
-Durante le sessioni di laboratorio useremo il sito [gather.town](https://gather.town) per gestire le persone collegate online.
+Durante le sessioni di laboratorio useremo il sito [gather.town](https://gather.town/app/etYemzL2K4Nr4o2t/LabTNDS2022) per gestire le persone collegate online.
 
 # Suggerimenti vari
 
