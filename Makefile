@@ -11,7 +11,7 @@ all: \
 	tomasi-lezione-01.html \
 	carminati-esercizi-11.html \
 	carminati-esercizi-10.html \
-	carminati-esercizi-09.html \
+	carminati-esercizi-08.html \
 	carminati-esercizi-07.html \
 	carminati-esercizi-06.html \
 	carminati-esercizi-05.html \
