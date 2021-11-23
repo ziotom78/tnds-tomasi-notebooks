@@ -175,7 +175,7 @@
 <h1 id="esercizio-9.1">Esercizio 9.1 - Risoluzione tramite metodo di Eulero</h1>
 <p>Implementare un codice per la risoluzione numerica di un’equazione differenziale descrivente il moto di un oscillatore armonico tramite il metodo di Eulero. Graficare l’andamento della posizione in funzione del tempo al variare del passo di integrazione e confrontare l’errore commesso con la soluzione esatta.</p>
 <p>Struttureremo la soluzione del problema in modo simile a quanto fatto nelle precedenti lezioni su ricerca degli zeri e integrazione numerica:</p>
-<p><img src="http://" /></p>
+<p><img src="http://labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/figure/EqDiffClassi_2122.png" /></p>
 <ul>
 <li>Definiamo una classe astratta <code>FunzioneVettorialeBase</code> con un unico metodo <code>Eval</code>, puramente virtuale, che dato un <code>vector</code> ed un <code>double</code>, rappresentante il tempo, restituisce il valore della derivata prima nel punto e nell’istante considerati.</li>
 <li>Da questa classe astratta, deriviamo una classe concreta che descriva le leggi del modo di un oscillatore armonico, permettendo di definirne la frequenza, o nel construttore o con degli opportuni metodi per leggere/definire dei parametri.</li>
