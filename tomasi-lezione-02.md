@@ -9,6 +9,7 @@ theme: white
 progress: true
 slideNumber: true
 background-image: ./media/background.png
+history: true
 width: 1440
 height: 810
 ...
