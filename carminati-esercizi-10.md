@@ -32,7 +32,7 @@ Per risolvere questo esercizio si può seguire lo schema seguente:
 
     class RandomGen {
     public:
-      RandomGen(unsigned int);
+      RandomGen(unsigned int seed);
       void SetA(unsigned int a) { m_a = a; }
       void SetC(unsigned int c) { m_c = c; }
       void SetM(unsigned int m) { m_m = m; }
@@ -54,33 +54,93 @@ Per risolvere questo esercizio si può seguire lo schema seguente:
 -   Preparare un semplice `main` per provare le funzionalità della classe RandomGen. Lo schema di massima potrebbe essere il seguente:
 
     ```c++
-    #include "TApplication.h"
-    #include "TCanvas.h"
-    #include "TH1F.h"
-    #include "TAxis.h"
     #include <iostream>
+    #include <vector>
     #include "randomgen.h"
+    #include "gplot++.h"
+
+    using namespace std;
 
     int main() {
-      TApplication app{"app", 0, 0};
+      // Implementate questa funzione per verificare che i vostri
+      // generatori funzionino; fate riferimento alla pagina
+      //
+      //   https://ziotom78.github.io/tnds-notebooks/lezione10/
+      //
+      // per sapere quali numeri usare negli assert
+      test_random_numbers();
+      
       RandomGen myGen{1};
-      const int nmax{10000};
+      vector<double> samples(10000); // Usare parentesi tonde () e non graffe {} qui!
       
-      TH1F unif{"Uniforme", "Uniforme", 100, 4, 11};
-      
-      for(int k{}; k < nmax; k++) {
-          unif.Fill(myGen.Unif(5,10));
+      for(size_t k{}; k < samples.size(); k++) {
+          samples[k] = myGen.Unif(5, 10);
+          // Stampa i primi 10 valori per controllo
+          if (k < 10)
+              cout << samples[k] << endl;
       }
 
-      TCanvas can2("Uniforme", "Uniforme") ;
-      can2.cd();
-      unif.GetXaxis()->SetTitle("x [AU]");
-      unif.GetYaxis()->SetTitle("N");
-      unif.Draw();
+      const int nbins{100};  // Numero di barre nell'istogramma
 
-      app.Run();
+      Gnuplot plt{};
+      plt.redirect_to_png("uniforme.png");
+      
+      // Per produrre i quattro grafici nella stessa immagine, secondo
+      // una matrice 2×2, si può usare il comando
+      //
+      //   plt.multiplot(2, 2);
+      //
+      // e poi invocare i comandi qui sotto quattro volte: ogni volta
+      // che si invoca `plt.show()`, Gnuplot avanza al plot successivo
+      
+      plt.set_xrange(4, 11);
+      plt.set_xlabel("x [AU]");
+      plt.set_ylabel("Numero di campioni");
+      plt.histogram(samples, nbins);
+      plt.show();
     }
     ```
+
+    Il programma usa [gplot++](https://github.com/ziotom78/gplotpp), installabile con i soliti comandi descritti [qui](./index.html#gplotinstall).
+    
+    Se eseguite il programma, otterrete questo grafico, non molto incoraggiante:
+    
+    <center>![](./media/histogram-bad.png)</center>
+    
+    I dati non sembrano affatto essere distribuiti uniformemente! Il problema è che per default Gnuplot sceglie una scala per l'asse $y$ che non parte da zero, e questo distorce l'aspetto del grafico. Dobbiamo quindi forzarlo a partire da zero con il metodo `plt.set_yrange`:
+    
+    ```c++
+    // Nel main visto sopra
+    
+    // …
+    plt.set_xrange(4, 11);
+    plt.set_yrange(0, NAN);
+    // …
+    ```
+    
+    Passare `NAN` come estremo superiore indica a Gnuplot che ci va bene che sia lui a calcolare il valore ottimale per l'estremo superiore, perché a noi interessa indicare solo l'estremo inferiore. Il risultato diventa questo:
+
+    <center>![](./media/histogram-good.png)</center>
+    
+-   Se invece volete usare ROOT, aggiungete in coda al `main` qualcosa di simile:
+
+    ```c++
+    TApplication app{"app", 0, 0};
+    TH1F unif{"Uniforme", "Uniforme", 100, 4, 11};
+    
+    for(double sample : samples) {
+        unif.Fill(samples);
+    }
+
+    TCanvas can2("Uniforme", "Uniforme") ;
+    can2.cd();
+    unif.GetXaxis()->SetTitle("x [AU]");
+    unif.GetYaxis()->SetTitle("Numero di campioni");
+    unif.Draw();
+
+    app.Run();
+    ```
+
 
 ## Generatore Lineare congruenziale
 
@@ -131,7 +191,7 @@ si ha
 $$
 P(R, \theta) = \frac12 \exp\left(- \frac{r^2}2\right).
 $$
-Se calcoliamo l'integrale di tale PDF per $r \elem [0, R]$ e $\theta \elem [0, 2\pi]$, otteniamo
+Se calcoliamo l'integrale di tale PDF per $r \in [0, R]$ e $\theta \in [0, 2\pi]$, otteniamo
 $$
 p = 1 - \exp\left(-\frac{R^2}2\right),
 $$
@@ -210,8 +270,8 @@ public:
   IntegralMC(unsigned int seed) : m_myrand{new RandomGen(seed)} {}
   ~IntegralMCQ {}
   double IntegraleHoM(double xmin, double xmax, double fmax,
-                      FunzioneBase * f, int punti);
-  double IntegraleAVE(double xmin, double xmax, FunzioneBase * f, int punti);
+                      FunzioneBase & f, int punti);
+  double IntegraleAVE(double xmin, double xmax, FunzioneBase & f, int punti);
 
 private:
   RandomGen * m_myrand;
@@ -255,7 +315,7 @@ virtual double Eval(const vector<double>&) const=0; .
 Alla classe che calcola l'integrale si dovrà aggiungere un metodo dedicato del tipo
 
 ```c++
-double Media(const FunzioneScalareBase * f,
+double Media(FunzioneScalareBase & f,
              const vector<double> & inf,
              const vector<double> & sup,
              unsigned int punti);
@@ -265,6 +325,7 @@ double Media(const FunzioneScalareBase * f,
 # Esercizio 10.4 - Errore nel caso di integrali multimensionali (facoltativo) {#esercizio-10.4}
 
 Provare a ripetere le consegne dell'esercizio 10.2 applicate all'integrale multidimensionale dell'esercizio 10.3. In questo modo si può facilmente verificare che la legge con cui scala l'errore è indipendente dalla dimensione dell'integrale.
+
 
 ## Qualche approfondimento su generatori di numeri casuali in C++11
 

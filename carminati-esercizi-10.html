@@ -177,7 +177,7 @@
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> RandomGen <span class="op">{</span></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span><span class="op">:</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  RandomGen<span class="op">(</span><span class="dt">unsigned</span> <span class="dt">int</span><span class="op">);</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  RandomGen<span class="op">(</span><span class="dt">unsigned</span> <span class="dt">int</span> seed<span class="op">);</span></span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="dt">void</span> SetA<span class="op">(</span><span class="dt">unsigned</span> <span class="dt">int</span> a<span class="op">)</span> <span class="op">{</span> <span class="va">m_a</span> <span class="op">=</span> a<span class="op">;</span> <span class="op">}</span></span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="dt">void</span> SetC<span class="op">(</span><span class="dt">unsigned</span> <span class="dt">int</span> c<span class="op">)</span> <span class="op">{</span> <span class="va">m_c</span> <span class="op">=</span> c<span class="op">;</span> <span class="op">}</span></span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="dt">void</span> SetM<span class="op">(</span><span class="dt">unsigned</span> <span class="dt">int</span> m<span class="op">)</span> <span class="op">{</span> <span class="va">m_m</span> <span class="op">=</span> m<span class="op">;</span> <span class="op">}</span></span>
@@ -194,32 +194,82 @@
 <span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code></pre></div>
 <p>Il costruttore si farà carico di inizializzare i parametri del generatore ai valori <code>m_a = 1664525</code>, <code>m_c = 1013904223</code> e <code>m_m = 231</code>.</p></li>
 <li><p>Preparare un semplice <code>main</code> per provare le funzionalità della classe RandomGen. Lo schema di massima potrebbe essere il seguente:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;TApplication.h&quot;</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;TCanvas.h&quot;</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;TH1F.h&quot;</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;TAxis.h&quot;</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;randomgen.h&quot;</span></span>
+<div class="sourceCode" id="cb2"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;vector&gt;</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;randomgen.h&quot;</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;gplot++.h&quot;</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="kw">using</span> <span class="kw">namespace</span> std<span class="op">;</span></span>
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  TApplication app<span class="op">{</span><span class="st">&quot;app&quot;</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">0</span><span class="op">};</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  RandomGen myGen<span class="op">{</span><span class="dv">1</span><span class="op">};</span></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">const</span> <span class="dt">int</span> nmax<span class="op">{</span><span class="dv">10000</span><span class="op">};</span></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>  TH1F unif<span class="op">{</span><span class="st">&quot;Uniforme&quot;</span><span class="op">,</span> <span class="st">&quot;Uniforme&quot;</span><span class="op">,</span> <span class="dv">100</span><span class="op">,</span> <span class="dv">4</span><span class="op">,</span> <span class="dv">11</span><span class="op">};</span></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span><span class="op">(</span><span class="dt">int</span> k<span class="op">{};</span> k <span class="op">&lt;</span> nmax<span class="op">;</span> k<span class="op">++)</span> <span class="op">{</span></span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>      unif<span class="op">.</span>Fill<span class="op">(</span>myGen<span class="op">.</span>Unif<span class="op">(</span><span class="dv">5</span><span class="op">,</span><span class="dv">10</span><span class="op">));</span></span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>  TCanvas can2<span class="op">(</span><span class="st">&quot;Uniforme&quot;</span><span class="op">,</span> <span class="st">&quot;Uniforme&quot;</span><span class="op">)</span> <span class="op">;</span></span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>  can2<span class="op">.</span>cd<span class="op">();</span></span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>  unif<span class="op">.</span>GetXaxis<span class="op">()-&gt;</span>SetTitle<span class="op">(</span><span class="st">&quot;x [AU]&quot;</span><span class="op">);</span></span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>  unif<span class="op">.</span>GetYaxis<span class="op">()-&gt;</span>SetTitle<span class="op">(</span><span class="st">&quot;N&quot;</span><span class="op">);</span></span>
-<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>  unif<span class="op">.</span>Draw<span class="op">();</span></span>
-<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>  app<span class="op">.</span>Run<span class="op">();</span></span>
-<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div></li>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Implementate questa funzione per verificare che i vostri</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="co">// generatori funzionino; fate riferimento alla pagina</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  <span class="co">//</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  <span class="co">//   https://ziotom78.github.io/tnds-notebooks/lezione10/</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>  <span class="co">//</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>  <span class="co">// per sapere quali numeri usare negli assert</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>  test_random_numbers<span class="op">();</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>  RandomGen myGen<span class="op">{</span><span class="dv">1</span><span class="op">};</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>  vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> samples<span class="op">(</span><span class="dv">10000</span><span class="op">);</span> <span class="co">// Usare parentesi tonde () e non graffe {} qui!</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span><span class="op">(</span><span class="dt">size_t</span> k<span class="op">{};</span> k <span class="op">&lt;</span> samples<span class="op">.</span>size<span class="op">();</span> k<span class="op">++)</span> <span class="op">{</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>      samples<span class="op">[</span>k<span class="op">]</span> <span class="op">=</span> myGen<span class="op">.</span>Unif<span class="op">(</span><span class="dv">5</span><span class="op">,</span> <span class="dv">10</span><span class="op">);</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>      <span class="co">// Stampa i primi 10 valori per controllo</span></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>      <span class="cf">if</span> <span class="op">(</span>k <span class="op">&lt;</span> <span class="dv">10</span><span class="op">)</span></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>          cout <span class="op">&lt;&lt;</span> samples<span class="op">[</span>k<span class="op">]</span> <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>  <span class="at">const</span> <span class="dt">int</span> nbins<span class="op">{</span><span class="dv">100</span><span class="op">};</span>  <span class="co">// Numero di barre nell&#39;istogramma</span></span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>  Gnuplot plt<span class="op">{};</span></span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>  plt<span class="op">.</span>redirect_to_png<span class="op">(</span><span class="st">&quot;uniforme.png&quot;</span><span class="op">);</span></span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Per produrre i quattro grafici nella stessa immagine, secondo</span></span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>  <span class="co">// una matrice 2×2, si può usare il comando</span></span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>  <span class="co">//</span></span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>  <span class="co">//   plt.multiplot(2, 2);</span></span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>  <span class="co">//</span></span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>  <span class="co">// e poi invocare i comandi qui sotto quattro volte: ogni volta</span></span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>  <span class="co">// che si invoca `plt.show()`, Gnuplot avanza al plot successivo</span></span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>  plt<span class="op">.</span>set_xrange<span class="op">(</span><span class="dv">4</span><span class="op">,</span> <span class="dv">11</span><span class="op">);</span></span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a>  plt<span class="op">.</span>set_xlabel<span class="op">(</span><span class="st">&quot;x [AU]&quot;</span><span class="op">);</span></span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a>  plt<span class="op">.</span>set_ylabel<span class="op">(</span><span class="st">&quot;Numero di campioni&quot;</span><span class="op">);</span></span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a>  plt<span class="op">.</span>histogram<span class="op">(</span>samples<span class="op">,</span> nbins<span class="op">);</span></span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a>  plt<span class="op">.</span>show<span class="op">();</span></span>
+<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p>Il programma usa <a href="https://github.com/ziotom78/gplotpp">gplot++</a>, installabile con i soliti comandi descritti <a href="./index.html#gplotinstall">qui</a>.</p>
+<p>Se eseguite il programma, otterrete questo grafico, non molto incoraggiante:</p>
+<center>
+<p><img src="./media/histogram-bad.png" /></p>
+</center>
+<p>I dati non sembrano affatto essere distribuiti uniformemente! Il problema è che per default Gnuplot sceglie una scala per l’asse <span class="math inline">y</span> che non parte da zero, e questo distorce l’aspetto del grafico. Dobbiamo quindi forzarlo a partire da zero con il metodo <code>plt.set_yrange</code>:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Nel main visto sopra</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co">// …</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>plt<span class="op">.</span>set_xrange<span class="op">(</span><span class="dv">4</span><span class="op">,</span> <span class="dv">11</span><span class="op">);</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>plt<span class="op">.</span>set_yrange<span class="op">(</span><span class="dv">0</span><span class="op">,</span> NAN<span class="op">);</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co">// …</span></span></code></pre></div>
+<p>Passare <code>NAN</code> come estremo superiore indica a Gnuplot che ci va bene che sia lui a calcolare il valore ottimale per l’estremo superiore, perché a noi interessa indicare solo l’estremo inferiore. Il risultato diventa questo:</p>
+<center>
+<p><img src="./media/histogram-good.png" /></p>
+</center></li>
+<li><p>Se invece volete usare ROOT, aggiungete in coda al <code>main</code> qualcosa di simile:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>TApplication app<span class="op">{</span><span class="st">&quot;app&quot;</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">0</span><span class="op">};</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>TH1F unif<span class="op">{</span><span class="st">&quot;Uniforme&quot;</span><span class="op">,</span> <span class="st">&quot;Uniforme&quot;</span><span class="op">,</span> <span class="dv">100</span><span class="op">,</span> <span class="dv">4</span><span class="op">,</span> <span class="dv">11</span><span class="op">};</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span><span class="op">(</span><span class="dt">double</span> sample <span class="op">:</span> samples<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    unif<span class="op">.</span>Fill<span class="op">(</span>samples<span class="op">);</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>TCanvas can2<span class="op">(</span><span class="st">&quot;Uniforme&quot;</span><span class="op">,</span> <span class="st">&quot;Uniforme&quot;</span><span class="op">)</span> <span class="op">;</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>can2<span class="op">.</span>cd<span class="op">();</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>unif<span class="op">.</span>GetXaxis<span class="op">()-&gt;</span>SetTitle<span class="op">(</span><span class="st">&quot;x [AU]&quot;</span><span class="op">);</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>unif<span class="op">.</span>GetYaxis<span class="op">()-&gt;</span>SetTitle<span class="op">(</span><span class="st">&quot;Numero di campioni&quot;</span><span class="op">);</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>unif<span class="op">.</span>Draw<span class="op">();</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>app<span class="op">.</span>Run<span class="op">();</span></span></code></pre></div></li>
 </ul>
 <h2 id="generatore-lineare-congruenziale">Generatore Lineare congruenziale</h2>
 <p>I generatori lineari congruenziali generano una sequenza di interi pseudocasuali utilizzando la sequente formula:</p>
@@ -231,7 +281,7 @@ n_i = \mathrm{mod}(a \cdot n_{i - 1} + c, m)
 d_i = n_i / m.
 </span></p>
 <p>Ricordiamo che in C++ l’operazione mod può essere eseguita con l’operatore <code>%</code>, che ritorna il resto della divisione (intera), per cui</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="dv">7</span> <span class="op">%</span> <span class="dv">5</span> <span class="op">=</span> <span class="dv">2</span></span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="dv">7</span> <span class="op">%</span> <span class="dv">5</span> <span class="op">=</span> <span class="dv">2</span></span></code></pre></div>
 <h2 id="generatore-esponenziale">Generatore esponenziale</h2>
 <p>Per generare numeri pseudo-casuali secondo la densità di probabilità esponenziale <span class="math inline">p(x) = \lambda e^{-\lambda x}</span> (per <span class="math inline">x \geq 0</span>) si può facilmente invertire la funzione cumulativa di <span class="math inline">p(x)</span>. A partire da un numero <span class="math inline">y</span> estratto secondo la distribuzione uniforme tra 0 e 1, il numero <span class="math display">
 x = - \frac1{\lambda} \log(1 - y)
@@ -248,7 +298,7 @@ y &amp;= r \sin\theta,
 \end{aligned}
 </span> si ha <span class="math display">
 P(R, \theta) = \frac12 \exp\left(- \frac{r^2}2\right).
-</span> Se calcoliamo l’integrale di tale PDF per <span class="math inline">r \elem [0, R]</span> e <span class="math inline">\theta \elem [0, 2\pi]</span>, otteniamo <span class="math display">
+</span> Se calcoliamo l’integrale di tale PDF per <span class="math inline">r \in [0, R]</span> e <span class="math inline">\theta \in [0, 2\pi]</span>, otteniamo <span class="math display">
 p = 1 - \exp\left(-\frac{R^2}2\right),
 </span> e <span class="math inline">p \in [0, 1]</span>. Invertendo questa formula otteniamo <span class="math display">
 R = \sqrt{-2\log(1 - p)}.
@@ -263,12 +313,12 @@ x = \sqrt{-2\log s} \cdot \cos{2\pi t}.
 x = \mu + \sigma\cdot \sqrt{-2\log s} \cdot \cos{2\pi t}.
 </span></p>
 <p>Qui sotto trovate una implementazione di tale metodo:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> RandomGen<span class="op">::</span>Gaus<span class="op">(</span><span class="dt">double</span> mean<span class="op">,</span> <span class="dt">double</span> sigma<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> s<span class="op">{</span>Rand<span class="op">()};</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> t<span class="op">{</span>Rand<span class="op">()};</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> x<span class="op">{</span>sqrt<span class="op">(-</span><span class="dv">2</span> <span class="op">*</span> log<span class="op">(</span>s<span class="op">))</span> <span class="op">*</span> cos<span class="op">(</span><span class="dv">2</span> <span class="op">*</span> M_PI <span class="op">*</span> t<span class="op">)};</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> mean <span class="op">+</span> x <span class="op">*</span> sigma<span class="op">;</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> RandomGen<span class="op">::</span>Gaus<span class="op">(</span><span class="dt">double</span> mean<span class="op">,</span> <span class="dt">double</span> sigma<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> s<span class="op">{</span>Rand<span class="op">()};</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> t<span class="op">{</span>Rand<span class="op">()};</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> x<span class="op">{</span>sqrt<span class="op">(-</span><span class="dv">2</span> <span class="op">*</span> log<span class="op">(</span>s<span class="op">))</span> <span class="op">*</span> cos<span class="op">(</span><span class="dv">2</span> <span class="op">*</span> M_PI <span class="op">*</span> t<span class="op">)};</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> mean <span class="op">+</span> x <span class="op">*</span> sigma<span class="op">;</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 <h2 id="metodo-accept-reject">Metodo Accept-Reject</h2>
 <p>Il metodo accept-reject può essere utilizzato per generare numeri casuali distribuiti secondo qualsivoglia forma funzionale. Consideriamo di voler generare numeri nell’intervallo <span class="math inline">[a, b]</span> secondo la distribuzione <span class="math inline">f(x)</span> in figura:</p>
 <p><img src="http://labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/figure/accrej.png" /></p>
@@ -293,17 +343,17 @@ y &amp;= M \cdot t.
 <li>Assumendo che l’andamento dell’errore sia noto (del tipo <span class="math inline">k / \sqrt{N}</span>), si determini quanti punti sono necessari per ottenere una precisione di 0.001. Si ripeta lo stesso lavoro con il metodo hit-or-miss.</li>
 </ol>
 <p>Per il calcolo di integrali con metodi MonteCarlo si può decidere di scrivere una nuova classe dedicata o estendere la classe <code>Integral</code> della <a href="carminati-esercizi-08.html#cenni-sullimplementazione">lezione 8</a>. In ogni caso ci dovrà essere un puntatore ad un oggetto di tipo <code>RandomGen</code> e due metodi che implementino le due tecniche discusse. A titolo di esempio si può considerare l’header file seguente:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> IntegralMC <span class="op">{</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span><span class="op">:</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  IntegralMC<span class="op">(</span><span class="dt">unsigned</span> <span class="dt">int</span> seed<span class="op">)</span> <span class="op">:</span> <span class="va">m_myrand</span><span class="op">{</span><span class="kw">new</span> RandomGen<span class="op">(</span>seed<span class="op">)}</span> <span class="op">{}</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="op">~</span>IntegralMCQ <span class="op">{}</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> IntegraleHoM<span class="op">(</span><span class="dt">double</span> xmin<span class="op">,</span> <span class="dt">double</span> xmax<span class="op">,</span> <span class="dt">double</span> fmax<span class="op">,</span></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>                      FunzioneBase <span class="op">*</span> f<span class="op">,</span> <span class="dt">int</span> punti<span class="op">);</span></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> IntegraleAVE<span class="op">(</span><span class="dt">double</span> xmin<span class="op">,</span> <span class="dt">double</span> xmax<span class="op">,</span> FunzioneBase <span class="op">*</span> f<span class="op">,</span> <span class="dt">int</span> punti<span class="op">);</span></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="kw">private</span><span class="op">:</span></span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>  RandomGen <span class="op">*</span> <span class="va">m_myrand</span><span class="op">;</span></span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> IntegralMC <span class="op">{</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span><span class="op">:</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  IntegralMC<span class="op">(</span><span class="dt">unsigned</span> <span class="dt">int</span> seed<span class="op">)</span> <span class="op">:</span> <span class="va">m_myrand</span><span class="op">{</span><span class="kw">new</span> RandomGen<span class="op">(</span>seed<span class="op">)}</span> <span class="op">{}</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="op">~</span>IntegralMCQ <span class="op">{}</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> IntegraleHoM<span class="op">(</span><span class="dt">double</span> xmin<span class="op">,</span> <span class="dt">double</span> xmax<span class="op">,</span> <span class="dt">double</span> fmax<span class="op">,</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>                      FunzioneBase <span class="op">&amp;</span> f<span class="op">,</span> <span class="dt">int</span> punti<span class="op">);</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> IntegraleAVE<span class="op">(</span><span class="dt">double</span> xmin<span class="op">,</span> <span class="dt">double</span> xmax<span class="op">,</span> FunzioneBase <span class="op">&amp;</span> f<span class="op">,</span> <span class="dt">int</span> punti<span class="op">);</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="kw">private</span><span class="op">:</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>  RandomGen <span class="op">*</span> <span class="va">m_myrand</span><span class="op">;</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 <h2 id="calcolo-di-integrali-con-il-metodo-della-media">Calcolo di integrali con il metodo della media</h2>
 <p>Come discusso a lezione, il metodo della media consiste nel valutare la media delle valutazioni della funzione <span class="math inline">f(x)</span> in un set di <span class="math inline">N</span> punti distribuiti uniformemente tra <span class="math inline">a</span> (minimo estremo di integrazione) e <span class="math inline">b</span> (massimo estremo integrazione). La stima dell’integrale si ottiene poi dalla seguente formula:</p>
 <p><span class="math display">
@@ -323,12 +373,12 @@ I = \int_1^2\int_1^2\left(
 </span></p>
 <p>utilizzando per esempio il metodo della media.</p>
 <p>Suggerimento: si potrebbe costruire una classe <code>FunzioneScalareBase</code> astratta da cui la funzione integranda erediti. La classe <code>FunzioneScalareBase</code> avrà un metodo virtuale puro</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">virtual</span> <span class="dt">double</span> Eval<span class="op">(</span><span class="at">const</span> vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;&amp;)</span> <span class="at">const</span><span class="op">=</span><span class="dv">0</span><span class="op">;</span> <span class="op">.</span></span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">virtual</span> <span class="dt">double</span> Eval<span class="op">(</span><span class="at">const</span> vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;&amp;)</span> <span class="at">const</span><span class="op">=</span><span class="dv">0</span><span class="op">;</span> <span class="op">.</span></span></code></pre></div>
 <p>Alla classe che calcola l’integrale si dovrà aggiungere un metodo dedicato del tipo</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> Media<span class="op">(</span><span class="at">const</span> FunzioneScalareBase <span class="op">*</span> f<span class="op">,</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>             <span class="at">const</span> vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> <span class="op">&amp;</span> inf<span class="op">,</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">const</span> vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> <span class="op">&amp;</span> sup<span class="op">,</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>             <span class="dt">unsigned</span> <span class="dt">int</span> punti<span class="op">);</span></span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> Media<span class="op">(</span>FunzioneScalareBase <span class="op">&amp;</span> f<span class="op">,</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>             <span class="at">const</span> vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> <span class="op">&amp;</span> inf<span class="op">,</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">const</span> vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> <span class="op">&amp;</span> sup<span class="op">,</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>             <span class="dt">unsigned</span> <span class="dt">int</span> punti<span class="op">);</span></span></code></pre></div>
 <h1 id="esercizio-10.4">Esercizio 10.4 - Errore nel caso di integrali multimensionali (facoltativo)</h1>
 <p>Provare a ripetere le consegne dell’esercizio 10.2 applicate all’integrale multidimensionale dell’esercizio 10.3. In questo modo si può facilmente verificare che la legge con cui scala l’errore è indipendente dalla dimensione dell’integrale.</p>
 <h2 id="qualche-approfondimento-su-generatori-di-numeri-casuali-in-c11">Qualche approfondimento su generatori di numeri casuali in C++11</h2>
