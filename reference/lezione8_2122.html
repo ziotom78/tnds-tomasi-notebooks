@@ -1,0 +1,549 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+
+
+
+  <tdi></tdi>
+  
+  <meta content="text/html; charset=ISO-8859-1" http-equiv="content-type"><title>Lezione 8</title>
+  
+
+   
+  <script type="text/javascript" language="javascript">
+function mostra(id){
+if (document.getElementById){
+if(document.getElementById(id).style.display == 'none'){
+document.getElementById(id).style.display = 'block';
+}else{
+document.getElementById(id).style.display = 'none';
+}
+}
+}
+  </script></head><body>
+<font> </font><font> </font>
+<table style="text-align: left; width: 100%;" border="1" cellpadding="2" cellspacing="2">
+
+  <tbody>
+    <tr>
+      <td style="background-color: rgb(204, 0, 0); text-align: center;"><big><big><big>Lezione 8<br>
+      <font size="+2">Equazioni Differenziali</font><br>
+      </big></big></big> </td>
+    </tr>
+  </tbody>
+</table>
+
+<br>
+
+<font size="+1">In questa lezione introdurremo alcuni metodi per la risoluzione di
+equazioni differenziali ordinarie. Implementeremo la risoluzione numerica di queste
+equazioni con i metodi di Eulero e di Runge-Kutta.
+<br>
+Per risolvere l'esercizio vedremo come &egrave; possibile definire le principali operazioni algebriche per i vector della STL. Questo ci permetter&agrave; di realizzare i metodi di integrazione di equazioni differenziali  usando una notazione vettoriale, molto simile al formalismo matematico.
+</font>
+<br>
+<br>
+<font size="+1"><span style="text-decoration: underline; color: rgb(0, 153, 0);">ESERCIZIO 
+8.0 - Algebra vettoriale</span><a name="es8.0"></a>:<br>
+Come prima cosa proviamo a dotare i <tt>vector</tt> della STL di tutte le funzionalit&agrave; algebriche che ci possono essere utile definendo opportunamente gli operatori <tt>+,*,/,+= </tt>.
+Dal momento che non possiamo modificare gli header files e i files di implementazione della classe <tt>vector</tt> implementiamo questi operatori come funzioni libere in un header file apposito da includere quando necessario. Potete trovarne un esempio <a href="code/VectorOperations.h">qui</a>.
+
+<br>
+
+Provate a scrivere un piccolo codice di test per verificare il corretto funzionamento delle operazioni tra vettori : potreste provate a realizzare
+un semplice programma che scriva a video le componenti della risultate di due forze 
+(vettori tridimensionali) e le componenti del versore della risultante. 
+<br>
+<br>
+
+<font size="+1"><span style="text-decoration: underline; color: rgb(0, 153, 0);">ESERCIZIO 
+8.1 - Risoluzione tramite metodo di Eulero</span><a name="es8.1"></a>:<br>
+Implementare un codice per la risoluzione numerica di un'equazione differenziale descrivente
+il moto di un oscillatore armonico tramite il metodo di Eulero. Graficare l'andamento
+della posizione in funzione del tempo al variare del passo di integrazione e confrontare l'errore commesso con la soluzione esatta.<br>
+Struttureremo la soluzione del problema in modo simile a quanto fatto nelle precedenti lezioni su ricerca degli zeri e integrazione numerica: 
+<br>
+<br>
+<img alt="classe differential" src="./figure/EqDiffClassi_2122.png" width="500"><br>
+<br>
+<ol>
+<li>Definiamo una classe astratta <code>FunzioneVettorialeBase</code> con un unico metodo <code>Eval</code>, puramente virtuale, che dato un <code>vector</code> ed un <code>double</code>, rappresentante il tempo, restituisce il valore della derivata prima nel punto e nell'istante considerati.
+<li>Da questa classe astratta, deriviamo una classe concreta che descriva le leggi del modo di un oscillatore armonico, permettendo di definirne la frequenza, o nel construttore o con degli opportuni metodi per leggere/definire dei parametri.
+<li>Definiamo una classe astratta <code>EquazioneDifferenzialeBase</code> che ha un unico metodo <code>Passo</code>, puramente virtuale, che dati il tempo <i>t</i>, un vettore <b>x</b>, il passo di integrazione <i>h</i> e un puntatore ad una  <code>FunzioneVettorialeBase</code>, restituisce la una stima di del valore della posizione <b>x</b> al tempo <i>t+h</i>. Avere il tempo <i>t</i> come argomento permetter&agrave; in esercizi futuri (come ad esempio il <a href="#es8.4">8.4</a>) di avere forzanti esterne o parametri dipendenti dal tempo.
+<li>Da questa classe astratta, deriviamo una classe concreta che implementi il metodo di Eulero. 
+</ol>
+Per testare il metodo, risolviamo l'equazione differenziale:<br>
+<img src="figure/EqOscillatoreArmonico.png" alt="Equazione differenziale">
+<br>
+con passi di integrazione da 0.1 a 0.001, mettendo in grafico il valore della <i>x</i> in funzione del tempo ed anche il suo errore rispetto alla soluzione esatta del problema: <i>x</i>=sin<i>t</i>. Si consiglia di svolgere l'integrazione per un certo numero di periodi, in modo da vedere se l'ampiezza di oscillazione rimane costante. Integrare fino a <i>t</i>=70&nbsp;s permette di vedere circa 10 periodi.
+<br>
+<br>
+<span style="text-decoration: underline;">Brevi Richiami</span><br>
+<!-- altro div -->
+<a href="#" onclick="mostra('testo8.1a'); return false;"> Il metodo di Eulero
+</a><br>
+<div style="display: none;" id="testo8.1a">
+<table style="text-align: left; width: 967px; height: 41px;" border="1" cellpadding="2" cellspacing="2">
+ <tbody>
+   <tr>
+     <td style="background-color: rgb(233, 229, 255);">
+Consideriamo la seconda legge della dimanica di Newton<br>
+<br>
+<I>a=d<sup>2</sup>x/dt<sup>2</sup> = F/m</I>
+<br><br>
+che &egrave; un'equazione differenziale del secondo ordine che pu&ograve; essere ridotta ad un'equazione differenziale
+del prim'ordine introducendo la variabile velocit&agrave;<br>
+<br>
+<I>dx/dt = v</I> <br>
+<I>dv/dt = F/m</I> <br>
+<br>
+Il metodo di Eulero consiste nel calcolare lo stato della soluzione al tempo <I>t+h</I> dato quello
+ad un tempo <I>t</I> tramite le espressioni:<br>
+<br>
+<I>x(t+h) = x(t) + h*dx/dt = x(t) + h*v</I><br>
+<I>v(t+h) = v(t) + h*dv/dt = v(t) + h*F/m</I><br> 
+<br>
+     </td>
+   </tr>
+ </tbody>
+</table>
+</div>
+<!-- fine div -->
+<br>
+<!-- inzio div-->
+<font size="+1">
+<a href="#" onclick="mostra('testo8.1b'); return false;">Struttura del programma
+</a><br>
+</font>
+
+<div style="display: none;" id="testo8.1b">
+<table style="text-align: left; width: 967px; height: 41px;" border="1" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="background-color: rgb(233, 229, 255);"> 
+
+Le classi astratte <code>FunzioneVettorialeBase</code> e 
+<code>EquazioneDifferenzialeBase</code> contengono (almeno per ora) solo un metodo virtuale puro, rispettivamente <code>Eval</code> e <code>Passo</code>.<br>
+Per comodit&agrave; possiamo mettere nello stesso file anche le classi concrete che, oltre ad avere l'implementazione dei metodi virtuali dovranno implementare un costruttore ed un distruttore.<br>
+
+L'header file contente le dichiarazioni delle classi &egrave; quindi:<br>
+<img alt="classe differential" src="./figure/EquazioniDifferenziali_nopointers.png" width="900"><br>
+
+Una volta implementate le classi (l'implementazione di <code>Eulero</code> &egrave; semplicissima se si usano le operazioni di algebra vettoriale), un possibile programma 
+per risolvere l'esercizio &egrave; il seguente:<br>
+<img alt="Esempio di codice" src="./figure/Esercizio81_nopointers.png" width="900"><br>
+Si riveda il solito esempio (<a href="test_Tgraph.cpp">qui</a>) per l'uso dei TGraph di ROOT.
+<br>
+<!--
+<b>Caccia all'errore:</b>
+l'istruzione <br><code>TCanvas myCanvas();</code><br>
+&egrave; sbagliata e rappresenta un errore frequente durante le sessioni di laboratorio. Essa <b>non</b> costruisce un oggetto <code>TCanvas</code> invocando il costruttore di <i>default</i>.<br>Quale sarebbe la sintassi corretta?<br>Cos'&egrave; in realt&agrave; l'oggetto <code>myCanvas</code> definito con la sintassi scorretta? 
+-->
+</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<br>
+<!--
+<a href="#" onclick="mostra('testo9.1c'); return false;"> Uso di TGraph
+</a><br>
+<div style="display: none;" id="testo9.1c">
+  <table style="text-align: left; width: 967px; height: 41px;" border="1" cellpadding="2" cellspacing="2">
+    <tbody>
+      <tr>
+	<td style="background-color: rgb(233, 229, 255);">
+<code>TGraph</code> &egrave; una classe di ROOT che serve a disegnare grafici. Per i nostri scopi servono 
+pochi metodi:<ul>
+<li>Costruttore standard <code>TGraph()</code>.
+<li>Metodo <code>SetPoint(int i, double x, double y)</code> che assegna le coordinate dell'<i>i</i>-esimo punto.
+<li>Metodo <code>Draw(const char * option)</code> che disegna il grafico, come opzione &egrave; necessario passare.
+almeno <code>"AL"</code>: <code>"A"</code> disegna gli assi mentre <code>"L"</code> una linea continua tra i punti. Pu&ograve; essere utile anche passare come opzione <code>"AL*"</code> dove <code>*</code> fa disegnare un asterisco in corrispondenza di
+ciascun punto.
+<li>I metodi <code>GetXaxis()</code> e <code>GetYaxis()</code> permettono di accedere agli assi del grafico. Invocando il medodo <code>SetTitle(const char* title)</code> di questi assi &egrave; possible mettere le etichette che indicano quali variabili sono rappresentate.<br> <b>Nota Bene:</b>
+  <ol><li>Per fare operazioni sugli assi bisogna includere anche <code>TAxis.h</</li><li>Questi metodi esistono anche per gli istogrammi e dovrebbero venire <b>sempre usati</b> per indicare chiaramente cosa si sta disegnando</li></ol>.
+</ul>
+<br>
+Esempio di utilizzo:<br>
+<PRE>TGraph<B><FONT COLOR="#663300">*</FONT></B> g<B><FONT COLOR="#663300"> =</FONT></B><FONT COLOR="#990000"> new</FONT> TGraph<B><FONT COLOR="#663300">();</FONT></B><FONT COLOR="#FF6633">
+
+int</FONT> i<B><FONT COLOR="#663300"> =</FONT></B><FONT COLOR="#999900"> 0</FONT><B><FONT COLOR="#663300">;</FONT></B><FONT COLOR="#FF0000">
+
+for</FONT><B><FONT COLOR="#663300">(...){</FONT></B><FONT COLOR="#FF6633">
+   double</FONT> x<B><FONT COLOR="#663300">,</FONT></B> y<B><FONT COLOR="#663300">;</FONT></B><I><FONT COLOR="#999999">
+
+   //calcolo x e y
+</FONT></I><B><FONT COLOR="#663300">   .....</FONT></B>
+   g<B><FONT COLOR="#663300">-&gt;</FONT></B>SetPoint<B><FONT COLOR="#663300">(</FONT></B>i<B><FONT COLOR="#663300">,</FONT></B> x<B><FONT COLOR="#663300">,</FONT></B> y<B><FONT COLOR="#663300">);</FONT></B>
+
+   i<B><FONT COLOR="#663300">++;
+}</FONT></B>
+
+TCanvas<B><FONT COLOR="#663300"> *</FONT></B>c<B><FONT COLOR="#663300"> =</FONT></B><FONT COLOR="#990000"> new</FONT> TCanvas<B><FONT COLOR="#663300">(</FONT></B><FONT COLOR="#009900">"C1"</FONT><B><FONT COLOR="#663300">,</FONT></B><FONT COLOR="#009900">"C1"</FONT><B><FONT COLOR="#663300">,</FONT></B><FONT COLOR="#999900">1</FONT><B><FONT COLOR="#663300">);</FONT></B>
+
+c<B><FONT COLOR="#663300">-&gt;</FONT></B>cd<B><FONT COLOR="#663300">();</FONT></B>
+g<B><FONT COLOR="#663300">-&gt;</FONT></B>GetXaxis<B><FONT COLOR="#663300">()</FONT></B><B><FONT COLOR="#663300">-&gt;</FONT></B>SetTitle<FONT COLOR="#663300">(</FONT></B><FONT COLOR="#009900">"t [s]"</FONT><B><FONT COLOR="#663300">);</FONT></B>
+g<B><FONT COLOR="#663300">-&gt;</FONT></B>GetYaxis<B><FONT COLOR="#663300">()</FONT></B><B><FONT COLOR="#663300">-&gt;</FONT></B>SetTitle<FONT COLOR="#663300">(</FONT></B><FONT COLOR="#009900">"x [mm]"</FONT><B><FONT COLOR="#663300">);</FONT></B>
+g<B><FONT COLOR="#663300">-&gt;</FONT></B>Draw<B><FONT COLOR="#663300">(</FONT></B><FONT COLOR="#009900">"AL"</FONT><B><FONT COLOR="#663300">);</FONT></B></PRE>
+
+	</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<br>
+-->
+<!-- inzio div-->
+<font size="+1">
+<a href="#" onclick="mostra('testo8.1d'); return false;">Cosa ci aspettiamo?
+</a><br>
+</font>
+
+<div style="display: none;" id="testo8.1d">
+<table style="text-align: left; width: 967px; height: 41px;" border="1" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="background-color: rgb(233, 229, 255);"> 
+
+Il metodo di Eulero non &egrave; molto preciso, in effetti con un passo di integrazione modesto si vede come esso possa risultare instabile, mostrando oscillazioni la cui ampiezza varia con il tempo. La figura sotto mostra l'andamento di <i>x</i> in funzione di <i>t</i> con un passo di integrazione di 0.1&nbsp;s:<br>
+<img alt="Eulero con passo 0.1 s" src="./figure/armonico0.1_eulero.png"><br>
+Per avere qualcosa di anche solo visivamente accettabile, bisogna andare a passi di almeno 0.0002&nbsp;s:<br>
+<img alt="Eulero con passo 0.0002 s" src="./figure/armonico0.0002_eulero.png"><br>
+<br>
+<b>Caccia all'errore:</b> presentare due grafici come questi all'esame comporterebbe boccaitura immediata. Perch&eacute;?<br>
+Suggerimento: nel preparare i grafici per la presentazione ci si deve sempre ricordare di specificare cosa stiamo rappresentando sugli assi !
+<br>
+<br>
+La figura seguente riporta l'errore accumulato dopo 70&nbsp;s di integrazione per diversi valori del passo:<br>
+<img alt="Errore in funzione del passo" src="./figure/errore_eulero.png"><br>
+Si noti come la pendenza della curva sia 1 in una scala log-log, mostrando come l'errore ottenuto sia proporzionale al passo <i>h</i>.
+</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<br>
+
+<br>
+<font size="+1"><span style="text-decoration: underline; color: rgb(204, 0, 0);">ESERCIZIO
+8.2 - Risoluzione tramite Runge-Kutta (da consegnare)</span><a name="es8.2"></a>:<br>
+Ripetere l'<a href="#es8.1">esercizio 8.1</a> con  il metodo di 
+risoluzione di equazioni differenziali di Runge-Kutta (del quarto ordine) 
+e confrontare quindi in condizioni analoghe
+(<I>t</I> massimo e <I>h</I>) la stabilit&agrave; dei due metodi.<br>
+Per svolgere l'esercizio, baster&agrave; realizzare una nuova classe concreta a partire
+da <code>EquazioneDifferenzialeBase</code>.
+<br>
+<br>
+<span style="text-decoration: underline;">Brevi richiami</span><br>
+<a href="#" onclick="mostra('testo8.2a'); return false;">Il metodo di Runge-Kutta
+</a><br>
+</font>
+
+<div style="display: none;" id="testo8.2a">
+<table style="text-align: left; width: 967px; height: 41px;" border="1" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="background-color: rgb(233, 229, 255);"> 
+Il noto metodo di Runge-Kutta &egrave un metodo del quarto ordine ed utilizza la seguente determinazione
+dell'incremento:<br>
+<I>
+k<sub>1</sub> = dx/dt(t,x)<br>
+k<sub>2</sub> = dx/dt(t+h/2,x+k<sub>1</sub>*h/2)<br>
+k<sub>3</sub> = dx/dt(t+h/2,x+k<sub>2</sub>*h/2)<br>
+k<sub>4</sub> = dx/dt(t+h,x+k<sub>3</sub>*h)<br>
+x(t+h) = x(t) + (k<sub>1</sub>+ 2*k<sub>2</sub>+2*k<sub>3</sub> + k<sub>4</sub>)*(h/6)<br>
+</I>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<br>
+<!-- inzio div-->
+<font size="+1">
+<a href="#" onclick="mostra('testo8.2b'); return false;">Cosa ci aspettiamo?
+</a><br>
+</font>
+
+<div style="display: none;" id="testo8.2b">
+<table style="text-align: left; width: 967px; height: 41px;" border="1" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="background-color: rgb(233, 229, 255);"> 
+
+Il metodo di Runge-Kutte del quarto ordine &egrave; molto pi&ugrave; preciso del metodo di Eulero, infatti, anche con un passo di integrazione di 0.1&nbsp;s produce oscillazioni molto stabili:<br>
+<img alt="Runge-Kutta con passo 0.1 s" src="./figure/armonico0.1_RK4.png"><br>
+La figura seguente riporta l'errore accumulato dopo 70&nbsp;s di integrazione per diversi valori del passo:<br>
+<img alt="Errore in funzione del passo" src="./figure/errore_RK4.png"><br>
+Si noti come la pendenza della curva nella sua parte iniziale sia 4 in una scala log-log, mostrando come l'errore ottenuto sia proporzionale a <i>h</i><sup>4</sup>.<br>
+Quando l'errore di troncamento del metodo diventa minore degli errori di arrotondamento
+della macchina si vede che non c'&egrave; pi&ugrave; alcun miglioramento nel ridurre il passo, anzi, il maggior numero di calcoli richiesto risulta in un peggioramento globale dell'errore.
+</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<br>
+<br>
+
+<font size="+1"><span style="text-decoration: underline; color: rgb(204, 0, 0);">ESERCIZIO
+8.3 - Moto del pendolo (da consegnare)</span><a name="es8.3"></a>:<br>
+Implementare la risoluzione dell'equazione del pendolo usando i metodi precedentemente 
+implementati. Fare quindi un grafico del periodo di oscillazione e verificare che per angoli
+grandi le oscillazioni non sono pi&ugrave isocrone.<br>
+<br>
+<span style="text-decoration: underline;">Brevi richiami</span><br>
+<a href="#" onclick="mostra('testo8.3a'); return false;">Il moto del pendolo
+</a><br>
+</font>
+
+<div style="display: none;" id="testo8.3a">
+<table style="text-align: left; width: 967px; height: 41px;" border="1" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="background-color: rgb(233, 229, 255);"> 
+L'equazione del pendolo &egrave; data dalla relazione<br>
+<br>
+<I>
+d<sup>2</sup>&theta;/dt<sup>2</sup> = -(g/l)sin&theta;<br>
+</I>
+<br>
+dove <I>g</i>=9.8 m/s<sup>2</sup> &egrave; l'accellerazione di gravit&agrave; sulla superficie
+terreste mentre <I>l</I> &egrave; la lunghezza del pendolo.<br>
+L'equazione differenziale si pu&ograve; approssimare con quella di un oscillatore armonico per piccole oscillazioni,
+sin<I>&theta;&sim;&theta;</I>. In tal caso le oscillazioni risultano isocrone cio&egrave;, con periodo indipendente
+dall'ampiezza delle oscillazioni.<br>
+Questa per&ograve; &egrave; solo un'approssimazione, e per grandi oscillazioni bisogna usare l'equazione esatta. Essendo il moto non pi&ugrave; armonico, il periodo di oscillazione dipende dall'ampiezza della stessa.<br>
+La figura illustra il periodo al variare dell'ampiezza per un pendolo con <i>l</i>=1&nbsp;m:<br>
+<img alt="Periodo in funzione dell'ampiezza" src="./figure/periodo_pendoloreale.png"><br>
+si noti come per piccole oscillazioni, il periodo sia effettivamente quello atteso 
+dall'approssimazione dell'oscillatore armonico:<br>
+<i>T</i>=2&pi;/&radic;(<i>g</i>/<i>l</i>)=2.007&nbsp;s,<br>
+ma aumenti significativamente per grandi ampiezze.
+      </td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<br>
+<!-- inzio div-->
+<font size="+1">
+<a href="#" onclick="mostra('testo8.3b'); return false;">Calcolo del periodo
+</a><br>
+</font>
+
+<div style="display: none;" id="testo8.3b">
+<table style="text-align: left; width: 967px; height: 41px;" border="1" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="background-color: rgb(233, 229, 255);"> 
+In questo caso l'integrazione numerica dell'equazione differenziale non si pu&ograve; effettuare per un tempo predefinito, ma deve essere portata avanti fino a quando non si raggiunge una condizione compatibile con l'aver terminato l'oscillazione.<br>
+Una possibile soluzione consiste in:
+<ol>
+<li>dare come condizioni iniziali un valore di &theta; pari all'ampiezza di oscillazione e velocit&agrave; angolare iniziale nulla;
+<li>portare avanti l'integrazione fino a quando non si nota un cambiamento di segno della velocit&agrave; angolare; 
+<li>siccome possiamo calcolare la velocit&agrave; solo con granularit&agrave; pari al 
+passo di integrazione, possiamo stimare il passaggio dallo zero interpolando linearmente tra i due ultimi valori della velocit&agrave; e calcolando quando la retta ottenuta passa per lo zero;
+<li>il tempo cos&igrave; calcolato corrisponde al semiperiodo dell'oscillazione.
+</ol>
+Un esempio di pseudo-codice che implementa questo algoritmo &egrave;:
+<img alt="Esempio di codice" src="./figure/Esercizio10.3.cxx.PNG"><br>
+<br>
+<b>N.B.:</b> controllate che la formula per l'interpolazione sia corretta!
+</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<br>
+<br>
+
+
+<br>
+<font size="+1"><span style="text-decoration: underline; color: rgb(204, 0, 0);">ESERCIZIO
+8.4 - Oscillazione forzate e risonanza (da consegnare)</span><a name="es8.4"></a>:<br>
+Implementare la risoluzione dell'equazione di un oscillatore armonico smorzato con
+forzante. Fare quindi un grafico della soluzione stazionaria in funzione della frequenza dell'oscillatore,
+ricostruendo la curva di risonanza.<br>
+
+<br>
+<span style="text-decoration: underline;">Brevi richiami</span><br>
+<a href="#" onclick="mostra('testo10.4a'); return false;">Oscillatore armonico con forzante
+</a><br>
+</font>
+
+<div style="display: none;" id="testo10.4a">
+<table style="text-align: left; width: 967px; height: 41px;" border="1" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="background-color: rgb(233, 229, 255);"> 
+L'equazione dell'oscillatore armonico smorzato con forzante &egrave; data dalla relazione<br>
+<br>
+<I>
+d<sup>2</sup>x/dt<sup>2</sup> = -&omega;<sub>0</sub><sup>2</sup> x - &alpha; * dx/dt + sin(&omega; t)
+</I>
+<br>
+Nell'esercizio proposto utilizzare come valori iniziali per &omega;<sub>0</sub> e &alpha;:<br>
+&omega;<sub>0</sub> = 10 rad/s<br>
+&alpha;= 1/30 s.<br>
+&Egrave; bene ricordare che per determinare l'ampiezza bisogna aspettare che il transiente delle oscillazioni si esaurisca. Questo avviene con una costante di tempo pari a 1/&alpha; (ovvero dopo un tempo 1/&alpha; l'ampiezza di oscillazione si riduce di un fattore 1/<i>e</i>). Le seguenti figure illustrano la parte iniziale del transiente per condizioni iniziali 
+<i>x</i>(0)=0, <i>dx/dx</i>(0)=0 e diversi valori di &omega;:<br>
+<img width="70%" alt="Esempio di codice" src="./figure/transiente_05.png"> &omega;=5 rad/s<br>
+<img width="70%" alt="Esempio di codice" src="./figure/transiente_10.png"> &omega;=10 rad/s<br>
+<img width="70%" alt="Esempio di codice" src="./figure/transiente_15.png"> &omega;=15 rad/s<br>
+<br>
+Si consiglia quindi di integrare l'equazione differenziale per un tempo pari ad almeno dieci volte 1/&alpha;, in modo da raggiungere una situazione in cui l'oscillazione &egrave; stabile, e poi valutare l'ampiezza.<br>
+Anche in questo caso si pu&ograve; assumere di aver raggiunto il massimo dell'oscillazione nel momento in cui si trova un punto in cui la velocit&agrave; cambia di segno.<br>
+Una curva di risonanza &egrave; illustrata in figura:<br>
+<img alt="Esempio di codice" src="./figure/risonanza.png"><br>
+
+      </td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<br>
+<font size="+1"><span style="text-decoration: underline; color: rgb(50, 50, 50);">ESERCIZIO
+8.5 - Moto in campo gravitazionale</span><a name="es8.5"></a>:<br>
+Implementare la risoluzione dell'equazione del moto di un corpo in un campo
+gravitazionale. Verificare, nel caso del sistema Terra-Sole, che il periodo di
+rivoluzione della Terra intorno al Sole sia effettivamente di un anno e che l'orbita
+sia periodica. Calcolare quindi il rapporto tra perielio ed afelio.<br>
+Provare ad aggiungere una piccola perturbazione al potenziale gravitazionale
+(ad esempio un termine proporzionale ad 1/r<sup>3</sup> nella forza) e verificare che le orbite
+non sono pi&ugrave; chiuse ma formano una rosetta.
+<br>
+
+<br>
+<span style="text-decoration: underline;">Brevi richiami</span><br>
+<a href="#" onclick="mostra('testo8.5a'); return false;">
+Moto in campo gravitazionale
+</a><br>
+</font>
+
+<div style="display: none;" id="testo8.5a">
+<table style="text-align: left; width: 967px; height: 41px;" border="1" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="background-color: rgb(233, 229, 255);"> 
+Nell'implementare il moto di un corpo in un campo gravitazionale utilizzare le seguenti condizioni:<br>
+- costante gravitazionale <I>G</I> = 6.6742 10<sup>-11</sup> m<sup>3</sup> kg<sup>-1</sup> s<sup>-2</sup><br>
+- massa del Sole <I>M<sub>O</sub></I> = 1.98844 10<sup>30</sup> kg<br>
+- distanza Terra-Sole al perielio = 147098074 km<br>
+- velocit&agrave al perielio = 30.287 km/s<br>
+
+      </td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<br>
+<font size="+1"><span style="text-decoration: underline; color: rgb(50, 50, 50);">ESERCIZIO
+8.6 - Moto di una particella carica in un campo elettrico e magnetico uniforme</span>
+<a name="es8.6"></a>:<br>
+Implementare la risoluzione dell'equazione del moto di una particella carica
+in un campo elettrico e magnetico uniforme. Disegnare la traiettoria della particella e determinarne
+il diametro. Se si aggiunge un campo elettrico con componente lungo l'asse <I>x</I> pari
+a <I>E<sub>x</sub></I> = 10000 V/m, in che direzione si muove ora la particella? 
+<br>
+
+<br>
+<span style="text-decoration: underline;">Brevi richiami</span><br>
+<a href="#" onclick="mostra('testo8.6a'); return false;">
+Moto in campo elettrico e magnetico uniformi
+</a><br>
+</font>
+
+<div style="display: none;" id="testo8.6a">
+<table style="text-align: left; width: 967px; height: 41px;" border="1" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="background-color: rgb(233, 229, 255);"> 
+Il moto di una particella carica in un campo elettrico e magnetico uniformi risente della
+forza di Lorentz e pertanto &egrave descritto dall'equazione<br>
+<br>
+<I>
+m d<sup>2</sup><B>x</B>/dt<sup>2</sup> = q <B>E</B> + q <B>v</B>&times;<B>B</B><br>
+</I>
+<br>
+che si pu&ograve riscrivere in forma matriciale come<br>
+<img style="width: 568px; height=303px;" alt="classe differential" src="./figure/lorentz_wrimatrix.gif"><br>
+<br>
+Consideriamo il moto nel piano <I>(x,y)</I> di un elettrone in un campo magnetico costante con i seguenti valori:
+<ul>
+<li> q = -1.60217653 10<sup>-19</sup> C<br>
+<li> m = 9.1093826 10<sup>-31</sup> kg<br>
+<li> v<sub>x</sub>(0) = 8 10<sup>6</sup> m/s<br>
+<li> B<sub>z</sub> = 5 10<sup>-3</sup> T<br>
+<li>tutte le altre componenti di campi e velocit&agrave iniziali sono nulle.
+</ul>
+Questi parametri corrispondono grosso modo all'apparato sperimentale per la misura di <I>e/m</I>
+del laboratorio del II anno.
+
+      </td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<br>
+<br>
+
+<!--
+<font size="+1"><span style="text-decoration: underline; color: rgb(50, 50, 50);">ESERCIZIO
+9.7 - Sempre pi&ugrave; overloading</span><a name="es9.7"></a>:<br>
+Implementare per la classe <code>VettoreLineare</code> l'overloading anche 
+degli operatori <code>-</code>, <code>/</code>, <code>+=</code>, <code>-=</code>, <code>*=</code>, <code>/=</code>.<br>
+Realizzare un programma che, avendo in ingresso due vettori tridimensionali, 
+<b>a</b> e <b>b</b>, restituisca le componenti di <b>b</b> parallele e perpendicolari ad <b>a</b>.
+<br><br>
+
+<span style="text-decoration: underline;">Brevi richiami</span><br>
+<a href="#" onclick="mostra('testo9.7a'); return false;">Uso di <code><b>this</b></code>
+</a><br>
+</font>
+
+<div style="display: none;" id="testo9.7a">
+<table style="text-align: left; width: 967px; height: 41px;" border="1" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="background-color: rgb(233, 229, 255);"> 
+      La maggior parte di questi overload possono venire ottenuti a partire 
+      da quelli dell'esercizio 9.0, usando opportunamente il puntatore 
+      <code>this</code>: <br>
+<img alt="Esempio di codice" src="./figure/Overloading2.cxx.PNG"><br>
+</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<br>
+<a href="#" onclick="mostra('testo9.7b'); return false;"> Proiezioni di vettori
+</a><br>
+<div style="display: none;" id="testo9.7b">
+<table style="text-align: left; width: 967px; height: 41px;" border="1" cellpadding="2" cellspacing="2">
+<tbody>
+  <tr>
+    <td style="background-color: rgb(233,229, 255);">
+Se <b>a</b> e <b>b</b> sono due vettori, indichiamo con <b>v</b> il versore
+di  <b>a</b>. Allora la componente di <b>b</b> parallela ad <b>a</b> &egrave; 
+data da: <br>
+(<b>b</b>&bull;<b>v</b>)<b>v</b> <br>
+e di conseguenza, quella perpendicolare ad <b>a</b> sar&agrave;:<br>
+<b>b</b>-(<b>b</b>&bull;<b>v</b>)<b>v</b>. <br>
+
+    </td>
+  </tr>
+</tbody>
+</table>
+</div>
+-->
+
+
+<br>
+<div style="text-align: center;"><font size="+1"><a href="../index.html"><img title="Back to Home Page" style="border: 0px solid ; width: 40px; height: 40px;" alt="Back to Home Page" src="../button-home.jpg"></a><br>
+</font></div>
+
+
+</body></html>
