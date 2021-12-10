@@ -102,13 +102,13 @@ private:
 class EquazioneDifferenzialeBase {
 public:
   virtual vector<double> Passo(double t, const vector<double>& x,
-                               double h, FunzioneVettorialeBase * f) const = 0;
+                               double h, FunzioneVettorialeBase & f) const = 0;
 }; 
 
 class Eulero : public EquazioneDifferenzialeBase {
 public:
   vector<double> Passo(double t, const vector<double> & x,
-                       double h, FunzioneVettorialeBase *f) const override;
+                       double h, FunzioneVettorialeBase & f) const override;
 };
 ```
 
@@ -117,15 +117,18 @@ Una volta implementate le classi (l'implementazione di Eulero è semplicissima s
 ```c++
 #include "equazionidifferenziali.h"
 
+#include <cassert>
 #include <iostream>
 #include <string>
 
 #include "fmtlib.h"
 
-#include "TApplication.h"
-#include "TAxis.h"
-#include "TCanvas.h"
-#include "TGraph.h"
+using namespace std;
+
+void print(double t, const vector<double> & x) {
+  assert(x.size() == 2);
+  fmt::print("{}\t{}\t{}\n", t, x[0], x[1]);
+}
 
 int main (int argc, char** argv ) {
   if(argc != 2) {
@@ -133,8 +136,6 @@ int main (int argc, char** argv ) {
       return -1;
   }
   
-  TApplication myApp{"myApp", 0, 0};
-
   Eulero myEuler;
 
   OscillatoreArmonico *osc{new OscillatoreArmonico(1)};
@@ -145,26 +146,78 @@ int main (int argc, char** argv ) {
   vector<double> x{0., 1.};
   double t{0};
 
-  TGraph *myGraph{new TGraph()};
   int nstep{int(tmax / h + 0.5)};
 
   for (int step{}; step < nstep; step++) {
+      print(t, x);
       myGraph->SetPoint(step, t, x[0]);
       x = myEuler.Passo(t, x, h, osc);
       t += h;
   }
-  
-  TCanvas *c = new TCanvas();
-  c->cd();
-  string title{fmt::format("Oscillatore armonico (Eulero, h = {})", h)};
-
-  myGraph->SetTitle(title.c_str());
-  myGraph->GetXaxis()->SetTitle("Tempo [s]1");
-  myGraph->GetYaxis()->SetTitle("Posizione x [m]");
-  myGraph->Draw("AL");
-
-  myApp.Run();
+  print(t, x);
 }
+```
+
+Come al solito, potete installare la libreria `fmtlib` usando lo script [`install_fmt_library.sh`](./install_fmt_library.sh): scaricatelo nella directory dell'esercizio ed eseguitelo, oppure eseguite direttamente questo comando:
+
+<input type="text" value="curl https://ziotom78.github.io/tnds-tomasi-notebooks/install_fmt_library.sh | sh" id="installFmtCommand" readonly="1" size="60"><button onclick='copyFmtInstallationScript("installFmtCommand")'>Copia</button> 
+
+In alternativa, scaricate questo [file zip](./fmtlib.zip) nella directory dell'esercizio e decomprimetelo, poi aggiungete il file `format.cc` nella riga in cui compilate l'eseguibile.
+
+## Grafico della soluzione
+
+Se si vuole anche implementare un grafico della soluzione con [gplot++](https://github.com/ziotom78/gplotpp), dovete salvare come al solito le ascisse e le ordinate dei punti del grafico in due `std::vector`, e poi chiamare il metodo `Gnuplot::plot(x, y)`. Per installare il file `gplot++.h` seguite le solite istruzioni descritte [qui](./index.html#gplotinstall).
+
+Questa è una possibile implementazione della seconda parte del `main`:
+
+```c++
+vector<double> times(nstep);  // Importante la parentesi tonda () anziché graffa {} qui
+vector<double> pos(nstep);
+
+for (int step{}; step < nstep; step++) {
+    times[step] = t;
+    pos[step] = x[0];
+    
+    print(t, x);
+    myGraph->SetPoint(step, t, x[0]);
+    x = myEuler.Passo(t, x, h, osc);
+    t += h;
+}
+print(t, x);
+
+Gnuplot plt{};
+
+plt.redirect_to_png("soluzione.png");
+plt.plot(times, pos);
+plt.set_xlabel("Tempo [s]");
+plt.set_ylabel("Posizione x [m]");
+plt.show();
+```
+
+Se invece volete usare ROOT, queste sono le righe da aggiungere alla seconda parte del `main`:
+
+```c++
+TApplication myApp{"myApp", 0, 0};
+TGraph *myGraph{new TGraph()};
+
+for (int step{}; step < nstep; step++) {
+    print(t, x);
+    myGraph->SetPoint(step, t, x[0]);
+    x = myEuler.Passo(t, x, h, osc);
+    t += h;
+}
+print(t, x);
+
+TCanvas *c{new TCanvas()};
+c->cd();
+string title{fmt::format("Oscillatore armonico (Eulero, h = {})", h)};
+
+myGraph->SetTitle(title.c_str());
+myGraph->GetXaxis()->SetTitle("Tempo [s]1");
+myGraph->GetYaxis()->SetTitle("Posizione x [m]");
+myGraph->Draw("AL");
+
+myApp.Run();
 ```
 
 Si riveda il solito esempio ([qui](./codici/test_tgraph.cpp)) per l'uso dei `TGraph` di ROOT.

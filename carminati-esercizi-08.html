@@ -136,6 +136,7 @@
                                                         <ul>
                                                         <li><a href="#il-metodo-di-eulero">Il metodo di Eulero</a></li>
                                                         <li><a href="#struttura-del-programma">Struttura del programma</a></li>
+                                                        <li><a href="#grafico-della-soluzione">Grafico della soluzione</a></li>
                                                         <li><a href="#cosa-ci-aspettiamo">Cosa ci aspettiamo?</a></li>
                                                         <li><a href="#esercizio-9.2">Esercizio 9.2 - Risoluzione tramite Runge-Kutta (da consegnare)</a></li>
                                                         <li><a href="#il-metodo-di-runge-kutta">Il metodo di Runge-Kutta</a></li>
@@ -235,65 +236,105 @@ v(t + h) &amp;= v(t) + h \cdot \dot{v}(t) = x(t) + h \cdot \frac{F}m.
 <span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> EquazioneDifferenzialeBase <span class="op">{</span></span>
 <span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span><span class="op">:</span></span>
 <span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>  <span class="kw">virtual</span> vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> Passo<span class="op">(</span><span class="dt">double</span> t<span class="op">,</span> <span class="at">const</span> vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;&amp;</span> x<span class="op">,</span></span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>                               <span class="dt">double</span> h<span class="op">,</span> FunzioneVettorialeBase <span class="op">*</span> f<span class="op">)</span> <span class="at">const</span> <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>                               <span class="dt">double</span> h<span class="op">,</span> FunzioneVettorialeBase <span class="op">&amp;</span> f<span class="op">)</span> <span class="at">const</span> <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
 <span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="op">};</span> </span>
 <span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Eulero <span class="op">:</span> <span class="kw">public</span> EquazioneDifferenzialeBase <span class="op">{</span></span>
 <span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span><span class="op">:</span></span>
 <span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>  vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> Passo<span class="op">(</span><span class="dt">double</span> t<span class="op">,</span> <span class="at">const</span> vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> <span class="op">&amp;</span> x<span class="op">,</span></span>
-<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>                       <span class="dt">double</span> h<span class="op">,</span> FunzioneVettorialeBase <span class="op">*</span>f<span class="op">)</span> <span class="at">const</span> <span class="kw">override</span><span class="op">;</span></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>                       <span class="dt">double</span> h<span class="op">,</span> FunzioneVettorialeBase <span class="op">&amp;</span> f<span class="op">)</span> <span class="at">const</span> <span class="kw">override</span><span class="op">;</span></span>
 <span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code></pre></div>
 <p>Una volta implementate le classi (l’implementazione di Eulero è semplicissima se si usano le operazioni di algebra vettoriale), un possibile programma per risolvere l’esercizio è il seguente:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;equazionidifferenziali.h&quot;</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;string&gt;</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;fmtlib.h&quot;</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;TApplication.h&quot;</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;TAxis.h&quot;</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;TCanvas.h&quot;</span></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;TGraph.h&quot;</span></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main <span class="op">(</span><span class="dt">int</span> argc<span class="op">,</span> <span class="dt">char</span><span class="op">**</span> argv <span class="op">)</span> <span class="op">{</span></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span><span class="op">(</span>argc <span class="op">!=</span> <span class="dv">2</span><span class="op">)</span> <span class="op">{</span></span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>      fmt<span class="op">::</span>print<span class="op">(</span>stderr<span class="op">,</span> <span class="st">&quot;Usage: </span><span class="sc">{}</span><span class="st"> &lt;stepsize&gt;</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">,</span> argv<span class="op">[</span><span class="dv">0</span><span class="op">]);</span></span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>      <span class="cf">return</span> <span class="op">-</span><span class="dv">1</span><span class="op">;</span></span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>  TApplication myApp<span class="op">{</span><span class="st">&quot;myApp&quot;</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">0</span><span class="op">};</span></span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>  Eulero myEuler<span class="op">;</span></span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>  OscillatoreArmonico <span class="op">*</span>osc<span class="op">{</span><span class="kw">new</span> OscillatoreArmonico<span class="op">(</span><span class="dv">1</span><span class="op">)};</span></span>
-<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> tmax<span class="op">{</span><span class="dv">70</span><span class="op">};</span></span>
-<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> h<span class="op">{</span>atof<span class="op">(</span>argv<span class="op">[</span><span class="dv">1</span><span class="op">])};</span></span>
-<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>  vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> x<span class="op">{</span><span class="fl">0.</span><span class="op">,</span> <span class="fl">1.</span><span class="op">};</span></span>
-<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> t<span class="op">{</span><span class="dv">0</span><span class="op">};</span></span>
-<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>  TGraph <span class="op">*</span>myGraph<span class="op">{</span><span class="kw">new</span> TGraph<span class="op">()};</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;cassert&gt;</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;string&gt;</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;fmtlib.h&quot;</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="kw">using</span> <span class="kw">namespace</span> std<span class="op">;</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> print<span class="op">(</span><span class="dt">double</span> t<span class="op">,</span> <span class="at">const</span> vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> <span class="op">&amp;</span> x<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  <span class="ot">assert</span><span class="op">(</span>x<span class="op">.</span>size<span class="op">()</span> <span class="op">==</span> <span class="dv">2</span><span class="op">);</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>  fmt<span class="op">::</span>print<span class="op">(</span><span class="st">&quot;</span><span class="sc">{}\t{}\t{}\n</span><span class="st">&quot;</span><span class="op">,</span> t<span class="op">,</span> x<span class="op">[</span><span class="dv">0</span><span class="op">],</span> x<span class="op">[</span><span class="dv">1</span><span class="op">]);</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main <span class="op">(</span><span class="dt">int</span> argc<span class="op">,</span> <span class="dt">char</span><span class="op">**</span> argv <span class="op">)</span> <span class="op">{</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span><span class="op">(</span>argc <span class="op">!=</span> <span class="dv">2</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>      fmt<span class="op">::</span>print<span class="op">(</span>stderr<span class="op">,</span> <span class="st">&quot;Usage: </span><span class="sc">{}</span><span class="st"> &lt;stepsize&gt;</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">,</span> argv<span class="op">[</span><span class="dv">0</span><span class="op">]);</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>      <span class="cf">return</span> <span class="op">-</span><span class="dv">1</span><span class="op">;</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>  Eulero myEuler<span class="op">;</span></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>  OscillatoreArmonico <span class="op">*</span>osc<span class="op">{</span><span class="kw">new</span> OscillatoreArmonico<span class="op">(</span><span class="dv">1</span><span class="op">)};</span></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> tmax<span class="op">{</span><span class="dv">70</span><span class="op">};</span></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> h<span class="op">{</span>atof<span class="op">(</span>argv<span class="op">[</span><span class="dv">1</span><span class="op">])};</span></span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>  vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> x<span class="op">{</span><span class="fl">0.</span><span class="op">,</span> <span class="fl">1.</span><span class="op">};</span></span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> t<span class="op">{</span><span class="dv">0</span><span class="op">};</span></span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>  <span class="dt">int</span> nstep<span class="op">{</span><span class="dt">int</span><span class="op">(</span>tmax <span class="op">/</span> h <span class="op">+</span> <span class="fl">0.5</span><span class="op">)};</span></span>
 <span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> step<span class="op">{};</span> step <span class="op">&lt;</span> nstep<span class="op">;</span> step<span class="op">++)</span> <span class="op">{</span></span>
-<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>      myGraph<span class="op">-&gt;</span>SetPoint<span class="op">(</span>step<span class="op">,</span> t<span class="op">,</span> x<span class="op">[</span><span class="dv">0</span><span class="op">]);</span></span>
-<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>      x <span class="op">=</span> myEuler<span class="op">.</span>Passo<span class="op">(</span>t<span class="op">,</span> x<span class="op">,</span> h<span class="op">,</span> osc<span class="op">);</span></span>
-<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>      t <span class="op">+=</span> h<span class="op">;</span></span>
-<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
-<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>  TCanvas <span class="op">*</span>c <span class="op">=</span> <span class="kw">new</span> TCanvas<span class="op">();</span></span>
-<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a>  c<span class="op">-&gt;</span>cd<span class="op">();</span></span>
-<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a>  string title<span class="op">{</span>fmt<span class="op">::</span>format<span class="op">(</span><span class="st">&quot;Oscillatore armonico (Eulero, h = </span><span class="sc">{}</span><span class="st">)&quot;</span><span class="op">,</span> h<span class="op">)};</span></span>
-<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a>  myGraph<span class="op">-&gt;</span>SetTitle<span class="op">(</span>title<span class="op">.</span>c_str<span class="op">());</span></span>
-<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a>  myGraph<span class="op">-&gt;</span>GetXaxis<span class="op">()-&gt;</span>SetTitle<span class="op">(</span><span class="st">&quot;Tempo [s]1&quot;</span><span class="op">);</span></span>
-<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a>  myGraph<span class="op">-&gt;</span>GetYaxis<span class="op">()-&gt;</span>SetTitle<span class="op">(</span><span class="st">&quot;Posizione x [m]&quot;</span><span class="op">);</span></span>
-<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a>  myGraph<span class="op">-&gt;</span>Draw<span class="op">(</span><span class="st">&quot;AL&quot;</span><span class="op">);</span></span>
-<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a>  myApp<span class="op">.</span>Run<span class="op">();</span></span>
-<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>      print<span class="op">(</span>t<span class="op">,</span> x<span class="op">);</span></span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>      myGraph<span class="op">-&gt;</span>SetPoint<span class="op">(</span>step<span class="op">,</span> t<span class="op">,</span> x<span class="op">[</span><span class="dv">0</span><span class="op">]);</span></span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>      x <span class="op">=</span> myEuler<span class="op">.</span>Passo<span class="op">(</span>t<span class="op">,</span> x<span class="op">,</span> h<span class="op">,</span> osc<span class="op">);</span></span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>      t <span class="op">+=</span> h<span class="op">;</span></span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>  print<span class="op">(</span>t<span class="op">,</span> x<span class="op">);</span></span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p>Come al solito, potete installare la libreria <code>fmtlib</code> usando lo script <a href="./install_fmt_library.sh"><code>install_fmt_library.sh</code></a>: scaricatelo nella directory dell’esercizio ed eseguitelo, oppure eseguite direttamente questo comando:</p>
+<p><input type="text" value="curl https://ziotom78.github.io/tnds-tomasi-notebooks/install_fmt_library.sh | sh" id="installFmtCommand" readonly="1" size="60"><button onclick='copyFmtInstallationScript("installFmtCommand")'>Copia</button></p>
+<p>In alternativa, scaricate questo <a href="./fmtlib.zip">file zip</a> nella directory dell’esercizio e decomprimetelo, poi aggiungete il file <code>format.cc</code> nella riga in cui compilate l’eseguibile.</p>
+<h2 id="grafico-della-soluzione">Grafico della soluzione</h2>
+<p>Se si vuole anche implementare un grafico della soluzione con <a href="https://github.com/ziotom78/gplotpp">gplot++</a>, dovete salvare come al solito le ascisse e le ordinate dei punti del grafico in due <code>std::vector</code>, e poi chiamare il metodo <code>Gnuplot::plot(x, y)</code>. Per installare il file <code>gplot++.h</code> seguite le solite istruzioni descritte <a href="./index.html#gplotinstall">qui</a>.</p>
+<p>Questa è una possibile implementazione della seconda parte del <code>main</code>:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> times<span class="op">(</span>nstep<span class="op">);</span>  <span class="co">// Importante la parentesi tonda () anziché graffa {} qui</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> pos<span class="op">(</span>nstep<span class="op">);</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> step<span class="op">{};</span> step <span class="op">&lt;</span> nstep<span class="op">;</span> step<span class="op">++)</span> <span class="op">{</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    times<span class="op">[</span>step<span class="op">]</span> <span class="op">=</span> t<span class="op">;</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    pos<span class="op">[</span>step<span class="op">]</span> <span class="op">=</span> x<span class="op">[</span><span class="dv">0</span><span class="op">];</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    print<span class="op">(</span>t<span class="op">,</span> x<span class="op">);</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    myGraph<span class="op">-&gt;</span>SetPoint<span class="op">(</span>step<span class="op">,</span> t<span class="op">,</span> x<span class="op">[</span><span class="dv">0</span><span class="op">]);</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> myEuler<span class="op">.</span>Passo<span class="op">(</span>t<span class="op">,</span> x<span class="op">,</span> h<span class="op">,</span> osc<span class="op">);</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    t <span class="op">+=</span> h<span class="op">;</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>print<span class="op">(</span>t<span class="op">,</span> x<span class="op">);</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>Gnuplot plt<span class="op">{};</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>plt<span class="op">.</span>redirect_to_png<span class="op">(</span><span class="st">&quot;soluzione.png&quot;</span><span class="op">);</span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>plt<span class="op">.</span>plot<span class="op">(</span>times<span class="op">,</span> pos<span class="op">);</span></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>plt<span class="op">.</span>set_xlabel<span class="op">(</span><span class="st">&quot;Tempo [s]&quot;</span><span class="op">);</span></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>plt<span class="op">.</span>set_ylabel<span class="op">(</span><span class="st">&quot;Posizione x [m]&quot;</span><span class="op">);</span></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>plt<span class="op">.</span>show<span class="op">();</span></span></code></pre></div>
+<p>Se invece volete usare ROOT, queste sono le righe da aggiungere alla seconda parte del <code>main</code>:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>TApplication myApp<span class="op">{</span><span class="st">&quot;myApp&quot;</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">0</span><span class="op">};</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>TGraph <span class="op">*</span>myGraph<span class="op">{</span><span class="kw">new</span> TGraph<span class="op">()};</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> step<span class="op">{};</span> step <span class="op">&lt;</span> nstep<span class="op">;</span> step<span class="op">++)</span> <span class="op">{</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    print<span class="op">(</span>t<span class="op">,</span> x<span class="op">);</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    myGraph<span class="op">-&gt;</span>SetPoint<span class="op">(</span>step<span class="op">,</span> t<span class="op">,</span> x<span class="op">[</span><span class="dv">0</span><span class="op">]);</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> myEuler<span class="op">.</span>Passo<span class="op">(</span>t<span class="op">,</span> x<span class="op">,</span> h<span class="op">,</span> osc<span class="op">);</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    t <span class="op">+=</span> h<span class="op">;</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>print<span class="op">(</span>t<span class="op">,</span> x<span class="op">);</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>TCanvas <span class="op">*</span>c<span class="op">{</span><span class="kw">new</span> TCanvas<span class="op">()};</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>c<span class="op">-&gt;</span>cd<span class="op">();</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>string title<span class="op">{</span>fmt<span class="op">::</span>format<span class="op">(</span><span class="st">&quot;Oscillatore armonico (Eulero, h = </span><span class="sc">{}</span><span class="st">)&quot;</span><span class="op">,</span> h<span class="op">)};</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>myGraph<span class="op">-&gt;</span>SetTitle<span class="op">(</span>title<span class="op">.</span>c_str<span class="op">());</span></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>myGraph<span class="op">-&gt;</span>GetXaxis<span class="op">()-&gt;</span>SetTitle<span class="op">(</span><span class="st">&quot;Tempo [s]1&quot;</span><span class="op">);</span></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>myGraph<span class="op">-&gt;</span>GetYaxis<span class="op">()-&gt;</span>SetTitle<span class="op">(</span><span class="st">&quot;Posizione x [m]&quot;</span><span class="op">);</span></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>myGraph<span class="op">-&gt;</span>Draw<span class="op">(</span><span class="st">&quot;AL&quot;</span><span class="op">);</span></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>myApp<span class="op">.</span>Run<span class="op">();</span></span></code></pre></div>
 <p>Si riveda il solito esempio (<a href="./codici/test_tgraph.cpp">qui</a>) per l’uso dei <code>TGraph</code> di ROOT.</p>
 <h2 id="cosa-ci-aspettiamo">Cosa ci aspettiamo?</h2>
 <p>Il metodo di Eulero non è molto preciso; in effetti, con un passo di integrazione modesto si vede come esso possa risultare instabile, mostrando oscillazioni la cui ampiezza varia con il tempo. La figura sotto mostra l’andamento di <span class="math inline">x(t)</span> con un passo di integrazione di 0.1 s:</p>
@@ -350,26 +391,26 @@ T = \frac{2\pi}{\sqrt{\frac{g}l}} \approx 2.007\,\text{s},
 <li>il tempo così calcolato corrisponde al semiperiodo dell’oscillazione.</li>
 </ol>
 <p>Un esempio di pseudo-codice che implementa questo algoritmo è:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">// condizioni iniziali</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> t<span class="op">{};</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>x<span class="op">.</span>SetComponent<span class="op">(</span><span class="dv">0</span><span class="op">,</span> <span class="op">-</span>A<span class="op">);</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>x<span class="op">.</span>SetComponent<span class="op">(</span><span class="dv">1</span><span class="op">,</span> <span class="dv">0</span><span class="op">);</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co">// con le condizioni iniziali date, la velocità sarà maggiore</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co">// o uguale a zero fino al punto di inversione del modo</span></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span><span class="op">(</span>x<span class="op">.</span>GetComponent<span class="op">(</span><span class="dv">1</span><span class="op">)</span> <span class="op">&gt;=</span> <span class="dv">0</span><span class="op">)</span> <span class="op">{</span></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    v <span class="op">=</span> x<span class="op">.</span>GetComponent<span class="op">(</span><span class="dv">1</span><span class="op">);</span> <span class="co">// salvo la velocità al passo precedente</span></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> myRK4<span class="op">.</span>Passo<span class="op">(</span>t<span class="op">,</span> x<span class="op">,</span> h<span class="op">,</span> osc<span class="op">);</span></span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    t <span class="op">+=</span> h<span class="op">;</span></span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="co">// calcolo del passaggio dallo zero utilizzando l&#39;interpolazione</span></span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="co">// lineare tra il passo precedente (t - h, v) e quello finale</span></span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="co">// (t, x.GetComponent(1))</span></span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>T <span class="op">=</span> t <span class="op">-</span> v <span class="op">*</span> h <span class="op">/</span> <span class="op">(</span>x<span class="op">.</span>GetComponent<span class="op">(</span><span class="dv">1</span><span class="op">)</span> <span class="op">-</span> v<span class="op">);</span></span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a><span class="co">// il periodo è due volte il semi-periodo appena calcolato</span></span>
-<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>T <span class="op">*=</span> <span class="dv">2</span><span class="op">;</span></span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">// condizioni iniziali</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> t<span class="op">{};</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>x<span class="op">.</span>SetComponent<span class="op">(</span><span class="dv">0</span><span class="op">,</span> <span class="op">-</span>A<span class="op">);</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>x<span class="op">.</span>SetComponent<span class="op">(</span><span class="dv">1</span><span class="op">,</span> <span class="dv">0</span><span class="op">);</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co">// con le condizioni iniziali date, la velocità sarà maggiore</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co">// o uguale a zero fino al punto di inversione del modo</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span><span class="op">(</span>x<span class="op">.</span>GetComponent<span class="op">(</span><span class="dv">1</span><span class="op">)</span> <span class="op">&gt;=</span> <span class="dv">0</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    v <span class="op">=</span> x<span class="op">.</span>GetComponent<span class="op">(</span><span class="dv">1</span><span class="op">);</span> <span class="co">// salvo la velocità al passo precedente</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> myRK4<span class="op">.</span>Passo<span class="op">(</span>t<span class="op">,</span> x<span class="op">,</span> h<span class="op">,</span> osc<span class="op">);</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>    t <span class="op">+=</span> h<span class="op">;</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="co">// calcolo del passaggio dallo zero utilizzando l&#39;interpolazione</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="co">// lineare tra il passo precedente (t - h, v) e quello finale</span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a><span class="co">// (t, x.GetComponent(1))</span></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>T <span class="op">=</span> t <span class="op">-</span> v <span class="op">*</span> h <span class="op">/</span> <span class="op">(</span>x<span class="op">.</span>GetComponent<span class="op">(</span><span class="dv">1</span><span class="op">)</span> <span class="op">-</span> v<span class="op">);</span></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a><span class="co">// il periodo è due volte il semi-periodo appena calcolato</span></span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>T <span class="op">*=</span> <span class="dv">2</span><span class="op">;</span></span></code></pre></div>
 <p>N.B.: controllate che la formula per l’interpolazione sia corretta!</p>
 <h1 id="esercizio-9.4">Esercizio 9.4 - Oscillazione forzate e risonanza (da consegnare)</h1>
 <p>Implementare la risoluzione dell’equazione di un oscillatore armonico smorzato con forzante. Fare quindi un grafico della soluzione stazionaria in funzione della frequenza dell’oscillatore, ricostruendo la curva di risonanza.</p>
