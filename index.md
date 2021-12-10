@@ -25,7 +25,7 @@ Durante le sessioni di laboratorio useremo il sito [gather.town](https://gather.
 
 # Suggerimenti vari
 
-## Uso della libreria `fmt`
+## Uso della libreria `fmt` {#fmtinstall}
 
 Siete invitati ad impratichirvi con la libreria `fmt`, che potete installare usando lo script [`install_fmt_library.sh`](./install_fmt_library.sh): scaricatelo nella directory dell'esercizio ed eseguitelo, oppure eseguite direttamente questo comando:
 
@@ -35,7 +35,7 @@ curl https://ziotom78.github.io/tnds-tomasi-notebooks/install_fmt_library.sh | s
 
 In alternativa, scaricate questo [file zip](./fmtlib.zip) nella directory dell'esercizio e decomprimetelo, poi aggiungete il file `format.cc` nella riga in cui compilate l'eseguibile. La libreria occupa molto poco spazio, quindi potete copiarla in ogni cartella in cui implementate un esercizio.
 
-## Gplot++
+## Gplot++ {#gplotinstall}
 
 Se avete difficoltà ad usare ROOT, potete interfacciare il vostro codice a [Gnuplot](http://www.gnuplot.info/) mediante la libreria [gplot++](https://github.com/ziotom78/gplotpp): è sufficiente scaricare il file [`gplot++.h`](https://raw.githubusercontent.com/ziotom78/gplotpp/master/gplot%2B%2B.h), oppure eseguire questo comando:
 
