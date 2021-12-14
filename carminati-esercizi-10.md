@@ -49,7 +49,7 @@ Per risolvere questo esercizio si può seguire lo schema seguente:
     };
     ```
 
-    Il costruttore si farà carico di inizializzare i parametri del generatore ai valori `m_a = 1664525`, `m_c = 1013904223` e `m_m = 1 << 31`.
+    Il costruttore si farà carico di inizializzare i parametri del generatore ai valori `m_a = 1664525`, `m_c = 1013904223` e `m_m = 1U << 31`.
 
 -   Preparare un semplice `main` per provare le funzionalità della classe RandomGen. Lo schema di massima potrebbe essere il seguente:
 
