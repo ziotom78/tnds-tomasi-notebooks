@@ -202,7 +202,7 @@ $$
 Definendo ora $s$ e $t$ come due variabili casuali distribuite uniformemente in [0,1], abbiamo
 $$
 \begin{aligned}
-R &= \sqrt{-2 \log s},\\
+R &= \sqrt{-2 \log (1 - s)},\\
 \theta &= 2\pi t,
 \end{aligned}
 $$
