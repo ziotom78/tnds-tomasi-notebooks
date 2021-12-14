@@ -20,6 +20,7 @@ header-includes: <script src="./fmtinstall.js"></script>
 | 16 Novembre 2021 | [Quadratura numerica](carminati-esercizi-07.html)     | [Notebook 7](https://ziotom78.github.io/tnds-notebooks/lezione07/) |
 | 23 Novembre 2021 | [Equazioni differenziali](carminati-esercizi-08.html) | [Notebook 8](https://ziotom78.github.io/tnds-notebooks/lezione08/) |
 | 30 Novembre 2021 | Idem                                                  | Idem                                                               |
+| 14 Dicembre 2021 | [Numeri pseudo-casuali](carminati-esercizi-10.html)   | [Notebook 10](https://ziotom78.github.io/tnds-notebooks/lezione10/) |
 </center>
 
 Durante le sessioni di laboratorio useremo il sito [gather.town](https://gather.town/app/etYemzL2K4Nr4o2t/LabTNDS2022) per gestire le persone collegate online.
