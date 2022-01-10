@@ -192,7 +192,7 @@
 <span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>  <span class="dt">unsigned</span> <span class="dt">int</span> <span class="va">m_a</span><span class="op">,</span> <span class="va">m_c</span><span class="op">,</span> <span class="va">m_m</span><span class="op">;</span></span>
 <span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>  <span class="dt">unsigned</span> <span class="dt">int</span> <span class="va">m_seed</span><span class="op">;</span></span>
 <span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code></pre></div>
-<p>Il costruttore si farà carico di inizializzare i parametri del generatore ai valori <code>m_a = 1664525</code>, <code>m_c = 1013904223</code> e <code>m_m = 1U << 31</code>.</p></li>
+<p>Il costruttore si farà carico di inizializzare i parametri del generatore ai valori <code>m_a = 1664525</code>, <code>m_c = 1013904223</code> e <code>m_m = 1U &lt;&lt; 31</code>.</p></li>
 <li><p>Preparare un semplice <code>main</code> per provare le funzionalità della classe RandomGen. Lo schema di massima potrebbe essere il seguente:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;vector&gt;</span></span>

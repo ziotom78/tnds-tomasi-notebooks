@@ -9,18 +9,20 @@ header-includes: <script src="./fmtinstall.js"></script>
 # Esercizi e delle spiegazioni
 
 <center>
-| Data             | Esercizi                                              | Spiegazione                                                        |
-|------------------|-------------------------------------------------------|--------------------------------------------------------------------|
-| 5 Ottobre 2021   | [Arrays](carminati-esercizi-01.html)                  | [Lezione 1](tomasi-lezione-01.html)                                |
-| 11 Ottobre 2021  | [Classe `Vettore`](carminati-esercizi-02.html)        | [Lezione 2](tomasi-lezione-02.html)                                |
-| 19 Ottobre 2021  | [Template e `vector`](carminati-esercizi-03.html)     | [Lezione 3](tomasi-lezione-03.html)                                |
-| 26 Ottobre 2021  | [Classi ed ereditarietà](carminati-esercizi-05.html)  | [Lezione 4](tomasi-lezione-04.html)                                |
-| 2 Novembre 2021  | Idem                                                  | [Lezione 5](tomasi-lezione-05.html)                                |
-| 9 Novembre 2021  | [Ricerca di zeri](carminati-esercizi-06.html)         | [Lezione 6](tomasi-lezione-06.html)                                |
-| 16 Novembre 2021 | [Quadratura numerica](carminati-esercizi-07.html)     | [Notebook 7](https://ziotom78.github.io/tnds-notebooks/lezione07/) |
-| 23 Novembre 2021 | [Equazioni differenziali](carminati-esercizi-08.html) | [Notebook 8](https://ziotom78.github.io/tnds-notebooks/lezione08/) |
-| 30 Novembre 2021 | Idem                                                  | Idem                                                               |
+| Data             | Esercizi                                              | Spiegazione                                                         |
+|------------------|-------------------------------------------------------|---------------------------------------------------------------------|
+| 5 Ottobre 2021   | [Arrays](carminati-esercizi-01.html)                  | [Lezione 1](tomasi-lezione-01.html)                                 |
+| 11 Ottobre 2021  | [Classe `Vettore`](carminati-esercizi-02.html)        | [Lezione 2](tomasi-lezione-02.html)                                 |
+| 19 Ottobre 2021  | [Template e `vector`](carminati-esercizi-03.html)     | [Lezione 3](tomasi-lezione-03.html)                                 |
+| 26 Ottobre 2021  | [Classi ed ereditarietà](carminati-esercizi-05.html)  | [Lezione 4](tomasi-lezione-04.html)                                 |
+| 2 Novembre 2021  | Idem                                                  | [Lezione 5](tomasi-lezione-05.html)                                 |
+| 9 Novembre 2021  | [Ricerca di zeri](carminati-esercizi-06.html)         | [Lezione 6](tomasi-lezione-06.html)                                 |
+| 16 Novembre 2021 | [Quadratura numerica](carminati-esercizi-07.html)     | [Notebook 7](https://ziotom78.github.io/tnds-notebooks/lezione07/)  |
+| 23 Novembre 2021 | [Equazioni differenziali](carminati-esercizi-08.html) | [Notebook 8](https://ziotom78.github.io/tnds-notebooks/lezione08/)  |
+| 30 Novembre 2021 | Idem                                                  | Idem                                                                |
 | 14 Dicembre 2021 | [Numeri pseudo-casuali](carminati-esercizi-10.html)   | [Notebook 10](https://ziotom78.github.io/tnds-notebooks/lezione10/) |
+| 11 Gennaio 2022  | [Metodi Monte Carlo](carminati-esercizi-11.html)      | [Lezione 12](tomasi-lezione-12.html)                                |
+|                  |                                                       | [Notebook 10](https://ziotom78.github.io/tnds-notebooks/lezione10/) |
 </center>
 
 Durante le sessioni di laboratorio useremo il sito [gather.town](https://gather.town/app/etYemzL2K4Nr4o2t/LabTNDS2022) per gestire le persone collegate online.
