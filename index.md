@@ -21,8 +21,8 @@ header-includes: <script src="./fmtinstall.js"></script>
 | 23 Novembre 2021 | [Equazioni differenziali](carminati-esercizi-08.html) | [Notebook 8](https://ziotom78.github.io/tnds-notebooks/lezione08/)  |
 | 30 Novembre 2021 | Idem                                                  | Idem                                                                |
 | 14 Dicembre 2021 | [Numeri pseudo-casuali](carminati-esercizi-10.html)   | [Notebook 10](https://ziotom78.github.io/tnds-notebooks/lezione10/) |
+| 21 Dicembre 2021 | Idem                                                  | Idem                                                                |
 | 11 Gennaio 2022  | [Metodi Monte Carlo](carminati-esercizi-11.html)      | [Lezione 12](tomasi-lezione-12.html)                                |
-|                  |                                                       | [Notebook 10](https://ziotom78.github.io/tnds-notebooks/lezione10/) |
 </center>
 
 Durante le sessioni di laboratorio useremo il sito [gather.town](https://gather.town/app/etYemzL2K4Nr4o2t/LabTNDS2022) per gestire le persone collegate online.
