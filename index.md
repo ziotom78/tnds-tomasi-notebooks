@@ -22,7 +22,7 @@ header-includes: <script src="./fmtinstall.js"></script>
 | 30 Novembre 2021 | Idem                                                  | Idem                                                                |
 | 14 Dicembre 2021 | [Numeri pseudo-casuali](carminati-esercizi-10.html)   | [Notebook 10](https://ziotom78.github.io/tnds-notebooks/lezione10/) |
 | 21 Dicembre 2021 | Idem                                                  | Idem                                                                |
-| 11 Gennaio 2022  | [Metodi Monte Carlo](carminati-esercizi-11.html)      | [Lezione 12](tomasi-lezione-12.html)                                |
+| 11 Gennaio 2022  | [Metodi Monte Carlo](carminati-esercizi-11.html)      | [Lezione 11](tomasi-lezione-11.html)                                |
 </center>
 
 Durante le sessioni di laboratorio useremo il sito [gather.town](https://gather.town/app/etYemzL2K4Nr4o2t/LabTNDS2022) per gestire le persone collegate online.

@@ -1,5 +1,5 @@
 ---
-title: "Laboratorio di TNDS -- Lezione 12"
+title: "Laboratorio di TNDS -- Lezione 11"
 author: "Maurizio Tomasi"
 date: "Martedì 11 Gennaio 2022"
 theme: "white"
