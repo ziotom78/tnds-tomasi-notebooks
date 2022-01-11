@@ -68,7 +68,7 @@ L'analisi dati consiste nella seguente procedura:
 
 Costruire una classe `EsperimentoPrisma` con le seguenti caratteristiche:
 
--   come data membri deve avere sia i valori veri che i valori misurati di tutte le quantità ed in più un generatore di numeri casuali `RandomGen` (vedi [lezione 8](carminati-esercizi-10.html#esercizio-10.0---generatore-di-numeri-casuali-da-consegnare));
+-   come data membri deve avere sia i valori veri che i valori misurati di tutte le quantità ed in più un generatore di numeri casuali `RandomGen` (vedi [lezione 10](carminati-esercizi-10.html#esercizio-10.0---generatore-di-numeri-casuali-da-consegnare));
 
 -   nel costruttore deve definire tutti i valori *di ingresso* delle quantità misurabili a partire dai parametri $A$, $B$, $\alpha$ e dalle lunghezze d'onda;
 
@@ -108,9 +108,11 @@ Il suo header file, potrà pertanto essere del tipo:
 class EsperimentoPrisma {
 public:
   EsperimentoPrisma();
-  ~EsperimentoPrisma();
+  ~EsperimentoPrisma() {}
   void Esegui();
   void Analizza();
+  
+  double getAmis() { return m_A_misurato; }
   
 private:
   // generatore di numeri casuali
@@ -126,6 +128,8 @@ private:
   double m_B_input, m_B_misurato;
   double m_n1_input, m_n1_misurato;
   double m_n2_input, m_n2_misurato;
+  double m_dm1_input, m_dm1_misurato;
+  double m_dm2_input, m_dm2_misurato;
   double m_th0_input, m_th0_misurato;
   double m_thl_input, m_thl_misurato;
   double m_th2_input, m_th2_misurato;
@@ -137,6 +141,8 @@ N.B.: in questo header mancano i metodi `Get…` per accedere ai data membri.
 La configurazione dell'esperimento, con il calcolo di tutti i valori assunti per le quantità misurabili, può venire fatta nel costruttore di default della classe, che in questo caso risulta più complicato del solito:
 
 ```c++
+#include "esperimento_prisma.h"
+
 EsperimentoPrisma: :EsperimentoPrisma() :
   m_rgen{1},
   m_lambdal{579.1e-9},
@@ -155,11 +161,10 @@ EsperimentoPrisma: :EsperimentoPrisma() :
   m_th0_input = M_P1 / 2;
   
   // determino thetal e theta2
-  double dm;
-  dm = 2 * asin(m_nl_input * sin(0.5 * m_alpha)) - m_alpha;
-  m_th1_input = m_th0_input + dm;
-  dm = 2 * asin(m_n2_input * sin(0.5 * m_alpha)) - m_alpha;
-  m_th2_input = m_th0_input + dm;
+  m_dm1_input = 2 * asin(m_n1_input * sin(0.5 * m_alpha)) - m_alpha;
+  m_th1_input = m_th0_input + m_dm1_input;
+  m_dm2_input = 2 * asin(m_n2_input * sin(0.5 * m_alpha)) - m_alpha;
+  m_th2_input = m_th0_input + m_dm2_input;
 }
 ```
 
@@ -169,8 +174,20 @@ Notate l'uso della lista di inizializzazione nel costruttore: questa permette di
 
 Per verificare le correlazioni tra due variabili, è utile utilizzare istogrammi bidimensionali, in cui i canali sono definiti da range di valori sia di una variabile che dell'altra.
 
-Per costruire questi istogrammi, si può usare la classe `TH2F` di ROOT.
-Questa ha un costruttore che premette di dividere in canali sia la coordinata $x$ che la $y$ dell'istogramma:
+Per costruire questi istogrammi, si può usare un classico «scatter plot», identico a un plot normale ma in cui non si congiungono i punti con linee. In [gplot++](https://github.com/ziotom78/gplotpp) è sufficiente usare lo stile `Gnuplot::LineStyle::POINTS`:
+
+```c++
+  Gnuplot plt{};
+  
+  plt.set_xlabel("Variabile X");
+  plt.set_ylabel("Variabile Y");
+  // `x` e `y` sono due vettori che contengono le due variabili
+  // di cui si vuole studiare la correlazione
+  plt.plot(x, y, "", Gnuplot::LineStyle::POINTS);
+  plt.show();
+```
+
+In ROOT è possibile usare lo stesso trucco, oppure produrre un istogramma 2D tramite la classe `TH2F` di ROOT. Questa ha un costruttore che premette di dividere in canali sia la coordinata $x$ che la $y$ dell'istogramma:
 
 ```c++
 TH2F::TH2F(char * nome, char * titolo,
