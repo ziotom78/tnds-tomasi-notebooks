@@ -237,7 +237,7 @@ $$
 $$
 </td>
 <td>
-![](http://labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/figure/delta.png)
+![](http://labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/figure/theta.png)
 </td>
 </tr>
 <tr>
@@ -252,7 +252,7 @@ $$
 $$
 </td>
 <td>
-![](http://labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/figure/nrifr.png)
+![](http://labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/figure/delta.png)
 </td>
 </tr>
 <tr>
@@ -268,7 +268,7 @@ n_2 &= 1.75110\\
 $$
 </td>
 <td>
-![](http://labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/figure/AB.png)
+![](http://labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/figure/nrifr.png)
 </td>
 </tr>
 <tr>
