@@ -427,7 +427,7 @@ int main(int argc, const char * argv[]) {
   // dell'istogramma
 
   TH1F histo{"histo", "histo", 100, -10, 100};
-  histo.StatOverflows(kTRUE);
+  histo.StatOverflows(true);
 
   for (size_t k{}; k < v.size(); k++ ) {
       histo.Fill(v[k]);

@@ -82,7 +82,7 @@ Costruire una classe `EsperimentoPrisma` con le seguenti caratteristiche:
 
 Scrivere un programma che esegua 10000 volte l'esperimento, faccia un istogramma dei valori misurati, e calcoli media e deviazione standard di tali valori.
 
-N.B.: Per il calcolo di medie e varianze potete decidere di immagazzinare i dati in un contenitore (`std::vector` o `Vettore`) e utilizzare le funzioni sviluppate nelle prime lezioni, oppure accedervi direttamente dagli istogrammi di ROOT come mostrato [qui](http://labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/lezioneROOT_1819.html#testoROOT_a2) ma ricordandosi di aggiungere `histo.StatOverflows(kTRUE);` in modo da forzare l'utilizzo di eventuali underflow e overflow per calcoli statistici.
+N.B.: Per il calcolo di medie e varianze potete decidere di immagazzinare i dati in un contenitore (`std::vector` o `Vettore`) e utilizzare le funzioni sviluppate nelle prime lezioni, oppure accedervi direttamente dagli istogrammi di ROOT come mostrato [qui](http://labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/lezioneROOT_1819.html#testoROOT_a2) ma ricordandosi di aggiungere `histo.StatOverflows(true);` in modo da forzare l'utilizzo di eventuali underflow e overflow per calcoli statistici.
 
 ## Parte II
 

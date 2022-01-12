@@ -199,7 +199,7 @@ B &amp;= \frac{n^2(\lambda_2) - n^2(\lambda_1)}{\frac1{\lambda_2^2} - \frac1{\la
 <li><p>i metodi necessari per accedere ai valori dei data membri, sia di ingresso che misurati..</p></li>
 </ul>
 <p>Scrivere un programma che esegua 10000 volte l’esperimento, faccia un istogramma dei valori misurati, e calcoli media e deviazione standard di tali valori.</p>
-<p>N.B.: Per il calcolo di medie e varianze potete decidere di immagazzinare i dati in un contenitore (<code>std::vector</code> o <code>Vettore</code>) e utilizzare le funzioni sviluppate nelle prime lezioni, oppure accedervi direttamente dagli istogrammi di ROOT come mostrato <a href="http://labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/lezioneROOT_1819.html#testoROOT_a2">qui</a> ma ricordandosi di aggiungere <code>histo.StatOverflows(kTRUE);</code> in modo da forzare l’utilizzo di eventuali underflow e overflow per calcoli statistici.</p>
+<p>N.B.: Per il calcolo di medie e varianze potete decidere di immagazzinare i dati in un contenitore (<code>std::vector</code> o <code>Vettore</code>) e utilizzare le funzioni sviluppate nelle prime lezioni, oppure accedervi direttamente dagli istogrammi di ROOT come mostrato <a href="http://labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/lezioneROOT_1819.html#testoROOT_a2">qui</a> ma ricordandosi di aggiungere <code>histo.StatOverflows(true);</code> in modo da forzare l’utilizzo di eventuali underflow e overflow per calcoli statistici.</p>
 <h2 id="parte-ii">Parte II</h2>
 <p>Aggiungere alla classe un metodo <code>Analizza()</code> che faccia i calcoli relativi all’analisi dati ed estendere il programma in modo da eseguire l’analisi dati dei 10000 esperimenti e fare istogrammi di:</p>
 <ol>
