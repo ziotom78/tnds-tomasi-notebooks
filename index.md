@@ -29,12 +29,24 @@ Durante le sessioni di laboratorio useremo il sito [gather.town](https://gather.
 
 # Suggerimenti vari
 
+## Installazione di ROOT e Gnuplot
+
+A partire dal Gennaio 2022, Repl.it non fornisce più una serie di programmi nelle proprie Repl, e purtroppo tra i programmi rimossi c'è anche Gnuplot. Ma c'è una soluzione semplice.
+
+Aprite la Repl in cui volete installare ROOT e/o Gnuplot, ed eseguite questo comando dalla console:
+
+```sh
+curl -s https://ziotom78.github.io/tnds-tomasi-notebooks/install_standard_packages | sh
+```
+
+Una volta eseguito, una serie di programmi saranno installati ed operativi. (E non dovrete ricordarvi di eseguire `source setup.sh` per attivare ROOT!)
+
 ## Uso della libreria `fmt` {#fmtinstall}
 
-Siete invitati ad impratichirvi con la libreria `fmt`, che potete installare usando lo script [`install_fmt_library.sh`](./install_fmt_library.sh): scaricatelo nella directory dell'esercizio ed eseguitelo, oppure eseguite direttamente questo comando:
+Siete invitati ad impratichirvi con la libreria `fmt`, che potete installare usando lo script [`install_fmt_library`](./install_fmt_library): scaricatelo nella directory dell'esercizio ed eseguitelo, oppure eseguite direttamente questo comando:
 
 ```
-curl https://ziotom78.github.io/tnds-tomasi-notebooks/install_fmt_library.sh | sh
+curl https://ziotom78.github.io/tnds-tomasi-notebooks/install_fmt_library | sh
 ```
 
 In alternativa, scaricate questo [file zip](./fmtlib.zip) nella directory dell'esercizio e decomprimetelo, poi aggiungete il file `format.cc` nella riga in cui compilate l'eseguibile. La libreria occupa molto poco spazio, quindi potete copiarla in ogni cartella in cui implementate un esercizio.
@@ -45,4 +57,10 @@ Se avete difficoltà ad usare ROOT, potete interfacciare il vostro codice a [Gnu
 
 ```
 curl 'https://raw.githubusercontent.com/ziotom78/gplotpp/master/gplot%2B%2B.h' > gplot++.h
+```
+
+Ricordate che la libreria funziona a patto che abbiate installato Gnuplot sul vostro computer (se usate i computer del laboratorio, è già installato). Per usare Gnuplot in Repl.it dovete eseguire da console questo comando (vedi sopra):
+
+```sh
+curl -s https://ziotom78.github.io/tnds-tomasi-notebooks/install_standard_packages | sh
 ```

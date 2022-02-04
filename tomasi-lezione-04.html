@@ -411,8 +411,8 @@ Zio Paperone   |       15 |     1.42e-01</code></pre>
 <ul>
 <li><p>Il comando <code>g++</code> sui computer del laboratorio e su Repl.it non supporta ancora lo standard C++20: solo a partire dalla versione 10 di GCC è supportato lo standard C++20, passando a <code>g++</code> il flag <code>-std=c++20</code>.</p></li>
 <li><p>La libreria di formattazione può però già essere usata scaricandola dal sito <a href="https://github.com/fmtlib/fmt">github.com/fmtlib/fmt</a>, che contiene la versione completa della libreria, usabile però anche da compilatori che ancora non supportano il C++20 (come quelli su Repl.it o del laboratorio).</p></li>
-<li><p>Per automatizzare l’installazione, potete scaricare (con il click destro) lo script <a href="./install_fmt_library.sh">install_fmt_library.sh</a>, da eseguire nella cartella del vostro programma:</p>
-<pre><code>sh install_fmt_library.sh</code></pre></li>
+<li><p>Per automatizzare l’installazione, potete scaricare (con il click destro) lo script <a href="./install_fmt_library">install_fmt_library</a>, da eseguire nella cartella del vostro programma:</p>
+<pre><code>sh install_fmt_library</code></pre></li>
 </ul>
 </section>
 <section class="slide level1">
@@ -422,7 +422,7 @@ Zio Paperone   |       15 |     1.42e-01</code></pre>
 <section id="differenze-tra-format-e-il-futuro-c20" class="slide level1">
 <h1>Differenze tra <code>format</code> e il futuro C++20</h1>
 <ul>
-<li><p>La libreria installata da <a url="./install_fmt_library.sh" download><code>install_fmt_library.sh</code></a> ha alcune differenze con lo standard C++20:</p>
+<li><p>La libreria installata da <a url="./install_fmt_library" download><code>install_fmt_library</code></a> ha alcune differenze con lo standard C++20:</p>
 <ol type="1">
 <li>Il namespace è diverso: è <code>fmt::</code> anziché <code>std::format::</code>;</li>
 <li>Il file da includere è diverso: <code>"fmt/format.h"</code> anziché <code>&lt;format&gt;</code>;</li>
@@ -434,7 +434,7 @@ Zio Paperone   |       15 |     1.42e-01</code></pre>
 <section id="differenze-tra-format-e-il-futuro-c20-1" class="slide level1">
 <h1>Differenze tra <code>format</code> e il futuro C++20</h1>
 <ul>
-<li><p>Lo script <code>install_fmt_library.sh</code> installa un piccolo file header, <code>fmtlib.h</code>, che si preoccupa di gestire le differenze tra il C++ attuale e il C++20</p></li>
+<li><p>Lo script <code>install_fmt_library</code> installa un piccolo file header, <code>fmtlib.h</code>, che si preoccupa di gestire le differenze tra il C++ attuale e il C++20</p></li>
 <li><p>Se usate <code>#include "fmtlib.h"</code>, vi basterà poi usare sempre il namespace <code>fmt::</code>.</p></li>
 <li><p>Se ricompilerete in futuro il vostro codice con un compilatore C++20, <code>fmtlib.h</code> vi permetterà di continuare ad usare <code>fmt::</code>, che sarà silenziosamente convertito in <code>std::format</code>.</p></li>
 </ul>

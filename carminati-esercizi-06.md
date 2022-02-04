@@ -182,11 +182,11 @@ cout << "x0 = " << fixed << setprecision(cifre_significative) << zero << endl;
 
 Potete installare la libreria `fmtlib` eseguendo questo comando:
 
-<input type="text" value="curl https://ziotom78.github.io/tnds-tomasi-notebooks/install_fmt_library.sh | sh" id="installFmtCommand" readonly="1" size="60"><button onclick='copyFmtInstallationScript("installFmtCommand")'>Copia</button> 
+<input type="text" value="curl https://ziotom78.github.io/tnds-tomasi-notebooks/install_fmt_library | sh" id="installFmtCommand" readonly="1" size="60"><button onclick='copyFmtInstallationScript("installFmtCommand")'>Copia</button> 
 
 e seguite poi le istruzioni fornite a video, che spiegano come aggiungere `format.cc` nel `Makefile`.
 
-In alternativa, scaricate manualmente lo script [`install_fmt_library.sh`](./install_fmt_library.sh) (click col tasto destro sul link e scegliere «Salva come…»). Lo script funziona solo sotto Linux e Mac; se usate Windows, scaricate questo [file zip](./fmtlib.zip) nella directory dell'esercizio e decomprimetelo, poi aggiungete il file `format.cc` nella riga in cui compilate l'eseguibile.
+In alternativa, scaricate manualmente lo script [`install_fmt_library`](./install_fmt_library) (click col tasto destro sul link e scegliere «Salva come…»). Lo script funziona solo sotto Linux e Mac; se usate Windows, scaricate questo [file zip](./fmtlib.zip) nella directory dell'esercizio e decomprimetelo, poi aggiungete il file `format.cc` nella riga in cui compilate l'eseguibile.
 
 
 ## La funzione segno

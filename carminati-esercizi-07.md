@@ -99,9 +99,9 @@ In questo modo il metodo `calculate` può usare gli estremi restituiti da `getA(
 
 **Caccia all'errore**: l'implementazione contiene un errore. Per metterlo in evidenza, provate ad integrare $f(x) = \sin x$ tra $\pi / 2$ e $\pi$: vedrete che la convergenza non è $O(h^2)$, ma solo $O(h)$. (Potete vedere l'errore anche confrontando i risultati del programma con i numeri riportati nel [notebook Julia](tomasi-lezione-07-quadratura-numerica.html)). Se applicate correttamente l'algoritmo, dovete riscontrare il comportamento atteso.
 
-Viene ora fornito un codice per verificare il funzionamento di quanto implementato finora, che usa la libreria `fmtlib`. Come al solito, potete installarla usando lo script [`install_fmt_library.sh`](./install_fmt_library.sh): scaricatelo nella directory dell'esercizio ed eseguitelo, oppure eseguite direttamente questo comando:
+Viene ora fornito un codice per verificare il funzionamento di quanto implementato finora, che usa la libreria `fmtlib`. Come al solito, potete installarla usando lo script [`install_fmt_library`](./install_fmt_library): scaricatelo nella directory dell'esercizio ed eseguitelo, oppure eseguite direttamente questo comando:
 
-<input type="text" value="curl https://ziotom78.github.io/tnds-tomasi-notebooks/install_fmt_library.sh | sh" id="installFmtCommand" readonly="1" size="60"><button onclick='copyFmtInstallationScript("installFmtCommand")'>Copia</button> 
+<input type="text" value="curl https://ziotom78.github.io/tnds-tomasi-notebooks/install_fmt_library | sh" id="installFmtCommand" readonly="1" size="60"><button onclick='copyFmtInstallationScript("installFmtCommand")'>Copia</button> 
 
 In alternativa, scaricate questo [file zip](./fmtlib.zip) nella directory dell'esercizio e decomprimetelo, poi aggiungete il file `format.cc` nella riga in cui compilate l'eseguibile.
 

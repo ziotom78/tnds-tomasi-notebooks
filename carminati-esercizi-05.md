@@ -119,9 +119,9 @@ Proviamo ad utilizzare l'esempio della classe `Posizione` per riflettere sul con
 
 (Scarica un esempio [qui](./codici/esercizio5.0.cpp)).
 
-Questo programma utilizza la nuova classe appena creata: richiede di fornire come argomenti le tre coordinate cartesiane e poi stampa le terne di coordinate cartesiane, sferiche e cilindriche. Il programma è pensato per usare la libreria fmt, che potete installare usando lo script [`install_fmt_library.sh`](./install_fmt_library.sh): scaricatelo nella directory dell'esercizio ed eseguitelo, oppure eseguite questo comando:
+Questo programma utilizza la nuova classe appena creata: richiede di fornire come argomenti le tre coordinate cartesiane e poi stampa le terne di coordinate cartesiane, sferiche e cilindriche. Il programma è pensato per usare la libreria fmt, che potete installare usando lo script [`install_fmt_library`](./install_fmt_library): scaricatelo nella directory dell'esercizio ed eseguitelo, oppure eseguite questo comando:
 
-<input type="text" value="curl https://ziotom78.github.io/tnds-tomasi-notebooks/install_fmt_library.sh | sh" id="installFmtCommand" readonly="1" size="60"><button onclick='copyFmtInstallationScript("installFmtCommand")'>Copia</button> 
+<input type="text" value="curl https://ziotom78.github.io/tnds-tomasi-notebooks/install_fmt_library | sh" id="installFmtCommand" readonly="1" size="60"><button onclick='copyFmtInstallationScript("installFmtCommand")'>Copia</button> 
 
 In alternativa, scaricate questo [file zip](./fmtlib.zip) nella directory dell'esercizio e decomprimetelo, poi aggiungete il file `format.cc` nella riga in cui compilate l'eseguibile:
 
@@ -136,7 +136,7 @@ Questo è il codice sorgente del programma:
 ```c++
 #include "posizione.h"
 
-// Installarla con ./install_fmt_library.sh
+// Installarla con ./install_fmt_library
 #include "fmtlib.h"
 
 #include <cstdlib>

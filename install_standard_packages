@@ -1,0 +1,37 @@
+#!/bin/sh
+
+if [ -z "$REPL_SLUG" ]; then
+    echo "Error, you must run this script within Repl.it"
+    exit 1
+fi
+
+readonly SLUG_DIR="$HOME/$REPL_SLUG"
+
+cat > "$SLUG_DIR/replit.nix" <<EOF
+{ pkgs }: {
+        deps = [
+                pkgs.clang_12
+                pkgs.ccls
+                pkgs.gdb
+                pkgs.gnumake
+                pkgs.cmake
+                pkgs.gsl
+                pkgs.cairo
+                pkgs.python39
+                pkgs.python39Packages.pip
+                pkgs.python39Packages.virtualenv
+                pkgs.pandoc
+                pkgs.valgrind
+                pkgs.gnuplot
+                pkgs.root
+        ];
+}
+EOF
+
+cat > "$HOME/.gdbinit" <<EOF
+set disassembly-flavor intel
+set print pretty on
+
+layout src
+break main
+EOF

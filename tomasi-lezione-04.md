@@ -384,10 +384,10 @@ int main() {
 -   La libreria di formattazione può però già essere usata scaricandola dal sito
 [github.com/fmtlib/fmt](https://github.com/fmtlib/fmt), che contiene la versione completa della libreria, usabile però anche da compilatori che ancora non supportano il C++20 (come quelli su Repl.it o del laboratorio).
 
--   Per automatizzare l'installazione, potete scaricare (con il click destro) lo script [install_fmt_library.sh](./install_fmt_library.sh), da eseguire nella cartella del vostro programma:
+-   Per automatizzare l'installazione, potete scaricare (con il click destro) lo script [install_fmt_library](./install_fmt_library), da eseguire nella cartella del vostro programma:
 
     ```
-    sh install_fmt_library.sh
+    sh install_fmt_library
     ```
 
 ---
@@ -396,7 +396,7 @@ int main() {
 
 # Differenze tra `format` e il futuro C++20
 
--   La libreria installata da <a url="./install_fmt_library.sh" download>`install_fmt_library.sh`</a> ha alcune differenze con lo standard C++20:
+-   La libreria installata da <a url="./install_fmt_library" download>`install_fmt_library`</a> ha alcune differenze con lo standard C++20:
 
     1. Il namespace è diverso: è `fmt::` anziché `std::format::`;
     2. Il file da includere è diverso: `"fmt/format.h"` anziché `<format>`;
@@ -406,7 +406,7 @@ int main() {
 
 # Differenze tra `format` e il futuro C++20
 
--   Lo script `install_fmt_library.sh` installa un piccolo file header, `fmtlib.h`, che si preoccupa di gestire le differenze tra il C++ attuale e il C++20
+-   Lo script `install_fmt_library` installa un piccolo file header, `fmtlib.h`, che si preoccupa di gestire le differenze tra il C++ attuale e il C++20
 
 -   Se usate `#include "fmtlib.h"`, vi basterà poi usare sempre il namespace `fmt::`.
 
