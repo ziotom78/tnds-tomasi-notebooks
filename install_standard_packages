@@ -35,3 +35,6 @@ set print pretty on
 layout src
 break main
 EOF
+
+curl -s https://ziotom78.github.io/tnds-tomasi-notebooks/install_fmt_library > install_fmt_library
+curl -s https://ziotom78.github.io/tnds-tomasi-notebooks/install_gplot++ > install_gplot++
