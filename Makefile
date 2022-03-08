@@ -3,6 +3,7 @@ PANDOC_IMAGINE := $(HOME)/bin/pandoc_imagine.py
 .phony: all http
 
 all: \
+    tomasi-c++-python-julia.html \
 	tomasi-lezione-11.html \
 	tomasi-lezione-06.html \
 	tomasi-lezione-05.html \
@@ -32,6 +33,22 @@ carminati-esercizi-%.html: carminati-esercizi-%.md
 		--template ./template.html5 \
 		-f markdown+tex_math_single_backslash+subscript+superscript \
 		-t html5 \
+		-o $@ $<
+
+tomasi-c++-python-julia.html: tomasi-c++-python-julia.md
+	$(PANDOC) \
+	  	--standalone \
+		--filter pandoc-imagine \
+		--katex \
+		-V theme=white \
+		-V progress=true \
+		-V slideNumber=true \
+		-V history=true \
+		-V background-image=./media/background.png \
+		-V width=1440 \
+		-V height=810 \
+		-f markdown+tex_math_single_backslash+subscript+superscript \
+		-t revealjs \
 		-o $@ $<
 
 tomasi-lezione-%.html: tomasi-lezione-%.md
