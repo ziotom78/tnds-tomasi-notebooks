@@ -27,12 +27,6 @@ header-includes: <script src="./fmtinstall.js"></script>
 -->
 </center>
 
-Durante le sessioni di laboratorio useremo il sito [gather.town](https://gather.town/app/etYemzL2K4Nr4o2t/LabTNDS2022) per gestire le persone collegate online.
-
-# Seminario di approfondimento
-
-Lunedì 7 Marzo 2022 ho tenuto un seminario di approfondimento sui linguaggi C++, Python e Julia. Le slides sono disponibili a questo [link](tomasi-c++-python-julia.html). È disponibile anche una registrazione del solo audio (niente video, purtroppo), contattatemi via mail per averne una copia.
-
 # Suggerimenti vari
 
 ## Installazione di ROOT e Gnuplot
