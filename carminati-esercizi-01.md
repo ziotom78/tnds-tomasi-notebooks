@@ -360,7 +360,7 @@ for(int j = 0; j < ndata - 1; ++j) {
 
     // Scambia vcopy[j] con vcopy[imin]
     double c = vcopy[j];
-    vcopy[k] = vcopy[imin];
+    vcopy[j] = vcopy[imin];
     vcopy[imin] = c;
 }
 ```
