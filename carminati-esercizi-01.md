@@ -9,7 +9,7 @@ lang: it-IT
 
 [La pagina con la spiegazione originale degli esercizi si trova qui: [labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/lezione1_1819.html](http://labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/lezione1_1819.html).]
 
-In questa prima lezione proviamo a rinfrescarci la memoria sulla programmazione lavorando direttamente su un caso concreto: abbiamo a disposizione un file in cui sono immagazzinati i valori ottenuti da una certa misura e vogliamo scrivere un codice per farci sopra una analisi statistica minimale. Calcoliamo la media, la varianza e la mediana della distribuzione: il calcolo della mediana in particolare richiede che il set di dati sia ordinato e quindi ci obbliga a fare un pò di esercizio aggiuntivo. In questa lezione lavoreremo con:
+In questa prima lezione proviamo a rinfrescare la memoria sulla programmazione lavorando direttamente su un caso concreto: abbiamo a disposizione un file in cui sono immagazzinati i valori ottenuti da una certa misura e vogliamo scrivere un codice per farci sopra una analisi statistica minimale. Calcoliamo la media, la varianza e la mediana della distribuzione: il calcolo della mediana in particolare richiede che il set di dati sia ordinato e quindi ci obbliga a fare un pò di esercizio aggiuntivo. In questa lezione lavoreremo con:
 
 - Tipo di dato da leggere è constituito da numeri `double`.
 - Tipo di contenitore di dati è un array (dinamico) del C.
@@ -62,15 +62,15 @@ cerr << "Errore nel parametro a: " << a << endl;
 -   `<<` serve a passare le variabili allo stream di output;
 -   `<< "A = "` stampa `A = ` (senza apici) a schermo;
 -   `<< a` stampa il valore della variabile a a schermo, qualsiasi sia il tipo di `a`;
--   `<< endl` (end line) stampa la fine della riga e svuota il buffer. È necessario con `cerr`, perché altrimenti nessuna scritta appare (subito) a video. Per `cerr` si può usare `\n` (ritorno a capo):
+-   `<< endl` (end line) stampa la fine della riga e svuota il buffer. È necessario con `cout`, perché altrimenti nessuna scritta appare (subito) a video. Per `cerr` invece basta usare `\n` (ritorno a capo), perché l'output è sempre immediato:
 
     ```c++
-    // Ok
+    // Ok, uso `endl` con `cout`
     cout << "Errore, occorre specificare un nome di file!" << endl;
     // Potrebbe non essere stampato subito, ma solo quando il programma termina
     cout << "Errore, occorre specificare un nome di file!\n"
     
-    // Questi due casi sono equivalenti
+    // Questi due casi sono equivalenti, perché scriviamo su `cerr`
     cerr << "Errore, occorre specificare un nome di file!" << endl;
     cerr << "Errore, occorre specificare un nome di file!\n"
     ```
@@ -112,7 +112,39 @@ Nel caso si allochino vettori (come nel nostro caso), la presenza delle parantes
 delete x;
 ```
 
-crea un *memory leak*, perché dealloca solo lo spazio della prima componente del vettore, non di tutto il vettore.
+crea un *memory leak*, perché dealloca solo lo spazio della prima componente del vettore, non di tutto il vettore. Questo programma quindi è **sbagliato**:
+
+```c++
+#include <cstdlib>
+
+int main(int argc, const char *argv[]) {
+  double * array = new double[10];
+  array[1] = 30.0;
+  delete array;    // Error, it should have been delete[] array;
+  return 0;
+}
+```
+
+Il compilatore `g++` non segnala questo tipo di errore:
+
+```
+$ g++ -o test test.cpp
+$ 
+```
+
+Potete però usare il flag `-Wall` (**consigliatissimo per tutti i vostri programmi!**), in modo che il compilatore vi avvisi:
+
+```
+$ g++ -Wall -o test test.cpp
+test.cpp: In function ‘int main(int, const char**)’:
+test.cpp:6:10: warning: ‘void operator delete(void*, long unsigned int)’ called on pointer returned from a mismatched allocation function [-Wmismatched-new-delete]
+    6 |   delete array;
+      |          ^~~~~
+test.cpp:4:33: note: returned from ‘void* operator new [](long unsigned int)’
+    4 |   double * array = new double[10];
+      |                                 ^
+$ 
+```
 
 ## Fstream
 
@@ -143,12 +175,12 @@ inputFile >> a;
 outputFile << "pippo " << a << "\n";
 ```
 
-Nei file non è di solito rilevante la differenza tra `endl` e `"\n"`.
+A differenza di `cout`, quando si scrive in file non è di solito rilevante la differenza tra `endl` e `"\n"`.
 
 Un metodo estremamente utile di `ifstream` è
 
 ```c++
-inputFile.eof();
+inputFile.eof();   # Return a boolean
 ```
 
 che restituisce vero se si è raggiunta la fine del file e falso altrimenti. Dopo l'utilizzo del file è possibile chiuderlo con il metodo `close()`:

@@ -11,6 +11,9 @@
   <link rel="stylesheet" href="https://unpkg.com/reveal.js@^4//dist/reset.css">
   <link rel="stylesheet" href="https://unpkg.com/reveal.js@^4//dist/reveal.css">
   <style>
+    .reveal .sourceCode {  /* see #7635 */
+      overflow: visible;
+    }
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
     span.underline{text-decoration: underline;}
@@ -55,7 +58,7 @@
     code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
     code span.at { color: #7d9029; } /* Attribute */
     code span.bn { color: #40a070; } /* BaseN */
-    code span.bu { } /* BuiltIn */
+    code span.bu { color: #008000; } /* BuiltIn */
     code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
     code span.ch { color: #4070a0; } /* Char */
     code span.cn { color: #880000; } /* Constant */
@@ -68,7 +71,7 @@
     code span.ex { } /* Extension */
     code span.fl { color: #40a070; } /* Float */
     code span.fu { color: #06287e; } /* Function */
-    code span.im { } /* Import */
+    code span.im { color: #008000; font-weight: bold; } /* Import */
     code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
     code span.kw { color: #007020; font-weight: bold; } /* Keyword */
     code span.op { color: #666666; } /* Operator */
@@ -84,22 +87,24 @@
   <link rel="stylesheet" href="https://unpkg.com/reveal.js@^4//dist/theme/white.css" id="theme">
   <link rel="stylesheet" href="./css/custom.css"/>
   <link rel="stylesheet" href="./css/asciinema-player.css"/>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.js"></script>
+  <script defer=""
+  src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js"></script>
   <script>document.addEventListener("DOMContentLoaded", function () {
-   var mathElements = document.getElementsByClassName("math");
-   var macros = [];
-   for (var i = 0; i < mathElements.length; i++) {
-    var texText = mathElements[i].firstChild;
-    if (mathElements[i].tagName == "SPAN") {
-     katex.render(texText.data, mathElements[i], {
-      displayMode: mathElements[i].classList.contains('display'),
-      throwOnError: false,
-      macros: macros,
-      fleqn: false
-     });
-  }}});
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
   </script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css" />
+  <link rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css" />
 </head>
 <body>
   <div class="reveal">
@@ -108,7 +113,7 @@
 <section id="title-slide">
   <h1 class="title">Laboratorio di TNDS – Lezione 3</h1>
   <p class="author">Maurizio Tomasi</p>
-  <p class="date">Martedì 19 Ottobre 2021</p>
+  <p class="date">Martedì 18 Ottobre 2022</p>
 </section>
 
 <section id="esercizi-per-oggi" class="slide level1">
@@ -117,23 +122,34 @@
 <section id="link-alle-risorse-online" class="slide level1">
 <h1>Link alle risorse online</h1>
 <ul>
-<li><p>La spiegazione dettagliata degli esercizi si trova qui: <a href="carminati-esercizi-03.html">carminati-esercizi-03.html</a>.</p></li>
-<li><p>Come al solito, queste slides, che forniscono suggerimenti addizionali rispetto alla lezione di teoria, sono disponibili all’indirizzo <a href="https://ziotom78.github.io/tnds-tomasi-notebooks/">ziotom78.github.io/tnds-tomasi-notebooks</a>.</p></li>
-<li><p>Chi è online si colleghi a Gather tramite <a href="https://gather.town/app/etYemzL2K4Nr4o2t/LabTNDS2022">questo link</a>.</p></li>
+<li><p>La spiegazione dettagliata degli esercizi si trova qui: <a
+href="carminati-esercizi-03.html">carminati-esercizi-03.html</a>.</p></li>
+<li><p>Come al solito, queste slides, che forniscono suggerimenti
+addizionali rispetto alla lezione di teoria, sono disponibili
+all’indirizzo <a
+href="https://ziotom78.github.io/tnds-tomasi-notebooks/">ziotom78.github.io/tnds-tomasi-notebooks</a>.</p></li>
 </ul>
 </section>
 <section id="esercizi" class="slide level1">
 <h1>Esercizi</h1>
 <ul>
-<li><a href="carminati-esercizi-03.html#esercizio-3.0">Esercizio 3.0</a>: Evoluzione della classe <code>Vettore</code> in una classe <code>template</code> (da consegnare)</li>
-<li><a href="carminati-esercizi-03.html#esercizio-3.1">Esercizio 3.1</a>: Codice di analisi dati utilizzando la classe <code>vector</code> (da consegnare)</li>
-<li><a href="carminati-esercizi-03.html#esercizio-3.2">Esercizio 3.2</a>: Analisi dati con <code>vector</code> e visualizzazione dei dati (da consegnare)</li>
+<li><a href="carminati-esercizi-03.html#esercizio-3.0">Esercizio
+3.0</a>: Evoluzione della classe <code>Vettore</code> in una classe
+<code>template</code> (da consegnare)</li>
+<li><a href="carminati-esercizi-03.html#esercizio-3.1">Esercizio
+3.1</a>: Codice di analisi dati utilizzando la classe
+<code>vector</code> (da consegnare)</li>
+<li><a href="carminati-esercizi-03.html#esercizio-3.2">Esercizio
+3.2</a>: Analisi dati con <code>vector</code> e visualizzazione dei dati
+(da consegnare)</li>
 </ul>
 </section>
 <section id="test-con-assert" class="slide level1">
 <h1>Test con <code>assert</code></h1>
-<p>Questo è il test per l’esercizio 3.1, che usa <code>std::vector</code>; adattatelo per l’esercizio 3.0.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>bool are_close<span class="op">(</span>double calculated<span class="op">,</span> double expected<span class="op">,</span> double epsilon <span class="op">=</span> <span class="fl">1e-7</span><span class="op">)</span> <span class="op">{</span></span>
+<p>Questo è il test per l’esercizio 3.1, che usa
+<code>std::vector</code>; adattatelo per l’esercizio 3.0.</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>bool are_close<span class="op">(</span>double calculated<span class="op">,</span> double expected<span class="op">,</span> double epsilon <span class="op">=</span> <span class="fl">1e-7</span><span class="op">)</span> <span class="op">{</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  return fabs<span class="op">(</span>calculated <span class="op">-</span> expected<span class="op">)</span> <span class="op">&lt;</span> epsilon<span class="op">;</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
@@ -156,10 +172,16 @@
 <section id="root" class="slide level1">
 <h1>ROOT</h1>
 <ul>
-<li><p>Nell’esercizio 3.2 è richiesto l’uso di ROOT, una libreria di funzioni per generare grafici.</p></li>
-<li><p>Chi usa Repl.it ha a disposizione il comando <code>install-root.sh</code>, che va eseguito dalla linea di comando per scaricare ROOT nella Repl e configurarlo.</p></li>
-<li><p>Chi usa le macchine del laboratorio non ha bisogno di fare nulla, perché ROOT è già installato.</p></li>
-<li><p>Chi usa il proprio computer… Auguri! Sotto Linux e Mac dovrebbe essere relativamente facile installarlo, sotto Windows la cosa è più complessa.</p></li>
+<li><p>Nell’esercizio 3.2 è richiesto l’uso di ROOT, una libreria di
+funzioni per generare grafici.</p></li>
+<li><p>Chi usa Repl.it ha a disposizione il comando
+<code>install-root.sh</code>, che va eseguito dalla linea di comando per
+scaricare ROOT nella Repl e configurarlo.</p></li>
+<li><p>Chi usa le macchine del laboratorio non ha bisogno di fare nulla,
+perché ROOT è già installato.</p></li>
+<li><p>Chi usa il proprio computer… Auguri! Sotto Linux e Mac dovrebbe
+essere relativamente facile installarlo, sotto Windows la cosa è più
+complessa.</p></li>
 </ul>
 </section>
 <section id="avvertenza-per-utenti-vscode" class="slide level1">
@@ -168,9 +190,15 @@
 <section id="avvertenza-per-utenti-vscode-1" class="slide level1">
 <h1>Avvertenza per utenti VSCode</h1>
 <ul>
-<li><p>Nella scorsa lezione, alcune persone che usavano VS Code hanno avuto problemi con il file system.</p></li>
-<li><p>Il problema è che di default VS Code richiede 5 GB di spazio su disco per ottimizzare i suggerimenti di completamento della sintassi (vedi <a href="https://github.com/microsoft/vscode-cpptools/issues/3347">discussione</a>).</p></li>
-<li><p>È possibile disabilitare la cache o ridurla a un valore ragionevole modificando nelle impostazioni di VS Code la voce <em>Intellisense cache size</em> (vedi video seguente).</p></li>
+<li><p>Nella scorsa lezione, alcune persone che usavano VS Code hanno
+avuto problemi con il file system.</p></li>
+<li><p>Il problema è che di default VS Code richiede 5 GB di spazio su
+disco per ottimizzare i suggerimenti di completamento della sintassi
+(vedi <a
+href="https://github.com/microsoft/vscode-cpptools/issues/3347">discussione</a>).</p></li>
+<li><p>È possibile disabilitare la cache o ridurla a un valore
+ragionevole modificando nelle impostazioni di VS Code la voce
+<em>Intellisense cache size</em> (vedi video seguente).</p></li>
 </ul>
 </section>
 <section class="slide level1">
@@ -184,19 +212,30 @@
 <section id="scrittura-a-video" class="slide level1">
 <h1>Scrittura a video</h1>
 <ul>
-<li><p>Quando si scrive a video, si può scegliere se usare <code>cout</code> o <code>cerr</code>.</p></li>
-<li><p>Le regole da seguire <strong>sempre</strong> sono le seguenti:</p>
+<li><p>Quando si scrive a video, si può scegliere se usare
+<code>cout</code> o <code>cerr</code>.</p></li>
+<li><p>Le regole da seguire <strong>sempre</strong> sono le
+seguenti:</p>
 <ul>
 <li><p>Usare <code>cerr</code> per scrivere messaggi.</p></li>
-<li><p>Usare <code>cout</code> per scrivere il risultato di conti.</p></li>
+<li><p>Usare <code>cout</code> per scrivere il risultato di
+conti.</p></li>
 </ul></li>
-<li><p>La differenza è che quanto viene scritto su <code>cerr</code> finisce sempre sullo schermo, anche se da linea di comando si usano gli operatori di reindirizzamento <code>&gt;</code> e <code>|</code>.</p></li>
-<li><p>Ci sono anche altre differenze; vi basti sapere che per stampare un <a href="https://en.wikipedia.org/wiki/Progress_indicator"><em>progress indicator</em></a> sul terminale è sempre meglio usare <code>cerr</code>.</p></li>
+<li><p>La differenza è che quanto viene scritto su <code>cerr</code>
+finisce sempre sullo schermo, anche se da linea di comando si usano gli
+operatori di reindirizzamento <code>&gt;</code> e
+<code>|</code>.</p></li>
+<li><p>Ci sono anche altre differenze; vi basti sapere che per stampare
+un <a
+href="https://en.wikipedia.org/wiki/Progress_indicator"><em>progress
+indicator</em></a> sul terminale è sempre meglio usare
+<code>cerr</code>.</p></li>
 </ul>
 </section>
 <section id="esempio-di-uso-di-cout-e-cerr" class="slide level1">
 <h1>Esempio di uso di <code>cout</code> e <code>cerr</code></h1>
-<div class="sourceCode" id="cb2"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">(</span><span class="dt">void</span><span class="op">)</span> <span class="op">{</span></span>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">(</span><span class="dt">void</span><span class="op">)</span> <span class="op">{</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">std::</span>cerr<span class="op"> &lt;&lt;</span> <span class="st">&quot;1. Leggo i dati da file...</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">;</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">// ...</span></span>
@@ -217,7 +256,10 @@
 <section id="esempio-di-uso-di-cout-e-cerr-2" class="slide level1">
 <h1>Esempio di uso di <code>cout</code> e <code>cerr</code></h1>
 <ul>
-<li><p>Se non avessimo usato la distinzione tra <code>cout</code> e <code>cerr</code> ma avessimo scritto tutto su <code>cout</code>, il risultato di <code>sort</code> avrebbe incluso le righe con i messaggi:</p>
+<li><p>Se non avessimo usato la distinzione tra <code>cout</code> e
+<code>cerr</code> ma avessimo scritto tutto su <code>cout</code>, il
+risultato di <code>sort</code> avrebbe incluso le righe con i
+messaggi:</p>
 <pre><code>$ esempio | sort -g
 1. Leggo i dati da file...
 1.75123
@@ -225,7 +267,9 @@
 5.91573
 2.78534
 3. Programma completato</code></pre></li>
-<li><p>In generale, stampate su <code>cerr</code> tutto ciò che bisogna mostrare all’utente <em>subito</em>, e non ha senso salvare in un file per essere eventualmente guardato dopo.</p></li>
+<li><p>In generale, stampate su <code>cerr</code> tutto ciò che bisogna
+mostrare all’utente <em>subito</em>, e non ha senso salvare in un file
+per essere eventualmente guardato dopo.</p></li>
 </ul>
 </section>
 <section id="tipi-di-errore" class="slide level1">
@@ -234,8 +278,10 @@
 <section id="uso-di-assert-e-di-cerr" class="slide level1">
 <h1>Uso di <code>assert</code> e di <code>cerr</code></h1>
 <ul>
-<li><p>Di solito gli studenti sono abbastanza confusi dal seguente codice:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>double Vettore<span class="op">::</span>GetComponent<span class="op">(</span>unsigned int i<span class="op">)</span> const <span class="op">{</span></span>
+<li><p>Di solito gli studenti sono abbastanza confusi dal seguente
+codice:</p>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>double Vettore<span class="op">::</span>GetComponent<span class="op">(</span>unsigned int i<span class="op">)</span> const <span class="op">{</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="co">// assert((m_N &gt; 1) &amp;&amp; &quot;Errore: l&#39;indice è troppo grande&quot;);</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  if <span class="op">(</span>i <span class="op">&lt;</span> <span class="va">m_N</span><span class="op">)</span> <span class="op">{</span></span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>      return <span class="va">m_v</span><span class="op">[</span>i<span class="op">];</span></span>
@@ -244,7 +290,8 @@
 <span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>      exit<span class="op">(-</span><span class="dv">1</span><span class="op">);</span></span>
 <span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
 <span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div></li>
-<li><p>Quando è meglio usare <code>assert</code>, e quando è meglio invece un messaggio di errore?</p></li>
+<li><p>Quando è meglio usare <code>assert</code>, e quando è meglio
+invece un messaggio di errore?</p></li>
 </ul>
 </section>
 <section id="tipi-di-errore-1" class="slide level1">
@@ -252,22 +299,31 @@
 <ul>
 <li><p>Esistono due tipi di errori in un programma:</p>
 <ol type="1">
-<li>Errori del <strong>programmatore</strong>, che ha sbagliato a scrivere il codice;</li>
-<li>Errori dell’<strong>utente</strong>, che ha invocato il programma in modo scorretto.</li>
+<li>Errori del <strong>programmatore</strong>, che ha sbagliato a
+scrivere il codice;</li>
+<li>Errori dell’<strong>utente</strong>, che ha invocato il programma in
+modo scorretto.</li>
 </ol></li>
-<li><p>È importante gestire i due casi in modo diverso, perché l’azione più appropriata dipende dal contesto.</p></li>
+<li><p>È importante gestire i due casi in modo diverso, perché l’azione
+più appropriata dipende dal contesto.</p></li>
 </ul>
 </section>
 <section id="errore-del-programmatore" class="slide level1">
 <h1>Errore del programmatore</h1>
 <ul>
 <li><p>Questo codice ha un errore molto comune:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">// The `&lt;=` is wrong! It should be `i &lt; v.size()`</span></span>
+<div class="sourceCode" id="cb5"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">// The `&lt;=` is wrong! It should be `i &lt; v.size()`</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span><span class="op">(</span><span class="dt">size_t</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;=</span> v<span class="op">.</span>size<span class="op">();</span> <span class="op">++</span>i<span class="op">)</span> <span class="op">{</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    v<span class="op">.</span>setComponent<span class="op">(</span>i<span class="op">,</span> <span class="fl">0.0</span><span class="op">);</span></span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
-<p>Il fatto di leggere oltre la fine dell’array è un errore imputabile a chi ha scritto il programma, non a chi lo usa.</p></li>
-<li><p>In questo caso <code>assert</code> è la soluzione migliore, perché dice al programmatore dove si trova la linea di codice da correggere (<a href="https://ziotom78.github.io/tnds-tomasi-notebooks/tomasi-lezione-01.html#/flag-del-compilatore">se si compila con <code>-g</code></a>).</p></li>
+<p>Il fatto di leggere oltre la fine dell’array è un errore imputabile a
+chi ha scritto il programma, non a chi lo usa.</p></li>
+<li><p>In questo caso <code>assert</code> è la soluzione migliore,
+perché dice al programmatore dove si trova la linea di codice da
+correggere (<a
+href="https://ziotom78.github.io/tnds-tomasi-notebooks/tomasi-lezione-01.html#/flag-del-compilatore">se
+si compila con <code>-g</code></a>).</p></li>
 </ul>
 </section>
 <section class="slide level1">
@@ -289,12 +345,15 @@ Backtrace:
 …
 … (lots of output)
 …</code></pre>
-<p>Queste informazioni sono inutili all’utente, ma molto preziose al programmatore!</p>
+<p>Queste informazioni sono inutili all’utente, ma molto preziose al
+programmatore!</p>
 </section>
 <section id="errore-dellutente" class="slide level1">
 <h1>Errore dell’utente</h1>
 <ul>
-<li><p>Se l’errore è causato dall’utente, si dovrebbe stampare invece un messaggio d’errore chiaro, che gli consenta di riparare all’errore.</p></li>
+<li><p>Se l’errore è causato dall’utente, si dovrebbe stampare invece un
+messaggio d’errore chiaro, che gli consenta di riparare
+all’errore.</p></li>
 <li><p>Primo esempio:</p>
 <pre><code>$ ./myprog
 Inserisci il numero di iterazioni da compiere: -7
@@ -309,16 +368,27 @@ $</code></pre></li>
 <section id="distinguere-tra-i-due-tipi" class="slide level1">
 <h1>Distinguere tra i due tipi</h1>
 <ul>
-<li><p>Non è sempre immediato distinguere tra i due tipi di errore.</p></li>
-<li><p>Ad esempio, come facciamo a sapere se nella funzione <code>Vettore::setComponent</code> un indice fuori dall’intervallo stabilito è colpa del programmatore o dell’utente?</p></li>
-<li><p>È sempre bene documentare che tipo di parametri vuole una funzione, e usare <code>assert</code>: in questo modo se si passano parametri sbagliati, la colpa è per forza del programmatore!</p></li>
-<li><p>Gli errori diretti all’utente andrebbero stampati solo nel <code>main</code> o in pochi altri posti; <em>mai</em> in funzioni di basso livello, che potrebbero essere invocate all’interno di un’interfaccia grafica anziché da terminale.</p></li>
+<li><p>Non è sempre immediato distinguere tra i due tipi di
+errore.</p></li>
+<li><p>Ad esempio, come facciamo a sapere se nella funzione
+<code>Vettore::setComponent</code> un indice fuori dall’intervallo
+stabilito è colpa del programmatore o dell’utente?</p></li>
+<li><p>È sempre bene documentare che tipo di parametri vuole una
+funzione, e usare <code>assert</code>: in questo modo se si passano
+parametri sbagliati, la colpa è per forza del programmatore!</p></li>
+<li><p>Gli errori diretti all’utente andrebbero stampati solo nel
+<code>main</code> o in pochi altri posti; <em>mai</em> in funzioni di
+basso livello, che potrebbero essere invocate all’interno di
+un’interfaccia grafica anziché da terminale.</p></li>
 </ul>
 </section>
 <section class="slide level1">
 
-<p>In questo esempio, la documentazione di <code>setComponent</code> dice quali sono i valori accettabili per <code>i</code>, quindi se il parametro è sbagliato la colpa è di chi lo invoca.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Set the value of an element in the array</span></span>
+<p>In questo esempio, la documentazione di <code>setComponent</code>
+dice quali sono i valori accettabili per <code>i</code>, quindi se il
+parametro è sbagliato la colpa è di chi lo invoca.</p>
+<div class="sourceCode" id="cb9"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Set the value of an element in the array</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co">//</span></span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co">// The index `i` *must* be in the range 0…size()-1</span></span>
 <span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> Vettore<span class="op">::</span>setComponent<span class="op">(</span><span class="dt">size_t</span> i<span class="op">,</span> <span class="dt">double</span> value<span class="op">)</span> <span class="op">{</span></span>
@@ -338,7 +408,9 @@ $</code></pre></li>
 <span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
 <span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>    v<span class="op">.</span>setComponent<span class="op">(</span>position<span class="op">,</span> <span class="fl">1.0</span><span class="op">);</span></span>
 <span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
-<p>Di conseguenza, il programmatore è «costretto» a verificare la correttezza del numero passato dall’utente nel <code>main</code> prima di invocare <code>v.setComponent</code>.</p>
+<p>Di conseguenza, il programmatore è «costretto» a verificare la
+correttezza del numero passato dall’utente nel <code>main</code> prima
+di invocare <code>v.setComponent</code>.</p>
 </section>
 <section id="uniform-initialization" class="slide level1">
 <h1><em>Uniform initialization</em></h1>
@@ -346,27 +418,36 @@ $</code></pre></li>
 <section id="inizializzazione-di-variabili" class="slide level1">
 <h1>Inizializzazione di variabili</h1>
 <ul>
-<li><p>Le pagine web su <code>labmaster</code> usano la sintassi tradizionale C++ per dichiarare e inizializzare variabili:</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Dichiara &quot;ndata&quot; e la inizializza</span></span>
+<li><p>Le pagine web su <code>labmaster</code> usano la sintassi
+tradizionale C++ per dichiarare e inizializzare variabili:</p>
+<div class="sourceCode" id="cb10"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Dichiara &quot;ndata&quot; e la inizializza</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> ndata <span class="op">=</span> atoi<span class="op">(</span>argv<span class="op">[</span><span class="dv">1</span><span class="op">]);</span></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>Vettore v<span class="op">(</span><span class="dv">10</span><span class="op">);</span></span>
 <span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>Vettore w <span class="op">=</span> v<span class="op">;</span></span></code></pre></div></li>
-<li><p>Questa sintassi è stata mutuata dal linguaggio C, ma ne esiste una più recente e più sicura.</p></li>
+<li><p>Questa sintassi è stata mutuata dal linguaggio C, ma ne esiste
+una più recente e più sicura.</p></li>
 </ul>
 </section>
 <section id="uniform-initialization-1" class="slide level1">
 <h1>Uniform initialization</h1>
 <ul>
-<li><p>Il C++11 implementa la <em>uniform initialization</em>, che si usa impiegando le parentesi graffe <code>{}</code> anziché l’uguale <code>=</code> e le parentesi tonde <code>()</code>:</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> a<span class="op">{};</span></span>
+<li><p>Il C++11 implementa la <em>uniform initialization</em>, che si
+usa impiegando le parentesi graffe <code>{}</code> anziché l’uguale
+<code>=</code> e le parentesi tonde <code>()</code>:</p>
+<div class="sourceCode" id="cb11"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> a<span class="op">{};</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> b<span class="op">{</span><span class="dv">10</span><span class="op">};</span></span></code></pre></div></li>
 <li><p>Le due linee di codice sopra sono equivalenti alle seguenti:</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> a <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<div class="sourceCode" id="cb12"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> a <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> b <span class="op">=</span> <span class="dv">10</span><span class="op">;</span></span></code></pre></div></li>
-<li><p>Analogamente, nei cicli <code>for</code> si può scrivere così:</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span><span class="op">(</span><span class="dt">int</span> k<span class="op">{</span><span class="dv">0</span><span class="op">};</span> k <span class="op">&lt;</span> <span class="dv">10</span><span class="op">;</span> <span class="op">++</span>k<span class="op">)</span> <span class="op">{</span></span>
+<li><p>Analogamente, nei cicli <code>for</code> si può scrivere
+così:</p>
+<div class="sourceCode" id="cb13"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span><span class="op">(</span><span class="dt">int</span> k<span class="op">{</span><span class="dv">0</span><span class="op">};</span> k <span class="op">&lt;</span> <span class="dv">10</span><span class="op">;</span> <span class="op">++</span>k<span class="op">)</span> <span class="op">{</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Scrivere k{} sarebbe stato uguale</span></span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div></li>
 </ul>
@@ -374,12 +455,15 @@ $</code></pre></li>
 <section id="vantaggi-12" class="slide level1">
 <h1>Vantaggi (1/2)</h1>
 <ul>
-<li><p>Inizializza una variabile al valore di default con <code>{}</code>:</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> a<span class="op">{};</span>            <span class="co">// Uguale a: int a = 0;</span></span>
+<li><p>Inizializza una variabile al valore di default con
+<code>{}</code>:</p>
+<div class="sourceCode" id="cb14"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> a<span class="op">{};</span>            <span class="co">// Uguale a: int a = 0;</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="dt">float</span> b<span class="op">{};</span>          <span class="co">// Uguale a: float b = 0.0;</span></span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="bu">std::</span>string<span class="op"> </span>s<span class="op">{};</span>    <span class="co">// Uguale a: std::string s = &quot;&quot;;</span></span></code></pre></div></li>
 <li><p>Sono vietate le conversioni di tipo, spesso fonti di errori:</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="dt">float</span> a <span class="op">=</span> <span class="fl">3.4</span><span class="op">;</span></span>
+<div class="sourceCode" id="cb15"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="dt">float</span> a <span class="op">=</span> <span class="fl">3.4</span><span class="op">;</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="co">// Legale, ma probabilmente scorretto</span></span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> b <span class="op">=</span> a<span class="op">;</span></span>
 <span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="co">// Il compilatore segnala errore</span></span>
@@ -389,25 +473,39 @@ $</code></pre></li>
 <section id="vantaggi-22" class="slide level1">
 <h1>Vantaggi (2/2)</h1>
 <ul>
-<li><p>È possibile inizializzare array dinamici usando una sola riga:</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> <span class="op">*</span> data<span class="op">{</span><span class="kw">new</span> <span class="dt">double</span><span class="op">[]{</span> <span class="fl">1.0</span><span class="op">,</span> <span class="fl">2.0</span><span class="op">,</span> <span class="fl">3.0</span> <span class="op">}};</span></span></code></pre></div></li>
-<li><p>La sintassi può essere usata anche per invocare costruttori di classi (che vedremo a partire da questa lezione):</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>Vettore v<span class="op">{};</span>   <span class="co">// Costruttore senza parametri</span></span>
+<li><p>È possibile inizializzare array dinamici usando una sola
+riga:</p>
+<div class="sourceCode" id="cb16"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> <span class="op">*</span> data<span class="op">{</span><span class="kw">new</span> <span class="dt">double</span><span class="op">[]{</span> <span class="fl">1.0</span><span class="op">,</span> <span class="fl">2.0</span><span class="op">,</span> <span class="fl">3.0</span> <span class="op">}};</span></span></code></pre></div></li>
+<li><p>La sintassi può essere usata anche per invocare costruttori di
+classi (che vedremo a partire da questa lezione):</p>
+<div class="sourceCode" id="cb17"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>Vettore v<span class="op">{};</span>   <span class="co">// Costruttore senza parametri</span></span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>Vettore w<span class="op">{</span><span class="dv">10</span><span class="op">};</span></span></code></pre></div></li>
-<li><p>Questi vantaggi sono evidenti solo se ci si abitua ad usare la <em>uniform initialization</em> ovunque. Abituatevi quindi da subito!</p></li>
+<li><p>Questi vantaggi sono evidenti solo se ci si abitua ad usare la
+<em>uniform initialization</em> ovunque. Abituatevi quindi da
+subito!</p></li>
 </ul>
 </section>
 <section id="most-vexing-parse" class="slide level1">
 <h1>«Most vexing parse»</h1>
 <ul>
-<li><p>Il fatto che la <em>uniform initialization</em> possa essere usata anche per invocare i costruttori previene il problema del cosiddetto <a href="https://en.wikipedia.org/wiki/Most_vexing_parse"><em>most vexing parse</em></a>:</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Voglio chiamare un costruttore senza parametri</span></span>
+<li><p>Il fatto che la <em>uniform initialization</em> possa essere
+usata anche per invocare i costruttori previene il problema del
+cosiddetto <a
+href="https://en.wikipedia.org/wiki/Most_vexing_parse"><em>most vexing
+parse</em></a>:</p>
+<div class="sourceCode" id="cb18"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Voglio chiamare un costruttore senza parametri</span></span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>Vettore v<span class="op">();</span>         <span class="co">// Il compilatore dà errore!</span></span></code></pre></div></li>
-<li><p>Usando le parentesi graffe il problema sparisce, e c’è anche simmetria con l’inizializzazione di tipi base del C++:</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>Vettore v<span class="op">{};</span> <span class="co">// Costruttore di default</span></span>
+<li><p>Usando le parentesi graffe il problema sparisce, e c’è anche
+simmetria con l’inizializzazione di tipi base del C++:</p>
+<div class="sourceCode" id="cb19"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>Vettore v<span class="op">{};</span> <span class="co">// Costruttore di default</span></span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> a<span class="op">{};</span>     <span class="co">// Idem</span></span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> b<span class="op">{};</span>  <span class="co">// Idem</span></span></code></pre></div></li>
-<li><p>Questo è <strong>uno dei più comuni errori degli studenti di TNDS</strong>.</p></li>
+<li><p>Questo è <strong>uno dei più comuni errori degli studenti di
+TNDS</strong>.</p></li>
 </ul>
 </section>
 <section id="int-e-unsigned-int" class="slide level1">
@@ -416,45 +514,65 @@ $</code></pre></li>
 <section id="interi-con-e-senza-segno" class="slide level1">
 <h1>Interi con e senza segno</h1>
 <ul>
-<li><p>In C++ esistono gli interi con segno (<code>char</code>, <code>short</code>, <code>int</code>, <code>long</code>, <code>long long</code>) e quelli senza segno (in cui si mette <code>unsigned</code> davanti al tipo).</p></li>
-<li><p>Ovviamente la differenza sta nel fatto che gli interi con segno (<code>int</code>) ammettono anche numeri negativi.</p></li>
+<li><p>In C++ esistono gli interi con segno (<code>char</code>,
+<code>short</code>, <code>int</code>, <code>long</code>,
+<code>long long</code>) e quelli senza segno (in cui si mette
+<code>unsigned</code> davanti al tipo).</p></li>
+<li><p>Ovviamente la differenza sta nel fatto che gli interi con segno
+(<code>int</code>) ammettono anche numeri negativi.</p></li>
 <li><p>Vediamo alcune differenze.</p></li>
 </ul>
 </section>
 <section id="cicli-for-su-array" class="slide level1">
 <h1>Cicli <code>for</code> su array</h1>
 <ul>
-<li><p>La classe <code>std::vector</code> (esercizio 3.1) restituisce la dimensione degli array come un intero senza segno di tipo <code>size_t</code>: un vettore non può avere un numero negativo di elementi!</p></li>
-<li><p>Questo codice fornisce un <em>warning</em> (<a href="https://ziotom78.github.io/tnds-tomasi-notebooks/tomasi-lezione-01.html#/flag-del-compilatore">se usate <code>-Wall --pedantic</code></a>):</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="bu">std::</span>vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> v<span class="op">(</span><span class="dv">3</span><span class="op">);</span></span>
+<li><p>La classe <code>std::vector</code> (esercizio 3.1) restituisce la
+dimensione degli array come un intero senza segno di tipo
+<code>size_t</code>: un vettore non può avere un numero negativo di
+elementi!</p></li>
+<li><p>Questo codice fornisce un <em>warning</em> (<a
+href="https://ziotom78.github.io/tnds-tomasi-notebooks/tomasi-lezione-01.html#/flag-del-compilatore">se
+usate <code>-Wall --pedantic</code></a>):</p>
+<div class="sourceCode" id="cb20"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="bu">std::</span>vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> v<span class="op">(</span><span class="dv">3</span><span class="op">);</span></span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span><span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> v<span class="op">.</span>size<span class="op">();</span> <span class="op">++</span>i<span class="op">)</span> <span class="op">{</span></span>
 <span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>    v<span class="op">[</span>i<span class="op">]</span> <span class="op">=</span> <span class="fl">0.0</span><span class="op">;</span></span>
 <span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
-<p>perché nella condizione <code>i &lt; v.size()</code> si confronta un intero con segno (<code>i</code>) e uno senza segno (<code>v.size()</code>).</p></li>
+<p>perché nella condizione <code>i &lt; v.size()</code> si confronta un
+intero con segno (<code>i</code>) e uno senza segno
+(<code>v.size()</code>).</p></li>
 </ul>
 </section>
 <section id="cicli-for-su-array-1" class="slide level1">
 <h1>Cicli <code>for</code> su array</h1>
 <ul>
-<li><p>Per togliere il warning è sufficiente dichiarare <code>i</code> di tipo <code>size_t</code>:</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="bu">std::</span>vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> v<span class="op">(</span><span class="dv">3</span><span class="op">);</span></span>
+<li><p>Per togliere il warning è sufficiente dichiarare <code>i</code>
+di tipo <code>size_t</code>:</p>
+<div class="sourceCode" id="cb21"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="bu">std::</span>vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> v<span class="op">(</span><span class="dv">3</span><span class="op">);</span></span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span><span class="op">(</span><span class="dt">size_t</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> v<span class="op">.</span>size<span class="op">();</span> <span class="op">++</span>i<span class="op">)</span> <span class="op">{</span>  <span class="co">// No more warnings</span></span>
 <span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>    v<span class="op">[</span>i<span class="op">]</span> <span class="op">=</span> <span class="fl">0.0</span><span class="op">;</span></span>
 <span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div></li>
-<li><p>In linguaggi più rigorosi del C++ (Ada) confrontare tipi con e senza segno è un <em>errore</em> anziché un warning. Prendete quindi sul serio questi warning!</p></li>
+<li><p>In linguaggi più rigorosi del C++ (Ada) confrontare tipi con e
+senza segno è un <em>errore</em> anziché un warning. Prendete quindi sul
+serio questi warning!</p></li>
 </ul>
 </section>
 <section id="cicli-a-ritroso" class="slide level1">
 <h1>Cicli a ritroso</h1>
 <ul>
-<li><p>Attenzione ai cicli a ritroso, in cui si parte dall’ultimo elemento e si torna indietro al primo! Questo codice <strong>non funziona</strong>:</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span><span class="op">(</span><span class="dt">size_t</span> i <span class="op">=</span> v<span class="op">.</span>size<span class="op">()</span> <span class="op">-</span> <span class="dv">1</span><span class="op">;</span> i <span class="op">&gt;=</span> <span class="dv">0</span><span class="op">;</span> <span class="op">--</span>i<span class="op">)</span> <span class="op">{</span></span>
+<li><p>Attenzione ai cicli a ritroso, in cui si parte dall’ultimo
+elemento e si torna indietro al primo! Questo codice <strong>non
+funziona</strong>:</p>
+<div class="sourceCode" id="cb22"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span><span class="op">(</span><span class="dt">size_t</span> i <span class="op">=</span> v<span class="op">.</span>size<span class="op">()</span> <span class="op">-</span> <span class="dv">1</span><span class="op">;</span> i <span class="op">&gt;=</span> <span class="dv">0</span><span class="op">;</span> <span class="op">--</span>i<span class="op">)</span> <span class="op">{</span></span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Do stuff</span></span>
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> <span class="co">// This loop never ends</span></span></code></pre></div></li>
 <li><p>Il modo giusto per scrivere il ciclo è il seguente:</p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span><span class="op">(</span><span class="dt">size_t</span> i <span class="op">=</span> v<span class="op">.</span>size<span class="op">()</span> <span class="op">-</span> <span class="dv">1</span><span class="op">;;</span> <span class="op">--</span>i<span class="op">)</span> <span class="op">{</span></span>
+<div class="sourceCode" id="cb23"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span><span class="op">(</span><span class="dt">size_t</span> i <span class="op">=</span> v<span class="op">.</span>size<span class="op">()</span> <span class="op">-</span> <span class="dv">1</span><span class="op">;;</span> <span class="op">--</span>i<span class="op">)</span> <span class="op">{</span></span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Do stuff</span></span>
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">// If we have reached the last iteration, stop here</span></span>
@@ -468,20 +586,52 @@ $</code></pre></li>
 <section id="funzioni-nella-stl" class="slide level1">
 <h1>Funzioni nella STL</h1>
 <ul>
-<li><p>La classe <code>std::vector</code> è un tipo di <em>container</em>, ossia un «contenitore» di altri oggetti.</p></li>
-<li><p>Oltre alla classe <code>std::vector</code>, la libreria standard C++ fornisce una serie di funzioni come <a href="https://www.cplusplus.com/reference/algorithm/sort/?kw=sort"><code>sort</code></a>, <a href="https://www.cplusplus.com/reference/algorithm/find_first_of/"><code>find_first_of</code></a> e <a href="https://www.cplusplus.com/reference/algorithm/min/"><code>min</code></a> che possono operare su un vettore o un altro tipo di <em>container</em> (es., <a href="https://www.cplusplus.com/reference/array/array/"><code>std::array</code></a>, <a href="https://www.cplusplus.com/reference/list/list/"><code>std::list</code></a>, <a href="https://www.cplusplus.com/reference/stack/stack/"><code>std::stack</code></a>, <a href="https://www.cplusplus.com/reference/set/set/"><code>std::set</code></a>, etc.)</p></li>
-<li><p>In tutti questi casi, non si deve passare alla funzione la variabile di tipo <code>std::vector</code>, ma una coppia di <strong>iteratori</strong>.</p></li>
+<li><p>La classe <code>std::vector</code> è un tipo di
+<em>container</em>, ossia un «contenitore» di altri oggetti.</p></li>
+<li><p>Oltre alla classe <code>std::vector</code>, la libreria standard
+C++ fornisce una serie di funzioni come <a
+href="https://www.cplusplus.com/reference/algorithm/sort/?kw=sort"><code>sort</code></a>,
+<a
+href="https://www.cplusplus.com/reference/algorithm/find_first_of/"><code>find_first_of</code></a>
+e <a
+href="https://www.cplusplus.com/reference/algorithm/min/"><code>min</code></a>
+che possono operare su un vettore o un altro tipo di <em>container</em>
+(es., <a
+href="https://www.cplusplus.com/reference/array/array/"><code>std::array</code></a>,
+<a
+href="https://www.cplusplus.com/reference/list/list/"><code>std::list</code></a>,
+<a
+href="https://www.cplusplus.com/reference/stack/stack/"><code>std::stack</code></a>,
+<a
+href="https://www.cplusplus.com/reference/set/set/"><code>std::set</code></a>,
+etc.)</p></li>
+<li><p>In tutti questi casi, non si deve passare alla funzione la
+variabile di tipo <code>std::vector</code>, ma una coppia di
+<strong>iteratori</strong>.</p></li>
 </ul>
 </section>
 <section id="iteratori" class="slide level1">
 <h1>Iteratori</h1>
 <ul>
-<li><p>Gli iteratori si trovano sempre in coppia, e rappresentano un’intervallo di elementi consecutivi. Se il primo elemento è <span class="math inline">x</span> e l’elemento dopo l’ultimo è <span class="math inline">y</span>, la coppia di iteratori <span class="math inline">x, y</span> corrisponde all’intervallo</p>
+<li><p>Gli iteratori si trovano sempre in coppia, e rappresentano
+un’intervallo di elementi consecutivi. Se il primo elemento è <span
+class="math inline">x</span> e l’elemento dopo l’ultimo è <span
+class="math inline">y</span>, la coppia di iteratori <span
+class="math inline">x, y</span> corrisponde all’intervallo</p>
 <p><span class="math display">
 [x, \ldots, y)
 </span></p></li>
-<li><p>Il primo elemento di un <code>std::vector</code> si ottiene mediante il metodo <a href="https://www.cplusplus.com/reference/vector/vector/begin/"><code>std::vector::begin()</code></a>, che restituisce un <em>iteratore</em> (per ottenere il primo elemento, usare <a href="https://www.cplusplus.com/reference/vector/vector/front/"><code>std::vector::front()</code></a>).</p></li>
-<li><p>Per l’ultimo elemento si usa <a href="https://www.cplusplus.com/reference/vector/vector/end/"><code>std::vector::end()</code></a> (<em>iteratore</em>) e <a href="https://www.cplusplus.com/reference/vector/vector/back/"><code>std::vector::back()</code></a> (l’elemento stesso).</p></li>
+<li><p>Il primo elemento di un <code>std::vector</code> si ottiene
+mediante il metodo <a
+href="https://www.cplusplus.com/reference/vector/vector/begin/"><code>std::vector::begin()</code></a>,
+che restituisce un <em>iteratore</em> (per ottenere il primo elemento,
+usare <a
+href="https://www.cplusplus.com/reference/vector/vector/front/"><code>std::vector::front()</code></a>).</p></li>
+<li><p>Per l’ultimo elemento si usa <a
+href="https://www.cplusplus.com/reference/vector/vector/end/"><code>std::vector::end()</code></a>
+(<em>iteratore</em>) e <a
+href="https://www.cplusplus.com/reference/vector/vector/back/"><code>std::vector::back()</code></a>
+(l’elemento stesso).</p></li>
 </ul>
 </section>
     </div>
@@ -524,7 +674,7 @@ $</code></pre></li>
 
         // Add the current slide number to the URL hash so that reloading the
         // page/copying the URL will return you to the same slide
-        hash: false,
+        hash: true,
 
         // Start with 1 for the hash rather than 0
         hashOneBasedIndex: false,

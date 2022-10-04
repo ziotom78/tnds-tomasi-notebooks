@@ -1,7 +1,7 @@
 ---
 title: Laboratorio di TNDS -- Lezione 1
 author: Maurizio Tomasi
-date: Martedì 5 Ottobre 2021
+date: Martedì 4 Ottobre 2022
 lang: it-IT
 theme: white
 progress: true
@@ -105,9 +105,8 @@ N = 9:
 Potete svolgere gli esercizi in uno dei modi seguenti:
 
 1.   Usando il computer di laboratorio davanti a voi (per chi è in presenza);
-2.   Chi segue la lezione online può connettersi ai computer del laboratorio.
-3.   Se avete un portatile con un compilatore C++ installato (ragionevolmente recente), potete svolgere l'esercizio su di esso.
-4.   Potete usare [Repl.it](https://replit.com/~): in questo caso non c'è bisogno di installare nulla, e potete usare anche un tablet (ma sarebbe meglio collegare una tastiera!).
+2.   Se avete un portatile con un compilatore C++ installato (ragionevolmente recente), potete svolgere l'esercizio su di esso.
+3.   Potete usare [Repl.it](https://replit.com/~): in questo caso non c'è bisogno di installare nulla, e potete usare anche un tablet (ma sarebbe meglio collegare una tastiera!).
 
 
 # Computer di laboratorio
@@ -165,15 +164,32 @@ dal terminale:
     computer di laboratorio.
 
 
-# Lavoro online
-
--   Durante la lezione useremo il sito [gather.town](https://gather.town) per gestire le persone collegate online.
-
--   Se siete online, per collegarvi a Gather fate click su [questo link](https://gather.town/app/etYemzL2K4Nr4o2t/LabTNDS2022).
-
--   Registratevi col vostro nome completo e posizionatevi in uno dei «banchi» virtuali disponibili.
-
 # Suggerimenti vari
+
+# Uso di `#define`
+
+-   Ogni anno si vedono studenti usare `#define` per definire costanti nel codice:
+
+    ```c++
+    #define g 9.81
+    ```
+    
+-   Questo è sconsigliabile. È meglio definire un `const`:
+
+    ```c++
+    const double g = 9.81;   // I can explicitly declare the type!
+    ```
+    
+-   Con `#define` ci possono essere problemi con la precedenza degli operatori:
+
+    ```c++
+    #define time1_s       1.62
+    #define time2_s       6.162
+    #define total_time_s  time1_s + time2_s
+    #define speed_m_s     1.0
+    
+    cout << "The position is " << total_time_s * speed_m_s << " m\n";
+    ```
 
 # Uso di argc e argv
 
@@ -191,9 +207,9 @@ dal terminale:
     int main(int argc, char ** argv);
     int main(int argc, char *argv[]);
     int main(int argc, const char **argv);
-    // La mia preferita, che ho usato nei video di oggi
+    // My personal favorite, I use this in the videos I linked before
     int main(int argc, const char *argv[]);
-    // Potete usare altri nomi
+    // You can pick whatever name you want
     int main(int num_of_arguments, const char *args[]);
     ```
 
@@ -329,7 +345,7 @@ prompt):
         g++ $(CXXFLAGS) main.cpp
     ```
 
--   Per inserire un Tab da Repl.it, impostate *Indent type* uguale a *Tab* e *Indent size* uguale a 8 in «Settings». **Attenzione**: su alcuni computer, Repl.it non permette di inserire un carattere Tab.
+-   Per inserire un Tab da Repl.it, impostate *Indent type* uguale a *Tab* e *Indent size* uguale a 8 in «Settings». **Attenzione**: con alcuni browser, Repl.it non permette di inserire un carattere Tab.
 
 ---
 
@@ -410,24 +426,103 @@ dipendenze da file che devono essere creati dallo stesso GNU Make.
 
 ---
 
+# File multipli ed header
+
+# File multipli ed header
+
+-   Dovete **sempre** includere in ogni header/file sorgente tutti gli
+    header che servono per definire i simboli nel codice. Spesso gli studenti si affidano invece a inclusioni precedenti!
+    
+-   Ad esempio, se un file `main.cpp` contiene questi `#include`:
+    
+    ```c++
+    // File main.cpp
+    #include "vectors.h"   // Defines 3D vectors
+    #include "newton.h"    // Defines functions to solve Newton's problems
+    ```
+    
+    è necessario che in `newton.h` si includa `vectors.h`:
+    
+    ```c++
+    // newton.h
+    #pragma once
+    #include "vectors.h"
+    
+    // … Here follows the header file for `newton.h`, where vectors are used
+    ```
+    
+-   Quest'ultima inclusione non sarebbe necessaria per compilare
+    `main.cpp`, ma è importante inserirla comunque! Vediamone i
+    motivi.
+    
+# Motivo #1
+
+-   Programmi complessi usano moltissimi `#include`. In questo caso si
+    tende a inserirli in ordine alfabetico, per individuare duplicati:
+    
+    ```c++
+    // Inspired by the source code for PolyRay 1.8
+    #include "subdiv.h"
+    #include "intersec.h"
+    #include "roots.h"
+    #include "memory.h"
+    #include "glyph.h"
+    #include "scan.h"
+    #include "memory.h"
+    #include "vector.h"
+    #include "io.h"
+    ```
+
+-   Formattatori automatici di codice come `clang-format` riordinano
+    di default gli `#include`. Ma nel nostro caso quindi metterebbe
+    `newton.h` **prima** di `vectors.h`, e la compilazione fallirebbe!
+
+# Motivo #2
+
+-   Siccome ogni `#include` può richiedere tempo per l'esecuzione, di
+    tanto in tanto nei progetti si fa un /purge/ degli `#include`
+    inutili: in ogni file, si controlla se ci sono degli header che
+    definiscono cose non usate all'interno del file.
+    
+-   ad esempio, una riga `#include "mp3.h"` all'interno di un file
+    sorgente in cui non si toccano affatto file MP3!
+    
+-   Nel nostro caso, può essere che i vettori definiti in `vector.h`
+    non siano mai usati esplicitamente in `main.cpp`, magari perché in
+    esso si calcola semplicemente il periodo orbitale di un satellite
+    artificiale. Ma se ci sono dipendenze nascoste (come `newton.h`
+    che dipende da `vector.h`), il metodo per il /purging/ non
+    funziona!
+
 # Avvertenza su GNU Make
 
--   Quando avrete svolto gli esercizi di questa lezione, vi sarà chiaro che la scrittura del `Makefile` è un processo molto lungo e verboso. Il comando `make` è stato inventato nel 1976, e all'epoca il mondo della programmazione era così!
+-   Quando avrete svolto gli esercizi di questa lezione, vi sarà
+    chiaro che la scrittura del `Makefile` è un processo molto lungo e
+    verboso. Il comando `make` è stato inventato nel 1976, e all'epoca
+    il mondo della programmazione era così!
 
--   Oggi più nessuno (neppure io!) usa GNU Make direttamente per compilare codice C++. Per i vostri progetti futuri (oltre questo corso) vi converrà usare sistemi più evoluti ed agili; tra questi, il più usato in assoluto è [CMake](https://cmake.org/).
+-   Oggi più nessuno (neppure io!) usa GNU Make direttamente per
+    compilare codice C++. Per i vostri progetti futuri (oltre questo
+    corso) vi converrà usare sistemi più evoluti ed agili; tra questi,
+    il più usato in assoluto è [CMake](https://cmake.org/).
 
--   Noi insegnamo il funzionamento di GNU Make perché pedagogicamente ci sembra utile: sistemi come CMake sono costruiti usando GNU Make come fondamento. Vediamone un esempio.
+-   Noi insegnamo il funzionamento di GNU Make perché pedagogicamente
+    ci sembra utile: sistemi come CMake sono costruiti usando GNU Make
+    come fondamento. Vediamone un esempio.
 
 # Uso di CMake
 
--   CMake è lo standard *de facto* per compilare progetti in C/C++, e si basa su GNU Make. Il modo in cui si usa è il seguente:
+-   CMake è lo standard *de facto* per compilare progetti in C/C++, e
+    si basa su GNU Make. Il modo in cui si usa è il seguente:
 
     #.   Si scrive un file chiamato `CMakeLists.txt` (occhio alle maiuscole!)
     #.   Si esegue `cmake` da linea di comando: esso legge `CMakeLists.txt` e produce un `Makefile`
     #.   A questo punto si usa `make` per compilare il programma come al solito.
 
--   La compilazione avviene quindi ancora attraverso GNU Make, ma il `Makefile` prodotto da CMake è ottimizzato (e mostra una bella barra
-percentuale se compilate un progetto che usa tanti file `.cpp`!).
+-   La compilazione avviene quindi ancora attraverso GNU Make, ma il
+    `Makefile` prodotto da CMake è ottimizzato (e mostra una bella
+    barra percentuale se compilate un progetto che usa tanti file
+    `.cpp`!).
 
 -   Ecco perché studiare GNU Make è ancora utile.
 

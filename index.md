@@ -1,7 +1,7 @@
 ---
 title: Lezioni del corso di TNDS
 author: Maurizio Tomasi
-date: A.A. 2021−2022
+date: A.A. 2022−2023
 lang: it-IT
 header-includes: <script src="./fmtinstall.js"></script>
 ...
@@ -11,18 +11,20 @@ header-includes: <script src="./fmtinstall.js"></script>
 <center>
 | Data             | Esercizi                                              | Spiegazione                                                         |
 |------------------|-------------------------------------------------------|---------------------------------------------------------------------|
-| 5 Ottobre 2021   | [Arrays](carminati-esercizi-01.html)                  | [Lezione 1](tomasi-lezione-01.html)                                 |
-| 11 Ottobre 2021  | [Classe `Vettore`](carminati-esercizi-02.html)        | [Lezione 2](tomasi-lezione-02.html)                                 |
-| 19 Ottobre 2021  | [Template e `vector`](carminati-esercizi-03.html)     | [Lezione 3](tomasi-lezione-03.html)                                 |
-| 26 Ottobre 2021  | [Classi ed ereditarietà](carminati-esercizi-05.html)  | [Lezione 4](tomasi-lezione-04.html)                                 |
-| 2 Novembre 2021  | Idem                                                  | [Lezione 5](tomasi-lezione-05.html)                                 |
-| 9 Novembre 2021  | [Ricerca di zeri](carminati-esercizi-06.html)         | [Lezione 6](tomasi-lezione-06.html)                                 |
-| 16 Novembre 2021 | [Quadratura numerica](carminati-esercizi-07.html)     | [Notebook 7](https://ziotom78.github.io/tnds-notebooks/lezione07/)  |
-| 23 Novembre 2021 | [Equazioni differenziali](carminati-esercizi-08.html) | [Notebook 8](https://ziotom78.github.io/tnds-notebooks/lezione08/)  |
-| 30 Novembre 2021 | Idem                                                  | Idem                                                                |
-| 14 Dicembre 2021 | [Numeri pseudo-casuali](carminati-esercizi-10.html)   | [Notebook 10](https://ziotom78.github.io/tnds-notebooks/lezione10/) |
-| 21 Dicembre 2021 | Idem                                                  | Idem                                                                |
-| 11 Gennaio 2022  | [Metodi Monte Carlo](carminati-esercizi-11.html)      | [Lezione 11](tomasi-lezione-11.html)                                |
+| 4 Ottobre 2022   | [Arrays](carminati-esercizi-01.html)                  | [Lezione 1](tomasi-lezione-01.html)                                 |
+<!--
+| 10 Ottobre 2022  | [Classe `Vettore`](carminati-esercizi-02.html)        | [Lezione 2](tomasi-lezione-02.html)                                 |
+| 18 Ottobre 2022  | [Template e `vector`](carminati-esercizi-03.html)     | [Lezione 3](tomasi-lezione-03.html)                                 |
+| 25 Ottobre 2022  | [Classi ed ereditarietà](carminati-esercizi-05.html)  | [Lezione 4](tomasi-lezione-04.html)                                 |
+| 1 Novembre 2022  | Idem                                                  | [Lezione 5](tomasi-lezione-05.html)                                 |
+| 8 Novembre 2022  | [Ricerca di zeri](carminati-esercizi-06.html)         | [Lezione 6](tomasi-lezione-06.html)                                 |
+| 15 Novembre 2022 | [Quadratura numerica](carminati-esercizi-07.html)     | [Notebook 7](https://ziotom78.github.io/tnds-notebooks/lezione07/)  |
+| 22 Novembre 2022 | [Equazioni differenziali](carminati-esercizi-08.html) | [Notebook 8](https://ziotom78.github.io/tnds-notebooks/lezione08/)  |
+| 29 Novembre 2022 | Idem                                                  | Idem                                                                |
+| 13 Dicembre 2022 | [Numeri pseudo-casuali](carminati-esercizi-10.html)   | [Notebook 10](https://ziotom78.github.io/tnds-notebooks/lezione10/) |
+| 20 Dicembre 2022 | Idem                                                  | Idem                                                                |
+| 10 Gennaio 2023  | [Metodi Monte Carlo](carminati-esercizi-11.html)      | [Lezione 11](tomasi-lezione-11.html)                                |
+-->
 </center>
 
 Durante le sessioni di laboratorio useremo il sito [gather.town](https://gather.town/app/etYemzL2K4Nr4o2t/LabTNDS2022) per gestire le persone collegate online.

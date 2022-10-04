@@ -31,6 +31,9 @@
         font-size: 0.9em;
         padding: 1em;
       }
+      h1 {
+        font-size: 1.8em;
+      }
     }
     @media print {
       body {
@@ -135,6 +138,12 @@
     #TOC li {
       list-style: none;
     }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
     #TOC a:not(:hover) {
       text-decoration: none;
     }
@@ -182,7 +191,7 @@
     code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
     code span.at { color: #7d9029; } /* Attribute */
     code span.bn { color: #40a070; } /* BaseN */
-    code span.bu { } /* BuiltIn */
+    code span.bu { color: #008000; } /* BuiltIn */
     code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
     code span.ch { color: #4070a0; } /* Char */
     code span.cn { color: #880000; } /* Constant */
@@ -195,7 +204,7 @@
     code span.ex { } /* Extension */
     code span.fl { color: #40a070; } /* Float */
     code span.fu { color: #06287e; } /* Function */
-    code span.im { } /* Import */
+    code span.im { color: #008000; font-weight: bold; } /* Import */
     code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
     code span.kw { color: #007020; font-weight: bold; } /* Keyword */
     code span.op { color: #666666; } /* Operator */
@@ -209,20 +218,25 @@
     code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
     .display.math{display: block; text-align: center; margin: 0.5rem auto;}
   </style>
+  <script src="./fmtinstall.js"></script>
   <!--[if lt IE 9]>
     <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
   <![endif]-->
-  <script src="./fmtinstall.js"></script>
 </head>
 <body>
 <header id="title-block-header">
 <h1 class="title">Lezioni del corso di TNDS</h1>
 <p class="author">Maurizio Tomasi</p>
-<p class="date">A.A. 2021−2022</p>
+<p class="date">A.A. 2022−2023</p>
 </header>
 <h1 id="esercizi-e-delle-spiegazioni">Esercizi e delle spiegazioni</h1>
 <center>
 <table>
+<colgroup>
+<col style="width: 12%" />
+<col style="width: 38%" />
+<col style="width: 48%" />
+</colgroup>
 <thead>
 <tr class="header">
 <th>Data</th>
@@ -232,85 +246,71 @@
 </thead>
 <tbody>
 <tr class="odd">
-<td>5 Ottobre 2021</td>
+<td>4 Ottobre 2022</td>
 <td><a href="carminati-esercizi-01.html">Arrays</a></td>
 <td><a href="tomasi-lezione-01.html">Lezione 1</a></td>
 </tr>
-<tr class="even">
-<td>11 Ottobre 2021</td>
-<td><a href="carminati-esercizi-02.html">Classe <code>Vettore</code></a></td>
-<td><a href="tomasi-lezione-02.html">Lezione 2</a></td>
-</tr>
-<tr class="odd">
-<td>19 Ottobre 2021</td>
-<td><a href="carminati-esercizi-03.html">Template e <code>vector</code></a></td>
-<td><a href="tomasi-lezione-03.html">Lezione 3</a></td>
-</tr>
-<tr class="even">
-<td>26 Ottobre 2021</td>
-<td><a href="carminati-esercizi-05.html">Classi ed ereditarietà</a></td>
-<td><a href="tomasi-lezione-04.html">Lezione 4</a></td>
-</tr>
-<tr class="odd">
-<td>2 Novembre 2021</td>
-<td>Idem</td>
-<td><a href="tomasi-lezione-05.html">Lezione 5</a></td>
-</tr>
-<tr class="even">
-<td>9 Novembre 2021</td>
-<td><a href="carminati-esercizi-06.html">Ricerca di zeri</a></td>
-<td><a href="tomasi-lezione-06.html">Lezione 6</a></td>
-</tr>
-<tr class="odd">
-<td>16 Novembre 2021</td>
-<td><a href="carminati-esercizi-07.html">Quadratura numerica</a></td>
-<td><a href="https://ziotom78.github.io/tnds-notebooks/lezione07/">Notebook 7</a></td>
-</tr>
-<tr class="even">
-<td>23 Novembre 2021</td>
-<td><a href="carminati-esercizi-08.html">Equazioni differenziali</a></td>
-<td><a href="https://ziotom78.github.io/tnds-notebooks/lezione08/">Notebook 8</a></td>
-</tr>
-<tr class="odd">
-<td>30 Novembre 2021</td>
-<td>Idem</td>
-<td>Idem</td>
-</tr>
-<tr class="even">
-<td>14 Dicembre 2021</td>
-<td><a href="carminati-esercizi-10.html">Numeri pseudo-casuali</a></td>
-<td><a href="https://ziotom78.github.io/tnds-notebooks/lezione10/">Notebook 10</a></td>
-</tr>
-<tr class="odd">
-<td>21 Dicembre 2021</td>
-<td>Idem</td>
-<td>Idem</td>
-</tr>
-<tr class="even">
-<td>11 Gennaio 2022</td>
-<td><a href="carminati-esercizi-11.html">Metodi Monte Carlo</a></td>
-<td><a href="tomasi-lezione-11.html">Lezione 11</a></td>
-</tr>
 </tbody>
 </table>
+<!--
+| 10 Ottobre 2022  | [Classe `Vettore`](carminati-esercizi-02.html)        | [Lezione 2](tomasi-lezione-02.html)                                 |
+| 18 Ottobre 2022  | [Template e `vector`](carminati-esercizi-03.html)     | [Lezione 3](tomasi-lezione-03.html)                                 |
+| 25 Ottobre 2022  | [Classi ed ereditarietà](carminati-esercizi-05.html)  | [Lezione 4](tomasi-lezione-04.html)                                 |
+| 1 Novembre 2022  | Idem                                                  | [Lezione 5](tomasi-lezione-05.html)                                 |
+| 8 Novembre 2022  | [Ricerca di zeri](carminati-esercizi-06.html)         | [Lezione 6](tomasi-lezione-06.html)                                 |
+| 15 Novembre 2022 | [Quadratura numerica](carminati-esercizi-07.html)     | [Notebook 7](https://ziotom78.github.io/tnds-notebooks/lezione07/)  |
+| 22 Novembre 2022 | [Equazioni differenziali](carminati-esercizi-08.html) | [Notebook 8](https://ziotom78.github.io/tnds-notebooks/lezione08/)  |
+| 29 Novembre 2022 | Idem                                                  | Idem                                                                |
+| 13 Dicembre 2022 | [Numeri pseudo-casuali](carminati-esercizi-10.html)   | [Notebook 10](https://ziotom78.github.io/tnds-notebooks/lezione10/) |
+| 20 Dicembre 2022 | Idem                                                  | Idem                                                                |
+| 10 Gennaio 2023  | [Metodi Monte Carlo](carminati-esercizi-11.html)      | [Lezione 11](tomasi-lezione-11.html)                                |
+-->
 </center>
-<p>Durante le sessioni di laboratorio useremo il sito <a href="https://gather.town/app/etYemzL2K4Nr4o2t/LabTNDS2022">gather.town</a> per gestire le persone collegate online.</p>
+<p>Durante le sessioni di laboratorio useremo il sito <a
+href="https://gather.town/app/etYemzL2K4Nr4o2t/LabTNDS2022">gather.town</a>
+per gestire le persone collegate online.</p>
 <h1 id="seminario-di-approfondimento">Seminario di approfondimento</h1>
-<p>Lunedì 7 Marzo 2022 ho tenuto un seminario di approfondimento sui linguaggi C++, Python e Julia. Le slides sono disponibili a questo <a href="tomasi-c++-python-julia.html">link</a>. È disponibile anche una registrazione del solo audio (niente video, purtroppo), contattatemi via mail per averne una copia.</p>
+<p>Lunedì 7 Marzo 2022 ho tenuto un seminario di approfondimento sui
+linguaggi C++, Python e Julia. Le slides sono disponibili a questo <a
+href="tomasi-c++-python-julia.html">link</a>. È disponibile anche una
+registrazione del solo audio (niente video, purtroppo), contattatemi via
+mail per averne una copia.</p>
 <h1 id="suggerimenti-vari">Suggerimenti vari</h1>
-<h2 id="installazione-di-root-e-gnuplot">Installazione di ROOT e Gnuplot</h2>
-<p>A partire dal Gennaio 2022, Repl.it non fornisce più una serie di programmi nelle proprie Repl, e purtroppo tra i programmi rimossi c’è anche Gnuplot. Ma c’è una soluzione semplice.</p>
-<p>Aprite la Repl in cui volete installare ROOT e/o Gnuplot, ed eseguite questo comando dalla console:</p>
+<h2 id="installazione-di-root-e-gnuplot">Installazione di ROOT e
+Gnuplot</h2>
+<p>A partire dal Gennaio 2022, Repl.it non fornisce più una serie di
+programmi nelle proprie Repl, e purtroppo tra i programmi rimossi c’è
+anche Gnuplot. Ma c’è una soluzione semplice.</p>
+<p>Aprite la Repl in cui volete installare ROOT e/o Gnuplot, ed eseguite
+questo comando dalla console:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-s</span> https://ziotom78.github.io/tnds-tomasi-notebooks/install_standard_packages <span class="kw">|</span> <span class="fu">sh</span></span></code></pre></div>
-<p>Una volta eseguito, una serie di programmi saranno installati ed operativi. (E non dovrete ricordarvi di eseguire <code>source setup.sh</code> per attivare ROOT!)</p>
+<p>Una volta eseguito, una serie di programmi saranno installati ed
+operativi. (E non dovrete ricordarvi di eseguire
+<code>source setup.sh</code> per attivare ROOT!)</p>
 <h2 id="fmtinstall">Uso della libreria <code>fmt</code></h2>
-<p>Siete invitati ad impratichirvi con la libreria <code>fmt</code>, che potete installare usando lo script <a href="./install_fmt_library"><code>install_fmt_library</code></a>: scaricatelo nella directory dell’esercizio ed eseguitelo, oppure eseguite direttamente questo comando:</p>
+<p>Siete invitati ad impratichirvi con la libreria <code>fmt</code>, che
+potete installare usando lo script <a
+href="./install_fmt_library"><code>install_fmt_library</code></a>:
+scaricatelo nella directory dell’esercizio ed eseguitelo, oppure
+eseguite direttamente questo comando:</p>
 <pre><code>curl https://ziotom78.github.io/tnds-tomasi-notebooks/install_fmt_library | sh</code></pre>
-<p>In alternativa, scaricate questo <a href="./fmtlib.zip">file zip</a> nella directory dell’esercizio e decomprimetelo, poi aggiungete il file <code>format.cc</code> nella riga in cui compilate l’eseguibile. La libreria occupa molto poco spazio, quindi potete copiarla in ogni cartella in cui implementate un esercizio.</p>
+<p>In alternativa, scaricate questo <a href="./fmtlib.zip">file zip</a>
+nella directory dell’esercizio e decomprimetelo, poi aggiungete il file
+<code>format.cc</code> nella riga in cui compilate l’eseguibile. La
+libreria occupa molto poco spazio, quindi potete copiarla in ogni
+cartella in cui implementate un esercizio.</p>
 <h2 id="gplotinstall">Gplot++</h2>
-<p>Se avete difficoltà ad usare ROOT, potete interfacciare il vostro codice a <a href="http://www.gnuplot.info/">Gnuplot</a> mediante la libreria <a href="https://github.com/ziotom78/gplotpp">gplot++</a>: è sufficiente scaricare il file <a href="https://raw.githubusercontent.com/ziotom78/gplotpp/master/gplot%2B%2B.h"><code>gplot++.h</code></a>, oppure eseguire questo comando:</p>
+<p>Se avete difficoltà ad usare ROOT, potete interfacciare il vostro
+codice a <a href="http://www.gnuplot.info/">Gnuplot</a> mediante la
+libreria <a href="https://github.com/ziotom78/gplotpp">gplot++</a>: è
+sufficiente scaricare il file <a
+href="https://raw.githubusercontent.com/ziotom78/gplotpp/master/gplot%2B%2B.h"><code>gplot++.h</code></a>,
+oppure eseguire questo comando:</p>
 <pre><code>curl &#39;https://raw.githubusercontent.com/ziotom78/gplotpp/master/gplot%2B%2B.h&#39; &gt; gplot++.h</code></pre>
-<p>Ricordate che la libreria funziona a patto che abbiate installato Gnuplot sul vostro computer (se usate i computer del laboratorio, è già installato). Per usare Gnuplot in Repl.it dovete eseguire da console questo comando (vedi sopra):</p>
+<p>Ricordate che la libreria funziona a patto che abbiate installato
+Gnuplot sul vostro computer (se usate i computer del laboratorio, è già
+installato). Per usare Gnuplot in Repl.it dovete eseguire da console
+questo comando (vedi sopra):</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-s</span> https://ziotom78.github.io/tnds-tomasi-notebooks/install_standard_packages <span class="kw">|</span> <span class="fu">sh</span></span></code></pre></div>
 </body>
 </html>

@@ -1,7 +1,7 @@
 ---
 title: Laboratorio di TNDS -- Lezione 3
 author: Maurizio Tomasi
-date: Martedì 19 Ottobre 2021
+date: Martedì 18 Ottobre 2022
 theme: white
 progress: true
 slideNumber: true
@@ -21,8 +21,6 @@ css:
 -   La spiegazione dettagliata degli esercizi si trova qui: [carminati-esercizi-03.html](carminati-esercizi-03.html).
 
 -   Come al solito, queste slides, che forniscono suggerimenti addizionali rispetto alla lezione di teoria, sono disponibili all'indirizzo [ziotom78.github.io/tnds-tomasi-notebooks](https://ziotom78.github.io/tnds-tomasi-notebooks/).
-
--   Chi è online si colleghi a Gather tramite [questo link](https://gather.town/app/etYemzL2K4Nr4o2t/LabTNDS2022).
 
 # Esercizi
 
