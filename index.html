@@ -271,19 +271,21 @@
 Gnuplot</h2>
 <p>A partire dal Gennaio 2022, Repl.it non fornisce più una serie di
 programmi nelle proprie Repl, e purtroppo tra i programmi rimossi c’è
-anche Gnuplot. Ma c’è una soluzione semplice.</p>
-<p>Aprite la Repl in cui volete installare ROOT e/o Gnuplot, ed eseguite
-questo comando dalla console:</p>
+anche Gnuplot. I docenti hanno provveduto ad installare sia ROOT che
+Gnuplot in ciascuno dei template usati per gli esercizi, ma questo non
+avviene se volete creare voi Repl aggiuntive.</p>
+<p>Se avete creato una Repl per conto vostro e volete configurarla
+esattamente come quelle usate a lezione, eseguite questo comando dalla
+console della nuova Repl:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-s</span> https://ziotom78.github.io/tnds-tomasi-notebooks/install_standard_packages <span class="kw">|</span> <span class="fu">sh</span></span></code></pre></div>
-<p>Una volta eseguito, una serie di programmi saranno installati ed
-operativi. (E non dovrete ricordarvi di eseguire
-<code>source setup.sh</code> per attivare ROOT!)</p>
+<p>Una volta eseguito, ROOT e Gnuplot, più altri utili programmi,
+saranno installati ed operativi.</p>
 <h2 id="fmtinstall">Uso della libreria <code>fmt</code></h2>
 <p>Siete invitati ad impratichirvi con la libreria <code>fmt</code>, che
 potete installare usando lo script <a
-href="./install_fmt_library"><code>install_fmt_library</code></a>:
-scaricatelo nella directory dell’esercizio ed eseguitelo, oppure
-eseguite direttamente questo comando:</p>
+href="./install_fmt_library"><code>install_fmt_library</code></a>. È già
+fornito nei template degli esercizi forniti per il turno T2, ma potete
+installarlo anche in altre Repl con questo comando:</p>
 <pre><code>curl https://ziotom78.github.io/tnds-tomasi-notebooks/install_fmt_library | sh</code></pre>
 <p>In alternativa, scaricate questo <a href="./fmtlib.zip">file zip</a>
 nella directory dell’esercizio e decomprimetelo, poi aggiungete il file
@@ -299,9 +301,6 @@ href="https://raw.githubusercontent.com/ziotom78/gplotpp/master/gplot%2B%2B.h"><
 oppure eseguire questo comando:</p>
 <pre><code>curl &#39;https://raw.githubusercontent.com/ziotom78/gplotpp/master/gplot%2B%2B.h&#39; &gt; gplot++.h</code></pre>
 <p>Ricordate che la libreria funziona a patto che abbiate installato
-Gnuplot sul vostro computer (se usate i computer del laboratorio, è già
-installato). Per usare Gnuplot in Repl.it dovete eseguire da console
-questo comando (vedi sopra):</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-s</span> https://ziotom78.github.io/tnds-tomasi-notebooks/install_standard_packages <span class="kw">|</span> <span class="fu">sh</span></span></code></pre></div>
+Gnuplot sul vostro computer.</p>
 </body>
 </html>
