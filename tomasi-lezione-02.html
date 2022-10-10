@@ -16,10 +16,15 @@
     }
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
-    span.underline{text-decoration: underline;}
-    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
     ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
     pre > code.sourceCode { white-space: pre; position: relative; }
     pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
     pre > code.sourceCode > span:empty { height: 1.2em; }
@@ -253,7 +258,7 @@ $</code></pre></li>
 <li><p><strong>Avvertenza</strong>: questo output si ottiene solo se
 avete implementato il <a
 href="https://ziotom78.github.io/tnds-tomasi-notebooks/tomasi-lezione-01.html#/flag-del-compilatore">suggerimento
-della scorsa lezione</a> di usare il flag <code>-g</code> nel
+della scorsa lezione</a> e usate il flag <code>-g</code> nel
 <code>Makefile</code>.</p></li>
 </ul>
 </section>
@@ -301,20 +306,21 @@ fallisce.</p></li>
 <section id="esercizio-1.1-assert" class="slide level1">
 <h1>Esercizio 1.1: assert</h1>
 <div class="sourceCode" id="cb10"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="dt">bool</span> are_close<span class="op">(</span><span class="dt">double</span> calculated<span class="op">,</span> <span class="dt">double</span> expected<span class="op">,</span> <span class="dt">double</span> epsilon <span class="op">=</span> <span class="fl">1e-7</span><span class="op">)</span> <span class="op">{</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> fabs<span class="op">(</span>calculated <span class="op">-</span> expected<span class="op">)</span> <span class="op">&lt;</span> epsilon<span class="op">;</span></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> test_statistical_functions<span class="op">(</span><span class="dt">void</span><span class="op">)</span> <span class="op">{</span></span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> mydata<span class="op">[]</span> <span class="op">=</span> <span class="op">{</span><span class="dv">1</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">3</span><span class="op">,</span> <span class="dv">4</span><span class="op">};</span>  <span class="co">// Use these instead of data.dat</span></span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>  <span class="ot">assert</span><span class="op">(</span>are_close<span class="op">(</span>CalcolaMedia<span class="op">(</span>mydata<span class="op">,</span> <span class="dv">4</span><span class="op">),</span> <span class="fl">2.5</span><span class="op">));</span></span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>  <span class="ot">assert</span><span class="op">(</span>are_close<span class="op">(</span>CalcolaVarianza<span class="op">(</span>mydata<span class="op">,</span> <span class="dv">4</span><span class="op">),</span> <span class="fl">1.25</span><span class="op">));</span></span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>  <span class="ot">assert</span><span class="op">(</span>are_close<span class="op">(</span>CalcolaMediana<span class="op">(</span>mydata<span class="op">,</span> <span class="dv">4</span><span class="op">),</span> <span class="fl">2.5</span><span class="op">));</span>  <span class="co">// Even</span></span>
-<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>  <span class="ot">assert</span><span class="op">(</span>are_close<span class="op">(</span>CalcolaMediana<span class="op">(</span>mydata<span class="op">,</span> <span class="dv">3</span><span class="op">),</span> <span class="dv">2</span><span class="op">));</span>    <span class="co">// Odd</span></span>
-<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Continue from here …</span></span>
-<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Return true if `calculated` and `expected` differ by less than `epsilon`</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="dt">bool</span> are_close<span class="op">(</span><span class="dt">double</span> calculated<span class="op">,</span> <span class="dt">double</span> expected<span class="op">,</span> <span class="dt">double</span> epsilon <span class="op">=</span> <span class="fl">1e-7</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> fabs<span class="op">(</span>calculated <span class="op">-</span> expected<span class="op">)</span> <span class="op">&lt;</span> epsilon<span class="op">;</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> test_statistical_functions<span class="op">(</span><span class="dt">void</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> mydata<span class="op">[]</span> <span class="op">=</span> <span class="op">{</span><span class="dv">1</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">3</span><span class="op">,</span> <span class="dv">4</span><span class="op">};</span>  <span class="co">// Use these instead of data.dat</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>  <span class="ot">assert</span><span class="op">(</span>are_close<span class="op">(</span>CalcolaMedia<span class="op">(</span>mydata<span class="op">,</span> <span class="dv">4</span><span class="op">),</span> <span class="fl">2.5</span><span class="op">));</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>  <span class="ot">assert</span><span class="op">(</span>are_close<span class="op">(</span>CalcolaVarianza<span class="op">(</span>mydata<span class="op">,</span> <span class="dv">4</span><span class="op">),</span> <span class="fl">1.25</span><span class="op">));</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>  <span class="ot">assert</span><span class="op">(</span>are_close<span class="op">(</span>CalcolaMediana<span class="op">(</span>mydata<span class="op">,</span> <span class="dv">4</span><span class="op">),</span> <span class="fl">2.5</span><span class="op">));</span>  <span class="co">// Even</span></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>  <span class="ot">assert</span><span class="op">(</span>are_close<span class="op">(</span>CalcolaMediana<span class="op">(</span>mydata<span class="op">,</span> <span class="dv">3</span><span class="op">),</span> <span class="dv">2</span><span class="op">));</span>    <span class="co">// Odd</span></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Continue from here …</span></span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 <p>Questi <code>assert</code> vanno bene anche per gli esercizi di oggi,
 con opportuni aggiustamenti (es., usare <code>Vettore</code> anziché
 <code>double *</code>).</p>
@@ -330,9 +336,9 @@ esercizio01.1: esercizio01.1.cpp:53: int main(): ↲
 Aborted (core dumped)
 $</code></pre></li>
 <li><p>Anche quando avete verificato che gli <code>assert</code> passano
-con successo, lasciateli al loro posto: non fanno male di certo, e nel
-caso in cui in futuro dobbiate modificare l’implementazione delle
-funzioni, continueranno a fungere da controllo.</p></li>
+con successo, lasciateli al loro posto: nel caso in cui in futuro
+dobbiate modificare l’implementazione delle funzioni (ad esempio per
+renderla più veloce), continueranno a fungere da controllo.</p></li>
 </ul>
 </section>
 <section id="assert-negli-esercizi" class="slide level1">
@@ -340,13 +346,13 @@ funzioni, continueranno a fungere da controllo.</p></li>
 <ul>
 <li><p>Le liste di <code>assert</code> che vi fornisco sono state
 costruite anno dopo anno, alla luce degli errori che solitamente hanno
-fatto i vostri precedenti colleghi.</p></li>
+fatto i vostri precedenti colleghi nei loro esercizi.</p></li>
 <li><p>Non presentatevi all’esame finché non riuscite a far passare
 <strong>tutti</strong> gli <code>assert</code> di <strong>tutti</strong>
 gli esercizi!</p></li>
 <li><p>Molte volte degli studenti hanno presentato uno scritto in cui
 avevano usato librerie con errori! E quasi sempre ritrovavo commenti del
-genere nel codice:</p>
+genere negli esercizi che consegnavano:</p>
 <div class="sourceCode" id="cb12"><pre
 class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Siccome non riuscivo a far passare i test, ho commentato gli assert.</span></span></code></pre></div></li>
 </ul>
@@ -497,9 +503,7 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb23-1"><a href="#
 <span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> CalcolaMedia<span class="op">(</span><span class="at">const</span> Vettore <span class="op">&amp;</span> vett<span class="op">);</span></span>
 <span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
-<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a>    <span class="co">// ...</span></span>
-<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span> <span class="co">/* ... */</span> <span class="op">}</span></span></code></pre></div>
 </section>
 <section id="header-guards" class="slide level1">
 <h1><em>Header guards</em></h1>
@@ -588,25 +592,25 @@ l’invocazione di un costruttore.</p></li>
 possibile «differire» l’inizializzazione:</p>
 <div class="sourceCode" id="cb29"><pre
 class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> x<span class="op">;</span></span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="dv">15</span><span class="op">;</span>         <span class="co">// Ok, first allocate then initialize</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="dv">15</span><span class="op">;</span>         <span class="co">// Ok: first allocate, then initialize</span></span>
 <span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>Vettore v<span class="op">;</span></span>
 <span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>v<span class="op">(</span><span class="dv">10</span><span class="op">);</span>          <span class="co">// Error, you cannot call the constructor here!</span></span>
 <span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>Vettore w<span class="op">(</span><span class="dv">10</span><span class="op">);</span>  <span class="co">// Ok, allocate and initialize</span></span></code></pre></div></li>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>Vettore w<span class="op">(</span><span class="dv">10</span><span class="op">);</span>  <span class="co">// Ok: allocate, then initialize</span></span></code></pre></div></li>
 <li><p>I costruttori possono richiedere molto tempo per essere eseguiti,
-ad esempio se invocano <code>new</code> (com’è il caso di
-<code>Vettore</code>).</p></li>
+ad esempio se al loro interno invocano <code>new</code> (com’è il caso
+di <code>Vettore</code>).</p></li>
 </ul>
 </section>
 <section id="analogia" class="slide level1">
 <h1>Analogia</h1>
 <p><img data-src="images/empty_room.jpg" style="width:20.0%" /> <img
 data-src="images/furnished_room.jpg" style="width:20.0%" /></p>
-<p>Immaginiamo che una variabile sia un appartamento. Appena allocata è
-completamente spoglia: è l’edificio appena gli imbianchini e i
-piastrellisti hanno terminato il lavoro. Quando poi viene chiamato il
-costruttore della variabile, è come se la casa venisse arredata.</p>
+<p>Immaginiamo che una variabile sia come un appartamento. Una volta
+allocata, è come quando gli imbianchini e i piastrellisti hanno appena
+terminato il lavoro. Quando poi viene chiamato il costruttore della
+variabile, è come se la casa venisse arredata.</p>
 </section>
 <section id="costruttori" class="slide level1">
 <h1>Costruttori</h1>
@@ -656,11 +660,11 @@ data-src="images/furnished_room.jpg" style="width:20.0%" /></p>
 <div class="sourceCode" id="cb32"><pre
 class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>Vettore <span class="op">&amp;</span> Vettore<span class="op">::</span><span class="kw">operator</span><span class="op">=(</span>const Vettore <span class="op">&amp;</span>vett<span class="op">)</span> <span class="op">{</span></span>
 <span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>    <span class="va">m_N</span> <span class="op">=</span> vett<span class="op">.</span><span class="va">m_N</span><span class="op">;</span></span>
-<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>    if<span class="op">(</span><span class="va">m_v</span><span class="op">)</span> delete <span class="va">m_v</span><span class="op">;</span>             <span class="co">// Put the old building in the garbage!</span></span>
-<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>    <span class="va">m_v</span> <span class="op">=</span> new double<span class="op">[</span><span class="va">m_N</span><span class="op">];</span>          <span class="co">// Create a new building</span></span>
-<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>    for<span class="op">(</span>int i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> <span class="va">m_N</span><span class="op">;</span> <span class="op">++</span>i<span class="op">)</span> <span class="op">{</span>  <span class="co">// Fill the rooms with a copy of the</span></span>
-<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>        <span class="va">m_v</span><span class="op">[</span>i<span class="op">]</span> <span class="op">=</span> vett<span class="op">.</span><span class="va">m_v</span><span class="op">[</span>i<span class="op">];</span>       <span class="co">// old furniture</span></span>
-<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span><span class="op">(</span><span class="va">m_v</span><span class="op">)</span> <span class="kw">delete</span> <span class="va">m_v</span><span class="op">;</span>             <span class="co">// Put the old building in the garbage!</span></span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>    <span class="va">m_v</span> <span class="op">=</span> <span class="kw">new</span> <span class="dt">double</span><span class="op">[</span><span class="va">m_N</span><span class="op">];</span>          <span class="co">// Create a new building</span></span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span><span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> <span class="va">m_N</span><span class="op">;</span> <span class="op">++</span>i<span class="op">)</span> <span class="op">{</span>  <span class="co">// Fill the rooms with a copy of the</span></span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>        <span class="va">m_v</span><span class="op">[</span>i<span class="op">]</span> <span class="op">=</span> vett<span class="op">.</span><span class="va">m_v</span><span class="op">[</span>i<span class="op">];</span>       <span class="co">// old furniture</span></span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
 <span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 </section>
 <section id="operazione-di-assegnamento-2" class="slide level1">

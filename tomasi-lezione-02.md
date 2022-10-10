@@ -157,7 +157,7 @@ int main() {
     $
     ```
 
--   **Avvertenza**: questo output si ottiene solo se avete implementato il [suggerimento della scorsa lezione](https://ziotom78.github.io/tnds-tomasi-notebooks/tomasi-lezione-01.html#/flag-del-compilatore) di usare il flag `-g` nel `Makefile`.
+-   **Avvertenza**: questo output si ottiene solo se avete implementato il [suggerimento della scorsa lezione](https://ziotom78.github.io/tnds-tomasi-notebooks/tomasi-lezione-01.html#/flag-del-compilatore) e usate il flag `-g` nel `Makefile`.
 
 
 # Test automatici
@@ -199,6 +199,7 @@ int main() {
 # Esercizio 1.1: assert
 
 ```c++
+// Return true if `calculated` and `expected` differ by less than `epsilon`
 bool are_close(double calculated, double expected, double epsilon = 1e-7) {
   return fabs(calculated - expected) < epsilon;
 }
@@ -231,17 +232,17 @@ Questi `assert` vanno bene anche per gli esercizi di oggi, con opportuni aggiust
     $
     ```
 
--   Anche quando avete verificato che gli `assert` passano con successo, lasciateli al loro posto: non fanno male di certo, e nel caso in cui in futuro dobbiate modificare l'implementazione delle funzioni, continueranno a fungere da controllo.
+-   Anche quando avete verificato che gli `assert` passano con successo, lasciateli al loro posto: nel caso in cui in futuro dobbiate modificare l'implementazione delle funzioni (ad esempio per renderla più veloce), continueranno a fungere da controllo.
 
 
 
 # Assert negli esercizi
 
--   Le liste di `assert` che vi fornisco sono state costruite anno dopo anno, alla luce degli errori che solitamente hanno fatto i vostri precedenti colleghi.
+-   Le liste di `assert` che vi fornisco sono state costruite anno dopo anno, alla luce degli errori che solitamente hanno fatto i vostri precedenti colleghi nei loro esercizi.
 
 -   Non presentatevi all'esame finché non riuscite a far passare **tutti** gli `assert` di **tutti** gli esercizi!
 
--   Molte volte degli studenti hanno presentato uno scritto in cui avevano usato librerie con errori! E quasi sempre ritrovavo commenti del genere nel codice:
+-   Molte volte degli studenti hanno presentato uno scritto in cui avevano usato librerie con errori! E quasi sempre ritrovavo commenti del genere negli esercizi che consegnavano:
 
     ```c++
     // Siccome non riuscivo a far passare i test, ho commentato gli assert.
@@ -394,9 +395,7 @@ class Vettore {
 
 double CalcolaMedia(const Vettore & vett);
 
-int main() {
-    // ...
-}
+int main() { /* ... */ }
 ```
 
 # *Header guards* {#header-guards}
@@ -484,15 +483,15 @@ int main() {
 
     ```c++
     int x;
-    x = 15;         // Ok, first allocate then initialize
+    x = 15;         // Ok: first allocate, then initialize
     
     Vettore v;
     v(10);          // Error, you cannot call the constructor here!
     
-    Vettore w(10);  // Ok, allocate and initialize
+    Vettore w(10);  // Ok: allocate, then initialize
     ```
     
--   I costruttori possono richiedere molto tempo per essere eseguiti, ad esempio se invocano `new` (com'è il caso di `Vettore`).
+-   I costruttori possono richiedere molto tempo per essere eseguiti, ad esempio se al loro interno invocano `new` (com'è il caso di `Vettore`).
 
 
 # Analogia
@@ -500,7 +499,7 @@ int main() {
 ![](images/empty_room.jpg){ width=20% }
 ![](images/furnished_room.jpg){ width=20% }
 
-Immaginiamo che una variabile sia un appartamento. Appena allocata è completamente spoglia: è l'edificio appena gli imbianchini e i piastrellisti hanno terminato il lavoro. Quando poi viene chiamato il costruttore della variabile, è come se la casa venisse arredata.
+Immaginiamo che una variabile sia come un appartamento. Una volta allocata, è come quando gli imbianchini e i piastrellisti hanno appena terminato il lavoro. Quando poi viene chiamato il costruttore della variabile, è come se la casa venisse arredata.
 
 
 # Costruttori
@@ -522,9 +521,7 @@ Vettore::Vettore(int n) : m_N(n) {
 ![](images/empty_room.jpg){ width=20% }
 ![](images/furnished_room.jpg){ width=20% }
 
-Un *copy constructor* corrisponde all'azione di costruire una stanza
-vuota identica alla prima (ossia, di tipo `Vettore`), e riempirla con
-gli stessi identici mobili (ossia, assegnando lo stesso valore a `m_N` e agli elementi di `m_v`).
+Un *copy constructor* corrisponde all'azione di costruire una stanza vuota identica alla prima (ossia, di tipo `Vettore`), e riempirla con gli stessi identici mobili (ossia, assegnando lo stesso valore a `m_N` e agli elementi di `m_v`).
 
 
 # Costruttori di copia
@@ -546,9 +543,7 @@ Vettore::Vettore(const Vettore &vett) : m_N(vett.m_N) {
 ![](images/empty_room.jpg){ width=20% }
 ![](images/furnished_room.jpg){ width=20% }
 
-Con una operazione di assegnamento (`operator=`), abbiamo due stanze
-già arredate (variabili già inizializzate), che vogliamo rendere
-identiche. Dobbiamo quindi prima *svuotare* la stanza di destinazione perché è piena, e solo dopo arredarla allo stesso modo dell'altra.
+Con una operazione di assegnamento (`operator=`), abbiamo due stanze già arredate (variabili già inizializzate), che vogliamo rendere identiche. Dobbiamo quindi prima *svuotare* la stanza di destinazione perché è piena, e solo dopo arredarla allo stesso modo dell'altra.
 
 
 # Operazione di assegnamento
@@ -559,11 +554,11 @@ identiche. Dobbiamo quindi prima *svuotare* la stanza di destinazione perché è
 ```c++
 Vettore & Vettore::operator=(const Vettore &vett) {
     m_N = vett.m_N;
-    if(m_v) delete m_v;             // Put the old building in the garbage!
-    m_v = new double[m_N];          // Create a new building
-    for(int i = 0; i < m_N; ++i) {  // Fill the rooms with a copy of the
-        m_v[i] = vett.m_v[i];       // old furniture
-    }
+    if(m_v) delete m_v;             // Put the old building in the garbage!
+    m_v = new double[m_N];          // Create a new building
+    for(int i = 0; i < m_N; ++i) {  // Fill the rooms with a copy of the
+        m_v[i] = vett.m_v[i];       // old furniture
+    }
 }
 ```
 

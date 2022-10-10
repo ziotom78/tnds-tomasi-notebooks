@@ -12,8 +12,8 @@ header-includes: <script src="./fmtinstall.js"></script>
 | Data             | Esercizi                                              | Spiegazione                                                         |
 |------------------|-------------------------------------------------------|---------------------------------------------------------------------|
 | 4 Ottobre 2022   | [Arrays](carminati-esercizi-01.html)                  | [Lezione 1](tomasi-lezione-01.html)                                 |
+| 11 Ottobre 2022  | [Classe `Vettore`](carminati-esercizi-02.html)        | [Lezione 2](tomasi-lezione-02.html)                                 |
 <!--
-| 10 Ottobre 2022  | [Classe `Vettore`](carminati-esercizi-02.html)        | [Lezione 2](tomasi-lezione-02.html)                                 |
 | 18 Ottobre 2022  | [Template e `vector`](carminati-esercizi-03.html)     | [Lezione 3](tomasi-lezione-03.html)                                 |
 | 25 Ottobre 2022  | [Classi ed ereditarietà](carminati-esercizi-05.html)  | [Lezione 4](tomasi-lezione-04.html)                                 |
 | 1 Novembre 2022  | Idem                                                  | [Lezione 5](tomasi-lezione-05.html)                                 |
