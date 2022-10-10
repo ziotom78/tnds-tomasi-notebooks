@@ -34,12 +34,12 @@ document.getElementById(id).style.display = 'none';
 
 <br>
 
-<font size="+1">In questa seconda lezione affronteremo gli stessi problemi della prima lezione (lettura di dati da un file, calcolo di media e mediana) utilizzando un contenitore di dati pi&ugrave; evoluto del semplice array del C. A questo proposito nella prima parte della lezione costruiremo la nostra prima classe, la classe <tt>Vettore</tt>. Nella seconda parte adatteremo le funzioni gi&agrave; scritte nella lezione scorsa in modo che possano funzionare con oggetti di tipo <tt>Vettore</tt>. Quindi in sintesi :
+<font size="+1">In questa seconda lezione affronteremo gli stessi problemi della prima lezione (lettura di dati da un file, calcolo di media, varianza e mediana) utilizzando un contenitore di dati pi&ugrave; evoluto del semplice array del C. A questo proposito nella prima parte della lezione costruiremo la nostra prima classe, la classe <tt>Vettore</tt>. Nella seconda parte adatteremo le funzioni gi&agrave; scritte nella lezione scorsa in modo che possano funzionare con oggetti di tipo <tt>Vettore</tt>. Quindi in sintesi :
 
 <ul>
 <li> Tipo di dato da leggere &egrave constituito da numeri <tt>double</tt>. </a>
-<li> Tipo di contenitore di dati &egrave una classe <tt>Vettore</tt> che scriveremo noi. </a>
-<li> Operazioni sui dati vengono svolte mediante funzioni che agiscono su oggetti di tipo <tt>Vettore</tt>. </a>
+<li> Tipo di contenitore di dati &egrave un oggetto della classe <tt>Vettore</tt> che scriveremo noi. </a>
+<li> Operazioni sui dati vengono svolte mediante funzioni che lavorano su oggetti di tipo <tt>Vettore</tt>. </a>
 </ul>
 
 </font>
@@ -77,8 +77,8 @@ L'header file della classe iniziale &egrave;  (Vettore.h) potrebbe essere cos&ig
 
 <ul>
 <li> Notate l'utilizzo del costrutto <tt>#ifndef .... #define .... #endif</tt>. <br>
-Queste direttive di preprocessore sono normalmente utilizzate per evitare inclusioni multiple di uno stesso header file che, nel caso specifico, porterebbero ad una doppia dichiarazione della classe <tt>Vettore</tt>. Immaginate infatti di voler compilare un codice <tt>main.cxx</tt> insieme ad un file <tt>funzioni.cxx</tt> e che entrambi i codici sorgente contengano una istruzione <tt>#include "Vettore.h"</tt>: in fase di compilazione il compilatore si lamenterebbe per una doppia dichiarazione della classe <tt>Vettore</tt>. Con il meccanismo indicato, alla prima inclusione di <tt>Vettore.h</tt>, viene creata una variabile globale <tt>__Vettore_h__</tt>. Al secondo tentativo di inclusione l'esistenza della variabile globale forza il compilatore a saltare tutte le righe tra <tt>#define .... #endif</tt>, di fatto evitando la seconda inclusione del file <tt>Vettore.h</tt>.  
-<li> Notate inoltre l'impementazione <it>in-line<it> del metodo <tt>GetN()</tt>: i metodi di una classe possono essere anche implementati direttamente nell'header file e non nel <tt>.cxx</tt>. L'implementazione inline implica che il compilatore metta una copia della funzione ogni volta che questa viene chiamata: in questo modo il codice diventa pi&ugrave; lungo ma vengono ottimizzate le performance in quanto non si deve effettuare una chiamata alla funzione. In genere l'implementazione inline viene effettuata per funzioni brevi. 
+Queste direttive di preprocessore sono normalmente utilizzate per evitare inclusioni multiple di uno stesso header file che, nel caso specifico, porterebbero ad una doppia dichiarazione della classe <tt>Vettore</tt>. Immaginate infatti di voler compilare un codice <tt>main.cpp</tt> insieme ad un file <tt>funzioni.cpp</tt> e che entrambi i codici sorgente contengano una istruzione <tt>#include "Vettore.h"</tt>: in fase di compilazione il compilatore si lamenterebbe per una doppia dichiarazione della classe <tt>Vettore</tt>. Con il meccanismo indicato, alla prima inclusione di <tt>Vettore.h</tt>, viene creata una variabile globale <tt>__Vettore_h__</tt>. Al secondo tentativo di inclusione l'esistenza della variabile globale forza il compilatore a saltare tutte le righe tra <tt>#define .... #endif</tt>, di fatto evitando la seconda inclusione del file <tt>Vettore.h</tt>.  
+<li> Notate inoltre l'impementazione <it>in-line<it> del metodo <tt>GetN()</tt>: i metodi di una classe possono essere anche implementati direttamente nell'header file (.h)e non nel <tt>.cpp</tt>. L'implementazione inline implica che il compilatore metta una copia della funzione ogni volta che questa viene chiamata: in questo modo il codice diventa pi&ugrave; lungo ma vengono ottimizzate le performance in quanto non si deve effettuare una chiamata alla funzione. In genere l'implementazione inline viene effettuata per funzioni brevi. 
 </ul>
 </td>
     </tr>
@@ -104,11 +104,13 @@ Queste direttive di preprocessore sono normalmente utilizzate per evitare inclus
 <img alt="Esempio di codice" src="./figure/VettoreClass.cxx.png" width="900" > <br>
 
 <ul>
+<!--
 <li> Notate l'uso della macro <tt>assert()</tt>: questa macro ( ricordarsi di includere la libreria <tt>assert.h</tt> ) pu&ograve; rivelarsi estremamente utile per scoprire errori nel nostro programma in fase di realizzazione del programma. <br>
 <pre> assert( ( m_N > i ) && "Errore : l'indice e' troppo grande");  </pre>
 far&agrave; abortire il programma se si verifica la condizione <tt>m_N > i</tt> ovvero se si tenta di riempire una componente di indice maggiore della dimensione del Vettore. Prima della chiusura del programma viene mostrato a video il messaggio impostato :<br>
 <pre> Assertion failed: (( m_N > i ) && "Errore : l'indice e' troppo grande"), function SetComponent, file Vettore.cxx, line 31. </pre>
 che indica molto chiaramente cosa ha esattamente causato il problema. Normalmente quando la fase di debugging e' terminata tutti gli <tt>assert</tt> utilizzati possono essere disabilitati mediante la definizione di una macro <tt># define NDEBUG</tt>: questa istruzione fa si che tutti gli assert dichiarati vengano ignorati e il flusso del programma ritorna ad essere quello normale.
+-->
 <li> Notate l'ultimo metodo implementato (dovete ovviamente aggiungerlo anche nell'header file della classe) che rappresenta l'overloading dell'operatore di accesso [] ad un elemento (eg. <tt> double a = v[2] </tt> se <tt>v</tt> &egrave; un oggetto di tipo <tt>Vettore</tt>). 
 </ul>
       <br>
@@ -285,10 +287,10 @@ copia dell'oggetto corrente.
 <font size="+1"><span style="text-decoration: underline; color: rgb(204, 0, 0);">ESERCIZIO 2.1 
 - Codice di analisi dati utilizzando la classe <tt>Vettore</tt> (da consegnare) </span><a name="es2.1"></a>: 
 <br>
-Proviamo ora a riscrivere il codice della prima lezione utilizzando un contenitore di dati pi&ugrave; raffinato: la classe <tt>Vettore</tt> ci permetter&agrave; di riempire il contenitore dati controllando per esempio che non stiamo sforando la dimensione allocata. Il <tt>Vettore</tt> inoltre si porta dietro anche la sua dimensione: se dobbiamo calcolare la media degli elementi di un <tt>Vettore</tt> non dobbiamo pi&ugrave; passare la dimensione come argomento esterno. <br>
+Proviamo ora a riscrivere il codice della prima lezione utilizzando un contenitore di dati pi&ugrave; raffinato: la classe <tt>Vettore</tt> ci permetter&agrave; di riempire il contenitore dati controllando per esempio che non stiamo sforando la dimensione allocata. Il <tt>Vettore</tt> inoltre si porta dietro anche la sua dimensione: se dobbiamo calcolare la media degli elementi di un <tt>Vettore</tt> <u>non dobbiamo pi&ugrave; passare la dimensione come argomento esterno.</u><br>
 Per svolgere questo esercizio dobbiamo :
 <ol>
-<li> modificare tutte le funzioni in <tt>funzioni.h</tt> e <tt>funzioni.cxx</tt> in modo che lavorino con oggetti di tipo <tt>Vettore</tt> invece che con semplici array del C.
+<li> modificare tutte le funzioni in <tt>funzioni.h</tt> e <tt>funzioni.cpp</tt> in modo che lavorino con oggetti di tipo <tt>Vettore</tt> invece che con semplici array del C.
 <li> modificare il main in modo che utilizzi la nuova classe <tt>Vettore</tt> e le nuove funzioni. 
 <li> modificare il <tt>Makefile</tt> 
 </ol>
@@ -333,10 +335,10 @@ Se non ci riuscite da soli potete dare un'occhiata ai suggerimenti qui sotto. <b
 </tr>
 
 <br>
-  <td style="vertical-align: top; background-color: rgb(233, 229, 255);">Il file di implementazione delle funzioni (.cxx) potrebbe risultare cos&igrave; (qui e' svolto solo il caso della media, l'estensione alle altre funzioni dovrebbe essere immediata) :<br>
+  <td style="vertical-align: top; background-color: rgb(233, 229, 255);">Il file di implementazione delle funzioni (.cpp) potrebbe risultare cos&igrave; (qui e' svolto solo il caso della media, l'estensione alle altre funzioni dovrebbe essere immediata) :<br>
 <br>
 <img src="figure/Esercizio2.1_funzioni.cxx.png" width="900" >
-       <br>
+ <br>
 <br> 
 </td>
     </tr>

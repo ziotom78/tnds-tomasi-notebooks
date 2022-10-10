@@ -9,11 +9,11 @@ lang: it-IT
 
 [La pagina con la spiegazione originale degli esercizi si trova qui: [labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/lezione2_1819.html](http://labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/lezione2_1819.html).]
 
-In questa seconda lezione affronteremo gli stessi problemi della prima lezione (lettura di dati da un file, calcolo di media e mediana) utilizzando un contenitore di dati più evoluto del semplice array del C. A questo proposito nella prima parte della lezione costruiremo la nostra prima classe, la classe `Vettore`. Nella seconda parte adatteremo le funzioni già scritte nella lezione scorsa in modo che possano funzionare con oggetti di tipo `Vettore`. Quindi in sintesi:
+In questa seconda lezione affronteremo gli stessi problemi della prima lezione (lettura di dati da un file, calcolo di media, varianza e mediana) utilizzando un contenitore di dati più evoluto del semplice array del C. A questo proposito nella prima parte della lezione costruiremo la nostra prima classe, la classe `Vettore`. Nella seconda parte adatteremo le funzioni già scritte nella lezione scorsa in modo che possano funzionare con oggetti di tipo `Vettore`. Quindi in sintesi:
 
 -   Tipo di dato da leggere è constituito da numeri `double`.
 -   Tipo di contenitore di dati è una classe `Vettore` che scriveremo noi.
--   Operazioni sui dati vengono svolte mediante funzioni che agiscono su oggetti di tipo `Vettore`.
+-   Operazioni sui dati vengono svolte mediante funzioni che lavorano su oggetti di tipo `Vettore`.
 
 
 # Esercizio 2.0 - Creazione della classe Vettore {#esercizio-2.0}
@@ -72,7 +72,7 @@ private:
 ```
 
 -   L'utilizzo del costrutto `#ifndef`…`#define`…`#endif` al posto di `#pragma once` merita una spiegazione. Queste direttive di preprocessore sono normalmente utilizzate per evitare inclusioni multiple di uno stesso header file che, nel caso specifico, porterebbero ad una doppia dichiarazione della classe `Vettore`. Immaginate infatti di voler compilare un codice `main.cpp` insieme ad un file `funzioni.cpp` e che entrambi i codici sorgente contengano una istruzione `#include "vettore.h"`: in fase di compilazione il compilatore si lamenterebbe per una doppia dichiarazione della classe `Vettore`. Con il meccanismo indicato, alla prima inclusione di `vettore.h`, viene creata una variabile globale `__vettore_h__` (meglio: una *macro*). Al secondo tentativo di inclusione l'esistenza di `__vettore_h__` globale forza il compilatore a saltare tutte le righe tra `#define` ed `#endif`, di fatto evitando la seconda inclusione del file `vettore.h`. La scrittura `#pragma once` non è nello standard C++, ma è così comoda che è implementata su tutti i compilatori C++ in commercio.
-    Notate inoltre l'impementazione in-line del metodo `GetN()`: i metodi di una classe possono essere anche implementati direttamente nell'header file e non nel file `.cpp`. L'implementazione inline implica che il compilatore metta una copia della funzione ogni volta che questa viene chiamata: in questo modo il codice diventa più lungo ma vengono ottimizzate le performance in quanto non si deve effettuare una chiamata alla funzione. In genere l'implementazione inline viene effettuata per funzioni brevi.
+    Notate inoltre l'impementazione in-line del metodo `GetN()`: i metodi di una classe possono essere anche implementati direttamente nell'header file (`.h`) e non nel file `.cpp`. L'implementazione inline implica che il compilatore metta una copia della funzione ogni volta che questa viene chiamata: in questo modo il codice diventa più lungo ma vengono ottimizzate le performance in quanto non si deve effettuare una chiamata alla funzione. In genere l'implementazione inline viene effettuata per funzioni brevi.
 
 
 ## Esempio di implementazione della classe
@@ -318,7 +318,7 @@ Il puntatore `this` indica un puntatore all'oggetto cui si sta applicando un met
 
 # Esercizio 2.1 - Codice di analisi dati utilizzando la classe Vettore (da consegnare) {#esercizio-2.1}
 
-Proviamo ora a riscrivere il codice della prima lezione utilizzando un contenitore di dati più raffinato: la classe `Vettore` ci permetterà di riempire il contenitore dati controllando per esempio che non stiamo sforando la dimensione allocata. Il `Vettore` inoltre si porta dietro anche la sua dimensione: se dobbiamo calcolare la media degli elementi di un `Vettore` non dobbiamo più passare la dimensione come argomento esterno.
+Proviamo ora a riscrivere il codice della prima lezione utilizzando un contenitore di dati più raffinato: la classe `Vettore` ci permetterà di riempire il contenitore dati controllando per esempio che non stiamo sforando la dimensione allocata. Il `Vettore` inoltre contiene un campo con la sua dimensione: se dobbiamo calcolare la media degli elementi di un `Vettore` non dobbiamo quindi più passare la dimensione come argomento esterno.
 
 Per svolgere questo esercizio dobbiamo :
 
