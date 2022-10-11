@@ -259,10 +259,10 @@ e nella sua implementazione dobbiamo assicurarci che l'oggetto costruito abbia l
 // overloading operatore di copia
 
 Vettore::Vettore(const Vettore & v) {
-  m_N = V.GetN();
+  m_N = v.GetN();
   m_v = new double[m_N];
   for(size_t i = 0; i < m_N; ++i) {
-      m_v[i] = V.GetComponent(i);
+      m_v[i] = v.GetComponent(i);
   }
 }
 ```
@@ -296,7 +296,7 @@ Una possibile implementazione è data qui sotto:
 // overloading operatore di assegnazione
 
 Vettore& Vettore::operator=(const Vettore& v) {
-  m_N = V.GetN();
+  m_N = v.GetN();
   if (m_v) {
       delete[] m_v;
   }
@@ -304,7 +304,7 @@ Vettore& Vettore::operator=(const Vettore& v) {
   m_v = new double[m_N];
 
   for (size_t i = 0; i < m_N; i++) {
-      m_v[i] = V.GetComponent(i);
+      m_v[i] = v.GetComponent(i);
   }
 
   return *this;
@@ -457,26 +457,26 @@ La funzione `Read()` restituirà un oggetto temporaneo di tipo `Vettore` che poi
 ```c++
 // move constructor
 
-Vettore::Vettore( Vettore&& V) {
+Vettore::Vettore(Vettore&& v) {
   cout << "Invocazione del move constructor" << endl;
 
-  m_N = V.m_N;
-  m_v = V.m_v;
-  V.m_N = 0;
-  V.m_v = nullptr;
+  m_N = v.m_N;
+  m_v = v.m_v;
+  v.m_N = 0;
+  v.m_v = nullptr;
   cout << "Move constructor chiamato" << endl;
 }
 
 // move assigment operator
-Vettore& Vettore::operator=(Vettore&& V) {
+Vettore& Vettore::operator=(Vettore&& v) {
   cout << "Invocazione del move assignment operator" << endl;
   delete [] m_v ;
 
-  m_N = V.m_N;
-  m_v = V.m_v;
+  m_N = v.m_N;
+  m_v = v.m_v;
   
-  V.m_N = 0;
-  V.m_v = nullptr;
+  v.m_N = 0;
+  v.m_v = nullptr;
 
   cout << "Move assignment operator invocato" << endl;
   return *this;

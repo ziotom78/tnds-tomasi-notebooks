@@ -490,10 +490,10 @@ costruito abbia la sua zone di memoria riservata:</p>
 class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">// overloading operatore di copia</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>Vettore<span class="op">::</span>Vettore<span class="op">(</span><span class="at">const</span> Vettore <span class="op">&amp;</span> v<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="va">m_N</span> <span class="op">=</span> V<span class="op">.</span>GetN<span class="op">();</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="va">m_N</span> <span class="op">=</span> v<span class="op">.</span>GetN<span class="op">();</span></span>
 <span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="va">m_v</span> <span class="op">=</span> <span class="kw">new</span> <span class="dt">double</span><span class="op">[</span><span class="va">m_N</span><span class="op">];</span></span>
 <span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span><span class="op">(</span><span class="dt">size_t</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> <span class="va">m_N</span><span class="op">;</span> <span class="op">++</span>i<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>      <span class="va">m_v</span><span class="op">[</span>i<span class="op">]</span> <span class="op">=</span> V<span class="op">.</span>GetComponent<span class="op">(</span>i<span class="op">);</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>      <span class="va">m_v</span><span class="op">[</span>i<span class="op">]</span> <span class="op">=</span> v<span class="op">.</span>GetComponent<span class="op">(</span>i<span class="op">);</span></span>
 <span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
 <span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 <h2 id="operatore-di-assegnazione">Operatore di assegnazione</h2>
@@ -520,7 +520,7 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb13-1"><a href="#
 class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co">// overloading operatore di assegnazione</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>Vettore<span class="op">&amp;</span> Vettore<span class="op">::</span><span class="kw">operator</span><span class="op">=(</span><span class="at">const</span> Vettore<span class="op">&amp;</span> v<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="va">m_N</span> <span class="op">=</span> V<span class="op">.</span>GetN<span class="op">();</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="va">m_N</span> <span class="op">=</span> v<span class="op">.</span>GetN<span class="op">();</span></span>
 <span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> <span class="op">(</span><span class="va">m_v</span><span class="op">)</span> <span class="op">{</span></span>
 <span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>      <span class="kw">delete</span><span class="op">[]</span> <span class="va">m_v</span><span class="op">;</span></span>
 <span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
@@ -528,7 +528,7 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb14-1"><a href="#
 <span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>  <span class="va">m_v</span> <span class="op">=</span> <span class="kw">new</span> <span class="dt">double</span><span class="op">[</span><span class="va">m_N</span><span class="op">];</span></span>
 <span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> <span class="op">(</span><span class="dt">size_t</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> <span class="va">m_N</span><span class="op">;</span> i<span class="op">++)</span> <span class="op">{</span></span>
-<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>      <span class="va">m_v</span><span class="op">[</span>i<span class="op">]</span> <span class="op">=</span> V<span class="op">.</span>GetComponent<span class="op">(</span>i<span class="op">);</span></span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>      <span class="va">m_v</span><span class="op">[</span>i<span class="op">]</span> <span class="op">=</span> v<span class="op">.</span>GetComponent<span class="op">(</span>i<span class="op">);</span></span>
 <span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
 <span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="op">*</span><span class="kw">this</span><span class="op">;</span></span>
@@ -697,26 +697,26 @@ constructor</em> e <em>move assignment operator</em>:</p>
 <div class="sourceCode" id="cb20"><pre
 class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co">// move constructor</span></span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>Vettore<span class="op">::</span>Vettore<span class="op">(</span> Vettore<span class="op">&amp;&amp;</span> V<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>Vettore<span class="op">::</span>Vettore<span class="op">(</span>Vettore<span class="op">&amp;&amp;</span> v<span class="op">)</span> <span class="op">{</span></span>
 <span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>  cout <span class="op">&lt;&lt;</span> <span class="st">&quot;Invocazione del move constructor&quot;</span> <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span>
 <span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>  <span class="va">m_N</span> <span class="op">=</span> V<span class="op">.</span><span class="va">m_N</span><span class="op">;</span></span>
-<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>  <span class="va">m_v</span> <span class="op">=</span> V<span class="op">.</span><span class="va">m_v</span><span class="op">;</span></span>
-<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>  V<span class="op">.</span><span class="va">m_N</span> <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>  V<span class="op">.</span><span class="va">m_v</span> <span class="op">=</span> <span class="kw">nullptr</span><span class="op">;</span></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>  <span class="va">m_N</span> <span class="op">=</span> v<span class="op">.</span><span class="va">m_N</span><span class="op">;</span></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>  <span class="va">m_v</span> <span class="op">=</span> v<span class="op">.</span><span class="va">m_v</span><span class="op">;</span></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>  v<span class="op">.</span><span class="va">m_N</span> <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>  v<span class="op">.</span><span class="va">m_v</span> <span class="op">=</span> <span class="kw">nullptr</span><span class="op">;</span></span>
 <span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>  cout <span class="op">&lt;&lt;</span> <span class="st">&quot;Move constructor chiamato&quot;</span> <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span>
 <span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
 <span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a><span class="co">// move assigment operator</span></span>
-<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a>Vettore<span class="op">&amp;</span> Vettore<span class="op">::</span><span class="kw">operator</span><span class="op">=(</span>Vettore<span class="op">&amp;&amp;</span> V<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a>Vettore<span class="op">&amp;</span> Vettore<span class="op">::</span><span class="kw">operator</span><span class="op">=(</span>Vettore<span class="op">&amp;&amp;</span> v<span class="op">)</span> <span class="op">{</span></span>
 <span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a>  cout <span class="op">&lt;&lt;</span> <span class="st">&quot;Invocazione del move assignment operator&quot;</span> <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span>
 <span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a>  <span class="kw">delete</span> <span class="op">[]</span> <span class="va">m_v</span> <span class="op">;</span></span>
 <span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a>  <span class="va">m_N</span> <span class="op">=</span> V<span class="op">.</span><span class="va">m_N</span><span class="op">;</span></span>
-<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a>  <span class="va">m_v</span> <span class="op">=</span> V<span class="op">.</span><span class="va">m_v</span><span class="op">;</span></span>
+<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a>  <span class="va">m_N</span> <span class="op">=</span> v<span class="op">.</span><span class="va">m_N</span><span class="op">;</span></span>
+<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a>  <span class="va">m_v</span> <span class="op">=</span> v<span class="op">.</span><span class="va">m_v</span><span class="op">;</span></span>
 <span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb20-21"><a href="#cb20-21" aria-hidden="true" tabindex="-1"></a>  V<span class="op">.</span><span class="va">m_N</span> <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb20-22"><a href="#cb20-22" aria-hidden="true" tabindex="-1"></a>  V<span class="op">.</span><span class="va">m_v</span> <span class="op">=</span> <span class="kw">nullptr</span><span class="op">;</span></span>
+<span id="cb20-21"><a href="#cb20-21" aria-hidden="true" tabindex="-1"></a>  v<span class="op">.</span><span class="va">m_N</span> <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb20-22"><a href="#cb20-22" aria-hidden="true" tabindex="-1"></a>  v<span class="op">.</span><span class="va">m_v</span> <span class="op">=</span> <span class="kw">nullptr</span><span class="op">;</span></span>
 <span id="cb20-23"><a href="#cb20-23" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb20-24"><a href="#cb20-24" aria-hidden="true" tabindex="-1"></a>  cout <span class="op">&lt;&lt;</span> <span class="st">&quot;Move assignment operator invocato&quot;</span> <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span>
 <span id="cb20-25"><a href="#cb20-25" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="op">*</span><span class="kw">this</span><span class="op">;</span></span>
