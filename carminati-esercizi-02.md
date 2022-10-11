@@ -52,7 +52,7 @@ public:
   ~Vettore();                    // distruttore
 
   size_t GetN() const {          // restituisce la dimensione del vettore
-      return N;
+      return m_N;
   }
 
   // Modifica la componente i-esima
