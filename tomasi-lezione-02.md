@@ -554,7 +554,7 @@ Con una operazione di assegnamento (`operator=`), abbiamo due stanze già arreda
 ```c++
 Vettore & Vettore::operator=(const Vettore &vett) {
     m_N = vett.m_N;
-    if(m_v) delete m_v;             // Put the old building in the garbage!
+    if(m_v) delete[] m_v;           // Put the old building in the garbage!
     m_v = new double[m_N];          // Create a new building
     for(int i = 0; i < m_N; ++i) {  // Fill the rooms with a copy of the
         m_v[i] = vett.m_v[i];       // old furniture
