@@ -5,7 +5,7 @@
 # This Bash script downloads the "fmt" C++ library and installs it in
 # the current directory.
 
-FMT_VERSION="8.1.1"
+FMT_VERSION="9.1.0"
 
 download_file() {
     filename="$1"
@@ -42,13 +42,14 @@ for filename in fmt/core.h fmt/format.h fmt/format-inl.h; do
     download_file "include/$filename" "$filename"
 done
 
-download_file src/format.cc format.cc
+#download_file src/format.cc format.cc
 
 cat > fmtlib.h <<EOF
 #pragma once
 
 #ifndef __has_include
     // No way to check if <format> exists, so play safe and use fmt
+    #define FMT_HEADER_ONLY
     #include "fmt/format.h"
 #else
     #if __has_include(<format>)
@@ -57,19 +58,14 @@ cat > fmtlib.h <<EOF
         namespace fmt = std::format;
     #else
         // No full C++20 support, sigh! Use fmt
+        #define FMT_HEADER_ONLY
         #include "fmt/format.h"
     #endif
 #endif
 EOF
 
 cat <<EOF
-The library has been downloaded. To use it, include in your C++ files the lines
+The library has been downloaded. To use it, include "fmtlib.h" in your C++ files:
 
     #include "fmtlib.h"
-
-and be sure to add "format.cc" in your Makefile when building executables, e.g.:
-
-    CXXFLAGS = -g -Wall --pedantic -std=c++11
-
-    myprogram: myprogram.cc routines.cc format.cc
 EOF

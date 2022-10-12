@@ -400,9 +400,8 @@ int main() {
 
     1. Il namespace è diverso: è `fmt::` anziché `std::format::`;
     2. Il file da includere è diverso: `"fmt/format.h"` anziché `<format>`;
-    3. Nel compilare i propri programmi, bisogna includere il file `format.cc`.
 
--   Probabilmente le differenze 1. e 2. siano dovute al desiderio degli autori di scrivere programmi che usino entrambe le librerie contemporaneamente, per andare a caccia di differenze e sistemarle.
+-   Questa libreria offre ulteriori potenzialità rispetto a quella fornita dal C++20, e siccome al momento `g++` non supporta ancora completamente lo standard C++20, la libreria `fmt` è ancora da preferire.
 
 # Differenze tra `format` e il futuro C++20
 
@@ -420,7 +419,7 @@ int main() {
 
 -   In questo corso, ROOT è usato come libreria C++, ossia come un insieme di classi invocabili all'interno dei vostri programmi.
 
--   Un'alternativa a ROOT, per coloro che hanno avuto problemi a installarlo sui propri laptop o in Repl.it, è  [Gnuplot](http://www.gnuplot.info/):
+-   Un'alternativa a ROOT, per coloro che hanno avuto problemi a installarlo sui propri laptop o in Repl.it, è [Gnuplot](http://www.gnuplot.info/):
 
     -   È già presente su Repl.it
     -   È facilmente installabile anche sotto Windows;
