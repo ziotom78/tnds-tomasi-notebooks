@@ -34,24 +34,24 @@ css:
 Questo è il test per l'esercizio 3.1, che usa `std::vector`; adattatelo per l'esercizio 3.0.
 
 ```c++
-bool are_close(double calculated, double expected, double epsilon = 1e-7) {
-  return fabs(calculated - expected) < epsilon;
+bool are_close(double calculated, double expected, double epsilon = 1e-7) {
+  return fabs(calculated - expected) < epsilon;
 }
 
-void test_statistical_functions(void) {
-  {  // New scope
-      std::vector<double> mydata{1, 2, 3, 4};  // Use these instead of data.dat
+void test_statistical_functions(void) {
+  {  // New scope
+      std::vector<double> mydata{1, 2, 3, 4};  // Use these instead of data.dat
 
-      assert(are_close(CalcolaMedia<double>(mydata), 2.5));
-      assert(are_close(CalcolaVarianza<double>(mydata), 1.25));
-      assert(are_close(CalcolaMediana<double>(mydata), 2.5));  // Even
-  }
+      assert(are_close(CalcolaMedia<double>(mydata), 2.5));
+      assert(are_close(CalcolaVarianza<double>(mydata), 1.25));
+      assert(are_close(CalcolaMediana<double>(mydata), 2.5));  // Even
+  }
 
-  { // New scope: I can declare again a variable named `mydata`
-      std::vector<double> mydata{1, 2, 3};     // Shorter
+  { // New scope: I can declare again a variable named `mydata`
+      std::vector<double> mydata{1, 2, 3};     // Shorter
 
-      assert(are_close(CalcolaMediana<double>(mydata), 2));    // Odd
-  }
+      assert(are_close(CalcolaMediana<double>(mydata), 2));    // Odd
+  }
 }
 ```
 
@@ -145,14 +145,14 @@ Con l'esempio seguente, è possibile usare il reindirizzamento:
 -   Di solito gli studenti sono abbastanza confusi dal seguente codice:
 
     ```c++
-    double Vettore::GetComponent(unsigned int i) const {
-      // assert((m_N > 1) && "Errore: l'indice è troppo grande");
-      if (i < m_N) {
-          return m_v[i];
-      } else {
-          cerr << "Errore: indice" << i << ", dimensione " << m_N << endl;
-          exit(-1);
-      }
+    double Vettore::GetComponent(unsigned int i) const {
+      // assert((m_N > 1) && "Errore: l'indice è troppo grande");
+      if (i < m_N) {
+          return m_v[i];
+      } else {
+          cerr << "Errore: indice" << i << ", dimensione " << m_N << endl;
+          exit(-1);
+      }
     }
     ```
 
@@ -208,9 +208,7 @@ Queste informazioni sono inutili all'utente, ma molto preziose al programmatore!
 
 # Errore dell'utente
 
--   Se l'errore è causato dall'utente, si dovrebbe stampare invece un
-    messaggio d'errore chiaro, che gli consenta di riparare
-    all'errore.
+-   Se l'errore è causato dall'utente, si dovrebbe stampare invece un messaggio d'errore chiaro, che gli consenta di riparare all'errore.
     
 -   Primo esempio:
     
@@ -307,7 +305,7 @@ Di conseguenza, il programmatore è «costretto» a verificare la correttezza de
 
     ```c++
     for(int k{0}; k < 10; ++k) {
-        // Scrivere k{} sarebbe stato uguale
+        // Writing k{} would be the same, as the default value is 0
     }
     ```
 
@@ -317,18 +315,18 @@ Di conseguenza, il programmatore è «costretto» a verificare la correttezza de
 -   Inizializza una variabile al valore di default con `{}`:
 
     ```c++
-    int a{};            // Uguale a: int a = 0;
-    float b{};          // Uguale a: float b = 0.0;
-    std::string s{};    // Uguale a: std::string s = "";
+    int a{};            // Same as: int a = 0;
+    float b{};          // Same as: float b = 0.0;
+    std::string s{};    // Same as: std::string s = "";
     ```
 
 -   Sono vietate le conversioni di tipo, spesso fonti di errori:
 
     ```c++
     float a = 3.4;
-    // Legale, ma probabilmente scorretto
+    // Allowed, but probably wrong
     int b = a;
-    // Il compilatore segnala errore
+    // The compiler prints an error message
     int c{a};
     ```
 
@@ -354,16 +352,16 @@ Di conseguenza, il programmatore è «costretto» a verificare la correttezza de
 -   Il fatto che la *uniform initialization* possa essere usata anche per invocare i costruttori previene il problema del cosiddetto [*most vexing parse*](https://en.wikipedia.org/wiki/Most_vexing_parse):
 
     ```c++
-    // Voglio chiamare un costruttore senza parametri
-    Vettore v();         // Il compilatore dà errore!
+    // I want to invoke a constructor that has no parameters
+    Vettore v();         // The compiler prints an error here!
     ```
 
 -   Usando le parentesi graffe il problema sparisce, e c'è anche simmetria con l'inizializzazione di tipi base del C++:
 
     ```c++
-    Vettore v{}; // Costruttore di default
-    int a{};     // Idem
-    double b{};  // Idem
+    Vettore v{}; // Default constructor
+    int a{};     // Same
+    double b{};  // Same
     ```
 
 -   Questo è **uno dei più comuni errori degli studenti di TNDS**.
@@ -392,7 +390,7 @@ Di conseguenza, il programmatore è «costretto» a verificare la correttezza de
     ```c++
     std::vector<double> v(3);
 
-    for(int i = 0; i < v.size(); ++i) {
+    for(int i{}; i < v.size(); ++i) {
         v[i] = 0.0;
     }
     ```
@@ -407,19 +405,19 @@ Di conseguenza, il programmatore è «costretto» a verificare la correttezza de
     ```c++
     std::vector<double> v(3);
 
-    for(size_t i = 0; i < v.size(); ++i) {  // No more warnings
+    for(size_t i{}; i < v.size(); ++i) {  // No more warnings
         v[i] = 0.0;
     }
     ```
 
--   In linguaggi più rigorosi del C++ (Ada) confrontare tipi con e senza segno è un *errore* anziché un warning. Prendete quindi sul serio questi warning!
+-   In linguaggi più rigorosi del C++ (es., Ada) confrontare tipi con e senza segno è un *errore* anziché un warning. Prendete quindi sul serio questi warning!
 
 # Cicli a ritroso
 
 -   Attenzione ai cicli a ritroso, in cui si parte dall'ultimo elemento e si torna indietro al primo! Questo codice **non funziona**:
 
     ```c++
-    for(size_t i = v.size() - 1; i >= 0; --i) {
+    for(size_t i{v.size() - 1}; i >= 0; --i) {
         // Do stuff
     } // This loop never ends
     ```
@@ -427,7 +425,7 @@ Di conseguenza, il programmatore è «costretto» a verificare la correttezza de
 -   Il modo giusto per scrivere il ciclo è il seguente:
 
     ```c++
-    for(size_t i = v.size() - 1;; --i) {
+    for(size_t i{v.size() - 1};; --i) {
         // Do stuff
 
         // If we have reached the last iteration, stop here

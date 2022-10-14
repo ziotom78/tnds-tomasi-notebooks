@@ -224,7 +224,7 @@ int main(void) {
     ```c++
     class Container {
     public:
-      Container() : a{"Pippo"}, b{"Pluto"} { } // Così si fa!
+      Container() : a{"Pippo"}, b{"Pluto"} { } // That's the way!
       
       // ...
     };
@@ -266,7 +266,7 @@ cout << setw(14) << "Nome"
      << setw(12) << right << "Valore" 
      << "\n";
 
-// Non provo neppure a scrivere il resto…
+// I don't even try to continue…
 ```
 
 (`setw` viene resettato subito dopo essere stato applicato alla variabile seguente, quindi non influisce su `" | "`).
@@ -379,10 +379,10 @@ int main() {
 
 # Il futuro… ora!
 
--   Il comando `g++` sui computer del laboratorio e su Repl.it non supporta ancora lo standard C++20: solo a partire dalla versione 10 di GCC è supportato lo standard C++20, passando a `g++` il flag `-std=c++20`.
+-   Il comando `g++` sui computer del laboratorio e su Repl.it non supporta ancora lo standard C++20: solo a partire dalla versione 10 di GCC è supportato lo standard C++20, passando a `g++` il flag `-std=c++20`, ma `format` ad oggi non è ancora supportato.
 
 -   La libreria di formattazione può però già essere usata scaricandola dal sito
-[github.com/fmtlib/fmt](https://github.com/fmtlib/fmt), che contiene la versione completa della libreria, usabile però anche da compilatori che ancora non supportano il C++20 (come quelli su Repl.it o del laboratorio).
+[github.com/fmtlib/fmt](https://github.com/fmtlib/fmt), che contiene una versione estesa della libreria, usabile anche da compilatori che non supportano il C++20 (come quelli su Repl.it o del laboratorio).
 
 -   Per automatizzare l'installazione, potete scaricare (con il click destro) lo script [install_fmt_library](./install_fmt_library), da eseguire nella cartella del vostro programma:
 
@@ -448,11 +448,11 @@ int main() {
 
 -   Non serve cambiare i `Makefile` per invocare chiamate come quelle a `root-config`;
     
--   Non serve ricordarsi di eseguire `source root/bin/thisroot.sh`;
+-   Se lavorate sui vostri computer, non serve ricordarsi di eseguire `source root/bin/thisroot.sh`;
 
--   Occupa appena 9 KB, quindi si può installare una copia dentro ogni cartella di esercizi (**non fate questo con ROOT in Repl.it!**);
+-   Occupa appena 9 KB, quindi si può installare una copia dentro ogni cartella di esercizi;
 
--   Non richiedendo `root-config`, Repl.it è in grado di visualizzare finestre di aiuto sui comandi di plot. 
+-   Repl.it è in grado di visualizzare finestre di aiuto se spostate il mouse sui comandi di plot. 
     
 # Semplice esempio
 

@@ -330,7 +330,7 @@ con costruttore vengono inizializzati due volte.</p></li>
 <div class="sourceCode" id="cb12"><pre
 class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Container <span class="op">{</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span><span class="op">:</span></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  Container<span class="op">()</span> <span class="op">:</span> a<span class="op">{</span><span class="st">&quot;Pippo&quot;</span><span class="op">},</span> b<span class="op">{</span><span class="st">&quot;Pluto&quot;</span><span class="op">}</span> <span class="op">{</span> <span class="op">}</span> <span class="co">// Così si fa!</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  Container<span class="op">()</span> <span class="op">:</span> a<span class="op">{</span><span class="st">&quot;Pippo&quot;</span><span class="op">},</span> b<span class="op">{</span><span class="st">&quot;Pluto&quot;</span><span class="op">}</span> <span class="op">{</span> <span class="op">}</span> <span class="co">// That&#39;s the way!</span></span>
 <span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="co">// ...</span></span>
 <span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code></pre></div></li>
@@ -368,7 +368,7 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb15-1"><a href="#
 <span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>     <span class="op">&lt;&lt;</span> setw<span class="op">(</span><span class="dv">12</span><span class="op">)</span> <span class="op">&lt;&lt;</span> right <span class="op">&lt;&lt;</span> <span class="st">&quot;Valore&quot;</span> </span>
 <span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>     <span class="op">&lt;&lt;</span> <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">;</span></span>
 <span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="co">// Non provo neppure a scrivere il resto…</span></span></code></pre></div>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="co">// I don&#39;t even try to continue…</span></span></code></pre></div>
 <p>(<code>setw</code> viene resettato subito dopo essere stato applicato
 alla variabile seguente, quindi non influisce su
 <code>" | "</code>).</p>
@@ -501,13 +501,14 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb21-1"><a href="#
 <li><p>Il comando <code>g++</code> sui computer del laboratorio e su
 Repl.it non supporta ancora lo standard C++20: solo a partire dalla
 versione 10 di GCC è supportato lo standard C++20, passando a
-<code>g++</code> il flag <code>-std=c++20</code>.</p></li>
+<code>g++</code> il flag <code>-std=c++20</code>, ma <code>format</code>
+ad oggi non è ancora supportato.</p></li>
 <li><p>La libreria di formattazione può però già essere usata
 scaricandola dal sito <a
 href="https://github.com/fmtlib/fmt">github.com/fmtlib/fmt</a>, che
-contiene la versione completa della libreria, usabile però anche da
-compilatori che ancora non supportano il C++20 (come quelli su Repl.it o
-del laboratorio).</p></li>
+contiene una versione estesa della libreria, usabile anche da
+compilatori che non supportano il C++20 (come quelli su Repl.it o del
+laboratorio).</p></li>
 <li><p>Per automatizzare l’installazione, potete scaricare (con il click
 destro) lo script <a
 href="./install_fmt_library">install_fmt_library</a>, da eseguire nella
@@ -609,13 +610,12 @@ l’esercizio:</p>
 <code>std::vector</code>;</p></li>
 <li><p>Non serve cambiare i <code>Makefile</code> per invocare chiamate
 come quelle a <code>root-config</code>;</p></li>
-<li><p>Non serve ricordarsi di eseguire
+<li><p>Se lavorate sui vostri computer, non serve ricordarsi di eseguire
 <code>source root/bin/thisroot.sh</code>;</p></li>
 <li><p>Occupa appena 9 KB, quindi si può installare una copia dentro
-ogni cartella di esercizi (<strong>non fate questo con ROOT in
-Repl.it!</strong>);</p></li>
-<li><p>Non richiedendo <code>root-config</code>, Repl.it è in grado di
-visualizzare finestre di aiuto sui comandi di plot.</p></li>
+ogni cartella di esercizi;</p></li>
+<li><p>Repl.it è in grado di visualizzare finestre di aiuto se spostate
+il mouse sui comandi di plot.</p></li>
 </ul>
 </section>
 <section id="semplice-esempio" class="slide level1">

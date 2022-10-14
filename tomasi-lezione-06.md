@@ -108,13 +108,13 @@ struct Animal {
 };
 
 struct Dog : public Animal {
-  // Posso ripetere "virtual" qui, anche se è superfluo…
+  // I can repeat "virtual" here, but it's optional
   virtual void greet() const override { std::cout << "Woof!\n"; }
 };
 
 
 struct Cat : public Animal {
-  // …ma di solito si evita di ripetere "virtual", perché c'è già "override"
+  // You usually avoid repeating "virtual", if there is "override"
   void greet() const override { std::cout << "Meow!\n"; }
 };
 ```
@@ -152,7 +152,7 @@ struct Cat : public Animal {
     };
 
     struct Dog : public Animal {
-      // Sono pigro, evito di scrivere `virtual` e `override`
+      // I'm lazy, I think I'll skip both `virtual` and `override`
       void greet() { std::cout << "Woof!\n"; }
     };
 
@@ -169,7 +169,7 @@ struct Cat : public Animal {
 
     ```c++
     struct Animal {
-      virtual void greet() const { std::cout << "?\n"; }  // Ho aggiunto "const"
+      virtual void greet() const { std::cout << "?\n"; }  // I added a `const`
     };
     ```
 
@@ -232,13 +232,13 @@ test.cpp:15:8: error: ‘void Cat::greet()’ marked ‘override’, but does no
 -   Nella classe derivata ci sono invece più possibilità:
 
     ```c++
-    // Prima possibilità: SCONSIGLIATA!
+    // First option: DON'T DO THIS!
     void greet() const;
-    // Seconda possibilità: SCONSIGLIATA!
+    // Second option: SCONSIGLIATA!
     virtual void greet() const;
-    // Terza possibilità: ok (protegge da errori), ma è verbosa
+    // Third option: ok, but too verbose
     virtual void greet() const override;
-    // Quarta possibilità: la migliore! (concisa, protegge da errori)
+    // Fourth option: the best! It prevents errors and it's concise
     void greet() const override;
     ```
 
@@ -265,14 +265,14 @@ test.cpp:15:8: error: ‘void Cat::greet()’ marked ‘override’, but does no
 -   Usando un puntatore e `new`, si possono specificare i due tipi `Particella` ed `Elettrone` separatamente:
 
     ```c++
-    //   Tipo 1            Tipo 2
+    //   Type 1            Type 2
        Particella * c{new Elettrone{}};
     ```
 
 -   Senza puntatore, non ci sarebbe questa possibilità:
 
     ```c++
-    Particella c{};  // Come specificare "Elettrone"?
+    Particella c{};  // How can I specify that I want "Elettrone"?
     ```
 
 # Quando usare i puntatori
@@ -280,7 +280,7 @@ test.cpp:15:8: error: ‘void Cat::greet()’ marked ‘override’, but does no
 Se non ci si trova nella situazione descritta, è meglio evitare di usare i puntatori: il codice è più semplice da leggere, e non c'è possibilità di avere `segmentation fault` causati dall'accesso a puntatori nulli.
 
 ```c++
-// Molto più semplice e sicuro!
+// Far easier and safer!
 Particella a{1., 2.};
 Elettrone b{};
 Elettrone c{};
@@ -303,18 +303,18 @@ $$
 # Verifica dell'algoritmo
 
 ```c++
-// Potreste addirittura passare un puntatore a `Solutore * s`, e invocare dal main
+// You might even pass a pointer to `Solutore * s` and call in `main`
 //     test_zeroes(new Bisezione{});
 //     test_zeroes(new Secante{});
 //     test_zeroes(new Newton{});
 void test_zeroes() {
   Bisezione s{};
-  Parabola f{3, 5, -2}; // Gli zeri di questa funzione sono noti, e sono x₁ = −2, x₂ = 1/3
+  Parabola f{3, 5, -2}; // Zeroes for this function are known: x₁ = −2, x₂ = 1/3
   s.SetPrecisione(1e-8);
 
-  assert(are_close(s.CercaZeri(-3.0, -1.0, f), -2.0)); // Lo zero è in mezzo ad [a, b]
-  assert(are_close(s.CercaZeri(-2.0, 0.0, f), -2.0));  // Lo zero è nell'estremo a
-  assert(are_close(s.CercaZeri(-4.0, -2.0, f), -2.0)); // Lo zero è nell'estremo b
+  assert(are_close(s.CercaZeri(-3.0, -1.0, f), -2.0)); // Zero is within (a, b)
+  assert(are_close(s.CercaZeri(-2.0, 0.0, f), -2.0));  // Zero is at a
+  assert(are_close(s.CercaZeri(-4.0, -2.0, f), -2.0)); // Zero is at b
 
   assert(are_close(s.CercaZeri(0.0, 1.0, f), 1.0 / 3));
 }
@@ -365,7 +365,7 @@ Il metodo di bisezione fallisce se le ipotesi del teorema degli zeri non valgono
     #include <cmath>
 
     if(something_is_invalid()) {
-        return std::nan(""); // Restituisce un NaN
+        return std::nan(""); // Return a NaN
     }
     ```
 
@@ -380,7 +380,7 @@ Il metodo di bisezione fallisce se le ipotesi del teorema degli zeri non valgono
     ```c++
     double x{CercaZeri(0., 1., f)};
     if(isnan(x)) {
-        // Stampa un messaggio di errore
+        // Print a error message
     }
     ```
     
@@ -388,14 +388,13 @@ Il metodo di bisezione fallisce se le ipotesi del teorema degli zeri non valgono
 
     ```c++
     if(x != x) {
-        // Vero solo se x contiene un NaN
+        // This is true only if `x` is a NaN
     }
     ```
 
 # Vantaggi dei NaN
 
-I numeri NaN sono vantaggiosi perché si «propagano»: operazioni con
-numeri NaN restituiscono sempre NaN.
+I numeri NaN sono vantaggiosi perché si «propagano»: operazioni con numeri NaN restituiscono sempre NaN.
 
 ```c++
 double x{nan("")};
@@ -403,14 +402,13 @@ cout << x + 1 << ", " << x * 2 << ", " << x / x << "\n";
 // Output: nan, nan, nan
 ```
 
-Inoltre hanno un comportamento molto particolare nelle operazioni di
-confronto:
+Inoltre hanno un comportamento molto particolare nelle operazioni di confronto:
 
 ```c++
 cout << (x < x) << ", ";
 cout << (x > x) << ", ";
 cout << (x == x) << ", ";
-cout << (x != x) << "\n";  // Vedi slide precedente
+cout << (x != x) << "\n";  // See previous slide
 
 // Output: 0, 0, 0, 1
 ```
