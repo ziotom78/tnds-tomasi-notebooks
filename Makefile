@@ -30,7 +30,7 @@ carminati-esercizi-%.html: carminati-esercizi-%.md
 	    	--standalone \
 		--katex \
 		--toc \
-		--template ./template.html5 \
+                --template ./template.html5 \
 		-f markdown+tex_math_single_backslash+subscript+superscript \
 		-t html5 \
 		-o $@ $<
@@ -56,6 +56,7 @@ tomasi-lezione-%.html: tomasi-lezione-%.md
 	    	--standalone \
 		--filter $(PANDOC_IMAGINE) \
 		-A asciinema-include.html \
+                --template ./template-revealjs.html5 \
 		--katex \
 		-f markdown+tex_math_single_backslash+subscript+superscript \
 		-t revealjs \

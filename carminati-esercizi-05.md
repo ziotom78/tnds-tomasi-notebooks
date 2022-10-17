@@ -123,13 +123,7 @@ Questo programma utilizza la nuova classe appena creata: richiede di fornire com
 
 <input type="text" value="curl https://ziotom78.github.io/tnds-tomasi-notebooks/install_fmt_library | sh" id="installFmtCommand" readonly="1" size="60"><button onclick='copyFmtInstallationScript("installFmtCommand")'>Copia</button> 
 
-In alternativa, scaricate questo [file zip](./fmtlib.zip) nella directory dell'esercizio e decomprimetelo, poi aggiungete il file `format.cc` nella riga in cui compilate l'eseguibile:
-
-```make
-esercizio-5.0: esercizio5.0.o
-    #                        ~~~~~~~~~ Aggiungere questo!
-    g++ -o $@ esercizio5.0.o format.cc $(CXXFLAGS)
-```
+In alternativa, scaricate questo [file zip](./fmtlib.zip) nella directory dell'esercizio e decomprimetelo.
 
 Questo è il codice sorgente del programma:
 

@@ -65,7 +65,7 @@
             code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
             code span.at { color: #7d9029; } /* Attribute */
             code span.bn { color: #40a070; } /* BaseN */
-            code span.bu { } /* BuiltIn */
+            code span.bu { color: #008000; } /* BuiltIn */
             code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
             code span.ch { color: #4070a0; } /* Char */
             code span.cn { color: #880000; } /* Constant */
@@ -78,7 +78,7 @@
             code span.ex { } /* Extension */
             code span.fl { color: #40a070; } /* Float */
             code span.fu { color: #06287e; } /* Function */
-            code span.im { } /* Import */
+            code span.im { color: #008000; font-weight: bold; } /* Import */
             code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
             code span.kw { color: #007020; font-weight: bold; } /* Keyword */
             code span.op { color: #666666; } /* Operator */
@@ -91,22 +91,24 @@
             code span.vs { color: #4070a0; } /* VerbatimString */
             code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
         </style>
-                                            <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.js"></script>
+                                            <script defer=""
+                                            src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js"></script>
                                             <script>document.addEventListener("DOMContentLoaded", function () {
-                                             var mathElements = document.getElementsByClassName("math");
-                                             var macros = [];
-                                             for (var i = 0; i < mathElements.length; i++) {
-                                              var texText = mathElements[i].firstChild;
-                                              if (mathElements[i].tagName == "SPAN") {
-                                               katex.render(texText.data, mathElements[i], {
-                                                displayMode: mathElements[i].classList.contains('display'),
-                                                throwOnError: false,
-                                                macros: macros,
-                                                fleqn: false
-                                               });
-                                            }}});
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
                                             </script>
-                                            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css" />
+                                            <link rel="stylesheet"
+                                            href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css" />
                                           <script src="./fmtinstall.js"></script>
                  
     </head>
@@ -118,10 +120,14 @@
 
                         <div class="uk-grid" data-uk-grid-margin>
                 <div class="uk-width-1-1">
-                    <h1 class="uk-heading-large">Lezione 7: Quadratura numerica</h1>
-                                        <h3 class="uk-heading-large">A.A. 2021−2022</p></h3>
-                                                            <p class="uk-text-large">Leonardo Carminati</p>
-                                        <p class="uk-text-large">Maurizio Tomasi</p>
+                    <h1 class="uk-heading-large">Lezione 7: Quadratura
+numerica</h1>
+                                        <h3 class="uk-heading-large">A.A.
+2021−2022</p></h3>
+                                                            <p class="uk-text-large">Leonardo
+Carminati</p>
+                                        <p class="uk-text-large">Maurizio
+Tomasi</p>
                                     </div>
             </div>
             
@@ -131,19 +137,58 @@
                         <div class="uk-panel uk-panel-box menu-begin" >
 
                                                         <ul>
-                                                        <li><a href="#esercizio-7.0">Esercizio 7.0 - Integrazione con la formula del mid-point</a>
+                                                        <li><a
+                                                        href="#esercizio-7.0"
+                                                        id="toc-esercizio-7.0">Esercizio
+                                                        7.0 -
+                                                        Integrazione con
+                                                        la formula del
+                                                        mid-point</a>
                                                         <ul>
-                                                        <li><a href="#il-metodo-del-mid-point">Il metodo del mid-point</a></li>
-                                                        <li><a href="#cenni-sullimplementazione">Cenni sull’implementazione</a></li>
+                                                        <li><a
+                                                        href="#il-metodo-del-mid-point"
+                                                        id="toc-il-metodo-del-mid-point">Il
+                                                        metodo del
+                                                        mid-point</a></li>
+                                                        <li><a
+                                                        href="#cenni-sullimplementazione"
+                                                        id="toc-cenni-sullimplementazione">Cenni
+                                                        sull’implementazione</a></li>
                                                         </ul></li>
-                                                        <li><a href="#esercizio-7.1">Esercizio 7.1 - Integrazione alla Simpson (da consegnare)</a>
+                                                        <li><a
+                                                        href="#esercizio-7.1"
+                                                        id="toc-esercizio-7.1">Esercizio
+                                                        7.1 -
+                                                        Integrazione
+                                                        alla Simpson (da
+                                                        consegnare)</a>
                                                         <ul>
-                                                        <li><a href="#il-metodo-simpson">Il metodo Simpson</a></li>
+                                                        <li><a
+                                                        href="#il-metodo-simpson"
+                                                        id="toc-il-metodo-simpson">Il
+                                                        metodo
+                                                        Simpson</a></li>
                                                         </ul></li>
-                                                        <li><a href="#esercizio-7.2">Esercizio 7.2 - Integrazione con la formula dei trapezi con precisione fissata (da consegnare)</a>
+                                                        <li><a
+                                                        href="#esercizio-7.2"
+                                                        id="toc-esercizio-7.2">Esercizio
+                                                        7.2 -
+                                                        Integrazione con
+                                                        la formula dei
+                                                        trapezi con
+                                                        precisione
+                                                        fissata (da
+                                                        consegnare)</a>
                                                         <ul>
-                                                        <li><a href="#stima-runtime-dellerrore">Stima runtime dell’errore</a></li>
-                                                        <li><a href="#cenni-sullimplementazione-1">Cenni sull’implementazione</a></li>
+                                                        <li><a
+                                                        href="#stima-runtime-dellerrore"
+                                                        id="toc-stima-runtime-dellerrore">Stima
+                                                        runtime
+                                                        dell’errore</a></li>
+                                                        <li><a
+                                                        href="#cenni-sullimplementazione-1"
+                                                        id="toc-cenni-sullimplementazione-1">Cenni
+                                                        sull’implementazione</a></li>
                                                         </ul></li>
                                                         </ul>
                             
@@ -152,20 +197,61 @@
                 </div>
 
                 <div class="uk-width-medium-3-4">
-<p>[La pagina con la spiegazione originale degli esercizi si trova qui: <a href="http://labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/lezione7_2122.html">labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/lezione7_2122.html</a>.</p>
-<p>In questa lezione implementeremo alcuni algoritmi per la quadratura numerica, cioè per il calcolo di integrali definiti di funzioni in un intervallo chiuso e la valutazione dell’errore commesso nel calcolo dell’integrale stesso. Questo si rende necessario quando non sappiamo valutare analiticamente l’integrale in esame, quando non si riesce ad esprimere la primitiva in funzioni elementari, quando la soluzione analitica è molto complicata ed il calcolo numerico è molto più semplice, oppure quando la funzione è conosciuta in un numeri finito di punti.</p>
-<h1 id="esercizio-7.0">Esercizio 7.0 - Integrazione con la formula del mid-point</h1>
-<p>Implementare un codice per il calcolo della funzione <span class="math inline">\sin(x)</span> su <span class="math inline">[0, \pi]</span> con il metodo del mid-point, con un numero di passi fissato passato da riga di comando. Per controllare la precisione ottenuta con un numero di passi fissato si richiede di stampare una tabella con la differenza tra il risultato numerico ed il valore esatto analitico in funzione del numero di passi (o della lunghezza del passo <span class="math inline">h</span>).</p>
-<p>In aggiunta alla tabella, si può rappresentare l’andamento dell’errore in funzione della lunghezza del passo <span class="math inline">h</span> con un <code>TGraph</code> di ROOT (una traccia su come visualizzare i dati usando un TGraph di ROOT si può trovare <a href="./codici/test_tgraph.cpp">qui</a>).</p>
+<p>[La pagina con la spiegazione originale degli esercizi si trova qui:
+<a
+href="http://labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/lezione7_2122.html">labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/lezione7_2122.html</a>.</p>
+<p>In questa lezione implementeremo alcuni algoritmi per la quadratura
+numerica, cioè per il calcolo di integrali definiti di funzioni in un
+intervallo chiuso e la valutazione dell’errore commesso nel calcolo
+dell’integrale stesso. Questo si rende necessario quando non sappiamo
+valutare analiticamente l’integrale in esame, quando non si riesce ad
+esprimere la primitiva in funzioni elementari, quando la soluzione
+analitica è molto complicata ed il calcolo numerico è molto più
+semplice, oppure quando la funzione è conosciuta in un numeri finito di
+punti.</p>
+<h1 id="esercizio-7.0">Esercizio 7.0 - Integrazione con la formula del
+mid-point</h1>
+<p>Implementare un codice per il calcolo della funzione <span
+class="math inline">\sin(x)</span> su <span class="math inline">[0,
+\pi]</span> con il metodo del mid-point, con un numero di passi fissato
+passato da riga di comando. Per controllare la precisione ottenuta con
+un numero di passi fissato si richiede di stampare una tabella con la
+differenza tra il risultato numerico ed il valore esatto analitico in
+funzione del numero di passi (o della lunghezza del passo <span
+class="math inline">h</span>).</p>
+<p>In aggiunta alla tabella, si può rappresentare l’andamento
+dell’errore in funzione della lunghezza del passo <span
+class="math inline">h</span> con un <code>TGraph</code> di ROOT (una
+traccia su come visualizzare i dati usando un TGraph di ROOT si può
+trovare <a href="./codici/test_tgraph.cpp">qui</a>).</p>
 <h2 id="il-metodo-del-mid-point">Il metodo del mid-point</h2>
-<p>Ricordiamo che in questo metodo l’approssimazione dell’integrale è definita dalla formula</p>
+<p>Ricordiamo che in questo metodo l’approssimazione dell’integrale è
+definita dalla formula</p>
 <p><span class="math display">
-\int_a^b f(x)\,\mathrm{d}x = h \cdot \bigl(f(x_0) + f(x_1) + \ldots + f(x_{N - 1})\bigl),\quad h = \frac{b - a}N, \quad x_k = a + \left(k + \frac12\right) h,
+\int_a^b f(x)\,\mathrm{d}x = h \cdot \bigl(f(x_0) + f(x_1) + \ldots +
+f(x_{N - 1})\bigl),\quad h = \frac{b - a}N, \quad x_k = a + \left(k +
+\frac12\right) h,
 </span></p>
-<p>che fornisce un’accuratezza dell’integrale di <span class="math inline">O(h^2)</span>. Notate che questo metodo non richiede il calcolo della funzione negli estremi di integrazione.</p>
+<p>che fornisce un’accuratezza dell’integrale di <span
+class="math inline">O(h^2)</span>. Notate che questo metodo non richiede
+il calcolo della funzione negli estremi di integrazione.</p>
 <h2 id="cenni-sullimplementazione">Cenni sull’implementazione</h2>
-<p>L’algoritmo può essere implementato in molti modi; una possibilità (non certo l’unica) sfrutta lo schema <em>classe madre astratta</em>/<em>classe derivata</em>. Qui vediamo l’esempio di un possibile header, in cui viene dichiarata una classe astratta <code>Integral</code> che rappresenta un generico algoritmo di integrazione. Il metodo privato <code>checkInterval</code> prende in ingresso gli estremi di integrazione e controlla il segno. La classe implementa (tra le varie cose) un metodo <code>integrate</code>, che si preoccupa di chiamare <code>checkInterval</code> e poi invoca il metodo virtuale puro <code>calculate</code>; esso accetta in input il numero di passi con cui si desira effettuare il calcolo e una referenza alla funzione da integrare. Il metodo di integrazione <code>Midpoint</code> viene concretamente implementato in una classe derivata sovrascrivendo il metodo <code>integrate</code>.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#pragma once</span></span>
+<p>L’algoritmo può essere implementato in molti modi; una possibilità
+(non certo l’unica) sfrutta lo schema <em>classe madre
+astratta</em>/<em>classe derivata</em>. Qui vediamo l’esempio di un
+possibile header, in cui viene dichiarata una classe astratta
+<code>Integral</code> che rappresenta un generico algoritmo di
+integrazione. Il metodo privato <code>checkInterval</code> prende in
+ingresso gli estremi di integrazione e controlla il segno. La classe
+implementa (tra le varie cose) un metodo <code>integrate</code>, che si
+preoccupa di chiamare <code>checkInterval</code> e poi invoca il metodo
+virtuale puro <code>calculate</code>; esso accetta in input il numero di
+passi con cui si desira effettuare il calcolo e una referenza alla
+funzione da integrare. Il metodo di integrazione <code>Midpoint</code>
+viene concretamente implementato in una classe derivata sovrascrivendo
+il metodo <code>integrate</code>.</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#pragma once</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;funzioni.h&quot;</span></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
@@ -216,18 +302,51 @@
 <span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> getSign<span class="op">()</span> <span class="op">*</span> sum <span class="op">*</span> h<span class="op">;</span></span>
 <span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
 <span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code></pre></div>
-<p>Notate in che modo il codice implementa il calcolo: il metodo pubblico è <code>Integral::integrate</code>, che <strong>non</strong> è virtuale: esso si preoccupa di invocare <code>Integral::checkInterval</code> (privato) per verificare gli estremi di integrazione, e poi invoca il metodo privato <code>Integral::calculate</code> che fa il conto vero e proprio:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> integrate<span class="op">(</span><span class="dt">double</span> a<span class="op">,</span> <span class="dt">double</span> b<span class="op">,</span> <span class="dt">unsigned</span> <span class="dt">int</span> nstep<span class="op">,</span> FunzioneBase <span class="op">&amp;</span>f<span class="op">)</span> <span class="op">{</span></span>
+<p>Notate in che modo il codice implementa il calcolo: il metodo
+pubblico è <code>Integral::integrate</code>, che <strong>non</strong> è
+virtuale: esso si preoccupa di invocare
+<code>Integral::checkInterval</code> (privato) per verificare gli
+estremi di integrazione, e poi invoca il metodo privato
+<code>Integral::calculate</code> che fa il conto vero e proprio:</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> integrate<span class="op">(</span><span class="dt">double</span> a<span class="op">,</span> <span class="dt">double</span> b<span class="op">,</span> <span class="dt">unsigned</span> <span class="dt">int</span> nstep<span class="op">,</span> FunzioneBase <span class="op">&amp;</span>f<span class="op">)</span> <span class="op">{</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  checkInterval<span class="op">(</span>a<span class="op">,</span> b<span class="op">);</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> calculate<span class="op">(</span>nstep<span class="op">,</span> f<span class="op">);</span></span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
-<p>In questo modo il metodo <code>calculate</code> può usare gli estremi restituiti da <code>getA()</code>/<code>getB()</code> e il segno restituito da <code>getSign()</code> senza doversi preoccupare del caso <span class="math inline">a &lt; b</span>. Se vi stupisce che il metodo <code>calculate</code>, pur essendo dichiarato <code>private</code>, possa essere ridefinito nella classe derivata <code>Midpoint</code>, considerate che <code>private</code> indica chi può <strong>chiamare</strong> il metodo (solo la classe <code>Integrate</code> e non le sue derivate), ma non pone restrizioni su chi possa <strong>ridefinirlo</strong>.</p>
-<p><strong>Caccia all’errore</strong>: l’implementazione contiene un errore. Per metterlo in evidenza, provate ad integrare <span class="math inline">f(x) = \sin x</span> tra <span class="math inline">\pi / 2</span> e <span class="math inline">\pi</span>: vedrete che la convergenza non è <span class="math inline">O(h^2)</span>, ma solo <span class="math inline">O(h)</span>. (Potete vedere l’errore anche confrontando i risultati del programma con i numeri riportati nel <a href="tomasi-lezione-07-quadratura-numerica.html">notebook Julia</a>). Se applicate correttamente l’algoritmo, dovete riscontrare il comportamento atteso.</p>
-<p>Viene ora fornito un codice per verificare il funzionamento di quanto implementato finora, che usa la libreria <code>fmtlib</code>. Come al solito, potete installarla usando lo script <a href="./install_fmt_library"><code>install_fmt_library</code></a>: scaricatelo nella directory dell’esercizio ed eseguitelo, oppure eseguite direttamente questo comando:</p>
+<p>In questo modo il metodo <code>calculate</code> può usare gli estremi
+restituiti da <code>getA()</code>/<code>getB()</code> e il segno
+restituito da <code>getSign()</code> senza doversi preoccupare del caso
+<span class="math inline">a &lt; b</span>. Se vi stupisce che il metodo
+<code>calculate</code>, pur essendo dichiarato <code>private</code>,
+possa essere ridefinito nella classe derivata <code>Midpoint</code>,
+considerate che <code>private</code> indica chi può
+<strong>chiamare</strong> il metodo (solo la classe
+<code>Integrate</code> e non le sue derivate), ma non pone restrizioni
+su chi possa <strong>ridefinirlo</strong>.</p>
+<p><strong>Caccia all’errore</strong>: l’implementazione contiene un
+errore. Per metterlo in evidenza, provate ad integrare <span
+class="math inline">f(x) = \sin x</span> tra <span
+class="math inline">\pi / 2</span> e <span
+class="math inline">\pi</span>: vedrete che la convergenza non è <span
+class="math inline">O(h^2)</span>, ma solo <span
+class="math inline">O(h)</span>. (Potete vedere l’errore anche
+confrontando i risultati del programma con i numeri riportati nel <a
+href="tomasi-lezione-07-quadratura-numerica.html">notebook Julia</a>).
+Se applicate correttamente l’algoritmo, dovete riscontrare il
+comportamento atteso.</p>
+<p>Viene ora fornito un codice per verificare il funzionamento di quanto
+implementato finora, che usa la libreria <code>fmtlib</code>. Come al
+solito, potete installarla usando lo script <a
+href="./install_fmt_library"><code>install_fmt_library</code></a>:
+scaricatelo nella directory dell’esercizio ed eseguitelo, oppure
+eseguite direttamente questo comando:</p>
 <p><input type="text" value="curl https://ziotom78.github.io/tnds-tomasi-notebooks/install_fmt_library | sh" id="installFmtCommand" readonly="1" size="60"><button onclick='copyFmtInstallationScript("installFmtCommand")'>Copia</button></p>
-<p>In alternativa, scaricate questo <a href="./fmtlib.zip">file zip</a> nella directory dell’esercizio e decomprimetelo, poi aggiungete il file <code>format.cc</code> nella riga in cui compilate l’eseguibile.</p>
+<p>In alternativa, scaricate questo <a href="./fmtlib.zip">file zip</a>
+nella directory dell’esercizio e decomprimetelo, poi aggiungete il file
+<code>format.cc</code> nella riga in cui compilate l’eseguibile.</p>
 <p>Ecco il codice di esempio:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;cmath&gt;</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;iomanip&gt;</span></span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
@@ -259,14 +378,32 @@
 <span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>  <span class="co">// cout &lt;&lt; setprecision(12) &lt;&lt; midpoint.integrate(a, b, nstep, mysin) &lt;&lt; endl;</span></span>
 <span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>  <span class="co">// cout &lt;&lt; setprecision(12) &lt;&lt; midpoint.integrate(a, b, nstep, mysin) &lt;&lt; endl;</span></span>
 <span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
-<p>dove abbiamo utilizzato una classe <code>Seno</code> che eredita dalla classe astratta <code>FunzioneBase</code>.</p>
-<h1 id="esercizio-7.1">Esercizio 7.1 - Integrazione alla Simpson (da consegnare)</h1>
-<p>Implementare l’integrazione con il metodo di Simpson con un numero di passi definito (è possibile farlo all’interno della classe già precedentemente costruita aggiungendo nuovi metodi e, se necessario, costruttori). Come nell’<a href="#esercizio-7.0">Esercizio 7.0</a>, stampare una tabella (o costruire un <code>TGraph</code> di ROOT) con la precisione raggiunta in funzione del numero di passi.</p>
+<p>dove abbiamo utilizzato una classe <code>Seno</code> che eredita
+dalla classe astratta <code>FunzioneBase</code>.</p>
+<h1 id="esercizio-7.1">Esercizio 7.1 - Integrazione alla Simpson (da
+consegnare)</h1>
+<p>Implementare l’integrazione con il metodo di Simpson con un numero di
+passi definito (è possibile farlo all’interno della classe già
+precedentemente costruita aggiungendo nuovi metodi e, se necessario,
+costruttori). Come nell’<a href="#esercizio-7.0">Esercizio 7.0</a>,
+stampare una tabella (o costruire un <code>TGraph</code> di ROOT) con la
+precisione raggiunta in funzione del numero di passi.</p>
 <h2 id="il-metodo-simpson">Il metodo Simpson</h2>
-<p>Nel metodo di integrazione alla Simpson, la funzione integranda è approssimata, negli intervalli <span class="math inline">[x_k, x_{k + 2}]</span> (dove <span class="math inline">k</span> è un intero pari e <span class="math inline">x_k = a + k h</span>) con un polinomio di secondo grado i cui nodi sono nei punti <span class="math inline">\bigl(x_k, f(x_k)\bigr)</span>, <span class="math inline">\bigl(x_{k + 1}, f(x_{k + 1})\bigr)</span>, <span class="math inline">\bigl(x_{k + 2}, f(x_{k + 2})\bigr)</span>. Esso fornisce una valutazione dell’integrale con una precisione pari a <span class="math inline">h^4</span>. La sua applicazione richiede che il numero di passi sia pari e la formula che approssima l’integrale è</p>
+<p>Nel metodo di integrazione alla Simpson, la funzione integranda è
+approssimata, negli intervalli <span class="math inline">[x_k, x_{k +
+2}]</span> (dove <span class="math inline">k</span> è un intero pari e
+<span class="math inline">x_k = a + k h</span>) con un polinomio di
+secondo grado i cui nodi sono nei punti <span
+class="math inline">\bigl(x_k, f(x_k)\bigr)</span>, <span
+class="math inline">\bigl(x_{k + 1}, f(x_{k + 1})\bigr)</span>, <span
+class="math inline">\bigl(x_{k + 2}, f(x_{k + 2})\bigr)</span>. Esso
+fornisce una valutazione dell’integrale con una precisione pari a <span
+class="math inline">h^4</span>. La sua applicazione richiede che il
+numero di passi sia pari e la formula che approssima l’integrale è</p>
 <p><span class="math display">
 \int_a^b f(x)\,\mathrm{d}x = h \cdot \left(
-\frac13 f(x_o) + \frac43 f(x_1) + \frac23 f(x_2) + \frac43 f(x_3) + \ldots
+\frac13 f(x_o) + \frac43 f(x_1) + \frac23 f(x_2) + \frac43 f(x_3) +
+\ldots
 + \frac23 f(x_{N - 2}) + \frac43 f(x_{N - 1}) + \frac13 f(x_N)\bigl)
 \right),
 </span></p>
@@ -274,33 +411,67 @@
 <p><span class="math display">
 h = \frac{b - a}N, \quad x_k = a + k h.
 </span></p>
-<h1 id="esercizio-7.2">Esercizio 7.2 - Integrazione con la formula dei trapezi con precisione fissata (da consegnare)</h1>
-<p>Implementare l’integrazione della funzione <span class="math inline">\sin(x)</span> su <span class="math inline">[0, \pi]</span> con il metodo dei trapezi e con precisione fissata all’interno della classe definita in precedenza. Occorrerà definire un costruttore che prenda in ingresso gli estremi di integrazione e la precisione desiderata passata dalla riga di comando.</p>
+<h1 id="esercizio-7.2">Esercizio 7.2 - Integrazione con la formula dei
+trapezi con precisione fissata (da consegnare)</h1>
+<p>Implementare l’integrazione della funzione <span
+class="math inline">\sin(x)</span> su <span class="math inline">[0,
+\pi]</span> con il metodo dei trapezi e con precisione fissata
+all’interno della classe definita in precedenza. Occorrerà definire un
+costruttore che prenda in ingresso gli estremi di integrazione e la
+precisione desiderata passata dalla riga di comando.</p>
 <h2 id="stima-runtime-dellerrore">Stima runtime dell’errore</h2>
-<p>Come possiamo fare a stimare l’errore che stiamo commettendo nel calcolo di un integrale se non conosciamo il valore vero <span class="math inline">I</span> dell’integrale? Partendo dalla conoscenza dell’andamento teorico dell’errore in funzione del passo <span class="math inline">h</span>, possiamo trovare un modo semplice per la stima dell’errore che stiamo commettendo. Nel caso della regola dei trapezi, l’adamento dell’errore è <span class="math inline">\epsilon = k h^2</span>. Calcolando l’integrale <span class="math inline">I_N</span> utilizzando un passo <span class="math inline">h</span> e successivamente l’intgrale <span class="math inline">I_{2N}</span> con un passo <span class="math inline">h/2</span>, possiamo scrivere il seguente sistema di equazioni: <span class="math display">
+<p>Come possiamo fare a stimare l’errore che stiamo commettendo nel
+calcolo di un integrale se non conosciamo il valore vero <span
+class="math inline">I</span> dell’integrale? Partendo dalla conoscenza
+dell’andamento teorico dell’errore in funzione del passo <span
+class="math inline">h</span>, possiamo trovare un modo semplice per la
+stima dell’errore che stiamo commettendo. Nel caso della regola dei
+trapezi, l’adamento dell’errore è <span class="math inline">\epsilon = k
+h^2</span>. Calcolando l’integrale <span class="math inline">I_N</span>
+utilizzando un passo <span class="math inline">h</span> e
+successivamente l’intgrale <span class="math inline">I_{2N}</span> con
+un passo <span class="math inline">h/2</span>, possiamo scrivere il
+seguente sistema di equazioni: <span class="math display">
 \begin{cases}
 I - I_N = k h^2,
 I - I_{2N} = k\left(\frac{h}2\right)^2.
 \end{cases}
 </span></p>
-<p>Sottraendo la prima equazione alla seconda, si ricava che una stima dell’errore è pari a <span class="math display">
+<p>Sottraendo la prima equazione alla seconda, si ricava che una stima
+dell’errore è pari a <span class="math display">
 \epsilon(N) = \frac43 \left|I_{2N} - I_N\right|.
 </span></p>
 <h2 id="cenni-sullimplementazione-1">Cenni sull’implementazione</h2>
-<p>La condizione di uscita dell’algoritmo è basata sul confronto del risultato di due passaggi successivi. Se la differenza della stima dell’integrale tra due passaggi consecutivi è più piccola della precisione richiesta allora l’algoritmo si ferma. Questo poichè l’integrale calcolato con una partizione più fine è sempre una stima migliore dell’approssimazione con la partizione originaria. Calcoliamo la prima approssimazione:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>sum0 <span class="op">=</span> <span class="op">(</span>f<span class="op">[</span>a<span class="op">]</span> <span class="op">+</span> f<span class="op">[</span>b<span class="op">])</span> <span class="op">/</span> <span class="dv">2</span><span class="op">;</span></span>
+<p>La condizione di uscita dell’algoritmo è basata sul confronto del
+risultato di due passaggi successivi. Se la differenza della stima
+dell’integrale tra due passaggi consecutivi è più piccola della
+precisione richiesta allora l’algoritmo si ferma. Questo poichè
+l’integrale calcolato con una partizione più fine è sempre una stima
+migliore dell’approssimazione con la partizione originaria. Calcoliamo
+la prima approssimazione:</p>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>sum0 <span class="op">=</span> <span class="op">(</span>f<span class="op">[</span>a<span class="op">]</span> <span class="op">+</span> f<span class="op">[</span>b<span class="op">])</span> <span class="op">/</span> <span class="dv">2</span><span class="op">;</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>I0 <span class="op">=</span> sum0 <span class="op">*</span> <span class="op">(</span>b <span class="op">-</span> a<span class="op">);</span></span></code></pre></div>
-<p>Al primo passaggio dell’algoritmo suddividiamo l’intervallo in due:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>sum1 <span class="op">=</span> sum0 <span class="op">+</span> f<span class="op">[</span>x11<span class="op">];</span> </span>
+<p>Al primo passaggio dell’algoritmo suddividiamo l’intervallo in
+due:</p>
+<div class="sourceCode" id="cb5"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>sum1 <span class="op">=</span> sum0 <span class="op">+</span> f<span class="op">[</span>x11<span class="op">];</span> </span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>I1 <span class="op">=</span> sum1 <span class="op">*</span> <span class="op">(</span>b <span class="op">-</span> a<span class="op">)</span> <span class="op">/</span> <span class="dv">2</span><span class="op">;</span></span></code></pre></div>
 <p>e così secondo lo schema in figura:</p>
-<p><img src="http://labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/figure/intervallo.png" /></p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>sum2 <span class="op">=</span> sum1 <span class="op">+</span> f<span class="op">[</span>x21<span class="op">]</span> <span class="op">+</span> f<span class="op">[</span>x22<span class="op">];</span></span>
+<p><img
+src="http://labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/figure/intervallo.png" /></p>
+<div class="sourceCode" id="cb6"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>sum2 <span class="op">=</span> sum1 <span class="op">+</span> f<span class="op">[</span>x21<span class="op">]</span> <span class="op">+</span> f<span class="op">[</span>x22<span class="op">];</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>I2 <span class="op">=</span> sum2 <span class="op">*</span> <span class="op">(</span>b <span class="op">-</span> a<span class="op">)</span> <span class="op">/</span> <span class="dv">4</span><span class="op">;</span></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>sum3 <span class="op">=</span> sum2 <span class="op">+</span> f<span class="op">[</span>x31<span class="op">]</span> <span class="op">+</span> f<span class="op">[</span>x32<span class="op">]</span> <span class="op">+</span> f<span class="op">[</span>x33<span class="op">]</span> <span class="op">+</span> f<span class="op">[</span>x34<span class="op">];</span></span>
 <span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>I3 <span class="op">=</span> sum3 <span class="op">*</span> <span class="op">(</span>b <span class="op">-</span> a<span class="op">)</span> <span class="op">/</span> <span class="dv">8</span><span class="op">;</span></span></code></pre></div>
-<p>I valori dell’ultima approssimazione dell’integrale e dell’ultima somma calcolata sono memorizzati all’interno dell’oggetto. In questo modo, se è necessario ricalcolare l’integrale raddoppiando i passi, come nel caso della formula che usa <span class="math inline">I_N</span> e <span class="math inline">I_{2N}</span>, non è necessario ricominciare da capo.</p>                    
+<p>I valori dell’ultima approssimazione dell’integrale e dell’ultima
+somma calcolata sono memorizzati all’interno dell’oggetto. In questo
+modo, se è necessario ricalcolare l’integrale raddoppiando i passi, come
+nel caso della formula che usa <span class="math inline">I_N</span> e
+<span class="math inline">I_{2N}</span>, non è necessario ricominciare
+da capo.</p>                    
                 </div>
             </div>
 

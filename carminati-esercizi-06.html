@@ -65,7 +65,7 @@
             code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
             code span.at { color: #7d9029; } /* Attribute */
             code span.bn { color: #40a070; } /* BaseN */
-            code span.bu { } /* BuiltIn */
+            code span.bu { color: #008000; } /* BuiltIn */
             code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
             code span.ch { color: #4070a0; } /* Char */
             code span.cn { color: #880000; } /* Constant */
@@ -78,7 +78,7 @@
             code span.ex { } /* Extension */
             code span.fl { color: #40a070; } /* Float */
             code span.fu { color: #06287e; } /* Function */
-            code span.im { } /* Import */
+            code span.im { color: #008000; font-weight: bold; } /* Import */
             code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
             code span.kw { color: #007020; font-weight: bold; } /* Keyword */
             code span.op { color: #666666; } /* Operator */
@@ -91,22 +91,24 @@
             code span.vs { color: #4070a0; } /* VerbatimString */
             code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
         </style>
-                                            <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.js"></script>
+                                            <script defer=""
+                                            src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js"></script>
                                             <script>document.addEventListener("DOMContentLoaded", function () {
-                                             var mathElements = document.getElementsByClassName("math");
-                                             var macros = [];
-                                             for (var i = 0; i < mathElements.length; i++) {
-                                              var texText = mathElements[i].firstChild;
-                                              if (mathElements[i].tagName == "SPAN") {
-                                               katex.render(texText.data, mathElements[i], {
-                                                displayMode: mathElements[i].classList.contains('display'),
-                                                throwOnError: false,
-                                                macros: macros,
-                                                fleqn: false
-                                               });
-                                            }}});
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
                                             </script>
-                                            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css" />
+                                            <link rel="stylesheet"
+                                            href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css" />
                                           <script src="./fmtinstall.js"></script>
                  
     </head>
@@ -118,10 +120,14 @@
 
                         <div class="uk-grid" data-uk-grid-margin>
                 <div class="uk-width-1-1">
-                    <h1 class="uk-heading-large">Lezione 6: Ricerca di zeri</h1>
-                                        <h3 class="uk-heading-large">A.A. 2021−2022</p></h3>
-                                                            <p class="uk-text-large">Leonardo Carminati</p>
-                                        <p class="uk-text-large">Maurizio Tomasi</p>
+                    <h1 class="uk-heading-large">Lezione 6: Ricerca di
+zeri</h1>
+                                        <h3 class="uk-heading-large">A.A.
+2021−2022</p></h3>
+                                                            <p class="uk-text-large">Leonardo
+Carminati</p>
+                                        <p class="uk-text-large">Maurizio
+Tomasi</p>
                                     </div>
             </div>
             
@@ -131,25 +137,86 @@
                         <div class="uk-panel uk-panel-box menu-begin" >
 
                                                         <ul>
-                                                        <li><a href="#esercizio-6.0">Esercizio 6.0 - Metodi virtuali</a>
+                                                        <li><a
+                                                        href="#esercizio-6.0"
+                                                        id="toc-esercizio-6.0">Esercizio
+                                                        6.0 - Metodi
+                                                        virtuali</a>
                                                         <ul>
-                                                        <li><a href="#parola-chiave-virtual">Parola chiave virtual</a></li>
+                                                        <li><a
+                                                        href="#parola-chiave-virtual"
+                                                        id="toc-parola-chiave-virtual">Parola
+                                                        chiave
+                                                        virtual</a></li>
                                                         </ul></li>
-                                                        <li><a href="#esercizio-6.1">Esercizio 6.1 - Classe astratta FunzioneBase</a>
+                                                        <li><a
+                                                        href="#esercizio-6.1"
+                                                        id="toc-esercizio-6.1">Esercizio
+                                                        6.1 - Classe
+                                                        astratta
+                                                        FunzioneBase</a>
                                                         <ul>
-                                                        <li><a href="#classi-astratte">Classi astratte</a></li>
-                                                        <li><a href="#la-classe-parabola">La classe Parabola</a></li>
+                                                        <li><a
+                                                        href="#classi-astratte"
+                                                        id="toc-classi-astratte">Classi
+                                                        astratte</a></li>
+                                                        <li><a
+                                                        href="#la-classe-parabola"
+                                                        id="toc-la-classe-parabola">La
+                                                        classe
+                                                        Parabola</a></li>
                                                         </ul></li>
-                                                        <li><a href="#esercizio-6.2">Esercizio 6.2 - Metodo della bisezione (da consegnare)</a>
+                                                        <li><a
+                                                        href="#esercizio-6.2"
+                                                        id="toc-esercizio-6.2">Esercizio
+                                                        6.2 - Metodo
+                                                        della bisezione
+                                                        (da
+                                                        consegnare)</a>
                                                         <ul>
-                                                        <li><a href="#il-metodo-della-bisezione">Il metodo della bisezione</a></li>
-                                                        <li><a href="#precisione-sulle-cifre-significative">Precisione sulle cifre significative</a></li>
-                                                        <li><a href="#la-funzione-segno">La funzione segno</a></li>
-                                                        <li><a href="#classe-astratta-solutore">Classe astratta Solutore</a></li>
+                                                        <li><a
+                                                        href="#il-metodo-della-bisezione"
+                                                        id="toc-il-metodo-della-bisezione">Il
+                                                        metodo della
+                                                        bisezione</a></li>
+                                                        <li><a
+                                                        href="#precisione-sulle-cifre-significative"
+                                                        id="toc-precisione-sulle-cifre-significative">Precisione
+                                                        sulle cifre
+                                                        significative</a></li>
+                                                        <li><a
+                                                        href="#la-funzione-segno"
+                                                        id="toc-la-funzione-segno">La
+                                                        funzione
+                                                        segno</a></li>
+                                                        <li><a
+                                                        href="#classe-astratta-solutore"
+                                                        id="toc-classe-astratta-solutore">Classe
+                                                        astratta
+                                                        Solutore</a></li>
                                                         </ul></li>
-                                                        <li><a href="#esercizio-6.3">Esercizio 6.3 - Equazioni non risolubili analiticamente (da consegnare)</a></li>
-                                                        <li><a href="#esercizio-6.4">Esercizio 6.4 - Miglioramenti di Solutore</a></li>
-                                                        <li><a href="#esercizio-6.5">Esercizio 6.5 - Ricerca di zeri di una funzione senza uso del polimorfismo</a></li>
+                                                        <li><a
+                                                        href="#esercizio-6.3"
+                                                        id="toc-esercizio-6.3">Esercizio
+                                                        6.3 - Equazioni
+                                                        non risolubili
+                                                        analiticamente
+                                                        (da
+                                                        consegnare)</a></li>
+                                                        <li><a
+                                                        href="#esercizio-6.4"
+                                                        id="toc-esercizio-6.4">Esercizio
+                                                        6.4 -
+                                                        Miglioramenti di
+                                                        Solutore</a></li>
+                                                        <li><a
+                                                        href="#esercizio-6.5"
+                                                        id="toc-esercizio-6.5">Esercizio
+                                                        6.5 - Ricerca di
+                                                        zeri di una
+                                                        funzione senza
+                                                        uso del
+                                                        polimorfismo</a></li>
                                                         </ul>
                             
                         </div>
@@ -157,12 +224,21 @@
                 </div>
 
                 <div class="uk-width-medium-3-4">
-<p>[La pagina con la spiegazione originale degli esercizi si trova qui: <a href="http://labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/lezione6_2021.html">labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/lezione6_2021.html</a>.</p>
-<p>In questa lezione affronteremo il problema della ricerca di zeri di una funzione. Per fare questo realizzeremo due classi astratte per rappresentare rispettivamente una generica funzione <span class="math inline">y = f(x)</span>, ed un metodo generico per la ricerca di zeri.</p>
+<p>[La pagina con la spiegazione originale degli esercizi si trova qui:
+<a
+href="http://labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/lezione6_2021.html">labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/lezione6_2021.html</a>.</p>
+<p>In questa lezione affronteremo il problema della ricerca di zeri di
+una funzione. Per fare questo realizzeremo due classi astratte per
+rappresentare rispettivamente una generica funzione <span
+class="math inline">y = f(x)</span>, ed un metodo generico per la
+ricerca di zeri.</p>
 <h1 id="esercizio-6.0">Esercizio 6.0 - Metodi virtuali</h1>
-<p>Considerare le classi <code>Particella</code> e la sue derivata <code>Elettrone</code> costruite nelle <a href="./carminati-esercizi-05.html">lezioni 4 e 5</a>.</p>
+<p>Considerare le classi <code>Particella</code> e la sue derivata
+<code>Elettrone</code> costruite nelle <a
+href="./carminati-esercizi-05.html">lezioni 4 e 5</a>.</p>
 <p>Implementare ed eseguite il seguente programma:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  Particella <span class="op">*</span>a<span class="op">{</span><span class="kw">new</span> Particella<span class="op">{</span><span class="fl">1.</span><span class="op">,</span> <span class="fl">2.</span><span class="op">}};</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  Elettrone  <span class="op">*</span>e<span class="op">{</span><span class="kw">new</span> Elettrone<span class="op">{}};</span></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  Particella <span class="op">*</span>b<span class="op">{</span><span class="kw">new</span> Elettrone<span class="op">{}};</span> <span class="co">// puntatore a Particella punta a un Elettrone</span></span>
@@ -175,39 +251,94 @@
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  <span class="kw">delete</span> e<span class="op">;</span></span>
 <span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  <span class="kw">delete</span> b<span class="op">;</span></span>
 <span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
-<p>Si dovrebbe vedere che viene invocato il metodo <code>Print()</code> della classe madre, anche quando gli oggetti riferiti dai puntatori sono classi figlie.</p>
-<p>Aggiungete ora negli <em>header file</em> della classe <code>Particella</code> il qualificatore <code>virtual</code> davanti alla dichiarazione del metodo <code>Print</code>, e aggiungere <code>override</code> nella classe <code>Elettrone</code>:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Nella classe Particella:</span></span>
+<p>Si dovrebbe vedere che viene invocato il metodo <code>Print()</code>
+della classe madre, anche quando gli oggetti riferiti dai puntatori sono
+classi figlie.</p>
+<p>Aggiungete ora negli <em>header file</em> della classe
+<code>Particella</code> il qualificatore <code>virtual</code> davanti
+alla dichiarazione del metodo <code>Print</code>, e aggiungere
+<code>override</code> nella classe <code>Elettrone</code>:</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Nella classe Particella:</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="kw">virtual</span> <span class="dt">void</span> Print<span class="op">()</span> <span class="at">const</span><span class="op">;</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co">// Nella classe Elettrone; notare che &quot;override&quot; va alla fine!</span></span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> Print<span class="op">()</span> <span class="at">const</span> <span class="kw">override</span><span class="op">;</span></span></code></pre></div>
-<p>[Il testo originale suggerisce: aggiungere ora negli header file delle classi il qualificatore <code>virtual</code> davanti alla dichiarazione del metodo <code>Print()</code>. Questo compila, ma non è più buona pratica col C++11, <a href="tomasi-lezione-06.html#override-best-practices">come spiegato negli approfondimenti</a>].</p>
-<p>Ricompilando e rigirando il programma si dovrebbe adesso vedere che per ciascun oggetto viene invocato il metodo corrispondente alla sua vera classe.</p>
+<p>[Il testo originale suggerisce: aggiungere ora negli header file
+delle classi il qualificatore <code>virtual</code> davanti alla
+dichiarazione del metodo <code>Print()</code>. Questo compila, ma non è
+più buona pratica col C++11, <a
+href="tomasi-lezione-06.html#override-best-practices">come spiegato
+negli approfondimenti</a>].</p>
+<p>Ricompilando e rigirando il programma si dovrebbe adesso vedere che
+per ciascun oggetto viene invocato il metodo corrispondente alla sua
+vera classe.</p>
 <h2 id="parola-chiave-virtual">Parola chiave virtual</h2>
-<p>La parola chiave <code>virtual</code> informa il compilatore che il metodo indicato potrà venire sovrascritto dalle classi figlie. Se essa viene fornita, durante l’esecuzione del programma, al momento di chiamare il metodo a partire da un puntatore alla classe madre, il programma valuterà se l’oggetto indirizzato è del tipo classe madre o una delle figlie. In quest’ultimo caso, invocherà il metodo appropriato della classe figlia reale.</p>
-<p>Nelle classi figlie, se si ridefinisce un metodo che la classe madre aveva dichiarato <code>virtual</code>, occorre specificare <code>override</code> (=“sovrascrivi”). Questo è spiegato con maggiore dettaglio nelle <a href="./tomasi-lezione-06.html#virtual-methods">slide</a>.</p>
-<p>Un metodo virtuale può anche essere posto a 0 (vedi prossimo esercizio), in tal caso è obbligatorio per le classi figlie implementarlo.</p>
+<p>La parola chiave <code>virtual</code> informa il compilatore che il
+metodo indicato potrà venire sovrascritto dalle classi figlie. Se essa
+viene fornita, durante l’esecuzione del programma, al momento di
+chiamare il metodo a partire da un puntatore alla classe madre, il
+programma valuterà se l’oggetto indirizzato è del tipo classe madre o
+una delle figlie. In quest’ultimo caso, invocherà il metodo appropriato
+della classe figlia reale.</p>
+<p>Nelle classi figlie, se si ridefinisce un metodo che la classe madre
+aveva dichiarato <code>virtual</code>, occorre specificare
+<code>override</code> (=“sovrascrivi”). Questo è spiegato con maggiore
+dettaglio nelle <a
+href="./tomasi-lezione-06.html#virtual-methods">slide</a>.</p>
+<p>Un metodo virtuale può anche essere posto a 0 (vedi prossimo
+esercizio), in tal caso è obbligatorio per le classi figlie
+implementarlo.</p>
 <h1 id="esercizio-6.1">Esercizio 6.1 - Classe astratta FunzioneBase</h1>
-<p>In questo e nei prossimi esercizi avremo a che fare con diverse funzioni <span class="math inline">y = f(x)</span> di una sola variabile, magari dipendenti da parametri, e di effettuare delle operazioni generiche su queste funzioni (come trovarne gli zeri, o farne l’integrale).</p>
-<p>In questo caso è utile definire una classe astratta che definisce le proprietà generali della classe, con metodi puramente virtuali, e poi lasciare alle classi derivate il compito di implementare tutti questi metodi e quelli aggiuntivi necessari. Notate in questo caso che è buona prassi definire il distruttore di una classe madre astratta come <code>virtual</code>, in modo che il distruttore della classe figlia venga invocato correttamente quando un oggetto di tipo classe figlia viene distrutto.</p>
+<p>In questo e nei prossimi esercizi avremo a che fare con diverse
+funzioni <span class="math inline">y = f(x)</span> di una sola
+variabile, magari dipendenti da parametri, e di effettuare delle
+operazioni generiche su queste funzioni (come trovarne gli zeri, o farne
+l’integrale).</p>
+<p>In questo caso è utile definire una classe astratta che definisce le
+proprietà generali della classe, con metodi puramente virtuali, e poi
+lasciare alle classi derivate il compito di implementare tutti questi
+metodi e quelli aggiuntivi necessari. Notate in questo caso che è buona
+prassi definire il distruttore di una classe madre astratta come
+<code>virtual</code>, in modo che il distruttore della classe figlia
+venga invocato correttamente quando un oggetto di tipo classe figlia
+viene distrutto.</p>
 <ol>
 <li><p>Definire la classe astratta FunzioneBase:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Classe astratta per una generica funzione</span></span>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Classe astratta per una generica funzione</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> FunzioneBase <span class="op">{</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span><span class="op">:</span></span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">virtual</span> <span class="dt">double</span> Eval<span class="op">(</span><span class="dt">double</span> x<span class="op">)</span> <span class="at">const</span> <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">virtual</span> <span class="op">~</span>FunzioneBase<span class="op">()</span> <span class="op">{}</span></span>
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code></pre></div></li>
-<li><p>Implementare una classe derivata <code>Parabola</code> che descriva una funzione del tipo <span class="math inline">f(x) = a x^2 + b x + c</span> (chiaramente questa classe dovrà avere i data membri per i parameteri <span class="math inline">a</span>, <span class="math inline">b</span> e <span class="math inline">c</span>, ed i metodi per definirli e accederci).</p></li>
-<li><p>Verificare il funzionamento della classe <code>Parabola</code> costruendo un programmino che, dati i parametri di una parabola, ne stampi il valore della <span class="math inline">y</span> nel vertice <span class="math inline">x_v = -b / 2a</span>.</p></li>
+<li><p>Implementare una classe derivata <code>Parabola</code> che
+descriva una funzione del tipo <span class="math inline">f(x) = a x^2 +
+b x + c</span> (chiaramente questa classe dovrà avere i data membri per
+i parameteri <span class="math inline">a</span>, <span
+class="math inline">b</span> e <span class="math inline">c</span>, ed i
+metodi per definirli e accederci).</p></li>
+<li><p>Verificare il funzionamento della classe <code>Parabola</code>
+costruendo un programmino che, dati i parametri di una parabola, ne
+stampi il valore della <span class="math inline">y</span> nel vertice
+<span class="math inline">x_v = -b / 2a</span>.</p></li>
 </ol>
 <h2 id="classi-astratte">Classi astratte</h2>
-<p>Quando dichiariamo nullo un metodo <code>virtual</code>, la classe difetta dell’implementazione di tale metodo, e quindi non si possono creare oggetti di quella classe. Solo le sue classi derivate implementeranno il metodo, e possono essere implementate. Siccome non si possono costruire oggetti di tale classe, non è necessario definire dei costruttori.</p>
-<p>Se una classe astratta implementa solo metodi virtuali nulli, come in questo caso, non è neanche necessario realizzare un file di implementazione, né creare un file oggetto, dato che tutta l’informazione è contenuta nell’header.</p>
+<p>Quando dichiariamo nullo un metodo <code>virtual</code>, la classe
+difetta dell’implementazione di tale metodo, e quindi non si possono
+creare oggetti di quella classe. Solo le sue classi derivate
+implementeranno il metodo, e possono essere implementate. Siccome non si
+possono costruire oggetti di tale classe, non è necessario definire dei
+costruttori.</p>
+<p>Se una classe astratta implementa solo metodi virtuali nulli, come in
+questo caso, non è neanche necessario realizzare un file di
+implementazione, né creare un file oggetto, dato che tutta
+l’informazione è contenuta nell’header.</p>
 <h2 id="la-classe-parabola">La classe Parabola</h2>
-<p>Questa è una possibile dichiarazione per la classe <code>Parabola</code>:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Parabola <span class="op">:</span> <span class="kw">public</span> FunzioneBase <span class="op">{</span></span>
+<p>Questa è una possibile dichiarazione per la classe
+<code>Parabola</code>:</p>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Parabola <span class="op">:</span> <span class="kw">public</span> FunzioneBase <span class="op">{</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span><span class="op">:</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Default: the constant function f(x) = 1</span></span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  Parabola<span class="op">()</span> <span class="op">:</span> <span class="va">m_a</span><span class="op">{},</span> <span class="va">m_b</span><span class="op">{},</span> <span class="va">m_c</span><span class="op">{</span><span class="dv">1</span><span class="op">}</span> <span class="op">{}</span></span>
@@ -230,50 +361,128 @@
 <span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a><span class="kw">private</span><span class="op">:</span></span>
 <span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> <span class="va">m_a</span><span class="op">,</span> <span class="va">m_b</span><span class="op">,</span> <span class="va">m_c</span><span class="op">;</span></span>
 <span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code></pre></div>
-<h1 id="esercizio-6.2">Esercizio 6.2 - Metodo della bisezione (da consegnare)</h1>
-<p>Scrivere un programma che calcoli gli zeri della funzione <span class="math display">
+<h1 id="esercizio-6.2">Esercizio 6.2 - Metodo della bisezione (da
+consegnare)</h1>
+<p>Scrivere un programma che calcoli gli zeri della funzione <span
+class="math display">
 f(x) = 3x^2 + 5x - 2.
 </span></p>
-<p>Il programma legge da riga di comando gli estremi dell’intervallo in cui cercare lo zero e la precisione richiesta. Per calcolare gli zeri, implementare una classe astratta <code>Solutore</code> ed una classe concreta che realizza uno dei due metodi visti a lezione: quello della bisezione o quello della secante. Si richiede obbligatoriamente che il programma stampi l’ascissa dello zero con un numero di cifre significative corrispondente alla precisione immessa.</p>
+<p>Il programma legge da riga di comando gli estremi dell’intervallo in
+cui cercare lo zero e la precisione richiesta. Per calcolare gli zeri,
+implementare una classe astratta <code>Solutore</code> ed una classe
+concreta che realizza uno dei due metodi visti a lezione: quello della
+bisezione o quello della secante. Si richiede obbligatoriamente che il
+programma stampi l’ascissa dello zero con un numero di cifre
+significative corrispondente alla precisione immessa.</p>
 <h2 id="il-metodo-della-bisezione">Il metodo della bisezione</h2>
-<p>Data una funzione <span class="math inline">f(x)</span>, si dice zero, o radice, di <span class="math inline">f</span> un elemento <span class="math inline">x_0</span> del suo dominio tale che <span class="math inline">f(x_0) = 0</span>.</p>
-<p>Ci proponiamo di trovare gli zeri della funzione <span class="math inline">f(x) = x^2 - 2</span> utilizzando il metodo di bisezione. È l’algoritmo più semplice: consiste in una procedura iterativa che, ad ogni ciclo, dimezza l’intervallo in cui si trova lo zero.</p>
-<p>Dal teorema di Bolzano (o degli zeri) sappiamo che, data una funzione <span class="math inline">f</span> continua sull’intervallo chiuso <span class="math inline">[a,b]</span> a valori reali tale che <span class="math inline">f(a) \cdot f(b) &lt; 0</span>, allora esiste un punto <span class="math inline">x_0 \in [a, b]</span> tale che <span class="math inline">f(x_0) = 0</span>.</p>
-<p>Definiamo intervallo di incertezza di <span class="math inline">f</span> un intervallo <span class="math inline">[a,b]</span> che soddisfa il Teorema di Bolzano. L’idea di base dell’algoritmo è che se esiste un intervallo di incertezza <span class="math inline">[a,b]</span> per una funzione <span class="math inline">f</span>, allora ne esiste uno più piccolo (esattamente la metà).</p>
-<p>L’algoritmo deve avere in input l’intervallo di incertezza di partenza <span class="math inline">[a,b]</span> ed una precisione (o tolleranza) <span class="math inline">\epsilon</span> con cui si vuole trovare lo zero di <span class="math inline">f</span> tale che <span class="math inline">\left|b - a\right| &lt; \epsilon</span>.</p>
-<p>Si parte quindi dividendo in due l’intervallo trovando il punto medio <span class="math inline">c = a + (b - a)/2</span> per cui avremo due intervalli <span class="math inline">[a,c]</span> e <span class="math inline">[c,b]</span>. Ora, se <span class="math inline">f(c) = 0</span> siamo fortunati e abbiamo trovato lo zero; altrimenti si deve valutare <span class="math inline">f(a) \cdot f(c)</span> e <span class="math inline">f(c) \cdot f(b)</span>, e ripetere la procedura sull’intervallo in cui <span class="math inline">f</span> cambia di segno. La procedura va ripetuta finchè la larghezza dell’intervallo finale non è minore di <span class="math inline">\epsilon</span>.</p>
+<p>Data una funzione <span class="math inline">f(x)</span>, si dice
+zero, o radice, di <span class="math inline">f</span> un elemento <span
+class="math inline">x_0</span> del suo dominio tale che <span
+class="math inline">f(x_0) = 0</span>.</p>
+<p>Ci proponiamo di trovare gli zeri della funzione <span
+class="math inline">f(x) = x^2 - 2</span> utilizzando il metodo di
+bisezione. È l’algoritmo più semplice: consiste in una procedura
+iterativa che, ad ogni ciclo, dimezza l’intervallo in cui si trova lo
+zero.</p>
+<p>Dal teorema di Bolzano (o degli zeri) sappiamo che, data una funzione
+<span class="math inline">f</span> continua sull’intervallo chiuso <span
+class="math inline">[a,b]</span> a valori reali tale che <span
+class="math inline">f(a) \cdot f(b) &lt; 0</span>, allora esiste un
+punto <span class="math inline">x_0 \in [a, b]</span> tale che <span
+class="math inline">f(x_0) = 0</span>.</p>
+<p>Definiamo intervallo di incertezza di <span
+class="math inline">f</span> un intervallo <span
+class="math inline">[a,b]</span> che soddisfa il Teorema di Bolzano.
+L’idea di base dell’algoritmo è che se esiste un intervallo di
+incertezza <span class="math inline">[a,b]</span> per una funzione <span
+class="math inline">f</span>, allora ne esiste uno più piccolo
+(esattamente la metà).</p>
+<p>L’algoritmo deve avere in input l’intervallo di incertezza di
+partenza <span class="math inline">[a,b]</span> ed una precisione (o
+tolleranza) <span class="math inline">\epsilon</span> con cui si vuole
+trovare lo zero di <span class="math inline">f</span> tale che <span
+class="math inline">\left|b - a\right| &lt; \epsilon</span>.</p>
+<p>Si parte quindi dividendo in due l’intervallo trovando il punto medio
+<span class="math inline">c = a + (b - a)/2</span> per cui avremo due
+intervalli <span class="math inline">[a,c]</span> e <span
+class="math inline">[c,b]</span>. Ora, se <span class="math inline">f(c)
+= 0</span> siamo fortunati e abbiamo trovato lo zero; altrimenti si deve
+valutare <span class="math inline">f(a) \cdot f(c)</span> e <span
+class="math inline">f(c) \cdot f(b)</span>, e ripetere la procedura
+sull’intervallo in cui <span class="math inline">f</span> cambia di
+segno. La procedura va ripetuta finchè la larghezza dell’intervallo
+finale non è minore di <span class="math inline">\epsilon</span>.</p>
 <p>Ci sono alcuni caveat:</p>
 <ul>
-<li><p>Se l’intervallo contiene più di una radice il metodo della bisezione ne troverà solo una.</p></li>
-<li><p>Nell’implementazione delle condizioni di ricerca dall’intervallo di incertezza occorre prestare attenzione alle operazioni tra floating point soprattutto in prossimità della radice.</p>
-<p>Ad esempio, le espressioni <span class="math inline">f(a)\cdot f(c)</span> e <span class="math inline">f(c)\cdot f(b)</span> hanno una buona probabilità di essere approssimate a zero, dal momento che entrambi gli argomenti convergono a una radice di <span class="math inline">f</span>. Per evitare questa eventualità, è meglio valutare, il prodotto dei segni <span class="math inline">\text{sign} f(a) \cdot \text{sign} f(c)</span> e così via.</p></li>
-<li><p>Un altro controllo utile è contare il numero di iterazioni dell’algoritmo e stampare un avviso nel caso queste siano troppo grandi (sopra il centinaio). In tal modo ci si accorge se ci sono possibili problemi nel ciclo (errori o richiesta di precisione troppo alta)</p></li>
+<li><p>Se l’intervallo contiene più di una radice il metodo della
+bisezione ne troverà solo una.</p></li>
+<li><p>Nell’implementazione delle condizioni di ricerca dall’intervallo
+di incertezza occorre prestare attenzione alle operazioni tra floating
+point soprattutto in prossimità della radice.</p>
+<p>Ad esempio, le espressioni <span class="math inline">f(a)\cdot
+f(c)</span> e <span class="math inline">f(c)\cdot f(b)</span> hanno una
+buona probabilità di essere approssimate a zero, dal momento che
+entrambi gli argomenti convergono a una radice di <span
+class="math inline">f</span>. Per evitare questa eventualità, è meglio
+valutare, il prodotto dei segni <span class="math inline">\text{sign}
+f(a) \cdot \text{sign} f(c)</span> e così via.</p></li>
+<li><p>Un altro controllo utile è contare il numero di iterazioni
+dell’algoritmo e stampare un avviso nel caso queste siano troppo grandi
+(sopra il centinaio). In tal modo ci si accorge se ci sono possibili
+problemi nel ciclo (errori o richiesta di precisione troppo
+alta)</p></li>
 </ul>
-<h2 id="precisione-sulle-cifre-significative">Precisione sulle cifre significative</h2>
-<p>Poiché la precisione richiesta all’algoritmo è passata al programma runtime, abbiamo bisogno di determinare runtime quante cifre significative stampare nel nostro risultato. È facile rendersi conto che il numero di cifre significative è dato da</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> cifre_significative <span class="op">=</span> <span class="op">-</span>log10<span class="op">(</span>precision<span class="op">);</span></span></code></pre></div>
-<p>Per cui per impostare il numero di cifre significative nella scrittura a video il codice sarà</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;fmtlib.h&quot;</span></span>
+<h2 id="precisione-sulle-cifre-significative">Precisione sulle cifre
+significative</h2>
+<p>Poiché la precisione richiesta all’algoritmo è passata al programma
+runtime, abbiamo bisogno di determinare runtime quante cifre
+significative stampare nel nostro risultato. È facile rendersi conto che
+il numero di cifre significative è dato da</p>
+<div class="sourceCode" id="cb5"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> cifre_significative <span class="op">=</span> <span class="op">-</span>log10<span class="op">(</span>precision<span class="op">);</span></span></code></pre></div>
+<p>Per cui per impostare il numero di cifre significative nella
+scrittura a video il codice sarà</p>
+<div class="sourceCode" id="cb6"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;fmtlib.h&quot;</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co">// {0} → valore di `zero`, {1} → valore di `cifre_significative`</span></span>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co">// Si deve mettere il punto prima di {1} per indicare le cifre dopo la virgola</span></span>
 <span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>fmt<span class="op">::</span>print<span class="op">(</span><span class="st">&quot;x0 = </span><span class="sc">{0:.{1}f}</span><span class="st">&quot;</span><span class="op">,</span> zero<span class="op">,</span> cifre_significative<span class="op">);</span></span></code></pre></div>
-<p>se usate la libreria <code>fmtlib.h</code>, oppure, se usate <code>cout</code> e <code>&lt;iomanip&gt;</code>:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>cout <span class="op">&lt;&lt;</span> <span class="st">&quot;x0 = &quot;</span> <span class="op">&lt;&lt;</span> fixed <span class="op">&lt;&lt;</span> setprecision<span class="op">(</span>cifre_significative<span class="op">)</span> <span class="op">&lt;&lt;</span> zero <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span></code></pre></div>
-<p>Potete installare la libreria <code>fmtlib</code> eseguendo questo comando:</p>
+<p>se usate la libreria <code>fmtlib.h</code>, oppure, se usate
+<code>cout</code> e <code>&lt;iomanip&gt;</code>:</p>
+<div class="sourceCode" id="cb7"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>cout <span class="op">&lt;&lt;</span> <span class="st">&quot;x0 = &quot;</span> <span class="op">&lt;&lt;</span> fixed <span class="op">&lt;&lt;</span> setprecision<span class="op">(</span>cifre_significative<span class="op">)</span> <span class="op">&lt;&lt;</span> zero <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span></code></pre></div>
+<p>Potete installare la libreria <code>fmtlib</code> eseguendo questo
+comando:</p>
 <p><input type="text" value="curl https://ziotom78.github.io/tnds-tomasi-notebooks/install_fmt_library | sh" id="installFmtCommand" readonly="1" size="60"><button onclick='copyFmtInstallationScript("installFmtCommand")'>Copia</button></p>
-<p>e seguite poi le istruzioni fornite a video, che spiegano come aggiungere <code>format.cc</code> nel <code>Makefile</code>.</p>
-<p>In alternativa, scaricate manualmente lo script <a href="./install_fmt_library"><code>install_fmt_library</code></a> (click col tasto destro sul link e scegliere «Salva come…»). Lo script funziona solo sotto Linux e Mac; se usate Windows, scaricate questo <a href="./fmtlib.zip">file zip</a> nella directory dell’esercizio e decomprimetelo, poi aggiungete il file <code>format.cc</code> nella riga in cui compilate l’eseguibile.</p>
+<p>e seguite poi le istruzioni fornite a video, che spiegano come
+aggiungere <code>format.cc</code> nel <code>Makefile</code>.</p>
+<p>In alternativa, scaricate manualmente lo script <a
+href="./install_fmt_library"><code>install_fmt_library</code></a> (click
+col tasto destro sul link e scegliere «Salva come…»). Lo script funziona
+solo sotto Linux e Mac; se usate Windows, scaricate questo <a
+href="./fmtlib.zip">file zip</a> nella directory dell’esercizio e
+decomprimetelo, poi aggiungete il file <code>format.cc</code> nella riga
+in cui compilate l’eseguibile.</p>
 <h2 id="la-funzione-segno">La funzione segno</h2>
-<p>La funzione <code>sign(x)</code> non è codificata nelle cstdlib, poiché l’informazione sul segno è già contenuta nella variabile di tipo <code>int</code>, <code>float</code>, <code>double</code>. [Nel C++11 è però disponibile la funzione <code>std::copysign</code>, definita in <code>&lt;cmath&gt;</code>, che copia il segno di una variabile <code>double</code> in un valore. Si può quindi usare questa definizione:]</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> sign<span class="op">(</span><span class="dt">double</span> x<span class="op">)</span> <span class="op">{</span></span>
+<p>La funzione <code>sign(x)</code> non è codificata nelle cstdlib,
+poiché l’informazione sul segno è già contenuta nella variabile di tipo
+<code>int</code>, <code>float</code>, <code>double</code>. [Nel C++11 è
+però disponibile la funzione <code>std::copysign</code>, definita in
+<code>&lt;cmath&gt;</code>, che copia il segno di una variabile
+<code>double</code> in un valore. Si può quindi usare questa
+definizione:]</p>
+<div class="sourceCode" id="cb8"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> sign<span class="op">(</span><span class="dt">double</span> x<span class="op">)</span> <span class="op">{</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Questa chiamata a copysign ritorna ±1.0 a seconda</span></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">// del segno di x, oppure zero se x == 0</span></span>
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> x <span class="op">!=</span> <span class="dv">0</span> <span class="op">?</span> <span class="bu">std::</span>copysign<span class="op">(</span><span class="fl">1.0</span><span class="op">,</span> x<span class="op">)</span> <span class="op">:</span> <span class="fl">0.0</span><span class="op">;</span></span>
 <span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
-<p>[Notare che la funzione restituisce zero se <code>x</code> è zero].</p>
+<p>[Notare che la funzione restituisce zero se <code>x</code> è
+zero].</p>
 <p>Una semplice implementazione della funzione segno è</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> sign<span class="op">(</span><span class="dt">double</span> x<span class="op">){</span></span>
+<div class="sourceCode" id="cb9"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> sign<span class="op">(</span><span class="dt">double</span> x<span class="op">){</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span><span class="op">(</span>x <span class="op">&lt;</span> <span class="dv">0</span><span class="op">)</span></span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>      <span class="cf">return</span> <span class="op">-</span><span class="dv">1</span><span class="op">;</span></span>
 <span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">else</span> <span class="cf">if</span> <span class="op">(</span>x <span class="op">&gt;</span> <span class="dv">0</span><span class="op">)</span></span>
@@ -281,13 +490,17 @@ f(x) = 3x^2 + 5x - 2.
 <span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
 <span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
-<p>[Anche questa funzione restituisce zero se <code>x</code> è zero].</p>
+<p>[Anche questa funzione restituisce zero se <code>x</code> è
+zero].</p>
 <p>Una implementazione molto più compatta [però meno leggibile] è</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> sign<span class="op">(</span><span class="dt">double</span> x<span class="op">){</span></span>
+<div class="sourceCode" id="cb10"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> sign<span class="op">(</span><span class="dt">double</span> x<span class="op">){</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="op">(</span>x <span class="op">==</span> <span class="fl">0.</span> <span class="op">?</span> <span class="fl">0.</span> <span class="op">:</span> <span class="op">(</span>x <span class="op">&gt;</span> <span class="dv">0</span> <span class="op">?</span> <span class="fl">1.</span> <span class="op">:</span> <span class="op">-</span><span class="dv">1</span><span class="op">));</span></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code></pre></div>
-<p>Usando una qualsiasi di queste funzioni, la condizione richiesta dall’algoritmo di bisezione sarà</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> sign_a<span class="op">{</span>sign<span class="op">(</span>f<span class="op">(</span>a<span class="op">))};</span></span>
+<p>Usando una qualsiasi di queste funzioni, la condizione richiesta
+dall’algoritmo di bisezione sarà</p>
+<div class="sourceCode" id="cb11"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> sign_a<span class="op">{</span>sign<span class="op">(</span>f<span class="op">(</span>a<span class="op">))};</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> sign_b<span class="op">{</span>sign<span class="op">(</span>f<span class="op">(</span>b<span class="op">))};</span></span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> sign_c<span class="op">{</span>sign<span class="op">(</span>f<span class="op">(</span>c<span class="op">))};</span></span>
 <span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
@@ -304,10 +517,22 @@ f(x) = 3x^2 + 5x - 2.
 <span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 <h2 id="classe-astratta-solutore">Classe astratta Solutore</h2>
 <ol>
-<li><p>La classe astratta Solutore potrebbe avere un metodo virtuale, corrispondente alla chiamate dell’algoritmo che cercherà di determinare gli zeri di una generica <code>FunzioneBase</code>, passata come puntatore o come referenza: nell’esempio sono presentati entrambi i casi, ma in generale è preferibile usare una <strong>referenza</strong>.</p></li>
-<li><p>Inoltre possiamo definire dei metodi per configurare la precisione richiesta: tale precisione può essere definita nel costruttore, tramite un metodo dedicato o direttamente nella chiamata al metodo <code>CercaZeri</code>. Lo stesso discorso vale per il numero massimo di iterazioni.</p></li>
-<li><p>Come nel caso di <code>FunzioneBase</code>, notate l’implementazione del distruttore come metodo virtuale e l’utilzzo della keyword <code>override</code>.</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Solutore <span class="op">{</span></span>
+<li><p>La classe astratta Solutore potrebbe avere un metodo virtuale,
+corrispondente alla chiamate dell’algoritmo che cercherà di determinare
+gli zeri di una generica <code>FunzioneBase</code>, passata come
+puntatore o come referenza: nell’esempio sono presentati entrambi i
+casi, ma in generale è preferibile usare una
+<strong>referenza</strong>.</p></li>
+<li><p>Inoltre possiamo definire dei metodi per configurare la
+precisione richiesta: tale precisione può essere definita nel
+costruttore, tramite un metodo dedicato o direttamente nella chiamata al
+metodo <code>CercaZeri</code>. Lo stesso discorso vale per il numero
+massimo di iterazioni.</p></li>
+<li><p>Come nel caso di <code>FunzioneBase</code>, notate
+l’implementazione del distruttore come metodo virtuale e l’utilzzo della
+keyword <code>override</code>.</p>
+<div class="sourceCode" id="cb12"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Solutore <span class="op">{</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span><span class="op">:</span></span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  Solutore<span class="op">();</span></span>
 <span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  Solutore<span class="op">(</span><span class="dt">double</span> prec<span class="op">);</span></span>
@@ -333,8 +558,12 @@ f(x) = 3x^2 + 5x - 2.
 <span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> <span class="va">m_prec</span><span class="op">;</span> <span class="co">// precisione della soluzione</span></span>
 <span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a>  <span class="dt">unsigned</span> <span class="dt">int</span> <span class="va">m_nmax</span><span class="op">,</span> <span class="va">m_niterations</span><span class="op">;</span></span>
 <span id="cb12-26"><a href="#cb12-26" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code></pre></div>
-<p>L’implementazione dell’algoritmo di bisezione dovrà necessariamente avvenire costruendo una classe dedicata <code>Bisezione</code> che erediti da <code>Solutore</code> e implementi una versione concreta del metodo <code>CercaZeri</code>.</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Bisezione <span class="op">:</span> <span class="kw">public</span> Solutore <span class="op">{</span></span>
+<p>L’implementazione dell’algoritmo di bisezione dovrà necessariamente
+avvenire costruendo una classe dedicata <code>Bisezione</code> che
+erediti da <code>Solutore</code> e implementi una versione concreta del
+metodo <code>CercaZeri</code>.</p>
+<div class="sourceCode" id="cb13"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Bisezione <span class="op">:</span> <span class="kw">public</span> Solutore <span class="op">{</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span><span class="op">:</span></span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  Bisezione<span class="op">();</span></span>
 <span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  Bisezione<span class="op">(</span><span class="dt">double</span> prec<span class="op">);</span></span>
@@ -350,22 +579,48 @@ f(x) = 3x^2 + 5x - 2.
 <span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>                                    <span class="dt">double</span> prec <span class="op">=</span> <span class="fl">1e-3</span><span class="op">,</span> <span class="dt">unsigned</span> <span class="dt">int</span> nmax <span class="op">=</span> <span class="dv">100</span><span class="op">);</span></span>
 <span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code></pre></div></li>
 </ol>
-<p>Per segnalare condizioni di errore potete usare i suggerimenti spiegati nelle <a href="./tomasi-lezione-06.html#use-of-nan">slide di approfondimento</a>.</p>
-<h1 id="esercizio-6.3">Esercizio 6.3 - Equazioni non risolubili analiticamente (da consegnare)</h1>
-<p>In problemi di meccanica quantistica che verranno studiati nel prossimo anno, ci si può imbattere in equazioni del tipo: <span class="math display">
+<p>Per segnalare condizioni di errore potete usare i suggerimenti
+spiegati nelle <a href="./tomasi-lezione-06.html#use-of-nan">slide di
+approfondimento</a>.</p>
+<h1 id="esercizio-6.3">Esercizio 6.3 - Equazioni non risolubili
+analiticamente (da consegnare)</h1>
+<p>In problemi di meccanica quantistica che verranno studiati nel
+prossimo anno, ci si può imbattere in equazioni del tipo: <span
+class="math display">
 x = \tan x.
 </span></p>
-<p>È facile rendersi conto che tale equazione ha una soluzione in ciascuno degli intervalli <span class="math inline">(n\pi, n\pi + \pi/2)</span> con <span class="math inline">n = 1, 2, 3\ldots</span>. Calcolare con una precisione di almeno <span class="math inline">10^{-6}</span> i valori delle soluzioni per <span class="math inline">n = 1\ldots 20</span>.</p>
-<p>Suggerimento: riscrivere l’equazione come <span class="math inline">\sin x - x \cos x = 0</span></p>
+<p>È facile rendersi conto che tale equazione ha una soluzione in
+ciascuno degli intervalli <span class="math inline">(n\pi, n\pi +
+\pi/2)</span> con <span class="math inline">n = 1, 2, 3\ldots</span>.
+Calcolare con una precisione di almeno <span
+class="math inline">10^{-6}</span> i valori delle soluzioni per <span
+class="math inline">n = 1\ldots 20</span>.</p>
+<p>Suggerimento: riscrivere l’equazione come <span
+class="math inline">\sin x - x \cos x = 0</span></p>
 <h1 id="esercizio-6.4">Esercizio 6.4 - Miglioramenti di Solutore</h1>
-<p>Aggiungere a <code>Solutore</code> due nuovi metodi virtuali puri:</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="kw">virtual</span> <span class="dt">bool</span> Trovato<span class="op">()</span> <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<p>Aggiungere a <code>Solutore</code> due nuovi metodi virtuali
+puri:</p>
+<div class="sourceCode" id="cb14"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="kw">virtual</span> <span class="dt">bool</span> Trovato<span class="op">()</span> <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="kw">virtual</span> <span class="dt">double</span> Incertezza<span class="op">()</span> <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span></code></pre></div>
-<p>Il primo dovrà restituire vero o falso a seconda che lo zero sia stato effettivamente trovato o meno. Ad esempio se un algoritmo non riesce a convergere per via delle cattive condizioni iniziali, <code>Trovato()</code> dovrà restituire <code>false</code>.</p>
-<p>Il secondo dovrà restituire l’incertezza effettiva sull’ascissa dello zero stimato, che di solito è migliore del minimo requisito sulla precisione immagazzinato in <code>_prec</code>.</p>
-<p>Implementare questi metodi nelle classi concrete usate per gli altri esercizi di questa lezione.</p>
-<h1 id="esercizio-6.5">Esercizio 6.5 - Ricerca di zeri di una funzione senza uso del polimorfismo</h1>
-<p>Si provi ad implementare un algoritmo di ricerca degli zeri di una funzione senza utilizzare il polimorfismo. Prendere come spunto le soluzioni indicate nelle trasparenze finali della lezione teorica. Si potrebbe codificare il metodo della bisezione in una funzione che accetti in input una <code>std::function</code>, e modellizzare la funzione di cui si vuole cercare lo zero con una funzione lambda.</p>                    
+<p>Il primo dovrà restituire vero o falso a seconda che lo zero sia
+stato effettivamente trovato o meno. Ad esempio se un algoritmo non
+riesce a convergere per via delle cattive condizioni iniziali,
+<code>Trovato()</code> dovrà restituire <code>false</code>.</p>
+<p>Il secondo dovrà restituire l’incertezza effettiva sull’ascissa dello
+zero stimato, che di solito è migliore del minimo requisito sulla
+precisione immagazzinato in <code>_prec</code>.</p>
+<p>Implementare questi metodi nelle classi concrete usate per gli altri
+esercizi di questa lezione.</p>
+<h1 id="esercizio-6.5">Esercizio 6.5 - Ricerca di zeri di una funzione
+senza uso del polimorfismo</h1>
+<p>Si provi ad implementare un algoritmo di ricerca degli zeri di una
+funzione senza utilizzare il polimorfismo. Prendere come spunto le
+soluzioni indicate nelle trasparenze finali della lezione teorica. Si
+potrebbe codificare il metodo della bisezione in una funzione che
+accetti in input una <code>std::function</code>, e modellizzare la
+funzione di cui si vuole cercare lo zero con una funzione
+lambda.</p>                    
                 </div>
             </div>
 

@@ -65,7 +65,7 @@
             code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
             code span.at { color: #7d9029; } /* Attribute */
             code span.bn { color: #40a070; } /* BaseN */
-            code span.bu { } /* BuiltIn */
+            code span.bu { color: #008000; } /* BuiltIn */
             code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
             code span.ch { color: #4070a0; } /* Char */
             code span.cn { color: #880000; } /* Constant */
@@ -78,7 +78,7 @@
             code span.ex { } /* Extension */
             code span.fl { color: #40a070; } /* Float */
             code span.fu { color: #06287e; } /* Function */
-            code span.im { } /* Import */
+            code span.im { color: #008000; font-weight: bold; } /* Import */
             code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
             code span.kw { color: #007020; font-weight: bold; } /* Keyword */
             code span.op { color: #666666; } /* Operator */
@@ -91,22 +91,24 @@
             code span.vs { color: #4070a0; } /* VerbatimString */
             code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
         </style>
-                                            <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.js"></script>
+                                            <script defer=""
+                                            src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js"></script>
                                             <script>document.addEventListener("DOMContentLoaded", function () {
-                                             var mathElements = document.getElementsByClassName("math");
-                                             var macros = [];
-                                             for (var i = 0; i < mathElements.length; i++) {
-                                              var texText = mathElements[i].firstChild;
-                                              if (mathElements[i].tagName == "SPAN") {
-                                               katex.render(texText.data, mathElements[i], {
-                                                displayMode: mathElements[i].classList.contains('display'),
-                                                throwOnError: false,
-                                                macros: macros,
-                                                fleqn: false
-                                               });
-                                            }}});
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
                                             </script>
-                                            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css" />
+                                            <link rel="stylesheet"
+                                            href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css" />
                                           <script src="./fmtinstall.js"></script>
                  
     </head>
@@ -118,10 +120,14 @@
 
                         <div class="uk-grid" data-uk-grid-margin>
                 <div class="uk-width-1-1">
-                    <h1 class="uk-heading-large">Lezione 8: Equazioni differenziali</h1>
-                                        <h3 class="uk-heading-large">A.A. 2021−2022</p></h3>
-                                                            <p class="uk-text-large">Leonardo Carminati</p>
-                                        <p class="uk-text-large">Maurizio Tomasi</p>
+                    <h1 class="uk-heading-large">Lezione 8: Equazioni
+differenziali</h1>
+                                        <h3 class="uk-heading-large">A.A.
+2021−2022</p></h3>
+                                                            <p class="uk-text-large">Leonardo
+Carminati</p>
+                                        <p class="uk-text-large">Maurizio
+Tomasi</p>
                                     </div>
             </div>
             
@@ -131,34 +137,126 @@
                         <div class="uk-panel uk-panel-box menu-begin" >
 
                                                         <ul>
-                                                        <li><a href="#esercizio-9.0">Esercizio 9.0 - Algebra vettoriale</a></li>
-                                                        <li><a href="#esercizio-9.1">Esercizio 9.1 - Risoluzione tramite metodo di Eulero</a>
+                                                        <li><a
+                                                        href="#esercizio-9.0"
+                                                        id="toc-esercizio-9.0">Esercizio
+                                                        9.0 - Algebra
+                                                        vettoriale</a></li>
+                                                        <li><a
+                                                        href="#esercizio-9.1"
+                                                        id="toc-esercizio-9.1">Esercizio
+                                                        9.1 -
+                                                        Risoluzione
+                                                        tramite metodo
+                                                        di Eulero</a>
                                                         <ul>
-                                                        <li><a href="#il-metodo-di-eulero">Il metodo di Eulero</a></li>
-                                                        <li><a href="#struttura-del-programma">Struttura del programma</a></li>
-                                                        <li><a href="#grafico-della-soluzione">Grafico della soluzione</a></li>
-                                                        <li><a href="#cosa-ci-aspettiamo">Cosa ci aspettiamo?</a></li>
-                                                        <li><a href="#esercizio-9.2">Esercizio 9.2 - Risoluzione tramite Runge-Kutta (da consegnare)</a></li>
-                                                        <li><a href="#il-metodo-di-runge-kutta">Il metodo di Runge-Kutta</a></li>
-                                                        <li><a href="#cosa-ci-aspettiamo-1">Cosa ci aspettiamo?</a></li>
-                                                        <li><a href="#errore-in-funzione-del-passo">Errore in funzione del passo</a></li>
+                                                        <li><a
+                                                        href="#il-metodo-di-eulero"
+                                                        id="toc-il-metodo-di-eulero">Il
+                                                        metodo di
+                                                        Eulero</a></li>
+                                                        <li><a
+                                                        href="#struttura-del-programma"
+                                                        id="toc-struttura-del-programma">Struttura
+                                                        del
+                                                        programma</a></li>
+                                                        <li><a
+                                                        href="#grafico-della-soluzione"
+                                                        id="toc-grafico-della-soluzione">Grafico
+                                                        della
+                                                        soluzione</a></li>
+                                                        <li><a
+                                                        href="#cosa-ci-aspettiamo"
+                                                        id="toc-cosa-ci-aspettiamo">Cosa
+                                                        ci
+                                                        aspettiamo?</a></li>
+                                                        <li><a
+                                                        href="#esercizio-9.2"
+                                                        id="toc-esercizio-9.2">Esercizio
+                                                        9.2 -
+                                                        Risoluzione
+                                                        tramite
+                                                        Runge-Kutta (da
+                                                        consegnare)</a></li>
+                                                        <li><a
+                                                        href="#il-metodo-di-runge-kutta"
+                                                        id="toc-il-metodo-di-runge-kutta">Il
+                                                        metodo di
+                                                        Runge-Kutta</a></li>
+                                                        <li><a
+                                                        href="#cosa-ci-aspettiamo-1"
+                                                        id="toc-cosa-ci-aspettiamo-1">Cosa
+                                                        ci
+                                                        aspettiamo?</a></li>
+                                                        <li><a
+                                                        href="#errore-in-funzione-del-passo"
+                                                        id="toc-errore-in-funzione-del-passo">Errore
+                                                        in funzione del
+                                                        passo</a></li>
                                                         </ul></li>
-                                                        <li><a href="#esercizio-9.3">Esercizio 9.3 - Moto del pendolo (da consegnare)</a>
+                                                        <li><a
+                                                        href="#esercizio-9.3"
+                                                        id="toc-esercizio-9.3">Esercizio
+                                                        9.3 - Moto del
+                                                        pendolo (da
+                                                        consegnare)</a>
                                                         <ul>
-                                                        <li><a href="#il-moto-del-pendolo">Il moto del pendolo</a></li>
-                                                        <li><a href="#calcolo-del-periodo">Calcolo del periodo</a></li>
+                                                        <li><a
+                                                        href="#il-moto-del-pendolo"
+                                                        id="toc-il-moto-del-pendolo">Il
+                                                        moto del
+                                                        pendolo</a></li>
+                                                        <li><a
+                                                        href="#calcolo-del-periodo"
+                                                        id="toc-calcolo-del-periodo">Calcolo
+                                                        del
+                                                        periodo</a></li>
                                                         </ul></li>
-                                                        <li><a href="#esercizio-9.4">Esercizio 9.4 - Oscillazione forzate e risonanza (da consegnare)</a>
+                                                        <li><a
+                                                        href="#esercizio-9.4"
+                                                        id="toc-esercizio-9.4">Esercizio
+                                                        9.4 -
+                                                        Oscillazione
+                                                        forzate e
+                                                        risonanza (da
+                                                        consegnare)</a>
                                                         <ul>
-                                                        <li><a href="#oscillatore-armonico-con-forzante">Oscillatore armonico con forzante</a></li>
+                                                        <li><a
+                                                        href="#oscillatore-armonico-con-forzante"
+                                                        id="toc-oscillatore-armonico-con-forzante">Oscillatore
+                                                        armonico con
+                                                        forzante</a></li>
                                                         </ul></li>
-                                                        <li><a href="#esercizio-9.5">Esercizio 9.5 - Moto in campo gravitazionale</a>
+                                                        <li><a
+                                                        href="#esercizio-9.5"
+                                                        id="toc-esercizio-9.5">Esercizio
+                                                        9.5 - Moto in
+                                                        campo
+                                                        gravitazionale</a>
                                                         <ul>
-                                                        <li><a href="#moto-in-campo-gravitazionale">Moto in campo gravitazionale</a></li>
+                                                        <li><a
+                                                        href="#moto-in-campo-gravitazionale"
+                                                        id="toc-moto-in-campo-gravitazionale">Moto
+                                                        in campo
+                                                        gravitazionale</a></li>
                                                         </ul></li>
-                                                        <li><a href="#esercizio-9.6">Esercizio 9.6 - Moto di una particella carica in un campo elettrico e magnetico uniforme</a>
+                                                        <li><a
+                                                        href="#esercizio-9.6"
+                                                        id="toc-esercizio-9.6">Esercizio
+                                                        9.6 - Moto di
+                                                        una particella
+                                                        carica in un
+                                                        campo elettrico
+                                                        e magnetico
+                                                        uniforme</a>
                                                         <ul>
-                                                        <li><a href="#moto-in-campo-elettrico-e-magnetico-uniformi">Moto in campo elettrico e magnetico uniformi</a></li>
+                                                        <li><a
+                                                        href="#moto-in-campo-elettrico-e-magnetico-uniformi"
+                                                        id="toc-moto-in-campo-elettrico-e-magnetico-uniformi">Moto
+                                                        in campo
+                                                        elettrico e
+                                                        magnetico
+                                                        uniformi</a></li>
                                                         </ul></li>
                                                         </ul>
                             
@@ -167,41 +265,100 @@
                 </div>
 
                 <div class="uk-width-medium-3-4">
-<p>[La pagina con la spiegazione originale degli esercizi si trova qui: <a href="http://labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/lezione8_2122.html">labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/lezione8_2122.html</a>.]</p>
-<p>In questa lezione introdurremo alcuni metodi per la risoluzione di equazioni differenziali ordinarie. Implementeremo la risoluzione numerica di queste equazioni con i metodi di Eulero e di Runge-Kutta.</p>
-<p>Per risolvere l’esercizio vedremo come è possibile definire le principali operazioni algebriche per i vector della STL. Questo ci permetterà di realizzare i metodi di integrazione di equazioni differenziali usando una notazione vettoriale, molto simile al formalismo matematico.</p>
+<p>[La pagina con la spiegazione originale degli esercizi si trova qui:
+<a
+href="http://labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/lezione8_2122.html">labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/lezione8_2122.html</a>.]</p>
+<p>In questa lezione introdurremo alcuni metodi per la risoluzione di
+equazioni differenziali ordinarie. Implementeremo la risoluzione
+numerica di queste equazioni con i metodi di Eulero e di
+Runge-Kutta.</p>
+<p>Per risolvere l’esercizio vedremo come è possibile definire le
+principali operazioni algebriche per i vector della STL. Questo ci
+permetterà di realizzare i metodi di integrazione di equazioni
+differenziali usando una notazione vettoriale, molto simile al
+formalismo matematico.</p>
 <h1 id="esercizio-9.0">Esercizio 9.0 - Algebra vettoriale</h1>
-<p>Come prima cosa, proviamo a dotare i vector della STL di tutte le funzionalità algebriche che ci possono essere utili, definendo opportunamente gli operatori <code>+</code>, <code>*</code>, <code>/</code>, <code>+=</code>. Dal momento che non possiamo modificare gli header files e i files di implementazione della classe <code>vector</code>, implementiamo questi operatori come funzioni libere in un header file apposito da includere quando necessario. Potete trovarne un esempio qui.</p>
-<p>Provate a scrivere un piccolo codice di test per verificare il corretto funzionamento delle operazioni tra vettori : potreste provate a realizzare un semplice programma che scriva a video le componenti della risultate di due forze (vettori tridimensionali) e le componenti del versore della risultante.</p>
-<h1 id="esercizio-9.1">Esercizio 9.1 - Risoluzione tramite metodo di Eulero</h1>
-<p>Implementare un codice per la risoluzione numerica di un’equazione differenziale descrivente il moto di un oscillatore armonico tramite il metodo di Eulero. Graficare l’andamento della posizione in funzione del tempo al variare del passo di integrazione e confrontare l’errore commesso con la soluzione esatta.</p>
-<p>Struttureremo la soluzione del problema in modo simile a quanto fatto nelle precedenti lezioni su ricerca degli zeri e integrazione numerica:</p>
-<p><img src="http://labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/figure/EqDiffClassi_2122.png" /></p>
+<p>Come prima cosa, proviamo a dotare i vector della STL di tutte le
+funzionalità algebriche che ci possono essere utili, definendo
+opportunamente gli operatori <code>+</code>, <code>*</code>,
+<code>/</code>, <code>+=</code>. Dal momento che non possiamo modificare
+gli header files e i files di implementazione della classe
+<code>vector</code>, implementiamo questi operatori come funzioni libere
+in un header file apposito da includere quando necessario. Potete
+trovarne un esempio qui.</p>
+<p>Provate a scrivere un piccolo codice di test per verificare il
+corretto funzionamento delle operazioni tra vettori : potreste provate a
+realizzare un semplice programma che scriva a video le componenti della
+risultate di due forze (vettori tridimensionali) e le componenti del
+versore della risultante.</p>
+<h1 id="esercizio-9.1">Esercizio 9.1 - Risoluzione tramite metodo di
+Eulero</h1>
+<p>Implementare un codice per la risoluzione numerica di un’equazione
+differenziale descrivente il moto di un oscillatore armonico tramite il
+metodo di Eulero. Graficare l’andamento della posizione in funzione del
+tempo al variare del passo di integrazione e confrontare l’errore
+commesso con la soluzione esatta.</p>
+<p>Struttureremo la soluzione del problema in modo simile a quanto fatto
+nelle precedenti lezioni su ricerca degli zeri e integrazione
+numerica:</p>
+<p><img
+src="http://labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/figure/EqDiffClassi_2122.png" /></p>
 <ul>
-<li>Definiamo una classe astratta <code>FunzioneVettorialeBase</code> con un unico metodo <code>Eval</code>, puramente virtuale, che dato un <code>vector</code> ed un <code>double</code>, rappresentante il tempo, restituisce il valore della derivata prima nel punto e nell’istante considerati.</li>
-<li>Da questa classe astratta, deriviamo una classe concreta che descriva le leggi del modo di un oscillatore armonico, permettendo di definirne la frequenza, o nel construttore o con degli opportuni metodi per leggere/definire dei parametri.</li>
-<li>Definiamo una classe astratta <code>EquazioneDifferenzialeBase</code> che ha un unico metodo <code>Passo</code>, puramente virtuale, che dati il tempo <span class="math inline">t</span>, un vettore <span class="math inline">\vec x</span>, il passo di integrazione <span class="math inline">h</span> e un puntatore ad una <code>FunzioneVettorialeBase</code>, restituisca la una stima di del valore della posizione <span class="math inline">\vec x</span> al tempo <span class="math inline">t + h</span>. Avere il tempo <span class="math inline">t</span> come argomento permetterà in esercizi futuri (come ad esempio il <a href="carminati-esercizi-09.html#esercizio-9.4---oscillazione-forzate-e-risonanza-da-consegnare">9.4</a>) di avere forzanti esterne o parametri dipendenti dal tempo.</li>
-<li>Da questa classe astratta, deriviamo una classe concreta che implementi il metodo di Eulero.</li>
+<li>Definiamo una classe astratta <code>FunzioneVettorialeBase</code>
+con un unico metodo <code>Eval</code>, puramente virtuale, che dato un
+<code>vector</code> ed un <code>double</code>, rappresentante il tempo,
+restituisce il valore della derivata prima nel punto e nell’istante
+considerati.</li>
+<li>Da questa classe astratta, deriviamo una classe concreta che
+descriva le leggi del modo di un oscillatore armonico, permettendo di
+definirne la frequenza, o nel construttore o con degli opportuni metodi
+per leggere/definire dei parametri.</li>
+<li>Definiamo una classe astratta
+<code>EquazioneDifferenzialeBase</code> che ha un unico metodo
+<code>Passo</code>, puramente virtuale, che dati il tempo <span
+class="math inline">t</span>, un vettore <span class="math inline">\vec
+x</span>, il passo di integrazione <span class="math inline">h</span> e
+un puntatore ad una <code>FunzioneVettorialeBase</code>, restituisca la
+una stima di del valore della posizione <span class="math inline">\vec
+x</span> al tempo <span class="math inline">t + h</span>. Avere il tempo
+<span class="math inline">t</span> come argomento permetterà in esercizi
+futuri (come ad esempio il <a
+href="carminati-esercizi-09.html#esercizio-9.4---oscillazione-forzate-e-risonanza-da-consegnare">9.4</a>)
+di avere forzanti esterne o parametri dipendenti dal tempo.</li>
+<li>Da questa classe astratta, deriviamo una classe concreta che
+implementi il metodo di Eulero.</li>
 </ul>
 <p>Per testare il metodo, risolviamo l’equazione differenziale:</p>
 <p><span class="math display">
 \frac{\mathrm{d}}{\mathrm{d}t} \begin{pmatrix}x\\v\end{pmatrix} =
-\begin{pmatrix}v\\-\omega_0^2 x\end{pmatrix},\quad x(0) = 0, \quad v(0) = 1, \quad \omega_0 = 1,
+\begin{pmatrix}v\\-\omega_0^2 x\end{pmatrix},\quad x(0) = 0, \quad v(0)
+= 1, \quad \omega_0 = 1,
 </span></p>
-<p>con passi di integrazione da 0.1 a 0.001, mettendo in grafico il valore della <span class="math inline">x</span> in funzione del tempo <span class="math inline">t</span> ed anche il suo errore rispetto alla soluzione esatta del problema, che è <span class="math inline">x(t) = \sin (t)</span>. Si consiglia di svolgere l’integrazione per un certo numero di periodi, in modo da vedere se l’ampiezza di oscillazione rimane costante. Integrare fino a <span class="math inline">t = 70\,\text{s}</span> permette di vedere circa 10 periodi.</p>
+<p>con passi di integrazione da 0.1 a 0.001, mettendo in grafico il
+valore della <span class="math inline">x</span> in funzione del tempo
+<span class="math inline">t</span> ed anche il suo errore rispetto alla
+soluzione esatta del problema, che è <span class="math inline">x(t) =
+\sin (t)</span>. Si consiglia di svolgere l’integrazione per un certo
+numero di periodi, in modo da vedere se l’ampiezza di oscillazione
+rimane costante. Integrare fino a <span class="math inline">t =
+70\,\text{s}</span> permette di vedere circa 10 periodi.</p>
 <h2 id="il-metodo-di-eulero">Il metodo di Eulero</h2>
 <p>Consideriamo la seconda legge della dimanica di Newton</p>
 <p><span class="math display">
 a = \frac{\mathrm{d}^2 x}{\mathrm{d}t^2} = \frac{F}m,
 </span></p>
-<p>che è un’equazione differenziale del secondo ordine che può essere ridotta ad un’equazione differenziale del prim’ordine introducendo la variabile velocità:</p>
+<p>che è un’equazione differenziale del secondo ordine che può essere
+ridotta ad un’equazione differenziale del prim’ordine introducendo la
+variabile velocità:</p>
 <p><span class="math display">
 \begin{aligned}
 \frac{\mathrm{d} x}{\mathrm{d}t} &amp;= v,
 \frac{\mathrm{d} v}{\mathrm{d}t} &amp;= \frac{F}m.
 \end{aligned}
 </span></p>
-<p>Il metodo di Eulero consiste nel calcolare lo stato della soluzione al tempo <span class="math inline">t + h</span> dato quello ad un tempo <span class="math inline">t</span> tramite le espressioni:</p>
+<p>Il metodo di Eulero consiste nel calcolare lo stato della soluzione
+al tempo <span class="math inline">t + h</span> dato quello ad un tempo
+<span class="math inline">t</span> tramite le espressioni:</p>
 <p><span class="math display">
 \begin{aligned}
 x(t + h) &amp;= x(t) + h \cdot \dot{x}(t) = x(t) + h \cdot v,\\
@@ -209,10 +366,16 @@ v(t + h) &amp;= v(t) + h \cdot \dot{v}(t) = x(t) + h \cdot \frac{F}m.
 \end{aligned}
 </span></p>
 <h2 id="struttura-del-programma">Struttura del programma</h2>
-<p>Le classi astratte <code>FunzioneVettorialeBase</code> e <code>EquazioneDifferenzialeBase</code> contengono (almeno per ora) solo un metodo virtuale puro, rispettivamente <code>Eval</code> e <code>Passo</code>.</p>
-<p>Per comodità possiamo mettere nello stesso file anche le classi concrete che, oltre ad avere l’implementazione dei metodi virtuali dovranno implementare un costruttore ed un distruttore.</p>
+<p>Le classi astratte <code>FunzioneVettorialeBase</code> e
+<code>EquazioneDifferenzialeBase</code> contengono (almeno per ora) solo
+un metodo virtuale puro, rispettivamente <code>Eval</code> e
+<code>Passo</code>.</p>
+<p>Per comodità possiamo mettere nello stesso file anche le classi
+concrete che, oltre ad avere l’implementazione dei metodi virtuali
+dovranno implementare un costruttore ed un distruttore.</p>
 <p>L’header file contente le dichiarazioni delle classi è quindi:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#pragma once</span></span>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#pragma once</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;vectorops.h&quot;</span></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
@@ -244,8 +407,11 @@ v(t + h) &amp;= v(t) + h \cdot \dot{v}(t) = x(t) + h \cdot \frac{F}m.
 <span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>  vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> Passo<span class="op">(</span><span class="dt">double</span> t<span class="op">,</span> <span class="at">const</span> vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> <span class="op">&amp;</span> x<span class="op">,</span></span>
 <span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>                       <span class="dt">double</span> h<span class="op">,</span> FunzioneVettorialeBase <span class="op">&amp;</span> f<span class="op">)</span> <span class="at">const</span> <span class="kw">override</span><span class="op">;</span></span>
 <span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code></pre></div>
-<p>Una volta implementate le classi (l’implementazione di Eulero è semplicissima se si usano le operazioni di algebra vettoriale), un possibile programma per risolvere l’esercizio è il seguente:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;equazionidifferenziali.h&quot;</span></span>
+<p>Una volta implementate le classi (l’implementazione di Eulero è
+semplicissima se si usano le operazioni di algebra vettoriale), un
+possibile programma per risolvere l’esercizio è il seguente:</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;equazionidifferenziali.h&quot;</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;cassert&gt;</span></span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
@@ -280,19 +446,31 @@ v(t + h) &amp;= v(t) + h \cdot \dot{v}(t) = x(t) + h \cdot \frac{F}m.
 <span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> step<span class="op">{};</span> step <span class="op">&lt;</span> nstep<span class="op">;</span> step<span class="op">++)</span> <span class="op">{</span></span>
 <span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>      print<span class="op">(</span>t<span class="op">,</span> x<span class="op">);</span></span>
-<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>      myGraph<span class="op">-&gt;</span>SetPoint<span class="op">(</span>step<span class="op">,</span> t<span class="op">,</span> x<span class="op">[</span><span class="dv">0</span><span class="op">]);</span></span>
-<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>      x <span class="op">=</span> myEuler<span class="op">.</span>Passo<span class="op">(</span>t<span class="op">,</span> x<span class="op">,</span> h<span class="op">,</span> osc<span class="op">);</span></span>
-<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>      t <span class="op">+=</span> h<span class="op">;</span></span>
-<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
-<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>  print<span class="op">(</span>t<span class="op">,</span> x<span class="op">);</span></span>
-<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
-<p>Come al solito, potete installare la libreria <code>fmtlib</code> usando lo script <a href="./install_fmt_library"><code>install_fmt_library</code></a>: scaricatelo nella directory dell’esercizio ed eseguitelo, oppure eseguite direttamente questo comando:</p>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>      x <span class="op">=</span> myEuler<span class="op">.</span>Passo<span class="op">(</span>t<span class="op">,</span> x<span class="op">,</span> h<span class="op">,</span> osc<span class="op">);</span></span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>      t <span class="op">+=</span> h<span class="op">;</span></span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>  print<span class="op">(</span>t<span class="op">,</span> x<span class="op">);</span></span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p>Come al solito, potete installare la libreria <code>fmtlib</code>
+usando lo script <a
+href="./install_fmt_library"><code>install_fmt_library</code></a>:
+scaricatelo nella directory dell’esercizio ed eseguitelo, oppure
+eseguite direttamente questo comando:</p>
 <p><input type="text" value="curl https://ziotom78.github.io/tnds-tomasi-notebooks/install_fmt_library | sh" id="installFmtCommand" readonly="1" size="60"><button onclick='copyFmtInstallationScript("installFmtCommand")'>Copia</button></p>
-<p>In alternativa, scaricate questo <a href="./fmtlib.zip">file zip</a> nella directory dell’esercizio e decomprimetelo, poi aggiungete il file <code>format.cc</code> nella riga in cui compilate l’eseguibile.</p>
+<p>In alternativa, scaricate questo <a href="./fmtlib.zip">file zip</a>
+nella directory dell’esercizio e decomprimetelo.</p>
 <h2 id="grafico-della-soluzione">Grafico della soluzione</h2>
-<p>Se si vuole anche implementare un grafico della soluzione con <a href="https://github.com/ziotom78/gplotpp">gplot++</a>, dovete salvare come al solito le ascisse e le ordinate dei punti del grafico in due <code>std::vector</code>, e poi chiamare il metodo <code>Gnuplot::plot(x, y)</code>. Per installare il file <code>gplot++.h</code> seguite le solite istruzioni descritte <a href="./index.html#gplotinstall">qui</a>.</p>
-<p>Questa è una possibile implementazione della seconda parte del <code>main</code>:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> times<span class="op">(</span>nstep<span class="op">);</span>  <span class="co">// Importante la parentesi tonda () anziché graffa {} qui</span></span>
+<p>Se si vuole anche implementare un grafico della soluzione con <a
+href="https://github.com/ziotom78/gplotpp">gplot++</a>, dovete salvare
+come al solito le ascisse e le ordinate dei punti del grafico in due
+<code>std::vector</code>, e poi chiamare il metodo
+<code>Gnuplot::plot(x, y)</code>. Per installare il file
+<code>gplot++.h</code> seguite le solite istruzioni descritte <a
+href="./index.html#gplotinstall">qui</a>.</p>
+<p>Questa è una possibile implementazione della seconda parte del
+<code>main</code>:</p>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> times<span class="op">(</span>nstep<span class="op">);</span>  <span class="co">// Importante la parentesi tonda () anziché graffa {} qui</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> pos<span class="op">(</span>nstep<span class="op">);</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> step<span class="op">{};</span> step <span class="op">&lt;</span> nstep<span class="op">;</span> step<span class="op">++)</span> <span class="op">{</span></span>
@@ -300,21 +478,22 @@ v(t + h) &amp;= v(t) + h \cdot \dot{v}(t) = x(t) + h \cdot \frac{F}m.
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    pos<span class="op">[</span>step<span class="op">]</span> <span class="op">=</span> x<span class="op">[</span><span class="dv">0</span><span class="op">];</span></span>
 <span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    </span>
 <span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    print<span class="op">(</span>t<span class="op">,</span> x<span class="op">);</span></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    myGraph<span class="op">-&gt;</span>SetPoint<span class="op">(</span>step<span class="op">,</span> t<span class="op">,</span> x<span class="op">[</span><span class="dv">0</span><span class="op">]);</span></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> myEuler<span class="op">.</span>Passo<span class="op">(</span>t<span class="op">,</span> x<span class="op">,</span> h<span class="op">,</span> osc<span class="op">);</span></span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    t <span class="op">+=</span> h<span class="op">;</span></span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>print<span class="op">(</span>t<span class="op">,</span> x<span class="op">);</span></span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>Gnuplot plt<span class="op">{};</span></span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>plt<span class="op">.</span>redirect_to_png<span class="op">(</span><span class="st">&quot;soluzione.png&quot;</span><span class="op">);</span></span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>plt<span class="op">.</span>plot<span class="op">(</span>times<span class="op">,</span> pos<span class="op">);</span></span>
-<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>plt<span class="op">.</span>set_xlabel<span class="op">(</span><span class="st">&quot;Tempo [s]&quot;</span><span class="op">);</span></span>
-<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>plt<span class="op">.</span>set_ylabel<span class="op">(</span><span class="st">&quot;Posizione x [m]&quot;</span><span class="op">);</span></span>
-<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>plt<span class="op">.</span>show<span class="op">();</span></span></code></pre></div>
-<p>Se invece volete usare ROOT, queste sono le righe da aggiungere alla seconda parte del <code>main</code>:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>TApplication myApp<span class="op">{</span><span class="st">&quot;myApp&quot;</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">0</span><span class="op">};</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> myEuler<span class="op">.</span>Passo<span class="op">(</span>t<span class="op">,</span> x<span class="op">,</span> h<span class="op">,</span> osc<span class="op">);</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    t <span class="op">+=</span> h<span class="op">;</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>print<span class="op">(</span>t<span class="op">,</span> x<span class="op">);</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>Gnuplot plt<span class="op">{};</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>plt<span class="op">.</span>redirect_to_png<span class="op">(</span><span class="st">&quot;soluzione.png&quot;</span><span class="op">);</span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>plt<span class="op">.</span>plot<span class="op">(</span>times<span class="op">,</span> pos<span class="op">);</span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>plt<span class="op">.</span>set_xlabel<span class="op">(</span><span class="st">&quot;Tempo [s]&quot;</span><span class="op">);</span></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>plt<span class="op">.</span>set_ylabel<span class="op">(</span><span class="st">&quot;Posizione x [m]&quot;</span><span class="op">);</span></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>plt<span class="op">.</span>show<span class="op">();</span></span></code></pre></div>
+<p>Se invece volete usare ROOT, queste sono le righe da aggiungere alla
+seconda parte del <code>main</code>:</p>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>TApplication myApp<span class="op">{</span><span class="st">&quot;myApp&quot;</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">0</span><span class="op">};</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>TGraph <span class="op">*</span>myGraph<span class="op">{</span><span class="kw">new</span> TGraph<span class="op">()};</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> step<span class="op">{};</span> step <span class="op">&lt;</span> nstep<span class="op">;</span> step<span class="op">++)</span> <span class="op">{</span></span>
@@ -335,21 +514,44 @@ v(t + h) &amp;= v(t) + h \cdot \dot{v}(t) = x(t) + h \cdot \frac{F}m.
 <span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>myGraph<span class="op">-&gt;</span>Draw<span class="op">(</span><span class="st">&quot;AL&quot;</span><span class="op">);</span></span>
 <span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>myApp<span class="op">.</span>Run<span class="op">();</span></span></code></pre></div>
-<p>Si riveda il solito esempio (<a href="./codici/test_tgraph.cpp">qui</a>) per l’uso dei <code>TGraph</code> di ROOT.</p>
+<p>Si riveda il solito esempio (<a
+href="./codici/test_tgraph.cpp">qui</a>) per l’uso dei
+<code>TGraph</code> di ROOT.</p>
 <h2 id="cosa-ci-aspettiamo">Cosa ci aspettiamo?</h2>
-<p>Il metodo di Eulero non è molto preciso; in effetti, con un passo di integrazione modesto si vede come esso possa risultare instabile, mostrando oscillazioni la cui ampiezza varia con il tempo. La figura sotto mostra l’andamento di <span class="math inline">x(t)</span> con un passo di integrazione di 0.1 s:</p>
-<p><img src="http://labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/figure/armonico0.1_eulero.png" /></p>
-<p>Per avere qualcosa di anche solo visivamente accettabile, bisogna andare a passi di almeno 0.0002 s:</p>
-<p><img src="http://labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/figure/armonico0.0002_eulero.png" /></p>
-<p><strong>Caccia all’errore</strong>: presentare due grafici come questi all’esame comporterebbe bocciatura immediata. Perché? (<em>Suggerimento: nel preparare i grafici per la presentazione ci si deve sempre ricordare di specificare cosa stiamo rappresentando sugli assi!</em>)</p>
-<p>La figura seguente riporta l’errore accumulato dopo 70 s di integrazione per diversi valori del passo:</p>
-<p><img src="http://labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/figure/errore_eulero.png" /></p>
-<p>Si noti come la pendenza della curva sia 1 in una scala log-log, mostrando come l’errore ottenuto sia proporzionale al passo <span class="math inline">h</span>.</p>
-<h2 id="esercizio-9.2">Esercizio 9.2 - Risoluzione tramite Runge-Kutta (da consegnare)</h2>
-<p>Ripetere l’esercizio 9.1 con il metodo di risoluzione di equazioni differenziali di Runge-Kutta (del quarto ordine) e confrontare quindi in condizioni analoghe (<span class="math inline">t</span> massimo e <span class="math inline">h</span>) la stabilità dei due metodi.</p>
-<p>Per svolgere l’esercizio, basterà realizzare una nuova classe concreta a partire da <code>EquazioneDifferenzialeBase</code>.</p>
+<p>Il metodo di Eulero non è molto preciso; in effetti, con un passo di
+integrazione modesto si vede come esso possa risultare instabile,
+mostrando oscillazioni la cui ampiezza varia con il tempo. La figura
+sotto mostra l’andamento di <span class="math inline">x(t)</span> con un
+passo di integrazione di 0.1 s:</p>
+<p><img
+src="http://labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/figure/armonico0.1_eulero.png" /></p>
+<p>Per avere qualcosa di anche solo visivamente accettabile, bisogna
+andare a passi di almeno 0.0002 s:</p>
+<p><img
+src="http://labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/figure/armonico0.0002_eulero.png" /></p>
+<p><strong>Caccia all’errore</strong>: presentare due grafici come
+questi all’esame comporterebbe bocciatura immediata. Perché?
+(<em>Suggerimento: nel preparare i grafici per la presentazione ci si
+deve sempre ricordare di specificare cosa stiamo rappresentando sugli
+assi!</em>)</p>
+<p>La figura seguente riporta l’errore accumulato dopo 70 s di
+integrazione per diversi valori del passo:</p>
+<p><img
+src="http://labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/figure/errore_eulero.png" /></p>
+<p>Si noti come la pendenza della curva sia 1 in una scala log-log,
+mostrando come l’errore ottenuto sia proporzionale al passo <span
+class="math inline">h</span>.</p>
+<h2 id="esercizio-9.2">Esercizio 9.2 - Risoluzione tramite Runge-Kutta
+(da consegnare)</h2>
+<p>Ripetere l’esercizio 9.1 con il metodo di risoluzione di equazioni
+differenziali di Runge-Kutta (del quarto ordine) e confrontare quindi in
+condizioni analoghe (<span class="math inline">t</span> massimo e <span
+class="math inline">h</span>) la stabilità dei due metodi.</p>
+<p>Per svolgere l’esercizio, basterà realizzare una nuova classe
+concreta a partire da <code>EquazioneDifferenzialeBase</code>.</p>
 <h2 id="il-metodo-di-runge-kutta">Il metodo di Runge-Kutta</h2>
-<p>Il noto metodo di Runge-Kutta è un metodo del quarto ordine ed utilizza la seguente determinazione dell’incremento:</p>
+<p>Il noto metodo di Runge-Kutta è un metodo del quarto ordine ed
+utilizza la seguente determinazione dell’incremento:</p>
 <p><span class="math display">
 \begin{aligned}
 k_1 &amp;= \dot{x}(t, x),\\
@@ -360,38 +562,76 @@ x(t+h) &amp;= x(t) + (k_1 + 2k_2 + 2k_3 + k_4)\frac{h}6.
 \end{aligned}
 </span></p>
 <h2 id="cosa-ci-aspettiamo-1">Cosa ci aspettiamo?</h2>
-<p>Il metodo di Runge-Kutte del quarto ordine è molto più preciso del metodo di Eulero: infatti produce oscillazioni molto stabili anche con un passo di integrazione di 0.1 s:</p>
-<p><img src="http://labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/figure/armonico0.1_RK4.png" /></p>
-<p>La figura seguente riporta l’errore accumulato dopo 70 s di integrazione per diversi valori del passo:</p>
-<p><img src="http://labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/figure/errore_RK4.png" /></p>
+<p>Il metodo di Runge-Kutte del quarto ordine è molto più preciso del
+metodo di Eulero: infatti produce oscillazioni molto stabili anche con
+un passo di integrazione di 0.1 s:</p>
+<p><img
+src="http://labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/figure/armonico0.1_RK4.png" /></p>
+<p>La figura seguente riporta l’errore accumulato dopo 70 s di
+integrazione per diversi valori del passo:</p>
+<p><img
+src="http://labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/figure/errore_RK4.png" /></p>
 <h2 id="errore-in-funzione-del-passo">Errore in funzione del passo</h2>
-<p>Si noti come la pendenza della curva nella sua parte iniziale sia 4 in una scala log-log, mostrando come l’errore ottenuto sia proporzionale a <span class="math inline">h^4</span>.</p>
-<p>Quando l’errore di troncamento del metodo diventa minore degli errori di arrotondamento della macchina si vede che non c’è più alcun miglioramento nel ridurre il passo, anzi, il maggior numero di calcoli richiesto risulta in un peggioramento globale dell’errore.</p>
-<h1 id="esercizio-9.3">Esercizio 9.3 - Moto del pendolo (da consegnare)</h1>
-<p>Implementare la risoluzione dell’equazione del pendolo usando i metodi precedentemente implementati. Fare quindi un grafico del periodo di oscillazione e verificare che per angoli grandi le oscillazioni non sono più isocrone.</p>
+<p>Si noti come la pendenza della curva nella sua parte iniziale sia 4
+in una scala log-log, mostrando come l’errore ottenuto sia proporzionale
+a <span class="math inline">h^4</span>.</p>
+<p>Quando l’errore di troncamento del metodo diventa minore degli errori
+di arrotondamento della macchina si vede che non c’è più alcun
+miglioramento nel ridurre il passo, anzi, il maggior numero di calcoli
+richiesto risulta in un peggioramento globale dell’errore.</p>
+<h1 id="esercizio-9.3">Esercizio 9.3 - Moto del pendolo (da
+consegnare)</h1>
+<p>Implementare la risoluzione dell’equazione del pendolo usando i
+metodi precedentemente implementati. Fare quindi un grafico del periodo
+di oscillazione e verificare che per angoli grandi le oscillazioni non
+sono più isocrone.</p>
 <h2 id="il-moto-del-pendolo">Il moto del pendolo</h2>
 <p>L’equazione del pendolo è data dalla relazione</p>
 <p><span class="math display">
 \frac{\mathrm{d}^2\theta}{\mathrm{d}t^2} = -\frac{g}{l}\sin\theta,
 </span></p>
-<p>dove <span class="math inline">g = 9.8\,\text{m/s}^2</span> è l’accellerazione di gravità sulla superficie terreste, mentre <span class="math inline">l</span> è la lunghezza del pendolo.</p>
-<p>L’equazione differenziale si può approssimare con quella di un oscillatore armonico per piccole oscillazioni, <span class="math inline">\sin\theta\sim\theta</span>. In tal caso, le oscillazioni risultano isocrone, cioè con periodo indipendente dall’ampiezza delle oscillazioni.</p>
-<p>Questa però è solo un’approssimazione, e per grandi oscillazioni bisogna usare l’equazione esatta. Essendo il moto non più armonico, il periodo di oscillazione dipende dall’ampiezza della stessa. La figura illustra il periodo al variare dell’ampiezza per un pendolo con <span class="math inline">l = 1\,\text{m}</span>:</p>
-<p><img src="http://labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/figure/periodo_pendoloreale.png" /></p>
-<p>Si noti come per piccole oscillazioni il periodo sia effettivamente quello atteso dall’approssimazione dell’oscillatore armonico:</p>
+<p>dove <span class="math inline">g = 9.8\,\text{m/s}^2</span> è
+l’accellerazione di gravità sulla superficie terreste, mentre <span
+class="math inline">l</span> è la lunghezza del pendolo.</p>
+<p>L’equazione differenziale si può approssimare con quella di un
+oscillatore armonico per piccole oscillazioni, <span
+class="math inline">\sin\theta\sim\theta</span>. In tal caso, le
+oscillazioni risultano isocrone, cioè con periodo indipendente
+dall’ampiezza delle oscillazioni.</p>
+<p>Questa però è solo un’approssimazione, e per grandi oscillazioni
+bisogna usare l’equazione esatta. Essendo il moto non più armonico, il
+periodo di oscillazione dipende dall’ampiezza della stessa. La figura
+illustra il periodo al variare dell’ampiezza per un pendolo con <span
+class="math inline">l = 1\,\text{m}</span>:</p>
+<p><img
+src="http://labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/figure/periodo_pendoloreale.png" /></p>
+<p>Si noti come per piccole oscillazioni il periodo sia effettivamente
+quello atteso dall’approssimazione dell’oscillatore armonico:</p>
 <p><span class="math display">
 T = \frac{2\pi}{\sqrt{\frac{g}l}} \approx 2.007\,\text{s},
 </span> ma aumenti significativamente per grandi ampiezze.</p>
 <h2 id="calcolo-del-periodo">Calcolo del periodo</h2>
-<p>In questo caso l’integrazione numerica dell’equazione differenziale non si può effettuare per un tempo predefinito, ma deve essere portata avanti fino a quando non si raggiunge una condizione compatibile con l’aver terminato l’oscillazione. Una possibile soluzione consiste in:</p>
+<p>In questo caso l’integrazione numerica dell’equazione differenziale
+non si può effettuare per un tempo predefinito, ma deve essere portata
+avanti fino a quando non si raggiunge una condizione compatibile con
+l’aver terminato l’oscillazione. Una possibile soluzione consiste
+in:</p>
 <ol>
-<li>dare come condizioni iniziali un valore di <span class="math inline">\theta</span> pari all’ampiezza di oscillazione e velocità angolare iniziale nulla;</li>
-<li>portare avanti l’integrazione fino a quando non si nota un cambiamento di segno della velocità angolare;</li>
-<li>siccome possiamo calcolare la velocità solo con granularità pari al passo di integrazione, possiamo stimare il passaggio dallo zero interpolando linearmente tra i due ultimi valori della velocità e calcolando quando la retta ottenuta passa per lo zero;</li>
-<li>il tempo così calcolato corrisponde al semiperiodo dell’oscillazione.</li>
+<li>dare come condizioni iniziali un valore di <span
+class="math inline">\theta</span> pari all’ampiezza di oscillazione e
+velocità angolare iniziale nulla;</li>
+<li>portare avanti l’integrazione fino a quando non si nota un
+cambiamento di segno della velocità angolare;</li>
+<li>siccome possiamo calcolare la velocità solo con granularità pari al
+passo di integrazione, possiamo stimare il passaggio dallo zero
+interpolando linearmente tra i due ultimi valori della velocità e
+calcolando quando la retta ottenuta passa per lo zero;</li>
+<li>il tempo così calcolato corrisponde al semiperiodo
+dell’oscillazione.</li>
 </ol>
 <p>Un esempio di pseudo-codice che implementa questo algoritmo è:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">// condizioni iniziali</span></span>
+<div class="sourceCode" id="cb5"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">// condizioni iniziali</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> t<span class="op">{};</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>x<span class="op">.</span>SetComponent<span class="op">(</span><span class="dv">0</span><span class="op">,</span> <span class="op">-</span>A<span class="op">);</span></span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>x<span class="op">.</span>SetComponent<span class="op">(</span><span class="dv">1</span><span class="op">,</span> <span class="dv">0</span><span class="op">);</span></span>
@@ -411,19 +651,41 @@ T = \frac{2\pi}{\sqrt{\frac{g}l}} \approx 2.007\,\text{s},
 <span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a><span class="co">// il periodo è due volte il semi-periodo appena calcolato</span></span>
 <span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>T <span class="op">*=</span> <span class="dv">2</span><span class="op">;</span></span></code></pre></div>
-<p>N.B.: controllate che la formula per l’interpolazione sia corretta!</p>
-<h1 id="esercizio-9.4">Esercizio 9.4 - Oscillazione forzate e risonanza (da consegnare)</h1>
-<p>Implementare la risoluzione dell’equazione di un oscillatore armonico smorzato con forzante. Fare quindi un grafico della soluzione stazionaria in funzione della frequenza dell’oscillatore, ricostruendo la curva di risonanza.</p>
-<h2 id="oscillatore-armonico-con-forzante">Oscillatore armonico con forzante</h2>
-<p>L’equazione dell’oscillatore armonico smorzato con forzante è data dalla relazione</p>
+<p>N.B.: controllate che la formula per l’interpolazione sia
+corretta!</p>
+<h1 id="esercizio-9.4">Esercizio 9.4 - Oscillazione forzate e risonanza
+(da consegnare)</h1>
+<p>Implementare la risoluzione dell’equazione di un oscillatore armonico
+smorzato con forzante. Fare quindi un grafico della soluzione
+stazionaria in funzione della frequenza dell’oscillatore, ricostruendo
+la curva di risonanza.</p>
+<h2 id="oscillatore-armonico-con-forzante">Oscillatore armonico con
+forzante</h2>
+<p>L’equazione dell’oscillatore armonico smorzato con forzante è data
+dalla relazione</p>
 <p><span class="math display">
-\frac{\mathrm{d}^2x}{\mathrm{d}t^2} = -\omega_0^2 x + \alpha \dot{x}(t) + \sin(\omega t).
+\frac{\mathrm{d}^2x}{\mathrm{d}t^2} = -\omega_0^2 x + \alpha \dot{x}(t)
++ \sin(\omega t).
 </span></p>
-<p>Nell’esercizio proposto, utilizzare i seguenti valori iniziali: <span class="math display">
+<p>Nell’esercizio proposto, utilizzare i seguenti valori iniziali: <span
+class="math display">
 \omega_0 = 10\,\text{rad/s}, \quad \alpha = \frac1{30}\,\text{s}.
 </span></p>
-<p>È bene ricordare che per determinare l’ampiezza bisogna aspettare che il transiente iniziale delle oscillazioni si esaurisca. Questo avviene con una costante di tempo pari a <span class="math inline">1/\alpha</span> (ovvero, dopo un tempo <span class="math inline">1/\alpha</span> l’ampiezza di oscillazione si riduce di un fattore <span class="math inline">1/e</span>). Le seguenti figure illustrano la parte iniziale del transiente per condizioni iniziali <span class="math inline">x(0)=0</span>, <span class="math inline">\dot{x}(0) = 0</span> e diversi valori di <span class="math inline">\omega</span>:</p>
+<p>È bene ricordare che per determinare l’ampiezza bisogna aspettare che
+il transiente iniziale delle oscillazioni si esaurisca. Questo avviene
+con una costante di tempo pari a <span
+class="math inline">1/\alpha</span> (ovvero, dopo un tempo <span
+class="math inline">1/\alpha</span> l’ampiezza di oscillazione si riduce
+di un fattore <span class="math inline">1/e</span>). Le seguenti figure
+illustrano la parte iniziale del transiente per condizioni iniziali
+<span class="math inline">x(0)=0</span>, <span
+class="math inline">\dot{x}(0) = 0</span> e diversi valori di <span
+class="math inline">\omega</span>:</p>
 <table>
+<colgroup>
+<col style="width: 23%" />
+<col style="width: 76%" />
+</colgroup>
 <thead>
 <tr class="header">
 <th>Frequenza</th>
@@ -433,38 +695,71 @@ T = \frac{2\pi}{\sqrt{\frac{g}l}} \approx 2.007\,\text{s},
 <tbody>
 <tr class="odd">
 <td><span class="math inline">5\,\text{rad/s}</span></td>
-<td><img src="http://labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/figure/transiente_05.png" /></td>
+<td><img
+src="http://labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/figure/transiente_05.png" /></td>
 </tr>
 <tr class="even">
 <td><span class="math inline">10\,\text{rad/s}</span></td>
-<td><img src="http://labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/figure/transiente_10.png" /></td>
+<td><img
+src="http://labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/figure/transiente_10.png" /></td>
 </tr>
 <tr class="odd">
 <td><span class="math inline">15\,\text{rad/s}</span></td>
-<td><img src="http://labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/figure/transiente_15.png" /></td>
+<td><img
+src="http://labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/figure/transiente_15.png" /></td>
 </tr>
 </tbody>
 </table>
-<p>Si consiglia quindi di integrare l’equazione differenziale per un tempo pari ad almeno dieci volte <span class="math inline">1/\alpha</span>, in modo da raggiungere una situazione in cui l’oscillazione è stabile, e poi valutare l’ampiezza. Anche in questo caso si può assumere di aver raggiunto il massimo dell’oscillazione nel momento in cui si trova un punto in cui la velocità cambia di segno.</p>
+<p>Si consiglia quindi di integrare l’equazione differenziale per un
+tempo pari ad almeno dieci volte <span
+class="math inline">1/\alpha</span>, in modo da raggiungere una
+situazione in cui l’oscillazione è stabile, e poi valutare l’ampiezza.
+Anche in questo caso si può assumere di aver raggiunto il massimo
+dell’oscillazione nel momento in cui si trova un punto in cui la
+velocità cambia di segno.</p>
 <p>Una curva di risonanza è illustrata in figura:</p>
-<p><img src="http://labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/figure/risonanza.png" /></p>
+<p><img
+src="http://labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/figure/risonanza.png" /></p>
 <h1 id="esercizio-9.5">Esercizio 9.5 - Moto in campo gravitazionale</h1>
-<p>Implementare la risoluzione dell’equazione del moto di un corpo in un campo gravitazionale. Verificare, nel caso del sistema Terra-Sole, che il periodo di rivoluzione della Terra intorno al Sole sia effettivamente di un anno e che l’orbita sia periodica. Calcolare quindi il rapporto tra perielio ed afelio.</p>
-<p>Provare ad aggiungere una piccola perturbazione al potenziale gravitazionale (ad esempio un termine proporzionale ad <span class="math inline">1/r^3</span> nella forza) e verificare che le orbite non sono più chiuse ma formano una rosetta.</p>
+<p>Implementare la risoluzione dell’equazione del moto di un corpo in un
+campo gravitazionale. Verificare, nel caso del sistema Terra-Sole, che
+il periodo di rivoluzione della Terra intorno al Sole sia effettivamente
+di un anno e che l’orbita sia periodica. Calcolare quindi il rapporto
+tra perielio ed afelio.</p>
+<p>Provare ad aggiungere una piccola perturbazione al potenziale
+gravitazionale (ad esempio un termine proporzionale ad <span
+class="math inline">1/r^3</span> nella forza) e verificare che le orbite
+non sono più chiuse ma formano una rosetta.</p>
 <h2 id="moto-in-campo-gravitazionale">Moto in campo gravitazionale</h2>
-<p>Nell’implementare il moto di un corpo in un campo gravitazionale utilizzare le seguenti condizioni:</p>
+<p>Nell’implementare il moto di un corpo in un campo gravitazionale
+utilizzare le seguenti condizioni:</p>
 <ul>
-<li>costante gravitazionale <span class="math inline">G = 6.6742\times 10^{-11}\,\text{m}^3\,\text{kg}^{-1}\,\text{s}^{-2}</span>;</li>
-<li>massa del Sole <span class="math inline">M_\odot = 1.98844\times 10^{30}\,\text{kg}</span>;</li>
-<li>distanza Terra-Sole al perielio <span class="math inline">D_p = 1.47098074\times 10^{11}\,\text{m}</span>;</li>
-<li>velocità al perielio <span class="math inline">v_p = 3.0287\times 10^4\,\text{m/s}</span>.</li>
+<li>costante gravitazionale <span class="math inline">G = 6.6742\times
+10^{-11}\,\text{m}^3\,\text{kg}^{-1}\,\text{s}^{-2}</span>;</li>
+<li>massa del Sole <span class="math inline">M_\odot = 1.98844\times
+10^{30}\,\text{kg}</span>;</li>
+<li>distanza Terra-Sole al perielio <span class="math inline">D_p =
+1.47098074\times 10^{11}\,\text{m}</span>;</li>
+<li>velocità al perielio <span class="math inline">v_p = 3.0287\times
+10^4\,\text{m/s}</span>.</li>
 </ul>
-<h1 id="esercizio-9.6">Esercizio 9.6 - Moto di una particella carica in un campo elettrico e magnetico uniforme</h1>
-<p>Implementare la risoluzione dell’equazione del moto di una particella carica in un campo elettrico e magnetico uniforme. Disegnare la traiettoria della particella e determinarne il diametro. Se si aggiunge un campo elettrico con componente lungo l’asse <span class="math inline">x</span> pari a <span class="math inline">E_x = 10^4\,\text{V/m}</span>, in che direzione si muove ora la particella?</p>
-<h2 id="moto-in-campo-elettrico-e-magnetico-uniformi">Moto in campo elettrico e magnetico uniformi</h2>
-<p>Il moto di una particella carica in un campo elettrico e magnetico uniformi risente della forza di Lorentz e pertanto è descritto dall’equazione <span class="math display">
+<h1 id="esercizio-9.6">Esercizio 9.6 - Moto di una particella carica in
+un campo elettrico e magnetico uniforme</h1>
+<p>Implementare la risoluzione dell’equazione del moto di una particella
+carica in un campo elettrico e magnetico uniforme. Disegnare la
+traiettoria della particella e determinarne il diametro. Se si aggiunge
+un campo elettrico con componente lungo l’asse <span
+class="math inline">x</span> pari a <span class="math inline">E_x =
+10^4\,\text{V/m}</span>, in che direzione si muove ora la
+particella?</p>
+<h2 id="moto-in-campo-elettrico-e-magnetico-uniformi">Moto in campo
+elettrico e magnetico uniformi</h2>
+<p>Il moto di una particella carica in un campo elettrico e magnetico
+uniformi risente della forza di Lorentz e pertanto è descritto
+dall’equazione <span class="math display">
 m\ddot{x}(t) = q E + q v\times B,
-</span> che si può riscrivere in forma matriciale come <span class="math display">
+</span> che si può riscrivere in forma matriciale come <span
+class="math display">
 \frac{\mathrm{d}}{\mathrm{d}t} \begin{pmatrix}
 x\\ y\\ z\\ v_x\\ v_y\\ v_z
 \end{pmatrix} =
@@ -483,15 +778,24 @@ x\\ y\\ z\\ v_x\\ v_y\\ v_z
 0\\ 0\\ 0\\ \frac{q}m E_x\\ \frac{q}m E_y\\ \frac{q}m E_z
 \end{pmatrix}.
 </span></p>
-<p>Consideriamo il moto nel piano <span class="math inline">(x, y)</span> di un elettrone in un campo magnetico costante con i seguenti valori:</p>
+<p>Consideriamo il moto nel piano <span class="math inline">(x,
+y)</span> di un elettrone in un campo magnetico costante con i seguenti
+valori:</p>
 <ul>
-<li><span class="math inline">q = -1.60217653\times 10^{-19}\,\text{C}</span>;</li>
-<li><span class="math inline">m = 9.1093826\times10^{-31}\,\text{kg}</span>;</li>
-<li><span class="math inline">v_x(0) = 8\times10^6\,\text{m/s}</span>;</li>
-<li><span class="math inline">B_z = 5\times10^{-3}\,\text{T}</span>;</li>
-<li>tutte le altre componenti di campi e velocità iniziali sono nulle.</li>
+<li><span class="math inline">q = -1.60217653\times
+10^{-19}\,\text{C}</span>;</li>
+<li><span class="math inline">m =
+9.1093826\times10^{-31}\,\text{kg}</span>;</li>
+<li><span class="math inline">v_x(0) =
+8\times10^6\,\text{m/s}</span>;</li>
+<li><span class="math inline">B_z =
+5\times10^{-3}\,\text{T}</span>;</li>
+<li>tutte le altre componenti di campi e velocità iniziali sono
+nulle.</li>
 </ul>
-<p>Questi parametri corrispondono grosso modo all’apparato sperimentale per la misura di <span class="math inline">e/m</span> del laboratorio del II anno.</p>                    
+<p>Questi parametri corrispondono grosso modo all’apparato sperimentale
+per la misura di <span class="math inline">e/m</span> del laboratorio
+del II anno.</p>                    
                 </div>
             </div>
 

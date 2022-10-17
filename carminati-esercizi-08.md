@@ -150,7 +150,6 @@ int main (int argc, char** argv ) {
 
   for (int step{}; step < nstep; step++) {
       print(t, x);
-      myGraph->SetPoint(step, t, x[0]);
       x = myEuler.Passo(t, x, h, osc);
       t += h;
   }
@@ -162,7 +161,7 @@ Come al solito, potete installare la libreria `fmtlib` usando lo script [`instal
 
 <input type="text" value="curl https://ziotom78.github.io/tnds-tomasi-notebooks/install_fmt_library | sh" id="installFmtCommand" readonly="1" size="60"><button onclick='copyFmtInstallationScript("installFmtCommand")'>Copia</button> 
 
-In alternativa, scaricate questo [file zip](./fmtlib.zip) nella directory dell'esercizio e decomprimetelo, poi aggiungete il file `format.cc` nella riga in cui compilate l'eseguibile.
+In alternativa, scaricate questo [file zip](./fmtlib.zip) nella directory dell'esercizio e decomprimetelo.
 
 ## Grafico della soluzione
 
@@ -179,7 +178,6 @@ for (int step{}; step < nstep; step++) {
     pos[step] = x[0];
     
     print(t, x);
-    myGraph->SetPoint(step, t, x[0]);
     x = myEuler.Passo(t, x, h, osc);
     t += h;
 }

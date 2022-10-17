@@ -11,12 +11,20 @@
   <link rel="stylesheet" href="https://unpkg.com/reveal.js@^4//dist/reset.css">
   <link rel="stylesheet" href="https://unpkg.com/reveal.js@^4//dist/reveal.css">
   <style>
+    .reveal .sourceCode {  /* see #7635 */
+      /* overflow: visible; */
+    }
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
-    span.underline{text-decoration: underline;}
-    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
     ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
   </style>
   <link rel="stylesheet" href="https://unpkg.com/reveal.js@^4//dist/theme/white.css" id="theme">
   <link rel="stylesheet" href="./css/custom.css"/>
@@ -38,25 +46,43 @@
 <section id="link-alle-risorse-online" class="slide level1">
 <h1>Link alle risorse online</h1>
 <ul>
-<li><p>La spiegazione dettagliata degli esercizi si trova qui: <a href="carminati-esercizi-05.html">carminati-esercizi-05.html</a>. È una versione estesa del testo originale sul sito del corso, che continua a restare disponibile <a href="http://labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/lezione5_1819_nuova.html">al solito indirizzo</a>.</p></li>
+<li><p>La spiegazione dettagliata degli esercizi si trova qui: <a
+href="carminati-esercizi-05.html">carminati-esercizi-05.html</a>. È una
+versione estesa del testo originale sul sito del corso, che continua a
+restare disponibile <a
+href="http://labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/lezione5_1819_nuova.html">al
+solito indirizzo</a>.</p></li>
 <li><p>La nuova versione ha una serie di vantaggi:</p>
 <ol>
-<li>Ho inserito dei link agli approfondimenti mostrati in queste slide;</li>
+<li>Ho inserito dei link agli approfondimenti mostrati in queste
+slide;</li>
 <li>Ho sistemato alcuni vecchi errori nel testo e nel codice;</li>
-<li>Mi sono sforzato di usare la <em>uniform initialization</em> ovunque, in modo che possiate abituarvi ad usarla (nel farlo ho scoperto un paio di bug nel testo!)</li>
-<li>Anche se gli esempi di codici sono selezionabili, il copia-e-incolla è disabilitato: sforzatevi di trascrivere il codice!</li>
+<li>Mi sono sforzato di usare la <em>uniform initialization</em>
+ovunque, in modo che possiate abituarvi ad usarla (nel farlo ho scoperto
+un paio di bug nel testo!)</li>
+<li>Anche se gli esempi di codici sono selezionabili, il copia-e-incolla
+è disabilitato: sforzatevi di trascrivere il codice!</li>
 </ol></li>
 </ul>
 </section>
 <section id="esercizi-per-oggi-1" class="slide level1">
 <h1>Esercizi per oggi</h1>
 <ul>
-<li><a href="carminati-esercizi-05.html#5.0">Esercizio 5.0</a>: Creazione della classe <code>Posizione</code></li>
-<li><a href="carminati-esercizi-05.html#5.1">Esercizio 5.1</a>: Creazione della classe <code>Particella</code> ed <code>Elettrone</code></li>
-<li><a href="carminati-esercizi-05.html#5.2">Esercizio 5.2</a>: Creazione delle classi <code>CampoVettoriale</code> e <code>PuntoMateriale</code></li>
-<li><a href="carminati-esercizi-05.html#5.3">Esercizio 5.3</a>: Calcolo del campo elettrico generato da un dipolo (<strong>da consegnare</strong>)</li>
-<li><a href="carminati-esercizi-05.html#5.4">Esercizio 5.4</a>: Campo di multipolo (approfondimento)</li>
-<li><a href="carminati-esercizi-05.html#5.5">Esercizio 5.5</a>: Gravità dallo spazio (approfondimento)</li>
+<li><a href="carminati-esercizi-05.html#5.0">Esercizio 5.0</a>:
+Creazione della classe <code>Posizione</code></li>
+<li><a href="carminati-esercizi-05.html#5.1">Esercizio 5.1</a>:
+Creazione della classe <code>Particella</code> ed
+<code>Elettrone</code></li>
+<li><a href="carminati-esercizi-05.html#5.2">Esercizio 5.2</a>:
+Creazione delle classi <code>CampoVettoriale</code> e
+<code>PuntoMateriale</code></li>
+<li><a href="carminati-esercizi-05.html#5.3">Esercizio 5.3</a>: Calcolo
+del campo elettrico generato da un dipolo (<strong>da
+consegnare</strong>)</li>
+<li><a href="carminati-esercizi-05.html#5.4">Esercizio 5.4</a>: Campo di
+multipolo (approfondimento)</li>
+<li><a href="carminati-esercizi-05.html#5.5">Esercizio 5.5</a>: Gravità
+dallo spazio (approfondimento)</li>
 </ul>
 </section>
     </div>
@@ -99,7 +125,7 @@
 
         // Add the current slide number to the URL hash so that reloading the
         // page/copying the URL will return you to the same slide
-        hash: false,
+        hash: true,
 
         // Start with 1 for the hash rather than 0
         hashOneBasedIndex: false,

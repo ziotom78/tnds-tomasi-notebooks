@@ -11,12 +11,20 @@
   <link rel="stylesheet" href="https://unpkg.com/reveal.js@^4//dist/reset.css">
   <link rel="stylesheet" href="https://unpkg.com/reveal.js@^4//dist/reveal.css">
   <style>
+    .reveal .sourceCode {  /* see #7635 */
+      overflow: visible;
+    }
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
-    span.underline{text-decoration: underline;}
-    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
     ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
     pre > code.sourceCode { white-space: pre; position: relative; }
     pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
     pre > code.sourceCode > span:empty { height: 1.2em; }
@@ -55,7 +63,7 @@
     code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
     code span.at { color: #7d9029; } /* Attribute */
     code span.bn { color: #40a070; } /* BaseN */
-    code span.bu { } /* BuiltIn */
+    code span.bu { color: #008000; } /* BuiltIn */
     code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
     code span.ch { color: #4070a0; } /* Char */
     code span.cn { color: #880000; } /* Constant */
@@ -68,7 +76,7 @@
     code span.ex { } /* Extension */
     code span.fl { color: #40a070; } /* Float */
     code span.fu { color: #06287e; } /* Function */
-    code span.im { } /* Import */
+    code span.im { color: #008000; font-weight: bold; } /* Import */
     code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
     code span.kw { color: #007020; font-weight: bold; } /* Keyword */
     code span.op { color: #666666; } /* Operator */
@@ -82,22 +90,24 @@
     code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
   </style>
   <link rel="stylesheet" href="https://unpkg.com/reveal.js@^4//dist/theme/white.css" id="theme">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.js"></script>
+  <script defer=""
+  src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js"></script>
   <script>document.addEventListener("DOMContentLoaded", function () {
-   var mathElements = document.getElementsByClassName("math");
-   var macros = [];
-   for (var i = 0; i < mathElements.length; i++) {
-    var texText = mathElements[i].firstChild;
-    if (mathElements[i].tagName == "SPAN") {
-     katex.render(texText.data, mathElements[i], {
-      displayMode: mathElements[i].classList.contains('display'),
-      throwOnError: false,
-      macros: macros,
-      fleqn: false
-     });
-  }}});
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
   </script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css" />
+  <link rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css" />
 </head>
 <body>
   <div class="reveal">
@@ -115,9 +125,12 @@
 <section id="funzionamento-di-un-compilatore" class="slide level1">
 <h1>Funzionamento di un compilatore</h1>
 <ul>
-<li>Un compilatore è un <em>traduttore</em>, che converte un linguaggio in un altro.</li>
-<li>I compilatori C++ come <code>g++</code> e <code>clang++</code> convertono il C++ in <em>linguaggio macchina</em>.</li>
-<li>Per capire come funziona un compilatore, bisogna comprendere il linguaggio macchina delle CPU!</li>
+<li>Un compilatore è un <em>traduttore</em>, che converte un linguaggio
+in un altro.</li>
+<li>I compilatori C++ come <code>g++</code> e <code>clang++</code>
+convertono il C++ in <em>linguaggio macchina</em>.</li>
+<li>Per capire come funziona un compilatore, bisogna comprendere il
+linguaggio macchina delle CPU!</li>
 </ul>
 </section>
 <section id="cosa-fa-la-cpu" class="slide level1">
@@ -148,13 +161,19 @@
 <h1>Memoria volatile</h1>
 <dl>
 <dt><strong>Registri</strong></dt>
-<dd><p>Attraverso identificativi come <code>ebp</code>, <code>rsp</code>, <code>eax</code>… (interi), <code>xmm0</code>, <code>xmm1</code>, … (floating point)</p>
+<dd>
+<p>Attraverso identificativi come <code>ebp</code>, <code>rsp</code>,
+<code>eax</code>… (interi), <code>xmm0</code>, <code>xmm1</code>, …
+(floating point)</p>
 </dd>
 <dt><strong>Cache</strong></dt>
-<dd><p>Esclusiva pertinenza della CPU!</p>
+<dd>
+<p>Esclusiva pertinenza della CPU!</p>
 </dd>
 <dt><strong>RAM</strong></dt>
-<dd><p><strong>RAM</strong>: la CPU richiede il dato al bus della memoria specificando l’indirizzo numerico</p>
+<dd>
+<p><strong>RAM</strong>: la CPU richiede il dato al bus della memoria
+specificando l’indirizzo numerico</p>
 </dd>
 </dl>
 </section>
@@ -188,7 +207,8 @@
 <li>Confronti</li>
 <li>Istruzioni di salto (<code>goto</code>)</li>
 <li>Copia di dati da RAM a registri e viceversa</li>
-<li>Comunicazione attraverso i bus: hard disk, scheda grafica, tastiera, mouse, porte ethernet, etc.</li>
+<li>Comunicazione attraverso i bus: hard disk, scheda grafica, tastiera,
+mouse, porte ethernet, etc.</li>
 </ul>
 </section>
 <section id="cosa-non-sa-fare-la-cpu" class="slide level1">
@@ -197,7 +217,8 @@
 <li>Cicli <code>for</code></li>
 <li>Operazioni matematiche complesse (es., <code>2 * x + y</code>)</li>
 <li>Gestione di dati complessi (array, stringhe, etc.)</li>
-<li>Allocazione di memoria con <code>new</code> e <code>delete</code></li>
+<li>Allocazione di memoria con <code>new</code> e
+<code>delete</code></li>
 <li>Funzioni con parametri</li>
 <li>Classi</li>
 <li>Molto altro!</li>
@@ -206,42 +227,61 @@
 <section id="assembler" class="slide level1">
 <h1>Assembler</h1>
 <ul>
-<li><p>Un programma in linguaggio macchina è una sequenza di bit: <code>0110101110…</code></p></li>
-<li><p>Può essere «traslitterato» partendo dal linguaggio assembler (usando compilatori come <a href="https://www.nasm.us/">NASM</a> e <a href="https://yasm.tortall.net/">YASM</a>):</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode asm"><code class="sourceCode fasm"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="bu">movapd</span> <span class="kw">xmm4</span><span class="op">,</span> <span class="kw">xmm1</span></span>
+<li><p>Un programma in linguaggio macchina è una sequenza di bit:
+<code>0110101110…</code></p></li>
+<li><p>Può essere «traslitterato» partendo dal linguaggio assembler
+(usando compilatori come <a href="https://www.nasm.us/">NASM</a> e <a
+href="https://yasm.tortall.net/">YASM</a>):</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode asm"><code class="sourceCode fasm"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="bu">movapd</span> <span class="kw">xmm4</span><span class="op">,</span> <span class="kw">xmm1</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="bu">mulsd</span> <span class="kw">xmm5</span><span class="op">,</span> <span class="kw">xmm0</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="bu">mulsd</span> <span class="kw">xmm4</span><span class="op">,</span> <span class="kw">xmm1</span></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="cf">jle</span> <span class="op">.</span>L10</span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="bu">movapd</span> <span class="kw">xmm6</span><span class="op">,</span> <span class="kw">xmm5</span></span></code></pre></div></li>
-<li><p>Compilare da assembler a linguaggio macchina (e viceversa) assomiglia a una «traslitterazione», come «πάντα ῥεῖ» ↔︎ «pánta rheî», più che a una «traduzione»</p></li>
+<li><p>Compilare da assembler a linguaggio macchina (e viceversa)
+assomiglia a una «traslitterazione», come «πάντα ῥεῖ» ↔︎ «pánta rheî»,
+più che a una «traduzione»</p></li>
 </ul>
 </section>
 <section id="section-1" class="slide level1">
 <h1></h1>
 <ul>
-<li><p>In passato, per molti computer era necessario programmare direttamente in Assembler (ossia in linguaggio macchina). Solo poche macchine offrivano nativamente linguaggi ad alto livello, come il Commodore 64:</p>
-<p><img data-src="./images/commodore64.jpg" style="width:40.0%" /></p></li>
-<li><p>Ma già dagli anni ’50 si erano sviluppati linguaggi <em>ad alto livello</em>, come <strong>Lisp</strong> e <strong>Fortran</strong>, i cui compilatori <em>traducono</em> (questa volta sì!) il codice in linguaggio macchina</p></li>
+<li><p>In passato, per molti computer era necessario programmare
+direttamente in Assembler (ossia in linguaggio macchina). Solo poche
+macchine offrivano nativamente linguaggi ad alto livello, come il
+Commodore 64:</p>
+<p><img data-src="./images/commodore64.jpg"
+style="width:40.0%" /></p></li>
+<li><p>Ma già dagli anni ’50 si erano sviluppati linguaggi <em>ad alto
+livello</em>, come <strong>Lisp</strong> e <strong>Fortran</strong>, i
+cui compilatori <em>traducono</em> (questa volta sì!) il codice in
+linguaggio macchina</p></li>
 </ul>
 </section>
 <section id="compilatori" class="slide level1">
 <h1>Compilatori</h1>
 <ul>
-<li>Un compilatore traduce il codice di un linguaggio ad alto livello (come il C++) in codice macchina</li>
-<li>Trasforma cicli <code>for</code> in cicli che usano <code>goto</code></li>
+<li>Un compilatore traduce il codice di un linguaggio ad alto livello
+(come il C++) in codice macchina</li>
+<li>Trasforma cicli <code>for</code> in cicli che usano
+<code>goto</code></li>
 <li>Decide autonomamente quando usare i registri e quando la RAM</li>
-<li>Per ogni architettura è necessario che il compilatore sappia generare l’assembler corrispondente. Le architetture più diffuse sono:
+<li>Per ogni architettura è necessario che il compilatore sappia
+generare l’assembler corrispondente. Le architetture più diffuse sono:
 <ul>
 <li>x86_64: usata nella maggior parte dei desktop e dei laptop</li>
-<li>ARM: usata soprattutto nei cellulari e nei tablet, ma anche in console di gioco (Nintendo Switch) e alcuni laptop (Chromebooks)</li>
+<li>ARM: usata soprattutto nei cellulari e nei tablet, ma anche in
+console di gioco (Nintendo Switch) e alcuni laptop (Chromebooks)</li>
 </ul></li>
 </ul>
 </section>
 <section id="compilatori-1" class="slide level1">
 <h1>Compilatori</h1>
 <ul>
-<li><p>Fino agli anni ’90 i compilatori non producevano codice macchina efficiente</p></li>
-<li><p>A quei tempi era possibile quindi scrivere direttamente codice assembler nei propri programmi C/C++/Pascal…</p>
+<li><p>Fino agli anni ’90 i compilatori non producevano codice macchina
+efficiente</p></li>
+<li><p>A quei tempi era possibile quindi scrivere direttamente codice
+assembler nei propri programmi C/C++/Pascal…</p>
 <center>
 <p><img data-src="./images/bp_asm.png" /></p>
 </center></li>
@@ -251,17 +291,26 @@
 <h1>Compilatori</h1>
 <ul>
 <li><p>Oggi siamo in una situazione completamente rovesciata!</p></li>
-<li><p>Da un lato, le CPU più recenti usano ottimizzazioni molto complesse, ed è quindi difficile per un programmatore umano scrivere codice assembler che sfrutti efficientemente la macchina…</p></li>
-<li><p>…e d’altra parte i compilatori moderni sono così sofisticati da produrre codice macchina imbattibile!</p></li>
-<li><p>Scrivere codice assembler è quindi una cosa che oggi non è praticamente mai necessaria (e per giunta rende il codice poco portabile)</p></li>
+<li><p>Da un lato, le CPU più recenti usano ottimizzazioni molto
+complesse, ed è quindi difficile per un programmatore umano scrivere
+codice assembler che sfrutti efficientemente la macchina…</p></li>
+<li><p>…e d’altra parte i compilatori moderni sono così sofisticati da
+produrre codice macchina imbattibile!</p></li>
+<li><p>Scrivere codice assembler è quindi una cosa che oggi non è
+praticamente mai necessaria (e per giunta rende il codice poco
+portabile)</p></li>
 </ul>
 </section>
 <section id="esplorare-il-codice-assembler" class="slide level1">
 <h1>Esplorare il codice assembler</h1>
 <ul>
-<li>Molti compilatori possono produrre file di testo con l’assembler generato, prima della traduzione in linguaggio macchina</li>
-<li>Se usate <code>gcc</code> e <code>clang</code>, esiste il flag <code>-S</code></li>
-<li>Potete fare esperimenti online sul sito <a href="https://godbolt.org">godbolt.org</a> (che ho usato per le prossime slide)</li>
+<li>Molti compilatori possono produrre file di testo con l’assembler
+generato, prima della traduzione in linguaggio macchina</li>
+<li>Se usate <code>gcc</code> e <code>clang</code>, esiste il flag
+<code>-S</code></li>
+<li>Potete fare esperimenti online sul sito <a
+href="https://godbolt.org">godbolt.org</a> (che ho usato per le prossime
+slide)</li>
 </ul>
 </section>
 <section id="esempio-un-ciclo-for" class="slide level1">
@@ -277,13 +326,15 @@
 </tr>
 <tr>
 <td>
-<div class="sourceCode" id="cb2"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> n<span class="op">;</span> <span class="op">++</span>i<span class="op">)</span></span>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> n<span class="op">;</span> <span class="op">++</span>i<span class="op">)</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">// loop body</span></span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 </td>
 <td>
-<div class="sourceCode" id="cb3"><pre class="sourceCode asm"><code class="sourceCode fasm"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>    <span class="bu">mov</span>  <span class="kw">ecx</span><span class="op">,</span> <span class="op">[</span>n<span class="op">]</span>      <span class="co">; ecx ← n</span></span>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode asm"><code class="sourceCode fasm"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>    <span class="bu">mov</span>  <span class="kw">ecx</span><span class="op">,</span> <span class="op">[</span>n<span class="op">]</span>      <span class="co">; ecx ← n</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">xor</span>  <span class="kw">eax</span><span class="op">,</span> <span class="kw">eax</span>      <span class="co">; eax ← 0</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">LoopTop:</span></span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">cmp</span>  <span class="kw">eax</span><span class="op">,</span> <span class="kw">ecx</span>      <span class="co">; if eax &gt;= ecx…</span></span>
@@ -300,10 +351,14 @@
 <section id="uso-di-registri" class="slide level1">
 <h1>Uso di registri</h1>
 <ul>
-<li><p>Per ogni dato, il compilatore deve decidere se usare un registro o la RAM</p></li>
-<li><p>Trovare la scelta ottimale è molto difficile (vedi <a href="https://en.wikipedia.org/wiki/Register_allocation">Wikipedia</a>)</p></li>
-<li><p>In passato il C/C++ offriva la parola chiave <code>register</code> (oggi deprecata):</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> fn<span class="op">(</span><span class="dt">void</span><span class="op">)</span> <span class="op">{</span></span>
+<li><p>Per ogni dato, il compilatore deve decidere se usare un registro
+o la RAM</p></li>
+<li><p>Trovare la scelta ottimale è molto difficile (vedi <a
+href="https://en.wikipedia.org/wiki/Register_allocation">Wikipedia</a>)</p></li>
+<li><p>In passato il C/C++ offriva la parola chiave
+<code>register</code> (oggi deprecata):</p>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode c"><code class="sourceCode c"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> fn<span class="op">(</span><span class="dt">void</span><span class="op">)</span> <span class="op">{</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> a<span class="op">,</span> b<span class="op">;</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">register</span> <span class="dt">int</span> i<span class="op">;</span> <span class="co">/* Put this variable in a register, if possible */</span></span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">/* … */</span></span>
@@ -313,17 +368,46 @@
 <section id="produrre-codice-assembler" class="slide level1">
 <h1>Produrre codice assembler</h1>
 <ul>
-<li>Il compilatore <code>g++</code> si basa su <a href="https://gcc.gnu.org/">GCC</a>, che implementa una serie di algoritmi per capire quale sia il modo più performante di usare i registri e ordinare le istruzioni</li>
-<li>Il compilatore <code>clang</code> si basa sulla libreria <a href="https://llvm.org/">LLVM</a>, che prende in input una descrizione «ad alto livello» della sequenza di operazioni da eseguire e le traduce in codice assembler ottimizzato</li>
+<li>Il compilatore <code>g++</code> si basa su <a
+href="https://gcc.gnu.org/">GCC</a>, che implementa una serie di
+algoritmi per capire quale sia il modo più performante di usare i
+registri e ordinare le istruzioni</li>
+<li>Il compilatore <code>clang</code> si basa sulla libreria <a
+href="https://llvm.org/">LLVM</a>, che prende in input una descrizione
+«ad alto livello» della sequenza di operazioni da eseguire e le traduce
+in codice assembler ottimizzato</li>
 </ul>
 </section>
 <section id="altri-linguaggi" class="slide level1">
 <h1>Altri linguaggi</h1>
 <ul>
-<li><a href="https://gcc.gnu.org/">GCC</a> supporta molti linguaggi oltre al C++, usando lo stesso generatore di codice assembler: C e Objective-C (<code>gcc</code>), <a href="https://wiki.dlang.org/GDC">D</a> (<code>gdc</code>), <a href="https://gcc.gnu.org/onlinedocs/gcc-9.3.0/gccgo/">Go</a> (<code>gccgo</code>), <a href="https://gcc.gnu.org/onlinedocs/gcc-9.3.0/gfortran/">Fortran</a> (<code>gfortran</code>), <a href="https://gcc.gnu.org/onlinedocs/gcc-9.3.0/gnat_ugn/">Ada</a> (<code>gnat</code>).</li>
-<li>La libreria LLVM è impiegata da molti compilatori: <a href="https://clang.llvm.org/">clang</a> (C/Objective-C/C++), <a href="https://wiki.dlang.org/LDC">LDC</a> (D), <a href="https://github.com/flang-compiler/flang">flang</a> (Fortran), <a href="https://crystal-lang.org/">Crystal</a>, <a href="https://swift.org/">Swift</a>, <a href="https://www.rust-lang.org/">Rust</a>, <a href="https://ziglang.org/">Zig</a>, <a href="https://julialang.org/">Julia</a></li>
-<li>Altri compilatori implementano un proprio generatore di codice assembler: <a href="https://freepascal.org/">FreePascal</a>, <a href="https://dlang.org/">DMD</a> (D), <a href="https://golang.org/">Go</a>, <a href="https://visualstudio.microsoft.com/vs/">Visual Studio</a> (C/C++), etc.</li>
-<li>Alcuni linguaggi, come <a href="https://nim-lang.org/">Nim</a>, producono codice C, che va poi compilato da un compilatore C.</li>
+<li><a href="https://gcc.gnu.org/">GCC</a> supporta molti linguaggi
+oltre al C++, usando lo stesso generatore di codice assembler: C e
+Objective-C (<code>gcc</code>), <a
+href="https://wiki.dlang.org/GDC">D</a> (<code>gdc</code>), <a
+href="https://gcc.gnu.org/onlinedocs/gcc-9.3.0/gccgo/">Go</a>
+(<code>gccgo</code>), <a
+href="https://gcc.gnu.org/onlinedocs/gcc-9.3.0/gfortran/">Fortran</a>
+(<code>gfortran</code>), <a
+href="https://gcc.gnu.org/onlinedocs/gcc-9.3.0/gnat_ugn/">Ada</a>
+(<code>gnat</code>).</li>
+<li>La libreria LLVM è impiegata da molti compilatori: <a
+href="https://clang.llvm.org/">clang</a> (C/Objective-C/C++), <a
+href="https://wiki.dlang.org/LDC">LDC</a> (D), <a
+href="https://github.com/flang-compiler/flang">flang</a> (Fortran), <a
+href="https://crystal-lang.org/">Crystal</a>, <a
+href="https://swift.org/">Swift</a>, <a
+href="https://www.rust-lang.org/">Rust</a>, <a
+href="https://ziglang.org/">Zig</a>, <a
+href="https://julialang.org/">Julia</a></li>
+<li>Altri compilatori implementano un proprio generatore di codice
+assembler: <a href="https://freepascal.org/">FreePascal</a>, <a
+href="https://dlang.org/">DMD</a> (D), <a
+href="https://golang.org/">Go</a>, <a
+href="https://visualstudio.microsoft.com/vs/">Visual Studio</a> (C/C++),
+etc.</li>
+<li>Alcuni linguaggi, come <a href="https://nim-lang.org/">Nim</a>,
+producono codice C, che va poi compilato da un compilatore C.</li>
 </ul>
 </section>
 <section id="python" class="slide level1">
@@ -332,11 +416,15 @@
 <section id="lapproccio-di-python" class="slide level1">
 <h1>L’approccio di Python</h1>
 <ul>
-<li>Python nasce all’inizio degli anni 90, 20 anni dopo il C e 7 dopo il C++</li>
-<li>Quando nasce il Python c’è la consapevolezza che i computer saranno sempre più veloci: programmi «lenti» sono sempre meno un problema</li>
-<li>L’approccio di Python è completamente diverso rispetto al C++: non è più <strong>compilato</strong>, ma <strong>interpretato</strong></li>
+<li>Python nasce all’inizio degli anni 90, 20 anni dopo il C e 7 dopo il
+C++</li>
+<li>Quando nasce il Python c’è la consapevolezza che i computer saranno
+sempre più veloci: programmi «lenti» sono sempre meno un problema</li>
+<li>L’approccio di Python è completamente diverso rispetto al C++: non è
+più <strong>compilato</strong>, ma <strong>interpretato</strong></li>
 <li>Oggi la versione più diffusa è la 3: evitate la 2!</li>
-<li>In campo scientifico si usa molto la distribuzione <strong>Anaconda Python</strong></li>
+<li>In campo scientifico si usa molto la distribuzione <strong>Anaconda
+Python</strong></li>
 </ul>
 </section>
 <section id="confronto-cpython" class="slide level1">
@@ -352,7 +440,8 @@
 </tr>
 <tr>
 <td>
-<div class="sourceCode" id="cb5"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
+<div class="sourceCode" id="cb5"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> sum<span class="op">{};</span></span>
@@ -363,7 +452,8 @@
 <span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 </td>
 <td>
-<div class="sourceCode" id="cb6"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="bu">sum</span> <span class="op">=</span> <span class="fl">0.0</span></span>
+<div class="sourceCode" id="cb6"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="bu">sum</span> <span class="op">=</span> <span class="fl">0.0</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">10_000_000</span>):</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">sum</span> <span class="op">+=</span> i</span>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">sum</span>)</span></code></pre></div>
@@ -371,27 +461,38 @@
 </tr>
 </table>
 <ul>
-<li>Il programma Python è più veloce da scrivere e più semplice da leggere</li>
-<li>Il programma C++ richiede 33 ms per l’esecuzione, quello Python 1 s (30 volte più lento!)</li>
+<li>Il programma Python è più veloce da scrivere e più semplice da
+leggere</li>
+<li>Il programma C++ richiede 33 ms per l’esecuzione, quello Python 1 s
+(30 volte più lento!)</li>
 </ul>
 </section>
 <section id="velocità-di-python" class="slide level1">
 <h1>Velocità di Python</h1>
 <ul>
-<li>Python non crea programmi nel linguaggio macchina della CPU, ma nell’assembler di una <strong>macchina virtuale</strong> (la «Python virtual machine»)</li>
-<li>Questo codice non viene eseguito dalla CPU ma da un programma C, che lo converte <strong>in fase di esecuzione</strong> in una sequenza di istruzioni in linguaggio macchina</li>
+<li>Python non crea programmi nel linguaggio macchina della CPU, ma
+nell’assembler di una <strong>macchina virtuale</strong> (la «Python
+virtual machine»)</li>
+<li>Questo codice non viene eseguito dalla CPU ma da un programma C, che
+lo converte <strong>in fase di esecuzione</strong> in una sequenza di
+istruzioni in linguaggio macchina</li>
 <li>Vediamo come funziona in un esempio pratico</li>
 </ul>
 </section>
 <section id="section-2" class="slide level1">
 <h1></h1>
 <ul>
-<li><p>In C++, una istruzione come <code>x = a + b</code> può essere convertita in Assembler così se <code>a</code> e <code>b</code> sono interi:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode asm"><code class="sourceCode fasm"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="bu">mov</span> <span class="kw">rax</span><span class="op">,</span> <span class="dt">QWORD</span> <span class="dt">PTR</span> <span class="op">[</span><span class="kw">rbp</span><span class="op">-</span><span class="dv">24</span><span class="op">]</span> <span class="co">; rax = a</span></span>
+<li><p>In C++, una istruzione come <code>x = a + b</code> può essere
+convertita in Assembler così se <code>a</code> e <code>b</code> sono
+interi:</p>
+<div class="sourceCode" id="cb7"><pre
+class="sourceCode asm"><code class="sourceCode fasm"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="bu">mov</span> <span class="kw">rax</span><span class="op">,</span> <span class="dt">QWORD</span> <span class="dt">PTR</span> <span class="op">[</span><span class="kw">rbp</span><span class="op">-</span><span class="dv">24</span><span class="op">]</span> <span class="co">; rax = a</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="bu">add</span> <span class="kw">rax</span><span class="op">,</span> <span class="dt">QWORD</span> <span class="dt">PTR</span> <span class="op">[</span><span class="kw">rbp</span><span class="op">-</span><span class="dv">16</span><span class="op">]</span> <span class="co">; rax += b</span></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="bu">mov</span> <span class="dt">QWORD</span> <span class="dt">PTR</span> <span class="op">[</span><span class="kw">rbp</span><span class="op">-</span><span class="dv">8</span><span class="op">],</span> <span class="kw">rax</span>  <span class="co">; x = rax</span></span></code></pre></div></li>
-<li><p>Ma se <code>a</code> e <code>b</code> sono <code>double</code>, diventa così:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode asm"><code class="sourceCode fasm"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="bu">movsd</span> <span class="kw">xmm0</span><span class="op">,</span> <span class="dt">QWORD</span> <span class="dt">PTR</span> <span class="op">[</span><span class="kw">rbp</span><span class="op">-</span><span class="dv">24</span><span class="op">]</span>  <span class="co">; xmm0 = a</span></span>
+<li><p>Ma se <code>a</code> e <code>b</code> sono <code>double</code>,
+diventa così:</p>
+<div class="sourceCode" id="cb8"><pre
+class="sourceCode asm"><code class="sourceCode fasm"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="bu">movsd</span> <span class="kw">xmm0</span><span class="op">,</span> <span class="dt">QWORD</span> <span class="dt">PTR</span> <span class="op">[</span><span class="kw">rbp</span><span class="op">-</span><span class="dv">24</span><span class="op">]</span>  <span class="co">; xmm0 = a</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="bu">movsd</span> <span class="kw">xmm1</span><span class="op">,</span> <span class="dt">QWORD</span> <span class="dt">PTR</span> <span class="op">[</span><span class="kw">rbp</span><span class="op">-</span><span class="dv">16</span><span class="op">]</span>  <span class="co">; xmm1 = b</span></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="bu">addsd</span> <span class="kw">xmm0</span><span class="op">,</span> <span class="kw">xmm1</span>                <span class="co">; xmm0 += xmm1</span></span>
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="bu">movsd</span> <span class="dt">QWORD</span> <span class="dt">PTR</span> <span class="op">[</span><span class="kw">rbp</span><span class="op">-</span><span class="dv">8</span><span class="op">],</span> <span class="kw">xmm0</span>   <span class="co">; x = xmm0</span></span></code></pre></div></li>
@@ -401,32 +502,45 @@
 <h1></h1>
 <ul>
 <li><p>Consideriamo ora questo programma Python:</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> add(a, b):</span>
+<div class="sourceCode" id="cb9"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> add(a, b):</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> a <span class="op">+</span> b</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(add(<span class="dv">1</span>, <span class="dv">3</span>))      <span class="co"># Result: 4</span></span>
 <span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(add(<span class="fl">1.0</span>, <span class="fl">3.0</span>))  <span class="co"># Result: 4.0</span></span>
 <span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(add(<span class="st">&#39;a&#39;</span>, <span class="st">&#39;b&#39;</span>))  <span class="co"># Result: &#39;ab&#39;</span></span></code></pre></div></li>
-<li><p>Come può Python compilare in un linguaggio assembler la funzione <code>add</code>, visto che la somma può assumere significati diversi?</p></li>
+<li><p>Come può Python compilare in un linguaggio assembler la funzione
+<code>add</code>, visto che la somma può assumere significati
+diversi?</p></li>
 </ul>
 </section>
 <section id="compilazione-e-python" class="slide level1">
 <h1>Compilazione e Python</h1>
 <ul>
-<li><p>In Python, l’istruzione <code>x = a + b</code> viene <strong>sempre</strong> compilata così:</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">load_fast</span>   0 <span class="co"># 0 stands for a            stack = [a]      1 element</span></span>
+<li><p>In Python, l’istruzione <code>x = a + b</code> viene
+<strong>sempre</strong> compilata così:</p>
+<div class="sourceCode" id="cb10"><pre
+class="sourceCode sh"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">load_fast</span>   0 <span class="co"># 0 stands for a            stack = [a]      1 element</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="ex">load_fast</span>   1 <span class="co"># 1 stands for b            stack = [a, b]   2 elements</span></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="ex">binary_add</span>    <span class="co"># sum the last two nums     stack = [c=a+b]  1 element</span></span>
 <span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="ex">store_fast</span>  2 <span class="co"># 2 stands for x            stack = []       0 elements</span></span></code></pre></div></li>
-<li><p>Questi comandi assumono che ci sia un vettore di elementi (chiamato <em>stack</em>) che venga mantenuto durante l’esecuzione, e che <code>load_fast</code> e <code>store_fast</code> aggiungano e tolgano elementi in coda al vettore.</p></li>
-<li><p>Istruzioni come <code>binary_add</code> tolgono uno o più elementi in coda al vettore, fanno un’operazione su di essi, e mettono il risultato in coda al vettore</p></li>
+<li><p>Questi comandi assumono che ci sia un vettore di elementi
+(chiamato <em>stack</em>) che venga mantenuto durante l’esecuzione, e
+che <code>load_fast</code> e <code>store_fast</code> aggiungano e
+tolgano elementi in coda al vettore.</p></li>
+<li><p>Istruzioni come <code>binary_add</code> tolgono uno o più
+elementi in coda al vettore, fanno un’operazione su di essi, e mettono
+il risultato in coda al vettore</p></li>
 </ul>
 </section>
 <section id="section-4" class="slide level1">
 <h1></h1>
-<p>Per eseguire il file <code>test.py</code>, occorre sempre chiamare <code>python3</code>:</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python3</span> test.py</span></code></pre></div>
-<p>Il programma <code>python3</code> è scritto in C, ed è più o meno fatto così:</p>
+<p>Per eseguire il file <code>test.py</code>, occorre sempre chiamare
+<code>python3</code>:</p>
+<div class="sourceCode" id="cb11"><pre
+class="sourceCode sh"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python3</span> test.py</span></code></pre></div>
+<p>Il programma <code>python3</code> è scritto in C, ed è più o meno
+fatto così:</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">(</span><span class="dt">int</span> argc<span class="op">,</span> <span class="dt">const</span> <span class="dt">char</span> argv<span class="op">[</span>argc <span class="op">+</span> <span class="dv">1</span><span class="op">])</span> <span class="op">{</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    initialize<span class="op">();</span></span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -442,13 +556,19 @@
 <section id="cosa-fa-run_command" class="slide level1">
 <h1>Cosa fa <code>run_command</code></h1>
 <ul>
-<li><p>La funzione <code>run_command</code> esegue <em>una</em> istruzione, e ogni volta che viene invocata deve capire come operare in base al tipo di dato.</p></li>
-<li><p>Verosimilmente, a seconda del comando che deve eseguire, <code>run_command</code> chiama una funzione C che gestisce l’esecuzione di quel particolare comando (<code>load_fast</code>, <code>store_fast</code>, <code>binary_add</code>, …)</p></li>
+<li><p>La funzione <code>run_command</code> esegue <em>una</em>
+istruzione, e ogni volta che viene invocata deve capire come operare in
+base al tipo di dato.</p></li>
+<li><p>Verosimilmente, a seconda del comando che deve eseguire,
+<code>run_command</code> chiama una funzione C che gestisce l’esecuzione
+di quel particolare comando (<code>load_fast</code>,
+<code>store_fast</code>, <code>binary_add</code>, …)</p></li>
 </ul>
 </section>
 <section id="section-5" class="slide level1">
 <h1></h1>
-<p>Questa è una possibile implementazione per <code>binary_add</code>:</p>
+<p>Questa è una possibile implementazione per
+<code>binary_add</code>:</p>
 <div class="sourceCode" id="cb13"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> binary_add<span class="op">(</span>PyObject <span class="op">*</span> val1<span class="op">,</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>                PyObject <span class="op">*</span> val2<span class="op">,</span></span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>                PyObject <span class="op">*</span> result<span class="op">)</span> <span class="op">{</span></span>
@@ -468,9 +588,12 @@
 <section id="vantaggi-di-python" class="slide level1">
 <h1>Vantaggi di Python</h1>
 <ul>
-<li>Si esegue il codice senza bisogno di compilare prima → più facile fare il debug</li>
-<li>Non è necessario dichiarare variabili → codice più breve e veloce da scrivere</li>
-<li>Non si usano i file header (<code>.h</code>) → meno file da gestire</li>
+<li>Si esegue il codice senza bisogno di compilare prima → più facile
+fare il debug</li>
+<li>Non è necessario dichiarare variabili → codice più breve e veloce da
+scrivere</li>
+<li>Non si usano i file header (<code>.h</code>) → meno file da
+gestire</li>
 <li>Non si usano i Makefile → maggiore semplicità</li>
 <li>Niente puntatori → minore possibilità di crash</li>
 </ul>
@@ -478,27 +601,35 @@
 <section id="svantaggi-di-python" class="slide level1">
 <h1>Svantaggi di Python</h1>
 <ul>
-<li><p>Se le variabili non hanno tipo, sono possibili molti errori</p></li>
-<li><p>Gli errori capitano durante l’esecuzione, non durante la compilazione: è quindi più facile che vada in crash un programma Python piuttosto che un programma C++. Esempio:</p>
+<li><p>Se le variabili non hanno tipo, sono possibili molti
+errori</p></li>
+<li><p>Gli errori capitano durante l’esecuzione, non durante la
+compilazione: è quindi più facile che vada in crash un programma Python
+piuttosto che un programma C++. Esempio:</p>
 <pre class="shell"><code>$ python3 test.py
 Traceback (most recent call last):
   File &quot;/home/tomasi/test.py&quot;, line 1, in &lt;module&gt;
     function_call(3.0)
 NameError: name &#39;function_call&#39; is not defined</code></pre></li>
-<li><p><strong>I programmi sono molto più lenti del C++!</strong></p></li>
+<li><p><strong>I programmi sono molto più lenti del
+C++!</strong></p></li>
 </ul>
 </section>
 <section id="comodità-di-python" class="slide level1">
 <h1>Comodità di Python</h1>
 <ul>
-<li>Python non viene certo usato per scrivere codice che funziona <strong>velocemente</strong>, ma per scrivere codice <strong>rapidamente</strong>!</li>
-<li>A differenza del C++, il linguaggio supporta molte funzionalità di alto livello</li>
+<li>Python non viene certo usato per scrivere codice che funziona
+<strong>velocemente</strong>, ma per scrivere codice
+<strong>rapidamente</strong>!</li>
+<li>A differenza del C++, il linguaggio supporta molte funzionalità di
+alto livello</li>
 </ul>
 </section>
 <section id="esempio" class="slide level1">
 <h1>Esempio</h1>
 <ul>
-<li><p>Supponiamo di avere un file, <code>test.txt</code>, contenente questi dati:</p>
+<li><p>Supponiamo di avere un file, <code>test.txt</code>, contenente
+questi dati:</p>
 <pre><code># This is a comment
 #
 # sensor temperature
@@ -507,13 +638,17 @@ lower_flange   270.1
   horn         290.81
 
 detector        85.3</code></pre></li>
-<li><p>Esso contiene delle temperature registrate da termometri installati in uno strumento</p></li>
-<li><p>Vogliamo scrivere un programma che stampi a video i nomi dei sensori, ordinati secondo la temperatura dal più freddo al più caldo. Il codice deve ignorare spazi, commenti e linee vuote</p></li>
+<li><p>Esso contiene delle temperature registrate da termometri
+installati in uno strumento</p></li>
+<li><p>Vogliamo scrivere un programma che stampi a video i nomi dei
+sensori, ordinati secondo la temperatura dal più freddo al più caldo. Il
+codice deve ignorare spazi, commenti e linee vuote</p></li>
 </ul>
 </section>
 <section id="soluzione-dellesercizio" class="slide level1">
 <h1>Soluzione dell’esercizio</h1>
-<div class="sourceCode" id="cb16"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">&quot;test.txt&quot;</span>, <span class="st">&quot;rt&quot;</span>) <span class="im">as</span> inpf:</span>
+<div class="sourceCode" id="cb16"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">&quot;test.txt&quot;</span>, <span class="st">&quot;rt&quot;</span>) <span class="im">as</span> inpf:</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>    lines <span class="op">=</span> [x.strip() <span class="cf">for</span> x <span class="kw">in</span> inpf.readlines()]  <span class="co"># lines = { x.strip | x ∈ inpf.readlines }</span></span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove from &quot;lines&quot; empty lines and comments</span></span>
@@ -532,18 +667,30 @@ upper_flange         (T = 301.76 K)</code></pre>
 <section id="quando-usare-python" class="slide level1">
 <h1>Quando usare Python?</h1>
 <ul>
-<li>Se un programma non richiede molti calcoli complessi, Python è solitamente la scelta migliore</li>
-<li>Se un programma Python è 100 volte più lento di un programma C++, ma completa sempre l’esecuzione in 0,1 secondi, vale la pena velocizzarlo?</li>
-<li>Scrivere programmi in Python è molto più veloce che scriverli in C++</li>
+<li>Se un programma non richiede molti calcoli complessi, Python è
+solitamente la scelta migliore</li>
+<li>Se un programma Python è 100 volte più lento di un programma C++, ma
+completa sempre l’esecuzione in 0,1 secondi, vale la pena
+velocizzarlo?</li>
+<li>Scrivere programmi in Python è molto più veloce che scriverli in
+C++</li>
 </ul>
 </section>
 <section id="python-nel-calcolo-scientifico" class="slide level1">
 <h1>Python nel calcolo scientifico</h1>
 <ul>
-<li>È possibile usare Python per simulazioni Monte Carlo? O per calcoli numerici su milioni di elementi?</li>
+<li>È possibile usare Python per simulazioni Monte Carlo? O per calcoli
+numerici su milioni di elementi?</li>
 <li>Python permette di invocare funzioni scritte in C e in Fortran</li>
-<li>Negli anni sono state sviluppate librerie Python molto potenti per il calcolo scientifico: <a href="https://numpy.org/">NumPy</a>, <a href="https://numba.pydata.org/">Numba</a>, <a href="https://www.numfys.net/howto/F2PY/">f2py</a>, <a href="https://cython.org/">Cython</a>, <a href="https://dask.org/">Dask</a>, <a href="https://pandas.pydata.org/">Pandas</a>…</li>
-<li>Lo svantaggio è che queste librerie scientifiche sono spesso <strong>poco integrate</strong> col linguaggio</li>
+<li>Negli anni sono state sviluppate librerie Python molto potenti per
+il calcolo scientifico: <a href="https://numpy.org/">NumPy</a>, <a
+href="https://numba.pydata.org/">Numba</a>, <a
+href="https://www.numfys.net/howto/F2PY/">f2py</a>, <a
+href="https://cython.org/">Cython</a>, <a
+href="https://dask.org/">Dask</a>, <a
+href="https://pandas.pydata.org/">Pandas</a>…</li>
+<li>Lo svantaggio è che queste librerie scientifiche sono spesso
+<strong>poco integrate</strong> col linguaggio</li>
 </ul>
 </section>
 <section id="julia" class="slide level1">
@@ -553,7 +700,8 @@ upper_flange         (T = 301.76 K)</code></pre>
 <h1>Cos’è Julia?</h1>
 <ul>
 <li><a href="https://julialang.org/">julialang.org</a></li>
-<li>Linguaggio molto recente (versione 0.1 rilasciata a Febbraio 2013)</li>
+<li>Linguaggio molto recente (versione 0.1 rilasciata a Febbraio
+2013)</li>
 <li>Pensato espressamente per il calcolo scientifico</li>
 <li>Veloce come C++ e facile come Python…?</li>
 <li>Versione corrente: 1.7.2</li>
@@ -563,29 +711,33 @@ upper_flange         (T = 301.76 K)</code></pre>
 <h1>Dove si colloca Julia?</h1>
 <dl>
 <dt>Compilatori</dt>
-<dd><p>C, C++, FreePascal, gfortran, Rust, GNAT Ada, Nim, …</p>
+<dd>
+<p>C, C++, FreePascal, gfortran, Rust, GNAT Ada, Nim, …</p>
 </dd>
 <dt>Interpreti</dt>
-<dd><p>CPython, R, Matlab, IDL, …</p>
+<dd>
+<p>CPython, R, Matlab, IDL, …</p>
 </dd>
 <dt>Just-in-time compilers</dt>
-<dd><p>Java, LuaJIT, Julia, etc.</p>
+<dd>
+<p>Java, LuaJIT, Julia, etc.</p>
 </dd>
 </dl>
 </section>
 <section id="un-assaggio-del-linguaggio" class="slide level1">
 <h1>Un assaggio del linguaggio</h1>
-<div class="sourceCode" id="cb18"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">f</span>(x) <span class="op">=</span> <span class="fl">3</span>x<span class="op">^</span><span class="fl">2</span>                  <span class="co"># Functions can be defined on one line!</span></span>
+<div class="sourceCode" id="cb18"><pre
+class="sourceCode julia"><code class="sourceCode julia"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">f</span>(x) <span class="op">=</span> <span class="fl">3</span>x<span class="op">^</span><span class="fl">2</span>                  <span class="co"># Functions can be defined on one line!</span></span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="fu">g</span>(t<span class="op">,</span> ν) <span class="op">=</span> <span class="fu">sin</span>(<span class="fl">2</span>π <span class="op">*</span> t <span class="op">*</span> ν)    <span class="co"># You can use Unicode characters</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="fu">g</span>(t, ν) <span class="op">=</span> <span class="fu">sin</span>(<span class="fl">2</span>π <span class="op">*</span> t <span class="op">*</span> ν)    <span class="co"># You can use Unicode characters</span></span>
 <span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="dt">Float64</span>[<span class="fl">1.0</span><span class="op">,</span> <span class="fl">3.0</span><span class="op">,</span> <span class="fl">4.0</span>]   <span class="co"># Lists are supported natively</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="dt">Float64</span>[<span class="fl">1.0</span>, <span class="fl">3.0</span>, <span class="fl">4.0</span>]   <span class="co"># Lists are supported natively</span></span>
 <span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="fu">sin</span>.(x)                      <span class="co"># Using &quot;.&quot;, functions can be applied to arrays</span></span>
 <span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a><span class="fu">⊕</span>(x<span class="op">,</span> y) <span class="op">=</span> <span class="fl">2</span>x <span class="op">+</span> y            <span class="co"># New operators can be defined!</span></span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a><span class="fu">⊕</span>(x, y) <span class="op">=</span> <span class="fl">2</span>x <span class="op">+</span> y            <span class="co"># New operators can be defined!</span></span>
 <span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a><span class="fl">3</span> ⊕ <span class="fl">2</span>                       <span class="co"># Prints 8</span></span></code></pre></div>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a><span class="fl">3</span> <span class="op">⊕</span> <span class="fl">2</span>                       <span class="co"># Prints 8</span></span></code></pre></div>
 </section>
 <section id="confronto-pythonjulia" class="slide level1">
 <h1>Confronto Python/Julia</h1>
@@ -600,7 +752,8 @@ upper_flange         (T = 301.76 K)</code></pre>
 </tr>
 <tr>
 <td>
-<div class="sourceCode" id="cb19"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> mysum(a, b):</span>
+<div class="sourceCode" id="cb19"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> mysum(a, b):</span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> a <span class="op">+</span> b</span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="co"># mysum(1, 2)</span></span>
@@ -608,7 +761,8 @@ upper_flange         (T = 301.76 K)</code></pre>
 <span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a><span class="co"># etc.</span></span></code></pre></div>
 </td>
 <td>
-<div class="sourceCode" id="cb20"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mysum</span>(a<span class="op">,</span> b) <span class="op">=</span> a <span class="op">+</span> b</span>
+<div class="sourceCode" id="cb20"><pre
+class="sourceCode julia"><code class="sourceCode julia"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mysum</span>(a, b) <span class="op">=</span> a <span class="op">+</span> b</span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Equivalente:</span></span>
 <span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="co"># function mysum(a, b)</span></span>
@@ -620,14 +774,22 @@ upper_flange         (T = 301.76 K)</code></pre>
 </td>
 </tr>
 </table>
-<p>Julia ha le medesime performance del C++, ma com’è possibile se come per Python in Julia non si specificano i tipi?</p>
+<p>Julia ha le medesime performance del C++, ma com’è possibile se come
+per Python in Julia non si specificano i tipi?</p>
 </section>
 <section id="compilazione-in-julia" class="slide level1">
 <h1>Compilazione in Julia</h1>
 <ul>
-<li><p>Julia, a differenza di Python, compila il codice in linguaggio macchina. Ma la compilazione viene effettuata <strong>la prima volta che si chiede di eseguire una funzione</strong>.</p></li>
-<li><p>Per esempio, nel momento in cui si scrive <code>mysum(1, 2)</code>, Julia esegue la compilazione assumendo che <code>a</code> e <code>b</code> siano due interi.</p></li>
-<li><p>A differenza del C++, la compilazione non viene fatta su un intero file, ma sulle <strong>singole funzioni</strong>: se una funzione non viene mai chiamata, non viene mai compilata in linguaggio macchina.</p></li>
+<li><p>Julia, a differenza di Python, compila il codice in linguaggio
+macchina. Ma la compilazione viene effettuata <strong>la prima volta che
+si chiede di eseguire una funzione</strong>.</p></li>
+<li><p>Per esempio, nel momento in cui si scrive
+<code>mysum(1, 2)</code>, Julia esegue la compilazione assumendo che
+<code>a</code> e <code>b</code> siano due interi.</p></li>
+<li><p>A differenza del C++, la compilazione non viene fatta su un
+intero file, ma sulle <strong>singole funzioni</strong>: se una funzione
+non viene mai chiamata, non viene mai compilata in linguaggio
+macchina.</p></li>
 </ul>
 </section>
 <section id="sessione-interattiva" class="slide level1">
@@ -646,7 +808,8 @@ julia&gt;</code></pre>
 </section>
 <section id="compilazione-in-julia-1" class="slide level1">
 <h1>Compilazione in Julia</h1>
-<p>Al prompt di Julia è semplice vedere in cosa è compilata una funzione, col comando <code>@code_native</code>:</p>
+<p>Al prompt di Julia è semplice vedere in cosa è compilata una
+funzione, col comando <code>@code_native</code>:</p>
 <pre><code>julia&gt; @code_native mysum(1, 2)
         .text
 Filename: REPL[4]
@@ -660,7 +823,8 @@ Source line: 1
 </section>
 <section id="compilazione-in-julia-2" class="slide level1">
 <h1>Compilazione in Julia</h1>
-<p>Se chiamiamo <code>sum</code> con floating-point, il codice compilato usa correttamente l’istruzione <code>addsd</code>:</p>
+<p>Se chiamiamo <code>sum</code> con floating-point, il codice compilato
+usa correttamente l’istruzione <code>addsd</code>:</p>
 <pre><code>julia&gt; @code_native mysum(1.0, 2.0)
         .text
 Filename: REPL[5]
@@ -674,7 +838,8 @@ Source line: 1
 </section>
 <section id="definire-funzioni" class="slide level1">
 <h1>Definire funzioni</h1>
-<p>In questo modo, Julia supporta diversi tipi garantendo però la stessa velocità del C++:</p>
+<p>In questo modo, Julia supporta diversi tipi garantendo però la stessa
+velocità del C++:</p>
 <pre><code>julia&gt; mysum(1, 2)              # Interi
 3
 
@@ -690,15 +855,22 @@ julia&gt; mysum(3+2im, 4-3im)      # Numeri complessi
 <section id="macro" class="slide level1">
 <h1>Macro</h1>
 <ul>
-<li><p>Julia è un linguaggio <em>omoiconico</em> (“medesima rappresentazione”), che significa che codice e variabili hanno la stessa rappresentazione.</p></li>
-<li><p>Questa è una caratteristica mutuata dal linguaggio Scheme, da cui gli sviluppatori di Julia hanno preso spesso ispirazione.</p></li>
-<li><p>(Il cuore del compilatore di Julia è scritto in un dialetto di Scheme!)</p></li>
-<li><p>Le macro sono apparentemente simili alle funzioni del C++, ma hanno una importante differenza</p></li>
+<li><p>Julia è un linguaggio <em>omoiconico</em> (“medesima
+rappresentazione”), che significa che codice e variabili hanno la stessa
+rappresentazione.</p></li>
+<li><p>Questa è una caratteristica mutuata dal linguaggio Scheme, da cui
+gli sviluppatori di Julia hanno preso spesso ispirazione.</p></li>
+<li><p>(Il cuore del compilatore di Julia è scritto in un dialetto di
+Scheme!)</p></li>
+<li><p>Le macro sono apparentemente simili alle funzioni del C++, ma
+hanno una importante differenza</p></li>
 </ul>
 </section>
 <section id="esempio-di-funzione" class="slide level1">
 <h1>Esempio di funzione</h1>
-<p>Consideriamo una funzione che accetta come argomento un intero <code>x</code>, e stampa <code>"A"</code> se <code>x</code> è maggiore di 2, <code>"B"</code> altrimenti.</p>
+<p>Consideriamo una funzione che accetta come argomento un intero
+<code>x</code>, e stampa <code>"A"</code> se <code>x</code> è maggiore
+di 2, <code>"B"</code> altrimenti.</p>
 <table width="100%">
 <tr>
 <td>
@@ -710,7 +882,8 @@ julia&gt; mysum(3+2im, 4-3im)      # Numeri complessi
 </tr>
 <tr>
 <td>
-<div class="sourceCode" id="cb25"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> f<span class="op">(</span><span class="dt">int</span> x<span class="op">)</span> <span class="op">{</span></span>
+<div class="sourceCode" id="cb25"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> f<span class="op">(</span><span class="dt">int</span> x<span class="op">)</span> <span class="op">{</span></span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span><span class="op">(</span>x <span class="op">&gt;</span> <span class="dv">2</span><span class="op">)</span> <span class="op">{</span></span>
 <span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>        <span class="bu">std::</span>cout<span class="op"> &lt;&lt;</span> <span class="st">&quot;A</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">;</span></span>
 <span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
@@ -719,7 +892,8 @@ julia&gt; mysum(3+2im, 4-3im)      # Numeri complessi
 <span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 </td>
 <td>
-<div class="sourceCode" id="cb26"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">f</span>(x)</span>
+<div class="sourceCode" id="cb26"><pre
+class="sourceCode julia"><code class="sourceCode julia"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">f</span>(x)</span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> x <span class="op">&gt;</span> <span class="fl">2</span></span>
 <span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>        <span class="fu">println</span>(<span class="st">&quot;A&quot;</span>)</span>
 <span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span></span>
@@ -733,9 +907,14 @@ julia&gt; mysum(3+2im, 4-3im)      # Numeri complessi
 <section id="esempio-di-macro" class="slide level1">
 <h1>Esempio di macro</h1>
 <ul>
-<li><p>Supponiamo ora di affrontare un problema apparentemente simile.</p></li>
-<li><p>Vogliamo scrivere una funzione che accetta come argomento un parametro <code>x</code>, e stampa <code>"A"</code> solo se <code>x</code> è stato calcolato usando una somma, altrimenti <code>"B"</code>.</p>
-<div class="sourceCode" id="cb27"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> f<span class="op">(</span><span class="dt">int</span> a<span class="op">)</span> <span class="op">{</span></span>
+<li><p>Supponiamo ora di affrontare un problema apparentemente
+simile.</p></li>
+<li><p>Vogliamo scrivere una funzione che accetta come argomento un
+parametro <code>x</code>, e stampa <code>"A"</code> solo se
+<code>x</code> è stato calcolato usando una somma, altrimenti
+<code>"B"</code>.</p>
+<div class="sourceCode" id="cb27"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> f<span class="op">(</span><span class="dt">int</span> a<span class="op">)</span> <span class="op">{</span></span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">// ????</span></span>
 <span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
 <span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a></span>
@@ -748,15 +927,23 @@ julia&gt; mysum(3+2im, 4-3im)      # Numeri complessi
 <section id="problema-col-c" class="slide level1">
 <h1>Problema col C++</h1>
 <ul>
-<li>Dovremmo usare una istruzione <code>if</code>, ma questa in C++ può essere usata solo per confrontare il valore di <em>variabili</em></li>
-<li>Noi dovremmo invece esaminare le <em>istruzioni</em> usate per calcolare il valore di <code>x</code></li>
-<li>Il linguaggio C++ <strong>non</strong> è «omoiconico», perché i suoi costrutti (<code>if</code>, <code>while</code>, <code>for</code>, …) funzionano solo sul contenuto dei dati (variabili), e non sulle istruzioni di codice</li>
+<li>Dovremmo usare una istruzione <code>if</code>, ma questa in C++ può
+essere usata solo per confrontare il valore di <em>variabili</em></li>
+<li>Noi dovremmo invece esaminare le <em>istruzioni</em> usate per
+calcolare il valore di <code>x</code></li>
+<li>Il linguaggio C++ <strong>non</strong> è «omoiconico», perché i suoi
+costrutti (<code>if</code>, <code>while</code>, <code>for</code>, …)
+funzionano solo sul contenuto dei dati (variabili), e non sulle
+istruzioni di codice</li>
 </ul>
 </section>
 <section id="esempio-di-macro-1" class="slide level1">
 <h1>Esempio di macro</h1>
-<p>Julia è invece omoiconico, e quindi si può ispezionare il <em>codice</em> usando gli stessi costrutti del linguaggio che si usano con i dati:</p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="kw">macro</span> <span class="fu">f</span>(<span class="cn">e</span><span class="op">::</span><span class="dt">Expr)</span></span>
+<p>Julia è invece omoiconico, e quindi si può ispezionare il
+<em>codice</em> usando gli stessi costrutti del linguaggio che si usano
+con i dati:</p>
+<div class="sourceCode" id="cb28"><pre
+class="sourceCode julia"><code class="sourceCode julia"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="kw">macro</span> <span class="fu">f</span>(<span class="cn">e</span><span class="op">::</span><span class="dt">Expr</span>)</span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="cn">e</span>.args[<span class="fl">1</span>] <span class="op">==</span> <span class="op">:+</span></span>
 <span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>        <span class="fu">println</span>(<span class="st">&quot;A&quot;</span>)</span>
 <span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span></span>
@@ -770,10 +957,15 @@ julia&gt; mysum(3+2im, 4-3im)      # Numeri complessi
 <section id="esecuzione-di-macro" class="slide level1">
 <h1>Esecuzione di macro</h1>
 <ul>
-<li><p>Le macro vengono eseguite <em>prima</em> che il codice Julia venga tradotto in linguaggio macchina</p></li>
-<li><p>Possono quindi essere usate per modificare del codice presente nel file sorgente, o addirittura per <em>generarlo automaticamente</em></p></li>
-<li><p>Consideriamo per esempio un codice C++ che calcola la derivata di una funzione:</p>
-<div class="sourceCode" id="cb29"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> der<span class="op">(</span><span class="dt">double</span> <span class="op">(*</span>f<span class="op">)(</span><span class="dt">double</span><span class="op">),</span> <span class="dt">double</span> x<span class="op">,</span> <span class="dt">double</span> h <span class="op">=</span> <span class="fl">1e-6</span><span class="op">)</span> <span class="op">{</span></span>
+<li><p>Le macro vengono eseguite <em>prima</em> che il codice Julia
+venga tradotto in linguaggio macchina</p></li>
+<li><p>Possono quindi essere usate per modificare del codice presente
+nel file sorgente, o addirittura per <em>generarlo
+automaticamente</em></p></li>
+<li><p>Consideriamo per esempio un codice C++ che calcola la derivata di
+una funzione:</p>
+<div class="sourceCode" id="cb29"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> der<span class="op">(</span><span class="dt">double</span> <span class="op">(*</span>f<span class="op">)(</span><span class="dt">double</span><span class="op">),</span> <span class="dt">double</span> x<span class="op">,</span> <span class="dt">double</span> h <span class="op">=</span> <span class="fl">1e-6</span><span class="op">)</span> <span class="op">{</span></span>
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="op">(</span>f<span class="op">(</span>x <span class="op">+</span> h<span class="op">)</span> <span class="op">-</span> f<span class="op">(</span>x<span class="op">))</span> <span class="op">/</span> h<span class="op">;</span></span>
 <span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div></li>
 </ul>
@@ -782,7 +974,8 @@ julia&gt; mysum(3+2im, 4-3im)      # Numeri complessi
 
 <ul>
 <li><p>Il codice macchina generato da GCC è più o meno il seguente:</p>
-<div class="sourceCode" id="cb30"><pre class="sourceCode asm"><code class="sourceCode fasm"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="bu">movsd</span>   <span class="kw">xmm0</span><span class="op">,</span> <span class="dt">QWORD</span> <span class="dt">PTR</span> <span class="op">[</span><span class="kw">rsp</span><span class="op">+</span><span class="dv">24</span><span class="op">]</span>  <span class="co">; xmm0 ← x</span></span>
+<div class="sourceCode" id="cb30"><pre
+class="sourceCode asm"><code class="sourceCode fasm"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="bu">movsd</span>   <span class="kw">xmm0</span><span class="op">,</span> <span class="dt">QWORD</span> <span class="dt">PTR</span> <span class="op">[</span><span class="kw">rsp</span><span class="op">+</span><span class="dv">24</span><span class="op">]</span>  <span class="co">; xmm0 ← x</span></span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="bu">movsd</span>   <span class="kw">xmm1</span><span class="op">,</span> <span class="dt">QWORD</span> <span class="dt">PTR</span> <span class="op">[</span><span class="kw">rsp</span><span class="op">+</span><span class="dv">16</span><span class="op">]</span>  <span class="co">; xmm0 ← h</span></span>
 <span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="bu">addsd</span>   <span class="kw">xmm0</span><span class="op">,</span> <span class="kw">xmm1</span>                <span class="co">; xmm0 ← x + h</span></span>
 <span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a><span class="cf">call</span>    <span class="kw">rdi</span>                       <span class="co">; xmm0 ← f(x + h)</span></span>
@@ -794,14 +987,19 @@ julia&gt; mysum(3+2im, 4-3im)      # Numeri complessi
 <span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a><span class="bu">movsd</span>   <span class="kw">xmm1</span><span class="op">,</span> <span class="dt">QWORD</span> <span class="dt">PTR</span> <span class="op">[</span><span class="kw">rsp</span><span class="op">+</span><span class="dv">16</span><span class="op">]</span>  <span class="co">; xmm1 ← h</span></span>
 <span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a><span class="bu">subsd</span>   <span class="kw">xmm2</span><span class="op">,</span> <span class="kw">xmm0</span>                <span class="co">; xmm2 ← xmm2 - xmm0 = f(x + h) - f(x)</span></span>
 <span id="cb30-12"><a href="#cb30-12" aria-hidden="true" tabindex="-1"></a><span class="bu">divsd</span>   <span class="kw">xmm2</span><span class="op">,</span> <span class="kw">xmm1</span>                <span class="co">; xmm2 ← xmm2 / xmm1 = (f(x + h) - f(x)) / h</span></span></code></pre></div></li>
-<li><p>Il compilatore non può fare molto altro, perché non conosce la forma <em>analitica</em> della funzione <code>f</code>: questo codice macchina viene quindi eseguito anche per funzioni dalla derivata banale, come <span class="math inline">f(x) = 2x + 1</span>.</p></li>
+<li><p>Il compilatore non può fare molto altro, perché non conosce la
+forma <em>analitica</em> della funzione <code>f</code>: questo codice
+macchina viene quindi eseguito anche per funzioni dalla derivata banale,
+come <span class="math inline">f(x) = 2x + 1</span>.</p></li>
 </ul>
 </section>
 <section id="derivate-in-julia" class="slide level1">
 <h1>Derivate in Julia</h1>
 <ul>
-<li><p>La libreria <code>Zygote</code> calcola derivate <em>analiticamente</em>:</p>
-<div class="sourceCode" id="cb31"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="kw">using</span> Zygote       <span class="co"># See https://arxiv.org/abs/1810.07951</span></span>
+<li><p>La libreria <code>Zygote</code> calcola derivate
+<em>analiticamente</em>:</p>
+<div class="sourceCode" id="cb31"><pre
+class="sourceCode julia"><code class="sourceCode julia"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">Zygote       </span><span class="co"># See https://arxiv.org/abs/1810.07951</span></span>
 <span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="fu">g</span>(x) <span class="op">=</span> <span class="fl">2</span>x <span class="op">+</span> <span class="fl">1</span></span>
 <span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a><span class="fu">println</span>(<span class="fu">g</span>(<span class="fl">1</span>))      <span class="co"># Print 3</span></span>
@@ -810,14 +1008,23 @@ julia&gt; mysum(3+2im, 4-3im)      # Numeri complessi
 <span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a><span class="co"># define double @&quot;julia_#59_2736&quot;(i64 signext %0) #0 {</span></span>
 <span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a><span class="co">#   ret double 2.000000e+00</span></span>
 <span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a><span class="co"># }</span></span></code></pre></div></li>
-<li><p><code>Zygote</code> usa un algoritmo, chiamato <em>reverse-mode algorithmic differentiation</em>, che è in grado di calcolare le derivate anche se nella funzione <code>g</code> si usano costrutti come cicli <code>while</code> o <code>for</code>!</p></li>
+<li><p><code>Zygote</code> usa un algoritmo, chiamato <em>reverse-mode
+algorithmic differentiation</em>, che è in grado di calcolare le
+derivate anche se nella funzione <code>g</code> si usano costrutti come
+cicli <code>while</code> o <code>for</code>!</p></li>
 </ul>
 </section>
 <section id="approfondimento-di-julia" class="slide level1">
 <h1>Approfondimento di Julia</h1>
 <ul>
-<li>Nel video <em>Julia, the power of language</em> (<a href="https://youtu.be/Zb8G6T8JtuM">youtu.be/Zb8G6T8JtuM</a>), lo speaker mostra varie applicazioni di Julia, tra cui l’implementazione di un tipo di matrice con determinate simmetrie</li>
-<li>In un altro video <em>Alan Edelman and Julia Language</em> (<a href="https://youtu.be/rZS2LGiurKY">youtu.be/rZS2LGiurKY</a>), lo speaker spiega come sia possibile per librerie come Zygote calcolare derivate.</li>
+<li>Nel video <em>Julia, the power of language</em> (<a
+href="https://youtu.be/Zb8G6T8JtuM">youtu.be/Zb8G6T8JtuM</a>), lo
+speaker mostra varie applicazioni di Julia, tra cui l’implementazione di
+un tipo di matrice con determinate simmetrie</li>
+<li>In un altro video <em>Alan Edelman and Julia Language</em> (<a
+href="https://youtu.be/rZS2LGiurKY">youtu.be/rZS2LGiurKY</a>), lo
+speaker spiega come sia possibile per librerie come Zygote calcolare
+derivate.</li>
 <li>Sono video illuminanti, vale la pena vederli!</li>
 </ul>
 </section>
@@ -861,7 +1068,7 @@ julia&gt; mysum(3+2im, 4-3im)      # Numeri complessi
 
         // Add the current slide number to the URL hash so that reloading the
         // page/copying the URL will return you to the same slide
-        hash: false,
+        hash: true,
 
         // Start with 1 for the hash rather than 0
         hashOneBasedIndex: false,

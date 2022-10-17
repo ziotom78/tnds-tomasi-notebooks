@@ -6,3 +6,7 @@
 .reveal h6 {
   text-transform: none;
 }
+
+.sourceCode {
+    overflow: scroll;
+}

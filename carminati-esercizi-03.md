@@ -44,11 +44,11 @@ template <typename T> double CalcolaMedia (const Vettore<T> &v, size_t ndata) {.
 e possiamo quindi utilizzare la funzione `CalcolaMedia` nel `main` nel modo seguente:
 
 ```c++
-cout << "media    = " << CalcolaMedia<double>( v  ) << endl;
+cout << "media    = " << CalcolaMedia<double>(v) << endl;
 
 // È valido anche omettere `<double>`, perché il compilatore può
 // capire da solo cosa mettere in `<…>` basandosi sul tipo di `v`
-// cout << "media    = " << CalcolaMedia( v  ) << endl;
+// cout << "media    = " << CalcolaMedia(v) << endl;
 ```
 
 Si possono trovare più dettagli a [questo link](http://www.cplusplus.com/doc/oldtutorial/templates/).
@@ -56,7 +56,7 @@ Si possono trovare più dettagli a [questo link](http://www.cplusplus.com/doc/ol
 
 # Esercizio 3.0 - Evoluzione della classe Vettore in una classe template (da consegnare) {#esercizio-3.0}
 
-Proviamo a rendere la classe `Vettore` della lezione scorsa una classe `template`, in modo che possa in linea di principio immagazzinare oggeti di un tipo generico `T`. Notate che quando usiamo classi o funzioni template non applichiamo la separazione tra header file (`.h`) e file di implementazione (`.cpp`), ma codifichiamo tutto dentro l'*header file*. Questo perché non sarebbe possibile per il compilatore compilare separatamente un set di funzioni o una classe senza sapere i tipi esatti con cui verranno utilizzati.
+Proviamo a rendere la classe `Vettore` della lezione scorsa una classe `template`, in modo che possa in linea di principio immagazzinare oggetti di un tipo generico `T`. Notate che quando usiamo classi o funzioni template non applichiamo la separazione tra header file (`.h`) e file di implementazione (`.cpp`), ma codifichiamo tutto dentro l'*header file*. Questo perché non sarebbe possibile per il compilatore compilare separatamente un set di funzioni o una classe senza sapere i tipi esatti con cui verranno utilizzati.
 
 Vediamo come fare passo passo.
 

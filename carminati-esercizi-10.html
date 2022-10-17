@@ -65,7 +65,7 @@
             code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
             code span.at { color: #7d9029; } /* Attribute */
             code span.bn { color: #40a070; } /* BaseN */
-            code span.bu { } /* BuiltIn */
+            code span.bu { color: #008000; } /* BuiltIn */
             code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
             code span.ch { color: #4070a0; } /* Char */
             code span.cn { color: #880000; } /* Constant */
@@ -78,7 +78,7 @@
             code span.ex { } /* Extension */
             code span.fl { color: #40a070; } /* Float */
             code span.fu { color: #06287e; } /* Function */
-            code span.im { } /* Import */
+            code span.im { color: #008000; font-weight: bold; } /* Import */
             code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
             code span.kw { color: #007020; font-weight: bold; } /* Keyword */
             code span.op { color: #666666; } /* Operator */
@@ -91,22 +91,24 @@
             code span.vs { color: #4070a0; } /* VerbatimString */
             code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
         </style>
-                                            <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.js"></script>
+                                            <script defer=""
+                                            src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js"></script>
                                             <script>document.addEventListener("DOMContentLoaded", function () {
-                                             var mathElements = document.getElementsByClassName("math");
-                                             var macros = [];
-                                             for (var i = 0; i < mathElements.length; i++) {
-                                              var texText = mathElements[i].firstChild;
-                                              if (mathElements[i].tagName == "SPAN") {
-                                               katex.render(texText.data, mathElements[i], {
-                                                displayMode: mathElements[i].classList.contains('display'),
-                                                throwOnError: false,
-                                                macros: macros,
-                                                fleqn: false
-                                               });
-                                            }}});
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
                                             </script>
-                                            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css" />
+                                            <link rel="stylesheet"
+                                            href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css" />
                                           <script src="./fmtinstall.js"></script>
                  
     </head>
@@ -118,10 +120,14 @@
 
                         <div class="uk-grid" data-uk-grid-margin>
                 <div class="uk-width-1-1">
-                    <h1 class="uk-heading-large">Lezione 10: Numeri casuali</h1>
-                                        <h3 class="uk-heading-large">A.A. 2021−2022</p></h3>
-                                                            <p class="uk-text-large">Leonardo Carminati</p>
-                                        <p class="uk-text-large">Maurizio Tomasi</p>
+                    <h1 class="uk-heading-large">Lezione 10: Numeri
+casuali</h1>
+                                        <h3 class="uk-heading-large">A.A.
+2021−2022</p></h3>
+                                                            <p class="uk-text-large">Leonardo
+Carminati</p>
+                                        <p class="uk-text-large">Maurizio
+Tomasi</p>
                                     </div>
             </div>
             
@@ -131,26 +137,97 @@
                         <div class="uk-panel uk-panel-box menu-begin" >
 
                                                         <ul>
-                                                        <li><a href="#esercizio-10.0">Esercizio 10.0 - Generatore di numeri casuali (da consegnare)</a>
+                                                        <li><a
+                                                        href="#esercizio-10.0"
+                                                        id="toc-esercizio-10.0">Esercizio
+                                                        10.0 -
+                                                        Generatore di
+                                                        numeri casuali
+                                                        (da
+                                                        consegnare)</a>
                                                         <ul>
-                                                        <li><a href="#generatore-lineare-congruenziale">Generatore Lineare congruenziale</a></li>
-                                                        <li><a href="#generatore-esponenziale">Generatore esponenziale</a></li>
-                                                        <li><a href="#metodo-di-box-muller">Metodo di Box Muller</a></li>
-                                                        <li><a href="#metodo-accept-reject">Metodo Accept-Reject</a></li>
+                                                        <li><a
+                                                        href="#generatore-lineare-congruenziale"
+                                                        id="toc-generatore-lineare-congruenziale">Generatore
+                                                        Lineare
+                                                        congruenziale</a></li>
+                                                        <li><a
+                                                        href="#generatore-esponenziale"
+                                                        id="toc-generatore-esponenziale">Generatore
+                                                        esponenziale</a></li>
+                                                        <li><a
+                                                        href="#metodo-di-box-muller"
+                                                        id="toc-metodo-di-box-muller">Metodo
+                                                        di Box
+                                                        Muller</a></li>
+                                                        <li><a
+                                                        href="#metodo-accept-reject"
+                                                        id="toc-metodo-accept-reject">Metodo
+                                                        Accept-Reject</a></li>
                                                         </ul></li>
-                                                        <li><a href="#esercizio-10.1">Esercizio 10.1 - Verifica del Teorema del Limite Centrale (facoltativo)</a>
+                                                        <li><a
+                                                        href="#esercizio-10.1"
+                                                        id="toc-esercizio-10.1">Esercizio
+                                                        10.1 - Verifica
+                                                        del Teorema del
+                                                        Limite Centrale
+                                                        (facoltativo)</a>
                                                         <ul>
-                                                        <li><a href="#il-teorema-del-limite-centrale">Il Teorema del Limite Centrale</a></li>
+                                                        <li><a
+                                                        href="#il-teorema-del-limite-centrale"
+                                                        id="toc-il-teorema-del-limite-centrale">Il
+                                                        Teorema del
+                                                        Limite
+                                                        Centrale</a></li>
                                                         </ul></li>
-                                                        <li><a href="#esercizio-10.2">Esercizio 10.2 - Calcolo di integrali con metodi MonteCarlo (da consegnare)</a>
+                                                        <li><a
+                                                        href="#esercizio-10.2"
+                                                        id="toc-esercizio-10.2">Esercizio
+                                                        10.2 - Calcolo
+                                                        di integrali con
+                                                        metodi
+                                                        MonteCarlo (da
+                                                        consegnare)</a>
                                                         <ul>
-                                                        <li><a href="#calcolo-di-integrali-con-il-metodo-della-media">Calcolo di integrali con il metodo della media</a></li>
-                                                        <li><a href="#calcolo-di-integrali-con-il-metodo-hit-or-miss">Calcolo di integrali con il metodo hit-or-miss</a></li>
+                                                        <li><a
+                                                        href="#calcolo-di-integrali-con-il-metodo-della-media"
+                                                        id="toc-calcolo-di-integrali-con-il-metodo-della-media">Calcolo
+                                                        di integrali con
+                                                        il metodo della
+                                                        media</a></li>
+                                                        <li><a
+                                                        href="#calcolo-di-integrali-con-il-metodo-hit-or-miss"
+                                                        id="toc-calcolo-di-integrali-con-il-metodo-hit-or-miss">Calcolo
+                                                        di integrali con
+                                                        il metodo
+                                                        hit-or-miss</a></li>
                                                         </ul></li>
-                                                        <li><a href="#esercizio-10.3">Esercizio 10.3 - Calcolo di integrali multidimensionali con metodi MonteCarlo (facoltativo)</a></li>
-                                                        <li><a href="#esercizio-10.4">Esercizio 10.4 - Errore nel caso di integrali multimensionali (facoltativo)</a>
+                                                        <li><a
+                                                        href="#esercizio-10.3"
+                                                        id="toc-esercizio-10.3">Esercizio
+                                                        10.3 - Calcolo
+                                                        di integrali
+                                                        multidimensionali
+                                                        con metodi
+                                                        MonteCarlo
+                                                        (facoltativo)</a></li>
+                                                        <li><a
+                                                        href="#esercizio-10.4"
+                                                        id="toc-esercizio-10.4">Esercizio
+                                                        10.4 - Errore
+                                                        nel caso di
+                                                        integrali
+                                                        multimensionali
+                                                        (facoltativo)</a>
                                                         <ul>
-                                                        <li><a href="#qualche-approfondimento-su-generatori-di-numeri-casuali-in-c11">Qualche approfondimento su generatori di numeri casuali in C++11</a></li>
+                                                        <li><a
+                                                        href="#qualche-approfondimento-su-generatori-di-numeri-casuali-in-c11"
+                                                        id="toc-qualche-approfondimento-su-generatori-di-numeri-casuali-in-c11">Qualche
+                                                        approfondimento
+                                                        su generatori di
+                                                        numeri casuali
+                                                        in
+                                                        C++11</a></li>
                                                         </ul></li>
                                                         </ul>
                             
@@ -159,21 +236,36 @@
                 </div>
 
                 <div class="uk-width-medium-3-4">
-<p>[La pagina con la spiegazione originale degli esercizi si trova qui: <a href="http://labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/lezione10_1819.html">labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/lezione10_1819.html</a>.]</p>
-<p>In questa lezione impareremo a costruire un generatore di numeri casuali. Lo utilizzeremo quindi per generare numeri secondo una distribuzione uniforme, esponenziale e Gaussiana. Come applicazione utilizzeremo la generazione di numeri casuali per calcolare numericamente integrali mono e multi-dimensionali.</p>
-<h1 id="esercizio-10.0">Esercizio 10.0 - Generatore di numeri casuali (da consegnare)</h1>
-<p>Scrivere un programma che produca quattro istogrammi contenenti ciascuno 10000 numeri pseudo-casuali estratti da:</p>
+<p>[La pagina con la spiegazione originale degli esercizi si trova qui:
+<a
+href="http://labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/lezione10_1819.html">labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/lezione10_1819.html</a>.]</p>
+<p>In questa lezione impareremo a costruire un generatore di numeri
+casuali. Lo utilizzeremo quindi per generare numeri secondo una
+distribuzione uniforme, esponenziale e Gaussiana. Come applicazione
+utilizzeremo la generazione di numeri casuali per calcolare
+numericamente integrali mono e multi-dimensionali.</p>
+<h1 id="esercizio-10.0">Esercizio 10.0 - Generatore di numeri casuali
+(da consegnare)</h1>
+<p>Scrivere un programma che produca quattro istogrammi contenenti
+ciascuno 10000 numeri pseudo-casuali estratti da:</p>
 <ol>
 <li>una distribuzione uniforme tra 5 e 10.</li>
-<li>una distribuzione esponenziale tra 0 e +∞ con costante <span class="math inline">k=1</span>.</li>
-<li>una distribuzione gaussiana centrata in 1 e larghezza 1 con il metodo di Box-Muller.</li>
-<li>una distribuzione gaussiana centrata in 1 e larghezza 1 con il metodo accept-reject.</li>
+<li>una distribuzione esponenziale tra 0 e +∞ con costante <span
+class="math inline">k=1</span>.</li>
+<li>una distribuzione gaussiana centrata in 1 e larghezza 1 con il
+metodo di Box-Muller.</li>
+<li>una distribuzione gaussiana centrata in 1 e larghezza 1 con il
+metodo accept-reject.</li>
 </ol>
 <p>Per risolvere questo esercizio si può seguire lo schema seguente:</p>
 <ul>
-<li><p>Scrivere una classe opportuna per la generazione di numeri casuali. La classe dovrà contenere un metodo che implementi un generatore lineare congruenziale di base e tutti i metodi necessari per le distribuzioni richieste.</p>
+<li><p>Scrivere una classe opportuna per la generazione di numeri
+casuali. La classe dovrà contenere un metodo che implementi un
+generatore lineare congruenziale di base e tutti i metodi necessari per
+le distribuzioni richieste.</p>
 <p>Header file della classe <code>RandomGen</code>:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#pragma once</span></span>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#pragma once</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> RandomGen <span class="op">{</span></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span><span class="op">:</span></span>
@@ -192,9 +284,15 @@
 <span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>  <span class="dt">unsigned</span> <span class="dt">int</span> <span class="va">m_a</span><span class="op">,</span> <span class="va">m_c</span><span class="op">,</span> <span class="va">m_m</span><span class="op">;</span></span>
 <span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>  <span class="dt">unsigned</span> <span class="dt">int</span> <span class="va">m_seed</span><span class="op">;</span></span>
 <span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code></pre></div>
-<p>Il costruttore si farà carico di inizializzare i parametri del generatore ai valori <code>m_a = 1664525</code>, <code>m_c = 1013904223</code> e <code>m_m = 1U &lt;&lt; 31</code>.</p></li>
-<li><p>Preparare un semplice <code>main</code> per provare le funzionalità della classe RandomGen. Lo schema di massima potrebbe essere il seguente:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
+<p>Il costruttore si farà carico di inizializzare i parametri del
+generatore ai valori <code>m_a = 1664525</code>,
+<code>m_c = 1013904223</code> e
+<code>m_m = 1U &lt;&lt; 31</code>.</p></li>
+<li><p>Preparare un semplice <code>main</code> per provare le
+funzionalità della classe RandomGen. Lo schema di massima potrebbe
+essere il seguente:</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;vector&gt;</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;randomgen.h&quot;</span></span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;gplot++.h&quot;</span></span>
@@ -239,24 +337,38 @@
 <span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a>  plt<span class="op">.</span>histogram<span class="op">(</span>samples<span class="op">,</span> nbins<span class="op">);</span></span>
 <span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a>  plt<span class="op">.</span>show<span class="op">();</span></span>
 <span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
-<p>Il programma usa <a href="https://github.com/ziotom78/gplotpp">gplot++</a>, installabile con i soliti comandi descritti <a href="./index.html#gplotinstall">qui</a>.</p>
-<p>Se eseguite il programma, otterrete questo grafico, non molto incoraggiante:</p>
+<p>Il programma usa <a
+href="https://github.com/ziotom78/gplotpp">gplot++</a>, installabile con
+i soliti comandi descritti <a
+href="./index.html#gplotinstall">qui</a>.</p>
+<p>Se eseguite il programma, otterrete questo grafico, non molto
+incoraggiante:</p>
 <center>
 <p><img src="./media/histogram-bad.png" /></p>
 </center>
-<p>I dati non sembrano affatto essere distribuiti uniformemente! Il problema è che per default Gnuplot sceglie una scala per l’asse <span class="math inline">y</span> che non parte da zero, e questo distorce l’aspetto del grafico. Dobbiamo quindi forzarlo a partire da zero con il metodo <code>plt.set_yrange</code>:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Nel main visto sopra</span></span>
+<p>I dati non sembrano affatto essere distribuiti uniformemente! Il
+problema è che per default Gnuplot sceglie una scala per l’asse <span
+class="math inline">y</span> che non parte da zero, e questo distorce
+l’aspetto del grafico. Dobbiamo quindi forzarlo a partire da zero con il
+metodo <code>plt.set_yrange</code>:</p>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Nel main visto sopra</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co">// …</span></span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>plt<span class="op">.</span>set_xrange<span class="op">(</span><span class="dv">4</span><span class="op">,</span> <span class="dv">11</span><span class="op">);</span></span>
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>plt<span class="op">.</span>set_yrange<span class="op">(</span><span class="dv">0</span><span class="op">,</span> NAN<span class="op">);</span></span>
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co">// …</span></span></code></pre></div>
-<p>Passare <code>NAN</code> come estremo superiore indica a Gnuplot che ci va bene che sia lui a calcolare il valore ottimale per l’estremo superiore, perché a noi interessa indicare solo l’estremo inferiore. Il risultato diventa questo:</p>
+<p>Passare <code>NAN</code> come estremo superiore indica a Gnuplot che
+ci va bene che sia lui a calcolare il valore ottimale per l’estremo
+superiore, perché a noi interessa indicare solo l’estremo inferiore. Il
+risultato diventa questo:</p>
 <center>
 <p><img src="./media/histogram-good.png" /></p>
 </center></li>
-<li><p>Se invece volete usare ROOT, aggiungete in coda al <code>main</code> qualcosa di simile:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>TApplication app<span class="op">{</span><span class="st">&quot;app&quot;</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">0</span><span class="op">};</span></span>
+<li><p>Se invece volete usare ROOT, aggiungete in coda al
+<code>main</code> qualcosa di simile:</p>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>TApplication app<span class="op">{</span><span class="st">&quot;app&quot;</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">0</span><span class="op">};</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>TH1F unif<span class="op">{</span><span class="st">&quot;Uniforme&quot;</span><span class="op">,</span> <span class="st">&quot;Uniforme&quot;</span><span class="op">,</span> <span class="dv">100</span><span class="op">,</span> <span class="dv">4</span><span class="op">,</span> <span class="dv">11</span><span class="op">};</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span><span class="op">(</span><span class="dt">double</span> sample <span class="op">:</span> samples<span class="op">)</span> <span class="op">{</span></span>
@@ -271,23 +383,42 @@
 <span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>app<span class="op">.</span>Run<span class="op">();</span></span></code></pre></div></li>
 </ul>
-<h2 id="generatore-lineare-congruenziale">Generatore Lineare congruenziale</h2>
-<p>I generatori lineari congruenziali generano una sequenza di interi pseudocasuali utilizzando la sequente formula:</p>
+<h2 id="generatore-lineare-congruenziale">Generatore Lineare
+congruenziale</h2>
+<p>I generatori lineari congruenziali generano una sequenza di interi
+pseudocasuali utilizzando la sequente formula:</p>
 <p><span class="math display">
 n_i = \mathrm{mod}(a \cdot n_{i - 1} + c, m)
 </span></p>
-<p>Quindi è necessario tenere in memoria il valore del numero intero generato al passaggio precedente. Alla prima iterazione, <span class="math inline">n_0 = \text{seed}</span>.</p>
-<p>Per ottenere un numero floating point uniformemente distribuito tra 0 e 1 (con 1 escluso) è sufficiente richiedere: <span class="math display">
+<p>Quindi è necessario tenere in memoria il valore del numero intero
+generato al passaggio precedente. Alla prima iterazione, <span
+class="math inline">n_0 = \text{seed}</span>.</p>
+<p>Per ottenere un numero floating point uniformemente distribuito tra 0
+e 1 (con 1 escluso) è sufficiente richiedere: <span
+class="math display">
 d_i = n_i / m.
 </span></p>
-<p>Ricordiamo che in C++ l’operazione mod può essere eseguita con l’operatore <code>%</code>, che ritorna il resto della divisione (intera), per cui</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="dv">7</span> <span class="op">%</span> <span class="dv">5</span> <span class="op">=</span> <span class="dv">2</span></span></code></pre></div>
+<p>Ricordiamo che in C++ l’operazione mod può essere eseguita con
+l’operatore <code>%</code>, che ritorna il resto della divisione
+(intera), per cui</p>
+<div class="sourceCode" id="cb5"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="dv">7</span> <span class="op">%</span> <span class="dv">5</span> <span class="op">=</span> <span class="dv">2</span></span></code></pre></div>
 <h2 id="generatore-esponenziale">Generatore esponenziale</h2>
-<p>Per generare numeri pseudo-casuali secondo la densità di probabilità esponenziale <span class="math inline">p(x) = \lambda e^{-\lambda x}</span> (per <span class="math inline">x \geq 0</span>) si può facilmente invertire la funzione cumulativa di <span class="math inline">p(x)</span>. A partire da un numero <span class="math inline">y</span> estratto secondo la distribuzione uniforme tra 0 e 1, il numero <span class="math display">
+<p>Per generare numeri pseudo-casuali secondo la densità di probabilità
+esponenziale <span class="math inline">p(x) = \lambda e^{-\lambda
+x}</span> (per <span class="math inline">x \geq 0</span>) si può
+facilmente invertire la funzione cumulativa di <span
+class="math inline">p(x)</span>. A partire da un numero <span
+class="math inline">y</span> estratto secondo la distribuzione uniforme
+tra 0 e 1, il numero <span class="math display">
 x = - \frac1{\lambda} \log(1 - y)
-</span> è distribuito proprio come la distribuzione esponenziale <span class="math inline">p(x)</span>.</p>
+</span> è distribuito proprio come la distribuzione esponenziale <span
+class="math inline">p(x)</span>.</p>
 <h2 id="metodo-di-box-muller">Metodo di Box Muller</h2>
-<p>Siano <span class="math inline">x</span> e <span class="math inline">y</span> due variabili indipendenti distribuite normalmente (Gaussiana con media 0 e sigma 1). L’espressione della loro distribuzione di probabilità (PDF) in due dimensioni è</p>
+<p>Siano <span class="math inline">x</span> e <span
+class="math inline">y</span> due variabili indipendenti distribuite
+normalmente (Gaussiana con media 0 e sigma 1). L’espressione della loro
+distribuzione di probabilità (PDF) in due dimensioni è</p>
 <p><span class="math display">
 P(x,y) = 1/2 \exp\left(-\frac{x^2 + y^2}2\right).
 </span></p>
@@ -298,52 +429,139 @@ y &amp;= r \sin\theta,
 \end{aligned}
 </span> si ha <span class="math display">
 P(R, \theta) = \frac12 \exp\left(- \frac{r^2}2\right).
-</span> Se calcoliamo l’integrale di tale PDF per <span class="math inline">r \in [0, R]</span> e <span class="math inline">\theta \in [0, 2\pi]</span>, otteniamo <span class="math display">
+</span> Se calcoliamo l’integrale di tale PDF per <span
+class="math inline">r \in [0, R]</span> e <span
+class="math inline">\theta \in [0, 2\pi]</span>, otteniamo <span
+class="math display">
 p = 1 - \exp\left(-\frac{R^2}2\right),
-</span> e <span class="math inline">p \in [0, 1]</span>. Invertendo questa formula otteniamo <span class="math display">
+</span> e <span class="math inline">p \in [0, 1]</span>. Invertendo
+questa formula otteniamo <span class="math display">
 R = \sqrt{-2\log(1 - p)}.
-</span> Definendo ora <span class="math inline">s</span> e <span class="math inline">t</span> come due variabili casuali distribuite uniformemente in [0,1], abbiamo <span class="math display">
+</span> Definendo ora <span class="math inline">s</span> e <span
+class="math inline">t</span> come due variabili casuali distribuite
+uniformemente in [0,1], abbiamo <span class="math display">
 \begin{aligned}
 R &amp;= \sqrt{-2 \log (1 - s)},\\
 \theta &amp;= 2\pi t,
 \end{aligned}
-</span> per cui la variabile <span class="math inline">x</span> distribuita normalmente può essere generata a partire da una coppia <span class="math inline">s</span> e <span class="math inline">t</span> distribuita uniformemente in <span class="math inline">[0,1]</span>, secondo la formula <span class="math display">
+</span> per cui la variabile <span class="math inline">x</span>
+distribuita normalmente può essere generata a partire da una coppia
+<span class="math inline">s</span> e <span class="math inline">t</span>
+distribuita uniformemente in <span class="math inline">[0,1]</span>,
+secondo la formula <span class="math display">
 x = \sqrt{-2\log s} \cdot \cos{2\pi t}.
-</span> Da ciò segue banalmente la generalizzazione nel caso di variabile <span class="math inline">x</span> distribuita gaussianamente con media <span class="math inline">\mu</span> e larghezza <span class="math inline">\sigma</span>: <span class="math display">
+</span> Da ciò segue banalmente la generalizzazione nel caso di
+variabile <span class="math inline">x</span> distribuita gaussianamente
+con media <span class="math inline">\mu</span> e larghezza <span
+class="math inline">\sigma</span>: <span class="math display">
 x = \mu + \sigma\cdot \sqrt{-2\log s} \cdot \cos{2\pi t}.
 </span></p>
 <p>Qui sotto trovate una implementazione di tale metodo:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> RandomGen<span class="op">::</span>Gaus<span class="op">(</span><span class="dt">double</span> mean<span class="op">,</span> <span class="dt">double</span> sigma<span class="op">)</span> <span class="op">{</span></span>
+<div class="sourceCode" id="cb6"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> RandomGen<span class="op">::</span>Gaus<span class="op">(</span><span class="dt">double</span> mean<span class="op">,</span> <span class="dt">double</span> sigma<span class="op">)</span> <span class="op">{</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> s<span class="op">{</span>Rand<span class="op">()};</span></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> t<span class="op">{</span>Rand<span class="op">()};</span></span>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> x<span class="op">{</span>sqrt<span class="op">(-</span><span class="dv">2</span> <span class="op">*</span> log<span class="op">(</span>s<span class="op">))</span> <span class="op">*</span> cos<span class="op">(</span><span class="dv">2</span> <span class="op">*</span> M_PI <span class="op">*</span> t<span class="op">)};</span></span>
 <span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> mean <span class="op">+</span> x <span class="op">*</span> sigma<span class="op">;</span></span>
 <span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 <h2 id="metodo-accept-reject">Metodo Accept-Reject</h2>
-<p>Il metodo accept-reject può essere utilizzato per generare numeri casuali distribuiti secondo qualsivoglia forma funzionale. Consideriamo di voler generare numeri nell’intervallo <span class="math inline">[a, b]</span> secondo la distribuzione <span class="math inline">f(x)</span> in figura:</p>
-<p><img src="http://labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/figure/accrej.png" /></p>
-<p>Il metodo si basa sulla generazione di una coppia di numeri <span class="math inline">x \in [a, b], y \in [0, M]</span> dove <span class="math inline">M</span> è un numero maggiore del massimo valore assunto da <span class="math inline">f(x)</span> nell’intervallo <span class="math inline">[a,b]</span>. La coppia <span class="math inline">(x, y)</span> può essere facilmente generata a partire da due numeri <span class="math inline">s</span> e <span class="math inline">t</span> generati uniformemente in <span class="math inline">[0,1]</span> usando le formule</p>
+<p>Il metodo accept-reject può essere utilizzato per generare numeri
+casuali distribuiti secondo qualsivoglia forma funzionale. Consideriamo
+di voler generare numeri nell’intervallo <span class="math inline">[a,
+b]</span> secondo la distribuzione <span class="math inline">f(x)</span>
+in figura:</p>
+<p><img
+src="http://labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/figure/accrej.png" /></p>
+<p>Il metodo si basa sulla generazione di una coppia di numeri <span
+class="math inline">x \in [a, b], y \in [0, M]</span> dove <span
+class="math inline">M</span> è un numero maggiore del massimo valore
+assunto da <span class="math inline">f(x)</span> nell’intervallo <span
+class="math inline">[a,b]</span>. La coppia <span
+class="math inline">(x, y)</span> può essere facilmente generata a
+partire da due numeri <span class="math inline">s</span> e <span
+class="math inline">t</span> generati uniformemente in <span
+class="math inline">[0,1]</span> usando le formule</p>
 <p><span class="math display">
 \begin{aligned}
 x &amp;= a + (b-a)\cdot s,\\
 y &amp;= M \cdot t.
 \end{aligned}
 </span></p>
-<p>Generata la coppia <span class="math inline">(x, y)</span>, si valuta quindi <span class="math inline">f(x)</span> e si accetta <span class="math inline">x</span> se <span class="math inline">y&lt; f(x)</span>, altrimenti si ripete la procedura. Così facendo si avrà un maggior numero di punti generati laddove <span class="math inline">f(x)</span> assume valori più grandi.</p>
-<h1 id="esercizio-10.1">Esercizio 10.1 - Verifica del Teorema del Limite Centrale (facoltativo)</h1>
-<p>Generare una serie di numeri casuali uniformemente distribuiti in <span class="math inline">[0, 1]</span> e calcolare la somma eseguita su un numero <span class="math inline">n</span> di elementi consecutivi della serie generata. Calcolare la varianza della serie di numeri generata e della serie delle somme. Verificare che questa scali con <span class="math inline">n</span>. Passare da riga di comando sia il numero di elementi della serie di partenza (10000 può essere un buon numero) ed il numero di elementi su cui fare la somma. Creare due istogrammi che contengano la distribuzione dei numeri generata e la distribuzione delle somme. Verificare come cambia la distribuzione delle somme al variare di <span class="math inline">n</span>.</p>
-<h2 id="il-teorema-del-limite-centrale">Il Teorema del Limite Centrale</h2>
-<p>I teoremi del limite centrale sono una famiglia di teoremi di convergenza debole nell’ambito delle teoria delle probabilità. Per tutti vale l’affermazione che la distribuzione di probabilità della somma (normalizzata) di un gran numero di variabili casuali tende ad una data distribuzione regolare (attrattore), che di norma è la Gaussiana o la Lorenziana.</p>
-<p>Nel nostro caso, verificheremo che la somma di <span class="math inline">n</span> variabili aleatorie <span class="math inline">x_i</span> indipendenti e identicamente distribuite con media <span class="math inline">\mu</span> e varianza <span class="math inline">\sigma^2 &lt; \infty</span> tende a distribuirsi come una variabile casuale gaussiana con media pari a <span class="math inline">n\mu</span> e varianza <span class="math inline">n\sigma^2</span>, al tendere di <span class="math inline">n</span> a infinito.</p>
-<h1 id="esercizio-10.2">Esercizio 10.2 - Calcolo di integrali con metodi MonteCarlo (da consegnare)</h1>
+<p>Generata la coppia <span class="math inline">(x, y)</span>, si valuta
+quindi <span class="math inline">f(x)</span> e si accetta <span
+class="math inline">x</span> se <span class="math inline">y&lt;
+f(x)</span>, altrimenti si ripete la procedura. Così facendo si avrà un
+maggior numero di punti generati laddove <span
+class="math inline">f(x)</span> assume valori più grandi.</p>
+<h1 id="esercizio-10.1">Esercizio 10.1 - Verifica del Teorema del Limite
+Centrale (facoltativo)</h1>
+<p>Generare una serie di numeri casuali uniformemente distribuiti in
+<span class="math inline">[0, 1]</span> e calcolare la somma eseguita su
+un numero <span class="math inline">n</span> di elementi consecutivi
+della serie generata. Calcolare la varianza della serie di numeri
+generata e della serie delle somme. Verificare che questa scali con
+<span class="math inline">n</span>. Passare da riga di comando sia il
+numero di elementi della serie di partenza (10000 può essere un buon
+numero) ed il numero di elementi su cui fare la somma. Creare due
+istogrammi che contengano la distribuzione dei numeri generata e la
+distribuzione delle somme. Verificare come cambia la distribuzione delle
+somme al variare di <span class="math inline">n</span>.</p>
+<h2 id="il-teorema-del-limite-centrale">Il Teorema del Limite
+Centrale</h2>
+<p>I teoremi del limite centrale sono una famiglia di teoremi di
+convergenza debole nell’ambito delle teoria delle probabilità. Per tutti
+vale l’affermazione che la distribuzione di probabilità della somma
+(normalizzata) di un gran numero di variabili casuali tende ad una data
+distribuzione regolare (attrattore), che di norma è la Gaussiana o la
+Lorenziana.</p>
+<p>Nel nostro caso, verificheremo che la somma di <span
+class="math inline">n</span> variabili aleatorie <span
+class="math inline">x_i</span> indipendenti e identicamente distribuite
+con media <span class="math inline">\mu</span> e varianza <span
+class="math inline">\sigma^2 &lt; \infty</span> tende a distribuirsi
+come una variabile casuale gaussiana con media pari a <span
+class="math inline">n\mu</span> e varianza <span
+class="math inline">n\sigma^2</span>, al tendere di <span
+class="math inline">n</span> a infinito.</p>
+<h1 id="esercizio-10.2">Esercizio 10.2 - Calcolo di integrali con metodi
+MonteCarlo (da consegnare)</h1>
 <ol>
-<li>Calcolare 10000 volte il valore dell’integrale di <span class="math inline">\sin(x)</span> su <span class="math inline">[0, \pi]</span> utilizzando il metodo della media a 100 punti e fare un grafico (istogramma) della distribuzione dei valori ottenuti.</li>
-<li>Estendere il punto precedente calcolando 10000 volte il valore dell’integrale di <span class="math inline">\sin(x)</span> su <span class="math inline">[0, \pi]</span> utilizzando il metodo della media a <span class="math inline">N</span> punti, con <span class="math inline">N</span> pari a 100, 500, 1000, 5000, 10000 punti. Per ogni valore di <span class="math inline">N</span> produrre il grafico della distribuzione dei 10000 valori ottenuti. [NOTA: poiché il calcolo degli integrali con <span class="math inline">N</span> molto elevato potrebbe richiedere un certo tempo, potrebbe essere utile salvare in diversi files i valori degli integrali calcolati per un determinato <span class="math inline">N</span> e svolgere i punti successivi con un secondo programma che utilizzi come input i files di integrali del programma precedente.]</li>
-<li>Stimare l’errore sul calcolo dell’integrale a 100, 500, 1000, 5000, 10000 punti come deviazione standard dei 10000 valori calcolati per ogni <span class="math inline">N</span>. Far un grafico di questo errore in funzione di <span class="math inline">N</span>.</li>
-<li>Assumendo che l’andamento dell’errore sia noto (del tipo <span class="math inline">k / \sqrt{N}</span>), si determini quanti punti sono necessari per ottenere una precisione di 0.001. Si ripeta lo stesso lavoro con il metodo hit-or-miss.</li>
+<li>Calcolare 10000 volte il valore dell’integrale di <span
+class="math inline">\sin(x)</span> su <span class="math inline">[0,
+\pi]</span> utilizzando il metodo della media a 100 punti e fare un
+grafico (istogramma) della distribuzione dei valori ottenuti.</li>
+<li>Estendere il punto precedente calcolando 10000 volte il valore
+dell’integrale di <span class="math inline">\sin(x)</span> su <span
+class="math inline">[0, \pi]</span> utilizzando il metodo della media a
+<span class="math inline">N</span> punti, con <span
+class="math inline">N</span> pari a 100, 500, 1000, 5000, 10000 punti.
+Per ogni valore di <span class="math inline">N</span> produrre il
+grafico della distribuzione dei 10000 valori ottenuti. [NOTA: poiché il
+calcolo degli integrali con <span class="math inline">N</span> molto
+elevato potrebbe richiedere un certo tempo, potrebbe essere utile
+salvare in diversi files i valori degli integrali calcolati per un
+determinato <span class="math inline">N</span> e svolgere i punti
+successivi con un secondo programma che utilizzi come input i files di
+integrali del programma precedente.]</li>
+<li>Stimare l’errore sul calcolo dell’integrale a 100, 500, 1000, 5000,
+10000 punti come deviazione standard dei 10000 valori calcolati per ogni
+<span class="math inline">N</span>. Far un grafico di questo errore in
+funzione di <span class="math inline">N</span>.</li>
+<li>Assumendo che l’andamento dell’errore sia noto (del tipo <span
+class="math inline">k / \sqrt{N}</span>), si determini quanti punti sono
+necessari per ottenere una precisione di 0.001. Si ripeta lo stesso
+lavoro con il metodo hit-or-miss.</li>
 </ol>
-<p>Per il calcolo di integrali con metodi MonteCarlo si può decidere di scrivere una nuova classe dedicata o estendere la classe <code>Integral</code> della <a href="carminati-esercizi-08.html#cenni-sullimplementazione">lezione 8</a>. In ogni caso ci dovrà essere un puntatore ad un oggetto di tipo <code>RandomGen</code> e due metodi che implementino le due tecniche discusse. A titolo di esempio si può considerare l’header file seguente:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> IntegralMC <span class="op">{</span></span>
+<p>Per il calcolo di integrali con metodi MonteCarlo si può decidere di
+scrivere una nuova classe dedicata o estendere la classe
+<code>Integral</code> della <a
+href="carminati-esercizi-08.html#cenni-sullimplementazione">lezione
+8</a>. In ogni caso ci dovrà essere un puntatore ad un oggetto di tipo
+<code>RandomGen</code> e due metodi che implementino le due tecniche
+discusse. A titolo di esempio si può considerare l’header file
+seguente:</p>
+<div class="sourceCode" id="cb7"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> IntegralMC <span class="op">{</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span><span class="op">:</span></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  IntegralMC<span class="op">(</span><span class="dt">unsigned</span> <span class="dt">int</span> seed<span class="op">)</span> <span class="op">:</span> <span class="va">m_myrand</span><span class="op">{</span><span class="kw">new</span> RandomGen<span class="op">(</span>seed<span class="op">)}</span> <span class="op">{}</span></span>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="op">~</span>IntegralMCQ <span class="op">{}</span></span>
@@ -354,35 +572,78 @@ y &amp;= M \cdot t.
 <span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="kw">private</span><span class="op">:</span></span>
 <span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>  RandomGen <span class="op">*</span> <span class="va">m_myrand</span><span class="op">;</span></span>
 <span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
-<h2 id="calcolo-di-integrali-con-il-metodo-della-media">Calcolo di integrali con il metodo della media</h2>
-<p>Come discusso a lezione, il metodo della media consiste nel valutare la media delle valutazioni della funzione <span class="math inline">f(x)</span> in un set di <span class="math inline">N</span> punti distribuiti uniformemente tra <span class="math inline">a</span> (minimo estremo di integrazione) e <span class="math inline">b</span> (massimo estremo integrazione). La stima dell’integrale si ottiene poi dalla seguente formula:</p>
+<h2 id="calcolo-di-integrali-con-il-metodo-della-media">Calcolo di
+integrali con il metodo della media</h2>
+<p>Come discusso a lezione, il metodo della media consiste nel valutare
+la media delle valutazioni della funzione <span
+class="math inline">f(x)</span> in un set di <span
+class="math inline">N</span> punti distribuiti uniformemente tra <span
+class="math inline">a</span> (minimo estremo di integrazione) e <span
+class="math inline">b</span> (massimo estremo integrazione). La stima
+dell’integrale si ottiene poi dalla seguente formula:</p>
 <p><span class="math display">
 \int_a^b f(x)\,\mathrm{d}x \approx (b - a)\frac{\sum_{n = 1}^N f(x_n)}N.
 </span></p>
-<h2 id="calcolo-di-integrali-con-il-metodo-hit-or-miss">Calcolo di integrali con il metodo hit-or-miss</h2>
-<p>Il metodo hit-or-miss si basa sulla generazione di una coppia di numeri <span class="math inline">x \elem [a, b]</span> e <span class="math inline">y \elem [0, f_\text{max}]</span>, dove <span class="math inline">f_\text{max}</span> è un numero maggiore del massimo valore assunto da <span class="math inline">f(x)</span> nell’intervallo <span class="math inline">[a, b]</span>. Generata la coppia <span class="math inline">(x, y)</span> si incrementa un contatore <span class="math inline">N_\text{tot}</span> e si valuta quindi <span class="math inline">f(x)</span>: se <span class="math inline">y &lt; f(x)</span>, allora si incrementa anche il contatore <span class="math inline">N_\text{hit}</span>. La procedura viene ripetuta fino a che il numero di estrazioni è pari un certo valore di <span class="math inline">N_\text{max}</span> passato come parametro. La stima dell’integrale si ottiene poi dalla seguente formula:</p>
+<h2 id="calcolo-di-integrali-con-il-metodo-hit-or-miss">Calcolo di
+integrali con il metodo hit-or-miss</h2>
+<p>Il metodo hit-or-miss si basa sulla generazione di una coppia di
+numeri <span class="math inline">x \elem [a, b]</span> e <span
+class="math inline">y \elem [0, f_\text{max}]</span>, dove <span
+class="math inline">f_\text{max}</span> è un numero maggiore del massimo
+valore assunto da <span class="math inline">f(x)</span> nell’intervallo
+<span class="math inline">[a, b]</span>. Generata la coppia <span
+class="math inline">(x, y)</span> si incrementa un contatore <span
+class="math inline">N_\text{tot}</span> e si valuta quindi <span
+class="math inline">f(x)</span>: se <span class="math inline">y &lt;
+f(x)</span>, allora si incrementa anche il contatore <span
+class="math inline">N_\text{hit}</span>. La procedura viene ripetuta
+fino a che il numero di estrazioni è pari un certo valore di <span
+class="math inline">N_\text{max}</span> passato come parametro. La stima
+dell’integrale si ottiene poi dalla seguente formula:</p>
 <p><span class="math display">
-\int_a^b f(x)\,\mathrm{d}x \approx (b - a) f_\text{max}\frac{N_\text{hit}}{N_\text{tot}}.
+\int_a^b f(x)\,\mathrm{d}x \approx (b - a)
+f_\text{max}\frac{N_\text{hit}}{N_\text{tot}}.
 </span></p>
-<h1 id="esercizio-10.3">Esercizio 10.3 - Calcolo di integrali multidimensionali con metodi MonteCarlo (facoltativo)</h1>
-<p>Provare a risolvere il seguente integrale con una precisione di 0.01:</p>
+<h1 id="esercizio-10.3">Esercizio 10.3 - Calcolo di integrali
+multidimensionali con metodi MonteCarlo (facoltativo)</h1>
+<p>Provare a risolvere il seguente integrale con una precisione di
+0.01:</p>
 <p><span class="math display">
 I = \int_1^2\int_1^2\left(
 \frac5{x^2}\cos(4y)\sin(7x) + 10
 \right)\,\mathrm{d}x\,\mathrm{d}y,
 </span></p>
 <p>utilizzando per esempio il metodo della media.</p>
-<p>Suggerimento: si potrebbe costruire una classe <code>FunzioneScalareBase</code> astratta da cui la funzione integranda erediti. La classe <code>FunzioneScalareBase</code> avrà un metodo virtuale puro</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">virtual</span> <span class="dt">double</span> Eval<span class="op">(</span><span class="at">const</span> vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;&amp;)</span> <span class="at">const</span><span class="op">=</span><span class="dv">0</span><span class="op">;</span> <span class="op">.</span></span></code></pre></div>
-<p>Alla classe che calcola l’integrale si dovrà aggiungere un metodo dedicato del tipo</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> Media<span class="op">(</span>FunzioneScalareBase <span class="op">&amp;</span> f<span class="op">,</span></span>
+<p>Suggerimento: si potrebbe costruire una classe
+<code>FunzioneScalareBase</code> astratta da cui la funzione integranda
+erediti. La classe <code>FunzioneScalareBase</code> avrà un metodo
+virtuale puro</p>
+<div class="sourceCode" id="cb8"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">virtual</span> <span class="dt">double</span> Eval<span class="op">(</span><span class="at">const</span> vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;&amp;)</span> <span class="at">const</span><span class="op">=</span><span class="dv">0</span><span class="op">;</span> <span class="op">.</span></span></code></pre></div>
+<p>Alla classe che calcola l’integrale si dovrà aggiungere un metodo
+dedicato del tipo</p>
+<div class="sourceCode" id="cb9"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> Media<span class="op">(</span>FunzioneScalareBase <span class="op">&amp;</span> f<span class="op">,</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>             <span class="at">const</span> vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> <span class="op">&amp;</span> inf<span class="op">,</span></span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">const</span> vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> <span class="op">&amp;</span> sup<span class="op">,</span></span>
 <span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>             <span class="dt">unsigned</span> <span class="dt">int</span> punti<span class="op">);</span></span></code></pre></div>
-<h1 id="esercizio-10.4">Esercizio 10.4 - Errore nel caso di integrali multimensionali (facoltativo)</h1>
-<p>Provare a ripetere le consegne dell’esercizio 10.2 applicate all’integrale multidimensionale dell’esercizio 10.3. In questo modo si può facilmente verificare che la legge con cui scala l’errore è indipendente dalla dimensione dell’integrale.</p>
-<h2 id="qualche-approfondimento-su-generatori-di-numeri-casuali-in-c11">Qualche approfondimento su generatori di numeri casuali in C++11</h2>
-<p>Nel C++ 11 è stata inserita una libreria per la generazione di numeri casuali: si veda per esempio <a href="http://www.cplusplus.com/reference/random/">qui</a>. Provate a dare un’occhiata a questo <a href="./codici/random_numbers.cpp">codice</a> per trovare un esempio su come utilizzare questa libreria e su come usare le librerie di ROOT ( si faccia riferimento alla <a href="https://root.cern.ch/doc/master/classTRandom.html">referenza</a>).</p>                    
+<h1 id="esercizio-10.4">Esercizio 10.4 - Errore nel caso di integrali
+multimensionali (facoltativo)</h1>
+<p>Provare a ripetere le consegne dell’esercizio 10.2 applicate
+all’integrale multidimensionale dell’esercizio 10.3. In questo modo si
+può facilmente verificare che la legge con cui scala l’errore è
+indipendente dalla dimensione dell’integrale.</p>
+<h2
+id="qualche-approfondimento-su-generatori-di-numeri-casuali-in-c11">Qualche
+approfondimento su generatori di numeri casuali in C++11</h2>
+<p>Nel C++ 11 è stata inserita una libreria per la generazione di numeri
+casuali: si veda per esempio <a
+href="http://www.cplusplus.com/reference/random/">qui</a>. Provate a
+dare un’occhiata a questo <a
+href="./codici/random_numbers.cpp">codice</a> per trovare un esempio su
+come utilizzare questa libreria e su come usare le librerie di ROOT ( si
+faccia riferimento alla <a
+href="https://root.cern.ch/doc/master/classTRandom.html">referenza</a>).</p>                    
                 </div>
             </div>
 

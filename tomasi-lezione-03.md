@@ -60,9 +60,7 @@ void test_statistical_functions(void) {
 
 -   Nell'esercizio 3.2 è richiesto l'uso di ROOT, una libreria di funzioni per generare grafici.
 
--   Chi usa Repl.it ha a disposizione il comando `install-root.sh`, che va eseguito dalla linea di comando per scaricare ROOT nella Repl e configurarlo.
-
--   Chi usa le macchine del laboratorio non ha bisogno di fare nulla, perché ROOT è già installato.
+-   Chi usa Repl.it o le macchine del laboratorio, dovrebbe averlo già installato.
 
 -   Chi usa il proprio computer… Auguri! Sotto Linux e Mac dovrebbe essere relativamente facile installarlo, sotto Windows la cosa è più complessa.
 
@@ -290,15 +288,8 @@ Di conseguenza, il programmatore è «costretto» a verificare la correttezza de
 -   Il C++11 implementa la *uniform initialization*, che si usa impiegando le parentesi graffe `{}` anziché l'uguale `=` e le parentesi tonde `()`:
 
     ```c++
-    int a{};
-    int b{10};
-    ```
-
--   Le due linee di codice sopra sono equivalenti alle seguenti:
-
-    ```c++
-    int a = 0;
-    int b = 10;
+    int a{};     // Same as   int a = 0;
+    int b{10};   // Same as   int b = 10;
     ```
 
 -   Analogamente, nei cicli `for` si può scrivere così:
@@ -323,11 +314,11 @@ Di conseguenza, il programmatore è «costretto» a verificare la correttezza de
 -   Sono vietate le conversioni di tipo, spesso fonti di errori:
 
     ```c++
-    float a = 3.4;
+    const double pi = 3.1415926535897932384626433;
     // Allowed, but probably wrong
-    int b = a;
+    int a = pi;
     // The compiler prints an error message
-    int c{a};
+    int c{pi};
     ```
 
 # Vantaggi (2/2)
@@ -361,7 +352,6 @@ Di conseguenza, il programmatore è «costretto» a verificare la correttezza de
     ```c++
     Vettore v{}; // Default constructor
     int a{};     // Same
-    double b{};  // Same
     ```
 
 -   Questo è **uno dei più comuni errori degli studenti di TNDS**.
@@ -432,6 +422,16 @@ Di conseguenza, il programmatore è «costretto» a verificare la correttezza de
         if (i == 0) break;
     }
     ```
+
+# Perché usare `unsigned`?
+
+- Tutti questi problemi verrebbero risolti se si definisse `size_t` un intero **con segno**.
+
+- Alcuni membri del comitato di standardizzazione del C++ hanno dichiarato che il restituire la dimensione degli array come valori *unsigned* è stato uno dei peggiori errori che potessero fare.
+
+- Il nuovo standard C++23 (che sarà rilasciato l'anno prossimo) introduce `ssize_t`, che è come `size_t` ma ha il segno.
+
+- Linguaggi più moderni, come [Nim](https://nim-lang.org/) e [Julia](https://julialang.org/), usano sempre interi con segno per iterare sugli array.
 
 # Iteratori nella STL
 

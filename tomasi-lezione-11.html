@@ -11,12 +11,20 @@
   <link rel="stylesheet" href="https://unpkg.com/reveal.js@^4//dist/reset.css">
   <link rel="stylesheet" href="https://unpkg.com/reveal.js@^4//dist/reveal.css">
   <style>
+    .reveal .sourceCode {  /* see #7635 */
+      /* overflow: visible; */
+    }
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
-    span.underline{text-decoration: underline;}
-    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
     ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
     pre > code.sourceCode { white-space: pre; position: relative; }
     pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
     pre > code.sourceCode > span:empty { height: 1.2em; }
@@ -55,7 +63,7 @@
     code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
     code span.at { color: #7d9029; } /* Attribute */
     code span.bn { color: #40a070; } /* BaseN */
-    code span.bu { } /* BuiltIn */
+    code span.bu { color: #008000; } /* BuiltIn */
     code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
     code span.ch { color: #4070a0; } /* Char */
     code span.cn { color: #880000; } /* Constant */
@@ -68,7 +76,7 @@
     code span.ex { } /* Extension */
     code span.fl { color: #40a070; } /* Float */
     code span.fu { color: #06287e; } /* Function */
-    code span.im { } /* Import */
+    code span.im { color: #008000; font-weight: bold; } /* Import */
     code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
     code span.kw { color: #007020; font-weight: bold; } /* Keyword */
     code span.op { color: #666666; } /* Operator */
@@ -98,16 +106,23 @@
 <section id="link-alle-risorse-online" class="slide level1">
 <h1>Link alle risorse online</h1>
 <ul>
-<li><p>La spiegazione dettagliata degli esercizi si trova qui: <a href="carminati-esercizi-11.html">carminati-esercizi-11.html</a>.</p></li>
-<li><p>Una soluzione degli esercizi in Julia è disponibile nel <a href="https://ziotom78.github.io/tnds-notebooks/lezione10/">notebook</a> usato nella scorsa esercitazione.</p></li>
-<li><p>Chi è online si colleghi a Gather tramite <a href="https://gather.town/app/etYemzL2K4Nr4o2t/LabTNDS2022">questo link</a>.</p></li>
+<li><p>La spiegazione dettagliata degli esercizi si trova qui: <a
+href="carminati-esercizi-11.html">carminati-esercizi-11.html</a>.</p></li>
+<li><p>Una soluzione degli esercizi in Julia è disponibile nel <a
+href="https://ziotom78.github.io/tnds-notebooks/lezione10/">notebook</a>
+usato nella scorsa esercitazione.</p></li>
+<li><p>Chi è online si colleghi a Gather tramite <a
+href="https://gather.town/app/etYemzL2K4Nr4o2t/LabTNDS2022">questo
+link</a>.</p></li>
 </ul>
 </section>
 <section id="esercizi-per-oggi" class="slide level1">
 <h1>Esercizi per oggi</h1>
 <ul>
-<li><a href="./carminati-esercizi-11.html#esercizio-11.0">Esercizio 11.0</a> (da consegnare)</li>
-<li><a href="./carminati-esercizi-11.html#esercizio-11.1">Esercizio 11.1</a> (facoltativo)</li>
+<li><a href="./carminati-esercizi-11.html#esercizio-11.0">Esercizio
+11.0</a> (da consegnare)</li>
+<li><a href="./carminati-esercizi-11.html#esercizio-11.1">Esercizio
+11.1</a> (facoltativo)</li>
 </ul>
 </section>
 <section id="conclusioni-sul-corso-di-tnds" class="slide level1">
@@ -116,9 +131,14 @@
 <section id="come-usare-quanto-imparato-qui" class="slide level1">
 <h1>Come usare quanto imparato qui?</h1>
 <ul>
-<li><p>In questo corso abbiamo insegnato il linguaggio C++ e i fondamenti della OOP.</p></li>
-<li><p>È una preoccupazione mia e degli altri docenti del corso che non vi fermiate a questo! (Carminati vi ha già mostrato Python, io vi ho mostrato Julia…)</p></li>
-<li><p>Nella maggior parte delle situazioni in cui può imbattersi un fisico, esistono alternative più <em>semplici</em> ed <em>efficienti</em> del C++ e della programmazione OOP.</p></li>
+<li><p>In questo corso abbiamo insegnato il linguaggio C++ e i
+fondamenti della OOP.</p></li>
+<li><p>È una preoccupazione mia e degli altri docenti del corso che non
+vi fermiate a questo! (Carminati vi ha già mostrato Python, io vi ho
+mostrato Julia…)</p></li>
+<li><p>Nella maggior parte delle situazioni in cui può imbattersi un
+fisico, esistono alternative più <em>semplici</em> ed
+<em>efficienti</em> del C++ e della programmazione OOP.</p></li>
 </ul>
 </section>
 <section class="slide level1">
@@ -129,20 +149,29 @@
 <section id="turbo-vision" class="slide level1">
 <h1>Turbo Vision</h1>
 <ul>
-<li><p>Un programma Turbo Vision poteva salvare su disco il suo stato.</p></li>
-<li><p>Quando si usciva dal programma e lo si faceva ripartire, l’utente ritrovava tutto nello stesso stato.</p></li>
-<li><p>Ogni classe che definiva gli oggetti del programma (finestre di testo, bottoni, dialoghi…) derivava dalla classe <code>TObject</code> (dalla versione 2.0, <code>TStreamable</code>), che aveva un metodo <code>save</code> e un metodo <code>load</code>.</p></li>
+<li><p>Un programma Turbo Vision poteva salvare su disco il suo
+stato.</p></li>
+<li><p>Quando si usciva dal programma e lo si faceva ripartire, l’utente
+ritrovava tutto nello stesso stato.</p></li>
+<li><p>Ogni classe che definiva gli oggetti del programma (finestre di
+testo, bottoni, dialoghi…) derivava dalla classe <code>TObject</code>
+(dalla versione 2.0, <code>TStreamable</code>), che aveva un metodo
+<code>save</code> e un metodo <code>load</code>.</p></li>
 </ul>
 </section>
 <section id="gestione-dello-stato" class="slide level1">
 <h1>Gestione dello stato</h1>
 <ul>
-<li><p>Ecco una versione molto semplificata della funzione di salvataggio:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>TObject <span class="op">**</span>objects <span class="op">=</span> …<span class="op">;</span>  <span class="co">// Array of pointers to TObject</span></span>
+<li><p>Ecco una versione molto semplificata della funzione di
+salvataggio:</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>TObject <span class="op">**</span>objects <span class="op">=</span> …<span class="op">;</span>  <span class="co">// Array of pointers to TObject</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span><span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> num_of_objects<span class="op">;</span> <span class="op">++</span>i<span class="op">)</span> <span class="op">{</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    objects<span class="op">[</span>i<span class="op">]-&gt;</span>save<span class="op">();</span></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div></li>
-<li><p>Ovviamente <code>TObject::save</code> è un metodo virtuale puro, che viene ridefinito in tutti gli oggetti discendenti: è il polimorfismo!</p></li>
+<li><p>Ovviamente <code>TObject::save</code> è un metodo virtuale puro,
+che viene ridefinito in tutti gli oggetti discendenti: è il
+polimorfismo!</p></li>
 </ul>
 </section>
 <section id="gerarchia-di-turbo-vision" class="slide level1">
@@ -150,28 +179,34 @@
 <center>
 <img data-src="images/turbo-vision-hierarchy.png" />
 </center>
-<p>In Turbo Vision 1.0, quasi tutte le classi sono derivate dalla classe <code>TObject</code>!</p>
+<p>In Turbo Vision 1.0, quasi tutte le classi sono derivate dalla classe
+<code>TObject</code>!</p>
 </section>
 <section id="borland-c-per-windows" class="slide level1">
 <h1>Borland C++ per Windows</h1>
 <center>
 <img data-src="images/borland-c++-win31.png" style="height:40.0%" />
 </center>
-<p>La versione per Windows del Borland C++ (1992) includeva <strong>OWL</strong> (Object Windows Library) per scrivere programmi Windows.</p>
+<p>La versione per Windows del Borland C++ (1992) includeva
+<strong>OWL</strong> (Object Windows Library) per scrivere programmi
+Windows.</p>
 </section>
 <section id="object-windows-library" class="slide level1">
 <h1>Object Windows Library</h1>
 <center>
 <img data-src="images/owlchess.png" style="height:40.0%" />
 </center>
-<p>Programma di esempio di Borland C++, scritto usando OWL. (Il gioco funziona veramente!) Ce n’era pure una versione per DOS in modalità caratteri scritta usando Turbo Vision.</p>
+<p>Programma di esempio di Borland C++, scritto usando OWL. (Il gioco
+funziona veramente!) Ce n’era pure una versione per DOS in modalità
+caratteri scritta usando Turbo Vision.</p>
 </section>
 <section id="root" class="slide level1">
 <h1>ROOT</h1>
 <center>
 <img data-src="images/root-tobject.png" style="width:40.0%" />
 </center>
-<p>Anche ROOT (che nasce nel 1994) usa l’approccio di fondare tutta la gerarchia di classi su un solo tipo, <code>TObject</code>.</p>
+<p>Anche ROOT (che nasce nel 1994) usa l’approccio di fondare tutta la
+gerarchia di classi su un solo tipo, <code>TObject</code>.</p>
 </section>
 <section id="microsoft-foundation-classes" class="slide level1">
 <h1>Microsoft Foundation Classes</h1>
@@ -185,7 +220,8 @@
 </section>
 <section id="incapsulamento" class="slide level1">
 <h1>Incapsulamento</h1>
-<p>La promessa dell’OOP era quella di rendere il codice più riutilizzabile:</p>
+<p>La promessa dell’OOP era quella di rendere il codice più
+riutilizzabile:</p>
 <ul>
 <li>Usando l’incapsulamento, tutto è interno a una classe</li>
 <li>Posso quindi prendere la classe e usarla in un nuovo progetto</li>
@@ -193,19 +229,27 @@
 </section>
 <section id="incapsulamento-1" class="slide level1">
 <h1>Incapsulamento</h1>
-<p>Se però volessi riutilizzare <code>TRadioButtons</code> di Turbo Vision in un mio programma, non potrei limitarmi a prendere solo quella classe:</p>
+<p>Se però volessi riutilizzare <code>TRadioButtons</code> di Turbo
+Vision in un mio programma, non potrei limitarmi a prendere solo quella
+classe:</p>
 <ul>
 <li><code>TRadioButtons</code> deriva da <code>TCluster</code>…</li>
 <li>…che deriva da <code>TGroup</code>…</li>
 <li>…che deriva da <code>TView</code>…</li>
 <li>…che deriva da <code>TObject</code>.</li>
-<li><code>TView</code> usa le classi <code>TPoint</code>, <code>TRect</code>, <code>TScreen</code>, e <code>TApplication</code>.</li>
+<li><code>TView</code> usa le classi <code>TPoint</code>,
+<code>TRect</code>, <code>TScreen</code>, e
+<code>TApplication</code>.</li>
 </ul>
-<p>Se voglio usare un algoritmo di <code>TRadioButtons</code> nel mio programma, devo incorporare tutto: la promessa di riutilizzabilità non si concretizza quasi mai!</p>
+<p>Se voglio usare un algoritmo di <code>TRadioButtons</code> nel mio
+programma, devo incorporare tutto: la promessa di riutilizzabilità non
+si concretizza quasi mai!</p>
 </section>
 <section id="gerarchie-di-classi" class="slide level1">
 <h1>Gerarchie di classi</h1>
-<p>Nei progetti che usano OOP, c’è una enorme proliferazione di classi, legate tra loro da relazioni spesso complesse. Questo rende il codice difficile da comprendere.</p>
+<p>Nei progetti che usano OOP, c’è una enorme proliferazione di classi,
+legate tra loro da relazioni spesso complesse. Questo rende il codice
+difficile da comprendere.</p>
 <center>
 <img data-src="images/mfc-hierarchy.png" style="width:40.0%" />
 </center>
@@ -213,49 +257,77 @@
 <section id="gerarchie-di-classi-1" class="slide level1">
 <h1>Gerarchie di classi</h1>
 <ul>
-<li>Considerate le Microsoft Foundation Classes (slide precedente): è difficile comprenderne la struttura intricata!</li>
-<li>Eppure la slide presenta solo le <strong><em>relazioni</em></strong> tra i tipi di dati…</li>
-<li>…e nulla ancora dice sugli <strong><em>algoritmi</em></strong> (es., come disegnare a video una finestra, cosa succede quando si preme un bottone…).</li>
-<li>Con la OOP, l’implementazione degli algoritmi va affrontata solo dopo che si è definita la gerarchia di classi!</li>
+<li>Considerate le Microsoft Foundation Classes (slide precedente): è
+difficile comprenderne la struttura intricata!</li>
+<li>Eppure la slide presenta solo le <strong><em>relazioni</em></strong>
+tra i tipi di dati…</li>
+<li>…e nulla ancora dice sugli <strong><em>algoritmi</em></strong> (es.,
+come disegnare a video una finestra, cosa succede quando si preme un
+bottone…).</li>
+<li>Con la OOP, l’implementazione degli algoritmi va affrontata solo
+dopo che si è definita la gerarchia di classi!</li>
 </ul>
 </section>
 <section id="alexander-stepanov" class="slide level1">
 <h1>Alexander Stepanov</h1>
 <ul>
-<li>Alexander Stepanov, uno dei creatori della libreria C++ STL (<em>Standard Template Library</em>, quella che definisce <code>std::vector</code>, <code>std::sort</code>, etc.) è da sempre stato un oppositore della programmazione OOP.</li>
-<li>Per il C++ propose un meccanismo alternativo, chiamato <em>programmazione generica</em> (v. <a href="http://www.stlport.org/resources/StepanovUSA.html">An Interview with A. Stepanov</a>).</li>
-<li>La sua idea è che i programmatori debbano concentrarsi innanzitutto sugli <strong><em>algoritmi</em></strong>, e che solo quando questi sono definiti si debba pensare ai tipi di dati su cui applicarli.</li>
-<li>Al contrario, l’OOP obbliga a partire dal tipo di dato (ossia, la gerarchia di classi) per definire poi gli algoritmi.</li>
+<li>Alexander Stepanov, uno dei creatori della libreria C++ STL
+(<em>Standard Template Library</em>, quella che definisce
+<code>std::vector</code>, <code>std::sort</code>, etc.) è da sempre
+stato un oppositore della programmazione OOP.</li>
+<li>Per il C++ propose un meccanismo alternativo, chiamato
+<em>programmazione generica</em> (v. <a
+href="http://www.stlport.org/resources/StepanovUSA.html">An Interview
+with A. Stepanov</a>).</li>
+<li>La sua idea è che i programmatori debbano concentrarsi innanzitutto
+sugli <strong><em>algoritmi</em></strong>, e che solo quando questi sono
+definiti si debba pensare ai tipi di dati su cui applicarli.</li>
+<li>Al contrario, l’OOP obbliga a partire dal tipo di dato (ossia, la
+gerarchia di classi) per definire poi gli algoritmi.</li>
 </ul>
 </section>
 <section id="oop-e-c" class="slide level1">
 <h1>OOP e C++</h1>
 <ul>
-<li>Bjarne Stroustrup, il creatore del C++, sposò le idee di Stepanov</li>
-<li>Lo standard C++98 include per la prima volta una versione della STL.</li>
-<li>La STL fornisce gli header <code>&lt;string&gt;</code>, <code>&lt;vector&gt;</code>, etc.</li>
-<li>Pochissimi di questi file usano l’ereditarietà e il polimorfismo.</li>
+<li>Bjarne Stroustrup, il creatore del C++, sposò le idee di
+Stepanov</li>
+<li>Lo standard C++98 include per la prima volta una versione della
+STL.</li>
+<li>La STL fornisce gli header <code>&lt;string&gt;</code>,
+<code>&lt;vector&gt;</code>, etc.</li>
+<li>Pochissimi di questi file usano l’ereditarietà e il
+polimorfismo.</li>
 </ul>
 </section>
 <section id="dove-va-oggi-il-c" class="slide level1">
 <h1>Dove va oggi il C++</h1>
 <ul>
-<li>La tendenza del linguaggio C++ negli standard succedutisi negli anni è stata di potenziare la programmazione generica e la metaprogrammazione.</li>
-<li>Poche delle potenzialità delle versioni più recenti (dal C++11 in poi) sono legate alla OOP.</li>
-<li>Due eccezioni che avete imparato ad usare sono le keyword <code>final</code> e <code>override</code>, che regolano il polimorfismo.</li>
+<li>La tendenza del linguaggio C++ negli standard succedutisi negli anni
+è stata di potenziare la programmazione generica e la
+metaprogrammazione.</li>
+<li>Poche delle potenzialità delle versioni più recenti (dal C++11 in
+poi) sono legate alla OOP.</li>
+<li>Due eccezioni che avete imparato ad usare sono le keyword
+<code>final</code> e <code>override</code>, che regolano il
+polimorfismo.</li>
 </ul>
 </section>
 <section id="piccolo-esperimento" class="slide level1">
 <h1>Piccolo esperimento</h1>
 <ul>
-<li><p>A dimostrazione di ciò, contiamo i file della libreria standard C++ sui computer del laboratorio che implementano metodi <code>virtual</code> (segno di polimorfismo):</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> grep <span class="at">-l</span> virtual <span class="va">$(</span><span class="fu">find</span> /usr/include/c++/4.8.5/<span class="pp">*</span> <span class="at">-type</span> f<span class="va">)</span> <span class="dt">\</span></span>
+<li><p>A dimostrazione di ciò, contiamo i file della libreria standard
+C++ sui computer del laboratorio che implementano metodi
+<code>virtual</code> (segno di polimorfismo):</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode sh"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> grep <span class="at">-l</span> virtual <span class="va">$(</span><span class="fu">find</span> /usr/include/c++/4.8.5/<span class="pp">*</span> <span class="at">-type</span> f<span class="va">)</span> <span class="dt">\</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>     <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-l</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="ex">64</span></span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> grep <span class="at">-L</span> virtual <span class="va">$(</span><span class="fu">find</span> /usr/include/c++/4.8.5/<span class="pp">*</span> <span class="at">-type</span> f<span class="va">)</span> <span class="dt">\</span></span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>     <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-l</span></span>
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="ex">629</span></span></code></pre></div></li>
-<li><p>(Usando <code>-l</code> si contano i file che includono <code>virtual</code>, usando <code>-L</code> quelli che <strong>non</strong> lo includono).</p></li>
+<li><p>(Usando <code>-l</code> si contano i file che includono
+<code>virtual</code>, usando <code>-L</code> quelli che
+<strong>non</strong> lo includono).</p></li>
 </ul>
 </section>
 <section id="dove-va-il-gcc" class="slide level1">
@@ -270,24 +342,37 @@
 </section>
 <section id="calcolo-scientifico" class="slide level1">
 <h1>Calcolo scientifico</h1>
-<p>Se la fisica computazionale vi interessa, vi consiglio caldamente di impratichirvi con uno o più di questi strumenti:</p>
+<p>Se la fisica computazionale vi interessa, vi consiglio caldamente di
+impratichirvi con uno o più di questi strumenti:</p>
 <ol type="1">
-<li><a href="https://www.python.org/">Python</a>: molto semplice, sono disponibili tantissime librerie (matematica, astronomia, web, multimedia, programmazione giochi, etc.)</li>
-<li><a href="https://julialang.org/">Julia</a>: meno librerie di Python, ma molto più veloce e potente.</li>
-<li><a href="https://www.r-project.org/">GNU R</a>: per analisi statistiche complesse non ha rivali.</li>
-<li><a href="https://www.wolfram.com/mathematica/">Mathematica</a>, a pagamento: molto potente nel calcolo simbolico.</li>
-<li><a href="https://www.mathworks.com/products/matlab.html">Matlab</a>, a pagamento, è orientato ad applicazioni ingegneristiche.</li>
-<li><a href="https://en.wikipedia.org/wiki/Fortran">Fortran</a>: come il C++, ma più adatto al calcolo scientifico (e più semplice da usare).</li>
+<li><a href="https://www.python.org/">Python</a>: molto semplice, sono
+disponibili tantissime librerie (matematica, astronomia, web,
+multimedia, programmazione giochi, etc.)</li>
+<li><a href="https://julialang.org/">Julia</a>: meno librerie di Python,
+ma molto più veloce e potente.</li>
+<li><a href="https://www.r-project.org/">GNU R</a>: per analisi
+statistiche complesse non ha rivali.</li>
+<li><a href="https://www.wolfram.com/mathematica/">Mathematica</a>, a
+pagamento: molto potente nel calcolo simbolico.</li>
+<li><a href="https://www.mathworks.com/products/matlab.html">Matlab</a>,
+a pagamento, è orientato ad applicazioni ingegneristiche.</li>
+<li><a href="https://en.wikipedia.org/wiki/Fortran">Fortran</a>: come il
+C++, ma più adatto al calcolo scientifico (e più semplice da
+usare).</li>
 </ol>
 <p>Tranne Fortran, tutti questi linguaggi sono interattivi.</p>
 </section>
 <section id="seminario-opzionale" class="slide level1">
 <h1>Seminario opzionale</h1>
 <ul>
-<li>Negli scorsi anni ho proposto un seminario di approfondimento su C++, Assembler, Python e Julia.</li>
-<li>Nel seminario spiego le differenze tra di loro e do indicazioni su come scegliere lo strumento di lavoro migliore.</li>
-<li>È stato un seminario che ha sempre riscosso abbastanza successo.</li>
-<li>Se alcuni di voi sono interessati, posso riproporlo, ma suggerirei di farlo dopo la sessione di esami.</li>
+<li>Negli scorsi anni ho proposto un seminario di approfondimento su
+C++, Assembler, Python e Julia.</li>
+<li>Nel seminario spiego le differenze tra di loro e do indicazioni su
+come scegliere lo strumento di lavoro migliore.</li>
+<li>È stato un seminario che ha sempre riscosso abbastanza
+successo.</li>
+<li>Se alcuni di voi sono interessati, posso riproporlo, ma suggerirei
+di farlo dopo la sessione di esami.</li>
 </ul>
 </section>
     </div>
@@ -330,7 +415,7 @@
 
         // Add the current slide number to the URL hash so that reloading the
         // page/copying the URL will return you to the same slide
-        hash: false,
+        hash: true,
 
         // Start with 1 for the hash rather than 0
         hashOneBasedIndex: false,
