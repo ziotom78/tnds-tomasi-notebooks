@@ -205,10 +205,8 @@ dal terminale:
 
     ```c++
     int main(int argc, char ** argv);
-    int main(int argc, char *argv[]);
-    int main(int argc, const char **argv);
     // My personal favorite, I use this in the videos I linked before
-    int main(int argc, const char *argv[]);
+    int main(int argc, char *argv[]);
     // You can pick whatever name you want
     int main(int num_of_arguments, const char *args[]);
     ```

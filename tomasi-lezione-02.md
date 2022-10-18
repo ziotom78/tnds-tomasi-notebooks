@@ -133,7 +133,7 @@ int main() {
 -   Il resto del codice resta uguale, ma nel `main` si deve invocare `test_sum()` prima di ogni altra cosa:
 
     ```c++
-    int main(int argc, const char *argv[]) {
+    int main(int argc, char *argv[]) {
         // This must be the very first thing!
         test_sum();
         
@@ -167,7 +167,7 @@ int main() {
 -   Il `main` dei vostri prossimi esercizi sembrerà questo:
 
     ```c++
-    int main(int argc, const char *argv[]) {
+    int main(int argc, char *argv[]) {
         // Put the tests of the functions you're going to use
         test_bisection();
         test_simpson_integral();
