@@ -26,13 +26,12 @@ Prima di incominciare a scrivere il codice è utile ripassare rapidamente alcuni
 per fare questo nella dichiarazione del main bisogna aggiungere due argomenti:
 
 ```c++
-main(int argc, const char *argv[])
+main(int argc, char *argv[])
 ```
 
 -   `argc` è il numero di argomenti presenti sulla riga di comando. Il valore di `argc` è sempre maggiore di 0 poiché il primo argomento
         è il nome del programma.
--   `argv` è un array di `argc` elementi che contiene le stringhe di caratteri passate da riga di comando. Quindi `argv[0]` è
-        il nome del programma, `argv[1]` il primo argomento, ecc…
+-   `argv` è un array di `argc` elementi che contiene le stringhe di caratteri passate da riga di comando. Quindi `argv[0]` è il nome del programma, `argv[1]` il primo argomento, ecc…
 
 Se da riga di comando passiamo un numero, esso verrà passato tramite `argv` come una stringa di caratteri; per convertire una stringa di caratteri in un numero intero si usa la funzione `atoi(const char*)` (che è contenuta in `<cstdlib>`):
 
@@ -117,7 +116,7 @@ crea un *memory leak*, perché dealloca solo lo spazio della prima componente de
 ```c++
 #include <cstdlib>
 
-int main(int argc, const char *argv[]) {
+int main(int argc, char *argv[]) {
   double * array = new double[10];
   array[1] = 30.0;
   delete array;    // Error, it should have been delete[] array;
@@ -229,7 +228,7 @@ Per questo primo esercizio ripassiamo la struttura generale di un programma:
 
 using namespace std;
 
-int main(int argc, const char *argv[]) {
+int main(int argc, char *argv[]) {
   if (argc < 3) {
       cerr << "Uso del programma: " << argv[0] << " <n_data> <filename>\n";
       return 1;
@@ -529,7 +528,7 @@ void scambiaByRef(double &, double &);
 void scambiaByPointer(double *, double *);
 void selection_sort(double *, int);
 
-int main(int argc, const char *argv[]) {
+int main(int argc, char *argv[]) {
   if (argc < 3) {
       cerr << "Uso del programma: " << argv[0] << " <n_data> <filename>\n";
       return 1;

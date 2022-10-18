@@ -183,13 +183,16 @@ Ecco l'aspetto che potrebbe avere il `main`: come vedete, usiamo il contenitore 
 #include "vettore.h"
 #include "funzioni.h"
 
-int main (int argc, const char * argv[]) {
+int main (int argc, char * argv[]) {
+  // Esegui i test sull'implementazione di `Vettore` (v. slide di Tomasi)
+  test_vettore();
+  
   if(argc < 3) {
       cerr << "Uso del programma: " << argv[0] << " <n_data> <filename>\n";
       return 1;
   }
 
-  int ndata{atoiCargv[1])};
+  int ndata{atoi(argv[1])};
   const char * filename{argv[2]};
 
   // usiamo il contenitore Vettore per immagazzinare double !
@@ -233,7 +236,6 @@ Vediamo passo passo come si può procedere.
 Analogamente a quanto fatto sopra, adattiamo il file di funzioni in modo che ciascuna possa lavorare con contenitori `vector`. Come già ricordato, tutto deve essere codificato nell'*header file* della classe. Vediamo qualche funzione (quelle mancanti dovreste essere in grado di farle da soli):
 
 ```c++
-
 #include <algorithm> // funzioni
 #include <cassert>
 #include <fstream>
@@ -318,7 +320,12 @@ Ecco l'aspetto che potrebbe avere il nostro nuovo codice:
 #include <fstream>
 #include <iostream>
 
-int main(int argc, const char * argv[]) {
+using namespace std;
+
+int main(int argc, char * argv[]) {
+  // Esegui i test sulle funzioni statistiche (v. slide di Tomasi)
+  test_statistical_functions();
+
   if(argc < 3) {
       cerr << "Uso del programma: " << argv[0] << " <n_data> <filename>\n";;
       return 1;
@@ -335,6 +342,7 @@ int main(int argc, const char * argv[]) {
   Print(v);
 }
 ```
+
 
 ## Il Makefile
 
@@ -408,7 +416,10 @@ Possiamo usare questo codice come esempio per l'utilizzo di un qualsiasi oggetto
 #include <fstream>
 #include <iostream>
 
-int main(int argc, const char * argv[]) {
+int main(int argc, char * argv[]) {
+  // Stessi test dell'esercizio 3.1, ma qui adattateli per std::vector
+  test_statistical_functions();
+  
   if(argc < 3) {
       cerr << "Uso del programma: " << argv[0] << " <n_data> <filename>\n";
       return 1;
@@ -420,7 +431,7 @@ int main(int argc, const char * argv[]) {
   TApplication app{"app", 0, 0};
 
   // leggo dati da file
-  vector<double> v{Read<double>( atoi(argv[1]) , argv[2]};
+  vector<double> v{Read<double>(atoi(argv[1]), argv[2]};
 
   // creo e riempio il vettore. L'opzione StatOverflows permette di calcolalare
   // le informazioni statistiche anche se il dato sta fuori dal range di definizione

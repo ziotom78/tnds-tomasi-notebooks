@@ -343,7 +343,7 @@ Ecco l'aspetto che potrebbe avere il nostro nuovo codice:
 #include <fstream>
 #include <iostream>
 
-int main (int argc, const char* argv[]) {
+int main (int argc, char* argv[]) {
   if(argc < 3) {
       cerr << "Uso del programma : " << argv[0] << " <ndata> <filename>" << endl;
 
