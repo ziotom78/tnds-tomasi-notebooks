@@ -151,28 +151,59 @@ href="https://ziotom78.github.io/tnds-tomasi-notebooks/">ziotom78.github.io/tnds
 </section>
 <section id="test-con-assert" class="slide level1">
 <h1>Test con <code>assert</code></h1>
-<p>Questo è il test per l’esercizio 3.1, che usa
-<code>std::vector</code>; adattatelo per l’esercizio 3.0.</p>
+</section>
+<section id="test-per-esercizio-3.0" class="slide level1">
+<h1>Test per esercizio 3.0</h1>
+<p>Dobbiamo verificare che la classe <code>Vettore</code> funzioni come
+atteso:</p>
 <div class="sourceCode" id="cb1"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="dt">bool</span> are_close<span class="op">(</span><span class="dt">double</span> calculated<span class="op">,</span> <span class="dt">double</span> expected<span class="op">,</span> <span class="dt">double</span> epsilon <span class="op">=</span> <span class="fl">1e-7</span><span class="op">)</span> <span class="op">{</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> fabs<span class="op">(</span>calculated <span class="op">-</span> expected<span class="op">)</span> <span class="op">&lt;</span> epsilon<span class="op">;</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> test_statistical_functions<span class="op">(</span><span class="dt">void</span><span class="op">)</span> <span class="op">{</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="op">{</span>  <span class="co">// New scope</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>      <span class="bu">std::</span>vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> mydata<span class="op">{</span><span class="dv">1</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">3</span><span class="op">,</span> <span class="dv">4</span><span class="op">};</span>  <span class="co">// Use these instead of data.dat</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>      <span class="ot">assert</span><span class="op">(</span>are_close<span class="op">(</span>CalcolaMedia<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;(</span>mydata<span class="op">),</span> <span class="fl">2.5</span><span class="op">));</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>      <span class="ot">assert</span><span class="op">(</span>are_close<span class="op">(</span>CalcolaVarianza<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;(</span>mydata<span class="op">),</span> <span class="fl">1.25</span><span class="op">));</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>      <span class="ot">assert</span><span class="op">(</span>are_close<span class="op">(</span>CalcolaMediana<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;(</span>mydata<span class="op">),</span> <span class="fl">2.5</span><span class="op">));</span>  <span class="co">// Even</span></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> test_vettore<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="op">{</span>  <span class="co">// New scope</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>      Vettore<span class="op">&lt;</span><span class="dt">char</span><span class="op">&gt;</span> v<span class="op">{};</span>       <span class="co">// Default constructor, no elements</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>      <span class="ot">assert</span><span class="op">(</span>v<span class="op">.</span>GetN<span class="op">()</span> <span class="op">==</span> <span class="dv">0</span><span class="op">);</span>   <span class="co">// The vector must be empty</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="op">{</span> <span class="co">// New scope: I can declare again a variable called `v`</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>      Vettore<span class="op">&lt;</span><span class="dt">int</span><span class="op">&gt;</span> v<span class="op">{</span><span class="dv">2</span><span class="op">};</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>      <span class="ot">assert</span><span class="op">(</span>v<span class="op">.</span>GetN<span class="op">()</span> <span class="op">==</span> <span class="dv">2</span><span class="op">);</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>      v<span class="op">.</span>SetComponent<span class="op">(</span><span class="dv">0</span><span class="op">,</span> <span class="dv">123</span><span class="op">);</span>  <span class="co">// Test both SetComponent and operator[]=</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>      v<span class="op">[</span><span class="dv">1</span><span class="op">]</span> <span class="op">=</span> <span class="dv">456</span><span class="op">;</span></span>
 <span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>  <span class="op">{</span> <span class="co">// New scope: I can declare again a variable named `mydata`</span></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>      <span class="bu">std::</span>vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> mydata<span class="op">{</span><span class="dv">1</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">3</span><span class="op">};</span>     <span class="co">// Shorter</span></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>      <span class="ot">assert</span><span class="op">(</span>are_close<span class="op">(</span>CalcolaMediana<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;(</span>mydata<span class="op">),</span> <span class="dv">2</span><span class="op">));</span>    <span class="co">// Odd</span></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>      <span class="ot">assert</span><span class="op">(</span>v<span class="op">.</span>GetComponent<span class="op">(</span><span class="dv">0</span><span class="op">)</span> <span class="op">==</span> <span class="dv">123</span><span class="op">);</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>      <span class="ot">assert</span><span class="op">(</span>v<span class="op">.</span>GetComponent<span class="op">(</span><span class="dv">1</span><span class="op">)</span> <span class="op">==</span> <span class="dv">456</span><span class="op">);</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>      v<span class="op">.</span>Scambia<span class="op">(</span><span class="dv">0</span><span class="op">,</span> <span class="dv">1</span><span class="op">);</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>      <span class="ot">assert</span><span class="op">(</span>v<span class="op">.</span>GetComponent<span class="op">(</span><span class="dv">0</span><span class="op">)</span> <span class="op">==</span> <span class="dv">456</span><span class="op">);</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>      <span class="ot">assert</span><span class="op">(</span>v<span class="op">[</span><span class="dv">1</span><span class="op">]</span> <span class="op">==</span> <span class="dv">123</span><span class="op">);</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+</section>
+<section id="test-per-esercizio-3.1" class="slide level1">
+<h1>Test per esercizio 3.1</h1>
+<p>Questo è il test per l’esercizio 3.1, che usa
+<code>std::vector</code>; adattatelo poi per l’esercizio 3.2.</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="dt">bool</span> are_close<span class="op">(</span><span class="dt">double</span> calculated<span class="op">,</span> <span class="dt">double</span> expected<span class="op">,</span> <span class="dt">double</span> epsilon <span class="op">=</span> <span class="fl">1e-7</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> fabs<span class="op">(</span>calculated <span class="op">-</span> expected<span class="op">)</span> <span class="op">&lt;</span> epsilon<span class="op">;</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> test_statistical_functions<span class="op">(</span><span class="dt">void</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="op">{</span>  <span class="co">// New scope</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>      <span class="bu">std::</span>vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> mydata<span class="op">{</span><span class="dv">1</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">3</span><span class="op">,</span> <span class="dv">4</span><span class="op">};</span>  <span class="co">// Use these instead of data.dat</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>      <span class="ot">assert</span><span class="op">(</span>are_close<span class="op">(</span>CalcolaMedia<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;(</span>mydata<span class="op">),</span> <span class="fl">2.5</span><span class="op">));</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>      <span class="ot">assert</span><span class="op">(</span>are_close<span class="op">(</span>CalcolaVarianza<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;(</span>mydata<span class="op">),</span> <span class="fl">1.25</span><span class="op">));</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>      <span class="ot">assert</span><span class="op">(</span>are_close<span class="op">(</span>CalcolaMediana<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;(</span>mydata<span class="op">),</span> <span class="fl">2.5</span><span class="op">));</span>  <span class="co">// Even</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>  <span class="op">{</span> <span class="co">// New scope: I can declare again a variable named `mydata`</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>      <span class="bu">std::</span>vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> mydata<span class="op">{</span><span class="dv">1</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">3</span><span class="op">};</span>     <span class="co">// Shorter</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>      <span class="ot">assert</span><span class="op">(</span>are_close<span class="op">(</span>CalcolaMediana<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;(</span>mydata<span class="op">),</span> <span class="dv">2</span><span class="op">));</span>    <span class="co">// Odd</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 </section>
 <section id="root" class="slide level1">
 <h1>ROOT</h1>
@@ -236,19 +267,19 @@ indicator</em></a> sul terminale è sempre meglio usare
 </section>
 <section id="esempio-di-uso-di-cout-e-cerr" class="slide level1">
 <h1>Esempio di uso di <code>cout</code> e <code>cerr</code></h1>
-<div class="sourceCode" id="cb2"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">(</span><span class="dt">void</span><span class="op">)</span> <span class="op">{</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">std::</span>cerr<span class="op"> &lt;&lt;</span> <span class="st">&quot;1. Leggo i dati da file...</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">;</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">// ...</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="bu">std::</span>cerr<span class="op"> &lt;&lt;</span> <span class="st">&quot;2. Stampo a video i risultati:</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">;</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> num<span class="op">;</span> <span class="op">++</span>i<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>        <span class="bu">std::</span>cout<span class="op"> &lt;&lt;</span> result<span class="op">[</span>i<span class="op">]</span> <span class="op">&lt;&lt;</span> <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">;</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    <span class="bu">std::</span>cerr<span class="op"> &lt;&lt;</span> <span class="st">&quot;3. Programma completato</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">;</span></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">(</span><span class="dt">void</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">std::</span>cerr<span class="op"> &lt;&lt;</span> <span class="st">&quot;1. Leggo i dati da file...</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">;</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">// ...</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="bu">std::</span>cerr<span class="op"> &lt;&lt;</span> <span class="st">&quot;2. Stampo a video i risultati:</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">;</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> num<span class="op">;</span> <span class="op">++</span>i<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>        <span class="bu">std::</span>cout<span class="op"> &lt;&lt;</span> result<span class="op">[</span>i<span class="op">]</span> <span class="op">&lt;&lt;</span> <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">;</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    <span class="bu">std::</span>cerr<span class="op"> &lt;&lt;</span> <span class="st">&quot;3. Programma completato</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">;</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 </section>
 <section id="esempio-di-uso-di-cout-e-cerr-1" class="slide level1">
 <h1>Esempio di uso di <code>cout</code> e <code>cerr</code></h1>
@@ -282,16 +313,16 @@ per essere eventualmente guardato dopo.</p></li>
 <ul>
 <li><p>Di solito gli studenti sono abbastanza confusi dal seguente
 codice:</p>
-<div class="sourceCode" id="cb4"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> Vettore<span class="op">::</span>GetComponent<span class="op">(</span><span class="dt">unsigned</span> <span class="dt">int</span> i<span class="op">)</span> <span class="at">const</span> <span class="op">{</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="co">// assert((m_N &gt; 1) &amp;&amp; &quot;Errore: l&#39;indice è troppo grande&quot;);</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> <span class="op">(</span>i <span class="op">&lt;</span> <span class="va">m_N</span><span class="op">)</span> <span class="op">{</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>      <span class="cf">return</span> <span class="va">m_v</span><span class="op">[</span>i<span class="op">];</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>      cerr <span class="op">&lt;&lt;</span> <span class="st">&quot;Errore: indice&quot;</span> <span class="op">&lt;&lt;</span> i <span class="op">&lt;&lt;</span> <span class="st">&quot;, dimensione &quot;</span> <span class="op">&lt;&lt;</span> <span class="va">m_N</span> <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>      exit<span class="op">(-</span><span class="dv">1</span><span class="op">);</span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div></li>
+<div class="sourceCode" id="cb5"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> Vettore<span class="op">::</span>GetComponent<span class="op">(</span><span class="dt">unsigned</span> <span class="dt">int</span> i<span class="op">)</span> <span class="at">const</span> <span class="op">{</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="co">// assert((m_N &gt; 1) &amp;&amp; &quot;Errore: l&#39;indice è troppo grande&quot;);</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> <span class="op">(</span>i <span class="op">&lt;</span> <span class="va">m_N</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>      <span class="cf">return</span> <span class="va">m_v</span><span class="op">[</span>i<span class="op">];</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>      cerr <span class="op">&lt;&lt;</span> <span class="st">&quot;Errore: indice&quot;</span> <span class="op">&lt;&lt;</span> i <span class="op">&lt;&lt;</span> <span class="st">&quot;, dimensione &quot;</span> <span class="op">&lt;&lt;</span> <span class="va">m_N</span> <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>      exit<span class="op">(-</span><span class="dv">1</span><span class="op">);</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div></li>
 <li><p>Quando è meglio usare <code>assert</code>, e quando è meglio
 invece un messaggio di errore?</p></li>
 </ul>
@@ -314,11 +345,11 @@ più appropriata dipende dal contesto.</p></li>
 <h1>Errore del programmatore</h1>
 <ul>
 <li><p>Questo codice ha un errore molto comune:</p>
-<div class="sourceCode" id="cb5"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">// The `&lt;=` is wrong! It should be `i &lt; v.size()`</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span><span class="op">(</span><span class="dt">size_t</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;=</span> v<span class="op">.</span>size<span class="op">();</span> <span class="op">++</span>i<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    v<span class="op">.</span>setComponent<span class="op">(</span>i<span class="op">,</span> <span class="fl">0.0</span><span class="op">);</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">// The `&lt;=` is wrong! It should be `i &lt; v.size()`</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span><span class="op">(</span><span class="dt">size_t</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;=</span> v<span class="op">.</span>size<span class="op">();</span> <span class="op">++</span>i<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    v<span class="op">.</span>setComponent<span class="op">(</span>i<span class="op">,</span> <span class="fl">0.0</span><span class="op">);</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 <p>Il fatto di leggere oltre la fine dell’array è un errore imputabile a
 chi ha scritto il programma, non a chi lo usa.</p></li>
 <li><p>In questo caso <code>assert</code> è la soluzione migliore,
@@ -389,27 +420,27 @@ un’interfaccia grafica anziché da terminale.</p></li>
 <p>In questo esempio, la documentazione di <code>setComponent</code>
 dice quali sono i valori accettabili per <code>i</code>, quindi se il
 parametro è sbagliato la colpa è di chi lo invoca.</p>
-<div class="sourceCode" id="cb9"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Set the value of an element in the array</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co">//</span></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co">// The index `i` *must* be in the range 0…size()-1</span></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> Vettore<span class="op">::</span>setComponent<span class="op">(</span><span class="dt">size_t</span> i<span class="op">,</span> <span class="dt">double</span> value<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    <span class="ot">assert</span><span class="op">(</span>i <span class="op">&lt;</span> size<span class="op">());</span></span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    <span class="va">m_v</span><span class="op">[</span>i<span class="op">]</span> <span class="op">=</span> value<span class="op">;</span></span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>    <span class="dt">size_t</span> position<span class="op">;</span></span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>    Vettore v<span class="op">(</span><span class="dv">10</span><span class="op">);</span></span>
-<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>    cerr <span class="op">&lt;&lt;</span> <span class="st">&quot;Inserisci la posizione del vettore: &quot;</span><span class="op">;</span></span>
-<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>    cin <span class="op">&gt;&gt;</span> position<span class="op">;</span></span>
-<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>position <span class="op">&gt;=</span> v<span class="op">.</span>size<span class="op">())</span> <span class="op">{</span></span>
-<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>        cerr <span class="op">&lt;&lt;</span> <span class="st">&quot;Errore, la posizione deve essere &lt; &quot;</span> <span class="op">&lt;&lt;</span> v<span class="op">.</span>size<span class="op">()</span> <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span>
-<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>        exit<span class="op">(</span><span class="dv">1</span><span class="op">);</span></span>
-<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>    v<span class="op">.</span>setComponent<span class="op">(</span>position<span class="op">,</span> <span class="fl">1.0</span><span class="op">);</span></span>
-<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Set the value of an element in the array</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co">//</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="co">// The index `i` *must* be in the range 0…size()-1</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> Vettore<span class="op">::</span>setComponent<span class="op">(</span><span class="dt">size_t</span> i<span class="op">,</span> <span class="dt">double</span> value<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    <span class="ot">assert</span><span class="op">(</span>i <span class="op">&lt;</span> size<span class="op">());</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    <span class="va">m_v</span><span class="op">[</span>i<span class="op">]</span> <span class="op">=</span> value<span class="op">;</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>    <span class="dt">size_t</span> position<span class="op">;</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>    Vettore v<span class="op">(</span><span class="dv">10</span><span class="op">);</span></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>    cerr <span class="op">&lt;&lt;</span> <span class="st">&quot;Inserisci la posizione del vettore: &quot;</span><span class="op">;</span></span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>    cin <span class="op">&gt;&gt;</span> position<span class="op">;</span></span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>position <span class="op">&gt;=</span> v<span class="op">.</span>size<span class="op">())</span> <span class="op">{</span></span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>        cerr <span class="op">&lt;&lt;</span> <span class="st">&quot;Errore, la posizione deve essere &lt; &quot;</span> <span class="op">&lt;&lt;</span> v<span class="op">.</span>size<span class="op">()</span> <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>        exit<span class="op">(</span><span class="dv">1</span><span class="op">);</span></span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>    v<span class="op">.</span>setComponent<span class="op">(</span>position<span class="op">,</span> <span class="fl">1.0</span><span class="op">);</span></span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 <p>Di conseguenza, il programmatore è «costretto» a verificare la
 correttezza del numero passato dall’utente nel <code>main</code> prima
 di invocare <code>v.setComponent</code>.</p>
@@ -422,13 +453,13 @@ di invocare <code>v.setComponent</code>.</p>
 <ul>
 <li><p>Le pagine web su <code>labmaster</code> usano la sintassi
 tradizionale C++ per dichiarare e inizializzare variabili:</p>
-<div class="sourceCode" id="cb10"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Dichiara &quot;ndata&quot; e la inizializza</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> ndata <span class="op">=</span> atoi<span class="op">(</span>argv<span class="op">[</span><span class="dv">1</span><span class="op">]);</span></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>Vettore v<span class="op">(</span><span class="dv">10</span><span class="op">);</span></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>Vettore w <span class="op">=</span> v<span class="op">;</span></span></code></pre></div></li>
+<div class="sourceCode" id="cb11"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Dichiara &quot;ndata&quot; e la inizializza</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> ndata <span class="op">=</span> atoi<span class="op">(</span>argv<span class="op">[</span><span class="dv">1</span><span class="op">]);</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>Vettore v<span class="op">(</span><span class="dv">10</span><span class="op">);</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>Vettore w <span class="op">=</span> v<span class="op">;</span></span></code></pre></div></li>
 <li><p>Questa sintassi è stata mutuata dal linguaggio C, ma ne esiste
 una più recente e più sicura.</p></li>
 </ul>
@@ -439,15 +470,15 @@ una più recente e più sicura.</p></li>
 <li><p>Il C++11 implementa la <em>uniform initialization</em>, che si
 usa impiegando le parentesi graffe <code>{}</code> anziché l’uguale
 <code>=</code> e le parentesi tonde <code>()</code>:</p>
-<div class="sourceCode" id="cb11"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> a<span class="op">{};</span>     <span class="co">// Same as   int a = 0;</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> b<span class="op">{</span><span class="dv">10</span><span class="op">};</span>   <span class="co">// Same as   int b = 10;</span></span></code></pre></div></li>
+<div class="sourceCode" id="cb12"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> a<span class="op">{};</span>     <span class="co">// Same as   int a = 0;</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> b<span class="op">{</span><span class="dv">10</span><span class="op">};</span>   <span class="co">// Same as   int b = 10;</span></span></code></pre></div></li>
 <li><p>Analogamente, nei cicli <code>for</code> si può scrivere
 così:</p>
-<div class="sourceCode" id="cb12"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span><span class="op">(</span><span class="dt">int</span> k<span class="op">{</span><span class="dv">0</span><span class="op">};</span> k <span class="op">&lt;</span> <span class="dv">10</span><span class="op">;</span> <span class="op">++</span>k<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Writing k{} would be the same, as the default value is 0</span></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div></li>
+<div class="sourceCode" id="cb13"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span><span class="op">(</span><span class="dt">int</span> k<span class="op">{</span><span class="dv">0</span><span class="op">};</span> k <span class="op">&lt;</span> <span class="dv">10</span><span class="op">;</span> <span class="op">++</span>k<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Writing k{} would be the same, as the default value is 0</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div></li>
 </ul>
 </section>
 <section id="vantaggi-12" class="slide level1">
@@ -455,17 +486,17 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb12-1"><a href="#
 <ul>
 <li><p>Inizializza una variabile al valore di default con
 <code>{}</code>:</p>
-<div class="sourceCode" id="cb13"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> a<span class="op">{};</span>            <span class="co">// Same as: int a = 0;</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="dt">float</span> b<span class="op">{};</span>          <span class="co">// Same as: float b = 0.0;</span></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="bu">std::</span>string<span class="op"> </span>s<span class="op">{};</span>    <span class="co">// Same as: std::string s = &quot;&quot;;</span></span></code></pre></div></li>
-<li><p>Sono vietate le conversioni di tipo, spesso fonti di errori:</p>
 <div class="sourceCode" id="cb14"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="at">const</span> <span class="dt">double</span> pi <span class="op">=</span> <span class="fl">3.1415926535897932384626433</span><span class="op">;</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="co">// Allowed, but probably wrong</span></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> a <span class="op">=</span> pi<span class="op">;</span></span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="co">// The compiler prints an error message</span></span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> c<span class="op">{</span>pi<span class="op">};</span></span></code></pre></div></li>
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> a<span class="op">{};</span>            <span class="co">// Same as: int a = 0;</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="dt">float</span> b<span class="op">{};</span>          <span class="co">// Same as: float b = 0.0;</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="bu">std::</span>string<span class="op"> </span>s<span class="op">{};</span>    <span class="co">// Same as: std::string s = &quot;&quot;;</span></span></code></pre></div></li>
+<li><p>Sono vietate le conversioni di tipo, spesso fonti di errori:</p>
+<div class="sourceCode" id="cb15"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="at">const</span> <span class="dt">double</span> pi <span class="op">=</span> <span class="fl">3.1415926535897932384626433</span><span class="op">;</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="co">// Allowed, but probably wrong</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> a <span class="op">=</span> pi<span class="op">;</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="co">// The compiler prints an error message</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> c<span class="op">{</span>pi<span class="op">};</span></span></code></pre></div></li>
 </ul>
 </section>
 <section id="vantaggi-22" class="slide level1">
@@ -473,13 +504,13 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb14-1"><a href="#
 <ul>
 <li><p>È possibile inizializzare array dinamici usando una sola
 riga:</p>
-<div class="sourceCode" id="cb15"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> <span class="op">*</span> data<span class="op">{</span><span class="kw">new</span> <span class="dt">double</span><span class="op">[]{</span> <span class="fl">1.0</span><span class="op">,</span> <span class="fl">2.0</span><span class="op">,</span> <span class="fl">3.0</span> <span class="op">}};</span></span></code></pre></div></li>
+<div class="sourceCode" id="cb16"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> <span class="op">*</span> data<span class="op">{</span><span class="kw">new</span> <span class="dt">double</span><span class="op">[]{</span> <span class="fl">1.0</span><span class="op">,</span> <span class="fl">2.0</span><span class="op">,</span> <span class="fl">3.0</span> <span class="op">}};</span></span></code></pre></div></li>
 <li><p>La sintassi può essere usata anche per invocare costruttori di
 classi (che vedremo a partire da questa lezione):</p>
-<div class="sourceCode" id="cb16"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>Vettore v<span class="op">{};</span>   <span class="co">// Costruttore senza parametri</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>Vettore w<span class="op">{</span><span class="dv">10</span><span class="op">};</span></span></code></pre></div></li>
+<div class="sourceCode" id="cb17"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>Vettore v<span class="op">{};</span>   <span class="co">// Costruttore senza parametri</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>Vettore w<span class="op">{</span><span class="dv">10</span><span class="op">};</span></span></code></pre></div></li>
 <li><p>Questi vantaggi sono evidenti solo se ci si abitua ad usare la
 <em>uniform initialization</em> ovunque. Abituatevi quindi da
 subito!</p></li>
@@ -493,14 +524,14 @@ usata anche per invocare i costruttori previene il problema del
 cosiddetto <a
 href="https://en.wikipedia.org/wiki/Most_vexing_parse"><em>most vexing
 parse</em></a>:</p>
-<div class="sourceCode" id="cb17"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co">// I want to invoke a constructor that has no parameters</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>Vettore v<span class="op">();</span>         <span class="co">// The compiler prints an error here!</span></span></code></pre></div></li>
+<div class="sourceCode" id="cb18"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co">// I want to invoke a constructor that has no parameters</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>Vettore v<span class="op">();</span>         <span class="co">// The compiler prints an error here!</span></span></code></pre></div></li>
 <li><p>Usando le parentesi graffe il problema sparisce, e c’è anche
 simmetria con l’inizializzazione di tipi base del C++:</p>
-<div class="sourceCode" id="cb18"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>Vettore v<span class="op">{};</span> <span class="co">// Default constructor</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> a<span class="op">{};</span>     <span class="co">// Same</span></span></code></pre></div></li>
+<div class="sourceCode" id="cb19"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>Vettore v<span class="op">{};</span> <span class="co">// Default constructor</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> a<span class="op">{};</span>     <span class="co">// Same</span></span></code></pre></div></li>
 <li><p>Questo è <strong>uno dei più comuni errori degli studenti di
 TNDS</strong>.</p></li>
 </ul>
@@ -516,7 +547,28 @@ TNDS</strong>.</p></li>
 <code>long long</code>) e quelli senza segno (in cui si mette
 <code>unsigned</code> davanti al tipo).</p></li>
 <li><p>Ovviamente la differenza sta nel fatto che gli interi con segno
-(<code>int</code>) ammettono anche numeri negativi.</p></li>
+(<code>int</code>) ammettono anche numeri negativi:</p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Tipo</th>
+<th style="text-align: right;">Minimo</th>
+<th style="text-align: right;">Massimo</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>int</code></td>
+<td style="text-align: right;">−2147483648</td>
+<td style="text-align: right;">2147483647</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>unsigned</code></td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">4294967295</td>
+</tr>
+</tbody>
+</table></li>
 <li><p>Vediamo alcune differenze.</p></li>
 </ul>
 </section>
@@ -530,12 +582,12 @@ elementi!</p></li>
 <li><p>Questo codice fornisce un <em>warning</em> (<a
 href="https://ziotom78.github.io/tnds-tomasi-notebooks/tomasi-lezione-01.html#/flag-del-compilatore">se
 usate <code>-Wall --pedantic</code></a>):</p>
-<div class="sourceCode" id="cb19"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="bu">std::</span>vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> v<span class="op">(</span><span class="dv">3</span><span class="op">);</span></span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span><span class="op">(</span><span class="dt">int</span> i<span class="op">{};</span> i <span class="op">&lt;</span> v<span class="op">.</span>size<span class="op">();</span> <span class="op">++</span>i<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>    v<span class="op">[</span>i<span class="op">]</span> <span class="op">=</span> <span class="fl">0.0</span><span class="op">;</span></span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb20"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="bu">std::</span>vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> v<span class="op">(</span>…<span class="op">);</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span><span class="op">(</span><span class="dt">int</span> i<span class="op">{};</span> i <span class="op">&lt;</span> v<span class="op">.</span>size<span class="op">();</span> <span class="op">++</span>i<span class="op">)</span> <span class="op">{</span>  <span class="co">// What happens if v.size() is 3 billions?</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>    v<span class="op">[</span>i<span class="op">]</span> <span class="op">=</span> <span class="fl">0.0</span><span class="op">;</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 <p>perché nella condizione <code>i &lt; v.size()</code> si confronta un
 intero con segno (<code>i</code>) e uno senza segno
 (<code>v.size()</code>).</p></li>
@@ -546,12 +598,12 @@ intero con segno (<code>i</code>) e uno senza segno
 <ul>
 <li><p>Per togliere il warning è sufficiente dichiarare <code>i</code>
 di tipo <code>size_t</code>:</p>
-<div class="sourceCode" id="cb20"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="bu">std::</span>vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> v<span class="op">(</span><span class="dv">3</span><span class="op">);</span></span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span><span class="op">(</span><span class="dt">size_t</span> i<span class="op">{};</span> i <span class="op">&lt;</span> v<span class="op">.</span>size<span class="op">();</span> <span class="op">++</span>i<span class="op">)</span> <span class="op">{</span>  <span class="co">// No more warnings</span></span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>    v<span class="op">[</span>i<span class="op">]</span> <span class="op">=</span> <span class="fl">0.0</span><span class="op">;</span></span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div></li>
+<div class="sourceCode" id="cb21"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="bu">std::</span>vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> v<span class="op">(</span><span class="dv">3</span><span class="op">);</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span><span class="op">(</span><span class="dt">size_t</span> i<span class="op">{};</span> i <span class="op">&lt;</span> v<span class="op">.</span>size<span class="op">();</span> <span class="op">++</span>i<span class="op">)</span> <span class="op">{</span>  <span class="co">// No more warnings</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>    v<span class="op">[</span>i<span class="op">]</span> <span class="op">=</span> <span class="fl">0.0</span><span class="op">;</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div></li>
 <li><p>In linguaggi più rigorosi del C++ (es., Ada) confrontare tipi con
 e senza segno è un <em>errore</em> anziché un warning. Prendete quindi
 sul serio questi warning!</p></li>
@@ -563,18 +615,18 @@ sul serio questi warning!</p></li>
 <li><p>Attenzione ai cicli a ritroso, in cui si parte dall’ultimo
 elemento e si torna indietro al primo! Questo codice <strong>non
 funziona</strong>:</p>
-<div class="sourceCode" id="cb21"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span><span class="op">(</span><span class="dt">size_t</span> i<span class="op">{</span>v<span class="op">.</span>size<span class="op">()</span> <span class="op">-</span> <span class="dv">1</span><span class="op">};</span> i <span class="op">&gt;=</span> <span class="dv">0</span><span class="op">;</span> <span class="op">--</span>i<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Do stuff</span></span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> <span class="co">// This loop never ends</span></span></code></pre></div></li>
-<li><p>Il modo giusto per scrivere il ciclo è il seguente:</p>
 <div class="sourceCode" id="cb22"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span><span class="op">(</span><span class="dt">size_t</span> i<span class="op">{</span>v<span class="op">.</span>size<span class="op">()</span> <span class="op">-</span> <span class="dv">1</span><span class="op">};;</span> <span class="op">--</span>i<span class="op">)</span> <span class="op">{</span></span>
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span><span class="op">(</span><span class="dt">size_t</span> i<span class="op">{</span>v<span class="op">.</span>size<span class="op">()</span> <span class="op">-</span> <span class="dv">1</span><span class="op">};</span> i <span class="op">&gt;=</span> <span class="dv">0</span><span class="op">;</span> <span class="op">--</span>i<span class="op">)</span> <span class="op">{</span></span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Do stuff</span></span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">// If we have reached the last iteration, stop here</span></span>
-<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>i <span class="op">==</span> <span class="dv">0</span><span class="op">)</span> <span class="cf">break</span><span class="op">;</span></span>
-<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div></li>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> <span class="co">// This loop never ends</span></span></code></pre></div></li>
+<li><p>Il modo giusto per scrivere il ciclo è il seguente:</p>
+<div class="sourceCode" id="cb23"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span><span class="op">(</span><span class="dt">size_t</span> i<span class="op">{</span>v<span class="op">.</span>size<span class="op">()</span> <span class="op">-</span> <span class="dv">1</span><span class="op">};;</span> <span class="op">--</span>i<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Do stuff</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">// If we have reached the last iteration, stop here</span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>i <span class="op">==</span> <span class="dv">0</span><span class="op">)</span> <span class="cf">break</span><span class="op">;</span></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div></li>
 </ul>
 </section>
 <section id="perché-usare-unsigned" class="slide level1">
@@ -593,6 +645,48 @@ segno.</p></li>
 href="https://nim-lang.org/">Nim</a> e <a
 href="https://julialang.org/">Julia</a>, usano sempre interi con segno
 per iterare sugli array.</p></li>
+</ul>
+</section>
+<section id="cicli-for-e-while" class="slide level1">
+<h1>Cicli <code>for</code> e <code>while</code></h1>
+</section>
+<section id="for-while-do-while" class="slide level1">
+<h1><code>for</code>, <code>while</code>, <code>do … while</code></h1>
+<ul>
+<li><p>Non sempre i cicli <code>for</code> sono la cosa migliore da
+usare. Ci sono anche <code>while</code> e
+<code>do … while</code></p></li>
+<li><p>Non è immediato capire quale sia meglio:</p>
+<ul>
+<li>Il <code>for</code> itera finché una condizione non viene verificata
+alla <strong>fine</strong> di ogni loop</li>
+<li>Il <code>while</code> itera finché una condizione non viene
+verificata all’<strong>inizio</strong> di ogni loop</li>
+<li>Il <code>do … while</code> itera finché una condizione non viene
+verificata alla <strong>fine</strong> di ogni loop</li>
+</ul></li>
+</ul>
+</section>
+<section id="il-ciclo-whiletrue" class="slide level1">
+<h1>Il ciclo <code>while(true)</code></h1>
+<ul>
+<li><p>Vi insegno un trucco per decidere quale usare: usate
+<code>while(true)</code>!</p>
+<div class="sourceCode" id="cb24"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span><span class="op">(</span><span class="kw">true</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>some condition <span class="dv">1</span><span class="op">)</span> <span class="cf">break</span><span class="op">;</span>   <span class="co">// *1*</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">// … do stuff …</span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>some condition <span class="dv">2</span><span class="op">)</span> <span class="cf">break</span><span class="op">;</span>   <span class="co">// *2*</span></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>    <span class="co">// … do other stuff …</span></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>some condition <span class="dv">3</span><span class="op">)</span> <span class="cf">break</span><span class="op">;</span>   <span class="co">// *3*</span></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div></li>
+<li><p>Se vi serve solo <code>*1*</code>, potete usare
+<code>while(some condition 1)</code>.</p></li>
+<li><p>Se vi serve solo <code>*3*</code>, potete usare
+<code>do … while(some condition 3)</code> oppure
+<code>for</code>.</p></li>
+<li><p>Nel caso <code>*2*</code>, lasciate <code>while(true)</code> con
+<code>if(…) break</code> in mezzo.</p></li>
 </ul>
 </section>
 <section id="iteratori-nella-stl" class="slide level1">

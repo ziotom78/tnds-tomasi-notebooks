@@ -31,7 +31,38 @@ css:
 
 # Test con `assert`
 
-Questo è il test per l'esercizio 3.1, che usa `std::vector`; adattatelo per l'esercizio 3.0.
+# Test per esercizio 3.0
+
+Dobbiamo verificare che la classe `Vettore` funzioni come atteso:
+
+```c++
+void test_vettore() {
+  {  // New scope
+      Vettore<char> v{};       // Default constructor, no elements
+      assert(v.GetN() == 0);   // The vector must be empty
+  }
+
+  { // New scope: I can declare again a variable called `v`
+      Vettore<int> v{2};
+      assert(v.GetN() == 2);
+  
+      v.SetComponent(0, 123);  // Test both SetComponent and operator[]=
+      v[1] = 456;
+
+      assert(v.GetComponent(0) == 123);
+      assert(v.GetComponent(1) == 456);
+  
+      v.Scambia(0, 1);
+
+      assert(v.GetComponent(0) == 456);
+      assert(v[1] == 123);
+  }
+}
+```
+
+# Test per esercizio 3.1
+
+Questo è il test per l'esercizio 3.1, che usa `std::vector`; adattatelo poi per l'esercizio 3.2.
 
 ```c++
 bool are_close(double calculated, double expected, double epsilon = 1e-7) {
@@ -366,7 +397,12 @@ Di conseguenza, il programmatore è «costretto» a verificare la correttezza de
     `unsigned` davanti al tipo).
 
 -   Ovviamente la differenza sta nel fatto che gli interi con segno
-    (`int`) ammettono anche numeri negativi.
+    (`int`) ammettono anche numeri negativi:
+    
+    | Tipo       | Minimo      | Massimo    |
+    |:-----------|------------:|-----------:|
+    | `int`      | −2147483648 | 2147483647 |
+    | `unsigned` |           0 | 4294967295 |
 
 -   Vediamo alcune differenze.
 
@@ -378,9 +414,9 @@ Di conseguenza, il programmatore è «costretto» a verificare la correttezza de
     `-Wall --pedantic`](https://ziotom78.github.io/tnds-tomasi-notebooks/tomasi-lezione-01.html#/flag-del-compilatore)):
 
     ```c++
-    std::vector<double> v(3);
+    std::vector<double> v(…);
 
-    for(int i{}; i < v.size(); ++i) {
+    for(int i{}; i < v.size(); ++i) {  // What happens if v.size() is 3 billions?
         v[i] = 0.0;
     }
     ```
@@ -432,6 +468,38 @@ Di conseguenza, il programmatore è «costretto» a verificare la correttezza de
 - Il nuovo standard C++23 (che sarà rilasciato l'anno prossimo) introduce `ssize_t`, che è come `size_t` ma ha il segno.
 
 - Linguaggi più moderni, come [Nim](https://nim-lang.org/) e [Julia](https://julialang.org/), usano sempre interi con segno per iterare sugli array.
+
+# Cicli `for` e `while`
+
+# `for`, `while`, `do … while`
+
+-   Non sempre i cicli `for` sono la cosa migliore da usare. Ci sono anche `while` e `do … while`
+
+-   Non è immediato capire quale sia meglio:
+
+    -   Il `for` itera finché una condizione non viene verificata alla **fine** di ogni loop
+    -   Il `while` itera finché una condizione non viene verificata all'**inizio** di ogni loop
+    -   Il `do … while` itera finché una condizione non viene verificata alla **fine** di ogni loop
+
+
+# Il ciclo `while(true)`
+
+-   Vi insegno un trucco per decidere quale usare: usate `while(true)`!
+
+    ```c++
+    while(true) {
+        if (some condition 1) break;   // *1*
+        // … do stuff …
+        if (some condition 2) break;   // *2*
+        // … do other stuff …
+        if (some condition 3) break;   // *3*
+    }
+    ```
+
+-   Se vi serve solo `*1*`, potete usare `while(some condition 1)`.
+-   Se vi serve solo `*3*`, potete usare `do … while(some condition 3)` oppure `for`.
+-   Nel caso `*2*`, lasciate `while(true)` con `if(…) break` in mezzo.
+
 
 # Iteratori nella STL
 
