@@ -164,7 +164,6 @@ template <typename T> void Print(const Vettore<T> & v, const char * filename) {
   for (size_t i{}; i < v.GetN(); i++) {
       out << v.GetComponent(i) << endl;
   }
-  out.close();
 }
 ```
 
@@ -281,8 +280,6 @@ template <typename T> void Print(const vector<T> & v, const char * filename) {
   for (size_t i{}; i < v.size(); i++) {
       out << v[i] << endl;
   }
-
-  out.close();
 }
 ```
 
