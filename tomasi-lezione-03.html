@@ -259,16 +259,16 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb2-1"><a href="#c
 <h1>Esempio di uso di <code>cout</code> e <code>cerr</code></h1>
 <ul>
 <li><p>Se non avessimo usato la distinzione tra <code>cout</code> e
-<code>cerr</code> ma avessimo scritto tutto su <code>cout</code>, il
-risultato di <code>sort</code> avrebbe incluso le righe con i
+<code>cerr</code> ma avessimo scritto tutto su <code>cout</code>,
+comandi come <code>sort</code> avrebbero mescolato risultati e
 messaggi:</p>
 <pre><code>$ esempio | sort -g
-1. Leggo i dati da file...
 1.75123
-2. Stampo a video i risultati:
-5.91573
+1. Leggo i dati da file...
 2.78534
-3. Programma completato</code></pre></li>
+2. Stampo a video i risultati:
+3. Programma completato
+5.91573</code></pre></li>
 <li><p>In generale, stampate su <code>cerr</code> tutto ciò che bisogna
 mostrare all’utente <em>subito</em>, e non ha senso salvare in un file
 per essere eventualmente guardato dopo.</p></li>

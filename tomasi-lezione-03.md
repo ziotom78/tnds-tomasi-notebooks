@@ -122,16 +122,16 @@ Con l'esempio seguente, è possibile usare il reindirizzamento:
 
 # Esempio di uso di `cout` e `cerr`
 
--   Se non avessimo usato la distinzione tra `cout` e `cerr` ma avessimo scritto tutto su `cout`, il risultato di `sort` avrebbe incluso le righe con i messaggi:
+-   Se non avessimo usato la distinzione tra `cout` e `cerr` ma avessimo scritto tutto su `cout`, comandi come `sort` avrebbero mescolato risultati e messaggi:
 
     ```
     $ esempio | sort -g
-    1. Leggo i dati da file...
     1.75123
-    2. Stampo a video i risultati:
-    5.91573
+    1. Leggo i dati da file...
     2.78534
+    2. Stampo a video i risultati:
     3. Programma completato
+    5.91573
     ```
 
 -   In generale, stampate su `cerr` tutto ciò che bisogna mostrare all'utente *subito*, e non ha senso salvare in un file per essere eventualmente guardato dopo.
