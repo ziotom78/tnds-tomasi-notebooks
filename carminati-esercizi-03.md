@@ -9,7 +9,7 @@ lang: it-IT
 
 [La pagina con la spiegazione originale degli esercizi si trova qui: [labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/lezione3_1819.html](http://labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/lezione3_1819.html).]
 
-In questa terza lezione affronteremo di nuovo gli stessi problemi della prima e seconda lezione (lettura di dati da un file, calcolo di media e mediana) utilizzando una evoluzione del contenitore di dati `Vettore`: possiamo rendere questa classe più flessibile in modo che sia capace di immagazzinare qualsiasi tipo di dato ( e non necessariamente dei numeri `double`)? Nella seconda parte spingeremo ancora oltre la generalizzazione imparando ad usare il contenitore vector della [STL](http://www.cplusplus.com/reference/stl/). Quindi, in sintesi:
+In questa terza lezione affronteremo di nuovo gli stessi problemi della prima e seconda lezione (lettura di dati da un file, calcolo di media e mediana) utilizzando una evoluzione del contenitore di dati `Vettore`: possiamo rendere questa classe più flessibile in modo che sia capace di immagazzinare qualsiasi tipo di dato (e non necessariamente dei numeri `double`)? Nella seconda parte spingeremo ancora oltre la generalizzazione imparando ad usare il contenitore vector della [STL](http://www.cplusplus.com/reference/stl/). Quindi, in sintesi:
 
 -   Tipo di dato da leggere è constituito da numeri `double`.
 -   Tipo di contenitore di dati è una generalizzazione della classe `Vettore` della lezione 2 o il contenitore vector della STL.
@@ -94,19 +94,19 @@ public:
 
   size_t GetN() const { return m_N; }
 
-  void SetComponent(size i , T a) { // modifica una componente
+  void SetComponent(size_t i, T a) { // modifica una componente
       // ...
   }
 
-  T GetComponent(size_t i ) const { // accedi ad una componente
+  T GetComponent(size_t i) const { // accedi ad una componente
       // ...
   }
 
-  void Scambia(size_t primo, size_t secondo ) { // scambia due elementi
+  void Scambia(size_t primo, size_t secondo) { // scambia due elementi
       // ...
   }
 
-  T& operator[](size_t i ) { // accede all'elemento i-esimo
+  T& operator[](size_t i) { // accede all'elemento i-esimo
       // ...
   }
 
@@ -200,9 +200,9 @@ int main (int argc, char * argv[]) {
 
   Print(v);
 
-  cout << "media = " << CalcolaMedia<double>( v ) << endl;
-  cout << "varianza = " << CalcolaVarianza<double>( v ) << endl;
-  cout << "mediana = " << CalcolaMediana<double>( v ) << endl;
+  cout << "media = " << CalcolaMedia<double>(v) << endl;
+  cout << "varianza = " << CalcolaVarianza<double>(v) << endl;
+  cout << "mediana = " << CalcolaMediana<double>(v) << endl;
 
   Print(v);
 }
@@ -440,7 +440,7 @@ int main(int argc, char * argv[]) {
   TH1F histo{"histo", "histo", 100, -10, 100};
   histo.StatOverflows(true);
 
-  for (size_t k{}; k < v.size(); k++ ) {
+  for (size_t k{}; k < v.size(); k++) {
       histo.Fill(v[k]);
   }
   

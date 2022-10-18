@@ -220,7 +220,7 @@ href="http://labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/lezione3_18
 della prima e seconda lezione (lettura di dati da un file, calcolo di
 media e mediana) utilizzando una evoluzione del contenitore di dati
 <code>Vettore</code>: possiamo rendere questa classe più flessibile in
-modo che sia capace di immagazzinare qualsiasi tipo di dato ( e non
+modo che sia capace di immagazzinare qualsiasi tipo di dato (e non
 necessariamente dei numeri <code>double</code>)? Nella seconda parte
 spingeremo ancora oltre la generalizzazione imparando ad usare il
 contenitore vector della <a
@@ -326,19 +326,19 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb5-1"><a href="#c
 <span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a>  <span class="dt">size_t</span> GetN<span class="op">()</span> <span class="at">const</span> <span class="op">{</span> <span class="cf">return</span> <span class="va">m_N</span><span class="op">;</span> <span class="op">}</span></span>
 <span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a>  <span class="dt">void</span> SetComponent<span class="op">(</span>size i <span class="op">,</span> T a<span class="op">)</span> <span class="op">{</span> <span class="co">// modifica una componente</span></span>
+<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a>  <span class="dt">void</span> SetComponent<span class="op">(</span><span class="dt">size_t</span> i<span class="op">,</span> T a<span class="op">)</span> <span class="op">{</span> <span class="co">// modifica una componente</span></span>
 <span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a>      <span class="co">// ...</span></span>
 <span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
 <span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-34"><a href="#cb5-34" aria-hidden="true" tabindex="-1"></a>  T GetComponent<span class="op">(</span><span class="dt">size_t</span> i <span class="op">)</span> <span class="at">const</span> <span class="op">{</span> <span class="co">// accedi ad una componente</span></span>
+<span id="cb5-34"><a href="#cb5-34" aria-hidden="true" tabindex="-1"></a>  T GetComponent<span class="op">(</span><span class="dt">size_t</span> i<span class="op">)</span> <span class="at">const</span> <span class="op">{</span> <span class="co">// accedi ad una componente</span></span>
 <span id="cb5-35"><a href="#cb5-35" aria-hidden="true" tabindex="-1"></a>      <span class="co">// ...</span></span>
 <span id="cb5-36"><a href="#cb5-36" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
 <span id="cb5-37"><a href="#cb5-37" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-38"><a href="#cb5-38" aria-hidden="true" tabindex="-1"></a>  <span class="dt">void</span> Scambia<span class="op">(</span><span class="dt">size_t</span> primo<span class="op">,</span> <span class="dt">size_t</span> secondo <span class="op">)</span> <span class="op">{</span> <span class="co">// scambia due elementi</span></span>
+<span id="cb5-38"><a href="#cb5-38" aria-hidden="true" tabindex="-1"></a>  <span class="dt">void</span> Scambia<span class="op">(</span><span class="dt">size_t</span> primo<span class="op">,</span> <span class="dt">size_t</span> secondo<span class="op">)</span> <span class="op">{</span> <span class="co">// scambia due elementi</span></span>
 <span id="cb5-39"><a href="#cb5-39" aria-hidden="true" tabindex="-1"></a>      <span class="co">// ...</span></span>
 <span id="cb5-40"><a href="#cb5-40" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
 <span id="cb5-41"><a href="#cb5-41" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-42"><a href="#cb5-42" aria-hidden="true" tabindex="-1"></a>  T<span class="op">&amp;</span> <span class="kw">operator</span><span class="op">[](</span><span class="dt">size_t</span> i <span class="op">)</span> <span class="op">{</span> <span class="co">// accede all&#39;elemento i-esimo</span></span>
+<span id="cb5-42"><a href="#cb5-42" aria-hidden="true" tabindex="-1"></a>  T<span class="op">&amp;</span> <span class="kw">operator</span><span class="op">[](</span><span class="dt">size_t</span> i<span class="op">)</span> <span class="op">{</span> <span class="co">// accede all&#39;elemento i-esimo</span></span>
 <span id="cb5-43"><a href="#cb5-43" aria-hidden="true" tabindex="-1"></a>      <span class="co">// ...</span></span>
 <span id="cb5-44"><a href="#cb5-44" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
 <span id="cb5-45"><a href="#cb5-45" aria-hidden="true" tabindex="-1"></a></span>
@@ -428,9 +428,9 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb7-1"><a href="#c
 <span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>  Print<span class="op">(</span>v<span class="op">);</span></span>
 <span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a>  cout <span class="op">&lt;&lt;</span> <span class="st">&quot;media = &quot;</span> <span class="op">&lt;&lt;</span> CalcolaMedia<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;(</span> v <span class="op">)</span> <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span>
-<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a>  cout <span class="op">&lt;&lt;</span> <span class="st">&quot;varianza = &quot;</span> <span class="op">&lt;&lt;</span> CalcolaVarianza<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;(</span> v <span class="op">)</span> <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span>
-<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a>  cout <span class="op">&lt;&lt;</span> <span class="st">&quot;mediana = &quot;</span> <span class="op">&lt;&lt;</span> CalcolaMediana<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;(</span> v <span class="op">)</span> <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a>  cout <span class="op">&lt;&lt;</span> <span class="st">&quot;media = &quot;</span> <span class="op">&lt;&lt;</span> CalcolaMedia<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;(</span>v<span class="op">)</span> <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a>  cout <span class="op">&lt;&lt;</span> <span class="st">&quot;varianza = &quot;</span> <span class="op">&lt;&lt;</span> CalcolaVarianza<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;(</span>v<span class="op">)</span> <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a>  cout <span class="op">&lt;&lt;</span> <span class="st">&quot;mediana = &quot;</span> <span class="op">&lt;&lt;</span> CalcolaMediana<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;(</span>v<span class="op">)</span> <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span>
 <span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a>  Print<span class="op">(</span>v<span class="op">);</span></span>
 <span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
@@ -688,7 +688,7 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb14-1"><a href="#
 <span id="cb14-30"><a href="#cb14-30" aria-hidden="true" tabindex="-1"></a>  TH1F histo<span class="op">{</span><span class="st">&quot;histo&quot;</span><span class="op">,</span> <span class="st">&quot;histo&quot;</span><span class="op">,</span> <span class="dv">100</span><span class="op">,</span> <span class="op">-</span><span class="dv">10</span><span class="op">,</span> <span class="dv">100</span><span class="op">};</span></span>
 <span id="cb14-31"><a href="#cb14-31" aria-hidden="true" tabindex="-1"></a>  histo<span class="op">.</span>StatOverflows<span class="op">(</span><span class="kw">true</span><span class="op">);</span></span>
 <span id="cb14-32"><a href="#cb14-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-33"><a href="#cb14-33" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> <span class="op">(</span><span class="dt">size_t</span> k<span class="op">{};</span> k <span class="op">&lt;</span> v<span class="op">.</span>size<span class="op">();</span> k<span class="op">++</span> <span class="op">)</span> <span class="op">{</span></span>
+<span id="cb14-33"><a href="#cb14-33" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> <span class="op">(</span><span class="dt">size_t</span> k<span class="op">{};</span> k <span class="op">&lt;</span> v<span class="op">.</span>size<span class="op">();</span> k<span class="op">++)</span> <span class="op">{</span></span>
 <span id="cb14-34"><a href="#cb14-34" aria-hidden="true" tabindex="-1"></a>      histo<span class="op">.</span>Fill<span class="op">(</span>v<span class="op">[</span>k<span class="op">]);</span></span>
 <span id="cb14-35"><a href="#cb14-35" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
 <span id="cb14-36"><a href="#cb14-36" aria-hidden="true" tabindex="-1"></a>  </span>
