@@ -142,7 +142,7 @@ using namespace std;
 // X, y e z di un punto e ne restituisce le coordinate sferiche
 // e cilindiriche.
 
-int main(int argc, const char *argv[]) {
+int main(int argc, char *argv[]) {
   // Controlla gli argomenti
   if (argc != 4) {
     std::cerr << "Usage: " << argv[0] << " <x> <y> <z>" << endl;
