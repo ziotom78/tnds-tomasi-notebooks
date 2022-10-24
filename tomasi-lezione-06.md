@@ -65,7 +65,7 @@ struct Cat : public Animal {
 ```c++
 #include <string>
 
-int main(int argc, const char *argv[]) {
+int main(int argc, char *argv[]) {
   Animal *animal{}; // Qui abbiamo proprio bisogno di *
 
   // Legge il nome dell'animale dalla linea di comando
