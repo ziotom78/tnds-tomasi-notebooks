@@ -409,14 +409,16 @@ cambiamenti anche nel main.</p>
 <p>Questo programma utilizza la nuova classe appena creata: richiede di
 fornire come argomenti le tre coordinate cartesiane e poi stampa le
 terne di coordinate cartesiane, sferiche e cilindriche. Il programma è
-pensato per usare la libreria fmt, che potete installare usando lo
-script <a
+pensato per usare la libreria <a
+href="https://github.com/fmtlib/fmt"><code>fmt</code></a>, che potete
+installare usando lo script <a
 href="./install_fmt_library"><code>install_fmt_library</code></a>:
 scaricatelo nella directory dell’esercizio ed eseguitelo, oppure
 eseguite questo comando:</p>
 <p><input type="text" value="curl https://ziotom78.github.io/tnds-tomasi-notebooks/install_fmt_library | sh" id="installFmtCommand" readonly="1" size="60"><button onclick='copyFmtInstallationScript("installFmtCommand")'>Copia</button></p>
-<p>In alternativa, scaricate questo <a href="./fmtlib.zip">file zip</a>
-nella directory dell’esercizio e decomprimetelo.</p>
+<p>(Se invece usate Windows, scaricate questo <a
+href="./fmtlib.zip">file zip</a> nella directory dell’esercizio e
+decomprimetelo).</p>
 <p>Questo è il codice sorgente del programma:</p>
 <div class="sourceCode" id="cb4"><pre
 class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;posizione.h&quot;</span></span>
@@ -433,7 +435,7 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb4-1"><a href="#c
 <span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="co">// X, y e z di un punto e ne restituisce le coordinate sferiche</span></span>
 <span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="co">// e cilindiriche.</span></span>
 <span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">(</span><span class="dt">int</span> argc<span class="op">,</span> <span class="at">const</span> <span class="dt">char</span> <span class="op">*</span>argv<span class="op">[])</span> <span class="op">{</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">(</span><span class="dt">int</span> argc<span class="op">,</span> <span class="dt">char</span> <span class="op">*</span>argv<span class="op">[])</span> <span class="op">{</span></span>
 <span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Controlla gli argomenti</span></span>
 <span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> <span class="op">(</span>argc <span class="op">!=</span> <span class="dv">4</span><span class="op">)</span> <span class="op">{</span></span>
 <span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>    <span class="bu">std::</span>cerr<span class="op"> &lt;&lt;</span> <span class="st">&quot;Usage: &quot;</span> <span class="op">&lt;&lt;</span> argv<span class="op">[</span><span class="dv">0</span><span class="op">]</span> <span class="op">&lt;&lt;</span> <span class="st">&quot; &lt;x&gt; &lt;y&gt; &lt;z&gt;&quot;</span> <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span>
