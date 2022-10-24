@@ -1,7 +1,7 @@
 ---
 title: "Laboratorio di TNDS -- Lezione 4"
 author: "Maurizio Tomasi"
-date: "Martedì 26 Ottobre 2021"
+date: "Martedì 25 Ottobre 2022"
 theme: white
 progress: true
 slideNumber: true
@@ -23,8 +23,6 @@ css:
 -   Sul sito Repl.it, la lezione odierna è classificata come «5» perché in realtà inizieremo oggi ad implementare gli esercizi, ma li termineremo settimana prossima.
 
 -   Come al solito, queste slides, che forniscono suggerimenti addizionali rispetto alla lezione di teoria, sono disponibili all'indirizzo [ziotom78.github.io/tnds-tomasi-notebooks](https://ziotom78.github.io/tnds-tomasi-notebooks/).
-
--   Chi è online si colleghi a Gather tramite [questo link](https://gather.town/app/etYemzL2K4Nr4o2t/LabTNDS2022).
 
 # Esercizi per oggi
 
@@ -98,7 +96,7 @@ void test_coordinates(void) {
 ```c++
 void test_coulomb_law(void) {
   // 0.5 µC charge with no mass (irrelevant for the electric field)
-  PuntoMateriale particella1{1.0, 5e-7, 5, 3, -2, };
+  PuntoMateriale particella1{0.0, 5e-7, 5, 3, -2};
   Posizione p{-2, 4, 1};
   
   CampoVettoriale V{particella.CampoElettrico(p)};
@@ -110,7 +108,7 @@ void test_coulomb_law(void) {
 
 void test_newton_law(void) {
   // 10⁹ tonnes, without charge (irrelevant for the gravitational field)
-  PuntoMateriale particella1{1e12, 0, 5, 3, -2, };
+  PuntoMateriale particella1{1e12, 0, 5, 3, -2};
   Posizione p{-2, 4, 1};
   
   CampoVettoriale V{particella.CampoElettrico(p)};
@@ -145,32 +143,32 @@ Prova::Prova() : a{1} { // Initializer: use ":" *before* the {
 
 -   I due metodi non sono equivalenti!
 
--   Costruiamo una classe `Container` che contiene al suo interno due variabili, `a` e `b`, dello stesso tipo `Object` ma inizializzate in modo diverso:
+-   Costruiamo una classe `DaylightPeriod` che contiene al suo interno due variabili, `a` e `b`, dello stesso tipo `Object` ma inizializzate in modo diverso:
 
     ```c++
-    class Container {
+    class DaylightPeriod {
     public:
       // Pass two strings as names to distinguish the two objects
-      Container() : a{"Pippo (initializer)"} { b = Object("Pluto (assignment)"); }
+      DaylightPeriod() : dawn{"7:00"} { sunset = Time("21:00"); }
 
     private:
-      Object a, b;
+      Time dawn, sunset;
     };
     ```
 
 # Inizializzazione e assegnamento
 
-Per capire cosa succede, definiamo `Object` in modo che stampi a video un messaggio ogni volta che viene invocato un suo metodo.
+Per capire cosa succede, definiamo `Time` in modo che stampi a video un messaggio ogni volta che viene invocato un suo metodo.
 
 ```c++
-class Object {
+class Time {
 public:
-  Object() { std::cout << "Call to empty constructor\n"; }
-  Object(const char *name) {
-    std::cout << "Call to constructor for \"" << name << "\"\n";
+  Time() { std::cout << "Call to empty constructor\n"; }
+  Time(const char *time) {
+    std::cout << "Call to constructor with time \"" << time << "\"\n";
   }
 
-  void operator=(const Object &) { 
+  void operator=(const Time &) { 
     std::cout << "Call to operator=\n";
   }
 };
@@ -178,12 +176,12 @@ public:
 
 # Inizializzazione e assegnamento
 
-Se ora creiamo nel `main` una variabile `Container`, vedremo cosa
+Se ora creiamo nel `main` una variabile `DaylightPeriod`, vedremo cosa
 accade nel costruttore:
 
 ```c++
 int main(void) {
-  Container c;
+  DaylightPeriod c;
   return 0;
 }
 ```
@@ -193,23 +191,21 @@ int main(void) {
 -   L'output del programma è il seguente:
 
     ```
-    Call to constructor for "Pippo (initializer)"
+    Call to constructor with time "7:00"
     Call to empty constructor
-    Call to constructor for "Pluto (assignment)"
+    Call to constructor with time "21:00"
     Call to operator=
     ```
     
--   Ricordiamo come abbiamo definito il costruttore:
+-   Ricordiamo come abbiamo definito la classe `DaylightPeriod`, e in particolare il costruttore:
 
     ```c++
-    class Container {
+    class DaylightPeriod {
     public:
-      Container() : a{"Pippo (initializer)"} {
-          b = Object("Pluto (assignment)");
-      }
+      DaylightPeriod() : dawn{"7:00"} { sunset = Time("21:00"); }
 
     private:
-      Object a, b;
+      Time dawn, sunset;
     };
     ```
 
@@ -222,9 +218,9 @@ int main(void) {
 -   L'inizializzazione con i due punti (`:`) è **sempre** da preferire:
 
     ```c++
-    class Container {
+    class DaylightPeriod {
     public:
-      Container() : a{"Pippo"}, b{"Pluto"} { } // That's the way!
+      DaylightPeriod() : dawn{"7:00"}, sunset{"21:00"} { } // That's the way!
       
       // ...
     };
@@ -269,7 +265,7 @@ cout << setw(14) << "Nome"
 // I don't even try to continue…
 ```
 
-(`setw` viene resettato subito dopo essere stato applicato alla variabile seguente, quindi non influisce su `" | "`).
+(`setw` viene resettato subito dopo essere stato applicato al parametro seguente, quindi non influisce su `" | "`).
 
 # Formattare stringhe in C++20
 
@@ -287,13 +283,12 @@ La soluzione del problema in C++20 si scriverebbe così:
 using namespace std;
 
 int main() {
-  format::print("{0:<14} | {1:>8} | {2:>12}\n",
-                "Nome", "Intero", "Valore");
-  //            ↑ {0}   ↑ {1}     ↑ {2}
+  format::print("{0:<14} | {1:>8} | {2:>12}\n", "Nome", "Intero", "Valore");
+  //                                            ↑ {0}   ↑ {1}     ↑ {2}
   
   for (int k{}; k < 2; k++) {
-      format::print("{0:<14} | {1:>8} | {2:>12.2e}\n",
-                    s[k], i[k], f[k]);
+      format::print("{0:<14} | {1:>8} | {2:>12.2e}\n", s[k], i[k], f[k]);
+      //                                               ↑ {0} ↑ {1} ↑ {2}
   }
 }
 ```
@@ -381,8 +376,7 @@ int main() {
 
 -   Il comando `g++` sui computer del laboratorio e su Repl.it non supporta ancora lo standard C++20: solo a partire dalla versione 10 di GCC è supportato lo standard C++20, passando a `g++` il flag `-std=c++20`, ma `format` ad oggi non è ancora supportato.
 
--   La libreria di formattazione può però già essere usata scaricandola dal sito
-[github.com/fmtlib/fmt](https://github.com/fmtlib/fmt), che contiene una versione estesa della libreria, usabile anche da compilatori che non supportano il C++20 (come quelli su Repl.it o del laboratorio).
+-   La libreria di formattazione può però già essere usata scaricandola dal sito [github.com/fmtlib/fmt](https://github.com/fmtlib/fmt), che contiene una versione estesa della libreria, usabile anche da compilatori che non supportano il C++20.
 
 -   Per automatizzare l'installazione, potete scaricare (con il click destro) lo script [install_fmt_library](./install_fmt_library), da eseguire nella cartella del vostro programma:
 
@@ -399,7 +393,7 @@ int main() {
 -   La libreria installata da <a url="./install_fmt_library" download>`install_fmt_library`</a> ha alcune differenze con lo standard C++20:
 
     1. Il namespace è diverso: è `fmt::` anziché `std::format::`;
-    2. Il file da includere è diverso: `"fmt/format.h"` anziché `<format>`;
+    2. Il file da includere è diverso.
 
 -   Questa libreria offre ulteriori potenzialità rispetto a quella fornita dal C++20, e siccome al momento `g++` non supporta ancora completamente lo standard C++20, la libreria `fmt` è ancora da preferire.
 
@@ -432,13 +426,13 @@ int main() {
 
 # Chiamare Gnuplot dal C++
 
--   Siccome negli anni passati alcuni vostri colleghi avevano avuto problemi a usare REPL sui propri laptop, ho sviluppato una piccola libreria C++ che consenta di invocare Gnuplot per generare plot all'interno di programmi C++. È disponibile all'indirizzo [github.com/ziotom78/gplotpp](https://github.com/ziotom78/gplotpp).
+-   Siccome negli anni passati alcuni vostri colleghi avevano avuto problemi a usare ROOT sui propri laptop, ho sviluppato una piccola libreria C++ che consenta di invocare Gnuplot per generare plot all'interno di programmi C++. È disponibile all'indirizzo [github.com/ziotom78/gplotpp](https://github.com/ziotom78/gplotpp).
 
 -   Se avete anche voi problemi con ROOT, potete provare ad usarla: in Repl.it è molto veloce, e non appesantisce il caricamento del sito. Inoltre [funziona anche sotto Windows](https://vimeo.com/638098854), se prima [installate Gnuplot nel modo giusto](https://vimeo.com/638098416).
 
 -   Per installarla in Repl.it, basta eseguire `sh install_gplot++.h`.
 
--   Sui vostri laptop dovete invece scaricare il file [gplot++.h](https://raw.githubusercontent.com/ziotom78/gplotpp/master/gplot%2B%2B.h) nella cartella dove vi serve. Se usate Linux o Mac OS X, basta eseguire da terminale il seguente comando nella directory dove state svolgendo l'esercizio:
+-   Sui vostri laptop dovete invece scaricare il file [gplot++.h](https://raw.githubusercontent.com/ziotom78/gplotpp/master/gplot%2B%2B.h) nella cartella dove vi serve, oppure eseguite:
 
     <input type="text" value="curl 'https://raw.githubusercontent.com/ziotom78/gplotpp/master/gplot%2B%2B.h' > gplot++.h" id="installGplotpp" readonly="1" size="60"><button onclick='copyFmtInstallationScript("installGplotpp")'>Copia</button> 
 

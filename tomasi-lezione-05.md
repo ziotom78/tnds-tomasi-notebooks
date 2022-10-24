@@ -1,7 +1,7 @@
 ---
 title: Laboratorio di TNDS -- Lezione 5
 author: Maurizio Tomasi
-date: Martedì 2 Novembre 2021
+date: Martedì 8 Novembre 2022
 theme: white
 progress: true
 slideNumber: true
@@ -18,14 +18,9 @@ css:
 
 # Link alle risorse online
 
--   La spiegazione dettagliata degli esercizi si trova qui: [carminati-esercizi-05.html](carminati-esercizi-05.html). È una versione estesa del testo originale sul sito del corso, che continua a restare disponibile [al solito indirizzo](http://labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/lezione5_1819_nuova.html).
+-   La spiegazione dettagliata degli esercizi si trova qui: [carminati-esercizi-05.html](carminati-esercizi-05.html) (la stessa della settimana scorsa).
 
--   La nuova versione ha una serie di vantaggi:
-
-    #.   Ho inserito dei link agli approfondimenti mostrati in queste slide;
-    #.   Ho sistemato alcuni vecchi errori nel testo e nel codice;
-    #.   Mi sono sforzato di usare la *uniform initialization* ovunque, in modo che possiate abituarvi ad usarla (nel farlo ho scoperto un paio di bug nel testo!)
-    #.   Anche se gli esempi di codici sono selezionabili, il copia-e-incolla è disabilitato: sforzatevi di trascrivere il codice!
+-   Come al solito, queste slides, che forniscono suggerimenti addizionali rispetto alla lezione di teoria, sono disponibili all'indirizzo [ziotom78.github.io/tnds-tomasi-notebooks](https://ziotom78.github.io/tnds-tomasi-notebooks/).
 
 # Esercizi per oggi
 

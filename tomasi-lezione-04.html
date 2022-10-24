@@ -100,7 +100,7 @@
 <section id="title-slide">
   <h1 class="title">Laboratorio di TNDS – Lezione 4</h1>
   <p class="author">Maurizio Tomasi</p>
-  <p class="date">Martedì 26 Ottobre 2021</p>
+  <p class="date">Martedì 25 Ottobre 2022</p>
 </section>
 
 <section id="esercizi-per-oggi" class="slide level1">
@@ -118,9 +118,6 @@ termineremo settimana prossima.</p></li>
 addizionali rispetto alla lezione di teoria, sono disponibili
 all’indirizzo <a
 href="https://ziotom78.github.io/tnds-tomasi-notebooks/">ziotom78.github.io/tnds-tomasi-notebooks</a>.</p></li>
-<li><p>Chi è online si colleghi a Gather tramite <a
-href="https://gather.town/app/etYemzL2K4Nr4o2t/LabTNDS2022">questo
-link</a>.</p></li>
 </ul>
 </section>
 <section id="esercizi-per-oggi-1" class="slide level1">
@@ -207,7 +204,7 @@ costruttori/distruttori di classi).</p></li>
 <div class="sourceCode" id="cb5"><pre
 class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> test_coulomb_law<span class="op">(</span><span class="dt">void</span><span class="op">)</span> <span class="op">{</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="co">// 0.5 µC charge with no mass (irrelevant for the electric field)</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  PuntoMateriale particella1<span class="op">{</span><span class="fl">1.0</span><span class="op">,</span> <span class="fl">5e-7</span><span class="op">,</span> <span class="dv">5</span><span class="op">,</span> <span class="dv">3</span><span class="op">,</span> <span class="op">-</span><span class="dv">2</span><span class="op">,</span> <span class="op">};</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  PuntoMateriale particella1<span class="op">{</span><span class="fl">0.0</span><span class="op">,</span> <span class="fl">5e-7</span><span class="op">,</span> <span class="dv">5</span><span class="op">,</span> <span class="dv">3</span><span class="op">,</span> <span class="op">-</span><span class="dv">2</span><span class="op">};</span></span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  Posizione p<span class="op">{-</span><span class="dv">2</span><span class="op">,</span> <span class="dv">4</span><span class="op">,</span> <span class="dv">1</span><span class="op">};</span></span>
 <span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  CampoVettoriale V<span class="op">{</span>particella<span class="op">.</span>CampoElettrico<span class="op">(</span>p<span class="op">)};</span></span>
@@ -219,7 +216,7 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb5-1"><a href="#c
 <span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> test_newton_law<span class="op">(</span><span class="dt">void</span><span class="op">)</span> <span class="op">{</span></span>
 <span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>  <span class="co">// 10⁹ tonnes, without charge (irrelevant for the gravitational field)</span></span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>  PuntoMateriale particella1<span class="op">{</span><span class="fl">1e12</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">5</span><span class="op">,</span> <span class="dv">3</span><span class="op">,</span> <span class="op">-</span><span class="dv">2</span><span class="op">,</span> <span class="op">};</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>  PuntoMateriale particella1<span class="op">{</span><span class="fl">1e12</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">5</span><span class="op">,</span> <span class="dv">3</span><span class="op">,</span> <span class="op">-</span><span class="dv">2</span><span class="op">};</span></span>
 <span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>  Posizione p<span class="op">{-</span><span class="dv">2</span><span class="op">,</span> <span class="dv">4</span><span class="op">,</span> <span class="dv">1</span><span class="op">};</span></span>
 <span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>  CampoVettoriale V<span class="op">{</span>particella<span class="op">.</span>CampoElettrico<span class="op">(</span>p<span class="op">)};</span></span>
@@ -253,34 +250,34 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb6-1"><a href="#c
 <h1>Inizializzazione e assegnamento</h1>
 <ul>
 <li><p>I due metodi non sono equivalenti!</p></li>
-<li><p>Costruiamo una classe <code>Container</code> che contiene al suo
-interno due variabili, <code>a</code> e <code>b</code>, dello stesso
+<li><p>Costruiamo una classe <code>DaylightPeriod</code> che contiene al
+suo interno due variabili, <code>a</code> e <code>b</code>, dello stesso
 tipo <code>Object</code> ma inizializzate in modo diverso:</p>
 <div class="sourceCode" id="cb7"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Container <span class="op">{</span></span>
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> DaylightPeriod <span class="op">{</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span><span class="op">:</span></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Pass two strings as names to distinguish the two objects</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  Container<span class="op">()</span> <span class="op">:</span> a<span class="op">{</span><span class="st">&quot;Pippo (initializer)&quot;</span><span class="op">}</span> <span class="op">{</span> b <span class="op">=</span> Object<span class="op">(</span><span class="st">&quot;Pluto (assignment)&quot;</span><span class="op">);</span> <span class="op">}</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  DaylightPeriod<span class="op">()</span> <span class="op">:</span> dawn<span class="op">{</span><span class="st">&quot;7:00&quot;</span><span class="op">}</span> <span class="op">{</span> sunset <span class="op">=</span> Time<span class="op">(</span><span class="st">&quot;21:00&quot;</span><span class="op">);</span> <span class="op">}</span></span>
 <span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="kw">private</span><span class="op">:</span></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  Object a<span class="op">,</span> b<span class="op">;</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  Time dawn<span class="op">,</span> sunset<span class="op">;</span></span>
 <span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code></pre></div></li>
 </ul>
 </section>
 <section id="inizializzazione-e-assegnamento-2" class="slide level1">
 <h1>Inizializzazione e assegnamento</h1>
-<p>Per capire cosa succede, definiamo <code>Object</code> in modo che
+<p>Per capire cosa succede, definiamo <code>Time</code> in modo che
 stampi a video un messaggio ogni volta che viene invocato un suo
 metodo.</p>
 <div class="sourceCode" id="cb8"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Object <span class="op">{</span></span>
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Time <span class="op">{</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span><span class="op">:</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  Object<span class="op">()</span> <span class="op">{</span> <span class="bu">std::</span>cout<span class="op"> &lt;&lt;</span> <span class="st">&quot;Call to empty constructor</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">;</span> <span class="op">}</span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  Object<span class="op">(</span><span class="at">const</span> <span class="dt">char</span> <span class="op">*</span>name<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">std::</span>cout<span class="op"> &lt;&lt;</span> <span class="st">&quot;Call to constructor for </span><span class="sc">\&quot;</span><span class="st">&quot;</span> <span class="op">&lt;&lt;</span> name <span class="op">&lt;&lt;</span> <span class="st">&quot;</span><span class="sc">\&quot;\n</span><span class="st">&quot;</span><span class="op">;</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  Time<span class="op">()</span> <span class="op">{</span> <span class="bu">std::</span>cout<span class="op"> &lt;&lt;</span> <span class="st">&quot;Call to empty constructor</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">;</span> <span class="op">}</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  Time<span class="op">(</span><span class="at">const</span> <span class="dt">char</span> <span class="op">*</span>time<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">std::</span>cout<span class="op"> &lt;&lt;</span> <span class="st">&quot;Call to constructor with time </span><span class="sc">\&quot;</span><span class="st">&quot;</span> <span class="op">&lt;&lt;</span> time <span class="op">&lt;&lt;</span> <span class="st">&quot;</span><span class="sc">\&quot;\n</span><span class="st">&quot;</span><span class="op">;</span></span>
 <span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
 <span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>  <span class="dt">void</span> <span class="kw">operator</span><span class="op">=(</span><span class="at">const</span> Object <span class="op">&amp;)</span> <span class="op">{</span> </span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>  <span class="dt">void</span> <span class="kw">operator</span><span class="op">=(</span><span class="at">const</span> Time <span class="op">&amp;)</span> <span class="op">{</span> </span>
 <span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>    <span class="bu">std::</span>cout<span class="op"> &lt;&lt;</span> <span class="st">&quot;Call to operator=</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">;</span></span>
 <span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
 <span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code></pre></div>
@@ -288,10 +285,10 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb8-1"><a href="#c
 <section id="inizializzazione-e-assegnamento-3" class="slide level1">
 <h1>Inizializzazione e assegnamento</h1>
 <p>Se ora creiamo nel <code>main</code> una variabile
-<code>Container</code>, vedremo cosa accade nel costruttore:</p>
+<code>DaylightPeriod</code>, vedremo cosa accade nel costruttore:</p>
 <div class="sourceCode" id="cb9"><pre
 class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">(</span><span class="dt">void</span><span class="op">)</span> <span class="op">{</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  Container c<span class="op">;</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  DaylightPeriod c<span class="op">;</span></span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
 <span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 </section>
@@ -299,21 +296,20 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb9-1"><a href="#c
 <h1>Risultato</h1>
 <ul>
 <li><p>L’output del programma è il seguente:</p>
-<pre><code>Call to constructor for &quot;Pippo (initializer)&quot;
+<pre><code>Call to constructor with time &quot;7:00&quot;
 Call to empty constructor
-Call to constructor for &quot;Pluto (assignment)&quot;
+Call to constructor with time &quot;21:00&quot;
 Call to operator=</code></pre></li>
-<li><p>Ricordiamo come abbiamo definito il costruttore:</p>
+<li><p>Ricordiamo come abbiamo definito la classe
+<code>DaylightPeriod</code>, e in particolare il costruttore:</p>
 <div class="sourceCode" id="cb11"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Container <span class="op">{</span></span>
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> DaylightPeriod <span class="op">{</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span><span class="op">:</span></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  Container<span class="op">()</span> <span class="op">:</span> a<span class="op">{</span><span class="st">&quot;Pippo (initializer)&quot;</span><span class="op">}</span> <span class="op">{</span></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>      b <span class="op">=</span> Object<span class="op">(</span><span class="st">&quot;Pluto (assignment)&quot;</span><span class="op">);</span></span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="kw">private</span><span class="op">:</span></span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>  Object a<span class="op">,</span> b<span class="op">;</span></span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code></pre></div></li>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  DaylightPeriod<span class="op">()</span> <span class="op">:</span> dawn<span class="op">{</span><span class="st">&quot;7:00&quot;</span><span class="op">}</span> <span class="op">{</span> sunset <span class="op">=</span> Time<span class="op">(</span><span class="st">&quot;21:00&quot;</span><span class="op">);</span> <span class="op">}</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="kw">private</span><span class="op">:</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>  Time dawn<span class="op">,</span> sunset<span class="op">;</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code></pre></div></li>
 </ul>
 </section>
 <section id="regola-generale" class="slide level1">
@@ -328,9 +324,9 @@ con costruttore vengono inizializzati due volte.</p></li>
 <li><p>L’inizializzazione con i due punti (<code>:</code>) è
 <strong>sempre</strong> da preferire:</p>
 <div class="sourceCode" id="cb12"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Container <span class="op">{</span></span>
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> DaylightPeriod <span class="op">{</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span><span class="op">:</span></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  Container<span class="op">()</span> <span class="op">:</span> a<span class="op">{</span><span class="st">&quot;Pippo&quot;</span><span class="op">},</span> b<span class="op">{</span><span class="st">&quot;Pluto&quot;</span><span class="op">}</span> <span class="op">{</span> <span class="op">}</span> <span class="co">// That&#39;s the way!</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  DaylightPeriod<span class="op">()</span> <span class="op">:</span> dawn<span class="op">{</span><span class="st">&quot;7:00&quot;</span><span class="op">},</span> sunset<span class="op">{</span><span class="st">&quot;21:00&quot;</span><span class="op">}</span> <span class="op">{</span> <span class="op">}</span> <span class="co">// That&#39;s the way!</span></span>
 <span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="co">// ...</span></span>
 <span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code></pre></div></li>
@@ -370,8 +366,7 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb15-1"><a href="#
 <span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="co">// I don&#39;t even try to continue…</span></span></code></pre></div>
 <p>(<code>setw</code> viene resettato subito dopo essere stato applicato
-alla variabile seguente, quindi non influisce su
-<code>" | "</code>).</p>
+al parametro seguente, quindi non influisce su <code>" | "</code>).</p>
 </section>
 <section id="formattare-stringhe-in-c20" class="slide level1">
 <h1>Formattare stringhe in C++20</h1>
@@ -398,15 +393,14 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb16-1"><a href="#
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="kw">using</span> <span class="kw">namespace</span> std<span class="op">;</span></span>
 <span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>  format<span class="op">::</span>print<span class="op">(</span><span class="st">&quot;</span><span class="sc">{0:&lt;14}</span><span class="st"> | </span><span class="sc">{1:&gt;8}</span><span class="st"> | </span><span class="sc">{2:&gt;12}\n</span><span class="st">&quot;</span><span class="op">,</span></span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>                <span class="st">&quot;Nome&quot;</span><span class="op">,</span> <span class="st">&quot;Intero&quot;</span><span class="op">,</span> <span class="st">&quot;Valore&quot;</span><span class="op">);</span></span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>  <span class="co">//            ↑ {0}   ↑ {1}     ↑ {2}</span></span>
-<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> k<span class="op">{};</span> k <span class="op">&lt;</span> <span class="dv">2</span><span class="op">;</span> k<span class="op">++)</span> <span class="op">{</span></span>
-<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>      format<span class="op">::</span>print<span class="op">(</span><span class="st">&quot;</span><span class="sc">{0:&lt;14}</span><span class="st"> | </span><span class="sc">{1:&gt;8}</span><span class="st"> | </span><span class="sc">{2:&gt;12.2e}\n</span><span class="st">&quot;</span><span class="op">,</span></span>
-<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>                    s<span class="op">[</span>k<span class="op">],</span> i<span class="op">[</span>k<span class="op">],</span> f<span class="op">[</span>k<span class="op">]);</span></span>
-<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
-<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>  format<span class="op">::</span>print<span class="op">(</span><span class="st">&quot;</span><span class="sc">{0:&lt;14}</span><span class="st"> | </span><span class="sc">{1:&gt;8}</span><span class="st"> | </span><span class="sc">{2:&gt;12}\n</span><span class="st">&quot;</span><span class="op">,</span> <span class="st">&quot;Nome&quot;</span><span class="op">,</span> <span class="st">&quot;Intero&quot;</span><span class="op">,</span> <span class="st">&quot;Valore&quot;</span><span class="op">);</span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>  <span class="co">//                                            ↑ {0}   ↑ {1}     ↑ {2}</span></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> k<span class="op">{};</span> k <span class="op">&lt;</span> <span class="dv">2</span><span class="op">;</span> k<span class="op">++)</span> <span class="op">{</span></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>      format<span class="op">::</span>print<span class="op">(</span><span class="st">&quot;</span><span class="sc">{0:&lt;14}</span><span class="st"> | </span><span class="sc">{1:&gt;8}</span><span class="st"> | </span><span class="sc">{2:&gt;12.2e}\n</span><span class="st">&quot;</span><span class="op">,</span> s<span class="op">[</span>k<span class="op">],</span> i<span class="op">[</span>k<span class="op">],</span> f<span class="op">[</span>k<span class="op">]);</span></span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>      <span class="co">//                                               ↑ {0} ↑ {1} ↑ {2}</span></span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 </section>
 <section id="stdformat-in-c20-1" class="slide level1">
 <h1><code>std::format</code> in C++20</h1>
@@ -507,8 +501,7 @@ ad oggi non è ancora supportato.</p></li>
 scaricandola dal sito <a
 href="https://github.com/fmtlib/fmt">github.com/fmtlib/fmt</a>, che
 contiene una versione estesa della libreria, usabile anche da
-compilatori che non supportano il C++20 (come quelli su Repl.it o del
-laboratorio).</p></li>
+compilatori che non supportano il C++20.</p></li>
 <li><p>Per automatizzare l’installazione, potete scaricare (con il click
 destro) lo script <a
 href="./install_fmt_library">install_fmt_library</a>, da eseguire nella
@@ -530,8 +523,7 @@ ha alcune differenze con lo standard C++20:</p>
 <ol type="1">
 <li>Il namespace è diverso: è <code>fmt::</code> anziché
 <code>std::format::</code>;</li>
-<li>Il file da includere è diverso: <code>"fmt/format.h"</code> anziché
-<code>&lt;format&gt;</code>;</li>
+<li>Il file da includere è diverso.</li>
 </ol></li>
 <li><p>Questa libreria offre ulteriori potenzialità rispetto a quella
 fornita dal C++20, e siccome al momento <code>g++</code> non supporta
@@ -584,7 +576,7 @@ libreria.</li>
 <h1>Chiamare Gnuplot dal C++</h1>
 <ul>
 <li><p>Siccome negli anni passati alcuni vostri colleghi avevano avuto
-problemi a usare REPL sui propri laptop, ho sviluppato una piccola
+problemi a usare ROOT sui propri laptop, ho sviluppato una piccola
 libreria C++ che consenta di invocare Gnuplot per generare plot
 all’interno di programmi C++. È disponibile all’indirizzo <a
 href="https://github.com/ziotom78/gplotpp">github.com/ziotom78/gplotpp</a>.</p></li>
@@ -597,9 +589,7 @@ Gnuplot nel modo giusto</a>.</p></li>
 <code>sh install_gplot++.h</code>.</p></li>
 <li><p>Sui vostri laptop dovete invece scaricare il file <a
 href="https://raw.githubusercontent.com/ziotom78/gplotpp/master/gplot%2B%2B.h">gplot++.h</a>
-nella cartella dove vi serve. Se usate Linux o Mac OS X, basta eseguire
-da terminale il seguente comando nella directory dove state svolgendo
-l’esercizio:</p>
+nella cartella dove vi serve, oppure eseguite:</p>
 <p><input type="text" value="curl 'https://raw.githubusercontent.com/ziotom78/gplotpp/master/gplot%2B%2B.h' > gplot++.h" id="installGplotpp" readonly="1" size="60"><button onclick='copyFmtInstallationScript("installGplotpp")'>Copia</button></p></li>
 </ul>
 </section>

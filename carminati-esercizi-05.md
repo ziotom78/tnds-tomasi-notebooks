@@ -274,12 +274,12 @@ int main() {
   Elettrone *e{new Elettrone{}};
 
   // Metodi della classe base
-  fmt::print("Particella con massa {} e carica {}\n", a->GetMassa(),
+  fmt::print("Particella con massa {} kg e carica {} C\n", a->GetMassa(),
              a->GetCarica());
   a->Print();
 
   // Metodi della classe derivata
-  fmt::print("Elettrone con massa {} e carica {}\n", e->GetMassa(),
+  fmt::print("Elettrone con massa {} kg e carica {} C\n", e->GetMassa(),
              e->GetCarica());
   e->Print();
 
@@ -291,7 +291,7 @@ int main() {
 
 Il programma di esempio contiene un errore, lo trovate?
 
-# Esercizio 5.2 - Creazione delle classi CampoVettoriale e PuntoMateriale {#esercizio-5.2}
+# Esercizio 5.2 - Creazione delle classi `CampoVettoriale` e `PuntoMateriale` {#esercizio-5.2}
 
 Per risolvere problemi relativi all'elettrostatica o alla gravità proviamo ad effettuare una modellizzazione basata su due elementi principali: una rappresentazione del campo vettoriale e una rappresentazione delle sorgenti dei campi vettoriali.
 
@@ -448,7 +448,8 @@ Questo programma utilizza le nuove classi appena create: richiede di fornire com
 #include "fmtlib.h"         // Usa la libreria "fmt::" del C++20
 
 using namespace std;
-int main(int argc, const char * argv[]) {
+
+int main(int argc, char * argv[]) {
   if (argc != 4) {
       fmt::print(stderr, "Usage: {} <x> <y> <z>\n", argv[0]);
       exit(-1);
@@ -468,7 +469,7 @@ int main(int argc, const char * argv[]) {
   PuntoMateriale protone  {mp,  e, 0, 0, -d / 2};
 
   CampoVettoriale E{elettrone.CampoElettrico(r) + protone.CampoElettrico(r)};
-  fmt::print("E = ({}, {}, {})\n", E.getFx(), E.getFy(), E.getFz());
+  fmt::print("E = ({}, {}, {}) N/C\n", E.getFx(), E.getFy(), E.getFz());
 }
 ```
 
@@ -476,9 +477,12 @@ int main(int argc, const char * argv[]) {
 
 Potete fare riferimento a [questa spiegazione](http://labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/lezioneROOT_1819.html) per produrre un grafico dell'andamento del campo usando la classe `TGraph` di ROOT.
 
-Se invece di ROOT preferite usare [gplot++](https://github.com/ziotom78/gplotpp) per produrre un grafico di $E = E(r)$, dovete salvare le ascisse e le ordinate dei punti del grafico in due `std::vector`, e poi chiamare il metodo `Gnuplot::plot(x, y)`. Per installare il file `gplot++.h` basta eseguire da linea di comando questo script:
+In alternativa potete usare [gplot++](https://github.com/ziotom78/gplotpp), che funziona sotto Mac e Linux ed è semplice da installare anche sotto Windows. Dovete innanzitutto [installare Gnuplot](https://github.com/ziotom78/gplotpp#installing-gnuplot-and-gploth), seguendo in particolare [questa avvertenza](https://github.com/ziotom78/gplotpp#windows) se usate Windows. Una volta installato Gnuplot, scaricate nella directory del vostro esercizio il file [`gplot++.h`](https://tinyurl.com/yyoeskq7), oppure se usate Linux o Mac eseguite questa linea di comando nella directory del vostro esercizio:
 
 <input type="text" value="curl 'https://raw.githubusercontent.com/ziotom78/gplotpp/master/gplot%2B%2B.h' > gplot++.h" id="installGplotpp" readonly="1" size="60"><button onclick='copyFmtInstallationScript("installGplotpp")'>Copia</button> 
+
+
+Per produrre un grafico di $E = E(r)$ con [gplot++](https://github.com/ziotom78/gplotpp), dovete salvare le ascisse e le ordinate dei punti del grafico in due `std::vector`, e poi chiamare il metodo `Gnuplot::plot(x, y)`. 
 
 Di seguito viene riportato un esempio:
 
@@ -492,6 +496,10 @@ using namespace std;
 
 const double delta = 1e-10;
 
+// Siccome questo programma non richiede di leggere parametri dalla linea di
+// comando, non c'è bisogno di specificare "argc" e "argv". (Se lo faceste,
+// il compilatore probabilmente emetterebbe qualche tipo di warning, perché
+// l'argomento è stato dichiarato ma mai usato).
 int main() {
   vector<double> d_vec; // Vettore delle distanze (asse x)
   vector<double> E_vec; // Vettore dei moduli del campo elettrico (asse y)
@@ -528,6 +536,7 @@ int main() {
 
   plt.plot(d_vec, E_vec);
 
+  // Ricordarsi di chiamarlo, altrimenti il grafico non verrà salvato/visualizzato
   plt.show();
 }
 ```
@@ -539,7 +548,7 @@ Questo è il risultato atteso:
 Notare che la pendenza della retta sul grafico bilogaritmico è −3: per un ordine di grandezza in più sull'asse $x$ (da 10 a 100&nbsp;nm) ci sono tre ordini di grandezza in meno (da $5 \times 10^5$ a $500\,\text{N/C}$) sull'asse $y$. Questo corrisponde al fatto che se $r \gg \delta$ allora
 $$
 \left|E_\text{dipolo}(r)\right| = \left|k\frac{q^+}{(r + \delta)^2} + k\frac{q^-}{(r - \delta)^2}\right|
-= \left|k\frac{e}{(r + \delta)^2} - k\frac{e}{(r - \delta)^2}\right| \approx \frac{4 k e \delta}{r^3}.
+= \left|k\frac{e}{(r + \delta)^2} - k\frac{e}{(r - \delta)^2}\right| \approx \frac{4 k e \delta}{r^3} \propto r^{-3}.
 $$
 
 # Esercizio 5.4 - Campo di multipolo (approfondimento) {#esercizio-5.4}

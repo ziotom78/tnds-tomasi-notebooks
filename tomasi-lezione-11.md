@@ -20,7 +20,6 @@ css:
 
 -   Una soluzione degli esercizi in Julia è disponibile nel [notebook](https://ziotom78.github.io/tnds-notebooks/lezione10/) usato nella scorsa esercitazione.
 
--   Chi è online si colleghi a Gather tramite [questo link](https://gather.town/app/etYemzL2K4Nr4o2t/LabTNDS2022).
 
 # Esercizi per oggi
 
