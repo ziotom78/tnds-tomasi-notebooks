@@ -20,6 +20,9 @@ cat > "$SLUG_DIR/replit.nix" <<EOF
                 pkgs.cairo
                 pkgs.python39
                 pkgs.python39Packages.pip
+                pkgs.python39Packages.ipython
+                pkgs.python39Packages.numpy
+                pkgs.python39Packages.matplotlib
                 pkgs.python39Packages.virtualenv
                 pkgs.pandoc
                 pkgs.valgrind
