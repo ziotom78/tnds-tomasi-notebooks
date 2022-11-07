@@ -91,6 +91,15 @@ void test_coordinates(void) {
 
 -   In un vero programma l'uso di `new` e `delete` espliciti andrebbe però limitato il più possibile (e in questi pochissimi casi, andrebbe comunque usato solamente in costruttori/distruttori di classi).
 
+---
+
+<center>
+![](images/c++-advice-no-pointers.png){width=40%}
+</center>
+
+Estratto dall'articolo [C++ is the next C++](https://www.open-std.org/jtc1/sc22/wg21/docs/papers/2022/p2657r0.html), che propone una nuova «modalità» di compilazione del C++ in cui disabilitare (quasi) del tutto i puntatori.
+
+
 # Esercizio 5.3
 
 ```c++
