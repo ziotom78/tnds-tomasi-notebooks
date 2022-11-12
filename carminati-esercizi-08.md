@@ -157,7 +157,7 @@ int main (int argc, char** argv ) {
 }
 ```
 
-Come al solito, potete installare la libreria `fmtlib` usando lo script [`install_fmt_library`](./install_fmt_library): scaricatelo nella directory dell'esercizio ed eseguitelo, oppure eseguite direttamente questo comando:
+Come al solito, potete installare la libreria `fmtlib` usando lo script [`install_fmt_library`](./install_fmt_library): scaricatelo nella directory dell'esercizio ed eseguitelo con `sh install_fmt_library`, oppure eseguite direttamente questo comando:
 
 <input type="text" value="curl https://ziotom78.github.io/tnds-tomasi-notebooks/install_fmt_library | sh" id="installFmtCommand" readonly="1" size="60"><button onclick='copyFmtInstallationScript("installFmtCommand")'>Copia</button> 
 
