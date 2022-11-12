@@ -16,6 +16,7 @@ cat > "$SLUG_DIR/replit.nix" <<EOF
                 pkgs.gnumake
                 pkgs.cmake
                 pkgs.conan
+                pkgs.meson
                 pkgs.gsl
                 pkgs.cairo
                 pkgs.python39
