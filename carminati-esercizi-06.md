@@ -189,7 +189,7 @@ e seguite poi le istruzioni fornite a video.
 
 In alternativa, scaricate manualmente lo script [`install_fmt_library`](./install_fmt_library) (click col tasto destro sul link e scegliere «Salva come…») ed avviatelo con `sh install_fmt_library`. Lo script funziona solo sotto Linux e Mac; se usate Windows, scaricate questo [file zip](./fmtlib.zip) nella directory dell'esercizio e decomprimetelo.
 
-Le istruzioni dettagliate sono qui: <https://ziotom78.github.io/tnds-tomasi-notebooks/index.html#fmtinstall>.
+Le istruzioni dettagliate sono qui: <index.html#fmtinstall>.
 
 
 ## La funzione segno
