@@ -169,8 +169,9 @@ Per cui per impostare il numero di cifre significative nella scrittura a video i
 ```c++
 #include "fmtlib.h"
 
-// {0} → valore di `zero`, {1} → valore di `cifre_significative`
-// Si deve mettere il punto prima di {1} per indicare le cifre dopo la virgola
+// {0} → value of variable `zero`, {1} → value of variable `cifre_significative`
+// We must use a dot '.' before {1}, because we're specifying how many digits
+// should be used for the decimal part
 fmt::print("x0 = {0:.{1}f}", zero, cifre_significative);
 ```
 
@@ -187,6 +188,8 @@ Potete installare la libreria `fmtlib` eseguendo questo comando:
 e seguite poi le istruzioni fornite a video.
 
 In alternativa, scaricate manualmente lo script [`install_fmt_library`](./install_fmt_library) (click col tasto destro sul link e scegliere «Salva come…») ed avviatelo con `sh install_fmt_library`. Lo script funziona solo sotto Linux e Mac; se usate Windows, scaricate questo [file zip](./fmtlib.zip) nella directory dell'esercizio e decomprimetelo.
+
+Le istruzioni dettagliate sono qui: <https://ziotom78.github.io/tnds-tomasi-notebooks/index.html#fmtinstall>.
 
 
 ## La funzione segno

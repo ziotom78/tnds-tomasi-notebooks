@@ -123,7 +123,7 @@ Questo programma utilizza la nuova classe appena creata: richiede di fornire com
 
 <input type="text" value="curl https://ziotom78.github.io/tnds-tomasi-notebooks/install_fmt_library | sh" id="installFmtCommand" readonly="1" size="60"><button onclick='copyFmtInstallationScript("installFmtCommand")'>Copia</button> 
 
-(Se invece usate Windows, scaricate questo [file zip](./fmtlib.zip) nella directory dell'esercizio e decomprimetelo).
+(Se invece usate Windows, scaricate questo [file zip](./fmtlib.zip) nella directory dell'esercizio e decomprimetelo). Le istruzioni dettagliate sono qui: <https://ziotom78.github.io/tnds-tomasi-notebooks/index.html#fmtinstall>.
 
 Questo è il codice sorgente del programma:
 

@@ -445,9 +445,10 @@ scrittura a video il codice sarà</p>
 <div class="sourceCode" id="cb6"><pre
 class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;fmtlib.h&quot;</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co">// {0} → valore di `zero`, {1} → valore di `cifre_significative`</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co">// Si deve mettere il punto prima di {1} per indicare le cifre dopo la virgola</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>fmt<span class="op">::</span>print<span class="op">(</span><span class="st">&quot;x0 = </span><span class="sc">{0:.{1}f}</span><span class="st">&quot;</span><span class="op">,</span> zero<span class="op">,</span> cifre_significative<span class="op">);</span></span></code></pre></div>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co">// {0} → value of variable `zero`, {1} → value of variable `cifre_significative`</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co">// We must use a dot &#39;.&#39; before {1}, because we&#39;re specifying how many digits</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co">// should be used for the decimal part</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>fmt<span class="op">::</span>print<span class="op">(</span><span class="st">&quot;x0 = </span><span class="sc">{0:.{1}f}</span><span class="st">&quot;</span><span class="op">,</span> zero<span class="op">,</span> cifre_significative<span class="op">);</span></span></code></pre></div>
 <p>se usate la libreria <code>fmtlib.h</code>, oppure, se usate
 <code>cout</code> e <code>&lt;iomanip&gt;</code>:</p>
 <div class="sourceCode" id="cb7"><pre
@@ -462,6 +463,9 @@ col tasto destro sul link e scegliere «Salva come…») ed avviatelo con
 <code>sh install_fmt_library</code>. Lo script funziona solo sotto Linux
 e Mac; se usate Windows, scaricate questo <a href="./fmtlib.zip">file
 zip</a> nella directory dell’esercizio e decomprimetelo.</p>
+<p>Le istruzioni dettagliate sono qui: <a
+href="https://ziotom78.github.io/tnds-tomasi-notebooks/index.html#fmtinstall"
+class="uri">https://ziotom78.github.io/tnds-tomasi-notebooks/index.html#fmtinstall</a>.</p>
 <h2 id="la-funzione-segno">La funzione segno</h2>
 <p>La funzione <code>sign(x)</code> non è codificata nelle cstdlib,
 poiché l’informazione sul segno è già contenuta nella variabile di tipo
