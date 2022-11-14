@@ -393,7 +393,7 @@ int main() {
     sh install_fmt_library
     ```
 
--   La libreria `fmt` supporta anche i colori, come mostrato nell'animazione seguente.
+-   La libreria `fmt` supporta anche i [colori](https://fmt.dev/latest/api.html#terminal-color-and-text-style), come mostrato nell'animazione seguente.
 
 ---
 
