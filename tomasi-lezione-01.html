@@ -368,12 +368,19 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb7-1"><a href="#c
 <h1>Significato di argc e argv (1/2)</h1>
 <ul>
 <li><p>Il primo parametro (<code>argc</code>) contiene il numero di
-parametri, <strong>incluso il nome dell’eseguibile</strong>, mentre
-<code>argv</code> è una lista di puntatori a caratteri (ossia stringhe)
-che contengono il nome dell’eseguibile seguito dal resto.</p></li>
-<li><p>Esempio:</p>
-<p><asciinema-player src="asciinema/argc-argv-60×13.asciinema" cols="60" rows="13" font-size="medium"></asciinema-player></p></li>
+parametri, <strong>incluso il nome dell’eseguibile</strong>.</p></li>
+<li><p>Il parametro <code>argv</code> è una lista di puntatori a
+caratteri (ossia stringhe) che contengono il nome dell’eseguibile
+seguito dal resto.</p></li>
+<li><p>Di conseguenza, <code>argv[0]</code> contiene il nome del
+programma eseguibile, mentre tutti i parametri passati da linea di
+comando sono memorizzati in <code>argv[1]</code>, <code>argv[2]</code>,
+etc.</p></li>
 </ul>
+</section>
+<section class="slide level1">
+
+<p><asciinema-player src="asciinema/argc-argv-79x19.asciinema" cols="79" rows="19" font-size="medium"></asciinema-player></p>
 </section>
 <section id="significato-di-argc-e-argv-12-1" class="slide level1">
 <h1>Significato di argc e argv (1/2)</h1>

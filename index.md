@@ -4,6 +4,8 @@ author: Maurizio Tomasi
 date: A.A. 2022−2023
 lang: it-IT
 header-includes: <script src="./fmtinstall.js"></script>
+css:
+- ./css/asciinema-player.css
 ...
 
 # Esercizi e delle spiegazioni
@@ -50,6 +52,12 @@ curl https://ziotom78.github.io/tnds-tomasi-notebooks/install_fmt_library | sh
 ```
 
 In alternativa, scaricate questo [file zip](./fmtlib.zip) nella directory dell'esercizio e decomprimetelo. La libreria occupa molto poco spazio, quindi potete copiarla in ogni cartella in cui implementate un esercizio.
+
+Questo è un esempio che mostra come installare ed usare la libreria:
+
+<center>
+<asciinema-player src="asciinema/install-fmt-94x25.cast" cols="94" rows="25" font-size="medium"></asciinema-player>
+</center>
 
 ## Gplot++ {#gplotinstall}
 

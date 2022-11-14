@@ -215,12 +215,15 @@ dal terminale:
 
 # Significato di argc e argv (1/2)
 
--   Il primo parametro (`argc`) contiene il numero di
-parametri, **incluso il nome dell'eseguibile**, mentre `argv` è una lista di puntatori a caratteri (ossia stringhe) che contengono il nome dell'eseguibile seguito dal resto.
+-   Il primo parametro (`argc`) contiene il numero di parametri, **incluso il nome dell'eseguibile**.
 
--   Esempio:
+-   Il parametro `argv` è una lista di puntatori a caratteri (ossia stringhe) che contengono il nome dell'eseguibile seguito dal resto.
 
-    <asciinema-player src="asciinema/argc-argv-60×13.asciinema" cols="60" rows="13" font-size="medium"></asciinema-player>
+-   Di conseguenza, `argv[0]` contiene il nome del programma eseguibile, mentre tutti i parametri passati da linea di comando sono memorizzati in `argv[1]`, `argv[2]`, etc.
+
+---
+
+<asciinema-player src="asciinema/argc-argv-79x19.asciinema" cols="79" rows="19" font-size="medium"></asciinema-player>
 
 ---
 

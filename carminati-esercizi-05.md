@@ -477,7 +477,7 @@ int main(int argc, char * argv[]) {
 
 Potete fare riferimento a [questa spiegazione](http://labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/lezioneROOT_1819.html) per produrre un grafico dell'andamento del campo usando la classe `TGraph` di ROOT.
 
-In alternativa potete usare [gplot++](https://github.com/ziotom78/gplotpp), che funziona sotto Mac e Linux ed è semplice da installare anche sotto Windows. Dovete innanzitutto [installare Gnuplot](https://github.com/ziotom78/gplotpp#installing-gnuplot-and-gploth), seguendo in particolare [questa avvertenza](https://github.com/ziotom78/gplotpp#windows) se usate Windows. Una volta installato Gnuplot, scaricate nella directory del vostro esercizio il file [`gplot++.h`](https://tinyurl.com/yyoeskq7), oppure se usate Linux o Mac eseguite questa linea di comando nella directory del vostro esercizio:
+In alternativa potete usare [gplot++](https://github.com/ziotom78/gplotpp), che funziona sotto Mac e Linux ed è semplice da installare anche sotto Windows. Dovete innanzitutto [installare Gnuplot](https://github.com/ziotom78/gplotpp#installing-gnuplot-and-gploth), seguendo in particolare [questa avvertenza](https://github.com/ziotom78/gplotpp#windows) se usate Windows. Una volta installato Gnuplot, scaricate nella directory del vostro esercizio il file [`gplot++.h`](https://raw.githubusercontent.com/ziotom78/gplotpp/master/gplot%2B%2B.h), oppure se usate Linux o Mac eseguite questa linea di comando nella directory del vostro esercizio:
 
 <input type="text" value="curl 'https://raw.githubusercontent.com/ziotom78/gplotpp/master/gplot%2B%2B.h' > gplot++.h" id="installGplotpp" readonly="1" size="60"><button onclick='copyFmtInstallationScript("installGplotpp")'>Copia</button> 
 

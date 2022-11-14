@@ -395,7 +395,7 @@ int main() {
 
 ---
 
-<asciinema-player src="asciinema/install-fmt-91×23.cast" cols="91" rows="23" font-size="medium"></asciinema-player>
+<asciinema-player src="asciinema/install-fmt-94x25.cast" cols="94" rows="25" font-size="medium"></asciinema-player>
 
 # Differenze tra `format` e il futuro C++20
 

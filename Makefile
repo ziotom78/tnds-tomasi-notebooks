@@ -23,7 +23,11 @@ all: \
 	index.html
 
 index.html: index.md
-	$(PANDOC) --standalone -o $@ $<
+	$(PANDOC) \
+		--standalone \
+		-A asciinema-include.html \
+		-o $@ \
+		$<
 
 carminati-esercizi-%.html: carminati-esercizi-%.md
 	$(PANDOC) \
