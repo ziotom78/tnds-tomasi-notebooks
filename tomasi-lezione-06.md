@@ -1,7 +1,7 @@
 ---
 title: "Laboratorio di TNDS -- Lezione 6"
 author: "Maurizio Tomasi"
-date: "Martedì 9 Novembre 2021"
+date: "Martedì 15 Novembre 2022"
 theme: "white"
 progress: true
 slideNumber: true
@@ -34,9 +34,11 @@ css:
 
 # Metodi virtuali
 
-Al momento, l'unico modo in cui il C++ implementa il polimorfismo durante l'esecuzione è attraverso i metodi `virtual`. (I template permettono polimorfismo in fase di compilazione, e sono quindi usati in ambiti diversi).
+-   Al momento, l'unico modo in cui il C++ implementa il polimorfismo durante l'esecuzione è attraverso i metodi `virtual`.
 
-Una classe derivata può ridefinire uno dei metodi della classe genitore se questo è indicato come `virtual`, usando la parola chiave [`override`](https://www.fluentcpp.com/2020/02/21/virtual-final-and-override-in-cpp/).
+-   (I template permettono polimorfismo in fase di compilazione, e sono quindi usati in ambiti diversi).
+
+-   Una classe derivata può ridefinire uno dei metodi della classe genitore se questo è indicato come `virtual`, usando la parola chiave [`override`](https://www.fluentcpp.com/2020/02/21/virtual-final-and-override-in-cpp/).
 
 # Uso di metodi virtuali
 
@@ -233,9 +235,9 @@ test.cpp:15:8: error: ‘void Cat::greet()’ marked ‘override’, but does no
     ```c++
     // First option: DON'T DO THIS!
     void greet() const;
-    // Second option: SCONSIGLIATA!
+    // Second option: DON'T DO THIS!
     virtual void greet() const;
-    // Third option: ok, but too verbose
+    // Third option: ok but verbose
     virtual void greet() const override;
     // Fourth option: the best! It prevents errors and it's concise
     void greet() const override;
@@ -254,10 +256,10 @@ test.cpp:15:8: error: ‘void Cat::greet()’ marked ‘override’, but does no
     Particella * c{new Elettrone{}};
     ```
 
--   È indispensabile usare puntatori (o reference) quando avviene questo:
+-   Si usano puntatori (o reference) quando avviene questo:
 
-   1.   Si crea una variabile di un tipo base (`Particella`)…
-   2.   …ma poi le si vuole assegnare una variabile di un tipo derivato (`Elettrone`).
+    1.   Si crea una variabile di un tipo base (`Particella`)…
+    2.   …ma poi le si vuole assegnare una variabile di un tipo derivato (`Elettrone`).
    
 # Quando usare puntatori
 
@@ -302,10 +304,10 @@ $$
 # Verifica dell'algoritmo
 
 ```c++
-// You might even pass a pointer to `Solutore * s` and call in `main`
-//     test_zeroes(new Bisezione{});
-//     test_zeroes(new Secante{});
-//     test_zeroes(new Newton{});
+// You might even pass a reference to `Solutore & s` and call in `main`
+//     test_zeroes(Bisezione{});
+//     test_zeroes(Secante{});
+//     test_zeroes(Newton{});
 void test_zeroes() {
   Bisezione s{};
   Parabola f{3, 5, -2}; // Zeroes for this function are known: x₁ = −2, x₂ = 1/3

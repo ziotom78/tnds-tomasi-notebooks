@@ -118,7 +118,7 @@
 <section id="title-slide">
   <h1 class="title">Laboratorio di TNDS – Lezione 6</h1>
   <p class="author">Maurizio Tomasi</p>
-  <p class="date">Martedì 9 Novembre 2021</p>
+  <p class="date">Martedì 15 Novembre 2022</p>
 </section>
 
 <section id="link-alle-risorse-online" class="slide level1">
@@ -155,14 +155,17 @@ consegnare</strong>)</li>
 </section>
 <section id="metodi-virtuali" class="slide level1">
 <h1>Metodi virtuali</h1>
-<p>Al momento, l’unico modo in cui il C++ implementa il polimorfismo
-durante l’esecuzione è attraverso i metodi <code>virtual</code>. (I
-template permettono polimorfismo in fase di compilazione, e sono quindi
-usati in ambiti diversi).</p>
-<p>Una classe derivata può ridefinire uno dei metodi della classe
+<ul>
+<li><p>Al momento, l’unico modo in cui il C++ implementa il polimorfismo
+durante l’esecuzione è attraverso i metodi
+<code>virtual</code>.</p></li>
+<li><p>(I template permettono polimorfismo in fase di compilazione, e
+sono quindi usati in ambiti diversi).</p></li>
+<li><p>Una classe derivata può ridefinire uno dei metodi della classe
 genitore se questo è indicato come <code>virtual</code>, usando la
 parola chiave <a
-href="https://www.fluentcpp.com/2020/02/21/virtual-final-and-override-in-cpp/"><code>override</code></a>.</p>
+href="https://www.fluentcpp.com/2020/02/21/virtual-final-and-override-in-cpp/"><code>override</code></a>.</p></li>
+</ul>
 </section>
 <section id="uso-di-metodi-virtuali" class="slide level1">
 <h1>Uso di metodi virtuali</h1>
@@ -359,9 +362,9 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb11-1"><a href="#
 <div class="sourceCode" id="cb12"><pre
 class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co">// First option: DON&#39;T DO THIS!</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> greet<span class="op">()</span> <span class="at">const</span><span class="op">;</span></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co">// Second option: SCONSIGLIATA!</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co">// Second option: DON&#39;T DO THIS!</span></span>
 <span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="kw">virtual</span> <span class="dt">void</span> greet<span class="op">()</span> <span class="at">const</span><span class="op">;</span></span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="co">// Third option: ok, but too verbose</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="co">// Third option: ok but verbose</span></span>
 <span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="kw">virtual</span> <span class="dt">void</span> greet<span class="op">()</span> <span class="at">const</span> <span class="kw">override</span><span class="op">;</span></span>
 <span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="co">// Fourth option: the best! It prevents errors and it&#39;s concise</span></span>
 <span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> greet<span class="op">()</span> <span class="at">const</span> <span class="kw">override</span><span class="op">;</span></span></code></pre></div></li>
@@ -380,15 +383,14 @@ oggi si usano i puntatori nel seguente codice:</p>
 class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>Particella <span class="op">*</span> a<span class="op">{</span><span class="kw">new</span> Particella<span class="op">{</span><span class="fl">1.</span><span class="op">,</span> <span class="fl">2.</span><span class="op">}};</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>Elettrone <span class="op">*</span> b<span class="op">{</span><span class="kw">new</span> Elettrone<span class="op">{}};</span></span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>Particella <span class="op">*</span> c<span class="op">{</span><span class="kw">new</span> Elettrone<span class="op">{}};</span></span></code></pre></div></li>
-<li><p>È indispensabile usare puntatori (o reference) quando avviene
-questo:</p></li>
-</ul>
+<li><p>Si usano puntatori (o reference) quando avviene questo:</p>
 <ol type="1">
 <li>Si crea una variabile di un tipo base
 (<code>Particella</code>)…</li>
 <li>…ma poi le si vuole assegnare una variabile di un tipo derivato
 (<code>Elettrone</code>).</li>
-</ol>
+</ol></li>
+</ul>
 </section>
 <section id="quando-usare-puntatori-1" class="slide level1">
 <h1>Quando usare puntatori</h1>
@@ -433,10 +435,10 @@ x_{1/2} = \frac{-5 \pm \sqrt{25 + 24}}6 = \begin{cases} -2,\\ \frac13.
 <section id="verifica-dellalgoritmo-1" class="slide level1">
 <h1>Verifica dell’algoritmo</h1>
 <div class="sourceCode" id="cb17"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co">// You might even pass a pointer to `Solutore * s` and call in `main`</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="co">//     test_zeroes(new Bisezione{});</span></span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="co">//     test_zeroes(new Secante{});</span></span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="co">//     test_zeroes(new Newton{});</span></span>
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co">// You might even pass a reference to `Solutore &amp; s` and call in `main`</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="co">//     test_zeroes(Bisezione{});</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="co">//     test_zeroes(Secante{});</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="co">//     test_zeroes(Newton{});</span></span>
 <span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> test_zeroes<span class="op">()</span> <span class="op">{</span></span>
 <span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>  Bisezione s<span class="op">{};</span></span>
 <span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>  Parabola f<span class="op">{</span><span class="dv">3</span><span class="op">,</span> <span class="dv">5</span><span class="op">,</span> <span class="op">-</span><span class="dv">2</span><span class="op">};</span> <span class="co">// Zeroes for this function are known: x₁ = −2, x₂ = 1/3</span></span>
