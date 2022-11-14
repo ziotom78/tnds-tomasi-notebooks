@@ -339,6 +339,7 @@ void test_zeroes() {
     sign(f(a)) * sign(f(b)) < 0
     ```
 
+
 # Uso di NaN {#use-of-nan}
 
 # Condizioni d'errore

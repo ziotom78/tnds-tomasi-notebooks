@@ -310,9 +310,9 @@ int main() {
 
     1. La posizione del parametro che contiene il valore, partendo da zero (`2`);
     2. I due punti (`:`);
-    3. Eventualmente `<` o `>` per specificare l'allineamento a sinistra o destra;
+    3. Eventualmente `<`, `^` o `>` allineare a sinistra, centro, o destra;
     4. Il numero di caratteri, ed eventualmente le cifre dopo la virgola (`12.2`);
-    5. Se necessario, una lettera che identifichi il tipo («`e`»: notazione scientifica, «`f`»: float, «`s`»: stringa, «`c`»: carattere, etc.)
+    5. Se necessario, una lettera che identifichi il tipo («`e`»: notazione scientifica, «`f`»: float, «`s`»: stringa, «`c`»: carattere, etc.).
 
 # Numero di caratteri
 
@@ -383,7 +383,7 @@ int main() {
 
 # Il futuro… ora!
 
--   Il comando `g++` sui computer del laboratorio e su Repl.it non supporta ancora lo standard C++20: solo a partire dalla versione 10 di GCC è supportato lo standard C++20, passando a `g++` il flag `-std=c++20`, ma `format` ad oggi non è ancora supportato.
+-   Il comando `g++` sui computer del laboratorio e su Repl.it non supporta ancora la libreria `format`.
 
 -   La libreria di formattazione può però già essere usata scaricandola dal sito [github.com/fmtlib/fmt](https://github.com/fmtlib/fmt), che contiene una versione estesa della libreria, usabile anche da compilatori che non supportano il C++20.
 
@@ -392,6 +392,8 @@ int main() {
     ```
     sh install_fmt_library
     ```
+
+-   La libreria `fmt` supporta anche i colori, come mostrato nell'animazione seguente.
 
 ---
 

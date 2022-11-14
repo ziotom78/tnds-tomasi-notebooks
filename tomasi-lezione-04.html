@@ -425,13 +425,13 @@ indica questo:</p>
 <li>La posizione del parametro che contiene il valore, partendo da zero
 (<code>2</code>);</li>
 <li>I due punti (<code>:</code>);</li>
-<li>Eventualmente <code>&lt;</code> o <code>&gt;</code> per specificare
-l’allineamento a sinistra o destra;</li>
+<li>Eventualmente <code>&lt;</code>, <code>^</code> o <code>&gt;</code>
+allineare a sinistra, centro, o destra;</li>
 <li>Il numero di caratteri, ed eventualmente le cifre dopo la virgola
 (<code>12.2</code>);</li>
 <li>Se necessario, una lettera che identifichi il tipo
 («<code>e</code>»: notazione scientifica, «<code>f</code>»: float,
-«<code>s</code>»: stringa, «<code>c</code>»: carattere, etc.)</li>
+«<code>s</code>»: stringa, «<code>c</code>»: carattere, etc.).</li>
 </ol></li>
 </ul>
 </section>
@@ -503,10 +503,7 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb21-1"><a href="#
 <h1>Il futuro… ora!</h1>
 <ul>
 <li><p>Il comando <code>g++</code> sui computer del laboratorio e su
-Repl.it non supporta ancora lo standard C++20: solo a partire dalla
-versione 10 di GCC è supportato lo standard C++20, passando a
-<code>g++</code> il flag <code>-std=c++20</code>, ma <code>format</code>
-ad oggi non è ancora supportato.</p></li>
+Repl.it non supporta ancora la libreria <code>format</code>.</p></li>
 <li><p>La libreria di formattazione può però già essere usata
 scaricandola dal sito <a
 href="https://github.com/fmtlib/fmt">github.com/fmtlib/fmt</a>, che
@@ -517,6 +514,8 @@ destro) lo script <a
 href="./install_fmt_library">install_fmt_library</a>, da eseguire nella
 cartella del vostro programma:</p>
 <pre><code>sh install_fmt_library</code></pre></li>
+<li><p>La libreria <code>fmt</code> supporta anche i colori, come
+mostrato nell’animazione seguente.</p></li>
 </ul>
 </section>
 <section class="slide level1">
