@@ -45,7 +45,9 @@ Una volta eseguito, ROOT e Gnuplot, più altri utili programmi, saranno installa
 
 ## Uso della libreria `fmt` {#fmtinstall}
 
-Siete invitati ad impratichirvi con la libreria `fmt`, che potete installare usando lo script [`install_fmt_library`](./install_fmt_library): si esegue con il comando `sh install_fmt_library`. È già fornito nei template degli esercizi forniti per il turno T2, ma potete installarlo anche in altre Repl con questo comando:
+Siete invitati ad impratichirvi con la libreria `fmt`, che potete installare usando lo script [`install_fmt_library`](./install_fmt_library): si esegue con il comando `sh install_fmt_library`, e il comando **va eseguito nella directory in cui avete i vostri codici!**.
+
+Lo script `install_fmt_library` è già fornito nei template degli esercizi forniti per il turno T2, ma potete installarlo anche in altre Repl con questo comando:
 
 ```
 curl https://ziotom78.github.io/tnds-tomasi-notebooks/install_fmt_library | sh

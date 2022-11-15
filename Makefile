@@ -26,6 +26,7 @@ index.html: index.md
 	$(PANDOC) \
 		--standalone \
 		-A asciinema-include.html \
+                --template ./template.html5 \
 		-o $@ \
 		$<
 
