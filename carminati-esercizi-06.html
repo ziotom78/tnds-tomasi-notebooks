@@ -463,8 +463,8 @@ col tasto destro sul link e scegliere «Salva come…») ed avviatelo con
 <code>sh install_fmt_library</code>. Lo script funziona solo sotto Linux
 e Mac; se usate Windows, scaricate questo <a href="./fmtlib.zip">file
 zip</a> nella directory dell’esercizio e decomprimetelo.</p>
-<p>Le istruzioni dettagliate sono qui:
-&lt;index.html#fmtinstall&gt;.</p>
+<p>Le istruzioni dettagliate sono qui: <a
+href="index.html#fmtinstall">index.html#fmtinstall</a>.</p>
 <h2 id="la-funzione-segno">La funzione segno</h2>
 <p>La funzione <code>sign(x)</code> non è codificata nelle cstdlib,
 poiché l’informazione sul segno è già contenuta nella variabile di tipo
@@ -474,30 +474,33 @@ però disponibile la funzione <code>std::copysign</code>, definita in
 <code>double</code> in un valore. Si può quindi usare questa
 definizione:]</p>
 <div class="sourceCode" id="cb8"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> sign<span class="op">(</span><span class="dt">double</span> x<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Questa chiamata a copysign ritorna ±1.0 a seconda</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">// del segno di x, oppure zero se x == 0</span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> x <span class="op">!=</span> <span class="dv">0</span> <span class="op">?</span> <span class="bu">std::</span>copysign<span class="op">(</span><span class="fl">1.0</span><span class="op">,</span> x<span class="op">)</span> <span class="op">:</span> <span class="fl">0.0</span><span class="op">;</span></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Use &quot;inline&quot; if you&#39;re going to put this definition in a .h file!</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="kw">inline</span> <span class="dt">double</span> sign<span class="op">(</span><span class="dt">double</span> x<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Questa chiamata a copysign ritorna ±1.0 a seconda</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">// del segno di x, oppure zero se x == 0</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> x <span class="op">!=</span> <span class="dv">0</span> <span class="op">?</span> <span class="bu">std::</span>copysign<span class="op">(</span><span class="fl">1.0</span><span class="op">,</span> x<span class="op">)</span> <span class="op">:</span> <span class="fl">0.0</span><span class="op">;</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 <p>[Notare che la funzione restituisce zero se <code>x</code> è
 zero].</p>
 <p>Una semplice implementazione della funzione segno è</p>
 <div class="sourceCode" id="cb9"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> sign<span class="op">(</span><span class="dt">double</span> x<span class="op">){</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span><span class="op">(</span>x <span class="op">&lt;</span> <span class="dv">0</span><span class="op">)</span></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>      <span class="cf">return</span> <span class="op">-</span><span class="dv">1</span><span class="op">;</span></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">else</span> <span class="cf">if</span> <span class="op">(</span>x <span class="op">&gt;</span> <span class="dv">0</span><span class="op">)</span></span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>     <span class="cf">return</span> <span class="dv">1</span><span class="op">;</span></span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Same as above</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="kw">inline</span> <span class="dt">double</span> sign<span class="op">(</span><span class="dt">double</span> x<span class="op">){</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span><span class="op">(</span>x <span class="op">&lt;</span> <span class="dv">0</span><span class="op">)</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>      <span class="cf">return</span> <span class="op">-</span><span class="dv">1</span><span class="op">;</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="cf">else</span> <span class="cf">if</span> <span class="op">(</span>x <span class="op">&gt;</span> <span class="dv">0</span><span class="op">)</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>     <span class="cf">return</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 <p>[Anche questa funzione restituisce zero se <code>x</code> è
 zero].</p>
 <p>Una implementazione molto più compatta [però meno leggibile] è</p>
 <div class="sourceCode" id="cb10"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> sign<span class="op">(</span><span class="dt">double</span> x<span class="op">){</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="op">(</span>x <span class="op">==</span> <span class="fl">0.</span> <span class="op">?</span> <span class="fl">0.</span> <span class="op">:</span> <span class="op">(</span>x <span class="op">&gt;</span> <span class="dv">0</span> <span class="op">?</span> <span class="fl">1.</span> <span class="op">:</span> <span class="op">-</span><span class="dv">1</span><span class="op">));</span></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code></pre></div>
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Same as above</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="kw">inline</span> <span class="dt">double</span> sign<span class="op">(</span><span class="dt">double</span> x<span class="op">){</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="op">(</span>x <span class="op">==</span> <span class="fl">0.</span> <span class="op">?</span> <span class="fl">0.</span> <span class="op">:</span> <span class="op">(</span>x <span class="op">&gt;</span> <span class="dv">0</span> <span class="op">?</span> <span class="fl">1.</span> <span class="op">:</span> <span class="op">-</span><span class="dv">1</span><span class="op">));</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code></pre></div>
 <p>Usando una qualsiasi di queste funzioni, la condizione richiesta
 dall’algoritmo di bisezione sarà</p>
 <div class="sourceCode" id="cb11"><pre
@@ -505,8 +508,8 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb11-1"><a href="#
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> sign_b<span class="op">{</span>sign<span class="op">(</span>f<span class="op">(</span>b<span class="op">))};</span></span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> sign_c<span class="op">{</span>sign<span class="op">(</span>f<span class="op">(</span>c<span class="op">))};</span></span>
 <span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="co">// Verificare se sign_a, sign_b, o sign_c sono nulli: in quel</span></span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="co">// caso abbiamo già trovato lo zero!</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="co">// Check whether sign_a, sign_b, or sign_c are zero: in that case,</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="co">// we&#39;ve already got the root!</span></span>
 <span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="co">// ...</span></span>
 <span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span><span class="op">(</span>sign_a <span class="op">*</span> sign_c <span class="op">&lt;</span> <span class="dv">0</span><span class="op">)</span> <span class="op">{</span></span>
@@ -539,26 +542,27 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb12-1"><a href="#
 <span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  Solutore<span class="op">(</span><span class="dt">double</span> prec<span class="op">);</span></span>
 <span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="kw">virtual</span> <span class="op">~</span>Solutore<span class="op">()</span> <span class="op">{}</span></span>
 <span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>  <span class="co">// A scopo illustrativo, trovate qui due definizioni: una con il puntatore </span></span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>  <span class="co">// FunzioneBase *, e una con il reference FunzioneBase &amp;.</span></span>
-<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Nel vostro codice ne basta una sola, meglio col reference</span></span>
-<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>  <span class="kw">virtual</span> <span class="dt">double</span> CercaZeriPointer<span class="op">(</span><span class="dt">double</span> xmin<span class="op">,</span> <span class="dt">double</span> xmax<span class="op">,</span> <span class="at">const</span> FunzioneBase <span class="op">*</span> f<span class="op">,</span></span>
-<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>                                  <span class="dt">double</span> prec <span class="op">=</span> <span class="fl">1e-3</span><span class="op">,</span> <span class="dt">unsigned</span> <span class="dt">int</span> nmax <span class="op">=</span> <span class="dv">100</span><span class="op">)</span> <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>  <span class="kw">virtual</span> <span class="dt">double</span> CercaZeriReference<span class="op">(</span><span class="dt">double</span> xmin<span class="op">,</span> <span class="dt">double</span> xmax<span class="op">,</span> <span class="at">const</span> FunzioneBase <span class="op">&amp;</span> f<span class="op">,</span></span>
-<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>                                    <span class="dt">double</span> prec <span class="op">=</span> <span class="fl">1e-3</span><span class="op">,</span> <span class="dt">unsigned</span> <span class="dt">int</span> nmax <span class="op">=</span> <span class="dv">100</span><span class="op">)</span> <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>  <span class="dt">void</span> SetPrecisione<span class="op">(</span><span class="dt">double</span> epsilon<span class="op">)</span> <span class="op">{</span> <span class="va">m_prec</span> <span class="op">=</span> epsilon<span class="op">;</span> <span class="op">}</span></span>
-<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> GetPrecisione<span class="op">()</span> <span class="at">const</span> <span class="op">{</span> <span class="cf">return</span> <span class="va">m_prec</span><span class="op">;}</span></span>
-<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>  <span class="dt">void</span> SetNMaxIterations<span class="op">(</span><span class="dt">unsigned</span> <span class="dt">int</span> n<span class="op">)</span> <span class="op">{</span> <span class="va">m_nmax</span> <span class="op">=</span> n<span class="op">;</span> <span class="op">}</span></span>
-<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>  <span class="dt">int</span> GetNMaxIterations<span class="op">()</span> <span class="at">const</span> <span class="op">{</span> <span class="cf">return</span> <span class="va">m_nmax</span><span class="op">;</span> <span class="op">}</span></span>
-<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a>  <span class="dt">unsigned</span> <span class="dt">int</span> GetNiterations<span class="op">()</span> <span class="at">const</span> <span class="op">{</span> <span class="cf">return</span> <span class="va">m_niterations</span><span class="op">;</span> <span class="op">}</span></span>
-<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a><span class="kw">protected</span><span class="op">:</span></span>
-<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> <span class="va">m_a</span><span class="op">,</span> <span class="va">m_b</span><span class="op">;</span> <span class="co">// estremi della regione di ricerca</span></span>
-<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> <span class="va">m_prec</span><span class="op">;</span> <span class="co">// precisione della soluzione</span></span>
-<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a>  <span class="dt">unsigned</span> <span class="dt">int</span> <span class="va">m_nmax</span><span class="op">,</span> <span class="va">m_niterations</span><span class="op">;</span></span>
-<span id="cb12-26"><a href="#cb12-26" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code></pre></div>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>  <span class="co">// For its pedagogical purpose, you find here two definitions: one</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>  <span class="co">// uses a pointer (*), the other one a reference (&amp;). In your code</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>  <span class="co">// you just have to implement one of them. (The one with the reference</span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>  <span class="co">// should be preferred).</span></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>  <span class="kw">virtual</span> <span class="dt">double</span> CercaZeriPointer<span class="op">(</span><span class="dt">double</span> xmin<span class="op">,</span> <span class="dt">double</span> xmax<span class="op">,</span> <span class="at">const</span> FunzioneBase <span class="op">*</span> f<span class="op">,</span></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>                                  <span class="dt">double</span> prec <span class="op">=</span> <span class="fl">1e-3</span><span class="op">,</span> <span class="dt">int</span> nmax <span class="op">=</span> <span class="dv">100</span><span class="op">)</span> <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>  <span class="kw">virtual</span> <span class="dt">double</span> CercaZeriReference<span class="op">(</span><span class="dt">double</span> xmin<span class="op">,</span> <span class="dt">double</span> xmax<span class="op">,</span> <span class="at">const</span> FunzioneBase <span class="op">&amp;</span> f<span class="op">,</span></span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>                                    <span class="dt">double</span> prec <span class="op">=</span> <span class="fl">1e-3</span><span class="op">,</span> <span class="dt">int</span> nmax <span class="op">=</span> <span class="dv">100</span><span class="op">)</span> <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>  <span class="dt">void</span> SetPrecisione<span class="op">(</span><span class="dt">double</span> epsilon<span class="op">)</span> <span class="op">{</span> <span class="va">m_prec</span> <span class="op">=</span> epsilon<span class="op">;</span> <span class="op">}</span></span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> GetPrecisione<span class="op">()</span> <span class="at">const</span> <span class="op">{</span> <span class="cf">return</span> <span class="va">m_prec</span><span class="op">;}</span></span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>  <span class="dt">void</span> SetNMaxIterations<span class="op">(</span><span class="dt">unsigned</span> <span class="dt">int</span> n<span class="op">)</span> <span class="op">{</span> <span class="va">m_nmax</span> <span class="op">=</span> n<span class="op">;</span> <span class="op">}</span></span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a>  <span class="dt">int</span> GetNMaxIterations<span class="op">()</span> <span class="at">const</span> <span class="op">{</span> <span class="cf">return</span> <span class="va">m_nmax</span><span class="op">;</span> <span class="op">}</span></span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a>  <span class="dt">unsigned</span> <span class="dt">int</span> GetNiterations<span class="op">()</span> <span class="at">const</span> <span class="op">{</span> <span class="cf">return</span> <span class="va">m_niterations</span><span class="op">;</span> <span class="op">}</span></span>
+<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a><span class="kw">protected</span><span class="op">:</span></span>
+<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> <span class="va">m_a</span><span class="op">,</span> <span class="va">m_b</span><span class="op">;</span> <span class="co">// range of the interval to explore</span></span>
+<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> <span class="va">m_prec</span><span class="op">;</span> <span class="co">// precision of the solution</span></span>
+<span id="cb12-26"><a href="#cb12-26" aria-hidden="true" tabindex="-1"></a>  <span class="dt">int</span> <span class="va">m_nmax</span><span class="op">,</span> <span class="va">m_niterations</span><span class="op">;</span></span>
+<span id="cb12-27"><a href="#cb12-27" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code></pre></div>
 <p>L’implementazione dell’algoritmo di bisezione dovrà necessariamente
 avvenire costruendo una classe dedicata <code>Bisezione</code> che
 erediti da <code>Solutore</code> e implementi una versione concreta del
@@ -570,14 +574,14 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb13-1"><a href="#
 <span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  Bisezione<span class="op">(</span><span class="dt">double</span> prec<span class="op">);</span></span>
 <span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="kw">virtual</span> <span class="op">~</span>Bisezione<span class="op">();</span></span>
 <span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Anche qui sono mostrate due versioni a scopo illustrativo. Voi dovete implementare</span></span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>  <span class="co">// solo quella corrispondente a quanto avete fatto nella classe madre `Solutore`</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Here too we provide two definitions. You must only implement the one you</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>  <span class="co">// provided in `Solutore`!</span></span>
 <span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>  <span class="kw">virtual</span> <span class="dt">double</span> CercaZeriPointer<span class="op">(</span><span class="dt">double</span> xmin<span class="op">,</span> <span class="dt">double</span> xmax<span class="op">,</span> <span class="at">const</span> FunzioneBase <span class="op">*</span> f<span class="op">,</span></span>
-<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>                                  <span class="dt">double</span> prec <span class="op">=</span> <span class="fl">1e-3</span><span class="op">,</span> <span class="dt">unsigned</span> <span class="dt">int</span> nmax <span class="op">=</span> <span class="dv">100</span><span class="op">);</span></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>                                  <span class="dt">double</span> prec <span class="op">=</span> <span class="fl">1e-3</span><span class="op">,</span> <span class="dt">int</span> nmax <span class="op">=</span> <span class="dv">100</span><span class="op">);</span></span>
 <span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>  <span class="kw">virtual</span> <span class="dt">double</span> CercaZeriReference<span class="op">(</span><span class="dt">double</span> xmin<span class="op">,</span> <span class="dt">double</span> xmax<span class="op">,</span> <span class="at">const</span> FunzioneBase <span class="op">&amp;</span> f<span class="op">,</span></span>
-<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>                                    <span class="dt">double</span> prec <span class="op">=</span> <span class="fl">1e-3</span><span class="op">,</span> <span class="dt">unsigned</span> <span class="dt">int</span> nmax <span class="op">=</span> <span class="dv">100</span><span class="op">);</span></span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>                                    <span class="dt">double</span> prec <span class="op">=</span> <span class="fl">1e-3</span><span class="op">,</span> <span class="dt">int</span> nmax <span class="op">=</span> <span class="dv">100</span><span class="op">);</span></span>
 <span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code></pre></div></li>
 </ol>
 <p>Per segnalare condizioni di errore potete usare i suggerimenti
@@ -602,8 +606,8 @@ class="math inline">\sin x - x \cos x = 0</span></p>
 <p>Aggiungere a <code>Solutore</code> due nuovi metodi virtuali
 puri:</p>
 <div class="sourceCode" id="cb14"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="kw">virtual</span> <span class="dt">bool</span> Trovato<span class="op">()</span> <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="kw">virtual</span> <span class="dt">double</span> Incertezza<span class="op">()</span> <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span></code></pre></div>
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="kw">virtual</span> <span class="dt">bool</span> Trovato<span class="op">()</span> <span class="at">const</span> <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="kw">virtual</span> <span class="dt">double</span> Incertezza<span class="op">()</span> <span class="at">const</span> <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span></code></pre></div>
 <p>Il primo dovrà restituire vero o falso a seconda che lo zero sia
 stato effettivamente trovato o meno. Ad esempio se un algoritmo non
 riesce a convergere per via delle cattive condizioni iniziali,

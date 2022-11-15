@@ -189,7 +189,7 @@ e seguite poi le istruzioni fornite a video.
 
 In alternativa, scaricate manualmente lo script [`install_fmt_library`](./install_fmt_library) (click col tasto destro sul link e scegliere «Salva come…») ed avviatelo con `sh install_fmt_library`. Lo script funziona solo sotto Linux e Mac; se usate Windows, scaricate questo [file zip](./fmtlib.zip) nella directory dell'esercizio e decomprimetelo.
 
-Le istruzioni dettagliate sono qui: <index.html#fmtinstall>.
+Le istruzioni dettagliate sono qui: [index.html#fmtinstall](index.html#fmtinstall).
 
 
 ## La funzione segno
@@ -197,7 +197,8 @@ Le istruzioni dettagliate sono qui: <index.html#fmtinstall>.
 La funzione `sign(x)` non è codificata nelle cstdlib, poiché l'informazione sul segno è già contenuta nella variabile di tipo `int`, `float`, `double`. [Nel C++11 è però disponibile la funzione `std::copysign`, definita in `<cmath>`, che copia il segno di una variabile `double` in un valore. Si può quindi usare questa definizione:]
 
 ```c++
-double sign(double x) {
+// Use "inline" if you're going to put this definition in a .h file!
+inline double sign(double x) {
     // Questa chiamata a copysign ritorna ±1.0 a seconda
     // del segno di x, oppure zero se x == 0
     return x != 0 ? std::copysign(1.0, x) : 0.0;
@@ -209,7 +210,8 @@ double sign(double x) {
 Una semplice implementazione della funzione segno è
 
 ```c++
-int sign(double x){
+// Same as above
+inline double sign(double x){
   if(x < 0)
       return -1;
   else if (x > 0)
@@ -224,7 +226,8 @@ int sign(double x){
 Una implementazione molto più compatta [però meno leggibile] è
 
 ```c++
-double sign(double x){
+// Same as above
+inline double sign(double x){
   return (x == 0. ? 0. : (x > 0 ? 1. : -1));
 };
 ```
@@ -236,8 +239,8 @@ double sign_a{sign(f(a))};
 double sign_b{sign(f(b))};
 double sign_c{sign(f(c))};
 
-// Verificare se sign_a, sign_b, o sign_c sono nulli: in quel
-// caso abbiamo già trovato lo zero!
+// Check whether sign_a, sign_b, or sign_c are zero: in that case,
+// we've already got the root!
 // ...
 
 if(sign_a * sign_c < 0) {
@@ -263,14 +266,15 @@ if(sign_a * sign_c < 0) {
       Solutore(double prec);
       virtual ~Solutore() {}
       
-      // A scopo illustrativo, trovate qui due definizioni: una con il puntatore 
-      // FunzioneBase *, e una con il reference FunzioneBase &.
-      // Nel vostro codice ne basta una sola, meglio col reference
+      // For its pedagogical purpose, you find here two definitions: one
+      // uses a pointer (*), the other one a reference (&). In your code
+      // you just have to implement one of them. (The one with the reference
+      // should be preferred).
       
       virtual double CercaZeriPointer(double xmin, double xmax, const FunzioneBase * f,
-                                      double prec = 1e-3, unsigned int nmax = 100) = 0;
+                                      double prec = 1e-3, int nmax = 100) = 0;
       virtual double CercaZeriReference(double xmin, double xmax, const FunzioneBase & f,
-                                        double prec = 1e-3, unsigned int nmax = 100) = 0;
+                                        double prec = 1e-3, int nmax = 100) = 0;
                                         
       void SetPrecisione(double epsilon) { m_prec = epsilon; }
       double GetPrecisione() const { return m_prec;}
@@ -279,9 +283,9 @@ if(sign_a * sign_c < 0) {
       unsigned int GetNiterations() const { return m_niterations; }
 
     protected:
-      double m_a, m_b; // estremi della regione di ricerca
-      double m_prec; // precisione della soluzione
-      unsigned int m_nmax, m_niterations;
+      double m_a, m_b; // range of the interval to explore
+      double m_prec; // precision of the solution
+      int m_nmax, m_niterations;
     };
     ```
 
@@ -294,14 +298,14 @@ if(sign_a * sign_c < 0) {
       Bisezione(double prec);
       virtual ~Bisezione();
 
-      // Anche qui sono mostrate due versioni a scopo illustrativo. Voi dovete implementare
-      // solo quella corrispondente a quanto avete fatto nella classe madre `Solutore`
+      // Here too we provide two definitions. You must only implement the one you
+      // provided in `Solutore`!
       
       virtual double CercaZeriPointer(double xmin, double xmax, const FunzioneBase * f,
-                                      double prec = 1e-3, unsigned int nmax = 100);
+                                      double prec = 1e-3, int nmax = 100);
                                       
       virtual double CercaZeriReference(double xmin, double xmax, const FunzioneBase & f,
-                                        double prec = 1e-3, unsigned int nmax = 100);
+                                        double prec = 1e-3, int nmax = 100);
     };
     ```
 
@@ -325,8 +329,8 @@ Suggerimento: riscrivere l'equazione come $\sin x - x \cos x = 0$
 Aggiungere a `Solutore` due nuovi metodi virtuali puri:
 
 ```c++
-virtual bool Trovato() = 0;
-virtual double Incertezza() = 0;
+virtual bool Trovato() const = 0;
+virtual double Incertezza() const = 0;
 ```
 
 Il primo dovrà restituire vero o falso a seconda che lo zero sia stato effettivamente trovato o meno. Ad esempio se un algoritmo non riesce a convergere per via delle cattive condizioni iniziali, `Trovato()` dovrà restituire `false`.
