@@ -440,7 +440,7 @@ nell’<em>header file</em>. Come si potrebbe infatti compilare una classe
 template senza sapere con che tipi di dato verrà utilizzata? Di
 conseguenza la compilazione si riduce alla singola istruzione:</p>
 <div class="sourceCode" id="cb8"><pre
-class="sourceCode makefile"><code class="sourceCode makefile"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="dt">CXXFLAGS </span><span class="ch">=</span><span class="st"> -g -Wall --pedantic -std=c++11</span></span>
+class="sourceCode makefile"><code class="sourceCode makefile"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="dt">CXXFLAGS </span><span class="ch">=</span><span class="st"> -g -Wall --pedantic -std=c++17</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="dv">esercizio3.0:</span><span class="dt"> esercizio3.0.cpp funzioni.h Vettore.h</span></span>
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    g++ -o <span class="ch">$@</span> esercizio3.0.cpp <span class="ch">$(</span><span class="dt">CXXFLAGS</span><span class="ch">)</span></span>
@@ -588,7 +588,7 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb11-1"><a href="#
 <h2 id="il-makefile">Il Makefile</h2>
 <p>Ecco il <code>Makefile</code>:</p>
 <div class="sourceCode" id="cb12"><pre
-class="sourceCode makefile"><code class="sourceCode makefile"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="dt">CXXFLAGS </span><span class="ch">=</span><span class="st"> -g -Wall --pedantic -std=c++11</span></span>
+class="sourceCode makefile"><code class="sourceCode makefile"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="dt">CXXFLAGS </span><span class="ch">=</span><span class="st"> -g -Wall --pedantic -std=c++17</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="dv">esercizio3.1:</span><span class="dt"> esercizio3.1.cpp funzioni.h</span></span>
 <span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>    g++ -o esercizio3.1 esercizio3.1.cpp <span class="ch">$(</span><span class="dt">CXXFLAGS</span><span class="ch">)</span></span>
@@ -705,7 +705,7 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb14-1"><a href="#
 includendo oggetti di ROOT:</p>
 <div class="sourceCode" id="cb15"><pre
 class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>LIBS <span class="op">:=</span> <span class="er">`</span>root<span class="op">-</span>config <span class="op">--</span>libs<span class="er">`</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>CXXFLAGS <span class="op">:=</span> <span class="op">-</span>g <span class="op">-</span>Wall <span class="op">--</span>pedantic <span class="op">-</span>std<span class="op">=</span>c<span class="op">++</span><span class="dv">11</span> <span class="er">`</span>root<span class="op">-</span>config <span class="op">--</span>cflags<span class="er">`</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>CXXFLAGS <span class="op">:=</span> <span class="op">-</span>g <span class="op">-</span>Wall <span class="op">--</span>pedantic <span class="op">-</span>std<span class="op">=</span>c<span class="op">++</span><span class="dv">17</span> <span class="er">`</span>root<span class="op">-</span>config <span class="op">--</span>cflags<span class="er">`</span></span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>esercizio3<span class="fl">.2</span><span class="op">:</span> esercizio3<span class="fl">.2</span><span class="er">.cpp</span> funzioni<span class="op">.</span>h</span>
 <span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>    g<span class="op">++</span> <span class="op">-</span>o esercizio3<span class="fl">.2</span> esercizio3<span class="fl">.2</span><span class="er">.cpp</span> <span class="er">$</span><span class="op">{</span>CXXFLAGS<span class="op">}</span> <span class="er">$</span><span class="op">{</span>LIBS<span class="op">}</span></span>

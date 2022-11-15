@@ -939,16 +939,16 @@ quando cambiamo il file <code>.h</code> il tutto venga propriamente
 ricompilato. In questo caso il <code>Makefile</code> diventa:</p>
 <div class="sourceCode" id="cb41"><pre
 class="sourceCode makefile"><code class="sourceCode makefile"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="dv">main:</span><span class="dt"> main.o funzioni.o</span></span>
-<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>    g++ -g -Wall --pedantic -std=c++11 main.o funzioni.o -o main</span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>    g++ -g -Wall --pedantic -std=c++17 main.o funzioni.o -o main</span>
 <span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a><span class="dv">main.o:</span><span class="dt"> main.cpp funzioni.h</span></span>
-<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>    g++ -g -Wall --pedantic -std=c++11 -c main.cpp -o main.o</span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>    g++ -g -Wall --pedantic -std=c++17 -c main.cpp -o main.o</span>
 <span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a><span class="dv">funzioni.o:</span><span class="dt"> funzioni.cpp funzioni.h</span></span>
-<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a>    g++ -g -Wall --pedantic -std=c++11 -c funzioni.cpp -o funzioni.o</span></code></pre></div>
+<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a>    g++ -g -Wall --pedantic -std=c++17 -c funzioni.cpp -o funzioni.o</span></code></pre></div>
 <p>Notate però quanto il <code>Makefile</code> sia ripetitivo. È
 possibile definire delle <em>variabili</em> nel Makefile per
 semplificarlo:</p>
 <div class="sourceCode" id="cb42"><pre
-class="sourceCode makefile"><code class="sourceCode makefile"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="dt">CXXFLAGS </span><span class="ch">=</span><span class="st"> -g -Wall --pedantic -std=c++11</span></span>
+class="sourceCode makefile"><code class="sourceCode makefile"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="dt">CXXFLAGS </span><span class="ch">=</span><span class="st"> -g -Wall --pedantic -std=c++17</span></span>
 <span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a><span class="dv">main:</span><span class="dt"> main.o funzioni.o</span></span>
 <span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>    g++ main.o funzioni.o -o main <span class="ch">$(</span><span class="dt">CXXFLAGS</span><span class="ch">)</span></span>
@@ -962,7 +962,7 @@ class="sourceCode makefile"><code class="sourceCode makefile"><span id="cb42-1">
 implicita</em>, e viene sostituita di volta in volta col nome del
 <em>target</em> corrente (che nell’esempio sopra è <code>main</code>,
 <code>main.o</code> e infine <code>funzioni.o</code>). I flag
-<code>-g -Wall --pedantic -std=c++11</code> servono per rendere la
+<code>-g -Wall --pedantic -std=c++17</code> servono per rendere la
 compilazione e l’esecuzione del codice più sicura, perché abilitano dei
 controlli addizionali, spiegati nelle <a
 href="tomasi-lezione-01.html#flag-del-compilatore">slide</a>.</p>

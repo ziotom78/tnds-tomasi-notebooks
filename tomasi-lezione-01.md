@@ -287,7 +287,7 @@ int main() {
 -   Partiamo da un caso molto semplice (l'esercizio 1.2 sarà più complicato). Create un file con nome `Makefile` (attenzione alla maiuscola iniziale!), e scrivete queste righe al suo interno:
 
     ```makefile
-    CXXFLAGS = -std=c++11 -g -Wall --pedantic
+    CXXFLAGS = -std=c++17 -g -Wall --pedantic
 
     main: main.cpp
     ```
@@ -297,7 +297,7 @@ prompt):
 
     ```text
     $ make
-    g++ -std=c++11 -g -Wall --pedantic    main.cpp   -o main
+    g++ -std=c++17 -g -Wall --pedantic    main.cpp   -o main
     $ ls
     main   main.cpp   Makefile
     ```
@@ -309,10 +309,10 @@ prompt):
 -   È utile specificare dei flag aggiuntivi per la compilazione, tramite la riga
 
     ```makefile
-    CXXFLAGS = -std=c++11 -g -Wall --pedantic
+    CXXFLAGS = -std=c++17 -g -Wall --pedantic
     ```
 
--   `-std=c++11` abilita alcune caratteristiche «recenti» del C++ (nelle versioni più aggiornate del compilatore GCC è inutile).
+-   `-std=c++17` abilita alcune caratteristiche «recenti» del C++ (nelle versioni più aggiornate del compilatore GCC è inutile).
 
 -   `-g`: se il codice va in *crash*, stampa la riga di codice che ha causato l'errore.
 
@@ -339,7 +339,7 @@ prompt):
 -   Se si vuole fornire manualmente la lista dei comandi da inviare, bisogna scriverli nella riga successiva, che va indentata inserendo un carattere **TAB** (attenzione: **non** una sequenza di spazi!):
 
     ```makefile
-    CXXFLAGS = -std=c++11 -g -Wall --pedantic
+    CXXFLAGS = -std=c++17 -g -Wall --pedantic
     
     main: main.cpp
         # You MUST use a Tab character to indent here!

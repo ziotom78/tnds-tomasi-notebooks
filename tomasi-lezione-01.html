@@ -441,13 +441,13 @@ vetusto ma presente su qualsiasi sistema Unix: GNU Make.</p></li>
 complicato). Create un file con nome <code>Makefile</code> (attenzione
 alla maiuscola iniziale!), e scrivete queste righe al suo interno:</p>
 <div class="sourceCode" id="cb10"><pre
-class="sourceCode makefile"><code class="sourceCode makefile"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="dt">CXXFLAGS </span><span class="ch">=</span><span class="st"> -std=c++11 -g -Wall --pedantic</span></span>
+class="sourceCode makefile"><code class="sourceCode makefile"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="dt">CXXFLAGS </span><span class="ch">=</span><span class="st"> -std=c++17 -g -Wall --pedantic</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="dv">main:</span><span class="dt"> main.cpp</span></span></code></pre></div></li>
 <li><p>Infine, da linea di comando eseguite il comando <code>make</code>
 (<code>$</code> indica il prompt):</p>
 <pre class="text"><code>$ make
-g++ -std=c++11 -g -Wall --pedantic    main.cpp   -o main
+g++ -std=c++17 -g -Wall --pedantic    main.cpp   -o main
 $ ls
 main   main.cpp   Makefile</code></pre></li>
 </ul>
@@ -458,8 +458,8 @@ main   main.cpp   Makefile</code></pre></li>
 <li><p>È utile specificare dei flag aggiuntivi per la compilazione,
 tramite la riga</p>
 <div class="sourceCode" id="cb12"><pre
-class="sourceCode makefile"><code class="sourceCode makefile"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="dt">CXXFLAGS </span><span class="ch">=</span><span class="st"> -std=c++11 -g -Wall --pedantic</span></span></code></pre></div></li>
-<li><p><code>-std=c++11</code> abilita alcune caratteristiche «recenti»
+class="sourceCode makefile"><code class="sourceCode makefile"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="dt">CXXFLAGS </span><span class="ch">=</span><span class="st"> -std=c++17 -g -Wall --pedantic</span></span></code></pre></div></li>
+<li><p><code>-std=c++17</code> abilita alcune caratteristiche «recenti»
 del C++ (nelle versioni più aggiornate del compilatore GCC è
 inutile).</p></li>
 <li><p><code>-g</code>: se il codice va in <em>crash</em>, stampa la
@@ -492,7 +492,7 @@ bisogna scriverli nella riga successiva, che va indentata inserendo un
 carattere <strong>TAB</strong> (attenzione: <strong>non</strong> una
 sequenza di spazi!):</p>
 <div class="sourceCode" id="cb14"><pre
-class="sourceCode makefile"><code class="sourceCode makefile"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="dt">CXXFLAGS </span><span class="ch">=</span><span class="st"> -std=c++11 -g -Wall --pedantic</span></span>
+class="sourceCode makefile"><code class="sourceCode makefile"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="dt">CXXFLAGS </span><span class="ch">=</span><span class="st"> -std=c++17 -g -Wall --pedantic</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="dv">main:</span><span class="dt"> main.cpp</span></span>
 <span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># You MUST use a Tab character to indent here!</span></span>

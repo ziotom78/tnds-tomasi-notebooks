@@ -417,7 +417,7 @@ double CalcolaMedia( const Vettore & v ) {
 Il makefile va modificato aggiungendo la compilazione della classe `Vettore`:
 
 ```makefile
-CXXFLAGS = -g -Wall --pedantic -std=c++11
+CXXFLAGS = -g -Wall --pedantic -std=c++17
 
 main: main.o vettore.o funzioni.o
     g++ -o $@ main.o vettore.o funzioni.o $(CXXFLAGS)
