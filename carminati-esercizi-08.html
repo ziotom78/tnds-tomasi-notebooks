@@ -285,7 +285,7 @@ opportunamente gli operatori <code>+</code>, <code>*</code>,
 gli header files e i files di implementazione della classe
 <code>vector</code>, implementiamo questi operatori come funzioni libere
 in un header file apposito da includere quando necessario. Potete
-trovarne un esempio qui.</p>
+trovarne un esempio <a href="codici/vector_operations.hpp">qui</a>.</p>
 <p>Provate a scrivere un piccolo codice di test per verificare il
 corretto funzionamento delle operazioni tra vettori : potreste provate a
 realizzare un semplice programma che scriva a video le componenti della
@@ -343,11 +343,11 @@ numero di periodi, in modo da vedere se l’ampiezza di oscillazione
 rimane costante. Integrare fino a <span class="math inline">t =
 70\,\text{s}</span> permette di vedere circa 10 periodi.</p>
 <h2 id="il-metodo-di-eulero">Il metodo di Eulero</h2>
-<p>Consideriamo la seconda legge della dimanica di Newton</p>
+<p>Consideriamo la seconda legge della dinamica di Newton:</p>
 <p><span class="math display">
-a = \frac{\mathrm{d}^2 x}{\mathrm{d}t^2} = \frac{F}m,
+a = \frac{\mathrm{d}^2 x}{\mathrm{d}t^2} = \frac{F}m.
 </span></p>
-<p>che è un’equazione differenziale del secondo ordine che può essere
+<p>Essa è un’equazione differenziale del secondo ordine che può essere
 ridotta ad un’equazione differenziale del prim’ordine introducendo la
 variabile velocità:</p>
 <p><span class="math display">
@@ -379,34 +379,32 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb1-1"><a href="#c
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;vectorops.h&quot;</span></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="kw">using</span> <span class="kw">namespace</span> std<span class="op">;</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> FunzioneVettorialeBase <span class="op">{</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span><span class="op">:</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="kw">virtual</span> vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> Eval<span class="op">(</span><span class="dt">double</span> t<span class="op">,</span> <span class="at">const</span> vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> <span class="op">&amp;</span> x<span class="op">)</span> <span class="at">const</span> <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> OscillatoreArmonico <span class="op">:</span> <span class="kw">public</span> FunzioneVettorialeBase <span class="op">{</span></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span><span class="op">:</span></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>  OscillatoreArmonico<span class="op">(</span><span class="dt">double</span> omega0<span class="op">)</span> <span class="op">:</span> <span class="va">m_omega0</span><span class="op">(</span>omega0<span class="op">)</span> <span class="op">{</span> <span class="op">}</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> FunzioneVettorialeBase <span class="op">{</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span><span class="op">:</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="kw">virtual</span> <span class="bu">std::</span>vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> Eval<span class="op">(</span><span class="dt">double</span> t<span class="op">,</span> <span class="at">const</span> <span class="bu">std::</span>vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> <span class="op">&amp;</span> x<span class="op">)</span> <span class="at">const</span> <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> OscillatoreArmonico <span class="op">:</span> <span class="kw">public</span> FunzioneVettorialeBase <span class="op">{</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span><span class="op">:</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  OscillatoreArmonico<span class="op">(</span><span class="dt">double</span> omega0<span class="op">)</span> <span class="op">:</span> <span class="va">m_omega0</span><span class="op">(</span>omega0<span class="op">)</span> <span class="op">{</span> <span class="op">}</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>  <span class="bu">std::</span>vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> Eval<span class="op">(</span><span class="dt">double</span> t<span class="op">,</span> <span class="at">const</span> <span class="bu">std::</span>vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> <span class="op">&amp;</span> x<span class="op">)</span> <span class="at">const</span> <span class="kw">override</span><span class="op">;</span></span>
 <span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>  vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> Eval<span class="op">(</span><span class="dt">double</span> t<span class="op">,</span> <span class="at">const</span> vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> <span class="op">&amp;</span> x<span class="op">)</span> <span class="at">const</span> <span class="kw">override</span><span class="op">;</span></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="kw">private</span><span class="op">:</span></span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> <span class="va">m_omega</span><span class="op">;</span></span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> EquazioneDifferenzialeBase <span class="op">{</span></span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span><span class="op">:</span></span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>  <span class="kw">virtual</span> vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> Passo<span class="op">(</span><span class="dt">double</span> t<span class="op">,</span> <span class="at">const</span> vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;&amp;</span> x<span class="op">,</span></span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>                               <span class="dt">double</span> h<span class="op">,</span> FunzioneVettorialeBase <span class="op">&amp;</span> f<span class="op">)</span> <span class="at">const</span> <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="op">};</span> </span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Eulero <span class="op">:</span> <span class="kw">public</span> EquazioneDifferenzialeBase <span class="op">{</span></span>
-<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span><span class="op">:</span></span>
-<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>  vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> Passo<span class="op">(</span><span class="dt">double</span> t<span class="op">,</span> <span class="at">const</span> vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> <span class="op">&amp;</span> x<span class="op">,</span></span>
-<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>                       <span class="dt">double</span> h<span class="op">,</span> FunzioneVettorialeBase <span class="op">&amp;</span> f<span class="op">)</span> <span class="at">const</span> <span class="kw">override</span><span class="op">;</span></span>
-<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code></pre></div>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="kw">private</span><span class="op">:</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> <span class="va">m_omega</span><span class="op">;</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> EquazioneDifferenzialeBase <span class="op">{</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span><span class="op">:</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>  <span class="kw">virtual</span> <span class="bu">std::</span>vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> Passo<span class="op">(</span><span class="dt">double</span> t<span class="op">,</span> <span class="at">const</span> <span class="bu">std::</span>vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;&amp;</span> x<span class="op">,</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>                                    <span class="dt">double</span> h<span class="op">,</span> FunzioneVettorialeBase <span class="op">&amp;</span> f<span class="op">)</span> <span class="at">const</span> <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="op">};</span> </span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Eulero <span class="op">:</span> <span class="kw">public</span> EquazioneDifferenzialeBase <span class="op">{</span></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span><span class="op">:</span></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>  <span class="bu">std::</span>vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> Passo<span class="op">(</span><span class="dt">double</span> t<span class="op">,</span> <span class="at">const</span> <span class="bu">std::</span>vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> <span class="op">&amp;</span> x<span class="op">,</span></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>                       <span class="dt">double</span> h<span class="op">,</span> FunzioneVettorialeBase <span class="op">&amp;</span> f<span class="op">)</span> <span class="at">const</span> <span class="kw">override</span><span class="op">;</span></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code></pre></div>
 <p>Una volta implementate le classi (l’implementazione di Eulero è
 semplicissima se si usano le operazioni di algebra vettoriale), un
 possibile programma per risolvere l’esercizio è il seguente:</p>
@@ -426,7 +424,7 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb2-1"><a href="#c
 <span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>  fmt<span class="op">::</span>print<span class="op">(</span><span class="st">&quot;</span><span class="sc">{}\t{}\t{}\n</span><span class="st">&quot;</span><span class="op">,</span> t<span class="op">,</span> x<span class="op">[</span><span class="dv">0</span><span class="op">],</span> x<span class="op">[</span><span class="dv">1</span><span class="op">]);</span></span>
 <span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
 <span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main <span class="op">(</span><span class="dt">int</span> argc<span class="op">,</span> <span class="dt">char</span><span class="op">**</span> argv <span class="op">)</span> <span class="op">{</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main <span class="op">(</span><span class="dt">int</span> argc<span class="op">,</span> <span class="dt">char</span><span class="op">**</span> argv<span class="op">)</span> <span class="op">{</span></span>
 <span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span><span class="op">(</span>argc <span class="op">!=</span> <span class="dv">2</span><span class="op">)</span> <span class="op">{</span></span>
 <span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>      fmt<span class="op">::</span>print<span class="op">(</span>stderr<span class="op">,</span> <span class="st">&quot;Usage: </span><span class="sc">{}</span><span class="st"> &lt;stepsize&gt;</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">,</span> argv<span class="op">[</span><span class="dv">0</span><span class="op">]);</span></span>
 <span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>      <span class="cf">return</span> <span class="op">-</span><span class="dv">1</span><span class="op">;</span></span>
@@ -434,23 +432,25 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb2-1"><a href="#c
 <span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>  Eulero myEuler<span class="op">;</span></span>
 <span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>  OscillatoreArmonico <span class="op">*</span>osc<span class="op">{</span><span class="kw">new</span> OscillatoreArmonico<span class="op">(</span><span class="dv">1</span><span class="op">)};</span></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>  OscillatoreArmonico osc<span class="op">{</span><span class="dv">1</span><span class="op">};</span></span>
 <span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> tmax<span class="op">{</span><span class="dv">70</span><span class="op">};</span></span>
 <span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> h<span class="op">{</span>stod<span class="op">(</span>argv<span class="op">[</span><span class="dv">1</span><span class="op">])};</span></span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> h<span class="op">{</span>stod<span class="op">(</span>argv<span class="op">[</span><span class="dv">1</span><span class="op">])};</span>  <span class="co">// `stod`: «string to double» (defined in &lt;string&gt;)</span></span>
 <span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>  vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> x<span class="op">{</span><span class="fl">0.</span><span class="op">,</span> <span class="fl">1.</span><span class="op">};</span></span>
-<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> t<span class="op">{</span><span class="dv">0</span><span class="op">};</span></span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>  vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> x<span class="op">{</span><span class="fl">0.</span><span class="op">,</span> <span class="fl">1.</span><span class="op">};</span> <span class="co">// Initial condition</span></span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> t<span class="op">{</span><span class="dv">0</span><span class="op">};</span> <span class="co">// Time</span></span>
 <span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>  <span class="dt">int</span> nstep<span class="op">{</span><span class="dt">int</span><span class="op">(</span>tmax <span class="op">/</span> h <span class="op">+</span> <span class="fl">0.5</span><span class="op">)};</span></span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>  <span class="dt">int</span> nstep<span class="op">{</span><span class="dt">int</span><span class="op">(</span>tmax <span class="op">/</span> h <span class="op">+</span> <span class="fl">0.5</span><span class="op">)};</span> <span class="co">// Compute the steps before starting the `for` loop</span></span>
 <span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> step<span class="op">{};</span> step <span class="op">&lt;</span> nstep<span class="op">;</span> step<span class="op">++)</span> <span class="op">{</span></span>
 <span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>      print<span class="op">(</span>t<span class="op">,</span> x<span class="op">);</span></span>
 <span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>      x <span class="op">=</span> myEuler<span class="op">.</span>Passo<span class="op">(</span>t<span class="op">,</span> x<span class="op">,</span> h<span class="op">,</span> osc<span class="op">);</span></span>
 <span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>      t <span class="op">+=</span> h<span class="op">;</span></span>
 <span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
-<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>  print<span class="op">(</span>t<span class="op">,</span> x<span class="op">);</span></span>
-<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Remember to print the last step!</span></span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a>  print<span class="op">(</span>t<span class="op">,</span> x<span class="op">);</span></span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 <p>Come al solito, potete installare la libreria <code>fmtlib</code>
 usando lo script <a
 href="./install_fmt_library"><code>install_fmt_library</code></a>:
@@ -473,7 +473,7 @@ href="./index.html#gplotinstall">qui</a>.</p>
 <p>Questa è una possibile implementazione della seconda parte del
 <code>main</code>:</p>
 <div class="sourceCode" id="cb3"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> times<span class="op">(</span>nstep<span class="op">);</span>  <span class="co">// Importante la parentesi tonda () anziché graffa {} qui</span></span>
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> times<span class="op">(</span>nstep<span class="op">);</span>  <span class="co">// Round parentheses here (), not braces {}!</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> pos<span class="op">(</span>nstep<span class="op">);</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> step<span class="op">{};</span> step <span class="op">&lt;</span> nstep<span class="op">;</span> step<span class="op">++)</span> <span class="op">{</span></span>
@@ -634,25 +634,25 @@ dell’oscillazione.</li>
 </ol>
 <p>Un esempio di pseudo-codice che implementa questo algoritmo è:</p>
 <div class="sourceCode" id="cb5"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">// condizioni iniziali</span></span>
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Initial conditions</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> t<span class="op">{};</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>x<span class="op">.</span>SetComponent<span class="op">(</span><span class="dv">0</span><span class="op">,</span> <span class="op">-</span>A<span class="op">);</span></span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>x<span class="op">.</span>SetComponent<span class="op">(</span><span class="dv">1</span><span class="op">,</span> <span class="dv">0</span><span class="op">);</span></span>
 <span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co">// con le condizioni iniziali date, la velocità sarà maggiore</span></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co">// o uguale a zero fino al punto di inversione del modo</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co">// Given the initial conditions, velocity will be</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co">// ≥ 0 up to the inversion point</span></span>
 <span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span><span class="op">(</span>x<span class="op">.</span>GetComponent<span class="op">(</span><span class="dv">1</span><span class="op">)</span> <span class="op">&gt;=</span> <span class="dv">0</span><span class="op">)</span> <span class="op">{</span></span>
 <span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    v <span class="op">=</span> x<span class="op">.</span>GetComponent<span class="op">(</span><span class="dv">1</span><span class="op">);</span> <span class="co">// salvo la velocità al passo precedente</span></span>
 <span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> myRK4<span class="op">.</span>Passo<span class="op">(</span>t<span class="op">,</span> x<span class="op">,</span> h<span class="op">,</span> osc<span class="op">);</span></span>
 <span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>    t <span class="op">+=</span> h<span class="op">;</span></span>
 <span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
 <span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="co">// calcolo del passaggio dallo zero utilizzando l&#39;interpolazione</span></span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="co">// lineare tra il passo precedente (t - h, v) e quello finale</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="co">// compute when we cross the zero using a linear utilizzando l&#39;interpolazione</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="co">// interpolation between the previous step (t - h, v) and</span></span>
 <span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a><span class="co">// (t, x.GetComponent(1))</span></span>
 <span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>T <span class="op">=</span> t <span class="op">-</span> v <span class="op">*</span> h <span class="op">/</span> <span class="op">(</span>x<span class="op">.</span>GetComponent<span class="op">(</span><span class="dv">1</span><span class="op">)</span> <span class="op">-</span> v<span class="op">);</span></span>
 <span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a><span class="co">// il periodo è due volte il semi-periodo appena calcolato</span></span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a><span class="co">// The period is twice the half-period we have computed</span></span>
 <span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>T <span class="op">*=</span> <span class="dv">2</span><span class="op">;</span></span></code></pre></div>
 <p>N.B.: controllate che la formula per l’interpolazione sia
 corretta!</p>

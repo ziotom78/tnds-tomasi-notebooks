@@ -16,7 +16,7 @@ Per risolvere l'esercizio vedremo come è possibile definire le principali opera
 
 # Esercizio 9.0 - Algebra vettoriale {#esercizio-9.0}
 
-Come prima cosa, proviamo a dotare i vector della STL di tutte le funzionalità algebriche che ci possono essere utili, definendo opportunamente gli operatori `+`, `*`, `/`, `+=`. Dal momento che non possiamo modificare gli header files e i files di implementazione della classe `vector`, implementiamo questi operatori come funzioni libere in un header file apposito da includere quando necessario. Potete trovarne un esempio qui.
+Come prima cosa, proviamo a dotare i vector della STL di tutte le funzionalità algebriche che ci possono essere utili, definendo opportunamente gli operatori `+`, `*`, `/`, `+=`. Dal momento che non possiamo modificare gli header files e i files di implementazione della classe `vector`, implementiamo questi operatori come funzioni libere in un header file apposito da includere quando necessario. Potete trovarne un esempio [qui](codici/vector_operations.hpp).
 
 Provate a scrivere un piccolo codice di test per verificare il corretto funzionamento delle operazioni tra vettori : potreste provate a realizzare un semplice programma che scriva a video le componenti della risultate di due forze (vettori tridimensionali) e le componenti del versore della risultante.
 
@@ -45,13 +45,13 @@ con passi di integrazione da 0.1 a 0.001, mettendo in grafico il valore della $x
 
 ## Il metodo di Eulero
 
-Consideriamo la seconda legge della dimanica di Newton
+Consideriamo la seconda legge della dinamica di Newton:
 
 $$
-a = \frac{\mathrm{d}^2 x}{\mathrm{d}t^2} = \frac{F}m,
+a = \frac{\mathrm{d}^2 x}{\mathrm{d}t^2} = \frac{F}m.
 $$
 
-che è un'equazione differenziale del secondo ordine che può essere ridotta ad un'equazione differenziale del prim'ordine introducendo la variabile velocità:
+Essa è un'equazione differenziale del secondo ordine che può essere ridotta ad un'equazione differenziale del prim'ordine introducendo la variabile velocità:
 
 $$
 \begin{aligned}
@@ -82,18 +82,16 @@ L'header file contente le dichiarazioni delle classi è quindi:
 
 #include "vectorops.h"
 
-using namespace std;
-
 class FunzioneVettorialeBase {
 public:
-  virtual vector<double> Eval(double t, const vector<double> & x) const = 0;
+  virtual std::vector<double> Eval(double t, const std::vector<double> & x) const = 0;
 };
 
 class OscillatoreArmonico : public FunzioneVettorialeBase {
 public:
   OscillatoreArmonico(double omega0) : m_omega0(omega0) { }
 
-  vector<double> Eval(double t, const vector<double> & x) const override;
+  std::vector<double> Eval(double t, const std::vector<double> & x) const override;
 
 private:
   double m_omega;
@@ -101,13 +99,13 @@ private:
 
 class EquazioneDifferenzialeBase {
 public:
-  virtual vector<double> Passo(double t, const vector<double>& x,
-                               double h, FunzioneVettorialeBase & f) const = 0;
+  virtual std::vector<double> Passo(double t, const std::vector<double>& x,
+                                    double h, FunzioneVettorialeBase & f) const = 0;
 }; 
 
 class Eulero : public EquazioneDifferenzialeBase {
 public:
-  vector<double> Passo(double t, const vector<double> & x,
+  std::vector<double> Passo(double t, const std::vector<double> & x,
                        double h, FunzioneVettorialeBase & f) const override;
 };
 ```
@@ -130,7 +128,7 @@ void print(double t, const vector<double> & x) {
   fmt::print("{}\t{}\t{}\n", t, x[0], x[1]);
 }
 
-int main (int argc, char** argv ) {
+int main (int argc, char** argv) {
   if(argc != 2) {
       fmt::print(stderr, "Usage: {} <stepsize>\n", argv[0]);
       return -1;
@@ -138,21 +136,23 @@ int main (int argc, char** argv ) {
   
   Eulero myEuler;
 
-  OscillatoreArmonico *osc{new OscillatoreArmonico(1)};
+  OscillatoreArmonico osc{1};
   double tmax{70};
 
-  double h{stod(argv[1])};
+  double h{stod(argv[1])};  // `stod`: «string to double» (defined in <string>)
 
-  vector<double> x{0., 1.};
-  double t{0};
+  vector<double> x{0., 1.}; // Initial condition
+  double t{0}; // Time
 
-  int nstep{int(tmax / h + 0.5)};
+  int nstep{int(tmax / h + 0.5)}; // Compute the steps before starting the `for` loop
 
   for (int step{}; step < nstep; step++) {
       print(t, x);
       x = myEuler.Passo(t, x, h, osc);
       t += h;
   }
+  
+  // Remember to print the last step!
   print(t, x);
 }
 ```
@@ -170,7 +170,7 @@ Se si vuole anche implementare un grafico della soluzione con [gplot++](https://
 Questa è una possibile implementazione della seconda parte del `main`:
 
 ```c++
-vector<double> times(nstep);  // Importante la parentesi tonda () anziché graffa {} qui
+vector<double> times(nstep);  // Round parentheses here (), not braces {}!
 vector<double> pos(nstep);
 
 for (int step{}; step < nstep; step++) {
@@ -316,30 +316,29 @@ Una possibile soluzione consiste in:
 Un esempio di pseudo-codice che implementa questo algoritmo è: 
 
 ```c++
-// condizioni iniziali
+// Initial conditions
 double t{};
 x.SetComponent(0, -A);
 x.SetComponent(1, 0);
 
-// con le condizioni iniziali date, la velocità sarà maggiore
-// o uguale a zero fino al punto di inversione del modo
+// Given the initial conditions, velocity will be
+// ≥ 0 up to the inversion point
 while(x.GetComponent(1) >= 0) {
     v = x.GetComponent(1); // salvo la velocità al passo precedente
     x = myRK4.Passo(t, x, h, osc);
     t += h;
 }
 
-// calcolo del passaggio dallo zero utilizzando l'interpolazione
-// lineare tra il passo precedente (t - h, v) e quello finale
+// compute when we cross the zero using a linear utilizzando l'interpolazione
+// interpolation between the previous step (t - h, v) and
 // (t, x.GetComponent(1))
 T = t - v * h / (x.GetComponent(1) - v);
 
-// il periodo è due volte il semi-periodo appena calcolato
+// The period is twice the half-period we have computed
 T *= 2;
 ```
 
 N.B.: controllate che la formula per l'interpolazione sia corretta!
-
 
 
 # Esercizio 9.4 - Oscillazione forzate e risonanza (da consegnare) {#esercizio-9.4}
