@@ -304,7 +304,7 @@ Di conseguenza, il programmatore è «costretto» a verificare la correttezza de
 
     ```c++
     // Dichiara "ndata" e la inizializza
-    int ndata = atoi(argv[1]);
+    int ndata = stoi(argv[1]);
 
     Vettore v(10);
 

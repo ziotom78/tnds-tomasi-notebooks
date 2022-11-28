@@ -33,14 +33,14 @@ main(int argc, char *argv[])
         è il nome del programma.
 -   `argv` è un array di `argc` elementi che contiene le stringhe di caratteri passate da riga di comando. Quindi `argv[0]` è il nome del programma, `argv[1]` il primo argomento, ecc…
 
-Se da riga di comando passiamo un numero, esso verrà passato tramite `argv` come una stringa di caratteri; per convertire una stringa di caratteri in un numero intero si usa la funzione `atoi(const char*)` (che è contenuta in `<cstdlib>`):
+Se da riga di comando passiamo un numero, esso verrà passato tramite `argv` come una stringa di caratteri; per convertire una stringa di caratteri in un numero intero si usa la funzione `std::stoi(const std::string &)` (che è contenuta in `<string>`):
 
 ```c++
 int N;
-N = atoi(argv[1]);
+N = std::stoi(argv[1]);
 ```
 
-Per completezza di informazione, la funzione corrispondente per convertire una stringa di caratteri in un numero reale è `atof(const char*)`, anch'essa disponibile in `<cstdlib>`.
+Per completezza di informazione, la funzione corrispondente per convertire una stringa di caratteri in un numero `double` è `std::stod(const std::string &)`, anch'essa disponibile in `<string>`.
 
 ## Cin, cout e cerr
 
@@ -222,9 +222,9 @@ Proviamo a scrivere un unico codice che legga dati da file, li immagazzini in un
 Per questo primo esercizio ripassiamo la struttura generale di un programma:
 
 ```c++
-#include <cstdlib>
 #include <fstream>
 #include <iostream>
+#include <string>
 
 using namespace std;
 
@@ -234,7 +234,7 @@ int main(int argc, char *argv[]) {
       return 1;
   }
 
-  int ndata = atoi(argv[1]);
+  int ndata = stoi(argv[1]);
   double * data = new double[ndata];
   const char * filename = argv[2];
 
@@ -512,9 +512,9 @@ Vediamo ora passo passo come fare.
 Ecco come potrebbe diventare il vostro codice dopo la cura:
 
 ```c++
-#include <cstdlib>
 #include <fstream>
 #include <iostream>
+#include <string>
 
 using namespace std;
 
@@ -534,7 +534,7 @@ int main(int argc, char *argv[]) {
       return 1;
   }
 
-  int ndata = atoi(argv[1]);
+  int ndata = stoi(argv[1]);
   const char * filename = argv[2];
 
   // uso la funzione per leggere gli elementi da un file

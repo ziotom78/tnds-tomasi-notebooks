@@ -108,9 +108,10 @@ In alternativa, scaricate questo [file zip](./fmtlib.zip) nella directory dell'e
 Ecco il codice di esempio:
 
 ```c++
-#include <iostream>
 #include <cmath>
 #include <iomanip>
+#include <iostream>
+#include <string>
 
 #include "fmtlib.h"
 #include "funzioni.h"
@@ -128,7 +129,7 @@ int main(int argc, char *argv[]) {
   double a{};
   double b{M_PI};
 
-  int nstep{atoi(argv[1])};
+  int nstep{stoi(argv[1])};
 
   Seno mysin{};
   Midpoint midpoint{};

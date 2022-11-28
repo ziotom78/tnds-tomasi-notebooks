@@ -175,12 +175,14 @@ Provate voi ad modificare le funzioni che mancano.
 Ecco l'aspetto che potrebbe avere il `main`: come vedete, usiamo il contenitore `Vettore` per immagazzinare un set di `double`.
 
 ```c++
-#include <cstdlib>
 #include <fstream>
 #include <iostream>
+#include <string>
 
 #include "vettore.h"
 #include "funzioni.h"
+
+using namespace str;
 
 int main (int argc, char * argv[]) {
   // Esegui i test sull'implementazione di `Vettore` (v. slide di Tomasi)
@@ -191,7 +193,7 @@ int main (int argc, char * argv[]) {
       return 1;
   }
 
-  int ndata{atoi(argv[1])};
+  int ndata{stoi(argv[1])};
   const char * filename{argv[2]};
 
   // usiamo il contenitore Vettore per immagazzinare double !
@@ -313,9 +315,9 @@ Ecco l'aspetto che potrebbe avere il nostro nuovo codice:
 
 ```c++
 #include "funzioni.h"
-#include <cstdlib>
 #include <fstream>
 #include <iostream>
+#include <string>
 
 using namespace std;
 
@@ -328,7 +330,7 @@ int main(int argc, char * argv[]) {
       return 1;
   }
 
-  vector<double> v{Read<double>(atoi(argv[1]), argv[2])};
+  vector<double> v{Read<double>(stoi(argv[1]), argv[2])};
 
   Print(v);
 
@@ -409,9 +411,11 @@ Possiamo usare questo codice come esempio per l'utilizzo di un qualsiasi oggetto
 #include "TCanvas.h"
 #include "TH1F.h"
 #include "funzioni.h"
-#include <cstdlib>
 #include <fstream>
 #include <iostream>
+#include <string>
+
+using namespace std;
 
 int main(int argc, char * argv[]) {
   // Stessi test dell'esercizio 3.1, ma qui adattateli per std::vector
@@ -428,7 +432,7 @@ int main(int argc, char * argv[]) {
   TApplication app{"app", 0, 0};
 
   // leggo dati da file
-  vector<double> v{Read<double>(atoi(argv[1]), argv[2]};
+  vector<double> v{Read<double>(stoi(argv[1]), argv[2]};
 
   // creo e riempio il vettore. L'opzione StatOverflows permette di calcolalare
   // le informazioni statistiche anche se il dato sta fuori dal range di definizione

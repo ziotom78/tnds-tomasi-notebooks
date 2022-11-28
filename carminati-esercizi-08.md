@@ -141,7 +141,7 @@ int main (int argc, char** argv ) {
   OscillatoreArmonico *osc{new OscillatoreArmonico(1)};
   double tmax{70};
 
-  double h{atof(argv[1])};
+  double h{stod(argv[1])};
 
   vector<double> x{0., 1.};
   double t{0};

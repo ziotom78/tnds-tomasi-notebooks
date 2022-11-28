@@ -339,9 +339,9 @@ Ecco l'aspetto che potrebbe avere il nostro nuovo codice:
 // includo la dichiarazione delle funzioni
 #include "funzioni.h"
 
-#include <cstdlib>
 #include <fstream>
 #include <iostream>
+#include <string>
 
 int main (int argc, char* argv[]) {
   if(argc < 3) {
@@ -350,7 +350,7 @@ int main (int argc, char* argv[]) {
       return 1;
   }
 
-  int ndata = atoi(argv[1]);
+  int ndata = std::stoi(argv[1]);
   const char * filename = argv[2];
 
   Vettore v(Read(ndata, filename));

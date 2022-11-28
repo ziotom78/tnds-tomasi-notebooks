@@ -133,8 +133,8 @@ Questo è il codice sorgente del programma:
 // Installarla con ./install_fmt_library
 #include "fmtlib.h"
 
-#include <cstdlib>
 #include <iostream>
+#include <string>
 
 using namespace std;
 
@@ -149,9 +149,9 @@ int main(int argc, char *argv[]) {
 
     return -1;
   }
-  double x{atof(argv[1])};
-  double y{atof(argv[2])};
-  double z{atof(argv[3])};
+  double x{stod(argv[1])};
+  double y{stod(argv[2])};
+  double z{stod(argv[3])};
 
   // Crea un oggetto posizione ed accede ai vari metodi
 
@@ -444,7 +444,7 @@ Questo programma utilizza le nuove classi appena create: richiede di fornire com
 #include "campovettoriale.h"
 
 #include <iostream>
-#include <cstdlib>
+#include <string>
 #include "fmtlib.h"         // Usa la libreria "fmt::" del C++20
 
 using namespace std;
@@ -455,9 +455,9 @@ int main(int argc, char * argv[]) {
       exit(-1);
   }
 
-  double x{atof(argv[1])};
-  double y{atof(argv[2])};
-  double z{atof(argv[3])};
+  double x{stod(argv[1])};
+  double y{stod(argv[2])};
+  double z{stod(argv[3])};
   Posizione r{x,y,z};
 
   const double e{1.60217653E-19};
