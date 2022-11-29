@@ -140,9 +140,9 @@ std::vector<T> &operator-=(std::vector<T> &a, const std::vector<T> &b) {
 }
 
 // Handy method to print a vector
-template <typename T> void Print(const std::vector<T> &v) {
+template <typename T> void Print(const std::vector<T> &v, std::ostream & os = std::cout) {
   for (auto it : v) {
-    std::cout << it << " ";
+    os << it << " ";
   }
-  std::cout << std::endl;
+  os << std::endl;
 }
