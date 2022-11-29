@@ -20,8 +20,8 @@ css:
 | 8 Novembre 2022  | Idem                                                  | [Lezione 5](tomasi-lezione-05.html)                                 |
 | 15 Novembre 2022  | [Ricerca di zeri](carminati-esercizi-06.html)         | [Lezione 6](tomasi-lezione-06.html)                                 |
 | 22 Novembre 2022 | [Quadratura numerica](carminati-esercizi-07.html)     | [Notebook 7](https://ziotom78.github.io/tnds-notebooks/lezione07/)  |
-<!--
 | 29 Novembre 2022 | [Equazioni differenziali](carminati-esercizi-08.html) | [Notebook 8](https://ziotom78.github.io/tnds-notebooks/lezione08/)  |
+<!--
 | 13 Dicembre 2022 | Idem                                                  | Idem                                                                |
 | 20 Dicembre 2022 | [Numeri pseudo-casuali](carminati-esercizi-10.html)   | [Notebook 10](https://ziotom78.github.io/tnds-notebooks/lezione10/) |
 | 10 Gennaio 2022 | Idem                                                  | Idem                                                                |
