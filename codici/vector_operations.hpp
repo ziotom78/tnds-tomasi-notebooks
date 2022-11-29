@@ -13,10 +13,9 @@
 template <typename T>
 std::vector<T> operator+(const std::vector<T> &a, const std::vector<T> &b) {
 
-  if (a.size() != b.size())
-    throw "Trying to sum vectors with different size";
+  assert(a.size() == b.size());
 
-  std::vector<T> result{a.size()};
+  std::vector<T> result(a.size()); // Round parentheses here!
 
   for (int i{}; i < static_cast<int>(a.size()); i++)
     result[i] = a[i] + b[i];
@@ -32,10 +31,9 @@ std::vector<T> operator+(const std::vector<T> &a, const std::vector<T> &b) {
 // Subtract one vector from another
 template <typename T>
 std::vector<T> operator-(const std::vector<T> &a, const std::vector<T> &b) {
-  if (a.size() != b.size())
-    throw "Trying to subtract vectors with different size";
+  assert(a.size() == b.size());
 
-  std::vector<T> result{a.size()};
+  std::vector<T> result(a.size()); // Round parentheses here!
 
   for (int i{}; i < static_cast<int>(a.size()); i++)
     result[i] = a[i] - b[i];
@@ -53,8 +51,7 @@ std::vector<T> operator-(const std::vector<T> &a, const std::vector<T> &b) {
 template <typename T>
 T operator*(const std::vector<T> &a, const std::vector<T> &b) {
 
-  if (a.size() != b.size())
-    throw "Trying to multiply vectors with different size";
+  assert(a.size() == b.size());
 
   T sum{};
   for (int i{}; i < static_cast<int>(a.size()); i++)
@@ -70,7 +67,7 @@ T operator*(const std::vector<T> &a, const std::vector<T> &b) {
 // Constant-vector product
 template <typename T> std::vector<T> operator*(T c, const std::vector<T> &a) {
 
-  std::vector<T> result{a.size()};
+  std::vector<T> result(a.size()); // Round parentheses here!
 
   for (int i{}; i < static_cast<int>(a.size()); i++)
     result[i] = c * a[i];
@@ -87,7 +84,7 @@ template <typename T> std::vector<T> operator*(T c, const std::vector<T> &a) {
 
 template <typename T> std::vector<T> operator*(const std::vector<T> &a, T c) {
 
-  std::vector<T> result{a.size()};
+  std::vector<T> result(a.size()); // Round parentheses here!
 
   for (int i{}; i < static_cast<int>(a.size()); i++)
     result[i] = c * a[i];
@@ -104,7 +101,8 @@ template <typename T> std::vector<T> operator*(const std::vector<T> &a, T c) {
 
 template <typename T> std::vector<T> operator/(const std::vector<T> &a, T c) {
 
-  std::vector<T> result{a.size()};
+  std::vector<T> result(a.size()); // Round parentheses here!
+
   for (int i{}; i < static_cast<int>(a.size()); i++)
     result[i] = a[i] / c;
 
@@ -121,8 +119,7 @@ template <typename T> std::vector<T> operator/(const std::vector<T> &a, T c) {
 template <typename T>
 std::vector<T> &operator+=(std::vector<T> &a, const std::vector<T> &b) {
 
-  if (a.size() != b.size())
-    throw "Trying to sum vectors with different sizes";
+  assert(a.size() == b.size());
 
   for (int i{}; i < static_cast<int>(a.size()); i++)
     a[i] += b[i];
@@ -134,8 +131,7 @@ std::vector<T> &operator+=(std::vector<T> &a, const std::vector<T> &b) {
 
 template <typename T>
 std::vector<T> &operator-=(std::vector<T> &a, const std::vector<T> &b) {
-  if (a.size() != b.size())
-    throw "Trying to subtract vectors with different sizes";
+  assert(a.size() == b.size());
 
   for (int i{}; i < static_cast<int>(a.size()); i++)
     a[i] -= b[i];
@@ -146,7 +142,7 @@ std::vector<T> &operator-=(std::vector<T> &a, const std::vector<T> &b) {
 // Handy method to print a vector
 template <typename T> void Print(const std::vector<T> &v) {
   for (auto it : v) {
-    std::cout << *it << " ";
+    std::cout << it << " ";
   }
   std::cout << std::endl;
 }
