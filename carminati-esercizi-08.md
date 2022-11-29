@@ -239,7 +239,7 @@ La figura seguente riporta l'errore accumulato dopo 70 s di integrazione per div
 Si noti come la pendenza della curva sia 1 in una scala log-log, mostrando come l'errore ottenuto sia proporzionale al passo $h$.
 
 
-## Esercizio 9.2 - Risoluzione tramite Runge-Kutta (da consegnare) {#esercizio-9.2}
+# Esercizio 9.2 - Risoluzione tramite Runge-Kutta (da consegnare) {#esercizio-9.2}
 
 Ripetere l'esercizio 9.1 con il metodo di risoluzione di equazioni differenziali di Runge-Kutta (del quarto ordine) e confrontare quindi in condizioni analoghe ($t$ massimo e $h$) la stabilità dei due metodi.
 
