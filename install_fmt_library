@@ -52,6 +52,8 @@ cat > fmtlib.h <<EOF
     #define FMT_HEADER_ONLY
     #include "fmt/format.h"
     #include "fmt/color.h"
+    #include "fmt/os.h"
+    #include "fmt/ranges.h"
 #else
     #if __has_include(<format>)
         // Hurrah, we're using a C++20 compiler!
@@ -62,6 +64,8 @@ cat > fmtlib.h <<EOF
         #define FMT_HEADER_ONLY
         #include "fmt/format.h"
         #include "fmt/color.h"
+        #include "fmt/os.h"
+        #include "fmt/ranges.h"
     #endif
 #endif
 EOF
