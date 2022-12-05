@@ -21,13 +21,16 @@ css:
 | 15 Novembre 2022  | [Ricerca di zeri](carminati-esercizi-06.html)         | [Lezione 6](tomasi-lezione-06.html)                                 |
 | 22 Novembre 2022 | [Quadratura numerica](carminati-esercizi-07.html)     | [Notebook 7](https://ziotom78.github.io/tnds-notebooks/lezione07/)  |
 | 29 Novembre 2022 | [Equazioni differenziali](carminati-esercizi-08.html) | [Notebook 8](https://ziotom78.github.io/tnds-notebooks/lezione08/)  |
+| 6 Dicembre 2022 | Idem                                                  | [Lezione 8](tomasi-lezione-08.html)                                 |
 <!--
-| 13 Dicembre 2022 | Idem                                                  | Idem                                                                |
+| 13 Dicembre 2022 | Idem                                                  | [Lezione 9](tomasi-lezione-09.html)                                 |
 | 20 Dicembre 2022 | [Numeri pseudo-casuali](carminati-esercizi-10.html)   | [Notebook 10](https://ziotom78.github.io/tnds-notebooks/lezione10/) |
 | 10 Gennaio 2022 | Idem                                                  | Idem                                                                |
 | 17 Gennaio 2023  | [Metodi Monte Carlo](carminati-esercizi-11.html)      | [Lezione 11](tomasi-lezione-11.html)                                |
 -->
 </center>
+
+Google form per il seminario finale su C++, Python e Julia: <https://forms.gle/99kR6ZADstXEJZZaA>.
 
 # Suggerimenti vari
 
@@ -53,7 +56,9 @@ Lo script `install_fmt_library` è già fornito nei template degli esercizi forn
 curl https://ziotom78.github.io/tnds-tomasi-notebooks/install_fmt_library | sh
 ```
 
-In alternativa, scaricate questo [file zip](./fmtlib.zip) nella directory dell'esercizio e decomprimetelo. La libreria occupa molto poco spazio, quindi potete copiarla in ogni cartella in cui implementate un esercizio.
+**Importante**: Il comando va dato all'interno della directory in cui codificate l'esercizio. Ciò significa che **ciascuna** delle directory che contiene un esercizio per cui è necessario usare `fmt` deve contenere una copia della libreria. Non preoccupatevi di sprecare spazio, perché la libreria `fmt` occupa pochi centinaia di KB.
+
+Se non avete il comando `curl` o state usando Windows, scaricate questo [file zip](./fmtlib.zip) nella directory di ciascun esercizio in cui prevedete di usare `fmt` e decomprimetelo.
 
 Questo è un esempio che mostra come installare ed usare la libreria:
 
