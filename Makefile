@@ -5,6 +5,7 @@ PANDOC_IMAGINE := $(HOME)/bin/pandoc_imagine.py
 all: \
     tomasi-c++-python-julia.html \
 	tomasi-lezione-11.html \
+	tomasi-lezione-08.html \
 	tomasi-lezione-06.html \
 	tomasi-lezione-05.html \
 	tomasi-lezione-04.html \
