@@ -89,12 +89,12 @@ public:
 
 class OscillatoreArmonico : public FunzioneVettorialeBase {
 public:
-  OscillatoreArmonico(double omega0) : m_omega0(omega0) { }
+  OscillatoreArmonico(double omega0) : m_omega0{omega0} { }
 
   std::vector<double> Eval(double t, const std::vector<double> & x) const override;
 
 private:
-  double m_omega;
+  double m_omega0;
 };
 
 class EquazioneDifferenzialeBase {
