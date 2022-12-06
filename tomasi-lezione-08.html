@@ -134,14 +134,14 @@ in questo contesto</p></li>
 <strong>lenta</strong>! Internamente <code>std::vector</code> crea un
 puntatore a un array:</p>
 <div class="sourceCode" id="cb2"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Possible implementation of std::vector</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="kw">template</span> <span class="op">&lt;</span><span class="kw">typename</span> T<span class="op">&gt;</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> vector <span class="op">{</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  T <span class="op">*</span> <span class="va">m_data</span><span class="op">;</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">size_t</span> <span class="va">m_size</span><span class="op">;</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span><span class="op">:</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  vector<span class="op">(</span><span class="dt">size_t</span> size<span class="op">)</span> <span class="op">:</span> <span class="va">m_size</span><span class="op">{</span>size<span class="op">}</span> <span class="op">{</span> <span class="va">m_data</span> <span class="op">=</span> <span class="kw">new</span> T<span class="op">[</span><span class="va">m_size</span><span class="op">];</span> <span class="op">}</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="op">~</span>vector<span class="op">()</span> <span class="op">{</span> <span class="kw">delete</span><span class="op">[]</span> <span class="va">m_data</span><span class="op">;</span> <span class="op">}</span></span>
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">template</span> <span class="op">&lt;</span><span class="kw">typename</span> T<span class="op">&gt;</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> vector <span class="op">{</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  T <span class="op">*</span> <span class="va">m_data</span><span class="op">;</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">size_t</span> <span class="va">m_size</span><span class="op">;</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span><span class="op">:</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  vector<span class="op">(</span><span class="dt">size_t</span> size<span class="op">)</span> <span class="op">:</span> <span class="va">m_size</span><span class="op">{</span>size<span class="op">}</span> <span class="op">{</span> <span class="va">m_data</span> <span class="op">=</span> <span class="kw">new</span> T<span class="op">[</span><span class="va">m_size</span><span class="op">];</span> <span class="op">}</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="op">~</span>vector<span class="op">()</span> <span class="op">{</span> <span class="kw">delete</span><span class="op">[]</span> <span class="va">m_data</span><span class="op">;</span> <span class="op">}</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="dt">size_t</span> size<span class="op">()</span> <span class="at">const</span> <span class="op">{</span> <span class="cf">return</span> <span class="va">m_size</span><span class="op">;</span> <span class="op">}</span></span>
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  <span class="co">// ...</span></span>
 <span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code></pre></div></li>
 <li><p>Ma <code>new</code> richiede molto lavoro da parte del sistema
@@ -172,9 +172,9 @@ l’esame!)</p></li>
 <section id="svantaggio-3-leggibilità" class="slide level1">
 <h1>Svantaggio #3: leggibilità</h1>
 <ul>
-<li><p>Siccome <code>std::vector</code> viene usato per vettori con un
-numero arbitrario di elementi, è difficile capire su quante dimensioni
-lavori una classe derivata da <code>FunzioneVettorialeBase</code>:</p>
+<li><p>Siccome <code>std::vector</code> può contenere un numero
+variabile di elementi, è difficile capire su quante dimensioni lavori
+una classe derivata da <code>FunzioneVettorialeBase</code>:</p>
 <div class="sourceCode" id="cb4"><pre
 class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">struct</span> FunzioneVettorialeBase <span class="op">{</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">virtual</span> vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> Eval<span class="op">(</span><span class="at">const</span> vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> <span class="op">&amp;</span>x<span class="op">)</span> <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
@@ -195,19 +195,19 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb4-1"><a href="#c
 <section id="la-classe-stdarray" class="slide level1">
 <h1>La classe <code>std::array</code></h1>
 <ul>
-<li><p>Fortunatamente, la libreria standard del C++ offre una classe
-perfetta per i nostri scopi: <code>std::array</code>.</p></li>
+<li><p>La libreria standard offre una classe perfetta per questo:
+<code>std::array</code>.</p></li>
 <li><p>Essa è equivalente ad un array con un numero
 <strong>fissato</strong> di elementi, che vengono controllati in fase di
 compilazione.</p></li>
 <li><p>Una sua possibile implementazione è la seguente:</p>
 <div class="sourceCode" id="cb5"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">template</span> <span class="op">&lt;</span><span class="kw">typename</span> T<span class="op">,</span> <span class="dt">size_t</span> N<span class="op">&gt;</span>  <span class="co">// C++ accepts *types* as well as *values* in templates</span></span>
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">template</span> <span class="op">&lt;</span><span class="kw">typename</span> T<span class="op">,</span> <span class="dt">size_t</span> N<span class="op">&gt;</span>      <span class="co">// C++ templates can be built on types and values</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> array <span class="op">{</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  T <span class="va">m_data</span><span class="op">[</span>N<span class="op">];</span>                   <span class="co">// No pointers, just an array of fixed size</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">const</span> <span class="dt">size_t</span> <span class="va">m_size</span> <span class="op">=</span> N<span class="op">;</span>       <span class="co">// The size is constant, we cannot change it</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span><span class="op">:</span></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="co">// ..</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  T <span class="va">m_data</span><span class="op">[</span>N<span class="op">];</span>                       <span class="co">// No pointers, just an array of fixed size</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span><span class="op">:</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">size_t</span> size<span class="op">()</span> <span class="at">const</span> <span class="op">{</span> <span class="cf">return</span> N<span class="op">;</span> <span class="op">}</span>  <span class="co">// Return the constant N</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="co">// ...</span></span>
 <span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code></pre></div></li>
 </ul>
 </section>
@@ -218,11 +218,11 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb5-1"><a href="#c
 variabile di tipo <code>std::array</code> bisogna specificare non solo
 il tipo ma anche la dimensione:</p>
 <div class="sourceCode" id="cb6"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="bu">std::</span>vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> v<span class="op">(</span><span class="dv">4</span><span class="op">);</span>  <span class="co">// The size is 4, but it can change later</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="bu">std::</span>array<span class="op">&lt;</span><span class="dt">double</span><span class="op">,</span> <span class="dv">4</span><span class="op">&gt;</span> a<span class="op">;</span>   <span class="co">// The size is forced to be 4</span></span>
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="bu">std::</span>vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> v<span class="op">(</span><span class="dv">2</span><span class="op">);</span>  <span class="co">// The size is 2, but it can change later</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="bu">std::</span>array<span class="op">&lt;</span><span class="dt">double</span><span class="op">,</span> <span class="dv">2</span><span class="op">&gt;</span> a<span class="op">;</span>   <span class="co">// The size is forced to be 2</span></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>v<span class="op">.</span>at<span class="op">(</span><span class="dv">0</span><span class="op">)</span> <span class="op">=</span> <span class="fl">1.0</span><span class="op">;</span>    <span class="co">// Both std::vector and std::array can be</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>a<span class="op">.</span>at<span class="op">(</span><span class="dv">0</span><span class="op">)</span> <span class="op">=</span> <span class="fl">2.0</span><span class="op">;</span>    <span class="co">// accessed using [] or .at()</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>v<span class="op">[</span><span class="dv">0</span><span class="op">]</span> <span class="op">=</span> <span class="fl">0.5</span><span class="op">;</span> v<span class="op">.</span>at<span class="op">(</span><span class="dv">1</span><span class="op">)</span> <span class="op">=</span> <span class="fl">1.0</span><span class="op">;</span>    <span class="co">// Both std::vector and std::array can be</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>a<span class="op">[</span><span class="dv">0</span><span class="op">]</span> <span class="op">=</span> <span class="fl">0.7</span><span class="op">;</span> a<span class="op">.</span>at<span class="op">(</span><span class="dv">1</span><span class="op">)</span> <span class="op">=</span> <span class="fl">2.0</span><span class="op">;</span>    <span class="co">// accessed using [] or .at()</span></span>
 <span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>v<span class="op">.</span>push_back<span class="op">(</span><span class="fl">3.14159</span><span class="op">);</span>  <span class="co">// Ok, the array will grow</span></span>
 <span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>a<span class="op">.</span>push_back<span class="op">(</span><span class="fl">2.71828</span><span class="op">);</span>  <span class="co">// ERROR, you cannot use push_back with an array</span></span></code></pre></div></li>
@@ -256,18 +256,20 @@ dimensione.</li>
 <div class="sourceCode" id="cb8"><pre
 class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">template</span> <span class="op">&lt;</span><span class="dt">size_t</span> N<span class="op">&gt;</span>   <span class="co">// Do *not* use «typename» here: it&#39;s a *value*, not a type</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="kw">struct</span> FunzioneVettorialeBase <span class="op">{</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Note that we specify N both in the parameter `x` and in the return type.</span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="co">// This ensures that the dimension is the same for both</span></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="kw">virtual</span> array<span class="op">&lt;</span><span class="dt">double</span> N<span class="op">&gt;</span> Eval<span class="op">(</span><span class="at">const</span> array<span class="op">&lt;</span><span class="dt">double</span> N<span class="op">&gt;</span> <span class="op">&amp;</span>x<span class="op">)</span> <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="kw">struct</span> OscillatoreArmonico <span class="op">:</span> FunzioneVettorialeBase<span class="op">&lt;</span><span class="dv">2</span><span class="op">&gt;</span> <span class="op">{</span></span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>  array<span class="op">&lt;</span><span class="dt">double</span><span class="op">,</span> <span class="dv">2</span><span class="op">&gt;</span> Eval<span class="op">(</span><span class="at">const</span> array<span class="op">&lt;</span><span class="dt">double</span><span class="op">,</span> <span class="dv">2</span><span class="op">&gt;</span> <span class="op">&amp;</span>x<span class="op">)</span> <span class="kw">override</span> <span class="op">{</span></span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>    <span class="co">// If you use the flag -std=c++17 or -std=c++20, you can just write</span></span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>    <span class="co">// return array{x[1], -x[0]};</span></span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> array<span class="op">&lt;</span><span class="dt">double</span><span class="op">,</span> <span class="dv">2</span><span class="op">&gt;{</span>x<span class="op">[</span><span class="dv">1</span><span class="op">],</span> <span class="op">-</span>x<span class="op">[</span><span class="dv">0</span><span class="op">]};</span></span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
-<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code></pre></div>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Before this change, it was:</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="co">// virtual vector&lt;double&gt; Eval(const vector&lt;double&gt; &amp;x) = 0;</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="kw">virtual</span> array<span class="op">&lt;</span><span class="dt">double</span><span class="op">,</span> N<span class="op">&gt;</span> Eval<span class="op">(</span><span class="at">const</span> array<span class="op">&lt;</span><span class="dt">double</span><span class="op">,</span> N<span class="op">&gt;</span> <span class="op">&amp;</span>x<span class="op">)</span> <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Note that we specify N both in the parameter `x` and in the return type.</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  <span class="co">// This ensures that the dimension is the same for both</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="kw">struct</span> OscillatoreArmonico <span class="op">:</span> FunzioneVettorialeBase<span class="op">&lt;</span><span class="dv">2</span><span class="op">&gt;</span> <span class="op">{</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>  array<span class="op">&lt;</span><span class="dt">double</span><span class="op">,</span> <span class="dv">2</span><span class="op">&gt;</span> Eval<span class="op">(</span><span class="at">const</span> array<span class="op">&lt;</span><span class="dt">double</span><span class="op">,</span> <span class="dv">2</span><span class="op">&gt;</span> <span class="op">&amp;</span>x<span class="op">)</span> <span class="kw">override</span> <span class="op">{</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>    <span class="co">// If you use the flag -std=c++17 or -std=c++20, you can just write</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>    <span class="co">// return array{x[1], -x[0]};</span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> array<span class="op">&lt;</span><span class="dt">double</span><span class="op">,</span> <span class="dv">2</span><span class="op">&gt;{</span>x<span class="op">[</span><span class="dv">1</span><span class="op">],</span> <span class="op">-</span>x<span class="op">[</span><span class="dv">0</span><span class="op">]};</span></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code></pre></div>
 </section>
 <section id="eqdiff" class="slide level1">
 <h1><code>EqDiff</code></h1>
@@ -312,7 +314,7 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb10-1"><a href="#
 <dl>
 <dt>Velocità</dt>
 <dd>
-il codice è 5 volte più veloce
+il codice è molto più veloce
 </dd>
 <dt>Controlli</dt>
 <dd>

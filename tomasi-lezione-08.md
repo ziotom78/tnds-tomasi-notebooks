@@ -41,7 +41,6 @@ css:
 -   Creare un nuovo oggetto `std::vector` è un'operazione **lenta**! Internamente `std::vector` crea un puntatore a un array:
 
     ```c++
-    // Possible implementation of std::vector
     template <typename T>
     class vector {
       T * m_data;
@@ -49,6 +48,7 @@ css:
     public:
       vector(size_t size) : m_size{size} { m_data = new T[m_size]; }
       ~vector() { delete[] m_data; }
+	  size_t size() const { return m_size; }
       // ...
     };
     ```
@@ -75,7 +75,7 @@ css:
 
 # Svantaggio #3: leggibilità
 
--   Siccome `std::vector` viene usato per vettori con un numero arbitrario di elementi, è difficile capire su quante dimensioni lavori una classe derivata da `FunzioneVettorialeBase`:
+-   Siccome `std::vector` può contenere un numero variabile di elementi, è difficile capire su quante dimensioni lavori una classe derivata da `FunzioneVettorialeBase`:
 
     ```c++
     struct FunzioneVettorialeBase {
@@ -95,19 +95,19 @@ css:
 
 # La classe `std::array`
 
--   Fortunatamente, la libreria standard del C++ offre una classe perfetta per i nostri scopi: `std::array`.
+-   La libreria standard offre una classe perfetta per questo: `std::array`.
 
 -   Essa è equivalente ad un array con un numero **fissato** di elementi, che vengono controllati in fase di compilazione.
 
 -   Una sua possibile implementazione è la seguente:
 
     ```c++
-    template <typename T, size_t N>  // C++ accepts *types* as well as *values* in templates
+    template <typename T, size_t N>      // C++ templates can be built on types and values
     class array {
-      T m_data[N];                   // No pointers, just an array of fixed size
-      const size_t m_size = N;       // The size is constant, we cannot change it
+      T m_data[N];                       // No pointers, just an array of fixed size
     public:
-      // ..
+      size_t size() const { return N; }  // Return the constant N
+      // ...
     };
     ```
 
@@ -116,11 +116,11 @@ css:
 -   A differenza di `std::vector`, nel dichiarare una variabile di tipo `std::array` bisogna specificare non solo il tipo ma anche la dimensione:
 
     ```c++
-    std::vector<double> v(4);  // The size is 4, but it can change later
-    std::array<double, 4> a;   // The size is forced to be 4
+    std::vector<double> v(2);  // The size is 2, but it can change later
+    std::array<double, 2> a;   // The size is forced to be 2
 
-    v.at(0) = 1.0;    // Both std::vector and std::array can be
-    a.at(0) = 2.0;    // accessed using [] or .at()
+    v[0] = 0.5; v.at(1) = 1.0;    // Both std::vector and std::array can be
+    a[0] = 0.7; a.at(1) = 2.0;    // accessed using [] or .at()
 
     v.push_back(3.14159);  // Ok, the array will grow
     a.push_back(2.71828);  // ERROR, you cannot use push_back with an array
@@ -148,9 +148,11 @@ css:
 ```c++
 template <size_t N>   // Do *not* use «typename» here: it's a *value*, not a type
 struct FunzioneVettorialeBase {
+  // Before this change, it was:
+  // virtual vector<double> Eval(const vector<double> &x) = 0;
+  virtual array<double, N> Eval(const array<double, N> &x) = 0;
   // Note that we specify N both in the parameter `x` and in the return type.
   // This ensures that the dimension is the same for both
-  virtual array<double N> Eval(const array<double N> &x) = 0;
 };
 
 struct OscillatoreArmonico : FunzioneVettorialeBase<2> {
@@ -205,7 +207,7 @@ std::array<T, N> operator+(const std::array<T, N> &a, const std::array<T, N> &b)
 La classe `std::array` risolve tutti i problemi di `std::vector`:
 
 Velocità
-: il codice è 5 volte più veloce
+: il codice è molto più veloce
 
 Controlli
 : le dimensioni sono controllate in fase di compilazione
