@@ -40,9 +40,7 @@ A partire dal Gennaio 2022, Repl.it non fornisce più una serie di programmi nel
 
 Se avete creato una Repl per conto vostro e volete configurarla esattamente come quelle usate a lezione, eseguite questo comando dalla console della nuova Repl:
 
-```sh
-curl -s https://ziotom78.github.io/tnds-tomasi-notebooks/install_standard_packages | sh
-```
+<p><input type="text" value="curl -s https://ziotom78.github.io/tnds-tomasi-notebooks/install_standard_packages | sh" id="installStdPackages" readonly="1" size="60"><button onclick='copyFmtInstallationScript("installStdPackages")'>Copia</button></p>
 
 Una volta eseguito, ROOT e Gnuplot, più altri utili programmi, saranno installati ed operativi.
 
@@ -52,9 +50,7 @@ Siete invitati ad impratichirvi con la libreria `fmt`, che potete installare usa
 
 Lo script `install_fmt_library` è già fornito nei template degli esercizi forniti per il turno T2, ma potete installarlo anche in altre Repl con questo comando:
 
-```
-curl https://ziotom78.github.io/tnds-tomasi-notebooks/install_fmt_library | sh
-```
+<p><input type="text" value="curl https://ziotom78.github.io/tnds-tomasi-notebooks/install_fmt_library | sh" id="installFmt" readonly="1" size="60"><button onclick='copyFmtInstallationScript("installFmt")'>Copia</button></p>
 
 **Importante**: Il comando va dato all'interno della directory in cui codificate l'esercizio. Ciò significa che **ciascuna** delle directory che contiene un esercizio per cui è necessario usare `fmt` deve contenere una copia della libreria. Non preoccupatevi di sprecare spazio, perché la libreria `fmt` occupa pochi centinaia di KB.
 
@@ -70,8 +66,6 @@ Questo è un esempio che mostra come installare ed usare la libreria:
 
 Se avete difficoltà ad usare ROOT, potete interfacciare il vostro codice a [Gnuplot](http://www.gnuplot.info/) mediante la libreria [gplot++](https://github.com/ziotom78/gplotpp): è sufficiente scaricare il file [`gplot++.h`](https://raw.githubusercontent.com/ziotom78/gplotpp/master/gplot%2B%2B.h), oppure eseguire questo comando:
 
-```
-curl 'https://raw.githubusercontent.com/ziotom78/gplotpp/master/gplot%2B%2B.h' > gplot++.h
-```
+<p><input type="text" value="curl 'https://raw.githubusercontent.com/ziotom78/gplotpp/master/gplot%2B%2B.h' > gplot++.h" id="installGplot" readonly="1" size="60"><button onclick='copyFmtInstallationScript("installGplot")'>Copia</button></p>
 
 Ricordate che la libreria funziona a patto che abbiate installato Gnuplot sul vostro computer.
