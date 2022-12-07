@@ -26,12 +26,15 @@ css:
 -   Se vi è più comodo, potete ottenere una versione PDF producendola da soli: basta aggiungere `?print-pdf` alla fine della URL e stampare la pagina da browser in un file PDF (vedi le [istruzioni dettagliate](https://revealjs.com/pdf-export/)).
 
 
-# Avvertenza generale
+# Avvertenze generale
 
--   *Non* fare copia-e-incolla da slide come queste! Trascrivere a mano il codice è più utile, perché vi consente di notare alcune sottigliezze sintattiche (es., dove vengono usati i punti e virgola).
+-   *Non* fare copia-e-incolla da slide come queste! Trascrivere a mano il codice è più utile, perché vi consente di notare alcune sottigliezze sintattiche (es., dove vengono usati i punti e virgola). In generale, trascrivere codice è un ottimo allenamento per imparare a scrivere programmi.
 
--   In generale, trascrivere codice è un ottimo allenamento per imparare a scrivere programmi.
+-   Create un segnalibro per il sito <https://cppreference.com/>, è indispensabile quando si programma in C++:
 
+    1. Contiene la documentazione completa del linguaggio, suddivisa nelle varie versioni (C++11, C++14, C++17, C++20, C++23…)
+    
+    2. Contiene la documentazione e gli esempi d'uso per tutte le funzioni della libreria standard del C++
 
 # Esercizi per oggi
 
