@@ -12,6 +12,9 @@ cat > "$SLUG_DIR/replit.nix" <<EOF
         deps = [
                 pkgs.clang_12
                 pkgs.ccls
+                pkgs.ncdu
+                pkgs.hyperfine
+                pkgs.tldr
                 pkgs.gdb
                 pkgs.gnumake
                 pkgs.cmake
