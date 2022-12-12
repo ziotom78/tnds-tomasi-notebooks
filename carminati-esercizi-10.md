@@ -267,14 +267,17 @@ Per il calcolo di integrali con metodi MonteCarlo si può decidere di scrivere u
 ```c++
 class IntegralMC {
 public:
-  IntegralMC(unsigned int seed) : m_myrand{new RandomGen(seed)} {}
+  // Take the seed
+  IntegralMC(unsigned int seed) : m_myrand{seed} {}
+  // Copy an existing generator
+  IntegralMC(const RandomGen & gen) : m_myrand{gen} {}
   ~IntegralMCQ {}
   double IntegraleHoM(double xmin, double xmax, double fmax,
                       FunzioneBase & f, int punti);
   double IntegraleAVE(double xmin, double xmax, FunzioneBase & f, int punti);
 
 private:
-  RandomGen * m_myrand;
+  RandomGen m_myrand;
 }
 ```
 

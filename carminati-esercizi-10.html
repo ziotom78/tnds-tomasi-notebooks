@@ -563,15 +563,18 @@ seguente:</p>
 <div class="sourceCode" id="cb7"><pre
 class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> IntegralMC <span class="op">{</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span><span class="op">:</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  IntegralMC<span class="op">(</span><span class="dt">unsigned</span> <span class="dt">int</span> seed<span class="op">)</span> <span class="op">:</span> <span class="va">m_myrand</span><span class="op">{</span><span class="kw">new</span> RandomGen<span class="op">(</span>seed<span class="op">)}</span> <span class="op">{}</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="op">~</span>IntegralMCQ <span class="op">{}</span></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> IntegraleHoM<span class="op">(</span><span class="dt">double</span> xmin<span class="op">,</span> <span class="dt">double</span> xmax<span class="op">,</span> <span class="dt">double</span> fmax<span class="op">,</span></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>                      FunzioneBase <span class="op">&amp;</span> f<span class="op">,</span> <span class="dt">int</span> punti<span class="op">);</span></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> IntegraleAVE<span class="op">(</span><span class="dt">double</span> xmin<span class="op">,</span> <span class="dt">double</span> xmax<span class="op">,</span> FunzioneBase <span class="op">&amp;</span> f<span class="op">,</span> <span class="dt">int</span> punti<span class="op">);</span></span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="kw">private</span><span class="op">:</span></span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>  RandomGen <span class="op">*</span> <span class="va">m_myrand</span><span class="op">;</span></span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Take the seed</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  IntegralMC<span class="op">(</span><span class="dt">unsigned</span> <span class="dt">int</span> seed<span class="op">)</span> <span class="op">:</span> <span class="va">m_myrand</span><span class="op">{</span>seed<span class="op">}</span> <span class="op">{}</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Copy an existing generator</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  IntegralMC<span class="op">(</span><span class="at">const</span> RandomGen <span class="op">&amp;</span> gen<span class="op">)</span> <span class="op">:</span> <span class="va">m_myrand</span><span class="op">{</span>gen<span class="op">}</span> <span class="op">{}</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  <span class="op">~</span>IntegralMCQ <span class="op">{}</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> IntegraleHoM<span class="op">(</span><span class="dt">double</span> xmin<span class="op">,</span> <span class="dt">double</span> xmax<span class="op">,</span> <span class="dt">double</span> fmax<span class="op">,</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>                      FunzioneBase <span class="op">&amp;</span> f<span class="op">,</span> <span class="dt">int</span> punti<span class="op">);</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> IntegraleAVE<span class="op">(</span><span class="dt">double</span> xmin<span class="op">,</span> <span class="dt">double</span> xmax<span class="op">,</span> FunzioneBase <span class="op">&amp;</span> f<span class="op">,</span> <span class="dt">int</span> punti<span class="op">);</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="kw">private</span><span class="op">:</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>  RandomGen <span class="va">m_myrand</span><span class="op">;</span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 <h2 id="calcolo-di-integrali-con-il-metodo-della-media">Calcolo di
 integrali con il metodo della media</h2>
 <p>Come discusso a lezione, il metodo della media consiste nel valutare
