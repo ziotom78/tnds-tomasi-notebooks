@@ -58,7 +58,7 @@ Se non avete il comando `curl` o state usando Windows, scaricate questo [file zi
 Questo è un esempio che mostra come installare ed usare la libreria:
 
 <center>
-<asciinema-player src="asciinema/install-fmt-94x25.cast" cols="94" rows="25" font-size="medium"></asciinema-player>
+  <script id="asciicast-FolwvNAVKQTqGXQs4grz4qjFk" src="https://asciinema.org/a/FolwvNAVKQTqGXQs4grz4qjFk.js" async></script>
 </center>
 
 ## Gplot++ {#gplotinstall}
