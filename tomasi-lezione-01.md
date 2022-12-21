@@ -116,10 +116,25 @@ Potete svolgere gli esercizi in uno dei modi seguenti:
 
 -   **Non** premete quello che sembra essere il pulsante on/off del monitor, perché in realtà **spegne il computer** (e manda una segnalazione al centro di calcolo).
 
--   Vi consiglio di usare come editor [Visual Studio Code](https://code.visualstudio.com/), che è installato sui computer del laboratorio.
+-   Vi consiglio di usare come editor [Visual Studio Code](https://code.visualstudio.com/), che è installato sui computer del laboratorio. Se usate questi computer, configuratelo **subito** con lo script
 
--   Potete scaricare ed installare Visual Studio Code anche sul vostro portatile: è gratuito e disponibile per Windows, Linux e Mac OS X.
+    ```
+    /home/comune/labTNDS_programmi/configure_vscode.py
+    ```
+    
+    altrimenti riempirà tutta la vostra quota disco appena iniziate ad usarlo, e il computer inizierà a non funzionare più.
 
+
+# Usare Visual Studio Code
+    
+-   Potete scaricare ed installare Visual Studio Code anche sul vostro portatile: è gratuito e disponibile per Windows, Linux e Mac OS X. Per configurarlo in modo che sia usabile con programmi C/C++, eseguite dal terminale del vostro computer il comando
+
+    ```
+    code --install-extension ms-vscode.cpptools
+    ```
+
+    (Attenzione, se avete installato «Code OSS» il comando non funziona, occorre proprio la versione rilasciata da Microsoft per installare questa estensione).
+    
 -   Di seguito c'è un breve filmato che vi mostra come scrivere ed eseguire un programma di esempio. Visual Studio Code presenta numerosi *plugin* per semplificare lo sviluppo; li vedremo meglio durante il corso.
 
 ---
@@ -140,12 +155,14 @@ dal terminale:
 
 -   Dovete configurare una connessione di tipo «SSH» a `tolab.fisica.unimi.it`, specificando il vostro nome utente (solitamente `nome.cognome`).
 
+-   È un'ottima soluzione anche se volete sviluppare sul **vostro** computer Windows usando WSL: in questo caso MobaXTerm permetterà di aprire finestre grafiche in cui mostrare i vostri plot, quando introdurremo i comandi grafici.
+
 
 # Come usare Repl.it
 
 -   Una soluzione che non richiede di installare nulla è [Repl.it](https://replit.com/~), un ambiente di sviluppo usabile da browser.
 
--   Durante l'anno scorso abbiamo svolto tutto il laboratorio usando Repl.it, quindi è fattibile impiegarlo per tutte le lezioni, anche se siete in presenza…
+-   È stato già usato negli anni passati, quindi è fattibile impiegarlo per questo corso…
 
 -   …ma il sito non si è sempre dimostrato affidabile: a volte resta offline, altre volte è estremamente lento.
 
@@ -171,16 +188,11 @@ dal terminale:
 
 # Uso di `#define`
 
--   Ogni anno si vedono studenti usare `#define` per definire costanti nel codice:
+-   Ogni anno si vedono studenti usare `#define` per definire costanti nel codice, ma è meglio usare un `const`:
 
     ```c++
-    #define g 9.81
-    ```
-    
--   Questo è sconsigliabile. È meglio definire un `const`:
-
-    ```c++
-    const double g = 9.81;   // I can explicitly declare the type!
+    #define g 9.81           // Don't do this!
+    const double g = 9.81;   // Much better, I can explicitly declare the type
     ```
     
 -   Con `#define` ci possono essere problemi con la precedenza degli operatori:
@@ -208,10 +220,10 @@ dal terminale:
 
     ```c++
     int main(int argc, char ** argv);
-    // My personal favorite, I use this in the videos I linked before
+    // My personal favorite
     int main(int argc, char *argv[]);
     // You can pick whatever name you want
-    int main(int num_of_arguments, const char *args[]);
+    int main(int num_of_arguments, char *args[]);
     ```
 
 ---
