@@ -48,7 +48,7 @@ css:
     public:
       vector(size_t size) : m_size{size} { m_data = new T[m_size]; }
       ~vector() { delete[] m_data; }
-	  size_t size() const { return m_size; }
+      size_t size() const { return m_size; }
       // ...
     };
     ```
@@ -214,6 +214,13 @@ Controlli
 
 Leggibilità
 : le dimensioni diventano esplicite
+
+
+# Svantaggi di `std::array`
+
+-   Il numero di elementi è fisso, e a differenza di `std::vector` non esiste il metodo `push_back`;
+
+-   Gli array sono allocati nella memoria *stack*, che è limitata. Dovrebbero essere usati solo se il numero di elementi **non supera qualche decina**.
 
 
 # Velocità

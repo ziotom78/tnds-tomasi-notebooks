@@ -326,6 +326,17 @@ le dimensioni diventano esplicite
 </dd>
 </dl>
 </section>
+<section id="svantaggi-di-stdarray" class="slide level1">
+<h1>Svantaggi di <code>std::array</code></h1>
+<ul>
+<li><p>Il numero di elementi è fisso, e a differenza di
+<code>std::vector</code> non esiste il metodo
+<code>push_back</code>;</p></li>
+<li><p>Gli array sono allocati nella memoria <em>stack</em>, che è
+limitata. Dovrebbero essere usati solo se il numero di elementi
+<strong>non supera qualche decina</strong>.</p></li>
+</ul>
+</section>
 <section id="velocità" class="slide level1">
 <h1>Velocità</h1>
 <ul>
