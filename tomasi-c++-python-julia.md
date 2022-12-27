@@ -173,14 +173,14 @@ for (int i = 0; i < n; ++i)
 </td>
 <td>
 ```asm
-    mov  ecx, [n]      ; ecx ← n
-    xor  eax, eax      ; eax ← 0
-LoopTop:
-    cmp  eax, ecx      ; if eax >= ecx…
-    jge  LoopEnd       ; …then go to LoopEnd
+    mov  ecx, [n]  ; ecx ← n
+    xor  eax, eax  ; eax ← 0
+LoopTop:  ; This is a *label*, not an instruction
+    cmp  eax, ecx  ; if eax >= ecx…
+    jge  LoopEnd   ; …then go to LoopEnd
     ; (loop body: DO NOT MODIFY ecx NOR eax!)
-    add  eax, 1        ; eax ← eax + 1
-    jmp  LoopTop
+    add  eax, 1    ; eax ← eax + 1
+    jmp  LoopTop   ; Make the CPU jump back by `n` bytes
 LoopEnd:
     ; (etc.)
 ```
@@ -329,7 +329,7 @@ print(sum)
 -   Consideriamo ora questo programma Python:
 
     ```python
-    def add(a, b):
+    def add(a, b):        # Type for `a` and `b` is not specified!
         return a + b
 
     print(add(1, 3))      # Result: 4
@@ -431,9 +431,9 @@ void binary_add(PyObject * val1,
 
 -   Se le variabili non hanno tipo, sono possibili molti errori
 
--   Gli errori capitano durante l’esecuzione, non durante la
-    compilazione: è quindi più facile che vada in crash un programma
-    Python piuttosto che un programma C++. Esempio:
+-   Quasi tutti gli errori capitano durante l’esecuzione: è quindi più
+    facile che vada in crash un programma Python piuttosto che un
+    programma C++. Esempio:
 
     ```shell
     $ python3 test.py
@@ -444,6 +444,11 @@ void binary_add(PyObject * val1,
     ```
 
 -   **I programmi sono molto più lenti del C++!**
+
+    ```python
+    for i in range(1000):   # Run this for i=0 to i=999
+        x[i] = a[i] + b[i]  # Every time Python checks the types of `x`, `a`, `b`
+    ```
 
 # Comodità di Python
 
@@ -529,7 +534,7 @@ upper_flange         (T = 301.76 K)
 -   Linguaggio molto recente (versione 0.1 rilasciata a Febbraio 2013)
 -   Pensato espressamente per il calcolo scientifico
 -   Veloce come C++ e facile come Python…?
--   Versione corrente: 1.7.2
+-   Versione corrente: 1.8.4
 
 # Dove si colloca Julia?
 
@@ -624,7 +629,7 @@ $ julia
   (_)     | (_) (_)    |
    _ _   _| |_  __ _   |  Type "?" for help, "]?" for Pkg help.
   | | | | | | |/ _` |  |
-  | | |_| | | | (_| |  |  Version 1.7.1 (2021-12-22)
+  | | |_| | | | (_| |  |  Version 1.8.4 (2022-12-23)
  _/ |\__'_|_|_|\__'_|  |  Official https://julialang.org/ release
 |__/                   |
 
@@ -683,8 +688,135 @@ julia> mysum(3+2im, 4-3im)      # Numeri complessi
 7 - 1im
 ```
 
+# Abbandono della programmazione OOP
 
-# Macro
+# OOP e Julia
+
+-   Julia **non** implementa i costrutti *object-oriented* del C++: non ci sono classi né metodi virtuali.
+
+-   L'approccio OOP si è infatti dimostrato negli anni poco adatto per il calcolo scientifico.
+
+-   Mostriamo le sue limitazioni usando come esempio il calcolo degli integrali con i metodi deterministici (trapezi, Simpson…):
+
+    ```c++
+    class Integral {
+    public:
+      double integrate(double a, double b, unsigned int nstep, FunzioneBase &f) {
+        checkInterval(a, b);
+        return calculate(nstep, f);
+      }
+
+	  // ...
+	};
+    ```
+
+# Propagazione degli errori
+
+-   Abbiamo visto che per studiare come gli errori si propagano nel codice, un buon metodo è quello di eseguire una simulazione Monte Carlo.
+
+-   Ma queste simulazioni possono essere molto lente da eseguire, soprattutto se il modello è complesso!
+
+-   (Esempio personale: simulare la presa dati della missione spaziale LiteBIRD richiede alcune settimane per un Monte Carlo di 50 campioni!)
+
+-   Per certi calcoli sarebbe sufficiente la propagazione degli errori!
+
+# La classe `Measurement`
+
+```c++
+struct Measurement {
+    double value;
+    double error;
+};
+
+Measurement operator+(Measurement a, Measurement b) {
+  return Measurement{a.value + b.value, sqrt(pow(a.error, 2) + pow(b.error, 2))};
+}
+
+// Do the same for the other operators: -, *, /, sin, cos…
+```
+
+# Integrali e `Measurement`
+
+-   Supponiamo ora che voglia calcolare l'integrale
+
+    $$
+    I = \int_a^b f(x)\,\mathrm{d}x,
+    $$
+    
+    ma che gli estremi $a$ e $b$ siano noti con una certa barra d'errore. Anziché fare un Monte Carlo, potrei usare `Measurement`…
+    
+-   …però non posso usarlo con la classe `Integral`, perché essa ammette solo i `double`!
+
+    ```c++
+    double Integral::integrate(double a, double b, unsigned int nstep, FunzioneBase &f);
+    ```
+
+# Soluzione
+
+-   Se `Integral::integrate` fosse una funzione di libreria (ad esempio, una classe di ROOT), questo chiuderebbe la questione: non posso usare `Measurement` con essa!
+
+-   Se invece fossi **io** l'autore di `Integral::integrate`, potrei allora modificare il codice. Ma così non potrei più compilare i miei vecchi programmi che usavano la versione con i `double`.
+
+-   Potrei fare una copia della classe e modificare quella, ma se in futuro correggessi bug o apportassi miglioramenti, dovrei ricordarmi di aggiornare entrambe.
+
+# Passo successivo
+
+-   Supponiamo ora di aver implementato una classe `UnitValue` che combini valori e unità di misura, e ne verifichi la consistenza:
+
+    ```c++
+	UnitValue speed{2.0, "m/s"};
+    UnitValue start_pos{3.5, "m"};
+    UnitValue time{6.0, "s"};
+
+    // Error, it should have been speed * time, not speed / time
+    UnitValue final_pos{start_pos + speed / time};
+    ```
+    
+-   Mi piacerebbe usarla insieme alla mia classe `Measurement` che propaga gli errori, ma non posso: sia `value` che `error` sono variabili `double`!
+
+-   Se però modifico `Measurement`, il mio programma che lo usava con `Integral::integra` non funziona più!
+
+# La soluzione di Julia
+
+-   Ma in Julia non devo definire il tipo dei parametri: è quindi molto più semplice usare tipi che gestiscano la propagazione degli errori o le unità di misura in funzioni già scritte.
+
+-   In effetti, queste due librerie esistono già: sono [Measurements.jl](https://github.com/JuliaPhysics/Measurements.jl) e [Unitful.jl](https://painterqubits.github.io/Unitful.jl/stable/), ed è facilissimo combinarle insieme.
+
+    ```julia
+    using Measurements, Unitful
+    
+    speed = (2.0 ± 0.1)u"m/s"    # Use 'u' followed by a string to define the unit
+    start_pos = (3.5 ± 0.1)u"m"
+    time = (6.0 ± 0.5)u"s"
+
+    final_pos = start_pos + speed / time
+    # ERROR: DimensionError: 3.5 ± 0.1 m and 0.333 ± 0.032 m s^-2
+    #        are not dimensionally compatible.
+    
+    final_pos = start_pos + speed * time    # Ok, the result is 15.5 ± 1.2 m
+    ```
+
+# La soluzione del C++
+
+-   In realtà, anche in C++ è possibile ottenere la versatilità di Julia, ma bisogna abbandonare l'approccio OOP.
+
+-   Se si definisse `UnitValue` come una classe template, si potrebbe combinare con la classe `Measurement`:
+
+    ```c++
+    template<typename T> struct UnitValue {
+	    T value;
+	    std::string unit;
+	};
+
+	UnitValue start_pos{Measurement{2.0, 0.1}, "m"};
+	// …and so on
+	```
+    
+-   Di fatto, le librerie scientifiche moderne in C++ non usano più approcci OOP come ROOT, ma sono basate sui template: ad esempio, [Armadillo](https://arma.sourceforge.net/).
+
+# Omoiconicità di Julia
+
+# Julia e le macro
 
 -   Julia è un linguaggio *omoiconico* (“medesima rappresentazione”), che significa che codice e variabili hanno la stessa rappresentazione.
 
@@ -779,52 +911,99 @@ end
 
 -   Possono quindi essere usate per modificare del codice presente nel file sorgente, o addirittura per *generarlo automaticamente*
 
--   Consideriamo per esempio un codice C++ che calcola la derivata di una funzione:
+-   Ma a cosa può servire una caratteristica simile? Dopotutto, sono due anni che programmate in C++ e non ne avete mai avuto bisogno…
+
+# [Latexify.jl](https://github.com/korsbo/Latexify.jl)
+
+-   La libreria [Latexify](https://github.com/korsbo/Latexify.jl) traduce la definizione di una funzione Julia in un'espressione LaTeX, che può essere visualizzata con la funzione `render`:
+
+    ```julia
+    julia> latex_str = @latexrun f(x; y=2) = (x + 2) / y - 1
+    julia> println(latex_str)
+    L"$f\left( x; y = 2 \right) = \frac{x + 2}{y} - 1$"
+    julia> render(latex_str)
+    ```
+    
+    <center>
+    ![](images/latexify-example.png)
+    </center>
+    
+-   Il modo in cui `@latexrun` opera è quello di esaminare pezzo per pezzo l'espressione, e tradurre le sue operazioni in simboli LaTeX.
+
+-   È utilissima per verificare una formula matematica complessa.
+
+# Gestire `argc` e `argv`
+
+-   Un'altra bella applicazione dell'omoiconicità è la generazione di interfacce da linea di comando.
+
+-   Riprendiamo l'esercizio 6.2 (ricerca degli zeri), che funzionava così:
+
+    ```
+    $ ./esercizio6.2 0 3 100 1e-5
+    Zero: 0.33333
+    ```
+    
+-   Il codice all'inizio del `main` era il seguente:
 
     ```c++
-    double der(double (*f)(double), double x, double h = 1e-6) {
-        return (f(x + h) - f(x)) / h;
-    }
+	if (argc != 5) {
+	  std::cerr << "Error, 5 parameters are needed: <a> <b> <nstep_max> <prec>\n";
+	  return 1;
+	}
+
+    double a = std::stod(argv[1]);
+    double b = std::stod(argv[2]);
+    int nsteps_max = std::stoi(argv[3]);
+    double prec = std::stod(argv[4]);  // Many students have used `stoi` here…
     ```
+
+# Generare il `main`
+
+-   Julia non è adatto per scrivere programmi da linea di comando, così mi baserò su [Nim](https://nim-lang.org/), un altro linguaggio «omoiconico».
+
+-   La libreria [cligen](https://github.com/c-blake/cligen) di Nim implementa una macro che, se fosse scritta per il C++, si userebbe così:
+
+    ```c++
+	int run_program(double a, double b, int nsteps_max, double prec) {
+	  // Here comes my program
+	}
+
+    // Macro call… but C++ has not them, so let's mimick Julia's syntax
+    @define_main(run_program);
+    ```
+    
+    La macro `@define_main` scansiona i parametri accettati da `run_program` e genera automaticamente il `main`, con le chiamate a `stod` e a `stoi` nell'ordine corretto; se si usa `--help`, mostra pure un aiuto!
 
 ---
 
--   Il codice macchina generato da GCC è più o meno il seguente:
+```
+$ ./esercizio6.2 --help
+Usage:
+  fun [REQUIRED,optional-params] 
+An API call doc comment
+Options:
+  -h, --help                           print this cligen-erated help
+  --help-syntax                        advanced: prepend,plurals,..
+  -a=, --a=           float  REQUIRED  set a
+  -b=, --b=           float  REQUIRED  set b
+  -n=, --nsteps-max=  int    REQUIRED  set nsteps_max
+  -p=, --prec=        float  REQUIRED  set prec
+  
+$ ./esercizio6.2 -a=0 -b=3 --nsteps-max=100 --prec=1e-5
+Zero: 0.33333
 
-    ```asm
-    movsd   xmm0, QWORD PTR [rsp+24]  ; xmm0 ← x
-    movsd   xmm1, QWORD PTR [rsp+16]  ; xmm0 ← h
-    addsd   xmm0, xmm1                ; xmm0 ← x + h
-    call    rdi                       ; xmm0 ← f(x + h)
-    movsd   xmm3, QWORD PTR [rsp+24]  ; xmm3 ← x
-    movsd   QWORD PTR [rsp+8], xmm0   ; [rsp+8] ← xmm0 = f(x + h)
-    movapd  xmm0, xmm3                ; xmm0 ← xmm3 = x
-    call    rdi                       ; xmm0 ← f(x)
-    movsd   xmm2, QWORD PTR [rsp+8]   ; xmm2 ← f(x + h)
-    movsd   xmm1, QWORD PTR [rsp+16]  ; xmm1 ← h
-    subsd   xmm2, xmm0                ; xmm2 ← xmm2 - xmm0 = f(x + h) - f(x)
-    divsd   xmm2, xmm1                ; xmm2 ← xmm2 / xmm1 = (f(x + h) - f(x)) / h
-    ```
+$ ./esercizio6.2 0 3 100 1e-5
+Zero: 0.33333
+$ 
+```
 
--   Il compilatore non può fare molto altro, perché non conosce la forma *analitica* della funzione `f`: questo codice macchina viene quindi eseguito anche per funzioni dalla derivata banale, come $f(x) = 2x + 1$.
+# Altre applicazioni
 
-# Derivate in Julia
+-   Una volta che si ha a disposizione un linguaggio omoiconico, le possibilità sono illimitate
 
--   La libreria `Zygote` calcola derivate *analiticamente*:
+-   Un campo in cui Julia sta prendendo sempre più piede è quello dell'intelligenza artificiale
 
-    ```julia
-    using Zygote       # See https://arxiv.org/abs/1810.07951
-
-    g(x) = 2x + 1
-    println(g(1))      # Print 3
-    println(g'(1))     # Print 2 (derivative of g at x=1)
-    @code_llvm g'(1)
-    # define double @"julia_#59_2736"(i64 signext %0) #0 {
-    #   ret double 2.000000e+00
-    # }
-    ```
-
--   `Zygote` usa un algoritmo, chiamato *reverse-mode algorithmic differentiation*, che è in grado di calcolare le derivate anche se nella funzione `g` si usano costrutti come cicli `while` o `for`!
+-   Anche la fisica teorica e computazionale sono due campi in cui Julia si sta affermando sempre di più
 
 # Approfondimento di Julia
 
