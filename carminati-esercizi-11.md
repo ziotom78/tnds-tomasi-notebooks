@@ -22,7 +22,7 @@ $$
 
 L'esperienza dello spettrometro a prisma si propone di misurare l'indice di rifrazione del materiale di un prisma per le diverse lunghezze d'onda di una lampada al mercurio onde determinare i parametri A e B che caratterizzano tale materiale.
 
-L'apparato sperimentale consiste in un goniometro sul quale viene posizionato il prisma. Una lampada a vapori di mercurio viene posizioneta da un lato del canocchiale con due collimatori per produrre un fascio luminoso che incide sul prisma. Il fascio di luce riflesso o rifratto viene osservato tramite un altro canocchiale. Gli angoli corrispondeni all'orientamento del supporto sul goniometro ed alla posizione dei canocchiali sono leggibili su di un nonio.
+L'apparato sperimentale consiste in un goniometro sul quale viene posizionato il prisma. Una lampada a vapori di mercurio viene posizionata da un lato del canocchiale con due collimatori per produrre un fascio luminoso che incide sul prisma. Il fascio di luce riflesso o rifratto viene osservato tramite un altro canocchiale. Gli angoli corrispondeni all'orientamento del supporto sul goniometro ed alla posizione dei canocchiali sono leggibili su di un nonio.
 
 ![](http://labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/figure/SchemaPrisma.png)
 
