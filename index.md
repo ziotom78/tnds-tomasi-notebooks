@@ -23,10 +23,9 @@ css:
 | 29 Novembre 2022 | [Equazioni differenziali](carminati-esercizi-08.html) | [Notebook 8](https://ziotom78.github.io/tnds-notebooks/lezione08/) |
 | 6 Dicembre 2022  | Idem                                                  | [Slides addizionali per la lezione 8](tomasi-lezione-08.html)      |
 | 13 Dicembre 2022 | [Numeri pseudo-casuali e integrali](carminati-esercizi-10.html)   | [Notebook 10](https://ziotom78.github.io/tnds-notebooks/lezione10/) |
-<!--
 | 20 Dicembre 2022 | Idem                                                  | Idem                                                                |
-| 17 Gennaio 2023  | [Metodi Monte Carlo](carminati-esercizi-11.html)      | [Lezione 11](tomasi-lezione-11.html)                                |
--->
+| 10 Gennaio 2023  | [Metodi Monte Carlo](carminati-esercizi-11.html)      | [Notebook 11](https://ziotom78.github.io/tnds-notebooks/lezione10/) |
+
 </center>
 
 Google form per il seminario finale su C++, Python e Julia: <https://forms.gle/99kR6ZADstXEJZZaA>.
