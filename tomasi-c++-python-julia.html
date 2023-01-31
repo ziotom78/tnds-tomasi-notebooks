@@ -864,7 +864,7 @@ julia&gt; mysum(3+2im, 4-3im)      # Numeri complessi
 <em>object-oriented</em> del C++: non ci sono classi né metodi
 virtuali.</p></li>
 <li><p>L’approccio OOP si è infatti dimostrato negli anni poco adatto
-per il calcolo scientifico.</p></li>
+per il calcolo scientifico</p></li>
 <li><p>Mostriamo le sue limitazioni usando come esempio il calcolo degli
 integrali con i metodi deterministici (trapezi, Simpson…):</p>
 <div class="sourceCode" id="cb26"><pre
@@ -951,7 +951,7 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb29-1"><a href="#
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>UnitValue start_pos<span class="op">{</span><span class="fl">3.5</span><span class="op">,</span> <span class="st">&quot;m&quot;</span><span class="op">};</span></span>
 <span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>UnitValue time<span class="op">{</span><span class="fl">6.0</span><span class="op">,</span> <span class="st">&quot;s&quot;</span><span class="op">};</span></span>
 <span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a><span class="co">// Error, it should have been speed * time, not speed / time</span></span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a><span class="co">// This triggers an error: it should have been speed * time, not speed / time</span></span>
 <span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>UnitValue final_pos<span class="op">{</span>start_pos <span class="op">+</span> speed <span class="op">/</span> time<span class="op">};</span></span></code></pre></div></li>
 <li><p>Mi piacerebbe usarla insieme alla mia classe
 <code>Measurement</code> che propaga gli errori, ma non posso: sia
@@ -964,9 +964,9 @@ lo usava con <code>Integral::integra</code> non funziona più!</p></li>
 <section id="la-soluzione-di-julia" class="slide level1">
 <h1>La soluzione di Julia</h1>
 <ul>
-<li><p>Ma in Julia non devo definire il tipo dei parametri: è quindi
-molto più semplice usare tipi che gestiscano la propagazione degli
-errori o le unità di misura in funzioni già scritte.</p></li>
+<li><p>In Julia non devo definire il tipo dei parametri: è quindi più
+semplice combinare tipi che gestiscano la propagazione degli errori o le
+unità di misura in funzioni già scritte.</p></li>
 <li><p>In effetti, queste due librerie esistono già: sono <a
 href="https://github.com/JuliaPhysics/Measurements.jl">Measurements.jl</a>
 e <a
@@ -1004,6 +1004,28 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb31-1"><a href="#
 <li><p>Di fatto, le librerie scientifiche moderne in C++ non usano più
 approcci OOP come ROOT, ma sono basate sui template: ad esempio, <a
 href="https://arma.sourceforge.net/">Armadillo</a>.</p></li>
+</ul>
+</section>
+<section id="fine-della-oop" class="slide level1">
+<h1>Fine della OOP?</h1>
+<ul>
+<li><p>La OOP è stato un approccio usatissimo negli anni ’90</p></li>
+<li><p>Con gli anni ha dimostrato però grandi limiti:</p>
+<ul>
+<li>Eccessiva rigidità (vedi esempio precedente);</li>
+<li>Troppo codice <em>boilerplate</em> (ricordate <code>GetA()</code>,
+<code>SetA()</code>, <code>GetB()</code>, <code>SetB()</code>…?);</li>
+<li>Promessa tradita di rendere il codice riutilizzabile.</li>
+</ul></li>
+<li><p>Un esempio simpatico che prende in giro i paradigmi della OOP è
+il repository <a
+href="https://github.com/EnterpriseQualityCoding/FizzBuzzEnterpriseEdition">FizzBuzzEnterpriseEdition</a>,
+una versione del semplice gioco <a
+href="https://en.wikipedia.org/wiki/Fizz_buzz">Fizz Buzz</a>
+implementata usando un programma con ben 47 classi!</p></li>
+<li><p>Per quanto riguarda il C++, nessuna delle nuove versioni (C++14,
+C++17, C++20…) ha aggiunto caratteristiche significative legate alla
+OOP.</p></li>
 </ul>
 </section>
 <section id="omoiconicità-di-julia" class="slide level1">

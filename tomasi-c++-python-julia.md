@@ -694,7 +694,7 @@ julia> mysum(3+2im, 4-3im)      # Numeri complessi
 
 -   Julia **non** implementa i costrutti *object-oriented* del C++: non ci sono classi né metodi virtuali.
 
--   L'approccio OOP si è infatti dimostrato negli anni poco adatto per il calcolo scientifico.
+-   L'approccio OOP si è infatti dimostrato negli anni poco adatto per il calcolo scientifico
 
 -   Mostriamo le sue limitazioni usando come esempio il calcolo degli integrali con i metodi deterministici (trapezi, Simpson…):
 
@@ -768,7 +768,7 @@ Measurement operator+(Measurement a, Measurement b) {
     UnitValue start_pos{3.5, "m"};
     UnitValue time{6.0, "s"};
 
-    // Error, it should have been speed * time, not speed / time
+    // This triggers an error: it should have been speed * time, not speed / time
     UnitValue final_pos{start_pos + speed / time};
     ```
     
@@ -778,7 +778,7 @@ Measurement operator+(Measurement a, Measurement b) {
 
 # La soluzione di Julia
 
--   Ma in Julia non devo definire il tipo dei parametri: è quindi molto più semplice usare tipi che gestiscano la propagazione degli errori o le unità di misura in funzioni già scritte.
+-   In Julia non devo definire il tipo dei parametri: è quindi più semplice combinare tipi che gestiscano la propagazione degli errori o le unità di misura in funzioni già scritte.
 
 -   In effetti, queste due librerie esistono già: sono [Measurements.jl](https://github.com/JuliaPhysics/Measurements.jl) e [Unitful.jl](https://painterqubits.github.io/Unitful.jl/stable/), ed è facilissimo combinarle insieme.
 
@@ -813,6 +813,20 @@ Measurement operator+(Measurement a, Measurement b) {
 	```
     
 -   Di fatto, le librerie scientifiche moderne in C++ non usano più approcci OOP come ROOT, ma sono basate sui template: ad esempio, [Armadillo](https://arma.sourceforge.net/).
+
+# Fine della OOP?
+
+-   La OOP è stato un approccio usatissimo negli anni '90
+
+-   Con gli anni ha dimostrato però grandi limiti:
+
+    - Eccessiva rigidità (vedi esempio precedente);
+    - Troppo codice *boilerplate* (ricordate `GetA()`, `SetA()`, `GetB()`, `SetB()`…?);
+    - Promessa tradita di rendere il codice riutilizzabile.
+
+-   Un esempio simpatico che prende in giro i paradigmi della OOP è il repository [FizzBuzzEnterpriseEdition](https://github.com/EnterpriseQualityCoding/FizzBuzzEnterpriseEdition), una versione del semplice gioco [Fizz Buzz](https://en.wikipedia.org/wiki/Fizz_buzz) implementata usando un programma con ben 47 classi!
+
+-   Per quanto riguarda il C++, nessuna delle nuove versioni (C++14, C++17, C++20…) ha aggiunto caratteristiche significative legate alla OOP.
 
 # Omoiconicità di Julia
 
