@@ -132,6 +132,29 @@ esercizio della scorsa lezione, ma ora occorre usare la classe
 <code>Vettore</code> dell’esercizio 2.0.</p></li>
 </ul>
 </section>
+<section id="velocità-del-codice" class="slide level1">
+<h1>Velocità del codice</h1>
+</section>
+<section id="calcolo-della-varianza" class="slide level1">
+<h1>Calcolo della varianza</h1>
+<ul>
+<li><p>Attenzione a non far fare al vostro codice calcoli
+inutili!</p></li>
+<li><p>Un errore molto diffuso è quello di implementare il calcolo della
+varianza così:</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span><span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> N<span class="op">;</span> <span class="op">++</span>i<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  accum <span class="op">+=</span> pow<span class="op">(</span>v<span class="op">[</span>i<span class="op">]</span> <span class="op">-</span> calcola_media<span class="op">(</span>v<span class="op">,</span> N<span class="op">),</span> <span class="dv">2</span><span class="op">);</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div></li>
+<li><p>Così però il vostro codice invoca <code>calcola_media</code> per
+<code>N</code> volte! Molto meglio scrivere così:</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> media <span class="op">=</span> calcola_media<span class="op">(</span>v<span class="op">,</span> N<span class="op">);</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span><span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> N<span class="op">;</span> <span class="op">++</span>i<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  accum <span class="op">+=</span> pow<span class="op">(</span>v<span class="op">[</span>i<span class="op">]</span> <span class="op">-</span> media<span class="op">,</span> <span class="dv">2</span><span class="op">);</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div></li>
+</ul>
+</section>
 <section id="scrittura-di-test" class="slide level1">
 <h1>Scrittura di test</h1>
 </section>
@@ -173,20 +196,20 @@ controlli per voi?</p></li>
 </section>
 <section id="un-semplice-esempio" class="slide level1">
 <h1>Un semplice esempio</h1>
-<div class="sourceCode" id="cb2"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> calc<span class="op">(</span><span class="dt">int</span> a<span class="op">,</span> <span class="dt">int</span> b<span class="op">)</span> <span class="op">{</span> <span class="cf">return</span> a <span class="op">+</span> b<span class="op">;</span> <span class="op">}</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="bu">std::</span>cout<span class="op"> &lt;&lt;</span> <span class="st">&quot;Inserisci due numeri: &quot;</span><span class="op">;</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> a<span class="op">,</span> b<span class="op">;</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    <span class="bu">std::</span>cin<span class="op"> &gt;&gt;</span> a <span class="op">&gt;&gt;</span> b<span class="op">;</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    <span class="bu">std::</span>cout<span class="op"> &lt;&lt;</span> <span class="st">&quot;Il risultato è &quot;</span> <span class="op">&lt;&lt;</span> calc<span class="op">(</span>a<span class="op">,</span> b<span class="op">)</span> <span class="op">&lt;&lt;</span> <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">;</span></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> calc<span class="op">(</span><span class="dt">int</span> a<span class="op">,</span> <span class="dt">int</span> b<span class="op">)</span> <span class="op">{</span> <span class="cf">return</span> a <span class="op">+</span> b<span class="op">;</span> <span class="op">}</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="bu">std::</span>cout<span class="op"> &lt;&lt;</span> <span class="st">&quot;Inserisci due numeri: &quot;</span><span class="op">;</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> a<span class="op">,</span> b<span class="op">;</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    <span class="bu">std::</span>cin<span class="op"> &gt;&gt;</span> a <span class="op">&gt;&gt;</span> b<span class="op">;</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    <span class="bu">std::</span>cout<span class="op"> &lt;&lt;</span> <span class="st">&quot;Il risultato è &quot;</span> <span class="op">&lt;&lt;</span> calc<span class="op">(</span>a<span class="op">,</span> b<span class="op">)</span> <span class="op">&lt;&lt;</span> <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">;</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 </section>
 <section id="un-semplice-esempio-1" class="slide level1">
 <h1>Un semplice esempio</h1>
@@ -212,21 +235,21 @@ volta.</p></li>
 <ul>
 <li><p>Si può verificare automaticamente la correttezza del codice con
 <code>assert</code>:</p>
-<div class="sourceCode" id="cb4"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;cassert&gt;</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> test_sum<span class="op">()</span> <span class="op">{</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">// No need to write std::assert, as it is a macro</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="ot">assert</span><span class="op">(</span>sum<span class="op">(</span><span class="dv">4</span><span class="op">,</span> <span class="dv">6</span><span class="op">)</span> <span class="op">==</span> <span class="dv">10</span><span class="op">);</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="ot">assert</span><span class="op">(</span>sum<span class="op">(-</span><span class="dv">1</span><span class="op">,</span> <span class="dv">3</span><span class="op">)</span> <span class="op">==</span> <span class="dv">2</span><span class="op">);</span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div></li>
+<div class="sourceCode" id="cb6"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;cassert&gt;</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> test_sum<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">// No need to write std::assert, as it is a macro</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    <span class="ot">assert</span><span class="op">(</span>sum<span class="op">(</span><span class="dv">4</span><span class="op">,</span> <span class="dv">6</span><span class="op">)</span> <span class="op">==</span> <span class="dv">10</span><span class="op">);</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    <span class="ot">assert</span><span class="op">(</span>sum<span class="op">(-</span><span class="dv">1</span><span class="op">,</span> <span class="dv">3</span><span class="op">)</span> <span class="op">==</span> <span class="dv">2</span><span class="op">);</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div></li>
 <li><p>Una chiamata ad <code>assert</code> viene tradotta più o meno
 così:</p>
-<div class="sourceCode" id="cb5"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">// assert(sum(4, 6) == 10);</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="op">(!</span> <span class="op">(</span>sum<span class="op">(</span><span class="dv">4</span><span class="op">,</span> <span class="dv">6</span><span class="op">)</span> <span class="op">==</span> <span class="dv">10</span><span class="op">))</span> <span class="op">{</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    make_the_program_crash<span class="op">();</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div></li>
+<div class="sourceCode" id="cb7"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">// assert(sum(4, 6) == 10);</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="op">(!</span> <span class="op">(</span>sum<span class="op">(</span><span class="dv">4</span><span class="op">,</span> <span class="dv">6</span><span class="op">)</span> <span class="op">==</span> <span class="dv">10</span><span class="op">))</span> <span class="op">{</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    make_the_program_crash<span class="op">();</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div></li>
 </ul>
 </section>
 <section id="test-automatici-1" class="slide level1">
@@ -234,14 +257,14 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb5-1"><a href="#c
 <ul>
 <li><p>Il resto del codice resta uguale, ma nel <code>main</code> si
 deve invocare <code>test_sum()</code> prima di ogni altra cosa:</p>
-<div class="sourceCode" id="cb6"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">(</span><span class="dt">int</span> argc<span class="op">,</span> <span class="dt">char</span> <span class="op">*</span>argv<span class="op">[])</span> <span class="op">{</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">// This must be the very first thing!</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    test_sum<span class="op">();</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Now implement the exercise as requested</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    …</span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div></li>
+<div class="sourceCode" id="cb8"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">(</span><span class="dt">int</span> argc<span class="op">,</span> <span class="dt">char</span> <span class="op">*</span>argv<span class="op">[])</span> <span class="op">{</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">// This must be the very first thing!</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    test_sum<span class="op">();</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Now implement the exercise as requested</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    …</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div></li>
 <li><p>Potete implementare più funzioni <code>test_*()</code>, che poi
 chiamerete una di seguito all’altra nel <code>main</code>.</p></li>
 </ul>
@@ -270,15 +293,15 @@ serie di test che verifichino il funzionamento corretto delle funzioni
 implementate.</p></li>
 <li><p>Il <code>main</code> dei vostri prossimi esercizi sembrerà
 questo:</p>
-<div class="sourceCode" id="cb8"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">(</span><span class="dt">int</span> argc<span class="op">,</span> <span class="dt">char</span> <span class="op">*</span>argv<span class="op">[])</span> <span class="op">{</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Put the tests of the functions you&#39;re going to use</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    test_bisection<span class="op">();</span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    test_simpson_integral<span class="op">();</span></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    test_random_generator<span class="op">();</span></span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    test_hit_or_miss<span class="op">();</span></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    …</span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div></li>
+<div class="sourceCode" id="cb10"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">(</span><span class="dt">int</span> argc<span class="op">,</span> <span class="dt">char</span> <span class="op">*</span>argv<span class="op">[])</span> <span class="op">{</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Put the tests of the functions you&#39;re going to use</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    test_bisection<span class="op">();</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    test_simpson_integral<span class="op">();</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    test_random_generator<span class="op">();</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    test_hit_or_miss<span class="op">();</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    …</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div></li>
 <li><p>In questa e nelle lezioni successive vi fornirò una serie di
 comandi <code>assert</code> da inserire nei vostri codici: vi aiuteranno
 a verificare che l’esercizio sia corretto.</p></li>
@@ -297,30 +320,30 @@ probabilmente ottenuto <code>282327</code> (risultato
 arrotondato).</p></li>
 <li><p>Non si può in questo caso scrivere un test per la varianza fatto
 così:</p>
-<div class="sourceCode" id="cb9"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ot">assert</span><span class="op">(</span>CalcolaVarianza<span class="op">(</span>mydata<span class="op">,</span> <span class="dv">100_000</span><span class="op">)</span> <span class="op">==</span> <span class="fl">282326.76577</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="ot">assert</span><span class="op">(</span>CalcolaVarianza<span class="op">(</span>mydata<span class="op">,</span> <span class="dv">100_000</span><span class="op">)</span> <span class="op">==</span> <span class="fl">282326.76577</span><span class="op">)</span></span></code></pre></div>
 <p>perché al minimo errore di arrotondamento l’uguaglianza
 fallisce.</p></li>
 </ul>
 </section>
 <section id="esercizio-1.1-assert" class="slide level1">
 <h1>Esercizio 1.1: assert</h1>
-<div class="sourceCode" id="cb10"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Return true if `calculated` and `expected` differ by less than `epsilon`</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="dt">bool</span> are_close<span class="op">(</span><span class="dt">double</span> calculated<span class="op">,</span> <span class="dt">double</span> expected<span class="op">,</span> <span class="dt">double</span> epsilon <span class="op">=</span> <span class="fl">1e-7</span><span class="op">)</span> <span class="op">{</span></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> fabs<span class="op">(</span>calculated <span class="op">-</span> expected<span class="op">)</span> <span class="op">&lt;</span> epsilon<span class="op">;</span></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> test_statistical_functions<span class="op">(</span><span class="dt">void</span><span class="op">)</span> <span class="op">{</span></span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> mydata<span class="op">[]</span> <span class="op">=</span> <span class="op">{</span><span class="dv">1</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">3</span><span class="op">,</span> <span class="dv">4</span><span class="op">};</span>  <span class="co">// Use these instead of data.dat</span></span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>  <span class="ot">assert</span><span class="op">(</span>are_close<span class="op">(</span>CalcolaMedia<span class="op">(</span>mydata<span class="op">,</span> <span class="dv">4</span><span class="op">),</span> <span class="fl">2.5</span><span class="op">));</span></span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>  <span class="ot">assert</span><span class="op">(</span>are_close<span class="op">(</span>CalcolaVarianza<span class="op">(</span>mydata<span class="op">,</span> <span class="dv">4</span><span class="op">),</span> <span class="fl">1.25</span><span class="op">));</span></span>
-<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>  <span class="ot">assert</span><span class="op">(</span>are_close<span class="op">(</span>CalcolaMediana<span class="op">(</span>mydata<span class="op">,</span> <span class="dv">4</span><span class="op">),</span> <span class="fl">2.5</span><span class="op">));</span>  <span class="co">// Even</span></span>
-<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>  <span class="ot">assert</span><span class="op">(</span>are_close<span class="op">(</span>CalcolaMediana<span class="op">(</span>mydata<span class="op">,</span> <span class="dv">3</span><span class="op">),</span> <span class="dv">2</span><span class="op">));</span>    <span class="co">// Odd</span></span>
-<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Continue from here …</span></span>
-<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Return true if `calculated` and `expected` differ by less than `epsilon`</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="dt">bool</span> are_close<span class="op">(</span><span class="dt">double</span> calculated<span class="op">,</span> <span class="dt">double</span> expected<span class="op">,</span> <span class="dt">double</span> epsilon <span class="op">=</span> <span class="fl">1e-7</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> fabs<span class="op">(</span>calculated <span class="op">-</span> expected<span class="op">)</span> <span class="op">&lt;</span> epsilon<span class="op">;</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> test_statistical_functions<span class="op">(</span><span class="dt">void</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> mydata<span class="op">[]</span> <span class="op">=</span> <span class="op">{</span><span class="dv">1</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">3</span><span class="op">,</span> <span class="dv">4</span><span class="op">};</span>  <span class="co">// Use these instead of data.dat</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>  <span class="ot">assert</span><span class="op">(</span>are_close<span class="op">(</span>CalcolaMedia<span class="op">(</span>mydata<span class="op">,</span> <span class="dv">4</span><span class="op">),</span> <span class="fl">2.5</span><span class="op">));</span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>  <span class="ot">assert</span><span class="op">(</span>are_close<span class="op">(</span>CalcolaVarianza<span class="op">(</span>mydata<span class="op">,</span> <span class="dv">4</span><span class="op">),</span> <span class="fl">1.25</span><span class="op">));</span></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>  <span class="ot">assert</span><span class="op">(</span>are_close<span class="op">(</span>CalcolaMediana<span class="op">(</span>mydata<span class="op">,</span> <span class="dv">4</span><span class="op">),</span> <span class="fl">2.5</span><span class="op">));</span>  <span class="co">// Even</span></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>  <span class="ot">assert</span><span class="op">(</span>are_close<span class="op">(</span>CalcolaMediana<span class="op">(</span>mydata<span class="op">,</span> <span class="dv">3</span><span class="op">),</span> <span class="dv">2</span><span class="op">));</span>    <span class="co">// Odd</span></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Continue from here …</span></span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 <p>Questi <code>assert</code> vanno bene anche per gli esercizi di oggi,
 con opportuni aggiustamenti (es., usare <code>Vettore</code> anziché
 <code>double *</code>).</p>
@@ -353,8 +376,8 @@ gli esercizi!</p></li>
 <li><p>Molte volte degli studenti hanno presentato uno scritto in cui
 avevano usato librerie con errori! E quasi sempre ritrovavo commenti del
 genere negli esercizi che consegnavano:</p>
-<div class="sourceCode" id="cb12"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Siccome non riuscivo a far passare i test, ho commentato gli assert.</span></span></code></pre></div></li>
+<div class="sourceCode" id="cb14"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Siccome non riuscivo a far passare i test, ho commentato gli assert.</span></span></code></pre></div></li>
 </ul>
 </section>
 <section id="implementazione-di-vettore" class="slide level1">
@@ -366,17 +389,17 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb12-1"><a href="#
 <li><p>Il testo dell’esercizio richiede di implementare i metodi
 <code>GetComponent</code> e <code>SetComponent</code> per leggere e
 scrivere valori nell’array:</p>
-<div class="sourceCode" id="cb13"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>Vettore v<span class="op">(</span><span class="dv">2</span><span class="op">);</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>v<span class="op">.</span>SetComponent<span class="op">(</span><span class="dv">0</span><span class="op">,</span> <span class="fl">162.3</span><span class="op">);</span></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>v<span class="op">.</span>SetComponent<span class="op">(</span><span class="dv">1</span><span class="op">,</span> <span class="fl">431.7</span><span class="op">);</span></span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="bu">std::</span>cout<span class="op"> &lt;&lt;</span> v<span class="op">.</span>GetComponent<span class="op">(</span><span class="dv">1</span><span class="op">)</span> <span class="op">&lt;&lt;</span> endl<span class="op">;</span>   <span class="co">// Print 431.7</span></span></code></pre></div></li>
+<div class="sourceCode" id="cb15"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>Vettore v<span class="op">(</span><span class="dv">2</span><span class="op">);</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>v<span class="op">.</span>SetComponent<span class="op">(</span><span class="dv">0</span><span class="op">,</span> <span class="fl">162.3</span><span class="op">);</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>v<span class="op">.</span>SetComponent<span class="op">(</span><span class="dv">1</span><span class="op">,</span> <span class="fl">431.7</span><span class="op">);</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="bu">std::</span>cout<span class="op"> &lt;&lt;</span> v<span class="op">.</span>GetComponent<span class="op">(</span><span class="dv">1</span><span class="op">)</span> <span class="op">&lt;&lt;</span> endl<span class="op">;</span>   <span class="co">// Print 431.7</span></span></code></pre></div></li>
 <li><p>Questo è però più scomodo rispetto ai semplici array:</p>
-<div class="sourceCode" id="cb14"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> v<span class="op">[</span><span class="dv">2</span><span class="op">];</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>v<span class="op">[</span><span class="dv">0</span><span class="op">]</span> <span class="op">=</span> <span class="fl">162.3</span><span class="op">;</span></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>v<span class="op">[</span><span class="dv">1</span><span class="op">]</span> <span class="op">=</span> <span class="fl">431.7</span><span class="op">;</span></span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="bu">std::</span>cout<span class="op"> &lt;&lt;</span> v<span class="op">[</span><span class="dv">1</span><span class="op">]</span> <span class="op">&lt;&lt;</span> endl<span class="op">;</span>                <span class="co">// Print 431.7</span></span></code></pre></div></li>
+<div class="sourceCode" id="cb16"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> v<span class="op">[</span><span class="dv">2</span><span class="op">];</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>v<span class="op">[</span><span class="dv">0</span><span class="op">]</span> <span class="op">=</span> <span class="fl">162.3</span><span class="op">;</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>v<span class="op">[</span><span class="dv">1</span><span class="op">]</span> <span class="op">=</span> <span class="fl">431.7</span><span class="op">;</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="bu">std::</span>cout<span class="op"> &lt;&lt;</span> v<span class="op">[</span><span class="dv">1</span><span class="op">]</span> <span class="op">&lt;&lt;</span> endl<span class="op">;</span>                <span class="co">// Print 431.7</span></span></code></pre></div></li>
 </ul>
 </section>
 <section id="uso-di-operator" class="slide level1">
@@ -385,17 +408,17 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb14-1"><a href="#
 <li><p>Si può rendere valida la scrittura <code>miovett[3]</code> anche
 con oggetti di tipo <code>Vettore</code> implementando il metodo
 <code>operator[]</code>:</p>
-<div class="sourceCode" id="cb15"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> Vettore<span class="op">::</span><span class="kw">operator</span><span class="op">[](</span><span class="dt">int</span> index<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>    <span class="ot">assert</span><span class="op">(</span>index <span class="op">&gt;=</span> <span class="dv">0</span> <span class="op">&amp;&amp;</span> index <span class="op">&lt;</span> <span class="va">m_size</span><span class="op">);</span></span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="va">m_arr</span><span class="op">[</span>index<span class="op">];</span></span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div></li>
+<div class="sourceCode" id="cb17"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> Vettore<span class="op">::</span><span class="kw">operator</span><span class="op">[](</span><span class="dt">int</span> index<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>    <span class="ot">assert</span><span class="op">(</span>index <span class="op">&gt;=</span> <span class="dv">0</span> <span class="op">&amp;&amp;</span> index <span class="op">&lt;</span> <span class="va">m_size</span><span class="op">);</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="va">m_arr</span><span class="op">[</span>index<span class="op">];</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div></li>
 <li><p>In questo modo la linea di codice
 <code>std::cout &lt;&lt; miovett[5] &lt;&lt; "\n"</code> sarà
 equivalente a</p>
-<div class="sourceCode" id="cb16"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="ot">assert</span><span class="op">(</span><span class="dv">5</span> <span class="op">&gt;=</span> <span class="dv">0</span> <span class="op">&amp;&amp;</span> <span class="dv">5</span> <span class="op">&lt;</span> miovett<span class="op">.</span><span class="va">m_size</span><span class="op">);</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="bu">std::</span>cout<span class="op"> &lt;&lt;</span> miovett<span class="op">.</span><span class="va">m_arr</span><span class="op">[</span><span class="dv">5</span><span class="op">]</span> <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span></code></pre></div></li>
+<div class="sourceCode" id="cb18"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="ot">assert</span><span class="op">(</span><span class="dv">5</span> <span class="op">&gt;=</span> <span class="dv">0</span> <span class="op">&amp;&amp;</span> <span class="dv">5</span> <span class="op">&lt;</span> miovett<span class="op">.</span><span class="va">m_size</span><span class="op">);</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="bu">std::</span>cout<span class="op"> &lt;&lt;</span> miovett<span class="op">.</span><span class="va">m_arr</span><span class="op">[</span><span class="dv">5</span><span class="op">]</span> <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span></code></pre></div></li>
 </ul>
 </section>
 <section id="uso-di-operator-1" class="slide level1">
@@ -403,18 +426,18 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb16-1"><a href="#
 <ul>
 <li><p>Se si ritorna un <em>reference</em>, è possibile anche fare
 assegnamenti:</p>
-<div class="sourceCode" id="cb17"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co">//     !</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> <span class="op">&amp;</span> Vettore<span class="op">::</span><span class="kw">operator</span><span class="op">[](</span><span class="dt">int</span> index<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>    <span class="ot">assert</span><span class="op">(</span>index <span class="op">&gt;=</span> <span class="dv">0</span> <span class="op">&amp;&amp;</span> index <span class="op">&lt;</span> <span class="va">m_size</span><span class="op">);</span></span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="va">m_arr</span><span class="op">[</span>index<span class="op">];</span></span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div></li>
+<div class="sourceCode" id="cb19"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co">//     !</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> <span class="op">&amp;</span> Vettore<span class="op">::</span><span class="kw">operator</span><span class="op">[](</span><span class="dt">int</span> index<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>    <span class="ot">assert</span><span class="op">(</span>index <span class="op">&gt;=</span> <span class="dv">0</span> <span class="op">&amp;&amp;</span> index <span class="op">&lt;</span> <span class="va">m_size</span><span class="op">);</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="va">m_arr</span><span class="op">[</span>index<span class="op">];</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div></li>
 <li><p>Così il programma seguente diventa legale:</p>
-<div class="sourceCode" id="cb18"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>Vettore v<span class="op">(</span><span class="dv">2</span><span class="op">);</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>v<span class="op">[</span><span class="dv">0</span><span class="op">]</span> <span class="op">=</span> <span class="fl">162.3</span><span class="op">;</span>  <span class="co">// Assignment, works thanks to the reference</span></span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>v<span class="op">[</span><span class="dv">1</span><span class="op">]</span> <span class="op">=</span> <span class="fl">431.7</span><span class="op">;</span>  <span class="co">// Ditto</span></span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="bu">std::</span>cout<span class="op"> &lt;&lt;</span> v<span class="op">[</span><span class="dv">1</span><span class="op">]</span> <span class="op">&lt;&lt;</span> endl<span class="op">;</span>                <span class="co">// Print 431.7</span></span></code></pre></div></li>
+<div class="sourceCode" id="cb20"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>Vettore v<span class="op">(</span><span class="dv">2</span><span class="op">);</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>v<span class="op">[</span><span class="dv">0</span><span class="op">]</span> <span class="op">=</span> <span class="fl">162.3</span><span class="op">;</span>  <span class="co">// Assignment, works thanks to the reference</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>v<span class="op">[</span><span class="dv">1</span><span class="op">]</span> <span class="op">=</span> <span class="fl">431.7</span><span class="op">;</span>  <span class="co">// Ditto</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="bu">std::</span>cout<span class="op"> &lt;&lt;</span> v<span class="op">[</span><span class="dv">1</span><span class="op">]</span> <span class="op">&lt;&lt;</span> endl<span class="op">;</span>                <span class="co">// Print 431.7</span></span></code></pre></div></li>
 </ul>
 </section>
 <section id="uso-di-header-files" class="slide level1">
@@ -429,15 +452,15 @@ ossia dei file con estensione <code>.h</code>, <code>.hh</code> o
 <li><p>Capita spesso che un file sia incluso più volte nel corso di una
 stessa compilazione.</p></li>
 <li><p>Consideriamo questo esempio:</p>
-<div class="sourceCode" id="cb19"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co">// File main.cpp</span></span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;vettore.h&quot;</span></span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;statistiche.h&quot;</span></span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
-<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>    <span class="co">// ...</span></span>
-<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div></li>
+<div class="sourceCode" id="cb21"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co">// File main.cpp</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;vettore.h&quot;</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;statistiche.h&quot;</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>    <span class="co">// ...</span></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div></li>
 <li><p>Nel <code>main</code> si usano sia le funzioni dichiarate in
 <code>vettore.h</code> che quelle dichiarate in
 <code>statistiche.h</code>, quindi ci vogliono entrambi gli
@@ -449,19 +472,19 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb19-1"><a href="#
 <ul>
 <li><p>Supponiamo che questo sia il contenuto di
 <code>vettore.h</code>:</p>
-<div class="sourceCode" id="cb20"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co">// File vettore.h</span></span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Vettore <span class="op">{</span></span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">// ...</span></span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co">// File vettore.h</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Vettore <span class="op">{</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">// ...</span></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code></pre></div>
 <p>e questo sia il contenuto di <code>statistiche.h</code>:</p>
-<div class="sourceCode" id="cb21"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co">// File statistiche.h</span></span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;vettore.h&quot;</span></span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> CalcolaMedia<span class="op">(</span><span class="at">const</span> Vettore <span class="op">&amp;</span> vett<span class="op">);</span></span></code></pre></div></li>
+<div class="sourceCode" id="cb23"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co">// File statistiche.h</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;vettore.h&quot;</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> CalcolaMedia<span class="op">(</span><span class="at">const</span> Vettore <span class="op">&amp;</span> vett<span class="op">);</span></span></code></pre></div></li>
 </ul>
 </section>
 <section id="uso-di-header-files-3" class="slide level1">
@@ -477,33 +500,33 @@ di compilazione:</p>
 ma il C++ non ammette di definire due classi con lo stesso nome (neppure
 se sono identiche!).</li>
 </ol>
-<div class="sourceCode" id="cb22"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co">// File main.cpp</span></span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;vettore.h&quot;</span></span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;statistiche.h&quot;</span></span>
-<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
-<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>    <span class="co">// ...</span></span>
-<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb24"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co">// File main.cpp</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;vettore.h&quot;</span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;statistiche.h&quot;</span></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>    <span class="co">// ...</span></span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 </section>
 <section id="uso-di-header-files-4" class="slide level1">
 <h1>Uso di header files</h1>
 <p>In pratica, <code>g++</code> è come se vedesse questo codice:</p>
-<div class="sourceCode" id="cb23"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Questo viene da #include &quot;vettore.h&quot;</span></span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Vettore <span class="op">{</span></span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">// ...</span></span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span>
-<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a><span class="co">// Questo viene dal secondo #include</span></span>
-<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Vettore <span class="op">{</span></span>
-<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>    <span class="co">// ...</span></span>
-<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span>
-<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> CalcolaMedia<span class="op">(</span><span class="at">const</span> Vettore <span class="op">&amp;</span> vett<span class="op">);</span></span>
-<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span> <span class="co">/* ... */</span> <span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb25"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Questo viene da #include &quot;vettore.h&quot;</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Vettore <span class="op">{</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">// ...</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a><span class="co">// Questo viene dal secondo #include</span></span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Vettore <span class="op">{</span></span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>    <span class="co">// ...</span></span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> CalcolaMedia<span class="op">(</span><span class="at">const</span> Vettore <span class="op">&amp;</span> vett<span class="op">);</span></span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span> <span class="co">/* ... */</span> <span class="op">}</span></span></code></pre></div>
 </section>
 <section id="header-guards" class="slide level1">
 <h1><em>Header guards</em></h1>
@@ -511,16 +534,16 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb23-1"><a href="#
 <li><p>Questo è un problema che risale ai primordi del linguaggio C
 (fine anni ’60), ed è stato storicamente risolto con l’uso di <em>header
 guards</em>:</p>
-<div class="sourceCode" id="cb24"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co">// File vettore.h</span></span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#ifndef __VETTORE_H__</span></span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#define __VETTORE_H__</span></span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Vettore <span class="op">{</span></span>
-<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>    <span class="co">// ...</span></span>
-<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span>
-<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a><span class="pp">#endif</span></span></code></pre></div>
+<div class="sourceCode" id="cb26"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co">// File vettore.h</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#ifndef __VETTORE_H__</span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#define __VETTORE_H__</span></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Vettore <span class="op">{</span></span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>    <span class="co">// ...</span></span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a><span class="pp">#endif</span></span></code></pre></div>
 <p>In questo modo, la seconda volta che il file viene incluso verrà
 saltato. L’identificatore <code>__VETTORE_H__</code> è
 arbitrario.</p></li>
@@ -534,12 +557,12 @@ permettono un’alternativa più semplice alle <em>header
 guards</em>.</p></li>
 <li><p>La seguente scrittura è più agile e mette al riparo da
 errori:</p>
-<div class="sourceCode" id="cb25"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#pragma once  </span><span class="co">// Questo file sarà incluso una volta sola</span></span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Vettore <span class="op">{</span></span>
-<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">// ...</span></span>
-<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code></pre></div>
+<div class="sourceCode" id="cb27"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#pragma once  </span><span class="co">// Questo file sarà incluso una volta sola</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Vettore <span class="op">{</span></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">// ...</span></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code></pre></div>
 <p>È più comoda perché si deve aggiungere una sola riga senza dover
 inventare un identificatore (<code>__VETTORE_H__</code>).</p></li>
 </ul>
@@ -550,17 +573,17 @@ inventare un identificatore (<code>__VETTORE_H__</code>).</p></li>
 <li><p>L’uso di <code>#pragma once</code> mette al riparo anche da una
 serie di errori che gli studenti di questo corso fanno spesso.</p></li>
 <li><p>Primo esempio:</p>
-<div class="sourceCode" id="cb26"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#ifndef __vettore_h__</span></span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#define __vettore_h_</span></span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="pp">#endif</span></span></code></pre></div></li>
+<div class="sourceCode" id="cb28"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#ifndef __vettore_h__</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#define __vettore_h_</span></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="pp">#endif</span></span></code></pre></div></li>
 <li><p>Secondo esempio:</p>
-<div class="sourceCode" id="cb27"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#ifdef  __vettore_h__</span></span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#define __vettore_h__</span></span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="pp">#endif</span></span></code></pre></div></li>
+<div class="sourceCode" id="cb29"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#ifdef  __vettore_h__</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#define __vettore_h__</span></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a><span class="pp">#endif</span></span></code></pre></div></li>
 </ul>
 </section>
 <section id="move-semantics" class="slide level1">
@@ -576,11 +599,11 @@ introduce una variabile nel codice:</p>
 <li>Inizializzazione della memoria.</li>
 </ol></li>
 <li><p>Esempio:</p>
-<div class="sourceCode" id="cb28"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> x<span class="op">;</span>  <span class="co">// Allocation</span></span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="dv">15</span><span class="op">;</span> <span class="co">// Initialization</span></span>
-<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> y <span class="op">=</span> <span class="dv">30</span><span class="op">;</span> <span class="co">// Shortcut, but there are still *two* operations here.</span></span></code></pre></div></li>
+<div class="sourceCode" id="cb30"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> x<span class="op">;</span>  <span class="co">// Allocation</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="dv">15</span><span class="op">;</span> <span class="co">// Initialization</span></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> y <span class="op">=</span> <span class="dv">30</span><span class="op">;</span> <span class="co">// Shortcut, but there are still *two* operations here.</span></span></code></pre></div></li>
 </ul>
 </section>
 <section id="costruzione-di-vettore" class="slide level1">
@@ -590,14 +613,14 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb28-1"><a href="#
 l’invocazione di un costruttore.</p></li>
 <li><p>Il costruttore va invocato quando si dichiara la variabile: non è
 possibile «differire» l’inizializzazione:</p>
-<div class="sourceCode" id="cb29"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> x<span class="op">;</span></span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="dv">15</span><span class="op">;</span>         <span class="co">// Ok: first allocate, then initialize</span></span>
-<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>Vettore v<span class="op">;</span></span>
-<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>v<span class="op">(</span><span class="dv">10</span><span class="op">);</span>          <span class="co">// Error, you cannot call the constructor here!</span></span>
-<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>Vettore w<span class="op">(</span><span class="dv">10</span><span class="op">);</span>  <span class="co">// Ok: allocate, then initialize</span></span></code></pre></div></li>
+<div class="sourceCode" id="cb31"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> x<span class="op">;</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="dv">15</span><span class="op">;</span>         <span class="co">// Ok: first allocate, then initialize</span></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>Vettore v<span class="op">;</span></span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>v<span class="op">(</span><span class="dv">10</span><span class="op">);</span>          <span class="co">// Error, you cannot call the constructor here!</span></span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>Vettore w<span class="op">(</span><span class="dv">10</span><span class="op">);</span>  <span class="co">// Ok: allocate, then initialize</span></span></code></pre></div></li>
 <li><p>I costruttori possono richiedere molto tempo per essere eseguiti,
 ad esempio se al loro interno invocano <code>new</code> (com’è il caso
 di <code>Vettore</code>).</p></li>
@@ -616,12 +639,12 @@ variabile, è come se la casa venisse arredata.</p>
 <h1>Costruttori</h1>
 <p><img data-src="images/empty_room.jpg" style="width:20.0%" /> <img
 data-src="images/furnished_room.jpg" style="width:20.0%" /></p>
-<div class="sourceCode" id="cb30"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>Vettore<span class="op">::</span>Vettore<span class="op">(</span><span class="dt">int</span> n<span class="op">)</span> <span class="op">:</span> <span class="va">m_N</span><span class="op">(</span>n<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>    <span class="va">m_v</span> <span class="op">=</span> <span class="kw">new</span> <span class="dt">double</span><span class="op">[</span><span class="va">m_N</span><span class="op">];</span>         <span class="co">// Allocate (build up the building)</span></span>
-<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span><span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> <span class="va">m_N</span><span class="op">;</span> <span class="op">++</span>i<span class="op">)</span>   <span class="co">// Initialize (add the furniture)</span></span>
-<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">m_v</span><span class="op">[</span>i<span class="op">]</span> <span class="op">=</span> <span class="fl">0.0</span><span class="op">;</span></span>
-<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb32"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>Vettore<span class="op">::</span>Vettore<span class="op">(</span><span class="dt">int</span> n<span class="op">)</span> <span class="op">:</span> <span class="va">m_N</span><span class="op">(</span>n<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>    <span class="va">m_v</span> <span class="op">=</span> <span class="kw">new</span> <span class="dt">double</span><span class="op">[</span><span class="va">m_N</span><span class="op">];</span>         <span class="co">// Allocate (build up the building)</span></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span><span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> <span class="va">m_N</span><span class="op">;</span> <span class="op">++</span>i<span class="op">)</span>   <span class="co">// Initialize (add the furniture)</span></span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">m_v</span><span class="op">[</span>i<span class="op">]</span> <span class="op">=</span> <span class="fl">0.0</span><span class="op">;</span></span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 </section>
 <section id="costruttori-di-copia" class="slide level1">
 <h1>Costruttori di copia</h1>
@@ -636,12 +659,12 @@ valore a <code>m_N</code> e agli elementi di <code>m_v</code>).</p>
 <h1>Costruttori di copia</h1>
 <p><img data-src="images/empty_room.jpg" style="width:20.0%" /> <img
 data-src="images/furnished_room.jpg" style="width:20.0%" /></p>
-<div class="sourceCode" id="cb31"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>Vettore<span class="op">::</span>Vettore<span class="op">(</span>const Vettore <span class="op">&amp;</span>vett<span class="op">)</span> <span class="op">:</span> <span class="va">m_N</span><span class="op">(</span>vett<span class="op">.</span><span class="va">m_N</span><span class="op">)</span> <span class="op">{</span></span>
-<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>    <span class="va">m_v</span> <span class="op">=</span> new double<span class="op">[</span><span class="va">m_N</span><span class="op">];</span>        <span class="co">// Allocate (build up the building)</span></span>
-<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span><span class="op">(</span>int i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> <span class="va">m_N</span><span class="op">;</span> <span class="op">++</span>i<span class="op">)</span>  <span class="co">// Initialize (add a copy of the furniture</span></span>
-<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">m_v</span><span class="op">[</span>i<span class="op">]</span> <span class="op">=</span> vett<span class="op">.</span><span class="va">m_v</span><span class="op">[</span>i<span class="op">];</span>     <span class="co">// that was used in the old building)</span></span>
-<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb33"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>Vettore<span class="op">::</span>Vettore<span class="op">(</span>const Vettore <span class="op">&amp;</span>vett<span class="op">)</span> <span class="op">:</span> <span class="va">m_N</span><span class="op">(</span>vett<span class="op">.</span><span class="va">m_N</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>    <span class="va">m_v</span> <span class="op">=</span> new double<span class="op">[</span><span class="va">m_N</span><span class="op">];</span>        <span class="co">// Allocate (build up the building)</span></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span><span class="op">(</span>int i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> <span class="va">m_N</span><span class="op">;</span> <span class="op">++</span>i<span class="op">)</span>  <span class="co">// Initialize (add a copy of the furniture</span></span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">m_v</span><span class="op">[</span>i<span class="op">]</span> <span class="op">=</span> vett<span class="op">.</span><span class="va">m_v</span><span class="op">[</span>i<span class="op">];</span>     <span class="co">// that was used in the old building)</span></span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 </section>
 <section id="operazione-di-assegnamento" class="slide level1">
 <h1>Operazione di assegnamento</h1>
@@ -657,25 +680,25 @@ dell’altra.</p>
 <h1>Operazione di assegnamento</h1>
 <p><img data-src="images/empty_room.jpg" style="width:20.0%" /> <img
 data-src="images/furnished_room.jpg" style="width:20.0%" /></p>
-<div class="sourceCode" id="cb32"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>Vettore <span class="op">&amp;</span> Vettore<span class="op">::</span><span class="kw">operator</span><span class="op">=(</span>const Vettore <span class="op">&amp;</span>vett<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>    <span class="va">m_N</span> <span class="op">=</span> vett<span class="op">.</span><span class="va">m_N</span><span class="op">;</span></span>
-<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span><span class="op">(</span><span class="va">m_v</span><span class="op">)</span> <span class="kw">delete</span><span class="op">[]</span> <span class="va">m_v</span><span class="op">;</span>           <span class="co">// Put the old building in the garbage!</span></span>
-<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>    <span class="va">m_v</span> <span class="op">=</span> <span class="kw">new</span> <span class="dt">double</span><span class="op">[</span><span class="va">m_N</span><span class="op">];</span>          <span class="co">// Create a new building</span></span>
-<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span><span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> <span class="va">m_N</span><span class="op">;</span> <span class="op">++</span>i<span class="op">)</span> <span class="op">{</span>  <span class="co">// Fill the rooms with a copy of the</span></span>
-<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>        <span class="va">m_v</span><span class="op">[</span>i<span class="op">]</span> <span class="op">=</span> vett<span class="op">.</span><span class="va">m_v</span><span class="op">[</span>i<span class="op">];</span>       <span class="co">// old furniture</span></span>
-<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb34"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>Vettore <span class="op">&amp;</span> Vettore<span class="op">::</span><span class="kw">operator</span><span class="op">=(</span>const Vettore <span class="op">&amp;</span>vett<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>    <span class="va">m_N</span> <span class="op">=</span> vett<span class="op">.</span><span class="va">m_N</span><span class="op">;</span></span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span><span class="op">(</span><span class="va">m_v</span><span class="op">)</span> <span class="kw">delete</span><span class="op">[]</span> <span class="va">m_v</span><span class="op">;</span>           <span class="co">// Put the old building in the garbage!</span></span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>    <span class="va">m_v</span> <span class="op">=</span> <span class="kw">new</span> <span class="dt">double</span><span class="op">[</span><span class="va">m_N</span><span class="op">];</span>          <span class="co">// Create a new building</span></span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span><span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> <span class="va">m_N</span><span class="op">;</span> <span class="op">++</span>i<span class="op">)</span> <span class="op">{</span>  <span class="co">// Fill the rooms with a copy of the</span></span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>        <span class="va">m_v</span><span class="op">[</span>i<span class="op">]</span> <span class="op">=</span> vett<span class="op">.</span><span class="va">m_v</span><span class="op">[</span>i<span class="op">];</span>       <span class="co">// old furniture</span></span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 </section>
 <section id="operazione-di-assegnamento-2" class="slide level1">
 <h1>Operazione di assegnamento</h1>
 <p><img data-src="images/empty_room.jpg" style="width:20.0%" /> <img
 data-src="images/furnished_room.jpg" style="width:20.0%" /></p>
-<div class="sourceCode" id="cb33"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>Vettore v1<span class="op">(</span><span class="dv">10</span><span class="op">),</span> v2<span class="op">(</span><span class="dv">30</span><span class="op">);</span></span>
-<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="co">// …here I initialize v1 and v2, and I use them for some time.</span></span>
-<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>v1 <span class="op">=</span> v2<span class="op">;</span> <span class="co">// Assignment through Vettore::operator=</span></span></code></pre></div>
+<div class="sourceCode" id="cb35"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>Vettore v1<span class="op">(</span><span class="dv">10</span><span class="op">),</span> v2<span class="op">(</span><span class="dv">30</span><span class="op">);</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="co">// …here I initialize v1 and v2, and I use them for some time.</span></span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>v1 <span class="op">=</span> v2<span class="op">;</span> <span class="co">// Assignment through Vettore::operator=</span></span></code></pre></div>
 </section>
 <section id="move-constructor" class="slide level1">
 <h1>Move constructor</h1>
@@ -690,37 +713,37 @@ comprarne di nuovi!</p>
 <h1>Move constructor</h1>
 <p><img data-src="images/empty_room.jpg" style="width:20.0%" /> <img
 data-src="images/furnished_room.jpg" style="width:20.0%" /></p>
-<div class="sourceCode" id="cb34"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>Vettore<span class="op">::</span>Vettore<span class="op">(</span>Vettore <span class="op">&amp;&amp;</span> vett<span class="op">)</span> <span class="op">:</span> <span class="va">m_n</span><span class="op">(</span>vett<span class="op">.</span><span class="va">m_N</span><span class="op">)</span> <span class="op">{</span></span>
-<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">// No need for &quot;delete vett.m_v&quot;: I want to keep the old furniture!</span></span>
-<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>    <span class="va">m_v</span> <span class="op">=</span> vett<span class="op">.</span><span class="va">m_v</span><span class="op">;</span>  <span class="co">// No need to call &quot;new&quot;: very fast!</span></span>
-<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">// No &quot;for&quot; loop to copy the elements: very fast!</span></span>
-<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb36"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>Vettore<span class="op">::</span>Vettore<span class="op">(</span>Vettore <span class="op">&amp;&amp;</span> vett<span class="op">)</span> <span class="op">:</span> <span class="va">m_n</span><span class="op">(</span>vett<span class="op">.</span><span class="va">m_N</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">// No need for &quot;delete vett.m_v&quot;: I want to keep the old furniture!</span></span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>    <span class="va">m_v</span> <span class="op">=</span> vett<span class="op">.</span><span class="va">m_v</span><span class="op">;</span>  <span class="co">// No need to call &quot;new&quot;: very fast!</span></span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">// No &quot;for&quot; loop to copy the elements: very fast!</span></span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 </section>
 <section id="move-constructor-2" class="slide level1">
 <h1>Move constructor</h1>
 <p><img data-src="images/empty_room.jpg" style="width:20.0%" /> <img
 data-src="images/furnished_room.jpg" style="width:20.0%" /></p>
-<div class="sourceCode" id="cb35"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Function &quot;Read&quot; creates a Vector and fill it with data read from file</span></span>
-<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>Vettore Read<span class="op">(</span><span class="dt">int</span> ndata<span class="op">,</span> <span class="at">const</span> <span class="dt">char</span> <span class="op">*</span> filename<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>  Vettore result<span class="op">(</span>ndata<span class="op">);</span></span>
-<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>  <span class="co">// …</span></span>
-<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> result<span class="op">;</span></span>
-<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
-<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a>Vettore v <span class="op">=</span> Read<span class="op">(</span>ndata<span class="op">,</span> filename<span class="op">);</span></span></code></pre></div>
+<div class="sourceCode" id="cb37"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Function &quot;Read&quot; creates a Vector and fill it with data read from file</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>Vettore Read<span class="op">(</span><span class="dt">int</span> ndata<span class="op">,</span> <span class="at">const</span> <span class="dt">char</span> <span class="op">*</span> filename<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>  Vettore result<span class="op">(</span>ndata<span class="op">);</span></span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>  <span class="co">// …</span></span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> result<span class="op">;</span></span>
+<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-8"><a href="#cb37-8" aria-hidden="true" tabindex="-1"></a>Vettore v <span class="op">=</span> Read<span class="op">(</span>ndata<span class="op">,</span> filename<span class="op">);</span></span></code></pre></div>
 </section>
 <section id="distinguere-tra-i-casi" class="slide level1">
 <h1>Distinguere tra i casi</h1>
-<div class="sourceCode" id="cb36"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>Vettore v1<span class="op">(</span><span class="dv">10</span><span class="op">);</span>                    <span class="co">// Constructor</span></span>
-<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>Vettore v2<span class="op">(</span>v1<span class="op">);</span>                    <span class="co">// Copy constructor</span></span>
-<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>Vettore v3 <span class="op">=</span> v1<span class="op">;</span>                   <span class="co">// Copy constructor</span></span>
-<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>v3 <span class="op">=</span> v1<span class="op">;</span>                           <span class="co">// Assignment</span></span>
-<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a>Vettore v4 <span class="op">=</span> Read<span class="op">(</span><span class="dv">10</span><span class="op">,</span> <span class="st">&quot;data.dat&quot;</span><span class="op">);</span> <span class="co">// Move constructor</span></span>
-<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a>                                   <span class="co">// (at the end of the call to &quot;Read&quot;)</span></span></code></pre></div>
+<div class="sourceCode" id="cb38"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>Vettore v1<span class="op">(</span><span class="dv">10</span><span class="op">);</span>                    <span class="co">// Constructor</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>Vettore v2<span class="op">(</span>v1<span class="op">);</span>                    <span class="co">// Copy constructor</span></span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>Vettore v3 <span class="op">=</span> v1<span class="op">;</span>                   <span class="co">// Copy constructor</span></span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>v3 <span class="op">=</span> v1<span class="op">;</span>                           <span class="co">// Assignment</span></span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a>Vettore v4 <span class="op">=</span> Read<span class="op">(</span><span class="dv">10</span><span class="op">,</span> <span class="st">&quot;data.dat&quot;</span><span class="op">);</span> <span class="co">// Move constructor</span></span>
+<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a>                                   <span class="co">// (at the end of the call to &quot;Read&quot;)</span></span></code></pre></div>
 </section>
     </div>
   </div>

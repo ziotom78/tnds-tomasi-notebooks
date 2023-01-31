@@ -30,6 +30,30 @@ height: 810
 -   [Esercizio 2.1](carminati-esercizi-02.html#esercizio-2.1) (da consegnare per l'esame scritto): è lo stesso tipo di esercizio della scorsa lezione, ma ora occorre usare la classe `Vettore` dell'esercizio 2.0.
 
 
+# Velocità del codice
+
+# Calcolo della varianza
+
+-   Attenzione a non far fare al vostro codice calcoli inutili!
+
+-   Un errore molto diffuso è quello di implementare il calcolo della varianza così:
+
+    ```c++
+    for(int i = 0; i < N; ++i) {
+      accum += pow(v[i] - calcola_media(v, N), 2);
+    }
+    ```
+
+-   Così però il vostro codice invoca `calcola_media` per `N` volte! Molto meglio scrivere così:
+
+    ```c++
+    double media = calcola_media(v, N);
+    for(int i = 0; i < N; ++i) {
+      accum += pow(v[i] - media, 2);
+    }
+    ```
+
+
 # Scrittura di test
 
 # Verificate il vostro codice!
