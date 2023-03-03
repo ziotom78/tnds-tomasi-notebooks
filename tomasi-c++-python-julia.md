@@ -621,71 +621,7 @@ per Python in Julia non si specificano i tipi?
 
 # Sessione interattiva
 
-```
-$ julia
-               _
-   _       _ _(_)_     |  Documentation: https://docs.julialang.org
-  (_)     | (_) (_)    |
-   _ _   _| |_  __ _   |  Type "?" for help, "]?" for Pkg help.
-  | | | | | | |/ _` |  |
-  | | |_| | | | (_| |  |  Version 1.8.4 (2022-12-23)
- _/ |\__'_|_|_|\__'_|  |  Official https://julialang.org/ release
-|__/                   |
-
-julia>
-```
-
-# Compilazione in Julia
-
-Al prompt di Julia è semplice vedere in cosa è compilata una funzione,
-col comando `@code_native`:
-```
-julia> @code_native mysum(1, 2)
-        .text
-Filename: REPL[4]
-        pushq   %rbp
-        movq    %rsp, %rbp
-Source line: 1
-        leaq    (%rcx,%rdx), %rax     ; rax = rcx + rdx
-        popq    %rbp
-        retq
-        nopw    (%rax,%rax)
-```
-
-# Compilazione in Julia
-
-Se chiamiamo `sum` con floating-point, il codice compilato usa
-correttamente l'istruzione `addsd`:
-```
-julia> @code_native mysum(1.0, 2.0)
-        .text
-Filename: REPL[5]
-        pushq   %rbp
-        movq    %rsp, %rbp
-Source line: 1
-        addsd   %xmm1, %xmm0
-        popq    %rbp
-        retq
-        nopw    (%rax,%rax)
-```
-
-# Definire funzioni
-
-In questo modo, Julia supporta diversi tipi garantendo però la stessa velocità del C++:
-
-```
-julia> mysum(1, 2)              # Interi
-3
-
-julia> mysum(1.0, 2.0)          # Floating-point
-3.0
-
-julia> mysum(1//3, 3//4)        # Frazioni (!)
-13//12
-
-julia> mysum(3+2im, 4-3im)      # Numeri complessi
-7 - 1im
-```
+<asciinema-player src="./asciinema/julia-compilation-83×23.asciinema" cols="83" rows="23" font-size="medium"></asciinema-player>
 
 # Abbandono della programmazione OOP
 
@@ -810,17 +746,6 @@ Measurement operator+(Measurement a, Measurement b) {
 	```
     
 -   Di fatto, le librerie scientifiche moderne in C++ non usano più approcci OOP come ROOT, ma sono basate sui template: ad esempio, [Armadillo](https://arma.sourceforge.net/).
-
-# Fine della OOP?
-
--   Dopo un grande sviluppo negli anni '90, oggi si sa che la OOP ha molti limiti:
-
-    - Eccessiva rigidità e scarsa riutilizzabilità (vedi esempio precedente);
-    - Troppo codice *boilerplate* (ricordate `GetA()`, `SetA()`, `GetB()`, `SetB()`…?).
-
--   Un esempio simpatico che prende in giro i paradigmi della OOP è il repository [FizzBuzzEnterpriseEdition](https://github.com/EnterpriseQualityCoding/FizzBuzzEnterpriseEdition), una versione del semplice gioco [Fizz Buzz](https://en.wikipedia.org/wiki/Fizz_buzz) implementata usando un programma con ben 47 classi!
-
--   Per quanto riguarda il C++, nessuna delle nuove versioni (C++14, C++17, C++20…) ha aggiunto caratteristiche significative legate alla OOP.
 
 # Omoiconicità di Julia
 
@@ -1014,5 +939,5 @@ $
 -   Nel video *Julia, the power of language* ([youtu.be/Zb8G6T8JtuM](https://youtu.be/Zb8G6T8JtuM)), lo speaker mostra varie applicazioni di Julia, tra cui l'implementazione di un tipo di matrice con determinate simmetrie
 -   In un altro video *Alan Edelman and Julia Language*
     ([youtu.be/rZS2LGiurKY](https://youtu.be/rZS2LGiurKY)), lo speaker
-    spiega come sia possibile per librerie come Zygote calcolare derivate.
--   Sono video illuminanti, vale la pena vederli!
+    spiega come calcolare efficacemente derivate con Julia
+

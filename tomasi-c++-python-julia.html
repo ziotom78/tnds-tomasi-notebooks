@@ -91,6 +91,7 @@
     code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
   </style>
   <link rel="stylesheet" href="https://unpkg.com/reveal.js@^4//dist/theme/white.css" id="theme">
+  <link rel="stylesheet" href="./css/asciinema-player.css"/>
   <script defer=""
   src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js"></script>
   <script>document.addEventListener("DOMContentLoaded", function () {
@@ -798,63 +799,7 @@ macchina.</p></li>
 </section>
 <section id="sessione-interattiva" class="slide level1">
 <h1>Sessione interattiva</h1>
-<pre><code>$ julia
-               _
-   _       _ _(_)_     |  Documentation: https://docs.julialang.org
-  (_)     | (_) (_)    |
-   _ _   _| |_  __ _   |  Type &quot;?&quot; for help, &quot;]?&quot; for Pkg help.
-  | | | | | | |/ _` |  |
-  | | |_| | | | (_| |  |  Version 1.8.4 (2022-12-23)
- _/ |\__&#39;_|_|_|\__&#39;_|  |  Official https://julialang.org/ release
-|__/                   |
-
-julia&gt;</code></pre>
-</section>
-<section id="compilazione-in-julia-1" class="slide level1">
-<h1>Compilazione in Julia</h1>
-<p>Al prompt di Julia è semplice vedere in cosa è compilata una
-funzione, col comando <code>@code_native</code>:</p>
-<pre><code>julia&gt; @code_native mysum(1, 2)
-        .text
-Filename: REPL[4]
-        pushq   %rbp
-        movq    %rsp, %rbp
-Source line: 1
-        leaq    (%rcx,%rdx), %rax     ; rax = rcx + rdx
-        popq    %rbp
-        retq
-        nopw    (%rax,%rax)</code></pre>
-</section>
-<section id="compilazione-in-julia-2" class="slide level1">
-<h1>Compilazione in Julia</h1>
-<p>Se chiamiamo <code>sum</code> con floating-point, il codice compilato
-usa correttamente l’istruzione <code>addsd</code>:</p>
-<pre><code>julia&gt; @code_native mysum(1.0, 2.0)
-        .text
-Filename: REPL[5]
-        pushq   %rbp
-        movq    %rsp, %rbp
-Source line: 1
-        addsd   %xmm1, %xmm0
-        popq    %rbp
-        retq
-        nopw    (%rax,%rax)</code></pre>
-</section>
-<section id="definire-funzioni" class="slide level1">
-<h1>Definire funzioni</h1>
-<p>In questo modo, Julia supporta diversi tipi garantendo però la stessa
-velocità del C++:</p>
-<pre><code>julia&gt; mysum(1, 2)              # Interi
-3
-
-julia&gt; mysum(1.0, 2.0)          # Floating-point
-3.0
-
-julia&gt; mysum(1//3, 3//4)        # Frazioni (!)
-13//12
-
-julia&gt; mysum(3+2im, 4-3im)      # Numeri complessi
-7 - 1im</code></pre>
+<p><asciinema-player src="./asciinema/julia-compilation-83×23.asciinema" cols="83" rows="23" font-size="medium"></asciinema-player></p>
 </section>
 <section id="abbandono-della-programmazione-oop" class="slide level1">
 <h1>Abbandono della programmazione OOP</h1>
@@ -868,16 +813,16 @@ virtuali.</p></li>
 <li><p>L’approccio OOP si è infatti dimostrato negli anni poco adatto
 per il calcolo scientifico. Consideriamo ad esempio il calcolo degli
 integrali:</p>
-<div class="sourceCode" id="cb26"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Integral <span class="op">{</span></span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span><span class="op">:</span></span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> integrate<span class="op">(</span><span class="dt">double</span> a<span class="op">,</span> <span class="dt">double</span> b<span class="op">,</span> <span class="dt">unsigned</span> <span class="dt">int</span> nstep<span class="op">,</span> FunzioneBase <span class="op">&amp;</span>f<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>    checkInterval<span class="op">(</span>a<span class="op">,</span> b<span class="op">);</span></span>
-<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> calculate<span class="op">(</span>nstep<span class="op">,</span> f<span class="op">);</span></span>
-<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
-<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>  <span class="co">// ...</span></span>
-<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code></pre></div></li>
+<div class="sourceCode" id="cb22"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Integral <span class="op">{</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span><span class="op">:</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> integrate<span class="op">(</span><span class="dt">double</span> a<span class="op">,</span> <span class="dt">double</span> b<span class="op">,</span> <span class="dt">unsigned</span> <span class="dt">int</span> nstep<span class="op">,</span> FunzioneBase <span class="op">&amp;</span>f<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>    checkInterval<span class="op">(</span>a<span class="op">,</span> b<span class="op">);</span></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> calculate<span class="op">(</span>nstep<span class="op">,</span> f<span class="op">);</span></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>  <span class="co">// ...</span></span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code></pre></div></li>
 </ul>
 </section>
 <section id="propagazione-degli-errori" class="slide level1">
@@ -894,19 +839,19 @@ errori!</p></li>
 </section>
 <section id="la-classe-measurement" class="slide level1">
 <h1>La classe <code>Measurement</code></h1>
-<div class="sourceCode" id="cb27"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="kw">struct</span> Measurement <span class="op">{</span></span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">double</span> value<span class="op">;</span></span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">double</span> error<span class="op">;</span></span>
-<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>    Measurement<span class="op">(</span><span class="dt">double</span> v<span class="op">,</span> <span class="dt">double</span> e<span class="op">)</span> <span class="op">:</span> value<span class="op">{</span>v<span class="op">},</span> error<span class="op">{</span>e<span class="op">}</span> <span class="op">{}</span></span>
-<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span>
-<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>Measurement <span class="kw">operator</span><span class="op">+(</span>Measurement a<span class="op">,</span> Measurement b<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> Measurement<span class="op">{</span>a<span class="op">.</span>value <span class="op">+</span> b<span class="op">.</span>value<span class="op">,</span> sqrt<span class="op">(</span>pow<span class="op">(</span>a<span class="op">.</span>error<span class="op">,</span> <span class="dv">2</span><span class="op">)</span> <span class="op">+</span> pow<span class="op">(</span>b<span class="op">.</span>error<span class="op">,</span> <span class="dv">2</span><span class="op">))};</span></span>
-<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
-<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a><span class="co">// Do the same for the other operators: -, *, /, sin, cos…</span></span></code></pre></div>
+<div class="sourceCode" id="cb23"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="kw">struct</span> Measurement <span class="op">{</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">double</span> value<span class="op">;</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">double</span> error<span class="op">;</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>    Measurement<span class="op">(</span><span class="dt">double</span> v<span class="op">,</span> <span class="dt">double</span> e<span class="op">)</span> <span class="op">:</span> value<span class="op">{</span>v<span class="op">},</span> error<span class="op">{</span>e<span class="op">}</span> <span class="op">{}</span></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>Measurement <span class="kw">operator</span><span class="op">+(</span>Measurement a<span class="op">,</span> Measurement b<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> Measurement<span class="op">{</span>a<span class="op">.</span>value <span class="op">+</span> b<span class="op">.</span>value<span class="op">,</span> sqrt<span class="op">(</span>pow<span class="op">(</span>a<span class="op">.</span>error<span class="op">,</span> <span class="dv">2</span><span class="op">)</span> <span class="op">+</span> pow<span class="op">(</span>b<span class="op">.</span>error<span class="op">,</span> <span class="dv">2</span><span class="op">))};</span></span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a><span class="co">// Do the same for the other operators: -, *, /, sin, cos…</span></span></code></pre></div>
 </section>
 <section id="integrali-e-measurement" class="slide level1">
 <h1>Integrali e <code>Measurement</code></h1>
@@ -921,8 +866,8 @@ Anziché fare un Monte Carlo, potrei usare
 <code>Measurement</code>…</p></li>
 <li><p>…però non posso usarlo con la classe <code>Integral</code>,
 perché essa ammette solo i <code>double</code>!</p>
-<div class="sourceCode" id="cb28"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> Integral<span class="op">::</span>integrate<span class="op">(</span><span class="dt">double</span> a<span class="op">,</span> <span class="dt">double</span> b<span class="op">,</span> <span class="dt">unsigned</span> <span class="dt">int</span> nstep<span class="op">,</span> FunzioneBase <span class="op">&amp;</span>f<span class="op">);</span></span></code></pre></div></li>
+<div class="sourceCode" id="cb24"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> Integral<span class="op">::</span>integrate<span class="op">(</span><span class="dt">double</span> a<span class="op">,</span> <span class="dt">double</span> b<span class="op">,</span> <span class="dt">unsigned</span> <span class="dt">int</span> nstep<span class="op">,</span> FunzioneBase <span class="op">&amp;</span>f<span class="op">);</span></span></code></pre></div></li>
 </ul>
 </section>
 <section id="soluzione" class="slide level1">
@@ -946,13 +891,13 @@ aggiornare entrambe.</p></li>
 <li><p>Supponiamo ora di aver implementato una classe
 <code>UnitValue</code> che combini valori e unità di misura, e ne
 verifichi la consistenza:</p>
-<div class="sourceCode" id="cb29"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>UnitValue speed<span class="op">{</span><span class="fl">2.0</span><span class="op">,</span> <span class="st">&quot;m/s&quot;</span><span class="op">};</span></span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>UnitValue start_pos<span class="op">{</span><span class="fl">3.5</span><span class="op">,</span> <span class="st">&quot;m&quot;</span><span class="op">};</span></span>
-<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>UnitValue time<span class="op">{</span><span class="fl">6.0</span><span class="op">,</span> <span class="st">&quot;s&quot;</span><span class="op">};</span></span>
-<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a><span class="co">// This triggers an error: it should have been speed * time, not speed / time</span></span>
-<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>UnitValue final_pos<span class="op">{</span>start_pos <span class="op">+</span> speed <span class="op">/</span> time<span class="op">};</span></span></code></pre></div></li>
+<div class="sourceCode" id="cb25"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>UnitValue speed<span class="op">{</span><span class="fl">2.0</span><span class="op">,</span> <span class="st">&quot;m/s&quot;</span><span class="op">};</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>UnitValue start_pos<span class="op">{</span><span class="fl">3.5</span><span class="op">,</span> <span class="st">&quot;m&quot;</span><span class="op">};</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>UnitValue time<span class="op">{</span><span class="fl">6.0</span><span class="op">,</span> <span class="st">&quot;s&quot;</span><span class="op">};</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a><span class="co">// This triggers an error: it should have been speed * time, not speed / time</span></span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>UnitValue final_pos<span class="op">{</span>start_pos <span class="op">+</span> speed <span class="op">/</span> time<span class="op">};</span></span></code></pre></div></li>
 <li><p>Mi piacerebbe usarla insieme alla mia classe
 <code>Measurement</code> che propaga gli errori, ma non posso: sia
 <code>value</code> che <code>error</code> sono variabili
@@ -970,18 +915,18 @@ passare anche tipi «nuovi» a funzioni «vecchie».</p></li>
 href="https://github.com/JuliaPhysics/Measurements.jl">Measurements.jl</a>
 e <a
 href="https://painterqubits.github.io/Unitful.jl/stable/">Unitful.jl</a></p>
-<div class="sourceCode" id="cb30"><pre
-class="sourceCode julia"><code class="sourceCode julia"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">Measurements</span>, <span class="bu">Unitful</span></span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>speed <span class="op">=</span> (<span class="fl">2.0</span> <span class="op">±</span> <span class="fl">0.1</span>)u<span class="st">&quot;m/s&quot;</span>    <span class="co"># Use &#39;u&#39; followed by a string to define the unit</span></span>
-<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>start_pos <span class="op">=</span> (<span class="fl">3.5</span> <span class="op">±</span> <span class="fl">0.1</span>)u<span class="st">&quot;m&quot;</span></span>
-<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>time <span class="op">=</span> (<span class="fl">6.0</span> <span class="op">±</span> <span class="fl">0.5</span>)u<span class="st">&quot;s&quot;</span></span>
-<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>final_pos <span class="op">=</span> start_pos <span class="op">+</span> speed <span class="op">/</span> time</span>
-<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a><span class="co"># ERROR: DimensionError: 3.5 ± 0.1 m and 0.333 ± 0.032 m s^-2</span></span>
-<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a><span class="co">#        are not dimensionally compatible.</span></span>
-<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a>final_pos <span class="op">=</span> start_pos <span class="op">+</span> speed <span class="op">*</span> time    <span class="co"># Ok, the result is 15.5 ± 1.2 m</span></span></code></pre></div></li>
+<div class="sourceCode" id="cb26"><pre
+class="sourceCode julia"><code class="sourceCode julia"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">Measurements</span>, <span class="bu">Unitful</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>speed <span class="op">=</span> (<span class="fl">2.0</span> <span class="op">±</span> <span class="fl">0.1</span>)u<span class="st">&quot;m/s&quot;</span>    <span class="co"># Use &#39;u&#39; followed by a string to define the unit</span></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>start_pos <span class="op">=</span> (<span class="fl">3.5</span> <span class="op">±</span> <span class="fl">0.1</span>)u<span class="st">&quot;m&quot;</span></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>time <span class="op">=</span> (<span class="fl">6.0</span> <span class="op">±</span> <span class="fl">0.5</span>)u<span class="st">&quot;s&quot;</span></span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>final_pos <span class="op">=</span> start_pos <span class="op">+</span> speed <span class="op">/</span> time</span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a><span class="co"># ERROR: DimensionError: 3.5 ± 0.1 m and 0.333 ± 0.032 m s^-2</span></span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a><span class="co">#        are not dimensionally compatible.</span></span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a>final_pos <span class="op">=</span> start_pos <span class="op">+</span> speed <span class="op">*</span> time    <span class="co"># Ok, the result is 15.5 ± 1.2 m</span></span></code></pre></div></li>
 </ul>
 </section>
 <section id="la-soluzione-del-c" class="slide level1">
@@ -991,39 +936,17 @@ class="sourceCode julia"><code class="sourceCode julia"><span id="cb30-1"><a hre
 Julia, ma bisogna abbandonare l’approccio OOP.</p></li>
 <li><p>Se si definisse <code>UnitValue</code> come una classe template,
 si potrebbe combinare con la classe <code>Measurement</code>:</p>
-<div class="sourceCode" id="cb31"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="kw">template</span><span class="op">&lt;</span><span class="kw">typename</span> T<span class="op">&gt;</span> <span class="kw">struct</span> UnitValue <span class="op">{</span></span>
-<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>    T value<span class="op">;</span></span>
-<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">std::</span>string<span class="op"> </span>unit<span class="op">;</span></span>
-<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span>
-<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>UnitValue start_pos<span class="op">{</span>Measurement<span class="op">{</span><span class="fl">2.0</span><span class="op">,</span> <span class="fl">0.1</span><span class="op">},</span> <span class="st">&quot;m&quot;</span><span class="op">};</span></span>
-<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a><span class="co">// …and so on</span></span></code></pre></div></li>
+<div class="sourceCode" id="cb27"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="kw">template</span><span class="op">&lt;</span><span class="kw">typename</span> T<span class="op">&gt;</span> <span class="kw">struct</span> UnitValue <span class="op">{</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>    T value<span class="op">;</span></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">std::</span>string<span class="op"> </span>unit<span class="op">;</span></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>UnitValue start_pos<span class="op">{</span>Measurement<span class="op">{</span><span class="fl">2.0</span><span class="op">,</span> <span class="fl">0.1</span><span class="op">},</span> <span class="st">&quot;m&quot;</span><span class="op">};</span></span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a><span class="co">// …and so on</span></span></code></pre></div></li>
 <li><p>Di fatto, le librerie scientifiche moderne in C++ non usano più
 approcci OOP come ROOT, ma sono basate sui template: ad esempio, <a
 href="https://arma.sourceforge.net/">Armadillo</a>.</p></li>
-</ul>
-</section>
-<section id="fine-della-oop" class="slide level1">
-<h1>Fine della OOP?</h1>
-<ul>
-<li><p>Dopo un grande sviluppo negli anni ’90, oggi si sa che la OOP ha
-molti limiti:</p>
-<ul>
-<li>Eccessiva rigidità e scarsa riutilizzabilità (vedi esempio
-precedente);</li>
-<li>Troppo codice <em>boilerplate</em> (ricordate <code>GetA()</code>,
-<code>SetA()</code>, <code>GetB()</code>, <code>SetB()</code>…?).</li>
-</ul></li>
-<li><p>Un esempio simpatico che prende in giro i paradigmi della OOP è
-il repository <a
-href="https://github.com/EnterpriseQualityCoding/FizzBuzzEnterpriseEdition">FizzBuzzEnterpriseEdition</a>,
-una versione del semplice gioco <a
-href="https://en.wikipedia.org/wiki/Fizz_buzz">Fizz Buzz</a>
-implementata usando un programma con ben 47 classi!</p></li>
-<li><p>Per quanto riguarda il C++, nessuna delle nuove versioni (C++14,
-C++17, C++20…) ha aggiunto caratteristiche significative legate alla
-OOP.</p></li>
 </ul>
 </section>
 <section id="omoiconicità-di-julia" class="slide level1">
@@ -1058,24 +981,24 @@ di 2, <code>"B"</code> altrimenti.</p>
 </tr>
 <tr>
 <td>
-<div class="sourceCode" id="cb32"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> f<span class="op">(</span><span class="dt">int</span> x<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span><span class="op">(</span>x <span class="op">&gt;</span> <span class="dv">2</span><span class="op">)</span> <span class="op">{</span></span>
-<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>        <span class="bu">std::</span>cout<span class="op"> &lt;&lt;</span> <span class="st">&quot;A</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">;</span></span>
-<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
-<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>        <span class="bu">std::</span>cout<span class="op"> &lt;&lt;</span> <span class="st">&quot;B</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">;</span></span>
-<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb28"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> f<span class="op">(</span><span class="dt">int</span> x<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span><span class="op">(</span>x <span class="op">&gt;</span> <span class="dv">2</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>        <span class="bu">std::</span>cout<span class="op"> &lt;&lt;</span> <span class="st">&quot;A</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">;</span></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>        <span class="bu">std::</span>cout<span class="op"> &lt;&lt;</span> <span class="st">&quot;B</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">;</span></span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 </td>
 <td>
-<div class="sourceCode" id="cb33"><pre
-class="sourceCode julia"><code class="sourceCode julia"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">f</span>(x)</span>
-<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> x <span class="op">&gt;</span> <span class="fl">2</span></span>
-<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>        <span class="fu">println</span>(<span class="st">&quot;A&quot;</span>)</span>
-<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span></span>
-<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>        <span class="fu">println</span>(<span class="st">&quot;B&quot;</span>)</span>
-<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">end</span></span>
-<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code></pre></div>
+<div class="sourceCode" id="cb29"><pre
+class="sourceCode julia"><code class="sourceCode julia"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">f</span>(x)</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> x <span class="op">&gt;</span> <span class="fl">2</span></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>        <span class="fu">println</span>(<span class="st">&quot;A&quot;</span>)</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span></span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>        <span class="fu">println</span>(<span class="st">&quot;B&quot;</span>)</span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">end</span></span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code></pre></div>
 </td>
 </tr>
 </table>
@@ -1089,15 +1012,15 @@ simile.</p></li>
 parametro <code>x</code>, e stampa <code>"A"</code> solo se
 <code>x</code> è stato calcolato usando una somma, altrimenti
 <code>"B"</code>.</p>
-<div class="sourceCode" id="cb34"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> f<span class="op">(</span><span class="dt">int</span> a<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">// ????</span></span>
-<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
-<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
-<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>    f<span class="op">(</span><span class="dv">2</span> <span class="op">+</span> <span class="dv">2</span><span class="op">);</span>  <span class="co">// Should print &quot;A&quot;</span></span>
-<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a>    f<span class="op">(</span><span class="dv">2</span> <span class="op">*</span> <span class="dv">2</span><span class="op">);</span>  <span class="co">// Should print &quot;B&quot;</span></span>
-<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div></li>
+<div class="sourceCode" id="cb30"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> f<span class="op">(</span><span class="dt">int</span> a<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">// ????</span></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>    f<span class="op">(</span><span class="dv">2</span> <span class="op">+</span> <span class="dv">2</span><span class="op">);</span>  <span class="co">// Should print &quot;A&quot;</span></span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>    f<span class="op">(</span><span class="dv">2</span> <span class="op">*</span> <span class="dv">2</span><span class="op">);</span>  <span class="co">// Should print &quot;B&quot;</span></span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div></li>
 </ul>
 </section>
 <section id="problema-col-c" class="slide level1">
@@ -1118,17 +1041,17 @@ istruzioni di codice</li>
 <p>Julia è invece omoiconico, e quindi si può ispezionare il
 <em>codice</em> usando gli stessi costrutti del linguaggio che si usano
 con i dati:</p>
-<div class="sourceCode" id="cb35"><pre
-class="sourceCode julia"><code class="sourceCode julia"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="kw">macro</span> <span class="fu">f</span>(<span class="cn">e</span><span class="op">::</span><span class="dt">Expr</span>)</span>
-<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="cn">e</span>.args[<span class="fl">1</span>] <span class="op">==</span> <span class="op">:+</span></span>
-<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>        <span class="fu">println</span>(<span class="st">&quot;A&quot;</span>)</span>
-<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span></span>
-<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>        <span class="fu">println</span>(<span class="st">&quot;B&quot;</span>)</span>
-<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">end</span></span>
-<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
-<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a><span class="pp">@f</span> <span class="fl">2</span> <span class="op">+</span> <span class="fl">2</span>   <span class="co"># Print &quot;A&quot;</span></span>
-<span id="cb35-10"><a href="#cb35-10" aria-hidden="true" tabindex="-1"></a><span class="pp">@f</span> <span class="fl">2</span> <span class="op">*</span> <span class="fl">2</span>   <span class="co"># Print &quot;B&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb31"><pre
+class="sourceCode julia"><code class="sourceCode julia"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="kw">macro</span> <span class="fu">f</span>(<span class="cn">e</span><span class="op">::</span><span class="dt">Expr</span>)</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="cn">e</span>.args[<span class="fl">1</span>] <span class="op">==</span> <span class="op">:+</span></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>        <span class="fu">println</span>(<span class="st">&quot;A&quot;</span>)</span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span></span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>        <span class="fu">println</span>(<span class="st">&quot;B&quot;</span>)</span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">end</span></span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a><span class="pp">@f</span> <span class="fl">2</span> <span class="op">+</span> <span class="fl">2</span>   <span class="co"># Print &quot;A&quot;</span></span>
+<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a><span class="pp">@f</span> <span class="fl">2</span> <span class="op">*</span> <span class="fl">2</span>   <span class="co"># Print &quot;B&quot;</span></span></code></pre></div>
 </section>
 <section id="esecuzione-di-macro" class="slide level1">
 <h1>Esecuzione di macro</h1>
@@ -1150,11 +1073,11 @@ bisogno…</p></li>
 href="https://github.com/korsbo/Latexify.jl">Latexify</a> traduce la
 definizione di una funzione Julia in un’espressione LaTeX, che può
 essere visualizzata con la funzione <code>render</code>:</p>
-<div class="sourceCode" id="cb36"><pre
-class="sourceCode julia"><code class="sourceCode julia"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> latex_str <span class="op">=</span> <span class="pp">@latexrun</span> <span class="fu">f</span>(x; y<span class="op">=</span><span class="fl">2</span>) <span class="op">=</span> (x <span class="op">+</span> <span class="fl">2</span>) <span class="op">/</span> y <span class="op">-</span> <span class="fl">1</span></span>
-<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">println</span>(latex_str)</span>
-<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>L<span class="st">&quot;</span><span class="sc">$</span>f<span class="st">\left( x; y = 2 </span><span class="sc">\r</span><span class="st">ight) = </span><span class="sc">\f</span><span class="st">rac{x + 2}{y} - 1</span><span class="sc">$</span><span class="st">&quot;</span></span>
-<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>julia<span class="st">&gt; render(latex_str)</span></span></code></pre></div>
+<div class="sourceCode" id="cb32"><pre
+class="sourceCode julia"><code class="sourceCode julia"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> latex_str <span class="op">=</span> <span class="pp">@latexrun</span> <span class="fu">f</span>(x; y<span class="op">=</span><span class="fl">2</span>) <span class="op">=</span> (x <span class="op">+</span> <span class="fl">2</span>) <span class="op">/</span> y <span class="op">-</span> <span class="fl">1</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">println</span>(latex_str)</span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>L<span class="st">&quot;</span><span class="sc">$</span>f<span class="st">\left( x; y = 2 </span><span class="sc">\r</span><span class="st">ight) = </span><span class="sc">\f</span><span class="st">rac{x + 2}{y} - 1</span><span class="sc">$</span><span class="st">&quot;</span></span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>julia<span class="st">&gt; render(latex_str)</span></span></code></pre></div>
 <center>
 <p><img data-src="images/latexify-example.png" /></p>
 </center></li>
@@ -1174,16 +1097,16 @@ zeri)?</p>
 <pre><code>$ ./esercizio6.2 0 3 100 1e-5
 Zero: 0.33333</code></pre></li>
 <li><p>Il codice all’inizio del <code>main</code> era il seguente:</p>
-<div class="sourceCode" id="cb38"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="op">(</span>argc <span class="op">!=</span> <span class="dv">5</span><span class="op">)</span> <span class="op">{</span></span>
-<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>  <span class="bu">std::</span>cerr<span class="op"> &lt;&lt;</span> <span class="st">&quot;Error, 5 parameters are needed: &lt;a&gt; &lt;b&gt; &lt;nstep_max&gt; &lt;prec&gt;</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">;</span></span>
-<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="dv">1</span><span class="op">;</span></span>
-<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
-<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> a <span class="op">=</span> <span class="bu">std::</span>stod<span class="op">(</span>argv<span class="op">[</span><span class="dv">1</span><span class="op">]);</span></span>
-<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> b <span class="op">=</span> <span class="bu">std::</span>stod<span class="op">(</span>argv<span class="op">[</span><span class="dv">2</span><span class="op">]);</span></span>
-<span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> nsteps_max <span class="op">=</span> <span class="bu">std::</span>stoi<span class="op">(</span>argv<span class="op">[</span><span class="dv">3</span><span class="op">]);</span></span>
-<span id="cb38-9"><a href="#cb38-9" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> prec <span class="op">=</span> <span class="bu">std::</span>stod<span class="op">(</span>argv<span class="op">[</span><span class="dv">4</span><span class="op">]);</span>  <span class="co">// Many students have used `stoi` here…</span></span></code></pre></div></li>
+<div class="sourceCode" id="cb34"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="op">(</span>argc <span class="op">!=</span> <span class="dv">5</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>  <span class="bu">std::</span>cerr<span class="op"> &lt;&lt;</span> <span class="st">&quot;Error, 5 parameters are needed: &lt;a&gt; &lt;b&gt; &lt;nstep_max&gt; &lt;prec&gt;</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">;</span></span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> a <span class="op">=</span> <span class="bu">std::</span>stod<span class="op">(</span>argv<span class="op">[</span><span class="dv">1</span><span class="op">]);</span></span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> b <span class="op">=</span> <span class="bu">std::</span>stod<span class="op">(</span>argv<span class="op">[</span><span class="dv">2</span><span class="op">]);</span></span>
+<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> nsteps_max <span class="op">=</span> <span class="bu">std::</span>stoi<span class="op">(</span>argv<span class="op">[</span><span class="dv">3</span><span class="op">]);</span></span>
+<span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> prec <span class="op">=</span> <span class="bu">std::</span>stod<span class="op">(</span>argv<span class="op">[</span><span class="dv">4</span><span class="op">]);</span>  <span class="co">// Many students have used `stoi` here…</span></span></code></pre></div></li>
 </ul>
 </section>
 <section id="generare-il-main" class="slide level1">
@@ -1195,13 +1118,13 @@ linguaggio «omoiconico».</p></li>
 <li><p>La libreria <a
 href="https://github.com/c-blake/cligen">cligen</a> di Nim implementa
 una macro che, se fosse scritta per il C++, si userebbe così:</p>
-<div class="sourceCode" id="cb39"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> run_program<span class="op">(</span><span class="dt">double</span> a<span class="op">,</span> <span class="dt">double</span> b<span class="op">,</span> <span class="dt">int</span> nsteps_max<span class="op">,</span> <span class="dt">double</span> prec<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Here comes my program</span></span>
-<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
-<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a><span class="co">// Macro call… but C++ has not them, so let&#39;s mimick Julia&#39;s syntax</span></span>
-<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a><span class="er">@</span>define_main<span class="op">(</span>run_program<span class="op">);</span></span></code></pre></div>
+<div class="sourceCode" id="cb35"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> run_program<span class="op">(</span><span class="dt">double</span> a<span class="op">,</span> <span class="dt">double</span> b<span class="op">,</span> <span class="dt">int</span> nsteps_max<span class="op">,</span> <span class="dt">double</span> prec<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Here comes my program</span></span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a><span class="co">// Macro call… but C++ has not them, so let&#39;s mimick Julia&#39;s syntax</span></span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a><span class="er">@</span>define_main<span class="op">(</span>run_program<span class="op">);</span></span></code></pre></div>
 <p>La macro <code>@define_main</code> analizza i parametri di
 <code>run_program</code> e genera automaticamente il <code>main</code>,
 usando <code>stod</code> e <code>stoi</code> in modo
@@ -1249,9 +1172,7 @@ speaker mostra varie applicazioni di Julia, tra cui l’implementazione di
 un tipo di matrice con determinate simmetrie</li>
 <li>In un altro video <em>Alan Edelman and Julia Language</em> (<a
 href="https://youtu.be/rZS2LGiurKY">youtu.be/rZS2LGiurKY</a>), lo
-speaker spiega come sia possibile per librerie come Zygote calcolare
-derivate.</li>
-<li>Sono video illuminanti, vale la pena vederli!</li>
+speaker spiega come calcolare efficacemente derivate con Julia</li>
 </ul>
 </section>
     </div>
@@ -1427,5 +1348,6 @@ derivate.</li>
         ]
       });
     </script>
+    <script src="js/asciinema-player.js"></script>
     </body>
 </html>

@@ -46,6 +46,8 @@ tomasi-c++-python-julia.html: tomasi-c++-python-julia.md
 	  	--standalone \
 		--filter pandoc-imagine \
 		--katex \
+		--css ./css/asciinema-player.css \
+		-A asciinema-include.html \
 		-V theme=white \
 		-V progress=true \
 		-V slideNumber=true \
