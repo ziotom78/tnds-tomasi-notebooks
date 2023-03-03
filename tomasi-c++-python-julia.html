@@ -25,6 +25,7 @@
       margin: 0 0.8em 0.2em -1.6em;
       vertical-align: middle;
     }
+    /* CSS for syntax highlighting */
     pre > code.sourceCode { white-space: pre; position: relative; }
     pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
     pre > code.sourceCode > span:empty { height: 1.2em; }
@@ -130,7 +131,7 @@ in un altro.</li>
 <li>I compilatori C++ come <code>g++</code> e <code>clang++</code>
 convertono il C++ in <em>linguaggio macchina</em>.</li>
 <li>Per capire come funziona un compilatore, bisogna comprendere il
-linguaggio macchina delle CPU!</li>
+linguaggio macchina delle CPU.</li>
 </ul>
 </section>
 <section id="cosa-fa-la-cpu" class="slide level1">
@@ -215,7 +216,8 @@ mouse, porte ethernet, etc.</li>
 <h1>Cosa <em>non</em> sa fare la CPU?</h1>
 <ul>
 <li>Cicli <code>for</code></li>
-<li>Operazioni matematiche complesse (es., <code>2 * x + y</code>)</li>
+<li>Operazioni matematiche complesse (es.,
+<code>2 * x + y / z</code>)</li>
 <li>Gestione di dati complessi (array, stringhe, etc.)</li>
 <li>Allocazione di memoria con <code>new</code> e
 <code>delete</code></li>
@@ -335,7 +337,7 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb2-1"><a href="#c
 <td>
 <div class="sourceCode" id="cb3"><pre
 class="sourceCode asm"><code class="sourceCode fasm"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>    <span class="bu">mov</span>  <span class="kw">ecx</span><span class="op">,</span> <span class="op">[</span>n<span class="op">]</span>  <span class="co">; ecx ← n</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">xor</span>  <span class="kw">eax</span><span class="op">,</span> <span class="kw">eax</span>  <span class="co">; eax ← 0</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">xor</span>  <span class="kw">eax</span><span class="op">,</span> <span class="kw">eax</span>  <span class="co">; eax ← 0 (there is no [i] here!)</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">LoopTop:</span>  <span class="co">; This is a *label*, not an instruction</span></span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">cmp</span>  <span class="kw">eax</span><span class="op">,</span> <span class="kw">ecx</span>  <span class="co">; if eax &gt;= ecx…</span></span>
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">jge</span>  LoopEnd   <span class="co">; …then go to LoopEnd</span></span>
@@ -352,7 +354,8 @@ class="sourceCode asm"><code class="sourceCode fasm"><span id="cb3-1"><a href="#
 <h1>Uso di registri</h1>
 <ul>
 <li><p>Per ogni dato, il compilatore deve decidere se usare un registro
-o la RAM</p></li>
+o la RAM: nell’esempio, <code>n</code> era nella RAM mentre
+<code>i</code> in un registro (<code>eax</code>)</p></li>
 <li><p>Trovare la scelta ottimale è molto difficile (vedi <a
 href="https://en.wikipedia.org/wiki/Register_allocation">Wikipedia</a>)</p></li>
 <li><p>In passato il C/C++ offriva la parola chiave
@@ -422,7 +425,6 @@ C++</li>
 sempre più veloci: programmi «lenti» sono sempre meno un problema</li>
 <li>L’approccio di Python è completamente diverso rispetto al C++: non è
 più <strong>compilato</strong>, ma <strong>interpretato</strong></li>
-<li>Oggi la versione più diffusa è la 3: evitate la 2!</li>
 <li>In campo scientifico si usa molto la distribuzione <strong>Anaconda
 Python</strong></li>
 </ul>
@@ -445,7 +447,7 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb5-1"><a href="#c
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> sum<span class="op">{};</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span><span class="op">(</span><span class="dt">double</span> i<span class="op">{};</span> i <span class="op">&lt;</span> <span class="dv">10000000</span><span class="op">;</span> i <span class="op">+=</span> <span class="dv">1</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span><span class="op">(</span><span class="dt">double</span> i<span class="op">{};</span> i <span class="op">&lt;</span> <span class="dv">10&#39;000&#39;000</span><span class="op">;</span> i <span class="op">+=</span> <span class="dv">1</span><span class="op">)</span> <span class="op">{</span></span>
 <span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>      sum <span class="op">+=</span> i<span class="op">;</span></span>
 <span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
 <span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  <span class="bu">std::</span>cout<span class="op"> &lt;&lt;</span> sum <span class="op">&lt;&lt;</span> <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">;</span></span>
@@ -706,7 +708,7 @@ href="https://pandas.pydata.org/">Pandas</a>…</li>
 2013)</li>
 <li>Pensato espressamente per il calcolo scientifico</li>
 <li>Veloce come C++ e facile come Python…?</li>
-<li>Versione corrente: 1.8.4</li>
+<li>Versione corrente: 1.8.5</li>
 </ul>
 </section>
 <section id="dove-si-colloca-julia" class="slide level1">
@@ -864,9 +866,8 @@ julia&gt; mysum(3+2im, 4-3im)      # Numeri complessi
 <em>object-oriented</em> del C++: non ci sono classi né metodi
 virtuali.</p></li>
 <li><p>L’approccio OOP si è infatti dimostrato negli anni poco adatto
-per il calcolo scientifico</p></li>
-<li><p>Mostriamo le sue limitazioni usando come esempio il calcolo degli
-integrali con i metodi deterministici (trapezi, Simpson…):</p>
+per il calcolo scientifico. Consideriamo ad esempio il calcolo degli
+integrali:</p>
 <div class="sourceCode" id="cb26"><pre
 class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Integral <span class="op">{</span></span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span><span class="op">:</span></span>
@@ -887,9 +888,6 @@ codice, un buon metodo è quello di eseguire una simulazione Monte
 Carlo.</p></li>
 <li><p>Ma queste simulazioni possono essere molto lente da eseguire,
 soprattutto se il modello è complesso!</p></li>
-<li><p>(Esempio personale: simulare la presa dati della missione
-spaziale LiteBIRD richiede alcune settimane per un Monte Carlo di 50
-campioni!)</p></li>
 <li><p>Per certi calcoli sarebbe sufficiente la propagazione degli
 errori!</p></li>
 </ul>
@@ -900,13 +898,15 @@ errori!</p></li>
 class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="kw">struct</span> Measurement <span class="op">{</span></span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">double</span> value<span class="op">;</span></span>
 <span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">double</span> error<span class="op">;</span></span>
-<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span>
-<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>Measurement <span class="kw">operator</span><span class="op">+(</span>Measurement a<span class="op">,</span> Measurement b<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> Measurement<span class="op">{</span>a<span class="op">.</span>value <span class="op">+</span> b<span class="op">.</span>value<span class="op">,</span> sqrt<span class="op">(</span>pow<span class="op">(</span>a<span class="op">.</span>error<span class="op">,</span> <span class="dv">2</span><span class="op">)</span> <span class="op">+</span> pow<span class="op">(</span>b<span class="op">.</span>error<span class="op">,</span> <span class="dv">2</span><span class="op">))};</span></span>
-<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
-<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a><span class="co">// Do the same for the other operators: -, *, /, sin, cos…</span></span></code></pre></div>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>    Measurement<span class="op">(</span><span class="dt">double</span> v<span class="op">,</span> <span class="dt">double</span> e<span class="op">)</span> <span class="op">:</span> value<span class="op">{</span>v<span class="op">},</span> error<span class="op">{</span>e<span class="op">}</span> <span class="op">{}</span></span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>Measurement <span class="kw">operator</span><span class="op">+(</span>Measurement a<span class="op">,</span> Measurement b<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> Measurement<span class="op">{</span>a<span class="op">.</span>value <span class="op">+</span> b<span class="op">.</span>value<span class="op">,</span> sqrt<span class="op">(</span>pow<span class="op">(</span>a<span class="op">.</span>error<span class="op">,</span> <span class="dv">2</span><span class="op">)</span> <span class="op">+</span> pow<span class="op">(</span>b<span class="op">.</span>error<span class="op">,</span> <span class="dv">2</span><span class="op">))};</span></span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a><span class="co">// Do the same for the other operators: -, *, /, sin, cos…</span></span></code></pre></div>
 </section>
 <section id="integrali-e-measurement" class="slide level1">
 <h1>Integrali e <code>Measurement</code></h1>
@@ -929,8 +929,8 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb28-1"><a href="#
 <h1>Soluzione</h1>
 <ul>
 <li><p>Se <code>Integral::integrate</code> fosse una funzione di
-libreria (ad esempio, una classe di ROOT), questo chiuderebbe la
-questione: non posso usare <code>Measurement</code> con essa!</p></li>
+libreria (ad esempio, una classe di ROOT), sarei spacciato: non potrei
+usare <code>Measurement</code> con essa!</p></li>
 <li><p>Se invece fossi <strong>io</strong> l’autore di
 <code>Integral::integrate</code>, potrei allora modificare il codice. Ma
 così non potrei più compilare i miei vecchi programmi che usavano la
@@ -964,14 +964,12 @@ lo usava con <code>Integral::integra</code> non funziona più!</p></li>
 <section id="la-soluzione-di-julia" class="slide level1">
 <h1>La soluzione di Julia</h1>
 <ul>
-<li><p>In Julia non devo definire il tipo dei parametri: è quindi più
-semplice combinare tipi che gestiscano la propagazione degli errori o le
-unità di misura in funzioni già scritte.</p></li>
-<li><p>In effetti, queste due librerie esistono già: sono <a
+<li><p>In Julia non si definisce il tipo dei parametri: si può quindi
+passare anche tipi «nuovi» a funzioni «vecchie».</p></li>
+<li><p>In effetti, questo si può fare con due librerie già esistenti: <a
 href="https://github.com/JuliaPhysics/Measurements.jl">Measurements.jl</a>
 e <a
-href="https://painterqubits.github.io/Unitful.jl/stable/">Unitful.jl</a>,
-ed è facilissimo combinarle insieme.</p>
+href="https://painterqubits.github.io/Unitful.jl/stable/">Unitful.jl</a></p>
 <div class="sourceCode" id="cb30"><pre
 class="sourceCode julia"><code class="sourceCode julia"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">Measurements</span>, <span class="bu">Unitful</span></span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -1009,13 +1007,13 @@ href="https://arma.sourceforge.net/">Armadillo</a>.</p></li>
 <section id="fine-della-oop" class="slide level1">
 <h1>Fine della OOP?</h1>
 <ul>
-<li><p>La OOP è stato un approccio usatissimo negli anni ’90</p></li>
-<li><p>Con gli anni ha dimostrato però grandi limiti:</p>
+<li><p>Dopo un grande sviluppo negli anni ’90, oggi si sa che la OOP ha
+molti limiti:</p>
 <ul>
-<li>Eccessiva rigidità (vedi esempio precedente);</li>
+<li>Eccessiva rigidità e scarsa riutilizzabilità (vedi esempio
+precedente);</li>
 <li>Troppo codice <em>boilerplate</em> (ricordate <code>GetA()</code>,
-<code>SetA()</code>, <code>GetB()</code>, <code>SetB()</code>…?);</li>
-<li>Promessa tradita di rendere il codice riutilizzabile.</li>
+<code>SetA()</code>, <code>GetB()</code>, <code>SetB()</code>…?).</li>
 </ul></li>
 <li><p>Un esempio simpatico che prende in giro i paradigmi della OOP è
 il repository <a
@@ -1038,11 +1036,10 @@ OOP.</p></li>
 rappresentazione”), che significa che codice e variabili hanno la stessa
 rappresentazione.</p></li>
 <li><p>Questa è una caratteristica mutuata dal linguaggio Scheme, da cui
-gli sviluppatori di Julia hanno preso spesso ispirazione.</p></li>
-<li><p>(Il cuore del compilatore di Julia è scritto in un dialetto di
-Scheme!)</p></li>
+gli sviluppatori di Julia hanno preso spesso ispirazione. (Il cuore del
+compilatore di Julia è scritto in un dialetto di Scheme!)</p></li>
 <li><p>Le macro sono apparentemente simili alle funzioni del C++, ma
-hanno una importante differenza</p></li>
+hanno una importante differenza.</p></li>
 </ul>
 </section>
 <section id="esempio-di-funzione" class="slide level1">
@@ -1141,8 +1138,8 @@ venga tradotto in linguaggio macchina</p></li>
 <li><p>Possono quindi essere usate per modificare del codice presente
 nel file sorgente, o addirittura per <em>generarlo
 automaticamente</em></p></li>
-<li><p>Ma a cosa può servire una caratteristica simile? Dopotutto, sono
-due anni che programmate in C++ e non ne avete mai avuto
+<li><p>Ma a cosa può servire una caratteristica simile? Dopotutto, è da
+tempo ormai che programmate in C++ e non ne avete mai sentito il
 bisogno…</p></li>
 </ul>
 </section>
@@ -1172,9 +1169,8 @@ complessa.</p></li>
 <h1>Gestire <code>argc</code> e <code>argv</code></h1>
 <ul>
 <li><p>Un’altra bella applicazione dell’omoiconicità è la generazione di
-interfacce da linea di comando.</p></li>
-<li><p>Riprendiamo l’esercizio 6.2 (ricerca degli zeri), che funzionava
-così:</p>
+interfacce da linea di comando. Ricordate l’esercizio 6.2 (ricerca degli
+zeri)?</p>
 <pre><code>$ ./esercizio6.2 0 3 100 1e-5
 Zero: 0.33333</code></pre></li>
 <li><p>Il codice all’inizio del <code>main</code> era il seguente:</p>
@@ -1206,10 +1202,10 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb39-1"><a href="#
 <span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a><span class="co">// Macro call… but C++ has not them, so let&#39;s mimick Julia&#39;s syntax</span></span>
 <span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a><span class="er">@</span>define_main<span class="op">(</span>run_program<span class="op">);</span></span></code></pre></div>
-<p>La macro <code>@define_main</code> scansiona i parametri accettati da
+<p>La macro <code>@define_main</code> analizza i parametri di
 <code>run_program</code> e genera automaticamente il <code>main</code>,
-con le chiamate a <code>stod</code> e a <code>stoi</code> nell’ordine
-corretto; se si usa <code>--help</code>, mostra pure un aiuto!</p></li>
+usando <code>stod</code> e <code>stoi</code> in modo
+appropriato.</p></li>
 </ul>
 </section>
 <section class="slide level1">

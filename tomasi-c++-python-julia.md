@@ -15,7 +15,7 @@ babel-lang: italian
 -   I compilatori C++ come `g++` e `clang++` convertono il C++ in
     *linguaggio macchina*.
 -   Per capire come funziona un compilatore, bisogna comprendere il
-    linguaggio macchina delle CPU!
+    linguaggio macchina delle CPU.
 
 # Cosa fa la CPU
 
@@ -70,7 +70,7 @@ babel-lang: italian
 # Cosa *non* sa fare la CPU?
 
 -   Cicli `for`
--   Operazioni matematiche complesse (es., `2 * x + y`)
+-   Operazioni matematiche complesse (es., `2 * x + y / z`)
 -   Gestione di dati complessi (array, stringhe, etc.)
 -   Allocazione di memoria con `new` e `delete`
 -   Funzioni con parametri
@@ -174,7 +174,7 @@ for (int i = 0; i < n; ++i)
 <td>
 ```asm
     mov  ecx, [n]  ; ecx ← n
-    xor  eax, eax  ; eax ← 0
+    xor  eax, eax  ; eax ← 0 (there is no [i] here!)
 LoopTop:  ; This is a *label*, not an instruction
     cmp  eax, ecx  ; if eax >= ecx…
     jge  LoopEnd   ; …then go to LoopEnd
@@ -191,7 +191,7 @@ LoopEnd:
 # Uso di registri
 
 -   Per ogni dato, il compilatore deve decidere se usare un registro o
-    la RAM
+    la RAM: nell'esempio, `n` era nella RAM mentre `i` in un registro (`eax`)
 -   Trovare la scelta ottimale è molto difficile (vedi
     [Wikipedia](https://en.wikipedia.org/wiki/Register_allocation))
 -   In passato il C/C++ offriva la parola chiave `register` (oggi
@@ -249,7 +249,6 @@ LoopEnd:
     problema
 -   L'approccio di Python è completamente diverso rispetto al C++: non
     è più **compilato**, ma **interpretato**
--   Oggi la versione più diffusa è la 3: evitate la 2!
 -   In campo scientifico si usa molto la distribuzione **Anaconda
     Python**
 
@@ -271,7 +270,7 @@ LoopEnd:
 
 int main() {
   double sum{};
-  for(double i{}; i < 10000000; i += 1) {
+  for(double i{}; i < 10'000'000; i += 1) {
       sum += i;
   }
   std::cout << sum << "\n";
@@ -534,7 +533,7 @@ upper_flange         (T = 301.76 K)
 -   Linguaggio molto recente (versione 0.1 rilasciata a Febbraio 2013)
 -   Pensato espressamente per il calcolo scientifico
 -   Veloce come C++ e facile come Python…?
--   Versione corrente: 1.8.4
+-   Versione corrente: 1.8.5
 
 # Dove si colloca Julia?
 
@@ -694,9 +693,7 @@ julia> mysum(3+2im, 4-3im)      # Numeri complessi
 
 -   Julia **non** implementa i costrutti *object-oriented* del C++: non ci sono classi né metodi virtuali.
 
--   L'approccio OOP si è infatti dimostrato negli anni poco adatto per il calcolo scientifico
-
--   Mostriamo le sue limitazioni usando come esempio il calcolo degli integrali con i metodi deterministici (trapezi, Simpson…):
+-   L'approccio OOP si è infatti dimostrato negli anni poco adatto per il calcolo scientifico. Consideriamo ad esempio il calcolo degli integrali:
 
     ```c++
     class Integral {
@@ -716,8 +713,6 @@ julia> mysum(3+2im, 4-3im)      # Numeri complessi
 
 -   Ma queste simulazioni possono essere molto lente da eseguire, soprattutto se il modello è complesso!
 
--   (Esempio personale: simulare la presa dati della missione spaziale LiteBIRD richiede alcune settimane per un Monte Carlo di 50 campioni!)
-
 -   Per certi calcoli sarebbe sufficiente la propagazione degli errori!
 
 # La classe `Measurement`
@@ -726,6 +721,8 @@ julia> mysum(3+2im, 4-3im)      # Numeri complessi
 struct Measurement {
     double value;
     double error;
+
+    Measurement(double v, double e) : value{v}, error{e} {}
 };
 
 Measurement operator+(Measurement a, Measurement b) {
@@ -753,7 +750,7 @@ Measurement operator+(Measurement a, Measurement b) {
 
 # Soluzione
 
--   Se `Integral::integrate` fosse una funzione di libreria (ad esempio, una classe di ROOT), questo chiuderebbe la questione: non posso usare `Measurement` con essa!
+-   Se `Integral::integrate` fosse una funzione di libreria (ad esempio, una classe di ROOT), sarei spacciato: non potrei usare `Measurement` con essa!
 
 -   Se invece fossi **io** l'autore di `Integral::integrate`, potrei allora modificare il codice. Ma così non potrei più compilare i miei vecchi programmi che usavano la versione con i `double`.
 
@@ -778,9 +775,9 @@ Measurement operator+(Measurement a, Measurement b) {
 
 # La soluzione di Julia
 
--   In Julia non devo definire il tipo dei parametri: è quindi più semplice combinare tipi che gestiscano la propagazione degli errori o le unità di misura in funzioni già scritte.
+-   In Julia non si definisce il tipo dei parametri: si può quindi passare anche tipi «nuovi» a funzioni «vecchie».
 
--   In effetti, queste due librerie esistono già: sono [Measurements.jl](https://github.com/JuliaPhysics/Measurements.jl) e [Unitful.jl](https://painterqubits.github.io/Unitful.jl/stable/), ed è facilissimo combinarle insieme.
+-   In effetti, questo si può fare con due librerie già esistenti: [Measurements.jl](https://github.com/JuliaPhysics/Measurements.jl) e [Unitful.jl](https://painterqubits.github.io/Unitful.jl/stable/)
 
     ```julia
     using Measurements, Unitful
@@ -816,13 +813,10 @@ Measurement operator+(Measurement a, Measurement b) {
 
 # Fine della OOP?
 
--   La OOP è stato un approccio usatissimo negli anni '90
+-   Dopo un grande sviluppo negli anni '90, oggi si sa che la OOP ha molti limiti:
 
--   Con gli anni ha dimostrato però grandi limiti:
-
-    - Eccessiva rigidità (vedi esempio precedente);
-    - Troppo codice *boilerplate* (ricordate `GetA()`, `SetA()`, `GetB()`, `SetB()`…?);
-    - Promessa tradita di rendere il codice riutilizzabile.
+    - Eccessiva rigidità e scarsa riutilizzabilità (vedi esempio precedente);
+    - Troppo codice *boilerplate* (ricordate `GetA()`, `SetA()`, `GetB()`, `SetB()`…?).
 
 -   Un esempio simpatico che prende in giro i paradigmi della OOP è il repository [FizzBuzzEnterpriseEdition](https://github.com/EnterpriseQualityCoding/FizzBuzzEnterpriseEdition), una versione del semplice gioco [Fizz Buzz](https://en.wikipedia.org/wiki/Fizz_buzz) implementata usando un programma con ben 47 classi!
 
@@ -834,11 +828,9 @@ Measurement operator+(Measurement a, Measurement b) {
 
 -   Julia è un linguaggio *omoiconico* (“medesima rappresentazione”), che significa che codice e variabili hanno la stessa rappresentazione.
 
--   Questa è una caratteristica mutuata dal linguaggio Scheme, da cui gli sviluppatori di Julia hanno preso spesso ispirazione.
+-   Questa è una caratteristica mutuata dal linguaggio Scheme, da cui gli sviluppatori di Julia hanno preso spesso ispirazione. (Il cuore del compilatore di Julia è scritto in un dialetto di Scheme!)
 
--   (Il cuore del compilatore di Julia è scritto in un dialetto di Scheme!)
-
--   Le macro sono apparentemente simili alle funzioni del C++, ma hanno una importante differenza
+-   Le macro sono apparentemente simili alle funzioni del C++, ma hanno una importante differenza.
 
 # Esempio di funzione
 
@@ -925,7 +917,7 @@ end
 
 -   Possono quindi essere usate per modificare del codice presente nel file sorgente, o addirittura per *generarlo automaticamente*
 
--   Ma a cosa può servire una caratteristica simile? Dopotutto, sono due anni che programmate in C++ e non ne avete mai avuto bisogno…
+-   Ma a cosa può servire una caratteristica simile? Dopotutto, è da tempo ormai che programmate in C++ e non ne avete mai sentito il bisogno…
 
 # [Latexify.jl](https://github.com/korsbo/Latexify.jl)
 
@@ -948,9 +940,7 @@ end
 
 # Gestire `argc` e `argv`
 
--   Un'altra bella applicazione dell'omoiconicità è la generazione di interfacce da linea di comando.
-
--   Riprendiamo l'esercizio 6.2 (ricerca degli zeri), che funzionava così:
+-   Un'altra bella applicazione dell'omoiconicità è la generazione di interfacce da linea di comando. Ricordate l'esercizio 6.2 (ricerca degli zeri)?
 
     ```
     $ ./esercizio6.2 0 3 100 1e-5
@@ -986,7 +976,7 @@ end
     @define_main(run_program);
     ```
     
-    La macro `@define_main` scansiona i parametri accettati da `run_program` e genera automaticamente il `main`, con le chiamate a `stod` e a `stoi` nell'ordine corretto; se si usa `--help`, mostra pure un aiuto!
+    La macro `@define_main` analizza i parametri di `run_program` e genera automaticamente il `main`, usando `stod` e `stoi` in modo appropriato.
 
 ---
 
