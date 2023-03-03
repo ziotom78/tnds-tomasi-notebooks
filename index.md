@@ -28,7 +28,7 @@ css:
 
 </center>
 
-Google form per il seminario finale su C++, Python e Julia: <https://forms.gle/99kR6ZADstXEJZZaA>.
+Google form per il seminario finale su C++, Python e Julia: <https://forms.gle/99kR6ZADstXEJZZaA>. Slide del seminario: [link](./tomasi-c++-python-julia.html).
 
 # Suggerimenti vari
 
