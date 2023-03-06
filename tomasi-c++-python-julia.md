@@ -629,19 +629,16 @@ per Python in Julia non si specificano i tipi?
 
 -   Julia **non** implementa i costrutti *object-oriented* del C++: non ci sono classi né metodi virtuali.
 
--   L'approccio OOP si è infatti dimostrato negli anni poco adatto per il calcolo scientifico. Consideriamo ad esempio il calcolo degli integrali:
+-   L'approccio OOP si è infatti dimostrato negli anni poco adatto per il calcolo scientifico. Consideriamo ad esempio `FunzioneBase`, che ci è servita molte volte:
 
     ```c++
-    class Integral {
+    class FunzioneBase {
     public:
-      double integrate(double a, double b, unsigned int nstep, FunzioneBase &f) {
-        checkInterval(a, b);
-        return calculate(nstep, f);
-      }
-
-	  // ...
-	};
+        virtual double Eval(double x) const = 0;
+    };
     ```
+    
+    e vediamone i limiti nell'ipotesi di voler rendere il codice più versatile.
 
 # Propagazione degli errori
 
@@ -670,27 +667,23 @@ Measurement operator+(Measurement a, Measurement b) {
 
 # Integrali e `Measurement`
 
--   Supponiamo ora che voglia calcolare l'integrale
+-   Supponiamo ora che io voglia calcolare lo zero o l'integrale di una funzione derivata da `FunzioneBase`.
 
-    $$
-    I = \int_a^b f(x)\,\mathrm{d}x,
-    $$
-    
-    ma che gli estremi $a$ e $b$ siano noti con una certa barra d'errore. Anziché fare un Monte Carlo, potrei usare `Measurement`…
-    
--   …però non posso usarlo con la classe `Integral`, perché essa ammette solo i `double`!
+-   Mi è impossibile usare `Measurement` nella nostra `FunzioneBase`, perché essa lavora solo con il tipo `double`:
 
     ```c++
-    double Integral::integrate(double a, double b, unsigned int nstep, FunzioneBase &f);
-    ```
+    virtual double Eval(double x) const = 0;
+	```
+    
+    Anche qualsiasi classe derivata deve quindi usare i `double`.
 
 # Soluzione
 
--   Se `Integral::integrate` fosse una funzione di libreria (ad esempio, una classe di ROOT), sarei spacciato: non potrei usare `Measurement` con essa!
+-   Se `FunzioneBase` fosse una classe di ROOT, sarei spacciato: non potrei usare `Measurement` con essa!
 
--   Se invece fossi **io** l'autore di `Integral::integrate`, potrei allora modificare il codice. Ma così non potrei più compilare i miei vecchi programmi che usavano la versione con i `double`.
+-   Se invece fossi **io** l'autore di `FunzioneBase` (ed è così!), potrei allora modificare il codice. Ma così non potrei più compilare i miei vecchi programmi che usavano la versione con i `double`.
 
--   Potrei fare una copia della classe e modificare quella, ma se in futuro correggessi bug o apportassi miglioramenti, dovrei ricordarmi di aggiornare entrambe.
+-   Potrei fare una copia della classe e modificare quella, ma se in futuro correggessi bug o apportassi miglioramenti a `FunzioneBase`, dovrei ricordarmi di aggiornare entrambe.
 
 # Passo successivo
 
@@ -707,7 +700,7 @@ Measurement operator+(Measurement a, Measurement b) {
     
 -   Mi piacerebbe usarla insieme alla mia classe `Measurement` che propaga gli errori, ma non posso: sia `value` che `error` sono variabili `double`!
 
--   Se però modifico `Measurement`, il mio programma che lo usava con `Integral::integra` non funziona più!
+-   Se però modifico `Measurement`, rischio che la mia nuova versione di `FunzioneBase` non funzioni più!
 
 # La soluzione di Julia
 

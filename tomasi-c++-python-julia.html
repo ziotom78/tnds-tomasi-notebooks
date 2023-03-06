@@ -92,24 +92,6 @@
   </style>
   <link rel="stylesheet" href="https://unpkg.com/reveal.js@^4//dist/theme/white.css" id="theme">
   <link rel="stylesheet" href="./css/asciinema-player.css"/>
-  <script defer=""
-  src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js"></script>
-  <script>document.addEventListener("DOMContentLoaded", function () {
- var mathElements = document.getElementsByClassName("math");
- var macros = [];
- for (var i = 0; i < mathElements.length; i++) {
-  var texText = mathElements[i].firstChild;
-  if (mathElements[i].tagName == "SPAN") {
-   katex.render(texText.data, mathElements[i], {
-    displayMode: mathElements[i].classList.contains('display'),
-    throwOnError: false,
-    macros: macros,
-    fleqn: false
-   });
-}}});
-  </script>
-  <link rel="stylesheet"
-  href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css" />
 </head>
 <body>
   <div class="reveal">
@@ -811,18 +793,15 @@ macchina.</p></li>
 <em>object-oriented</em> del C++: non ci sono classi né metodi
 virtuali.</p></li>
 <li><p>L’approccio OOP si è infatti dimostrato negli anni poco adatto
-per il calcolo scientifico. Consideriamo ad esempio il calcolo degli
-integrali:</p>
+per il calcolo scientifico. Consideriamo ad esempio
+<code>FunzioneBase</code>, che ci è servita molte volte:</p>
 <div class="sourceCode" id="cb22"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Integral <span class="op">{</span></span>
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> FunzioneBase <span class="op">{</span></span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span><span class="op">:</span></span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> integrate<span class="op">(</span><span class="dt">double</span> a<span class="op">,</span> <span class="dt">double</span> b<span class="op">,</span> <span class="dt">unsigned</span> <span class="dt">int</span> nstep<span class="op">,</span> FunzioneBase <span class="op">&amp;</span>f<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>    checkInterval<span class="op">(</span>a<span class="op">,</span> b<span class="op">);</span></span>
-<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> calculate<span class="op">(</span>nstep<span class="op">,</span> f<span class="op">);</span></span>
-<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
-<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>  <span class="co">// ...</span></span>
-<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code></pre></div></li>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">virtual</span> <span class="dt">double</span> Eval<span class="op">(</span><span class="dt">double</span> x<span class="op">)</span> <span class="at">const</span> <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code></pre></div>
+<p>e vediamone i limiti nell’ipotesi di voler rendere il codice più
+versatile.</p></li>
 </ul>
 </section>
 <section id="propagazione-degli-errori" class="slide level1">
@@ -856,33 +835,30 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb23-1"><a href="#
 <section id="integrali-e-measurement" class="slide level1">
 <h1>Integrali e <code>Measurement</code></h1>
 <ul>
-<li><p>Supponiamo ora che voglia calcolare l’integrale</p>
-<p><span class="math display">
-I = \int_a^b f(x)\,\mathrm{d}x,
-</span></p>
-<p>ma che gli estremi <span class="math inline">a</span> e <span
-class="math inline">b</span> siano noti con una certa barra d’errore.
-Anziché fare un Monte Carlo, potrei usare
-<code>Measurement</code>…</p></li>
-<li><p>…però non posso usarlo con la classe <code>Integral</code>,
-perché essa ammette solo i <code>double</code>!</p>
+<li><p>Supponiamo ora che io voglia calcolare lo zero o l’integrale di
+una funzione derivata da <code>FunzioneBase</code>.</p></li>
+<li><p>Mi è impossibile usare <code>Measurement</code> nella nostra
+<code>FunzioneBase</code>, perché essa lavora solo con il tipo
+<code>double</code>:</p>
 <div class="sourceCode" id="cb24"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> Integral<span class="op">::</span>integrate<span class="op">(</span><span class="dt">double</span> a<span class="op">,</span> <span class="dt">double</span> b<span class="op">,</span> <span class="dt">unsigned</span> <span class="dt">int</span> nstep<span class="op">,</span> FunzioneBase <span class="op">&amp;</span>f<span class="op">);</span></span></code></pre></div></li>
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="kw">virtual</span> <span class="dt">double</span> Eval<span class="op">(</span><span class="dt">double</span> x<span class="op">)</span> <span class="at">const</span> <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span></code></pre></div>
+<p>Anche qualsiasi classe derivata deve quindi usare i
+<code>double</code>.</p></li>
 </ul>
 </section>
 <section id="soluzione" class="slide level1">
 <h1>Soluzione</h1>
 <ul>
-<li><p>Se <code>Integral::integrate</code> fosse una funzione di
-libreria (ad esempio, una classe di ROOT), sarei spacciato: non potrei
-usare <code>Measurement</code> con essa!</p></li>
+<li><p>Se <code>FunzioneBase</code> fosse una classe di ROOT, sarei
+spacciato: non potrei usare <code>Measurement</code> con essa!</p></li>
 <li><p>Se invece fossi <strong>io</strong> l’autore di
-<code>Integral::integrate</code>, potrei allora modificare il codice. Ma
-così non potrei più compilare i miei vecchi programmi che usavano la
-versione con i <code>double</code>.</p></li>
+<code>FunzioneBase</code> (ed è così!), potrei allora modificare il
+codice. Ma così non potrei più compilare i miei vecchi programmi che
+usavano la versione con i <code>double</code>.</p></li>
 <li><p>Potrei fare una copia della classe e modificare quella, ma se in
-futuro correggessi bug o apportassi miglioramenti, dovrei ricordarmi di
-aggiornare entrambe.</p></li>
+futuro correggessi bug o apportassi miglioramenti a
+<code>FunzioneBase</code>, dovrei ricordarmi di aggiornare
+entrambe.</p></li>
 </ul>
 </section>
 <section id="passo-successivo" class="slide level1">
@@ -902,8 +878,8 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb25-1"><a href="#
 <code>Measurement</code> che propaga gli errori, ma non posso: sia
 <code>value</code> che <code>error</code> sono variabili
 <code>double</code>!</p></li>
-<li><p>Se però modifico <code>Measurement</code>, il mio programma che
-lo usava con <code>Integral::integra</code> non funziona più!</p></li>
+<li><p>Se però modifico <code>Measurement</code>, rischio che la mia
+nuova versione di <code>FunzioneBase</code> non funzioni più!</p></li>
 </ul>
 </section>
 <section id="la-soluzione-di-julia" class="slide level1">
