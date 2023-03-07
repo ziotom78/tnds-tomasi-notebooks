@@ -109,14 +109,14 @@ babel-lang: italian
 -   Un compilatore traduce il codice di un linguaggio ad alto livello
     (come il C++) in codice macchina
 -   Trasforma cicli `for` in cicli che usano `goto`
--   Decide autonomamente quando usare i registri e quando la RAM
--   Per ogni architettura è necessario che il compilatore sappia
-    generare l'assembler corrispondente. Le architetture più diffuse
+-   Decide quando usare i registri e quando la RAM
+-   Il compilatore deve conoscere l'assembler di ogni architettura. Quelle più diffuse
     sono:
     -    x86_64: usata nella maggior parte dei desktop e dei laptop
     -    ARM: usata soprattutto nei cellulari e nei tablet, ma anche
          in console di gioco (Nintendo Switch) e alcuni laptop
          (Chromebooks)
+    -    M1/M2: simili ad ARM, sono montati sui computer Apple più recenti
 
 # Compilatori
 
