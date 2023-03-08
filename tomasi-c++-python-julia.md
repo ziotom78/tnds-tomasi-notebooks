@@ -551,19 +551,7 @@ Just-in-time compilers
 
 # Un assaggio del linguaggio
 
-```julia
-f(x) = 3x^2                  # Functions can be defined on one line!
-
-g(t, ν) = sin(2π * t * ν)    # You can use Unicode characters
-
-x = Float64[1.0, 3.0, 4.0]   # Lists are supported natively
-
-sin.(x)                      # Using ".", functions can be applied to arrays
-
-⊕(x, y) = 2x + y            # New operators can be defined!
-
-3 ⊕ 2                       # Prints 8
-```
+<asciinema-player src="./asciinema/julia-first-example-83x23.asciinema" cols="83" rows="23" font-size="medium"></asciinema-player>
 
 # Confronto Python/Julia
 
