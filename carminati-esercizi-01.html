@@ -28,7 +28,7 @@
         <style type="text/css">code{white-space: pre;}</style>
                         <style type="text/css">
             pre > code.sourceCode { white-space: pre; position: relative; }
-            pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+            pre > code.sourceCode > span { line-height: 1.25; }
             pre > code.sourceCode > span:empty { height: 1.2em; }
             .sourceCode { overflow: visible; }
             code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -238,6 +238,10 @@ Tomasi</p>
                                                         di
                                                         stile</a></li>
                                                         </ul></li>
+                                                        <li><a
+                                                        href="#errori-comuni"
+                                                        id="toc-errori-comuni">Errori
+                                                        comuni</a></li>
                                                         </ul>
                             
                         </div>
@@ -948,7 +952,7 @@ class="sourceCode makefile"><code class="sourceCode makefile"><span id="cb41-1">
 possibile definire delle <em>variabili</em> nel Makefile per
 semplificarlo:</p>
 <div class="sourceCode" id="cb42"><pre
-class="sourceCode makefile"><code class="sourceCode makefile"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="dt">CXXFLAGS </span><span class="ch">=</span><span class="st"> -g -Wall --pedantic -std=c++17</span></span>
+class="sourceCode makefile"><code class="sourceCode makefile"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="dt">CXXFLAGS</span> <span class="ch">=</span><span class="st"> -g -Wall --pedantic -std=c++17</span></span>
 <span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a><span class="dv">main:</span><span class="dt"> main.o funzioni.o</span></span>
 <span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>    g++ main.o funzioni.o -o main <span class="ch">$(</span><span class="dt">CXXFLAGS</span><span class="ch">)</span></span>
@@ -1106,8 +1110,45 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb47-1"><a href="#
 <p>Nel caso della varianza la prima implementazione richiede una
 chiamata alla funzione CalcolaMedia() mentre la seconda no. La terza
 infine implementa il calcolo nello stesso modo visto per la media,
-ovvero evitando di immagazzinare somme troppo
-elevate.</p>                    
+ovvero evitando di immagazzinare somme troppo elevate.</p>
+<h1 id="errori-comuni">Errori comuni</h1>
+<p>Elenco qui gli errori più comuni che ho riscontrato negli ultimi anni
+correggendo gli esercizi della lezione 1 consegnati prima dell’esame
+scritto:</p>
+<ul>
+<li><p>Assicuratevi di leggere da file proprio il numero <code>N</code>
+di elementi specificato da linea di comando: in certi codici vengono
+letti <code>N - 1</code> elementi. Chiedete al vostro programma di
+caricarne un numero molto limitato (es., <code>N = 3</code>) e
+verificate ad occhio che abbia effettivamente caricato tre
+numeri.</p></li>
+<li><p>Molti studenti hanno dei programmi che richiedono moltissimo per
+calcolare la varianza. Una implementazione come questa ricalcola ogni
+volta la media, ed è da evitare:</p>
+<div class="sourceCode" id="cb48"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> accum <span class="op">=</span> <span class="fl">0.0</span><span class="op">;</span></span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span><span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> N<span class="op">;</span> <span class="op">++</span>i<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Ogni volta CalcolaMedia deve sommare gli N elementi</span></span>
+<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a>  accum <span class="op">+=</span> pow<span class="op">(</span>x<span class="op">[</span>i<span class="op">]</span> <span class="op">-</span> CalcolaMedia<span class="op">(</span>x<span class="op">,</span> N<span class="op">),</span> <span class="dv">2</span><span class="op">);</span></span>
+<span id="cb48-5"><a href="#cb48-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p>Siccome la media è sempre la stessa, conviene calcolarla <strong>una
+volta sola</strong> prima del ciclo <code>for</code>:</p>
+<div class="sourceCode" id="cb49"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> accum <span class="op">=</span> <span class="fl">0.0</span><span class="op">;</span></span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a><span class="co">// Calcola la media una volta per tutte</span></span>
+<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a><span class="at">const</span> <span class="dt">double</span> media <span class="op">=</span> CalcolaMedia<span class="op">(</span>x<span class="op">,</span> N<span class="op">);</span></span>
+<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span><span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> N<span class="op">;</span> <span class="op">++</span>i<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb49-5"><a href="#cb49-5" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Riutilizza il valore della media calcolato sopra: è molto più veloce!</span></span>
+<span id="cb49-6"><a href="#cb49-6" aria-hidden="true" tabindex="-1"></a>  accum <span class="op">+=</span> pow<span class="op">(</span>x<span class="op">[</span>i<span class="op">]</span> <span class="op">-</span> media<span class="op">,</span> <span class="dv">2</span><span class="op">);</span></span>
+<span id="cb49-7"><a href="#cb49-7" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div></li>
+<li><p>Spesso il codice per il calcolo della mediana funziona solo se N
+è pari, oppure se N è dispari, ma non viceversa. Assicuratevi che
+funzioni con <code>N=3</code> e con <code>N=4</code>, che sono casi
+facili da controllare!</p></li>
+<li><p>Alcuni studenti richiedono di specificare il numero N da linea di
+comando, ma poi ignorano quanto specificato dall’utente e leggono sempre
+<code>N=10000</code>.</p></li>
+</ul>                    
                 </div>
             </div>
 

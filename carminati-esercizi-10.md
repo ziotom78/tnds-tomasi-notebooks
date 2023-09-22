@@ -333,3 +333,14 @@ Provare a ripetere le consegne dell'esercizio 10.2 applicate all'integrale multi
 ## Qualche approfondimento su generatori di numeri casuali in C++11
 
 Nel C++ 11 è stata inserita una libreria per la generazione di numeri casuali: si veda per esempio [qui](http://www.cplusplus.com/reference/random/). Provate a dare un'occhiata a questo [codice](./codici/random_numbers.cpp) per trovare un esempio su come utilizzare questa libreria e su come usare le librerie di ROOT ( si faccia riferimento alla [referenza](https://root.cern.ch/doc/master/classTRandom.html)).
+
+
+# Errori comuni
+
+Come di consueto, elenco alcuni errori molto comuni che ho trovato negli anni passati correggendo gli esercizi che gli studenti hanno consegnato all'esame:
+
+-   Stranamente, un certo numero di studenti non segue quanto richiesto per l'esercizio 10.2 ed inventa metodi alternativi (spesso molto più lenti) per stimare l'errore. Cercate di attenervi a quanto richiesto nel testo, perché si tratta di un approccio risolutivo che si ripropone spesso nei temi d'esame.
+
+-   Sempre nell'esercizio 10.2, imparate ad usare giudiziosamente i cicli `for` per studiare i vari casi, anziché usare spietatamente il copia-e-incolla!
+
+-   Come già detto a proposito della [lezione 9](carminati-esercizi-09.html#errori-comuni), se il vostro programma richiede una serie di parametri da linea di comando, assicuratevi di documentarli e di permettere all'utente di avviare il programma con `make esegui`.

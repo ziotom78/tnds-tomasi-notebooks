@@ -343,3 +343,20 @@ Implementare questi metodi nelle classi concrete usate per gli altri esercizi di
 # Esercizio 6.5 - Ricerca di zeri di una funzione senza uso del polimorfismo {#esercizio-6.5}
 
 Si provi ad implementare un algoritmo di ricerca degli zeri di una funzione senza utilizzare il polimorfismo. Prendere come spunto le soluzioni indicate nelle trasparenze finali della lezione teorica. Si potrebbe codificare il metodo della bisezione in una funzione che accetti in input una `std::function`, e modellizzare la funzione di cui si vuole cercare lo zero con una funzione lambda.
+
+
+# Errori comuni
+
+Come di consueto, elenco alcuni errori molto comuni che ho trovato negli anni passati correggendo gli esercizi che gli studenti hanno consegnato all'esame:
+
+-   L'errore più diffuso in assoluto è quello di dimenticarsi di verificare se lo zero stia nell'estremo `a` o nell'estremo `b`. Per esempio, se si richiede di cercare uno zero della funzione
+
+    $$
+    f(x) = 3x^2 + 5x - 2
+    $$
+
+    nell'intervallo $[-4, -2]$, il programma dovrebbe riportare correttamente che c'è uno zero in $x = 4$, anche se è un punto all'estremità dell'intervallo. (Lo stesso vale ovviamente se si specifica l'intervallo $[-2, 0]$).
+    
+-   Un errore un po' più subdolo è quello di non individuare lo zero se si trova esattamente in mezzo all'intervallo: nell'esempio della funzione $f(x)$ vista sopra, il codice di alcuni studenti non trova una soluzione se si specifica l'intervallo $[-3, -1]$, perché lo zero cade esattamente a metà e il codice non si accorge che $f(c) = 0$ quando $c = (a + b)/2$.
+
+-   Il codice di alcuni studenti non si accorge di aver raggiunto la precisione richiesta, e continua ad iterare fino al numero massimo di iterazioni `m_nmax`.

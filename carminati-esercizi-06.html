@@ -28,7 +28,7 @@
         <style type="text/css">code{white-space: pre;}</style>
                         <style type="text/css">
             pre > code.sourceCode { white-space: pre; position: relative; }
-            pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+            pre > code.sourceCode > span { line-height: 1.25; }
             pre > code.sourceCode > span:empty { height: 1.2em; }
             .sourceCode { overflow: visible; }
             code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -217,6 +217,10 @@ Tomasi</p>
                                                         funzione senza
                                                         uso del
                                                         polimorfismo</a></li>
+                                                        <li><a
+                                                        href="#errori-comuni"
+                                                        id="toc-errori-comuni">Errori
+                                                        comuni</a></li>
                                                         </ul>
                             
                         </div>
@@ -624,8 +628,36 @@ funzione senza utilizzare il polimorfismo. Prendere come spunto le
 soluzioni indicate nelle trasparenze finali della lezione teorica. Si
 potrebbe codificare il metodo della bisezione in una funzione che
 accetti in input una <code>std::function</code>, e modellizzare la
-funzione di cui si vuole cercare lo zero con una funzione
-lambda.</p>                    
+funzione di cui si vuole cercare lo zero con una funzione lambda.</p>
+<h1 id="errori-comuni">Errori comuni</h1>
+<p>Come di consueto, elenco alcuni errori molto comuni che ho trovato
+negli anni passati correggendo gli esercizi che gli studenti hanno
+consegnato all’esame:</p>
+<ul>
+<li><p>L’errore più diffuso in assoluto è quello di dimenticarsi di
+verificare se lo zero stia nell’estremo <code>a</code> o nell’estremo
+<code>b</code>. Per esempio, se si richiede di cercare uno zero della
+funzione</p>
+<p><span class="math display">
+f(x) = 3x^2 + 5x - 2
+</span></p>
+<p>nell’intervallo <span class="math inline">[-4, -2]</span>, il
+programma dovrebbe riportare correttamente che c’è uno zero in <span
+class="math inline">x = 4</span>, anche se è un punto all’estremità
+dell’intervallo. (Lo stesso vale ovviamente se si specifica l’intervallo
+<span class="math inline">[-2, 0]</span>).</p></li>
+<li><p>Un errore un po’ più subdolo è quello di non individuare lo zero
+se si trova esattamente in mezzo all’intervallo: nell’esempio della
+funzione <span class="math inline">f(x)</span> vista sopra, il codice di
+alcuni studenti non trova una soluzione se si specifica l’intervallo
+<span class="math inline">[-3, -1]</span>, perché lo zero cade
+esattamente a metà e il codice non si accorge che <span
+class="math inline">f(c) = 0</span> quando <span class="math inline">c =
+(a + b)/2</span>.</p></li>
+<li><p>Il codice di alcuni studenti non si accorge di aver raggiunto la
+precisione richiesta, e continua ad iterare fino al numero massimo di
+iterazioni <code>m_nmax</code>.</p></li>
+</ul>                    
                 </div>
             </div>
 

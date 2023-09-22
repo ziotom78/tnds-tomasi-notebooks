@@ -28,7 +28,7 @@
         <style type="text/css">code{white-space: pre;}</style>
                         <style type="text/css">
             pre > code.sourceCode { white-space: pre; position: relative; }
-            pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+            pre > code.sourceCode > span { line-height: 1.25; }
             pre > code.sourceCode > span:empty { height: 1.2em; }
             .sourceCode { overflow: visible; }
             code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -257,6 +257,10 @@ Tomasi</p>
                                                         href="#grafici"
                                                         id="toc-grafici">Grafici</a></li>
                                                         </ul></li>
+                                                        <li><a
+                                                        href="#errori-comuni"
+                                                        id="toc-errori-comuni">Errori
+                                                        comuni</a></li>
                                                         </ul>
                             
                         </div>
@@ -961,8 +965,44 @@ grafico qui sopra, la montagna <span class="math inline">k</span>-esima
 99</span> e <span class="math inline">\delta\theta = 1\,\text{km} / 2\pi
 R_T</span> l’incremento angolare associato a sfere di raggio 1 km e
 poste sulla superficie terrestre, con <span
-class="math inline">R_T</span> raggio medio della
-Terra.</p>                    
+class="math inline">R_T</span> raggio medio della Terra.</p>
+<h1 id="errori-comuni">Errori comuni</h1>
+<p>Come di consueto, elenco alcuni errori molto comuni che ho trovato
+negli anni passati correggendo gli esercizi che gli studenti hanno
+consegnato all’esame:</p>
+<ul>
+<li><p>L’errore di gran lunga più comune è sbagliare l’implementazione
+della formula del campo, che oggettivamente è complicata! Riguardate in
+particolare queste cose:</p>
+<ol>
+<li><p>Unità di misura delle costanti;</p></li>
+<li><p>Attenzione a come scrivete i numeri in notazione scientifica! Il
+numero <span class="math inline">10^{-4}</span> si scrive
+<code>1e-4</code>, <strong>non</strong> <code>10e-4</code>!</p></li>
+<li><p>Verificate che ciò che deve stare al numeratore stia veramente al
+numeratore, e idem per il denominatore!</p></li>
+<li><p>Ovviamente, il campo di una singola carica deve andare come <span
+class="math inline">1/r^2</span>! Eppure un bel po’ di studenti
+consegnano codice che non segue neppure questa semplice
+proprietà…</p></li>
+<li><p>Quando calcolate la distanza <span class="math inline">d</span>
+tra due posizioni, assicuratevi di restituire <span
+class="math inline">d</span> e non <span class="math inline">d^2</span>
+(quante volte l’ho visto negli esercizi!).</p></li>
+</ol></li>
+<li><p>Stranamente, ogni anno più di uno studente sbaglia a implementare
+<code>operator+</code> per i vettori, e invece di calcolare
+<code>v + w</code> calcola in realtà <code>v + v = 2v</code>, oppure
+<code>w + w = 2w</code>.</p></li>
+<li><p>Nel leggere la posizione <code>x y z</code> a cui calcolare il
+campo del dipolo da linea di comando, assicuratevi di usare la funzione
+<a
+href="https://en.cppreference.com/w/cpp/string/basic_string/stof"><code>std::stod</code></a>
+oppure <a
+href="https://cplusplus.com/reference/cstdlib/atof/"><code>std::atof</code></a>,
+anziché <code>std::stoi</code> o <code>std::atoi</code>, perché queste
+ultime due restituiscono valori interi.</p></li>
+</ul>                    
                 </div>
             </div>
 

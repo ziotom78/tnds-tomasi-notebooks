@@ -488,3 +488,8 @@ Vettore& Vettore::operator=(Vettore&& v) {
 -   Il puntatore dell'oggetto di input viene sganciato dai dati.
 -   Per vedere il move constructor all'opera potrebbe essere necessario aggiungere la flag `-fno-elide-constructors` per disattivare eventuali ottimizzazioni interne del compilatore che maschererebbero l'uso del *move constructor*.
 -   Per ulteriori spiegazioni, vedere anche le [slide addizionali](tomasi-lezione-02.html#move-semantics).
+
+
+# Errori comuni
+
+Gli errori che gli studenti hanno fatto negli anni precedenti sono simili a quelli elencati per la [prima lezione](carminati-esercizi-01.html#errori-comuni).

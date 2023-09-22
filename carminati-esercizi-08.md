@@ -428,3 +428,28 @@ Consideriamo il moto nel piano $(x, y)$ di un elettrone in un campo magnetico co
 -   tutte le altre componenti di campi e velocità iniziali sono nulle. 
 
 Questi parametri corrispondono grosso modo all'apparato sperimentale per la misura di $e/m$ del laboratorio del II anno.
+
+
+# Errori comuni
+
+Come di consueto, elenco alcuni errori molto comuni che ho trovato negli anni passati correggendo gli esercizi che gli studenti hanno consegnato all'esame:
+
+-   Attenzione al fattore $1/6$ nel codice del metodo Runge-Kutta: se scrivete `1 / 6` nel vostro codice C++, il risultato è zero (perché?).
+
+-   Nell'esercizio 9.3 bisogna risolvere più volte l'equazione del pendolo col metodo Runge-Kutta. Attenzione a resettare ogni volta le variabili! Dopo aver risolto l'equazione per una certa ampiezza iniziale $A$, bisogna resettare sia il tempo `t` a zero che la variabile `x`, in modo che questa contenga di nuovo la condizione iniziale (con un valore diverso di $A$), prima di far ripartire il Runge-Kutta.
+
+-   Questi esercizi richiedono di passare una serie di parametri numerici dalla linea di comando. Assicuratevi di stampare una buona documentazione se l'utente non li specifica, e fate magari in modo che il comando `make esegui` avvii il vostro programma con parametri sensati.
+
+    Ecco un buon esempio:
+    
+    ```
+    $ ./esercizio_9.4
+    Uso: esercizio_9.4 passo_h omega0 alpha omega_forzante
+    passo_h: intervallo di integrazione con RK [s]
+    omega0: frequenza di oscillazione [rad/s]
+    alpha: coefficiente di smorzamento [s]
+    omega_forzante: frequenza della forzante [rad/s]
+    $ make esegui
+    ./esercizio_9.4 1e-2 10 0.033333 5
+    ... [segue l'output del programma]
+    ```

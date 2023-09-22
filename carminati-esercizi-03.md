@@ -485,3 +485,9 @@ $ root-config --libs
 (il risultato sui vostri computer potrebbe essere differente).
 
 I path vengono memorizzati nelle variabili `LIBS` e `CXXFLAGS`. Queste due variabili vengono poi passate al comando `g++` in modo che il compilatore abbia a disposizione tutti gli ingredienti per una corretta compilazione.
+
+
+
+# Errori comuni
+
+Gli errori che gli studenti hanno fatto negli anni precedenti sono simili a quelli elencati per la [prima lezione](carminati-esercizi-01.html#errori-comuni).

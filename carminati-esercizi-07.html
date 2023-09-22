@@ -28,7 +28,7 @@
         <style type="text/css">code{white-space: pre;}</style>
                         <style type="text/css">
             pre > code.sourceCode { white-space: pre; position: relative; }
-            pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+            pre > code.sourceCode > span { line-height: 1.25; }
             pre > code.sourceCode > span:empty { height: 1.2em; }
             .sourceCode { overflow: visible; }
             code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -190,6 +190,10 @@ Tomasi</p>
                                                         id="toc-cenni-sullimplementazione-1">Cenni
                                                         sull’implementazione</a></li>
                                                         </ul></li>
+                                                        <li><a
+                                                        href="#errori-comuni"
+                                                        id="toc-errori-comuni">Errori
+                                                        comuni</a></li>
                                                         </ul>
                             
                         </div>
@@ -474,7 +478,30 @@ somma calcolata sono memorizzati all’interno dell’oggetto. In questo
 modo, se è necessario ricalcolare l’integrale raddoppiando i passi, come
 nel caso della formula che usa <span class="math inline">I_N</span> e
 <span class="math inline">I_{2N}</span>, non è necessario ricominciare
-da capo.</p>                    
+da capo.</p>
+<h1 id="errori-comuni">Errori comuni</h1>
+<p>Come di consueto, elenco alcuni errori molto comuni che ho trovato
+negli anni passati correggendo gli esercizi che gli studenti hanno
+consegnato all’esame:</p>
+<ul>
+<li><p>Molte volte gli studenti usano la funzione <code>abs</code>
+anziché <code>fabs</code> nel determinare l’ampiezza dell’intervallo di
+integrazione. Attenzione! Se <code>fabs</code> restituisce sempre un
+numero floating-point, la funzione <code>abs</code> lo fa
+<strong>solo</strong> se si include <code>&lt;cmath&gt;</code>,
+altrimenti restituisce un intero: se quindi l’intervallo di integrazione
+<code>b-a</code> è inferiore a 1, <code>abs(b - a) == 0</code>!</p></li>
+<li><p>Alcuni studenti calcolano le somme dei termini degli integrali
+saltando l’ultimo punto (e sottostimando quindi l’integrale di <span
+class="math inline">\sin x</span>).</p></li>
+<li><p>Attenzione ai coefficienti nella formula di Simpson, perché a
+volte gli studenti scambiano di posto il 4 con il 2!</p></li>
+<li><p>Non confondete il significato di “numero di passi” quando
+calcolate l’errore di un metodo di integrazione: se per calcolare
+l’errore dovete stimare l’integrale con passo <code>h</code> e con passo
+<code>h/2</code>, l’errore che ottenete si riferisce al passo
+<code>h</code>, non al passo <code>h/2</code>!</p></li>
+</ul>                    
                 </div>
             </div>
 

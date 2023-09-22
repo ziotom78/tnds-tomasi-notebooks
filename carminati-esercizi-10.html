@@ -28,7 +28,7 @@
         <style type="text/css">code{white-space: pre;}</style>
                         <style type="text/css">
             pre > code.sourceCode { white-space: pre; position: relative; }
-            pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+            pre > code.sourceCode > span { line-height: 1.25; }
             pre > code.sourceCode > span:empty { height: 1.2em; }
             .sourceCode { overflow: visible; }
             code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -229,6 +229,10 @@ Tomasi</p>
                                                         in
                                                         C++11</a></li>
                                                         </ul></li>
+                                                        <li><a
+                                                        href="#errori-comuni"
+                                                        id="toc-errori-comuni">Errori
+                                                        comuni</a></li>
                                                         </ul>
                             
                         </div>
@@ -646,7 +650,26 @@ dare un’occhiata a questo <a
 href="./codici/random_numbers.cpp">codice</a> per trovare un esempio su
 come utilizzare questa libreria e su come usare le librerie di ROOT ( si
 faccia riferimento alla <a
-href="https://root.cern.ch/doc/master/classTRandom.html">referenza</a>).</p>                    
+href="https://root.cern.ch/doc/master/classTRandom.html">referenza</a>).</p>
+<h1 id="errori-comuni">Errori comuni</h1>
+<p>Come di consueto, elenco alcuni errori molto comuni che ho trovato
+negli anni passati correggendo gli esercizi che gli studenti hanno
+consegnato all’esame:</p>
+<ul>
+<li><p>Stranamente, un certo numero di studenti non segue quanto
+richiesto per l’esercizio 10.2 ed inventa metodi alternativi (spesso
+molto più lenti) per stimare l’errore. Cercate di attenervi a quanto
+richiesto nel testo, perché si tratta di un approccio risolutivo che si
+ripropone spesso nei temi d’esame.</p></li>
+<li><p>Sempre nell’esercizio 10.2, imparate ad usare giudiziosamente i
+cicli <code>for</code> per studiare i vari casi, anziché usare
+spietatamente il copia-e-incolla!</p></li>
+<li><p>Come già detto a proposito della <a
+href="carminati-esercizi-09.html#errori-comuni">lezione 9</a>, se il
+vostro programma richiede una serie di parametri da linea di comando,
+assicuratevi di documentarli e di permettere all’utente di avviare il
+programma con <code>make esegui</code>.</p></li>
+</ul>                    
                 </div>
             </div>
 

@@ -294,3 +294,9 @@ $$
 # Esercizio 11.1 - Attrito viscoso (facoltativo) {#esercizio-11.1}
 
 Svolgere il tema d'esame sulla simulazione di un esperimento per la misura della viscosità di un materiale: [preappello del gennaio 2009, esercizio 6](http://labmaster.mi.infn.it/Laboratorio2/Compiti/Compito_lab2_pre09_6.pdf).
+
+
+# Errori comuni
+
+Vi farà piacere saperlo, ma di solito l'esercizio 11.0 è quello che gli studenti fanno meglio! Assicuratevi giusto di ottenere valori degli errori e del coefficiente di correlazione simili a quelli che ho indicato a lezione.
+

@@ -858,3 +858,36 @@ double CalcolaVarianza(double * data, int size) {
 ```
 
 Nel caso della varianza la prima implementazione richiede una chiamata alla funzione CalcolaMedia() mentre la seconda no. La terza infine implementa il calcolo nello stesso modo visto per la media, ovvero evitando di immagazzinare somme troppo elevate.
+
+
+# Errori comuni
+
+Elenco qui gli errori più comuni che ho riscontrato negli ultimi anni correggendo gli esercizi della lezione 1 consegnati prima dell'esame scritto:
+
+-   Assicuratevi di leggere da file proprio il numero `N` di elementi specificato da linea di comando: in certi codici vengono letti `N - 1` elementi. Chiedete al vostro programma di caricarne un numero molto limitato (es., `N = 3`) e verificate ad occhio che abbia effettivamente caricato tre numeri.
+
+-   Molti studenti hanno dei programmi che richiedono moltissimo per calcolare la varianza. Una implementazione come questa ricalcola ogni volta la media, ed è da evitare:
+
+    ```c++
+    double accum = 0.0;
+    for(int i = 0; i < N; ++i) {
+	  // Ogni volta CalcolaMedia deve sommare gli N elementi
+	  accum += pow(x[i] - CalcolaMedia(x, N), 2);
+    }
+    ```
+    
+    Siccome la media è sempre la stessa, conviene calcolarla **una volta sola** prima del ciclo `for`:
+    
+    ```c++
+    double accum = 0.0;
+    // Calcola la media una volta per tutte
+	const double media = CalcolaMedia(x, N);
+    for(int i = 0; i < N; ++i) {
+      // Riutilizza il valore della media calcolato sopra: è molto più veloce!
+	  accum += pow(x[i] - media, 2);
+    }
+    ```
+
+-   Spesso il codice per il calcolo della mediana funziona solo se N è pari, oppure se N è dispari, ma non viceversa. Assicuratevi che funzioni con `N=3` e con `N=4`, che sono casi facili da controllare!
+
+-   Alcuni studenti richiedono di specificare il numero N da linea di comando, ma poi ignorano quanto specificato dall'utente e leggono sempre `N=10000`.

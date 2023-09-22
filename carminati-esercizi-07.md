@@ -216,3 +216,16 @@ I3 = sum3 * (b - a) / 8;
 ```
 
 I valori dell'ultima approssimazione dell'integrale e dell'ultima somma calcolata sono memorizzati all'interno dell'oggetto. In questo modo, se è necessario ricalcolare l'integrale raddoppiando i passi, come nel caso della formula che usa $I_N$ e $I_{2N}$, non è necessario ricominciare da capo.
+
+
+# Errori comuni
+
+Come di consueto, elenco alcuni errori molto comuni che ho trovato negli anni passati correggendo gli esercizi che gli studenti hanno consegnato all'esame:
+
+-   Molte volte gli studenti usano la funzione `abs` anziché `fabs` nel determinare l'ampiezza dell'intervallo di integrazione. Attenzione! Se `fabs` restituisce sempre un numero floating-point, la funzione `abs` lo fa **solo** se si include `<cmath>`, altrimenti restituisce un intero: se quindi l'intervallo di integrazione `b-a` è inferiore a 1, `abs(b - a) == 0`!
+
+-   Alcuni studenti calcolano le somme dei termini degli integrali saltando l'ultimo punto (e sottostimando quindi l'integrale di $\sin x$).
+
+-   Attenzione ai coefficienti nella formula di Simpson, perché a volte gli studenti scambiano di posto il 4 con il 2!
+
+-   Non confondete il significato di “numero di passi” quando calcolate l'errore di un metodo di integrazione: se per calcolare l'errore dovete stimare l'integrale con passo `h` e con passo `h/2`, l'errore che ottenete si riferisce al passo `h`, non al passo `h/2`!

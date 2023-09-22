@@ -28,7 +28,7 @@
         <style type="text/css">code{white-space: pre;}</style>
                         <style type="text/css">
             pre > code.sourceCode { white-space: pre; position: relative; }
-            pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+            pre > code.sourceCode > span { line-height: 1.25; }
             pre > code.sourceCode > span:empty { height: 1.2em; }
             .sourceCode { overflow: visible; }
             code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -260,6 +260,10 @@ Tomasi</p>
                                                         magnetico
                                                         uniformi</a></li>
                                                         </ul></li>
+                                                        <li><a
+                                                        href="#errori-comuni"
+                                                        id="toc-errori-comuni">Errori
+                                                        comuni</a></li>
                                                         </ul>
                             
                         </div>
@@ -800,7 +804,39 @@ nulle.</li>
 </ul>
 <p>Questi parametri corrispondono grosso modo all’apparato sperimentale
 per la misura di <span class="math inline">e/m</span> del laboratorio
-del II anno.</p>                    
+del II anno.</p>
+<h1 id="errori-comuni">Errori comuni</h1>
+<p>Come di consueto, elenco alcuni errori molto comuni che ho trovato
+negli anni passati correggendo gli esercizi che gli studenti hanno
+consegnato all’esame:</p>
+<ul>
+<li><p>Attenzione al fattore <span class="math inline">1/6</span> nel
+codice del metodo Runge-Kutta: se scrivete <code>1 / 6</code> nel vostro
+codice C++, il risultato è zero (perché?).</p></li>
+<li><p>Nell’esercizio 9.3 bisogna risolvere più volte l’equazione del
+pendolo col metodo Runge-Kutta. Attenzione a resettare ogni volta le
+variabili! Dopo aver risolto l’equazione per una certa ampiezza iniziale
+<span class="math inline">A</span>, bisogna resettare sia il tempo
+<code>t</code> a zero che la variabile <code>x</code>, in modo che
+questa contenga di nuovo la condizione iniziale (con un valore diverso
+di <span class="math inline">A</span>), prima di far ripartire il
+Runge-Kutta.</p></li>
+<li><p>Questi esercizi richiedono di passare una serie di parametri
+numerici dalla linea di comando. Assicuratevi di stampare una buona
+documentazione se l’utente non li specifica, e fate magari in modo che
+il comando <code>make esegui</code> avvii il vostro programma con
+parametri sensati.</p>
+<p>Ecco un buon esempio:</p>
+<pre><code>$ ./esercizio_9.4
+Uso: esercizio_9.4 passo_h omega0 alpha omega_forzante
+passo_h: intervallo di integrazione con RK [s]
+omega0: frequenza di oscillazione [rad/s]
+alpha: coefficiente di smorzamento [s]
+omega_forzante: frequenza della forzante [rad/s]
+$ make esegui
+./esercizio_9.4 1e-2 10 0.033333 5
+... [segue l&#39;output del programma]</code></pre></li>
+</ul>                    
                 </div>
             </div>
 
