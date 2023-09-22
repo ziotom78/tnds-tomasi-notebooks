@@ -53,7 +53,7 @@ $endif$
               $endfor$   
     </head>
 
-    <body oncopy="return false" oncut="return false" onpaste="return false">
+    <body>
 
 
         <div class="uk-container uk-container-center uk-margin-top uk-margin-large-bottom">

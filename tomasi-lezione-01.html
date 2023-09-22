@@ -25,8 +25,9 @@
       margin: 0 0.8em 0.2em -1.6em;
       vertical-align: middle;
     }
+    /* CSS for syntax highlighting */
     pre > code.sourceCode { white-space: pre; position: relative; }
-    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span { line-height: 1.25; }
     pre > code.sourceCode > span:empty { height: 1.2em; }
     .sourceCode { overflow: visible; }
     code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -465,7 +466,7 @@ vetusto ma presente su qualsiasi sistema Unix: GNU Make.</p></li>
 complicato). Create un file con nome <code>Makefile</code> (attenzione
 alla maiuscola iniziale!), e scrivete queste righe al suo interno:</p>
 <div class="sourceCode" id="cb11"><pre
-class="sourceCode makefile"><code class="sourceCode makefile"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="dt">CXXFLAGS </span><span class="ch">=</span><span class="st"> -std=c++17 -g -Wall --pedantic</span></span>
+class="sourceCode makefile"><code class="sourceCode makefile"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="dt">CXXFLAGS</span> <span class="ch">=</span><span class="st"> -std=c++17 -g -Wall --pedantic</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="dv">main:</span><span class="dt"> main.cpp</span></span></code></pre></div></li>
 <li><p>Infine, da linea di comando eseguite il comando <code>make</code>
@@ -482,7 +483,7 @@ main   main.cpp   Makefile</code></pre></li>
 <li><p>È utile specificare dei flag aggiuntivi per la compilazione,
 tramite la riga</p>
 <div class="sourceCode" id="cb13"><pre
-class="sourceCode makefile"><code class="sourceCode makefile"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="dt">CXXFLAGS </span><span class="ch">=</span><span class="st"> -std=c++17 -g -Wall --pedantic</span></span></code></pre></div></li>
+class="sourceCode makefile"><code class="sourceCode makefile"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="dt">CXXFLAGS</span> <span class="ch">=</span><span class="st"> -std=c++17 -g -Wall --pedantic</span></span></code></pre></div></li>
 <li><p><code>-std=c++17</code> abilita alcune caratteristiche «recenti»
 del C++ (nelle versioni più aggiornate del compilatore GCC è
 inutile).</p></li>
@@ -516,7 +517,7 @@ bisogna scriverli nella riga successiva, che va indentata inserendo un
 carattere <strong>TAB</strong> (attenzione: <strong>non</strong> una
 sequenza di spazi!):</p>
 <div class="sourceCode" id="cb15"><pre
-class="sourceCode makefile"><code class="sourceCode makefile"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="dt">CXXFLAGS </span><span class="ch">=</span><span class="st"> -std=c++17 -g -Wall --pedantic</span></span>
+class="sourceCode makefile"><code class="sourceCode makefile"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="dt">CXXFLAGS</span> <span class="ch">=</span><span class="st"> -std=c++17 -g -Wall --pedantic</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="dv">main:</span><span class="dt"> main.cpp</span></span>
 <span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># You MUST use a Tab character to indent here!</span></span>
