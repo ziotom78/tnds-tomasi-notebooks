@@ -1260,6 +1260,33 @@ facili da controllare!</p></li>
 <li><p>Alcuni studenti richiedono di specificare il numero N da linea di
 comando, ma poi ignorano quanto specificato dall’utente e leggono sempre
 <code>N=10000</code>.</p></li>
+<li><p>Alcuni studenti si affidano all’ordine di inclusione degli header
+per evitare qualche <code>#include</code> in più. Se in
+<code>vectors.h</code> avete definito funzioni che lavorano su vettori,
+e in <code>newton.h</code> avete ulteriori funzioni che risolvono
+problemi di fisica Newtoniana, dovete assicurarvi che all’inizio di
+<code>newton.h</code> ci sia un <code>#include "vectors.h"</code>:</p>
+<div class="sourceCode" id="cb55"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="co">// newton.h</span></span>
+<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#pragma once</span></span>
+<span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;vectors.h&quot;</span></span>
+<span id="cb55-4"><a href="#cb55-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-5"><a href="#cb55-5" aria-hidden="true" tabindex="-1"></a><span class="co">// Qui segue il resto del file</span></span>
+<span id="cb55-6"><a href="#cb55-6" aria-hidden="true" tabindex="-1"></a><span class="op">...</span></span></code></pre></div>
+<p>Alcuni studenti omettono la riga <code>#include "vectors.h"</code> e
+la mettono nel <code>main</code>, prima di
+<code>#include "newton.h"</code>:</p>
+<div class="sourceCode" id="cb56"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;vectors.h&quot;</span></span>
+<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;newton.h&quot;</span></span>
+<span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb56-4"><a href="#cb56-4" aria-hidden="true" tabindex="-1"></a><span class="co">// ...</span></span></code></pre></div>
+<p>Anche se il codice compila lo stesso, è concettualmente sbagliato: il
+file <code>newton.h</code> richiede <code>vectors.h</code>, e dovrebbe
+quindi includerlo al suo interno. Altrimenti, tutte le volte che userete
+<code>newton.h</code> in altri programmi, dovrete sempre ricordarvi di
+anteporre <code>#include "vectors.h"</code>, e questa è una cosa facile
+da dimenticare.</p></li>
 </ul>                    
                 </div>
             </div>

@@ -1,7 +1,7 @@
 ---
 title: "Laboratorio di TNDS -- Lezione 6"
 author: "Maurizio Tomasi"
-date: "Martedì 15 Novembre 2022"
+date: "Martedì 31 Ottobre 2023"
 theme: "white"
 progress: true
 slideNumber: true

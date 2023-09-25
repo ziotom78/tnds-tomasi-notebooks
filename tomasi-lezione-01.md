@@ -1,7 +1,7 @@
 ---
 title: Laboratorio di TNDS -- Lezione 1
 author: Maurizio Tomasi
-date: Martedì 4 Ottobre 2022
+date: Martedì 26 Settembre 2023
 lang: it-IT
 theme: white
 progress: true
@@ -127,13 +127,13 @@ Potete svolgere gli esercizi in uno dei modi seguenti:
 
 # Usare Visual Studio Code
     
--   Potete scaricare ed installare Visual Studio Code anche sul vostro portatile: è gratuito e disponibile per Windows, Linux e Mac OS X. Per configurarlo in modo che sia usabile con programmi C/C++, eseguite dal terminale del vostro computer il comando
+-   Potete scaricare ed installare [Visual Studio Code](https://code.visualstudio.com/) anche sul vostro portatile: è gratuito e disponibile per Windows, Linux e Mac OS X. Per configurarlo in modo che sia usabile con programmi C/C++, eseguite dal terminale del vostro computer il comando
 
     ```
     code --install-extension ms-vscode.cpptools
     ```
 
-    (Attenzione, se avete installato «Code OSS» il comando non funziona, occorre proprio la versione rilasciata da Microsoft per installare questa estensione).
+    (Attenzione, se avete installato «Code OSS» il comando non funziona: occorre proprio la versione rilasciata da Microsoft per installare questa estensione).
     
 -   Di seguito c'è un breve filmato che vi mostra come scrivere ed eseguire un programma di esempio. Visual Studio Code presenta numerosi *plugin* per semplificare lo sviluppo; li vedremo meglio durante il corso.
 
@@ -351,13 +351,13 @@ prompt):
 
 # Comandi personalizzati
 
--   Se si vuole fornire manualmente la lista dei comandi da inviare, bisogna scriverli nella riga successiva, che va indentata inserendo un carattere **TAB** (attenzione: **non** una sequenza di spazi!):
+-   Se si vuole fornire manualmente la lista dei comandi da inviare, bisogna scriverli nella riga successiva, che va indentata inserendo un carattere **TAB**, solitamente indicato sulle tastiere con ↹ (è a sinistra del tasto Q):
 
     ```makefile
     CXXFLAGS = -std=c++17 -g -Wall --pedantic
     
     main: main.cpp
-        # You MUST use a Tab character to indent here!
+        # You MUST use a Tab character ↹ to indent here!
         g++ $(CXXFLAGS) main.cpp
     ```
 
@@ -447,29 +447,24 @@ dipendenze da file che devono essere creati dallo stesso GNU Make.
 # File multipli ed header
 
 -   Dovete **sempre** includere in ogni header/file sorgente tutti gli
-    header che servono per definire i simboli nel codice. Spesso gli studenti si affidano invece a inclusioni precedenti!
+    header che servono per definire i simboli nel codice.
     
 -   Ad esempio, se un file `main.cpp` contiene questi `#include`:
     
     ```c++
-    // File main.cpp
-    #include "vectors.h"   // Defines 3D vectors
-    #include "newton.h"    // Defines functions to solve Newton's problems
+    // main.cpp
+    #include "vectors.h"   // Define 3D vectors
+    #include "newton.h"    // Define functions to solve Newton's problems
     ```
     
-    è necessario che in `newton.h` si includa `vectors.h`:
+    è buona cosa che in `newton.h` si includa comunque `vectors.h`:
     
     ```c++
     // newton.h
     #pragma once
     #include "vectors.h"
-    
-    // … Here follows the header file for `newton.h`, where vectors are used
+    // etc.
     ```
-    
--   Quest'ultima inclusione non sarebbe necessaria per compilare
-    `main.cpp`, ma è importante inserirla comunque! Vediamone i
-    motivi.
     
 # Motivo #1
 
@@ -477,43 +472,40 @@ dipendenze da file che devono essere creati dallo stesso GNU Make.
     tende a inserirli in ordine alfabetico, per individuare duplicati:
     
     ```c++
-    // Inspired by the source code for PolyRay 1.8
     #include "subdiv.h"
     #include "intersec.h"
-    #include "roots.h"
     #include "memory.h"
+    #include "roots.h"
     #include "glyph.h"
     #include "scan.h"
     #include "memory.h"
     #include "vector.h"
-    #include "io.h"
     ```
 
 -   Formattatori automatici di codice come `clang-format` riordinano
-    di default gli `#include`. Ma nel nostro caso quindi metterebbe
+    gli `#include`: nel nostro caso quindi metterebbe
     `newton.h` **prima** di `vectors.h`, e la compilazione fallirebbe!
 
 # Motivo #2
 
--   Siccome ogni `#include` può richiedere tempo per l'esecuzione, di
-    tanto in tanto nei progetti si fa un /purge/ degli `#include`
-    inutili: in ogni file, si controlla se ci sono degli header che
-    definiscono cose non usate all'interno del file.
+-   Ogni `#include` richiede tempo per la compilazione. Di tanto in
+    tanto nei progetti si fa un /purge/ degli `#include` inutili: in
+    ogni file, si controlla se ci sono degli header che definiscono
+    cose non usate all'interno del file.
     
--   ad esempio, una riga `#include "mp3.h"` all'interno di un file
+-   Ad esempio, una riga `#include "mp3.h"` all'interno di un file
     sorgente in cui non si toccano affatto file MP3!
     
--   Nel nostro caso, può essere che i vettori definiti in `vector.h`
-    non siano mai usati esplicitamente in `main.cpp`, magari perché in
+-   Nel nostro caso, i vettori definiti in `vector.h` potrebbero non
+    essere mai usati esplicitamente in `main.cpp`, magari perché in
     esso si calcola semplicemente il periodo orbitale di un satellite
     artificiale. Ma se ci sono dipendenze nascoste (come `newton.h`
-    che dipende da `vector.h`), il metodo per il /purging/ non
-    funziona!
+    che dipende da `vector.h`), questo è un problema!
 
 # Avvertenza su GNU Make
 
 -   Quando avrete svolto gli esercizi di questa lezione, vi sarà
-    chiaro che la scrittura del `Makefile` è un processo molto lungo e
+    chiaro che la scrittura del `Makefile` è un processo lungo e
     verboso. Il comando `make` è stato inventato nel 1976, e all'epoca
     il mondo della programmazione era così!
 
@@ -537,55 +529,7 @@ dipendenze da file che devono essere creati dallo stesso GNU Make.
 
 -   La compilazione avviene quindi ancora attraverso GNU Make, ma il
     `Makefile` prodotto da CMake è ottimizzato (e mostra una bella
-    barra percentuale se compilate un progetto che usa tanti file
+    barra percentuale quando si compila un progetto che usa tanti file
     `.cpp`!).
 
 -   Ecco perché studiare GNU Make è ancora utile.
-
-
-# Esempio di CMake
-
-Per darvi un'idea di come funzioni CMake, ecco il contenuto di `CMakeLists.txt` per l'esercizio 1.2:
-
-```cmake
-cmake_minimum_required (VERSION 2.8.11)
-project (ESERCIZIO01.2)
-
-add_executable (esercizio01.2
-    esercizio01.2.cpp funzioni.cpp)
-```
-
-# Esempio di CMake (2/2)
-
-**Attenzione**: se volete provare come funziona CMake, non eseguite `cmake` nella directory, altrimenti sovrascriverà il vostro `Makefile`! Fate così:
-
-```bash
-$ mkdir build && cd build
-$ cmake .. # Legge il file CMakeLists.txt da ..
-$ make # Esegue il `Makefile` in "./build"
-$ ./esercizio01.2 # L'eseguibile è in "./build"
-```
-
-# Vantaggi di CMake
-
--   Molte meno righe da scrivere!
-
--   Tracciamento automatico dei file `.h`: non è necessario dire quali
-    file `.h` includa un file `.cpp`, perché pensa automaticamente
-    CMake a recuperare l'informazione cercando gli `#include` nel file
-    `.cpp`. Non è più necessario quindi indicarli manualmente come nel
-    caso di un `Makefile`:
-
-    ```makefile
-    # Non necessario se si usa CMake
-    funzioni.o: funzioni.cpp funzioni.h
-    ```
-
--   È ormai il metodo standard per includere librerie nei propri
-    progetti:
-    [ROOT](https://cliutils.gitlab.io/modern-cmake/chapters/packages/ROOT.html),
-    [BOOST](https://cliutils.gitlab.io/modern-cmake/chapters/packages/Boost.html),
-    [OpenMP](https://cliutils.gitlab.io/modern-cmake/chapters/packages/OpenMP.html),
-    [CUDA](https://cliutils.gitlab.io/modern-cmake/chapters/packages/CUDA.html),
-    [MPI](https://cliutils.gitlab.io/modern-cmake/chapters/packages/MPI.html),
-    [Qt](https://doc.qt.io/qt-5/cmake-manual.html), etc.

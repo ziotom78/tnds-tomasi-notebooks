@@ -1,7 +1,7 @@
 ---
 title: Laboratorio di TNDS -- Lezione 3
 author: Maurizio Tomasi
-date: Martedì 18 Ottobre 2022
+date: Martedì 10 Ottobre 2023
 theme: white
 progress: true
 slideNumber: true

@@ -1,7 +1,7 @@
 ---
 title: Laboratorio di TNDS -- Lezione 5
 author: Maurizio Tomasi
-date: Martedì 8 Novembre 2022
+date: Martedì 24 Ottobre 2023
 theme: white
 progress: true
 slideNumber: true

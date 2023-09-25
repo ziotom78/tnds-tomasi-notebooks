@@ -12,7 +12,7 @@ all: \
 	tomasi-lezione-03.html \
 	tomasi-lezione-02.html \
 	tomasi-lezione-01.html \
-	carminati-esercizi-11.html \
+	carminati-esercizi-12.html \
 	carminati-esercizi-10.html \
 	carminati-esercizi-08.html \
 	carminati-esercizi-07.html \

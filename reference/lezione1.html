@@ -1,0 +1,1273 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="S2I MkDocs Example">
+      
+      
+        <meta name="author" content="CERN Authoring">
+      
+      
+        <link rel="canonical" href="https://s2i-mkdocs-example.docs.cern.ch/Lezione1/Lezione1/">
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.3.1, mkdocs-material-8.5.3">
+    
+    
+      
+        <title>Lezione 1 - Lab TNDS</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.7a952b86.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.cbb835fc.min.css">
+        
+      
+      
+
+    
+    
+    
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/fonts.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#lezione-1" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Lab TNDS" class="md-header__button md-logo" aria-label="Lab TNDS" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Lab TNDS
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Lezione 1
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      <form class="md-header__option" data-md-component="palette">
+        
+          
+          
+          <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent=""  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+          
+            <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+            </label>
+          
+        
+          
+          
+          <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="amber"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
+          
+            <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12c0-2.42-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+            </label>
+          
+        
+      </form>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://gitlab.cern.ch/authoring/documentation/s2i-mkdocs-example" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitLab
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Lab TNDS" class="md-nav__button md-logo" aria-label="Lab TNDS" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    Lab TNDS
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://gitlab.cern.ch/authoring/documentation/s2i-mkdocs-example" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitLab
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Lezione 1
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Lezione 1
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#esercizio-10-primo-codice-per-analisi" class="md-nav__link">
+    ESERCIZIO 1.0 - Primo codice per analisi :
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#esercizio-11-codice-di-analisi-con-funzioni" class="md-nav__link">
+    ESERCIZIO 1.1 - Codice di analisi con funzioni:
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#esercizio-12-codice-di-analisi-con-funzioni-esterne-e-makefile" class="md-nav__link">
+    ESERCIZIO 1.2 - Codice di analisi con funzioni esterne e Makefile:
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#esercizio-13-overloading-di-funzione-da-consegnare" class="md-nav__link">
+    ESERCIZIO 1.3 - Overloading di funzione (da consegnare):
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#approfondimenti" class="md-nav__link">
+    Approfondimenti
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Lezione2/Lezione2/" class="md-nav__link">
+        Lezione 2
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Lezione3/Lezione3/" class="md-nav__link">
+        Lezione 3
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Lezione4/Lezione4/" class="md-nav__link">
+        Lezione 4
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Lezione5/Lezione5/" class="md-nav__link">
+        Lezione 5
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Lezione6/lezione6/" class="md-nav__link">
+        Lezione 6
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Lezione7/Lezione7/" class="md-nav__link">
+        Lezione 7
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Lezione8/Lezione8/" class="md-nav__link">
+        Lezione 8 e 9
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Lezione10-11/Lezione1011/" class="md-nav__link">
+        Lezione 10 e 11
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Lezione12/Lezione12/" class="md-nav__link">
+        Lezione 12
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#esercizio-10-primo-codice-per-analisi" class="md-nav__link">
+    ESERCIZIO 1.0 - Primo codice per analisi :
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#esercizio-11-codice-di-analisi-con-funzioni" class="md-nav__link">
+    ESERCIZIO 1.1 - Codice di analisi con funzioni:
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#esercizio-12-codice-di-analisi-con-funzioni-esterne-e-makefile" class="md-nav__link">
+    ESERCIZIO 1.2 - Codice di analisi con funzioni esterne e Makefile:
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#esercizio-13-overloading-di-funzione-da-consegnare" class="md-nav__link">
+    ESERCIZIO 1.3 - Overloading di funzione (da consegnare):
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#approfondimenti" class="md-nav__link">
+    Approfondimenti
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  <a href="https://gitlab.cern.ch/authoring/documentation/s2i-mkdocs-example/blob/master/docs/Lezione1/Lezione1.md" title="Edit this page" class="md-content__button md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
+  </a>
+
+
+<h1 id="lezione-1">Lezione 1</h1>
+<p>In questa prima lezione proviamo a rinfrescarci la memoria sulla programmazione procedurale lavorando direttamente su un caso concreto: abbiamo a disposizione un file in cui sono immagazzinati i valori ottenuti da una certa misura e vogliamo scrivere un codice per farci sopra una analisi statistica minimale. </p>
+<ol>
+<li>Carichiamo in memoria dei dati che provengono da un file di misure</li>
+<li>Calcoliamo media, varianza e mediana del campione</li>
+</ol>
+<p>Il calcolo della mediana in particolare richiede che il set di dati sia ordinato e quindi ci obbliga a fare un pò di esercizio aggiuntivo. </p>
+<p>In questa lezione lavoreremo con questi ingredienti:</p>
+<ul>
+<li>Tipo di dato da leggere è constituito da numeri <code>double</code> immagazzinati in un file <code>data.dat</code>.</li>
+<li>Tipo di contenitore di dati è un array (dinamico) del C.</li>
+<li>Operazioni sui dati vengono svolte mediante funzioni. </li>
+</ul>
+<p>Prima di incominciare a scrivere il codice potrebbe essere utile ripassare rapidamente alcuni elementi base del linguaggio : </p>
+<details class="tip">
+<summary>Passaggio di inputs da linea di comando</summary>
+<p>È possibile passare al programma degli input direttamente da linea di comando nel momento in cui si esegue il programma :</p>
+<div class="highlight"><pre><span></span><code>./programma &lt;input1&gt; &lt;input2&gt;
+</code></pre></div>
+<p>Per fare questo nella dichiarazione del <code>main</code> bisogna aggiungere due argomenti:</p>
+<p><div class="highlight"><pre><span></span><code><span class="w"> </span><span class="n">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">**</span><span class="n">argv</span><span class="p">)</span>
+</code></pre></div>
+dove </p>
+<ul>
+<li><code>argc</code>  è il numero di argomenti presenti sulla riga di comando. Il valore di argc è sempre maggiore di 0 poiché il primo argomento è il nome del programma.</li>
+<li><code>argv</code> è un array di <code>argc</code> elementi che contiene gli array di caratteri passati da riga di comando. Quindi <code>argv[0]</code> è il nome del programma, <code>argv[1]</code> il primo argomento, etc..</li>
+</ul>
+<p>Se da riga di comando passiamo un numero, esso verrà passato tramite <code>argv</code> come un array di caratteri. Per convertire una array di caratteri in un numero intero si usa la funzione <code>atoi(char*)</code> (che è contenuta in <code>&lt;cstdlib&gt;</code>):</p>
+<div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+</code></pre></div>
+<p>La funzione corrispondente per convertire un array di caratteri in un numero <code>double</code> è <code>atof(char*)</code>, anch'essa disponibile in <code>&lt;cstdlib&gt;</code>. </p>
+</details>
+<!-- ================================================================= -->
+<blockquote></blockquote>
+<details class="tip">
+<summary>Uso di <code>cin</code> e <code>cout</code></summary>
+<p>L'output su schermo e l'input da tastiera sono gestiti in C++ usando gli oggetti <code>cin</code> e <code>cout</code>, che sono definiti nella libreria <code>iostream</code> :</p>
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span><span class="c1"> </span>
+</code></pre></div>
+<p>L'uso di <code>cout</code> è molto semplice :
+<div class="highlight"><pre><span></span><code><span class="kt">double</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span>
+<span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="s">&quot;A = &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>
+</code></pre></div>
+Uso di <code>cin</code>:
+<div class="highlight"><pre><span></span><code><span class="kt">double</span><span class="w"> </span><span class="n">a</span><span class="p">;</span><span class="w"> </span>
+<span class="n">cin</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">a</span><span class="p">;</span>
+</code></pre></div></p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+</div>
+<p>ATTENZIONE se <code>a</code> è una variabile <code>int</code> e da tastiera viene digitato <code>2.34</code>, il valore di <code>a</code> sarà convertito a <code>2</code>. Se digitate a schermo <code>pippo</code>, non sarà possibile convertirlo in un numero, ed il valore di <code>a</code> rimarrà inalterato. </p>
+</details>
+<!-- ================================================================= -->
+<blockquote></blockquote>
+<details class="tip">
+<summary>Allocazione dinamica della memoria</summary>
+<p>L'allocazione dinamica della memoria consente di decidere <em>al momento dell'esecuzion (runtime)</em> quanta memoria il programma deve allocare. In C++ l'allocazione (e la de-allocazione) dinamica della memoria viene effettuata con gli operatori <code>new</code> e <code>delete</code>:
+Il comando</p>
+<div class="highlight"><pre><span></span><code><span class="kt">double</span><span class="w"> </span><span class="o">*</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">double</span><span class="p">[</span><span class="n">N</span><span class="p">];</span>
+</code></pre></div>
+<p>crea un puntatore x a una zona di memoria di N <code>double</code> (cioè a un array di <code>double</code> con N elementi)
+Il comando</p>
+<div class="highlight"><pre><span></span><code><span class="k">delete</span><span class="p">[]</span><span class="w"> </span><span class="n">x</span><span class="p">;</span><span class="w"> </span>
+</code></pre></div>
+<p>de-alloca la memoria. Ciò vuol dire che un tentativo di accedere agli elementi di <code>x</code> dopo il comando <code>delete</code> risulterà in un errore di <code>segmentation violation</code>.</p>
+<p>È estremamente importante ricordarsi di de-allocare la memoria. Infatti in programmi complessi che utilizzano molta memoria (o in cicli che continuano ad allocare memoria), l'assenza della de-allocazione può portare a consumare progressivamente tutta la memoria RAM della macchina (<em>memory leak</em>), causando un blocco del sistema.
+Nel caso si allochino array (come nel nostro caso), la presenza delle parantesi <code>[]</code> dopo <code>delete</code> indica che bisogna de-allocare tutta la zona di memoria. Il comando</p>
+<div class="highlight"><pre><span></span><code><span class="k">delete</span><span class="w"> </span><span class="n">x</span><span class="p">;</span>
+</code></pre></div>
+<p>crea un memory leak, perché libera il puntatore all'array ma non il suo contenuto. </p>
+</details>
+<!-- ================================================================= -->
+<blockquote></blockquote>
+<details class="tip">
+<summary>Lettura e scrittura da file con <code>fstream</code></summary>
+<p>L'input e l'output da files è gestito in C++ dalla libreria <code>fstream</code>. I principali oggetti sono <code>ifstream</code> (input file stream) e <code>ofstream</code> (output file stream). Gli stream vengono dichiarati e inizializzati come:</p>
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;fstream&gt;</span>
+
+<span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">std</span><span class="p">;</span>
+
+<span class="n">ifstream</span><span class="w"> </span><span class="n">inputFile</span><span class="p">(</span><span class="s">&quot;nomeInput.txt&quot;</span><span class="p">)</span>
+<span class="n">ofstream</span><span class="w"> </span><span class="n">outputFile</span><span class="p">(</span><span class="s">&quot;nomeOutput.txt&quot;</span><span class="p">)</span>
+</code></pre></div>
+<p>Per controllare che il file sia stato aperto con successo si può usare il seguente codice</p>
+<div class="highlight"><pre><span></span><code><span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">inputFile</span><span class="p">){</span>
+<span class="w">  </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="s">&quot;Error ....&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span><span class="w"> </span><span class="c1">//stampa un messaggio</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="mi">-1</span><span class="p">;</span><span class="w"> </span><span class="c1">//ritorna un valore diverso da quello usuale</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>L'utilizzo degli stream per scrivere su un file di output o per caricare da un file di input è uguale all'uso di <code>cin</code> e <code>cout</code></p>
+<div class="highlight"><pre><span></span><code><span class="n">inputFile</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">a</span><span class="p">;</span>
+<span class="n">outputFile</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>
+</code></pre></div>
+<p>Un metodo estremamente utile di <code>ifstream</code> è</p>
+<p><div class="highlight"><pre><span></span><code><span class="n">inputFile</span><span class="p">.</span><span class="n">eof</span><span class="p">();</span>
+</code></pre></div>
+che restituisce <code>true</code> se si è raggiunta la fine del file e <code>false</code> altrimenti.
+Dopo l'utilizzo del file è buona norma chiuderlo con il metodo <code>close()</code>
+<div class="highlight"><pre><span></span><code><span class="n">inputFile</span><span class="p">.</span><span class="n">close</span><span class="p">();</span>
+<span class="n">outputFile</span><span class="p">.</span><span class="n">close</span><span class="p">();</span>
+</code></pre></div></p>
+</details>
+<h2 id="esercizio-10-primo-codice-per-analisi">ESERCIZIO 1.0 - Primo codice per analisi :</h2>
+<p>Come punto di partenza possiamo scrivere un unico codice che legga dati da file, li immagazzini in un array dinamico, calcoli la media, la varianza e la mediana dei dati raccolti. Scriviamo su un file di output i dati riordinati in ordine crescente. Il numero di elementi da caricare e il nome del file in cui trovare i dati sono passati da tastiera nel momento in cui il programma viene eseguito. Cerchiamo di costruire il codice passo passo. </p>
+<details>
+<p><summary> Struttura del programma </summary> </p>
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;fstream&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cstdlib&gt;</span>
+
+<span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">std</span><span class="p">;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="o">**</span><span class="w"> </span><span class="n">argv</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">argc</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Uso del programma : &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">argv</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; &lt;n_data&gt; &lt;filename&gt; &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="mi">-1</span><span class="w"> </span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">ndata</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+<span class="kt">double</span><span class="o">*</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">double</span><span class="p">[</span><span class="n">ndata</span><span class="p">];</span>
+<span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">filename</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span>
+
+<span class="c1">// [ ... 1) leggi dati da file e caricali nel c-array data ... ] </span>
+
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">ndata</span><span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="n">k</span><span class="o">++</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">data</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span><span class="w"> </span><span class="c1">// dopo averli caricati visualizzo</span>
+
+<span class="c1">// [ ... 2) calcolo la media e la varianza degli elementi caricati ... ]</span>
+
+<span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Media =  &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">media</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;   Varianza = &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span><span class="w"> </span><span class="c1">// </span>
+
+<span class="c1">//  calcola la mediana : prima creo una copia del vettore di partenza  </span>
+
+<span class="kt">double</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">vcopy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">double</span><span class="p">[</span><span class="n">ndata</span><span class="p">];</span>
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">ndata</span><span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">++</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="n">vcopy</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">data</span><span class="p">[</span><span class="n">k</span><span class="p">];</span>
+
+<span class="c1">// [ ... 3) poi riordino gli elementi del vettore copia dal minore al maggiore ... ]</span>
+
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">ndata</span><span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="n">k</span><span class="o">++</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">vcopy</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span><span class="w"> </span><span class="c1">// dopo averli riordinati visualizzo</span>
+
+<span class="c1">// [ ... 4) poi prendo il valore centrale ( ndata dispari ) o la media tra i due centrali</span>
+<span class="c1">// (ndata pari) dell&#39;array ordinato ... ]</span>
+
+<span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Mediana = &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">mediana</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span><span class="w"> </span><span class="c1">// stampa la mediana calcolata</span>
+
+<span class="c1">// visualizzo l&#39;array originale [......]                                                             </span>
+
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">ndata</span><span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="n">k</span><span class="o">++</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">data</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span><span class="w"> </span>
+
+<span class="c1">// [ ... 5) scrivo i dati riordinati su un file ... ]</span>
+
+<span class="k">delete</span><span class="w"> </span><span class="p">[]</span><span class="w"> </span><span class="n">vcopy</span><span class="w"> </span><span class="p">;</span>
+<span class="k">delete</span><span class="w"> </span><span class="p">[]</span><span class="w"> </span><span class="n">data</span><span class="p">;</span>
+
+<span class="k">return</span><span class="w"> </span><span class="mi">0</span>
+
+<span class="p">}</span>
+</code></pre></div>
+</details>
+<p>Provate ad implementare le parti mancanti. Se non ci riuscite sbirciate pure sotto. </p>
+<details>
+<p><summary> 1. Caricamento di elementi da file </summary></p>
+<div class="highlight"><pre><span></span><code><span class="w">    </span><span class="n">ifstream</span><span class="w"> </span><span class="nf">fin</span><span class="p">(</span><span class="n">filename</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="o">!</span><span class="n">fin</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span>
+<span class="w">      </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Cannot open file &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">filename</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span><span class="w">    </span>
+<span class="w">      </span><span class="n">exit</span><span class="p">(</span><span class="mi">33</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">ndata</span><span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="n">k</span><span class="o">++</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">fin</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">data</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="w"> </span><span class="p">;</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">fin</span><span class="p">.</span><span class="n">eof</span><span class="p">()</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span>
+<span class="w">          </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;End of file reached exiting&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span><span class="w"> </span>
+<span class="w">          </span><span class="n">exit</span><span class="p">(</span><span class="mi">33</span><span class="p">)</span><span class="w"> </span><span class="p">;</span><span class="w">      </span>
+<span class="w">        </span><span class="p">}</span><span class="w">    </span>
+<span class="w">      </span><span class="p">}</span><span class="w">        </span>
+<span class="w">    </span><span class="p">}</span>
+</code></pre></div>
+</details>
+<details>
+<p><summary> 2. Calcolo della media e della varianza </summary></p>
+<div class="highlight"><pre><span></span><code><span class="c1">// calcolo la media degli elementi caricati</span>
+
+<span class="kt">double</span><span class="w"> </span><span class="n">media</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">ndata</span><span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="n">k</span><span class="o">++</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">media</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">data</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="w"> </span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">media</span><span class="w"> </span><span class="o">=</span><span class="w">  </span><span class="n">media</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="p">(</span><span class="n">ndata</span><span class="p">)</span><span class="w"> </span><span class="p">;</span><span class="w">  </span>
+<span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Valore medio del set di dati caricato &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">media</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+
+<span class="c1">// calcolo della varianza degli elementi caricati                                                                                                 </span>
+
+<span class="kt">double</span><span class="w"> </span><span class="n">varianza</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">ndata</span><span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="n">k</span><span class="o">++</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">varianza</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">data</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">-</span><span class="w"> </span><span class="n">media</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">data</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">media</span><span class="w"> </span><span class="p">)</span><span class="w">  </span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">varianza</span><span class="w"> </span><span class="o">=</span><span class="w">  </span><span class="n">varianza</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="p">(</span><span class="n">ndata</span><span class="p">)</span><span class="w"> </span><span class="p">;</span>
+<span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Varianza del set di dati caricato &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">varianza</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+</code></pre></div>
+</details>
+<details>
+<p><summary> 3. Riordino elementi di un array </summary></p>
+<p>Esistono vari tipi di algoritmi di riordinamento con prestazioni molto diverse. Qui implementiamo uno dei più semplici ( ma anche dei più lenti ) che viene chiamato <em>simple sort</em>. Sentitevi liberi di implementare algoritmi più raffinati.</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// - prima riordino gli elementi del vettore dal minore al maggiore</span>
+<span class="c1">//   devo farne una copia in modo che il vettore originale resti </span>
+<span class="c1">//   inalterato</span>
+
+<span class="kt">double</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">vcopy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">double</span><span class="p">[</span><span class="n">ndata</span><span class="p">];</span>
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">ndata</span><span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">++</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="n">vcopy</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">data</span><span class="p">[</span><span class="n">k</span><span class="p">];</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="n">imin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="kt">double</span><span class="w"> </span><span class="n">min</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">j</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="o">&lt;</span><span class="n">ndata</span><span class="mi">-1</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">  </span>
+<span class="w">  </span><span class="n">imin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">j</span><span class="p">;</span>
+<span class="w">  </span><span class="n">min</span><span class="o">=</span><span class="n">vcopy</span><span class="p">[</span><span class="n">imin</span><span class="p">];</span>
+<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="o">=</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">&lt;</span><span class="n">ndata</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">vcopy</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">&lt;</span><span class="n">min</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">                                             </span>
+<span class="w">      </span><span class="n">min</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="n">vcopy</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+<span class="w">      </span><span class="n">imin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">i</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span><span class="w">                          </span>
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">c</span><span class="o">=</span><span class="n">vcopy</span><span class="p">[</span><span class="n">j</span><span class="p">];</span>
+<span class="w">  </span><span class="n">vcopy</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">=</span><span class="n">vcopy</span><span class="p">[</span><span class="n">imin</span><span class="p">];</span>
+<span class="w">  </span><span class="n">vcopy</span><span class="p">[</span><span class="n">imin</span><span class="p">]</span><span class="o">=</span><span class="n">c</span><span class="p">;</span>
+<span class="p">}</span><span class="w">                  </span>
+</code></pre></div>
+</details>
+<details>
+<p><summary> 4. Calcolo della mediana </summary></p>
+<div class="highlight"><pre><span></span><code><span class="c1">// poi prendo il valore centrale ( ndata dispari ) o la media tra i due centrali</span>
+<span class="c1">// (ndata pari) dell&#39;array ordinato</span>
+
+<span class="kt">double</span><span class="w"> </span><span class="n">mediana</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">ndata</span><span class="o">%</span><span class="mi">2</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">    </span>
+<span class="w">  </span><span class="n">mediana</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">vcopy</span><span class="p">[</span><span class="w"> </span><span class="n">ndata</span><span class="o">/</span><span class="mi">2</span><span class="w"> </span><span class="mi">-1</span><span class="w">  </span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">vcopy</span><span class="p">[</span><span class="w"> </span><span class="n">ndata</span><span class="o">/</span><span class="mi">2</span><span class="w"> </span><span class="p">]</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="mf">2.</span><span class="p">;</span><span class="w">    </span>
+<span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">mediana</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">vcopy</span><span class="p">[</span><span class="n">ndata</span><span class="o">/</span><span class="mi">2</span><span class="p">];</span><span class="w">    </span>
+<span class="p">}</span>
+
+<span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Mediana = &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">mediana</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+</code></pre></div>
+</details>
+<details>
+<p><summary> 5. Scrittura elementi su file </summary></p>
+<div class="highlight"><pre><span></span><code><span class="n">ofstream</span><span class="w"> </span><span class="n">fout</span><span class="p">(</span><span class="s">&quot;output_file.txt&quot;</span><span class="p">);</span><span class="w">  </span>
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">ndata</span><span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="n">k</span><span class="o">++</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="n">fout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">vcopy</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+<span class="n">fout</span><span class="p">.</span><span class="n">close</span><span class="p">();</span>
+</code></pre></div>
+</details>
+<ul>
+<li>
+<p>Compiliamo il programma invocando al solito g++:</p>
+<pre><code>g++ esercizio1.0.cpp -o esercizio1.0
+</code></pre>
+</li>
+<li>
+<p>Eseguiamo il programma :</p>
+<pre><code>./esercizio1.0 1000000 data.dat
+</code></pre>
+</li>
+</ul>
+<div class="admonition question">
+<p class="admonition-title">Question</p>
+</div>
+<p>Quanti elementi contiene il file <code>data.dat</code> ? Cosa succede se tento di leggere 1000000 di elementi ?</p>
+<h2 id="esercizio-11-codice-di-analisi-con-funzioni">ESERCIZIO 1.1 - Codice di analisi con funzioni:</h2>
+<p>Vogliamo ora riorganizzare il codice precedente per renderlo più modulare e facilmente riutilizzabile. Per capirci meglio: il calcolo della media è una operazione generale che può essere immaginata come un blocco di codice che accetta in input un array di dati e una dimensione e restituisce un valore ( la media appunto ). Se in uno stesso codice principale dobbiamo calcolare più volte la media di array di dati diversi non vogliamo ripetere più volte il frammento di codice relativo. Lo stesso vale per la lettura di un set di dati da un file o per il calcolo della mediana. Il codice dovrebbe avere quindi una struttura del tipo</p>
+<ul>
+<li>Dichiarazione di tutte le funzioni che verranno utilizzate.</li>
+<li>Programma vero e proprio <code>int main() {....}</code> in cui le funzioni vengono utilizzate.</li>
+<li>Al termine del programma principale l'implementazione di tutte le funzioni dichiarate. </li>
+</ul>
+<p>Dal momento che abbiamo deciso di spezzare il codice in funzioni proviamo a fare uso di una funzione dedicata che scambi tra loro due elementi di un array. In questo caso ripassiamo prima rapidamente come funziona il passaggio di dati in una funzione. </p>
+<details>
+<p><summary> Funzioni con argomenti by reference e by value (e by pointer) </summary></p>
+<p>Il passaggio di valori a una funzione può avvenire by <em>value</em>, by <em>reference</em> o by <em>pointer</em>.
+Ad esempio vogliamo scrivere una funzione che scambi di posto il contenuto di due variabili. Abbiamo tre possibilità:</p>
+<ul>
+<li><strong>By Value</strong></li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="kt">void</span><span class="w"> </span><span class="nf">scambiaByValue</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">c</span><span class="o">=</span><span class="n">a</span><span class="p">;</span>
+<span class="w">  </span><span class="n">a</span><span class="o">=</span><span class="n">b</span><span class="p">;</span>
+<span class="w">  </span><span class="n">b</span><span class="o">=</span><span class="n">c</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>la chiamata nel main viene effettuata</p>
+<div class="highlight"><pre><span></span><code><span class="kt">double</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span>
+<span class="kt">double</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">4</span><span class="p">;</span>
+<span class="n">scambia</span><span class="w"> </span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">);</span>
+</code></pre></div>
+<div class="admonition failure">
+<p class="admonition-title">Failure</p>
+</div>
+<p>Non vengono scambiate !</p>
+<ul>
+<li><strong>By Reference</strong></li>
+</ul>
+<p><div class="highlight"><pre><span></span><code><span class="kt">void</span><span class="w"> </span><span class="nf">scambiaByRef</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="o">&amp;</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="o">&amp;</span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">c</span><span class="o">=</span><span class="n">a</span><span class="p">;</span>
+<span class="w">  </span><span class="n">a</span><span class="o">=</span><span class="n">b</span><span class="p">;</span>
+<span class="w">  </span><span class="n">b</span><span class="o">=</span><span class="n">c</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+la chiamata nel main viene effettuata 
+<div class="highlight"><pre><span></span><code><span class="kt">double</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span>
+<span class="kt">double</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">4</span><span class="p">;</span>
+<span class="n">scambia</span><span class="w"> </span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">);</span>
+</code></pre></div></p>
+<div class="admonition success">
+<p class="admonition-title">Success</p>
+</div>
+<ul>
+<li><strong>By Pointer</strong></li>
+</ul>
+<p><div class="highlight"><pre><span></span><code><span class="kt">void</span><span class="w"> </span><span class="nf">scambiaByPointer</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="o">*</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="o">*</span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">c</span><span class="o">=*</span><span class="n">a</span><span class="p">;</span>
+<span class="w">  </span><span class="o">*</span><span class="n">a</span><span class="o">=*</span><span class="n">b</span><span class="p">;</span>
+<span class="w">  </span><span class="o">*</span><span class="n">b</span><span class="o">=</span><span class="n">c</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+la chiamata nel main viene effettuata 
+<div class="highlight"><pre><span></span><code><span class="kt">double</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span>
+<span class="kt">double</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">4</span><span class="p">;</span>
+<span class="n">scambia</span><span class="w"> </span><span class="p">(</span><span class="o">&amp;</span><span class="n">a</span><span class="p">,</span><span class="o">&amp;</span><span class="n">b</span><span class="p">);</span>
+</code></pre></div></p>
+<div class="admonition success">
+<p class="admonition-title">Success</p>
+</div>
+</details>
+<p>Vediamo nel dettaglio come fare :</p>
+<details>
+<p><summary> Struttura del programma </summary></p>
+<p>Il codice principale potrebbe essere strutturato nel modo seguente :</p>
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;fstream&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cstdlib&gt;</span>
+
+<span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">std</span><span class="p">;</span>
+
+<span class="kt">double</span><span class="w"> </span><span class="nf">CalcolaMedia</span><span class="p">(</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">;</span>
+<span class="kt">double</span><span class="w"> </span><span class="nf">CalcolaVarianza</span><span class="p">(</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="p">);</span>
+<span class="kt">double</span><span class="w"> </span><span class="nf">CalcolaMediana</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="p">[]</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">;</span>
+<span class="kt">double</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nf">ReadDataFromFile</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="w">  </span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">;</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">Print</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">;</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">scambiaByValue</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">;</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">scambiaByRef</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="o">&amp;</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="o">&amp;</span><span class="p">)</span><span class="w"> </span><span class="p">;</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">scambiaByPointer</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="p">;</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">selection_sort</span><span class="p">(</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="p">);</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="o">**</span><span class="w"> </span><span class="n">argv</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">argc</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Uso del programma : &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">argv</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; &lt;n_data&gt; &lt;filename&gt; &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">-1</span><span class="w"> </span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">ndata</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+<span class="w">  </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">filename</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span>
+
+<span class="w">  </span><span class="c1">// uso una funzione per leggere gli elementi da un file</span>
+
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ReadDataFromFile</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">filename</span><span class="p">,</span><span class="w"> </span><span class="n">ndata</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">;</span>
+
+<span class="w">  </span><span class="c1">// [... aggiungo dei cout per visualizzare il contenuto del vettore ...]</span>
+
+<span class="w">  </span><span class="c1">// uso una funzione per calcolare la media e la varianza</span>
+
+<span class="w">  </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Media = &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">CalcolaMedia</span><span class="p">(</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="n">ndata</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+
+<span class="w">  </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Varianza = &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">CalcolaVarianza</span><span class="p">(</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="n">ndata</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+
+<span class="w">  </span><span class="c1">// uso una funzione per calcolare la mediana</span>
+
+<span class="w">  </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Mediana = &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">CalcolaMediana</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="w"> </span><span class="n">ndata</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+
+<span class="w">  </span><span class="c1">// [ ... aggiungo dei cout per controllare il vettore riordinato ]</span>
+
+<span class="w">  </span><span class="c1">// Scrivo i dati riordinati su file</span>
+
+<span class="w">  </span><span class="n">Print</span><span class="p">(</span><span class="w"> </span><span class="s">&quot;fileout.txt&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="p">,</span><span class="w"> </span><span class="n">ndata</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">;</span>
+
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+
+<span class="p">}</span>
+
+<span class="c1">// legge &lt;size&gt; elementi da &lt;Filename&gt; e restituisce un array</span>
+
+<span class="kt">double</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nf">ReadDataFromFile</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">Filename</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">size</span><span class="w">  </span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">double</span><span class="p">[</span><span class="n">size</span><span class="p">];</span>
+
+<span class="w">  </span><span class="c1">//   [ ... ]</span>
+
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">data</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">Print</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">Filename</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">data</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">  </span><span class="c1">//  [ ... ]</span>
+
+<span class="p">}</span>
+
+<span class="c1">// calcola la media di &lt;size&gt; elementi dell&#39;array &lt;data&gt;</span>
+
+<span class="kt">double</span><span class="w"> </span><span class="nf">CalcolaMedia</span><span class="p">(</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">  </span><span class="c1">//   [ ... ]</span>
+
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">media</span><span class="w"> </span><span class="p">;</span>
+
+<span class="p">}</span>
+
+<span class="c1">// calcola la varianza di &lt;size&gt; elementi dell&#39;array &lt;data&gt;</span>
+
+<span class="kt">double</span><span class="w"> </span><span class="nf">CalcolaVarianza</span><span class="p">(</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">  </span><span class="c1">//   [ ... ]</span>
+
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">media</span><span class="w"> </span><span class="p">;</span>
+
+<span class="p">}</span>
+
+<span class="c1">// funzioni per scambiare di posto due elementi, utile per il riordinamento</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">scambiaByValue</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">c</span><span class="o">=</span><span class="n">a</span><span class="p">;</span>
+<span class="w">  </span><span class="n">a</span><span class="o">=</span><span class="n">b</span><span class="p">;</span>
+<span class="w">  </span><span class="n">b</span><span class="o">=</span><span class="n">c</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">scambiaByRef</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="o">&amp;</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="o">&amp;</span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">c</span><span class="o">=</span><span class="n">a</span><span class="p">;</span>
+<span class="w">  </span><span class="n">a</span><span class="o">=</span><span class="n">b</span><span class="p">;</span>
+<span class="w">  </span><span class="n">b</span><span class="o">=</span><span class="n">c</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">scambiaByPointer</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="o">*</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="o">*</span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">c</span><span class="o">=*</span><span class="n">a</span><span class="p">;</span>
+<span class="w">  </span><span class="o">*</span><span class="n">a</span><span class="o">=*</span><span class="n">b</span><span class="p">;</span>
+<span class="w">  </span><span class="o">*</span><span class="n">b</span><span class="o">=</span><span class="n">c</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// algoritmo di riordinamento di un array ( selection_sort ) </span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">selection_sort</span><span class="p">(</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">vec</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">size</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">j</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="o">&lt;</span><span class="n">size</span><span class="mi">-1</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">     </span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">imin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">j</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">min</span><span class="o">=</span><span class="n">vec</span><span class="p">[</span><span class="n">imin</span><span class="p">];</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="o">=</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">&lt;</span><span class="n">size</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span>
+<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">vec</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">&lt;</span><span class="n">min</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">                 </span>
+<span class="w">        </span><span class="n">min</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="n">vec</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+<span class="w">        </span><span class="n">imin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">i</span><span class="p">;</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span><span class="w">                                       </span>
+<span class="w">    </span><span class="n">scambiaByRef</span><span class="p">(</span><span class="n">vec</span><span class="p">[</span><span class="n">j</span><span class="p">],</span><span class="n">vec</span><span class="p">[</span><span class="n">imin</span><span class="p">]);</span><span class="w">     </span>
+<span class="w">  </span><span class="p">}</span><span class="w">                                          </span>
+<span class="p">}</span>
+
+<span class="c1">// Calcolo della mediana di un array &lt;vec&gt; di dimensione &lt;size&gt;. Prima si crea</span>
+<span class="c1">// una copia dell&#39;array, lo riordina e calcola la mediana</span>
+
+<span class="kt">double</span><span class="w"> </span><span class="nf">CalcolaMediana</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">vec</span><span class="p">[]</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">vcopy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="p">[</span><span class="n">size</span><span class="p">];</span>
+<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="n">vcopy</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">vec</span><span class="p">[</span><span class="n">i</span><span class="p">];</span><span class="w"> </span>
+
+<span class="w">  </span><span class="n">selection_sort</span><span class="p">(</span><span class="w"> </span><span class="n">vcopy</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="p">);</span>
+
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">mediana</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="o">%</span><span class="mi">2</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">    </span>
+<span class="w">    </span><span class="n">mediana</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">vcopy</span><span class="p">[</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="o">/</span><span class="mi">2</span><span class="w"> </span><span class="mi">-1</span><span class="w"> </span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">vcopy</span><span class="p">[</span><span class="w"> </span><span class="n">size</span><span class="o">/</span><span class="mi">2</span><span class="w"> </span><span class="p">]</span><span class="w">  </span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="mf">2.</span><span class="p">;</span><span class="w">    </span>
+<span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">mediana</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">vcopy</span><span class="p">[</span><span class="n">size</span><span class="w"> </span><span class="o">/</span><span class="mi">2</span><span class="p">];</span><span class="w">    </span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="k">delete</span><span class="w"> </span><span class="p">[]</span><span class="w"> </span><span class="n">vcopy</span><span class="p">;</span>
+
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">mediana</span><span class="p">;</span>
+<span class="p">}</span><span class="w"> </span>
+</code></pre></div>
+</details>
+<p>Il main è ora decisamente più compatto e leggibile. Quasi tutte le principali funzionalità del codice sono state scorporate in un opportuno set di funzioni.</p>
+<ul>
+<li>Come nel caso dell'esercizio precedente compiliamo il programma invocando al solito g++:
+<div class="highlight"><pre><span></span><code>g++ esercizio1.1.cpp -o esercizio1.1
+</code></pre></div></li>
+<li>Eseguiamo il programma :
+<div class="highlight"><pre><span></span><code>./esercizio1.1 1000000 data.dat 
+</code></pre></div></li>
+</ul>
+<h2 id="esercizio-12-codice-di-analisi-con-funzioni-esterne-e-makefile">ESERCIZIO 1.2 - Codice di analisi con funzioni esterne e Makefile:</h2>
+<p>In questo esercizio terminiamo il processo di riorganizzazione dell'esercizio 1.0. Procederemo in questo modo:</p>
+<ul>
+<li>Tutte le dichiarazioni di variabili che abbiamo messo in testa al programma le spostiamo in un file separato <code>funzioni.h</code>.</li>
+<li>Tutte le implementazioni delle funzioni in coda al programma le spostiamo in un file separato <code>funzioni.cpp</code>.</li>
+<li>Ricordiamoci di includere il file <code>funzioni.h</code> sia in <code>esercizio1.2.cpp</code> sia in <code>funzioni.cpp</code> tramite il solito <code>#include "funzioni.h"</code></li>
+<li>Compiliamo separatamente <code>esercizio1.2.cpp</code> e <code>funzioni.cpp</code> utilizzando un <code>Makefile</code> </li>
+</ul>
+<p>Prima di incominciare rivediamo rapidamente come si scrive un <code>Makefile</code>:</p>
+<details>
+<p><summary> Makefile </summary></p>
+<p>Vogliamo creare un <code>Makefile</code> che ci permetta di compilare il nostro programma quando questo è
+composto/spezzato in diversi file sorgente. Supponiamo di avere un codice spezzato in
+<div class="highlight"><pre><span></span><code>esercizio1.2.cpp funzioni.cpp funzioni.h
+</code></pre></div>
+Ovviamente possiamo compilare il tutto con</p>
+<p><div class="highlight"><pre><span></span><code>g++ esercizio1.2.cpp funzioni.cpp -o esercizio1.2
+</code></pre></div>
+ma possiamo farlo in maniera più efficace. La struttura/sintassi del <code>Makefile</code> è la seguente:
+<div class="highlight"><pre><span></span><code>target: dipendenze
+[tab] system command
+</code></pre></div>
+Nel nostro caso
+<div class="highlight"><pre><span></span><code>esercizio1.2: funzioni.cpp esercizio1.2.cpp funzioni.h
+[tab] g++ funzioni.cpp esercizio1.2.cpp -o esercizio1.2
+</code></pre></div>
+lanciando il comando <code>make</code> viene eseguito il primo target che quindi lancia una compilazione. 
+Possiamo scrivere un <code>Makefile</code> più sofisticato esplicitando le dipendenze in modo che le parti di codice vengano compilate separatamente. In questo caso il <code>Makefile</code> diventa
+<div class="highlight"><pre><span></span><code>esercizio1.2: esercizio1.2.o funzioni.o
+  g++ esercizio1.2.o funzioni.o -o esercizio1.2
+esercizio1.2.o: esercizio1.2.cpp funzioni.h
+  g++ -c esercizio1.2.cpp -o esercizio1.2.o
+funzioni.o: funzioni.cpp funzioni.h
+  g++ -c funzioni.cpp -o funzioni.o
+</code></pre></div></p>
+</details>
+<h2 id="esercizio-13-overloading-di-funzione-da-consegnare">ESERCIZIO 1.3 - Overloading di funzione (da consegnare):</h2>
+<p>Aggiungete alla vostra libreria di funzioni una funzione <code>void Print(double *, int)</code> che permetta di scrivere gli elementi di un array a video. Questo è possibile grazie all'<em>overloading</em> (funzioni con stesso nome, ma con argomenti differenti).</p>
+<details>
+<p><summary> Overloading di funzioni </summary></p>
+<p>L'overloading delle funzioni è una funzionalità specifica del C++ che non è presente in C. Questa funzionalità permette di poter utilizzare lo stesso nome per funzioni diverse (cioè che compiono operazioni diverse) all'interno dello stesso programma, a patto però che gli argomenti forniti alla funzione siano differenti. In maniera automatica, il compilatore sceglierà la funzione appropriata a seconda del tipo di argomenti passati. In pratica:
+<div class="highlight"><pre><span></span><code><span class="kt">void</span><span class="w"> </span><span class="nf">Print</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="o">*</span><span class="w">  </span><span class="n">data</span><span class="w">  </span><span class="kt">int</span><span class="w">  </span><span class="n">ndata</span><span class="p">)</span><span class="w"> </span><span class="p">{...}</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">Print</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">filename</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="p">,</span><span class="w">  </span><span class="kt">int</span><span class="w">  </span><span class="n">ndata</span><span class="p">)</span><span class="w"> </span><span class="p">{...}</span>
+</code></pre></div>
+Le due funzioni hanno lo stesso nome, ma ovviamente ci si aspetta che facciano cose diverse.
+Si noti che per poter fare l'overloading di una funzione non basta che soltanto il tipo restituito dalla funzione sia differente, ma occorre che siano diversi i tipi e/o il numero dei parametri passati alla funzione.</p>
+</details>
+<h2 id="approfondimenti">Approfondimenti</h2>
+<details class="example">
+<summary>Formattazione dell'output</summary>
+<p>La C++ Standard Library permette di manipolare la formattazione dell'output utilizzando i manipolatori, alcuni dei quali sono dichiarati nell'header <iomanip>.
+In generale i manipolatori modificano lo stato di uno stream (<code>cout, cin, ofstream, ifstream</code>...).</p>
+<p>I manipolatori che ci serviranno per modificare l'output di numeri floating-point sono:</p>
+<p><code>fixed</code>: stampa i numeri senza l'uso di esponenti, ove possibile
+<code>scientific</code>: stampa i numeri utilizzando gli esponenti
+<code>setprecision(int n)</code>: stampa n cifre dopo la virgola</p>
+<p>Esempio:
+<div class="highlight"><pre><span></span><code><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;double number: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">setprecision</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">double_number</span><span class="p">;</span><span class="w"> </span>
+</code></pre></div></p>
+<p>Utili per stampare i dati in una tabella sono
+<div class="highlight"><pre><span></span><code><span class="n">setw</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="n">imposta</span><span class="w"> </span><span class="n">la</span><span class="w"> </span><span class="n">larghezza</span><span class="w"> </span><span class="n">di</span><span class="w"> </span><span class="n">un</span><span class="w"> </span><span class="n">campo</span><span class="w"> </span><span class="n">ad</span><span class="w"> </span><span class="n">n</span>
+<span class="n">setfill</span><span class="p">(</span><span class="kt">char</span><span class="w"> </span><span class="n">c</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="n">usa</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="n">come</span><span class="w"> </span><span class="n">carattere</span><span class="w"> </span><span class="n">di</span><span class="w"> </span><span class="n">riempimento</span><span class="w"> </span><span class="p">(</span><span class="n">quello</span><span class="w"> </span><span class="n">di</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="n">è</span><span class="w"> </span><span class="n">lo</span><span class="w"> </span><span class="n">spazio</span><span class="p">)</span>
+</code></pre></div>
+Ad esempio
+<div class="highlight"><pre><span></span><code><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="n">setw</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="s">&quot;0.132&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="n">setw</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="s">&quot;234&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="n">endl</span>
+<span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="n">setw</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="s">&quot;10&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="n">setw</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="s">&quot;12&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="n">endl</span>
+</code></pre></div>
+stampa i numeri in due colonne allineate </p>
+</details>
+<details class="example">
+<summary>Implementazione migliorata</summary>
+<p>In generale l'implementazione di algoritmi in una funzione può avvenira in diversi modi. 
+Proviamo a vedere alcune possibili varianti per le funzioni relative al calcolo della media e della varianza:</p>
+<div class="highlight"><pre><span></span><code><span class="kt">double</span><span class="w"> </span><span class="nf">CalcolaMedia</span><span class="p">(</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="w">  </span><span class="n">accumulo</span><span class="p">;</span>
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">accumulo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+
+<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="n">k</span><span class="o">++</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span>
+<span class="w">    </span><span class="n">accumulo</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">data</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="w"> </span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span><span class="w">  </span>
+
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="mf">1.</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="p">(</span><span class="n">size</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">accumulo</span><span class="w"> </span><span class="p">;</span><span class="w">  </span>
+
+<span class="p">}</span>
+
+<span class="kt">double</span><span class="w"> </span><span class="nf">CalcolaMedia</span><span class="p">(</span><span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">size</span><span class="w">  </span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">accumulo</span><span class="o">=</span><span class="mf">0.</span><span class="p">;</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="w">  </span><span class="n">accumulo</span><span class="p">;</span>
+
+<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="n">k</span><span class="o">++</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">accumulo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="p">(</span><span class="n">k</span><span class="p">)</span><span class="o">/</span><span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="p">(</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">accumulo</span><span class="w"> </span><span class="o">+</span>
+<span class="w">      </span><span class="mf">1.</span><span class="o">/</span><span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="p">(</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="w"> </span><span class="n">data</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="w"> </span><span class="p">;</span><span class="w">    </span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">accumulo</span><span class="p">;</span>
+
+<span class="p">}</span>
+</code></pre></div>
+<p>La prima funzione implementa il calcolo in modo intuitivo. La seconda è meno ovvia ma se ci pensate ha lo stesso effetto con il grosso vantaggio di non conservare la somma di tutti i valori che potrebbe diventare troppo grande.</p>
+<div class="highlight"><pre><span></span><code><span class="kt">double</span><span class="w"> </span><span class="nf">CalcolaVarianza</span><span class="p">(</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="p">){</span>
+
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">result</span><span class="o">=</span><span class="mf">0.</span><span class="p">;</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">result</span><span class="p">;</span>
+
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">media</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CalcolaMedia</span><span class="p">(</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="p">);</span>
+
+<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">result</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">media</span><span class="o">-</span><span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">media</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="mf">1.</span><span class="o">/</span><span class="n">static_cas</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="n">size</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">double</span><span class="w"> </span><span class="nf">CalcolaVarianza</span><span class="p">(</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">result</span><span class="o">=</span><span class="mf">0.</span><span class="p">;</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">result</span><span class="p">;</span>
+
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">sumx</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">sumx2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+
+<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">sumx</span><span class="w">  </span><span class="o">+=</span><span class="w"> </span><span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="p">;</span>
+<span class="w">    </span><span class="n">sumx2</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.</span><span class="o">/</span><span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="p">(</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">sumx2</span><span class="w">   </span><span class="o">-</span><span class="w"> </span><span class="p">(</span><span class="n">sumx</span><span class="o">*</span><span class="n">sumx</span><span class="o">/</span><span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="p">(</span><span class="n">size</span><span class="w"> </span><span class="p">)))</span><span class="w">  </span><span class="p">;</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">result</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">double</span><span class="w"> </span><span class="nf">CalcolaVarianza</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">result</span><span class="o">=</span><span class="mf">0.</span><span class="p">;</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">result</span><span class="p">;</span>
+
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">old_average</span><span class="p">,</span><span class="w"> </span><span class="n">average</span><span class="o">=</span><span class="mf">0.</span><span class="p">;</span>
+
+<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="n">old_average</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">average</span><span class="p">;</span>
+<span class="w">      </span><span class="n">average</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">/</span><span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">average</span><span class="w"> </span><span class="o">+</span>
+<span class="w">        </span><span class="mf">1.</span><span class="o">/</span><span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+
+<span class="w">      </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.</span><span class="o">/</span><span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">*</span>
+<span class="w">        </span><span class="p">(</span><span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">+</span>
+<span class="w">        </span><span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">old_average</span><span class="o">*</span><span class="n">old_average</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="o">-</span>
+<span class="w">        </span><span class="n">average</span><span class="o">*</span><span class="n">average</span><span class="w"> </span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span><span class="w">      </span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">result</span><span class="p">;</span>
+<span class="p">}</span><span class="w"> </span>
+</code></pre></div>
+<p>Nel caso della varianza la prima implementazione richiede una chiamata alla funzione <code>CalcolaMedia()</code> mentre la seconda no. La terza infine implementa il calcolo nello stesso modo visto per la media, ovvero evitando di immagazzinare somme troppo elevate. In generale è sempre consigliato usare funzioni e algoritmi da librerie ufficiali ( standard library, boost ) che vi garantiscono un livello di prestazioni ottimale.</p>
+</details>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+    <nav class="md-footer__inner md-grid" aria-label="Footer" >
+      
+        
+        <a href="../.." class="md-footer__link md-footer__link--prev" aria-label="Previous: Home" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Home
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../../Lezione2/Lezione2/" class="md-footer__link md-footer__link--next" aria-label="Next: Lezione 2" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Lezione 2
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.5bf1dace.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.37e9125f.min.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      
+    
+  </body>
+</html>

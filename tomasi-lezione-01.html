@@ -119,7 +119,7 @@
 <section id="title-slide">
   <h1 class="title">Laboratorio di TNDS – Lezione 1</h1>
   <p class="author">Maurizio Tomasi</p>
-  <p class="date">Martedì 4 Ottobre 2022</p>
+  <p class="date">Martedì 26 Settembre 2023</p>
 </section>
 
 <section id="introduzione-al-corso" class="slide level1">
@@ -268,12 +268,13 @@ usarlo, e il computer inizierà a non funzionare più.</p></li>
 <section id="usare-visual-studio-code" class="slide level1">
 <h1>Usare Visual Studio Code</h1>
 <ul>
-<li><p>Potete scaricare ed installare Visual Studio Code anche sul
+<li><p>Potete scaricare ed installare <a
+href="https://code.visualstudio.com/">Visual Studio Code</a> anche sul
 vostro portatile: è gratuito e disponibile per Windows, Linux e Mac OS
 X. Per configurarlo in modo che sia usabile con programmi C/C++,
 eseguite dal terminale del vostro computer il comando</p>
 <pre><code>code --install-extension ms-vscode.cpptools</code></pre>
-<p>(Attenzione, se avete installato «Code OSS» il comando non funziona,
+<p>(Attenzione, se avete installato «Code OSS» il comando non funziona:
 occorre proprio la versione rilasciata da Microsoft per installare
 questa estensione).</p></li>
 <li><p>Di seguito c’è un breve filmato che vi mostra come scrivere ed
@@ -514,13 +515,13 @@ programmi C++, e quindi correttamente invoca l’eseguibile
 <ul>
 <li><p>Se si vuole fornire manualmente la lista dei comandi da inviare,
 bisogna scriverli nella riga successiva, che va indentata inserendo un
-carattere <strong>TAB</strong> (attenzione: <strong>non</strong> una
-sequenza di spazi!):</p>
+carattere <strong>TAB</strong>, solitamente indicato sulle tastiere con
+↹ (è a sinistra del tasto Q):</p>
 <div class="sourceCode" id="cb15"><pre
 class="sourceCode makefile"><code class="sourceCode makefile"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="dt">CXXFLAGS</span> <span class="ch">=</span><span class="st"> -std=c++17 -g -Wall --pedantic</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="dv">main:</span><span class="dt"> main.cpp</span></span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># You MUST use a Tab character to indent here!</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># You MUST use a Tab character ↹ to indent here!</span></span>
 <span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>    g++ <span class="ch">$(</span><span class="dt">CXXFLAGS</span><span class="ch">)</span> main.cpp</span></code></pre></div></li>
 <li><p>Per inserire un Tab da Repl.it, impostate <em>Indent type</em>
 uguale a <em>Tab</em> e <em>Indent size</em> uguale a 8 in «Settings».
@@ -611,25 +612,21 @@ esercizi!</p></li>
 <h1>File multipli ed header</h1>
 <ul>
 <li><p>Dovete <strong>sempre</strong> includere in ogni header/file
-sorgente tutti gli header che servono per definire i simboli nel codice.
-Spesso gli studenti si affidano invece a inclusioni precedenti!</p></li>
+sorgente tutti gli header che servono per definire i simboli nel
+codice.</p></li>
 <li><p>Ad esempio, se un file <code>main.cpp</code> contiene questi
 <code>#include</code>:</p>
 <div class="sourceCode" id="cb20"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co">// File main.cpp</span></span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;vectors.h&quot;</span><span class="pp">   </span><span class="co">// Defines 3D vectors</span></span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;newton.h&quot;</span><span class="pp">    </span><span class="co">// Defines functions to solve Newton&#39;s problems</span></span></code></pre></div>
-<p>è necessario che in <code>newton.h</code> si includa
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co">// main.cpp</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;vectors.h&quot;</span><span class="pp">   </span><span class="co">// Define 3D vectors</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;newton.h&quot;</span><span class="pp">    </span><span class="co">// Define functions to solve Newton&#39;s problems</span></span></code></pre></div>
+<p>è buona cosa che in <code>newton.h</code> si includa comunque
 <code>vectors.h</code>:</p>
 <div class="sourceCode" id="cb21"><pre
 class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co">// newton.h</span></span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#pragma once</span></span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;vectors.h&quot;</span></span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="co">// … Here follows the header file for `newton.h`, where vectors are used</span></span></code></pre></div></li>
-<li><p>Quest’ultima inclusione non sarebbe necessaria per compilare
-<code>main.cpp</code>, ma è importante inserirla comunque! Vediamone i
-motivi.</p></li>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="co">// etc.</span></span></code></pre></div></li>
 </ul>
 </section>
 <section id="motivo-1" class="slide level1">
@@ -639,48 +636,44 @@ motivi.</p></li>
 questo caso si tende a inserirli in ordine alfabetico, per individuare
 duplicati:</p>
 <div class="sourceCode" id="cb22"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Inspired by the source code for PolyRay 1.8</span></span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;subdiv.h&quot;</span></span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;intersec.h&quot;</span></span>
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;subdiv.h&quot;</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;intersec.h&quot;</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;memory.h&quot;</span></span>
 <span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;roots.h&quot;</span></span>
-<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;memory.h&quot;</span></span>
-<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;glyph.h&quot;</span></span>
-<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;scan.h&quot;</span></span>
-<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;memory.h&quot;</span></span>
-<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;vector.h&quot;</span></span>
-<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;io.h&quot;</span></span></code></pre></div></li>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;glyph.h&quot;</span></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;scan.h&quot;</span></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;memory.h&quot;</span></span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;vector.h&quot;</span></span></code></pre></div></li>
 <li><p>Formattatori automatici di codice come <code>clang-format</code>
-riordinano di default gli <code>#include</code>. Ma nel nostro caso
-quindi metterebbe <code>newton.h</code> <strong>prima</strong> di
-<code>vectors.h</code>, e la compilazione fallirebbe!</p></li>
+riordinano gli <code>#include</code>: nel nostro caso quindi metterebbe
+<code>newton.h</code> <strong>prima</strong> di <code>vectors.h</code>,
+e la compilazione fallirebbe!</p></li>
 </ul>
 </section>
 <section id="motivo-2" class="slide level1">
 <h1>Motivo #2</h1>
 <ul>
-<li><p>Siccome ogni <code>#include</code> può richiedere tempo per
-l’esecuzione, di tanto in tanto nei progetti si fa un /purge/ degli
-<code>#include</code> inutili: in ogni file, si controlla se ci sono
-degli header che definiscono cose non usate all’interno del
-file.</p></li>
-<li><p>ad esempio, una riga <code>#include "mp3.h"</code> all’interno di
+<li><p>Ogni <code>#include</code> richiede tempo per la compilazione. Di
+tanto in tanto nei progetti si fa un /purge/ degli <code>#include</code>
+inutili: in ogni file, si controlla se ci sono degli header che
+definiscono cose non usate all’interno del file.</p></li>
+<li><p>Ad esempio, una riga <code>#include "mp3.h"</code> all’interno di
 un file sorgente in cui non si toccano affatto file MP3!</p></li>
-<li><p>Nel nostro caso, può essere che i vettori definiti in
-<code>vector.h</code> non siano mai usati esplicitamente in
-<code>main.cpp</code>, magari perché in esso si calcola semplicemente il
-periodo orbitale di un satellite artificiale. Ma se ci sono dipendenze
-nascoste (come <code>newton.h</code> che dipende da
-<code>vector.h</code>), il metodo per il /purging/ non
-funziona!</p></li>
+<li><p>Nel nostro caso, i vettori definiti in <code>vector.h</code>
+potrebbero non essere mai usati esplicitamente in <code>main.cpp</code>,
+magari perché in esso si calcola semplicemente il periodo orbitale di un
+satellite artificiale. Ma se ci sono dipendenze nascoste (come
+<code>newton.h</code> che dipende da <code>vector.h</code>), questo è un
+problema!</p></li>
 </ul>
 </section>
 <section id="avvertenza-su-gnu-make" class="slide level1">
 <h1>Avvertenza su GNU Make</h1>
 <ul>
 <li><p>Quando avrete svolto gli esercizi di questa lezione, vi sarà
-chiaro che la scrittura del <code>Makefile</code> è un processo molto
-lungo e verboso. Il comando <code>make</code> è stato inventato nel
-1976, e all’epoca il mondo della programmazione era così!</p></li>
+chiaro che la scrittura del <code>Makefile</code> è un processo lungo e
+verboso. Il comando <code>make</code> è stato inventato nel 1976, e
+all’epoca il mondo della programmazione era così!</p></li>
 <li><p>Oggi più nessuno (neppure io!) usa GNU Make direttamente per
 compilare codice C++. Per i vostri progetti futuri (oltre questo corso)
 vi converrà usare sistemi più evoluti ed agili; tra questi, il più usato
@@ -705,58 +698,9 @@ come al solito.</li>
 </ol></li>
 <li><p>La compilazione avviene quindi ancora attraverso GNU Make, ma il
 <code>Makefile</code> prodotto da CMake è ottimizzato (e mostra una
-bella barra percentuale se compilate un progetto che usa tanti file
+bella barra percentuale quando si compila un progetto che usa tanti file
 <code>.cpp</code>!).</p></li>
 <li><p>Ecco perché studiare GNU Make è ancora utile.</p></li>
-</ul>
-</section>
-<section id="esempio-di-cmake" class="slide level1">
-<h1>Esempio di CMake</h1>
-<p>Per darvi un’idea di come funzioni CMake, ecco il contenuto di
-<code>CMakeLists.txt</code> per l’esercizio 1.2:</p>
-<div class="sourceCode" id="cb23"><pre
-class="sourceCode cmake"><code class="sourceCode cmake"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="kw">cmake_minimum_required</span> (<span class="ot">VERSION</span> <span class="dt">2.8.11</span>)</span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="kw">project</span> (ESERCIZIO01.2)</span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="kw">add_executable</span> (<span class="bn">esercizio01.2</span></span>
-<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>    esercizio01.2.cpp funzioni.cpp)</span></code></pre></div>
-</section>
-<section id="esempio-di-cmake-22" class="slide level1">
-<h1>Esempio di CMake (2/2)</h1>
-<p><strong>Attenzione</strong>: se volete provare come funziona CMake,
-non eseguite <code>cmake</code> nella directory, altrimenti
-sovrascriverà il vostro <code>Makefile</code>! Fate così:</p>
-<div class="sourceCode" id="cb24"><pre
-class="sourceCode bash"><code class="sourceCode bash"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> mkdir build <span class="kw">&amp;&amp;</span> <span class="bu">cd</span> build</span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> cmake .. <span class="co"># Legge il file CMakeLists.txt da ..</span></span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> make <span class="co"># Esegue il `Makefile` in &quot;./build&quot;</span></span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> ./esercizio01.2 <span class="co"># L&#39;eseguibile è in &quot;./build&quot;</span></span></code></pre></div>
-</section>
-<section id="vantaggi-di-cmake" class="slide level1">
-<h1>Vantaggi di CMake</h1>
-<ul>
-<li><p>Molte meno righe da scrivere!</p></li>
-<li><p>Tracciamento automatico dei file <code>.h</code>: non è
-necessario dire quali file <code>.h</code> includa un file
-<code>.cpp</code>, perché pensa automaticamente CMake a recuperare
-l’informazione cercando gli <code>#include</code> nel file
-<code>.cpp</code>. Non è più necessario quindi indicarli manualmente
-come nel caso di un <code>Makefile</code>:</p>
-<div class="sourceCode" id="cb25"><pre
-class="sourceCode makefile"><code class="sourceCode makefile"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Non necessario se si usa CMake</span></span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="dv">funzioni.o:</span><span class="dt"> funzioni.cpp funzioni.h</span></span></code></pre></div></li>
-<li><p>È ormai il metodo standard per includere librerie nei propri
-progetti: <a
-href="https://cliutils.gitlab.io/modern-cmake/chapters/packages/ROOT.html">ROOT</a>,
-<a
-href="https://cliutils.gitlab.io/modern-cmake/chapters/packages/Boost.html">BOOST</a>,
-<a
-href="https://cliutils.gitlab.io/modern-cmake/chapters/packages/OpenMP.html">OpenMP</a>,
-<a
-href="https://cliutils.gitlab.io/modern-cmake/chapters/packages/CUDA.html">CUDA</a>,
-<a
-href="https://cliutils.gitlab.io/modern-cmake/chapters/packages/MPI.html">MPI</a>,
-<a href="https://doc.qt.io/qt-5/cmake-manual.html">Qt</a>, etc.</p></li>
 </ul>
 </section>
     </div>

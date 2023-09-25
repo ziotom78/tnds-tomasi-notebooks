@@ -1,7 +1,7 @@
 ---
 title: Laboratorio di TNDS -- Lezione 2
 author: Maurizio Tomasi
-date: Martedì 11 Ottobre 2022
+date: Martedì 3 Ottobre 2023
 css:
 - css/custom.css
 - css/asciinema-player.css

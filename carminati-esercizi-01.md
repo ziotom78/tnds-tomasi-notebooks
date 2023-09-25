@@ -983,3 +983,25 @@ Elenco qui gli errori più comuni che ho riscontrato negli ultimi anni correggen
 -   Spesso il codice per il calcolo della mediana funziona solo se N è pari, oppure se N è dispari, ma non viceversa. Assicuratevi che funzioni con `N=3` e con `N=4`, che sono casi facili da controllare!
 
 -   Alcuni studenti richiedono di specificare il numero N da linea di comando, ma poi ignorano quanto specificato dall'utente e leggono sempre `N=10000`.
+
+-   Alcuni studenti si affidano all'ordine di inclusione degli header per evitare qualche `#include` in più. Se in `vectors.h` avete definito funzioni che lavorano su vettori, e in `newton.h` avete ulteriori funzioni che risolvono problemi di fisica Newtoniana, dovete assicurarvi che all'inizio di `newton.h` ci sia un `#include "vectors.h"`:
+
+    ```c++
+    // newton.h
+    #pragma once
+    #include "vectors.h"
+    
+    // Qui segue il resto del file
+    ...
+    ```
+    
+    Alcuni studenti omettono la riga `#include "vectors.h"` e la mettono nel `main`, prima di `#include "newton.h"`:
+    
+    ```c++
+    #include "vectors.h"
+    #include "newton.h"
+    
+    // ...
+    ```
+    
+    Anche se il codice compila lo stesso, è concettualmente sbagliato: il file `newton.h` richiede `vectors.h`, e dovrebbe quindi includerlo al suo interno. Altrimenti, tutte le volte che userete `newton.h` in altri programmi, dovrete sempre ricordarvi di anteporre `#include "vectors.h"`, e questa è una cosa facile da dimenticare.
