@@ -523,7 +523,7 @@ dipendenze da file che devono essere creati dallo stesso GNU Make.
 -   CMake è lo standard *de facto* per compilare progetti in C/C++, e
     si basa su GNU Make. Il modo in cui si usa è il seguente:
 
-    #.   Si scrive un file chiamato `CMakeLists.txt` (occhio alle maiuscole!)
+    #.   Si scrive un file chiamato `CMakeLists.txt`
     #.   Si esegue `cmake` da linea di comando: esso legge `CMakeLists.txt` e produce un `Makefile`
     #.   A questo punto si usa `make` per compilare il programma come al solito.
 
