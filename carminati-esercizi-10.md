@@ -8,7 +8,7 @@ lang: it-IT
 header-includes: <script src="./fmtinstall.js"></script>
 ...
 
-[La pagina con la spiegazione originale degli esercizi si trova qui: [labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/lezione10_1819.html](http://labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/lezione10_1819.html).]
+[La pagina con la spiegazione originale degli esercizi si trova qui: <https://labtnds.docs.cern.ch/Lezione10-11/Lezione1011/>.]
 
 In questa lezione impareremo a costruire un generatore di numeri casuali. Lo utilizzeremo quindi per generare numeri secondo una distribuzione uniforme, esponenziale e Gaussiana. Come applicazione utilizzeremo la generazione di numeri casuali per calcolare numericamente integrali mono e multi-dimensionali.
 

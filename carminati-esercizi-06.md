@@ -8,7 +8,7 @@ lang: it-IT
 header-includes: <script src="./fmtinstall.js"></script>
 ...
 
-[La pagina con la spiegazione originale degli esercizi si trova qui: [labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/lezione6_2021.html](http://labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/lezione6_2021.html).
+[La pagina con la spiegazione originale degli esercizi si trova qui: <https://labtnds.docs.cern.ch/Lezione6/Lezione6/>.]
 
 In questa lezione affronteremo il problema della ricerca di zeri di una funzione. Per fare questo realizzeremo due classi astratte per rappresentare rispettivamente una generica funzione $y = f(x)$, ed un metodo generico per la ricerca di zeri.
 

@@ -7,11 +7,18 @@ date: "A.A. 2021−2022"
 lang: it-IT
 ...
 
-[La pagina con la spiegazione originale degli esercizi si trova qui: [labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/lezione1_1819.html](http://labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/lezione1_1819.html).]
+[La pagina con la spiegazione originale degli esercizi si trova qui: <https://labtnds.docs.cern.ch/Lezione1/Lezione1/>.]
 
-In questa prima lezione proviamo a rinfrescare la memoria sulla programmazione lavorando direttamente su un caso concreto: abbiamo a disposizione un file in cui sono immagazzinati i valori ottenuti da una certa misura e vogliamo scrivere un codice per farci sopra una analisi statistica minimale. Calcoliamo la media, la varianza e la mediana della distribuzione: il calcolo della mediana in particolare richiede che il set di dati sia ordinato e quindi ci obbliga a fare un pò di esercizio aggiuntivo. In questa lezione lavoreremo con:
+In questa prima lezione proviamo a rinfrescare la memoria sulla programmazione lavorando direttamente su un caso concreto: abbiamo a disposizione un file in cui sono immagazzinati i valori ottenuti da una certa misura e vogliamo scrivere un codice per farci sopra una analisi statistica minimale.
 
-- Tipo di dato da leggere è constituito da numeri `double`.
+1. Carichiamo in memoria dei dati che provengono da un file di misure;
+2. Calcoliamo media, varianza e mediana del campione.
+
+Il calcolo della mediana in particolare richiede che il set di dati sia ordinato e quindi ci obbliga a fare un po' di esercizio aggiuntivo.
+
+In questa lezione lavoreremo con questi ingredienti:
+
+- Tipo di dato da leggere è constituito da numeri `double` immagazzinati in un file `data.dat`.
 - Tipo di contenitore di dati è un array (dinamico) del C.
 - Operazioni sui dati vengono svolte mediante funzioni.
 
@@ -29,24 +36,75 @@ per fare questo nella dichiarazione del main bisogna aggiungere due argomenti:
 main(int argc, char *argv[])
 ```
 
--   `argc` è il numero di argomenti presenti sulla riga di comando. Il valore di `argc` è sempre maggiore di 0 poiché il primo argomento
-        è il nome del programma.
--   `argv` è un array di `argc` elementi che contiene le stringhe di caratteri passate da riga di comando. Quindi `argv[0]` è il nome del programma, `argv[1]` il primo argomento, ecc…
+-   `argc` è il numero di argomenti presenti sulla riga di comando. Il valore di `argc` è sempre maggiore di 0 poiché il primo argomento è il nome del programma.
+-   `argv` è un array di `argc` elementi che contiene gli array di caratteri passati da riga di comando. Quindi `argv[0]` è il nome del programma, `argv[1]` il primo argomento, ecc…
 
-Se da riga di comando passiamo un numero, esso verrà passato tramite `argv` come una stringa di caratteri; per convertire una stringa di caratteri in un numero intero si usa la funzione `std::stoi(const std::string &)` (che è contenuta in `<string>`):
+Se da riga di comando passiamo un numero, esso verrà passato tramite `argv` come un array di caratteri; per convertire un array di caratteri in un numero intero si usa la funzione `std::stoi(const std::string &)` (che è contenuta in `<string>`):
 
 ```c++
 int N;
 N = std::stoi(argv[1]);
 ```
 
-Per completezza di informazione, la funzione corrispondente per convertire una stringa di caratteri in un numero `double` è `std::stod(const std::string &)`, anch'essa disponibile in `<string>`.
+La funzione corrispondente per convertire un array di caratteri in un numero `double` è `std::stod(const std::string &)`, anch'essa disponibile in `<string>`.
+
+<div class="warning-box">
+
+## Le funzioni `atoi` e `atof`
+
+Il C++ fornisce anche le funzioni `atoi` e `atof`, che sono state definite nello standard C del 1971, ma **sono da evitare**. In caso di errore infatti restituiscono il valore `0`, come mostra questo esempio:
+
+```c++
+#include <iostream>
+#include <cstdlib>
+
+using namespace std;
+
+int main(int argc, char *argv[]) {
+  if (argc != 2) {
+	cerr << "Errore, devi specificare un numero intero da linea di comando.\n";
+	return 1;
+  }
+  
+  int i = atoi(argv[1]);
+  cout << argv[1] << " convertito in un intero è " << i << "\n";
+}
+```
+
+Come vedete, il programma restituisce lo stesso output sia che si passi il valore `0` (corretto) sia che si passi `pippo` (sbagliato):
+
+```
+$ ./test 5
+5 convertito in un intero è 5
+$ ./test 0
+0 convertito in un intero è 0
+$ ./test pippo
+pippo convertito in un intero è 0
+```
+
+Se invece si usa `std::stoi` anziché `atoi` per inizializzare `i`:
+
+```c++
+int i = stoi(argv[1]);
+```
+
+ecco che il programma segnala l'errore:
+
+```
+$ ./test 5
+5 convertito in un intero è 5
+$ ./test 0
+0 convertito in un intero è 0
+$ ./test pippo
+terminate called after throwing an instance of 'std::invalid_argument'
+  what():  stoi
+Aborted (core dumped)
+```
+</div>
 
 ## Cin, cout e cerr
 
 L'output su schermo e l'input da tastiera sono gestiti in C++ usando gli oggetti `cin`, `cout` e `cerr`, che sono definiti nella libreria `<iostream>`.
-
-Il principale vantaggio di questi oggetti rispetto a `scanf` e `printf` (usati nel C) è che non è necessario specificare il tipo (`double`, `string`, etc) che si sta passando all'oggetto.
 
 Uso di `cout` e di `cerr`:
 
@@ -77,19 +135,18 @@ cerr << "Errore nel parametro a: " << a << endl;
 Uso di `cin`:
 
 ```c++
+int a;
 cin >> a;
 ```
 
 -   `>>` serve a prendere le variabili dallo stream di input;
 -   `>> a` legge da video un contenuto appropriato e lo salva nella variabile a.
 
-**Attenzione**: se `a` è una variabile `int` e voi a schermo digitate 2.34, il valore di `a` sarà convertito a 2. Se digitate a schermo "pippo", non sarà possibile convertirlo in un numero, ed il valore di `a` rimarrà inalterato.
+**Attenzione**: se `a` è una variabile `int` e digitate da tastiera 2.34, il valore di `a` sarà convertito a 2. Se digitate `pippo`, non sarà possibile convertirlo in un numero, ed il valore di `a` rimarrà inalterato.
 
 ## Allocazione dinamica della memoria
 
-L'allocazione dinamica della memoria consente di decidere al momento dell'esecuzione, ossia a *runtime* e non al momento della compilazione, quanta memoria il programma deve allocare.
-
-In C++ l'allocazione e la deallocazione dinamica della memoria viene effettuata rispettivamente con gli operatori `new` e `delete`. Il comando
+L'allocazione dinamica della memoria consente di decidere *al momento dell'esecuzione* (*runtime*) quanta memoria il programma deve allocare. In C++ l'allocazione (e la de-allocazione) dinamica della memoria viene effettuata con gli operatori `new` e `delete`. Il comando
 
 ```c++
 double *x = new double[N];
@@ -101,17 +158,15 @@ crea un puntatore `x` a una zona di memoria di `N` double (cioè a un array di `
 delete[] x;
 ```
 
-dealloca la memoria; ciò vuol dire che un tentativo di accedere agli elementi di `x` dopo il comando delete risulterà in un errore di *segmentation violation*.
+dealloca la memoria; ciò vuol dire che un tentativo di accedere agli elementi di `x` dopo il comando delete potrebbe portare ad un errore di *segmentation violation*.
 
-È estremamente importante ricordarsi di deallocare la memoria. Infatti in programmi complessi che utilizzano molta memoria (o in cicli che continuano ad allocare memoria), l'assenza della deallocazione può portare a consumare progressivamente tutta la memoria RAM della macchina (*memory leak*), causando un blocco del sistema.
-
-Nel caso si allochino vettori (come nel nostro caso), la presenza delle parantesi `[]` dopo `delete` indica che bisogna deallocare tutta la zona di memoria. Il comando
+È estremamente importante ricordarsi di deallocare la memoria. Infatti in programmi complessi che utilizzano molta memoria (o in cicli che continuano ad allocare memoria), l'assenza della deallocazione può portare a consumare progressivamente tutta la memoria RAM della macchina (*memory leak*), causando un blocco del sistema. Nel caso in cui si allochino array (come nel nostro caso), la presenza delle parantesi `[]` dopo `delete` indica che bisogna deallocare tutta la zona di memoria. Il comando
 
 ```c++
 delete x;
 ```
 
-crea un *memory leak*, perché dealloca solo lo spazio della prima componente del vettore, non di tutto il vettore. Questo programma quindi è **sbagliato**:
+crea un *memory leak*, perché dealloca solo il puntatore all'array ma non il suo contenuto. Questo programma quindi è **sbagliato**:
 
 ```c++
 #include <cstdlib>
@@ -119,7 +174,7 @@ crea un *memory leak*, perché dealloca solo lo spazio della prima componente de
 int main(int argc, char *argv[]) {
   double * array = new double[10];
   array[1] = 30.0;
-  delete array;    // Error, it should have been delete[] array;
+  delete array;    // Errore, sarebbe dovuto essere "delete[] array;"
   return 0;
 }
 ```
@@ -174,15 +229,15 @@ inputFile >> a;
 outputFile << "pippo " << a << "\n";
 ```
 
-A differenza di `cout`, quando si scrive in file non è di solito rilevante la differenza tra `endl` e `"\n"`.
+Siccome di solito il contenuto di un file viene ispezionato dopo il termine del programma, quando si scrive in file non è di solito rilevante la differenza tra `endl` e `"\n"`.
 
 Un metodo estremamente utile di `ifstream` è
 
 ```c++
-inputFile.eof();   # Return a boolean
+inputFile.eof();   // Restituisce un valore Booleano
 ```
 
-che restituisce vero se si è raggiunta la fine del file e falso altrimenti. Dopo l'utilizzo del file è possibile chiuderlo con il metodo `close()`:
+che restituisce `true` se si è raggiunta la fine del file, `false` altrimenti. Dopo l'utilizzo del file è possibile chiuderlo con il metodo `close()`:
 
 ```c++
 inputFile.close();
@@ -196,7 +251,7 @@ double readDoubleFromFile(const string & file_name) {
   ifstream inputFile(file_name);
   double a
   inputFile >> a;
-  inputFile.close();
+  inputFile.close();  // Non necessario
   return a;
 }
 ```
@@ -204,11 +259,11 @@ double readDoubleFromFile(const string & file_name) {
 è esattamente uguale a questa:
 
 ```c++
-double readDoubleFromFile(const string & file_name) {
-  ifstream inputFile(file_name);
-  double a
+double readDoubleFromFile() {
+  ifstream inputFile("data.dat");
+  double a;
   inputFile >> a;
-  // Non c'è bisogno di chiamare inputFile.close(), ci pensa il compilatore
+  // Non c'è bisogno di invocaqre inputFile.close(), lo farà il g++
   return a;
 }
 ```
@@ -307,7 +362,7 @@ if (!fin) {
     for(int k = 0; k < ndata; ++k) {
         fin >> data[k];
         if (fin.eof()) {
-            cerr << "Raggiunta la fine del file prima di aver letto " << ndata << "dati, esco\n";
+            cerr << "Raggiunta la fine del file prima di aver letto " << ndata << " dati, esco\n";
             exit(1);
     }
 }
@@ -333,12 +388,13 @@ cout << "Valore medio del set di dati caricato: " << media << endl;
 
 ## Riordino elementi di un array (3)
 
-In questo frammento di codice riordiniamo gli elementi dell'array data in ordine crescente. Utilizziamo un semplice algoritmo di riordinamento che dovreste già conoscere, il [*selection sort*](https://it.wikipedia.org/wiki/Selection_sort).
+
+Esistono vari tipi di algoritmi di riordinamento con prestazioni molto diverse. Qui implementiamo uno dei più semplici (ma anche dei più lenti), che viene chiamato *simple sort* o [*selection sort*](https://it.wikipedia.org/wiki/Selection_sort). Sentitevi liberi di implementare algoritmi più raffinati.
 
 ```c++
-// prima riordino gli elementi del vettore dal minore al maggiore
-// devo farne una copia in modo che il vettore originale resti
-// inalterato
+// Prima riordino gli elementi del vettore dal minore al maggiore.
+// Devo farne una copia, in modo che il vettore originale resti
+// inalterato.
 
 double * vcopy = new double[ndata];
 for(int k = 0; k < ndata; ++k) {
@@ -400,7 +456,7 @@ fout.close();
 -   Compiliamo il programma invocando come al solito `g++`:
 
     ```
-    g++ main.cpp -o main
+    g++ main.cpp  -Wall -o main
     ```
 
 -   Eseguiamo il programma:
@@ -408,6 +464,9 @@ fout.close();
     ```
     ./main 1000000 data.dat
     ```
+
+**Domanda**: Quanti elementi contiene il file `data.dat`? Cosa succede se tento di leggere 1.000.000 di elementi ?
+
 
 # Esercizio 1.1 - Codice di analisi con funzioni {#esercizio-1.1}
 
@@ -423,7 +482,7 @@ Dal momento che abbiamo deciso di spezzare il codice in funzioni proviamo a fare
 
 Il passaggio di valori a una funzione può avvenire *by value*, *by reference* o *by pointer*.
 
-Ad esempio, se vogliamo scrivere una funzione che incrementi di uno il valore di una variabile intera abbiamo tre possibilità:
+Consideriamo l'esempio di una funzione che scambi il valore di due variabili. Abbiamo tre possibilità:
 
 <table>
 <thead>
@@ -440,8 +499,13 @@ Ad esempio, se vogliamo scrivere una funzione che incrementi di uno il valore di
 <td>
 
 ```c++
-void incrementa(int a) {
-  a++;
+void scambiaByValue(
+    double a,
+    double b
+) {
+  double c = a;
+  a = b;
+  b = c;
 }
 ```
 
@@ -449,8 +513,13 @@ void incrementa(int a) {
 <td>
 
 ```c++
-void incrementa(int &a) {
-  a++;
+void scambiaByRef(
+    double & a,
+    double & b
+) {
+  double c = a;
+  a = b;
+  b = c;
 }
 ```
 
@@ -458,8 +527,13 @@ void incrementa(int &a) {
 <td>
 
 ```c++
-void incrementa(int *a) {
-  (*a)++;
+void scambiaByPtr(
+    double * a, 
+    double * b
+) {
+  double c = *a;
+  *a = *b;
+  *b = c;
 }
 ```
 
@@ -470,40 +544,43 @@ void incrementa(int *a) {
 <td>
 
 ```c++
-int a = 0;
-incrementa(a);
+double a = 5;
+double b = 4;
+scambia(a, b);
 ```
 
 </td>
 <td>
 
 ```c++
-int a = 0;
-incrementa(a);
+double a = 5;
+double b = 4;
+scambiaByRef(a, b);
 ```
 
 </td>
 <td>
 
 ```c++
-int a = 0;
-incrementa(&a);
+double a = 5;
+double b = 4;
+scambiaByPtr(&a, &b);
 ```
 
 </td>
 </tr>
 <tr>
 <td>Effetto</td>
-<td>`a` **non** viene incrementato</td>
-<td>`a` viene incrementato</td>
-<td>`a` viene incrementato</td>
+<td>`a` e `b` restano gli stessi! **Errore!**</td>
+<td>`a = 4`, `b = 5`: ok!</td>
+<td>`a = 4`, `b = 5`: ok!</td>
 </tr>
 </tbody>
 </table>
 
-Il passaggio dei parametri *by value* non funziona poiché alla funzione vengono passate copie dei parametri, e la funzione chiamata opera su queste copie dei parametri. Qualunque cambiamento apportato alle copie non ha alcun effetto sui valori originali dei parametri presenti nella funzione chiamante.
+Il passaggio dei parametri *by value* non funziona poiché alla funzione vengono passate copie dei parametri, e la funzione chiamata opera su queste copie dei parametri. Qualunque cambiamento apportato alle copie non ha alcun effetto sui valori originali dei parametri `a` e `b` presenti nella funzione chiamante.
 
-Le chiamate *by pointer* e *by reference* passano alla funzione l'indirizzo di memoria in cui il programma ha memorizzato la variabile `a`. Per cui la funzione agisce direttamente sulla variabile `a` e non su una copia.
+Le chiamate *by pointer* e *by reference* passano alla funzione l'indirizzo di memoria in cui il programma ha memorizzato la variabile `a`, per cui la funzione agisce direttamente sulla variabile `a` e non su una copia.
 
 Vediamo ora passo passo come fare.
 
@@ -648,23 +725,23 @@ Il `main` è ora decisamente più compatto e leggibile. Quasi tutte le principal
 
 Come nel caso dell'esercizio precedente compiliamo il programma invocando come al solito `g++`:
 
-    g++ main.cpp -o main
-
+    g++ main.cpp -Wall -o main
 
 Eseguiamo il programma :
 
     ./main 1000000 data.dat
 
+
 # Esercizio 1.2 - Codice di analisi con funzioni e Makefile {#esercizio-1.2}
 
 In questo esercizio terminiamo il processo di riorganizzazione dell'esercizio 1.0. Procederemo in questo modo:
 
--   Tutte le dichiarazioni di variabili che abbiamo messo in testa al programma le spostiamo in un file separato `funzioni.h`.
--   Tutte le implementazioni delle funzioni in coda al programma le spostiamo in un file separato `funzioni.cpp`.
+-   Spostiamo tutte le dichiarazioni di variabili che abbiamo messo in testa al programma in un file separato `funzioni.h`.
+-   Spostiamo tutte le implementazioni delle funzioni in coda al programma in un file separato `funzioni.cpp`.
 -   Ricordiamoci di includere il file `funzioni.h` sia in `main.cpp` sia in `funzioni.cpp` tramite il solito `#include "funzioni.h"`
 -   Compiliamo separatamente `main.cpp` e `funzioni.cpp` utilizzando un `Makefile`
 
-Prima di incominciare, rivediamo rapidamente come si scrive un `Makefile`:
+Prima di incominciare, rivediamo rapidamente come si scrive un `Makefile`.
 
 ## Il Makefile
 
@@ -676,25 +753,34 @@ Vogliamo creare un `Makefile` che ci permetta di compilare il nostro programma q
 
 Ovviamente possiamo compilare il tutto con
 
-    g++ main.cpp funzioni.cpp -o main
+    g++ main.cpp funzioni.cpp -Wall -o main
 
-ma possiamo farlo in maniera molto più efficace. La struttura/sintassi del `Makefile` è la seguente:
+ma possiamo farlo in maniera più efficace. La struttura/sintassi del `Makefile` è la seguente:
 
 ```
 target: dipendenze
-[tab] system command
+↹system command
 ```
 
-Nel nostro caso
+dove `↹` indica che dovete proprio premere il tasto TAB della tastiera (a sinistra del tasto Q). Se usate il tasto TAB, il `Makefile` apparirà così sullo schermo:
+
+```
+target: dipendenze
+    system command
+```
+
+Il tasto TAB è come una serie di spazi, ma attenzione! Usare gli spazi in questo contesto è un errore!
+
+Nel nostro caso, con il `Makefile` contenente le righe
 
 ```makefile
 main: funzioni.cpp main.cpp
-    g++ funzioni.cpp main.cpp -o main
+↹g++ funzioni.cpp main.cpp -Wall -o main
 ```
 
-lanciando il comando `make` tutto viene compilato.
+è possibile compilare tutto lanciando il comando `make`.
 
-Possiamo scriverlo anche esplicitando le dipendenze in modo che anche quando cambiamo il file `.h` il tutto venga propriamente ricompilato. In questo caso il `Makefile` diventa:
+Possiamo scrivere il `Makefile` anche esplicitando le dipendenze, in modo che anche quando cambiamo il file `.h` il tutto venga propriamente ricompilato. In questo caso il `Makefile` diventa:
 
 ```makefile
 main: main.o funzioni.o
@@ -737,7 +823,7 @@ void Print(const double *  data, int ndata) {...}
 void Print(const char * filename, const double * data, int ndata) {...}
 ```
 
-Le due funzioni hanno lo stesso nome, ma ovviamente il codice al loro interno dovrà essere differente! Si noti che per poter fare l'overloading di una funzione non basta che soltanto il tipo restituito dalla funzione sia differente, ma occorre che siano diversi i tipi e/o il numero dei parametri passati alla funzione.
+Le due funzioni hanno lo stesso nome, ma ovviamente ci si aspetta che facciano cose diverse. Si noti che per poter fare l'overloading di una funzione non basta che soltanto il tipo restituito dalla funzione sia differente, ma occorre che siano diversi i tipi e/o il numero dei parametri passati alla funzione.
 
 Seguono ulteriori suggerimenti.
 
@@ -772,9 +858,11 @@ cout << setw(5) << "0.132" << setw(5) << "234" << endl
 
 stampa i numeri in due colonne allineate.
 
-## Questione di stile
+Questi comandi sono stati introdotti nel C++ tra gli anni '80 e '90, ed oggi non sono più usati. Vedremo nelle prossime lezioni che le versioni più recenti del C++ forniscono un metodo più semplice, versatile e intuitivo per stampare il valore di variabili.
 
-Proviamo a vedere alcune possibili varianti per le funzioni relative al calcolo della media e della varianza:
+## Implementazione migliorata
+
+In generale l'implementazione di algoritmi in una funzione può avvenira in diversi modi. Proviamo a vedere alcune possibili varianti per le funzioni relative al calcolo della media e della varianza:
 
 ```c++
 // Versione 1
@@ -801,7 +889,7 @@ double CalcolaMedia(double * data, int size) {
   }
 
   for(int k = 0; k < size; ++k) {
-      accumulo = static_cast<double>(k) / static_cast<double(k + 1) * accumulo +
+      accumulo = static_cast<double>(k) / static_cast<double>(k + 1) * accumulo +
           1.0 / static_cast<double>(k + 1) * data[k];
   }
 
@@ -809,7 +897,11 @@ double CalcolaMedia(double * data, int size) {
 }
 ```
 
-La prima funzione implementa il calcolo in modo intuitivo. La seconda è meno ovvia ma se ci pensate ha lo stesso effetto con il grosso vantaggio di non conservare la somma di tutti i valori che potrebbe diventare troppo grande.
+La prima funzione implementa il calcolo in modo intuitivo. La seconda è meno ovvia, perché ad ogni passo incrementa `accumulo` con il valore
+$$
+\frac{k}{k + 1}\times \texttt{accumulo} + \frac{\texttt{data[k]}}{k + 1}.
+$$
+Non è difficile dimostrare che il risultato finale è lo stesso; questa versione però ha il vantaggio di non conservare la somma di tutti i valori che potrebbe diventare troppo grande.
 
 ```c++
 // Versione 1

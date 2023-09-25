@@ -8,7 +8,7 @@ lang: it-IT
 header-includes: <script src="./fmtinstall.js"></script>
 ...
 
-[La pagina con la spiegazione originale degli esercizi si trova qui: [labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/lezione7_2122.html](http://labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/lezione7_2122.html).
+[La pagina con la spiegazione originale degli esercizi si trova qui: <https://labtnds.docs.cern.ch/Lezione7/Lezione7/>.]
 
 In questa lezione implementeremo alcuni algoritmi per la quadratura numerica, cioè per il calcolo di integrali definiti di funzioni in un intervallo chiuso e la valutazione dell'errore commesso nel calcolo dell'integrale stesso. Questo si rende necessario quando non sappiamo valutare analiticamente l'integrale in esame, quando non si riesce ad esprimere la primitiva in funzioni elementari, quando la soluzione analitica è molto complicata ed il calcolo numerico è molto più semplice, oppure quando la funzione è conosciuta in un numeri finito di punti.
 

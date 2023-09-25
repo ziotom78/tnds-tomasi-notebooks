@@ -8,7 +8,8 @@ lang: it-IT
 header-includes: <script src="./fmtinstall.js"></script>
 ...
 
-[La pagina con la spiegazione originale degli esercizi si trova qui: [labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/lezione8_2122.html](http://labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/lezione8_2122.html).]
+
+[La pagina con la spiegazione originale degli esercizi si trova qui: <https://labtnds.docs.cern.ch/Lezione8/Lezione8/>.]
 
 In questa lezione introdurremo alcuni metodi per la risoluzione di equazioni differenziali ordinarie. Implementeremo la risoluzione numerica di queste equazioni con i metodi di Eulero e di Runge-Kutta.
 

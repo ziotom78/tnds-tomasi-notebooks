@@ -10,3 +10,7 @@
 .sourceCode {
     overflow: scroll;
 }
+
+.warning-box {
+    padding: 25px; background-color: #ffd7d7;
+}

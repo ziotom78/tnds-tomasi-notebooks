@@ -12,6 +12,7 @@
 
         <!-- <link rel="stylesheet" href="style.css"> -->
         <link rel="stylesheet" href="https://cdn.rawgit.com/diversen/pandoc-uikit/master/style.css">
+        <link href="css/custom.css" rel="stylesheet" />
         <link href="https://vjs.zencdn.net/5.4.4/video-js.css" rel="stylesheet" />
         <script src="https://code.jquery.com/jquery-2.2.1.min.js"></script>
         <!-- <script src="uikit.js"></script> -->
@@ -269,8 +270,8 @@ Tomasi</p>
 
                 <div class="uk-width-medium-3-4">
 <p>[La pagina con la spiegazione originale degli esercizi si trova qui:
-<a
-href="http://labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/lezione5_1819_nuova.html">labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/lezione5_1819_nuova.html</a>.]</p>
+<a href="https://labtnds.docs.cern.ch/Lezione5/Lezione5/"
+class="uri">https://labtnds.docs.cern.ch/Lezione5/Lezione5/</a>.]</p>
 <p>In questa quinta lezione vogliamo affrontare un semplice problema di
 elettrostatica utilizzando un codice numerico. In particolare, vogliamo
 calcolare il campo elettrico generato da un dipolo (e idealmente anche
@@ -978,7 +979,10 @@ particolare queste cose:</p>
 <li><p>Unità di misura delle costanti;</p></li>
 <li><p>Attenzione a come scrivete i numeri in notazione scientifica! Il
 numero <span class="math inline">10^{-4}</span> si scrive
-<code>1e-4</code>, <strong>non</strong> <code>10e-4</code>!</p></li>
+<code>1e-4</code>, <strong>non</strong> <code>10e-4</code>, perché la
+scrittura <code>1e-4</code> indica effettivamente <span
+class="math inline">1 \times 10^{-4}</span>, così come 7.5e-3 indica
+<span class="math inline">7.5\times 10^{-3}</span>.</p></li>
 <li><p>Verificate che ciò che deve stare al numeratore stia veramente al
 numeratore, e idem per il denominatore!</p></li>
 <li><p>Ovviamente, il campo di una singola carica deve andare come <span
