@@ -1,7 +1,7 @@
 ---
 title: Lezioni del corso di TNDS
 author: Maurizio Tomasi
-date: A.A. 2022−2023
+date: A.A. 2023−2024
 lang: it-IT
 header-includes: <script src="./fmtinstall.js"></script>
 css:
