@@ -171,7 +171,7 @@ Vettore::Vettore() {
 
 // Costruttore con dimensione
 Vettore::Vettore(int N) {
-  if (N <= 0) {
+  if (N < 0) {
       cerr << "Errore, la dimensione deve essere positiva anziché " << N << endl;
       exit(1);
   }
