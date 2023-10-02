@@ -88,7 +88,7 @@ Se invece si usa `std::stoi` anziché `atoi` per inizializzare `i`:
 int i = stoi(argv[1]);
 ```
 
-ecco che il programma segnala l'errore:
+il programma funziona come sopra con gli input corretti (`5` e `0`), ma stavolta segnala l'errore quando si inserisce `pippo`:
 
 ```
 $ ./test 5
@@ -104,9 +104,7 @@ Aborted (core dumped)
 
 ## Cin, cout e cerr
 
-L'output su schermo e l'input da tastiera sono gestiti in C++ usando gli oggetti `cin`, `cout` e `cerr`, che sono definiti nella libreria `<iostream>`.
-
-Uso di `cout` e di `cerr`:
+L'output su schermo e l'input da tastiera sono gestiti in C++ usando gli oggetti `cin`, `cout` e `cerr`, che sono definiti nella libreria `<iostream>`. Vediamo un esempio:
 
 ```c++
 // Usato per messaggi
@@ -119,18 +117,20 @@ cerr << "Errore nel parametro a: " << a << endl;
 -   `<<` serve a passare le variabili allo stream di output;
 -   `<< "A = "` stampa `A = ` (senza apici) a schermo;
 -   `<< a` stampa il valore della variabile a a schermo, qualsiasi sia il tipo di `a`;
--   `<< endl` (end line) stampa la fine della riga e svuota il buffer. È necessario con `cout`, perché altrimenti nessuna scritta appare (subito) a video. Per `cerr` invece basta usare `\n` (ritorno a capo), perché l'output è sempre immediato:
+-   `<< endl` (end line) stampa la fine della riga e svuota il buffer. È necessario con `cout`, perché altrimenti nessuna scritta appare (subito) a video. Per `cerr` invece è equivalente all'uso di `\n` (ritorno a capo), perché l'output è sempre immediato:
 
     ```c++
     // Ok, uso `endl` con `cout`
     cout << "Errore, occorre specificare un nome di file!" << endl;
     // Potrebbe non essere stampato subito, ma solo quando il programma termina
-    cout << "Errore, occorre specificare un nome di file!\n"
+    cout << "Errore, occorre specificare un nome di file!\n";
     
     // Questi due casi sono equivalenti, perché scriviamo su `cerr`
     cerr << "Errore, occorre specificare un nome di file!" << endl;
     cerr << "Errore, occorre specificare un nome di file!\n"
     ```
+
+Si dovrebbe usare `cout` per i messaggi informativi e `cerr` per i messaggi d'errore; vedremo nelle prossime lezioni quale sia la ragione di questa regola.
 
 Uso di `cin`:
 

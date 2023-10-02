@@ -27,7 +27,8 @@ height: 810
 -   Lo scopo della lezione di oggi è introdurre il concetto di «classe», che è un tipo di dato complesso del linguaggio C++, creando una classe `Vettore` che implementa un array «intelligente» di valori `double`.
 
 -   [Esercizio 2.0](carminati-esercizi-02.html#esercizio-2.0): creazione della classe `Vettore`.
--   [Esercizio 2.1](carminati-esercizi-02.html#esercizio-2.1) (da consegnare per l'esame scritto): è lo stesso tipo di esercizio della scorsa lezione, ma ora occorre usare la classe `Vettore` dell'esercizio 2.0.
+-   [Esercizio 2.0](carminati-esercizi-02.html#esercizio-2.1): completamento dell'esercizio 2.0.
+-   [Esercizio 2.1](carminati-esercizi-02.html#esercizio-2.2) (da consegnare per l'esame scritto): è lo stesso tipo di esercizio della scorsa lezione, ma ora occorre usare quanto si è scritto per gli esercizi 2.0 e 2.1.
 
 
 # Velocità del codice
@@ -85,9 +86,9 @@ N = 9:
 
 -   La scorsa settimana vi avevo fornito i risultati attesi, che avete (**spero!**) confrontato con l'output dei vostri programmi.
 
--   Ma se nelle prossime settimane deciderete di mettere mano ai vecchi esercizi per migliorarli, dovrete ricontrollare da capo i numeri!
+-   Ma se nelle prossime settimane deciderete di mettere mano ai vecchi esercizi per migliorarli, dovrete ricontrollare i numeri dopo ogni modifica del codice!
 
--   Non sarebbe meglio se fosse il calcolatore a fare questi controlli per voi?
+-   Non sarebbe meglio se fosse il computer a fare questi controlli per voi?
 
 
 # Un semplice esempio
@@ -208,16 +209,11 @@ int main() {
 
 -   Se provate a scrivere dei test per gli esercizi di queste prime lezioni, vi imbatterete però in un problema legato ai numeri *floating-point*.
 
--   Considerate il risultato atteso per la varianza nel caso `N = 100000`, che è `282326.76577`. Se avete usato `std::cout <<` per stampare la varianza, avete probabilmente ottenuto `282327` (risultato arrotondato).
+-   Si può vedere facilmente che i numeri *floating-point* sono solo un'approssimazione dei numeri reali. Ad esempio, il numero 0.1 non è rappresentabile esattamente con un `float` o un `double`.
 
--   Non si può in questo caso scrivere un test per la varianza fatto così:
+-   Occorre fissare una tolleranza $\epsilon$ e verificare che il risultato del calcolo $x_\text{calc}$ differisca dal valore atteso $x_\text{exp}$ per meno di $\epsilon$, ossia
 
-    ```c++
-    assert(CalcolaVarianza(mydata, 100_000) == 282326.76577)
-    ```
-    
-    perché al minimo errore di arrotondamento l'uguaglianza fallisce.
-
+    $$\left|x_\text{calc} - x_\text{exp}\right| < \epsilon.$$
 
 
 # Esercizio 1.1: assert
@@ -460,25 +456,27 @@ int main() { /* ... */ }
 
 # Possibili errori
 
--   L'uso di `#pragma once` mette al riparo anche da una serie di errori che gli studenti di questo corso fanno spesso.
+L'uso di `#pragma once` mette al riparo anche da una serie di errori che gli studenti di questo corso fanno spesso.
 
--   Primo esempio:
-
-    ```c++
-    #ifndef __vettore_h__
-    #define __vettore_h_
+```c++
+// Primo esempio
+#ifndef __vettore_h__
+#define __vettore_h_
     
-    #endif
-    ```
+#endif
 
--   Secondo esempio:
-
-    ```c++
-    #ifdef  __vettore_h__
-    #define __vettore_h__
+// Secondo esempio
+#ifdef  __vettore_h__
+#define __vettore_h__
     
-    #endif
-    ```
+#endif
+
+// Terzo esempio
+#ifdef  __vettore_h__
+#define __Vettore_h__
+    
+#endif
+```
 
 
 # Costruttori, move semantics, etc. {#move-semantics}
@@ -545,7 +543,7 @@ Vettore::Vettore(int n) : m_N(n) {
 ![](images/empty_room.jpg){ width=20% }
 ![](images/furnished_room.jpg){ width=20% }
 
-Un *copy constructor* corrisponde all'azione di costruire una stanza vuota identica alla prima (ossia, di tipo `Vettore`), e riempirla con gli stessi identici mobili (ossia, assegnando lo stesso valore a `m_N` e agli elementi di `m_v`).
+Un *copy constructor* corrisponde all'azione di costruire una stanza vuota identica alla prima (ossia, di tipo `Vettore`), e riempirla con gli stessi identici mobili (ossia, assegnando lo stesso valore a `m_N` e agli elementi di `m_v`): è come se volessi arredare due camere di un albergo in modo che siano identiche.
 
 
 # Costruttori di copia
@@ -607,7 +605,7 @@ v1 = v2; // Assignment through Vettore::operator=
 
 Il *move constructor* è stato introdotto nel C++11, e corrisponde a un
 **trasloco**: ho una stanza già arredata e una vuota, e voglio spostare i
-mobili dalla prima alla seconda, senza comprarne di nuovi!
+mobili dalla prima alla seconda, senza comprarne di nuovi: così non spreco nulla!
 
 
 # Move constructor

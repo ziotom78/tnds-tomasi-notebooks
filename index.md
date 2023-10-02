@@ -11,21 +11,21 @@ css:
 # Esercizi e delle spiegazioni
 
 <center>
-| Data             | Esercizi                                              | Spiegazione                                                        |
-|------------------|-------------------------------------------------------|--------------------------------------------------------------------|
-| 26 Settembre 2022   | [Arrays](carminati-esercizi-01.html)                  | [Lezione 1](tomasi-lezione-01.html)                                |
+| Data              | Esercizi                                              | Spiegazione                                                        |
+|-------------------|-------------------------------------------------------|--------------------------------------------------------------------|
+| 26 Settembre 2022 | [Arrays](carminati-esercizi-01.html)                  | [Lezione 1](tomasi-lezione-01.html)                                |
+| 3 Ottobre 2023    | [Classe `Vettore`](carminati-esercizi-02.html)        | [Lezione 2](tomasi-lezione-02.html)                                |
 <!--
-| 3 Ottobre 2023  | [Classe `Vettore`](carminati-esercizi-02.html)        | [Lezione 2](tomasi-lezione-02.html)                                |
-| 10 Ottobre 2023  | [Template e `vector`](carminati-esercizi-03.html)     | [Lezione 3](tomasi-lezione-03.html)                                |
-| 17 Ottobre 2023  | [Classi ed ereditarietà](carminati-esercizi-05.html)  | [Lezione 4](tomasi-lezione-04.html)                                |
-| 24 Ottobre 2023  | Idem                                                  | [Lezione 5](tomasi-lezione-05.html)                                |
-| 31 Ottobre 2023 | [Ricerca di zeri](carminati-esercizi-06.html)         | [Lezione 6](tomasi-lezione-06.html)                                |
-| 7 Novembre 2023 | [Quadratura numerica](carminati-esercizi-07.html)     | [Notebook 7](https://ziotom78.github.io/tnds-notebooks/lezione07/) |
-| 14 Novembre 2023 | [Equazioni differenziali](carminati-esercizi-08.html) | [Notebook 8](https://ziotom78.github.io/tnds-notebooks/lezione08/) |
-| 21 Novembre 2023  | Idem                                                  | [Slides addizionali per la lezione 8](tomasi-lezione-08.html)      |
-| 28 Novembre 2023 | [Numeri pseudo-casuali e integrali](carminati-esercizi-10.html)   | [Notebook 10](https://ziotom78.github.io/tnds-notebooks/lezione10/) |
-| 5 Dicembre 2023 | Idem                                                  | Idem                                                                |
-| 12 Dicembre 2023  | [Metodi Monte Carlo](carminati-esercizi-12.html)      | [Notebook 10](https://ziotom78.github.io/tnds-notebooks/lezione10/) |
+| 10 Ottobre 2023  | [Template e `vector`](carminati-esercizi-03.html)               | [Lezione 3](tomasi-lezione-03.html)                                 |
+| 17 Ottobre 2023  | [Classi ed ereditarietà](carminati-esercizi-05.html)            | [Lezione 4](tomasi-lezione-04.html)                                 |
+| 24 Ottobre 2023  | Idem                                                            | [Lezione 5](tomasi-lezione-05.html)                                 |
+| 31 Ottobre 2023  | [Ricerca di zeri](carminati-esercizi-06.html)                   | [Lezione 6](tomasi-lezione-06.html)                                 |
+| 7 Novembre 2023  | [Quadratura numerica](carminati-esercizi-07.html)               | [Notebook 7](https://ziotom78.github.io/tnds-notebooks/lezione07/)  |
+| 14 Novembre 2023 | [Equazioni differenziali](carminati-esercizi-08.html)           | [Notebook 8](https://ziotom78.github.io/tnds-notebooks/lezione08/)  |
+| 21 Novembre 2023 | Idem                                                            | [Slides addizionali per la lezione 8](tomasi-lezione-08.html)       |
+| 28 Novembre 2023 | [Numeri pseudo-casuali e integrali](carminati-esercizi-10.html) | [Notebook 10](https://ziotom78.github.io/tnds-notebooks/lezione10/) |
+| 5 Dicembre 2023  | Idem                                                            | Idem                                                                |
+| 12 Dicembre 2023 | [Metodi Monte Carlo](carminati-esercizi-12.html)                | [Notebook 10](https://ziotom78.github.io/tnds-notebooks/lezione10/) |
 -->
 
 </center>

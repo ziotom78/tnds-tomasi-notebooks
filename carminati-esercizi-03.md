@@ -3,7 +3,7 @@ title: "Lezione 3: Analisi dei dati (template e vector)"
 author:
 - "Leonardo Carminati"
 - "Maurizio Tomasi"
-date: "A.A. 2021−2022"
+date: "A.A. 2023−2024"
 lang: it-IT
 ...
 

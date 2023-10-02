@@ -363,7 +363,9 @@ pippo convertito in un intero è 0</code></pre>
 inizializzare <code>i</code>:</p>
 <div class="sourceCode" id="cb6"><pre
 class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> i <span class="op">=</span> stoi<span class="op">(</span>argv<span class="op">[</span><span class="dv">1</span><span class="op">]);</span></span></code></pre></div>
-<p>ecco che il programma segnala l’errore:</p>
+<p>il programma funziona come sopra con gli input corretti
+(<code>5</code> e <code>0</code>), ma stavolta segnala l’errore quando
+si inserisce <code>pippo</code>:</p>
 <pre><code>$ ./test 5
 5 convertito in un intero è 5
 $ ./test 0
@@ -376,8 +378,8 @@ Aborted (core dumped)</code></pre>
 <h2 id="cin-cout-e-cerr">Cin, cout e cerr</h2>
 <p>L’output su schermo e l’input da tastiera sono gestiti in C++ usando
 gli oggetti <code>cin</code>, <code>cout</code> e <code>cerr</code>, che
-sono definiti nella libreria <code>&lt;iostream&gt;</code>.</p>
-<p>Uso di <code>cout</code> e di <code>cerr</code>:</p>
+sono definiti nella libreria <code>&lt;iostream&gt;</code>. Vediamo un
+esempio:</p>
 <div class="sourceCode" id="cb8"><pre
 class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Usato per messaggi</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>cout <span class="op">&lt;&lt;</span> <span class="st">&quot;A = &quot;</span> <span class="op">&lt;&lt;</span> a <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span>
@@ -393,19 +395,22 @@ apici) a schermo;</p></li>
 schermo, qualsiasi sia il tipo di <code>a</code>;</p></li>
 <li><p><code>&lt;&lt; endl</code> (end line) stampa la fine della riga e
 svuota il buffer. È necessario con <code>cout</code>, perché altrimenti
-nessuna scritta appare (subito) a video. Per <code>cerr</code> invece
-basta usare <code>\n</code> (ritorno a capo), perché l’output è sempre
-immediato:</p>
+nessuna scritta appare (subito) a video. Per <code>cerr</code> invece è
+equivalente all’uso di <code>\n</code> (ritorno a capo), perché l’output
+è sempre immediato:</p>
 <div class="sourceCode" id="cb9"><pre
 class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Ok, uso `endl` con `cout`</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>cout <span class="op">&lt;&lt;</span> <span class="st">&quot;Errore, occorre specificare un nome di file!&quot;</span> <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co">// Potrebbe non essere stampato subito, ma solo quando il programma termina</span></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>cout <span class="op">&lt;&lt;</span> <span class="st">&quot;Errore, occorre specificare un nome di file!</span><span class="sc">\n</span><span class="st">&quot;</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>cout <span class="op">&lt;&lt;</span> <span class="st">&quot;Errore, occorre specificare un nome di file!</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">;</span></span>
 <span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="co">// Questi due casi sono equivalenti, perché scriviamo su `cerr`</span></span>
 <span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>cerr <span class="op">&lt;&lt;</span> <span class="st">&quot;Errore, occorre specificare un nome di file!&quot;</span> <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span>
 <span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>cerr <span class="op">&lt;&lt;</span> <span class="st">&quot;Errore, occorre specificare un nome di file!</span><span class="sc">\n</span><span class="st">&quot;</span></span></code></pre></div></li>
 </ul>
+<p>Si dovrebbe usare <code>cout</code> per i messaggi informativi e
+<code>cerr</code> per i messaggi d’errore; vedremo nelle prossime
+lezioni quale sia la ragione di questa regola.</p>
 <p>Uso di <code>cin</code>:</p>
 <div class="sourceCode" id="cb10"><pre
 class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> a<span class="op">;</span></span>

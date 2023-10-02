@@ -3,7 +3,7 @@ title: "Lezione 5: Classi ed ereditarietà"
 author: 
 - "Leonardo Carminati"
 - "Maurizio Tomasi"
-date: "A.A. 2021−2022"
+date: "A.A. 2023−2024"
 lang: it-IT
 header-includes: <script src="./fmtinstall.js"></script>
 ...
