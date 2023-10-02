@@ -1,0 +1,1234 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="S2I MkDocs Example">
+      
+      
+        <meta name="author" content="CERN Authoring">
+      
+      
+        <link rel="canonical" href="https://s2i-mkdocs-example.docs.cern.ch/Lezione2/Lezione2/">
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.3.1, mkdocs-material-8.5.3">
+    
+    
+      
+        <title>Lezione 2 - Lab TNDS</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.7a952b86.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.cbb835fc.min.css">
+        
+      
+      
+
+    
+    
+    
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/fonts.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#lezione-2" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Lab TNDS" class="md-header__button md-logo" aria-label="Lab TNDS" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Lab TNDS
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Lezione 2
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      <form class="md-header__option" data-md-component="palette">
+        
+          
+          
+          <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent=""  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+          
+            <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+            </label>
+          
+        
+          
+          
+          <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="amber"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
+          
+            <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12c0-2.42-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+            </label>
+          
+        
+      </form>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://gitlab.cern.ch/authoring/documentation/s2i-mkdocs-example" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitLab
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Lab TNDS" class="md-nav__button md-logo" aria-label="Lab TNDS" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    Lab TNDS
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://gitlab.cern.ch/authoring/documentation/s2i-mkdocs-example" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitLab
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Lezione1/Lezione1/" class="md-nav__link">
+        Lezione 1
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Lezione 2
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Lezione 2
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#esercizio-20-creazione-della-classe-vettore" class="md-nav__link">
+    ESERCIZIO 2.0 - Creazione della classe Vettore :
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#esercizio-21-completamento-della-classe-vettore" class="md-nav__link">
+    ESERCIZIO 2.1 - Completamento della classe Vettore :
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#esercizio-22-codice-di-analisi-dati-utilizzando-la-classe-vettore-da-consegnare" class="md-nav__link">
+    ESERCIZIO 2.2 - Codice di analisi dati utilizzando la classe Vettore (da consegnare) :
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#approfondimenti" class="md-nav__link">
+    Approfondimenti
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Lezione3/Lezione3/" class="md-nav__link">
+        Lezione 3
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Lezione4/Lezione4/" class="md-nav__link">
+        Lezione 4
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Lezione5/Lezione5/" class="md-nav__link">
+        Lezione 5
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Lezione6/lezione6/" class="md-nav__link">
+        Lezione 6
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Lezione7/Lezione7/" class="md-nav__link">
+        Lezione 7
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Lezione8/Lezione8/" class="md-nav__link">
+        Lezione 8 e 9
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Lezione10-11/Lezione1011/" class="md-nav__link">
+        Lezione 10 e 11
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Lezione12/Lezione12/" class="md-nav__link">
+        Lezione 12
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_12" type="checkbox" id="__nav_12" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_12">
+          Survival guides
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Survival guides" data-md-level="1">
+        <label class="md-nav__title" for="__nav_12">
+          <span class="md-nav__icon md-icon"></span>
+          Survival guides
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Survival/unix/" class="md-nav__link">
+        Principali comandi UNIX
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Survival/root/" class="md-nav__link">
+        Principali oggetti di ROOT
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#esercizio-20-creazione-della-classe-vettore" class="md-nav__link">
+    ESERCIZIO 2.0 - Creazione della classe Vettore :
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#esercizio-21-completamento-della-classe-vettore" class="md-nav__link">
+    ESERCIZIO 2.1 - Completamento della classe Vettore :
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#esercizio-22-codice-di-analisi-dati-utilizzando-la-classe-vettore-da-consegnare" class="md-nav__link">
+    ESERCIZIO 2.2 - Codice di analisi dati utilizzando la classe Vettore (da consegnare) :
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#approfondimenti" class="md-nav__link">
+    Approfondimenti
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  <a href="https://gitlab.cern.ch/authoring/documentation/s2i-mkdocs-example/blob/master/docs/Lezione2/Lezione2.md" title="Edit this page" class="md-content__button md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
+  </a>
+
+
+<h1 id="lezione-2">Lezione 2</h1>
+<p>In questa seconda lezione affronteremo gli stessi problemi della prima (lettura di dati da un file, calcolo di media, varianza e mediana) utilizzando però un contenitore di dati di nostra invenzione, idealmente più evoluto del semplice array dinamico del C. A questo proposito nella prima parte della lezione costruiremo la nostra prima classe, la classe <code>Vettore</code> che sostiuirà l'array dinamico del C. Nella seconda parte adatteremo le funzioni già scritte nella lezione scorsa in modo che possano lavorare con oggetti di tipo <code>Vettore</code> invece che con array dinamici del C. Quindi in sintesi :</p>
+<ul>
+<li>Tipo di dato da leggere è constituito da numeri double immagazzinati in un file <code>data.dat</code>.</li>
+<li>Tipo di contenitore di dati è la classe <code>Vettore</code> che scriveremo noi.</li>
+<li>Operazioni sui dati vengono svolte mediante funzioni che lavorano su oggetti di tipo <code>Vettore</code>. </li>
+</ul>
+<h2 id="esercizio-20-creazione-della-classe-vettore">ESERCIZIO 2.0 - Creazione della classe <code>Vettore</code> :</h2>
+<p>In questo esercizio proviamo ad implementare una classe che abbia come data membri privati un intero (dimensione del vettore) ed un puntatore a double (puntatore alla zona di memoria dove sono immagazzinati i dati).</p>
+<p>La classe dovrà poi implementare:</p>
+<ul>
+<li>Un costruttore di default, che assegni valori nulli alla lunghezza del vettore ed al puntatore.</li>
+<li>Un costruttore che abbia come argomento un intero: questo deve creare un vettore di lunghezza pari al valore dell'intero e tutte le componenti nulle (usando un <code>new</code> per allocare la memoria necessaria).</li>
+<li>Un distruttore: deve chiaramente deallocare con <code>delete[]</code> la zona di memoria allocata con <code>new</code>.</li>
+<li>Dei metodi per inserire e leggere i valori della componenti: questi metodi devono controllare che l'indice delle componenti richieste sia compatibile con la lunghezza del vettore. </li>
+</ul>
+<details>
+<p><summary> Esempio di header file della classe (<code>Vettore.h</code>): </summary></p>
+<p>L'header file della classe iniziale (<code>Vettore.h</code>) potrebbe essere così:</p>
+<div class="highlight"><pre><span></span><code><span class="cp">#ifndef __Vettore_h__</span>
+<span class="cp">#define __Vettore_h__</span>
+
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+
+<span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">std</span><span class="p">;</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Vettore</span><span class="w"> </span><span class="p">{</span>
+<span class="w"> </span><span class="k">public</span><span class="o">:</span>
+
+<span class="w">  </span><span class="c1">// costruttori</span>
+
+<span class="w">  </span><span class="n">Vettore</span><span class="p">();</span><span class="w">               </span><span class="c1">// Costruttore di default </span>
+<span class="w">  </span><span class="n">Vettore</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">N</span><span class="p">);</span><span class="w">          </span><span class="c1">// Costruttore con dimensione del vettore</span>
+
+<span class="w">  </span><span class="c1">// distruttore</span>
+
+<span class="w">  </span><span class="o">~</span><span class="n">Vettore</span><span class="p">();</span><span class="w">              </span>
+
+<span class="w">  </span><span class="c1">// metodi di accesso</span>
+
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="nf">GetN</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">m_N</span><span class="p">;}</span><span class="w"> </span><span class="c1">// Accede alla dimensione del vettore</span>
+<span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="nf">SetComponent</span><span class="p">(</span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="p">);</span><span class="w"> </span><span class="c1">// Modifica la componente i-esima</span>
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="nf">GetComponent</span><span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="p">;</span><span class="w"> </span><span class="c1">// Accede alla componente i-esima</span>
+
+<span class="w">  </span><span class="c1">// metodi interni</span>
+
+<span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="nf">Scambia</span><span class="p">(</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">;</span>
+
+<span class="w"> </span><span class="k">private</span><span class="o">:</span>
+
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">m_N</span><span class="p">;</span><span class="w">          </span><span class="c1">// dimensione del vettore</span>
+<span class="w">  </span><span class="kt">double</span><span class="o">*</span><span class="w"> </span><span class="n">m_v</span><span class="p">;</span><span class="w">      </span><span class="c1">// vettore di dati </span>
+
+<span class="p">};</span>
+
+<span class="cp">#endif </span><span class="c1">// __Vettore_h__</span>
+</code></pre></div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+</div>
+<ul>
+<li>Notate l'utilizzo del costrutto <code>#ifndef .... #define .... #endif</code> (<em>include guards</em>) . Queste direttive di preprocessore sono normalmente utilizzate per evitare inclusioni multiple di uno stesso header file che, nel caso specifico, porterebbero ad una doppia dichiarazione della classe <code>Vettore</code>. Immaginate infatti di voler compilare un codice <code>main.cpp</code> insieme ad un file <code>funzioni.cpp</code> e che entrambi i codici sorgente contengano una istruzione <code>#include "Vettore.h"</code>: in fase di compilazione il compilatore si lamenterebbe per una doppia dichiarazione della classe <code>Vettore</code>. Con il meccanismo indicato, alla prima inclusione di <code>Vettore.h</code>, viene creata una variabile globale <code>__Vettore_h__</code>. Al secondo tentativo di inclusione l'esistenza della variabile globale forza il compilatore a saltare tutte le righe tra <code>#define .... #endif</code>, di fatto evitando la seconda inclusione del file <code>Vettore.h</code>.</li>
+<li>Si può ottenere lo stesso effetto inserendo la direttiva <code>#pragma once</code> all'inizio del file <code>Vettore.h</code>: rispetto all'utilizzo delle <em>include guards</em> l'implementazione è più semplice e compatta ma il <code>#pragma once</code> potrebbe non funzionare per qualche (raro) compilatore.</li>
+</ul>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+</div>
+<p>Notate inoltre l'impementazione <em>in-line</em> del metodo <code>GetN()</code>: i metodi di una classe possono essere anche implementati direttamente nell'header file (.h) e non nel .cpp. L'implementazione inline implica che il compilatore metta una copia della funzione ogni volta che questa viene chiamata: in questo modo il codice diventa più lungo ma vengono ottimizzate le performance in quanto non si deve effettuare una chiamata alla funzione. In genere l'implementazione inline viene effettuata per funzioni brevi ( una o poche righe ). </p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+</div>
+<p>Notate l'uso del qualificatore <code>const</code> nella definizione del metodo <code>GetN()</code>: in questo modo ogni istruzione dentro <code>GetN()</code> che tenti di modificare il contenuto della classe verrà segnalata come errore di compilazione. Il metodo <code>GetN()</code> è un metodo di accesso e logicamente non ci aspettiamo che effettui alcuna operazione di modifica del contenuto della classe : in questo caso è buona pratica dichiararlo <code>const</code> al fine di rendere l'utilizzo della nostra classe da parte di eventuali utenti più sicuro. </p>
+</details>
+<details>
+<p><summary> Esempio di implementazione della classe (<code>Vettore.cpp</code>):  </summary></p>
+<p>Il file di implementazione della classe iniziale (<code>Vettore.cpp</code>) potrebbe essere così:
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;Vettore.h&quot;</span>
+
+<span class="c1">// costruttore senza argomenti</span>
+
+<span class="n">Vettore</span><span class="o">::</span><span class="n">Vettore</span><span class="p">()</span><span class="w">  </span><span class="p">{</span>
+<span class="w">  </span><span class="n">m_N</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">  </span><span class="n">m_v</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// costruttore con dimensione</span>
+
+<span class="n">Vettore</span><span class="o">::</span><span class="n">Vettore</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">N</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">N</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Errore: la dimensione deve essere positiva &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+<span class="w">    </span><span class="n">exit</span><span class="w"> </span><span class="p">(</span><span class="mi">4</span><span class="p">);</span><span class="w"> </span><span class="c1">// ??</span>
+<span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">m_N</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">N</span><span class="p">;</span>
+<span class="w">    </span><span class="n">m_v</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">double</span><span class="p">[</span><span class="n">N</span><span class="p">];</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">N</span><span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="n">k</span><span class="o">++</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="n">m_v</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// distruttore</span>
+
+<span class="n">Vettore</span><span class="o">::~</span><span class="n">Vettore</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">delete</span><span class="p">[]</span><span class="w"> </span><span class="n">m_v</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// metodi di accesso</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="n">Vettore</span><span class="o">::</span><span class="n">SetComponent</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">a</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">m_N</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">m_v</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="n">a</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Errore: indice &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;, dimensione &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">m_N</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+<span class="w">    </span><span class="n">exit</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="p">);</span><span class="w"> </span><span class="c1">// ??</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="p">}</span>
+
+<span class="kt">double</span><span class="w"> </span><span class="n">Vettore</span><span class="o">::</span><span class="n">GetComponent</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">m_N</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">m_v</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+<span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Errore: indice &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;, dimensione &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">m_N</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+<span class="w">    </span><span class="n">exit</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span><span class="w"> </span><span class="c1">// ?</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// metodi interni</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="n">Vettore</span><span class="o">::</span><span class="n">Scambia</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">primo</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">secondo</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">temp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GetComponent</span><span class="p">(</span><span class="n">primo</span><span class="p">);</span>
+<span class="w">  </span><span class="n">SetComponent</span><span class="p">(</span><span class="n">primo</span><span class="p">,</span><span class="n">GetComponent</span><span class="p">(</span><span class="n">secondo</span><span class="p">));</span>
+<span class="w">  </span><span class="n">SetComponent</span><span class="p">(</span><span class="n">secondo</span><span class="p">,</span><span class="n">temp</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></p>
+</details>
+<details>
+<p><summary> Programma di test: </summary></p>
+<p>Questo semplice programma ci permette di provare le funzionalità della nuova classe <code>Vettore</code> :</p>
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;Vettore.h&quot;</span>
+
+<span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">std</span><span class="p">;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">  </span><span class="c1">// costruttore senza argomenti ==&gt;&gt; crea un vettore di dimenione nulla </span>
+
+<span class="w">  </span><span class="n">Vettore</span><span class="w"> </span><span class="n">vnull</span><span class="w"> </span><span class="p">;</span>
+<span class="w">  </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Vettore vnull : dimensione = &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">vnull</span><span class="p">.</span><span class="n">GetN</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">vnull</span><span class="p">.</span><span class="n">GetN</span><span class="p">()</span><span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="n">k</span><span class="o">++</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">vnull</span><span class="p">.</span><span class="n">GetComponent</span><span class="p">(</span><span class="n">k</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; &quot;</span><span class="w"> </span><span class="p">;</span>
+<span class="w">  </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+
+<span class="w">  </span><span class="c1">// construttore con intero : costruisco un OGGETTO di tipo vettore di lunghezza 10</span>
+
+<span class="w">  </span><span class="n">Vettore</span><span class="w"> </span><span class="n">v</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
+<span class="w">  </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Vettore v : = dimensione = &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">v</span><span class="p">.</span><span class="n">GetN</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">v</span><span class="p">.</span><span class="n">GetN</span><span class="p">()</span><span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="n">k</span><span class="o">++</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">v</span><span class="p">.</span><span class="n">GetComponent</span><span class="p">(</span><span class="n">k</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; &quot;</span><span class="w"> </span><span class="p">;</span>
+<span class="w">  </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">comp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
+<span class="w">  </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Componente &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">comp</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; = &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">v</span><span class="p">.</span><span class="n">GetComponent</span><span class="p">(</span><span class="n">comp</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+
+<span class="w">  </span><span class="n">v</span><span class="p">.</span><span class="n">SetComponent</span><span class="p">(</span><span class="n">comp</span><span class="p">,</span><span class="mi">-999</span><span class="p">)</span><span class="w"> </span><span class="p">;</span>
+
+<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">v</span><span class="p">.</span><span class="n">GetN</span><span class="p">()</span><span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="n">k</span><span class="o">++</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">v</span><span class="p">.</span><span class="n">GetComponent</span><span class="p">(</span><span class="n">k</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; &quot;</span><span class="w"> </span><span class="p">;</span>
+<span class="w">  </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+
+<span class="w">  </span><span class="c1">// anche come puntatore</span>
+
+<span class="w">  </span><span class="n">Vettore</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">vp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Vettore</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
+<span class="w">  </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Vettore vp : = dimensione = &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">vp</span><span class="o">-&gt;</span><span class="n">GetN</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">vp</span><span class="o">-&gt;</span><span class="n">GetN</span><span class="p">()</span><span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="n">k</span><span class="o">++</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">vp</span><span class="o">-&gt;</span><span class="n">GetComponent</span><span class="p">(</span><span class="n">k</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; &quot;</span><span class="w"> </span><span class="p">;</span>
+<span class="w">  </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span><span class="w">    </span>
+
+<span class="w">  </span><span class="k">delete</span><span class="w"> </span><span class="n">vp</span><span class="p">;</span>
+
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+
+<span class="p">}</span>
+</code></pre></div>
+</details>
+<h2 id="esercizio-21-completamento-della-classe-vettore">ESERCIZIO 2.1 - Completamento della classe <code>Vettore</code> :</h2>
+<p>La classe <code>vettore</code> costruita sopra non è però ancora completa, anzi può essere addirittura pericolosa ! In particolare vogliamo : 
+1. aggiungere la possibilità di costruire un <code>vettore</code> a partire da un <code>vettore</code> esistente ( <em>costruttore di copia</em> )
+2. aggiungere la possibilità di eguagliare due oggetti di tipo <code>vettore</code> ( <em>operatore di assegnazione</em> )
+3. aggiungere un operatore di accesso rapido alle componenti (<code>[]</code>)</p>
+<details>
+<p><summary> Copy constructor: </summary></p>
+<p>Il <em>copy constructor</em> (o costruttore di copia) viene utilizzato per creare una copia di un <code>vettore</code> esistente: esso deve accettare in input
+un <code>vettore</code> e costruirne una copia del <code>vettore</code> argomento. </p>
+<p>Il copy constructor viene invocato implicitamente ogni volta che utilizziamo sintassi come:
+<div class="highlight"><pre><span></span><code><span class="n">Vettore</span><span class="w"> </span><span class="n">a</span><span class="p">;</span><span class="w">       </span><span class="c1">// costruttore standard senza argomenti</span>
+<span class="n">Vettore</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="p">;</span><span class="w">   </span><span class="c1">// copy constructor </span>
+</code></pre></div>
+oppure la sintassi equivalente:
+<div class="highlight"><pre><span></span><code><span class="n">Vettore</span><span class="w"> </span><span class="n">a</span><span class="p">;</span><span class="w">     </span><span class="c1">// costruttore standard senza argomenti</span>
+<span class="n">Vettore</span><span class="w"> </span><span class="nf">b</span><span class="p">(</span><span class="n">a</span><span class="p">);</span><span class="w">  </span><span class="c1">// copy constructor </span>
+</code></pre></div>
+ed in tutti i casi in cui si passa un oggetto per valore. Il compilatore mette a disposizione un construttore di copia di default che eguaglia i data membri. In questo caso i due puntatori <code>m_v</code> dei due oggetti <code>vettore</code> punterebbero alla stessa area di memoria generando possibili problemi di memory management. In questi casi si deve procedere a fornire al compilatore una implementazione esplicita del costruttore di copia.</p>
+<ul>
+<li>Il copy constructor viene dichiarato nell'header con una sintassi:
+<div class="highlight"><pre><span></span><code><span class="n">Vettore</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">Vettore</span><span class="o">&amp;</span><span class="w"> </span><span class="p">);</span>
+</code></pre></div></li>
+<li>Nell'implementazione dobbiamo assicurarci che l'oggetto costruito abbia la sua zona di memoria riservata:
+<div class="highlight"><pre><span></span><code><span class="c1">// overloading costruttore di copia</span>
+
+<span class="n">Vettore</span><span class="o">::</span><span class="n">Vettore</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">Vettore</span><span class="o">&amp;</span><span class="w"> </span><span class="n">V</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">m_N</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">V</span><span class="p">.</span><span class="n">GetN</span><span class="p">();</span>
+<span class="w">  </span><span class="n">m_v</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">double</span><span class="p">[</span><span class="n">m_N</span><span class="p">];</span>
+<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">&lt;</span><span class="n">m_N</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="n">m_v</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="n">V</span><span class="p">.</span><span class="n">GetComponent</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></li>
+</ul>
+</details>
+<details>
+<p><summary> Operatore di assegnazione : </summary></p>
+<p>L'<em>operatore di assegnazione</em> viene utilizzato per eguagliare un vettore ad un altro ( entrambi esistenti ). </p>
+<p>L'operatore di assegnazione viene invocato implicitamente ogni volta che utilizziamo una sintassi del tipo :
+<div class="highlight"><pre><span></span><code><span class="n">Vettore</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="p">;</span>
+<span class="c1">// ... riempimento delle componenti di a </span>
+<span class="n">Vettore</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="p">;</span><span class="w"> </span>
+<span class="c1">// ... riempimento delle componenti di b</span>
+
+<span class="n">a</span><span class="o">=</span><span class="n">b</span><span class="p">;</span>
+</code></pre></div>
+oppure la sintassi equivalente 
+``c++</p>
+<p>Vettore a ;
+// ... riempimento delle componenti di a 
+Vettore b ; 
+// ... riempimento delle componenti di b</p>
+<p>a.operator=(b);</p>
+<p><div class="highlight"><pre><span></span><code>In questo caso ```a``` e ```b``` sono oggetti della stessa classe, di fatto l&#39;assegnazione non è altro che una abbreviazione per indicare la chiamata ad un metodo della classe di nome `operator=`: 
+```a.operator=(b);```
+Il compilatore fornisce un&#39;implementazione di default di questo operatore, che corrisponde ad un assegnazione membro a membro di tutti i data membri. Ma questo non funzione se alcuni data membri sono puntatori, perché avremmo diversi oggetti che condividono la stessa area di memoria.
+Dobbiamo quindi realizzare un&#39;implementazione sicura dell&#39;assegnazione, facendo una copia dei dati in una nuova locazione di memoria.
+
+* L&#39;header file dovrà contenere una dichiarazione:
+```c++
+Vettore&amp; operator=(const Vettore&amp; )
+</code></pre></div>
+* Una possibile implementazione è data qui sotto:
+<div class="highlight"><pre><span></span><code><span class="c1">// overloading operatore di assegnazione</span>
+
+<span class="n">Vettore</span><span class="o">&amp;</span><span class="w"> </span><span class="n">Vettore</span><span class="o">::</span><span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">Vettore</span><span class="o">&amp;</span><span class="w"> </span><span class="n">V</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">m_N</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">V</span><span class="p">.</span><span class="n">GetN</span><span class="p">();</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">m_v</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="k">delete</span><span class="p">[]</span><span class="w"> </span><span class="n">m_v</span><span class="p">;</span>
+<span class="w">  </span><span class="n">m_v</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">double</span><span class="p">[</span><span class="n">m_N</span><span class="p">];</span>
+<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">&lt;</span><span class="n">m_N</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="n">m_v</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="n">V</span><span class="p">.</span><span class="n">GetComponent</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="o">*</span><span class="k">this</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></p>
+<details class="tip">
+<summary>Il puntatore <code>this</code></summary>
+<p>Il puntatore <code>this</code> indica un puntatore all'oggetto cui si sta applicando un metodo. E' particolarmente utile in alcune occasioni, come nel caso dell'operatore di assegnazione, in cui si deve restituire una copia dell'oggetto corrente. </p>
+</details>
+</details>
+<details>
+<p><summary> Operatore di accesso <code>[]</code>: </summary></p>
+<p>Se vogliamo semplificare la codifica dell'accesso alle componenti di un <code>Vettore</code> ( sia in lettura sia in scrittura ) potremmo pensare di fare un <em>overloading</em> dell'operatore di accesso <code>operator[](int)</code>. Questo permetterebbe ad esempio di accedere alla seconda componente di un vettore v semplicemente scrivendo
+<div class="highlight"><pre><span></span><code><span class="kt">double</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">v</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+</code></pre></div>
+Per aggiungere questa funzionalità alla nostra classe <code>Vettore</code> dobbiamo come al solito :
+* aggiungere la dichiarazione del metodo nell'header file
+<div class="highlight"><pre><span></span><code><span class="kt">double</span><span class="o">&amp;</span><span class="w"> </span><span class="k">operator</span><span class="p">[](</span><span class="kt">int</span><span class="p">);</span>
+</code></pre></div>
+* aggiungere l'implementazione del metodo nel file di implementazione:
+<div class="highlight"><pre><span></span><code><span class="kt">double</span><span class="o">&amp;</span><span class="w"> </span><span class="n">Vettore</span><span class="o">::</span><span class="k">operator</span><span class="p">[]</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">i</span><span class="o">&lt;</span><span class="n">m_N</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">m_v</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+<span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Errore: indice &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;, dimensione &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">m_N</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+<span class="w">    </span><span class="n">exit</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span><span class="w"> </span><span class="c1">// ??</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></p>
+</details>
+<details>
+<p><summary> Esempio di codice : </summary></p>
+<p>A quensto punto possiamo utilizzare il seguente codice di test che include anche un esempio di utilizzo di <em>copy constructor</em>, <em>operatore di assegnazione</em> e <em>operatore di accesso</em>. </p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+</div>
+<p>Questo esempio di codice darebbe problemi di memory corruption senza l'implementazione corretta del copy constructor e dell'operatore di assegnazione !
+  Infatti avremmo ottenuto due vettori che condividono esattamente la stessa area di memoria : una modifica su un vettore implica che anche l'altro venga modificato. Avendo implementato esplicitamente ed in maniera corretta i due operatori questo problema non si presenta.</p>
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;Vettore.h&quot;</span>
+
+<span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">std</span><span class="p">;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">  </span><span class="c1">// costruttore senza argomenti ==&gt;&gt; crea un vettore di dimenione nulla </span>
+
+<span class="w">  </span><span class="n">Vettore</span><span class="w"> </span><span class="n">vnull</span><span class="w"> </span><span class="p">;</span>
+<span class="w">  </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Vettore vnull : dimensione = &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">vnull</span><span class="p">.</span><span class="n">GetN</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">vnull</span><span class="p">.</span><span class="n">GetN</span><span class="p">()</span><span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="n">k</span><span class="o">++</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">vnull</span><span class="p">.</span><span class="n">GetComponent</span><span class="p">(</span><span class="n">k</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; &quot;</span><span class="w"> </span><span class="p">;</span>
+<span class="w">  </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+
+<span class="w">  </span><span class="c1">// construttore con intero : costruisco un OGGETTO di tipo vettore di lunghezza 10</span>
+
+<span class="w">  </span><span class="n">Vettore</span><span class="w"> </span><span class="n">v</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
+<span class="w">  </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Vettore v : = dimensione = &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">v</span><span class="p">.</span><span class="n">GetN</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">v</span><span class="p">.</span><span class="n">GetN</span><span class="p">()</span><span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="n">k</span><span class="o">++</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">v</span><span class="p">.</span><span class="n">GetComponent</span><span class="p">(</span><span class="n">k</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; &quot;</span><span class="w"> </span><span class="p">;</span>
+<span class="w">  </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">comp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
+<span class="w">  </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Componente &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">comp</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; = &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">v</span><span class="p">.</span><span class="n">GetComponent</span><span class="p">(</span><span class="n">comp</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+<span class="w">  </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Componente &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">comp</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; = &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">v</span><span class="p">[</span><span class="n">comp</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+
+<span class="w">  </span><span class="n">v</span><span class="p">.</span><span class="n">SetComponent</span><span class="p">(</span><span class="n">comp</span><span class="p">,</span><span class="mi">-999</span><span class="p">)</span><span class="w"> </span><span class="p">;</span>
+<span class="w">  </span><span class="n">v</span><span class="p">[</span><span class="n">comp</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">-999</span><span class="w"> </span><span class="p">;</span>
+
+<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">v</span><span class="p">.</span><span class="n">GetN</span><span class="p">()</span><span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="n">k</span><span class="o">++</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">v</span><span class="p">.</span><span class="n">GetComponent</span><span class="p">(</span><span class="n">k</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; &quot;</span><span class="w"> </span><span class="p">;</span>
+<span class="w">  </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+
+<span class="w">  </span><span class="c1">// anche come puntatore</span>
+
+<span class="w">  </span><span class="n">Vettore</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">vp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Vettore</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
+<span class="w">  </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Vettore vp : = dimensione = &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">vp</span><span class="o">-&gt;</span><span class="n">GetN</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">vp</span><span class="o">-&gt;</span><span class="n">GetN</span><span class="p">()</span><span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="n">k</span><span class="o">++</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">vp</span><span class="o">-&gt;</span><span class="n">GetComponent</span><span class="p">(</span><span class="n">k</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; &quot;</span><span class="w"> </span><span class="p">;</span>
+<span class="w">  </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span><span class="w">    </span>
+
+<span class="w">  </span><span class="c1">// copy constructor : w viene creato come copia di v</span>
+
+<span class="w">  </span><span class="n">Vettore</span><span class="w"> </span><span class="n">w</span><span class="o">=</span><span class="n">v</span><span class="p">;</span><span class="w">  </span><span class="c1">//  oppure la sintassi equivalente: Vettore w(v);</span>
+
+<span class="w">  </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Vettore w : dimensione = &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">w</span><span class="p">.</span><span class="n">GetN</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">w</span><span class="p">.</span><span class="n">GetN</span><span class="p">()</span><span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="n">k</span><span class="o">++</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">w</span><span class="p">.</span><span class="n">GetComponent</span><span class="p">(</span><span class="n">k</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; &quot;</span><span class="w"> </span><span class="p">;</span>
+<span class="w">  </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+
+<span class="w">  </span><span class="n">v</span><span class="p">.</span><span class="n">SetComponent</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">99</span><span class="p">);</span><span class="w"> </span><span class="c1">// WARNING : senza copy constructor opportuno, un cambio di v cambia anche w !!!!!!</span>
+
+<span class="w">  </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Vettore v : dimensione = &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">v</span><span class="p">.</span><span class="n">GetN</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">v</span><span class="p">.</span><span class="n">GetN</span><span class="p">()</span><span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="n">k</span><span class="o">++</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">v</span><span class="p">.</span><span class="n">GetComponent</span><span class="p">(</span><span class="n">k</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; &quot;</span><span class="w"> </span><span class="p">;</span>
+<span class="w">  </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+
+<span class="w">  </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Vettore w : dimensione = &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">w</span><span class="p">.</span><span class="n">GetN</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">w</span><span class="p">.</span><span class="n">GetN</span><span class="p">()</span><span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="n">k</span><span class="o">++</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">w</span><span class="p">.</span><span class="n">GetComponent</span><span class="p">(</span><span class="n">k</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; &quot;</span><span class="w"> </span><span class="p">;</span>
+<span class="w">  </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+
+<span class="w">  </span><span class="c1">// operatore di assegnazione : prima creo Z e poi lo eguagli a w</span>
+
+<span class="w">  </span><span class="n">Vettore</span><span class="w"> </span><span class="n">z</span><span class="w"> </span><span class="p">;</span><span class="w"> </span>
+<span class="w">  </span><span class="n">z</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">w</span><span class="w"> </span><span class="p">;</span>
+
+<span class="w">  </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Vettore z : dimensione = &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">z</span><span class="p">.</span><span class="n">GetN</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">z</span><span class="p">.</span><span class="n">GetN</span><span class="p">()</span><span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="n">k</span><span class="o">++</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">z</span><span class="p">.</span><span class="n">GetComponent</span><span class="p">(</span><span class="n">k</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; &quot;</span><span class="w"> </span><span class="p">;</span>
+<span class="w">  </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+
+<span class="w">  </span><span class="k">delete</span><span class="w"> </span><span class="n">vp</span><span class="p">;</span>
+
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+
+<span class="p">}</span>
+</code></pre></div>
+</details>
+<h2 id="esercizio-22-codice-di-analisi-dati-utilizzando-la-classe-vettore-da-consegnare">ESERCIZIO 2.2 - Codice di analisi dati utilizzando la classe Vettore (da consegnare) :</h2>
+<p>Proviamo ora a riscrivere il codice della prima lezione utilizzando un contenitore di dati più raffinato: la classe <code>Vettore</code> ci permetterà di riempire il contenitore dati controllando per esempio che non stiamo sforando la dimensione allocata. Il <code>Vettore</code> inoltre si porta dietro anche la sua dimensione: se dobbiamo calcolare la media degli elementi di un Vettore <em>non dobbiamo più passare la dimensione come argomento esterno !</em> 
+Per svolgere questo esercizio dobbiamo :</p>
+<ul>
+<li>modificare tutte le funzioni in <code>funzioni.h</code> e <code>funzioni.cpp</code> in modo che lavorino con oggetti di tipo <code>Vettore</code> invece che con semplici array del C.</li>
+<li>modificare il <code>main</code> in modo che utilizzi la nuova classe <code>Vettore</code> e le nuove funzioni.</li>
+<li>modificare il <code>Makefile</code> </li>
+</ul>
+<p>Se non ci riuscite da soli potete dare un'occhiata ai suggerimenti qui sotto. </p>
+<details>
+<p><summary> Struttura del programma: </summary></p>
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cstdlib&gt;</span>
+
+<span class="c1">// includo la dichiarazione della classe Vettore</span>
+
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;Vettore.h&quot;</span>
+
+<span class="c1">// include la dichiarazione delle funzioni </span>
+
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;funzioni.h&quot;</span>
+
+<span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">std</span><span class="p">;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="o">**</span><span class="w"> </span><span class="n">argv</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">argc</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Uso del programma : &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">argv</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; &lt;n_data&gt; &lt;filename&gt; &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">ndata</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span><span class="w">    </span>
+<span class="w">  </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">filename</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span>
+
+<span class="w">  </span><span class="n">Vettore</span><span class="w"> </span><span class="n">v</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Read</span><span class="p">(</span><span class="w"> </span><span class="n">ndata</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="n">filename</span><span class="w"> </span><span class="p">);</span>
+
+<span class="w">  </span><span class="n">Print</span><span class="p">(</span><span class="w"> </span><span class="n">v</span><span class="w"> </span><span class="p">);</span>
+
+<span class="w">  </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;media    = &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">CalcolaMedia</span><span class="p">(</span><span class="w"> </span><span class="n">v</span><span class="w">  </span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+<span class="w">  </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;varianza = &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">CalcolaVarianza</span><span class="p">(</span><span class="w"> </span><span class="n">v</span><span class="w">  </span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+<span class="w">  </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;mediana  = &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">CalcolaMediana</span><span class="p">(</span><span class="w"> </span><span class="n">v</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span><span class="w"> </span>
+
+<span class="w">  </span><span class="n">Print</span><span class="p">(</span><span class="w"> </span><span class="n">v</span><span class="w"> </span><span class="p">);</span>
+<span class="w">  </span><span class="n">Print</span><span class="p">(</span><span class="w"> </span><span class="n">v</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="s">&quot;data_out.txt&quot;</span><span class="w"> </span><span class="p">);</span>
+
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+</details>
+<details>
+<p><summary> Le funzioni: </summary></p>
+<ul>
+<li>L'header file (.h) potrebbe risultare così:
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;fstream&gt;</span><span class="c1"> </span>
+
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;Vettore.h&quot;</span>
+
+<span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">std</span><span class="p">;</span>
+
+<span class="n">Vettore</span><span class="w"> </span><span class="nf">Read</span><span class="p">(</span><span class="w"> </span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">;</span>
+
+<span class="kt">double</span><span class="w"> </span><span class="nf">CalcolaMedia</span><span class="p">(</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">Vettore</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">;</span>
+<span class="kt">double</span><span class="w"> </span><span class="nf">CalcolaVarianza</span><span class="p">(</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">Vettore</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">;</span>
+<span class="kt">double</span><span class="w"> </span><span class="nf">CalcolaMediana</span><span class="p">(</span><span class="w"> </span><span class="n">Vettore</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">;</span><span class="w"> </span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">Print</span><span class="p">(</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">Vettore</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">;</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">Print</span><span class="p">(</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">Vettore</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">;</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">selection_sort</span><span class="p">(</span><span class="w"> </span><span class="n">Vettore</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="p">);</span>
+</code></pre></div></li>
+<li>il file di implementazione (.cpp) potrebbe risultare così per il calcolo della media (aggiungere tutte le funzioni restati): 
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;funzioni.h&quot;</span>
+
+<span class="kt">double</span><span class="w"> </span><span class="nf">CalcolaMedia</span><span class="p">(</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">Vettore</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">v</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">accumulo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">v</span><span class="p">.</span><span class="n">GetN</span><span class="p">()</span><span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="n">k</span><span class="o">++</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span>
+<span class="w">    </span><span class="n">accumulo</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">v</span><span class="p">.</span><span class="n">GetComponent</span><span class="p">(</span><span class="n">k</span><span class="p">)</span><span class="w"> </span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">accumulo</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">v</span><span class="p">.</span><span class="n">GetN</span><span class="p">()</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">;</span>
+
+<span class="p">}</span>
+</code></pre></div></li>
+</ul>
+<details class="tip">
+<summary>Passaggio dati <em>by reference</em> con qualificatore <code>const</code></summary>
+</details>
+<p>Nella funzione <code>CalcolaMedia</code> il vettore di input viene passato con la sintassi <code>const Vettore &amp; v</code>, quindi il passaggio avviene <em>by reference</em> evitando  una inutile e pesante copia dell'oggetto vettore di input. Il passaggio by reference darebbe alla funzione la possibilità di modificare ( per sbaglio ) il contenuto del vettore del <code>main</code> : per questo motivo si aggiunge il qualificatore <code>const</code> che non permette ( pena un errore di compilazione ) operazioni di modifica del contenuto del vettore da dentro la funzione.</p>
+</details>
+<details>
+<p><summary> Il Makefile: </summary>
+Il makefile va modificato aggiungendo la compilazione della classe <code>Vettore</code>:</p>
+<div class="highlight"><pre><span></span><code>esercizio2.2 : esercizio2.2.o Vettore.o funzioni.o
+        g++ -o esercizio2.2 esercizio2.2.o Vettore.o funzioni.o
+funzioni.o: funzioni.cpp funzioni.h Vettore.h
+        g++ -c -o funzioni.o funzioni.cpp
+esercizio2.2.o : esercizio2.2.cpp funzioni.h Vettore.h
+        g++ -c -o esercizio2.2.o esercizio2.2.cpp
+Vettore.o : Vettore.cpp Vettore.h
+        g++ -c -o Vettore.o Vettore.cpp
+
+clean:
+        rm *.o
+cleanall: clean
+        rm esercizio2.2
+</code></pre></div>
+</details>
+<div class="admonition question">
+<p class="admonition-title">Question</p>
+<p>Perchè CalcolaMedia vuole in input un (const Vettore &amp;) mentre CalcolaMediana semplicemente un (Vettore) ? :  </p>
+<ul>
+<li>Nel caso di <code>CalcolaMedia(...)</code> o <code>CalcolaVarianza(...)</code> il passaggio avviene <em>by reference</em> per ottimizzare l'uso della memoria. Con questa modalità di passaggio dati la funzione lavora sul <code>Vettore</code> del <code>main</code> e pertanto una modifica accidentale del <code>Vettore</code> di input all'interno della funzione ha un effetto anche nel <code>main</code>. Il qualificatore <code>const</code> vieta alla funzione di fare qualsiasi operazione di cambiamento del contenuto del vettore di input pena un errore di compilazione.</li>
+<li>Nel caso invece di <code>CalcolaMediana(...)</code> il passaggio e' effettuato <em>by value</em> e senza il qualificatore <code>const</code>: in questo modo permettiamo che il metodo proceda al riodinamento del <code>Vettore</code>. Dal momento che con il passaggio by value il <code>Vettore</code> nella funzione è una copia del <code>Vettore</code> di input ogni cambiamento effettuato nella funzione non si ripercuote sul <code>main</code>. </li>
+</ul>
+</div>
+<h2 id="approfondimenti">Approfondimenti</h2>
+<details class="example">
+<summary>The <code>move</code> semantic</summary>
+<p>La <em>move semantic</em> è un nuovo modo (dal C++11) di spostare le risorse in un modo ottimale evitando di creare copie non necessarie di oggetti temporanei ed è basato sulle <em>r-value</em> references. La potenza della move semantic si può capire affrontando il caso in cui si voglia costruire un oggetto della classe <code>Vettore</code> a partire dall'output di una funzione :
+<div class="highlight"><pre><span></span><code><span class="n">Vettore</span><span class="w"> </span><span class="n">v</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Read</span><span class="p">(</span><span class="n">ndata</span><span class="p">,</span><span class="w"> </span><span class="n">filename</span><span class="p">);</span>
+</code></pre></div>
+La funzione <code>Read()</code> restituirà un oggetto temporaneo di tipo <code>`Vettore</code> che poi verrà utilizzato come input del costruttore di copia per la creazione di v. Chiaramente questo riduce notevolmente le performance del nostro codice. Perchè non realizzare un costruttore di copia (e un operatore di assegnazione) che siano in grado di rubare i data membri all'oggetto temporaneo senza dover copiare dati ? Questo è lo spirito del move constructor e move assignment operator: 
+<div class="highlight"><pre><span></span><code><span class="c1">// overloading del move constructor</span>
+
+<span class="n">Vettore</span><span class="o">::</span><span class="n">Vettore</span><span class="p">(</span><span class="w"> </span><span class="n">Vettore</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">V</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Calling move constructor&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+<span class="w">  </span><span class="n">m_N</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">V</span><span class="p">.</span><span class="n">m_N</span><span class="p">;</span>
+<span class="w">  </span><span class="n">m_v</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">V</span><span class="p">.</span><span class="n">m_v</span><span class="p">;</span>
+<span class="w">  </span><span class="n">V</span><span class="p">.</span><span class="n">m_N</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">  </span><span class="n">V</span><span class="p">.</span><span class="n">m_v</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">nullptr</span><span class="p">;</span>
+<span class="w">  </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Move constructor called&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+
+<span class="p">}</span>
+
+<span class="c1">// overloading del move assignment operator</span>
+
+<span class="n">Vettore</span><span class="o">&amp;</span><span class="w"> </span><span class="n">Vettore</span><span class="o">::</span><span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="w"> </span><span class="n">Vettore</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">V</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Calling move assignment operator &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+<span class="w">  </span><span class="k">delete</span><span class="w"> </span><span class="p">[]</span><span class="w"> </span><span class="n">m_v</span><span class="w"> </span><span class="p">;</span>
+
+<span class="w">  </span><span class="n">m_N</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">V</span><span class="p">.</span><span class="n">m_N</span><span class="p">;</span>
+<span class="w">  </span><span class="n">m_v</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">V</span><span class="p">.</span><span class="n">m_v</span><span class="p">;</span>
+
+<span class="w">  </span><span class="n">V</span><span class="p">.</span><span class="n">m_N</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">  </span><span class="n">V</span><span class="p">.</span><span class="n">m_v</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">nullptr</span><span class="p">;</span>
+<span class="w">  </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Move assignment operator called&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="o">*</span><span class="k">this</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></p>
+<ul>
+<li>Notare la doppia <code>&amp;&amp;</code> al vettore in input, qui stiamo sfruttando la referenza ad un rvalue</li>
+<li>Il move constructor e move assignment operator semplicemente rubano i dati all'oggetto temporaneo ( non c'è copia elemento per elemento )</li>
+<li>Il puntatore dell'oggetto di input viene sganciato dai dati</li>
+<li>Per vedere il move constructor all'opera potrebbe essere necessario aggiungere la flag <code>-fno-elide-constructors</code> per disattivare eventuali ottimizzazioni interne del compilatore che maschererebbero l'uso del move constructor </li>
+</ul>
+</details>
+<details class="example">
+<summary>C++ exceptions</summary>
+<p>Nei metodi della classe <code>Vettore</code> o nelle funzioni corrispondenti abbiamo spesso utilizzato la funzione <code>exit()</code> per interrompere l'esecuzione del programma in caso si incontri una condizione patologica ( per esempio tentiamo di accedere ad una componenete che non esiste). Questo approccio non è considerto buon conding : in generale non vogliamo che il comportamento di una funzione ( magari scritta da altri ) possa decidere la sorte del programma. Sarebbe meglio che la funzione potesse fornire al <code>main</code> l'informazione su eventuali errori di esecuzione e lasciare al <code>main</code> la possibilità di decidere della sorte del programa. In C++ esiste un meccanismo di gestione delle <a href="https://cplusplus.com/doc/tutorial/exceptions/">exceptions</a>. Per capire meglio come utilizzare le exceptions in C++ proviamo a tenere come esempio il metodo di accesso ad un elemento (<code>GetComponent()</code>). Con la modifica seguente</p>
+<p><div class="highlight"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">Vettore</span><span class="w"> </span><span class="p">{</span>
+
+<span class="k">public</span><span class="o">:</span>
+
+<span class="w">  </span><span class="c1">// ....</span>
+
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">GetComponent</span><span class="p">(</span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">m_N</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="k">throw</span><span class="w"> </span><span class="mi">99</span><span class="w"> </span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">m_v</span><span class="p">[</span><span class="n">k</span><span class="p">];</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="k">private</span><span class="o">:</span>
+
+<span class="w">  </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">m_N</span><span class="p">;</span>
+<span class="w">  </span><span class="kt">double</span><span class="o">*</span><span class="w"> </span><span class="n">m_v</span><span class="p">;</span>
+
+<span class="p">};</span>
+</code></pre></div>
+il metodo <code>GetComponent()</code> può essere usato nel modo seguente dal <code>main()</code>:</p>
+<p><div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;Vettore.h&quot;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(){</span>
+
+
+<span class="w">  </span><span class="n">Vettore</span><span class="w"> </span><span class="n">v</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>
+
+<span class="w">  </span><span class="n">v</span><span class="p">.</span><span class="n">SetComponent</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">99</span><span class="p">);</span>
+
+<span class="w">  </span><span class="k">try</span><span class="p">{</span>
+<span class="w">    </span><span class="n">v</span><span class="p">.</span><span class="n">GetComponent</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span><span class="w"> </span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">errcode</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Error code &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">errcode</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; exiting &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+<span class="w">    </span><span class="n">exit</span><span class="w"> </span><span class="p">(</span><span class="mi">44</span><span class="p">)</span><span class="w"> </span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+
+<span class="p">}</span>
+</code></pre></div>
+Come si può notare quando si tenta di leggere la componente 4 (che non esiste ) il metodo <code>GetComponent()</code> solleva un'eccezione che viene propagata al <code>main</code>. A questo punto si può decidere cosa fare direttamente nel <code>main()</code>.</p>
+</details>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+    <nav class="md-footer__inner md-grid" aria-label="Footer" >
+      
+        
+        <a href="../../Lezione1/Lezione1/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Lezione 1" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Lezione 1
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../../Lezione3/Lezione3/" class="md-footer__link md-footer__link--next" aria-label="Next: Lezione 3" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Lezione 3
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.5bf1dace.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.37e9125f.min.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      
+    
+  </body>
+</html>
