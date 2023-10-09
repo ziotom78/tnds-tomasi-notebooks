@@ -505,7 +505,7 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb5-1"><a href="#c
 <span id="cb5-67"><a href="#cb5-67" aria-hidden="true" tabindex="-1"></a>  <span class="co">//     SetComponent(secondo, temp);</span></span>
 <span id="cb5-68"><a href="#cb5-68" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
 <span id="cb5-69"><a href="#cb5-69" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-70"><a href="#cb5-70" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> <span class="op">&amp;</span> Vettore<span class="op">::</span><span class="kw">operator</span><span class="op">[](</span><span class="dt">int</span> i<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb5-70"><a href="#cb5-70" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> <span class="op">&amp;</span> Vettore<span class="op">::</span><span class="kw">operator</span><span class="op">[](</span><span class="dt">int</span> i<span class="op">)</span> <span class="at">const</span> <span class="op">{</span></span>
 <span id="cb5-71"><a href="#cb5-71" aria-hidden="true" tabindex="-1"></a>  crashIfInvalidIndex<span class="op">(</span>i<span class="op">);</span></span>
 <span id="cb5-72"><a href="#cb5-72" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="va">m_v</span><span class="op">[</span>i<span class="op">];</span></span>
 <span id="cb5-73"><a href="#cb5-73" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
@@ -731,11 +731,11 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb18-1"><a href="#
 <li><p>Aggiungere la dichiarazione del metodo nell’header file
 (<code>.h</code>):</p>
 <div class="sourceCode" id="cb19"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span><span class="op">&amp;</span> <span class="kw">operator</span><span class="op">[](</span><span class="dt">int</span><span class="op">);</span></span></code></pre></div></li>
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span><span class="op">&amp;</span> <span class="kw">operator</span><span class="op">[](</span><span class="dt">int</span><span class="op">)</span> <span class="at">const</span><span class="op">;</span></span></code></pre></div></li>
 <li><p>Aggiungere l’implementazione del metodo nel file di
 implementazione (<code>.cpp</code>):</p>
 <div class="sourceCode" id="cb20"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span><span class="op">&amp;</span> Vettore<span class="op">::</span><span class="kw">operator</span><span class="op">[]</span> <span class="op">(</span><span class="dt">int</span> i<span class="op">)</span> <span class="op">{</span></span>
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span><span class="op">&amp;</span> Vettore<span class="op">::</span><span class="kw">operator</span><span class="op">[]</span> <span class="op">(</span><span class="dt">int</span> i<span class="op">)</span> <span class="at">const</span> <span class="op">{</span></span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  crashIfInvalidIndex<span class="op">(</span>i<span class="op">);</span></span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="va">m_v</span><span class="op">[</span>i<span class="op">];</span></span>
 <span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div></li>

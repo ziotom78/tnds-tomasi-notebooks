@@ -224,7 +224,7 @@ void Vettore::Scambia(int primo, int secondo) {
   //     SetComponent(secondo, temp);
 }
 
-double & Vettore::operator[](int i) {
+double & Vettore::operator[](int i) const {
   crashIfInvalidIndex(i);
   return m_v[i];
 }
@@ -456,14 +456,14 @@ Per aggiungere questa funzionalità alla nostra classe `Vettore` dobbiamo come a
 -   Aggiungere la dichiarazione del metodo nell'header file (`.h`):
 
     ```c++
-    double& operator[](int);
+    double& operator[](int) const;
     ```
 
 
 -   Aggiungere l'implementazione del metodo nel file di implementazione (`.cpp`):
 
     ```c++
-    double& Vettore::operator[] (int i) {
+    double& Vettore::operator[] (int i) const {
       crashIfInvalidIndex(i);
       return m_v[i];
     }

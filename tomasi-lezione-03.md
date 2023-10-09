@@ -95,20 +95,7 @@ void test_statistical_functions(void) {
 
 -   Chi usa il proprio computer… Auguri! Sotto Linux e Mac dovrebbe essere relativamente facile installarlo, sotto Windows la cosa è più complessa.
 
-
-# Avvertenza per utenti VSCode
-
-# Avvertenza per utenti VSCode
-
--   Nella scorsa lezione, alcune persone che usavano VS Code hanno avuto problemi con il file system.
-
--   Il problema è che di default VS Code richiede 5 GB di spazio su disco per ottimizzare i suggerimenti di completamento della sintassi (vedi [discussione](https://github.com/microsoft/vscode-cpptools/issues/3347)).
-
--   È possibile disabilitare la cache o ridurla a un valore ragionevole modificando nelle impostazioni di VS Code la voce *Intellisense cache size* (vedi video seguente).
-
----
-
-<iframe src="https://player.vimeo.com/video/630209637?h=fcc3022dd1&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" width="854" height="642" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen title="How to reduce the size of Intellisense cache"></iframe>
+-   Di tutti gli esercizi che farete questo semestre, solo il 3.2 richiede obbligatoriamente di usare ROOT. (Neppure i temi d'esami dello scritto hanno mai imposto, né imporranno, l'uso di ROOT).
 
 
 # `cout` e `cerr` {#cout-e-cerr}
@@ -169,24 +156,6 @@ Con l'esempio seguente, è possibile usare il reindirizzamento:
 
 # Tipi di errore {#tipi-di-errore}
 
-# Uso di `assert` e di `cerr`
-
--   Di solito gli studenti sono abbastanza confusi dal seguente codice:
-
-    ```c++
-    double Vettore::GetComponent(unsigned int i) const {
-      // assert((m_N > 1) && "Errore: l'indice è troppo grande");
-      if (i < m_N) {
-          return m_v[i];
-      } else {
-          cerr << "Errore: indice" << i << ", dimensione " << m_N << endl;
-          exit(-1);
-      }
-    }
-    ```
-
--   Quando è meglio usare `assert`, e quando è meglio invece un messaggio di errore?
-
 # Tipi di errore
 
 -   Esistono due tipi di errori in un programma:
@@ -202,7 +171,7 @@ Con l'esempio seguente, è possibile usare il reindirizzamento:
 
     ```c++
     // The `<=` is wrong! It should be `i < v.size()`
-    for(size_t i = 0; i <= v.size(); ++i) {
+    for(int i = 0; i <= v.size(); ++i) {
         v.setComponent(i, 0.0);
     }
     ```
@@ -215,7 +184,7 @@ Con l'esempio seguente, è possibile usare il reindirizzamento:
 
 ```
 $ ./myprog
-vettore.hpp:34:void Vettore::setComponent(size_t pos, double value):
+vettore.hpp:34:void Vettore::setComponent(int pos, double value):
    Assertion `pos < n_N` failed
 Aborted (core dumped)
 $ catchsegv ./myprog | c++filt
@@ -223,7 +192,7 @@ $ catchsegv ./myprog | c++filt
 … (lots of output)
 …
 Backtrace:
-/home/unimi/maurizio.tomasi/vettore.hpp:34(void Vettore::setComponent(size_t pos, double value))[0x40075f]
+/home/unimi/maurizio.tomasi/vettore.hpp:34(void Vettore::setComponent(int pos, double value))[0x40075f]
 /home/unimi/maurizio.tomasi/vettore.hpp:79(void Vettore::set_array_to_zero())[0x40075f]
 /home/unimi/maurizio.tomasi/test.cpp:15(main)[0x400796]
 /lib64/libc.so.6(__libc_start_main+0xf3)[0x7fbb807d14a3]
@@ -274,13 +243,13 @@ In questo esempio, la documentazione di `setComponent` dice quali sono i valori 
 // Set the value of an element in the array
 //
 // The index `i` *must* be in the range 0…size()-1
-void Vettore::setComponent(size_t i, double value) {
+void Vettore::setComponent(int i, double value) {
     assert(i < size());
     m_v[i] = value;
 }
 
 int main() {
-    size_t position;
+    int position;
     Vettore v(10);
     
     cerr << "Inserisci la posizione del vettore: ";
@@ -300,7 +269,7 @@ Di conseguenza, il programmatore è «costretto» a verificare la correttezza de
 
 # Inizializzazione di variabili
 
--   Le pagine web su `labmaster` usano la sintassi tradizionale C++ per dichiarare e inizializzare variabili:
+-   Storicamente, il C++ ha permesso da sempre di dichiarare e contemporaneamente inizializzare le variabili usando `=` e le parentesi `()` per i costruttori:
 
     ```c++
     // Dichiara "ndata" e la inizializza
@@ -360,7 +329,7 @@ Di conseguenza, il programmatore è «costretto» a verificare la correttezza de
     double * data{new double[]{ 1.0, 2.0, 3.0 }};
     ```
 
--   La sintassi può essere usata anche per invocare costruttori di classi (che vedremo a partire da questa lezione):
+-   La sintassi può essere usata anche per invocare costruttori di classi (che abbiamo già visto nella lezione precedente):
 
     ```c++
     Vettore v{};   // Costruttore senza parametri
@@ -404,12 +373,10 @@ Di conseguenza, il programmatore è «costretto» a verificare la correttezza de
     | `int`      | −2147483648 | 2147483647 |
     | `unsigned` |           0 | 4294967295 |
 
--   Vediamo alcune differenze.
-
 
 # Cicli `for` su array
 
--   La classe `std::vector` (esercizio 3.1) restituisce la dimensione degli array come un intero senza segno di tipo `size_t`: un vettore non può avere un numero negativo di elementi!
+-   La classe `std::vector` (esercizio 3.1) restituisce la dimensione degli array come un intero senza segno di tipo `int`: un vettore non può avere un numero negativo di elementi!
 -   Questo codice fornisce un *warning* ([se usate
     `-Wall --pedantic`](https://ziotom78.github.io/tnds-tomasi-notebooks/tomasi-lezione-01.html#/flag-del-compilatore)):
 
@@ -426,48 +393,35 @@ Di conseguenza, il programmatore è «costretto» a verificare la correttezza de
 
 # Cicli `for` su array
 
--   Per togliere il warning è sufficiente dichiarare `i` di tipo `size_t`:
+-   Per togliere il warning è sufficiente effettuare un *casting* a `int` del risultato di `v.size()`:
 
     ```c++
     std::vector<double> v(3);
 
-    for(size_t i{}; i < v.size(); ++i) {  // No more warnings
+    for(int i{}; i < (int) v.size(); ++i) {  // No more warnings
         v[i] = 0.0;
     }
     ```
 
 -   In linguaggi più rigorosi del C++ (es., Ada) confrontare tipi con e senza segno è un *errore* anziché un warning. Prendete quindi sul serio questi warning!
 
-# Cicli a ritroso
+-   Usando interi con segno, molti algoritmi diventano più semplici (es., scandire gli elementi di un array a ritroso). Preferite quindi sempre `int` a `unsigned`!
 
--   Attenzione ai cicli a ritroso, in cui si parte dall'ultimo elemento e si torna indietro al primo! Questo codice **non funziona**:
+# Il C++20
 
-    ```c++
-    for(size_t i{v.size() - 1}; i >= 0; --i) {
-        // Do stuff
-    } // This loop never ends
-    ```
+-   Alcuni esperti di C++ hanno dichiarato che usare `unsigned` per la dimensione degli array è stato uno dei peggiori errori che potessero fare.
 
--   Il modo giusto per scrivere il ciclo è il seguente:
+-   Dal C++20 è disponibile la funzione `ssize()`, che funziona su vettori e altri tipi della STL e restituisce sempre un `int`:
 
     ```c++
-    for(size_t i{v.size() - 1};; --i) {
-        // Do stuff
+    std::vector<double> v(3);
 
-        // If we have reached the last iteration, stop here
-        if (i == 0) break;
+    for(int i{}; i < ssize(v); ++i) {
+        v[i] = 0.0;
     }
     ```
 
-# Perché usare `unsigned`?
-
-- Tutti questi problemi verrebbero risolti se si definisse `size_t` un intero **con segno**.
-
-- Alcuni membri del comitato di standardizzazione del C++ hanno dichiarato che il restituire la dimensione degli array come valori *unsigned* è stato uno dei peggiori errori che potessero fare.
-
-- Il nuovo standard C++23 (che sarà rilasciato l'anno prossimo) introduce `ssize_t`, che è come `size_t` ma ha il segno.
-
-- Linguaggi più moderni, come [Nim](https://nim-lang.org/) e [Julia](https://julialang.org/), usano sempre interi con segno per iterare sugli array.
+    Se usate Replit, basta usare `-std=c++20` anziché `-std=c++17`. Se usate i computer del laboratorio invece, siete sfortunati e dovete usare il cast a `(int)`.
 
 # Cicli `for` e `while`
 
@@ -484,21 +438,21 @@ Di conseguenza, il programmatore è «costretto» a verificare la correttezza de
 
 # Il ciclo `while(true)`
 
--   Vi insegno un trucco per decidere quale usare: usate `while(true)`!
+-   Vi insegno un trucco per decidere quale usare: usate `while(true)`
 
     ```c++
     while(true) {
-        if (some condition 1) break;   // *1*
+        if (condition 1) break;   // *1*
         // … do stuff …
-        if (some condition 2) break;   // *2*
+        if (condition 2) break;   // *2*
         // … do other stuff …
-        if (some condition 3) break;   // *3*
+        if (condition 3) break;   // *3*
     }
     ```
 
--   Se vi serve solo `*1*`, potete usare `while(some condition 1)`.
--   Se vi serve solo `*3*`, potete usare `do … while(some condition 3)` oppure `for`.
--   Nel caso `*2*`, lasciate `while(true)` con `if(…) break` in mezzo.
+-   Se c'è solo `*1*`, potete usare `while(condition 1)`.
+-   Se c'è solo `*3*`, potete usare `do … while(condition 3)` oppure `for`.
+-   Se c'è `*2*`, lasciate tutto così
 
 
 # Iteratori nella STL

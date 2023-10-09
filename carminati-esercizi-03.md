@@ -9,9 +9,9 @@ lang: it-IT
 
 [La pagina con la spiegazione originale degli esercizi si trova qui: <https://labtnds.docs.cern.ch/Lezione3/Lezione3/>.]
 
-In questa terza lezione affronteremo di nuovo gli stessi problemi della prima e seconda lezione (lettura di dati da un file, calcolo di media e mediana) utilizzando una evoluzione del contenitore di dati `Vettore`: possiamo rendere questa classe più flessibile in modo che sia capace di immagazzinare qualsiasi tipo di dato (e non necessariamente dei numeri `double`)? Nella seconda parte spingeremo ancora oltre la generalizzazione imparando ad usare il contenitore vector della [STL](http://www.cplusplus.com/reference/stl/). Quindi, in sintesi:
+In questa terza lezione affronteremo di nuovo gli stessi problemi della prima e seconda lezione (lettura di dati da un file, calcolo di media e mediana) utilizzando una evoluzione del contenitore di dati `Vettore`: possiamo rendere questa classe più flessibile in modo che sia capace di immagazzinare qualsiasi tipo di dato (e non necessariamente dei numeri `double`). Nella seconda parte spingeremo ancora oltre la generalizzazione imparando ad usare il contenitore vector della [STL](http://www.cplusplus.com/reference/stl/). Quindi, in sintesi:
 
--   Tipo di dato da leggere è constituito da numeri `double`.
+-   Tipo di dato da leggere è constituito da numeri `double` immagazzinati nel solito file `data.dat`.
 -   Tipo di contenitore di dati è una generalizzazione della classe `Vettore` della lezione 2 o il contenitore vector della STL.
 -   Operazioni sui dati vengono svolte mediante funzioni che agiscono su oggetti di tipo `Vettore` o `vector`.
 
@@ -38,7 +38,7 @@ Vettore <double> v;
 L'istruzione indicata qui sopra crea effettivamente una istanza della classe `Vettore` specializzata per lavorare con dei `double`. Analogamente se pensiamo per esempio alla funzione `CalcolaMedia()` possiamo scrivere
 
 ```c++
-template <typename T> double CalcolaMedia (const Vettore<T> &v, size_t ndata) {...}
+template <typename T> double CalcolaMedia (const Vettore<T> &v, int ndata) {...}
 ```
 
 e possiamo quindi utilizzare la funzione `CalcolaMedia` nel `main` nel modo seguente:
@@ -65,6 +65,7 @@ Vediamo come fare passo passo.
 Provate a lavorare sulla generalizzazione della classe `Vettore` in modo che diventi un contenitore di oggetti generici di tipo `T`. Provate a completare voi le parti mancanti. Ricordatevi che in questo caso particolare tutto va fatto nell'*header file* della classe.
 
 ```c++
+// File vettore.h
 #pragma once
 
 #include <iostream>
@@ -78,7 +79,7 @@ public:
       // ...
   }
 
-  Vettore(size_t N) { // costruttore
+  Vettore(int N) { // costruttore
       // ..
   }
 
@@ -92,42 +93,99 @@ public:
 
   ~Vettore() { delete [] m_v;  }
 
-  size_t GetN() const { return m_N; }
+  int GetN() const { return m_N; }
 
-  void SetComponent(size_t i, T a) { // modifica una componente
+  void SetComponent(int i, T a) { // modifica una componente
       // ...
   }
 
-  T GetComponent(size_t i) const { // accedi ad una componente
+  T GetComponent(int i) const { // accedi ad una componente
       // ...
   }
 
-  void Scambia(size_t primo, size_t secondo) { // scambia due elementi
+  void Scambia(int primo, int secondo) { // scambia due elementi
       // ...
   }
 
-  T& operator[](size_t i) { // accede all'elemento i-esimo
+  T& operator[](int i) const { // accede all'elemento i-esimo
       // ...
   }
 
 private:
-  size_t m_N;
+  int m_N;
   T * m_v;
 };
 ```
 
-## Adeguamento funzioni
-
-Analogamente a quanto fatto sopra, adattiamo il file di funzioni in modo tale che possano lavorare con contenitori `Vettore` di tipo `template`. Come già ricordato, tutto deve essere codificato nell'*header file* della classe e non nel file `.cpp`.
+In caso si può usare la forma alternativa che abbiamo visto a lezione per separare dichiarazione e implementazione, sempre nello stesso header file:
 
 ```c++
+////////////////////////////////////////////////////////////////////////////////
+// File vettore.h
+#pragma once
+
+#include <iostream>
+#include <cassert>
+
+using namespace std;
+
+template <typename T> class Vettore {
+public:
+  Vettore();
+  Vettore(int N);
+  Vettore(const Vettore& V);
+  Vettore& operator=(const Vettore& V);
+  ~Vettore();
+
+  int GetN() const;
+  void SetComponent(int i, T a);
+  T GetComponent(int i) const;
+  void Scambia(int primo, int secondo);
+  T& operator[](int i) const;
+
+private:
+  int m_N;
+  T * m_v;
+};
+
+////////////////////////////////////////////////////////////////////////////////
+// File vettore.cpp
+#include "vettore.h"
+
+template <typename T> Vettore<T>::Vettore() {
+  // ...
+}
+
+template <typename T> Vettore<T>::Vettore(int N) {
+  // ...
+}
+
+template <typename T> T Vettore<T>::GetComponent(int i) const {
+  // ...
+}
+
+// Etc.
+```
+
+Ovviamente in questo caso le cose diventano più complicate, perché dovrete lavorare su più file e sarete costretti ad estendere anche il `Makefile` in modo che compili il nuovo file `vettore.cpp`! La prassi degli ultimi anni è quella di tenere l'intera definizione di una classe in un solo file `.h`, facendo a meno del `.cpp`: si parla in questo caso di [*header-only library*](https://en.wikipedia.org/wiki/Header-only), e la gestione del codice è molto più semplice. (In più, per un motivo legato al modo in cui funziona il *linker*, il compilatore è in grado di produrre codice più efficiente e veloce.)
+
+## Adeguamento funzioni
+
+Analogamente a quanto fatto sopra, adattiamo il file di funzioni in modo tale che possano lavorare con contenitori `Vettore` di tipo `template`. Come già ricordato, in presenza di `template` tutto deve essere codificato in un file `.h` e non nel file `.cpp`.
+
+```c++
+// File funzioni.h
+
+#pragma once
+
 #include <iostream>
 #include <fstream>
+#include <cstdlib>
 #include "vettore.h"
 
 using namespace std;
 
-template <typename T> Vettore<T> Read (size_t N , const char * filename) {
+template <typename T> Vettore<T> Read (int N , const char * filename) {
   ifstream in{filename};   // Parentesi graffe: uniform initialization
   Vettore<T> v{N};
   if(! in) {
@@ -135,7 +193,8 @@ template <typename T> Vettore<T> Read (size_t N , const char * filename) {
       exit(1);
   }
 
-  for (size_t i{}; i < N; i++) {
+  // Parentesi graffe: uniform initialization
+  for (int i{}; i < N; i++) {
       T val{};
       in >> val ;
       v.SetComponent(i, val);
@@ -149,7 +208,8 @@ template <typename T> Vettore<T> Read (size_t N , const char * filename) {
 }
 
 template <typename T> void Print(const Vettore<T> & v) {
-  for (size_t k{}; k < v.GetN(); k++) {
+  // Parentesi graffe: uniform initialization
+  for (int k{}; k < v.GetN(); k++) {
       cout << v.GetComponent(k) << endl;
   }
 }
@@ -158,10 +218,11 @@ template <typename T> void Print(const Vettore<T> & v, const char * filename) {
   ofstream out(filename);
   if(! out) {
     cerr << "Non posso creare il file " << filename << "\n";
-    return;
+    exit(1);
   }
 
-  for (size_t i{}; i < v.GetN(); i++) {
+  // Parentesi graffe: uniform initialization
+  for (int i{}; i < v.GetN(); i++) {
       out << v.GetComponent(i) << endl;
   }
 }
@@ -201,6 +262,8 @@ int main (int argc, char * argv[]) {
 
   Print(v);
 
+  // Se usate il flag -std=c++17, tutti questi <double> sono superflui e
+  // potete toglierli: provate!
   cout << "media = " << CalcolaMedia<double>(v) << endl;
   cout << "varianza = " << CalcolaVarianza<double>(v) << endl;
   cout << "mediana = " << CalcolaMediana<double>(v) << endl;
@@ -226,9 +289,9 @@ clean:
 
 # Esercizio 3.1 - Codice di analisi dati utilizzando la classe std::vector (da consegnare) {#esercizio-3.1}
 
--   Vediamo come possiamo ora fare uso di un contenitore “ufficiale” del c++, la classe `vector`. Questo particolare contenitore non è altro che una classe `template` sulla falsariga della nostra `Vettore`. La particolarità di questa classe sta nel fatto che la sua dimensione può non essere nota a priori: la costruzione del vettore può avvenire “aggiungendo in coda” con `push_back(x)` gli elementi `x` man mano che si rendono disponibili. Vedremo nel seguito alcuni esempi; è possibile trovare più materiale in [questa referenza](http://www.cplusplus.com/reference/vector/vector/).
--   Notate anche che per contenitori della STL (come `vector`) che stiamo andando ad utilizzare, esistono delle funzioni standard che possono essere utilizzate (vedi nel nostro esempio la funzione `sort`).
+Vediamo come possiamo ora fare uso di un contenitore “ufficiale” del c++, la classe `vector`. Questo particolare contenitore non è altro che una classe `template` sulla falsariga della nostra `Vettore`. La particolarità di questa classe sta nel fatto che la sua dimensione può non essere nota a priori: la costruzione del vettore può avvenire “aggiungendo in coda” con `push_back(x)` gli elementi `x` man mano che si rendono disponibili. Vedremo nel seguito alcuni esempi; è possibile trovare più materiale in [questa referenza](http://www.cplusplus.com/reference/vector/vector/).
 
+Notate anche che per contenitori della STL (come `vector`) che stiamo andando ad utilizzare, esistono delle funzioni standard che possono essere utilizzate (vedi nel nostro esempio la funzione `sort`).
 
 Vediamo passo passo come si può procedere.
 
@@ -237,6 +300,10 @@ Vediamo passo passo come si può procedere.
 Analogamente a quanto fatto sopra, adattiamo il file di funzioni in modo che ciascuna possa lavorare con contenitori `vector`. Come già ricordato, tutto deve essere codificato nell'*header file* della classe. Vediamo qualche funzione (quelle mancanti dovreste essere in grado di farle da soli):
 
 ```c++
+// File funzioni.h
+
+#pragma once
+
 #include <algorithm> // funzioni
 #include <cassert>
 #include <fstream>
@@ -245,18 +312,23 @@ Analogamente a quanto fatto sopra, adattiamo il file di funzioni in modo che cia
 
 using namespace std;
 
-template <typename T> vector<T> Read(size_t N, const char* filename) {
+template <typename T> vector<T> Read(int N, const char* filename) {
+  // Crea un vettore “vuoto”, ossia privo di elementi
   vector<T> v;
+  
   ifstream in{filename};
   if(in) {
       cerr << "Impossibile aprire il file " << filename << "\n";
       exit(1);
   }
 
-  for (size_t i{}; i < N; i++) {
+  for (int i{}; i < N; i++) {
       T val{};
       in >> val;
+      
+      // Aggiungi in coda a `v` un nuovo elemento
       v.push_back(val);
+      
       if(in.eof()) {
           cerr << "Fine del file raggiunta prematuramente\n";
           exit(1);
@@ -267,7 +339,21 @@ template <typename T> vector<T> Read(size_t N, const char* filename) {
 }
 
 template <typename T> void Print(const vector<T> & v) {
-  for (size_t i{}; i < v.size(); i++) {
+  // Purtroppo è necessario usare (int) sul risultato di vector::size(),
+  // altrimenti il compilatore produce un warning.
+  //
+  // Se il vostro compilatore supporta il C++20, potete usare `ssize()`:
+  //
+  // for (int i{}; i < ssize(v); i++) {
+  //    cout << v[i] << endl;
+  //
+  // In Replit, è sufficiente mettere nel Makefile `--std=c++20` anziché
+  // `--std=c++17` per abilitare `ssize()`, che è molto comodo!
+  //
+  // Se usate i computer del laboratorio, purtroppo implementano un
+  // compilatore troppo vecchio per supportare ssize().
+
+  for (int i{}; i < (int) v.size(); i++) {
       cout << v[i] << endl;
 }
 
@@ -279,7 +365,8 @@ template <typename T> void Print(const vector<T> & v, const char * filename) {
       return;
   }
 
-  for (size_t i{}; i < v.size(); i++) {
+  // Anche qui bisogna usare (int), oppure invocare `ssize()`.
+  for (int i{}; i < (int) v.size(); i++) {
       out << v[i] << endl;
   }
 }
@@ -292,7 +379,7 @@ template <typename T> void Print(const vector<T> & v, const char * filename) {
 
 In altre parole, le parentesi graffe usate con un `std::vector` indicano *l'elenco degli elementi da inserire*, e non il numero di elementi da allocare! Nelle future lezioni vedremo che ciò è molto utile, ma è importante ricordarsi della differenza!
 
-Ecco l'esempio della funzione `CalcolaMediana`: notate l'utilizzo della funzione `sort()` della STL per ordinare gli elementi di un contenitore. Quando possibile, usiamo funzioni e algoritmi ufficiali! La funzione `sort()` lavora con un iteratore al primo elemento del contenitore (`v.begin()`) e uno all'ultimo (+1) (`v.end()`). I contenitori della STL come `vector` hanno i due metodi `begin()` e `end()`, e le funzioni STL in genere lavorano con iteratori: in questo modo la funzione può lavorare indifferentemente su ogni tipo di contenitore, indipendentemente dalla struttura interna del contenitore.
+Ecco l'esempio della funzione `CalcolaMediana`: notate l'utilizzo della funzione `sort()` della STL per ordinare gli elementi di un contenitore. Quando possibile, usiamo funzioni e algoritmi ufficiali! La funzione `sort()` lavora con un iteratore al primo elemento del contenitore (`v.begin()`) e uno all'ultimo (+1) (`v.end()`). I contenitori della STL come `vector` hanno i due metodi `begin()` e `end()`, e le funzioni STL hanno storicamente lavorano con iteratori: in questo modo la funzione può lavorare indifferentemente su ogni tipo di contenitore, indipendentemente dalla struttura interna del contenitore.
 
 ```c++
 template <typename T> double CalcolaMediana(vector<T> v) {
@@ -308,6 +395,8 @@ template <typename T> double CalcolaMediana(vector<T> v) {
   return mediana;
 }
 ```
+
+C'è da dire che con il nuovo standard C++20 si sta abbandonando la programmazione con gli iteratori per usare i [*range*](https://en.cppreference.com/w/cpp/ranges), più espressivi e semplici da usare. Siccome però i computer del laboratorio non supportano questa versione del C++, non affronteremo i *range* nelle esercitazioni.
 
 ## Il codice principale
 
@@ -334,6 +423,7 @@ int main(int argc, char * argv[]) {
 
   Print(v);
 
+  // Come già scritto sopra, in C++17 i <double> sono superflui.
   cout << "media " << CalcolaMedia<double>(v) << endl;
   cout << "varianza " << CalcolaVarianza<double>(v) << endl;
   cout << "mediana " << CalcolaMediana<double>(v) << endl;
@@ -441,7 +531,7 @@ int main(int argc, char * argv[]) {
   TH1F histo{"histo", "histo", 100, -10, 100};
   histo.StatOverflows(true);
 
-  for (size_t k{}; k < v.size(); k++) {
+  for (int k{}; k < v.size(); k++) {
       histo.Fill(v[k]);
   }
   
@@ -462,7 +552,7 @@ int main(int argc, char * argv[]) {
 
 Ecco come dobbiamo modificare il `Makefile` per compilare includendo oggetti di ROOT:
 
-```c++
+```makefile
 LIBS := `root-config --libs`
 CXXFLAGS := -g -Wall --pedantic -std=c++17 `root-config --cflags`
 
@@ -491,3 +581,5 @@ I path vengono memorizzati nelle variabili `LIBS` e `CXXFLAGS`. Queste due varia
 # Errori comuni
 
 Gli errori che gli studenti hanno fatto negli anni precedenti sono simili a quelli elencati per la [prima lezione](carminati-esercizi-01.html#errori-comuni).
+
+Ogni anno molti studenti hanno difficoltà ad usare ROOT, che è oggettivamente una libreria molto complessa e non semplice da installare né da usare. Per la lezione di oggi la consegna dell'esercizio 3.2 richiede però espressamente di usare ROOT. Se avete sinora usato il vostro portatile ma avete difficoltà ad installare ROOT su di esso, vi consiglio di usare Replit o i computer del laboratorio **solo per l'esercizio 3.2**; nelle prossime lezioni fornirò il link ad una libreria più semplice da installare ed usare, che funzionerà anche se usate Windows.

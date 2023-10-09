@@ -116,13 +116,17 @@ Potete svolgere gli esercizi in uno dei modi seguenti:
 
 -   **Non** premete quello che sembra essere il pulsante on/off del monitor, perché in realtà **spegne il computer** (e manda una segnalazione al centro di calcolo).
 
--   Vi consiglio di usare come editor [Visual Studio Code](https://code.visualstudio.com/), che è installato sui computer del laboratorio. Se usate questi computer, configuratelo **subito** con lo script
+-   Vi consiglio di usare come editor [Visual Studio Code](https://code.visualstudio.com/), che è installato sui computer del laboratorio. Attenzione però: la configurazione di default di VSCode causa problemi sui computer del laboratorio!
 
-    ```
-    /home/comune/labTNDS_programmi/configure_vscode.py
-    ```
-    
-    altrimenti riempirà tutta la vostra quota disco appena iniziate ad usarlo, e il computer inizierà a non funzionare più.
+# Sistemare VSCode
+
+-   Il problema è che di default VS Code richiede 5 GB di spazio su disco per ottimizzare i suggerimenti di completamento della sintassi (vedi [discussione](https://github.com/microsoft/vscode-cpptools/issues/3347)).
+
+-   È possibile disabilitare la cache o ridurla a un valore ragionevole modificando nelle impostazioni di VS Code la voce *Intellisense cache size* (vedi video seguente).
+
+---
+
+<iframe src="https://player.vimeo.com/video/630209637?h=fcc3022dd1&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" width="854" height="642" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen title="How to reduce the size of Intellisense cache"></iframe>
 
 
 # Usare Visual Studio Code
