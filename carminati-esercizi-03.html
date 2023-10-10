@@ -384,33 +384,20 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb6-1"><a href="#c
 <span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>  T <span class="op">*</span> <span class="va">m_v</span><span class="op">;</span></span>
 <span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span>
 <span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a><span class="co">////////////////////////////////////////////////////////////////////////////////</span></span>
-<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a><span class="co">// File vettore.cpp</span></span>
-<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;vettore.h&quot;</span></span>
-<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a><span class="kw">template</span> <span class="op">&lt;</span><span class="kw">typename</span> T<span class="op">&gt;</span> Vettore<span class="op">&lt;</span>T<span class="op">&gt;::</span>Vettore<span class="op">()</span> <span class="op">{</span></span>
-<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a>  <span class="co">// ...</span></span>
-<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
-<span id="cb6-36"><a href="#cb6-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-37"><a href="#cb6-37" aria-hidden="true" tabindex="-1"></a><span class="kw">template</span> <span class="op">&lt;</span><span class="kw">typename</span> T<span class="op">&gt;</span> Vettore<span class="op">&lt;</span>T<span class="op">&gt;::</span>Vettore<span class="op">(</span><span class="dt">int</span> N<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb6-38"><a href="#cb6-38" aria-hidden="true" tabindex="-1"></a>  <span class="co">// ...</span></span>
-<span id="cb6-39"><a href="#cb6-39" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
-<span id="cb6-40"><a href="#cb6-40" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-41"><a href="#cb6-41" aria-hidden="true" tabindex="-1"></a><span class="kw">template</span> <span class="op">&lt;</span><span class="kw">typename</span> T<span class="op">&gt;</span> T Vettore<span class="op">&lt;</span>T<span class="op">&gt;::</span>GetComponent<span class="op">(</span><span class="dt">int</span> i<span class="op">)</span> <span class="at">const</span> <span class="op">{</span></span>
-<span id="cb6-42"><a href="#cb6-42" aria-hidden="true" tabindex="-1"></a>  <span class="co">// ...</span></span>
-<span id="cb6-43"><a href="#cb6-43" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
-<span id="cb6-44"><a href="#cb6-44" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-45"><a href="#cb6-45" aria-hidden="true" tabindex="-1"></a><span class="co">// Etc.</span></span></code></pre></div>
-<p>Ovviamente in questo caso le cose diventano più complicate, perché
-dovrete lavorare su più file e sarete costretti ad estendere anche il
-<code>Makefile</code> in modo che compili il nuovo file
-<code>vettore.cpp</code>! La prassi degli ultimi anni è quella di tenere
-l’intera definizione di una classe in un solo file <code>.h</code>,
-facendo a meno del <code>.cpp</code>: si parla in questo caso di <a
-href="https://en.wikipedia.org/wiki/Header-only"><em>header-only
-library</em></a>, e la gestione del codice è molto più semplice. (In
-più, per un motivo legato al modo in cui funziona il <em>linker</em>, il
-compilatore è in grado di produrre codice più efficiente e veloce.)</p>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a><span class="kw">template</span> <span class="op">&lt;</span><span class="kw">typename</span> T<span class="op">&gt;</span> Vettore<span class="op">&lt;</span>T<span class="op">&gt;::</span>Vettore<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a>  <span class="co">// ...</span></span>
+<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a><span class="kw">template</span> <span class="op">&lt;</span><span class="kw">typename</span> T<span class="op">&gt;</span> Vettore<span class="op">&lt;</span>T<span class="op">&gt;::</span>Vettore<span class="op">(</span><span class="dt">int</span> N<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a>  <span class="co">// ...</span></span>
+<span id="cb6-36"><a href="#cb6-36" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb6-37"><a href="#cb6-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-38"><a href="#cb6-38" aria-hidden="true" tabindex="-1"></a><span class="kw">template</span> <span class="op">&lt;</span><span class="kw">typename</span> T<span class="op">&gt;</span> T Vettore<span class="op">&lt;</span>T<span class="op">&gt;::</span>GetComponent<span class="op">(</span><span class="dt">int</span> i<span class="op">)</span> <span class="at">const</span> <span class="op">{</span></span>
+<span id="cb6-39"><a href="#cb6-39" aria-hidden="true" tabindex="-1"></a>  <span class="co">// ...</span></span>
+<span id="cb6-40"><a href="#cb6-40" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb6-41"><a href="#cb6-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-42"><a href="#cb6-42" aria-hidden="true" tabindex="-1"></a><span class="co">// Etc.</span></span></code></pre></div>
 <h2 id="adeguamento-funzioni">Adeguamento funzioni</h2>
 <p>Analogamente a quanto fatto sopra, adattiamo il file di funzioni in
 modo tale che possano lavorare con contenitori <code>Vettore</code> di

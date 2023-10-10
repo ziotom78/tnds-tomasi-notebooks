@@ -148,9 +148,6 @@ private:
   T * m_v;
 };
 
-////////////////////////////////////////////////////////////////////////////////
-// File vettore.cpp
-#include "vettore.h"
 
 template <typename T> Vettore<T>::Vettore() {
   // ...
@@ -167,7 +164,6 @@ template <typename T> T Vettore<T>::GetComponent(int i) const {
 // Etc.
 ```
 
-Ovviamente in questo caso le cose diventano più complicate, perché dovrete lavorare su più file e sarete costretti ad estendere anche il `Makefile` in modo che compili il nuovo file `vettore.cpp`! La prassi degli ultimi anni è quella di tenere l'intera definizione di una classe in un solo file `.h`, facendo a meno del `.cpp`: si parla in questo caso di [*header-only library*](https://en.wikipedia.org/wiki/Header-only), e la gestione del codice è molto più semplice. (In più, per un motivo legato al modo in cui funziona il *linker*, il compilatore è in grado di produrre codice più efficiente e veloce.)
 
 ## Adeguamento funzioni
 
