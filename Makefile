@@ -18,6 +18,7 @@ all: \
 	carminati-esercizi-07.html \
 	carminati-esercizi-06.html \
 	carminati-esercizi-05.html \
+	carminati-esercizi-04.html \
 	carminati-esercizi-03.html \
 	carminati-esercizi-02.html \
 	carminati-esercizi-01.html \

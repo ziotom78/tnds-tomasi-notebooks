@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html  lang="it-IT"  dir="ltr">
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Lezione 4</title>
+        <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+        <link rel="apple-touch-icon-precomposed" href="images/apple-touch-icon.png">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/2.26.4/css/uikit.gradient.css">
+
+        <!-- <link rel="stylesheet" href="style.css"> -->
+        <link rel="stylesheet" href="https://cdn.rawgit.com/diversen/pandoc-uikit/master/style.css">
+        <link href="css/custom.css" rel="stylesheet" />
+        <link href="https://vjs.zencdn.net/5.4.4/video-js.css" rel="stylesheet" />
+        <script src="https://code.jquery.com/jquery-2.2.1.min.js"></script>
+        <!-- <script src="uikit.js"></script> -->
+        <script src="https://cdn.rawgit.com/diversen/pandoc-uikit/master/uikit.js"></script>
+        <!-- <script src="scripts.js"></script> -->
+        <script src="https://cdn.rawgit.com/diversen/pandoc-uikit/master/scripts.js"></script>
+        <!-- <script src="jquery.sticky-kit.js "></script> -->
+        <script src="https://cdn.rawgit.com/diversen/pandoc-uikit/master/jquery.sticky-kit.js"></script>
+
+        <meta name="generator" content="pandoc-uikit" />
+                <meta name="author" content="Leonardo Carminati" />
+                <meta name="author" content="Maurizio Tomasi" />
+                        <title>Lezione 4</title>
+        <style type="text/css">code{white-space: pre;}</style>
+                        <style type="text/css">
+            pre > code.sourceCode { white-space: pre; position: relative; }
+            pre > code.sourceCode > span { line-height: 1.25; }
+            pre > code.sourceCode > span:empty { height: 1.2em; }
+            .sourceCode { overflow: visible; }
+            code.sourceCode > span { color: inherit; text-decoration: inherit; }
+            div.sourceCode { margin: 1em 0; }
+            pre.sourceCode { margin: 0; }
+            @media screen {
+            div.sourceCode { overflow: auto; }
+            }
+            @media print {
+            pre > code.sourceCode { white-space: pre-wrap; }
+            pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+            }
+            pre.numberSource code
+              { counter-reset: source-line 0; }
+            pre.numberSource code > span
+              { position: relative; left: -4em; counter-increment: source-line; }
+            pre.numberSource code > span > a:first-child::before
+              { content: counter(source-line);
+                position: relative; left: -1em; text-align: right; vertical-align: baseline;
+                border: none; display: inline-block;
+                -webkit-touch-callout: none; -webkit-user-select: none;
+                -khtml-user-select: none; -moz-user-select: none;
+                -ms-user-select: none; user-select: none;
+                padding: 0 4px; width: 4em;
+                color: #aaaaaa;
+              }
+            pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+            div.sourceCode
+              {   }
+            @media screen {
+            pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+            }
+            code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+            code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+            code span.at { color: #7d9029; } /* Attribute */
+            code span.bn { color: #40a070; } /* BaseN */
+            code span.bu { color: #008000; } /* BuiltIn */
+            code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+            code span.ch { color: #4070a0; } /* Char */
+            code span.cn { color: #880000; } /* Constant */
+            code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+            code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+            code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+            code span.dt { color: #902000; } /* DataType */
+            code span.dv { color: #40a070; } /* DecVal */
+            code span.er { color: #ff0000; font-weight: bold; } /* Error */
+            code span.ex { } /* Extension */
+            code span.fl { color: #40a070; } /* Float */
+            code span.fu { color: #06287e; } /* Function */
+            code span.im { color: #008000; font-weight: bold; } /* Import */
+            code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+            code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+            code span.op { color: #666666; } /* Operator */
+            code span.ot { color: #007020; } /* Other */
+            code span.pp { color: #bc7a00; } /* Preprocessor */
+            code span.sc { color: #4070a0; } /* SpecialChar */
+            code span.ss { color: #bb6688; } /* SpecialString */
+            code span.st { color: #4070a0; } /* String */
+            code span.va { color: #19177c; } /* Variable */
+            code span.vs { color: #4070a0; } /* VerbatimString */
+            code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+        </style>
+                                            <script defer=""
+                                            src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js"></script>
+                                            <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+                                            </script>
+                                            <link rel="stylesheet"
+                                            href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css" />
+                               
+    </head>
+
+    <body>
+
+
+        <div class="uk-container uk-container-center uk-margin-top uk-margin-large-bottom">
+
+                        <div class="uk-grid" data-uk-grid-margin>
+                <div class="uk-width-1-1">
+                    <h1 class="uk-heading-large">Lezione 4</h1>
+                                        <h3 class="uk-heading-large">A.A.
+2023−2024</p></h3>
+                                                            <p class="uk-text-large">Leonardo
+Carminati</p>
+                                        <p class="uk-text-large">Maurizio
+Tomasi</p>
+                                    </div>
+            </div>
+            
+            <div class="uk-grid" data-uk-grid-margin >          
+                <div class="uk-width-medium-1-4">
+                    <div class="uk-overflow-container" data-uk-sticky="{top:25,media: 768}">
+                        <div class="uk-panel uk-panel-box menu-begin" >
+
+                                                        <ul>
+                                                        <li><a
+                                                        href="#esercizio-4.0"
+                                                        id="toc-esercizio-4.0">Esercizio
+                                                        4.0 — Misura del
+                                                        rapporto <span
+                                                        class="math inline">q/m</span>
+                                                        per l’elettrone
+                                                        (analisi
+                                                        dati)</a>
+                                                        <ul>
+                                                        <li><a
+                                                        href="#esempio-di-codice"
+                                                        id="toc-esempio-di-codice">Esempio
+                                                        di
+                                                        codice</a></li>
+                                                        </ul></li>
+                                                        <li><a
+                                                        href="#esercizio-4.1"
+                                                        id="toc-esercizio-4.1">Esercizio
+                                                        4.1 — Misura
+                                                        della carica
+                                                        dell’elettrone
+                                                        (anslisi
+                                                        dati)</a>
+                                                        <ul>
+                                                        <li><a
+                                                        href="#esempio-di-codice-1"
+                                                        id="toc-esempio-di-codice-1">Esempio
+                                                        di
+                                                        codice</a></li>
+                                                        </ul></li>
+                                                        <li><a
+                                                        href="#esercizio-4.2"
+                                                        id="toc-esercizio-4.2">Esercizio
+                                                        4.2 —
+                                                        Determinazione
+                                                        del cammino
+                                                        minimo
+                                                        (approfondimento
+                                                        uso STL)</a>
+                                                        <ul>
+                                                        <li><a
+                                                        href="#esempio-di-codice-2"
+                                                        id="toc-esempio-di-codice-2">Esempio
+                                                        di
+                                                        codice</a></li>
+                                                        </ul></li>
+                                                        </ul>
+                            
+                        </div>
+                    </div>
+                </div>
+
+                <div class="uk-width-medium-3-4">
+<p>[La pagina con la spiegazione originale degli esercizi si trova qui:
+<a href="https://labtnds.docs.cern.ch/Lezione4/Lezione4/"
+class="uri">https://labtnds.docs.cern.ch/Lezione4/Lezione4/</a>.]</p>
+<p>In questa lezione non ci sono esercizi da consegnare per l’esame. Vi
+proponiamo alcuni temi specifici che si possono affrontare con gli
+strumenti che abbiamo sviluppato sinora: l’analisi dei dati raccolti in
+un tipico esperimento del laboratorio di fisica (esperimento di Millikan
+e misura del rapporto <span class="math inline">q/m</span> per
+l’elettrone) e un semplice problema di riordinamento, per fare qualche
+esercizio con gli strumenti della STL.</p>
+<h1 id="esercizio-4.0">Esercizio 4.0 — Misura del rapporto <span
+class="math inline">q/m</span> per l’elettrone (analisi dati)</h1>
+<p>Un esperimento molto interessante che si svolge nel laboratorio di
+fisica riguarda la misura del rapporto tra la carica e la massa di un
+elettrone. Un fascio di elettroni di energia nota (determinata dal
+potenziale <span class="math inline">2\Delta V</span> applicato ai capi
+di un condensatore) viene deflesso da un campo magnetico opportunamente
+generato. Dalla misura del raggio di deflessione <span
+class="math inline">r</span> si può ricavare una stima del rapporto
+<span class="math inline">q/m</span>. La misura in laboratorio è
+piuttosto complessa a causa degli effetti sistematici sperimentali, ma
+il rapporto <span class="math inline">q/m</span> può essere determinato
+sfruttando la relazione <span class="math display"> (r B)^2 =
+\frac{m}q\,2\Delta V,
+</span> perché il rapporto è legato al coefficiente angolare della
+relazione.</p>
+<p>Nel file di dati sono riportate le misure prese in laboratorio: nella
+prima colonna il valore di <span class="math inline">2\Delta V</span>,
+nella seconda colonna il valore di <span class="math inline">(r
+B)^2</span> e nella terza l’errore sulla determinazione di <span
+class="math inline">(r B)^2</span>. Provate a scrivere un codice che
+pemetta di visualizzare i dati raccolti e determinare il rapporto <span
+class="math inline">q/m</span> ( in questo caso l’oggetto di ROOT più
+indicato è <a
+href="https://labtnds.docs.cern.ch/Survival/root/">TGraphErrors</a>.</p>
+<ul>
+<li><p>Il file di dati si chiama <a
+href="https://labtnds.docs.cern.ch/Lezione4/data_millikan.dat"><code>data_millikan.dat</code></a>.</p></li>
+<li><p>Potete provare a scrivere il codice da soli. In caso potete
+prendere ispirazione dall’esempio qui sotto.</p></li>
+</ul>
+<h2 id="esempio-di-codice">Esempio di codice</h2>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;cmath&gt;</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;fstream&gt;</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;vector&gt;</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;TApplication.h&quot;</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;TAxis.h&quot;</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;TF1.h&quot;</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;TGraphErrors.h&quot;</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;TLegend.h&quot;</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="kw">using</span> <span class="kw">namespace</span> std<span class="op">;</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> ParseFile<span class="op">(</span>string filename<span class="op">,</span> vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> <span class="op">&amp;</span>myx<span class="op">,</span> vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> <span class="op">&amp;</span>myy<span class="op">,</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>               vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> <span class="op">&amp;</span>myerry<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>  ifstream fin<span class="op">{</span>filename<span class="op">.</span>c_str<span class="op">()};</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> x<span class="op">,</span> y<span class="op">,</span> err<span class="op">;</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> <span class="op">(!</span>fin<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>    cerr <span class="op">&lt;&lt;</span> <span class="st">&quot;Cannot open file &quot;</span> <span class="op">&lt;&lt;</span> filename <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>    exit<span class="op">(</span><span class="dv">1</span><span class="op">);</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>  <span class="cf">while</span> <span class="op">(</span>fin <span class="op">&gt;&gt;</span> x <span class="op">&gt;&gt;</span> y <span class="op">&gt;&gt;</span> err<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>    myx<span class="op">.</span>push_back<span class="op">(</span>x<span class="op">);</span></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>    myy<span class="op">.</span>push_back<span class="op">(</span>y<span class="op">);</span></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>    myerry<span class="op">.</span>push_back<span class="op">(</span>err<span class="op">);</span></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>  fin<span class="op">.</span>close<span class="op">();</span></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>TGraphErrors DoPlot<span class="op">(</span>vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> myx<span class="op">,</span> vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> myy<span class="op">,</span></span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>                    vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> myerry<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>  TGraphErrors mygraph<span class="op">;</span></span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> k<span class="op">{};</span> k <span class="op">&lt;</span> <span class="op">(</span><span class="dt">int</span><span class="op">)</span> myx<span class="op">.</span>size<span class="op">();</span> k<span class="op">++)</span> <span class="op">{</span></span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>    mygraph<span class="op">.</span>SetPoint<span class="op">(</span>k<span class="op">,</span> myx<span class="op">[</span>k<span class="op">],</span> myy<span class="op">[</span>k<span class="op">]);</span></span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>    mygraph<span class="op">.</span>SetPointError<span class="op">(</span>k<span class="op">,</span> <span class="dv">0</span><span class="op">,</span> myerry<span class="op">[</span>k<span class="op">]);</span></span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> mygraph<span class="op">;</span></span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>  TApplication app<span class="op">{</span><span class="st">&quot;MyApp&quot;</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">0</span><span class="op">};</span></span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a>  vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> myx<span class="op">{};</span></span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a>  vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> myy<span class="op">{};</span></span>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a>  vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> myerry<span class="op">{};</span></span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a>  <span class="co">// read data from file</span></span>
+<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a>  ParseFile<span class="op">(</span><span class="st">&quot;data_eom.dat&quot;</span><span class="op">,</span> myx<span class="op">,</span> myy<span class="op">,</span> myerry<span class="op">);</span></span>
+<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a>  <span class="co">// create TGraphErrors</span></span>
+<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a>  TGraphErrors mygraph <span class="op">=</span> DoPlot<span class="op">(</span>myx<span class="op">,</span> myy<span class="op">,</span> myerry<span class="op">);</span></span>
+<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a>  <span class="co">// fit the TGraphErrors ( linear fit )</span></span>
+<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a>  TF1 <span class="op">*</span>myfun <span class="op">=</span> <span class="kw">new</span> TF1<span class="op">(</span><span class="st">&quot;fitfun&quot;</span><span class="op">,</span> <span class="st">&quot;[0]*x+[1]&quot;</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">1000</span><span class="op">);</span></span>
+<span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a>  mygraph<span class="op">.</span>Fit<span class="op">(</span>myfun<span class="op">);</span></span>
+<span id="cb1-68"><a href="#cb1-68" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> moe <span class="op">=</span> myfun<span class="op">-&gt;</span>GetParameter<span class="op">(</span><span class="dv">0</span><span class="op">);</span></span>
+<span id="cb1-69"><a href="#cb1-69" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> error <span class="op">=</span> sqrt<span class="op">(</span>pow<span class="op">(</span><span class="fl">1.</span> <span class="op">/</span> moe<span class="op">,</span> <span class="dv">4</span><span class="op">)</span> <span class="op">*</span> pow<span class="op">(</span>myfun<span class="op">-&gt;</span>GetParError<span class="op">(</span><span class="dv">0</span><span class="op">),</span> <span class="dv">2</span><span class="op">));</span></span>
+<span id="cb1-70"><a href="#cb1-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-71"><a href="#cb1-71" aria-hidden="true" tabindex="-1"></a>  cout <span class="op">&lt;&lt;</span> <span class="st">&quot;Valore di e/m dal fit = &quot;</span> <span class="op">&lt;&lt;</span> <span class="fl">1.</span> <span class="op">/</span> moe <span class="op">&lt;&lt;</span> <span class="st">&quot;+/-&quot;</span> <span class="op">&lt;&lt;</span> error <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span>
+<span id="cb1-72"><a href="#cb1-72" aria-hidden="true" tabindex="-1"></a>  cout <span class="op">&lt;&lt;</span> <span class="st">&quot;Valore del chi2 del fit = &quot;</span> <span class="op">&lt;&lt;</span> myfun<span class="op">-&gt;</span>GetChisquare<span class="op">()</span> <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span>
+<span id="cb1-73"><a href="#cb1-73" aria-hidden="true" tabindex="-1"></a>  cout <span class="op">&lt;&lt;</span> <span class="st">&quot;          prob del chi2 = &quot;</span> <span class="op">&lt;&lt;</span> myfun<span class="op">-&gt;</span>GetProb<span class="op">()</span> <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span>
+<span id="cb1-74"><a href="#cb1-74" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-75"><a href="#cb1-75" aria-hidden="true" tabindex="-1"></a>  <span class="co">// customise the plot, cosmetics</span></span>
+<span id="cb1-76"><a href="#cb1-76" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-77"><a href="#cb1-77" aria-hidden="true" tabindex="-1"></a>  mygraph<span class="op">.</span>Draw<span class="op">(</span><span class="st">&quot;AP&quot;</span><span class="op">);</span></span>
+<span id="cb1-78"><a href="#cb1-78" aria-hidden="true" tabindex="-1"></a>  mygraph<span class="op">.</span>SetMarkerStyle<span class="op">(</span><span class="dv">20</span><span class="op">);</span></span>
+<span id="cb1-79"><a href="#cb1-79" aria-hidden="true" tabindex="-1"></a>  mygraph<span class="op">.</span>SetMarkerSize<span class="op">(</span><span class="dv">1</span><span class="op">);</span></span>
+<span id="cb1-80"><a href="#cb1-80" aria-hidden="true" tabindex="-1"></a>  mygraph<span class="op">.</span>SetTitle<span class="op">(</span><span class="st">&quot;Misura e/m&quot;</span><span class="op">);</span></span>
+<span id="cb1-81"><a href="#cb1-81" aria-hidden="true" tabindex="-1"></a>  mygraph<span class="op">.</span>GetXaxis<span class="op">()-&gt;</span>SetTitle<span class="op">(</span><span class="st">&quot;2#DeltaV (V)&quot;</span><span class="op">);</span></span>
+<span id="cb1-82"><a href="#cb1-82" aria-hidden="true" tabindex="-1"></a>  mygraph<span class="op">.</span>GetYaxis<span class="op">()-&gt;</span>SetTitle<span class="op">(</span><span class="st">&quot;(B_{z}R)^</span><span class="sc">{2}</span><span class="st"> (T^</span><span class="sc">{2}</span><span class="st">m^</span><span class="sc">{2}</span><span class="st"> )&quot;</span><span class="op">);</span></span>
+<span id="cb1-83"><a href="#cb1-83" aria-hidden="true" tabindex="-1"></a>  TLegend leg<span class="op">(</span><span class="fl">0.15</span><span class="op">,</span> <span class="fl">0.7</span><span class="op">,</span> <span class="fl">0.3</span><span class="op">,</span> <span class="fl">0.85</span><span class="op">);</span></span>
+<span id="cb1-84"><a href="#cb1-84" aria-hidden="true" tabindex="-1"></a>  leg<span class="op">.</span>AddEntry<span class="op">(&amp;</span>mygraph<span class="op">,</span> <span class="st">&quot;data&quot;</span><span class="op">,</span> <span class="st">&quot;p&quot;</span><span class="op">);</span></span>
+<span id="cb1-85"><a href="#cb1-85" aria-hidden="true" tabindex="-1"></a>  leg<span class="op">.</span>AddEntry<span class="op">(</span>myfun<span class="op">,</span> <span class="st">&quot;fit&quot;</span><span class="op">,</span> <span class="st">&quot;l&quot;</span><span class="op">);</span></span>
+<span id="cb1-86"><a href="#cb1-86" aria-hidden="true" tabindex="-1"></a>  leg<span class="op">.</span>Draw<span class="op">(</span><span class="st">&quot;same&quot;</span><span class="op">);</span></span>
+<span id="cb1-87"><a href="#cb1-87" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-88"><a href="#cb1-88" aria-hidden="true" tabindex="-1"></a>  app<span class="op">.</span>Run<span class="op">();</span></span>
+<span id="cb1-89"><a href="#cb1-89" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-90"><a href="#cb1-90" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb1-91"><a href="#cb1-91" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<h1 id="esercizio-4.1">Esercizio 4.1 — Misura della carica
+dell’elettrone (anslisi dati)</h1>
+<p>La carica dell’elettrone è stata misurata per la prima volta nel 1909
+in uno storico esperimento dal fisico statunitense Robert Millikan.
+Questo esperimento si effettua anche nel laboratorio di fisica e
+consiste nel misurare la velocità di caduta o risalita di goccioline
+d’olio elettrizzate per strofinio in una regione con campo elettrico
+regolabile. Nel file di dati sono riportare le misure di carica
+elettrica (<span class="math inline">Q_i</span>) per un certo numero di
+goccioline osservate. Il valore della carica può essere determinato come
+il minimo della funzione <span class="math display">
+S(q) = \sum \left[\frac{Q_i}{k_i} - q\right]^2,
+</span> dove <span class="math inline">k_i</span> è il numero intero più
+vicino al rapporto <span class="math inline">Q_i / q</span>. Provate a
+scrivere un codice per rappresentare la funzione e determinare il valore
+della carica dell’elettrone.</p>
+<ul>
+<li>Il file di dati si chiama <a
+href="https://labtnds.docs.cern.ch/Lezione4/data_eom.dat"><code>data_eom.dat</code></a>.</li>
+<li>Potete provare a scrivere il codice da soli. In caso potete prendere
+ispirazione dall’esempio qui sotto.</li>
+</ul>
+<h2 id="esempio-di-codice-1">Esempio di codice</h2>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;cmath&gt;</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;fstream&gt;</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;iomanip&gt;</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;vector&gt;</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;TApplication.h&quot;</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;TAxis.h&quot;</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;TCanvas.h&quot;</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;TF1.h&quot;</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;TGraph.h&quot;</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;TH1F.h&quot;</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="kw">using</span> <span class="kw">namespace</span> std<span class="op">;</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="co">// ===========================================================</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="co">// Read data from file and store them in a vector</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="co">// ===========================================================</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> ParseFile<span class="op">(</span>string filename<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>  ifstream fin<span class="op">{</span>filename<span class="op">.</span>c_str<span class="op">()};</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>  vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> v<span class="op">;</span></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> val<span class="op">;</span></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> <span class="op">(!</span>fin<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>    cerr <span class="op">&lt;&lt;</span> <span class="st">&quot;Cannot open file &quot;</span> <span class="op">&lt;&lt;</span> filename <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>    exit<span class="op">(</span><span class="dv">1</span><span class="op">);</span></span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>  <span class="cf">while</span> <span class="op">(</span>fin <span class="op">&gt;&gt;</span> val<span class="op">)</span></span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>    v<span class="op">.</span>push_back<span class="op">(</span>val<span class="op">);</span></span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>  fin<span class="op">.</span>close<span class="op">();</span></span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> v<span class="op">;</span></span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a><span class="co">// ===========================================================</span></span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a><span class="co">// Compute S(q)</span></span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a><span class="co">// ===========================================================</span></span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> fun<span class="op">(</span><span class="dt">double</span> q<span class="op">,</span> vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> params<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> sum<span class="op">{};</span></span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> k<span class="op">{};</span> k <span class="op">&lt;</span> <span class="op">(</span><span class="dt">int</span><span class="op">)</span> params<span class="op">.</span>size<span class="op">();</span> k<span class="op">++)</span></span>
+<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a>    sum <span class="op">+=</span> pow<span class="op">(</span>q <span class="op">-</span> params<span class="op">[</span>k<span class="op">]</span> <span class="op">/</span> <span class="op">(</span>round<span class="op">(</span>params<span class="op">[</span>k<span class="op">]</span> <span class="op">/</span> q<span class="op">)),</span> <span class="dv">2</span><span class="op">);</span></span>
+<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> sum<span class="op">;</span></span>
+<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a><span class="co">// ===========================================================</span></span>
+<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a><span class="co">// Compute qmin</span></span>
+<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a><span class="co">// ===========================================================</span></span>
+<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> deriv<span class="op">(</span><span class="dt">double</span> qmin<span class="op">,</span> vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> params<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> sum<span class="op">{};</span></span>
+<span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> k<span class="op">{};</span> k <span class="op">&lt;</span> <span class="op">(</span><span class="dt">int</span><span class="op">)</span> params<span class="op">.</span>size<span class="op">();</span> k<span class="op">++)</span></span>
+<span id="cb2-58"><a href="#cb2-58" aria-hidden="true" tabindex="-1"></a>    sum <span class="op">+=</span> <span class="op">(</span>params<span class="op">[</span>k<span class="op">]</span> <span class="op">/</span> round<span class="op">(</span>params<span class="op">[</span>k<span class="op">]</span> <span class="op">/</span> qmin<span class="op">));</span></span>
+<span id="cb2-59"><a href="#cb2-59" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> sum <span class="op">/</span> params<span class="op">.</span>size<span class="op">();</span></span>
+<span id="cb2-60"><a href="#cb2-60" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb2-61"><a href="#cb2-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-62"><a href="#cb2-62" aria-hidden="true" tabindex="-1"></a><span class="co">// ===========================================================</span></span>
+<span id="cb2-63"><a href="#cb2-63" aria-hidden="true" tabindex="-1"></a><span class="co">// This can be used to actually minimse S(q)</span></span>
+<span id="cb2-64"><a href="#cb2-64" aria-hidden="true" tabindex="-1"></a><span class="co">// ===========================================================</span></span>
+<span id="cb2-65"><a href="#cb2-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-66"><a href="#cb2-66" aria-hidden="true" tabindex="-1"></a><span class="co">/*</span></span>
+<span id="cb2-67"><a href="#cb2-67" aria-hidden="true" tabindex="-1"></a><span class="co">double funROOT (double * q , double * params) {</span></span>
+<span id="cb2-68"><a href="#cb2-68" aria-hidden="true" tabindex="-1"></a><span class="co">  double sum{};</span></span>
+<span id="cb2-69"><a href="#cb2-69" aria-hidden="true" tabindex="-1"></a><span class="co">  for (int k{} ; k &lt; 64; k++)</span></span>
+<span id="cb2-70"><a href="#cb2-70" aria-hidden="true" tabindex="-1"></a><span class="co">    sum += pow(q[0] - params[k] / (round(params[k] / q[0])), 2);</span></span>
+<span id="cb2-71"><a href="#cb2-71" aria-hidden="true" tabindex="-1"></a><span class="co">  return sum;</span></span>
+<span id="cb2-72"><a href="#cb2-72" aria-hidden="true" tabindex="-1"></a><span class="co">}</span></span>
+<span id="cb2-73"><a href="#cb2-73" aria-hidden="true" tabindex="-1"></a><span class="co">*/</span></span>
+<span id="cb2-74"><a href="#cb2-74" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-75"><a href="#cb2-75" aria-hidden="true" tabindex="-1"></a><span class="co">// ===========================================================</span></span>
+<span id="cb2-76"><a href="#cb2-76" aria-hidden="true" tabindex="-1"></a><span class="co">// This code estimates the best value of qe from a set of</span></span>
+<span id="cb2-77"><a href="#cb2-77" aria-hidden="true" tabindex="-1"></a><span class="co">// measurements (drop charges)</span></span>
+<span id="cb2-78"><a href="#cb2-78" aria-hidden="true" tabindex="-1"></a><span class="co">// ===========================================================</span></span>
+<span id="cb2-79"><a href="#cb2-79" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-80"><a href="#cb2-80" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb2-81"><a href="#cb2-81" aria-hidden="true" tabindex="-1"></a>  TApplication app<span class="op">{</span><span class="dv">0</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">0</span><span class="op">};</span></span>
+<span id="cb2-82"><a href="#cb2-82" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-83"><a href="#cb2-83" aria-hidden="true" tabindex="-1"></a>  <span class="co">// read charges from file</span></span>
+<span id="cb2-84"><a href="#cb2-84" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-85"><a href="#cb2-85" aria-hidden="true" tabindex="-1"></a>  vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> charges<span class="op">{</span>ParseFile<span class="op">(</span><span class="st">&quot;data_millikan.dat&quot;</span><span class="op">)};</span></span>
+<span id="cb2-86"><a href="#cb2-86" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-87"><a href="#cb2-87" aria-hidden="true" tabindex="-1"></a>  <span class="co">// show charges distribution</span></span>
+<span id="cb2-88"><a href="#cb2-88" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-89"><a href="#cb2-89" aria-hidden="true" tabindex="-1"></a>  TCanvas can1<span class="op">{};</span></span>
+<span id="cb2-90"><a href="#cb2-90" aria-hidden="true" tabindex="-1"></a>  can1<span class="op">.</span>cd<span class="op">();</span></span>
+<span id="cb2-91"><a href="#cb2-91" aria-hidden="true" tabindex="-1"></a>  TH1F histo<span class="op">{</span><span class="st">&quot;cariche&quot;</span><span class="op">,</span> <span class="st">&quot;Charges distribution&quot;</span><span class="op">,</span> <span class="dv">100</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="fl">20e-19</span><span class="op">};</span></span>
+<span id="cb2-92"><a href="#cb2-92" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i<span class="op">{};</span> i <span class="op">&lt;</span> <span class="op">(</span><span class="dt">int</span><span class="op">)</span> charges<span class="op">.</span>size<span class="op">();</span> i<span class="op">++)</span> <span class="op">{</span></span>
+<span id="cb2-93"><a href="#cb2-93" aria-hidden="true" tabindex="-1"></a>    cout <span class="op">&lt;&lt;</span> charges<span class="op">[</span>i<span class="op">]</span> <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span>
+<span id="cb2-94"><a href="#cb2-94" aria-hidden="true" tabindex="-1"></a>    histo<span class="op">.</span>Fill<span class="op">(</span>charges<span class="op">[</span>i<span class="op">]);</span></span>
+<span id="cb2-95"><a href="#cb2-95" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb2-96"><a href="#cb2-96" aria-hidden="true" tabindex="-1"></a>  histo<span class="op">.</span>Draw<span class="op">();</span></span>
+<span id="cb2-97"><a href="#cb2-97" aria-hidden="true" tabindex="-1"></a>  histo<span class="op">.</span>GetXaxis<span class="op">()-&gt;</span>SetTitle<span class="op">(</span><span class="st">&quot;Charge [C]&quot;</span><span class="op">);</span></span>
+<span id="cb2-98"><a href="#cb2-98" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-99"><a href="#cb2-99" aria-hidden="true" tabindex="-1"></a>  TGraph g<span class="op">{};</span></span>
+<span id="cb2-100"><a href="#cb2-100" aria-hidden="true" tabindex="-1"></a>  <span class="dt">int</span> counter<span class="op">{</span><span class="dv">0</span><span class="op">};</span></span>
+<span id="cb2-101"><a href="#cb2-101" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> qmin<span class="op">{</span><span class="dv">0</span><span class="op">};</span></span>
+<span id="cb2-102"><a href="#cb2-102" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> sqmin<span class="op">{</span>DBL_MAX<span class="op">};</span></span>
+<span id="cb2-103"><a href="#cb2-103" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-104"><a href="#cb2-104" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> <span class="op">(</span><span class="dt">double</span> value<span class="op">{</span><span class="fl">1.4e-19</span><span class="op">};</span> value <span class="op">&lt;</span> <span class="fl">1.8e-19</span><span class="op">;</span> value <span class="op">+=</span> <span class="fl">0.001e-19</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb2-105"><a href="#cb2-105" aria-hidden="true" tabindex="-1"></a>    g<span class="op">.</span>SetPoint<span class="op">(</span>counter<span class="op">,</span> value<span class="op">,</span> fun<span class="op">(</span>value<span class="op">,</span> charges<span class="op">));</span></span>
+<span id="cb2-106"><a href="#cb2-106" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>fun<span class="op">(</span>value<span class="op">,</span> charges<span class="op">)</span> <span class="op">&lt;</span> sqmin<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb2-107"><a href="#cb2-107" aria-hidden="true" tabindex="-1"></a>      sqmin <span class="op">=</span> fun<span class="op">(</span>value<span class="op">,</span> charges<span class="op">);</span></span>
+<span id="cb2-108"><a href="#cb2-108" aria-hidden="true" tabindex="-1"></a>      qmin <span class="op">=</span> value<span class="op">;</span></span>
+<span id="cb2-109"><a href="#cb2-109" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb2-110"><a href="#cb2-110" aria-hidden="true" tabindex="-1"></a>    counter<span class="op">++;</span></span>
+<span id="cb2-111"><a href="#cb2-111" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb2-112"><a href="#cb2-112" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-113"><a href="#cb2-113" aria-hidden="true" tabindex="-1"></a>  cout <span class="op">&lt;&lt;</span> <span class="st">&quot;Found approximate minimum at q = &quot;</span> <span class="op">&lt;&lt;</span> qmin <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span>
+<span id="cb2-114"><a href="#cb2-114" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-115"><a href="#cb2-115" aria-hidden="true" tabindex="-1"></a>  TCanvas can2<span class="op">{};</span></span>
+<span id="cb2-116"><a href="#cb2-116" aria-hidden="true" tabindex="-1"></a>  can2<span class="op">.</span>cd<span class="op">();</span></span>
+<span id="cb2-117"><a href="#cb2-117" aria-hidden="true" tabindex="-1"></a>  g<span class="op">.</span>Draw<span class="op">(</span><span class="st">&quot;ALP&quot;</span><span class="op">);</span></span>
+<span id="cb2-118"><a href="#cb2-118" aria-hidden="true" tabindex="-1"></a>  g<span class="op">.</span>SetMarkerStyle<span class="op">(</span><span class="dv">20</span><span class="op">);</span></span>
+<span id="cb2-119"><a href="#cb2-119" aria-hidden="true" tabindex="-1"></a>  g<span class="op">.</span>SetMarkerSize<span class="op">(</span><span class="fl">0.5</span><span class="op">);</span></span>
+<span id="cb2-120"><a href="#cb2-120" aria-hidden="true" tabindex="-1"></a>  g<span class="op">.</span>SetTitle<span class="op">(</span><span class="st">&quot;Best charge value&quot;</span><span class="op">);</span></span>
+<span id="cb2-121"><a href="#cb2-121" aria-hidden="true" tabindex="-1"></a>  g<span class="op">.</span>GetXaxis<span class="op">()-&gt;</span>SetTitle<span class="op">(</span><span class="st">&quot;Charge (C)&quot;</span><span class="op">);</span></span>
+<span id="cb2-122"><a href="#cb2-122" aria-hidden="true" tabindex="-1"></a>  g<span class="op">.</span>GetYaxis<span class="op">()-&gt;</span>SetTitle<span class="op">(</span><span class="st">&quot;S(q) (C^</span><span class="sc">{2}</span><span class="st">)&quot;</span><span class="op">);</span></span>
+<span id="cb2-123"><a href="#cb2-123" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-124"><a href="#cb2-124" aria-hidden="true" tabindex="-1"></a>  <span class="co">/*</span></span>
+<span id="cb2-125"><a href="#cb2-125" aria-hidden="true" tabindex="-1"></a><span class="co">  TF1 myfun( &quot;charge&quot;,funROOT,1.5e-19 , 1.7E-19, 64);</span></span>
+<span id="cb2-126"><a href="#cb2-126" aria-hidden="true" tabindex="-1"></a><span class="co">  for ( int k{}; k &lt; 64; k++ ) myfun.SetParameter(k, charges[k]);</span></span>
+<span id="cb2-127"><a href="#cb2-127" aria-hidden="true" tabindex="-1"></a><span class="co">  cout &lt;&lt; myfun.GetMinimumX() &lt;&lt; endl ;</span></span>
+<span id="cb2-128"><a href="#cb2-128" aria-hidden="true" tabindex="-1"></a><span class="co">  */</span></span>
+<span id="cb2-129"><a href="#cb2-129" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-130"><a href="#cb2-130" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> mycharge<span class="op">{</span>deriv<span class="op">(</span>qmin<span class="op">,</span> charges<span class="op">)};</span></span>
+<span id="cb2-131"><a href="#cb2-131" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> uncer<span class="op">{</span></span>
+<span id="cb2-132"><a href="#cb2-132" aria-hidden="true" tabindex="-1"></a>    sqrt<span class="op">(</span>fun<span class="op">(</span>mycharge<span class="op">,</span> charges<span class="op">)</span> <span class="op">/</span> <span class="op">(</span>charges<span class="op">.</span>size<span class="op">()</span> <span class="op">*</span> <span class="op">(</span>charges<span class="op">.</span>size<span class="op">()</span> <span class="op">-</span> <span class="dv">1</span><span class="op">)))};</span></span>
+<span id="cb2-133"><a href="#cb2-133" aria-hidden="true" tabindex="-1"></a>  cout <span class="op">&lt;&lt;</span> <span class="st">&quot;Measured charge = &quot;</span> <span class="op">&lt;&lt;</span> mycharge <span class="op">&lt;&lt;</span> <span class="st">&quot; ± &quot;</span> <span class="op">&lt;&lt;</span> uncer <span class="op">&lt;&lt;</span> <span class="st">&quot;(stat only)&quot;</span></span>
+<span id="cb2-134"><a href="#cb2-134" aria-hidden="true" tabindex="-1"></a>       <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span>
+<span id="cb2-135"><a href="#cb2-135" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-136"><a href="#cb2-136" aria-hidden="true" tabindex="-1"></a>  app<span class="op">.</span>Run<span class="op">();</span></span>
+<span id="cb2-137"><a href="#cb2-137" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<h1 id="esercizio-4.2">Esercizio 4.2 — Determinazione del cammino minimo
+(approfondimento uso STL)</h1>
+<p>In questo esercizio possiamo provare ad approfondire l’uso di
+contenitori e algoritmi della STL. Proviamo ad affrontare questo
+problema: dato un set di punti nel piano cerchiamo il percorso che ci
+permette (partendo dall’origine) di toccare tutti i punti percorrendo la
+minor distanza possibile. Le coordinate dei punti si trovano in un file.
+Eventualmente cercate di produrre un grafico del percorso
+effettuato.</p>
+<ul>
+<li><p>Il file di dati è <a
+href="https://labtnds.docs.cern.ch/Lezione4/data_points.dat">data_points.dat</a></p></li>
+<li><p>Potete provare a scrivere il codice da soli. In caso potete
+prendere ispirazione dall’esempio qui sotto che implementa un algoritmo
+in stile <em>brute force</em> (nel codice si può anche trovare un
+esempio di overloading di <code>operator&lt;&lt;</code>, utile per
+semplificare la lettura da file).</p></li>
+</ul>
+<h2 id="esempio-di-codice-2">Esempio di codice</h2>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;TApplication.h&quot;</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;TAxis.h&quot;</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;TGraph.h&quot;</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;algorithm&gt;</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;cmath&gt;</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;fstream&gt;</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;string&gt;</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;vector&gt;</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="kw">using</span> <span class="kw">namespace</span> std<span class="op">;</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="co">// implementazione di una classe posizione</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Posizione <span class="op">{</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span><span class="op">:</span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>  Posizione<span class="op">()</span> <span class="op">:</span> <span class="va">m_x</span><span class="op">{},</span> <span class="va">m_y</span><span class="op">{},</span> <span class="va">m_z</span><span class="op">{}</span> <span class="op">{}</span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>  Posizione<span class="op">(</span><span class="dt">double</span> x<span class="op">,</span> <span class="dt">double</span> y<span class="op">,</span> <span class="dt">double</span> z<span class="op">)</span> <span class="op">:</span> <span class="va">m_x</span><span class="op">{</span>x<span class="op">},</span> <span class="va">m_y</span><span class="op">{</span>y<span class="op">},</span> <span class="va">m_z</span><span class="op">{</span>z<span class="op">}</span> <span class="op">{}</span></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>  <span class="kw">friend</span> <span class="bu">std::</span>istream<span class="op"> &amp;</span><span class="kw">operator</span><span class="op">&gt;&gt;(</span><span class="bu">std::</span>istream<span class="op"> &amp;</span>is<span class="op">,</span> Posizione <span class="op">&amp;</span>p<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>    string temp<span class="op">;</span></span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>    getline<span class="op">(</span>is<span class="op">,</span> temp<span class="op">,</span> <span class="ch">&#39;,&#39;</span><span class="op">);</span></span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>    p<span class="op">.</span><span class="va">m_x</span> <span class="op">=</span> stod<span class="op">(</span>temp<span class="op">);</span></span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>    getline<span class="op">(</span>is<span class="op">,</span> temp<span class="op">,</span> <span class="ch">&#39;,&#39;</span><span class="op">);</span></span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>    p<span class="op">.</span><span class="va">m_y</span> <span class="op">=</span> stod<span class="op">(</span>temp<span class="op">);</span></span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>    getline<span class="op">(</span>is<span class="op">,</span> temp<span class="op">,</span> <span class="ch">&#39;</span><span class="sc">\n</span><span class="ch">&#39;</span><span class="op">);</span></span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>    p<span class="op">.</span><span class="va">m_z</span> <span class="op">=</span> stod<span class="op">(</span>temp<span class="op">);</span></span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> is<span class="op">;</span></span>
+<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> getDistance<span class="op">()</span> <span class="at">const</span> <span class="op">{</span></span>
+<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> sqrt<span class="op">(</span><span class="va">m_x</span> <span class="op">*</span> <span class="va">m_x</span> <span class="op">+</span> <span class="va">m_y</span> <span class="op">*</span> <span class="va">m_y</span> <span class="op">+</span> <span class="va">m_z</span> <span class="op">*</span> <span class="va">m_z</span><span class="op">);</span></span>
+<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-40"><a href="#cb3-40" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> GetX<span class="op">()</span> <span class="at">const</span> <span class="op">{</span> <span class="cf">return</span> <span class="va">m_x</span><span class="op">;</span> <span class="op">}</span></span>
+<span id="cb3-41"><a href="#cb3-41" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> GetY<span class="op">()</span> <span class="at">const</span> <span class="op">{</span> <span class="cf">return</span> <span class="va">m_y</span><span class="op">;</span> <span class="op">}</span></span>
+<span id="cb3-42"><a href="#cb3-42" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> GetZ<span class="op">()</span> <span class="at">const</span> <span class="op">{</span> <span class="cf">return</span> <span class="va">m_z</span><span class="op">;</span> <span class="op">}</span></span>
+<span id="cb3-43"><a href="#cb3-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-44"><a href="#cb3-44" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> getDistance<span class="op">(</span>Posizione p<span class="op">)</span> <span class="at">const</span> <span class="op">{</span></span>
+<span id="cb3-45"><a href="#cb3-45" aria-hidden="true" tabindex="-1"></a>    <span class="dt">double</span> dx<span class="op">{</span>p<span class="op">.</span>GetX<span class="op">()</span> <span class="op">-</span> <span class="va">m_x</span><span class="op">};</span></span>
+<span id="cb3-46"><a href="#cb3-46" aria-hidden="true" tabindex="-1"></a>    <span class="dt">double</span> dy<span class="op">{</span>p<span class="op">.</span>GetY<span class="op">()</span> <span class="op">-</span> <span class="va">m_y</span><span class="op">};</span></span>
+<span id="cb3-47"><a href="#cb3-47" aria-hidden="true" tabindex="-1"></a>    <span class="dt">double</span> dz<span class="op">{</span>p<span class="op">.</span>GetZ<span class="op">()</span> <span class="op">-</span> <span class="va">m_z</span><span class="op">};</span></span>
+<span id="cb3-48"><a href="#cb3-48" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> sqrt<span class="op">(</span>dx <span class="op">*</span> dx <span class="op">+</span> dy <span class="op">*</span> dy <span class="op">+</span> dz <span class="op">*</span> dz<span class="op">);</span></span>
+<span id="cb3-49"><a href="#cb3-49" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb3-50"><a href="#cb3-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-51"><a href="#cb3-51" aria-hidden="true" tabindex="-1"></a>  <span class="dt">bool</span> <span class="kw">operator</span><span class="op">&lt;(</span><span class="at">const</span> Posizione <span class="op">&amp;</span>b<span class="op">)</span> <span class="at">const</span> <span class="op">{</span></span>
+<span id="cb3-52"><a href="#cb3-52" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="op">(</span>getDistance<span class="op">()</span> <span class="op">&gt;</span> b<span class="op">.</span>getDistance<span class="op">());</span></span>
+<span id="cb3-53"><a href="#cb3-53" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb3-54"><a href="#cb3-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-55"><a href="#cb3-55" aria-hidden="true" tabindex="-1"></a>  <span class="dt">void</span> printPositions<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb3-56"><a href="#cb3-56" aria-hidden="true" tabindex="-1"></a>    cout <span class="op">&lt;&lt;</span> <span class="st">&quot;Posizione : x = &quot;</span> <span class="op">&lt;&lt;</span> <span class="va">m_x</span> <span class="op">&lt;&lt;</span> <span class="st">&quot; y = &quot;</span> <span class="op">&lt;&lt;</span> <span class="va">m_y</span> <span class="op">&lt;&lt;</span> <span class="st">&quot; z = &quot;</span> <span class="op">&lt;&lt;</span> <span class="va">m_z</span></span>
+<span id="cb3-57"><a href="#cb3-57" aria-hidden="true" tabindex="-1"></a>         <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span>
+<span id="cb3-58"><a href="#cb3-58" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb3-59"><a href="#cb3-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-60"><a href="#cb3-60" aria-hidden="true" tabindex="-1"></a><span class="kw">private</span><span class="op">:</span></span>
+<span id="cb3-61"><a href="#cb3-61" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> <span class="va">m_x</span><span class="op">,</span> <span class="va">m_y</span><span class="op">,</span> <span class="va">m_z</span><span class="op">;</span></span>
+<span id="cb3-62"><a href="#cb3-62" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span>
+<span id="cb3-63"><a href="#cb3-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-64"><a href="#cb3-64" aria-hidden="true" tabindex="-1"></a><span class="co">// algoritmo di riordinamento dei vettore di punti</span></span>
+<span id="cb3-65"><a href="#cb3-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-66"><a href="#cb3-66" aria-hidden="true" tabindex="-1"></a><span class="kw">template</span> <span class="op">&lt;</span><span class="kw">typename</span> T<span class="op">&gt;</span> <span class="dt">void</span> findBestPath<span class="op">(</span>T start<span class="op">,</span> T end<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb3-67"><a href="#cb3-67" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-68"><a href="#cb3-68" aria-hidden="true" tabindex="-1"></a>  Posizione ref<span class="op">{};</span></span>
+<span id="cb3-69"><a href="#cb3-69" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> <span class="op">(</span><span class="kw">auto</span> it<span class="op">{</span>start<span class="op">};</span> it <span class="op">!=</span> end<span class="op">;</span> it<span class="op">++)</span> <span class="op">{</span></span>
+<span id="cb3-70"><a href="#cb3-70" aria-hidden="true" tabindex="-1"></a>    sort<span class="op">(</span>it<span class="op">,</span> end<span class="op">,</span> <span class="op">[&amp;](</span>Posizione i<span class="op">,</span> Posizione j<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb3-71"><a href="#cb3-71" aria-hidden="true" tabindex="-1"></a>      <span class="cf">return</span> i<span class="op">.</span>getDistance<span class="op">(</span>ref<span class="op">)</span> <span class="op">&lt;</span> j<span class="op">.</span>getDistance<span class="op">(</span>ref<span class="op">);</span></span>
+<span id="cb3-72"><a href="#cb3-72" aria-hidden="true" tabindex="-1"></a>    <span class="op">});</span></span>
+<span id="cb3-73"><a href="#cb3-73" aria-hidden="true" tabindex="-1"></a>    ref <span class="op">=</span> <span class="op">*</span>it<span class="op">;</span></span>
+<span id="cb3-74"><a href="#cb3-74" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb3-75"><a href="#cb3-75" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb3-76"><a href="#cb3-76" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-77"><a href="#cb3-77" aria-hidden="true" tabindex="-1"></a><span class="co">// main</span></span>
+<span id="cb3-78"><a href="#cb3-78" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-79"><a href="#cb3-79" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb3-80"><a href="#cb3-80" aria-hidden="true" tabindex="-1"></a>  TApplication app<span class="op">{</span><span class="st">&quot;myapp&quot;</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">0</span><span class="op">};</span></span>
+<span id="cb3-81"><a href="#cb3-81" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-82"><a href="#cb3-82" aria-hidden="true" tabindex="-1"></a>  string filename<span class="op">{</span><span class="st">&quot;data_points.dat&quot;</span><span class="op">};</span></span>
+<span id="cb3-83"><a href="#cb3-83" aria-hidden="true" tabindex="-1"></a>  ifstream f<span class="op">{</span>filename<span class="op">};</span></span>
+<span id="cb3-84"><a href="#cb3-84" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-85"><a href="#cb3-85" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> <span class="op">(!</span>f<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb3-86"><a href="#cb3-86" aria-hidden="true" tabindex="-1"></a>    cerr <span class="op">&lt;&lt;</span> <span class="st">&quot;Cannot open file &quot;</span> <span class="op">&lt;&lt;</span> filename <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span>
+<span id="cb3-87"><a href="#cb3-87" aria-hidden="true" tabindex="-1"></a>    exit<span class="op">(</span><span class="dv">1</span><span class="op">);</span></span>
+<span id="cb3-88"><a href="#cb3-88" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb3-89"><a href="#cb3-89" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-90"><a href="#cb3-90" aria-hidden="true" tabindex="-1"></a>  vector<span class="op">&lt;</span>Posizione<span class="op">&gt;</span> vp<span class="op">{};</span></span>
+<span id="cb3-91"><a href="#cb3-91" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-92"><a href="#cb3-92" aria-hidden="true" tabindex="-1"></a>  Posizione p<span class="op">{};</span></span>
+<span id="cb3-93"><a href="#cb3-93" aria-hidden="true" tabindex="-1"></a>  <span class="cf">while</span> <span class="op">(</span>f<span class="op">.</span>good<span class="op">())</span> <span class="op">{</span></span>
+<span id="cb3-94"><a href="#cb3-94" aria-hidden="true" tabindex="-1"></a>    f <span class="op">&gt;&gt;</span> p<span class="op">;</span></span>
+<span id="cb3-95"><a href="#cb3-95" aria-hidden="true" tabindex="-1"></a>    vp<span class="op">.</span>push_back<span class="op">(</span>p<span class="op">);</span></span>
+<span id="cb3-96"><a href="#cb3-96" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb3-97"><a href="#cb3-97" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-98"><a href="#cb3-98" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> <span class="op">(</span><span class="kw">auto</span> it<span class="op">{</span>vp<span class="op">.</span>begin<span class="op">()};</span> it <span class="op">!=</span> vp<span class="op">.</span>end<span class="op">();</span> it<span class="op">++)</span></span>
+<span id="cb3-99"><a href="#cb3-99" aria-hidden="true" tabindex="-1"></a>    it<span class="op">-&gt;</span>printPositions<span class="op">();</span></span>
+<span id="cb3-100"><a href="#cb3-100" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-101"><a href="#cb3-101" aria-hidden="true" tabindex="-1"></a>  findBestPath<span class="op">&lt;</span>vector<span class="op">&lt;</span>Posizione<span class="op">&gt;::</span>iterator<span class="op">&gt;(</span>vp<span class="op">.</span>begin<span class="op">(),</span> vp<span class="op">.</span>end<span class="op">());</span></span>
+<span id="cb3-102"><a href="#cb3-102" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-103"><a href="#cb3-103" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> <span class="op">(</span><span class="kw">auto</span> it<span class="op">{</span>vp<span class="op">.</span>begin<span class="op">()};</span> it <span class="op">!=</span> vp<span class="op">.</span>end<span class="op">();</span> it<span class="op">++)</span></span>
+<span id="cb3-104"><a href="#cb3-104" aria-hidden="true" tabindex="-1"></a>    it<span class="op">-&gt;</span>printPositions<span class="op">();</span></span>
+<span id="cb3-105"><a href="#cb3-105" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-106"><a href="#cb3-106" aria-hidden="true" tabindex="-1"></a>  TGraph mygraph<span class="op">{};</span></span>
+<span id="cb3-107"><a href="#cb3-107" aria-hidden="true" tabindex="-1"></a>  mygraph<span class="op">.</span>SetPoint<span class="op">(</span><span class="dv">0</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">0</span><span class="op">);</span></span>
+<span id="cb3-108"><a href="#cb3-108" aria-hidden="true" tabindex="-1"></a>  <span class="dt">int</span> counter<span class="op">{</span><span class="dv">1</span><span class="op">};</span></span>
+<span id="cb3-109"><a href="#cb3-109" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> <span class="op">(</span><span class="kw">auto</span> it<span class="op">{</span>vp<span class="op">.</span>begin<span class="op">()};</span> it <span class="op">!=</span> vp<span class="op">.</span>end<span class="op">();</span> it<span class="op">++)</span> <span class="op">{</span></span>
+<span id="cb3-110"><a href="#cb3-110" aria-hidden="true" tabindex="-1"></a>    mygraph<span class="op">.</span>SetPoint<span class="op">(</span>counter<span class="op">,</span> <span class="op">(*</span>it<span class="op">).</span>GetX<span class="op">(),</span> <span class="op">(*</span>it<span class="op">).</span>GetY<span class="op">());</span></span>
+<span id="cb3-111"><a href="#cb3-111" aria-hidden="true" tabindex="-1"></a>    counter<span class="op">++;</span></span>
+<span id="cb3-112"><a href="#cb3-112" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb3-113"><a href="#cb3-113" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-114"><a href="#cb3-114" aria-hidden="true" tabindex="-1"></a>  mygraph<span class="op">.</span>GetXaxis<span class="op">()-&gt;</span>SetLimits<span class="op">(-</span><span class="dv">10</span><span class="op">,</span> <span class="dv">10</span><span class="op">);</span></span>
+<span id="cb3-115"><a href="#cb3-115" aria-hidden="true" tabindex="-1"></a>  mygraph<span class="op">.</span>SetMinimum<span class="op">(-</span><span class="dv">10</span><span class="op">);</span></span>
+<span id="cb3-116"><a href="#cb3-116" aria-hidden="true" tabindex="-1"></a>  mygraph<span class="op">.</span>SetMaximum<span class="op">(</span><span class="dv">10</span><span class="op">);</span></span>
+<span id="cb3-117"><a href="#cb3-117" aria-hidden="true" tabindex="-1"></a>  mygraph<span class="op">.</span>GetXaxis<span class="op">()-&gt;</span>SetTitle<span class="op">(</span><span class="st">&quot;X&quot;</span><span class="op">);</span></span>
+<span id="cb3-118"><a href="#cb3-118" aria-hidden="true" tabindex="-1"></a>  mygraph<span class="op">.</span>GetYaxis<span class="op">()-&gt;</span>SetTitle<span class="op">(</span><span class="st">&quot;Y&quot;</span><span class="op">);</span></span>
+<span id="cb3-119"><a href="#cb3-119" aria-hidden="true" tabindex="-1"></a>  mygraph<span class="op">.</span>SetTitle<span class="op">(</span><span class="st">&quot;Percorso&quot;</span><span class="op">);</span></span>
+<span id="cb3-120"><a href="#cb3-120" aria-hidden="true" tabindex="-1"></a>  mygraph<span class="op">.</span>SetMarkerStyle<span class="op">(</span><span class="dv">21</span><span class="op">);</span></span>
+<span id="cb3-121"><a href="#cb3-121" aria-hidden="true" tabindex="-1"></a>  mygraph<span class="op">.</span>SetMarkerSize<span class="op">(</span><span class="dv">1</span><span class="op">);</span></span>
+<span id="cb3-122"><a href="#cb3-122" aria-hidden="true" tabindex="-1"></a>  mygraph<span class="op">.</span>SetLineColor<span class="op">(</span><span class="dv">6</span><span class="op">);</span></span>
+<span id="cb3-123"><a href="#cb3-123" aria-hidden="true" tabindex="-1"></a>  mygraph<span class="op">.</span>Draw<span class="op">(</span><span class="st">&quot;ALP&quot;</span><span class="op">);</span></span>
+<span id="cb3-124"><a href="#cb3-124" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-125"><a href="#cb3-125" aria-hidden="true" tabindex="-1"></a>  app<span class="op">.</span>Run<span class="op">();</span></span>
+<span id="cb3-126"><a href="#cb3-126" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>                    
+                </div>
+            </div>
+
+            <script src="https://vjs.zencdn.net/5.4.4/video.js"></script>
+        </div>
+    </body>
+</html>
