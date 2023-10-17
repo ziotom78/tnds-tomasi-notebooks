@@ -39,13 +39,12 @@ raccolti e determinare il rapporto $q/m$ ( in questo caso l'oggetto di
 ROOT più indicato è
 [TGraphErrors](https://labtnds.docs.cern.ch/Survival/root/).
 
--   Il file di dati si chiama
-    [`data_millikan.dat`](https://labtnds.docs.cern.ch/Lezione4/data_millikan.dat).
+Il file di dati si chiama
+    [`data_eom.dat`](https://labtnds.docs.cern.ch/Lezione4/data_eom.dat).
+    Potete provare a scrivere il codice da soli. In caso potete
+    prendere ispirazione dagli esempi riportati sotto
 
--   Potete provare a scrivere il codice da soli. In caso potete
-    prendere ispirazione dall'esempio qui sotto.
-
-## Esempio di codice
+## Esempio di codice con ROOT
 
 ```c++
 #include <cmath>
@@ -139,7 +138,270 @@ int main() {
 
   return 0;
 }
-```    
+```
+
+## Esempio di codice con GnuPlot e FmtLib
+
+È possibile usare la libreria
+[gplot++](https://github.com/ziotom78/gplotpp) per produrre grafici: è
+molto più leggera di ROOT, funziona bene anche con Replit e si può
+usare facilmente sotto ogni sistema operativo (Windows, Linux, Mac OS
+X). La libreria però non fornisce funzioni di analisi dati, così
+dobbiamo implementare noi la funzione per la regressione lineare:
+
+```c++
+// File linearfit.h
+#pragma once
+
+#include <cassert>
+#include <cmath>
+#include <vector>
+
+/**
+ * Result of a linear fit of the form y_i = A + B × x_i
+ *
+ * @tparam T The floating-point type to use. Typically it's either `float`,
+ * `double`, or `long double`
+ */
+template <typename T> struct LinearFitResults {
+  T a;
+  T a_err;
+  T b;
+  T b_err;
+};
+
+/** Perform a least-squares linear fit of samples (x_i, y_i) using the model y_i
+ * = A + B × x_i
+ *
+ * This code implements a simple weighted least-squares algorithm, using the
+ * formulae provided in «Numerical Recipes» (Press, Teukolsky, Vetterling,
+ * Flannery, 3rd edition), Eqq. 15.2.16–21. These formulae are basically the
+ * same as the ones provided in «An Introduction to Error Analysis: The Study of
+ * Uncertainties in Physical Measurements» (Taylor), but it is more robust
+ * against rounding errors, thanks to the usage of the variable t_i.
+ *
+ * @tparam T The floating-point data type used to do all the calculations
+ * @param x_vec The vector of samples x_i
+ * @param y_vec The vector of samples y_i
+ * @param y_err_vec
+ * @return
+ */
+template <typename T>
+LinearFitResults<T> linear_fit(const std::vector<T> &x_vec,
+                               const std::vector<T> &y_vec,
+                               const std::vector<T> &y_err_vec) {
+  assert(x_vec.size() == y_vec.size());
+  assert(y_vec.size() == y_err_vec.size());
+  const int num_of_samples{(int) x_vec.size()};
+
+  // See Numerical recipes, Eqq. 15.2.16–21
+
+  // S = ∑ w_i = ∑ 1/σ_i²
+  T S{};
+
+  // Sx = ∑ w_i x_i
+  T Sx{};
+
+  // Sx2 = ∑ w_i x_i²
+  T Sx2{};
+
+  // Sy = ∑ w_i y_i
+  T Sy{};
+
+  for (int i{}; i < (int) num_of_samples; ++i) {
+    auto x{x_vec.at(i)};
+    auto y{y_vec.at(i)};
+    auto w{1.0 / std::pow(y_err_vec.at(i), 2)};
+    S += w;
+    Sx += w * x;
+    Sx2 += w * std::pow(x, 2);
+    Sy += w * y;
+  }
+
+  // Stt = ∑ t_i², with t_i = (x_i - Sx / S) / σ_i
+  T Stt{};
+  // Stys = ∑ t_i y_i / σ_i
+  T Stys{};
+
+  for (int i{}; i < (int) num_of_samples; ++i) {
+    auto x = x_vec.at(i);
+    auto y = y_vec.at(i);
+    auto y_err = y_err_vec.at(i);
+    auto t = (x - Sx / S) / y_err;
+    Stt += std::pow(t, 2);
+    Stys += t * y / y_err;
+  }
+
+  T b{Stys / Stt};
+  T a{(Sy - Sx * b) / S};
+  T b_err{std::sqrt(1 / Stt)};
+  T a_err{std::sqrt((1 + Sx2 / (S * Stt)) / S)};
+
+  return LinearFitResults<T>{a, a_err, b, b_err};
+}
+```
+
+Con questo file si può usare il programma seguente, che memorizza
+tutti i dati in una struttura `Measurements`. Il programma usa la
+libreria [fmtlib](https://github.com/fmtlib/fmt), che permette di
+scrivere in maniera più semplice messaggi all'utente. Vedremo meglio
+sia gplot++ che fmtlib nella prossima lezione, se volete provare ad
+installarle già oggi le istruzioni sono a questi link:
+[gplot](index.html#gplotinstall), [fmtlib](index.html#fmtinstall).
+
+```c++
+#include "fmtlib.h"
+#include "gplot++.h"
+#include "linearfit.h"
+#include <cmath>
+#include <fstream>
+#include <iostream>
+#include <string>
+#include <vector>
+
+using namespace std;
+
+template <typename T> struct Measurements {
+  vector<T> voltage;
+  vector<T> rb;
+  vector<T> rb_err;
+
+  int size() const { return (int) voltage.size(); }
+};
+
+/**
+ * Read the measurements of the q/m experiment from an input stream
+ *
+ * @tparam T The floating-point data type to use in the result
+ * @param input The input stream where to read data from
+ * @param data The object that will contain the result on exit
+ */
+template <typename T>
+void read_from_file(istream &input, Measurements<T> &data) {
+  T voltage, rb, rb_err;
+  while (input >> voltage >> rb >> rb_err) {
+    data.voltage.push_back(voltage);
+    data.rb.push_back(rb);
+    data.rb_err.push_back(rb_err);
+  }
+}
+
+template <typename T>
+void plot_data_and_fit(const string &filename, const Measurements<T> &data,
+                       T a, T b) {
+  Gnuplot gnuplot{};
+  gnuplot.redirect_to_png(filename);
+
+  // Plot the data that have been read from file
+  gnuplot.plot_yerr(data.voltage, data.rb, data.rb_err, "Measurements");
+
+  // Now plot the best-fit line y = A + B x by computing the coordinates of the
+  // leftmost and rightmost points
+  T x1{data.voltage.front()}, x2{data.voltage.back()};
+  T y1{a + x1 * b}, y2{a + x2 * b};
+  gnuplot.plot(vector<T>{x1, x2}, vector<T>{y1, y2}, "Best fit");
+
+  gnuplot.set_xlabel("2ΔV [V]");
+  gnuplot.set_ylabel("(r×B)² [m²·T²]");
+  gnuplot.show();
+
+  cerr << fmt::format("plot saved in file \"{}\"\n", filename);
+}
+
+int main(int argc, const char *argv[]) {
+  if (argc != 2) {
+    cerr << fmt::format("usage: {} DATA_FILE\n", argv[0]);
+    return 1;
+  }
+  const string file_name{argv[1]};
+  ifstream input_file{file_name};
+  if (!input_file) {
+    cerr << fmt::format("error, unable to load file \"{}\"\n", file_name);
+    return 1;
+  }
+
+  Measurements<float> data;
+  read_from_file(input_file, data);
+
+  cerr << fmt::format("{} elements have been read from \"{}\"\n", data.size(),
+                      file_name);
+
+  auto result = linear_fit(data.voltage, data.rb, data.rb_err);
+
+  fmt::print("Data have been fitted on a curve y = A + B × x:\n");
+  fmt::print("A = {:.4e} ± {:.4e}\n", result.a, result.a_err);
+  fmt::print("B = {:.4e} ± {:.4e}\n", result.b, result.b_err);
+
+  plot_data_and_fit("output_plot.png", data, result.a, result.b);
+
+  auto q_over_m{1 / result.b};
+  auto error{sqrt(pow(q_over_m, 4) * pow(result.b_err, 2))};
+
+  fmt::print("q/m = {:.4e} ± {:.4e}\n", q_over_m, error);
+}
+```
+
+
+## Esempio di codice in Python
+
+Python è probabilmente il linguaggio di programmazione più usato in
+ambito scientifico. Per quelli di voi curiosi, fornisco una
+implementazione dello stesso codice sopra usando questo linguaggio:
+
+```python
+#!/usr/bin/env python3
+
+# You must install NumPy and Matplotlib before running this code:
+#
+#     pip install numpy matplotlib
+
+import numpy as np
+import matplotlib.pylab as plt
+
+# np.loadtxt loads a text files and returns a N×3 matrix
+data = np.loadtxt("data_eom.dat")
+
+# With this instruction we save the three columns of the matrix
+# in the three vectors `x`, `y`, and `err`
+x, y, err = [data[:, i] for i in (0, 1, 2)]
+
+# Draw a plot
+plt.errorbar(x, y, yerr=err, fmt="o")
+
+# Compute the best fit with the model y = A + B x
+params, cov = np.polyfit(x, y, 1, w=1 / err, cov="unscaled")
+
+# The quantity m/e is the value of B
+m_over_e = params[0]
+
+# This adds the best fit to the previous plot
+plt.plot(x, np.polyval(params, x))
+
+plt.xlabel("2ΔV [V]")
+plt.ylabel("(rB)² [m² T²]")
+plot_file_name = "output.png"
+plt.savefig(plot_file_name)
+print(f"Plot saved in file {plot_file_name}")
+
+# √cov_00 is the error over the factor B
+m_over_e_err = np.sqrt(cov[0, 0])
+
+rel_error = m_over_e_err / m_over_e
+
+# We have m/e, but we must compute e/m, so we use error propagation here
+e_over_m = 1 / m_over_e
+e_over_m_err = rel_error * e_over_m
+
+# Strings beginning with `f` are treated similarly to the C++ fmt library
+print(f"e/m = {e_over_m:.2e} ± {e_over_m_err:.2e}")
+print("reference: 1.76×10^11 C⋅kg^−1")
+```
+
+Una volta che il programma è stato salvato in un file
+`esercizio4.0.py`, potete compilarlo ed eseguirlo con un solo comando:
+
+    python esercizio4.0.py
+
 
 # Esercizio 4.1 — Misura della carica dell'elettrone (anslisi dati)  {#esercizio-4.1}
 
@@ -165,7 +427,7 @@ determinare il valore della carica dell'elettrone.
     prendere ispirazione dall'esempio qui sotto.
 
 
-## Esempio di codice
+## Esempio di codice (ROOT)
 
 ```c++
 #include <cmath>
@@ -327,7 +589,7 @@ effettuato.
     la lettura da file).
 
 
-## Esempio di codice
+## Esempio di codice (ROOT)
   
 ```c++
 #include "TApplication.h"
