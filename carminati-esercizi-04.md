@@ -403,7 +403,7 @@ Una volta che il programma è stato salvato in un file
     python esercizio4.0.py
 
 
-# Esercizio 4.1 — Misura della carica dell'elettrone (anslisi dati)  {#esercizio-4.1}
+# Esercizio 4.1 — Misura della carica dell'elettrone (analisi dati)  {#esercizio-4.1}
 
 La carica dell'elettrone è stata misurata per la prima volta nel 1909
 in uno storico esperimento dal fisico statunitense Robert Millikan.
@@ -421,27 +421,36 @@ dove $k_i$ è il numero intero più vicino al rapporto $Q_i / q$.
 Provate a scrivere un codice per rappresentare la funzione e
 determinare il valore della carica dell'elettrone.
 
--   Il file di dati si chiama
-    [`data_eom.dat`](https://labtnds.docs.cern.ch/Lezione4/data_eom.dat).
--   Potete provare a scrivere il codice da soli. In caso potete
-    prendere ispirazione dall'esempio qui sotto.
+Il file di dati si chiama
+[`data_millikan.dat`](https://labtnds.docs.cern.ch/Lezione4/data_millikan.dat).
+Anche in questo caso vengono fornite più versioni dell'esercizio.
 
 
-## Esempio di codice (ROOT)
+## Parte comune
+
+Definiamo alcune funzioni generiche nei file `common.h` e `common.cpp`:
 
 ```c++
-#include <cmath>
-#include <fstream>
-#include <iomanip>
-#include <iostream>
-#include <vector>
+// common.h
+#pragma once
 
-#include "TApplication.h"
-#include "TAxis.h"
-#include "TCanvas.h"
-#include "TF1.h"
-#include "TGraph.h"
-#include "TH1F.h"
+#include <vector>
+#include <fstream>
+
+using namespace std;
+
+vector<double> ParseFile(string filename);
+double fun(double q, vector<double> params);
+double deriv(double qmin, vector<double> params);
+```
+
+L'implementazione di queste funzioni è nel file `common.cpp`:
+
+```c++
+#include "common.h"
+
+#include <iostream>
+#include <cmath>
 
 using namespace std;
 
@@ -473,10 +482,10 @@ vector<double> ParseFile(string filename) {
 
 double fun(double q, vector<double> params) {
   double sum{};
-  
-  for (int k{}; k < (int) params.size(); k++)
+
+  for (int k{}; k < (int)params.size(); k++)
     sum += pow(q - params[k] / (round(params[k] / q)), 2);
-  
+
   return sum;
 }
 
@@ -486,23 +495,34 @@ double fun(double q, vector<double> params) {
 
 double deriv(double qmin, vector<double> params) {
   double sum{};
-  for (int k{}; k < (int) params.size(); k++)
+  for (int k{}; k < (int)params.size(); k++)
     sum += (params[k] / round(params[k] / qmin));
   return sum / params.size();
 }
+```
 
-// ===========================================================
-// This can be used to actually minimse S(q)
-// ===========================================================
+## Esempio di codice (ROOT)
 
-/*
-double funROOT (double * q , double * params) {
-  double sum{};
-  for (int k{} ; k < 64; k++)
-    sum += pow(q[0] - params[k] / (round(params[k] / q[0])), 2);
-  return sum;
-}
-*/
+Sfruttando i file `common.h` e `common.cpp`, possiamo ora fornire una
+implementazione del programma che usa le librerie ROOT:
+
+```c++
+#include <cmath>
+#include <fstream>
+#include <iomanip>
+#include <iostream>
+#include <vector>
+
+#include "TApplication.h"
+#include "TAxis.h"
+#include "TCanvas.h"
+#include "TF1.h"
+#include "TGraph.h"
+#include "TH1F.h"
+
+#include "common.h"
+
+using namespace std;
 
 // ===========================================================
 // This code estimates the best value of qe from a set of
@@ -521,8 +541,8 @@ int main() {
   TCanvas can1{};
   can1.cd();
   TH1F histo{"cariche", "Charges distribution", 100, 0, 20e-19};
-  for (int i{}; i < (int) charges.size(); i++) {
-	cout << charges[i] << endl;
+  for (int i{}; i < (int)charges.size(); i++) {
+    cout << charges[i] << endl;
     histo.Fill(charges[i]);
   }
   histo.Draw();
@@ -553,21 +573,109 @@ int main() {
   g.GetXaxis()->SetTitle("Charge (C)");
   g.GetYaxis()->SetTitle("S(q) (C^{2})");
 
-  /*
-  TF1 myfun( "charge",funROOT,1.5e-19 , 1.7E-19, 64);
-  for ( int k{}; k < 64; k++ ) myfun.SetParameter(k, charges[k]);
-  cout << myfun.GetMinimumX() << endl ;
-  */
-
   double mycharge{deriv(qmin, charges)};
   double uncer{
-	sqrt(fun(mycharge, charges) / (charges.size() * (charges.size() - 1)))};
+      sqrt(fun(mycharge, charges) / (charges.size() * (charges.size() - 1)))};
   cout << "Measured charge = " << mycharge << " ± " << uncer << "(stat only)"
        << endl;
 
   app.Run();
 }
-```    
+```
+
+Vi consiglio di compilare nel `Makefile` i file `esercizio4.1.cpp` e
+`common.cpp` insieme, anziché creare i file `.o` e linkarli con un
+passaggio a parte: è molto più semplice!
+
+```make
+esercizio4.1: esercizio4.1.cpp common.cpp common.h
+    g++ -g -Wall --pedantic -std=c++17 -o esercizio4.1 esercizio4.1.cpp common.cpp
+```
+
+## Esempio (gplot++, fmtlib)
+
+Questa è invece una implementazione che usa
+[gplot++](https://github.com/ziotom78/gplotpp) e
+[fmtlib](https://github.com/fmtlib/fmt):
+
+```c++
+#include "gplot++.h"
+#include "fmtlib.h"
+#include <cmath>
+#include <cfloat>
+#include <fstream>
+#include <iomanip>
+#include <iostream>
+#include <vector>
+
+#include "common.h"
+
+using namespace std;
+
+// ===========================================================
+// This code estimates the best value of qe from a set of
+// measurements (drop charges)
+// ===========================================================
+
+int main() {
+  // read charges from file
+
+  vector<double> charges{ParseFile("data_millikan.dat")};
+
+  // show charges distribution
+  Gnuplot plt{};
+
+  plt.multiplot(2, 1, "Millikan");
+
+  plt.set_title("Charge distribution");
+  plt.set_xlabel("Charge [C]");
+  plt.set_ylabel("Number of counts");
+  plt.histogram(charges, 10);
+
+  plt.show();
+
+  double qmin{0};
+  double sqmin{DBL_MAX};
+
+  // These vector will contain the X,Y coordinates
+  // of the points to plot
+  vector<double> x_charge{};
+  vector<double> y_fun{};
+
+  for (double value{1.4e-19}; value < 1.8e-19; value += 0.001e-19) {
+    double cur_value{fun(value, charges)};
+    x_charge.push_back(value);
+    y_fun.push_back(cur_value);
+
+    if (cur_value < sqmin) {
+      sqmin = cur_value;
+      qmin = value;
+    }
+  }
+  plt.set_title("Best charge value");
+  plt.set_xlabel("Charge [C]");
+  plt.set_ylabel("S(q) [C²]");
+  plt.plot(x_charge, y_fun);
+
+  plt.show();
+
+  fmt::print("Found approximate minimum at q = {0:.4e} C\n", qmin);
+
+  double mycharge{deriv(qmin, charges)};
+  double uncer{
+      sqrt(fun(mycharge, charges) / (charges.size() * (charges.size() - 1)))};
+  fmt::print("Measured charge = {0:.4e} ± {1:.4e} C (stat only)\n", mycharge,
+             uncer);
+}
+```
+
+Come sopra, consiglio di compilare insieme `esercizio4.1.cpp` e
+`common.cpp` nel `Makefile`:
+
+```make
+esercizio4.1: esercizio4.1.cpp common.cpp common.h
+    g++ -g -Wall --pedantic -std=c++17 -o esercizio4.1 esercizio4.1.cpp common.cpp
+```
 
 # Esercizio 4.2 — Determinazione del cammino minimo (approfondimento uso STL)  {#esercizio-4.2}
 
