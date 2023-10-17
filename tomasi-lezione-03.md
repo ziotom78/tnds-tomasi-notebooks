@@ -43,7 +43,7 @@ void test_vettore() {
   }
 
   { // New scope: I can declare again a variable called `v`
-      Vettore<int> v{2};
+      Vettore<int> v(2);
       assert(v.GetN() == 2);
   
       v.SetComponent(0, 123);  // Test both SetComponent and operator[]=
