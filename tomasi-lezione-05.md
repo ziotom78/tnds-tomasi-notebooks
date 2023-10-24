@@ -294,7 +294,8 @@ int main(void) {
 -   Si può indicare lo *stream* su cui scrivere:
 
     ```c++
-    std::format::print(std::cerr, "Errore, il file '{}' non esiste!", filename);
+    // `stderr` è come `std::cerr` (e `stdout` è come `std::cout`)
+    std::format::print(stderr, "Errore, il file '{}' non esiste!", filename);
     ```
 
 -   Invece di stampare a video, si può salvare il risultato in una stringa usando `std::format::format` anziché `std::format::print`:

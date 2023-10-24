@@ -421,7 +421,8 @@ gettext</a>.</p></li>
 <ul>
 <li><p>Si può indicare lo <em>stream</em> su cui scrivere:</p>
 <div class="sourceCode" id="cb15"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="bu">std::</span>format<span class="bu">::</span>print<span class="op">(</span><span class="bu">std::</span>cerr<span class="op">,</span> <span class="st">&quot;Errore, il file &#39;</span><span class="sc">{}</span><span class="st">&#39; non esiste!&quot;</span><span class="op">,</span> filename<span class="op">);</span></span></code></pre></div></li>
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co">// `stderr` è come `std::cerr` (e `stdout` è come `std::cout`)</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="bu">std::</span>format<span class="bu">::</span>print<span class="op">(</span>stderr<span class="op">,</span> <span class="st">&quot;Errore, il file &#39;</span><span class="sc">{}</span><span class="st">&#39; non esiste!&quot;</span><span class="op">,</span> filename<span class="op">);</span></span></code></pre></div></li>
 <li><p>Invece di stampare a video, si può salvare il risultato in una
 stringa usando <code>std::format::format</code> anziché
 <code>std::format::print</code>:</p>
