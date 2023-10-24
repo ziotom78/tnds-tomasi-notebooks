@@ -133,7 +133,7 @@ using namespace std;
 int main(int argc, char *argv[]) {
   // Controlla gli argomenti
   if (argc != 4) {
-    fmt::print(std::cerr, "Usage: {} X Y Z\n", argv[0]);
+    fmt::print(stderr, "Usage: {} X Y Z\n", argv[0]);
     return -1;
   }
 
@@ -383,9 +383,10 @@ Per risolvere facilmente questo tipo di problemi è molto utile ridefinire gli o
 CampoVettoriale CampoVettoriale::operator+(const CampoVettoriale & v) const {  
   if ((v.getX() != getX()) || (v.getY() != getY()) || (v.getZ() != getZ())) {
       // fmt::print accetta come primo argomento lo stream su cui
-      // scrivere (se non si specifica, usa std::cout). Siccome questo
-      // è un messaggio di errore, usiamo std::cerr
-      fmt::print(std::cerr,
+      // scrivere (se non si specifica, usa stdout, che è analogo a std::cout).
+      // Siccome questo è un messaggio di errore, usiamo stderr, analogo a
+      // std::cerr
+      fmt::print(stderr,
                  "Somma di campi vettoriali in punti diversi non ammessa\n");
       exit(1);
   } 
@@ -487,7 +488,7 @@ const double d{1.E-10};
 
 int main(int argc, char * argv[]) {
   if (argc != 4) {
-      fmt::print(cerr, "Usage: {} <x> <y> <z>\n", argv[0]);
+      fmt::print(stderr, "Usage: {} <x> <y> <z>\n", argv[0]);
       exit(1);
   }
 
