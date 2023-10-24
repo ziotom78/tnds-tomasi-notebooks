@@ -284,7 +284,9 @@ int main(void) {
 
 -   Se si vuole usare la notazione scientifica, si usa la lettera `e`: la scrittura `{:.5e}` indica che si richiedono 5 cifre dopo la virgola
 
--   Si può indicare il numero di caratteri da usare inserendo un numero subito dopo `:`: così `{:5}` chiede di usare almeno 5 caratteri per scrivere il valore (se ne servono meno, vengono inseriti spazi vuoti, mentre se il numero inizia con `0` vengono messi degli zeri). Questo è utile per allineare valori in tabelle!
+-   Si può indicare il numero di caratteri da usare inserendo un numero subito dopo `:`: così `{:5}` chiede di usare almeno 5 caratteri per scrivere il valore. Questo è utile per allineare valori in tabelle!
+
+-   La libreria rende possibile l'internazionalizzazione, usando ad esempio [GNU gettext](https://en.wikipedia.org/wiki/Gettext).
 
 
 # Trucchi
