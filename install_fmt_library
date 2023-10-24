@@ -5,7 +5,7 @@
 # This Bash script downloads the "fmt" C++ library and installs it in
 # the current directory.
 
-FMT_VERSION="9.1.0"
+FMT_VERSION="10.1.1"
 
 download_file() {
     filename="$1"
