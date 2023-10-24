@@ -133,7 +133,7 @@ using namespace std;
 int main(int argc, char *argv[]) {
   // Controlla gli argomenti
   if (argc != 4) {
-    std::cerr << "Usage: " << argv[0] << " <x> <y> <z>" << endl;
+    fmt::print(std::cerr, "Usage: {} X Y Z\n", argv[0]);
     return -1;
   }
 
@@ -300,19 +300,19 @@ int main() {
   // `e` è un *puntatore* a una variabile di tipo `Elettrone`
   Elettrone *e{new Elettrone{}};
 
-  // Metodi della classe base: la sintassi è `a.NOMEMETODO(…)`
-  fmt::print("Particella con massa {} kg e carica {} C\n",
-             a.GetMassa(), a.GetCarica());
+  // Metodi della classe base. Notare che qui la sintassi è `a.NOMEMETODO(…)`
+  fmt::print("Particella con massa {} kg e carica {} C\n", a.GetMassa(),
+             a.GetCarica());
   a.Print();
 
-  // Metodi della classe derivata: la sintassi è
+  // Metodi della classe derivata. Qui invece la sintassi è
   // `e->NOMEMETODO(…)` e non `e.NOMEMETODO(…)`,
   // perché `e` è un puntatore
   fmt::print("Elettrone con massa {} kg e carica {} C\n", e->GetMassa(),
              e->GetCarica());
   e->Print();
 
-  Particella b{a}; // costruisco una Particella a partire da una Particella
+  Particella b{a};  // costruisco una Particella a partire da una Particella
   Particella d{*e}; // costruisco una Particella a partire da un Elettrone
   Elettrone f{d};   // costruisco un Elettrone a partire da una Particella
 
@@ -427,7 +427,7 @@ In C++, una classe può ereditare da più di una classe madre. In questo caso ma
 #pragma once
 
 #include "particella.h"
-#include "Posizione.h"
+#include "posizione.h"
 
 class PuntoMateriale : public Particella, public Posizione {
     // …
