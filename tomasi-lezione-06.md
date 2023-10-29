@@ -27,16 +27,15 @@ css:
 -   [Esercizio 6.1](./carminati-esercizi-06.html#esercizio-6.1): Classe astratta FunzioneBase
 -   [Esercizio 6.2](./carminati-esercizi-06.html#esercizio-6.2): Metodo della bisezione (**da consegnare**)
 -   [Esercizio 6.3](./carminati-esercizi-06.html#esercizio-6.3): Equazioni non risolubili analiticamente (**da consegnare**)
--   [Esercizio 6.4](./carminati-esercizi-06.html#esercizio-6.4): Miglioramenti di `Solutore`
--   [Esercizio 6.5](./carminati-esercizi-06.html#esercizio-6.5): Ricerca di zeri di una funzione senza uso del polimorfismo
+-   [Esercizio 6.4](./carminati-esercizi-06.html#esercizio-6.4): Ricerca di zeri di una funzione senza uso del polimorfismo
 
 # Metodi virtuali {#virtual-methods}
 
 # Metodi virtuali
 
--   Al momento, l'unico modo in cui il C++ implementa il polimorfismo durante l'esecuzione è attraverso i metodi `virtual`.
+-   L'unico modo in cui il C++ implementa il polimorfismo durante l'esecuzione è attraverso i metodi `virtual`.
 
--   (I template permettono polimorfismo in fase di compilazione, e sono quindi usati in ambiti diversi).
+-   (I *template* permettono polimorfismo in fase di **compilazione**, e sono quindi usati in ambiti diversi).
 
 -   Una classe derivata può ridefinire uno dei metodi della classe genitore se questo è indicato come `virtual`, usando la parola chiave [`override`](https://www.fluentcpp.com/2020/02/21/virtual-final-and-override-in-cpp/).
 
@@ -122,7 +121,7 @@ struct Cat : public Animal {
 
 # `virtual` e `override`
 
--   Analogamente, anche `override` può essere tralasciato:
+-   Per compatibilità con le vecchie versioni del C++, anche `override` può essere tralasciato:
 
     ```c++
     struct Animal {
@@ -130,118 +129,18 @@ struct Cat : public Animal {
     };
 
     struct Dog : public Animal {
-      // Ok, compila e funziona come atteso
+      // Ok, compila e funziona come atteso, ma NON FATELO!
       virtual void greet() const { std::cout << "Woof!\n"; }
     };
 
 
     struct Cat : public Animal {
-      // Anche questo è ok e compila senza errori
+      // Anche questo è ok e compila senza errori, ma NON FATELO!
       void greet() const { std::cout << "Meow!\n"; }
     };
     ```
 
--   Tralasciare sia `virtual` che `override` è però sconsigliato!
-
-# `virtual` e `override`
-
--   Supponiamo di avere scritto una versione più primitiva del codice, senza indicare `greet` come `const`:
-
-    ```c++
-    struct Animal {
-      virtual void greet() { std::cout << "?\n"; }
-    };
-
-    struct Dog : public Animal {
-      // I'm lazy, I think I'll skip both `virtual` and `override`
-      void greet() { std::cout << "Woof!\n"; }
-    };
-
-    struct Cat : public Animal {
-      void greet() { std::cout << "Meow!\n"; }
-    };
-    ```
-
--   Anche questo codice compila e funziona senza problemi, ma…
-
-# `virtual` e `override`
-
--   Supponiamo ora di modificare il file `animal.h`:
-
-    ```c++
-    struct Animal {
-      virtual void greet() const { std::cout << "?\n"; }  // I added a `const`
-    };
-    ```
-
--   Il codice compila ancora, ma smette di funzionare:
-
-    ```text
-    $ ./test cat
-    ?
-    $ ./test dog
-    ?
-    $ ./test bird
-    $
-    ```
-    
-    (Notate che `cat` e `dog` producono `?`, mentre `bird` non produce nulla). Cos'è successo?
-    
-# `virtual` e `override`
-
-```c++
-// Questo è il "main" del programma
-Animal *animal{};
-
-std::string name{argc > 1 ? argv[1] : ""};
-if (name == "cat") {
-  animal = new Cat();        // Ok, crea un oggetto Cat…
-} else if (name == "dog") {
-  animal = new Dog();        // …o un oggetto Dog, ma…
-}
-
-if (animal)
-  animal->greet();           // …qui invoca sempre Animal::greet(), che stampa "?"
-```
-
-# `virtual` e `override`
-
-Abbiamo due modi per correggere il problema:
-
-1.   Cercare in tutto il codice quali classi derivino da `Animal` e reimplementino `greet`, e aggiungere `const` (semplice in un programma così piccolo, ma difficile in un programma di media complessità!).
-2.   Indicare **sempre** `override` nei metodi derivati, perché il questo modo il compilatore C++ può segnalare l'errore:
-
-```
-test.cpp:10:8: error: ‘void Dog::greet()’ marked ‘override’, but does not override
-   10 |   void greet() override { std::cout << "Woof!\n"; }
-      |        ^~~~~
-test.cpp:15:8: error: ‘void Cat::greet()’ marked ‘override’, but does not override
-   15 |   void greet() override { std::cout << "Meow!\n"; }
-      |        ^~~~~
-```
-
-# Forma preferita
-
--   Nella classe base i metodi virtuali vanno indicati con `virtual`:
-
-    ```c++
-    class Animal {
-      virtual void greet() const;
-    };
-    ```
-    
--   Nella classe derivata ci sono invece più possibilità:
-
-    ```c++
-    // First option: DON'T DO THIS!
-    void greet() const;
-    // Second option: DON'T DO THIS!
-    virtual void greet() const;
-    // Third option: ok but verbose
-    virtual void greet() const override;
-    // Fourth option: the best! It prevents errors and it's concise
-    void greet() const override;
-    ```
+-   Questa è una **pessima** pratica, che però si può trovare in codici C++ particolarmente vecchi.
 
 
 # Uso di puntatori
@@ -251,7 +150,7 @@ test.cpp:15:8: error: ‘void Cat::greet()’ marked ‘override’, but does no
 -   Nell'[Esercizio 6.1](./carminati-esercizi-06.html#esercizio-6.0) di oggi si usano i puntatori nel seguente codice:
 
     ```c++
-    Particella * a{new Particella{1., 2.}};
+    Particella * p{new Particella{1., 2.}};
     Elettrone * b{new Elettrone{}};
     Particella * c{new Elettrone{}};
     ```
@@ -357,7 +256,7 @@ Il metodo di bisezione fallisce se le ipotesi del teorema degli zeri non valgono
      ```
      
      (In alternativa si può dichiarare `found` variabile membro di
-     `Solutore`, come suggerito nell'[Esercizio 6.4](carminati-esercizi-06.html#esercizio-6.4)).
+     `Solutore`).
 
 # Condizioni di errore con NaN
 
@@ -373,16 +272,15 @@ Il metodo di bisezione fallisce se le ipotesi del teorema degli zeri non valgono
 
 -   È una implementazione dell'idea numero 2 (restituire un valore fissato in caso di errore) che non ha ambiguità.
 
--   Può essere implementata in parallelo con le modifiche suggerite nell'[Esercizio 7.4](carminati-esercizi-06.html#esercizio-6.4)).
-
 # Controllo di NaN
 
 -   Per controllare se il valore restituito è un NaN, si può usare la funzione `isnan` (in `<cmath>`):
 
     ```c++
+    // Codice nel `main`
     double x{CercaZeri(0., 1., f)};
     if(isnan(x)) {
-        // Print a error message
+        // Print a error message to std::cerr
     }
     ```
     

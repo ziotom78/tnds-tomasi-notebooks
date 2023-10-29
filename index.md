@@ -18,8 +18,8 @@ css:
 | 10 Ottobre 2023   | [Template e `vector`](carminati-esercizi-03.html)               | [Lezione 3](tomasi-lezione-03.html)                                 |
 | 17 Ottobre 2023   | [Esercizi facoltativi](carminati-esercizi-04.html)              |                                                                     |
 | 24 Ottobre 2023   | [Classi ed ereditarietà](carminati-esercizi-05.html)            | [Lezione 5](tomasi-lezione-05.html)                                 |
-<!--
 | 31 Ottobre 2023   | [Ricerca di zeri](carminati-esercizi-06.html)                   | [Lezione 6](tomasi-lezione-06.html)                                 |
+<!--
 | 7 Novembre 2023   | [Quadratura numerica](carminati-esercizi-07.html)               | [Notebook 7](https://ziotom78.github.io/tnds-notebooks/lezione07/)  |
 | 14 Novembre 2023  | [Equazioni differenziali](carminati-esercizi-08.html)           | [Notebook 8](https://ziotom78.github.io/tnds-notebooks/lezione08/)  |
 | 21 Novembre 2023  | Idem                                                            | [Slides addizionali per la lezione 8](tomasi-lezione-08.html)       |
