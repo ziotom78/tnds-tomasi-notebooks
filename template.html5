@@ -18,7 +18,7 @@ $endif$
         <link rel="stylesheet" href="https://cdn.rawgit.com/diversen/pandoc-uikit/master/style.css">
         <link href="css/custom.css" rel="stylesheet" />
         <link href="https://vjs.zencdn.net/5.4.4/video-js.css" rel="stylesheet" />
-        <script src="https://code.jquery.com/jquery-2.2.1.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
         <!-- <script src="uikit.js"></script> -->
         <script src="https://cdn.rawgit.com/diversen/pandoc-uikit/master/uikit.js"></script>
         <!-- <script src="scripts.js"></script> -->
