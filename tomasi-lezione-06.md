@@ -24,7 +24,7 @@ css:
 # Esercizi per oggi
 
 -   [Esercizio 6.0](./carminati-esercizi-06.html#esercizio-6.0): Metodi virtuali
--   [Esercizio 6.1](./carminati-esercizi-06.html#esercizio-6.1): Classe astratta FunzioneBase
+-   [Esercizio 6.1](./carminati-esercizi-06.html#esercizio-6.1): Classe astratta `FunzioneBase`
 -   [Esercizio 6.2](./carminati-esercizi-06.html#esercizio-6.2): Metodo della bisezione (**da consegnare**)
 -   [Esercizio 6.3](./carminati-esercizi-06.html#esercizio-6.3): Equazioni non risolubili analiticamente (**da consegnare**)
 -   [Esercizio 6.4](./carminati-esercizi-06.html#esercizio-6.4): Ricerca di zeri di una funzione senza uso del polimorfismo
@@ -100,7 +100,7 @@ scelta viene fatta a runtime, a seconda del valore di `argv`:
 
 # `virtual` e `override` {#override-best-practices}
 
-La parola `virtual` è obbligatoria solo all'interno della classe base e facoltativa nei metodi derivati:
+La parola `virtual` è obbligatoria solo all'interno della classe base:
 
 ```c++
 struct Animal {
@@ -111,7 +111,6 @@ struct Dog : public Animal {
   // I can repeat "virtual" here, but it's optional
   virtual void greet() const override { std::cout << "Woof!\n"; }
 };
-
 
 struct Cat : public Animal {
   // You usually avoid repeating "virtual", if there is "override"
@@ -124,15 +123,10 @@ struct Cat : public Animal {
 -   Per compatibilità con le vecchie versioni del C++, anche `override` può essere tralasciato:
 
     ```c++
-    struct Animal {
-      virtual void greet() const { std::cout << "?\n"; }
-    };
-
     struct Dog : public Animal {
       // Ok, compila e funziona come atteso, ma NON FATELO!
       virtual void greet() const { std::cout << "Woof!\n"; }
     };
-
 
     struct Cat : public Animal {
       // Anche questo è ok e compila senza errori, ma NON FATELO!
@@ -140,7 +134,7 @@ struct Cat : public Animal {
     };
     ```
 
--   Questa è una **pessima** pratica, che però si può trovare in codici C++ particolarmente vecchi.
+-   Questo è comune in codici C++ particolarmente vecchi, ma oggigiorno è considerata una **pessima** pratica.
 
 
 # Uso di puntatori
@@ -216,7 +210,7 @@ void test_zeroes() {
   assert(are_close(s.CercaZeri(-2.0, 0.0, f), -2.0));  // Zero is at a
   assert(are_close(s.CercaZeri(-4.0, -2.0, f), -2.0)); // Zero is at b
 
-  assert(are_close(s.CercaZeri(0.0, 1.0, f), 1.0 / 3));
+  assert(are_close(s.CercaZeri(0.0, 1.0, f), 1.0 / 3)); // Do NOT write 1 / 3 !
 }
 ```
 
@@ -229,13 +223,13 @@ void test_zeroes() {
 -   La scrittura
 
     ```c++
-    f(a) * f(b) < 0
+    if (f(a) * f(b) < 0) { … }
     ```
     
     non è consigliabile, perché se `f(a)` o `f(b)` sono molto piccoli, il risultato potrebbe essere nullo. Meglio usare un'espressione come
     
     ```c++
-    sign(f(a)) * sign(f(b)) < 0
+    if (sign(f(a)) * sign(f(b)) < 0) { … }
     ```
 
 
@@ -265,8 +259,12 @@ Il metodo di bisezione fallisce se le ipotesi del teorema degli zeri non valgono
     ```c++
     #include <cmath>
 
-    if(something_is_invalid()) {
-        return std::nan(""); // Return a NaN
+    double my_function(…) {
+      if(something_is_invalid()) {
+          return std::nan(""); // Return a NaN
+      }
+
+      // Continue
     }
     ```
 
@@ -284,7 +282,7 @@ Il metodo di bisezione fallisce se le ipotesi del teorema degli zeri non valgono
     }
     ```
     
--   Siccome i NaN hanno anche la proprietà che non sono uguali a se stessi (`NaN == NaN` è falso), si può usare anche questo test:
+-   I NaN hanno anche la proprietà che non sono uguali a se stessi:
 
     ```c++
     if(x != x) {
@@ -311,4 +309,37 @@ cout << (x == x) << ", ";
 cout << (x != x) << "\n";  // See previous slide
 
 // Output: 0, 0, 0, 1
+```
+
+# Un po' di curiosità
+
+-   [Walter Bright](https://en.wikipedia.org/wiki/Walter_Bright), sviluppatore dello storico compilatore [Zortech C/C++](https://en.wikipedia.org/wiki/Digital_Mars) (1988), ha creato il [linguaggio D](https://dlang.org/) nel 2001.
+
+-   Bright adora il C ma detesta il C++, e ha creato D per superarne alcune limitazioni (come gli header files, che lui detesta!)
+
+-   Molte idee del linguaggio D sono state poi incorporate nelle ultime versioni del C++ ([moduli](https://en.wikipedia.org/wiki/Module_(programming)), [range](https://en.wikipedia.org/wiki/Range_(computer_programming)), [funzioni anonime](https://en.wikipedia.org/wiki/Anonymous_functions)…)
+
+-   In D, variabili `double` non inizializzate sono poste dal compilatore uguali a `NaN`: in questo modo, è immediato accorgersi quando ci si dimentica di inizializzarle (Vedere [questo thread](https://forum.dlang.org/thread/dowtxwcvlsunqugffcnp@forum.dlang.org) per maggiore contesto).
+
+
+# Esempio di codice D (sbagliato)
+
+```d
+import std.stdio;  // No header files in D: hurrah!
+
+double mean(double[] values) {
+    double accum;  // Ooops, I forgot to initialize this!
+
+    foreach(value; values) {
+        accum += value;
+    }
+
+    return accum / values.length;
+}
+
+void main() {
+    double[] vec = [1.0, 5.0, 4.0, 3.0];
+    writeln(mean(vec));
+    // This prints "nan" because of the forgotten initialization
+}
 ```
