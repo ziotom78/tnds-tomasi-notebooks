@@ -1,0 +1,964 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="S2I MkDocs Example">
+      
+      
+        <meta name="author" content="CERN Authoring">
+      
+      
+        <link rel="canonical" href="https://s2i-mkdocs-example.docs.cern.ch/Lezione6/lezione6/">
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.3.1, mkdocs-material-8.5.3">
+    
+    
+      
+        <title>Lezione 6 - Lab TNDS</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.7a952b86.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.cbb835fc.min.css">
+        
+      
+      
+
+    
+    
+    
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/fonts.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#lezione-6-ricerca-zeri-di-funzione" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Lab TNDS" class="md-header__button md-logo" aria-label="Lab TNDS" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Lab TNDS
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Lezione 6
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      <form class="md-header__option" data-md-component="palette">
+        
+          
+          
+          <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent=""  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+          
+            <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+            </label>
+          
+        
+          
+          
+          <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="amber"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
+          
+            <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12c0-2.42-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+            </label>
+          
+        
+      </form>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://gitlab.cern.ch/authoring/documentation/s2i-mkdocs-example" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitLab
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Lab TNDS" class="md-nav__button md-logo" aria-label="Lab TNDS" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    Lab TNDS
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://gitlab.cern.ch/authoring/documentation/s2i-mkdocs-example" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitLab
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Lezione1/Lezione1/" class="md-nav__link">
+        Lezione 1
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Lezione2/Lezione2/" class="md-nav__link">
+        Lezione 2
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Lezione3/Lezione3/" class="md-nav__link">
+        Lezione 3
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Lezione4/Lezione4/" class="md-nav__link">
+        Lezione 4
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Lezione5/Lezione5/" class="md-nav__link">
+        Lezione 5
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Lezione 6
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Lezione 6
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#esercizio-60-metodi-virtual" class="md-nav__link">
+    ESERCIZIO 6.0 - Metodi virtual :
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#esercizio-61-classe-astratta-funzionebase" class="md-nav__link">
+    ESERCIZIO 6.1 - Classe astratta FunzioneBase :
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#esercizio-62-metodo-della-bisezione-da-consegnare" class="md-nav__link">
+    ESERCIZIO 6.2 - Metodo della bisezione (da consegnare):
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#esercizio-63-equazioni-non-risolubili-analiticamente-da-consegnare" class="md-nav__link">
+    ESERCIZIO 6.3 - Equazioni non risolubili analiticamente (da consegnare):
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#esercizio-64-ricerca-di-zeri-di-una-funzione-senza-uso-del-polimorfismo-facoltativo" class="md-nav__link">
+    ESERCIZIO 6.4 - Ricerca di zeri di una funzione senza uso del polimorfismo (facoltativo):
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Lezione7/Lezione7/" class="md-nav__link">
+        Lezione 7
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Lezione8/Lezione8/" class="md-nav__link">
+        Lezione 8 e 9
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Lezione10-11/Lezione1011/" class="md-nav__link">
+        Lezione 10 e 11
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Lezione12/Lezione12/" class="md-nav__link">
+        Lezione 12
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_12" type="checkbox" id="__nav_12" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_12">
+          Survival guides
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Survival guides" data-md-level="1">
+        <label class="md-nav__title" for="__nav_12">
+          <span class="md-nav__icon md-icon"></span>
+          Survival guides
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Survival/unix/" class="md-nav__link">
+        Principali comandi UNIX
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Survival/root/" class="md-nav__link">
+        Principali oggetti di ROOT
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#esercizio-60-metodi-virtual" class="md-nav__link">
+    ESERCIZIO 6.0 - Metodi virtual :
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#esercizio-61-classe-astratta-funzionebase" class="md-nav__link">
+    ESERCIZIO 6.1 - Classe astratta FunzioneBase :
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#esercizio-62-metodo-della-bisezione-da-consegnare" class="md-nav__link">
+    ESERCIZIO 6.2 - Metodo della bisezione (da consegnare):
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#esercizio-63-equazioni-non-risolubili-analiticamente-da-consegnare" class="md-nav__link">
+    ESERCIZIO 6.3 - Equazioni non risolubili analiticamente (da consegnare):
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#esercizio-64-ricerca-di-zeri-di-una-funzione-senza-uso-del-polimorfismo-facoltativo" class="md-nav__link">
+    ESERCIZIO 6.4 - Ricerca di zeri di una funzione senza uso del polimorfismo (facoltativo):
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  <a href="https://gitlab.cern.ch/authoring/documentation/s2i-mkdocs-example/blob/master/docs/Lezione6/lezione6.md" title="Edit this page" class="md-content__button md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
+  </a>
+
+
+<!-- può da più  avrà è  -->
+
+<h1 id="lezione-6-ricerca-zeri-di-funzione">Lezione 6 : ricerca zeri di funzione</h1>
+<p>In questa sesta lezione affronteremo il problema della ricerca di zeri di una funzione. Per fare questo realizzeremo per prima cosa due classi astratte per rappresentare rispettivamente una generica funzione di una variabile <script type="math/tex">f(x)</script> e un generico algoritmo per la ricerca di zeri. Affronteremo poi casi concreti (ricerca degli zeri per una parabola usando il metodo della bisezione) sfruttanto <em>ereditarietà</em> e <em>polimorfismo</em>.</p>
+<h2 id="esercizio-60-metodi-virtual">ESERCIZIO 6.0 - Metodi virtual :</h2>
+<p>Prima di incominciare con la lezione vera e propria proviamo a riflettere sul significato del polimorfismo attraverso l'uso del qualificatore <code>virtual</code>. Consideriamo le classi <code>Particella</code> e la sue derivata <code>Elettrone</code> costruite nella lezione 5. Implementare ed eseguire il seguente programma:</p>
+<p><div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;Particella.h&quot;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">  </span><span class="n">Particella</span><span class="w"> </span><span class="o">*</span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Particella</span><span class="p">(</span><span class="mf">1.</span><span class="p">,</span><span class="mf">2.</span><span class="p">);</span>
+<span class="w">  </span><span class="n">Elettrone</span><span class="w">  </span><span class="o">*</span><span class="n">e</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Elettrone</span><span class="p">();</span>
+<span class="w">  </span><span class="n">Particella</span><span class="w"> </span><span class="o">*</span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Elettrone</span><span class="p">();</span><span class="w"> </span><span class="c1">// Puntatore a Particella che punta ad un oggetto Elettrone</span>
+
+<span class="w">  </span><span class="n">p</span><span class="o">-&gt;</span><span class="n">Print</span><span class="p">();</span><span class="w"> </span><span class="c1">// Metodo Print di Particella</span>
+<span class="w">  </span><span class="n">e</span><span class="o">-&gt;</span><span class="n">Print</span><span class="p">();</span><span class="w"> </span><span class="c1">// Metodo Print di Elettrone</span>
+<span class="w">  </span><span class="n">b</span><span class="o">-&gt;</span><span class="n">Print</span><span class="p">();</span><span class="w"> </span><span class="c1">// Quale Print ???</span>
+
+<span class="w">  </span><span class="k">delete</span><span class="w"> </span><span class="n">p</span><span class="p">;</span>
+<span class="w">  </span><span class="k">delete</span><span class="w"> </span><span class="n">e</span><span class="p">;</span>
+<span class="w">  </span><span class="k">delete</span><span class="w"> </span><span class="n">b</span><span class="p">;</span>
+
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+
+<span class="p">}</span>
+</code></pre></div>
+Mentre le prime due chiamate <code>p-&gt;Print();</code> e <code>e-&gt;Print();</code> sono immediate da capire, il caso più interessante è quello di <code>b</code> : <code>b</code> è tecnicamente di tipo puntatore a <code>Particella</code> ma punta ad un oggetto di tipo <code>Elettrone</code>. Questa sitauzione è permessa in C++ e costituisce la base del <em>polimorfismo</em>.</p>
+<ul>
+<li>Se utilizziamo le classi scritte nella lezione 5 senza modifiche, si dovrebbe constatare nell'istruzione <code>b-&gt;Print()</code> viene invocato il metodo <code>Print()</code> della classe madre (<code>Particella</code>), anche quando gli oggetti riferiti dai puntatori sono classi figlie (<code>Elettrone</code> in questo caso).</li>
+<li>Aggiungere ora negli header file delle classi <code>Particella</code> ed <code>Elettrone</code> il qualificatore <code>virtual</code> davanti alla dichiarazione del metodo <code>Print()</code>. Ricompilando e rigirando il programma si dovrebbe adesso vedere che per ciascun oggetto viene invocato il metodo corrispondente all'oggetto al quale il puntatore punta: nel caso specifico in <code>b-&gt;Print()</code> viene invocato il metodo <code>Print()</code> di <code>Elettrone</code> in quanto <code>b</code> punta ad un oggetto di tipo <code>Elettrone</code>.</li>
+<li>Una classe che implementa o eredita un metodo virtuale si dice <em>polimorfica</em>: l'istruzione <code>b-&gt;Print()</code> darà esiti diversi a seconda della classe a cui <code>b</code> punta nonstante tecnicamente <code>b</code> sia di tipo puntatore a <code>Particella</code>. Questa proprietà del linguaggio sarà molto utile per sviluppare il codice di ricerca degli zeri di una funzione. </li>
+</ul>
+<details class="tip">
+<summary>Metodi virtuali e classi astratte</summary>
+<p>La parola chiave <code>virtual</code> informa il compilatore che il metodo indicato potrà venire sovrascritto dalle classi figlie.
+Se essa viene fornita, durante l'esecuzione del programma, al momento di chiamare il metodo a partire da un puntatore alla classe madre, il programma valuterà se l'oggetto indirizzato è del tipo classe madre o una delle figlie. In quest'ultimo caso, invocherà il metodo appropriato della classe figlia reale.
+Un metodo virtuale può anche essere posto a 0 (vedi prossimo esercizio), in tal caso è <em>obbligatorio</em> per le classi figlie implementarlo. In questo caso il metodo si dice <em>virtuale puro</em> e una classe che implementa almeno un metodo virtuale puro si dice <em>classe astratta</em>.</p>
+</details>
+<h2 id="esercizio-61-classe-astratta-funzionebase">ESERCIZIO 6.1 - Classe astratta FunzioneBase :</h2>
+<p>In questo e nei prossimi esercizi avremo a che fare con diverse funzioni di una sola variabile e dovremo effettuare delle operazioni generiche su queste funzioni (come trovarne gli zeri o  calclarne l'integrale in un certo intervallo). Dovremo pertanto strutturare il codice in modo che ogni algoritmo possa lavorare allo stesso modo su funzioni che possono essere diverse. Per fare questo è utile definire una classe astratta che implementi le proprietà generali della classe attraverso metodi virtuali puri e poi lasciare alle classi derivate il compito di implementare concretamente tutti questi metodi ( ed eventualmente quelli aggiuntivi necessari). Notate in questo caso che è buona prassi definire il distruttore di una classe madre astratta come <code>virtual</code> in modo che il distruttore della classe figlia venga invocato correttamente quando un oggetto di tipo classe figlia viene distrutto. 
+Per capire meglio la struttura del codice procediamo per passi. In questo esercizio scriviamo un set di classi per modellizzare una generica funzione di una variabile:</p>
+<ul>
+<li>definire la classe astratta <code>FunzioneBase</code> che implementi un metodo <code>double Eval(double x)</code> che modellizza l'effetto di applicare <script type="math/tex">f</script> in <script type="math/tex">x</script>.</li>
+<li>implementare una classe derivata <code>Parabola</code> che descriva una funzione del tipo <script type="math/tex">f(x)=ax^{2}+bx+c</script> (chiaramente questa classe dovrà avere dei data membri aggiuntivi per i parameteri a, b, c insieme a metodi dedicati per l'accesso in lettura e scrittura a questi parametri).</li>
+<li>verificare il funzionamento della classe <code>Parabola</code> costruendo un programmino che, dati i parametri di una parabola, ne stampi il valore della <script type="math/tex">y</script> nel vertice <script type="math/tex">x_{v}=-b/2a</script>. A titolo di esempio utilizzare la parabola <script type="math/tex">f(x)= 3x^{2}+5x-2</script>. </li>
+</ul>
+<details>
+<p><summary> La classe <code>FunzioneBase</code>  </summary></p>
+<div class="highlight"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">FunzioneBase</span><span class="w"> </span><span class="p">{</span>
+
+<span class="k">public</span><span class="o">:</span>
+
+<span class="w">  </span><span class="k">virtual</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">Eval</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+<span class="w">  </span><span class="k">virtual</span><span class="w"> </span><span class="o">~</span><span class="n">FunzioneBase</span><span class="p">()</span><span class="w"> </span><span class="p">{;};</span>
+
+<span class="p">};</span>
+</code></pre></div>
+</details>
+<details>
+<p><summary> La classe <code>Parabola</code> </summary></p>
+<div class="highlight"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">Parabola</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="n">FunzioneBase</span><span class="w"> </span><span class="p">{</span>
+
+<span class="k">public</span><span class="o">:</span>
+
+<span class="w">  </span><span class="n">Parabola</span><span class="p">()</span><span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="n">m_a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.</span><span class="p">;</span><span class="w"> </span><span class="n">m_b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.</span><span class="p">;</span><span class="w"> </span><span class="n">m_c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w">  </span>
+<span class="w">  </span><span class="n">Parabola</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">c</span><span class="p">)</span><span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="n">m_a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="p">;</span><span class="w"> </span><span class="n">m_b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">b</span><span class="p">;</span><span class="w"> </span><span class="n">m_c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">c</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="w">  </span><span class="o">~</span><span class="n">Parabola</span><span class="p">()</span><span class="w"> </span><span class="p">{;}</span><span class="w"> </span><span class="p">;</span>
+<span class="w">  </span><span class="k">virtual</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="nf">Eval</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="p">{</span><span class="k">return</span><span class="w"> </span><span class="n">m_a</span><span class="o">*</span><span class="n">x</span><span class="o">*</span><span class="n">x</span><span class="o">+</span><span class="n">m_b</span><span class="o">*</span><span class="n">x</span><span class="o">+</span><span class="n">m_c</span><span class="p">;}</span>
+<span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="nf">SetA</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">a</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">m_a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="nf">GetA</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span><span class="k">return</span><span class="w"> </span><span class="n">m_a</span><span class="p">;}</span><span class="w"> </span>
+<span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="nf">SetB</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">m_b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">b</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="nf">GetB</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span><span class="k">return</span><span class="w"> </span><span class="n">m_b</span><span class="p">;}</span><span class="w"> </span>
+<span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="nf">SetC</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">c</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">m_c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">c</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="nf">GetC</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span><span class="k">return</span><span class="w"> </span><span class="n">m_c</span><span class="p">;}</span><span class="w"> </span>
+
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="nf">GetVertex</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="o">-</span><span class="n">m_b</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">m_a</span><span class="p">)</span><span class="w"> </span><span class="p">;}</span><span class="w"> </span><span class="p">;</span>
+
+<span class="k">private</span><span class="o">:</span>
+
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">m_a</span><span class="p">,</span><span class="w"> </span><span class="n">m_b</span><span class="p">,</span><span class="w"> </span><span class="n">m_c</span><span class="p">;</span>
+
+<span class="p">};</span>
+</code></pre></div>
+<p>Notate la keyword <code>override</code> che ci avvisa con un errore se cerchiamo per errore di definire nella classe figlia il metodo virtuale della classe madre con parametri di input diversi. </p>
+</details>
+<details class="tip">
+<summary>Nota sulle classi astratte</summary>
+<p>Quando dichiariamo nullo un metodo virtual, la classe difetta dell'implementazione di tale metodo, e quindi non si possono creare oggetti di quella classe. Solo le sue classi derivate implementeranno il metodo, e possono essere implementate.
+Siccome non si possono costruire oggetti di tale classe, non è necessario definire dei costruttori.
+Se una classe astratta implementa solo metodi virtuali nulli, come in questo caso, non è neanche necessario realizzare un file di implementazione, né creare un file oggetto, dato che tutta l'informazione è contenuta nell'header. </p>
+</details>
+<details class="tip">
+<summary>Nota sull'organizzazione del codice</summary>
+<p>In linea di principio si potrebbe pensare di costruire una coppia di files <code>.h</code> e <code>.cpp</code> per ogni classe che scriviamo. Questo potrebbe portare ad una proliferazione incontrollata del numero di files del nostro progetto. Per limitare questo effetto possiamo pensare di scrivere nello stesso file un set di classi affini tra loro: in questo caso specifico per esempio <code>Particella</code> ed <code>Elettrone</code> possono stare ragionevolemnte nello stesso file. </p>
+</details>
+<h2 id="esercizio-62-metodo-della-bisezione-da-consegnare">ESERCIZIO 6.2 - Metodo della bisezione (da consegnare):</h2>
+<p>Passiamo ora alla codifica della parte relativa agli algoritmi di ricerca degli zeri di una funzione: proviamo a scrivere un programma che calcoli gli zeri della funzione <script type="math/tex">f(x) = 3x^{2}+5x-2</script>. Il programma dovrà leggere da riga di comando gli estremi dell'intervallo in cui cercare lo zero e la precisione richiesta. Per calcolare gli zeri, implementeremo una classe astratta <code>Solutore</code> ed una classe concreta che realizza il <em>metodo della bisezione</em> visto a lezione. Nulla vieta di implementare anche il <em>metodo delle secanti</em> usando lo stesso schema.
+Si richiede obbligatoriamente che il programma stampi l'ascissa dello zero con un numero di cifre significative corrispondente alla precisione immessa.</p>
+<details>
+<p><summary> La funzione segno </summary></p>
+<p>Ci sono vari modi di implementare una funzione segno da utilizzare nella codifica dell'algoritmo di bisezione. </p>
+<ol>
+<li>
+<p>funzione libera
+<div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="nf">sign</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">x</span><span class="p">){</span>
+
+<span class="w"> </span><span class="k">if</span><span class="p">(</span><span class="n">x</span><span class="o">&lt;</span><span class="mi">0</span><span class="p">)</span>
+<span class="w">   </span><span class="k">return</span><span class="w"> </span><span class="mi">-1</span><span class="p">;</span>
+<span class="w"> </span><span class="k">else</span><span class="w"> </span>
+<span class="w">   </span><span class="k">return</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+oppure con l implementazione equivalente ma molto più compatta 
+<div class="highlight"><pre><span></span><code><span class="kt">double</span><span class="w"> </span><span class="nf">sign</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">x</span><span class="p">){</span><span class="k">return</span><span class="w"> </span><span class="p">(</span><span class="n">x</span><span class="o">==</span><span class="mf">0.</span><span class="o">?</span><span class="mf">0.</span><span class="o">:</span><span class="p">(</span><span class="n">x</span><span class="o">&gt;</span><span class="mi">0</span><span class="o">?</span><span class="mf">1.</span><span class="o">:</span><span class="mi">-1</span><span class="p">));</span><span class="w"> </span><span class="p">};</span>
+</code></pre></div></p>
+</li>
+<li>
+<p>classe che erediti da <code>FunzioneBase</code>
+<div class="highlight"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">Segno</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="n">FunzioneBase</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="o">:</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">Eval</span><span class="p">(</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="p">(</span><span class="n">x</span><span class="o">==</span><span class="mf">0.</span><span class="o">?</span><span class="mf">0.</span><span class="o">:</span><span class="p">(</span><span class="n">x</span><span class="o">&gt;</span><span class="mi">0</span><span class="o">?</span><span class="mf">1.</span><span class="o">:</span><span class="mi">-1</span><span class="p">));</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+Usando questa funzione la condizione richiesta dall'algoritmo di bisezione sarà ( implementando segno come funzione libera )</p>
+</li>
+</ol>
+<div class="highlight"><pre><span></span><code><span class="k">if</span><span class="p">((</span><span class="n">sign</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">a</span><span class="p">))</span><span class="o">*</span><span class="n">sign</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">c</span><span class="p">)))</span><span class="o">&lt;</span><span class="mi">0</span><span class="p">)</span>
+<span class="w">  </span><span class="p">......</span>
+
+<span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="p">((</span><span class="n">sign</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">b</span><span class="p">))</span><span class="o">*</span><span class="n">sign</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">c</span><span class="p">)))</span><span class="o">&lt;</span><span class="mi">0</span><span class="p">)</span>
+<span class="w">  </span><span class="p">......</span>
+
+<span class="k">else</span>
+<span class="w">  </span><span class="p">......</span>
+</code></pre></div>
+</details>
+<details>
+<p><summary> Classe astratta <code>Solutore</code> </summary></p>
+<p>La classe astratta <code>Solutore</code> potrebbe avere un metodo virtuale puro <code>CercaZeri</code> corrispondente alla chiamate dell'algoritmo che cercherà di determinare gli zeri di una generica <code>FunzioneBase</code>, passata come puntatore o come referenza: nell'esempio sono presentati entrambi i casi, se siete indecisi optate per l'uso di una referenza.
+Inoltre possiamo definire dei metodi per configurare la precisione richiesta: tale precisione può essere definita nel costruttore, tramite un metodo dedicato o direttamente nella chiamata al metodo <code>CercaZeri</code>. Stesso discorso vale per il numero massimo di iterazione dell'algoritmo.
+Come nel caso della <code>FunzioneBase</code> notate l'implementazione del distruttore come metodo virtuale e l'utilzzo della keyword <code>override</code>. </p>
+<div class="highlight"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">Solutore</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w"> </span><span class="k">public</span><span class="o">:</span>
+
+<span class="c1">// costruttori : potete aggiungere costruttori che ritenete opportuni e/o necessari</span>
+
+<span class="w">  </span><span class="n">Solutore</span><span class="p">()</span><span class="w"> </span><span class="p">;</span>
+<span class="w">  </span><span class="n">Solutore</span><span class="p">(</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">prec</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">;</span>
+
+
+<span class="w">  </span><span class="k">virtual</span><span class="w"> </span><span class="o">~</span><span class="n">Solutore</span><span class="p">()</span><span class="w"> </span><span class="p">{;};</span>
+
+<span class="w">  </span><span class="c1">// a scopo illustrativo trovate le due versioni una con puntatore FunzioneBase *</span>
+<span class="w">  </span><span class="c1">// e una con reference FunzioneBase&amp;. Chiaramente ne basta una !</span>
+
+<span class="w">  </span><span class="k">virtual</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="nf">CercaZeriPointer</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">xmin</span><span class="w"> </span><span class="p">,</span>
+<span class="w">                                  </span><span class="kt">double</span><span class="w"> </span><span class="n">xmax</span><span class="w"> </span><span class="p">,</span>
+<span class="w">                                  </span><span class="k">const</span><span class="w"> </span><span class="n">FunzioneBase</span><span class="o">*</span><span class="w"> </span><span class="n">f</span><span class="p">,</span>
+<span class="w">                                  </span><span class="kt">double</span><span class="w"> </span><span class="n">prec</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.001</span><span class="p">,</span>
+<span class="w">                                  </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">nmax</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">100</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+
+<span class="w">  </span><span class="k">virtual</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="nf">CercaZeriReference</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">xmin</span><span class="w"> </span><span class="p">,</span>
+<span class="w">                                    </span><span class="kt">double</span><span class="w"> </span><span class="n">xmax</span><span class="w"> </span><span class="p">,</span>
+<span class="w">                                    </span><span class="k">const</span><span class="w"> </span><span class="n">FunzioneBase</span><span class="o">&amp;</span><span class="w"> </span><span class="n">f</span><span class="p">,</span>
+<span class="w">                                    </span><span class="kt">double</span><span class="w"> </span><span class="n">prec</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.001</span><span class="p">,</span>
+<span class="w">                                    </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">nmax</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">100</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+
+<span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="nf">SetPrecisione</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">epsilon</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">m_prec</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">epsilon</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="nf">GetPrecisione</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">m_prec</span><span class="p">;}</span>
+
+<span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="nf">SetNMaxiterations</span><span class="p">(</span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">m_nmax</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="w">  </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">GetNMaxiterations</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">m_nmax</span><span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">;</span>
+
+<span class="w">  </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">GetNiterations</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">m_niterations</span><span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">;</span>
+
+<span class="w"> </span><span class="k">protected</span><span class="o">:</span>
+
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">m_a</span><span class="p">,</span><span class="w"> </span><span class="n">m_b</span><span class="p">;</span><span class="w">              </span><span class="c1">// estremi intervallo di ricerca</span>
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">m_prec</span><span class="p">;</span><span class="w">                </span><span class="c1">// precisione richiesta</span>
+<span class="w">  </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">m_nmax</span><span class="p">;</span><span class="w">          </span><span class="c1">// massimo numero di iterazioni permesse </span>
+<span class="w">  </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">m_niterations</span><span class="p">;</span><span class="w">   </span><span class="c1">// numero di iterazioni effettuate</span>
+
+<span class="p">};</span>
+</code></pre></div>
+</details>
+<details>
+<p><summary> La classe concreta <code>Bisezione</code> </summary></p>
+<p>L'implementazione dell'algoritmo di bisezione dovrà necessariamente avvenire costruendo una classe dedicata <code>Bisezione</code> che erediti da <code>Solutore</code> e implementi una versione concreta del metodo <code>CercaZeri</code>. </p>
+<div class="highlight"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">Bisezione</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="n">Solutore</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w"> </span><span class="k">public</span><span class="o">:</span>
+
+<span class="w">  </span><span class="n">Bisezione</span><span class="p">()</span><span class="w"> </span><span class="p">{}</span><span class="w"> </span><span class="p">;</span>
+<span class="w">  </span><span class="n">Bisezione</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">prec</span><span class="w"> </span><span class="p">);</span>
+<span class="w">  </span><span class="k">virtual</span><span class="w"> </span><span class="o">~</span><span class="n">Bisezione</span><span class="p">();</span>
+
+<span class="w">  </span><span class="c1">// a scopo illustrativo trovate le due versioni una con puntatore FunzioneBase * </span>
+<span class="w">  </span><span class="c1">// e una con reference FunzioneBase&amp;. Ne basta una sola, meglio con la reference                                              </span>
+<span class="w">  </span><span class="c1">// e comunque coerente con quanto dichiarato nella classe madre                                                             </span>
+
+<span class="w">  </span><span class="k">virtual</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="nf">CercaZeriPointer</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">xmin</span><span class="p">,</span>
+<span class="w">                                  </span><span class="kt">double</span><span class="w"> </span><span class="n">xmax</span><span class="p">,</span>
+<span class="w">                                  </span><span class="k">const</span><span class="w"> </span><span class="n">FunzioneBase</span><span class="o">*</span><span class="w"> </span><span class="n">f</span><span class="p">,</span>
+<span class="w">                                  </span><span class="kt">double</span><span class="w"> </span><span class="n">prec</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.001</span><span class="w"> </span><span class="p">,</span>
+<span class="w">                                  </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">nmax</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">100</span><span class="p">)</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="p">;</span>
+
+<span class="w">  </span><span class="k">virtual</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="nf">CercaReference</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">xmin</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">xmax</span><span class="p">,</span>
+<span class="w">                                </span><span class="k">const</span><span class="w"> </span><span class="n">FunzioneBase</span><span class="o">&amp;</span><span class="w"> </span><span class="n">f</span><span class="p">,</span>
+<span class="w">                                </span><span class="kt">double</span><span class="w"> </span><span class="n">prec</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.001</span><span class="p">,</span>
+<span class="w">                                </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">nmax</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">100</span><span class="p">)</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="p">;</span>
+
+<span class="p">};</span>
+</code></pre></div>
+</details>
+<details class="tip">
+<summary>Il metodo della bisezione</summary>
+<p>Data una funzione <script type="math/tex">f(x)</script>, si dice <em>zero</em>, o radice, di <script type="math/tex">f</script> un elemento <script type="math/tex">x_{0}</script> del suo dominio tale che <script type="math/tex">f(x_{0}) = 0</script>.</p>
+<p>Per trovare numericamente gli zeri della funzione <script type="math/tex">f(x)</script> possiamo utilizzare il metodo della <em>bisezione</em>: è l'algoritmo più semplice e consiste in una procedura iterativa che, ad ogni ciclo, dimezza l'intervallo in cui si trova lo zero. Dal teorema di Bolzano (o degli zeri) sappiamo che data una funzione <script type="math/tex">f(x)</script> continua sull'intervallo chiuso <script type="math/tex">[a,b]</script> a valori in <script type="math/tex">\mathbb{R}</script> tale che <script type="math/tex">f(a)*f(b) < 0</script>,
+allora esiste un punto <script type="math/tex">x_{0}</script> all'interno di <script type="math/tex">[a,b]</script> tale che <script type="math/tex">f(x_{0}) = 0</script>.</p>
+<p>Definiamo intervallo di incertezza di <script type="math/tex">f</script> un intervallo <script type="math/tex">[a,b]</script> che soddisfa il teorema di Bolzano.
+L'idea di base dell'algoritmo è che se esiste un intervalo di incertezza <script type="math/tex">[a,b]</script> per una funzione <script type="math/tex">f(x)</script>, allora ne esiste uno più piccolo (esattamente la metà).
+L'algoritmo deve avere in input l'intervallo di incertezza di partenza <script type="math/tex">[a,b]</script> ed una precisione (o tolleranza) <script type="math/tex">\epsilon</script> con cui si vuole trovare lo zero di <script type="math/tex">f(x)</script> tale che <script type="math/tex">|b - a| < \epsilon</script>.</p>
+<p>Si parte quindi dividendo in due l'intervallo trovando il punto medio <script type="math/tex">c = a + 0.5*(b-a)</script> per cui avremo due intervalli <script type="math/tex">[a,c)</script> e <script type="math/tex">(c,b]</script>.
+Ora se <script type="math/tex">f(c) = 0</script> siamo fortunati e abbiamo trovato lo zero.
+Altrimenti si deve valutare <script type="math/tex">f(a)*f(c)</script> e <script type="math/tex">f(c)*f(b)</script> e ripetere la procedura sull'intervallo in cui <script type="math/tex">f(x)</script> cambia di segno.
+La procedura va ripetuta finchè la larghezza dell'intervallo finale non è minore di <script type="math/tex">\epsilon</script>.</p>
+<p>Ci sono alcuni caveat da tenere in considerazione : 
+* nell'implementazione delle condizioni di ricerca dall'intervallo di incertezza occorre prestare attenzione alle operazioni tra floating point soprattutto in prossimità della radice.
+Ad esempio le espressioni <script type="math/tex">f(a)*f(c)</script> e <script type="math/tex">f(c)*f(b)</script> hanno una buona probabilità di essere approssimata a zero dal momento che entrambi gli argomenti convergono a una radice di <script type="math/tex">f</script>. Per evitare questa eventualità è meglio valutare il prodotto dei segni <script type="math/tex">sign(f(a))*sign(f(c))</script> e <script type="math/tex">sign(f(c))*sign(f(b))</script>.
+* un controllo utile da implementare è quello di contare il numero di iterazioni dell'algoritmo e stampare un avviso nel caso queste superino una soglia <script type="math/tex">nmax</script> che può essere impostata dall'utente. In tal modo ci si accorge se ci sono possibili problemi nel ciclo (errori o richiesta di precisione troppo alta che innesca loop infiniti). 
+* Se l'intervallo contiene più di una radice il metodo della bisezione ne troverà solo una !</p>
+</details>
+<details class="tip">
+<summary>Precisione sulle cifre significative</summary>
+<p>Poiché la precisione richiesta all'algoritmo è passata al programma runtime, abbiamo bisogno di determinare runtime quante cifre significative stampare nel nostro risultato. È facile rendersi conto che il numero di cifre significative è dato da
+<div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="n">cifre_significative</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="n">log10</span><span class="p">(</span><span class="n">precision</span><span class="p">);</span>
+</code></pre></div>
+Per cui per impostare il numero di cifre significative nella scrittura a video il codice sarà
+<div class="highlight"><pre><span></span><code><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="n">fixed</span><span class="p">;</span>
+<span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="n">setprecision</span><span class="p">(</span><span class="n">cifre_significative</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="n">zero</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>
+</code></pre></div></p>
+</details>
+<details class="tip">
+<summary>Valori di default nelle funzioni</summary>
+<p>Avrete probabilmente notato che nella dichiarazione di <code>CercaZeri</code> abbiamo assegnato dei valori di default a <code>prec</code> e <code>nmax</code>.
+<div class="highlight"><pre><span></span><code><span class="k">virtual</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="nf">CercaReference</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">xmin</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">xmax</span><span class="p">,</span>
+<span class="w">                              </span><span class="k">const</span><span class="w"> </span><span class="n">FunzioneBase</span><span class="o">&amp;</span><span class="w"> </span><span class="n">f</span><span class="p">,</span>
+<span class="w">                              </span><span class="kt">double</span><span class="w"> </span><span class="n">prec</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.001</span><span class="p">,</span>
+<span class="w">                              </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">nmax</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">100</span><span class="p">)</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="p">;</span>
+</code></pre></div>
+Questo significa che le ulttime due variabili possono essere omesse nella chiamata nel <code>main</code> 
+<div class="highlight"><pre><span></span><code><span class="n">bisettore</span><span class="p">.</span><span class="n">CercaReference</span><span class="p">(</span><span class="w"> </span><span class="n">xmin</span><span class="p">,</span><span class="w"> </span><span class="n">xmax</span><span class="p">,</span><span class="w"> </span><span class="n">f</span><span class="w"> </span><span class="p">);</span>
+</code></pre></div>
+e il metodo utilizzerà i valori  si 0.001 e 100 per <code>prec</code> e <code>nmax</code>. </p>
+</details>
+<h2 id="esercizio-63-equazioni-non-risolubili-analiticamente-da-consegnare">ESERCIZIO 6.3 - Equazioni non risolubili analiticamente (da consegnare):</h2>
+<p>In problemi di meccanica quantistica che verranno studiati nel prossimo anno, ci si può imbattere in equazioni del tipo:
+<script type="math/tex; mode=display">x = tan(x)</script>
+È facile rendersi conto che tale equazione ha una soluzione in ciascuno degli intervalli <script type="math/tex">(n\pi,n\pi+\pi/2), n=1,2,3...</script> Calcolare con una precisione di almeno <script type="math/tex">10^{-6}</script> i valori delle soluzioni per <script type="math/tex">n</script> da 1 a 20.</p>
+<details class="tip">
+<summary>Suggerimento</summary>
+<p>Riscrivere l'equazione come <script type="math/tex">sin(x)-xcos(x)=0</script>.</p>
+</details>
+<!--
+## ESERCIZIO 6.4 - Miglioramenti di Solutore:
+Aggiungere a Solutore due nuovi metodi virtuali:
+Nuovi metodi di Solutore
+<div class="highlight"><pre><span></span><code><span class="k">virtual</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="nf">Trovato</span><span class="p">()</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">;</span>
+<span class="k">virtual</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="nf">Incertezza</span><span class="p">()</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+</code></pre></div>
+Il primo dovrà restituire vero o falso a seconda che lo zero sia stato effettivamente trovato o meno. Ad esempio se un algoritmo non riesce a convergere per via delle cattive condizioni iniziali ```Trovato()``` dovrà restituire false.
+Il secondo dovrà restituire l'incertezza effettiva sull'ascissa dello zero stimato, che di solito è migliore del minimo requisito sulla precisione immagazzinato in ```_prec```.
+Implementare questi metodi nelle classi concrete usate per gli altri esercizi di questa lezione.
+-->
+<h2 id="esercizio-64-ricerca-di-zeri-di-una-funzione-senza-uso-del-polimorfismo-facoltativo">ESERCIZIO 6.4 - Ricerca di zeri di una funzione senza uso del polimorfismo (facoltativo):</h2>
+<p>Si provi ad implementare un algoritmo di ricerca degli zeri di una funzione senza utilizzare il polimorfismo. Prendere come spunto le soluzioni indicate nelle trasparenze finali della lezione teorica. Si potrebbe codificare il metodo della bisezione in una funzione che accetti in input una <code>std::function</code> e modellizzare la funzione di cui si vuole cercare lo zero con una funzione lambda ( oppure utilizzando un funtore o ancora utelizzando una semplice funzione). </p>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+    <nav class="md-footer__inner md-grid" aria-label="Footer" >
+      
+        
+        <a href="../../Lezione5/Lezione5/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Lezione 5" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Lezione 5
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../../Lezione7/Lezione7/" class="md-footer__link md-footer__link--next" aria-label="Next: Lezione 7" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Lezione 7
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.5bf1dace.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.37e9125f.min.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      
+    
+  </body>
+</html>

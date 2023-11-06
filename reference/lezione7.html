@@ -1,0 +1,882 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="S2I MkDocs Example">
+      
+      
+        <meta name="author" content="CERN Authoring">
+      
+      
+        <link rel="canonical" href="https://s2i-mkdocs-example.docs.cern.ch/Lezione7/Lezione7/">
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.3.1, mkdocs-material-8.5.3">
+    
+    
+      
+        <title>Lezione 7 - Lab TNDS</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.7a952b86.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.cbb835fc.min.css">
+        
+      
+      
+
+    
+    
+    
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/fonts.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#lezione-7-quadratura-numerica" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Lab TNDS" class="md-header__button md-logo" aria-label="Lab TNDS" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Lab TNDS
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Lezione 7
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      <form class="md-header__option" data-md-component="palette">
+        
+          
+          
+          <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent=""  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+          
+            <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+            </label>
+          
+        
+          
+          
+          <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="amber"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
+          
+            <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12c0-2.42-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+            </label>
+          
+        
+      </form>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://gitlab.cern.ch/authoring/documentation/s2i-mkdocs-example" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitLab
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Lab TNDS" class="md-nav__button md-logo" aria-label="Lab TNDS" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    Lab TNDS
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://gitlab.cern.ch/authoring/documentation/s2i-mkdocs-example" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitLab
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Lezione1/Lezione1/" class="md-nav__link">
+        Lezione 1
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Lezione2/Lezione2/" class="md-nav__link">
+        Lezione 2
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Lezione3/Lezione3/" class="md-nav__link">
+        Lezione 3
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Lezione4/Lezione4/" class="md-nav__link">
+        Lezione 4
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Lezione5/Lezione5/" class="md-nav__link">
+        Lezione 5
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Lezione6/lezione6/" class="md-nav__link">
+        Lezione 6
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Lezione 7
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Lezione 7
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#esercizio-70-integrazione-con-il-metodo-midpoint-a-numero-di-passi-fissato" class="md-nav__link">
+    ESERCIZIO 7.0 - Integrazione con il metodo midpoint a numero di passi fissato:
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#esercizio-71-integrazione-con-metodo-di-simpson-a-numero-di-passi-fissato-da-consegnare" class="md-nav__link">
+    ESERCIZIO 7.1 - Integrazione con metodo di Simpson a numero di passi fissato (da consegnare):
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#esercizio-72-integrazione-con-metodo-dei-trapezi-a-precisione-fissata-da-consegnare" class="md-nav__link">
+    ESERCIZIO 7.2 - Integrazione con metodo dei trapezi a precisione fissata (da consegnare):
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Lezione8/Lezione8/" class="md-nav__link">
+        Lezione 8 e 9
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Lezione10-11/Lezione1011/" class="md-nav__link">
+        Lezione 10 e 11
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Lezione12/Lezione12/" class="md-nav__link">
+        Lezione 12
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_12" type="checkbox" id="__nav_12" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_12">
+          Survival guides
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Survival guides" data-md-level="1">
+        <label class="md-nav__title" for="__nav_12">
+          <span class="md-nav__icon md-icon"></span>
+          Survival guides
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Survival/unix/" class="md-nav__link">
+        Principali comandi UNIX
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Survival/root/" class="md-nav__link">
+        Principali oggetti di ROOT
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#esercizio-70-integrazione-con-il-metodo-midpoint-a-numero-di-passi-fissato" class="md-nav__link">
+    ESERCIZIO 7.0 - Integrazione con il metodo midpoint a numero di passi fissato:
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#esercizio-71-integrazione-con-metodo-di-simpson-a-numero-di-passi-fissato-da-consegnare" class="md-nav__link">
+    ESERCIZIO 7.1 - Integrazione con metodo di Simpson a numero di passi fissato (da consegnare):
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#esercizio-72-integrazione-con-metodo-dei-trapezi-a-precisione-fissata-da-consegnare" class="md-nav__link">
+    ESERCIZIO 7.2 - Integrazione con metodo dei trapezi a precisione fissata (da consegnare):
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  <a href="https://gitlab.cern.ch/authoring/documentation/s2i-mkdocs-example/blob/master/docs/Lezione7/Lezione7.md" title="Edit this page" class="md-content__button md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
+  </a>
+
+
+<!-- può da più  avrà è  -->
+<h1 id="lezione-7-quadratura-numerica">Lezione 7 : quadratura numerica</h1>
+<p>In questa lezione implementeremo alcuni algoritmi di <em>quadratura numerica</em>, cioè algoritmi per il calcolo di integrali definiti di funzioni continue in un intervallo chiuso e limitato. I metodi numerici che studieremo in questa sessione si possono rendere necessari in varie occasioni: quando non sappiamo valutare analiticamente l'integrale in esame, quando la soluzione analitica è molto complicata ed il calcolo numerico è molto più semplice, oppure quando la funzione è conosciuta in un numeri finito di punti.</p>
+<h2 id="esercizio-70-integrazione-con-il-metodo-midpoint-a-numero-di-passi-fissato">ESERCIZIO 7.0 - Integrazione con il metodo <em>midpoint</em> a numero di passi fissato:</h2>
+<p>In questo primo esercizio proviamo ad implementare un codice per il calcolo dell'integrale della funzione <script type="math/tex">sin(x)</script> tra <script type="math/tex">[0,\pi]</script> con il metodo midpoint.</p>
+<ol>
+<li>Per prima cosa costruiamo un programma di test che calcoli l'integrale utilizzando un numero di intervalli fissato e passato da riga di comando. </li>
+<li>Per controllare la precisione ottenuta con un numero di passi fissato proviamo a stampare una tabella con la differenza tra il risultato numerico ed il valore esatto (ottenuto analiticamente) in funzione del numero di passi (o della lunghezza del passo h). In aggiunta alla tabella si può rappresentare l'andamento dell'errore in funzione della lunghezza del passo h con un TGraph di ROOT (una traccia su come visualizzare i dati usando un TGraph di ROOT si può trovare <a href="./Survival/root.md">qui</a>).</li>
+</ol>
+<details class="tip">
+<summary>Il metodo <em>midpoint</em></summary>
+<p>Ricordiamo che in questo metodo l'approssimazione dell'integrale è definita dalla formula</p>
+<p>
+<script type="math/tex; mode=display"> \int_{a}^{b} f(x) dx \approx ( f(x_{0})  +   f(x_{1})  + ... + f(x_{N-1})   ) h </script>
+</p>
+<p>dove </p>
+<p>
+<script type="math/tex; mode=display"> h = \frac{b-a}{N} </script>
+</p>
+<p>e</p>
+<p>
+<script type="math/tex; mode=display"> x_{k} = a + \left( k + \frac{1}{2}  h \right)   k = 0, 1.... N-1 </script>
+</p>
+<p>Questa formula fornisce un'accuratezza dell'integrale di <script type="math/tex">O(h^{2})</script>. Notate che questo metodo non richiede il calcolo della funzione negli estremi di integrazione.</p>
+</details>
+<details>
+<p><summary> Cenni sull'implementazione : </summary></p>
+<p>L'algoritmo può essere implementato con uno schema del tipo classe madre astratta e classe derivata che abbiamo già utilizzato nella lezione precedente. Si potrebbe pensare ad una organizzazione di questo tipo: </p>
+<ul>
+<li>Prepariamo una <em>classe astratta</em> <code>Integral</code> che rappresenta un generico algoritmo di integrazione. Il suo costruttore prende in ingresso gli estremi di integrazione e controlla il segno. </li>
+<li>La classe implementa (tra le varie cose) un metodo virtuale puro<br />
+<div class="highlight"><pre><span></span><code><span class="k">virtual</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="nf">Integra</span><span class="p">(</span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">nstep</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">FunzioneBase</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">f</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">;</span>
+</code></pre></div>
+che accetti in input il numero di passi (<code>step</code>) con cui si desidera effettuare il calcolo e una referenza (<code>f</code>) alla funzione da integrare. </li>
+<li>Il metodo di integrazione <em>midpoint</em> viene concretamente implementato in una classe derivata <code>Midpoint</code> sovrascrivendo il metodo <code>Integra</code>.</li>
+</ul>
+<p>Qui vediamo l'esempio di un possibile header file (.h). </p>
+<p><div class="highlight"><pre><span></span><code><span class="cp">#ifndef __INTEGRAL_H__</span>
+<span class="cp">#define __INTEGRAL_H__</span>
+
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;Funzioni.h&quot;</span>
+
+<span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">std</span><span class="p">;</span><span class="w">                                                        </span>
+
+<span class="c1">// base class</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Integral</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w"> </span><span class="k">public</span><span class="o">:</span>
+
+<span class="w">  </span><span class="n">Integral</span><span class="w"> </span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">checkInterval</span><span class="w"> </span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">);</span>
+<span class="w">    </span><span class="n">m_nstep</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="n">m_h</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">;</span>
+<span class="w">    </span><span class="n">m_sum</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">;</span>
+<span class="w">    </span><span class="n">m_integral</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="p">;</span>
+
+<span class="w">  </span><span class="k">virtual</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="nf">Integra</span><span class="p">(</span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">nstep</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">FunzioneBase</span><span class="w"> </span><span class="o">&amp;</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">;</span>
+
+<span class="w"> </span><span class="k">protected</span><span class="o">:</span>
+
+<span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="n">checkInterval</span><span class="p">(</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">m_a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">min</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">);</span>
+<span class="w">    </span><span class="n">m_b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">max</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">);</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="n">m_sign</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">-1</span><span class="p">;</span>
+<span class="w">    </span><span class="k">else</span><span class="w"> </span><span class="n">m_sign</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">m_nstep</span><span class="p">;</span>
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">m_a</span><span class="p">,</span><span class="w"> </span><span class="n">m_b</span><span class="p">;</span>
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">m_sum</span><span class="p">,</span><span class="w"> </span><span class="n">m_integral</span><span class="p">,</span><span class="w"> </span><span class="n">m_h</span><span class="p">;</span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">m_sign</span><span class="p">;</span>
+
+<span class="p">};</span>
+
+<span class="c1">// derived class</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Midpoint</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="n">Integral</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w"> </span><span class="k">public</span><span class="o">:</span>
+
+<span class="w">  </span><span class="n">Midpoint</span><span class="w"> </span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">Integral</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">;</span>
+
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="nf">Integra</span><span class="p">(</span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">nstep</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">FunzioneBase</span><span class="w"> </span><span class="o">&amp;</span><span class="n">f</span><span class="p">)</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">nstep</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Error, number of steps is negative&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span><span class="w"> </span><span class="n">exit</span><span class="p">(</span><span class="mi">-1</span><span class="p">)</span><span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">m_nstep</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">nstep</span><span class="p">;</span>
+<span class="w">    </span><span class="n">m_h</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">m_b</span><span class="o">-</span><span class="n">m_a</span><span class="p">)</span><span class="o">/</span><span class="n">m_nstep</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">m_sum</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.</span><span class="p">;</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">&lt;</span><span class="n">m_nstep</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="n">m_sum</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">f</span><span class="p">.</span><span class="n">Eval</span><span class="p">(</span><span class="w"> </span><span class="n">m_a</span><span class="w">  </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mf">0.5</span><span class="p">)</span><span class="o">*</span><span class="n">m_h</span><span class="w"> </span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="n">m_integral</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">m_sign</span><span class="o">*</span><span class="n">m_sum</span><span class="o">*</span><span class="n">m_h</span><span class="p">;</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">m_integral</span><span class="p">;</span>
+<span class="w">  </span><span class="p">};</span>
+
+<span class="p">};</span>
+
+<span class="cp">#endif </span><span class="c1">// __INTEGRAL_H__                                   </span>
+</code></pre></div>
+Per verificare il funzionamento dell'algoritmo di integrazione appena scritto possiamo utilizzare un semplice programma di questo tipo:
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;Integral.h&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;Funzioni.h&quot;</span>
+
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cmath&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iomanip&gt;</span>
+
+<span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">std</span><span class="p">;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="o">**</span><span class="w"> </span><span class="n">argv</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">argc</span><span class="o">!=</span><span class="mi">2</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Usage: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">argv</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; &lt;nstep&gt;&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">-1</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">nstep</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+
+<span class="w">  </span><span class="n">Seno</span><span class="w"> </span><span class="n">f</span><span class="p">;</span>
+
+<span class="w">  </span><span class="n">Midpoint</span><span class="w"> </span><span class="n">myInt</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">M_PI</span><span class="p">)</span><span class="w"> </span><span class="p">;</span>
+
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">I</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">myInt</span><span class="p">.</span><span class="n">Integra</span><span class="p">(</span><span class="n">nstep</span><span class="p">,</span><span class="w"> </span><span class="n">f</span><span class="p">);</span><span class="w"> </span>
+
+<span class="w">  </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; Passi= &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">setw</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">nstep</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; I= &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">setw</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">I</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+Si può poi aggiungere in coda o in un altro codice lo studio dell'andamento dell'errore in funzione del passo <script type="math/tex">h</script> o del numero di step sfruttando un frammento di codice di questo tipo :</p>
+<div class="highlight"><pre><span></span><code><span class="w">  </span><span class="c1">// ............</span>
+
+<span class="w">  </span><span class="n">TGraph</span><span class="w"> </span><span class="n">g_errore</span><span class="p">;</span>
+
+<span class="w">  </span><span class="n">nstep</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">4</span><span class="p">;</span>
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">Iv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">2.</span><span class="w"> </span><span class="p">;</span>
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">I</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">err</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="n">h</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">;</span>
+
+<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span><span class="w"> </span><span class="n">k</span><span class="o">++</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">h</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">b</span><span class="o">-</span><span class="n">a</span><span class="p">)</span><span class="o">/</span><span class="n">nstep</span><span class="p">;</span><span class="w"> </span>
+<span class="w">    </span><span class="n">I</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">myInt</span><span class="p">.</span><span class="n">Integra</span><span class="p">(</span><span class="n">nstep</span><span class="p">,</span><span class="w"> </span><span class="n">f</span><span class="p">);</span><span class="w"> </span>
+<span class="w">    </span><span class="n">err</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fabs</span><span class="p">(</span><span class="n">I</span><span class="o">-</span><span class="n">Iv</span><span class="p">);</span>
+<span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; Passi= &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">setw</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">nstep</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; Errore= &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">setw</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">err</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+<span class="w">    </span><span class="n">g_errore</span><span class="p">.</span><span class="n">SetPoint</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="w"> </span><span class="n">h</span><span class="p">,</span><span class="w"> </span><span class="n">err</span><span class="w"> </span><span class="p">);</span>
+<span class="w">    </span><span class="n">nstep</span><span class="w"> </span><span class="o">*=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="c1">// ............</span>
+</code></pre></div>
+</details>
+<h2 id="esercizio-71-integrazione-con-metodo-di-simpson-a-numero-di-passi-fissato-da-consegnare">ESERCIZIO 7.1 - Integrazione con metodo di <em>Simpson</em> a numero di passi fissato (da consegnare):</h2>
+<p>Implementare l'integrazione con il metodo di Simpson con un numero di passi fissato. Si può utilizzare lo stesso schema dell'esercizio precedente costruendo una classe derivata <code>Simpson</code> . Come nell'esercizio 7.0 fornire il valore dell'integrale calcolato con numero di passi inserito da linea di comando e stampare una tabella (o costruire un TGraph di ROOT) con la precisione raggiunta in funzione del numero di passi.</p>
+<details>
+<p><summary> Il metodo Simpson : </summary>
+Nel metodo di integrazione alla Simpson, la funzione integranda è approssimata, negli intervalli <script type="math/tex">[x_{k},x_{k+2}]</script> (dove <script type="math/tex">k</script> è un intero pari e <script type="math/tex">x_{k}=a+kh</script>) con un polinomio di secondo grado i cui nodi sono nei punti <script type="math/tex">(x_{k},f(x_{k}))</script>, <script type="math/tex">(x_{k+1},f(x_{k+1})</script> e <script type="math/tex">(x_{k+2},f(x_{k+2}))</script>. Esso fornisce una valutazione dell'integrale con una precisione pari a <script type="math/tex">h^{4}</script>.
+La sua applicazione richiede che il numero di passi sia <em>pari</em> e la formula che approssima l'integrale è :</p>
+<p>
+<script type="math/tex; mode=display"> \int_{a}^{b} f(x) dx \approx \left( \frac{1}{3}f(x_{0})  +  \frac{4}{3} f(x_{1}) + \frac{2}{3} f(x_{2}) + \frac{4}{3} f(x_{3}) + ... + \frac{2}{3} f(x_{N-2}) + \frac{4}{3} f(x_{N-1}) + \frac{1}{3} f(x_{N}) \right) h </script>
+</p>
+<p>dove </p>
+<p>
+<script type="math/tex; mode=display"> h = \frac{b-a}{N} </script>
+</p>
+<p>e</p>
+<p>
+<script type="math/tex; mode=display"> x_{k} = a + k h </script>
+</p>
+</details>
+<h2 id="esercizio-72-integrazione-con-metodo-dei-trapezi-a-precisione-fissata-da-consegnare">ESERCIZIO 7.2 - Integrazione con metodo dei <em>trapezi</em> a precisione fissata (da consegnare):</h2>
+<p>Concludiamo l'esercitazione implementando l'integrazione della funzione <script type="math/tex">sin(x)</script> tra <script type="math/tex">[0,\pi]</script> con il metodo dei <em>trapezi</em>. In quest'ultimo esercizio proviamo a riflettere sull'uso di un algoritmo di integrazione numerica <em>a precisione fissata</em> invece che a numero di passi fissato. Negli esercizi precedenti il calcolo a numero di passi fissato non ci da alcuna indicazione sulla qualità del risultato : integrare a 10 step è sufficiente ? 
+L'idea di base che vogliamo sviluppare è che l'utente fornisca una precisione desiderata e l'algoritmo debba essere in grado di aumentare automaticamente il numero di passi fino a raggiungere la precisione richiesta sul valore dell'integrale. L'algoritmo dovrà accettare in input il valore della precisione e raddoppiare il numero di passi finchè l'errore (stimato <em>runtime</em>, si veda sotto) non diventa inferiore alla precisione impostata. </p>
+<ol>
+<li>Come nei casi precedenti si può costruire una classe dedicata per l'implementazione del metodo dei trapezi</li>
+<li>Possiamo implementare come nei casi precedenti un metodo 
+<div class="highlight"><pre><span></span><code><span class="kt">double</span><span class="w"> </span><span class="nf">Integra</span><span class="p">(</span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">nstep</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">FunzioneBase</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">f</span><span class="p">)</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="p">{...}</span>
+</code></pre></div>
+che contenga il calcolo con il metodo dei trapezi a numero di passi fissato.</li>
+<li>Il punto che ci interessa maggiormente è provare a realizzare un metodo dei trapezi che lavori a precisione fissata, quindi qualcosa del tipo 
+<div class="highlight"><pre><span></span><code><span class="kt">double</span><span class="w"> </span><span class="nf">Integra</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">prec</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">FunzioneBase</span><span class="w"> </span><span class="o">&amp;</span><span class="n">f</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="p">{...}</span>
+</code></pre></div>
+L'algoritmo dovrà raddoppiare il numero di passi finché l'errore non diventa minore della richiesta dell'utente (<code>prec</code>). La struttura di base sarè quindi un ciclo <code>while</code> nel quale la condizione di uscita è rappresentata dal controllo sull'errore runtime.</li>
+</ol>
+<p>Un algoritmo a precisione fissata si può implementare anche per il metodo midpoint e per il metodo di Simpson ma nel caso dei trapezoidi si presta ad una implementazione particolarmente efficiente (si veda la nota sotto).</p>
+<details class="tip">
+<summary>Stima runtime dell'errore</summary>
+<p>Come possiamo fare a stimare l'errore che stiamo commettendo nel calcolo di un integrale se non conosciamo il valore vero <script type="math/tex">I</script> dell'integrale ? Partendo dalla conoscenza dell'andamento teorico dell'errore in funzione del passo <script type="math/tex">h</script> possiamo trovare un modo semplice per la stima dell'errore che stiamo commettendo. Nel caso della regola dei trapezi l'adamento dell'errore è <script type="math/tex">err= k h^{2}</script>. Calcolando l'integrale <script type="math/tex">I_{N}</script> utilizzando un passo <script type="math/tex">h</script> e successivamente l'intgrale <script type="math/tex">I_{2N}</script> con un passo <script type="math/tex">h/2</script> possiamo scrivere il seguente sistema di equazioni:
+<script type="math/tex; mode=display">I - I_{N} = k h^{2}</script>
+<script type="math/tex; mode=display">I - I_{2N} = k (h/2)^{2}</script>
+Sottraendo per esempio la prima equazione alla seconda, non è difficile ricavare che una stima dell'errore pari a
+<script type="math/tex; mode=display">err(N) = \frac{4}{3} fabs(I_{2N} - I_{N}) </script>
+</p>
+</details>
+<details class="tip">
+<summary>Cenni sull'implementazione</summary>
+<p>La condizione di uscita dell'algoritmo è basata sul confronto del risultato di due passaggi successivi. Se la differenza della stima dell'integrale tra due passaggi consecutivi è più piccola della precisione richiesta allora l'algoritmo si ferma. Questo poichè l'integrale calcolato con una partizione più fine è sempre una stima migliore dell'approssimazione con la partizione originaria.
+L'algoritmo dei trapezoidi si presta ad una implementazione ottimizzata descritta qui di seguito. Nel costruttore calcoliamo la prima approssimazione:</p>
+<p>
+<script type="math/tex; mode=display">\Sigma_{0} = ( f(a) + f(b) ) / 2 </script>
+<script type="math/tex; mode=display">I_{0} = \Sigma_{0} * (b-a)</script>
+</p>
+<p>Al primo passaggio dell'algoritmo suddividiamo l'intervallo in due:</p>
+<p>
+<script type="math/tex; mode=display">\Sigma_{1} = \Sigma_{0} + f[x_{11}] </script>
+<script type="math/tex; mode=display">I_{1} = \Sigma_{1} * (b-a)/2</script>
+</p>
+<p>Al secondo passaggio otteniamo :</p>
+<p>
+<script type="math/tex; mode=display">\Sigma_{2} = \Sigma_{1} + f[x_{21}] + f[x_{22}]  </script>
+<script type="math/tex; mode=display">I_{2} = \Sigma_{2} * (b-a)/4</script>
+</p>
+<p>Al terzo pasaggio otteniamo :</p>
+<p>
+<script type="math/tex; mode=display">\Sigma_{3} = \Sigma_{2} + f[x_{31}] + f[x_{32}] + f[x_{33}] + f[x_{34}] </script>
+<script type="math/tex; mode=display">I_{3} = \Sigma_{3} * (b-a)/8</script>
+</p>
+<p>e così secondo lo schema in figura ( <script type="math/tex">L=(b-a)</script> ) :</p>
+<p><img alt="" src="../intervallo.png" /></p>
+<p>I valori dell'ultima approssimazione dell'integrale e dell'ultima somma calcolata sono memorizzati all'interno dell'oggetto. In questo modo, se viene richiesto di ricalcolare l'integrale, non è necessario ricominciare da capo. </p>
+</details>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+    <nav class="md-footer__inner md-grid" aria-label="Footer" >
+      
+        
+        <a href="../../Lezione6/lezione6/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Lezione 6" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Lezione 6
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../../Lezione8/Lezione8/" class="md-footer__link md-footer__link--next" aria-label="Next: Lezione 8 e 9" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Lezione 8 e 9
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.5bf1dace.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.37e9125f.min.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      
+    
+  </body>
+</html>

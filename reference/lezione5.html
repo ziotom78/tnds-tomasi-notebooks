@@ -1,0 +1,1269 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="S2I MkDocs Example">
+      
+      
+        <meta name="author" content="CERN Authoring">
+      
+      
+        <link rel="canonical" href="https://s2i-mkdocs-example.docs.cern.ch/Lezione5/Lezione5/">
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.3.1, mkdocs-material-8.5.3">
+    
+    
+      
+        <title>Lezione 5 - Lab TNDS</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.7a952b86.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.cbb835fc.min.css">
+        
+      
+      
+
+    
+    
+    
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/fonts.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#lezione-5" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Lab TNDS" class="md-header__button md-logo" aria-label="Lab TNDS" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Lab TNDS
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Lezione 5
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      <form class="md-header__option" data-md-component="palette">
+        
+          
+          
+          <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent=""  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+          
+            <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+            </label>
+          
+        
+          
+          
+          <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="amber"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
+          
+            <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12c0-2.42-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+            </label>
+          
+        
+      </form>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://gitlab.cern.ch/authoring/documentation/s2i-mkdocs-example" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitLab
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Lab TNDS" class="md-nav__button md-logo" aria-label="Lab TNDS" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    Lab TNDS
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://gitlab.cern.ch/authoring/documentation/s2i-mkdocs-example" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitLab
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Lezione1/Lezione1/" class="md-nav__link">
+        Lezione 1
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Lezione2/Lezione2/" class="md-nav__link">
+        Lezione 2
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Lezione3/Lezione3/" class="md-nav__link">
+        Lezione 3
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Lezione4/Lezione4/" class="md-nav__link">
+        Lezione 4
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Lezione 5
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Lezione 5
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#esercizio-50-creazione-della-classe-posizione" class="md-nav__link">
+    ESERCIZIO 5.0 - Creazione della classe Posizione :
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#esercizio-51-creazione-della-classe-particella-ed-elettrone" class="md-nav__link">
+    ESERCIZIO 5.1 - Creazione della classe Particella ed Elettrone:
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#esercizio-52-creazione-delle-classi-campovettoriale-e-puntomateriale" class="md-nav__link">
+    ESERCIZIO 5.2 - Creazione delle classi CampoVettoriale e PuntoMateriale :
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#esercizio-53-calcolo-del-campo-elettrico-generato-da-un-dipolo-da-consegnare" class="md-nav__link">
+    ESERCIZIO 5.3 - Calcolo del campo elettrico generato da un dipolo (da consegnare):
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#esercizio-54-campo-di-multipolo-approfondimento" class="md-nav__link">
+    ESERCIZIO 5.4 - Campo di multipolo (approfondimento):
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#esercizio-55-gravita-dallo-spazio-approfondimento" class="md-nav__link">
+    ESERCIZIO 5.5 - Gravità dallo spazio (approfondimento):
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Lezione6/lezione6/" class="md-nav__link">
+        Lezione 6
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Lezione7/Lezione7/" class="md-nav__link">
+        Lezione 7
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Lezione8/Lezione8/" class="md-nav__link">
+        Lezione 8 e 9
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Lezione10-11/Lezione1011/" class="md-nav__link">
+        Lezione 10 e 11
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Lezione12/Lezione12/" class="md-nav__link">
+        Lezione 12
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_12" type="checkbox" id="__nav_12" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_12">
+          Survival guides
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Survival guides" data-md-level="1">
+        <label class="md-nav__title" for="__nav_12">
+          <span class="md-nav__icon md-icon"></span>
+          Survival guides
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Survival/unix/" class="md-nav__link">
+        Principali comandi UNIX
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Survival/root/" class="md-nav__link">
+        Principali oggetti di ROOT
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#esercizio-50-creazione-della-classe-posizione" class="md-nav__link">
+    ESERCIZIO 5.0 - Creazione della classe Posizione :
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#esercizio-51-creazione-della-classe-particella-ed-elettrone" class="md-nav__link">
+    ESERCIZIO 5.1 - Creazione della classe Particella ed Elettrone:
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#esercizio-52-creazione-delle-classi-campovettoriale-e-puntomateriale" class="md-nav__link">
+    ESERCIZIO 5.2 - Creazione delle classi CampoVettoriale e PuntoMateriale :
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#esercizio-53-calcolo-del-campo-elettrico-generato-da-un-dipolo-da-consegnare" class="md-nav__link">
+    ESERCIZIO 5.3 - Calcolo del campo elettrico generato da un dipolo (da consegnare):
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#esercizio-54-campo-di-multipolo-approfondimento" class="md-nav__link">
+    ESERCIZIO 5.4 - Campo di multipolo (approfondimento):
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#esercizio-55-gravita-dallo-spazio-approfondimento" class="md-nav__link">
+    ESERCIZIO 5.5 - Gravità dallo spazio (approfondimento):
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  <a href="https://gitlab.cern.ch/authoring/documentation/s2i-mkdocs-example/blob/master/docs/Lezione5/Lezione5.md" title="Edit this page" class="md-content__button md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
+  </a>
+
+
+<!-- può da più  avrà è  -->
+<h1 id="lezione-5">Lezione 5</h1>
+<p>In questa quinta lezione vogliamo affrontare un semplice problema di elettrostatica utilizzando un codice numerico. In particolare vogliamo preparare un programma che ci permetta di calcolare il campo elettrico generato da un dipolo. Vedremo poi come il codice si può estendere in modo immediato a problemi più complessi (ad esempio per studiare il campo generato da un multi-polo o il campo gravitazionale generato da un sistema di masse). Nell'affrontare questo problema fisico approfondiremo il concetto di ereditarietà in C++. Come al solito dovremo prima preparare un set di classi utili per lo svolgimento dell'esercizio.</p>
+<h2 id="esercizio-50-creazione-della-classe-posizione">ESERCIZIO 5.0 - Creazione della classe <code>Posizione</code> :</h2>
+<p>Implementare una classe <code>Posizione</code> che descriva un punto nello spazio seguendo queste indicazioni:</p>
+<ul>
+<li>Come data membri privati usare la terna di coordinate cartesiane.</li>
+<li>Definire un costruttore di default che crei un punto di coordinate (0,0,0).</li>
+<li>Definire un costruttore che abbia come argomento una terna di numeri <code>double</code> corrispondenti alle coordinate del punto.</li>
+<li>Definire metodi per restituire le coordinate del punto in sistemi di coordinate cartesiane, sferiche e cilindriche.</li>
+<li>Definire un metodo che calcoli la distanza da un altro punto. </li>
+</ul>
+<p>Verificare il funzionamento della classe creando un programmino che legga da riga di comando le coordinate cartesiane di un punto e ne stampi le coordinate in un sistema di coordinate sferiche e cilindriche.</p>
+<details>
+<p><summary> Header file della classe: </summary></p>
+<p>Nell'header file <code>Posizione.h</code> vanno dichiarati tutti i metodi ed i data membri. Si noti come i data membri siano tutti privati: questa modo di disegnare le classi implementa il concetto di <em>incapsulamento</em> e <em>data hiding</em> in C++.
+Un paio di punti che già vale la pena ricordare:</p>
+<ul>
+<li>Il qualificatore <code>const</code> dopo la dichiarazione di una funzione informa che la funzione non modificherà il contenuto dell'oggetto. In maniera simile il qualificatore <code>const</code> nell'argomento di <code>Distanza</code> specifica che il metodo <code>Distanza</code> con modificherà il suo argomento. È sempre utile specificare esplicitamente queste proprietà dei metodi.</li>
+<li>Come abbiamo già visto, l'insieme delle direttive <code>#ifndef, #define, #endif</code> serve per proteggersi da inclusioni incrociate (molto comuni quando si utilizzano diverse classi che interagiscono tra di loro).</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="cp">#ifndef __Posizione_h__</span>
+<span class="cp">#define __Posizione_h__</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Posizione</span><span class="w"> </span><span class="p">{</span>
+
+<span class="k">public</span><span class="o">:</span>
+
+<span class="w">  </span><span class="c1">// costruttori</span>
+<span class="w">  </span><span class="n">Posizione</span><span class="p">();</span>
+<span class="w">  </span><span class="n">Posizione</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">z</span><span class="p">);</span><span class="w"> </span>
+
+<span class="w">  </span><span class="c1">// distruttore</span>
+<span class="w">  </span><span class="o">~</span><span class="n">Posizione</span><span class="p">();</span>
+
+<span class="w">  </span><span class="c1">// metodi di accesso</span>
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="nf">getX</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span><span class="w">       </span><span class="c1">// Restituisce coordinate cartesiane</span>
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="nf">getY</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="nf">getZ</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="nf">getR</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span><span class="w">       </span><span class="c1">// Restituisce Coordinate sferiche</span>
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="nf">getPhi</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="nf">getTheta</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="nf">getRho</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span><span class="w">     </span><span class="c1">// raggio delle coordinate cilindriche</span>
+
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="nf">Distanza</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">Posizione</span><span class="o">&amp;</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="p">;</span><span class="w"> </span><span class="c1">// distanza da un altro punto</span>
+
+<span class="k">private</span><span class="o">:</span>
+
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">m_x</span><span class="p">,</span><span class="w"> </span><span class="n">m_y</span><span class="p">,</span><span class="w"> </span><span class="n">m_z</span><span class="p">;</span><span class="w">  </span>
+
+<span class="p">};</span>
+
+<span class="cp">#endif </span><span class="c1">// __Posizione_h__</span>
+</code></pre></div>
+</details>
+<details>
+<p><summary> File di implementazione delle classe : </summary></p>
+<p>Qui vediamo un esempio di implementazione della classe (file <code>Posizione.cpp</code>).
+Per prima cosa sono definiti i costruttori ed un distruttore, che in questo caso può esser vuoto ( nei costruttori non ci sono operazioni di allocazione dinamica della memoria quindi non è necessario implementare regole di distruzione particolari).
+Successivamente sono implementati tutti i metodi descritti nell'header file:</p>
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;Posizione.h&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cmath&gt;</span>
+
+<span class="c1">// costruttore di default</span>
+<span class="n">Posizione</span><span class="o">::</span><span class="n">Posizione</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">m_x</span><span class="o">=</span><span class="mf">0.</span><span class="p">;</span>
+<span class="w">  </span><span class="n">m_y</span><span class="o">=</span><span class="mf">0.</span><span class="p">;</span>
+<span class="w">  </span><span class="n">m_z</span><span class="o">=</span><span class="mf">0.</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// costruttore a partire da una terna cartesiana</span>
+<span class="n">Posizione</span><span class="o">::</span><span class="n">Posizione</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">z</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">m_x</span><span class="o">=</span><span class="n">x</span><span class="p">;</span>
+<span class="w">  </span><span class="n">m_y</span><span class="o">=</span><span class="n">y</span><span class="p">;</span>
+<span class="w">  </span><span class="n">m_z</span><span class="o">=</span><span class="n">z</span><span class="p">;</span>
+<span class="p">}</span><span class="w"> </span>
+
+<span class="c1">// distruttore (puo&#39; essere vuoto)</span>
+<span class="n">Posizione</span><span class="o">::~</span><span class="n">Posizione</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="p">}</span>
+
+<span class="c1">// Coordinate cartesiane</span>
+<span class="kt">double</span><span class="w"> </span><span class="n">Posizione</span><span class="o">::</span><span class="n">getX</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">m_x</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kt">double</span><span class="w"> </span><span class="n">Posizione</span><span class="o">::</span><span class="n">getY</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">m_y</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kt">double</span><span class="w"> </span><span class="n">Posizione</span><span class="o">::</span><span class="n">getZ</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">m_z</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// Coordinate sferiche</span>
+<span class="kt">double</span><span class="w"> </span><span class="n">Posizione</span><span class="o">::</span><span class="n">getR</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">sqrt</span><span class="p">(</span><span class="n">m_x</span><span class="o">*</span><span class="n">m_x</span><span class="o">+</span><span class="n">m_y</span><span class="o">*</span><span class="n">m_y</span><span class="o">+</span><span class="n">m_z</span><span class="o">*</span><span class="n">m_z</span><span class="p">);</span>
+<span class="p">}</span><span class="w">       </span>
+<span class="kt">double</span><span class="w"> </span><span class="n">Posizione</span><span class="o">::</span><span class="n">getPhi</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">atan2</span><span class="p">(</span><span class="n">m_y</span><span class="p">,</span><span class="n">m_x</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="kt">double</span><span class="w"> </span><span class="n">Posizione</span><span class="o">::</span><span class="n">getTheta</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">acos</span><span class="p">(</span><span class="n">m_z</span><span class="o">/</span><span class="n">getR</span><span class="p">());</span>
+<span class="p">}</span>
+
+<span class="c1">// raggio delle coordinate cilindriche  </span>
+<span class="kt">double</span><span class="w"> </span><span class="n">Posizione</span><span class="o">::</span><span class="n">getRho</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">sqrt</span><span class="p">(</span><span class="n">m_x</span><span class="o">*</span><span class="n">m_x</span><span class="o">+</span><span class="n">m_y</span><span class="o">*</span><span class="n">m_y</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// distanza da un altro punto</span>
+<span class="kt">double</span><span class="w"> </span><span class="n">Posizione</span><span class="o">::</span><span class="n">Distanza</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">Posizione</span><span class="o">&amp;</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">sqrt</span><span class="p">(</span><span class="w"> </span><span class="n">pow</span><span class="p">(</span><span class="n">getX</span><span class="p">()</span><span class="o">-</span><span class="n">b</span><span class="p">.</span><span class="n">getX</span><span class="p">(),</span><span class="mi">2</span><span class="p">)</span>
+<span class="w">              </span><span class="o">+</span><span class="n">pow</span><span class="p">(</span><span class="n">getY</span><span class="p">()</span><span class="o">-</span><span class="n">b</span><span class="p">.</span><span class="n">getY</span><span class="p">(),</span><span class="mi">2</span><span class="p">)</span><span class="w"> </span>
+<span class="w">              </span><span class="o">+</span><span class="n">pow</span><span class="p">(</span><span class="n">getZ</span><span class="p">()</span><span class="o">-</span><span class="n">b</span><span class="p">.</span><span class="n">getZ</span><span class="p">(),</span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+</details>
+<details>
+<p><summary> Esempio di programma : </summary></p>
+<p>Questo programma utilizza la nuova classe appena creata: richiede di fornire come argomenti le tre coordinate cartesiane e poi stampa le terne di coordinate cartesiane, sferiche e cilindriche.</p>
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;Posizione.h&quot;</span>
+
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cstdlib&gt;</span>
+
+<span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">std</span><span class="p">;</span>
+
+<span class="c1">// Questo programma vuole com input da riga di comando le coordinate x, y e z di </span>
+<span class="c1">// un punto e ne restituisce le coordinate sferiche e cilindiriche.</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="o">**</span><span class="w"> </span><span class="n">argv</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">  </span><span class="c1">// Controlla gli argomenti</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">argc</span><span class="o">!=</span><span class="mi">4</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cerr</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Usage: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">argv</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; &lt;x&gt; &lt;y&gt; &lt;z&gt;&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">-1</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">atof</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">atof</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">]);</span>
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">z</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">atof</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">3</span><span class="p">]);</span>
+
+<span class="w">  </span><span class="c1">// Crea un oggetto posizione ed accede ai vari metodi</span>
+
+<span class="w">  </span><span class="n">Posizione</span><span class="w"> </span><span class="n">P</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">z</span><span class="p">);</span>
+
+<span class="w">  </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Coordinate cartesiane: &quot;</span><span class="w"> </span>
+<span class="w">       </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">P</span><span class="p">.</span><span class="n">getX</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;,&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">P</span><span class="p">.</span><span class="n">getY</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;,&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">P</span><span class="p">.</span><span class="n">getZ</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+<span class="w">  </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Coordinate cilindriche: &quot;</span><span class="w"> </span>
+<span class="w">       </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">P</span><span class="p">.</span><span class="n">getRho</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;,&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">P</span><span class="p">.</span><span class="n">getPhi</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;,&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">P</span><span class="p">.</span><span class="n">getZ</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+<span class="w">  </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Coordinate sferiche: &quot;</span><span class="w"> </span>
+<span class="w">       </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">P</span><span class="p">.</span><span class="n">getR</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;,&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">P</span><span class="p">.</span><span class="n">getPhi</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;,&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">P</span><span class="p">.</span><span class="n">getTheta</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+</details>
+<details class="tip">
+<summary><em>Incapsulamento</em> e <em>data hiding</em></summary>
+<p>Proviamo ad utilizzare l'esempio della classe <code>Posizione</code> per riflettere sul concetto di <em>incapsulamento</em>. La nostra classe "nasconde" i dati principali (le tre coordinate nel caso specifico) in un set di data-membri privati (<code>m_x, m_y, m_z</code>). Tali data-membri non sono per definizione accessibili al programma principale in modo diretto ma solo attraverso una serie di metodi pubblici (interfacce) che proteggono il dato da un utilizzo incontrollato. Inoltre la protezione del dato dietro interfacce pubbliche mette al riparo da possibili cambiamenti o correzioni nel design di una classe: supponiamo che per qualche ragione l'autore della classe decida che è meglio rappresentare la posizione utilizzando una terna di numeri che corrispondono alle coordinate sferiche. Se l'autore della classe adegua di conseguenza le interfacce pubbliche, un eventuale utilizzatore della classe (il nostro <code>main</code>) non si accorgerebbe della variazione. Se invece il <code>main</code> avesse avuto libero accesso alle tre coordinate e le avesse utilizzate direttamente, il cambiamento di design della classe avrebbe richiesto rendendo pesanti cambiamenti anche nel <code>main</code>. </p>
+</details>
+<details class="tip">
+<summary>Una nota sui distruttori</summary>
+<p>L'implementazione esplicita di un distruttore è spesso necessaria per evitare <em>memory leaks</em> quando il costruttore alloca dinamicamente memoria. In caso contrario tipicamente il distruttore sarà vuoto e può essere omesso. Ricordiamoci che se il distruttore viene dichiarato nell'header file della classe allora dobbiamo necessariamente fornirne una implementazione (anche vuota). In questo caso in <code>Posizione.h</code> ci basta scrivere :
+<div class="highlight"><pre><span></span><code><span class="o">~</span><span class="n">Posizione</span><span class="p">()</span><span class="w"> </span><span class="p">{;}</span><span class="w"> </span><span class="p">;</span><span class="w">  </span>
+</code></pre></div></p>
+</details>
+<h2 id="esercizio-51-creazione-della-classe-particella-ed-elettrone">ESERCIZIO 5.1 - Creazione della classe Particella ed Elettrone:</h2>
+<p>Incominciamo a definire due classi che ci permetteranno di rappresentare le sorgenti del campo (elettrico in questo caso).</p>
+<ul>
+<li>Costruiamo una classe <code>Particella</code> caratterizzata dall'avere una massa ed una carica, quindi dotata dei seguenti metodi:<ul>
+<li>Un construttore avente come argomenti massa e carica.</li>
+<li>Dei metodi di accesso ai valori di massa e carica.</li>
+<li>Un metodo per stampare tali valori. 
+  Siccome vogliamo che questa classe sia la classe base di altre classi, dichiareremo i data membri come <code>protected</code>.</li>
+</ul>
+</li>
+<li>Costruiamo, attraverso il meccanismo di ereditarietà, una classe derivata <code>Elettrone</code> che, essendo una <code>Particella</code> di massa e carica note (wikipedia), ha il solo costruttore di default, che inizializza correttamente i data membri. Modifichiamo il metodo di stampa in modo che indichi che si tratta di un elettrone.</li>
+<li>Verifichiamo che le nuovi classi e l'ereditarietà funzioni correttamente:<ul>
+<li>Istanziamo un oggetto (o puntatore) per ogni classe.</li>
+<li>Verifichiamo che su tutti questi operano i metodi accessori di massa e carica di <code>Particella</code>, ma il metodo di stampa delle classi derivate. </li>
+</ul>
+</li>
+</ul>
+<details>
+<p><summary> Classe Particella : </summary></p>
+<ul>
+<li>Possibile header file (<code>Particella.h</code>):
+<div class="highlight"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">Particella</span><span class="w"> </span><span class="p">{</span>
+
+<span class="k">public</span><span class="o">:</span>
+
+<span class="w">  </span><span class="c1">// costruttori</span>
+<span class="w">  </span><span class="n">Particella</span><span class="p">()</span><span class="w"> </span><span class="p">;</span>
+<span class="w">  </span><span class="n">Particella</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">massa</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">carica</span><span class="p">);</span>
+
+<span class="w">  </span><span class="c1">// distruttore</span>
+<span class="w">  </span><span class="o">~</span><span class="n">Particella</span><span class="p">();</span>
+
+<span class="w">  </span><span class="c1">// metodi</span>
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="nf">GetMassa</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w">  </span><span class="p">{</span><span class="k">return</span><span class="w"> </span><span class="n">m_massa</span><span class="p">;}</span>
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="nf">GetCarica</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span><span class="k">return</span><span class="w"> </span><span class="n">m_carica</span><span class="p">;}</span>
+<span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="nf">Print</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
+
+<span class="w"> </span><span class="k">protected</span><span class="o">:</span>
+
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">m_massa</span><span class="p">;</span>
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">m_carica</span><span class="p">;</span>
+
+<span class="p">};</span>
+</code></pre></div></li>
+<li>Possibile file di implementazione (<code>Particelle.cpp</code>)
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;Particella.h&quot;</span>
+
+<span class="c1">// costruttore </span>
+<span class="n">Particella</span><span class="o">::</span><span class="n">Particella</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">massa</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">carica</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span>
+<span class="w">  </span><span class="n">m_massa</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">massa</span><span class="p">;</span>
+<span class="w">  </span><span class="n">m_carica</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">carica</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// distruttore </span>
+<span class="n">Particella</span><span class="o">::~</span><span class="n">Particella</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="n">Particella</span><span class="o">::</span><span class="n">Print</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Particella: m=&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">m_massa</span><span class="w"> </span>
+<span class="w">       </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;, q=&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">m_carica</span>
+<span class="w">       </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span><span class="w"> </span>
+<span class="p">}</span>
+</code></pre></div></li>
+</ul>
+</details>
+<details>
+<p><summary> Classe Elettrone : </summary></p>
+<ul>
+<li>Possibile header file ( aggiungere in coda a <code>Particella.h</code> o creare un nuovo file <code>Elettrone.h</code>) :
+<div class="highlight"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">Elettrone</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="n">Particella</span><span class="w"> </span><span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+<span class="w">  </span><span class="c1">// costruttore</span>
+<span class="w">  </span><span class="n">Elettrone</span><span class="p">();</span>
+<span class="w">  </span><span class="c1">// distruttore</span>
+<span class="w">  </span><span class="o">~</span><span class="n">Elettrone</span><span class="p">();</span>
+<span class="w">  </span><span class="c1">// </span>
+<span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="nf">Print</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
+<span class="p">};</span>
+</code></pre></div></li>
+<li>Possibile file di implementazione ( aggiungere a <code>Particella.cpp</code> o creare un nuovo file <code>Elettrone.cpp</code>):
+<div class="highlight"><pre><span></span><code><span class="c1">// costruttore</span>
+<span class="n">Elettrone</span><span class="o">::</span><span class="n">Elettrone</span><span class="p">()</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">Particella</span><span class="p">(</span><span class="mf">9.1093826E-31</span><span class="p">,</span><span class="mf">-1.60217653E-19</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="c1">// Invoco il costruttore della classe base con i parametri</span>
+<span class="w">  </span><span class="c1">// opportuni,  ma poi non c&#39;e&#39; altro da fare</span>
+<span class="p">}</span>
+
+<span class="c1">// distruttore</span>
+<span class="n">Elettrone</span><span class="o">::~</span><span class="n">Elettrone</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="n">Elettrone</span><span class="o">::</span><span class="n">Print</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Elettrone: m=&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">m_massa</span><span class="w"> </span>
+<span class="w">       </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;, q=&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">m_carica</span>
+<span class="w">       </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+</code></pre></div></li>
+</ul>
+</details>
+<details>
+<p><summary> Esempio di programma : </summary></p>
+<p>Questo programma utilizza le nuove classi appena create. Verifica il funzionamento dell'ereditarietà e la dereferenziazione dei puntatori a classe.</p>
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;particella.h&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span><span class="c1"> </span>
+
+<span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">std</span><span class="p">;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">  </span><span class="n">Particella</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="p">(</span><span class="mf">1.</span><span class="p">,</span><span class="mf">1.6E-19</span><span class="p">);</span>
+<span class="w">  </span><span class="n">Elettrone</span><span class="w"> </span><span class="o">*</span><span class="n">e</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Elettrone</span><span class="p">();</span>
+
+<span class="w">  </span><span class="c1">// Metodi della classe base</span>
+<span class="w">  </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Particella &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">GetMassa</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;,&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">GetCarica</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+<span class="w">  </span><span class="n">a</span><span class="p">.</span><span class="n">Print</span><span class="p">();</span><span class="w"> </span>
+
+<span class="w">  </span><span class="c1">// Metodi della classe derivata (inherited) </span>
+<span class="w">  </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Elettrone &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">e</span><span class="o">-&gt;</span><span class="n">GetMassa</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;,&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">e</span><span class="o">-&gt;</span><span class="n">GetCarica</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+<span class="w">  </span><span class="n">e</span><span class="o">-&gt;</span><span class="n">Print</span><span class="p">();</span><span class="w"> </span>
+
+<span class="w">  </span><span class="n">Particella</span><span class="w"> </span><span class="n">b</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="w"> </span><span class="p">;</span><span class="w">   </span><span class="c1">// costruisco una Particella a partire da una Particella</span>
+<span class="w">  </span><span class="n">Particella</span><span class="w"> </span><span class="n">d</span><span class="p">(</span><span class="o">*</span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">;</span><span class="w">  </span><span class="c1">// costruisco una Particella a partire da un Elettrone</span>
+<span class="w">  </span><span class="n">Elettrone</span><span class="w">  </span><span class="n">f</span><span class="p">(</span><span class="n">d</span><span class="p">)</span><span class="w">  </span><span class="p">;</span><span class="w">  </span><span class="c1">// costruisco un Elettrone a partire da una Particella </span>
+
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+
+<span class="p">}</span>
+</code></pre></div>
+<div class="admonition question">
+<p class="admonition-title">Question</p>
+</div>
+<p>Il programma di esempio contiene un errore, lo trovate ?</p>
+</details>
+<h2 id="esercizio-52-creazione-delle-classi-campovettoriale-e-puntomateriale">ESERCIZIO 5.2 - Creazione delle classi CampoVettoriale e PuntoMateriale :</h2>
+<p>Per risolvere problemi relativi all'elettrostatica o alla gravità proviamo ad effettuare una modellizzazione basata su due elementi principali: una rappresentazione del campo vettoriale e una rappresentazione delle sorgenti dei campi vettoriali.</p>
+<ul>
+<li>La classe <code>CampoVettoriale</code>: sono molti i casi in Fisica in cui un vettore è collegato ad un punto dello spazio. Ad esempio una forza ha un punto di applicazione, o i vettori del campo elettrico e campo gravitazionale hanno un valore che varia da punto a punto dello spazio.
+Possiamo quindi pensare di costruire una classe <code>CampoVettoriale</code> che erediti dalla classe <code>Posizione</code> e che aggiunga :<ul>
+<li>le tre componenti di un vettore (campo)</li>
+<li>i metodi per accedere e/o modificare il vettore (campo)</li>
+<li>costruttori (in particolare, implementare un costruttore <code>CampoVettoriale(const Posizione&amp;)</code> che crei un vettore nullo nella posizione assegnata)</li>
+<li>un metodo <code>double Modulo()</code> che restituisca la lunghezza del vettore (campo)</li>
+<li>overloading di <code>operator+</code> e <code>operator+=</code> in modo da poter facilmente sommare campi. </li>
+</ul>
+</li>
+</ul>
+<details>
+<p><summary> Header file della classe CampoVettoriale: </summary></p>
+<div class="highlight"><pre><span></span><code><span class="cp">#ifndef __CampoVettoriale_h__</span>
+<span class="cp">#define __CampoVettoriale_h__</span>
+
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;Posizione.h&quot;</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">CampoVettoriale</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="n">Posizione</span><span class="w"> </span><span class="p">{</span>
+
+<span class="k">public</span><span class="o">:</span>
+
+<span class="w">  </span><span class="c1">// esempi di possibili costruttori</span>
+<span class="w">  </span><span class="n">CampoVettoriale</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">Posizione</span><span class="o">&amp;</span><span class="p">);</span>
+<span class="w">  </span><span class="n">CampoVettoriale</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">Posizione</span><span class="o">&amp;</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">Fx</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">Fy</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">Fz</span><span class="p">);</span>
+<span class="w">  </span><span class="n">CampoVettoriale</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">z</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">Fx</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">Fy</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">Fz</span><span class="p">);</span>
+
+<span class="w">  </span><span class="c1">// il distruttore non c&#39;e&#39;, mi fido di quello di default</span>
+
+<span class="w">  </span><span class="c1">// operazioni </span>
+<span class="w">  </span><span class="n">CampoVettoriale</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="k">operator</span><span class="o">+=</span><span class="p">(</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">CampoVettoriale</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">;</span>
+<span class="w">  </span><span class="n">CampoVettoriale</span><span class="w"> </span><span class="k">operator</span><span class="o">+</span><span class="p">(</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">CampoVettoriale</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
+
+<span class="w">  </span><span class="c1">// interfacce</span>
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="nf">getFx</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span><span class="k">return</span><span class="w"> </span><span class="n">m_Fx</span><span class="p">;}</span>
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="nf">getFy</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span><span class="k">return</span><span class="w"> </span><span class="n">m_Fy</span><span class="p">;}</span>
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="nf">getFz</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span><span class="k">return</span><span class="w"> </span><span class="n">m_Fz</span><span class="p">;}</span>
+
+<span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="nf">setFx</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">Fx</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">m_Fx</span><span class="o">=</span><span class="n">Fx</span><span class="p">;}</span>
+<span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="nf">setFy</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">Fy</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">m_Fy</span><span class="o">=</span><span class="n">Fy</span><span class="p">;}</span>
+<span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="nf">setFz</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">Fz</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">m_Fz</span><span class="o">=</span><span class="n">Fz</span><span class="p">;}</span>
+
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="nf">Modulo</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">;</span>
+
+<span class="k">private</span><span class="o">:</span>
+
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">m_Fx</span><span class="p">,</span><span class="w"> </span><span class="n">m_Fy</span><span class="p">,</span><span class="w"> </span><span class="n">m_Fz</span><span class="p">;</span>
+
+<span class="p">};</span>
+
+<span class="cp">#endif </span><span class="c1">// __CampoVettoriale_h__ </span>
+</code></pre></div>
+</details>
+<details class="tip">
+<summary>Overloading operatori</summary>
+<p>Per risolvere facilmente questo tipo di problemi è molto utile ridefinire gli operatori <code>operator+</code> e <code>operator+=</code> per la classe <code>CampoVettoriale</code>. Di seguito una possibile implementazione comoda di questo overloading. Notate che nell'operatore <code>operator+</code> viene creato un nuovo vettore (somma) che viene restituito <em>by value</em>. Per <code>operator+=</code> invece la modifica viene effettuata sull'oggetto che chiama l'operatore. L'oggetto stesso (modificato) viene poi restituito <em>by reference</em>. </p>
+<div class="highlight"><pre><span></span><code><span class="n">CampoVettoriale</span><span class="w"> </span><span class="n">CampoVettoriale</span><span class="o">::</span><span class="k">operator</span><span class="o">+</span><span class="p">(</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">CampoVettoriale</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">v</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span><span class="w">  </span>
+
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">v</span><span class="p">.</span><span class="n">getX</span><span class="p">()</span><span class="o">!=</span><span class="w"> </span><span class="n">getX</span><span class="p">()</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">v</span><span class="p">.</span><span class="n">getY</span><span class="p">()</span><span class="o">!=</span><span class="w"> </span><span class="n">getY</span><span class="p">()</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">v</span><span class="p">.</span><span class="n">getZ</span><span class="p">()</span><span class="o">!=</span><span class="w"> </span><span class="n">getZ</span><span class="p">()</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Somma di campi vettoriali in punti diversi non ammessa&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">    </span><span class="n">exit</span><span class="w"> </span><span class="p">(</span><span class="mi">-11</span><span class="p">)</span><span class="w"> </span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span><span class="w"> </span>
+
+<span class="w">  </span><span class="n">CampoVettoriale</span><span class="w"> </span><span class="n">sum</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">Posizione</span><span class="p">(</span><span class="w"> </span><span class="n">getX</span><span class="p">(),</span><span class="n">getY</span><span class="p">(),</span><span class="w"> </span><span class="n">getZ</span><span class="p">())</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="c1">// creo un campo vettoriale nella posizione giusta</span>
+<span class="w">  </span><span class="n">sum</span><span class="p">.</span><span class="n">setFx</span><span class="p">(</span><span class="w"> </span><span class="n">getFx</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">v</span><span class="p">.</span><span class="n">getFx</span><span class="p">())</span><span class="w"> </span><span class="p">;</span><span class="w">  </span>
+<span class="w">  </span><span class="n">sum</span><span class="p">.</span><span class="n">setFy</span><span class="p">(</span><span class="w"> </span><span class="n">getFy</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">v</span><span class="p">.</span><span class="n">getFy</span><span class="p">())</span><span class="w"> </span><span class="p">;</span><span class="w">  </span>
+<span class="w">  </span><span class="n">sum</span><span class="p">.</span><span class="n">setFz</span><span class="p">(</span><span class="w"> </span><span class="n">getFz</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">v</span><span class="p">.</span><span class="n">getFz</span><span class="p">())</span><span class="w"> </span><span class="p">;</span><span class="w">  </span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">sum</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">CampoVettoriale</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">CampoVettoriale</span><span class="o">::</span><span class="k">operator</span><span class="o">+=</span><span class="p">(</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">CampoVettoriale</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">v</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="k">this</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="k">this</span><span class="p">)</span><span class="o">+</span><span class="n">v</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+</details>
+<ul>
+<li>La classe <code>PuntoMateriale</code>: questa classe ci servirà per rappresentare le sorgenti dei campi. Costruire la classe in modo che erediti da entrambe le classi <code>Particella</code> e <code>Posizione</code>.<ul>
+<li>Implementare i costruttori che pensate siano utili.</li>
+<li>Implementare il metodo <code>CampoVettoriale CampoElettrico(const Posizione&amp;) const</code> che restituisca il campo elettrico generato dal <code>PuntoMateriale</code> nella Posizione r (per i più volenterosi anche il metodo <code>CampoVettoriale CampoGravitazionale(const Posizione&amp;) const</code> che restituisca il campo gravitazionale generato dal <code>PuntoMateriale</code> nella <code>Posizione</code> r). </li>
+</ul>
+</li>
+</ul>
+<details>
+<p><summary> Header file della classe PuntoMateriale: </summary></p>
+<div class="highlight"><pre><span></span><code><span class="cp">#ifndef __PuntoMateriale_h__</span>
+<span class="cp">#define __PuntoMateriale_h__</span>
+
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;Particella.h&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;Posizione.h&quot;</span>
+
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;CampoVettoriale.h&quot;</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">PuntoMateriale</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="n">Particella</span><span class="p">,</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="n">Posizione</span><span class="w"> </span><span class="p">{</span>
+
+<span class="k">public</span><span class="o">:</span>
+
+<span class="w">  </span><span class="c1">// possibili costruttori</span>
+<span class="w">  </span><span class="n">PuntoMateriale</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">massa</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">carica</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">Posizione</span><span class="o">&amp;</span><span class="p">);</span>
+<span class="w">  </span><span class="n">PuntoMateriale</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">massa</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">carica</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">z</span><span class="p">);</span>
+
+<span class="w">  </span><span class="c1">// costruttore è vuoto, possiamo anche ometterlo</span>
+<span class="w">  </span><span class="o">~</span><span class="n">PuntoMateriale</span><span class="p">()</span><span class="w"> </span><span class="p">{;};</span>
+
+<span class="w">  </span><span class="c1">// Qui sta la fisica, calcolo e restituisco il campo in una posizione</span>
+<span class="w">  </span><span class="n">CampoVettoriale</span><span class="w"> </span><span class="nf">CampoElettrico</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">Posizione</span><span class="o">&amp;</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">;</span>
+<span class="w">  </span><span class="n">CampoVettoriale</span><span class="w"> </span><span class="nf">CampoGravitazionale</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">Posizione</span><span class="o">&amp;</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
+
+<span class="p">};</span>
+
+<span class="cp">#endif </span><span class="c1">// __PuntoMateriale_h__</span>
+</code></pre></div>
+</details>
+<p>N.B.: per entrambe le classi di cui sopra, sentitevi liberi di aggiungere tutti i metodi addizionali che ritenete utili per risolvere questo esercizio o i successivi.</p>
+<details class="tip">
+<summary>Ereditarietà multipla</summary>
+<p>In C++, una classe può ereditare da più di una classe madre. In questo caso mantiene le proprietà (metodi e data membri) di tutte le classi madri.
+Nell'header file <code>PuntoMateriale.h</code> vanno elencate tutte le classi da cui si vuole ereditare, specificando la modalità con cui si vuole ereditare (<code>public</code>, <code>private</code> o <code>protected</code>):</p>
+<p><div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;Particella.h&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;Posizione.h&quot;</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">PuntoMateriale</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="n">Particella</span><span class="p">,</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="n">Posizione</span><span class="w"> </span><span class="p">{</span>
+
+<span class="c1">// ....</span>
+
+<span class="p">}</span>
+</code></pre></div>
+La nuova classe avrà, per esempio, definiti sia i metodi <code>GetMassa()</code> e <code>GetCarica()</code> di <code>Particella</code> e anche <code>X()</code>, <code>R()</code>... di <code>Posizione</code></p>
+</details>
+<details class="tip">
+<summary>Utilizzo di costruttori delle classi madri</summary>
+<p>Specialmente nel caso di ereditarietà multipla, è buona norma utilizzare i costruttori già esistenti della classe madre.
+Tali costruttori possono venire chiamati esplicemente dando il nome della classe madre seguito dagli argomenti opportuni. Ad esempio, siccome esistono i costruttori di <code>Posizione</code> con le tre coordinate cartesiane, e di <code>Particella</code> con <code>massa</code> e <code>carica</code>, possiamo definire un costruttore:</p>
+<p><div class="highlight"><pre><span></span><code><span class="n">PuntoMateriale</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">massa</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">carica</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">z</span><span class="p">);</span>
+</code></pre></div>
+la cui implementazione è data da:</p>
+<p><div class="highlight"><pre><span></span><code><span class="n">PuntoMateriale</span><span class="o">::</span><span class="n">PuntoMateriale</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">massa</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">carica</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">z</span><span class="p">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span>
+<span class="w">  </span><span class="n">Particella</span><span class="p">(</span><span class="n">massa</span><span class="p">,</span><span class="n">carica</span><span class="p">),</span><span class="w"> </span><span class="n">Posizione</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">z</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">  </span><span class="c1">// nothing more to be done !</span>
+
+<span class="p">}</span>
+</code></pre></div>
+Come si può notare in questo esempio la costruzione di PuntoMateriale è completamente delegata si costruttori delle classi madre.</p>
+</details>
+<!--
+??? tip "Overloading operatori" 
+    Per risolvere facilmente questo tipo di problemi è molto utile ridefinire gli operatori operator= e operator+= per la classe `CampoVettoriale`. Di seguito una possibile implementazione comoda di questo overloading. Notate che nell'operatore operator+ viene creato un nuovo vettore (somma) che viene restituito "by value". Per operator+= invece la modifica viene effettuata sull'oggetto che chiama l'operatore. L'oggetto stesso (modificato) viene poi restituito "by reference". 
+
+    <div class="highlight"><pre><span></span><code><span class="n">CampoVettoriale</span><span class="w"> </span><span class="n">CampoVettoriale</span><span class="o">::</span><span class="k">operator</span><span class="o">+</span><span class="p">(</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">CampoVettoriale</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">v</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span><span class="w">  </span>
+
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">v</span><span class="p">.</span><span class="n">getX</span><span class="p">()</span><span class="o">!=</span><span class="w"> </span><span class="n">getX</span><span class="p">()</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">v</span><span class="p">.</span><span class="n">getY</span><span class="p">()</span><span class="o">!=</span><span class="w"> </span><span class="n">getY</span><span class="p">()</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">v</span><span class="p">.</span><span class="n">getZ</span><span class="p">()</span><span class="o">!=</span><span class="w"> </span><span class="n">getZ</span><span class="p">()</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Somma di campi vettoriali in punti diversi non ammessa&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">    </span><span class="n">exit</span><span class="w"> </span><span class="p">(</span><span class="mi">-11</span><span class="p">)</span><span class="w"> </span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span><span class="w"> </span>
+
+<span class="w">  </span><span class="n">CampoVettoriale</span><span class="w"> </span><span class="n">sum</span><span class="p">(</span><span class="w"> </span><span class="n">v</span><span class="w"> </span><span class="p">);</span><span class="w">  </span>
+<span class="w">  </span><span class="n">sum</span><span class="p">.</span><span class="n">m_Fx</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">getFx</span><span class="p">();</span>
+<span class="w">  </span><span class="n">sum</span><span class="p">.</span><span class="n">m_Fy</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">getFy</span><span class="p">();</span>
+<span class="w">  </span><span class="n">sum</span><span class="p">.</span><span class="n">m_Fz</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">getFz</span><span class="p">();</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">sum</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">CampoVettoriale</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">CampoVettoriale</span><span class="o">::</span><span class="k">operator</span><span class="o">+=</span><span class="p">(</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">CampoVettoriale</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">v</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="k">this</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="k">this</span><span class="p">)</span><span class="o">+</span><span class="n">v</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+
+-->
+
+<h2 id="esercizio-53-calcolo-del-campo-elettrico-generato-da-un-dipolo-da-consegnare">ESERCIZIO 5.3 - Calcolo del campo elettrico generato da un dipolo (da consegnare):</h2>
+<p>A questo punto possiamo utilizzare tutti gli ingredienti realizzati sopra per affrontare un interessante problema di elettrostatica ovvero lo studio del campo elettrico generato da un dipolo. Per fare questo sviluppiamo un codice che costuisca un dipolo costituito da un elettrone e un protone posizionati ad una distanza <script type="math/tex">\delta= 10^{-10} m</script>. e determini:</p>
+<ol>
+<li>il valore del campo elettrico di dipolo prodotto in un punto P le cui coordinate sono inserite da linea di comando</li>
+<li>disegni l'andamento del modulo del campo elettrico lungo l'asse del dipolo per una distanza da 100 a 1000 volte <script type="math/tex">\delta</script>. Che tipo di andamento ha il campo ? (fate riferimento all'approfondimento sulle leggi di potenza qui sotto) </li>
+</ol>
+<details>
+<p><summary> Esempio di programma : </summary>
+Questo programma utilizza le nuove classi appena create: richiede di fornire come argomenti le tre coordinate cartesiane e poi stampa il campo elettrico di dipolo richiesto dall'esercizio:</p>
+<p><div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;CampoVettoriale.h&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;PuntoMateriale.h&quot;</span>
+
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cstdlib&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cmath&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+
+<span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">std</span><span class="p">;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="o">**</span><span class="w"> </span><span class="n">argv</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">argc</span><span class="o">!=</span><span class="w"> </span><span class="mi">4</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">cerr</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Usage: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">argv</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; &lt;x&gt; &lt;y&gt; &lt;z&gt;&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+<span class="w">    </span><span class="n">exit</span><span class="p">(</span><span class="mi">-1</span><span class="p">);</span><span class="w"> </span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">e</span><span class="w"> </span><span class="o">=</span><span class="mf">1.60217653E-19</span><span class="w"> </span><span class="p">;</span>
+<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">me</span><span class="o">=</span><span class="mf">9.1093826E-31</span><span class="p">;</span>
+<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">mp</span><span class="o">=</span><span class="mf">1.6726219E-27</span><span class="p">;</span><span class="w">  </span>
+<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">d</span><span class="w"> </span><span class="o">=</span><span class="mf">1.</span><span class="n">E</span><span class="mi">-10</span><span class="p">;</span>
+
+<span class="w">  </span><span class="n">Posizione</span><span class="w"> </span><span class="n">p</span><span class="p">(</span><span class="w"> </span><span class="n">atof</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="n">atof</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">]),</span><span class="w"> </span><span class="n">atof</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span><span class="w"> </span><span class="p">);</span>
+
+<span class="w">  </span><span class="n">PuntoMateriale</span><span class="w"> </span><span class="n">elettrone</span><span class="p">(</span><span class="n">me</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="n">e</span><span class="p">,</span><span class="mf">0.</span><span class="p">,</span><span class="mf">0.</span><span class="p">,</span><span class="n">d</span><span class="o">/</span><span class="mf">2.</span><span class="p">);</span>
+<span class="w">  </span><span class="n">PuntoMateriale</span><span class="w"> </span><span class="n">protone</span><span class="p">(</span><span class="n">mp</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="p">,</span><span class="mf">0.</span><span class="p">,</span><span class="mf">0.</span><span class="p">,</span><span class="o">-</span><span class="n">d</span><span class="o">/</span><span class="mf">2.</span><span class="p">);</span>
+
+<span class="w">  </span><span class="n">CampoVettoriale</span><span class="w"> </span><span class="n">E</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">elettrone</span><span class="p">.</span><span class="n">CampoElettrico</span><span class="p">(</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">protone</span><span class="p">.</span><span class="n">CampoElettrico</span><span class="p">(</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">;</span>
+
+<span class="w">  </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;E=(&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">E</span><span class="p">.</span><span class="n">getFx</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;,&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">E</span><span class="p">.</span><span class="n">getFy</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;,&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">E</span><span class="p">.</span><span class="n">getFz</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;)&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w">  </span>
+<span class="p">}</span>
+</code></pre></div>
+A partire da questo esempio completare le richieste dell'esercizio:
+  * si aggiunga un ciclo che permetta di calcolare il campo a distanze via via crescenti 
+  * si aggiunga eventualmente un <code>TGraph</code> per visualizzare l'andamento del campo in funzione della distanza dal centro del dipolo</p>
+</details>
+<details>
+<p><summary> Possibile <code>Makefile</code> : </summary></p>
+<p>Il numero di classi sta proliferando e quindi anche il <code>Makefile</code> diventa sempre più articolato. Ecco un esempio :</p>
+<div class="highlight"><pre><span></span><code>INCS=`root-config --cflags`
+LIBS=`root-config --libs`
+
+esercizio_5.3: esercizio_5.3.o Posizione.o PuntoMateriale.o CampoVettoriale.o Particella.o
+       g++ -o esercizio_5.3 esercizio_5.3.o Posizione.o PuntoMateriale.o CampoVettoriale.o Particella.o ${LIBS}
+
+esercizio_5.3.o: esercizio_5.3.cpp Particella.h PuntoMateriale.h Posizione.h CampoVettoriale.h
+       g++ -c esercizio_5.3.cpp -o esercizio_5.3.o ${INCS}       
+
+Particella.o: Particella.cpp Particella.h
+       g++ -c Particella.cpp -o Particella.o
+
+Posizione.o: Posizione.cpp Posizione.h
+       g++ -c Posizione.cpp -o Posizione.o
+
+PuntoMateriale.o: PuntoMateriale.cpp PuntoMateriale.h Posizione.h Particella.h
+       g++ -c PuntoMateriale.cpp -o PuntoMateriale.o
+
+CampoVettoriale.o: CampoVettoriale.cpp CampoVettoriale.h Posizione.h
+       g++ -c CampoVettoriale.cpp -o CampoVettoriale.o
+
+clean:
+       rm *.o
+</code></pre></div>
+</details>
+<details class="tip">
+<summary>Leggi di potenza</summary>
+<p>Se un campo ha un andamento <script type="math/tex">E=kR^{\alpha}</script>, se valutiamo il campo (<script type="math/tex">E_{1}</script>,<script type="math/tex">E_{2}</script>) in due punti diversi (<script type="math/tex">R_{1}</script> e <script type="math/tex">R_{2}</script>), possiamo ricavare <script type="math/tex">\alpha</script> dalla relazione:</p>
+<p>
+<script type="math/tex; mode=display">\alpha = log(E_{1}/E_{2})/log(R_{1}/R_{2})</script>
+</p>
+</details>
+<h2 id="esercizio-54-campo-di-multipolo-approfondimento">ESERCIZIO 5.4 - Campo di multipolo (approfondimento):</h2>
+<p>Scrivere un programma che calcoli il campo elettrico generato da un multipolo di ordine <script type="math/tex">n</script>.
+In questo esercizio, un n-polo (con n pari) è una distribuzione di n particelle, in cui la particella i-esima ha carica <script type="math/tex">(-1)^{i}e</script> (dove <script type="math/tex">e</script> è la carica del protone) e si trova nel punto:
+<script type="math/tex; mode=display">( r_{0}cos(2\pi i / n ) , r_{0} sin(2\pi i /n) ) </script>
+dove <script type="math/tex">r_{0}</script> è il raggio a cui sono messe le cariche.
+Verificare che a grande distanza <script type="math/tex">(R>>r_{0})</script> il campo elettrico varia proporzionalmente a <script type="math/tex">R^{-2-n/2}</script>.
+Valutare fino a quali valori di <script type="math/tex">n</script> si riesce a verificare questa dipendenza.
+Questo è un problema abbastanza interessante, perché bisogna scegliere una distanza abbastanza grande perché sia valido il comportamento asintotico, ma abbastanza ridotta per evitare problemi di arrotondamento nella somma di molti termini di segno contrario.</p>
+<h2 id="esercizio-55-gravita-dallo-spazio-approfondimento">ESERCIZIO 5.5 - Gravità dallo spazio (approfondimento):</h2>
+<p>Il satellite <a href="https://www.esa.int/Space_in_Member_States/Italy/La_missione_GOCE_dell_ESA">GOCE</a> si trovava in orbita a 250 km dalla superficie terrestre ed era dotato di accelerometri in grado di misurare variazioni dell'accelerazione di gravità fino a <script type="math/tex">\delta g/g=10^{-13}</script>.
+Lo scopo della missione includeva una mappatura dettagliata del campo gravitazionale terrestre, prodotto dalle distribuzioni non omogenee di massa.
+Costruire un programma che :</p>
+<ul>
+<li>calcoli l'accelerazione di gravità sul satellite per una Terra perfettamene sferica e dimensioni pari al <a href="https://it.wikipedia.org/wiki/Terra">raggio medio</a>.</li>
+<li>calcoli la variazione relativa di <script type="math/tex">g</script> prodotta da una catena montuosa, schematizzata come una fila di 100 sfere di 1 km di raggio poste sopra la superficie media della Terra (usare 3000 <script type="math/tex">kg/m^{3}</script> come densità della roccia) e produca un grafico della variazione in funzione della posizione del satellite sull'orbita.</li>
+</ul>
+<p>Per risolvere questo esercizio si costruisca dapprima il sistema di sorgenti di campo (Terra e catena montuosa). Si calcoli il campo generato da tutte le sorgenti in un punto a distanza dal centro della terra pari al raggio terrestre più la distanza del satellite dalla superficie terrestre. Muovere questo punto in modo che percorra tutta l'orbita ( in passi da 10 Km ).</p>
+<details>
+<p><summary> Schema :  </summary></p>
+<p><img alt="" src="../schema_montagne.png" /></p>
+</details>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+    <nav class="md-footer__inner md-grid" aria-label="Footer" >
+      
+        
+        <a href="../../Lezione4/Lezione4/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Lezione 4" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Lezione 4
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../../Lezione6/lezione6/" class="md-footer__link md-footer__link--next" aria-label="Next: Lezione 6" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Lezione 6
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.5bf1dace.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.37e9125f.min.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      
+    
+  </body>
+</html>
