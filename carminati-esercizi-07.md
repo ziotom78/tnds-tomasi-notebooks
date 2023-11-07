@@ -172,9 +172,9 @@ int main (int argc, char* argv[]) {
   int nstep{stoi(argv[1])};
 
   Seno f{};
-  Midpoint myInt{0, M_PI};
+  Midpoint myInt{};
 
-  double I{myInt.integrate(nstep, f)}; 
+  double I{myInt.integrate(0, M_PI, nstep, f)}; 
 
   fmt::print("Passi: {}, I = {}\n", nstep, I);
 }
