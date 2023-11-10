@@ -71,3 +71,20 @@ Se avete difficoltà ad usare ROOT, potete interfacciare il vostro codice a [Gnu
 <p><input type="text" value="curl 'https://raw.githubusercontent.com/ziotom78/gplotpp/master/gplot%2B%2B.h' > gplot++.h" id="installGplot" readonly="1" size="60"><button onclick='copyFmtInstallationScript("installGplot")'>Copia</button></p>
 
 Ricordate che la libreria funziona a patto che abbiate installato Gnuplot sul vostro computer.
+
+
+## ROOT e Visual Studio Code {#rootvscode}
+
+Di default, Visual Studio Code non riconosce le librerie di ROOT e segnala quindi errore quando incontra istruzioni come
+
+```c++
+#include "TGraph.h"
+```
+
+Un modo per togliere queste segnalazioni di errore è quello di spostarsi nel tab “Estensioni” (Ctrl+Shift+X), selezionare il plug-in “C/C++” e alla voce “Intellisense” selezionare “Default: Include Path”. Inserire nella casella di testo il contenuto dell'output del comando
+
+```
+root-config --incdir
+```
+
+(Suggerimento di Matteo Bettoni)
