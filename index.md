@@ -81,10 +81,12 @@ Di default, Visual Studio Code non riconosce le librerie di ROOT e segnala quind
 #include "TGraph.h"
 ```
 
-Un modo per togliere queste segnalazioni di errore è quello di spostarsi nel tab “Estensioni” (Ctrl+Shift+X), selezionare il plug-in “C/C++” e alla voce “Intellisense” selezionare “Default: Include Path”. Inserire nella casella di testo il contenuto dell'output del comando
+Un modo per togliere queste segnalazioni di errore è quello di aprire il menu “Impostazioni”, e scegliere la voce “Estensioni”/“C/C++”/“Intellisense” e selezionare “Default: Include Path”. Premere il bottone “Aggiungi elemento”, ed inserire nella casella di testo il contenuto dell'output del comando
 
 ```
 root-config --incdir
 ```
+
+![](images/root-vscode-config.png)
 
 (Suggerimento di Matteo Bettoni)
