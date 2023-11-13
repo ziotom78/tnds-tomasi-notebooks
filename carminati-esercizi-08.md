@@ -11,38 +11,111 @@ header-includes: <script src="./fmtinstall.js"></script>
 
 [La pagina con la spiegazione originale degli esercizi si trova qui: <https://labtnds.docs.cern.ch/Lezione8/Lezione8/>.]
 
-In questa lezione introdurremo alcuni metodi per la risoluzione di equazioni differenziali ordinarie. Implementeremo la risoluzione numerica di queste equazioni con i metodi di Eulero e di Runge-Kutta.
+In questa lezione introdurremo alcuni metodi per la risoluzione di equazioni differenziali ordinarie. Implementeremo la risoluzione numerica di queste equazioni con i metodi di *Eulero* e di *Runge-Kutta*.
 
-Per risolvere l'esercizio vedremo come è possibile definire le principali operazioni algebriche per i vector della STL. Questo ci permetterà di realizzare i metodi di integrazione di equazioni differenziali usando una notazione vettoriale, molto simile al formalismo matematico.
+Per risolvere l'esercizio vedremo come è possibile definire le principali operazioni algebriche per classi della STL come `std::vector` o il nuovo `std::array`. Questo ci permetterà di realizzare i metodi di integrazione di equazioni differenziali usando una notazione vettoriale, molto simile al formalismo matematico.
 
-# Esercizio 9.0 - Algebra vettoriale {#esercizio-9.0}
+# Introduzione a `std::array`
 
-Come prima cosa, proviamo a dotare i vector della STL di tutte le funzionalità algebriche che ci possono essere utili, definendo opportunamente gli operatori `+`, `*`, `/`, `+=`. Dal momento che non possiamo modificare gli header files e i files di implementazione della classe `vector`, implementiamo questi operatori come funzioni libere in un header file apposito da includere quando necessario. Potete trovarne un esempio [qui](codici/vector_operations.hpp).
+La STL fornisce varie implementazioni del concetto di “array”. Finora abbiamo sempre usato il tipo `std::vector`, che è una versione più potente degli array del C. Le due variabili `array` e `vec` nell'esempio contengono gli stessi elementi:
 
-Provate a scrivere un piccolo codice di test per verificare il corretto funzionamento delle operazioni tra vettori : potreste provate a realizzare un semplice programma che scriva a video le componenti della risultate di due forze (vettori tridimensionali) e le componenti del versore della risultante.
+```c++
+double array[] = {1.0, 2.0, 3.0};
+std::vector<double> stl_vec{1.0, 2.0, 3.0};
+```
 
-# Esercizio 9.1 - Risoluzione tramite metodo di Eulero {#esercizio-9.1}
+ma la variabile `stl_vec` ha più funzionalità:
 
-Implementare un codice per la risoluzione numerica di un'equazione differenziale descrivente il moto di un oscillatore armonico tramite il metodo di Eulero. Graficare l'andamento della posizione in funzione del tempo al variare del passo di integrazione e confrontare l'errore commesso con la soluzione esatta.
+-   È sempre possibile sapere quanti elementi contenga con il metodo `stl_vec.size()` (o in C++20 mediante `ssize(stl_vec)`);
 
-Struttureremo la soluzione del problema in modo simile a quanto fatto nelle precedenti lezioni su ricerca degli zeri e integrazione numerica:
+-   Si possono aggiungere elementi in coda con `stl_vec.push_back()` e [`stl_vec.emplace_back()`](https://en.cppreference.com/w/cpp/container/vector/emplace_back);
 
-![](http://labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/figure/EqDiffClassi_2122.png)
+-   Si possono rimuovere elementi con [`stl_vec.erase()`](https://cplusplus.com/reference/vector/vector/erase/).
 
--   Definiamo una classe astratta `FunzioneVettorialeBase` con un unico metodo `Eval`, puramente virtuale, che dato un `vector` ed un `double`, rappresentante il tempo, restituisce il valore della derivata prima nel punto e nell'istante considerati.
--   Da questa classe astratta, deriviamo una classe concreta che descriva le leggi del modo di un oscillatore armonico, permettendo di definirne la frequenza, o nel construttore o con degli opportuni metodi per leggere/definire dei parametri.
--   Definiamo una classe astratta `EquazioneDifferenzialeBase` che ha un unico metodo `Passo`, puramente virtuale, che dati il tempo $t$, un vettore $\vec x$, il passo di integrazione $h$ e un puntatore ad una `FunzioneVettorialeBase`, restituisca la una stima di del valore della posizione $\vec x$ al tempo $t + h$. Avere il tempo $t$ come argomento permetterà in esercizi futuri (come ad esempio il [9.4](carminati-esercizi-09.html#esercizio-9.4---oscillazione-forzate-e-risonanza-da-consegnare)) di avere forzanti esterne o parametri dipendenti dal tempo.
--   Da questa classe astratta, deriviamo una classe concreta che implementi il metodo di Eulero. 
+-   Se si usa la scrittura `stl_vec.at(4)` anziché `stl_vec[4]`, l'accesso a un elemento non esistente dell'array causa un messaggio di errore esplicito.
+
+Oltre a `std::vector`, la STL offre la possibilità di usare [`std::array`](https://en.cppreference.com/w/cpp/container/array), che si comporta esattamente come `std::vector` a parte queste differenze:
+
+-   È allocato sullo *stack* anziché sullo *heap*, quindi è molto veloce da creare;
+
+-   Proibisce di aggiungere e togliere elementi: il numero di elementi va definito in fase di dichiarazione e non può essere modificato;
+
+-   Va usato quando il numero di elementi nell'array è piccolo (qualche decina al massimo), altrimenti si rischia di riempire tutto lo *stack*;
+
+-   Il compilatore è sempre in grado di verificare che le dimensioni di un array siano consistenti. Ad esempio, se si somma un array `a` di due elementi ad un array `b` di quattro elementi, il compilatore produce un errore di compilazione. Questo non sarebbe vero se `a` e `b` fossero di tipo `std::vector`!
+
+Il testo originale degli esercizi di Carminati assume che negli esercizi di oggi si usi `std::vector`, ma il testo qui sotto vi mostrerà invece come usare `std::array`, perché rende impossibile alcuni errori che gli studenti tendono a fare.
+
+Questo è il modo in cui si usa:
+
+```c++
+// Notare che bisogna indicare il numero di elementi
+// *dentro* le parentesi angolari <> del template!
+std::array<double, 3> stl_arr{1.0, 2.0, 3.0};
+```
+
+La scrittura `array<double, 3>` può sembrare strana: finora abbiamo sempre visto nelle parentesi angolari `<>` dei template tipi come `double` oppure `int`, ma il C++ permette anche di specificare *valori* come parametri dei template.
+
+È poi possibile implementare codice come se si stesse usando un oggetto di tipo `std::vector`:
+
+```c++
+for(int i{}; i < (int) stl_arr.size(); ++i) {
+  // Ok anche `stl_arr[i]`, ma non controlla la
+  // correttezza di `i`
+  std::cout << stl_arr.at(i) << "\n";
+}
+```
+
+ma è vietato chiamare metodi come `stl_arr.push_back(5.0)`, perché la dimensione dell'array non cambia mai!
+
+Se si vogliono definire funzioni che operano su un array, nel template bisogna non solo indicare `<typename T>` come nel caso di `std::vector`, perché qui anche la *dimensione* dell'array è un parametro (che purtroppo va indicata come `size_t` anziché `int` ☹):
+
+```c++
+template <typename T, size_t n>
+void print(const std::array<T, n> & arr) {
+  // …
+}
+```
+
+Notate che `T` è dichiarata come `typename`, perché questo parametro rappresenta un *tipo* come `double` oppure `int`, mentre `n` è un numero (`size_t` è un intero senza segno), perché questo non deve essere un tipo bensì un *valore* come `2`, `5`, `14`…
+
+
+# Esercizio 8.0 - Algebra vettoriale {#esercizio-8.0}
+
+
+Come prima cosa, proviamo a dotare il tipo `std::array` della STL di tutte le funzionalità algebriche che ci possono essere utili, definendo opportunamente gli operatori `+`, `*`, `/`, `+=`. Dal momento che non possiamo modificare gli header files e i files di implementazione della classe `std::array`, implementiamo questi operatori come funzioni libere in un header file apposito da includere quando necessario. Potete trovarne un esempio [qui](codici/array_operations.h).
+
+Notate la presenza della funzione `test_array_operations()`, che verifica la correttezza delle operazioni su `std::array`. Usando solo numeri interi per le componenti dei vettori, non c'è bisogno di invocare la nostra solita funzione `are_close()` perché in questo caso la variabile `double` opera senza arrotondamenti.
+
+Ovviamente, per eseguire i test basta invocarli all'inizio di `main()`, come al solito:
+
+```c++
+#include "array_operations.h"
+#include <array>
+
+int main() {
+  test_array_operations();
+}
+```
+
+
+# Esercizio 8.1 - Risoluzione tramite metodo di Eulero {#esercizio-8.1}
+
+Nel primo esercizio implementeremo un codice per la risoluzione numerica dell'equazione differenziale che descrive il moto di un oscillatore armonico tramite il metodo di Eulero. Gli obiettivi principali di questo esercizio sono due:
+
+1.  Studiare l'andamento della posizione in funzione del tempo `t` (per `t` che va da 0 a 70 secondi) per un fissato passo di integrazione `h` (si potrebbe costruire un grafico, per esempio) e confrontare l'errore commesso con la soluzione esatta.
+
+2.  Studiare l'andamento dell'errore che si commette utilizzando il metodo di Eulero quando confrontiamo la soluzione approssimata con la soluzione esatta nell'istante t = 70 s in funzione del passo di integrazione `h` in un intervallo compreso tra 0.1 e 0.001.
 
 Per testare il metodo, risolviamo l'equazione differenziale:
 
 $$
 \frac{\mathrm{d}}{\mathrm{d}t} \begin{pmatrix}x\\v\end{pmatrix} =
-\begin{pmatrix}v\\-\omega_0^2 x\end{pmatrix},\quad x(0) = 0, \quad v(0) = 1, \quad \omega_0 = 1,
+\begin{pmatrix}v\\-\omega_0^2 x\end{pmatrix},\quad x(0) = 0, \quad v(0) = 1\,\text{m/s}, \quad \omega_0 = 1\,\text{s}^{-1},
 $$
 
+mettendo in grafico il valore della $x$ in funzione del tempo $t$ ed eventualmente anche il suo errore rispetto alla soluzione esatta del problema, che è $x(t) = \sin (t)$. Si consiglia di svolgere l'integrazione per un certo numero di periodi, in modo da vedere se l'ampiezza di oscillazione rimane costante. Integrare fino a $t = 70\,\text{s}$ permette di vedere circa 10 periodi.
 
-con passi di integrazione da 0.1 a 0.001, mettendo in grafico il valore della $x$ in funzione del tempo $t$ ed anche il suo errore rispetto alla soluzione esatta del problema, che è $x(t) = \sin (t)$. Si consiglia di svolgere l'integrazione per un certo numero di periodi, in modo da vedere se l'ampiezza di oscillazione rimane costante. Integrare fino a $t = 70\,\text{s}$ permette di vedere circa 10 periodi.
 
 ## Il metodo di Eulero
 
@@ -56,7 +129,7 @@ Essa è un'equazione differenziale del secondo ordine che può essere ridotta ad
 
 $$
 \begin{aligned}
-\frac{\mathrm{d} x}{\mathrm{d}t} &= v,
+\frac{\mathrm{d} x}{\mathrm{d}t} &= v,\\
 \frac{\mathrm{d} v}{\mathrm{d}t} &= \frac{F}m.
 \end{aligned}
 $$
@@ -65,96 +138,189 @@ Il metodo di Eulero consiste nel calcolare lo stato della soluzione al tempo $t 
 
 $$
 \begin{aligned}
-x(t + h) &= x(t) + h \cdot \dot{x}(t) = x(t) + h \cdot v,\\
-v(t + h) &= v(t) + h \cdot \dot{v}(t) = x(t) + h \cdot \frac{F}m.
+x(t + h) &\approx x(t) + h \cdot \dot{x}(t) = x(t) + h \cdot v,\\
+v(t + h) &\approx v(t) + h \cdot \dot{v}(t) = x(t) + h \cdot \frac{F}m.
 \end{aligned}
 $$
 
+
 ## Struttura del programma
 
-Le classi astratte `FunzioneVettorialeBase` e `EquazioneDifferenzialeBase` contengono (almeno per ora) solo un metodo virtuale puro, rispettivamente `Eval` e `Passo`.
+Struttureremo la soluzione del problema in modo simile a quanto fatto nelle precedenti lezioni su ricerca degli zeri e integrazione numerica:
 
-Per comodità possiamo mettere nello stesso file anche le classi concrete che, oltre ad avere l'implementazione dei metodi virtuali dovranno implementare un costruttore ed un distruttore.
+-   Definiamo una classe astratta `FunzioneVettorialeBase` con un unico metodo `Eval`, puramente virtuale, che dato un `array` ed un `double`, rappresentante il tempo, restituisce il valore della derivata prima nel punto e nell'istante considerati.
+-   Da questa classe astratta, deriviamo una classe concreta `OscillatoreArmonico`, nella quale implementeremo il metodo `Eval` concreto relativo all'oscillatore armonico.
+-   Definiamo una classe astratta `EquazioneDifferenzialeBase` che contenga il metodo virtuale puro `Passo`, puramente virtuale, che dati il tempo $t$, un vettore $\vec x$, il passo di integrazione $h$ e un puntatore ad una `FunzioneVettorialeBase`, restituisca la una stima del valore della posizione $\vec x$ al tempo $t + h$. Avere il tempo $t$ come argomento esplicito non serve per questo esercizio in particolare, ma permetterà in futuro (come ad esempio nell'esercizio [8.4](carminati-esercizi-08.html#esercizio-8.4)) di avere forzanti esterne o parametri dipendenti dal tempo.
+-   Da questa classe astratta, deriviamo una classe concreta che implementi il metodo `Passo` relativo al metodo di Eulero. 
 
-L'header file contente le dichiarazioni delle classi è quindi:
+Per comodità possiamo mettere tutte queste classi nello stesso header file che potrebbe avere l'aspetto seguente:
 
 ```c++
 #pragma once
 
-#include "vectorops.h"
+#include "array_operations.h"
+#include <cmath>
 
-class FunzioneVettorialeBase {
+// classe astratta, restituisce la derivata valutata nel punto x
+// di una funzione a `n` dimensioni, dove `n` è un parametro del
+// template
+template <size_t n> class FunzioneVettorialeBase {
+
 public:
-  virtual std::vector<double> Eval(double t, const std::vector<double> & x) const = 0;
+  virtual std::array<double, n> Eval(double t,
+                                     const std::array<double, n> &x) const = 0;
 };
 
-class OscillatoreArmonico : public FunzioneVettorialeBase {
+// caso fisico concreto, oscillatore armonico a 1 dimensione,
+// che corrisponde ad una dimensione 2 nello spazio delle fasi
+// (notare `<2>` alla fine di `FunzioneVettorialeBase`: questa
+// classe *non* è template, perché sia il tipo T che il numero n
+// sono definiti ed univoci: `double` e `2`).
+class OscillatoreArmonico : public FunzioneVettorialeBase<2> {
 public:
-  OscillatoreArmonico(double omega0) : m_omega0{omega0} { }
+  OscillatoreArmonico(double omega0) : m_omega0{omega0} {}
 
-  std::vector<double> Eval(double t, const std::vector<double> & x) const override;
+  std::array<double, 2>
+  Eval(double t,
+       const std::array<double, 2> &x) const override {
+    // Implementare il metodo
+  }
 
 private:
   double m_omega0;
 };
 
-class EquazioneDifferenzialeBase {
+// classe astratta per un integratore di equazioni differenziali
+// (Eulero, Runge Kutta, etc.) a N dimensioni
+template <size_t n> class EquazioneDifferenzialeBase {
 public:
-  virtual std::vector<double> Passo(double t, const std::vector<double>& x,
-                                    double h, FunzioneVettorialeBase & f) const = 0;
-}; 
-
-class Eulero : public EquazioneDifferenzialeBase {
-public:
-  std::vector<double> Passo(double t, const std::vector<double> & x,
-                       double h, FunzioneVettorialeBase & f) const override;
+  virtual std::array<double, n>
+  Passo(double t, const std::array<double, n> &x, double h,
+        const FunzioneVettorialeBase<n> &f) const = 0;
 };
+
+// integratore concreto, metodo di Eulero a N dimensioni
+template <size_t n> class Eulero : public EquazioneDifferenzialeBase<n> {
+public:
+  std::array<double, n>
+  Passo(double t, const std::array<double, n> &x, double h,
+        const FunzioneVettorialeBase<n> &f) const override {
+    // Implementare il metodo: basta una riga di codice per Eulero!
+  }
+};
+
+// Test del metodo di Eulero
+
+inline double are_close(double a, double b, double eps = 1e-7) {
+  return abs(a - b) < eps;
+}
+
+inline void test_euler() {
+  // Verifica la correttezza del metodo di Eulero integrando
+  // l'oscillatore armonico con ω₀=1 rad/s e verificando che
+  // al tempo t=0.9 s posizione e velocità coincidano con
+  // la soluzione del codice Julia all'indirizzo
+  // https://ziotom78.github.io/tnds-notebooks/lezione08/#esercizio_81_metodo_di_eulero
+  Eulero<2> my_euler{};
+
+  OscillatoreArmonico osc{1.};
+
+  const double tmax{0.91}; // È più sicuro usare qualcosa di più di 0.9
+  const double h{0.1};
+  array<double, 2> x{0., 1.};
+  double t{};
+
+  // `lround` è come `round`, ma arrotonda sempre verso il basso
+  const int num_of_steps{(int) lround(tmax / h)};
+
+  // evoluzione del sistema fino a 0.9 s
+  for (int step{}; step < num_of_steps; step++) {
+    x = my_euler.Passo(t, x, h, osc);
+    t = t + h;
+  }
+
+  // Questi sono i numeri prodotti dal codice Julia. Verifichiamo fino
+  // alla sesta cifra, perché i numeri stampati dal programma Julia
+  // usavano questa convenzione
+  assert(are_close(x[0], 0.817256, 1e-6));
+  assert(are_close(x[1], 0.652516, 1e-6));
+}
 ```
 
 Una volta implementate le classi (l'implementazione di Eulero è semplicissima se si usano le operazioni di algebra vettoriale), un possibile programma per risolvere l'esercizio è il seguente:
 
 ```c++
-#include "equazionidifferenziali.h"
-
-#include <cassert>
-#include <iostream>
-#include <string>
+#include "array_operations.h"
+#include "equazioni_differenziali.h"
 
 #include "fmtlib.h"
+#include "gplot++.h"
+#include <string>
 
-using namespace std;
+int main(int argc, char *argv[]) {
+  test_array_operations();
+  test_euler();
 
-void print(double t, const vector<double> & x) {
-  assert(x.size() == 2);
-  fmt::print("{}\t{}\t{}\n", t, x[0], x[1]);
-}
-
-int main (int argc, char** argv) {
-  if(argc != 2) {
-      fmt::print(stderr, "Usage: {} <stepsize>\n", argv[0]);
-      return -1;
+  if (argc != 2) {
+    fmt::println(stderr, "Uso: {} PASSO", argv[0]);
+    return 1;
   }
-  
-  Eulero myEuler;
 
-  OscillatoreArmonico osc{1};
-  double tmax{70};
+  Eulero<2> my_euler{};
 
-  double h{stod(argv[1])};  // `stod`: «string to double» (defined in <string>)
+  OscillatoreArmonico osc{1.};
 
-  vector<double> x{0., 1.}; // Initial condition
-  double t{0}; // Time
+  const double tmax{70.};
+  const double h{stof(argv[1])};
+  double t{};
+  array<double, 2> x{0., 1.};
 
-  int nstep{int(tmax / h + 0.5)}; // Compute the steps before starting the `for` loop
+  const int num_of_steps{(int)lround(tmax / h)};
 
-  for (int step{}; step < nstep; step++) {
-      print(t, x);
-      x = myEuler.Passo(t, x, h, osc);
-      t += h;
+  // evoluzione del sistema fino a 70 s
+
+  Gnuplot plt{};
+
+  // Ho bisogno di costruire due vettori per poter poi
+  // fare il plot. Qui uso "vector" anziché "array",
+  // perché le due liste potrebbero essere molto grandi
+  // e si rischierebbe quindi di riempire lo stack.
+  //
+  // Notare che uso `()` anziché `{}` per passare i
+  // parametri del costruttore, perché voglio
+  // specificare il *numero di elementi* del vettore!
+  std::vector<double> list_of_t(num_of_steps);
+  std::vector<double> list_of_x(num_of_steps);
+
+  for (int step = 0; step < num_of_steps; step++) {
+    // Salva le coordinate del punto (t, x) per
+    // fare poi il grafico
+    list_of_t.at(step) = t;
+    list_of_x.at(step) = x[0];
+
+    // Stampa i risultati in forma di tabella
+    // (da fare sempre! aiuta nel trovare errori)
+    fmt::println("{:.1f} {:.6f} {:.6f}", t, x[0], x[1]);
+
+    // “Avanza” di un passo `h` la soluzione in `x`
+    x = my_euler.Passo(t, x, h, osc);
+    t = t + h;
   }
-  
-  // Remember to print the last step!
-  print(t, x);
+
+  // Ora si può produrre il grafico
+
+  std::string filename{"euler.png"};
+  plt.redirect_to_png(filename);
+  plt.plot(list_of_t, list_of_x);
+  plt.set_xlabel("Tempo [s]");
+  plt.set_ylabel("Oscillazione [m]");
+  plt.show();
+
+  // È sempre bene dare all'utente un feedback di ciò che
+  // si è fatto: in questo modo l'utente saprà quale file aprire!
+  fmt::println("Finito, il risultato è nel grafico '{}'", filename);
+
+  return 0;
 }
 ```
 
@@ -164,43 +330,13 @@ Come al solito, potete installare la libreria `fmtlib` usando lo script [`instal
 
 In alternativa, scaricate questo [file zip](./fmtlib.zip) nella directory dell'esercizio e decomprimetelo.  Le istruzioni dettagliate sono qui: [index.html#fmtinstall](index.html#fmtinstall).
 
-## Grafico della soluzione
-
-Se si vuole anche implementare un grafico della soluzione con [gplot++](https://github.com/ziotom78/gplotpp), dovete salvare come al solito le ascisse e le ordinate dei punti del grafico in due `std::vector`, e poi chiamare il metodo `Gnuplot::plot(x, y)`. Per installare il file `gplot++.h` seguite le solite istruzioni descritte [qui](./index.html#gplotinstall).
-
-Questa è una possibile implementazione della seconda parte del `main`:
-
-```c++
-vector<double> times(nstep);  // Round parentheses here (), not braces {}!
-vector<double> pos(nstep);
-
-for (int step{}; step < nstep; step++) {
-    times[step] = t;
-    pos[step] = x[0];
-    
-    print(t, x);
-    x = myEuler.Passo(t, x, h, osc);
-    t += h;
-}
-print(t, x);
-
-Gnuplot plt{};
-
-plt.redirect_to_png("soluzione.png");
-plt.plot(times, pos);
-plt.set_xlabel("Tempo [s]");
-plt.set_ylabel("Posizione x [m]");
-plt.show();
-```
-
-Se invece volete usare ROOT, queste sono le righe da aggiungere alla seconda parte del `main`:
+Il codice sopra usa la libreria [gplot++](https://github.com/ziotom78/gplotpp) per salvare il grafico della soluzione in un file PNG. Se invece volete usare ROOT, queste sono le righe da aggiungere alla seconda parte del `main`:
 
 ```c++
 TApplication myApp{"myApp", 0, 0};
 TGraph *myGraph{new TGraph()};
 
-for (int step{}; step < nstep; step++) {
-    print(t, x);
+for (int step{}; step < num_of_steps; step++) {
     myGraph->SetPoint(step, t, x[0]);
     x = myEuler.Passo(t, x, h, osc);
     t += h;
@@ -221,30 +357,28 @@ myApp.Run();
 
 Si riveda il solito esempio ([qui](./codici/test_tgraph.cpp)) per l'uso dei `TGraph` di ROOT.
 
-## Cosa ci aspettiamo?
+## Risultati attesi
 
 Il metodo di Eulero non è molto preciso; in effetti, con un passo di integrazione modesto si vede come esso possa risultare instabile, mostrando oscillazioni la cui ampiezza varia con il tempo. La figura sotto mostra l'andamento di $x(t)$ con un passo di integrazione di 0.1&nbsp;s:
 
-![](http://labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/figure/armonico0.1_eulero.png)
+![](https://labtnds.docs.cern.ch/Lezione8/pictures/Eulero-01.png)
 
 Per avere qualcosa di anche solo visivamente accettabile, bisogna andare a passi di almeno 0.0002&nbsp;s:
 
-![](http://labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/figure/armonico0.0002_eulero.png)
-
-**Caccia all'errore**: presentare due grafici come questi all'esame comporterebbe bocciatura immediata. Perché? (*Suggerimento: nel preparare i grafici per la presentazione ci si deve sempre ricordare di specificare cosa stiamo rappresentando sugli assi!*)
+![](https://labtnds.docs.cern.ch/Lezione8/pictures/Eulero-00001.png)
 
 La figura seguente riporta l'errore accumulato dopo 70 s di integrazione per diversi valori del passo:
 
-![](http://labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/figure/errore_eulero.png)
+![](https://labtnds.docs.cern.ch/Lezione8/pictures/errore_eulero.png)
 
 Si noti come la pendenza della curva sia 1 in una scala log-log, mostrando come l'errore ottenuto sia proporzionale al passo $h$.
 
 
-# Esercizio 9.2 - Risoluzione tramite Runge-Kutta (da consegnare) {#esercizio-9.2}
+# Esercizio 8.2 - Risoluzione tramite Runge-Kutta (da consegnare) {#esercizio-8.2}
 
-Ripetere l'esercizio 9.1 con il metodo di risoluzione di equazioni differenziali di Runge-Kutta (del quarto ordine) e confrontare quindi in condizioni analoghe ($t$ massimo e $h$) la stabilità dei due metodi.
+Ripetere l'esercizio 8.1 con il metodo di risoluzione di equazioni differenziali di Runge-Kutta (del quarto ordine) e confrontare quindi in condizioni analoghe ($t$ massimo e $h$) la stabilità dei due metodi.
 
-Per svolgere l'esercizio, basterà realizzare una nuova classe concreta a partire da `EquazioneDifferenzialeBase`.
+Per svolgere l'esercizio, basterà realizzare una nuova classe concreta a partire da `EquazioneDifferenzialeBase`. Implementate anche un metodo `test_runge_kutta()` sulla falsariga di `test_euler()` per l'[esercizio 8.1](http://0.0.0.0:8000/carminati-esercizi-08.html#struttura-del-programma).
 
 ## Il metodo di Runge-Kutta
 
@@ -262,24 +396,30 @@ $$
 
 ## Cosa ci aspettiamo?
 
-Il metodo di Runge-Kutte del quarto ordine è molto più preciso del metodo di Eulero: infatti produce oscillazioni molto stabili anche con un passo di integrazione di 0.1&nbsp;s:
+Il metodo di Runge-Kutta del quarto ordine è molto più preciso del metodo di Eulero: infatti produce oscillazioni molto stabili anche con un passo di integrazione di 0.1&nbsp;s:
 
-![](http://labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/figure/armonico0.1_RK4.png)
+![](https://labtnds.docs.cern.ch/Lezione8/pictures/RungeKutta-01.png)
 
 La figura seguente riporta l'errore accumulato dopo 70&nbsp;s di integrazione per diversi valori del passo:
 
-![](http://labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/figure/errore_RK4.png)
+![](https://labtnds.docs.cern.ch/Lezione8/pictures/errore_rk.png)
 
-## Errore in funzione del passo
-
-Si noti come la pendenza della curva nella sua parte iniziale sia 4 in una scala log-log, mostrando come l'errore ottenuto sia proporzionale a $h^4$.
-
-Quando l'errore di troncamento del metodo diventa minore degli errori di arrotondamento della macchina si vede che non c'è più alcun miglioramento nel ridurre il passo, anzi, il maggior numero di calcoli richiesto risulta in un peggioramento globale dell'errore.
+Si noti come la pendenza della curva nella sua parte iniziale sia 4 in una scala log-log, mostrando come l'errore ottenuto sia proporzionale a $h^4$. Quando l'errore di troncamento del metodo diventa minore degli errori di arrotondamento della macchina si vede che non c'è più alcun miglioramento nel ridurre il passo, anzi, il maggior numero di calcoli richiesto risulta in un peggioramento globale dell'errore.
 
 
-# Esercizio 9.3 - Moto del pendolo (da consegnare) {#esercizio-9.3}
+# Esercizio 8.3 - Moto del pendolo (da consegnare) {#esercizio-8.3}
 
-Implementare la risoluzione dell'equazione del pendolo usando i metodi precedentemente implementati. Fare quindi un grafico del periodo di oscillazione e verificare che per angoli grandi le oscillazioni non sono più isocrone.
+Incominciamo ora con una carrellata di interessanti applicazioni dei metodi che abbiamo appena studiato. In questo esercizio proveremo ad implementare la risoluzione dell'equazione del moto del pendolo: per prima cosa possiamo provare a fare un grafico dell'andamento dell'ampiezza dell'oscillazione in funzione del tempo. La cosa più interessante che possiamo studiare con questo codice è l'andamento del periodo di oscillazione in funzione dell'ampiezza di oscillazione: in questo modo possiamo verificare che per angoli grandi le oscillazioni non sono più isocrone. La struttura logica dell'esercizio dovrebbe essere la seguente:
+
+1.  Portare il sistema in una condizione iniziale (θ₀, 0);
+
+2.  Far evolvere il sistema usando il metodo di Eulero o di Runge-Kutta con passo di integrazione $h$ opportuno;
+
+3.  Calcolare il periodo di oscillazione del pendolo;
+
+4.  Riportare il sistema ad una condizione iniziale con ampiezza θ₀ variata e ripetere la sequenza di operazioni
+
+Si suggerisce di far variare θ₀ tra 0.1 e 3 radianti, in passi di 0.1 radianti.
 
 ## Il moto del pendolo
 
@@ -291,107 +431,128 @@ $$
 
 dove $g = 9.8\,\text{m/s}^2$ è l'accellerazione di gravità sulla superficie terreste, mentre $l$ è la lunghezza del pendolo.
 
-L'equazione differenziale si può approssimare con quella di un oscillatore armonico per piccole oscillazioni, $\sin\theta\sim\theta$. In tal caso, le oscillazioni risultano isocrone, cioè con periodo indipendente dall'ampiezza delle oscillazioni.
+L'equazione differenziale si può approssimare con quella di un oscillatore armonico per piccole oscillazioni, $\sin\theta\sim\theta$. In tal caso, le oscillazioni risultano isocrone, cioè con periodo indipendente dall'ampiezza delle oscillazioni. Questa però è solo un'approssimazione, e per grandi oscillazioni bisogna usare l'equazione esatta.
 
-Questa però è solo un'approssimazione, e per grandi oscillazioni bisogna usare l'equazione esatta. Essendo il moto non più armonico, il periodo di oscillazione dipende dall'ampiezza della stessa. La figura illustra il periodo al variare dell'ampiezza per un pendolo con $l = 1\,\text{m}$:
+## Calcolo del periodo
 
-![](http://labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/figure/periodo_pendoloreale.png)
+In questo caso l'integrazione numerica dell'equazione differenziale non si può effettuare per un tempo predefinito, ma deve essere portata avanti fino a quando non si raggiunge una condizione compatibile con l'aver terminato l'oscillazione.
+
+-   Una possibile soluzione consiste nel portare avanti l'integrazione fino a quando non si registra un cambiamento di segno della velocità angolare;
+
+-   Siccome possiamo calcolare la velocità solo con granularità pari al passo di integrazione, possiamo migliorare la stima del periodo di oscillazione interpolando linearmente tra i punti $(t,v(t))$ e $(t+h,v(t+h))$ calcolando quando la retta ottenuta passa per lo zero; il tempo così calcolato corrisponde al semiperiodo dell'oscillazione. 
+
+Un frammento di codice che implementa questo algoritmo è il seguente:
+
+```c++
+double A{0.1 * (i + 1)};
+double v{};
+double t{}; 
+std::array<double, 2> x{-A , v} ;
+while (x[1] >= 0) {
+    v = x[1];    
+    x = myRK4.Passo(t, x, h, osc);
+    t = t + h;
+    fmt::println("{} {} {}", A, x[0], t);
+}
+t = t - v * h / (x[1] - v);
+
+// Il periodo è il *doppio* del tempo che abbiamo trovato!
+double period{2 * t};
+```
+
+
+## Risultati attesi
+
+La figura illustra il periodo al variare dell'ampiezza per un pendolo con $l = 1\,\text{m}$:
+
+![](https://labtnds.docs.cern.ch/Lezione8/pictures/periodo_pendolo.png)
 
 Si noti come per piccole oscillazioni il periodo sia effettivamente quello atteso dall'approssimazione dell'oscillatore armonico:
 
 $$
 T = \frac{2\pi}{\sqrt{\frac{g}l}} \approx 2.007\,\text{s},
 $$
+
 ma aumenti significativamente per grandi ampiezze. 
 
-## Calcolo del periodo
 
-In questo caso l'integrazione numerica dell'equazione differenziale non si può effettuare per un tempo predefinito, ma deve essere portata avanti fino a quando non si raggiunge una condizione compatibile con l'aver terminato l'oscillazione.
-Una possibile soluzione consiste in:
+# Esercizio 8.4 - Oscillazione forzate e risonanza (da consegnare) {#esercizio-8.4}
 
-#.  dare come condizioni iniziali un valore di $\theta$ pari all'ampiezza di oscillazione e velocità angolare iniziale nulla;
-#.  portare avanti l'integrazione fino a quando non si nota un cambiamento di segno della velocità angolare;
-#.  siccome possiamo calcolare la velocità solo con granularità pari al passo di integrazione, possiamo stimare il passaggio dallo zero interpolando linearmente tra i due ultimi valori della velocità e calcolando quando la retta ottenuta passa per lo zero;
-#.  il tempo così calcolato corrisponde al semiperiodo dell'oscillazione. 
+Implementare la risoluzione dell'equazione di un oscillatore armonico smorzato con forzante. Fare quindi un grafico della soluzione stazionaria in funzione della frequenza dell'oscillatore, ricostruendo la curva di risonanza. La struttura logica dell'esercizio dovrebbe essere la seguente:
 
-Un esempio di pseudo-codice che implementa questo algoritmo è: 
+-   Costruiamo un oscillatore armonico forzato con smorzante con una pulsazione propria ω₀=10 rad/s e una costante α=1/30 s.
 
-```c++
-// Initial conditions
-double t{};
-x.SetComponent(0, -A);
-x.SetComponent(1, 0);
+-   Impostiamo un valore della pulsazione della forzante ω (si consiglia di esplorare un intervallo per ω tra 9 rad/s e 11 rad/s in passi da 0.05 rad/s).
 
-// Given the initial conditions, velocity will be
-// ≥ 0 up to the inversion point
-while(x.GetComponent(1) >= 0) {
-    v = x.GetComponent(1); // salvo la velocità al passo precedente
-    x = myRK4.Passo(t, x, h, osc);
-    t += h;
-}
+-   Mettiamo il sistema nella sua condizione iniziale $x=0$ e $v_x=0$.
 
-// compute when we cross the zero using a linear utilizzando l'interpolazione
-// interpolation between the previous step (t - h, v) and
-// (t, x.GetComponent(1))
-T = t - v * h / (x.GetComponent(1) - v);
+-   Facciamo evolvere il sistema usando il metodo di Runge-Kutta con passo di integrazione h opportuno fino all'esaurirsi del transiente.
 
-// The period is twice the half-period we have computed
-T *= 2;
-```
+-   Calcoliamo l'ampiezza dell'oscillazione.
 
-N.B.: controllate che la formula per l'interpolazione sia corretta!
-
-
-# Esercizio 9.4 - Oscillazione forzate e risonanza (da consegnare) {#esercizio-9.4}
-
-Implementare la risoluzione dell'equazione di un oscillatore armonico smorzato con forzante. Fare quindi un grafico della soluzione stazionaria in funzione della frequenza dell'oscillatore, ricostruendo la curva di risonanza.
+-   Modifichiamo il valore della pulsazione della forzante ω e riportiamo il sistema alle condizioni iniziali $x=0$ e $v_x=0$, ripetendo poi la sequenza di operazioni
 
 ## Oscillatore armonico con forzante
 
 L'equazione dell'oscillatore armonico smorzato con forzante è data dalla relazione
 
 $$
-\frac{\mathrm{d}^2x}{\mathrm{d}t^2} = -\omega_0^2 x + \alpha \dot{x}(t) + \sin(\omega t).
+\frac{\mathrm{d}^2x}{\mathrm{d}t^2} = -\omega_0^2 x - \alpha \dot{x}(t) + a_0 \sin(\omega t).
 $$
 
 Nell'esercizio proposto, utilizzare i seguenti valori iniziali:
 $$
-\omega_0 = 10\,\text{rad/s}, \quad \alpha = \frac1{30}\,\text{s}.
+\omega_0 = 10\,\text{rad/s}, \quad \alpha = \frac1{30\,\text{s}}, \quad a_0 = 1\,\text{m/s}^2.
 $$
 
-È bene ricordare che per determinare l'ampiezza bisogna aspettare che il transiente iniziale delle oscillazioni si esaurisca. Questo avviene con una costante di tempo pari a $1/\alpha$ (ovvero, dopo un tempo $1/\alpha$ l'ampiezza di oscillazione si riduce di un fattore $1/e$). Le seguenti figure illustrano la parte iniziale del transiente per condizioni iniziali $x(0)=0$, $\dot{x}(0) = 0$ e diversi valori di $\omega$:
+## Risultati attesi
 
-| Frequenza                   | Andamento                                                                                    |
-|-----------------------------|----------------------------------------------------------------------------------------------|
-| $5\,\text{rad/s}$  | ![](http://labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/figure/transiente_05.png) |
-| $10\,\text{rad/s}$ | ![](http://labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/figure/transiente_10.png) |
-| $15\,\text{rad/s}$ | ![](http://labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/figure/transiente_15.png) |
+La figura seguente riporta l'andamento dell'ampiezza in funzione del tempo nel caso in cui la frequenza propria del sistema (ω₀) e quella della forzante (ω) coincidano: ω₀ = ω = 10 rad/s.
 
-Si consiglia quindi di integrare l'equazione differenziale per un tempo pari ad almeno dieci volte $1/\alpha$, in modo da raggiungere una situazione in cui l'oscillazione è stabile, e poi valutare l'ampiezza. Anche in questo caso si può assumere di aver raggiunto il massimo dell'oscillazione nel momento in cui si trova un punto in cui la velocità cambia di segno.
+![](https://labtnds.docs.cern.ch/Lezione8/pictures/forzato_10_short.png)
+
+È bene ricordare che per determinare l'ampiezza bisogna aspettare che il transiente delle oscillazioni si esaurisca. Questo avviene con una costante di tempo pari a 1/α (ovvero, dopo un tempo 1/α l'ampiezza di oscillazione si riduce di un fattore 1/e).
+
+![](https://labtnds.docs.cern.ch/Lezione8/pictures/forzato_10_long.png)
+
+Si consiglia quindi di integrare l'equazione differenziale per un tempo pari ad almeno dieci volte 1/α, in modo da raggiungere una situazione in cui l'oscillazione è stabile, e poi valutare l'ampiezza. Anche in questo caso si può assumere di aver raggiunto il massimo dell'oscillazione nel momento in cui si trova un punto in cui la velocità cambia di segno.
 
 Una curva di risonanza è illustrata in figura:
 
-![](http://labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/figure/risonanza.png)
+![](https://labtnds.docs.cern.ch/Lezione8/pictures/risonanza.png)
 
 
-# Esercizio 9.5 - Moto in campo gravitazionale {#esercizio-9.5}
+# Esercizio 8.5 - Moto in campo gravitazionale {#esercizio-8.5}
 
-Implementare la risoluzione dell'equazione del moto di un corpo in un campo gravitazionale. Verificare, nel caso del sistema Terra-Sole, che il periodo di rivoluzione della Terra intorno al Sole sia effettivamente di un anno e che l'orbita sia periodica. Calcolare quindi il rapporto tra perielio ed afelio.
+Implementare la risoluzione dell'equazione del moto di un corpo in un campo gravitazionale.
 
-Provare ad aggiungere una piccola perturbazione al potenziale gravitazionale (ad esempio un termine proporzionale ad $1/r^3$ nella forza) e verificare che le orbite non sono più chiuse ma formano una rosetta.
+-   Verificare, nel caso del sistema Terra-Sole, che il periodo di rivoluzione della Terra intorno al Sole sia effettivamente di un anno e che l'orbita sia periodica. Calcolare quindi il rapporto tra perielio ed afelio.
+
+-   Provare ad aggiungere una piccola perturbazione al potenziale gravitazionale (ad esempio un termine proporzionale ad $1/r^3$ nella forza) e verificare che le orbite non sono più chiuse ma formano una rosetta.
 
 ## Moto in campo gravitazionale
 
 Nell'implementare il moto di un corpo in un campo gravitazionale utilizzare le seguenti condizioni:
 
 - costante gravitazionale $G = 6.6742\times 10^{-11}\,\text{m}^3\,\text{kg}^{-1}\,\text{s}^{-2}$;
-- massa del Sole $M_\odot = 1.98844\times 10^{30}\,\text{kg}$;
+- massa del Sole $M_\odot = 1.988441030\times 10^{30}\,\text{kg}$;
 - distanza Terra-Sole al perielio $D_p = 1.47098074\times 10^{11}\,\text{m}$;
 - velocità al perielio $v_p = 3.0287\times 10^4\,\text{m/s}$.
 
-# Esercizio 9.6 - Moto di una particella carica in un campo elettrico e magnetico uniforme {#esercizio-9.6}
+## Risultati attesi
 
-Implementare la risoluzione dell'equazione del moto di una particella carica in un campo elettrico e magnetico uniforme. Disegnare la traiettoria della particella e determinarne il diametro. Se si aggiunge un campo elettrico con componente lungo l'asse $x$ pari a $E_x = 10^4\,\text{V/m}$, in che direzione si muove ora la particella?
+Nel caso di potenziale gravitazionale standard dovremmo ottenere una traiettoria di questo tipo:
+
+![](https://labtnds.docs.cern.ch/Lezione8/pictures/orbita.png)
+
+Aggiungendo un termine di perturbazione α/r³ al potenziale gravitazionale, la traiettoria diventa la seguente:
+
+![](https://labtnds.docs.cern.ch/Lezione8/pictures/rosetta.png)
+
+
+# Esercizio 8.6 - Moto di una particella carica in un campo elettrico e magnetico uniforme {#esercizio-8.6}
+
+Implementare la risoluzione dell'equazione del moto di una particella carica in un magnetico uniforme. Disegnare la traiettoria della particella e determinarne il diametro dell'orbita. Se si aggiunge un campo elettrico con componente lungo l'asse x pari a $E_x = 10000\,\text{V/m}$, in che direzione si muove ora la particella?
 
 ## Moto in campo elettrico e magnetico uniformi
 
@@ -419,6 +580,8 @@ x\\ y\\ z\\ v_x\\ v_y\\ v_z
 0\\ 0\\ 0\\ \frac{q}m E_x\\ \frac{q}m E_y\\ \frac{q}m E_z
 \end{pmatrix}.
 $$
+È un problema tridimensionale, e richiede quindi uno spazio delle fasi a sei dimensioni. Bisognerà quindi usare tipi `std::array<double, 6>`.
+
 
 Consideriamo il moto nel piano $(x, y)$ di un elettrone in un campo magnetico costante con i seguenti valori:
 
@@ -435,9 +598,11 @@ Questi parametri corrispondono grosso modo all'apparato sperimentale per la misu
 
 Come di consueto, elenco alcuni errori molto comuni che ho trovato negli anni passati correggendo gli esercizi che gli studenti hanno consegnato all'esame:
 
--   Attenzione al fattore $1/6$ nel codice del metodo Runge-Kutta: se scrivete `1 / 6` nel vostro codice C++, il risultato è zero (perché?).
+-   Se seguite il testo originale degli esercizi e implementate tutto il codice di questa lezione usando `std::vector` anziché `std::array`, fate molta attenzione al numero di elementi in ogni vettore che usate all'interno di un calcolo come `a + b`: se `a` ha 2 dimensioni ma `b` ne ha 3, è un errore e i risultati del vostro programma saranno sbagliati!
 
--   Nell'esercizio 9.3 bisogna risolvere più volte l'equazione del pendolo col metodo Runge-Kutta. Attenzione a resettare ogni volta le variabili! Dopo aver risolto l'equazione per una certa ampiezza iniziale $A$, bisogna resettare sia il tempo `t` a zero che la variabile `x`, in modo che questa contenga di nuovo la condizione iniziale (con un valore diverso di $A$), prima di far ripartire il Runge-Kutta.
+-   Attenzione al fattore $1/6$ nel codice del metodo Runge-Kutta: se scrivete `1 / 6` nel vostro codice C++, il risultato è zero!
+
+-   Nell'[esercizio 8.3](http://0.0.0.0:8000/carminati-esercizi-08.html#esercizio-8.3) bisogna risolvere più volte l'equazione del pendolo col metodo Runge-Kutta. Attenzione a resettare ogni volta le variabili! Dopo aver risolto l'equazione per una certa ampiezza iniziale $A$, bisogna resettare sia il tempo `t` a zero che la variabile `x`, in modo che questa contenga di nuovo la condizione iniziale (con un valore diverso di $A$), prima di far ripartire il Runge-Kutta.
 
 -   Questi esercizi richiedono di passare una serie di parametri numerici dalla linea di comando. Assicuratevi di stampare una buona documentazione se l'utente non li specifica, e fate magari in modo che il comando `make esegui` avvii il vostro programma con parametri sensati.
 
@@ -446,10 +611,12 @@ Come di consueto, elenco alcuni errori molto comuni che ho trovato negli anni pa
     ```
     $ ./esercizio_9.4
     Uso: esercizio_9.4 passo_h omega0 alpha omega_forzante
-    passo_h: intervallo di integrazione con RK [s]
-    omega0: frequenza di oscillazione [rad/s]
-    alpha: coefficiente di smorzamento [s]
-    omega_forzante: frequenza della forzante [rad/s]
+
+      passo_h           Intervallo di integrazione con RK [s]
+      omega0            Frequenza di oscillazione [rad/s]
+      alpha             Coefficiente di smorzamento [s⁻¹]
+      omega_forzante    Frequenza della forzante [rad/s]
+
     $ make esegui
     ./esercizio_9.4 1e-2 10 0.033333 5
     ... [segue l'output del programma]
