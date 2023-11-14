@@ -74,7 +74,7 @@ Ricordate che la libreria funziona a patto che abbiate installato Gnuplot sul vo
 
 ## ROOT e Visual Studio Code {#rootvscode}
 
-Di default, Visual Studio Code non riconosce le librerie di ROOT e segnala quindi errore quando incontra istruzioni come
+(Suggerimento di Matteo Bettoni) Di default, Visual Studio Code non riconosce le librerie di ROOT e segnala quindi errore quando incontra istruzioni come
 
 ```c++
 #include "TGraph.h"
@@ -88,4 +88,3 @@ root-config --incdir
 
 ![](images/root-vscode-config.png)
 
-(Suggerimento di Matteo Bettoni)
