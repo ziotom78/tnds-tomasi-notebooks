@@ -19,8 +19,11 @@
     div.columns{display: flex; gap: min(4vw, 1.5em);}
     div.column{flex: auto; overflow-x: auto;}
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-    ul.task-list{list-style: none;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
     ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
       width: 0.8em;
       margin: 0 0.8em 0.2em -1.6em;
       vertical-align: middle;
@@ -107,25 +110,25 @@
 <section id="alcuni-problemi-di-stdvector" class="slide level1">
 <h1>Alcuni problemi di <code>std::vector</code></h1>
 </section>
-<section id="caratteristiche-di-stdvector" class="slide level1">
-<h1>Caratteristiche di <code>std::vector</code></h1>
+<section id="stdvector" class="slide level1">
+<h1><code>std::vector</code></h1>
 <ul>
 <li><p>Finora abbiamo sempre usato <code>std::vector</code> per
 memorizzare sequenze di valori</p></li>
-<li><p>Gli esercizi sulle equazioni differenziali non fanno
-eccezione:</p>
+<li><p>Gli esercizi sulle equazioni differenziali proposti da Carminati
+non fanno eccezione:</p>
 <div class="sourceCode" id="cb1"><pre
 class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">struct</span> FunzioneVettorialeBase <span class="op">{</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">virtual</span> vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> Eval<span class="op">(</span><span class="at">const</span> vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> <span class="op">&amp;</span>x<span class="op">)</span> <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">virtual</span> vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> Eval<span class="op">(</span><span class="at">const</span> vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> <span class="op">&amp;</span>x<span class="op">)</span> <span class="at">const</span> <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="kw">struct</span> OscillatoreArmonico <span class="op">:</span> FunzioneVettorialeBase <span class="op">{</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> Eval<span class="op">(</span><span class="at">const</span> vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> <span class="op">&amp;</span>x<span class="op">)</span> <span class="kw">override</span> <span class="op">{</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> Eval<span class="op">(</span><span class="at">const</span> vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> <span class="op">&amp;</span>x<span class="op">)</span> <span class="at">const</span> <span class="kw">override</span> <span class="op">{</span></span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;{</span>x<span class="op">[</span><span class="dv">1</span><span class="op">],</span> <span class="op">-</span>x<span class="op">[</span><span class="dv">0</span><span class="op">]};</span></span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code></pre></div></li>
 <li><p>L’uso di <code>std::vector</code> ha però una serie di svantaggi
-in questo contesto</p></li>
+in questo contesto.</p></li>
 </ul>
 </section>
 <section id="svantaggio-1-velocità" class="slide level1">
@@ -161,7 +164,7 @@ compatibili:</p>
 class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">template</span> <span class="op">&lt;</span><span class="kw">typename</span> T<span class="op">&gt;</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="bu">std::</span>vector<span class="op">&lt;</span>T<span class="op">&gt;</span> <span class="kw">operator</span><span class="op">+(</span><span class="at">const</span> <span class="bu">std::</span>vector<span class="op">&lt;</span>T<span class="op">&gt;</span> <span class="op">&amp;</span>a<span class="op">,</span> <span class="at">const</span> <span class="bu">std::</span>vector<span class="op">&lt;</span>T<span class="op">&gt;</span> <span class="op">&amp;</span>b<span class="op">)</span> <span class="op">{</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="ot">assert</span><span class="op">(</span>a<span class="op">.</span>size<span class="op">()</span> <span class="op">==</span> b<span class="op">.</span>size<span class="op">());</span>  <span class="co">// Don&#39;t forget to do this, or to throw some exception!</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="ot">assert</span><span class="op">(</span>a<span class="op">.</span>size<span class="op">()</span> <span class="op">==</span> b<span class="op">.</span>size<span class="op">());</span>  <span class="co">// Don&#39;t forget to do this!</span></span>
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="co">// ...</span></span>
 <span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div></li>
@@ -183,8 +186,8 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb4-1"><a href="#c
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="kw">struct</span> OscillatoreArmonico <span class="op">:</span> FunzioneVettorialeBase <span class="op">{</span></span>
 <span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> Eval<span class="op">(</span><span class="at">const</span> vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> <span class="op">&amp;</span>x<span class="op">)</span> <span class="kw">override</span> <span class="op">{</span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="co">// This is a two-dimensional problem in phase space, because we&#39;re returning</span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    <span class="co">// a 2-element array. But it&#39;s not evident at all!</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Lo spazio delle fasi è a 2 dimensioni, ma questo è chiaro solo</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    <span class="co">// se si contano gli elementi del vettore restituito!</span></span>
 <span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;{</span>x<span class="op">[</span><span class="dv">1</span><span class="op">],</span> <span class="op">-</span>x<span class="op">[</span><span class="dv">0</span><span class="op">]};</span></span>
 <span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
 <span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code></pre></div></li>
@@ -196,189 +199,104 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb4-1"><a href="#c
 <section id="la-classe-stdarray" class="slide level1">
 <h1>La classe <code>std::array</code></h1>
 <ul>
-<li><p>La libreria standard offre una classe perfetta per questo:
-<code>std::array</code>.</p></li>
+<li><p>La libreria standard offre una classe perfetta per gli esercizi
+di oggi: <code>std::array</code>.</p></li>
 <li><p>Essa è equivalente ad un array con un numero
 <strong>fissato</strong> di elementi, che vengono controllati in fase di
 compilazione.</p></li>
-<li><p>Una sua possibile implementazione è la seguente:</p>
+<li><p>Gli array sono allocati nella memoria <em>stack</em>, che è
+velocissima da usare ma limitata. Dovrebbero essere usati solo se il
+numero di elementi <strong>non supera qualche decina</strong>.</p></li>
+</ul>
+</section>
+<section id="esempio-di-implementazione" class="slide level1">
+<h1>Esempio di implementazione</h1>
+<ul>
+<li><p>Un’implementazione semplificata di <code>std::array</code> è la
+seguente, che <strong>non</strong> usa <code>new</code>:</p>
 <div class="sourceCode" id="cb5"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">template</span> <span class="op">&lt;</span><span class="kw">typename</span> T<span class="op">,</span> <span class="dt">size_t</span> N<span class="op">&gt;</span>      <span class="co">// C++ templates can be built on types and values</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> array <span class="op">{</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  T <span class="va">m_data</span><span class="op">[</span>N<span class="op">];</span>                       <span class="co">// No pointers, just an array of fixed size</span></span>
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">template</span> <span class="op">&lt;</span><span class="kw">typename</span> T<span class="op">,</span> <span class="dt">size_t</span> N<span class="op">&gt;</span>      <span class="co">// I template C++ possono essere usati per tipi</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> array <span class="op">{</span>                        <span class="co">// come `double` e valori come `size_t`</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  T <span class="va">m_data</span><span class="op">[</span>N<span class="op">];</span>                       <span class="co">// Non è un puntatore, ma un array di dimensione nota</span></span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span><span class="op">:</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">size_t</span> size<span class="op">()</span> <span class="at">const</span> <span class="op">{</span> <span class="cf">return</span> N<span class="op">;</span> <span class="op">}</span>  <span class="co">// Return the constant N</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">size_t</span> size<span class="op">()</span> <span class="at">const</span> <span class="op">{</span> <span class="cf">return</span> N<span class="op">;</span> <span class="op">}</span>  <span class="co">// Ritorna il valore costante N</span></span>
 <span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="co">// ...</span></span>
 <span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code></pre></div></li>
+<li><p>Se il valore <code>N</code> è ridotto a pochi elementi (due o
+tre), il compilatore può addirittura decidere di evitare di usare lo
+<em>stack</em> ed impiega invece i <em>registri</em> (che è il tipo di
+memoria usabile dalla CPU più veloce in assoluto)</p></li>
+</ul>
+</section>
+<section class="slide level1">
+
+<ul>
+<li><p>Finora abbiamo sempre visto <code>typename T</code> nei template,
+dicendo che il tipo (<code>double</code>, <code>float</code>,
+<code>int</code>…) deve essere fornito quando si <em>istanzia</em> il
+template:</p>
+<div class="sourceCode" id="cb6"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">template</span> <span class="op">&lt;</span><span class="kw">typename</span> T<span class="op">&gt;</span> <span class="kw">class</span> Vettore <span class="op">{</span> T <span class="op">*</span> arr<span class="op">;</span> <span class="co">/* ... */</span> <span class="op">};</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>Vettore<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> v<span class="op">;</span>  <span class="co">// Vettore di double</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>Vettore<span class="op">&lt;</span><span class="dt">int</span><span class="op">&gt;</span> w<span class="op">;</span>     <span class="co">// Vettore di interi</span></span></code></pre></div></li>
+<li><p>Usare <code>size_t N</code> indica che nella definizione di
+<code>std::array</code>, il valore numerico di <code>N</code> è un
+intero senza segno da fornire quando si istanzia il template:</p>
+<div class="sourceCode" id="cb7"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">template</span> <span class="op">&lt;</span><span class="dt">size_t</span> N<span class="op">&gt;</span> <span class="kw">class</span> Array <span class="op">{</span> <span class="dt">double</span> arr<span class="op">[</span>N<span class="op">];</span> <span class="co">/* ... */</span> <span class="op">};</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>Array<span class="op">&lt;</span><span class="dv">3</span><span class="op">&gt;</span> v<span class="op">;</span>  <span class="co">// Array di 3 elementi</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>Array<span class="op">&lt;</span><span class="dv">4</span><span class="op">&gt;</span> w<span class="op">;</span>  <span class="co">// Array di 4 elementi</span></span></code></pre></div></li>
 </ul>
 </section>
 <section id="uso-di-stdarray-1" class="slide level1">
 <h1>Uso di <code>std::array</code></h1>
 <ul>
-<li><p>A differenza di <code>std::vector</code>, nel dichiarare una
-variabile di tipo <code>std::array</code> bisogna specificare non solo
-il tipo ma anche la dimensione:</p>
-<div class="sourceCode" id="cb6"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="bu">std::</span>vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> v<span class="op">(</span><span class="dv">2</span><span class="op">);</span>  <span class="co">// The size is 2, but it can change later</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="bu">std::</span>array<span class="op">&lt;</span><span class="dt">double</span><span class="op">,</span> <span class="dv">2</span><span class="op">&gt;</span> a<span class="op">;</span>   <span class="co">// The size is forced to be 2</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>v<span class="op">[</span><span class="dv">0</span><span class="op">]</span> <span class="op">=</span> <span class="fl">0.5</span><span class="op">;</span> v<span class="op">.</span>at<span class="op">(</span><span class="dv">1</span><span class="op">)</span> <span class="op">=</span> <span class="fl">1.0</span><span class="op">;</span>    <span class="co">// Both std::vector and std::array can be</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>a<span class="op">[</span><span class="dv">0</span><span class="op">]</span> <span class="op">=</span> <span class="fl">0.7</span><span class="op">;</span> a<span class="op">.</span>at<span class="op">(</span><span class="dv">1</span><span class="op">)</span> <span class="op">=</span> <span class="fl">2.0</span><span class="op">;</span>    <span class="co">// accessed using [] or .at()</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>v<span class="op">.</span>push_back<span class="op">(</span><span class="fl">3.14159</span><span class="op">);</span>  <span class="co">// Ok, the array will grow</span></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>a<span class="op">.</span>push_back<span class="op">(</span><span class="fl">2.71828</span><span class="op">);</span>  <span class="co">// ERROR, you cannot use push_back with an array</span></span></code></pre></div></li>
-<li><p>Si può inizializzare un array in maniera immediata:</p>
-<div class="sourceCode" id="cb7"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="bu">std::</span>array<span class="op">&lt;</span><span class="dt">double</span><span class="op">,</span> <span class="dv">4</span><span class="op">&gt;</span> a<span class="op">{</span><span class="fl">1.0</span><span class="op">,</span> <span class="fl">2.0</span><span class="op">,</span> <span class="fl">3.0</span><span class="op">,</span> <span class="fl">4.0</span><span class="op">};</span>  <span class="co">// Ok, but if you use -std=c++17…</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="bu">std::</span>array<span class="op"> </span>a<span class="op">{</span><span class="fl">1.0</span><span class="op">,</span> <span class="fl">2.0</span><span class="op">,</span> <span class="fl">3.0</span><span class="op">,</span> <span class="fl">4.0</span><span class="op">};</span>             <span class="co">// …&quot;double&quot; and &quot;4&quot; are redundant!</span></span></code></pre></div></li>
-</ul>
-</section>
-<section id="uso-in-funzionevettorialebase" class="slide level1">
-<h1>Uso in <code>FunzioneVettorialeBase</code></h1>
-<ul>
-<li><p>La classe <code>std::array</code> è perfetta per
-<code>FunzioneVettorialeBase</code></p></li>
-<li><p>Se siete intimoriti da <code>std::array</code>, ignorate pure le
-slide seguenti. Se invece volete provare, dovete implementare queste
-modifiche:</p>
-<ol type="1">
-<li>Modificare <code>FunzioneVettorialeBase</code> in modo che
-<code>Eval</code> usi <code>std::array</code>;</li>
-<li>Modificare <code>EqDiff</code> in modo che <code>Passo</code> usi
-<code>std::array</code>;</li>
-<li>Modificare <code>vector_operations.hpp</code> perché le funzioni
-usino <code>std::array</code>, togliendo i controlli sulla
-dimensione.</li>
-</ol></li>
-</ul>
-</section>
-<section id="funzionevettorialebase" class="slide level1">
-<h1><code>FunzioneVettorialeBase</code></h1>
+<li><p>Quando si istanzia <code>std::array</code>, bisogna specificare
+anche la dimensione:</p>
 <div class="sourceCode" id="cb8"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">template</span> <span class="op">&lt;</span><span class="dt">size_t</span> N<span class="op">&gt;</span>   <span class="co">// Do *not* use «typename» here: it&#39;s a *value*, not a type</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="kw">struct</span> FunzioneVettorialeBase <span class="op">{</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Before this change, it was:</span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="co">// virtual vector&lt;double&gt; Eval(const vector&lt;double&gt; &amp;x) = 0;</span></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="kw">virtual</span> array<span class="op">&lt;</span><span class="dt">double</span><span class="op">,</span> N<span class="op">&gt;</span> Eval<span class="op">(</span><span class="at">const</span> array<span class="op">&lt;</span><span class="dt">double</span><span class="op">,</span> N<span class="op">&gt;</span> <span class="op">&amp;</span>x<span class="op">)</span> <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Note that we specify N both in the parameter `x` and in the return type.</span></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  <span class="co">// This ensures that the dimension is the same for both</span></span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="kw">struct</span> OscillatoreArmonico <span class="op">:</span> FunzioneVettorialeBase<span class="op">&lt;</span><span class="dv">2</span><span class="op">&gt;</span> <span class="op">{</span></span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>  array<span class="op">&lt;</span><span class="dt">double</span><span class="op">,</span> <span class="dv">2</span><span class="op">&gt;</span> Eval<span class="op">(</span><span class="at">const</span> array<span class="op">&lt;</span><span class="dt">double</span><span class="op">,</span> <span class="dv">2</span><span class="op">&gt;</span> <span class="op">&amp;</span>x<span class="op">)</span> <span class="kw">override</span> <span class="op">{</span></span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>    <span class="co">// If you use the flag -std=c++17 or -std=c++20, you can just write</span></span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>    <span class="co">// return array{x[1], -x[0]};</span></span>
-<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> array<span class="op">&lt;</span><span class="dt">double</span><span class="op">,</span> <span class="dv">2</span><span class="op">&gt;{</span>x<span class="op">[</span><span class="dv">1</span><span class="op">],</span> <span class="op">-</span>x<span class="op">[</span><span class="dv">0</span><span class="op">]};</span></span>
-<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
-<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code></pre></div>
-</section>
-<section id="eqdiff" class="slide level1">
-<h1><code>EqDiff</code></h1>
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="bu">std::</span>vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> v<span class="op">(</span><span class="dv">2</span><span class="op">);</span>  <span class="co">// The size is 2, but it can change later</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="bu">std::</span>array<span class="op">&lt;</span><span class="dt">double</span><span class="op">,</span> <span class="dv">2</span><span class="op">&gt;</span> a<span class="op">;</span>   <span class="co">// The size is 2 and *cannot* change</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>v<span class="op">[</span><span class="dv">0</span><span class="op">]</span> <span class="op">=</span> <span class="fl">0.5</span><span class="op">;</span> v<span class="op">.</span>at<span class="op">(</span><span class="dv">1</span><span class="op">)</span> <span class="op">=</span> <span class="fl">1.0</span><span class="op">;</span>    <span class="co">// Both std::vector and std::array can be</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>a<span class="op">[</span><span class="dv">0</span><span class="op">]</span> <span class="op">=</span> <span class="fl">0.7</span><span class="op">;</span> a<span class="op">.</span>at<span class="op">(</span><span class="dv">1</span><span class="op">)</span> <span class="op">=</span> <span class="fl">2.0</span><span class="op">;</span>    <span class="co">// accessed using [] or .at()</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>v<span class="op">.</span>push_back<span class="op">(</span><span class="fl">3.14159</span><span class="op">);</span>  <span class="co">// Ok, the array will grow</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>a<span class="op">.</span>push_back<span class="op">(</span><span class="fl">2.71828</span><span class="op">);</span>  <span class="co">// ERROR, you cannot use push_back with an array</span></span></code></pre></div></li>
+<li><p>Si può inizializzare un array in maniera immediata:</p>
 <div class="sourceCode" id="cb9"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Generica equazione differenziale a N dimensioni</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="kw">template</span> <span class="op">&lt;</span><span class="bu">std::</span>size_t<span class="op"> </span>N<span class="op">&gt;</span> <span class="kw">struct</span> EqDiff <span class="op">{</span></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">virtual</span> array<span class="op">&lt;</span><span class="dt">double</span><span class="op">,</span> N<span class="op">&gt;</span> Passo<span class="op">(</span><span class="dt">double</span> t<span class="op">,</span> <span class="at">const</span> array<span class="op">&lt;</span><span class="dt">double</span><span class="op">,</span> N<span class="op">&gt;</span> <span class="op">&amp;</span>x<span class="op">,</span> <span class="dt">double</span> h<span class="op">,</span></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>                                 FunzioneVettorialeBase<span class="op">&lt;</span>N<span class="op">&gt;</span> <span class="op">&amp;</span>fn<span class="op">)</span> <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="co">// Generico solutore di Eulero a N dimensioni</span></span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="kw">template</span> <span class="op">&lt;</span><span class="bu">std::</span>size_t<span class="op"> </span>N<span class="op">&gt;</span> <span class="kw">struct</span> Eulero <span class="op">:</span> <span class="kw">public</span> EqDiff<span class="op">&lt;</span>N<span class="op">&gt;</span> <span class="op">{</span></span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>  array<span class="op">&lt;</span><span class="dt">double</span><span class="op">,</span> N<span class="op">&gt;</span> Passo<span class="op">(</span><span class="dt">double</span> t<span class="op">,</span> <span class="at">const</span> array<span class="op">&lt;</span><span class="dt">double</span><span class="op">,</span> N<span class="op">&gt;</span> <span class="op">&amp;</span>x<span class="op">,</span> <span class="dt">double</span> h<span class="op">,</span></span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>                         FunzioneVettorialeBase<span class="op">&lt;</span>N<span class="op">&gt;</span> <span class="op">&amp;</span>fn<span class="op">)</span> <span class="kw">override</span> <span class="op">{</span></span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>    array<span class="op">&lt;</span><span class="dt">double</span><span class="op">,</span> N<span class="op">&gt;</span> result<span class="op">;</span></span>
-<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>    <span class="co">// ...</span></span>
-<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> result<span class="op">;</span></span>
-<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
-<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code></pre></div>
-</section>
-<section id="vector_operations.hpp" class="slide level1">
-<h1><code>vector_operations.hpp</code></h1>
-<div class="sourceCode" id="cb10"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="kw">template</span> <span class="op">&lt;</span><span class="kw">typename</span> T<span class="op">,</span> <span class="dt">size_t</span> N<span class="op">&gt;</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="bu">std::</span>array<span class="op">&lt;</span>T<span class="op">,</span> N<span class="op">&gt;</span> <span class="kw">operator</span><span class="op">+(</span><span class="at">const</span> <span class="bu">std::</span>array<span class="op">&lt;</span>T<span class="op">,</span> N<span class="op">&gt;</span> <span class="op">&amp;</span>a<span class="op">,</span> <span class="at">const</span> <span class="bu">std::</span>array<span class="op">&lt;</span>T<span class="op">,</span> N<span class="op">&gt;</span> <span class="op">&amp;</span>b<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="bu">std::</span>array<span class="op">&lt;</span>T<span class="op">,</span> N<span class="op">&gt;</span> result<span class="op">;</span></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="co">// No check on the size of `a` and `b`, as they are guaranteed to be both N</span></span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i<span class="op">{};</span> i <span class="op">&lt;</span> N<span class="op">;</span> i<span class="op">++)</span>  <span class="co">// We could have used a.size() instead of N</span></span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>    result<span class="op">[</span>i<span class="op">]</span> <span class="op">=</span> a<span class="op">[</span>i<span class="op">]</span> <span class="op">+</span> b<span class="op">[</span>i<span class="op">];</span></span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> result<span class="op">;</span></span>
-<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
-<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a><span class="co">// Same for the other functions</span></span></code></pre></div>
-</section>
-<section id="vantaggi-di-stdarray" class="slide level1">
-<h1>Vantaggi di <code>std::array</code></h1>
-<p>La classe <code>std::array</code> risolve tutti i problemi di
-<code>std::vector</code>:</p>
-<dl>
-<dt>Velocità</dt>
-<dd>
-il codice è molto più veloce
-</dd>
-<dt>Controlli</dt>
-<dd>
-le dimensioni sono controllate in fase di compilazione
-</dd>
-<dt>Leggibilità</dt>
-<dd>
-le dimensioni diventano esplicite
-</dd>
-</dl>
-</section>
-<section id="svantaggi-di-stdarray" class="slide level1">
-<h1>Svantaggi di <code>std::array</code></h1>
-<ul>
-<li><p>Il numero di elementi è fisso, e a differenza di
-<code>std::vector</code> non esiste il metodo
-<code>push_back</code>;</p></li>
-<li><p>Gli array sono allocati nella memoria <em>stack</em>, che è
-limitata. Dovrebbero essere usati solo se il numero di elementi
-<strong>non supera qualche decina</strong>.</p></li>
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="bu">std::</span>array<span class="op">&lt;</span><span class="dt">double</span><span class="op">,</span> <span class="dv">4</span><span class="op">&gt;</span> a<span class="op">{</span><span class="fl">1.0</span><span class="op">,</span> <span class="fl">2.0</span><span class="op">,</span> <span class="fl">3.0</span><span class="op">,</span> <span class="fl">4.0</span><span class="op">};</span>  <span class="co">// Ok, but if you use -std=c++17…</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="bu">std::</span>array<span class="op"> </span>a<span class="op">{</span><span class="fl">1.0</span><span class="op">,</span> <span class="fl">2.0</span><span class="op">,</span> <span class="fl">3.0</span><span class="op">,</span> <span class="fl">4.0</span><span class="op">};</span>             <span class="co">// …&quot;double&quot; and &quot;4&quot; are redundant!</span></span></code></pre></div></li>
 </ul>
 </section>
-<section id="velocità" class="slide level1">
-<h1>Velocità</h1>
+<section id="uso-negli-esercizi" class="slide level1">
+<h1>Uso negli esercizi</h1>
 <ul>
-<li><p>Se si riscrive la classe <code>FunzioneVettorialeBase</code>
-usando <code>std::array</code>, con GCC 12 il codice è circa 5 volte più
-veloce nel risolvere l’equazione del pendolo (esercizio 9.1).</p></li>
-<li><p>Questo è possibile perché le variabili usate nel calcolo non sono
-allocate usando <code>new</code>, ma nello <em>stack</em> (un tipo di
-memoria molto più rapida della memoria <em>heap</em>, che è il tipo
-usato da <code>new</code>).</p></li>
+<li><p>L’anno scorso ho proposto agli alunni più volonterosi di usare
+<code>std::array</code>, per questi motivi:</p>
+<ol type="1">
+<li><p>Il codice è circa 10 volte più veloce, e questo è importante
+soprattutto se si devono fare Monte Carlo di problemi con equazioni
+differenziali;</p></li>
+<li><p>In sede di esame vediamo a volte errori di dimensionalità, che
+<code>std::array</code> previene;</p></li>
+<li><p>Non è necessario implementare controlli sulla dimensione degli
+array, perché ci pensa il compilatore.</p></li>
+</ol></li>
+<li><p>Questo è il primo anno in cui ho aggiornato la pagina <a
+href="carminati-esercizi-08.html">carminati-esercizi-08.html</a> perché
+usi <code>std::array</code>!</p></li>
 </ul>
 </section>
 <section id="controlli" class="slide level1">
 <h1>Controlli</h1>
 <ul>
-<li><p>In <code>vector_operations.hpp</code> non è più necessario
-controllare la dimensione dei vettori e segnalare errori con
-<code>assert</code> o <code>throw</code>.</p></li>
-<li><p>Il codice diventa infatti il seguente:</p>
-<div class="sourceCode" id="cb11"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="kw">template</span> <span class="op">&lt;</span><span class="kw">typename</span> T<span class="op">,</span> <span class="dt">size_t</span> N<span class="op">&gt;</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="bu">std::</span>array<span class="op">&lt;</span>T<span class="op">,</span> N<span class="op">&gt;</span> <span class="kw">operator</span><span class="op">+(</span><span class="at">const</span> <span class="bu">std::</span>array<span class="op">&lt;</span>T<span class="op">,</span> N<span class="op">&gt;</span> <span class="op">&amp;</span>a<span class="op">,</span> <span class="at">const</span> <span class="bu">std::</span>array<span class="op">&lt;</span>T<span class="op">,</span> N<span class="op">&gt;</span> <span class="op">&amp;</span>b<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="bu">std::</span>array<span class="op">&lt;</span>T<span class="op">,</span> N<span class="op">&gt;</span> result<span class="op">;</span></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i<span class="op">{};</span> i <span class="op">&lt;</span> N<span class="op">;</span> i<span class="op">++)</span></span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>    result<span class="op">[</span>i<span class="op">]</span> <span class="op">=</span> a<span class="op">[</span>i<span class="op">]</span> <span class="op">+</span> b<span class="op">[</span>i<span class="op">];</span></span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> result</span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
-<p>Notate che tutti gli array sono dichiarati come
-<code>std::array&lt;T, N&gt;</code>: il fatto che <code>N</code> sia la
-stessa ovunque obbliga il compilatore a verificare che sia
-così.</p></li>
-</ul>
-</section>
-<section id="controlli-1" class="slide level1">
-<h1>Controlli</h1>
-<ul>
 <li><p>Se combino due array con lunghezza diversa</p>
-<div class="sourceCode" id="cb12"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="bu">std::</span>array<span class="op"> </span>x<span class="op">{</span><span class="fl">1.0</span><span class="op">,</span> <span class="fl">2.0</span><span class="op">};</span>      <span class="co">// An array with 2 elements</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="bu">std::</span>array<span class="op"> </span>y<span class="op">{</span><span class="fl">3.0</span><span class="op">,</span> <span class="fl">4.0</span><span class="op">,</span> <span class="fl">5.0</span><span class="op">};</span> <span class="co">// An array with 3 elements</span></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="bu">std::</span>array<span class="op"> </span>z<span class="op">{</span>x <span class="op">+</span> y<span class="op">};</span>         <span class="co">// Gosh, what&#39;s going to happen?</span></span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="bu">std::</span>array<span class="op"> </span>x<span class="op">{</span><span class="fl">1.0</span><span class="op">,</span> <span class="fl">2.0</span><span class="op">};</span>      <span class="co">// An array with 2 elements</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="bu">std::</span>array<span class="op"> </span>y<span class="op">{</span><span class="fl">3.0</span><span class="op">,</span> <span class="fl">4.0</span><span class="op">,</span> <span class="fl">5.0</span><span class="op">};</span> <span class="co">// An array with 3 elements</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="bu">std::</span>array<span class="op"> </span>z<span class="op">{</span>x <span class="op">+</span> y<span class="op">};</span>         <span class="co">// Gosh, what&#39;s going to happen?</span></span></code></pre></div>
 <p>il compilatore <code>g++</code> produce un errore di
 compilazione:</p>
 <pre><code>test_arr.cpp:64:13: error: no match for ‘operator+’ (operand types are ‘std::array&lt;double, 2&gt;’ and ‘std::array&lt;double, 3&gt;’)
@@ -388,8 +306,7 @@ compilazione:</p>
       |           |   array&lt;[...],3&gt;
       |           array&lt;[...],2&gt;</code></pre></li>
 <li><p>Nel caso di <code>std::vector</code>, il codice compilerebbe ma
-andrebbe poi in crash quando eseguito (a patto che mi sia ricordato di
-implementare tutti i controlli)</p></li>
+andrebbe poi in crash.</p></li>
 </ul>
 </section>
 <section id="leggibilità" class="slide level1">
@@ -398,16 +315,18 @@ implementare tutti i controlli)</p></li>
 <li><p>Con tutte le dimensioni esplicitate, il codice diventa più
 leggibile</p></li>
 <li><p>Ad esempio, nel derivare la classe
-<code>OscillatoreArmonico</code> bisogna specificare
-<code>&lt;2&gt;</code> per <code>FunzioneVettorialeBase</code>:</p>
-<div class="sourceCode" id="cb14"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="kw">struct</span> OscillatoreArmonico <span class="op">:</span> FunzioneVettorialeBase<span class="op">&lt;</span><span class="dv">2</span><span class="op">&gt;</span> <span class="op">{</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="co">// ...</span></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code></pre></div></li>
-<li><p>Similmente, nel <code>main</code> dell’esercizio 9.1 definirei
+<code>OscillatoreArmonico</code> dell’<a
+href="carminati-esercizi-08.html#esercizio-8.1">esercizio 8.1</a>
+bisogna specificare <code>&lt;2&gt;</code> per
+<code>FunzioneVettorialeBase</code>:</p>
+<div class="sourceCode" id="cb12"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">struct</span> OscillatoreArmonico <span class="op">:</span> FunzioneVettorialeBase<span class="op">&lt;</span><span class="dv">2</span><span class="op">&gt;</span> <span class="op">{</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="co">// ...</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code></pre></div></li>
+<li><p>Similmente, nel <code>main</code> dello stesso si definisce
 l’istanza della classe <code>Eulero</code> così:</p>
-<div class="sourceCode" id="cb15"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>Eulero<span class="op">&lt;</span><span class="dv">2</span><span class="op">&gt;</span> myEuler<span class="op">;</span>  <span class="co">// I am going to apply Euler&#39;s method to a 2D problem</span></span></code></pre></div></li>
+<div class="sourceCode" id="cb13"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>Eulero<span class="op">&lt;</span><span class="dv">2</span><span class="op">&gt;</span> myEuler<span class="op">;</span>  <span class="co">// Metodo di Eulero per un&#39;equazione di secondo grado</span></span></code></pre></div></li>
 </ul>
 </section>
 <section id="seminario-di-fine-semestre" class="slide level1">
@@ -423,8 +342,8 @@ di Febbraio.</p></li>
 progettati i rispettivi compilatori, e do indicazioni su come scegliere
 lo strumento di lavoro migliore.</p></li>
 <li><p>Se siete interessati, compilate il Google Form all’indirizzo <a
-href="https://forms.gle/99kR6ZADstXEJZZaA"
-class="uri">https://forms.gle/99kR6ZADstXEJZZaA</a>: alla fine del
+href="https://forms.gle/ZaDv5n6PjDEaNRoT8"
+class="uri">https://forms.gle/ZaDv5n6PjDEaNRoT8</a>: alla fine del
 semestre contatterò chi l’ha compilato per decidere la data migliore per
 tutti.</p></li>
 </ul>

@@ -16,25 +16,25 @@ css:
 
 # Alcuni problemi di `std::vector`
 
-# Caratteristiche di `std::vector`
+# `std::vector`
 
 -   Finora abbiamo sempre usato `std::vector` per memorizzare sequenze di valori
 
--   Gli esercizi sulle equazioni differenziali non fanno eccezione:
+-   Gli esercizi sulle equazioni differenziali proposti da Carminati non fanno eccezione:
 
     ```c++
     struct FunzioneVettorialeBase {
-      virtual vector<double> Eval(const vector<double> &x) = 0;
+      virtual vector<double> Eval(const vector<double> &x) const = 0;
     };
 
     struct OscillatoreArmonico : FunzioneVettorialeBase {
-      vector<double> Eval(const vector<double> &x) override {
+      vector<double> Eval(const vector<double> &x) const override {
         return vector<double>{x[1], -x[0]};
       }
     };
     ```
 
--   L'uso di `std::vector` ha però una serie di svantaggi in questo contesto
+-   L'uso di `std::vector` ha però una serie di svantaggi in questo contesto.
 
 # Svantaggio #1: velocità
 
@@ -65,7 +65,7 @@ css:
     template <typename T>
     std::vector<T> operator+(const std::vector<T> &a, const std::vector<T> &b) {
 
-      assert(a.size() == b.size());  // Don't forget to do this, or to throw some exception!
+      assert(a.size() == b.size());  // Don't forget to do this!
 
       // ...
     }
@@ -84,8 +84,8 @@ css:
 
     struct OscillatoreArmonico : FunzioneVettorialeBase {
       vector<double> Eval(const vector<double> &x) override {
-        // This is a two-dimensional problem in phase space, because we're returning
-        // a 2-element array. But it's not evident at all!
+        // Lo spazio delle fasi è a 2 dimensioni, ma questo è chiaro solo
+        // se si contano gli elementi del vettore restituito!
         return vector<double>{x[1], -x[0]};
       }
     };
@@ -95,29 +95,56 @@ css:
 
 # La classe `std::array`
 
--   La libreria standard offre una classe perfetta per questo: `std::array`.
+-   La libreria standard offre una classe perfetta per gli esercizi di oggi: `std::array`.
 
 -   Essa è equivalente ad un array con un numero **fissato** di elementi, che vengono controllati in fase di compilazione.
 
--   Una sua possibile implementazione è la seguente:
+-   Gli array sono allocati nella memoria *stack*, che è velocissima da usare ma limitata. Dovrebbero essere usati solo se il numero di elementi **non supera qualche decina**.
+
+
+# Esempio di implementazione
+
+-   Un'implementazione semplificata di `std::array` è la seguente, che **non** usa `new`:
 
     ```c++
-    template <typename T, size_t N>      // C++ templates can be built on types and values
-    class array {
-      T m_data[N];                       // No pointers, just an array of fixed size
+    template <typename T, size_t N>      // I template C++ possono essere usati per tipi
+    class array {                        // come `double` e valori come `size_t`
+      T m_data[N];                       // Non è un puntatore, ma un array di dimensione nota
     public:
-      size_t size() const { return N; }  // Return the constant N
+      size_t size() const { return N; }  // Ritorna il valore costante N
       // ...
     };
     ```
 
+-   Se il valore `N` è ridotto a pochi elementi (due o tre), il compilatore può addirittura decidere di evitare di usare lo *stack* ed impiega invece i *registri* (che è il tipo di memoria usabile dalla CPU più veloce in assoluto)
+
+---
+
+-   Finora abbiamo sempre visto `typename T` nei template, dicendo che il tipo (`double`, `float`, `int`…) deve essere fornito quando si *istanzia* il template:
+
+    ```c++
+    template <typename T> class Vettore { T * arr; /* ... */ };
+
+    Vettore<double> v;  // Vettore di double
+    Vettore<int> w;     // Vettore di interi
+    ```
+
+-   Usare `size_t N` indica che nella definizione di `std::array`, il valore numerico di `N` è un intero senza segno da fornire quando si istanzia il template:
+
+    ```c++
+    template <size_t N> class Array { double arr[N]; /* ... */ };
+
+    Array<3> v;  // Array di 3 elementi
+    Array<4> w;  // Array di 4 elementi
+    ```
+
 # Uso di `std::array`
 
--   A differenza di `std::vector`, nel dichiarare una variabile di tipo `std::array` bisogna specificare non solo il tipo ma anche la dimensione:
+-   Quando si istanzia `std::array`, bisogna specificare anche la dimensione:
 
     ```c++
     std::vector<double> v(2);  // The size is 2, but it can change later
-    std::array<double, 2> a;   // The size is forced to be 2
+    std::array<double, 2> a;   // The size is 2 and *cannot* change
 
     v[0] = 0.5; v.at(1) = 1.0;    // Both std::vector and std::array can be
     a[0] = 0.7; a.at(1) = 2.0;    // accessed using [] or .at()
@@ -133,119 +160,18 @@ css:
     std::array a{1.0, 2.0, 3.0, 4.0};             // …"double" and "4" are redundant!
     ```
 
-# Uso in `FunzioneVettorialeBase`
+# Uso negli esercizi
 
--   La classe `std::array` è perfetta per `FunzioneVettorialeBase`
+-   L'anno scorso ho proposto agli alunni più volonterosi di usare `std::array`, per questi motivi:
 
--   Se siete intimoriti da `std::array`, ignorate pure le slide seguenti. Se invece volete provare, dovete implementare queste modifiche:
+    1.  Il codice è circa 10 volte più veloce, e questo è importante soprattutto se si devono fare Monte Carlo di problemi con equazioni differenziali;
 
-    1. Modificare `FunzioneVettorialeBase` in modo che `Eval` usi `std::array`;
-    2. Modificare `EqDiff` in modo che `Passo` usi `std::array`;
-    3. Modificare `vector_operations.hpp` perché le funzioni usino `std::array`, togliendo i controlli sulla dimensione.
+    2.  In sede di esame vediamo a volte errori di dimensionalità, che `std::array` previene;
 
-# `FunzioneVettorialeBase`
+    3.  Non è necessario implementare controlli sulla dimensione degli array, perché ci pensa il compilatore.
 
-```c++
-template <size_t N>   // Do *not* use «typename» here: it's a *value*, not a type
-struct FunzioneVettorialeBase {
-  // Before this change, it was:
-  // virtual vector<double> Eval(const vector<double> &x) = 0;
-  virtual array<double, N> Eval(const array<double, N> &x) = 0;
-  // Note that we specify N both in the parameter `x` and in the return type.
-  // This ensures that the dimension is the same for both
-};
+-   Questo è il primo anno in cui ho aggiornato la pagina [carminati-esercizi-08.html](carminati-esercizi-08.html) perché usi `std::array`!
 
-struct OscillatoreArmonico : FunzioneVettorialeBase<2> {
-  array<double, 2> Eval(const array<double, 2> &x) override {
-    // If you use the flag -std=c++17 or -std=c++20, you can just write
-    // return array{x[1], -x[0]};
-    return array<double, 2>{x[1], -x[0]};
-  }
-};
-```
-
-# `EqDiff`
-
-```c++
-// Generica equazione differenziale a N dimensioni
-template <std::size_t N> struct EqDiff {
-  virtual array<double, N> Passo(double t, const array<double, N> &x, double h,
-                                 FunzioneVettorialeBase<N> &fn) = 0;
-};
-
-// Generico solutore di Eulero a N dimensioni
-template <std::size_t N> struct Eulero : public EqDiff<N> {
-  array<double, N> Passo(double t, const array<double, N> &x, double h,
-                         FunzioneVettorialeBase<N> &fn) override {
-    array<double, N> result;
-    // ...
-    return result;
-  }
-};
-```
-
-# `vector_operations.hpp`
-
-```c++
-template <typename T, size_t N>
-std::array<T, N> operator+(const std::array<T, N> &a, const std::array<T, N> &b) {
-  std::array<T, N> result;
-
-  // No check on the size of `a` and `b`, as they are guaranteed to be both N
-  
-  for (int i{}; i < N; i++)  // We could have used a.size() instead of N
-    result[i] = a[i] + b[i];
-    
-  return result;
-}
-
-// Same for the other functions
-```
-
-# Vantaggi di `std::array`
-
-La classe `std::array` risolve tutti i problemi di `std::vector`:
-
-Velocità
-: il codice è molto più veloce
-
-Controlli
-: le dimensioni sono controllate in fase di compilazione
-
-Leggibilità
-: le dimensioni diventano esplicite
-
-
-# Svantaggi di `std::array`
-
--   Il numero di elementi è fisso, e a differenza di `std::vector` non esiste il metodo `push_back`;
-
--   Gli array sono allocati nella memoria *stack*, che è limitata. Dovrebbero essere usati solo se il numero di elementi **non supera qualche decina**.
-
-
-# Velocità
-
--   Se si riscrive la classe `FunzioneVettorialeBase` usando `std::array`, con GCC 12 il codice è circa 5 volte più veloce nel risolvere l'equazione del pendolo (esercizio 9.1).
-
--   Questo è possibile perché le variabili usate nel calcolo non sono allocate usando `new`, ma nello *stack* (un tipo di memoria molto più rapida della memoria *heap*, che è il tipo usato da `new`).
-
-# Controlli
-
--   In `vector_operations.hpp` non è più necessario controllare la dimensione dei vettori e segnalare errori con `assert` o `throw`.
-
--   Il codice diventa infatti il seguente:
-
-    ```c++
-    template <typename T, size_t N>
-    std::array<T, N> operator+(const std::array<T, N> &a, const std::array<T, N> &b) {
-      std::array<T, N> result;
-      for (int i{}; i < N; i++)
-        result[i] = a[i] + b[i];
-      return result
-    }
-    ```
-
-    Notate che tutti gli array sono dichiarati come `std::array<T, N>`: il fatto che `N` sia la stessa ovunque obbliga il compilatore a verificare che sia così.
     
 # Controlli
 
@@ -268,13 +194,13 @@ Leggibilità
           |           array<[...],2>
     ```
     
--   Nel caso di `std::vector`, il codice compilerebbe ma andrebbe poi in crash quando eseguito (a patto che mi sia ricordato di implementare tutti i controlli)
+-   Nel caso di `std::vector`, il codice compilerebbe ma andrebbe poi in crash.
 
 # Leggibilità
 
 -   Con tutte le dimensioni esplicitate, il codice diventa più leggibile
 
--   Ad esempio, nel derivare la classe `OscillatoreArmonico` bisogna specificare `<2>` per `FunzioneVettorialeBase`:
+-   Ad esempio, nel derivare la classe `OscillatoreArmonico` dell'[esercizio 8.1](carminati-esercizi-08.html#esercizio-8.1) bisogna specificare `<2>` per `FunzioneVettorialeBase`:
     
     ```c++
     struct OscillatoreArmonico : FunzioneVettorialeBase<2> {
@@ -282,10 +208,10 @@ Leggibilità
     };
     ```
     
--   Similmente, nel `main` dell'esercizio 9.1 definirei l'istanza della classe `Eulero` così:
+-   Similmente, nel `main` dello stesso si definisce l'istanza di `Eulero` così:
 
     ```c++
-    Eulero<2> myEuler;  // I am going to apply Euler's method to a 2D problem
+    Eulero<2> myEuler;  // Metodo di Eulero per un'equazione di secondo grado
     ```
 
 # Seminario di fine semestre
@@ -296,4 +222,4 @@ Leggibilità
 
 -   Nel seminario spiego le differenze tra di loro, mostro come sono progettati i rispettivi compilatori, e do indicazioni su come scegliere lo strumento di lavoro migliore.
 
--   Se siete interessati, compilate il Google Form all'indirizzo <https://forms.gle/99kR6ZADstXEJZZaA>: alla fine del semestre contatterò chi l'ha compilato per decidere la data migliore per tutti.
+-   Se siete interessati, compilate il Google Form all'indirizzo <https://forms.gle/ZaDv5n6PjDEaNRoT8>: alla fine del semestre contatterò chi l'ha compilato per decidere la data migliore per tutti.
