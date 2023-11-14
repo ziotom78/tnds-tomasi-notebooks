@@ -1,0 +1,1087 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="S2I MkDocs Example">
+      
+      
+        <meta name="author" content="CERN Authoring">
+      
+      
+        <link rel="canonical" href="https://s2i-mkdocs-example.docs.cern.ch/Lezione8/Lezione8/">
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.3.1, mkdocs-material-8.5.3">
+    
+    
+      
+        <title>Lezione 8 e 9 - Lab TNDS</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.7a952b86.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.cbb835fc.min.css">
+        
+      
+      
+
+    
+    
+    
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/fonts.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#lezione-8-equazioni-differenziali" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Lab TNDS" class="md-header__button md-logo" aria-label="Lab TNDS" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Lab TNDS
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Lezione 8 e 9
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      <form class="md-header__option" data-md-component="palette">
+        
+          
+          
+          <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent=""  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+          
+            <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+            </label>
+          
+        
+          
+          
+          <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="amber"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
+          
+            <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12c0-2.42-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+            </label>
+          
+        
+      </form>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://gitlab.cern.ch/authoring/documentation/s2i-mkdocs-example" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitLab
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Lab TNDS" class="md-nav__button md-logo" aria-label="Lab TNDS" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    Lab TNDS
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://gitlab.cern.ch/authoring/documentation/s2i-mkdocs-example" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitLab
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Lezione1/Lezione1/" class="md-nav__link">
+        Lezione 1
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Lezione2/Lezione2/" class="md-nav__link">
+        Lezione 2
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Lezione3/Lezione3/" class="md-nav__link">
+        Lezione 3
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Lezione4/Lezione4/" class="md-nav__link">
+        Lezione 4
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Lezione5/Lezione5/" class="md-nav__link">
+        Lezione 5
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Lezione6/lezione6/" class="md-nav__link">
+        Lezione 6
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Lezione7/Lezione7/" class="md-nav__link">
+        Lezione 7
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Lezione 8 e 9
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Lezione 8 e 9
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#esercizio-80-algebra-vettoriale" class="md-nav__link">
+    ESERCIZIO 8.0 - Algebra vettoriale:
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#esercizio-81-risoluzione-tramite-metodo-di-eulero" class="md-nav__link">
+    ESERCIZIO 8.1 - Risoluzione tramite metodo di Eulero:
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#esercizio-82-risoluzione-tramite-runge-kutta-da-consegnare" class="md-nav__link">
+    ESERCIZIO 8.2 - Risoluzione tramite Runge-Kutta (da consegnare):
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#esercizio-83-moto-del-pendolo-da-consegnare" class="md-nav__link">
+    ESERCIZIO 8.3 - Moto del pendolo (da consegnare):
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#esercizio-84-oscillazione-forzate-e-risonanza-da-consegnare" class="md-nav__link">
+    ESERCIZIO 8.4 - Oscillazione forzate e risonanza (da consegnare):
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#esercizio-85-moto-in-campo-gravitazionale" class="md-nav__link">
+    ESERCIZIO 8.5 - Moto in campo gravitazionale:
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#esercizio-86-moto-di-una-particella-carica-in-un-campo-elettrico-e-magnetico-uniforme" class="md-nav__link">
+    ESERCIZIO 8.6 - Moto di una particella carica in un campo elettrico e magnetico uniforme :
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Lezione10-11/Lezione1011/" class="md-nav__link">
+        Lezione 10 e 11
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Lezione12/Lezione12/" class="md-nav__link">
+        Lezione 12
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_12" type="checkbox" id="__nav_12" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_12">
+          Survival guides
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Survival guides" data-md-level="1">
+        <label class="md-nav__title" for="__nav_12">
+          <span class="md-nav__icon md-icon"></span>
+          Survival guides
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Survival/unix/" class="md-nav__link">
+        Principali comandi UNIX
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Survival/root/" class="md-nav__link">
+        Principali oggetti di ROOT
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#esercizio-80-algebra-vettoriale" class="md-nav__link">
+    ESERCIZIO 8.0 - Algebra vettoriale:
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#esercizio-81-risoluzione-tramite-metodo-di-eulero" class="md-nav__link">
+    ESERCIZIO 8.1 - Risoluzione tramite metodo di Eulero:
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#esercizio-82-risoluzione-tramite-runge-kutta-da-consegnare" class="md-nav__link">
+    ESERCIZIO 8.2 - Risoluzione tramite Runge-Kutta (da consegnare):
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#esercizio-83-moto-del-pendolo-da-consegnare" class="md-nav__link">
+    ESERCIZIO 8.3 - Moto del pendolo (da consegnare):
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#esercizio-84-oscillazione-forzate-e-risonanza-da-consegnare" class="md-nav__link">
+    ESERCIZIO 8.4 - Oscillazione forzate e risonanza (da consegnare):
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#esercizio-85-moto-in-campo-gravitazionale" class="md-nav__link">
+    ESERCIZIO 8.5 - Moto in campo gravitazionale:
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#esercizio-86-moto-di-una-particella-carica-in-un-campo-elettrico-e-magnetico-uniforme" class="md-nav__link">
+    ESERCIZIO 8.6 - Moto di una particella carica in un campo elettrico e magnetico uniforme :
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  <a href="https://gitlab.cern.ch/authoring/documentation/s2i-mkdocs-example/blob/master/docs/Lezione8/Lezione8.md" title="Edit this page" class="md-content__button md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
+  </a>
+
+
+<!-- può da più  avrà è  -->
+
+<h1 id="lezione-8-equazioni-differenziali">Lezione 8 : Equazioni differenziali</h1>
+<p>In questa lezione studieremo alcuni metodi per la ricerca di soluzioni di equazioni differenziali ordinarie relative al moto di sistemi fisici interessanti. Implementeremo un codice per la risoluzione numerica di queste equazioni con i metodi di <em>Eulero</em> e di <em>Runge-Kutta</em>.
+Per risolvere l'esercizio vedremo come è possibile definire le principali operazioni algebriche per i <code>vector</code> della STL. Questo ci permetterà di realizzare i metodi di integrazione di equazioni differenziali usando una notazione vettoriale, molto simile al formalismo matematico.</p>
+<h2 id="esercizio-80-algebra-vettoriale">ESERCIZIO 8.0 - Algebra vettoriale:</h2>
+<p>Come prima cosa proviamo a dotare i <code>vector</code> della STL di tutte le operazioni algebriche che ci possono essere utili definendo opportunamente gli operatori <code>+,*,/,+=</code> . Dal momento che non possiamo modificare gli header files della classe <code>vector</code>, implementiamo questi operatori come funzioni libere in un header file apposito da includere quando necessario. 
+Provate a scrivere un piccolo codice di test per verificare il corretto funzionamento delle operazioni tra vettori : potreste provate a realizzare un semplice programma che scriva a video le componenti della risultante di due forze (vettori tridimensionali) e le componenti del versore della risultante.</p>
+<details>
+<p><summary> Algebra per i <code>vector</code> : </summary></p>
+<p>Potete utilizzare le funzioni definite nel file <a href="../VectorOperations.h">VectorOperations.h</a>. Notate che tutte le funzioni che abbiamo implementato sono dichiarate <code>inline</code>: in questo modo le funzioni possono essere codificate in un header file che può essere incluso in diversi file <code>.cpp</code> senza creare problemi in fase di linking. In questo modo i vari <code>.cpp</code> possono anche essere compilati separatamente e in fase di linking il compilatore utilizzerà una sola versione della funzione compilata insieme a ciascun <code>.cpp</code>. 
+Potreste poi provare l'algebra dei vettori con un semplice <code>main</code> del tipo seguente :
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;vector&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;VectorOperations.h&quot;</span>
+
+<span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">std</span><span class="p">;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">   </span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="n">v1</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="mf">3.</span><span class="p">,</span><span class="mf">4.</span><span class="p">,</span><span class="mf">6.</span><span class="p">}</span><span class="w"> </span><span class="p">;</span>
+<span class="w">   </span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="n">v2</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="mf">4.</span><span class="p">,</span><span class="mf">5.</span><span class="p">,</span><span class="mf">6.</span><span class="p">}</span><span class="w"> </span><span class="p">;</span>
+
+<span class="w">   </span><span class="kt">double</span><span class="w"> </span><span class="n">para</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">2.</span><span class="p">;</span>
+
+<span class="w">   </span><span class="c1">// provare la somma e prodotto per scalare, calcolare il versore della risultante v1+v2</span>
+
+<span class="p">}</span>
+</code></pre></div></p>
+</details>
+<h2 id="esercizio-81-risoluzione-tramite-metodo-di-eulero">ESERCIZIO 8.1 - Risoluzione tramite metodo di Eulero:</h2>
+<p>Nel primo esercizio implementeremo un codice per la risoluzione numerica  dell'equazione differenziale che descrive il moto di un oscillatore armonico tramite il <em>metodo di Eulero</em>. Gli obiettivi principali di questo esercizio sono due :</p>
+<ul>
+<li>studiare l'andamento della posizione in funzione del tempo <code>t</code> ( per <code>t</code> che va da 0 a 70 secondi ) per un fissato passo di integrazione <code>'h</code> (si potrebbe costruire un TGraph per esempio) e confrontare l'errore commesso con la soluzione esatta.</li>
+<li>studiare l'andamento dell'errore che si commentte utilizzando il metodo di Eulero quando confrontiamo la soluzione approssimata con la soluzione esatta nell'istante t=70s in funzione del passo di integrazione <code>h</code> in un intervallo compreso tra 0.1 e 0.001.</li>
+</ul>
+<p>Per testare il metodo, risolviamo l'equazione differenziale:
+<script type="math/tex; mode=display">  \frac{d}{dt}  \begin{pmatrix} x \\ v  \end{pmatrix}  = \begin{pmatrix} v \\ -\omega_{0}^{2} x \end{pmatrix}   \qquad \qquad     \begin{matrix} x(0)=0 \\ v(0)=1 \end{matrix}    </script>
+</p>
+<p>mettendo in grafico il valore della x in funzione del tempo ed eventualmente anche il suo errore rispetto alla soluzione esatta del problema <script type="math/tex">x=sin(t)</script>. Utilizziamo <script type="math/tex">\omega_{0}</script> =1 s<script type="math/tex">^{-1}</script>. Si consiglia di svolgere l'integrazione per un certo numero di periodi, in modo da vedere se l'ampiezza di oscillazione rimane costante. Integrare fino a t=70 s permette di vedere circa 10 periodi.</p>
+<details class="tip">
+<summary>Il metodo di Eulero</summary>
+<p>Consideriamo la seconda legge della dimanica di Newton</p>
+<p>
+<script type="math/tex; mode=display">a=\frac{d^{2}x}{dt^{2}} = \frac{F}{m}</script>
+</p>
+<p>che è un'equazione differenziale del secondo ordine che può essere ridotta ad un'equazione differenziale del prim'ordine introducendo la variabile velocità</p>
+<p>
+<script type="math/tex; mode=display">\begin{cases}
+\frac{dx}{dt} = v \\
+\frac{dv}{dt} = \frac{F}{m} \\
+\end{cases}</script>
+</p>
+<p>Il metodo di Eulero consiste nel calcolare lo stato della soluzione al tempo t+h dato quello ad un tempo t tramite le espressioni:</p>
+<p>
+<script type="math/tex; mode=display">\begin{cases}
+x(t+h) = x(t) + h \frac{dx}{dt} = x(t) + hv  \\
+v(t+h) = v(t) + h \frac{dv}{dt} = v(t) + h\frac{F}{m}  \\
+\end{cases}</script>
+</p>
+</details>
+<details>
+<p><summary> Struttura del programma : </summary></p>
+<p>Struttureremo la soluzione del problema in modo simile a quanto fatto nelle precedenti lezioni su ricerca degli zeri e integrazione numerica:</p>
+<p><img alt="" src="../pictures/EqDiffClassi_2122.png" /></p>
+<ul>
+<li>Per primna cosa costruiamo la classe astratta <code>FunzioneVettorialeBase</code> che contenga il metodo virtuale puro <code>Eval</code>. Aggiungiamo poi la classe concreta <code>OscillatoreArmonico</code> nella quale implementeremo il metodo <code>Eval</code> concreto relativo all'oscillatore armonico. </li>
+<li>In seguito aggiungeremo la classa astratta <code>EquazioneDifferenzialeBase</code> che contenga il metodo virtuale puro <code>Passo</code>. Aggiungiamo poi la classe concreta <code>Eulero</code> nella quale implementeremo il metodo <code>Passo</code> relativo al metodo di Eulero.   </li>
+</ul>
+<p>Per comodità possiamo mettere tutte queste classi nello stesso header file che potrebbe avere l'aspetto seguente :</p>
+<p><div class="highlight"><pre><span></span><code><span class="cp">#ifndef __EquazioniDifferenziali_h__</span>
+<span class="cp">#define __EquazioniDifferenziali_h__</span>
+
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;VectorOperations.h&quot;</span><span class="c1"> </span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cmath&gt;</span>
+
+<span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">std</span><span class="p">;</span>
+
+<span class="c1">// ===========================================================================</span>
+<span class="c1">// classe astratta, restituisce la derivata valutata nel punto x</span>
+<span class="c1">// ===========================================================================</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">FunzioneVettorialeBase</span><span class="w"> </span><span class="p">{</span>
+
+<span class="k">public</span><span class="o">:</span>
+<span class="w">  </span><span class="k">virtual</span><span class="w"> </span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="n">Eval</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">t</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="c1">// caso fisico concreto, oscillatore armonico</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">OscillatoreArmonico</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="n">FunzioneVettorialeBase</span><span class="w"> </span><span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+<span class="w">  </span><span class="n">OscillatoreArmonico</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">omega0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">  </span><span class="n">m_omega0</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">omega0</span><span class="p">;</span><span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="p">;</span>
+
+<span class="w">  </span><span class="k">virtual</span><span class="w"> </span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="n">Eval</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">t</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">  </span><span class="c1">// .... scrivere implementazione </span>
+
+<span class="w">  </span><span class="p">};</span>
+
+<span class="w"> </span><span class="k">private</span><span class="o">:</span>
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">m_omega0</span><span class="p">;</span><span class="w">  </span>
+<span class="p">};</span>
+
+<span class="c1">// ===========================================================================</span>
+<span class="c1">// classe astratta per un integratore di equazioni differenziali</span>
+<span class="c1">// ===========================================================================</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">EquazioneDifferenzialeBase</span><span class="w"> </span><span class="p">{</span>
+
+<span class="k">public</span><span class="o">:</span>
+<span class="w">  </span><span class="k">virtual</span><span class="w"> </span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="n">Passo</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">t</span><span class="p">,</span><span class="w"> </span>
+<span class="w">                               </span><span class="k">const</span><span class="w"> </span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span>
+<span class="w">                               </span><span class="kt">double</span><span class="w"> </span><span class="n">h</span><span class="p">,</span><span class="w"> </span>
+<span class="w">                               </span><span class="k">const</span><span class="w"> </span><span class="n">FunzioneVettorialeBase</span><span class="w"> </span><span class="o">&amp;</span><span class="n">f</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="c1">// integratore concreto, metodo di Eulero</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Eulero</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="n">EquazioneDifferenzialeBase</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w"> </span><span class="k">public</span><span class="o">:</span>
+
+<span class="w">  </span><span class="k">virtual</span><span class="w"> </span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="n">Passo</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">t</span><span class="p">,</span><span class="w"> </span>
+<span class="w">                               </span><span class="k">const</span><span class="w"> </span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span>
+<span class="w">                               </span><span class="kt">double</span><span class="w"> </span><span class="n">h</span><span class="p">,</span><span class="w"> </span>
+<span class="w">                               </span><span class="k">const</span><span class="w"> </span><span class="n">FunzioneVettorialeBase</span><span class="w"> </span><span class="o">&amp;</span><span class="n">f</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="c1">// ... scrivere implementazione</span>
+
+<span class="w">  </span><span class="p">};</span>
+
+<span class="p">};</span>
+
+<span class="cp">#endif</span>
+</code></pre></div>
+Una volta implementate le classi (l'implementazione di Eulero è semplicissima se si usano le operazioni di algebra vettoriale), un possibile programma per risolvere l'esercizio è il seguente:</p>
+<p><div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;EquazioniDifferenziali.h&quot;</span>
+
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;string&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;sstream&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iomanip&gt;</span>
+
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;TApplication.h&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;TAxis.h&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;TCanvas.h&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;TGraph.h&quot;</span>
+
+<span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="nf">convert</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">h</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="o">**</span><span class="w"> </span><span class="n">argv</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">argc</span><span class="o">!=</span><span class="mi">2</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cerr</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Usage: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">argv</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; &lt;stepsize&gt;&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">-1</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span><span class="w">  </span>
+
+<span class="w">  </span><span class="n">TApplication</span><span class="w"> </span><span class="n">myApp</span><span class="p">(</span><span class="s">&quot;myApp&quot;</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">);</span>
+
+<span class="w">  </span><span class="n">Eulero</span><span class="w"> </span><span class="n">myEuler</span><span class="p">;</span>
+
+<span class="w">  </span><span class="n">OscillatoreArmonico</span><span class="w"> </span><span class="n">osc</span><span class="p">(</span><span class="mf">1.</span><span class="p">);</span>
+
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">tmax</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">70.</span><span class="p">;</span>
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">h</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">atof</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+<span class="w">  </span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="p">{</span><span class="mf">0.</span><span class="p">,</span><span class="mf">1.</span><span class="p">}</span><span class="w"> </span><span class="p">;</span>
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.</span><span class="p">;</span><span class="w"> </span>
+
+<span class="w">  </span><span class="n">TGraph</span><span class="w"> </span><span class="n">myGraph</span><span class="w"> </span><span class="p">;</span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">nstep</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">int</span><span class="p">(</span><span class="n">tmax</span><span class="o">/</span><span class="n">h</span><span class="o">+</span><span class="mf">0.5</span><span class="p">);</span>
+
+<span class="w">  </span><span class="c1">// evoluzione del sistema fino a 70 s  </span>
+
+<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">step</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">step</span><span class="o">&lt;</span><span class="n">nstep</span><span class="p">;</span><span class="w"> </span><span class="n">step</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">myGraph</span><span class="p">.</span><span class="n">SetPoint</span><span class="p">(</span><span class="n">step</span><span class="p">,</span><span class="n">t</span><span class="p">,</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+<span class="w">    </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">myEuler</span><span class="p">.</span><span class="n">Passo</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">h</span><span class="p">,</span><span class="n">osc</span><span class="p">);</span>
+<span class="w">    </span><span class="n">t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">t</span><span class="o">+</span><span class="n">h</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="c1">// grafici  </span>
+
+<span class="w">  </span><span class="n">TCanvas</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="p">;</span>
+<span class="w">  </span><span class="n">c</span><span class="p">.</span><span class="n">cd</span><span class="p">();</span>
+<span class="w">  </span><span class="n">string</span><span class="w"> </span><span class="n">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Oscillatore armonico (Eulero h = &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">convert</span><span class="p">(</span><span class="n">h</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;)&quot;</span><span class="w"> </span><span class="p">;</span>
+<span class="w">  </span><span class="n">myGraph</span><span class="p">.</span><span class="n">SetTitle</span><span class="p">(</span><span class="n">title</span><span class="p">.</span><span class="n">c_str</span><span class="p">());</span>
+<span class="w">  </span><span class="n">myGraph</span><span class="p">.</span><span class="n">GetXaxis</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">SetTitle</span><span class="p">(</span><span class="s">&quot;Tempo [s]&quot;</span><span class="p">);</span>
+<span class="w">  </span><span class="n">myGraph</span><span class="p">.</span><span class="n">GetYaxis</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">SetTitle</span><span class="p">(</span><span class="s">&quot;Posizione x [m]&quot;</span><span class="p">);</span>
+<span class="w">  </span><span class="n">myGraph</span><span class="p">.</span><span class="n">Draw</span><span class="p">(</span><span class="s">&quot;AL&quot;</span><span class="p">);</span>
+
+<span class="w">  </span><span class="n">myApp</span><span class="p">.</span><span class="n">Run</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="nf">convert</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">h</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">cifre_significative</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="n">log10</span><span class="p">(</span><span class="n">h</span><span class="p">);</span>
+<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">ostringstream</span><span class="w"> </span><span class="n">streamObj3</span><span class="p">;</span>
+<span class="w">  </span><span class="n">streamObj3</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">fixed</span><span class="p">;</span>
+<span class="w">  </span><span class="n">streamObj3</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">setprecision</span><span class="p">(</span><span class="n">cifre_significative</span><span class="p">);</span>
+<span class="w">  </span><span class="n">streamObj3</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">h</span><span class="p">;</span>
+<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">strObj3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">streamObj3</span><span class="p">.</span><span class="n">str</span><span class="p">();</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">strObj3</span><span class="p">;</span>
+
+<span class="p">}</span><span class="w"> </span><span class="p">;</span>
+</code></pre></div>
+Notate l'uso della funzione <code>convert</code> che ci permette di convertire il valore di h in una string in modo che possa entrare nel titolo del grafico.</p>
+</details>
+<details class="success">
+<summary>Risultati attesi</summary>
+<p>Il metodo di Eulero non è molto preciso, in effetti con un passo di integrazione modesto si vede come esso possa risultare instabile, mostrando oscillazioni la cui ampiezza varia con il tempo. La figura seguente mostra l'andamento di x in funzione di t calcolato con un passo di integrazione di 0.1 s:</p>
+<p><img alt="Eulero01" src="../pictures/Eulero-01.png" /></p>
+<p>Per avere qualcosa di anche solo visivamente accettabile dobbiamo scendere a passi di almeno 0.0001 s:</p>
+<p><img alt="Eulero0001" src="../pictures/Eulero-00001.png" /></p>
+<p>La figura seguente riporta l'errore accumulato dopo 70 s di integrazione per diversi valori del passo:</p>
+<p><img alt="ErroreEulero" src="../pictures/errore_eulero.png" /></p>
+<p>Si noti come la pendenza della curva sia 1 in una scala log-log, mostrando come l'errore ottenuto sia proporzionale al passo <script type="math/tex">h</script>. </p>
+</details>
+<h2 id="esercizio-82-risoluzione-tramite-runge-kutta-da-consegnare">ESERCIZIO 8.2 - Risoluzione tramite Runge-Kutta (da consegnare):</h2>
+<p>Ora vogliamo ripetere l'esercizio 8.1 utilizzando però il metodo di risoluzione di equazioni differenziali di <em>Runge-Kutta</em> (del quarto ordine) e confrontare quindi in condizioni analoghe (<script type="math/tex">t_{max}</script> = 70 s) la precisione dei due metodi.</p>
+<p>Per svolgere l'esercizio, basterà realizzare una nuova classe concreta <code>RungeKutta</code> a partire da <code>EquazioneDifferenzialeBase</code>.</p>
+<details class="tip">
+<summary>Il metodo di Runge-Kutta</summary>
+<p>Il noto metodo di Runge-Kutta è un metodo del quarto ordine ed utilizza la seguente determinazione dell'incremento:</p>
+<p>
+<script type="math/tex; mode=display">\begin{cases}
+k_{1} = \frac{dx}{dt}(t,x)   \\
+k_{2} = \frac{dx}{dt}(t+h/2,x+k_{1}*h/2)  \\ 
+k_{3} = \frac{dx}{dt}(t+h/2,x+k_{2}*h/2)  \\ 
+k_{4} = \frac{dx}{dt}(t+h,x+k_{3}*h)  \\
+\\
+x(t+h) = x(t) + (k_{1}+ 2*k_{2}+2*k_{3} + k_{4})*(h/6)  \\
+\end{cases}</script>
+</p>
+</details>
+<details class="success">
+<summary>Risultati attesi</summary>
+<p>Il metodo di Runge-Kutta del quarto ordine è molto più preciso del metodo di Eulero, infatti, anche con un passo di integrazione di 0.1 s produce oscillazioni molto stabili:</p>
+<p><img alt="" src="../pictures/RungeKutta-01.png" /></p>
+<p>La figura seguente riporta l'errore accumulato dopo 70 s di integrazione per diversi valori del passo:</p>
+<p><img alt="" src="../pictures/errore_rk.png" />    </p>
+<p>Si noti come la pendenza della curva nella sua parte iniziale sia 4 in una scala log-log, mostrando come l'errore ottenuto sia proporzionale a <script type="math/tex">h^{4}</script>. Quando l'errore di troncamento del metodo diventa minore degli errori di arrotondamento della macchina si vede che non c'è più alcun miglioramento nel ridurre il passo, anzi, il maggior numero di calcoli richiesto risulta in un peggioramento globale dell'errore. </p>
+</details>
+<h2 id="esercizio-83-moto-del-pendolo-da-consegnare">ESERCIZIO 8.3 - Moto del pendolo (da consegnare):</h2>
+<p>Incominciamo ora con una carrellata di interessanti applicazioni dei metodi che abbiamo appena studiato. In questo esercizio proveremo ad implementare la risoluzione dell'equazione del moto del pendolo: per prima cosa possiamo provare a fare un grafico dell'andamento dell'ampiezza dell'oscillazione in funzione del tempo. La cosa più interessante che possiamo studiare con questo codice è l'andamento del periodo di oscillazione in funzione dell'ampiezza di oscillazione: in questo modo possiamo verificare che per angoli grandi le oscillazioni non sono più isocrone. La struttura logica dell'esercizio dovrebbe essere la seguente :</p>
+<ol>
+<li>portare il sistema in una condizione iniziale <script type="math/tex">(\theta_{0}, 0)</script>
+</li>
+<li>far evolvere il sistema usando il metodo di Eulero o di Runge-Kutta con passo di integrazione <script type="math/tex">h</script> opportuno</li>
+<li>calcolare il periodo di oscillazione del pendolo</li>
+<li>riportare il sistema ad una condizione iniziale con ampiezza <script type="math/tex">\theta_{0}</script> variata e ripetere la sequenza di operazioni</li>
+</ol>
+<p>Si suggerisce far variare <script type="math/tex">\theta_{0}</script> tra 0.1 e 3 radiandi in passi di 0.1 radianti.</p>
+<details class="tip">
+<summary>Il moto del pendolo</summary>
+<p>L'equazione del pendolo è data dalla relazione</p>
+<p>
+<script type="math/tex; mode=display"> \frac{d^{2}\theta}{dt^{2}} = - \left( \frac{g}{l} \right) sin \theta    </script>
+</p>
+<p>dove <script type="math/tex">g=9.8</script> m/s<script type="math/tex">^{2}</script> è l'accellerazione di gravità sulla superficie terreste mentre <script type="math/tex">l</script> è la lunghezza del pendolo.
+L'equazione differenziale si può approssimare con quella di un oscillatore armonico per piccole oscillazioni, <script type="math/tex">sin\theta \sim \theta</script>. In tal caso le oscillazioni risultano isocrone cioè con periodo indipendente dall'ampiezza delle oscillazioni.
+Questa però è solo un'approssimazione e per grandi oscillazioni bisogna usare l'equazione esatta. Essendo il moto non più armonico, il periodo di oscillazione dipende dall'ampiezza della stessa.</p>
+</details>
+<details>
+<p><summary> Calcolo del periodo : </summary></p>
+<p>In questo caso l'integrazione numerica dell'equazione differenziale non si può effettuare per un tempo predefinito, ma deve essere portata avanti fino a quando non si raggiunge una condizione compatibile con l'aver terminato l'oscillazione. </p>
+<ul>
+<li>Una possibile soluzione consiste nel portare avanti l'integrazione fino a quando non si registra un cambiamento di segno della velocità angolare;</li>
+<li>Siccome possiamo calcolare la velocità solo con granularità pari al passo di integrazione, possiamo migliorare la stima del periodo di oscillazione interpolando linearmente tra i punti <script type="math/tex">(t,v(t))</script> e <script type="math/tex">(t+h,v(t+h))</script> calcolando quando la retta ottenuta passa per lo zero; il tempo così calcolato corrisponde al semiperiodo dell'oscillazione. </li>
+</ul>
+<p>Un frammento di codice che implementa questo algoritmo è: </p>
+<div class="highlight"><pre><span></span><code><span class="kt">double</span><span class="w"> </span><span class="n">A</span><span class="o">=</span><span class="mf">0.1</span><span class="o">*</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">);</span>
+<span class="kt">double</span><span class="w"> </span><span class="n">v</span><span class="o">=</span><span class="mf">0.</span><span class="p">;</span>
+<span class="kt">double</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.</span><span class="p">;</span><span class="w"> </span>
+<span class="n">vector</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="p">{</span><span class="o">-</span><span class="n">A</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="n">v</span><span class="p">}</span><span class="w"> </span><span class="p">;</span>
+<span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">&gt;=</span><span class="mf">0.</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">v</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span><span class="w">    </span>
+<span class="w">    </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">myRK4</span><span class="p">.</span><span class="n">Passo</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">h</span><span class="p">,</span><span class="n">osc</span><span class="p">);</span>
+<span class="w">    </span><span class="n">t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">t</span><span class="o">+</span><span class="n">h</span><span class="p">;</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">A</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="n">t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">t</span><span class="o">-</span><span class="n">v</span><span class="o">*</span><span class="n">h</span><span class="o">/</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">v</span><span class="p">);</span>
+<span class="kt">double</span><span class="w"> </span><span class="n">period</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="o">*</span><span class="n">t</span><span class="w"> </span><span class="p">;</span>
+</code></pre></div>
+</details>
+<details class="success">
+<summary>Risultati attesi</summary>
+<p>La figura seguente illustra il periodo al variare dell'ampiezza per un pendolo con <script type="math/tex">l=</script> 1 m:</p>
+<p><img alt="" src="../pictures/periodo_pendolo.png" /></p>
+<p>si noti come per piccole oscillazioni, il periodo sia effettivamente quello atteso dall'approssimazione dell'oscillatore armonico:
+<script type="math/tex; mode=display">  T = 2 \pi \sqrt{ \frac{l}{g} } = 2.007 s   </script>
+ma aumenti significativamente per grandi ampiezze. </p>
+</details>
+<h2 id="esercizio-84-oscillazione-forzate-e-risonanza-da-consegnare">ESERCIZIO 8.4 - Oscillazione forzate e risonanza (da consegnare):</h2>
+<p>Implementare la risoluzione dell'equazione di un oscillatore armonico smorzato con forzante. Fare quindi un grafico dell'ampiezza di oscillazione della  soluzione in condizioni stazionarie in funzione della frequenza della forzante per ricostruire la curva di risonanza. La struttura logica dell'esercizio dovrebbe essere la seguente :</p>
+<ul>
+<li>costruiamo un oscillatore armonico forzato con smorzante con una pulsazione propria <script type="math/tex">\omega_{0} = 10</script> rad/se una costante <script type="math/tex">\alpha=1/30</script> s  </li>
+<li>impostiamo un valore della pulsazione della forzante <script type="math/tex">\omega</script> (si consiglia di esplorare un range di <script type="math/tex">\omega</script> tra 9 rad/s e 11 rad/s in passi da 0.05 rad/s)</li>
+<li>mettiamo il sistema nella sua condizione iniziale x=0 e <script type="math/tex">v_{x}</script>=0</li>
+<li>facciamo evolvere il sistema usando il metodo di Runge-Kutta con passo di integrazione h opportuno fino all'esaurirsi del transiente</li>
+<li>calcoliamo l'ampiezza dell'oscillazione</li>
+<li>modifichiamo il valore della pulsazione della forzante <script type="math/tex">\omega</script>, riportiamo il sistema alle condizioni iniziali x=0 e <script type="math/tex">v_{x}</script>=0 e ripetiamo la sequenza di operazioni</li>
+</ul>
+<details class="tip">
+<summary>Oscillatore armonico con forzante</summary>
+<p>L'equazione dell'oscillatore armonico smorzato con forzante è data dalla relazione</p>
+<p>
+<script type="math/tex; mode=display"> \frac{d^{2}x}{dt^{2}} = - \omega_{0}^{2} x - \alpha   \frac{dx}{dt}  + sin (\omega t)    </script>
+</p>
+<p>Nell'esercizio proposto utilizzare come valori iniziali <script type="math/tex">\omega_{0} = 10</script> rad/s e <script type="math/tex">\alpha</script> = 1/30 s. </p>
+</details>
+<details class="success">
+<summary>Risultati attesi</summary>
+<p>La figura seguente riporta l'andamento dell'ampiezza in funzione del tempo nel caso in cui la frequenza propria del sistema (<script type="math/tex">\omega_{0}</script>) e quella della forzante (<script type="math/tex">\omega</script>) coincidano <script type="math/tex">\omega_{0} = \omega = 10</script> rad/s.</p>
+<p><img alt="" src="../pictures/forzato_10_short.png" /></p>
+<p>È bene ricordare che per determinare l'ampiezza bisogna aspettare che il transiente delle oscillazioni si esaurisca. Questo avviene con una costante di tempo pari a <script type="math/tex">1/\alpha</script> (ovvero dopo un tempo <script type="math/tex">1/\alpha</script> l'ampiezza di oscillazione si riduce di un fattore 1/e).</p>
+<p><img alt="" src="../pictures/forzato_10_long.png" /></p>
+<p>Si consiglia quindi di integrare l'equazione differenziale per un tempo pari ad almeno <em>dieci volte</em> <script type="math/tex">1/\alpha</script>, in modo da raggiungere una situazione in cui l'oscillazione è stabile, e poi valutare l'ampiezza. Anche in questo caso si può assumere di aver raggiunto il massimo dell'oscillazione nel momento in cui si trova un punto in cui la velocità cambia di segno.</p>
+<p>Una curva di risonanza è illustrata in figura:</p>
+<p><img alt="" src="../pictures/risonanza.png" /></p>
+</details>
+</details>
+<h2 id="esercizio-85-moto-in-campo-gravitazionale">ESERCIZIO 8.5 - Moto in campo gravitazionale:</h2>
+<p>Implementare la risoluzione dell'equazione del moto di un corpo in un campo gravitazionale. </p>
+<ul>
+<li>Verificare, nel caso del sistema Terra-Sole, che il periodo di rivoluzione della Terra intorno al Sole sia effettivamente di un anno e che l'orbita sia periodica (utilizzare un passo h di integrazione opportuno). Calcolare quindi il rapporto tra perielio ed afelio. </li>
+<li>Provare ad aggiungere una piccola perturbazione al potenziale gravitazionale (ad esempio un termine proporzionale ad <script type="math/tex">1/r^{3}</script> nella forza) e verificare che le orbite non sono più chiuse ma formano una rosetta.</li>
+</ul>
+<details class="tip">
+<summary>Moto in campo gravitazionale</summary>
+<p>Nell'implementare il moto di un corpo in un campo gravitazionale utilizzare le seguenti condizioni:</p>
+<ul>
+<li>costante gravitazionale G = 6.6742 10-11 m<script type="math/tex">^{3}</script> kg<script type="math/tex">^{-1}</script> s<script type="math/tex">^{-2}</script>
+</li>
+<li>massa del Sole <script type="math/tex">M_{S}</script> = 1.98844 1030 kg</li>
+<li>distanza Terra-Sole al perielio = 147098074 km</li>
+<li>velocità terra al perielio = 30.287 km/s</li>
+</ul>
+</details>
+<details class="success">
+<summary>Risultati attesi</summary>
+<p>Nel caso di potenziale gravitazionale standard dovremmo ottenere una traiettoria di questo tipo :</p>
+<p><img alt="" src="../pictures/orbita.png" /></p>
+<p>Aggiungendo un termine di perturbazione <script type="math/tex">\alpha/r^{3}</script> al potenziale gravitazionale la traiettoria diventa il seguente:</p>
+<p><img alt="" src="../pictures/rosetta.png" /></p>
+</details>
+<h2 id="esercizio-86-moto-di-una-particella-carica-in-un-campo-elettrico-e-magnetico-uniforme">ESERCIZIO 8.6 - Moto di una particella carica in un campo elettrico e magnetico uniforme :</h2>
+<p>Implementare la risoluzione dell'equazione del moto di una particella carica in un magnetico uniforme. Disegnare la traiettoria della particella e determinarne il diametro dell'orbita. Se si aggiunge un campo elettrico con componente lungo l'asse x pari a <script type="math/tex">E_{x}</script> = 10000 V/m, in che direzione si muove ora la particella?</p>
+<details class="tip">
+<summary>Moto in campo elettrico e magnetico uniformi</summary>
+<p>Il moto di una particella carica in un campo elettrico e magnetico uniformi risente della forza di Lorentz e pertanto è descritto dall'equazione</p>
+<p>
+<script type="math/tex; mode=display"> m \frac{d^{2}  \overrightarrow{x}  }{dt^{2}} = q\overrightarrow{E} + q\overrightarrow{v} \times \overrightarrow{B} </script>
+</p>
+<p>che si può riscrivere in forma matriciale come</p>
+<p>
+<script type="math/tex; mode=display"> \frac{d}{dt}  \begin{pmatrix} x \\ y \\ z \\ v_{x} \\ v_{y} \\ v_{z}  \end{pmatrix} =   
+\begin{pmatrix} 0 & 0 & 0 & 1 & 0 & 0 \\  0 & 0 & 0 & 0 & 1 & 0 \\ 0 & 0 & 0 & 0 & 0 & 1  \\
+0 & 0 & 0 & 0 & \frac{q}{m} B_{z} & -\frac{q}{m} B_{y} \\  0 & 0 & 0 & -\frac{q}{m} B_{z} & 0 & \frac{q}{m} B_{x} \\ 0 & 0 & 0 & \frac{q}{m} B_{y} & -\frac{q}{m} B_{x} & 0  
+\end{pmatrix}      
+\begin{pmatrix} x \\ y \\ z \\ v_{x} \\ v_{y} \\ v_{z}  \end{pmatrix} + \begin{pmatrix} 0\\ 0 \\ 0 \\ \frac{q}{m} E_{x} \\ \frac{q}{m}E_{y} \\ \frac{q}{m}E_{z}  \end{pmatrix}  </script>
+</p>
+<p>Consideriamo il moto nel piano (x,y) di un elettrone in un campo magnetico costante con i seguenti valori:</p>
+<ul>
+<li>q = -1.60217653 <script type="math/tex">10^{-19}</script> C</li>
+<li>m = 9.1093826 <script type="math/tex">10^{-31}</script> kg</li>
+<li>v<script type="math/tex">_{x}</script>(0) = 8 <script type="math/tex">10^{6}</script> m/s</li>
+<li>B<script type="math/tex">_{z}</script> = 5 <script type="math/tex">10^{-3}</script> T</li>
+<li>tutte le altre componenti di campi e velocità iniziali sono nulle. </li>
+</ul>
+<p>Questi parametri corrispondono grosso modo all'apparato sperimentale per la misura di <script type="math/tex">e/m</script> del laboratorio del II anno.</p>
+</details>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+    <nav class="md-footer__inner md-grid" aria-label="Footer" >
+      
+        
+        <a href="../../Lezione7/Lezione7/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Lezione 7" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Lezione 7
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../../Lezione10-11/Lezione1011/" class="md-footer__link md-footer__link--next" aria-label="Next: Lezione 10 e 11" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Lezione 10 e 11
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.5bf1dace.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.37e9125f.min.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      
+    
+  </body>
+</html>
