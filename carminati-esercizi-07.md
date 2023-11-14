@@ -196,7 +196,7 @@ for (size_t i{}; i < (int) steps.size(); ++i) {
   double estimated_value{myInt.integrate(steps[i], f)}; 
   errors[i] = fabs(estimated_value - true_value);
   step_sizes[i] = myInt.GetH();
-  fmt::print("{:12d} {:14.8e} {:20.8e}\n", steps[i], step_sizes[i], err);
+  fmt::print("{:12d} {:14.8e} {:20.8e}\n", steps[i], step_sizes[i], errors[i]);
 }
 
 // Crea un plot
