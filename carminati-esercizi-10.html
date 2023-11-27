@@ -742,11 +742,16 @@ dichiarava all’interno di <code>IntegraleMC</code> un
 <code>new</code> nel costruttore e <code>delete</code> nel distruttore,
 nonché a definire un costruttore di copia e un /move constructor/.
 Quest’anno evitiamo di usare il puntatore, e quindi il codice è molto
-più semplice e più consono alla moderna programmazione C++.</p></li>
+più semplice e più consono alla moderna programmazione C++. Ovviamente,
+per chiamare il costruttore occorre usare una <em>initialization
+list</em>, che noi ben conosciamo. Carminati propone <a
+href="https://www.learncpp.com/cpp-tutorial/constructor-member-initializer-lists/">questa
+pagina</a> come approfondimento.</p></li>
 <li><p>Per salvare la struttura delle classi virtuale/concreta siamo
 stati costretti ad aggiungere il campo <code>fmax</code> anche ad
 <code>IntegraleMedia</code>, anche se non necessario: serve infatti
-soltanto per il metodo /hit-or-miss/.</p></li>
+soltanto per il metodo /hit-or-miss/. In questo caso non è veramente
+vantaggioso utilizzare questo tipo di schema.</p></li>
 </ul>
 <h2 id="un-vettore-di-istogrammi-in-root">Un vettore di istogrammi in
 ROOT</h2>

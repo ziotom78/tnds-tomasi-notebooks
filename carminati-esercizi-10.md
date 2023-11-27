@@ -385,9 +385,9 @@ public:
 
 Alcune osservazioni:
 
--   Negli anni passati, il codice proposto sopra da Carminati dichiarava all'interno di `IntegraleMC` un **puntatore** a `RandomGen` (ossia, `m_myrand` era dichiarato come `RandomGen * m_myrand`), e questo obbligava ad invocare `new` nel costruttore e `delete` nel distruttore, nonché a definire un costruttore di copia e un /move constructor/. Quest'anno evitiamo di usare il puntatore, e quindi il codice è molto più semplice e più consono alla moderna programmazione C++.
+-   Negli anni passati, il codice proposto sopra da Carminati dichiarava all'interno di `IntegraleMC` un **puntatore** a `RandomGen` (ossia, `m_myrand` era dichiarato come `RandomGen * m_myrand`), e questo obbligava ad invocare `new` nel costruttore e `delete` nel distruttore, nonché a definire un costruttore di copia e un /move constructor/. Quest'anno evitiamo di usare il puntatore, e quindi il codice è molto più semplice e più consono alla moderna programmazione C++. Ovviamente, per chiamare il costruttore occorre usare una *initialization list*, che noi ben conosciamo. Carminati propone [questa pagina](https://www.learncpp.com/cpp-tutorial/constructor-member-initializer-lists/) come approfondimento.
 
--   Per salvare la struttura delle classi virtuale/concreta siamo stati costretti ad aggiungere il campo `fmax` anche ad `IntegraleMedia`, anche se non necessario: serve infatti soltanto per il metodo /hit-or-miss/.
+-   Per salvare la struttura delle classi virtuale/concreta siamo stati costretti ad aggiungere il campo `fmax` anche ad `IntegraleMedia`, anche se non necessario: serve infatti soltanto per il metodo /hit-or-miss/. In questo caso non è veramente vantaggioso utilizzare questo tipo di schema.
 
 
 ## Un vettore di istogrammi in ROOT
