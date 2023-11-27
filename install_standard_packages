@@ -10,7 +10,7 @@ readonly SLUG_DIR="$HOME/$REPL_SLUG"
 cat > "$SLUG_DIR/replit.nix" <<EOF
 { pkgs }: {
         deps = [
-                pkgs.clang_12
+                pkgs.clang_16
                 pkgs.ccls
                 pkgs.ncdu
                 pkgs.hyperfine
@@ -19,15 +19,16 @@ cat > "$SLUG_DIR/replit.nix" <<EOF
                 pkgs.gnumake
                 pkgs.cmake
                 pkgs.conan
+                pkgs.eigen
                 pkgs.meson
                 pkgs.gsl
                 pkgs.cairo
-                pkgs.python39
-                pkgs.python39Packages.pip
-                pkgs.python39Packages.ipython
-                pkgs.python39Packages.numpy
-                pkgs.python39Packages.matplotlib
-                pkgs.python39Packages.virtualenv
+                pkgs.python311
+                pkgs.python311Packages.pip
+                pkgs.python311Packages.ipython
+                pkgs.python311Packages.numpy
+                pkgs.python311Packages.matplotlib
+                pkgs.python311Packages.virtualenv
                 pkgs.pandoc
                 pkgs.valgrind
                 pkgs.gnuplot
