@@ -10,7 +10,7 @@ readonly SLUG_DIR="$HOME/$REPL_SLUG"
 cat > "$SLUG_DIR/replit.nix" <<EOF
 { pkgs }: {
         deps = [
-                pkgs.clang_16
+                pkgs.clang_14
                 pkgs.ccls
                 pkgs.ncdu
                 pkgs.hyperfine
