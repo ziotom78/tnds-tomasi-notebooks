@@ -23,12 +23,12 @@ cat > "$SLUG_DIR/replit.nix" <<EOF
                 pkgs.meson
                 pkgs.gsl
                 pkgs.cairo
-                pkgs.python311
-                pkgs.python311Packages.pip
-                pkgs.python311Packages.ipython
-                pkgs.python311Packages.numpy
-                pkgs.python311Packages.matplotlib
-                pkgs.python311Packages.virtualenv
+                pkgs.python310
+                pkgs.python310Packages.pip
+                pkgs.python310Packages.ipython
+                pkgs.python310Packages.numpy
+                pkgs.python310Packages.matplotlib
+                pkgs.python310Packages.virtualenv
                 pkgs.pandoc
                 pkgs.valgrind
                 pkgs.gnuplot
