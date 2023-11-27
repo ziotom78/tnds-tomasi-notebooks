@@ -310,13 +310,19 @@ Nel `main` quindi il codice sarà semplice da scrivere e soprattutto da leggere:
 
 ```c++
 // Assumo qui di usare Gnuplot, ma usando ROOT il concetto è uguale
-Gnuplot plt1{};
-// Rendi la figura più grande del normale: dovrà contenere molti
-// istogrammi!
-plt1.redirect_to_png(plot_file_name, "1280,1024");
+Gnuplot plt_histograms{};
+Gnuplot plt_errors{};
 
-// Quattro righe, tre colonne (12 istogrammi in totale)
-plt1.multiplot(4, 3);
+// Rendi la prima figura più grande del normale: dovrà contenere molti
+// istogrammi!
+plt_histograms.redirect_to_png("histograms.png", "1280,1024");
+
+// Il secondo grafico può essere lasciato alle dimensioni standard
+plt_errors.redirect_to_png("errors.png");
+
+// Nel grafico degli istogrammi, disponili su quattro righe e tre colonne
+// (12 istogrammi in totale)
+plt_histograms.multiplot(4, 3);
 
 RandomGen rng{1};
 // Alloco già lo spazio per 100 000 elementi, e lo faccio
@@ -327,9 +333,15 @@ std::vector<double> result(100'000);
 for(int N{1}; N <= 12; ++N) {
   compute_sums(rng, N, result);
   // Qui uso "fmtlib.h" per formattare l'etichetta dell'istogramma
-  plt1.histogram(result, 100, fmt::format("N = {}", N));
-  plt1.show();
+  plt_histograms.histogram(result, 100, fmt::format("N = {}", N));
+  plt_histograms.show();
+
+  // Aggiunge il punto con la σ al grafico degli errori
+  plt_errors.add_point(N, calculate_standard_deviation(result));
 }
+
+// Salva il file con il grafico degli errori
+plt_errors.show();
 ```
 
 
@@ -435,16 +447,16 @@ Siccome il programma deve fare molti calcoli, vi consiglio di fornire qualche fe
   const int num_of_estimates{1000};
   const std::vector num_of_points_list{500, 1000, 5000, 10'000, 50'000, 100'000};
 
-  Gnuplot plt{};
+  Gnuplot plt_histograms{};
 
-  plt1.redirect_to_png("es10.3_histograms.png", "800,1600");
+  plt_histograms.redirect_to_png("es10.3_histograms.png", "800,1600");
 
   assert( == 6);
 
   // Useremo 2 colonne per mostrare l'istogramma della media
   // e di hit-or-miss, e tante righe quanti sono i valori in
   // "num_of_points_list"
-  plt1.multiplot(num_of_points_list.size(), 2);
+  plt_histograms.multiplot(num_of_points_list.size(), 2);
 
   // Itera `num_of_points` su tutti i valori di `num_of_points_list`:
   // prima num_of_points = 500, poi num_of_points = 1000, poi etc.
@@ -464,16 +476,16 @@ Siccome il programma deve fare molti calcoli, vi consiglio di fornire qualche fe
 
     // Mette nella colonna di sinistra l'istogramma delle stime
     // con il metodo della media…
-    plt.histogram(estimates_mean, 20,
+    plt_histograms.histogram(estimates_mean, 20,
                   fmt::format("Media, N = {}", num_of_points));
-    plt.set_xrange(1.8, 2.2);
-    plt.show();
+    plt_histograms.set_xrange(1.8, 2.2);
+    plt_histograms.show();
 
     // …e nella colonna di destra quello con hit-or-miss
-    plt.histogram(estimates_hom, 20,
+    plt_histograms.histogram(estimates_hom, 20,
                   fmt::format("Hit-or-miss, N = {}", num_of_points));
-    plt.set_xrange(1.8, 2.2);
-    plt.show();
+    plt_histograms.set_xrange(1.8, 2.2);
+    plt_histograms.show();
   }
 ```
 

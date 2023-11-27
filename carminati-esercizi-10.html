@@ -637,26 +637,38 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb7-1"><a href="#c
 soprattutto da leggere:</p>
 <div class="sourceCode" id="cb8"><pre
 class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Assumo qui di usare Gnuplot, ma usando ROOT il concetto è uguale</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>Gnuplot plt1<span class="op">{};</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co">// Rendi la figura più grande del normale: dovrà contenere molti</span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co">// istogrammi!</span></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>plt1<span class="op">.</span>redirect_to_png<span class="op">(</span>plot_file_name<span class="op">,</span> <span class="st">&quot;1280,1024&quot;</span><span class="op">);</span></span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="co">// Quattro righe, tre colonne (12 istogrammi in totale)</span></span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>plt1<span class="op">.</span>multiplot<span class="op">(</span><span class="dv">4</span><span class="op">,</span> <span class="dv">3</span><span class="op">);</span></span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>RandomGen rng<span class="op">{</span><span class="dv">1</span><span class="op">};</span></span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="co">// Alloco già lo spazio per 100 000 elementi, e lo faccio</span></span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="co">// una volta sola *prima* del ciclo `for`: così il codice</span></span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="co">// sarà rapidissimo</span></span>
-<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="bu">std::</span>vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> result<span class="op">(</span><span class="dv">100&#39;000</span><span class="op">);</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>Gnuplot plt_histograms<span class="op">{};</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>Gnuplot plt_errors<span class="op">{};</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="co">// Rendi la prima figura più grande del normale: dovrà contenere molti</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="co">// istogrammi!</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>plt_histograms<span class="op">.</span>redirect_to_png<span class="op">(</span><span class="st">&quot;histograms.png&quot;</span><span class="op">,</span> <span class="st">&quot;1280,1024&quot;</span><span class="op">);</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="co">// Il secondo grafico può essere lasciato alle dimensioni standard</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>plt_errors<span class="op">.</span>redirect_to_png<span class="op">(</span><span class="st">&quot;errors.png&quot;</span><span class="op">);</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="co">// Nel grafico degli istogrammi, disponili su quattro righe e tre colonne</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="co">// (12 istogrammi in totale)</span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>plt_histograms<span class="op">.</span>multiplot<span class="op">(</span><span class="dv">4</span><span class="op">,</span> <span class="dv">3</span><span class="op">);</span></span>
 <span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span><span class="op">(</span><span class="dt">int</span> N<span class="op">{</span><span class="dv">1</span><span class="op">};</span> N <span class="op">&lt;=</span> <span class="dv">12</span><span class="op">;</span> <span class="op">++</span>N<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>  compute_sums<span class="op">(</span>rng<span class="op">,</span> N<span class="op">,</span> result<span class="op">);</span></span>
-<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Qui uso &quot;fmtlib.h&quot; per formattare l&#39;etichetta dell&#39;istogramma</span></span>
-<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>  plt1<span class="op">.</span>histogram<span class="op">(</span>result<span class="op">,</span> <span class="dv">100</span><span class="op">,</span> fmt<span class="op">::</span>format<span class="op">(</span><span class="st">&quot;N = </span><span class="sc">{}</span><span class="st">&quot;</span><span class="op">,</span> N<span class="op">));</span></span>
-<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>  plt1<span class="op">.</span>show<span class="op">();</span></span>
-<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>RandomGen rng<span class="op">{</span><span class="dv">1</span><span class="op">};</span></span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a><span class="co">// Alloco già lo spazio per 100 000 elementi, e lo faccio</span></span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a><span class="co">// una volta sola *prima* del ciclo `for`: così il codice</span></span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a><span class="co">// sarà rapidissimo</span></span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a><span class="bu">std::</span>vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> result<span class="op">(</span><span class="dv">100&#39;000</span><span class="op">);</span></span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span><span class="op">(</span><span class="dt">int</span> N<span class="op">{</span><span class="dv">1</span><span class="op">};</span> N <span class="op">&lt;=</span> <span class="dv">12</span><span class="op">;</span> <span class="op">++</span>N<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>  compute_sums<span class="op">(</span>rng<span class="op">,</span> N<span class="op">,</span> result<span class="op">);</span></span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Qui uso &quot;fmtlib.h&quot; per formattare l&#39;etichetta dell&#39;istogramma</span></span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a>  plt_histograms<span class="op">.</span>histogram<span class="op">(</span>result<span class="op">,</span> <span class="dv">100</span><span class="op">,</span> fmt<span class="op">::</span>format<span class="op">(</span><span class="st">&quot;N = </span><span class="sc">{}</span><span class="st">&quot;</span><span class="op">,</span> N<span class="op">));</span></span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a>  plt_histograms<span class="op">.</span>show<span class="op">();</span></span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Aggiunge il punto con la σ al grafico degli errori</span></span>
+<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a>  plt_errors<span class="op">.</span>add_point<span class="op">(</span>N<span class="op">,</span> calculate_standard_deviation<span class="op">(</span>result<span class="op">));</span></span>
+<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a><span class="co">// Salva il file con il grafico degli errori</span></span>
+<span id="cb8-33"><a href="#cb8-33" aria-hidden="true" tabindex="-1"></a>plt_errors<span class="op">.</span>show<span class="op">();</span></span></code></pre></div>
 <h1 id="esercizio-10.2">Esercizio 10.2 - Calcolo di integrali con metodi
 Montecarlo (da consegnare)</h1>
 <p>Studiamo in questo esercizio il comportamento delle tecniche
@@ -815,16 +827,16 @@ qualche feedback all’utente usando la libreria <code>fmtlib</code>:</p>
 class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>  <span class="at">const</span> <span class="dt">int</span> num_of_estimates<span class="op">{</span><span class="dv">1000</span><span class="op">};</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">const</span> <span class="bu">std::</span>vector<span class="op"> </span>num_of_points_list<span class="op">{</span><span class="dv">500</span><span class="op">,</span> <span class="dv">1000</span><span class="op">,</span> <span class="dv">5000</span><span class="op">,</span> <span class="dv">10&#39;000</span><span class="op">,</span> <span class="dv">50&#39;000</span><span class="op">,</span> <span class="dv">100&#39;000</span><span class="op">};</span></span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  Gnuplot plt<span class="op">{};</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  Gnuplot plt_histograms<span class="op">{};</span></span>
 <span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>  plt1<span class="op">.</span>redirect_to_png<span class="op">(</span><span class="st">&quot;es10.3_histograms.png&quot;</span><span class="op">,</span> <span class="st">&quot;800,1600&quot;</span><span class="op">);</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>  plt_histograms<span class="op">.</span>redirect_to_png<span class="op">(</span><span class="st">&quot;es10.3_histograms.png&quot;</span><span class="op">,</span> <span class="st">&quot;800,1600&quot;</span><span class="op">);</span></span>
 <span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>  <span class="ot">assert</span><span class="op">(</span> <span class="op">==</span> <span class="dv">6</span><span class="op">);</span></span>
 <span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Useremo 2 colonne per mostrare l&#39;istogramma della media</span></span>
 <span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>  <span class="co">// e di hit-or-miss, e tante righe quanti sono i valori in</span></span>
 <span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>  <span class="co">// &quot;num_of_points_list&quot;</span></span>
-<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>  plt1<span class="op">.</span>multiplot<span class="op">(</span>num_of_points_list<span class="op">.</span>size<span class="op">(),</span> <span class="dv">2</span><span class="op">);</span></span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>  plt_histograms<span class="op">.</span>multiplot<span class="op">(</span>num_of_points_list<span class="op">.</span>size<span class="op">(),</span> <span class="dv">2</span><span class="op">);</span></span>
 <span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Itera `num_of_points` su tutti i valori di `num_of_points_list`:</span></span>
 <span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>  <span class="co">// prima num_of_points = 500, poi num_of_points = 1000, poi etc.</span></span>
@@ -844,16 +856,16 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb11-1"><a href="#
 <span id="cb11-30"><a href="#cb11-30" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb11-31"><a href="#cb11-31" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Mette nella colonna di sinistra l&#39;istogramma delle stime</span></span>
 <span id="cb11-32"><a href="#cb11-32" aria-hidden="true" tabindex="-1"></a>    <span class="co">// con il metodo della media…</span></span>
-<span id="cb11-33"><a href="#cb11-33" aria-hidden="true" tabindex="-1"></a>    plt<span class="op">.</span>histogram<span class="op">(</span>estimates_mean<span class="op">,</span> <span class="dv">20</span><span class="op">,</span></span>
+<span id="cb11-33"><a href="#cb11-33" aria-hidden="true" tabindex="-1"></a>    plt_histograms<span class="op">.</span>histogram<span class="op">(</span>estimates_mean<span class="op">,</span> <span class="dv">20</span><span class="op">,</span></span>
 <span id="cb11-34"><a href="#cb11-34" aria-hidden="true" tabindex="-1"></a>                  fmt<span class="op">::</span>format<span class="op">(</span><span class="st">&quot;Media, N = </span><span class="sc">{}</span><span class="st">&quot;</span><span class="op">,</span> num_of_points<span class="op">));</span></span>
-<span id="cb11-35"><a href="#cb11-35" aria-hidden="true" tabindex="-1"></a>    plt<span class="op">.</span>set_xrange<span class="op">(</span><span class="fl">1.8</span><span class="op">,</span> <span class="fl">2.2</span><span class="op">);</span></span>
-<span id="cb11-36"><a href="#cb11-36" aria-hidden="true" tabindex="-1"></a>    plt<span class="op">.</span>show<span class="op">();</span></span>
+<span id="cb11-35"><a href="#cb11-35" aria-hidden="true" tabindex="-1"></a>    plt_histograms<span class="op">.</span>set_xrange<span class="op">(</span><span class="fl">1.8</span><span class="op">,</span> <span class="fl">2.2</span><span class="op">);</span></span>
+<span id="cb11-36"><a href="#cb11-36" aria-hidden="true" tabindex="-1"></a>    plt_histograms<span class="op">.</span>show<span class="op">();</span></span>
 <span id="cb11-37"><a href="#cb11-37" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb11-38"><a href="#cb11-38" aria-hidden="true" tabindex="-1"></a>    <span class="co">// …e nella colonna di destra quello con hit-or-miss</span></span>
-<span id="cb11-39"><a href="#cb11-39" aria-hidden="true" tabindex="-1"></a>    plt<span class="op">.</span>histogram<span class="op">(</span>estimates_hom<span class="op">,</span> <span class="dv">20</span><span class="op">,</span></span>
+<span id="cb11-39"><a href="#cb11-39" aria-hidden="true" tabindex="-1"></a>    plt_histograms<span class="op">.</span>histogram<span class="op">(</span>estimates_hom<span class="op">,</span> <span class="dv">20</span><span class="op">,</span></span>
 <span id="cb11-40"><a href="#cb11-40" aria-hidden="true" tabindex="-1"></a>                  fmt<span class="op">::</span>format<span class="op">(</span><span class="st">&quot;Hit-or-miss, N = </span><span class="sc">{}</span><span class="st">&quot;</span><span class="op">,</span> num_of_points<span class="op">));</span></span>
-<span id="cb11-41"><a href="#cb11-41" aria-hidden="true" tabindex="-1"></a>    plt<span class="op">.</span>set_xrange<span class="op">(</span><span class="fl">1.8</span><span class="op">,</span> <span class="fl">2.2</span><span class="op">);</span></span>
-<span id="cb11-42"><a href="#cb11-42" aria-hidden="true" tabindex="-1"></a>    plt<span class="op">.</span>show<span class="op">();</span></span>
+<span id="cb11-41"><a href="#cb11-41" aria-hidden="true" tabindex="-1"></a>    plt_histograms<span class="op">.</span>set_xrange<span class="op">(</span><span class="fl">1.8</span><span class="op">,</span> <span class="fl">2.2</span><span class="op">);</span></span>
+<span id="cb11-42"><a href="#cb11-42" aria-hidden="true" tabindex="-1"></a>    plt_histograms<span class="op">.</span>show<span class="op">();</span></span>
 <span id="cb11-43"><a href="#cb11-43" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span></code></pre></div>
 <p>Le distribuzioni attese degli integrali per i diversi valori di <span
 class="math inline">N</span> dovrebbero avere questo aspetto:</p>
