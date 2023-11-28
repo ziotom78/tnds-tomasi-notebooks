@@ -340,6 +340,9 @@ for(int N{1}; N <= 12; ++N) {
   plt_errors.add_point(N, calculate_standard_deviation(result));
 }
 
+// Fai un grafico dei punti aggiunti con plt_errors.add_point()
+plt_errors.plot();
+
 // Salva il file con il grafico degli errori
 plt_errors.show();
 ```
