@@ -1,0 +1,862 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="S2I MkDocs Example">
+      
+      
+        <meta name="author" content="CERN Authoring">
+      
+      
+        <link rel="canonical" href="https://s2i-mkdocs-example.docs.cern.ch/Lezione12/Lezione12/">
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.3.1, mkdocs-material-8.5.3">
+    
+    
+      
+        <title>Lezione 12 - Lab TNDS</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.7a952b86.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.cbb835fc.min.css">
+        
+      
+      
+
+    
+    
+    
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/fonts.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#lezione-12" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Lab TNDS" class="md-header__button md-logo" aria-label="Lab TNDS" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Lab TNDS
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Lezione 12
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      <form class="md-header__option" data-md-component="palette">
+        
+          
+          
+          <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent=""  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+          
+            <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+            </label>
+          
+        
+          
+          
+          <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="amber"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
+          
+            <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12c0-2.42-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+            </label>
+          
+        
+      </form>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://gitlab.cern.ch/authoring/documentation/s2i-mkdocs-example" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitLab
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Lab TNDS" class="md-nav__button md-logo" aria-label="Lab TNDS" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    Lab TNDS
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://gitlab.cern.ch/authoring/documentation/s2i-mkdocs-example" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitLab
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Lezione1/Lezione1/" class="md-nav__link">
+        Lezione 1
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Lezione2/Lezione2/" class="md-nav__link">
+        Lezione 2
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Lezione3/Lezione3/" class="md-nav__link">
+        Lezione 3
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Lezione4/Lezione4/" class="md-nav__link">
+        Lezione 4
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Lezione5/Lezione5/" class="md-nav__link">
+        Lezione 5
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Lezione6/lezione6/" class="md-nav__link">
+        Lezione 6
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Lezione7/Lezione7/" class="md-nav__link">
+        Lezione 7
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Lezione8/Lezione8/" class="md-nav__link">
+        Lezione 8 e 9
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Lezione10-11/Lezione1011/" class="md-nav__link">
+        Lezione 10 e 11
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Lezione 12
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Lezione 12
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#esercizio-120-simulazione-dellesperienza-dello-spettrometro-a-prisma-da-consegnare" class="md-nav__link">
+    ESERCIZIO 12.0 - Simulazione dell'esperienza dello spettrometro a prisma (da consegnare) :
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#esercizio-121-attrito-viscoso-facoltativo" class="md-nav__link">
+    ESERCIZIO 12.1 - Attrito viscoso (facoltativo) :
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_12" type="checkbox" id="__nav_12" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_12">
+          Survival guides
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Survival guides" data-md-level="1">
+        <label class="md-nav__title" for="__nav_12">
+          <span class="md-nav__icon md-icon"></span>
+          Survival guides
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Survival/unix/" class="md-nav__link">
+        Principali comandi UNIX
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Survival/root/" class="md-nav__link">
+        Principali oggetti di ROOT
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#esercizio-120-simulazione-dellesperienza-dello-spettrometro-a-prisma-da-consegnare" class="md-nav__link">
+    ESERCIZIO 12.0 - Simulazione dell'esperienza dello spettrometro a prisma (da consegnare) :
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#esercizio-121-attrito-viscoso-facoltativo" class="md-nav__link">
+    ESERCIZIO 12.1 - Attrito viscoso (facoltativo) :
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  <a href="https://gitlab.cern.ch/authoring/documentation/s2i-mkdocs-example/blob/master/docs/Lezione12/Lezione12.md" title="Edit this page" class="md-content__button md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
+  </a>
+
+
+<!-- può da più  avrà   è-->
+<h1 id="lezione-12">Lezione 12</h1>
+<p>In questa lezione affronteremo l'uso delle tecniche Monte Carlo per la simulazione di una misura che avete scolto nel laboratorio di fisica (spettrometro a prisma). Come vedremo la simulazione ci aiuterà a capire meglio il comportamento dell'apparato sperimentale permettendoci per esempio di stimare l'incertezza attesa sulle grandezze da misurare. </p>
+<h2 id="esercizio-120-simulazione-dellesperienza-dello-spettrometro-a-prisma-da-consegnare">ESERCIZIO 12.0 - Simulazione dell'esperienza dello spettrometro a prisma (da consegnare) :</h2>
+<p>La dipendenza dell'indice di rifrazione dalla lunghezza d'onda della luce che incide su un materiale viene descritta dalla legge di Cauchy:
+<script type="math/tex; mode=display"> n(\lambda) = \sqrt{ A + \frac{B}{\lambda^{2}} } </script>
+dove <script type="math/tex">A</script> e <script type="math/tex">B</script> sono due costanti che dipendono dalle caratteristiche del materiale che attraversa.
+L'esperienza dello spettrometro a prisma si propone di misurare l'indice di rifrazione del materiale di un prisma per le diverse lunghezze d'onda di una lampada al mercurio per determinare i parametri <script type="math/tex">A</script> e <script type="math/tex">B</script> che caratterizzano tale materiale.
+L'apparato sperimentale consiste in un goniometro sul quale viene posizionato il prisma. Una lampada a vapori di mercurio viene posizionata da un lato del canocchiale con due collimatori per produrre un fascio luminoso che incide sul prisma. Il fascio di luce riflesso o rifratto viene osservato tramite un altro canocchiale. Gli angoli corrispondeni all'orientamento del supporto sul goniometro ed alla posizione dei canocchiali sono leggibili su di un nonio.</p>
+<p><img alt="Image title" src="../pictures/SchemaPrisma.png" /></p>
+<p>La misura sperimentale consiste nella determinazione:</p>
+<ol>
+<li>dell'angolo corrispondente al fascio non deflesso in assenza del prisma: <script type="math/tex">\theta_{0}</script>.</li>
+<li>dell'angolo corrispondente alla deviazione minima della riga del giallo: <script type="math/tex">\theta_{m}(\lambda_{1})</script>.</li>
+<li>dell'angolo corrispondente alla deviazione minima della riga del viola: <script type="math/tex">\theta_{m}(\lambda_{2})</script>.. </li>
+</ol>
+<p>L'analisi dati consiste nella seguente procedura:</p>
+<ol>
+<li>determinazione degli angoli di deviazione minima:
+<script type="math/tex; mode=display"> \delta_{m}(\lambda_{1}) = \theta_{m}(\lambda_{1}) - \theta_{0} </script>
+<script type="math/tex; mode=display"> \delta_{m}(\lambda_{2}) = \theta_{m}(\lambda_{2}) - \theta_{0} </script>
+</li>
+<li>
+<p>calcolo degli indici di rifrazione <script type="math/tex">n(\lambda )</script> dalla relazione: 
+<script type="math/tex; mode=display"> n(\lambda_{1})  =   \frac{  sin \frac{ \delta_{m}(\lambda_{1}) + \alpha }{2} }  { sin \frac{\alpha}{2} }</script>
+<script type="math/tex; mode=display"> n(\lambda_{2})  =   \frac{  sin \frac{ \delta_{m}(\lambda_{2}) + \alpha }{2} }  { sin \frac{\alpha}{2} }</script>
+</p>
+</li>
+<li>
+<p>calcolo dei parametri <script type="math/tex">A</script> e <script type="math/tex">B</script> dalle formule:
+<script type="math/tex; mode=display">  A = \frac{ \lambda_{2}^{2} n^{2}(\lambda_{2}) - \lambda_{1}^{2} n^{2}(\lambda_{1})  }{\lambda_{2}^{2} - \lambda_{1}^{2} } </script>
+<script type="math/tex; mode=display">  B = \frac{ n^{2}(\lambda_{2}) - n^{2}(\lambda_{1}) }{ \frac{1}{\lambda_{2}^{2}} - \frac{1}{\lambda_{1}^{2}}}</script>
+</p>
+</li>
+</ol>
+<p>La simulazione della misura parte dall'assumere dei valori verosimili dei parametri della legge di Cauchy e determinare come questi si traducono in quantità osservabili. A partire da queste quantità osservabili simuliamo una misura aggiungendo una perturbazione gaussiana ai valori nominali e ne determiniamo l'impatto sulle grandezze da misurare (<script type="math/tex">A</script> e <script type="math/tex">B</script>). </p>
+<p>Nell'esperimento l'unico tipo di grandezze misurate sono gli angoli, per cui possiamo assumere un'incertezza uguale per tutte le misure angolari e pari a <script type="math/tex">\sigma_{\theta}=0.3</script> mrad.
+Nell'esperienza di laboratorio l'angolo di apertura del prisma vale <script type="math/tex">\alpha=60^{\circ}</script> ed il materiale del prisma ha valori dei parametri di Cauchy <script type="math/tex">A</script>=2.7, <script type="math/tex">B</script>=60000 nm<script type="math/tex">^{2}</script>.
+Consideriamo le due lunghezze d'onda estreme della lampada al mercurio, il giallo, <script type="math/tex">\lambda_{1}</script>=579.1 nm, ed il viola, <script type="math/tex">\lambda_{2}</script>=404.7 nm.</p>
+<p>Per costruire la nostra simulazione procediamo per gradi:</p>
+<ul>
+<li>
+<p>Costruire una classe <code>EsperimentoPrisma</code> con le seguenti caratteristiche:</p>
+<ul>
+<li>come data membri deve avere sia i valori 'veri' che i valori misurati di tutte le quantità ed in più un generatore di numeri casuali <code>RandomGen</code> (vedi lezione 10);</li>
+<li>nel costruttore deve definire tutti i valori 'veri' delle quantità misurabili a partire dai parametri <script type="math/tex">A</script>, <script type="math/tex">B</script> ed <script type="math/tex">\alpha</script> e dalle lunghezze d'onda; N.B.: il valore di <script type="math/tex">\theta_{0}</script> è arbitrario ma, una volta definito, i <script type="math/tex">\theta_{m}</script> sono fissati.</li>
+</ul>
+</li>
+<li>
+<p>Aggiungere un metodo <code>Esegui()</code> che effettua la misura sperimentale e determina dei valori misurati di <script type="math/tex">\theta_{0}</script>, <script type="math/tex">\theta_{m}(\lambda_{1})</script> e <script type="math/tex">\theta_{m}(\lambda_{2})</script>; N.B.: il valore misurato di un angolo si ottiene estraendo un numero distribuito in gaussianamente intorno al suo valore \'vero\' e deviazione standard <script type="math/tex">\sigma_{\theta}</script>.</p>
+</li>
+<li>
+<p>Aggiungere alla classe un metodo <code>Analizza()</code> che a partire dalle pseudomisure svolga l'analisi dei dati sino alla determinazione di A e B (misurati)</p>
+</li>
+<li>
+<p>i metodi necessari per accedere ai valori dei data membri, sia quelli 'veri' sia quelli misurati.</p>
+</li>
+</ul>
+<p>Scrivere un programma che esegua 10000 volte l'esperimento, faccia un istogramma dei valori misurati, e calcoli media e deviazione standard di tali valori.
+Per il calcolo di medie e deviazioni standard potete decidere di immagazzinare i dati in un contenitore <code>std::vector</code> e utilizzare le funzioni sviluppate nelle prime lezioni oppure accedervi direttamente dagli istogrammi di ROOT come mostrato <a href="../../Survival/root/">qui</a> (ricordandosi di aggiungere <code>histo.StatOverflows( kTRUE );</code> in modo da forzare l'utilizzo di eventuali underflow e overflow per calcoli statistici).</p>
+<p>In particolare è utile studiare le seguenti distribuzioni :</p>
+<ol>
+<li>distribuzione delle differenze tra i valori misurati e quelli attesi per <script type="math/tex">\theta_{0}</script>, <script type="math/tex">\theta_{1}</script> e <script type="math/tex">\theta_{2}</script>. Calcolare media e deviazione standard delle distribuzioni.</li>
+<li>distribuzione della differenza tra i valori misurati e quelli attesi di <script type="math/tex">\delta_{m}(\lambda_{1})</script> e <script type="math/tex">\delta_{m}(\lambda_{2})</script>, calcolare media e deviazione standard delle distribuzioni. Produrre un istogramma bidimensionale delle differenze per le due lunghezze d'onda e calcolare il coefficiente di correlazione.</li>
+<li>distribuzione della differenza tra i valori misurati e quelli attesi di <script type="math/tex">n(\lambda_{1})</script> e <script type="math/tex">n(\lambda_{2})</script>, calcolare media e deviazione standard delle distribuzioni. Produrre un istogramma bidimensionale delle differenze per le due lunghezze d'onda, e calcolare il coefficiente di correlazione.</li>
+<li>distribuzione delle differenza tra i valori misurati e quelli attesi di <script type="math/tex">A</script> e <script type="math/tex">B</script>, calcolare media e deviazione standard delle distribuzioni. Produrre un istogramma bidimensionale delle differenze e calcolare il coefficiente di correlazione. </li>
+</ol>
+<p>In caso provate a confrontare l'errore stimato su <script type="math/tex">A</script> e <script type="math/tex">B</script> dalla simulazione con quello ottenuto dalla propagazione degli errori.  </p>
+<details>
+<p><summary> La classe EsperimentoPrisma : </summary></p>
+<p>La classe <code>EsperimentoPrisma</code> deve contenere al suo interno un generatore di numeri casuali per la simulazione del processo di misura, tutti i parametri che definiscono l'esperimento e, per le quantità misurate, sia il valore assunto sia il valore ottenuto dal processo di misura ed analisi dati dell'esperimento.
+Il suo header file, potrà pertanto essere del tipo:</p>
+<div class="highlight"><pre><span></span><code><span class="cp">#ifndef _Esperimento_Prisma_h_</span>
+<span class="cp">#define _Esperimento_Prisma_h_</span>
+
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;RandomGen.h&quot;</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">EsperimentoPrisma</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="o">:</span>
+
+<span class="w">  </span><span class="n">EsperimentoPrisma</span><span class="p">(</span><span class="w"> </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">seed</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">;</span>
+<span class="w">  </span><span class="o">~</span><span class="n">EsperimentoPrisma</span><span class="p">()</span><span class="w"> </span><span class="p">{;}</span><span class="w"> </span><span class="p">;</span>
+
+<span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="nf">Esegui</span><span class="p">()</span><span class="w"> </span><span class="p">;</span>
+<span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="nf">Analizza</span><span class="p">()</span><span class="w"> </span><span class="p">;</span>
+
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="nf">getAmis</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">m_A_misurato</span><span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">;</span>
+
+<span class="w">  </span><span class="c1">// .... aggiungere i metodi necessari</span>
+
+<span class="w"> </span><span class="k">private</span><span class="o">:</span>
+
+<span class="w">  </span><span class="c1">// generatore di numeri casuali</span>
+
+<span class="w">  </span><span class="n">RandomGen</span><span class="w"> </span><span class="n">m_rgen</span><span class="w"> </span><span class="p">;</span>
+
+<span class="w">  </span><span class="c1">// parametri dell&#39;apparato sperimentale</span>
+
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">m_lambda1</span><span class="p">,</span><span class="w"> </span><span class="n">m_lambda2</span><span class="p">,</span><span class="w"> </span><span class="n">m_alpha</span><span class="p">,</span><span class="w"> </span><span class="n">m_sigmat</span><span class="p">;</span>
+
+<span class="w">  </span><span class="c1">// valori delle quantita&#39; misurabili :</span>
+<span class="w">  </span><span class="c1">// input    : valori assunti come ipotesi nella simulazione</span>
+<span class="w">  </span><span class="c1">// misurato : valore dopo la simulazione di misura </span>
+
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">m_A_input</span><span class="p">,</span><span class="w"> </span><span class="n">m_A_misurato</span><span class="p">;</span>
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">m_B_input</span><span class="p">,</span><span class="w"> </span><span class="n">m_B_misurato</span><span class="p">;</span>
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">m_n1_input</span><span class="p">,</span><span class="w"> </span><span class="n">m_n1_misurato</span><span class="p">;</span>
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">m_n2_input</span><span class="p">,</span><span class="w"> </span><span class="n">m_n2_misurato</span><span class="p">;</span>
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">m_dm1_input</span><span class="p">,</span><span class="w"> </span><span class="n">m_dm1_misurato</span><span class="p">;</span>
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">m_dm2_input</span><span class="p">,</span><span class="w"> </span><span class="n">m_dm2_misurato</span><span class="p">;</span>
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">m_th0_input</span><span class="p">,</span><span class="w"> </span><span class="n">m_th0_misurato</span><span class="p">;</span>
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">m_th1_input</span><span class="p">,</span><span class="w"> </span><span class="n">m_th1_misurato</span><span class="p">;</span>
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">m_th2_input</span><span class="p">,</span><span class="w"> </span><span class="n">m_th2_misurato</span><span class="p">;</span>
+
+<span class="p">};</span>
+
+<span class="cp">#endif</span>
+</code></pre></div>
+<p>N.B.: in questo header mancano i metodi tipo <code>Get</code> per accedere ai data membri.</p>
+<p>La configurazione dell'esperimento, con il calcolo di tutti i valori 'veri' per le quantità misurabili, può venire fatta nel costruttore della classe, che in questo caso risulta più complicato del solito:</p>
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;EsperimentoPrisma.h&quot;</span>
+
+<span class="n">EsperimentoPrisma</span><span class="o">::</span><span class="n">EsperimentoPrisma</span><span class="p">(</span><span class="w"> </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">seed</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="o">:</span>
+<span class="w">  </span><span class="n">m_rgen</span><span class="p">(</span><span class="w"> </span><span class="n">seed</span><span class="w"> </span><span class="p">),</span>
+<span class="w">  </span><span class="n">m_lambda1</span><span class="p">(</span><span class="mf">579.1E-9</span><span class="p">),</span>
+<span class="w">  </span><span class="n">m_lambda2</span><span class="p">(</span><span class="mf">404.7E-9</span><span class="p">),</span>
+<span class="w">  </span><span class="n">m_alpha</span><span class="p">(</span><span class="mf">60.</span><span class="o">*</span><span class="n">M_PI</span><span class="o">/</span><span class="mf">180.</span><span class="p">),</span>
+<span class="w">  </span><span class="n">m_sigmat</span><span class="p">(</span><span class="mf">0.3E-3</span><span class="p">),</span>
+<span class="w">  </span><span class="n">m_A_input</span><span class="p">(</span><span class="mf">2.7</span><span class="p">),</span>
+<span class="w">  </span><span class="n">m_B_input</span><span class="p">(</span><span class="mf">60000E-18</span><span class="p">)</span>
+<span class="p">{</span>
+
+<span class="w">  </span><span class="c1">// calcolo degli indici di rifrazione attesi</span>
+
+<span class="w">  </span><span class="n">m_n1_input</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sqrt</span><span class="p">(</span><span class="w"> </span><span class="n">m_A_input</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">m_B_input</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="n">m_lambda1</span><span class="o">*</span><span class="n">m_lambda1</span><span class="p">)</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">;</span>
+<span class="w">  </span><span class="n">m_n2_input</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sqrt</span><span class="p">(</span><span class="w"> </span><span class="n">m_A_input</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">m_B_input</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="n">m_lambda2</span><span class="o">*</span><span class="n">m_lambda2</span><span class="p">)</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">;</span>
+
+<span class="w">  </span><span class="c1">// theta0 e&#39; arbitrario, scelgo M_PI/2.</span>
+
+<span class="w">  </span><span class="n">m_th0_input</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">M_PI</span><span class="o">/</span><span class="mf">2.</span><span class="w"> </span><span class="p">;</span>
+
+<span class="w">  </span><span class="c1">// determino theta1 e theta2 </span>
+
+<span class="w">  </span><span class="n">m_dm1_input</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">2.</span><span class="o">*</span><span class="n">asin</span><span class="p">(</span><span class="w"> </span><span class="n">m_n1_input</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">sin</span><span class="w"> </span><span class="p">(</span><span class="mf">0.5</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">m_alpha</span><span class="p">)</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">m_alpha</span><span class="w"> </span><span class="p">;</span>
+<span class="w">  </span><span class="n">m_th1_input</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">m_th0_input</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">m_dm1_input</span><span class="w"> </span><span class="p">;</span>
+<span class="w">  </span><span class="n">m_dm2_input</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">2.</span><span class="o">*</span><span class="n">asin</span><span class="p">(</span><span class="w"> </span><span class="n">m_n2_input</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">sin</span><span class="w"> </span><span class="p">(</span><span class="mf">0.5</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">m_alpha</span><span class="p">)</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">m_alpha</span><span class="w"> </span><span class="p">;</span>
+<span class="w">  </span><span class="n">m_th2_input</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">m_th0_input</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">m_dm2_input</span><span class="w"> </span><span class="p">;</span>
+
+<span class="p">}</span>
+</code></pre></div>
+<p>Notate l'uso della <em>lista di inizializzazione</em> nel costruttore che abbiamo già visto nella scorsa lezione: questa permette di inizializzare direttamente i valori dei data membri anzichè procedere all'assegnazione dei valori nel costruttore dopo che i data membri siano stati costruiti. Nel nostro caso particolare diventa utile per inizializzare l'oggetto <code>m_rgen</code> invocando il costruttore opportuno ( altrimenti avrebbe usato il costruttore senza argomenti che nel nostro caso non esiste ). Potete trovare una buona spiegazione dell'utilizzo delle liste di inizializzazione <a href="https://www.learncpp.com/cpp-tutorial/8-5a-constructor-member-initializer-lists/">qui</a>. </p>
+</details>
+<details>
+<p><summary> Istrogrammi bidimensionali : </summary></p>
+<p>Per verificare le correlazioni tra due variabili si possono utilizzare istogrammi bidimensionali, in cui i bins sono definiti da range di valori sia di una variabile che dell'altra
+Per costruire questi istogrammi, utilizzeremo la classe <code>TH2F</code> di ROOT.
+Questa ha un costruttore che premette di dividere in bins sia la coordinata x che la y dell'istogramma:
+<div class="highlight"><pre><span></span><code><span class="n">TH2F</span><span class="o">::</span><span class="n">TH2F</span><span class="p">(</span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">nome</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">titolo</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">n_bins_x</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">xmin</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">xmax</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">n_bins_y</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">ymin</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">ymax</span><span class="p">);</span>
+</code></pre></div>
+La classe <code>TH2F</code> ha gli stessi metodi <code>Fill()</code> e <code>Draw()</code> della classe <code>TH1F</code>, l'unica differenza è che ora <code>Fill</code> ha bisogno della coppia completa di valori per decidere il canale in cui viene collocato l'evento:
+<div class="highlight"><pre><span></span><code><span class="n">TH2F</span><span class="o">::</span><span class="n">Fill</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">y</span><span class="p">);</span>
+</code></pre></div></p>
+</details>
+<details>
+<p><summary> Calcolo del coefficiente di correlazione : </summary></p>
+<p>Il coefficiente di correlazione <script type="math/tex">\rho</script> tra due variabili <script type="math/tex">x</script> e <script type="math/tex">y</script>, può venire espresso come:
+<script type="math/tex; mode=display">(<xy> - <x> <y>)/\sigma_{x}\sigma_{y} </script>
+Si noti che dalla relazione:
+<script type="math/tex; mode=display"> \sigma_{x}^{2} = <x^{2}> - <x>^{2}  </script>
+risulta che può essere più conveniente nel ciclo di esperimenti calcolare le sommatorie di <script type="math/tex">x</script>, <script type="math/tex">y</script>, <script type="math/tex">x^{2}</script>, <script type="math/tex">y^{2}</script> e xy, ed al termine del ciclo effettuare le medie e trovare incertezze e correlazioni. Il tutto non richiede strettamente di immagazinare tutti i dati dei 10000 esperimenti. </p>
+</details>
+<details>
+<p><summary> Risultati attesi : </summary></p>
+<p><img align="left" alt="Image title" src="../pictures/theta.png" /> </p>
+<ul>
+<li>
+<script type="math/tex">\theta_{0}</script> = 1.5708 rad (arbitrario) </li>
+<li>
+<script type="math/tex">\theta_{1}</script> = 2.5494 <script type="math/tex">\pm</script> 0.0003 rad</li>
+<li>
+<script type="math/tex">\theta_{2}</script> = 2.6567 <script type="math/tex">\pm</script> 0.0003 rad</li>
+</ul>
+<p><img align="left" alt="Image title" src="../pictures/delta.png" /> </p>
+<ul>
+<li>
+<script type="math/tex">\delta_{m,1} </script> = 0.97860 <script type="math/tex">\pm</script> 0.00043 rad</li>
+<li>
+<script type="math/tex">\delta_{m,2} </script> = 1.08594 <script type="math/tex">\pm</script> 0.00043 rad</li>
+<li>
+<script type="math/tex">\rho( \delta_{m,1} , \delta_{m,2}   ) </script> = 50<script type="math/tex">\%</script>
+</li>
+</ul>
+<p><img align="left" alt="Image title" src="../pictures/nrifr.png" /> </p>
+<ul>
+<li>
+<script type="math/tex">n_{1}</script> = 1.69674 <script type="math/tex">\pm</script> 0.00022</li>
+<li>
+<script type="math/tex">n_{2}</script> = 1.75110 <script type="math/tex">\pm</script> 0.00021</li>
+<li>
+<script type="math/tex">\rho( n_{1} , n_{2} ) </script> = 50<script type="math/tex">\%</script>
+</li>
+</ul>
+<p><img align="left" alt="Image title" src="../pictures/AB.png" /> </p>
+<ul>
+<li>
+<script type="math/tex">A</script> = 2.70002 <script type="math/tex">\pm</script> 0.0013</li>
+<li>
+<script type="math/tex">B</script> = 60000 <script type="math/tex">\pm</script> 240 nm<script type="math/tex">^{2}</script>
+</li>
+<li>
+<script type="math/tex">\rho(A,B)</script> = -87<script type="math/tex">\%</script>
+</li>
+</ul>
+</details>
+<h2 id="esercizio-121-attrito-viscoso-facoltativo">ESERCIZIO 12.1 - Attrito viscoso (facoltativo) :</h2>
+<p>Svolgere il <a href="../AppelloTNDS_Visco.pdf">tema d'esame</a> sulla simulazione di un esperimento per la misura della viscosità di un materiale.</p>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+    <nav class="md-footer__inner md-grid" aria-label="Footer" >
+      
+        
+        <a href="../../Lezione10-11/Lezione1011/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Lezione 10 e 11" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Lezione 10 e 11
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../../Survival/unix/" class="md-footer__link md-footer__link--next" aria-label="Next: Principali comandi UNIX" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Principali comandi UNIX
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.5bf1dace.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.37e9125f.min.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      
+    
+  </body>
+</html>

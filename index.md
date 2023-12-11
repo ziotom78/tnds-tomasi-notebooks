@@ -23,10 +23,8 @@ css:
 | 14 Novembre 2023  | [Equazioni differenziali](carminati-esercizi-08.html)           | [Notebook 8](https://ziotom78.github.io/tnds-notebooks/lezione08/), [slides](tomasi-lezione-08.html) |
 | 20 Novembre 2023  | Idem                                                            | [Esempio svolto](2023-11-21 Equazioni differenziali Tomasi.pdf)     |
 | 28 Novembre 2023  | [Numeri pseudo-casuali e integrali](carminati-esercizi-10.html) | [Notebook 10](https://ziotom78.github.io/tnds-notebooks/lezione10/) |
-<!--
 | 5 Dicembre 2023   | Idem                                                            | Idem                                                                |
 | 12 Dicembre 2023  | [Metodi Monte Carlo](carminati-esercizi-12.html)                | [Notebook 10](https://ziotom78.github.io/tnds-notebooks/lezione10/) |
--->
 
 </center>
 
