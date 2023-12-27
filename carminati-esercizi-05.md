@@ -521,7 +521,7 @@ Il numero di classi sta proliferando e quindi anche il `Makefile` diventa sempre
 ```make
 INCS=`root-config --cflags`
 LIBS=`root-config --libs`
-CXXFLAGS=-g -Wall --pedantic -std=c++17
+CXXFLAGS=-g -Wall --pedantic -std=c++23
 
 esercizio_5.3: esercizio_5.3.o posizione.o puntomateriale.o campovettoriale.o particella.o
        g++ -o esercizio_5.3 esercizio_5.3.o posizione.o puntomateriale.o campovettoriale.o particella.o ${LIBS}
@@ -548,7 +548,7 @@ clean:
 Questo invece è il caso in cui usiate gplot++: non c'è più bisogno di usare `INCS` e `LIBS`.
 
 ```make
-CXXFLAGS=-g -Wall --pedantic -std=c++17
+CXXFLAGS=-g -Wall --pedantic -std=c++23
 
 esercizio_5.3: esercizio_5.3.o posizione.o puntomateriale.o campovettoriale.o particella.o
        g++ -o esercizio_5.3 esercizio_5.3.o posizione.o puntomateriale.o campovettoriale.o particella.o
@@ -575,7 +575,7 @@ clean:
 Nel caso in cui decidiate di implementare tutte le classi nei file `.h` e di non usare quindi file `.cpp`, il `Makefile` si semplifica moltissimo. Ecco un esempio (assumendo che usiate gplot++):
 
 ```make
-CXXFLAGS=-g -Wall --pedantic -std=c++17
+CXXFLAGS=-g -Wall --pedantic -std=c++23
 
 esercizio_5.3: esercizio_5.3.cpp posizione.h puntomateriale.h campovettoriale.h particella.h
        g++ -o esercizio_5.3 esercizio_5.3.cpp ${CXXFLAGS}

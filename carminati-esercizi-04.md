@@ -589,7 +589,7 @@ passaggio a parte: è molto più semplice!
 
 ```make
 esercizio4.1: esercizio4.1.cpp common.cpp common.h
-    g++ -g -Wall --pedantic -std=c++17 -o esercizio4.1 esercizio4.1.cpp common.cpp
+    g++ -g3 -Wall --pedantic -std=c++23 -o esercizio4.1 esercizio4.1.cpp common.cpp
 ```
 
 ## Esempio (gplot++, fmtlib)
@@ -674,7 +674,7 @@ Come sopra, consiglio di compilare insieme `esercizio4.1.cpp` e
 
 ```make
 esercizio4.1: esercizio4.1.cpp common.cpp common.h
-    g++ -g -Wall --pedantic -std=c++17 -o esercizio4.1 esercizio4.1.cpp common.cpp
+    g++ -g3 -Wall --pedantic -std=c++23 -o esercizio4.1 esercizio4.1.cpp common.cpp
 ```
 
 # Esercizio 4.2 — Determinazione del cammino minimo (approfondimento uso STL)  {#esercizio-4.2}

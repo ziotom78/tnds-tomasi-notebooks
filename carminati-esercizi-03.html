@@ -489,7 +489,7 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb8-1"><a href="#c
 <span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a>  Print<span class="op">(</span>v<span class="op">);</span></span>
 <span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Se usate il flag -std=c++17, tutti questi &lt;double&gt; sono superflui e</span></span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Se usate il flag -std=c++23, tutti questi &lt;double&gt; sono superflui e</span></span>
 <span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a>  <span class="co">// potete toglierli: provate!</span></span>
 <span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a>  cout <span class="op">&lt;&lt;</span> <span class="st">&quot;media = &quot;</span> <span class="op">&lt;&lt;</span> CalcolaMedia<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;(</span>v<span class="op">)</span> <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span>
 <span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a>  cout <span class="op">&lt;&lt;</span> <span class="st">&quot;varianza = &quot;</span> <span class="op">&lt;&lt;</span> CalcolaVarianza<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;(</span>v<span class="op">)</span> <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span>
@@ -504,13 +504,13 @@ nell’<em>header file</em>. Come si potrebbe infatti compilare una classe
 template senza sapere con che tipi di dato verrà utilizzata? Di
 conseguenza la compilazione si riduce alla singola istruzione:</p>
 <div class="sourceCode" id="cb9"><pre
-class="sourceCode makefile"><code class="sourceCode makefile"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="dt">CXXFLAGS</span> <span class="ch">=</span><span class="st"> -g -Wall --pedantic -std=c++17</span></span>
+class="sourceCode makefile"><code class="sourceCode makefile"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="dt">CXXFLAGS</span> <span class="ch">=</span><span class="st"> -g3 -Wall --pedantic -std=c++23</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="dv">esercizio3.0:</span><span class="dt"> esercizio3.0.cpp funzioni.h Vettore.h</span></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    g++ -o <span class="ch">$@</span> esercizio3.0.cpp <span class="ch">$(</span><span class="dt">CXXFLAGS</span><span class="ch">)</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="er">    </span>g++ -o <span class="ch">$@</span> esercizio3.0.cpp <span class="ch">$(</span><span class="dt">CXXFLAGS</span><span class="ch">)</span></span>
 <span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="dv">clean:</span></span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    rm -f esercizio3.0 *.o</span></code></pre></div>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="er">    </span>rm -f esercizio3.0 *.o</span></code></pre></div>
 <h1 id="esercizio-3.1">Esercizio 3.1 - Codice di analisi dati
 utilizzando la classe std::vector (da consegnare)</h1>
 <p>Vediamo come possiamo ora fare uso di un contenitore “ufficiale” del
@@ -582,8 +582,8 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb10-1"><a href="#
 <span id="cb10-45"><a href="#cb10-45" aria-hidden="true" tabindex="-1"></a>  <span class="co">// for (int i{}; i &lt; ssize(v); i++) {</span></span>
 <span id="cb10-46"><a href="#cb10-46" aria-hidden="true" tabindex="-1"></a>  <span class="co">//    cout &lt;&lt; v[i] &lt;&lt; endl;</span></span>
 <span id="cb10-47"><a href="#cb10-47" aria-hidden="true" tabindex="-1"></a>  <span class="co">//</span></span>
-<span id="cb10-48"><a href="#cb10-48" aria-hidden="true" tabindex="-1"></a>  <span class="co">// In Replit, è sufficiente mettere nel Makefile `--std=c++20` anziché</span></span>
-<span id="cb10-49"><a href="#cb10-49" aria-hidden="true" tabindex="-1"></a>  <span class="co">// `--std=c++17` per abilitare `ssize()`, che è molto comodo!</span></span>
+<span id="cb10-48"><a href="#cb10-48" aria-hidden="true" tabindex="-1"></a>  <span class="co">// In Replit, è sufficiente mettere nel Makefile `--std=c++23` anziché</span></span>
+<span id="cb10-49"><a href="#cb10-49" aria-hidden="true" tabindex="-1"></a>  <span class="co">// `--std=c++23` per abilitare `ssize()`, che è molto comodo!</span></span>
 <span id="cb10-50"><a href="#cb10-50" aria-hidden="true" tabindex="-1"></a>  <span class="co">//</span></span>
 <span id="cb10-51"><a href="#cb10-51" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Se usate i computer del laboratorio, purtroppo implementano un</span></span>
 <span id="cb10-52"><a href="#cb10-52" aria-hidden="true" tabindex="-1"></a>  <span class="co">// compilatore troppo vecchio per supportare ssize().</span></span>
@@ -681,13 +681,13 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb12-1"><a href="#
 <h2 id="il-makefile">Il Makefile</h2>
 <p>Ecco il <code>Makefile</code>:</p>
 <div class="sourceCode" id="cb13"><pre
-class="sourceCode makefile"><code class="sourceCode makefile"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="dt">CXXFLAGS</span> <span class="ch">=</span><span class="st"> -g -Wall --pedantic -std=c++17</span></span>
+class="sourceCode makefile"><code class="sourceCode makefile"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="dt">CXXFLAGS</span> <span class="ch">=</span><span class="st"> -g3 -Wall --pedantic -std=c++23</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="dv">esercizio3.1:</span><span class="dt"> esercizio3.1.cpp funzioni.h</span></span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    g++ -o esercizio3.1 esercizio3.1.cpp <span class="ch">$(</span><span class="dt">CXXFLAGS</span><span class="ch">)</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="er">    </span>g++ -o esercizio3.1 esercizio3.1.cpp <span class="ch">$(</span><span class="dt">CXXFLAGS</span><span class="ch">)</span></span>
 <span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="dv">clean:</span></span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>    rm -f esercizio3.1</span></code></pre></div>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="er">    </span>rm -f esercizio3.1</span></code></pre></div>
 <p>Notate che la classe <code>vector</code> ci libera completamente
 dalla necessità di conoscere in anticipo la quantità di dati da
 caricare. Questo ci permette per esempio di scrivere una funzione che
@@ -800,19 +800,19 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb15-1"><a href="#
 includendo oggetti di ROOT:</p>
 <div class="sourceCode" id="cb16"><pre
 class="sourceCode makefile"><code class="sourceCode makefile"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="dt">LIBS</span> <span class="ch">:=</span><span class="st"> `root-config --libs`</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="dt">CXXFLAGS</span> <span class="ch">:=</span><span class="st"> -g -Wall --pedantic -std=c++17 `root-config --cflags`</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="dt">CXXFLAGS</span> <span class="ch">:=</span><span class="st"> -g3 -Wall --pedantic -std=c++23 `root-config --cflags`</span></span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="dv">esercizio3.2:</span><span class="dt"> esercizio3.2.cpp funzioni.h</span></span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>    g++ -o esercizio3.2 esercizio3.2.cpp <span class="ch">${</span><span class="dt">CXXFLAGS</span><span class="ch">}</span> <span class="ch">${</span><span class="dt">LIBS</span><span class="ch">}</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="er">    </span>g++ -o esercizio3.2 esercizio3.2.cpp <span class="ch">${</span><span class="dt">CXXFLAGS</span><span class="ch">}</span> <span class="ch">${</span><span class="dt">LIBS</span><span class="ch">}</span></span>
 <span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="dv">clean:</span></span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>    rm -f esercizio3.2</span></code></pre></div>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="er">    </span>rm -f esercizio3.2</span></code></pre></div>
 <p>Notate l’utilizzo dei comandi <code>root-config --libs</code> e
 <code>root-config --cflags</code>, che restituiscono rispettivamente il
 path per raggiungere le librerie di ROOT e il gli header files, come
 potete provare anche dalla linea di comando:</p>
 <pre><code>$ root-config --cflags
--pthread -std=c++14 -m64 -I/usr/include/root
+-pthread -std=c++23 -m64 -I/usr/include/root
 $ root-config --libs
 -L/usr/lib64/root -lCore -lImt -lRIO -lNet -lHist -lGraf -lGraf3d -lGpad -lROOTVecOps -lTree -lTreePlayer -lRint -lPostscript -lMatrix -lPhysics -lMathCore -lThread -lMultiProc -lROOTDataFrame -pthread -lm -ldl -rdynamic</code></pre>
 <p>(il risultato sui vostri computer potrebbe essere differente).</p>

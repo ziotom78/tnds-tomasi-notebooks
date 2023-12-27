@@ -784,17 +784,17 @@ Possiamo scrivere il `Makefile` anche esplicitando le dipendenze, in modo che an
 
 ```makefile
 main: main.o funzioni.o
-    g++ -g -Wall --pedantic -std=c++17 main.o funzioni.o -o main
+    g++ -g3 -Wall --pedantic -std=c++23 main.o funzioni.o -o main
 main.o: main.cpp funzioni.h
-    g++ -g -Wall --pedantic -std=c++17 -c main.cpp -o main.o
+    g++ -g3 -Wall --pedantic -std=c++23 -c main.cpp -o main.o
 funzioni.o: funzioni.cpp funzioni.h
-    g++ -g -Wall --pedantic -std=c++17 -c funzioni.cpp -o funzioni.o
+    g++ -g3 -Wall --pedantic -std=c++23 -c funzioni.cpp -o funzioni.o
 ```
 
 Notate però quanto il `Makefile` sia ripetitivo. È possibile definire delle *variabili* nel Makefile per semplificarlo:
 
 ```makefile
-CXXFLAGS = -g -Wall --pedantic -std=c++17
+CXXFLAGS = -g3 -Wall --pedantic -std=c++23
 
 main: main.o funzioni.o
     g++ main.o funzioni.o -o main $(CXXFLAGS)
@@ -806,7 +806,7 @@ funzioni.o: funzioni.cpp funzioni.h
     g++ -c funzioni.cpp -o funzioni.o $(CXXFLAGS)
 ```
 
-La variabile `$@` è una cosiddetta *variabile implicita*, e viene sostituita di volta in volta col nome del *target* corrente (che nell'esempio sopra è `main`, `main.o` e infine `funzioni.o`). I flag `-g -Wall --pedantic -std=c++17` servono per rendere la compilazione e l'esecuzione del codice più sicura, perché abilitano dei controlli addizionali, spiegati nelle [slide](tomasi-lezione-01.html#flag-del-compilatore).
+La variabile `$@` è una cosiddetta *variabile implicita*, e viene sostituita di volta in volta col nome del *target* corrente (che nell'esempio sopra è `main`, `main.o` e infine `funzioni.o`). I flag `-g -Wall --pedantic -std=c++23` servono per rendere la compilazione e l'esecuzione del codice più sicura, perché abilitano dei controlli addizionali, spiegati nelle [slide](tomasi-lezione-01.html#flag-del-compilatore).
 
 
 # Esercizio 1.3 - Overloading di funzione (da consegnare) {#esercizio-1.3}

@@ -1,19 +1,3 @@
----
-title: Laboratorio di TNDS -- Lezione 5
-author: Maurizio Tomasi
-date: Martedì 24 Ottobre 2023
-theme: white
-progress: true
-slideNumber: true
-background-image: ./media/background.png
-history: true
-width: 1440
-height: 810
-css:
-- ./css/custom.css
-- ./css/asciinema-player.css
-...
-
 # Esercizi per oggi
 
 # Link alle risorse online
@@ -62,11 +46,11 @@ bool are_close(double calculated, double expected, double epsilon = 1e-7) {
 
 void test_coordinates(void) {
   Posizione p{1, 2, 3};
-  
+
   assert(are_close(p.getX(), 1.0));
   assert(are_close(p.getY(), 2.0);
   assert(are_close(p.getZ(), 3.0);
-  
+
   assert(are_close(p.getR(), 3.7416573867739));
   assert(are_close(p.getPhi(), 1.1071487177941);
   assert(are_close(p.getTheta(), 0.64052231267943);
@@ -105,9 +89,9 @@ void test_coulomb_law(void) {
   // 0.5 µC charge with no mass (irrelevant for the electric field)
   PuntoMateriale particella1{0.0, 5e-7, 5, 3, -2};
   Posizione p{-2, 4, 1};
-  
+
   CampoVettoriale V{particella.CampoElettrico(p)};
-  
+
   assert(are_close(V.getFx(), -69.41150052142065));
   assert(are_close(V.getFy(), 9.915928645917235));
   assert(are_close(V.getFz(), 29.747785937751708));
@@ -117,9 +101,9 @@ void test_newton_law(void) {
   // 10⁹ tonnes, without charge (irrelevant for the gravitational field)
   PuntoMateriale particella1{1e12, 0, 5, 3, -2};
   Posizione p{-2, 4, 1};
-  
+
   CampoVettoriale V{particella.CampoElettrico(p)};
-    
+
   assert(are_close(V.getFx(), -1.0302576701177));
   assert(are_close(V.getFy(), 0.14717966715968));
   assert(are_close(V.getFz(), 0.44153900147903));
@@ -175,7 +159,7 @@ public:
     std::cout << "Call to constructor with time \"" << time << "\"\n";
   }
 
-  void operator=(const Time &) { 
+  void operator=(const Time &) {
     std::cout << "Call to operator=\n";
   }
 };
@@ -203,7 +187,7 @@ int main(void) {
     Call to constructor with time "21:00"
     Call to operator=
     ```
-    
+
 -   Ricordiamo come abbiamo definito la classe `DaylightPeriod`, e in particolare il costruttore:
 
     ```c++
@@ -228,7 +212,7 @@ int main(void) {
     class DaylightPeriod {
     public:
       DaylightPeriod() : dawn{"7:00"}, sunset{"21:00"} { } // That's the way!
-      
+
       // ...
     };
     ```
@@ -244,7 +228,7 @@ int main(void) {
     ```c++
     Posizione p{calcola_posizione()};
 
-    cout << "La posizione è (" << p.GetX() << ", " 
+    cout << "La posizione è (" << p.GetX() << ", "
          << p.GetY(), << ", " << p.GetZ() << ")" << endl;
     ```
 
@@ -378,16 +362,16 @@ int main(void) {
 
 -   Sui vostri laptop dovete invece scaricare il file [gplot++.h](https://raw.githubusercontent.com/ziotom78/gplotpp/master/gplot%2B%2B.h) nella cartella dove vi serve, oppure eseguite (sotto Linux/Mac OS X):
 
-    <input type="text" value="curl 'https://raw.githubusercontent.com/ziotom78/gplotpp/master/gplot%2B%2B.h' > gplot++.h" id="installGplotpp" readonly="1" size="60"><button onclick='copyFmtInstallationScript("installGplotpp")'>Copia</button> 
+    <input type="text" value="curl 'https://raw.githubusercontent.com/ziotom78/gplotpp/master/gplot%2B%2B.h' > gplot++.h" id="installGplotpp" readonly="1" size="60"><button onclick='copyFmtInstallationScript("installGplotpp")'>Copia</button>
 
 # Vantaggi di gplot++
 
--   Repl.it è in grado di visualizzare finestre di aiuto se spostate il mouse sui comandi di plot. 
+-   Repl.it è in grado di visualizzare finestre di aiuto se spostate il mouse sui comandi di plot.
 
 -   Si possono passare direttamente array di vettori di tipo `std::vector`, invece di chiamare ripetutamente `TGraph::SetPoint`;
 
 -   Non serve cambiare i `Makefile` per invocare `root-config`;
-    
+
 -   Se lavorate sui vostri computer, non serve ricordarsi di eseguire `source root/bin/thisroot.sh`;
 
 -   Occupa appena 9 KB, quindi si può installare una copia dentro ogni cartella di esercizi;
@@ -435,7 +419,7 @@ int main() {
 
   // Salva il grafico in "output.png"
   plt.redirect_to_png("output.png");
-  
+
   plt.plot(values);
   plt.show();
 }
@@ -474,3 +458,20 @@ int main(void) {
 ![](images/gplot++-complex.png){width=50%}
 
 Per esempi e documentazione, andate alla pagina [github.com/ziotom78/gplotpp](https://github.com/ziotom78/gplotpp).
+
+
+---
+title: Laboratorio di TNDS -- Lezione 5
+author: Maurizio Tomasi
+date: Martedì 24 Ottobre 2023
+theme: white
+progress: true
+slideNumber: true
+background-image: ./media/background.png
+history: true
+width: 1440
+height: 810
+css:
+- ./css/custom.css
+- ./css/asciinema-player.css
+...

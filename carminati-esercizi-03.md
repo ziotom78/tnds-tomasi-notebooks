@@ -258,7 +258,7 @@ int main (int argc, char * argv[]) {
 
   Print(v);
 
-  // Se usate il flag -std=c++17, tutti questi <double> sono superflui e
+  // Se usate il flag -std=c++23, tutti questi <double> sono superflui e
   // potete toglierli: provate!
   cout << "media = " << CalcolaMedia<double>(v) << endl;
   cout << "varianza = " << CalcolaVarianza<double>(v) << endl;
@@ -273,7 +273,7 @@ int main (int argc, char * argv[]) {
 Nel caso si utilizzino classi o funzioni `template`, la dichiarazione e l'implementazione vanno codificate entrambe nell'*header file*. Come si potrebbe infatti compilare una classe template senza sapere con che tipi di dato verrà utilizzata? Di conseguenza la compilazione si riduce alla singola istruzione:
 
 ```makefile
-CXXFLAGS = -g -Wall --pedantic -std=c++17
+CXXFLAGS = -g3 -Wall --pedantic -std=c++23
 
 esercizio3.0: esercizio3.0.cpp funzioni.h Vettore.h
     g++ -o $@ esercizio3.0.cpp $(CXXFLAGS)
@@ -343,8 +343,8 @@ template <typename T> void Print(const vector<T> & v) {
   // for (int i{}; i < ssize(v); i++) {
   //    cout << v[i] << endl;
   //
-  // In Replit, è sufficiente mettere nel Makefile `--std=c++20` anziché
-  // `--std=c++17` per abilitare `ssize()`, che è molto comodo!
+  // In Replit, è sufficiente mettere nel Makefile `--std=c++23` anziché
+  // `--std=c++23` per abilitare `ssize()`, che è molto comodo!
   //
   // Se usate i computer del laboratorio, purtroppo implementano un
   // compilatore troppo vecchio per supportare ssize().
@@ -434,7 +434,7 @@ int main(int argc, char * argv[]) {
 Ecco il `Makefile`:
 
 ```makefile
-CXXFLAGS = -g -Wall --pedantic -std=c++17
+CXXFLAGS = -g3 -Wall --pedantic -std=c++23
 
 esercizio3.1: esercizio3.1.cpp funzioni.h
     g++ -o esercizio3.1 esercizio3.1.cpp $(CXXFLAGS)
@@ -550,7 +550,7 @@ Ecco come dobbiamo modificare il `Makefile` per compilare includendo oggetti di 
 
 ```makefile
 LIBS := `root-config --libs`
-CXXFLAGS := -g -Wall --pedantic -std=c++17 `root-config --cflags`
+CXXFLAGS := -g3 -Wall --pedantic -std=c++23 `root-config --cflags`
 
 esercizio3.2: esercizio3.2.cpp funzioni.h
     g++ -o esercizio3.2 esercizio3.2.cpp ${CXXFLAGS} ${LIBS}
@@ -563,7 +563,7 @@ Notate l'utilizzo dei comandi `root-config --libs` e `root-config --cflags`, che
 
 ```
 $ root-config --cflags
--pthread -std=c++14 -m64 -I/usr/include/root
+-pthread -std=c++23 -m64 -I/usr/include/root
 $ root-config --libs
 -L/usr/lib64/root -lCore -lImt -lRIO -lNet -lHist -lGraf -lGraf3d -lGpad -lROOTVecOps -lTree -lTreePlayer -lRint -lPostscript -lMatrix -lPhysics -lMathCore -lThread -lMultiProc -lROOTDataFrame -pthread -lm -ldl -rdynamic
 ```

@@ -1,12 +1,4 @@
----
-title: "Lezione 7: Quadratura numerica"
-author:
-- "Leonardo Carminati"
-- "Maurizio Tomasi"
-date: "A.A. 2023−2024"
-lang: it-IT
-header-includes: <script src="./fmtinstall.js"></script>
-...
+# Esercizi per oggi
 
 [La pagina con la spiegazione originale degli esercizi si trova qui: <https://labtnds.docs.cern.ch/Lezione7/Lezione7/>.]
 
@@ -381,3 +373,13 @@ Come di consueto, elenco alcuni errori molto comuni che ho trovato negli anni pa
 -   Non confondete il significato di “numero di passi” quando calcolate l'errore di un metodo di integrazione: se per calcolare l'errore dovete stimare l'integrale con passo `h` e con passo `h/2`, l'errore che ottenete si riferisce al passo `h`, non al passo `h/2`!
 
 Il notebook all'indirizzo <https://ziotom78.github.io/tnds-notebooks/lezione07/> fornisce una lunga serie di test: se li implementate tutti, avete il 99.9% di essere sicuri che la vostra implementazione sia corretta!
+
+---
+title: "Lezione 7: Quadratura numerica"
+author:
+- "Leonardo Carminati"
+- "Maurizio Tomasi"
+date: "A.A. 2023−2024"
+lang: it-IT
+header-includes: <script src="./fmtinstall.js"></script>
+...

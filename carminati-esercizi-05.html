@@ -865,7 +865,7 @@ ROOT o <a href="index.html#gplotinstall">gplot++</a>.</p></li>
 pensato per ROOT:</p>
 <pre class="make"><code>INCS=`root-config --cflags`
 LIBS=`root-config --libs`
-CXXFLAGS=-g -Wall --pedantic -std=c++17
+CXXFLAGS=-g -Wall --pedantic -std=c++23
 
 esercizio_5.3: esercizio_5.3.o posizione.o puntomateriale.o campovettoriale.o particella.o
        g++ -o esercizio_5.3 esercizio_5.3.o posizione.o puntomateriale.o campovettoriale.o particella.o ${LIBS}
@@ -889,7 +889,7 @@ clean:
        rm -f *.o</code></pre>
 <p>Questo invece è il caso in cui usiate gplot++: non c’è più bisogno di
 usare <code>INCS</code> e <code>LIBS</code>.</p>
-<pre class="make"><code>CXXFLAGS=-g -Wall --pedantic -std=c++17
+<pre class="make"><code>CXXFLAGS=-g -Wall --pedantic -std=c++23
 
 esercizio_5.3: esercizio_5.3.o posizione.o puntomateriale.o campovettoriale.o particella.o
        g++ -o esercizio_5.3 esercizio_5.3.o posizione.o puntomateriale.o campovettoriale.o particella.o
@@ -915,7 +915,7 @@ clean:
 <code>.h</code> e di non usare quindi file <code>.cpp</code>, il
 <code>Makefile</code> si semplifica moltissimo. Ecco un esempio
 (assumendo che usiate gplot++):</p>
-<pre class="make"><code>CXXFLAGS=-g -Wall --pedantic -std=c++17
+<pre class="make"><code>CXXFLAGS=-g -Wall --pedantic -std=c++23
 
 esercizio_5.3: esercizio_5.3.cpp posizione.h puntomateriale.h campovettoriale.h particella.h
        g++ -o esercizio_5.3 esercizio_5.3.cpp ${CXXFLAGS}

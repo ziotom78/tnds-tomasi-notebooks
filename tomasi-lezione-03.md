@@ -1,19 +1,3 @@
----
-title: Laboratorio di TNDS -- Lezione 3
-author: Maurizio Tomasi
-date: Martedì 10 Ottobre 2023
-theme: white
-progress: true
-slideNumber: true
-background-image: ./media/background.png
-history: true
-width: 1440
-height: 810
-css:
-- ./css/custom.css
-- ./css/asciinema-player.css
-...
-
 # Esercizi per oggi
 
 # Link alle risorse online
@@ -45,13 +29,13 @@ void test_vettore() {
   { // New scope: I can declare again a variable called `v`
       Vettore<int> v(2);
       assert(v.GetN() == 2);
-  
+
       v.SetComponent(0, 123);  // Test both SetComponent and operator[]=
       v[1] = 456;
 
       assert(v.GetComponent(0) == 123);
       assert(v.GetComponent(1) == 456);
-  
+
       v.Scambia(0, 1);
 
       assert(v.GetComponent(0) == 456);
@@ -107,7 +91,7 @@ void test_statistical_functions(void) {
 -   Le regole da seguire **sempre** sono le seguenti:
 
     -   Usare `cerr` per scrivere messaggi.
-    
+
     -   Usare `cout` per scrivere il risultato di conti.
 
 -   La differenza è che quanto viene scritto su `cerr` finisce sempre sullo schermo, anche se da linea di comando si usano gli operatori di reindirizzamento `>` e `|`.
@@ -162,7 +146,7 @@ Con l'esempio seguente, è possibile usare il reindirizzamento:
 
     1.  Errori del **programmatore**, che ha sbagliato a scrivere il codice;
     2.  Errori dell'**utente**, che ha invocato il programma in modo scorretto.
-    
+
 -   È importante gestire i due casi in modo diverso, perché l'azione più appropriata dipende dal contesto.
 
 # Errore del programmatore
@@ -175,7 +159,7 @@ Con l'esempio seguente, è possibile usare il reindirizzamento:
         v.setComponent(i, 0.0);
     }
     ```
-    
+
     Il fatto di leggere oltre la fine dell'array è un errore imputabile a chi ha scritto il programma, non a chi lo usa.
 
 -   In questo caso `assert` è la soluzione migliore, perché dice al programmatore dove si trova la linea di codice da correggere ([se si compila con `-g`](https://ziotom78.github.io/tnds-tomasi-notebooks/tomasi-lezione-01.html#/flag-del-compilatore)).
@@ -207,16 +191,16 @@ Queste informazioni sono inutili all'utente, ma molto preziose al programmatore!
 # Errore dell'utente
 
 -   Se l'errore è causato dall'utente, si dovrebbe stampare invece un messaggio d'errore chiaro, che gli consenta di riparare all'errore.
-    
+
 -   Primo esempio:
-    
+
     ```
     $ ./myprog
     Inserisci il numero di iterazioni da compiere: -7
     Errore, il numero di iterazioni deve essere un numero positivo
     $
     ```
-    
+
 -   Secondo esempio:
 
     ```
@@ -224,7 +208,7 @@ Queste informazioni sono inutili all'utente, ma molto preziose al programmatore!
     Errore, non riesco ad aprire il file "data.dat"
     $
     ```
-    
+
 # Distinguere tra i due tipi
 
 -   Non è sempre immediato distinguere tra i due tipi di errore.
@@ -251,7 +235,7 @@ void Vettore::setComponent(int i, double value) {
 int main() {
     int position;
     Vettore v(10);
-    
+
     cerr << "Inserisci la posizione del vettore: ";
     cin >> position;
     if (position >= v.size()) {
@@ -367,7 +351,7 @@ Di conseguenza, il programmatore è «costretto» a verificare la correttezza de
 
 -   Ovviamente la differenza sta nel fatto che gli interi con segno
     (`int`) ammettono anche numeri negativi:
-    
+
     | Tipo       | Minimo      | Massimo    |
     |:-----------|------------:|-----------:|
     | `int`      | −2147483648 | 2147483647 |
@@ -405,7 +389,15 @@ Di conseguenza, il programmatore è «costretto» a verificare la correttezza de
 
 -   In linguaggi più rigorosi del C++ (es., Ada) confrontare tipi con e senza segno è un *errore* anziché un warning. Prendete quindi sul serio questi warning!
 
--   Usando interi con segno, molti algoritmi diventano più semplici (es., scandire gli elementi di un array a ritroso). Preferite quindi sempre `int` a `unsigned`!
+# `int` e `unsigned int`
+
+-   Usando interi con segno, molti algoritmi diventano più semplici (es., scandire gli elementi di un array a ritroso).
+
+-   Citazione da [Google Coding Guidelines](https://google.github.io/styleguide/cppguide.html#Integer_Types):
+
+    > You should not use the unsigned integer types such as uint32_t, unless there is a valid reason such as representing a bit pattern rather than a number, or you need defined overflow modulo 2^N. In particular, do not use unsigned types to say a number will never be negative. Instead, use assertions for this.
+
+-   Preferite quindi sempre `int` a `unsigned`!
 
 # Il C++20
 
@@ -421,7 +413,7 @@ Di conseguenza, il programmatore è «costretto» a verificare la correttezza de
     }
     ```
 
-    Se usate Replit, basta usare `-std=c++20` anziché `-std=c++17`. Se usate i computer del laboratorio invece, siete sfortunati e dovete usare il cast a `(int)`.
+    Se usate Replit, basta usare `-std=c++23` anziché `-std=c++23`. Se usate i computer del laboratorio invece, siete sfortunati e dovete usare il cast a `(int)`.
 
 # Cicli `for` e `while`
 
@@ -476,3 +468,20 @@ Di conseguenza, il programmatore è «costretto» a verificare la correttezza de
 -   Il primo elemento di un `std::vector` si ottiene mediante il metodo [`std::vector::begin()`](https://www.cplusplus.com/reference/vector/vector/begin/), che restituisce un *iteratore* (per ottenere il primo elemento, usare [`std::vector::front()`](https://www.cplusplus.com/reference/vector/vector/front/)).
 
 -   Per l'ultimo elemento si usa [`std::vector::end()`](https://www.cplusplus.com/reference/vector/vector/end/) (*iteratore*) e [`std::vector::back()`](https://www.cplusplus.com/reference/vector/vector/back/) (l'elemento stesso).
+
+
+---
+title: Laboratorio di TNDS -- Lezione 3
+author: Maurizio Tomasi
+date: Martedì 10 Ottobre 2023
+theme: white
+progress: true
+slideNumber: true
+background-image: ./media/background.png
+history: true
+width: 1440
+height: 810
+css:
+- ./css/custom.css
+- ./css/asciinema-player.css
+...

@@ -1,19 +1,3 @@
----
-title: "Laboratorio di TNDS -- Lezione 8"
-author: "Maurizio Tomasi"
-date: "Martedì 14 Novembre 2023"
-theme: "white"
-progress: true
-slideNumber: true
-background-image: "./media/background.png"
-history: true
-width: 1440
-height: 810
-css:
-- ./css/custom.css
-- ./css/asciinema-player.css
-...
-
 # Alcuni problemi di `std::vector`
 
 # `std::vector`
@@ -156,7 +140,7 @@ css:
 -   Si può inizializzare un array in maniera immediata:
 
     ```c++
-    std::array<double, 4> a{1.0, 2.0, 3.0, 4.0};  // Ok, but if you use -std=c++17…
+    std::array<double, 4> a{1.0, 2.0, 3.0, 4.0};  // Ok, but if you use -std=c++23…
     std::array a{1.0, 2.0, 3.0, 4.0};             // …"double" and "4" are redundant!
     ```
 
@@ -172,7 +156,7 @@ css:
 
 -   Questo è il primo anno in cui ho aggiornato la pagina [carminati-esercizi-08.html](carminati-esercizi-08.html) perché usi `std::array`!
 
-    
+
 # Controlli
 
 -   Se combino due array con lunghezza diversa
@@ -182,7 +166,7 @@ css:
     std::array y{3.0, 4.0, 5.0}; // An array with 3 elements
     std::array z{x + y};         // Gosh, what's going to happen?
     ```
-    
+
     il compilatore `g++` produce un errore di compilazione:
 
     ```
@@ -193,7 +177,7 @@ css:
           |           |   array<[...],3>
           |           array<[...],2>
     ```
-    
+
 -   Nel caso di `std::vector`, il codice compilerebbe ma andrebbe poi in crash.
 
 # Leggibilità
@@ -201,13 +185,13 @@ css:
 -   Con tutte le dimensioni esplicitate, il codice diventa più leggibile
 
 -   Ad esempio, nel derivare la classe `OscillatoreArmonico` dell'[esercizio 8.1](carminati-esercizi-08.html#esercizio-8.1) bisogna specificare `<2>` per `FunzioneVettorialeBase`:
-    
+
     ```c++
     struct OscillatoreArmonico : FunzioneVettorialeBase<2> {
       // ...
     };
     ```
-    
+
 -   Similmente, nel `main` dello stesso si definisce l'istanza di `Eulero` così:
 
     ```c++
@@ -223,3 +207,19 @@ css:
 -   Nel seminario spiego le differenze tra di loro, mostro come sono progettati i rispettivi compilatori, e do indicazioni su come scegliere lo strumento di lavoro migliore.
 
 -   Se siete interessati, compilate il Google Form all'indirizzo <https://forms.gle/ZaDv5n6PjDEaNRoT8>: alla fine del semestre contatterò chi l'ha compilato per decidere la data migliore per tutti.
+
+---
+title: "Laboratorio di TNDS -- Lezione 8"
+author: "Maurizio Tomasi"
+date: "Martedì 14 Novembre 2023"
+theme: "white"
+progress: true
+slideNumber: true
+background-image: "./media/background.png"
+history: true
+width: 1440
+height: 810
+css:
+- ./css/custom.css
+- ./css/asciinema-player.css
+...

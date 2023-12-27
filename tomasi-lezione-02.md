@@ -1,19 +1,3 @@
----
-title: Laboratorio di TNDS -- Lezione 2
-author: Maurizio Tomasi
-date: Martedì 3 Ottobre 2023
-css:
-- css/custom.css
-- css/asciinema-player.css
-theme: white
-progress: true
-slideNumber: true
-background-image: ./media/background.png
-history: true
-width: 1440
-height: 810
-...
-
 # Esercizi per oggi
 
 # Link alle risorse online
@@ -650,3 +634,20 @@ v3 = v1;                           // Assignment
 Vettore v4 = Read(10, "data.dat"); // Move constructor
                                    // (at the end of the call to "Read")
 ```
+
+
+---
+title: Laboratorio di TNDS -- Lezione 2
+author: Maurizio Tomasi
+date: Martedì 3 Ottobre 2023
+css:
+- css/custom.css
+- css/asciinema-player.css
+theme: white
+progress: true
+slideNumber: true
+background-image: ./media/background.png
+history: true
+width: 1440
+height: 810
+...

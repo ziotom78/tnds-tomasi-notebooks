@@ -1051,30 +1051,30 @@ tutto venga propriamente ricompilato. In questo caso il
 <code>Makefile</code> diventa:</p>
 <div class="sourceCode" id="cb46"><pre
 class="sourceCode makefile"><code class="sourceCode makefile"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="dv">main:</span><span class="dt"> main.o funzioni.o</span></span>
-<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>    g++ -g -Wall --pedantic -std=c++17 main.o funzioni.o -o main</span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a><span class="er">    </span>g++ -g3 -Wall --pedantic -std=c++23 main.o funzioni.o -o main</span>
 <span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a><span class="dv">main.o:</span><span class="dt"> main.cpp funzioni.h</span></span>
-<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a>    g++ -g -Wall --pedantic -std=c++17 -c main.cpp -o main.o</span>
+<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a><span class="er">    </span>g++ -g3 -Wall --pedantic -std=c++23 -c main.cpp -o main.o</span>
 <span id="cb46-5"><a href="#cb46-5" aria-hidden="true" tabindex="-1"></a><span class="dv">funzioni.o:</span><span class="dt"> funzioni.cpp funzioni.h</span></span>
-<span id="cb46-6"><a href="#cb46-6" aria-hidden="true" tabindex="-1"></a>    g++ -g -Wall --pedantic -std=c++17 -c funzioni.cpp -o funzioni.o</span></code></pre></div>
+<span id="cb46-6"><a href="#cb46-6" aria-hidden="true" tabindex="-1"></a><span class="er">    </span>g++ -g3 -Wall --pedantic -std=c++23 -c funzioni.cpp -o funzioni.o</span></code></pre></div>
 <p>Notate però quanto il <code>Makefile</code> sia ripetitivo. È
 possibile definire delle <em>variabili</em> nel Makefile per
 semplificarlo:</p>
 <div class="sourceCode" id="cb47"><pre
-class="sourceCode makefile"><code class="sourceCode makefile"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="dt">CXXFLAGS</span> <span class="ch">=</span><span class="st"> -g -Wall --pedantic -std=c++17</span></span>
+class="sourceCode makefile"><code class="sourceCode makefile"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="dt">CXXFLAGS</span> <span class="ch">=</span><span class="st"> -g3 -Wall --pedantic -std=c++23</span></span>
 <span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a><span class="dv">main:</span><span class="dt"> main.o funzioni.o</span></span>
-<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a>    g++ main.o funzioni.o -o main <span class="ch">$(</span><span class="dt">CXXFLAGS</span><span class="ch">)</span></span>
+<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a><span class="er">    </span>g++ main.o funzioni.o -o main <span class="ch">$(</span><span class="dt">CXXFLAGS</span><span class="ch">)</span></span>
 <span id="cb47-5"><a href="#cb47-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb47-6"><a href="#cb47-6" aria-hidden="true" tabindex="-1"></a><span class="dv">main.o:</span><span class="dt"> main.cpp funzioni.h</span></span>
-<span id="cb47-7"><a href="#cb47-7" aria-hidden="true" tabindex="-1"></a>    g++ -c main.cpp -o main.o <span class="ch">$(</span><span class="dt">CXXFLAGS</span><span class="ch">)</span></span>
+<span id="cb47-7"><a href="#cb47-7" aria-hidden="true" tabindex="-1"></a><span class="er">    </span>g++ -c main.cpp -o main.o <span class="ch">$(</span><span class="dt">CXXFLAGS</span><span class="ch">)</span></span>
 <span id="cb47-8"><a href="#cb47-8" aria-hidden="true" tabindex="-1"></a>    </span>
 <span id="cb47-9"><a href="#cb47-9" aria-hidden="true" tabindex="-1"></a><span class="dv">funzioni.o:</span><span class="dt"> funzioni.cpp funzioni.h</span></span>
-<span id="cb47-10"><a href="#cb47-10" aria-hidden="true" tabindex="-1"></a>    g++ -c funzioni.cpp -o funzioni.o <span class="ch">$(</span><span class="dt">CXXFLAGS</span><span class="ch">)</span></span></code></pre></div>
+<span id="cb47-10"><a href="#cb47-10" aria-hidden="true" tabindex="-1"></a><span class="er">    </span>g++ -c funzioni.cpp -o funzioni.o <span class="ch">$(</span><span class="dt">CXXFLAGS</span><span class="ch">)</span></span></code></pre></div>
 <p>La variabile <code>$@</code> è una cosiddetta <em>variabile
 implicita</em>, e viene sostituita di volta in volta col nome del
 <em>target</em> corrente (che nell’esempio sopra è <code>main</code>,
 <code>main.o</code> e infine <code>funzioni.o</code>). I flag
-<code>-g -Wall --pedantic -std=c++17</code> servono per rendere la
+<code>-g -Wall --pedantic -std=c++23</code> servono per rendere la
 compilazione e l’esecuzione del codice più sicura, perché abilitano dei
 controlli addizionali, spiegati nelle <a
 href="tomasi-lezione-01.html#flag-del-compilatore">slide</a>.</p>

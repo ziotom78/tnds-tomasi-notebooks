@@ -766,7 +766,7 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb8-1"><a href="#c
 creare i file <code>.o</code> e linkarli con un passaggio a parte: è
 molto più semplice!</p>
 <pre class="make"><code>esercizio4.1: esercizio4.1.cpp common.cpp common.h
-    g++ -g -Wall --pedantic -std=c++17 -o esercizio4.1 esercizio4.1.cpp common.cpp</code></pre>
+    g++ -g3 -Wall --pedantic -std=c++23 -o esercizio4.1 esercizio4.1.cpp common.cpp</code></pre>
 <h2 id="esempio-gplot-fmtlib">Esempio (gplot++, fmtlib)</h2>
 <p>Questa è invece una implementazione che usa <a
 href="https://github.com/ziotom78/gplotpp">gplot++</a> e <a
@@ -844,7 +844,7 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb10-1"><a href="#
 <code>esercizio4.1.cpp</code> e <code>common.cpp</code> nel
 <code>Makefile</code>:</p>
 <pre class="make"><code>esercizio4.1: esercizio4.1.cpp common.cpp common.h
-    g++ -g -Wall --pedantic -std=c++17 -o esercizio4.1 esercizio4.1.cpp common.cpp</code></pre>
+    g++ -g3 -Wall --pedantic -std=c++23 -o esercizio4.1 esercizio4.1.cpp common.cpp</code></pre>
 <h1 id="esercizio-4.2">Esercizio 4.2 — Determinazione del cammino minimo
 (approfondimento uso STL)</h1>
 <p>In questo esercizio possiamo provare ad approfondire l’uso di
@@ -885,7 +885,7 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb12-1"><a href="#
 <span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>  Posizione<span class="op">(</span><span class="dt">double</span> x<span class="op">,</span> <span class="dt">double</span> y<span class="op">,</span> <span class="dt">double</span> z<span class="op">)</span> <span class="op">:</span> <span class="va">m_x</span><span class="op">{</span>x<span class="op">},</span> <span class="va">m_y</span><span class="op">{</span>y<span class="op">},</span> <span class="va">m_z</span><span class="op">{</span>z<span class="op">}</span> <span class="op">{}</span></span>
 <span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a>  <span class="kw">friend</span> <span class="bu">std::</span>istream<span class="op"> &amp;</span><span class="kw">operator</span><span class="op">&gt;&gt;(</span><span class="bu">std::</span>istream<span class="op"> &amp;</span>is<span class="op">,</span> Posizione <span class="op">&amp;</span>p<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a>  <span class="kw">friend</span> <span class="bu">std::</span>istream <span class="op">&amp;</span><span class="kw">operator</span><span class="op">&gt;&gt;(</span><span class="bu">std::</span>istream <span class="op">&amp;</span>is<span class="op">,</span> Posizione <span class="op">&amp;</span>p<span class="op">)</span> <span class="op">{</span></span>
 <span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a>    string temp<span class="op">;</span></span>
 <span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a>    </span>
 <span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a>    getline<span class="op">(</span>is<span class="op">,</span> temp<span class="op">,</span> <span class="ch">&#39;,&#39;</span><span class="op">);</span></span>

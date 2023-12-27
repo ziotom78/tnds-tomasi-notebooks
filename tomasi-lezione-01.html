@@ -19,8 +19,11 @@
     div.columns{display: flex; gap: min(4vw, 1.5em);}
     div.column{flex: auto; overflow-x: auto;}
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-    ul.task-list{list-style: none;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
     ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
       width: 0.8em;
       margin: 0 0.8em 0.2em -1.6em;
       vertical-align: middle;
@@ -451,12 +454,12 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb9-1"><a href="#c
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> calc<span class="op">(</span><span class="dt">int</span> a<span class="op">,</span> <span class="dt">int</span> b<span class="op">)</span> <span class="op">{</span> <span class="cf">return</span> a <span class="op">+</span> b<span class="op">;</span> <span class="op">}</span></span>
 <span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    <span class="bu">std::</span>cout<span class="op"> &lt;&lt;</span> <span class="st">&quot;Insert two numbers: &quot;</span><span class="op">;</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> <span class="st">&quot;Insert two numbers: &quot;</span><span class="op">;</span></span>
 <span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> a<span class="op">,</span> b<span class="op">;</span></span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>    <span class="bu">std::</span>cin<span class="op"> &gt;&gt;</span> a <span class="op">&gt;&gt;</span> b<span class="op">;</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>    <span class="bu">std::</span>cin <span class="op">&gt;&gt;</span> a <span class="op">&gt;&gt;</span> b<span class="op">;</span></span>
 <span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>    <span class="bu">std::</span>cout<span class="op"> &lt;&lt;</span> <span class="st">&quot;The result is &quot;</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>    <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> <span class="st">&quot;The result is &quot;</span></span>
 <span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>              <span class="op">&lt;&lt;</span> calc<span class="op">(</span>a<span class="op">,</span> b<span class="op">)</span> <span class="op">&lt;&lt;</span> <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">;</span></span>
 <span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
 <span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
@@ -482,13 +485,13 @@ vetusto ma presente su qualsiasi sistema Unix: GNU Make.</p></li>
 complicato). Create un file con nome <code>Makefile</code> (attenzione
 alla maiuscola iniziale!), e scrivete queste righe al suo interno:</p>
 <div class="sourceCode" id="cb10"><pre
-class="sourceCode makefile"><code class="sourceCode makefile"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="dt">CXXFLAGS</span> <span class="ch">=</span><span class="st"> -std=c++17 -g -Wall --pedantic</span></span>
+class="sourceCode makefile"><code class="sourceCode makefile"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="dt">CXXFLAGS</span> <span class="ch">=</span><span class="st"> -std=c++23 -g3 -Wall --pedantic</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="dv">main:</span><span class="dt"> main.cpp</span></span></code></pre></div></li>
 <li><p>Infine, da linea di comando eseguite il comando <code>make</code>
 (<code>$</code> indica il prompt):</p>
 <pre class="text"><code>$ make
-g++ -std=c++17 -g -Wall --pedantic    main.cpp   -o main
+g++ -std=c++23 -g3 -Wall --pedantic    main.cpp   -o main
 $ ls
 main   main.cpp   Makefile</code></pre></li>
 </ul>
@@ -499,11 +502,10 @@ main   main.cpp   Makefile</code></pre></li>
 <li><p>È utile specificare dei flag aggiuntivi per la compilazione,
 tramite la riga</p>
 <div class="sourceCode" id="cb12"><pre
-class="sourceCode makefile"><code class="sourceCode makefile"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="dt">CXXFLAGS</span> <span class="ch">=</span><span class="st"> -std=c++17 -g -Wall --pedantic</span></span></code></pre></div></li>
-<li><p><code>-std=c++17</code> abilita alcune caratteristiche «recenti»
-del C++ (nelle versioni più aggiornate del compilatore GCC è
-inutile).</p></li>
-<li><p><code>-g</code>: se il codice va in <em>crash</em>, stampa la
+class="sourceCode makefile"><code class="sourceCode makefile"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="dt">CXXFLAGS</span> <span class="ch">=</span><span class="st"> -std=c++23 -g3 -Wall --pedantic</span></span></code></pre></div></li>
+<li><p><code>-std=c++23</code> usa la versione più recente del
+C++.</p></li>
+<li><p><code>-g3</code>: se il codice va in <em>crash</em>, stampa la
 riga di codice che ha causato l’errore.</p></li>
 <li><p><code>-Wall</code>: rende il compilatore C++ più brontolone del
 solito.</p></li>
@@ -533,7 +535,7 @@ bisogna scriverli nella riga successiva, che va indentata inserendo un
 carattere <strong>TAB</strong>, solitamente indicato sulle tastiere con
 ↹ (è a sinistra del tasto Q):</p>
 <div class="sourceCode" id="cb14"><pre
-class="sourceCode makefile"><code class="sourceCode makefile"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="dt">CXXFLAGS</span> <span class="ch">=</span><span class="st"> -std=c++17 -g -Wall --pedantic</span></span>
+class="sourceCode makefile"><code class="sourceCode makefile"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="dt">CXXFLAGS</span> <span class="ch">=</span><span class="st"> -std=c++23 -g3 -Wall --pedantic</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="dv">main:</span><span class="dt"> main.cpp</span></span>
 <span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># You MUST use a Tab character ↹ to indent here!</span></span>
@@ -569,8 +571,8 @@ file, e di compilarli separatamente. In questo caso la struttura del
 <div class="sourceCode" id="cb16"><pre
 class="sourceCode makefile"><code class="sourceCode makefile"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="dv">esercizio1.2:</span><span class="dt"> esercizio1.2.cpp funzioni.cpp</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Con \ si può andare a capo</span></span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>    g++ esercizio1.2.cpp funzioni.cpp <span class="ch">\</span></span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>        -o esercizio1.2 <span class="ch">$(</span><span class="dt">CXXFLAGS</span><span class="ch">)</span></span></code></pre></div>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>    g++ esercizio1.2.cpp funzioni.cpp \</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>        <span class="ch">-</span><span class="fu">o esercizio1.2 </span><span class="ch">$(</span><span class="dt">CXXFLAGS</span><span class="ch">)</span></span></code></pre></div>
 <p>Questo esempio crea di nuovo l’eseguibile a partire da file
 <code>.cpp</code>.</p></li>
 <li><p>Quanto scritto qui sopra funziona, ma <strong>non è quanto
@@ -588,13 +590,13 @@ Make.</p></li>
 <li><p>Questo è ciò che serve per i file <code>.o</code>:</p>
 <div class="sourceCode" id="cb17"><pre
 class="sourceCode makefile"><code class="sourceCode makefile"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="dv">esercizio1.2:</span><span class="dt"> esercizio1.2.o funzioni.o</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>    g++ esercizio1.2.o funzioni.o -o esercizio1.2</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="er">    </span>g++ esercizio1.2.o funzioni.o -o esercizio1.2</span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="dv">esercizio1.2.o:</span><span class="dt"> esercizio1.2.cpp funzioni.h</span></span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>    g++ -c esercizio1.2.cpp -o esercizio1.2.o <span class="ch">$(</span><span class="dt">CXXFLAGS</span><span class="ch">)</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="er">    </span>g++ -c esercizio1.2.cpp -o esercizio1.2.o <span class="ch">$(</span><span class="dt">CXXFLAGS</span><span class="ch">)</span></span>
 <span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="dv">funzioni.o:</span><span class="dt"> funzioni.cpp funzioni.h</span></span>
-<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>    g++ -c funzioni.cpp -o funzioni.o <span class="ch">$(</span><span class="dt">CXXFLAGS</span><span class="ch">)</span></span></code></pre></div>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a><span class="er">    </span>g++ -c funzioni.cpp -o funzioni.o <span class="ch">$(</span><span class="dt">CXXFLAGS</span><span class="ch">)</span></span></code></pre></div>
 <p>(<code>CXXFLAGS</code> non serve quando si mettono insieme più file
 <code>.o</code>: la compilazione del codice C++ è già
 avvenuta).</p></li>
@@ -609,13 +611,13 @@ che rappresenta il nome del file da creare.</p></li>
 <li><p>L’esempio nella slide precedente si può riscrivere così:</p>
 <div class="sourceCode" id="cb18"><pre
 class="sourceCode makefile"><code class="sourceCode makefile"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="dv">esercizio1.2:</span><span class="dt"> esercizio1.2.o funzioni.o</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>    g++ esercizio1.2.o funzioni.o -o <span class="ch">$@</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="er">    </span>g++ esercizio1.2.o funzioni.o -o <span class="ch">$@</span></span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="dv">esercizio1.2.o:</span><span class="dt"> esercizio1.2.cpp funzioni.h</span></span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>    g++ -c esercizio1.2.cpp -o <span class="ch">$@</span> <span class="ch">$(</span><span class="dt">CXXFLAGS</span><span class="ch">)</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="er">    </span>g++ -c esercizio1.2.cpp -o <span class="ch">$@</span> <span class="ch">$(</span><span class="dt">CXXFLAGS</span><span class="ch">)</span></span>
 <span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="dv">funzioni.o:</span><span class="dt"> funzioni.cpp funzioni.h</span></span>
-<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>    g++ -c funzioni.cpp -o <span class="ch">$@</span> <span class="ch">$(</span><span class="dt">CXXFLAGS</span><span class="ch">)</span></span></code></pre></div></li>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a><span class="er">    </span>g++ -c funzioni.cpp -o <span class="ch">$@</span> <span class="ch">$(</span><span class="dt">CXXFLAGS</span><span class="ch">)</span></span></code></pre></div></li>
 <li><p>È più facile riciclare il <code>Makefile</code> nei nuovi
 esercizi!</p></li>
 </ul>
@@ -687,16 +689,22 @@ problema!</p></li>
 <ul>
 <li><p>Quando avrete svolto gli esercizi di questa lezione, vi sarà
 chiaro che la scrittura del <code>Makefile</code> è un processo lungo e
-verboso. Il comando <code>make</code> è stato inventato nel 1976, e
-all’epoca il mondo della programmazione era così!</p></li>
+verboso.</p></li>
+<li><p>Il comando <code>make</code> è stato <a
+href="https://onlinelibrary.wiley.com/doi/10.1002/spe.4380090402">inventato
+nel 1976</a> da Stuart Feldman, e funzionava su un computer PDP-11 (vedi
+slide seguente).</p></li>
 <li><p>Oggi più nessuno (neppure io!) usa GNU Make direttamente per
 compilare codice C++. Per i vostri progetti futuri (oltre questo corso)
 vi converrà usare sistemi più evoluti ed agili; tra questi, il più usato
 in assoluto è <a href="https://cmake.org/">CMake</a>.</p></li>
-<li><p>Noi insegnamo il funzionamento di GNU Make perché pedagogicamente
-ci sembra utile: sistemi come CMake sono costruiti usando GNU Make come
-fondamento. Vediamone un esempio.</p></li>
 </ul>
+</section>
+<section class="slide level1">
+
+<p><img data-src="images/540px-Pdp-11-40.jpg" /></p>
+<p>Fonte: <a href="https://en.wikipedia.org/wiki/PDP-11">Pagina
+Wikipedia del PDP-11</a></p>
 </section>
 <section id="uso-di-cmake" class="slide level1">
 <h1>Uso di CMake</h1>
@@ -706,15 +714,16 @@ C/C++, e si basa su GNU Make. Il modo in cui si usa è il seguente:</p>
 <ol>
 <li>Si scrive un file chiamato <code>CMakeLists.txt</code></li>
 <li>Si esegue <code>cmake</code> da linea di comando: esso legge
-<code>CMakeLists.txt</code> e produce un <code>Makefile</code></li>
-<li>A questo punto si usa <code>make</code> per compilare il programma
-come al solito.</li>
+<code>CMakeLists.txt</code> e produce un file contenente i comandi da
+compilare in un <a
+href="https://cmake.org/cmake/help/latest/manual/cmake-generators.7.html#cmake-generators">sistema
+scelto dall’utente</a>.</li>
+<li>Si eseguono i comandi da compilare nel sistema prescelto.</li>
 </ol></li>
-<li><p>La compilazione avviene quindi ancora attraverso GNU Make, ma il
-<code>Makefile</code> prodotto da CMake è ottimizzato (e mostra una
-bella barra percentuale quando si compila un progetto che usa tanti file
-<code>.cpp</code>!).</p></li>
-<li><p>Ecco perché studiare GNU Make è ancora utile.</p></li>
+<li><p>Anche se oggi esistono sistemi più veloci e performanti di Make
+(come <a href="https://ninja-build.org/">Ninja</a>, che è usato per
+compilare Google Chrome e Android), è possibile chiedere a CMake di
+produrre un <code>Makefile</code>.</p></li>
 </ul>
 </section>
     </div>

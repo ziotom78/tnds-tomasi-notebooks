@@ -1,20 +1,3 @@
----
-title: Laboratorio di TNDS -- Lezione 1
-author: Maurizio Tomasi
-date: Martedì 26 Settembre 2023
-lang: it-IT
-theme: white
-progress: true
-slideNumber: true
-background-image: ./media/background.png
-history: true
-width: 1440
-height: 810
-css:
-- css/custom.css
-- css/asciinema-player.css
-...
-
 # Introduzione al corso
 
 # Queste slides
@@ -33,7 +16,7 @@ css:
 -   Create un segnalibro per il sito <https://cppreference.com/>, è indispensabile quando si programma in C++:
 
     1. Contiene la documentazione completa del linguaggio, suddivisa nelle varie versioni (C++11, C++14, C++17, C++20, C++23…)
-    
+
     2. Contiene la documentazione e gli esempi d'uso per tutte le funzioni della libreria standard del C++
 
 # Esercizi per oggi
@@ -130,7 +113,7 @@ Potete svolgere gli esercizi in uno dei modi seguenti:
 
 
 # Usare Visual Studio Code
-    
+
 -   Potete scaricare ed installare [Visual Studio Code](https://code.visualstudio.com/) anche sul vostro portatile: è gratuito e disponibile per Windows, Linux e Mac OS X. Per configurarlo in modo che sia usabile con programmi C/C++, eseguite dal terminale del vostro computer il comando
 
     ```
@@ -138,7 +121,7 @@ Potete svolgere gli esercizi in uno dei modi seguenti:
     ```
 
     (Attenzione, se avete installato «Code OSS» il comando non funziona: occorre proprio la versione rilasciata da Microsoft per installare questa estensione).
-    
+
 -   Di seguito c'è un breve filmato che vi mostra come scrivere ed eseguire un programma di esempio. Visual Studio Code presenta numerosi *plugin* per semplificare lo sviluppo; li vedremo meglio durante il corso.
 
 ---
@@ -198,7 +181,7 @@ dal terminale:
     #define g 9.81           // Don't do this!
     const double g = 9.81;   // Much better, I can explicitly declare the type
     ```
-    
+
 -   Con `#define` ci possono essere problemi con la precedenza degli operatori:
 
     ```c++
@@ -206,7 +189,7 @@ dal terminale:
     #define time2_s       6.162
     #define total_time_s  time1_s + time2_s
     #define speed_m_s     1.0
-    
+
     cout << "The position is " << total_time_s * speed_m_s << " m\n";
     ```
 
@@ -306,7 +289,7 @@ int main() {
 -   Partiamo da un caso molto semplice (l'esercizio 1.2 sarà più complicato). Create un file con nome `Makefile` (attenzione alla maiuscola iniziale!), e scrivete queste righe al suo interno:
 
     ```makefile
-    CXXFLAGS = -std=c++17 -g -Wall --pedantic
+    CXXFLAGS = -std=c++23 -g3 -Wall --pedantic
 
     main: main.cpp
     ```
@@ -316,7 +299,7 @@ prompt):
 
     ```text
     $ make
-    g++ -std=c++17 -g -Wall --pedantic    main.cpp   -o main
+    g++ -std=c++23 -g3 -Wall --pedantic    main.cpp   -o main
     $ ls
     main   main.cpp   Makefile
     ```
@@ -328,12 +311,12 @@ prompt):
 -   È utile specificare dei flag aggiuntivi per la compilazione, tramite la riga
 
     ```makefile
-    CXXFLAGS = -std=c++17 -g -Wall --pedantic
+    CXXFLAGS = -std=c++23 -g3 -Wall --pedantic
     ```
 
--   `-std=c++17` abilita alcune caratteristiche «recenti» del C++ (nelle versioni più aggiornate del compilatore GCC è inutile).
+-   `-std=c++23` usa la versione più recente del C++.
 
--   `-g`: se il codice va in *crash*, stampa la riga di codice che ha causato l'errore.
+-   `-g3`: se il codice va in *crash*, stampa la riga di codice che ha causato l'errore.
 
 -   `-Wall`: rende il compilatore C++ più brontolone del solito.
 
@@ -358,8 +341,8 @@ prompt):
 -   Se si vuole fornire manualmente la lista dei comandi da inviare, bisogna scriverli nella riga successiva, che va indentata inserendo un carattere **TAB**, solitamente indicato sulle tastiere con ↹ (è a sinistra del tasto Q):
 
     ```makefile
-    CXXFLAGS = -std=c++17 -g -Wall --pedantic
-    
+    CXXFLAGS = -std=c++23 -g3 -Wall --pedantic
+
     main: main.cpp
         # You MUST use a Tab character ↹ to indent here!
         g++ $(CXXFLAGS) main.cpp
@@ -413,10 +396,10 @@ dipendenze da file che devono essere creati dallo stesso GNU Make.
     ```makefile
     esercizio1.2: esercizio1.2.o funzioni.o
         g++ esercizio1.2.o funzioni.o -o esercizio1.2
-    
+
     esercizio1.2.o: esercizio1.2.cpp funzioni.h
         g++ -c esercizio1.2.cpp -o esercizio1.2.o $(CXXFLAGS)
-    
+
     funzioni.o: funzioni.cpp funzioni.h
         g++ -c funzioni.cpp -o funzioni.o $(CXXFLAGS)
     ```
@@ -434,10 +417,10 @@ dipendenze da file che devono essere creati dallo stesso GNU Make.
     ```makefile
     esercizio1.2: esercizio1.2.o funzioni.o
         g++ esercizio1.2.o funzioni.o -o $@
-    
+
     esercizio1.2.o: esercizio1.2.cpp funzioni.h
         g++ -c esercizio1.2.cpp -o $@ $(CXXFLAGS)
-    
+
     funzioni.o: funzioni.cpp funzioni.h
         g++ -c funzioni.cpp -o $@ $(CXXFLAGS)
     ```
@@ -452,29 +435,29 @@ dipendenze da file che devono essere creati dallo stesso GNU Make.
 
 -   Dovete **sempre** includere in ogni header/file sorgente tutti gli
     header che servono per definire i simboli nel codice.
-    
+
 -   Ad esempio, se un file `main.cpp` contiene questi `#include`:
-    
+
     ```c++
     // main.cpp
     #include "vectors.h"   // Define 3D vectors
     #include "newton.h"    // Define functions to solve Newton's problems
     ```
-    
+
     è buona cosa che in `newton.h` si includa comunque `vectors.h`:
-    
+
     ```c++
     // newton.h
     #pragma once
     #include "vectors.h"
     // etc.
     ```
-    
+
 # Motivo #1
 
 -   Programmi complessi usano moltissimi `#include`. In questo caso si
     tende a inserirli in ordine alfabetico, per individuare duplicati:
-    
+
     ```c++
     #include "subdiv.h"
     #include "intersec.h"
@@ -496,10 +479,10 @@ dipendenze da file che devono essere creati dallo stesso GNU Make.
     tanto nei progetti si fa un /purge/ degli `#include` inutili: in
     ogni file, si controlla se ci sono degli header che definiscono
     cose non usate all'interno del file.
-    
+
 -   Ad esempio, una riga `#include "mp3.h"` all'interno di un file
     sorgente in cui non si toccano affatto file MP3!
-    
+
 -   Nel nostro caso, i vettori definiti in `vector.h` potrebbero non
     essere mai usati esplicitamente in `main.cpp`, magari perché in
     esso si calcola semplicemente il periodo orbitale di un satellite
@@ -510,17 +493,24 @@ dipendenze da file che devono essere creati dallo stesso GNU Make.
 
 -   Quando avrete svolto gli esercizi di questa lezione, vi sarà
     chiaro che la scrittura del `Makefile` è un processo lungo e
-    verboso. Il comando `make` è stato inventato nel 1976, e all'epoca
-    il mondo della programmazione era così!
+    verboso.
+
+-   Il comando `make` è stato [inventato nel
+    1976](https://onlinelibrary.wiley.com/doi/10.1002/spe.4380090402) da Stuart Feldman,
+    e funzionava su un computer PDP-11 (vedi slide seguente).
 
 -   Oggi più nessuno (neppure io!) usa GNU Make direttamente per
     compilare codice C++. Per i vostri progetti futuri (oltre questo
     corso) vi converrà usare sistemi più evoluti ed agili; tra questi,
     il più usato in assoluto è [CMake](https://cmake.org/).
 
--   Noi insegnamo il funzionamento di GNU Make perché pedagogicamente
-    ci sembra utile: sistemi come CMake sono costruiti usando GNU Make
-    come fondamento. Vediamone un esempio.
+---
+
+![](images/540px-Pdp-11-40.jpg)
+
+Fonte: [Pagina Wikipedia del PDP-11](https://en.wikipedia.org/wiki/PDP-11)
+
+---
 
 # Uso di CMake
 
@@ -528,12 +518,31 @@ dipendenze da file che devono essere creati dallo stesso GNU Make.
     si basa su GNU Make. Il modo in cui si usa è il seguente:
 
     #.   Si scrive un file chiamato `CMakeLists.txt`
-    #.   Si esegue `cmake` da linea di comando: esso legge `CMakeLists.txt` e produce un `Makefile`
-    #.   A questo punto si usa `make` per compilare il programma come al solito.
+    #.   Si esegue `cmake` da linea di comando: esso legge
+         `CMakeLists.txt` e produce un file contenente i comandi da
+         compilare in un [sistema scelto
+         dall'utente](https://cmake.org/cmake/help/latest/manual/cmake-generators.7.html#cmake-generators).
+    #.   Si eseguono i comandi da compilare nel sistema prescelto.
 
--   La compilazione avviene quindi ancora attraverso GNU Make, ma il
-    `Makefile` prodotto da CMake è ottimizzato (e mostra una bella
-    barra percentuale quando si compila un progetto che usa tanti file
-    `.cpp`!).
+-   Anche se oggi esistono sistemi più veloci e performanti di Make
+    (come [Ninja](https://ninja-build.org/), che è usato per compilare
+    Google Chrome e Android), è possibile chiedere a CMake di produrre
+    un `Makefile`.
 
--   Ecco perché studiare GNU Make è ancora utile.
+
+---
+title: Laboratorio di TNDS -- Lezione 1
+author: Maurizio Tomasi
+date: Martedì 26 Settembre 2023
+lang: it-IT
+theme: white
+progress: true
+slideNumber: true
+background-image: ./media/background.png
+history: true
+width: 1440
+height: 810
+css:
+- css/custom.css
+- css/asciinema-player.css
+...

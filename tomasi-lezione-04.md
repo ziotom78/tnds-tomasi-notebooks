@@ -1,19 +1,3 @@
----
-title: "Laboratorio di TNDS -- Lezione 4"
-author: "Maurizio Tomasi"
-date: "Martedì 17 Ottobre 2023"
-theme: white
-progress: true
-slideNumber: true
-background-image: ./media/background.png
-history: true
-width: 1440
-height: 810
-css:
-- ./css/custom.css
-- ./css/asciinema-player.css
-...
-
 # Esercizi per oggi
 
 # Link alle risorse online
@@ -33,3 +17,19 @@ css:
 -   [Esercizio 5.4](carminati-esercizi-05.html#5.4): Campo di multipolo (approfondimento)
 -   [Esercizio 5.5](carminati-esercizi-05.html#5.5): Gravità dallo spazio (approfondimento)
 
+
+---
+title: "Laboratorio di TNDS -- Lezione 4"
+author: "Maurizio Tomasi"
+date: "Martedì 17 Ottobre 2023"
+theme: white
+progress: true
+slideNumber: true
+background-image: ./media/background.png
+history: true
+width: 1440
+height: 810
+css:
+- ./css/custom.css
+- ./css/asciinema-player.css
+...

@@ -1,19 +1,3 @@
----
-title: "Laboratorio di TNDS -- Lezione 6"
-author: "Maurizio Tomasi"
-date: "Martedì 31 Ottobre 2023"
-theme: "white"
-progress: true
-slideNumber: true
-background-image: "./media/background.png"
-history: true
-width: 1440
-height: 810
-css:
-- ./css/custom.css
-- ./css/asciinema-player.css
-...
-
 # Link alle risorse online
 
 -   La spiegazione dettagliata degli esercizi si trova qui: [carminati-esercizi-06.html](carminati-esercizi-06.html).
@@ -153,7 +137,7 @@ struct Cat : public Animal {
 
     1.   Si crea una variabile di un tipo base (`Particella`)…
     2.   …ma poi le si vuole assegnare una variabile di un tipo derivato (`Elettrone`).
-   
+
 # Quando usare puntatori
 
 -   Usando un puntatore e `new`, si possono specificare i due tipi `Particella` ed `Elettrone` separatamente:
@@ -225,9 +209,9 @@ void test_zeroes() {
     ```c++
     if (f(a) * f(b) < 0) { … }
     ```
-    
+
     non è consigliabile, perché se `f(a)` o `f(b)` sono molto piccoli, il risultato potrebbe essere nullo. Meglio usare un'espressione come
-    
+
     ```c++
     if (sign(f(a)) * sign(f(b)) < 0) { … }
     ```
@@ -242,13 +226,13 @@ Il metodo di bisezione fallisce se le ipotesi del teorema degli zeri non valgono
 1.   Scrivere un messaggio di errore e invocare `abort()`;
 
 2.   Restituire un valore fissato (es., zero). Questo è però ambiguo!
-     
+
 3.   Accettare un parametro aggiuntivo `bool &found` per `CercaZeri`:
-     
+
      ```c++
      double CercaZeri(double xmin, double xmax, const FunzioneBase * f, bool &found);
      ```
-     
+
      (In alternativa si può dichiarare `found` variabile membro di
      `Solutore`).
 
@@ -281,7 +265,7 @@ Il metodo di bisezione fallisce se le ipotesi del teorema degli zeri non valgono
         // Print a error message to std::cerr
     }
     ```
-    
+
 -   I NaN hanno anche la proprietà che non sono uguali a se stessi:
 
     ```c++
@@ -343,3 +327,19 @@ void main() {
     // This prints "nan" because of the forgotten initialization
 }
 ```
+
+---
+title: "Laboratorio di TNDS -- Lezione 6"
+author: "Maurizio Tomasi"
+date: "Martedì 31 Ottobre 2023"
+theme: "white"
+progress: true
+slideNumber: true
+background-image: "./media/background.png"
+history: true
+width: 1440
+height: 810
+css:
+- ./css/custom.css
+- ./css/asciinema-player.css
+...

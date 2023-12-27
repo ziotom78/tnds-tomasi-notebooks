@@ -1,19 +1,3 @@
----
-title: "Laboratorio di TNDS -- Lezione 11"
-author: "Maurizio Tomasi"
-date: "Martedì 11 Gennaio 2022"
-theme: "white"
-progress: true
-slideNumber: true
-background-image: "./media/background.png"
-history: true
-width: 1440
-height: 810
-css:
-- ./css/custom.css
-- ./css/asciinema-player.css
-...
-
 # Link alle risorse online
 
 -   La spiegazione dettagliata degli esercizi si trova qui: [carminati-esercizi-11.html](carminati-esercizi-11.html).
@@ -186,3 +170,20 @@ Tranne Fortran, tutti questi linguaggi sono interattivi.
 -   Nel seminario spiego le differenze tra di loro e do indicazioni su come scegliere lo strumento di lavoro migliore.
 -   È stato un seminario che ha sempre riscosso abbastanza successo.
 -   Se alcuni di voi sono interessati, posso riproporlo, ma suggerirei di farlo dopo la sessione di esami.
+
+
+---
+title: "Laboratorio di TNDS -- Lezione 11"
+author: "Maurizio Tomasi"
+date: "Martedì 11 Gennaio 2022"
+theme: "white"
+progress: true
+slideNumber: true
+background-image: "./media/background.png"
+history: true
+width: 1440
+height: 810
+css:
+- ./css/custom.css
+- ./css/asciinema-player.css
+...
