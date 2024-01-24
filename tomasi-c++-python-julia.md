@@ -625,7 +625,7 @@ per Python in Julia non si specificano i tipi?
         virtual double Eval(double x) const = 0;
     };
     ```
-    
+
     e vediamone i limiti nell'ipotesi di voler rendere il codice più versatile.
 
 # Propagazione degli errori
@@ -662,7 +662,7 @@ Measurement operator+(Measurement a, Measurement b) {
     ```c++
     virtual double Eval(double x) const = 0;
 	```
-    
+
     Anche qualsiasi classe derivata deve quindi usare i `double`.
 
 # Soluzione
@@ -685,7 +685,7 @@ Measurement operator+(Measurement a, Measurement b) {
     // This triggers an error: it should have been speed * time, not speed / time
     UnitValue final_pos{start_pos + speed / time};
     ```
-    
+
 -   Mi piacerebbe usarla insieme alla mia classe `Measurement` che propaga gli errori, ma non posso: sia `value` che `error` sono variabili `double`!
 
 -   Se però modifico `Measurement`, rischio che la mia nuova versione di `FunzioneBase` non funzioni più!
@@ -698,7 +698,7 @@ Measurement operator+(Measurement a, Measurement b) {
 
     ```julia
     using Measurements, Unitful
-    
+
     speed = (2.0 ± 0.1)u"m/s"    # Use 'u' followed by a string to define the unit
     start_pos = (3.5 ± 0.1)u"m"
     time = (6.0 ± 0.5)u"s"
@@ -706,7 +706,7 @@ Measurement operator+(Measurement a, Measurement b) {
     final_pos = start_pos + speed / time
     # ERROR: DimensionError: 3.5 ± 0.1 m and 0.333 ± 0.032 m s^-2
     #        are not dimensionally compatible.
-    
+
     final_pos = start_pos + speed * time    # Ok, the result is 15.5 ± 1.2 m
     ```
 
@@ -725,8 +725,9 @@ Measurement operator+(Measurement a, Measurement b) {
 	UnitValue start_pos{Measurement{2.0, 0.1}, "m"};
 	// …and so on
 	```
-    
+
 -   Di fatto, le librerie scientifiche moderne in C++ non usano più approcci OOP come ROOT, ma sono basate sui template: ad esempio, [Armadillo](https://arma.sourceforge.net/).
+
 
 # Omoiconicità di Julia
 
