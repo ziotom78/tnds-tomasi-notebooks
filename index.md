@@ -108,6 +108,8 @@ Fornisco un piccolo vademecum per aiutarvi a svolgere nel migliore di modi l'esa
 
     Non spendete però troppo tempo per arrivare a una stima con carta e penna: se dopo dieci minuti di lavoro siete ancora in alto mare, lasciate perdere!
 
+#.  Leggete *tutto* il testo dell'esame prima di iniziare a scrivere il codice. Magari nel primo punto vi viene chiesto di assumere una certa quantità fisica (una massa, una velocità…) come costante, ma in uno dei punti successivi dovete cambiarne il valore oppure addirittura trasformarla in una quantità che dipende dal tempo o dallo spazio. Se leggete prima tutto il testo, potete già fare caso a queste cose e progettare la struttura del codice in maniera più efficace.
+
 #.  I temi di esame sono solitamente espressi come una lista di punti, ciascuno dei quali è una domanda. **MAI** implementare il codice che risolve tutti i punti e poi eseguirlo! Implementate il codice che vi serve per risolvere il primo punto, stampatelo, verificate i risultati, e quando vi convince passate al secondo. In questo modo, se i numeri prodotti per il primo punto appaiono strani, potete correggere gli errori prima di passare al punto successivo. Altrimenti rischiate di dover buttare via tutto il lavoro: magari vi rendete conto che per risolvere bene il primo punto avevate bisogno di *due* variabili `std::vector` anziché una sola, e di conseguenza quanto avete implementato per i punti successivi non è più valido.
 
 #.  Non succederà mai che viene richiesto l'uso di ROOT o di Gnuplot esplicitamente; fare però i grafici è utile per avere l'intuizione se i risultati che il vostro codice produce sono sensati oppure no.
@@ -178,7 +180,7 @@ Fornisco un piccolo vademecum per aiutarvi a svolgere nel migliore di modi l'esa
     -   In ognuna delle copie del codice che avete incollato bisogna ovviamente cambiare qualcosa qua e là; è facile che ci sia almeno una di quelle copie in cui modificate la riga sbagliata, oppure non la modificate del tutto. (È il caso dell'esempio sopra: ve ne eravate accorti?)
 
     La cosa migliore da fare è quella di spostare il codice che va ripetuto all'interno di una funzione, e poi chiamarla più volte nel `main`:
-    
+
     ```c++
     double calcola_risultato(int N) {
       // Qui va tutta l'implementazione del calcolo
@@ -199,7 +201,7 @@ Fornisco un piccolo vademecum per aiutarvi a svolgere nel migliore di modi l'esa
       }
     }
     ```
-    
+
     Per fare un esempio un po' più complicato, immaginiamo che vi venga chiesto di fare la simulazione di un esperimento dati tre parametri $A$, $B$ e $C$, e che l'esercizio si articoli in tre punti:
 
     -   Prima dovete calcolare il risultato dell'esperimento supponendo che il parametro $A$ sia affetto da errore, mentre altre due quantità $B$ e $C$ usate nella simulazione non hanno errore;
