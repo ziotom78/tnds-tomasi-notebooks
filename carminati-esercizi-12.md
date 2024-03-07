@@ -309,4 +309,4 @@ Svolgere il tema d'esame sulla simulazione di un esperimento per la misura della
 
 # Errori comuni
 
-Vi farà piacere saperlo: di solito l'esercizio 12.0 è quello che gli studenti fanno meglio! Assicuratevi di ottenere valori degli errori e del coefficiente di correlazione simili a quelli che ho indicato a lezione.
+L'unico errore (davvero comune!) che ho visto in questi anni è di evitare di calcolare il coefficiente di correlazione come richiesto dall'esercizio. A quanto pare alcuni studenti credono che il grafico che mostra la correlazione sia sufficiente; il testo invece vi chiede di implementare proprio il calcolo della formula!
