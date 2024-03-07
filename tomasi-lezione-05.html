@@ -397,7 +397,7 @@ indicati con <code>_________</code>, la libreria
 <div class="sourceCode" id="cb14"><pre
 class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>Posizione p<span class="op">{</span>calcola_posizione<span class="op">()};</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="bu">std::</span>format::print<span class="op">(</span><span class="st">&quot;La posizione è (</span><span class="sc">{}</span><span class="st">, </span><span class="sc">{}</span><span class="st">, </span><span class="sc">{}</span><span class="st">)</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">,</span> p<span class="op">.</span>GetX<span class="op">(),</span> p<span class="op">.</span>GetY<span class="op">(),</span> p<span class="op">.</span>GetZ<span class="op">());</span></span></code></pre></div></li>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>cout <span class="op">&lt;&lt;</span> format<span class="op">(</span><span class="st">&quot;La posizione è (</span><span class="sc">{}</span><span class="st">, </span><span class="sc">{}</span><span class="st">, </span><span class="sc">{}</span><span class="st">)</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">,</span> p<span class="op">.</span>GetX<span class="op">(),</span> p<span class="op">.</span>GetY<span class="op">(),</span> p<span class="op">.</span>GetZ<span class="op">());</span></span></code></pre></div></li>
 </ul>
 </section>
 <section id="formattazioni-più-elaborate" class="slide level1">
@@ -414,42 +414,79 @@ richiedono 5 cifre dopo la virgola</p></li>
 numero subito dopo <code>:</code>: così <code>{:5}</code> chiede di
 usare almeno 5 caratteri per scrivere il valore. Questo è utile per
 allineare valori in tabelle!</p></li>
-<li><p>La libreria rende possibile l’internazionalizzazione, usando ad
-esempio <a href="https://en.wikipedia.org/wiki/Gettext">GNU
-gettext</a>.</p></li>
+<li><p>La libreria rende possibile l’internazionalizzazione!</p></li>
 </ul>
 </section>
-<section id="trucchi" class="slide level1">
-<h1>Trucchi</h1>
+<section id="internazionalizzazione" class="slide level1">
+<h1>Internazionalizzazione</h1>
 <ul>
-<li><p>Si può indicare lo <em>stream</em> su cui scrivere:</p>
+<li><p>Per rendere i propri programma “traducibili”, si usa la libreria
+<a href="https://en.wikipedia.org/wiki/Gettext">GNU gettext</a>:</p>
 <div class="sourceCode" id="cb15"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co">// `stderr` è come `std::cerr` (e `stdout` è come `std::cout`)</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="bu">std::</span>format::print<span class="op">(</span>stderr<span class="op">,</span> <span class="st">&quot;Errore, il file &#39;</span><span class="sc">{}</span><span class="st">&#39; non esiste!&quot;</span><span class="op">,</span> filename<span class="op">);</span></span></code></pre></div></li>
-<li><p>Invece di stampare a video, si può salvare il risultato in una
-stringa usando <code>std::format::format</code> anziché
-<code>std::format::print</code>:</p>
-<div class="sourceCode" id="cb16"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span><span class="op">(</span><span class="dt">int</span> k<span class="op">{};</span> k <span class="op">&lt;</span> <span class="dv">100</span><span class="op">;</span> <span class="op">++</span>k<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>    string filename<span class="op">{</span><span class="bu">std::</span>format::format<span class="op">(</span><span class="st">&quot;out</span><span class="sc">{:04d}</span><span class="st">.txt&quot;</span><span class="op">,</span> k<span class="op">)};</span></span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>    ofstream outf<span class="op">{</span>filename<span class="op">};</span></span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Scrivi i dati in `outf`</span></span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="co">// Vengono creati i file &quot;out0000.txt&quot;, &quot;out0001.txt&quot;, &quot;out0002.txt&quot;, …</span></span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="co">// Se sopra avessi indicato `4d` anziché `04d`, i nomi dei file sarebbero stati</span></span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="co">// &quot;out   0.txt&quot;, &quot;out   1.txt&quot;, &quot;out   2.txt&quot;, …</span></span></code></pre></div></li>
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>cout <span class="op">&lt;&lt;</span> gettext<span class="op">(</span><span class="st">&quot;Insert a number, please: &quot;</span><span class="op">);</span></span></code></pre></div></li>
+<li><p>La funzione <code>gettext</code> determina la lingua del sistema
+e cerca un file <code>.po</code> appropriato (che va fornito insieme al
+proprio programma), fatto così:</p>
+<pre><code>msgid &quot;Insert a number, please: &quot;
+msgstr &quot;Inserire un numero, per favore: &quot;</code></pre></li>
+<li><p>Di solito nei programmi si <a
+href="https://www.gnu.org/software/gettext/manual/gettext.html#Overview">usa
+la macro <code>_()</code></a> come <em>alias</em> per
+<code>gettext()</code>:</p>
+<div class="sourceCode" id="cb17"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>cout <span class="op">&lt;&lt;</span> _<span class="op">(</span><span class="st">&quot;Insert a number, please: &quot;</span><span class="op">);</span></span></code></pre></div></li>
+</ul>
+</section>
+<section id="internazionalizzazione-1" class="slide level1">
+<h1>Internazionalizzazione</h1>
+<ul>
+<li><p>Uno dei motivi per cui <code>cout</code> non è più utilizzata è
+proprio per l’internazionalizzazione. Per esempio, la data “14 Aprile
+2003” può essere scritta come <code>04/14/2003</code> (americano),
+<code>14/04/2003</code> (italiano) o <code>2003-04-14</code> (formato
+ISO).</p></li>
+<li><p>Ma è impossibile usare <code>gettext</code> con <code>cout</code>
+in questo caso!</p>
+<div class="sourceCode" id="cb18"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Inglese:</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>cout <span class="op">&lt;&lt;</span> <span class="st">&quot;Birth date: &quot;</span> <span class="op">&lt;&lt;</span> month <span class="op">&lt;&lt;</span> <span class="st">&quot;/&quot;</span> <span class="op">&lt;&lt;</span> day <span class="op">&lt;&lt;</span> <span class="st">&quot;/&quot;</span> <span class="op">&lt;&lt;</span> year<span class="op">;</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="co">// Italiano:</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>cout <span class="op">&lt;&lt;</span> <span class="st">&quot;Data di nascita: &quot;</span> <span class="op">&lt;&lt;</span> day <span class="op">&lt;&lt;</span> <span class="st">&quot;/&quot;</span> <span class="op">&lt;&lt;</span> month <span class="op">&lt;&lt;</span> <span class="st">&quot;/&quot;</span> <span class="op">&lt;&lt;</span> year<span class="op">;</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="co">// ISO:</span></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>cout <span class="op">&lt;&lt;</span> <span class="st">&quot;Birth date: &quot;</span> <span class="op">&lt;&lt;</span> year <span class="op">&lt;&lt;</span> <span class="st">&quot;-&quot;</span> <span class="op">&lt;&lt;</span> month <span class="op">&lt;&lt;</span> <span class="st">&quot;-&quot;</span> <span class="op">&lt;&lt;</span> day<span class="op">;</span></span></code></pre></div></li>
+</ul>
+</section>
+<section id="internazionalizzazione-2" class="slide level1">
+<h1>Internazionalizzazione</h1>
+<ul>
+<li><p>Con <code>std::format</code> invece è facile usare
+<code>gettext</code>:</p>
+<div class="sourceCode" id="cb19"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>cout <span class="op">&lt;&lt;</span> <span class="bu">std::</span>format<span class="op">(</span>_<span class="op">(</span><span class="st">&quot;Birth date: </span><span class="sc">{1}</span><span class="st">/</span><span class="sc">{0}</span><span class="st">/</span><span class="sc">{2}</span><span class="st">&quot;</span><span class="op">),</span> day<span class="op">,</span> month<span class="op">,</span> year<span class="op">);</span></span></code></pre></div></li>
+<li><p>Il file <code>italian.po</code> conterrà questo:</p>
+<pre><code>msgid: Birth date: {1}/{0}/{2}
+msgstr: Data di nascita: {0}/{1}/{2}</code></pre></li>
+<li><p>Nel C++23 vengono anche introdotte le funzioni <a
+href="https://en.cppreference.com/w/cpp/io/print"><code>print</code></a>
+e <a
+href="https://en.cppreference.com/w/cpp/io/println"><code>println</code></a>,
+così che <code>cout</code> si eviterà del tutto:</p>
+<div class="sourceCode" id="cb21"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>print<span class="op">(</span>_<span class="op">(</span><span class="st">&quot;Birth date: </span><span class="sc">{1}</span><span class="st">/</span><span class="sc">{0}</span><span class="st">/</span><span class="sc">{2}</span><span class="st">&quot;</span><span class="op">),</span> day<span class="op">,</span> month<span class="op">,</span> year<span class="op">);</span></span></code></pre></div></li>
 </ul>
 </section>
 <section id="il-futuro-ora" class="slide level1">
 <h1>Il futuro… ora!</h1>
 <ul>
-<li><p>Il comando <code>g++</code> sui computer del laboratorio e su
-Repl.it non supporta ancora la libreria <code>format</code>.</p></li>
-<li><p>La libreria di formattazione può però già essere usata
-scaricandola dal sito <a
-href="https://github.com/fmtlib/fmt">github.com/fmtlib/fmt</a>, che
-contiene una versione estesa della libreria, usabile anche da
-compilatori che non supportano il C++20.</p></li>
+<li><p>Il compilatore <code>g++</code> sui computer del laboratorio
+supporta già <code>format</code>, ma non ancora <code>print</code> e
+<code>println</code></p></li>
+<li><p>Una libreria di formattazione completa, che implementa anche i
+colori e può essere usata anche su compilatori più vecchi, è disponibile
+al sito <a
+href="https://github.com/fmtlib/fmt">github.com/fmtlib/fmt</a>. Questa
+<strong>non è necessaria</strong> per il corso, la fornisco solo per chi
+è interessato.</p></li>
 <li><p>Per automatizzare l’installazione, potete scaricare (con il click
 destro) lo script <a
 href="./install_fmt_library">install_fmt_library</a>, da eseguire nella
@@ -464,25 +501,20 @@ come mostrato nell’animazione seguente.</p></li>
 
 <p><asciinema-player src="asciinema/install-fmt-94x25.cast" cols="94" rows="25" font-size="medium"></asciinema-player></p>
 </section>
-<section id="differenze-tra-format-e-il-futuro-c20"
-class="slide level1">
-<h1>Differenze tra <code>format</code> e il futuro C++20</h1>
+<section id="differenze-tra-format-e-il-c20" class="slide level1">
+<h1>Differenze tra <code>format</code> e il C++20</h1>
 <ul>
 <li><p>La libreria installata da
 <a url="./install_fmt_library" download><code>install_fmt_library</code></a>
 ha alcune differenze con lo standard C++20:</p>
 <ol type="1">
 <li>Il namespace è diverso: è <code>fmt::</code> anziché
-<code>std::format::</code>;</li>
+<code>std::</code>;</li>
 <li>Il file da includere è diverso.</li>
 </ol></li>
-<li><p>Questa libreria offre ulteriori potenzialità rispetto a quella
-fornita dal C++20, e siccome al momento <code>g++</code> non supporta
-ancora completamente lo standard C++20, la libreria <code>fmt</code> è
-ancora da preferire.</p></li>
 </ul>
 </section>
-<section id="differenze-tra-format-e-il-futuro-c20-1"
+<section id="differenze-tra-format-e-il-futuro-c20"
 class="slide level1">
 <h1>Differenze tra <code>format</code> e il futuro C++20</h1>
 <ul>
@@ -492,9 +524,6 @@ differenze tra il C++ attuale e il C++20</p></li>
 <li><p>Se usate <code>#include "fmtlib.h"</code>, vi basterà poi usare
 sempre il namespace <code>fmt::</code> anziché il più lungo
 <code>std::format::</code>.</p></li>
-<li><p>Se ricompilerete in futuro il vostro codice con un compilatore
-C++20, <code>fmtlib.h</code> vi permetterà di continuare ad usare
-<code>fmt::</code>.</p></li>
 </ul>
 </section>
 <section id="creazione-di-grafici" class="slide level1">
@@ -561,15 +590,15 @@ ogni cartella di esercizi;</p></li>
 </section>
 <section id="semplice-esempio" class="slide level1">
 <h1>Semplice esempio</h1>
-<div class="sourceCode" id="cb18"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;gplot++.h&quot;</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="bu">std::</span>vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> values<span class="op">{</span><span class="dv">1</span><span class="op">,</span> <span class="dv">7</span><span class="op">,</span> <span class="dv">3</span><span class="op">,</span> <span class="dv">5</span><span class="op">,</span> <span class="dv">8</span><span class="op">,</span> <span class="op">-</span><span class="dv">4</span><span class="op">};</span></span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>  Gnuplot plt<span class="op">{};</span></span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>  plt<span class="op">.</span>plot<span class="op">(</span>values<span class="op">);</span></span>
-<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>  plt<span class="op">.</span>show<span class="op">();</span></span>
-<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb23"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;gplot++.h&quot;</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>  <span class="bu">std::</span>vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> values<span class="op">{</span><span class="dv">1</span><span class="op">,</span> <span class="dv">7</span><span class="op">,</span> <span class="dv">3</span><span class="op">,</span> <span class="dv">5</span><span class="op">,</span> <span class="dv">8</span><span class="op">,</span> <span class="op">-</span><span class="dv">4</span><span class="op">};</span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>  Gnuplot plt<span class="op">{};</span></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>  plt<span class="op">.</span>plot<span class="op">(</span>values<span class="op">);</span></span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>  plt<span class="op">.</span>show<span class="op">();</span></span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 </section>
 <section id="semplice-esempio-1" class="slide level1">
 <h1>Semplice esempio</h1>
@@ -585,28 +614,28 @@ fa in ROOT, ma se usate Repl.it è estremamente lenta!</p></li>
 PNG, che Repl.it permette di visualizzare con un click. Basta usare il
 metodo <code>Gnuplot::redirect_to_png</code> subito dopo aver creato una
 variabile di tipo <code>Gnuplot</code>:</p>
-<div class="sourceCode" id="cb19"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>Gnuplot plt<span class="op">{};</span></span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>plt<span class="op">.</span>redirect_to_png<span class="op">(</span><span class="st">&quot;output.png&quot;</span><span class="op">);</span></span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="co">// Now use plt.plot(...) as usual</span></span></code></pre></div></li>
+<div class="sourceCode" id="cb24"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>Gnuplot plt<span class="op">{};</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>plt<span class="op">.</span>redirect_to_png<span class="op">(</span><span class="st">&quot;output.png&quot;</span><span class="op">);</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="co">// Now use plt.plot(...) as usual</span></span></code></pre></div></li>
 </ul>
 </section>
 <section id="salvare-i-plot-in-file-png" class="slide level1">
 <h1>Salvare i plot in file PNG</h1>
-<div class="sourceCode" id="cb20"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;gplot++.h&quot;</span></span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>  <span class="bu">std::</span>vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> values<span class="op">{</span><span class="dv">1</span><span class="op">,</span> <span class="dv">7</span><span class="op">,</span> <span class="dv">3</span><span class="op">,</span> <span class="dv">5</span><span class="op">,</span> <span class="dv">8</span><span class="op">,</span> <span class="op">-</span><span class="dv">4</span><span class="op">};</span></span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>  Gnuplot plt<span class="op">{};</span></span>
-<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Salva il grafico in &quot;output.png&quot;</span></span>
-<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>  plt<span class="op">.</span>redirect_to_png<span class="op">(</span><span class="st">&quot;output.png&quot;</span><span class="op">);</span></span>
-<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>  plt<span class="op">.</span>plot<span class="op">(</span>values<span class="op">);</span></span>
-<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>  plt<span class="op">.</span>show<span class="op">();</span></span>
-<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb25"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;gplot++.h&quot;</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>  <span class="bu">std::</span>vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> values<span class="op">{</span><span class="dv">1</span><span class="op">,</span> <span class="dv">7</span><span class="op">,</span> <span class="dv">3</span><span class="op">,</span> <span class="dv">5</span><span class="op">,</span> <span class="dv">8</span><span class="op">,</span> <span class="op">-</span><span class="dv">4</span><span class="op">};</span></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>  Gnuplot plt<span class="op">{};</span></span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Salva il grafico in &quot;output.png&quot;</span></span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>  plt<span class="op">.</span>redirect_to_png<span class="op">(</span><span class="st">&quot;output.png&quot;</span><span class="op">);</span></span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>  plt<span class="op">.</span>plot<span class="op">(</span>values<span class="op">);</span></span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>  plt<span class="op">.</span>show<span class="op">();</span></span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 </section>
 <section class="slide level1">
 
@@ -615,25 +644,25 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb20-1"><a href="#
 </section>
 <section id="esempio-più-complesso" class="slide level1">
 <h1>Esempio più complesso</h1>
-<div class="sourceCode" id="cb21"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">(</span><span class="dt">void</span><span class="op">)</span> <span class="op">{</span></span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  Gnuplot plt<span class="op">{};</span></span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  <span class="bu">std::</span>vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> x<span class="op">{</span><span class="dv">1</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">3</span><span class="op">,</span> <span class="dv">4</span><span class="op">,</span> <span class="dv">5</span><span class="op">},</span> y<span class="op">{</span><span class="dv">5</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">4</span><span class="op">,</span> <span class="dv">1</span><span class="op">,</span> <span class="dv">3</span><span class="op">};</span></span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>  plt<span class="op">.</span>multiplot<span class="op">(</span><span class="dv">2</span><span class="op">,</span> <span class="dv">1</span><span class="op">,</span> <span class="st">&quot;Title&quot;</span><span class="op">);</span> <span class="co">// Two plots in two rows</span></span>
-<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>  plt<span class="op">.</span>set_xlabel<span class="op">(</span><span class="st">&quot;X axis&quot;</span><span class="op">);</span></span>
-<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>  plt<span class="op">.</span>set_ylabel<span class="op">(</span><span class="st">&quot;Y axis&quot;</span><span class="op">);</span></span>
-<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>  plt<span class="op">.</span>plot<span class="op">(</span>x<span class="op">,</span> y<span class="op">,</span> <span class="st">&quot;x-y plot&quot;</span><span class="op">);</span></span>
-<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>  plt<span class="op">.</span>plot<span class="op">(</span>y<span class="op">,</span> x<span class="op">,</span> <span class="st">&quot;y-x plot&quot;</span><span class="op">,</span> Gnuplot<span class="op">::</span>LineStyle<span class="op">::</span>LINESPOINTS<span class="op">);</span></span>
-<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>  plt<span class="op">.</span>show<span class="op">();</span> <span class="co">// Create the plot and move to the next row</span></span>
-<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>  plt<span class="op">.</span>set_xlabel<span class="op">(</span><span class="st">&quot;Value&quot;</span><span class="op">);</span></span>
-<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a>  plt<span class="op">.</span>set_ylabel<span class="op">(</span><span class="st">&quot;Number of counts&quot;</span><span class="op">);</span></span>
-<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a>  plt<span class="op">.</span>histogram<span class="op">(</span>y<span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="st">&quot;Histogram&quot;</span><span class="op">);</span> <span class="co">// Two bins</span></span>
-<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a>  plt<span class="op">.</span>set_xrange<span class="op">(-</span><span class="dv">1</span><span class="op">,</span> <span class="dv">7</span><span class="op">);</span></span>
-<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a>  plt<span class="op">.</span>set_yrange<span class="op">(</span><span class="dv">0</span><span class="op">,</span> <span class="dv">5</span><span class="op">);</span></span>
-<span id="cb21-17"><a href="#cb21-17" aria-hidden="true" tabindex="-1"></a>  plt<span class="op">.</span>show<span class="op">();</span></span>
-<span id="cb21-18"><a href="#cb21-18" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb26"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">(</span><span class="dt">void</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  Gnuplot plt<span class="op">{};</span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>  <span class="bu">std::</span>vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> x<span class="op">{</span><span class="dv">1</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">3</span><span class="op">,</span> <span class="dv">4</span><span class="op">,</span> <span class="dv">5</span><span class="op">},</span> y<span class="op">{</span><span class="dv">5</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">4</span><span class="op">,</span> <span class="dv">1</span><span class="op">,</span> <span class="dv">3</span><span class="op">};</span></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>  plt<span class="op">.</span>multiplot<span class="op">(</span><span class="dv">2</span><span class="op">,</span> <span class="dv">1</span><span class="op">,</span> <span class="st">&quot;Title&quot;</span><span class="op">);</span> <span class="co">// Two plots in two rows</span></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>  plt<span class="op">.</span>set_xlabel<span class="op">(</span><span class="st">&quot;X axis&quot;</span><span class="op">);</span></span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>  plt<span class="op">.</span>set_ylabel<span class="op">(</span><span class="st">&quot;Y axis&quot;</span><span class="op">);</span></span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>  plt<span class="op">.</span>plot<span class="op">(</span>x<span class="op">,</span> y<span class="op">,</span> <span class="st">&quot;x-y plot&quot;</span><span class="op">);</span></span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>  plt<span class="op">.</span>plot<span class="op">(</span>y<span class="op">,</span> x<span class="op">,</span> <span class="st">&quot;y-x plot&quot;</span><span class="op">,</span> Gnuplot<span class="op">::</span>LineStyle<span class="op">::</span>LINESPOINTS<span class="op">);</span></span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>  plt<span class="op">.</span>show<span class="op">();</span> <span class="co">// Create the plot and move to the next row</span></span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a>  plt<span class="op">.</span>set_xlabel<span class="op">(</span><span class="st">&quot;Value&quot;</span><span class="op">);</span></span>
+<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a>  plt<span class="op">.</span>set_ylabel<span class="op">(</span><span class="st">&quot;Number of counts&quot;</span><span class="op">);</span></span>
+<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a>  plt<span class="op">.</span>histogram<span class="op">(</span>y<span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="st">&quot;Histogram&quot;</span><span class="op">);</span> <span class="co">// Two bins</span></span>
+<span id="cb26-15"><a href="#cb26-15" aria-hidden="true" tabindex="-1"></a>  plt<span class="op">.</span>set_xrange<span class="op">(-</span><span class="dv">1</span><span class="op">,</span> <span class="dv">7</span><span class="op">);</span></span>
+<span id="cb26-16"><a href="#cb26-16" aria-hidden="true" tabindex="-1"></a>  plt<span class="op">.</span>set_yrange<span class="op">(</span><span class="dv">0</span><span class="op">,</span> <span class="dv">5</span><span class="op">);</span></span>
+<span id="cb26-17"><a href="#cb26-17" aria-hidden="true" tabindex="-1"></a>  plt<span class="op">.</span>show<span class="op">();</span></span>
+<span id="cb26-18"><a href="#cb26-18" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 </section>
 <section id="esempio-più-complesso-1" class="slide level1">
 <h1>Esempio più complesso</h1>

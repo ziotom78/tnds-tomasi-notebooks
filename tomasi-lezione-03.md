@@ -413,7 +413,7 @@ Di conseguenza, il programmatore è «costretto» a verificare la correttezza de
     }
     ```
 
-    Se usate Replit, basta usare `-std=c++23` anziché `-std=c++23`. Se usate i computer del laboratorio invece, siete sfortunati e dovete usare il cast a `(int)`.
+    Se usate Replit, basta usare `-std=c++20` oppure `-std=c++23` anziché `-std=c++17`. Se usate i computer del laboratorio invece, siete sfortunati e dovete usare il cast a `(int)`.
 
 # Cicli `for` e `while`
 

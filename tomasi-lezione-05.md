@@ -257,7 +257,7 @@ int main(void) {
     ```c++
     Posizione p{calcola_posizione()};
 
-    std::format::print("La posizione è ({}, {}, {})\n", p.GetX(), p.GetY(), p.GetZ());
+    cout << format("La posizione è ({}, {}, {})\n", p.GetX(), p.GetY(), p.GetZ());
     ```
 
 # Formattazioni più elaborate
@@ -270,36 +270,70 @@ int main(void) {
 
 -   Si può indicare il numero di caratteri da usare inserendo un numero subito dopo `:`: così `{:5}` chiede di usare almeno 5 caratteri per scrivere il valore. Questo è utile per allineare valori in tabelle!
 
--   La libreria rende possibile l'internazionalizzazione, usando ad esempio [GNU gettext](https://en.wikipedia.org/wiki/Gettext).
+-   La libreria rende possibile l'internazionalizzazione!
 
+# Internazionalizzazione
 
-# Trucchi
-
--   Si può indicare lo *stream* su cui scrivere:
+-   Per rendere i propri programma “traducibili”, si usa la libreria [GNU gettext](https://en.wikipedia.org/wiki/Gettext):
 
     ```c++
-    // `stderr` è come `std::cerr` (e `stdout` è come `std::cout`)
-    std::format::print(stderr, "Errore, il file '{}' non esiste!", filename);
+    cout << gettext("Insert a number, please: ");
     ```
 
--   Invece di stampare a video, si può salvare il risultato in una stringa usando `std::format::format` anziché `std::format::print`:
+-   La funzione `gettext` determina la lingua del sistema e cerca un file `.po` appropriato (che va fornito insieme al proprio programma), fatto così:
+
+    ```
+    msgid "Insert a number, please: "
+    msgstr "Inserire un numero, per favore: "
+    ```
+
+-   Di solito nei programmi si [usa la macro `_()`](https://www.gnu.org/software/gettext/manual/gettext.html#Overview) come *alias* per `gettext()`:
 
     ```c++
-    for(int k{}; k < 100; ++k) {
-        string filename{std::format::format("out{:04d}.txt", k)};
-        ofstream outf{filename};
-        // Scrivi i dati in `outf`
-    }
-    // Vengono creati i file "out0000.txt", "out0001.txt", "out0002.txt", …
-    // Se sopra avessi indicato `4d` anziché `04d`, i nomi dei file sarebbero stati
-    // "out   0.txt", "out   1.txt", "out   2.txt", …
+    cout << _("Insert a number, please: ");
+    ```
+
+# Internazionalizzazione
+
+-   Uno dei motivi per cui `cout` non è più utilizzata è proprio per l'internazionalizzazione. Per esempio, la data “14 Aprile 2003” può essere scritta come `04/14/2003` (americano), `14/04/2003` (italiano) o `2003-04-14` (formato ISO).
+
+-   Ma è impossibile usare `gettext` con `cout` in questo caso!
+
+    ```c++
+    // Inglese:
+    cout << "Birth date: " << month << "/" << day << "/" << year;
+    // Italiano:
+    cout << "Data di nascita: " << day << "/" << month << "/" << year;
+    // ISO:
+    cout << "Birth date: " << year << "-" << month << "-" << day;
+    ```
+
+# Internazionalizzazione
+
+-   Con `std::format` invece è facile usare `gettext`:
+
+    ```c++
+    cout << std::format(_("Birth date: {1}/{0}/{2}"), day, month, year);
+	```
+
+-   Il file `italian.po` conterrà questo:
+
+    ```
+    msgid: Birth date: {1}/{0}/{2}
+    msgstr: Data di nascita: {0}/{1}/{2}
+    ```
+
+-   Nel C++23 vengono anche introdotte le funzioni [`print`](https://en.cppreference.com/w/cpp/io/print) e [`println`](https://en.cppreference.com/w/cpp/io/println), così che `cout` si eviterà del tutto:
+
+    ```c++
+    print(_("Birth date: {1}/{0}/{2}"), day, month, year);
     ```
 
 # Il futuro… ora!
 
--   Il comando `g++` sui computer del laboratorio e su Repl.it non supporta ancora la libreria `format`.
+-   Il compilatore `g++` sui computer del laboratorio supporta già `format`, ma non ancora `print` e `println`
 
--   La libreria di formattazione può però già essere usata scaricandola dal sito [github.com/fmtlib/fmt](https://github.com/fmtlib/fmt), che contiene una versione estesa della libreria, usabile anche da compilatori che non supportano il C++20.
+-   Una libreria di formattazione completa, che implementa anche i colori e può essere usata anche su compilatori più vecchi, è disponibile al sito [github.com/fmtlib/fmt](https://github.com/fmtlib/fmt). Questa **non è necessaria** per il corso, la fornisco solo per chi è interessato.
 
 -   Per automatizzare l'installazione, potete scaricare (con il click destro) lo script [install_fmt_library](./install_fmt_library), da eseguire nella cartella del vostro programma:
 
@@ -314,14 +348,12 @@ int main(void) {
 <asciinema-player src="asciinema/install-fmt-94x25.cast" cols="94" rows="25" font-size="medium"></asciinema-player>
 
 
-# Differenze tra `format` e il futuro C++20
+# Differenze tra `format` e il C++20
 
 -   La libreria installata da <a url="./install_fmt_library" download>`install_fmt_library`</a> ha alcune differenze con lo standard C++20:
 
-    1. Il namespace è diverso: è `fmt::` anziché `std::format::`;
+    1. Il namespace è diverso: è `fmt::` anziché `std::`;
     2. Il file da includere è diverso.
-
--   Questa libreria offre ulteriori potenzialità rispetto a quella fornita dal C++20, e siccome al momento `g++` non supporta ancora completamente lo standard C++20, la libreria `fmt` è ancora da preferire.
 
 
 # Differenze tra `format` e il futuro C++20
@@ -329,8 +361,6 @@ int main(void) {
 -   Lo script `install_fmt_library` installa un piccolo file header, `fmtlib.h`, che si preoccupa di gestire le differenze tra il C++ attuale e il C++20
 
 -   Se usate `#include "fmtlib.h"`, vi basterà poi usare sempre il namespace `fmt::` anziché il più lungo `std::format::`.
-
--   Se ricompilerete in futuro il vostro codice con un compilatore C++20, `fmtlib.h` vi permetterà di continuare ad usare `fmt::`.
 
 
 # Creazione di grafici
