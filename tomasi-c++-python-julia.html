@@ -135,7 +135,7 @@ linguaggio macchina delle CPU.</li>
 <ul>
 <li>Registro (qualche kB, 64 bit/ciclo)</li>
 <li>Cache (128 kB–128 MB, 40-700 GB/s)</li>
-<li>RAM (10 GB/s)</li>
+<li>RAM (4–32 GB, 10 GB/s)</li>
 </ul></li>
 <li><strong>Memoria permanente</strong>:
 <ul>
@@ -260,7 +260,7 @@ Quelle più diffuse sono:
 <li>x86_64: usata nella maggior parte dei desktop e dei laptop</li>
 <li>ARM: usata soprattutto nei cellulari e nei tablet, ma anche in
 console di gioco (Nintendo Switch) e alcuni laptop (Chromebooks)</li>
-<li>M1/M2: simili ad ARM, sono montati sui computer Apple più
+<li>M1/M2/M3: simili ad ARM, sono montati sui computer Apple più
 recenti</li>
 </ul></li>
 </ul>
@@ -434,27 +434,25 @@ Python</strong></li>
 class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> sum<span class="op">{};</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> result<span class="op">{};</span></span>
 <span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span><span class="op">(</span><span class="dt">double</span> i<span class="op">{};</span> i <span class="op">&lt;</span> <span class="dv">10&#39;000&#39;000</span><span class="op">;</span> i <span class="op">+=</span> <span class="dv">1</span><span class="op">)</span> <span class="op">{</span></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>      sum <span class="op">+=</span> i<span class="op">;</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>      result <span class="op">+=</span> i<span class="op">;</span></span>
 <span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> sum <span class="op">&lt;&lt;</span> <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">;</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> result <span class="op">&lt;&lt;</span> <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">;</span></span>
 <span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 </td>
 <td>
 <div class="sourceCode" id="cb6"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="bu">sum</span> <span class="op">=</span> <span class="fl">0.0</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">10_000_000</span>):</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">sum</span> <span class="op">+=</span> i</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">sum</span>)</span></code></pre></div>
+class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> <span class="bu">sum</span>(<span class="bu">range</span>(<span class="dv">10_000_000</span>))</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(result)</span></code></pre></div>
 </td>
 </tr>
 </table>
 <ul>
 <li>Il programma Python è più veloce da scrivere e più semplice da
 leggere</li>
-<li>Il programma C++ richiede 33 ms per l’esecuzione, quello Python 1 s
-(30 volte più lento!)</li>
+<li>Il programma C++ richiede 33 ms per l’esecuzione, quello Python
+150 ms (5 volte più lento!)</li>
 </ul>
 </section>
 <section id="velocità-di-python" class="slide level1">
@@ -466,15 +464,16 @@ virtual machine»)</li>
 <li>Questo codice non viene eseguito dalla CPU ma da un programma C, che
 lo converte <strong>in fase di esecuzione</strong> in una sequenza di
 istruzioni in linguaggio macchina</li>
-<li>Vediamo come funziona in un esempio pratico</li>
+<li>Questo approccio è più lento, ma ha alcuni vantaggi significativi:
+vediamoli in un esempio pratico</li>
 </ul>
 </section>
-<section id="section-2" class="slide level1">
-<h1></h1>
+<section id="tipi-e-codice-macchina" class="slide level1">
+<h1>Tipi e codice macchina</h1>
 <ul>
-<li><p>In C++, una istruzione come <code>x = a + b</code> può essere
-convertita in Assembler così se <code>a</code> e <code>b</code> sono
-interi:</p>
+<li><p>In C++, una istruzione come <code>x = a + b</code>, se
+<code>a</code> e <code>b</code> sono interi, può essere convertita in
+Assembler così:</p>
 <div class="sourceCode" id="cb7"><pre
 class="sourceCode asm"><code class="sourceCode fasm"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="bu">mov</span> <span class="kw">rax</span><span class="op">,</span> <span class="dt">QWORD</span> <span class="dt">PTR</span> <span class="op">[</span><span class="kw">rbp</span><span class="op">-</span><span class="dv">24</span><span class="op">]</span> <span class="co">; rax = a</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="bu">add</span> <span class="kw">rax</span><span class="op">,</span> <span class="dt">QWORD</span> <span class="dt">PTR</span> <span class="op">[</span><span class="kw">rbp</span><span class="op">-</span><span class="dv">16</span><span class="op">]</span> <span class="co">; rax += b</span></span>
@@ -488,7 +487,7 @@ class="sourceCode asm"><code class="sourceCode fasm"><span id="cb8-1"><a href="#
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="bu">movsd</span> <span class="dt">QWORD</span> <span class="dt">PTR</span> <span class="op">[</span><span class="kw">rbp</span><span class="op">-</span><span class="dv">8</span><span class="op">],</span> <span class="kw">xmm0</span>   <span class="co">; x = xmm0</span></span></code></pre></div></li>
 </ul>
 </section>
-<section id="section-3" class="slide level1">
+<section id="section-2" class="slide level1">
 <h1></h1>
 <ul>
 <li><p>Consideriamo ora questo programma Python:</p>
@@ -523,7 +522,7 @@ elementi in coda al vettore, fanno un’operazione su di essi, e mettono
 il risultato in coda al vettore</p></li>
 </ul>
 </section>
-<section id="section-4" class="slide level1">
+<section id="section-3" class="slide level1">
 <h1></h1>
 <p>Per eseguire il file <code>test.py</code>, occorre sempre chiamare
 <code>python3</code>:</p>
@@ -555,7 +554,7 @@ di quel particolare comando (<code>load_fast</code>,
 <code>store_fast</code>, <code>binary_add</code>, …)</p></li>
 </ul>
 </section>
-<section id="section-5" class="slide level1">
+<section id="section-4" class="slide level1">
 <h1></h1>
 <p>Questa è una possibile implementazione per
 <code>binary_add</code>:</p>
@@ -603,8 +602,8 @@ Traceback (most recent call last):
 NameError: name &#39;function_call&#39; is not defined</code></pre></li>
 <li><p><strong>I programmi sono molto più lenti del C++!</strong></p>
 <div class="sourceCode" id="cb15"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1000</span>):   <span class="co"># Run this for i=0 to i=999</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>    x[i] <span class="op">=</span> a[i] <span class="op">+</span> b[i]  <span class="co"># Every time Python checks the types of `x`, `a`, `b`</span></span></code></pre></div></li>
+class="sourceCode python"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1_000_000</span>):  <span class="co"># Run this for i=0 to i=999_999</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>    x[i] <span class="op">=</span> a[i] <span class="op">+</span> b[i]      <span class="co"># Every time Python checks the types of `x`, `a`, `b`</span></span></code></pre></div></li>
 </ul>
 </section>
 <section id="comodità-di-python" class="slide level1">
@@ -696,7 +695,7 @@ href="https://pandas.pydata.org/">Pandas</a>…</li>
 2013)</li>
 <li>Pensato espressamente per il calcolo scientifico</li>
 <li>Veloce come C++ e facile come Python…?</li>
-<li>Versione corrente: 1.8.5</li>
+<li>Versione corrente: 1.10.2</li>
 </ul>
 </section>
 <section id="dove-si-colloca-julia" class="slide level1">
@@ -712,7 +711,7 @@ href="https://pandas.pydata.org/">Pandas</a>…</li>
 </dd>
 <dt>Just-in-time compilers</dt>
 <dd>
-<p>Java, LuaJIT, Julia, etc.</p>
+<p>Java, Kotlin, C#, LuaJIT, Julia, etc.</p>
 </dd>
 </dl>
 </section>
@@ -801,13 +800,13 @@ versatile.</p></li>
 <section id="propagazione-degli-errori" class="slide level1">
 <h1>Propagazione degli errori</h1>
 <ul>
-<li><p>Abbiamo visto che per studiare come gli errori si propagano nel
+<li><p>Abbiamo visto che, per studiare come gli errori si propagano nel
 codice, un buon metodo è quello di eseguire una simulazione Monte
-Carlo.</p></li>
+Carlo</p></li>
 <li><p>Ma queste simulazioni possono essere molto lente da eseguire,
 soprattutto se il modello è complesso!</p></li>
 <li><p>Per certi calcoli sarebbe sufficiente la propagazione degli
-errori!</p></li>
+errori</p></li>
 </ul>
 </section>
 <section id="la-classe-measurement" class="slide level1">
@@ -843,8 +842,9 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb23-1"><a href="#
 <section id="soluzione" class="slide level1">
 <h1>Soluzione</h1>
 <ul>
-<li><p>Se <code>FunzioneBase</code> fosse una classe di ROOT, sarei
-spacciato: non potrei usare <code>Measurement</code> con essa!</p></li>
+<li><p>Se <code>FunzioneBase</code> fosse una classe di ROOT (quindi
+immodificabile), sarei spacciato: non potrei usare
+<code>Measurement</code> con essa!</p></li>
 <li><p>Se invece fossi <strong>io</strong> l’autore di
 <code>FunzioneBase</code> (ed è così!), potrei allora modificare il
 codice. Ma così non potrei più compilare i miei vecchi programmi che
@@ -915,8 +915,8 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb26-1"><a href="#
 <span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>UnitValue start_pos<span class="op">{</span>Measurement<span class="op">{</span><span class="fl">2.0</span><span class="op">,</span> <span class="fl">0.1</span><span class="op">},</span> <span class="st">&quot;m&quot;</span><span class="op">};</span></span>
 <span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a><span class="co">// …and so on</span></span></code></pre></div></li>
 <li><p>Di fatto, le librerie scientifiche moderne in C++ non usano più
-approcci OOP come ROOT, ma sono basate sui template: ad esempio, <a
-href="https://arma.sourceforge.net/">Armadillo</a>.</p></li>
+approcci OOP come ROOT, ma sono basate sui template (<a
+href="https://arma.sourceforge.net/">Armadillo</a>…)</p></li>
 </ul>
 </section>
 <section id="omoiconicità-di-julia" class="slide level1">

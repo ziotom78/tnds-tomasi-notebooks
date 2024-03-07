@@ -1,11 +1,3 @@
----
-author: "Maurizio Tomasi"
-title: "C++, Python, Julia"
-date: "Università degli Studi di Milano"
-lang: italian
-babel-lang: italian
----
-
 # C++
 
 # Funzionamento di un compilatore
@@ -28,7 +20,7 @@ babel-lang: italian
 -   **Memoria volatile**:
     -   Registro (qualche kB, 64 bit/ciclo)
     -   Cache (128 kB–128 MB, 40-700 GB/s)
-    -   RAM (10 GB/s)
+    -   RAM (4–32 GB, 10 GB/s)
 -   **Memoria permanente**:
     -   Disco fisso SSD (1 GB/s)
     -   Disco fisso HDD (120 MB/s)
@@ -116,7 +108,7 @@ babel-lang: italian
     -    ARM: usata soprattutto nei cellulari e nei tablet, ma anche
          in console di gioco (Nintendo Switch) e alcuni laptop
          (Chromebooks)
-    -    M1/M2: simili ad ARM, sono montati sui computer Apple più recenti
+    -    M1/M2/M3: simili ad ARM, sono montati sui computer Apple più recenti
 
 # Compilatori
 
@@ -269,20 +261,18 @@ LoopEnd:
 #include <iostream>
 
 int main() {
-  double sum{};
+  double result{};
   for(double i{}; i < 10'000'000; i += 1) {
-      sum += i;
+      result += i;
   }
-  std::cout << sum << "\n";
+  std::cout << result << "\n";
 }
 ```
 </td>
 <td>
 ```python
-sum = 0.0
-for i in range(10_000_000):
-    sum += i
-print(sum)
+result = sum(range(10_000_000))
+print(result)
 ```
 </td>
 </tr>
@@ -291,7 +281,7 @@ print(sum)
 -   Il programma Python è più veloce da scrivere e più semplice da
     leggere
 -   Il programma C++ richiede 33 ms per l'esecuzione, quello Python
-    1 s (30 volte più lento!)
+    150 ms (5 volte più lento!)
 
 # Velocità di Python
 
@@ -301,12 +291,13 @@ print(sum)
 -   Questo codice non viene eseguito dalla CPU ma da un programma C,
     che lo converte **in fase di esecuzione** in una sequenza di
     istruzioni in linguaggio macchina
--   Vediamo come funziona in un esempio pratico
+-   Questo approccio è più lento, ma ha alcuni vantaggi significativi:
+    vediamoli in un esempio pratico
 
-#
+# Tipi e codice macchina
 
--   In C++, una istruzione come `x = a + b` può essere convertita in
-    Assembler così se `a` e `b` sono interi:
+-   In C++, una istruzione come `x = a + b`, se `a` e `b` sono interi, può essere convertita in
+    Assembler così:
 
     ```asm
     mov rax, QWORD PTR [rbp-24] ; rax = a
@@ -445,8 +436,8 @@ void binary_add(PyObject * val1,
 -   **I programmi sono molto più lenti del C++!**
 
     ```python
-    for i in range(1000):   # Run this for i=0 to i=999
-        x[i] = a[i] + b[i]  # Every time Python checks the types of `x`, `a`, `b`
+    for i in range(1_000_000):  # Run this for i=0 to i=999_999
+        x[i] = a[i] + b[i]      # Every time Python checks the types of `x`, `a`, `b`
     ```
 
 # Comodità di Python
@@ -533,7 +524,7 @@ upper_flange         (T = 301.76 K)
 -   Linguaggio molto recente (versione 0.1 rilasciata a Febbraio 2013)
 -   Pensato espressamente per il calcolo scientifico
 -   Veloce come C++ e facile come Python…?
--   Versione corrente: 1.8.5
+-   Versione corrente: 1.10.2
 
 # Dove si colloca Julia?
 
@@ -547,7 +538,7 @@ Interpreti
 
 Just-in-time compilers
 
-: Java, LuaJIT, Julia, etc.
+: Java, Kotlin, C#, LuaJIT, Julia, etc.
 
 # Un assaggio del linguaggio
 
@@ -630,11 +621,11 @@ per Python in Julia non si specificano i tipi?
 
 # Propagazione degli errori
 
--   Abbiamo visto che per studiare come gli errori si propagano nel codice, un buon metodo è quello di eseguire una simulazione Monte Carlo.
+-   Abbiamo visto che, per studiare come gli errori si propagano nel codice, un buon metodo è quello di eseguire una simulazione Monte Carlo
 
 -   Ma queste simulazioni possono essere molto lente da eseguire, soprattutto se il modello è complesso!
 
--   Per certi calcoli sarebbe sufficiente la propagazione degli errori!
+-   Per certi calcoli sarebbe sufficiente la propagazione degli errori
 
 # La classe `Measurement`
 
@@ -667,7 +658,7 @@ Measurement operator+(Measurement a, Measurement b) {
 
 # Soluzione
 
--   Se `FunzioneBase` fosse una classe di ROOT, sarei spacciato: non potrei usare `Measurement` con essa!
+-   Se `FunzioneBase` fosse una classe di ROOT (quindi immodificabile), sarei spacciato: non potrei usare `Measurement` con essa!
 
 -   Se invece fossi **io** l'autore di `FunzioneBase` (ed è così!), potrei allora modificare il codice. Ma così non potrei più compilare i miei vecchi programmi che usavano la versione con i `double`.
 
@@ -726,7 +717,7 @@ Measurement operator+(Measurement a, Measurement b) {
 	// …and so on
 	```
 
--   Di fatto, le librerie scientifiche moderne in C++ non usano più approcci OOP come ROOT, ma sono basate sui template: ad esempio, [Armadillo](https://arma.sourceforge.net/).
+-   Di fatto, le librerie scientifiche moderne in C++ non usano più approcci OOP come ROOT, ma sono basate sui template ([Armadillo](https://arma.sourceforge.net/)…)
 
 
 # Omoiconicità di Julia
@@ -923,3 +914,11 @@ $
     ([youtu.be/rZS2LGiurKY](https://youtu.be/rZS2LGiurKY)), lo speaker
     spiega come calcolare efficacemente derivate con Julia
 
+
+---
+author: "Maurizio Tomasi"
+title: "C++, Python, Julia"
+date: "Università degli Studi di Milano"
+lang: italian
+babel-lang: italian
+---
