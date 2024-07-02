@@ -1,100 +1,16 @@
 <!DOCTYPE html>
-<html  lang="it-IT"  dir="ltr">
-
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Lezione 5: Classi ed ereditarietà</title>
-        <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
-        <link rel="apple-touch-icon-precomposed" href="images/apple-touch-icon.png">
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/2.26.4/css/uikit.gradient.css">
-
-        <!-- <link rel="stylesheet" href="style.css"> -->
-        <link rel="stylesheet" href="https://cdn.rawgit.com/diversen/pandoc-uikit/master/style.css">
-        <link href="css/custom.css" rel="stylesheet" />
-        <link href="https://vjs.zencdn.net/5.4.4/video-js.css" rel="stylesheet" />
-        <script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
-        <!-- <script src="uikit.js"></script> -->
-        <script src="https://cdn.rawgit.com/diversen/pandoc-uikit/master/uikit.js"></script>
-        <!-- <script src="scripts.js"></script> -->
-        <script src="https://cdn.rawgit.com/diversen/pandoc-uikit/master/scripts.js"></script>
-        <!-- <script src="jquery.sticky-kit.js "></script> -->
-        <script src="https://cdn.rawgit.com/diversen/pandoc-uikit/master/jquery.sticky-kit.js"></script>
-
-        <meta name="generator" content="pandoc-uikit" />
-                <meta name="author" content="Leonardo Carminati" />
-                <meta name="author" content="Maurizio Tomasi" />
-                        <title>Lezione 5: Classi ed ereditarietà</title>
-        <style type="text/css">code{white-space: pre;}</style>
-                        <style type="text/css">
-            pre > code.sourceCode { white-space: pre; position: relative; }
-            pre > code.sourceCode > span { line-height: 1.25; }
-            pre > code.sourceCode > span:empty { height: 1.2em; }
-            .sourceCode { overflow: visible; }
-            code.sourceCode > span { color: inherit; text-decoration: inherit; }
-            div.sourceCode { margin: 1em 0; }
-            pre.sourceCode { margin: 0; }
-            @media screen {
-            div.sourceCode { overflow: auto; }
-            }
-            @media print {
-            pre > code.sourceCode { white-space: pre-wrap; }
-            pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-            }
-            pre.numberSource code
-              { counter-reset: source-line 0; }
-            pre.numberSource code > span
-              { position: relative; left: -4em; counter-increment: source-line; }
-            pre.numberSource code > span > a:first-child::before
-              { content: counter(source-line);
-                position: relative; left: -1em; text-align: right; vertical-align: baseline;
-                border: none; display: inline-block;
-                -webkit-touch-callout: none; -webkit-user-select: none;
-                -khtml-user-select: none; -moz-user-select: none;
-                -ms-user-select: none; user-select: none;
-                padding: 0 4px; width: 4em;
-                color: #aaaaaa;
-              }
-            pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-            div.sourceCode
-              {   }
-            @media screen {
-            pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-            }
-            code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-            code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-            code span.at { color: #7d9029; } /* Attribute */
-            code span.bn { color: #40a070; } /* BaseN */
-            code span.bu { color: #008000; } /* BuiltIn */
-            code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-            code span.ch { color: #4070a0; } /* Char */
-            code span.cn { color: #880000; } /* Constant */
-            code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-            code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-            code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-            code span.dt { color: #902000; } /* DataType */
-            code span.dv { color: #40a070; } /* DecVal */
-            code span.er { color: #ff0000; font-weight: bold; } /* Error */
-            code span.ex { } /* Extension */
-            code span.fl { color: #40a070; } /* Float */
-            code span.fu { color: #06287e; } /* Function */
-            code span.im { color: #008000; font-weight: bold; } /* Import */
-            code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-            code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-            code span.op { color: #666666; } /* Operator */
-            code span.ot { color: #007020; } /* Other */
-            code span.pp { color: #bc7a00; } /* Preprocessor */
-            code span.sc { color: #4070a0; } /* SpecialChar */
-            code span.ss { color: #bb6688; } /* SpecialString */
-            code span.st { color: #4070a0; } /* String */
-            code span.va { color: #19177c; } /* Variable */
-            code span.vs { color: #4070a0; } /* VerbatimString */
-            code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-        </style>
-                                            <script defer=""
-                                            src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js"></script>
-                                            <script>document.addEventListener("DOMContentLoaded", function () {
+<html xmlns="http://www.w3.org/1999/xhtml" lang="it-IT" xml:lang="it-IT">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc-markdown-css-theme" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Leonardo Carminati" />
+  <meta name="author" content="Maurizio Tomasi" />
+  <title>Lezione 5: Classi ed ereditarietà</title>
+  <link rel="stylesheet" href="css/theme.css" />
+  <link rel="stylesheet" href="css/skylighting-solarized-theme.css" />
+  <script defer="" src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
  var mathElements = document.getElementsByClassName("math");
  var macros = [];
  for (var i = 0; i < mathElements.length; i++) {
@@ -107,248 +23,83 @@
     fleqn: false
    });
 }}});
-                                            </script>
-                                            <link rel="stylesheet"
-                                            href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css" />
-                                          <script src="./fmtinstall.js"></script>
-                 
-    </head>
+  </script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css" />
+  <script src="./fmtinstall.js"></script>
+</head>
+<body>
 
-    <body>
+<header>
+<h1 class="title">Lezione 5: Classi ed ereditarietà</h1>
+<blockquote class="metadata">
+<p class="author">
+      Leonardo CarminatiMaurizio Tomasi
+  </p>
+<p class="date before-toc"><time datetime="A.A. 2023−2024">A.A. 2023−2024</time></p>
+</blockquote>
+</header>
 
+<nav id="TOC" role="doc-toc">
+    <strong>Contents</strong><label for="contents">⊕</label>
+  <input type="checkbox" id="contents">
+  <ul>
+  <li><a href="#esercizio-5.0" id="toc-esercizio-5.0">Esercizio 5.0 - Creazione della classe Posizione</a>
+  <ul>
+  <li><a href="#header-file-della-classe" id="toc-header-file-della-classe">Header file della classe</a></li>
+  <li><a href="#file-di-implementazione-delle-classe" id="toc-file-di-implementazione-delle-classe">File di implementazione delle classe</a></li>
+  <li><a href="#esempio-di-programma" id="toc-esempio-di-programma">Esempio di programma</a></li>
+  <li><a href="#incapsulamento-e-data-hiding" id="toc-incapsulamento-e-data-hiding">Incapsulamento e <em>data hiding</em></a></li>
+  <li><a href="#una-nota-sui-distruttori" id="toc-una-nota-sui-distruttori">Una nota sui distruttori</a></li>
+  </ul></li>
+  <li><a href="#esercizio-5.1" id="toc-esercizio-5.1">Esercizio 5.1 - Creazione della classe Particella ed Elettrone</a>
+  <ul>
+  <li><a href="#classe-particella" id="toc-classe-particella">Classe <code>Particella</code></a></li>
+  <li><a href="#classe-elettrone" id="toc-classe-elettrone">Classe <code>Elettrone</code></a></li>
+  <li><a href="#esempio-di-programma-1" id="toc-esempio-di-programma-1">Esempio di programma</a></li>
+  <li><a href="#domanda" id="toc-domanda">Domanda</a></li>
+  </ul></li>
+  <li><a href="#esercizio-5.2" id="toc-esercizio-5.2">Esercizio 5.2 - Creazione delle classi <code>CampoVettoriale</code> e <code>PuntoMateriale</code></a>
+  <ul>
+  <li><a href="#header-file-della-classe-campovettoriale" id="toc-header-file-della-classe-campovettoriale">Header file della classe <code>CampoVettoriale</code></a></li>
+  <li><a href="#header-file-della-classe-puntomateriale" id="toc-header-file-della-classe-puntomateriale">Header file della classe <code>PuntoMateriale</code></a></li>
+  </ul></li>
+  <li><a href="#esercizio-5.3" id="toc-esercizio-5.3">Esercizio 5.3 - Calcolo del campo elettrico generato da un dipolo (da consegnare)</a>
+  <ul>
+  <li><a href="#esempio-di-programma-2" id="toc-esempio-di-programma-2">Esempio di programma</a></li>
+  <li><a href="#il-makefile" id="toc-il-makefile">Il <code>Makefile</code></a></li>
+  <li><a href="#leggi-di-potenza" id="toc-leggi-di-potenza">Leggi di potenza</a></li>
+  <li><a href="#creazione-di-plot" id="toc-creazione-di-plot">Creazione di plot</a></li>
+  </ul></li>
+  <li><a href="#esercizio-5.4" id="toc-esercizio-5.4">Esercizio 5.4 - Campo di multipolo (approfondimento)</a></li>
+  <li><a href="#esercizio-5.5" id="toc-esercizio-5.5">Esercizio 5.5 - Gravità dallo spazio (approfondimento)</a>
+  <ul>
+  <li><a href="#grafici" id="toc-grafici">Grafici</a></li>
+  </ul></li>
+  <li><a href="#errori-comuni" id="toc-errori-comuni">Errori comuni</a></li>
+  </ul>
+</nav>
 
-        <div class="uk-container uk-container-center uk-margin-top uk-margin-large-bottom">
-
-                        <div class="uk-grid" data-uk-grid-margin>
-                <div class="uk-width-1-1">
-                    <h1 class="uk-heading-large">Lezione 5: Classi ed
-ereditarietà</h1>
-                                        <h3 class="uk-heading-large">A.A.
-2023−2024</p></h3>
-                                                            <p class="uk-text-large">Leonardo
-Carminati</p>
-                                        <p class="uk-text-large">Maurizio
-Tomasi</p>
-                                    </div>
-            </div>
-            
-            <div class="uk-grid" data-uk-grid-margin >          
-                <div class="uk-width-medium-1-4">
-                    <div class="uk-overflow-container" data-uk-sticky="{top:25,media: 768}">
-                        <div class="uk-panel uk-panel-box menu-begin" >
-
-                                                        <ul>
-                                                        <li><a
-                                                        href="#esercizio-5.0"
-                                                        id="toc-esercizio-5.0">Esercizio
-                                                        5.0 - Creazione
-                                                        della classe
-                                                        Posizione</a>
-                                                        <ul>
-                                                        <li><a
-                                                        href="#header-file-della-classe"
-                                                        id="toc-header-file-della-classe">Header
-                                                        file della
-                                                        classe</a></li>
-                                                        <li><a
-                                                        href="#file-di-implementazione-delle-classe"
-                                                        id="toc-file-di-implementazione-delle-classe">File
-                                                        di
-                                                        implementazione
-                                                        delle
-                                                        classe</a></li>
-                                                        <li><a
-                                                        href="#esempio-di-programma"
-                                                        id="toc-esempio-di-programma">Esempio
-                                                        di
-                                                        programma</a></li>
-                                                        <li><a
-                                                        href="#incapsulamento-e-data-hiding"
-                                                        id="toc-incapsulamento-e-data-hiding">Incapsulamento
-                                                        e <em>data
-                                                        hiding</em></a></li>
-                                                        <li><a
-                                                        href="#una-nota-sui-distruttori"
-                                                        id="toc-una-nota-sui-distruttori">Una
-                                                        nota sui
-                                                        distruttori</a></li>
-                                                        </ul></li>
-                                                        <li><a
-                                                        href="#esercizio-5.1"
-                                                        id="toc-esercizio-5.1">Esercizio
-                                                        5.1 - Creazione
-                                                        della classe
-                                                        Particella ed
-                                                        Elettrone</a>
-                                                        <ul>
-                                                        <li><a
-                                                        href="#classe-particella"
-                                                        id="toc-classe-particella">Classe
-                                                        <code>Particella</code></a></li>
-                                                        <li><a
-                                                        href="#classe-elettrone"
-                                                        id="toc-classe-elettrone">Classe
-                                                        <code>Elettrone</code></a></li>
-                                                        <li><a
-                                                        href="#esempio-di-programma-1"
-                                                        id="toc-esempio-di-programma-1">Esempio
-                                                        di
-                                                        programma</a></li>
-                                                        <li><a
-                                                        href="#domanda"
-                                                        id="toc-domanda">Domanda</a></li>
-                                                        </ul></li>
-                                                        <li><a
-                                                        href="#esercizio-5.2"
-                                                        id="toc-esercizio-5.2">Esercizio
-                                                        5.2 - Creazione
-                                                        delle classi
-                                                        <code>CampoVettoriale</code>
-                                                        e
-                                                        <code>PuntoMateriale</code></a>
-                                                        <ul>
-                                                        <li><a
-                                                        href="#header-file-della-classe-campovettoriale"
-                                                        id="toc-header-file-della-classe-campovettoriale">Header
-                                                        file della
-                                                        classe
-                                                        <code>CampoVettoriale</code></a>
-                                                        <ul>
-                                                        <li><a
-                                                        href="#overloading-operatori"
-                                                        id="toc-overloading-operatori">Overloading
-                                                        operatori</a></li>
-                                                        </ul></li>
-                                                        <li><a
-                                                        href="#header-file-della-classe-puntomateriale"
-                                                        id="toc-header-file-della-classe-puntomateriale">Header
-                                                        file della
-                                                        classe
-                                                        <code>PuntoMateriale</code></a>
-                                                        <ul>
-                                                        <li><a
-                                                        href="#ereditarietà-multipla"
-                                                        id="toc-ereditarietà-multipla">Ereditarietà
-                                                        multipla</a></li>
-                                                        <li><a
-                                                        href="#utilizzo-di-costruttori-delle-classi-madri"
-                                                        id="toc-utilizzo-di-costruttori-delle-classi-madri">Utilizzo
-                                                        di costruttori
-                                                        delle classi
-                                                        madri</a></li>
-                                                        </ul></li>
-                                                        </ul></li>
-                                                        <li><a
-                                                        href="#esercizio-5.3"
-                                                        id="toc-esercizio-5.3">Esercizio
-                                                        5.3 - Calcolo
-                                                        del campo
-                                                        elettrico
-                                                        generato da un
-                                                        dipolo (da
-                                                        consegnare)</a>
-                                                        <ul>
-                                                        <li><a
-                                                        href="#esempio-di-programma-2"
-                                                        id="toc-esempio-di-programma-2">Esempio
-                                                        di
-                                                        programma</a></li>
-                                                        <li><a
-                                                        href="#il-makefile"
-                                                        id="toc-il-makefile">Il
-                                                        <code>Makefile</code></a></li>
-                                                        <li><a
-                                                        href="#leggi-di-potenza"
-                                                        id="toc-leggi-di-potenza">Leggi
-                                                        di
-                                                        potenza</a></li>
-                                                        <li><a
-                                                        href="#creazione-di-plot"
-                                                        id="toc-creazione-di-plot">Creazione
-                                                        di plot</a></li>
-                                                        </ul></li>
-                                                        <li><a
-                                                        href="#esercizio-5.4"
-                                                        id="toc-esercizio-5.4">Esercizio
-                                                        5.4 - Campo di
-                                                        multipolo
-                                                        (approfondimento)</a></li>
-                                                        <li><a
-                                                        href="#esercizio-5.5"
-                                                        id="toc-esercizio-5.5">Esercizio
-                                                        5.5 - Gravità
-                                                        dallo spazio
-                                                        (approfondimento)</a>
-                                                        <ul>
-                                                        <li><a
-                                                        href="#grafici"
-                                                        id="toc-grafici">Grafici</a></li>
-                                                        </ul></li>
-                                                        <li><a
-                                                        href="#errori-comuni"
-                                                        id="toc-errori-comuni">Errori
-                                                        comuni</a></li>
-                                                        </ul>
-                            
-                        </div>
-                    </div>
-                </div>
-
-                <div class="uk-width-medium-3-4">
-<p>[La pagina con la spiegazione originale degli esercizi si trova qui:
-<a href="https://labtnds.docs.cern.ch/Lezione5/Lezione5/"
-class="uri">https://labtnds.docs.cern.ch/Lezione5/Lezione5/</a>.]</p>
-<p>In questa quinta lezione vogliamo affrontare un semplice problema di
-elettrostatica utilizzando un codice numerico. In particolare, vogliamo
-calcolare il campo elettrico generato da un dipolo. Vedremo poi come il
-codice si può estendere in modo immediato a problemi più complessi (ad
-esempio per studiare il campo generato da un multi-polo o il campo
-gravitazionale generato da un sistema di masse). Nell’affrontare questo
-problema fisico approfondiremo il concetto di ereditarietà in C++. Come
-al solito dovremo prima preparare un set di classi utili per lo
-svolgimento dell’esercizio.</p>
-<h1 id="esercizio-5.0">Esercizio 5.0 - Creazione della classe
-Posizione</h1>
-<p>Implementare una classe <code>Posizione</code> che descriva un punto
-nello spazio seguendo queste indicazioni:</p>
+<main>
+<p>[La pagina con la spiegazione originale degli esercizi si trova qui: <a href="https://labtnds.docs.cern.ch/Lezione5/Lezione5/" class="uri">https://labtnds.docs.cern.ch/Lezione5/Lezione5/</a>.]</p>
+<p>In questa quinta lezione vogliamo affrontare un semplice problema di elettrostatica utilizzando un codice numerico. In particolare, vogliamo calcolare il campo elettrico generato da un dipolo. Vedremo poi come il codice si può estendere in modo immediato a problemi più complessi (ad esempio per studiare il campo generato da un multi-polo o il campo gravitazionale generato da un sistema di masse). Nell’affrontare questo problema fisico approfondiremo il concetto di ereditarietà in C++. Come al solito dovremo prima preparare un set di classi utili per lo svolgimento dell’esercizio.</p>
+<h1 id="esercizio-5.0">Esercizio 5.0 - Creazione della classe Posizione</h1>
+<p>Implementare una classe <code>Posizione</code> che descriva un punto nello spazio seguendo queste indicazioni:</p>
 <ol>
-<li>Come data membri privati usare la terna di coordinate
-cartesiane.</li>
-<li>Definire un costruttore di default che crei un punto di coordinate
-(0,0,0).</li>
-<li>Definire un costruttore che abbia come argomento una terna di numeri
-<code>double</code> corrispondenti alle coordinate del punto.</li>
-<li>Definire metodi per restituire le coordinate del punto in sistemi di
-coordinate cartesiane, sferiche e cilindriche.</li>
+<li>Come data membri privati usare la terna di coordinate cartesiane.</li>
+<li>Definire un costruttore di default che crei un punto di coordinate (0,0,0).</li>
+<li>Definire un costruttore che abbia come argomento una terna di numeri <code>double</code> corrispondenti alle coordinate del punto.</li>
+<li>Definire metodi per restituire le coordinate del punto in sistemi di coordinate cartesiane, sferiche e cilindriche.</li>
 <li>Definire un metodo che calcoli la distanza da un altro punto.</li>
 </ol>
-<p>Verificare il funzionamento della classe creando un programmino che
-legga da riga di comando le coordinate cartesiane di un punto e ne
-stampi le coordinate in un sistema di coordinate sferiche e
-cilindriche.</p>
+<p>Verificare il funzionamento della classe creando un programmino che legga da riga di comando le coordinate cartesiane di un punto e ne stampi le coordinate in un sistema di coordinate sferiche e cilindriche.</p>
 <h2 id="header-file-della-classe">Header file della classe</h2>
-<p>Nell’header file <code>posizione.h</code> vanno dichiarati tutti i
-metodi ed i data membri. Si noti come i data membri siano tutti privati:
-questa modo di disegnare le classi implementa il concetto di
-<em>incapsulamento</em> e <em>data hiding</em> in C++.</p>
+<p>Nell’header file <code>posizione.h</code> vanno dichiarati tutti i metodi ed i data membri. Si noti come i data membri siano tutti privati: questa modo di disegnare le classi implementa il concetto di <em>incapsulamento</em> e <em>data hiding</em> in C++.</p>
 <p>Un paio di punti già che vale la pena ricordare:</p>
 <ol>
-<li>Il qualificatore <code>const</code> dopo la dichiarazione di una
-funzione informa che la funzione non modificherà il contenuto
-dell’oggetto. In maniera simile il qualificatore <code>const</code>
-nell’argomento di <code>Distanza</code> specifica che il metodo
-<code>Distanza</code> non modificherà il suo argomento. È sempre utile
-specificare esplicitamente queste proprietà dei metodi.</li>
-<li>L’insieme dell direttive <code>#ifndef</code>, <code>#define</code>,
-<code>#endif</code> serve per proteggersi da inclusioni incrociate
-(molto comuni quando si utilizzano diverse classi che interagiscono tra
-di loro). Nelle <a href="./tomasi-lezione-02.html#pragma-once">slide</a>
-abbiamo però visto che <code>#pragma once</code> è un modo più semplice
-di ottenere lo stesso risultato che mette al riparo da tanti potenziali
-errori.</li>
+<li>Il qualificatore <code>const</code> dopo la dichiarazione di una funzione informa che la funzione non modificherà il contenuto dell’oggetto. In maniera simile il qualificatore <code>const</code> nell’argomento di <code>Distanza</code> specifica che il metodo <code>Distanza</code> non modificherà il suo argomento. È sempre utile specificare esplicitamente queste proprietà dei metodi.</li>
+<li>L’insieme dell direttive <code>#ifndef</code>, <code>#define</code>, <code>#endif</code> serve per proteggersi da inclusioni incrociate (molto comuni quando si utilizzano diverse classi che interagiscono tra di loro). Nelle <a href="./tomasi-lezione-02.html#pragma-once">slide</a> abbiamo però visto che <code>#pragma once</code> è un modo più semplice di ottenere lo stesso risultato che mette al riparo da tanti potenziali errori.</li>
 </ol>
-<div class="sourceCode" id="cb1"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#pragma once</span></span>
+<div class="sourceCode" id="cb1"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#pragma once</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Posizione <span class="op">{</span></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span><span class="op">:</span></span>
@@ -372,19 +123,9 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb1-1"><a href="#c
 <span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="kw">private</span><span class="op">:</span></span>
 <span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> <span class="va">m_x</span><span class="op">,</span> <span class="va">m_y</span><span class="op">,</span> <span class="va">m_z</span><span class="op">;</span></span>
 <span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code></pre></div>
-<h2 id="file-di-implementazione-delle-classe">File di implementazione
-delle classe</h2>
-<p>Qui vediamo un esempio di implementazione della classe (file
-<code>posizione.cpp</code>). Per prima cosa sono definiti i costruttori
-ed un distruttore, che in questo caso può esser vuoto (nei costruttori
-non ci sono operazioni di allocazione dinamica della memoria quindi non
-è necessario implementare regole di distruzione particolari). Noi
-definiamo comunque il distruttore, perché questo è un esempio didattico;
-solitamente per classi così semplici però il distruttore si tralascia se
-il suo corpo è vuoto (<code>{}</code>). Successivamente sono
-implementati tutti i metodi descritti nell’header file:</p>
-<div class="sourceCode" id="cb2"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;posizione.h&quot;</span></span>
+<h2 id="file-di-implementazione-delle-classe">File di implementazione delle classe</h2>
+<p>Qui vediamo un esempio di implementazione della classe (file <code>posizione.cpp</code>). Per prima cosa sono definiti i costruttori ed un distruttore, che in questo caso può esser vuoto (nei costruttori non ci sono operazioni di allocazione dinamica della memoria quindi non è necessario implementare regole di distruzione particolari). Noi definiamo comunque il distruttore, perché questo è un esempio didattico; solitamente per classi così semplici però il distruttore si tralascia se il suo corpo è vuoto (<code>{}</code>). Successivamente sono implementati tutti i metodi descritti nell’header file:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;posizione.h&quot;</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;cmath&gt;</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co">// costruttore di default</span></span>
@@ -423,22 +164,11 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb2-1"><a href="#c
 <span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>              pow<span class="op">(</span>getZ<span class="op">()</span> <span class="op">-</span> b<span class="op">.</span>getZ<span class="op">(),</span> <span class="dv">2</span><span class="op">));</span></span>
 <span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 <h2 id="esempio-di-programma">Esempio di programma</h2>
-<p>Questo programma utilizza la nuova classe appena creata: richiede di
-fornire come argomenti le tre coordinate cartesiane e poi stampa le
-terne di coordinate cartesiane, sferiche e cilindriche.</p>
-<p>Il programma è pensato per usare la libreria <a
-href="https://github.com/fmtlib/fmt"><code>fmt</code></a>, che potete
-installare usando lo script <a
-href="./install_fmt_library"><code>install_fmt_library</code></a>:
-scaricatelo nella directory dell’esercizio ed eseguitelo con
-<code>sh install_fmt_library</code>, oppure eseguite questo comando:</p>
+<p>Questo programma utilizza la nuova classe appena creata: richiede di fornire come argomenti le tre coordinate cartesiane e poi stampa le terne di coordinate cartesiane, sferiche e cilindriche.</p>
+<p>Il programma è pensato per usare la libreria <a href="https://github.com/fmtlib/fmt"><code>fmt</code></a>, che potete installare usando lo script <a href="./install_fmt_library"><code>install_fmt_library</code></a>: scaricatelo nella directory dell’esercizio ed eseguitelo con <code>sh install_fmt_library</code>, oppure eseguite questo comando:</p>
 <p><input type="text" value="curl https://ziotom78.github.io/tnds-tomasi-notebooks/install_fmt_library | sh" id="installFmtCommand" readonly="1" size="60"><button onclick='copyFmtInstallationScript("installFmtCommand")'>Copia</button></p>
-<p>(Se invece usate Windows, scaricate questo <a
-href="./fmtlib.zip">file zip</a> nella directory dell’esercizio e
-decomprimetelo). Le istruzioni dettagliate sono qui: <a
-href="index.html#fmtinstall">index.html#fmtinstall</a>.</p>
-<div class="sourceCode" id="cb3"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;posizione.h&quot;</span></span>
+<p>(Se invece usate Windows, scaricate questo <a href="./fmtlib.zip">file zip</a> nella directory dell’esercizio e decomprimetelo). Le istruzioni dettagliate sono qui: <a href="index.html#fmtinstall">index.html#fmtinstall</a>.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;posizione.h&quot;</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co">// Installarla con ./install_fmt_library</span></span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;fmtlib.h&quot;</span></span>
@@ -481,71 +211,32 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb3-1"><a href="#c
 Coordinate cartesiane: 1, 2, 5
 Coordinate cilindriche: 2.23606797749979, 1.1071487177940904, 5
 Coordinate sferiche: 5.477225575051661, 1.1071487177940904, 0.420534335283965</code></pre>
-<h2 id="incapsulamento-e-data-hiding">Incapsulamento e <em>data
-hiding</em></h2>
-<p>Proviamo ad utilizzare l’esempio della classe <code>Posizione</code>
-per riflettere sul concetto di <em>incapsulamento</em>. La nostra classe
-“nasconde” i dati principali (le tre coordinate nel caso specifico) in
-un set di data-membri privati (<code>m_x</code>, <code>m_y</code>,
-<code>m_z</code>). Tali data-membri non sono per definizione accessibili
-al programma principale in modo diretto, ma solo attraverso una serie di
-metodi pubblici (interfacce) che proteggono il dato da un utilizzo
-incontrollato. Inoltre la protezione del dato dietro interfacce
-pubbliche mette al riparo da possibili cambiamenti o correzioni nel
-design di una classe.</p>
-<p>Per fare un esempio, supponiamo che per qualche ragione l’autore
-della classe decida che è meglio rappresentare la posizione utilizzando
-una terna di numeri che corrispondono alle coordinate sferiche. Se
-l’autore della classe adegua di conseguenza le interfacce pubbliche, un
-eventuale utilizzatore della classe (il nostro <code>main</code>) non si
-accorgerebbe della variazione. Se invece il
-<code>main`` avesse avuto libero accesso alle tre coordinate e le avesse utilizzate direttamente, il cambiamento di design della classe avrebbe richiesto rendendo pesanti cambiamenti anche nel</code>main``.</p>
+<h2 id="incapsulamento-e-data-hiding">Incapsulamento e <em>data hiding</em></h2>
+<p>Proviamo ad utilizzare l’esempio della classe <code>Posizione</code> per riflettere sul concetto di <em>incapsulamento</em>. La nostra classe “nasconde” i dati principali (le tre coordinate nel caso specifico) in un set di data-membri privati (<code>m_x</code>, <code>m_y</code>, <code>m_z</code>). Tali data-membri non sono per definizione accessibili al programma principale in modo diretto, ma solo attraverso una serie di metodi pubblici (interfacce) che proteggono il dato da un utilizzo incontrollato. Inoltre la protezione del dato dietro interfacce pubbliche mette al riparo da possibili cambiamenti o correzioni nel design di una classe.</p>
+<p>Per fare un esempio, supponiamo che per qualche ragione l’autore della classe decida che è meglio rappresentare la posizione utilizzando una terna di numeri che corrispondono alle coordinate sferiche. Se l’autore della classe adegua di conseguenza le interfacce pubbliche, un eventuale utilizzatore della classe (il nostro <code>main</code>) non si accorgerebbe della variazione. Se invece il <code>main`` avesse avuto libero accesso alle tre coordinate e le avesse utilizzate direttamente, il cambiamento di design della classe avrebbe richiesto rendendo pesanti cambiamenti anche nel</code>main``.</p>
 <h2 id="una-nota-sui-distruttori">Una nota sui distruttori</h2>
-<p>L’implementazione esplicita di un distruttore è spesso necessaria per
-evitare <em>memory leaks</em> quando il costruttore alloca dinamicamente
-memoria. In caso contrario tipicamente il distruttore sarà vuoto e può
-essere omesso. Ricordiamoci che se il distruttore viene dichiarato
-nell’header file della classe allora dobbiamo necessariamente fornirne
-una implementazione (anche vuota). In questo caso in
-<code>posizione.h</code> ci basta scrivere:</p>
-<div class="sourceCode" id="cb5"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="op">~</span>Posizione<span class="op">()</span> <span class="op">{}</span></span></code></pre></div>
-<h1 id="esercizio-5.1">Esercizio 5.1 - Creazione della classe Particella
-ed Elettrone</h1>
-<p>Incominciamo a definire due classi che ci permetteranno di
-rappresentare le sorgenti del campo (elettrico in questo caso).</p>
+<p>L’implementazione esplicita di un distruttore è spesso necessaria per evitare <em>memory leaks</em> quando il costruttore alloca dinamicamente memoria. In caso contrario tipicamente il distruttore sarà vuoto e può essere omesso. Ricordiamoci che se il distruttore viene dichiarato nell’header file della classe allora dobbiamo necessariamente fornirne una implementazione (anche vuota). In questo caso in <code>posizione.h</code> ci basta scrivere:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="op">~</span>Posizione<span class="op">()</span> <span class="op">{}</span></span></code></pre></div>
+<h1 id="esercizio-5.1">Esercizio 5.1 - Creazione della classe Particella ed Elettrone</h1>
+<p>Incominciamo a definire due classi che ci permetteranno di rappresentare le sorgenti del campo (elettrico in questo caso).</p>
 <ul>
-<li><p>Costruiamo una classe <code>Particella</code> caratterizzata
-dall’avere una massa ed una carica, quindi dotata dei seguenti
-metodi:</p>
+<li><p>Costruiamo una classe <code>Particella</code> caratterizzata dall’avere una massa ed una carica, quindi dotata dei seguenti metodi:</p>
 <ol>
 <li><p>Un construttore avente come argomenti massa e carica.</p></li>
 <li><p>Dei metodi di accesso ai valori di massa e carica.</p></li>
 <li><p>Un metodo per stampare tali valori.</p></li>
 </ol></li>
-<li><p>Siccome vogliamo che questa classe sia la classe base di altre
-classi, dichiareremo i data membri come `protected``.</p></li>
-<li><p>Costruiamo, attraverso il meccanismo di ereditarietà, una classe
-derivata <code>Elettrone</code> che, essendo una <code>Particella</code>
-di massa e carica note (i cui valori sono riportati su <a
-href="http://it.wikipedia.org/wiki/Elettrone">wikipedia</a>), ha il solo
-costruttore di default, che inizializza correttamente i data membri.
-Modifichiamo il metodo di stampa in modo che indichi che si tratta di un
-elettrone.</p></li>
+<li><p>Siccome vogliamo che questa classe sia la classe base di altre classi, dichiareremo i data membri come `protected``.</p></li>
+<li><p>Costruiamo, attraverso il meccanismo di ereditarietà, una classe derivata <code>Elettrone</code> che, essendo una <code>Particella</code> di massa e carica note (i cui valori sono riportati su <a href="http://it.wikipedia.org/wiki/Elettrone">wikipedia</a>), ha il solo costruttore di default, che inizializza correttamente i data membri. Modifichiamo il metodo di stampa in modo che indichi che si tratta di un elettrone.</p></li>
 </ul>
-<p>Verifichiamo che le nuovi classi e l’ereditarietà funzioni
-correttamente:</p>
+<p>Verifichiamo che le nuovi classi e l’ereditarietà funzioni correttamente:</p>
 <ol>
 <li>Istanziamo dinamicamente un oggetto per ogni classe.</li>
-<li>Verifichiamo che su tutti questi operano i metodi accessori di massa
-e carica di <code>Particella</code>, ma il metodo di stampa delle classi
-derivate.</li>
+<li>Verifichiamo che su tutti questi operano i metodi accessori di massa e carica di <code>Particella</code>, ma il metodo di stampa delle classi derivate.</li>
 </ol>
 <h2 id="classe-particella">Classe <code>Particella</code></h2>
-<p>Questo è l’header <code>particella.h</code> per la classe
-<code>Particella</code>:</p>
-<div class="sourceCode" id="cb6"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#pragma once</span></span>
+<p>Questo è l’header <code>particella.h</code> per la classe <code>Particella</code>:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#pragma once</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co">// Classe astratta per una generica particella</span></span>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co">// Definisce i metodi che ogni particella</span></span>
@@ -571,8 +262,7 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb6-1"><a href="#c
 <span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> <span class="va">m_carica</span><span class="op">;</span></span>
 <span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code></pre></div>
 <p>Implementazione nel file <code>particella.cpp</code>:</p>
-<div class="sourceCode" id="cb7"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;fmtlib.h&quot;</span></span>
+<div class="sourceCode" id="cb7"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;fmtlib.h&quot;</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co">// Metodi per la classe base</span></span>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
@@ -583,12 +273,8 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb7-1"><a href="#c
 <span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>  fmt<span class="op">::</span>print<span class="op">(</span><span class="st">&quot;Particella: m = </span><span class="sc">{}</span><span class="st">, q = </span><span class="sc">{}\n</span><span class="st">&quot;</span><span class="op">,</span> <span class="va">m_massa</span><span class="op">,</span> <span class="va">m_carica</span><span class="op">);</span></span>
 <span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 <h2 id="classe-elettrone">Classe <code>Elettrone</code></h2>
-<p>File header <code>elettrone.h</code> per la classe
-<code>Elettrone</code> (in questo caso scegliamo di tenere tutto nel
-file <code>.h</code>, e non c’è bisogno quindi di creare un file
-<code>elettrone.cpp</code>: molto più comodo!):</p>
-<div class="sourceCode" id="cb8"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#pragma once</span></span>
+<p>File header <code>elettrone.h</code> per la classe <code>Elettrone</code> (in questo caso scegliamo di tenere tutto nel file <code>.h</code>, e non c’è bisogno quindi di creare un file <code>elettrone.cpp</code>: molto più comodo!):</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#pragma once</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;fmtlib.h&quot;</span></span>
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
@@ -612,11 +298,8 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb8-1"><a href="#c
 <span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
 <span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code></pre></div>
 <h2 id="esempio-di-programma-1">Esempio di programma</h2>
-<p>Questo programma utilizza le nuove classi appena create. Verifica il
-funzionamento dell’ereditarietà e la dereferenziazione dei puntatori a
-classe.</p>
-<div class="sourceCode" id="cb9"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;fmtlib.h&quot;</span></span>
+<p>Questo programma utilizza le nuove classi appena create. Verifica il funzionamento dell’ereditarietà e la dereferenziazione dei puntatori a classe.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;fmtlib.h&quot;</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;particella.h&quot;</span></span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
 <span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
@@ -648,35 +331,19 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb9-1"><a href="#c
 <span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 <h2 id="domanda">Domanda</h2>
 <p>Il programma di esempio contiene un errore, lo trovate?</p>
-<h1 id="esercizio-5.2">Esercizio 5.2 - Creazione delle classi
-<code>CampoVettoriale</code> e <code>PuntoMateriale</code></h1>
-<p>Per risolvere problemi relativi all’elettrostatica o alla gravità
-proviamo ad effettuare una modellizzazione basata su due elementi
-principali: una rappresentazione del campo vettoriale e una
-rappresentazione delle sorgenti dei campi vettoriali.</p>
-<p>Definiremo quindi una classe <code>CampoVettoriale</code>: sono molti
-i casi in Fisica in cui un vettore è collegato ad un punto dello spazio.
-Ad esempio una forza ha un punto di applicazione, o i vettori del campo
-elettrico e campo gravitazionale hanno un valore che varia da punto a
-punto dello spazio.</p>
-<p>Questo esercizio richiede di costruire una classe
-<code>CampoVettoriale</code>, che erediti dalla classe
-<code>Posizione</code> e che aggiunga:</p>
+<h1 id="esercizio-5.2">Esercizio 5.2 - Creazione delle classi <code>CampoVettoriale</code> e <code>PuntoMateriale</code></h1>
+<p>Per risolvere problemi relativi all’elettrostatica o alla gravità proviamo ad effettuare una modellizzazione basata su due elementi principali: una rappresentazione del campo vettoriale e una rappresentazione delle sorgenti dei campi vettoriali.</p>
+<p>Definiremo quindi una classe <code>CampoVettoriale</code>: sono molti i casi in Fisica in cui un vettore è collegato ad un punto dello spazio. Ad esempio una forza ha un punto di applicazione, o i vettori del campo elettrico e campo gravitazionale hanno un valore che varia da punto a punto dello spazio.</p>
+<p>Questo esercizio richiede di costruire una classe <code>CampoVettoriale</code>, che erediti dalla classe <code>Posizione</code> e che aggiunga:</p>
 <ol>
 <li><p>le tre componenti di un vettore alla posizione;</p></li>
 <li><p>i metodi per accedere e/o modificare il vettore;</p></li>
-<li><p>costruttori: in particolare, il costruttore
-<code>CampoVettoriale(const Posizione&amp;)</code> che crei un vettore
-nullo nella posizione assegnata;</p></li>
-<li><p>un metodo <code>double Modulo() const</code> che restituisca la
-lunghezza del vettore;</p></li>
-<li><p>overloading di <code>operator+</code> e <code>operator+=</code>
-in modo da poter facilmente sommare campi.</p></li>
+<li><p>costruttori: in particolare, il costruttore <code>CampoVettoriale(const Posizione&amp;)</code> che crei un vettore nullo nella posizione assegnata;</p></li>
+<li><p>un metodo <code>double Modulo() const</code> che restituisca la lunghezza del vettore;</p></li>
+<li><p>overloading di <code>operator+</code> e <code>operator+=</code> in modo da poter facilmente sommare campi.</p></li>
 </ol>
-<h2 id="header-file-della-classe-campovettoriale">Header file della
-classe <code>CampoVettoriale</code></h2>
-<div class="sourceCode" id="cb10"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#pragma once</span></span>
+<h2 id="header-file-della-classe-campovettoriale">Header file della classe <code>CampoVettoriale</code></h2>
+<div class="sourceCode" id="cb10"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#pragma once</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;posizione.h&quot;</span></span>
 <span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
@@ -703,17 +370,8 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb10-1"><a href="#
 <span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> <span class="va">m_Fx</span><span class="op">,</span> <span class="va">m_Fy</span><span class="op">,</span> <span class="va">m_Fz</span><span class="op">;</span></span>
 <span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code></pre></div>
 <h3 id="overloading-operatori">Overloading operatori</h3>
-<p>Per risolvere facilmente questo tipo di problemi è molto utile
-ridefinire gli operatori <code>operator+</code> e
-<code>operator+=</code> per la classe <code>CampoVettoriale</code>. Di
-seguito una possibile implementazione comoda di questo overloading.
-Notate che nell’operatore <code>operator+</code> viene creato un nuovo
-vettore (somma) che viene restituito <em>by value</em>. Per
-<code>operator+=</code> invece la modifica viene effettuata sull’oggetto
-che chiama l’operatore. L’oggetto stesso (modificato) viene poi
-restituito <em>by reference</em>.</p>
-<div class="sourceCode" id="cb11"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>CampoVettoriale CampoVettoriale<span class="op">::</span><span class="kw">operator</span><span class="op">+(</span><span class="at">const</span> CampoVettoriale <span class="op">&amp;</span> v<span class="op">)</span> <span class="at">const</span> <span class="op">{</span>  </span>
+<p>Per risolvere facilmente questo tipo di problemi è molto utile ridefinire gli operatori <code>operator+</code> e <code>operator+=</code> per la classe <code>CampoVettoriale</code>. Di seguito una possibile implementazione comoda di questo overloading. Notate che nell’operatore <code>operator+</code> viene creato un nuovo vettore (somma) che viene restituito <em>by value</em>. Per <code>operator+=</code> invece la modifica viene effettuata sull’oggetto che chiama l’operatore. L’oggetto stesso (modificato) viene poi restituito <em>by reference</em>.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>CampoVettoriale CampoVettoriale<span class="op">::</span><span class="kw">operator</span><span class="op">+(</span><span class="at">const</span> CampoVettoriale <span class="op">&amp;</span> v<span class="op">)</span> <span class="at">const</span> <span class="op">{</span>  </span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> <span class="op">((</span>v<span class="op">.</span>getX<span class="op">()</span> <span class="op">!=</span> getX<span class="op">())</span> <span class="op">||</span> <span class="op">(</span>v<span class="op">.</span>getY<span class="op">()</span> <span class="op">!=</span> getY<span class="op">())</span> <span class="op">||</span> <span class="op">(</span>v<span class="op">.</span>getZ<span class="op">()</span> <span class="op">!=</span> getZ<span class="op">()))</span> <span class="op">{</span></span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>      <span class="co">// fmt::print accetta come primo argomento lo stream su cui</span></span>
 <span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>      <span class="co">// scrivere (se non si specifica, usa stdout, che è analogo a std::cout).</span></span>
@@ -744,22 +402,12 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb11-1"><a href="#
 <span id="cb11-29"><a href="#cb11-29" aria-hidden="true" tabindex="-1"></a>CampoVettoriale <span class="op">&amp;</span> CampoVettoriale<span class="op">::</span><span class="kw">operator</span><span class="op">+=(</span><span class="at">const</span> CampoVettoriale <span class="op">&amp;</span> v<span class="op">)</span> <span class="op">{</span></span>
 <span id="cb11-30"><a href="#cb11-30" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="op">(*</span><span class="kw">this</span><span class="op">)</span> <span class="op">=</span> <span class="op">(*</span><span class="kw">this</span><span class="op">)</span> <span class="op">+</span> v<span class="op">;</span></span>
 <span id="cb11-31"><a href="#cb11-31" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
-<p>N.B.: per entrambe le classi di cui sopra, sentitevi liberi di
-aggiungere tutti i metodi addizionali che ritenete utili per risolvere
-questo esercizio o i successivi.</p>
-<h2 id="header-file-della-classe-puntomateriale">Header file della
-classe <code>PuntoMateriale</code></h2>
-<p>La classe <code>PuntoMateriale</code> ci servirà per rappresentare le
-sorgenti dei campi.</p>
+<p>N.B.: per entrambe le classi di cui sopra, sentitevi liberi di aggiungere tutti i metodi addizionali che ritenete utili per risolvere questo esercizio o i successivi.</p>
+<h2 id="header-file-della-classe-puntomateriale">Header file della classe <code>PuntoMateriale</code></h2>
+<p>La classe <code>PuntoMateriale</code> ci servirà per rappresentare le sorgenti dei campi.</p>
 <h3 id="ereditarietà-multipla">Ereditarietà multipla</h3>
-<p>In C++, una classe può ereditare da più di una classe madre. In
-questo caso mantiene le proprietà (metodi e data membri) di tutte le
-classi madri. Nell’header file <code>puntomateriale.h</code> vanno
-elencate tutte le classi da cui si vuole ereditare, specificando la
-modalità con cui si vuole ereditare (<code>public</code>,
-<code>private</code> o <code>protected</code>):</p>
-<div class="sourceCode" id="cb12"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#pragma once</span></span>
+<p>In C++, una classe può ereditare da più di una classe madre. In questo caso mantiene le proprietà (metodi e data membri) di tutte le classi madri. Nell’header file <code>puntomateriale.h</code> vanno elencate tutte le classi da cui si vuole ereditare, specificando la modalità con cui si vuole ereditare (<code>public</code>, <code>private</code> o <code>protected</code>):</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#pragma once</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;particella.h&quot;</span></span>
 <span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;posizione.h&quot;</span></span>
@@ -767,56 +415,27 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb12-1"><a href="#
 <span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> PuntoMateriale <span class="op">:</span> <span class="kw">public</span> Particella<span class="op">,</span> <span class="kw">public</span> Posizione <span class="op">{</span></span>
 <span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>    <span class="co">// …</span></span>
 <span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code></pre></div>
-<p>La nuova classe avrà, per esempio, definiti sia i metodi
-<code>GetMassa()</code> e <code>GetCarica()</code> di
-<code>Particella</code> e anche <code>GetX()</code>,
-<code>GetR()</code>, … di <code>Posizione</code>.</p>
-<h3 id="utilizzo-di-costruttori-delle-classi-madri">Utilizzo di
-costruttori delle classi madri</h3>
-<p>Specialmente nel caso di ereditarietà multipla, è buona norma
-utilizzare i costruttori già esistenti della classe madre. Tali
-costruttori possono venire chiamati esplicemente dando il nome della
-classe madre seguito dagli argomenti opportuni. Ad esempio, siccome
-esistono i costruttori di <code>Posizione</code> con le tre coordinate
-cartesiane, e di <code>Particella</code> con massa e carica, possiamo
-definire un costruttore:</p>
-<div class="sourceCode" id="cb13"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>PuntoMateriale<span class="op">(</span><span class="dt">double</span> massa<span class="op">,</span> <span class="dt">double</span> carica<span class="op">,</span> <span class="dt">double</span> x<span class="op">,</span> <span class="dt">double</span> y<span class="op">,</span> <span class="dt">double</span> z<span class="op">);</span></span></code></pre></div>
+<p>La nuova classe avrà, per esempio, definiti sia i metodi <code>GetMassa()</code> e <code>GetCarica()</code> di <code>Particella</code> e anche <code>GetX()</code>, <code>GetR()</code>, … di <code>Posizione</code>.</p>
+<h3 id="utilizzo-di-costruttori-delle-classi-madri">Utilizzo di costruttori delle classi madri</h3>
+<p>Specialmente nel caso di ereditarietà multipla, è buona norma utilizzare i costruttori già esistenti della classe madre. Tali costruttori possono venire chiamati esplicemente dando il nome della classe madre seguito dagli argomenti opportuni. Ad esempio, siccome esistono i costruttori di <code>Posizione</code> con le tre coordinate cartesiane, e di <code>Particella</code> con massa e carica, possiamo definire un costruttore:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>PuntoMateriale<span class="op">(</span><span class="dt">double</span> massa<span class="op">,</span> <span class="dt">double</span> carica<span class="op">,</span> <span class="dt">double</span> x<span class="op">,</span> <span class="dt">double</span> y<span class="op">,</span> <span class="dt">double</span> z<span class="op">);</span></span></code></pre></div>
 <p>la cui implementazione è data da:</p>
-<div class="sourceCode" id="cb14"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>PuntoMateriale<span class="op">::</span>PuntoMateriale<span class="op">(</span><span class="dt">double</span> massa<span class="op">,</span> <span class="dt">double</span> carica<span class="op">,</span></span>
+<div class="sourceCode" id="cb14"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>PuntoMateriale<span class="op">::</span>PuntoMateriale<span class="op">(</span><span class="dt">double</span> massa<span class="op">,</span> <span class="dt">double</span> carica<span class="op">,</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>                               <span class="dt">double</span> x<span class="op">,</span> <span class="dt">double</span> y<span class="op">,</span> <span class="dt">double</span> z<span class="op">)</span> <span class="op">:</span> </span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    Particella<span class="op">{</span>massa<span class="op">,</span> carica<span class="op">},</span> Posizione<span class="op">{</span>x<span class="op">,</span> y<span class="op">,</span> z<span class="op">}</span> <span class="op">{</span></span>
 <span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>    <span class="co">// nothing more to be done !</span></span>
 <span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
-<p>Come si può notare in questo esempio la costruzione di
-<code>PuntoMateriale</code> è completamente delegata si costruttori
-delle classi madre.</p>
-<h1 id="esercizio-5.3">Esercizio 5.3 - Calcolo del campo elettrico
-generato da un dipolo (da consegnare)</h1>
-<p>A questo punto possiamo utilizzare tutti gli ingredienti realizzati
-sopra per affrontare un interessante problema di elettrostatica ovvero
-lo studio del campo elettrico generato da un dipolo. Per fare questo
-sviluppiamo un codice che costuisca un dipolo costituito da un elettrone
-e un protone posizionati ad una distanza <span
-class="math inline">\delta = 10^{-10}\,\text{m}</span> e determini:</p>
+<p>Come si può notare in questo esempio la costruzione di <code>PuntoMateriale</code> è completamente delegata si costruttori delle classi madre.</p>
+<h1 id="esercizio-5.3">Esercizio 5.3 - Calcolo del campo elettrico generato da un dipolo (da consegnare)</h1>
+<p>A questo punto possiamo utilizzare tutti gli ingredienti realizzati sopra per affrontare un interessante problema di elettrostatica ovvero lo studio del campo elettrico generato da un dipolo. Per fare questo sviluppiamo un codice che costuisca un dipolo costituito da un elettrone e un protone posizionati ad una distanza <span class="math inline">\delta = 10^{-10}\,\text{m}</span> e determini:</p>
 <ol>
-<li>il valore del campo elettrico di dipolo prodotto in un punto <span
-class="math inline">P</span> le cui coordinate sono inserite da linea di
-comando;</li>
-<li>disegni l’andamento del modulo del campo elettrico lungo l’asse del
-dipolo per una distanza da 100 a 1000 volte <span
-class="math inline">\delta</span>. Che tipo di andamento ha il campo?
-(Fate riferimento all’approfondimento seguente sulle leggi di potenza
-qui sotto).</li>
+<li>il valore del campo elettrico di dipolo prodotto in un punto <span class="math inline">P</span> le cui coordinate sono inserite da linea di comando;</li>
+<li>disegni l’andamento del modulo del campo elettrico lungo l’asse del dipolo per una distanza da 100 a 1000 volte <span class="math inline">\delta</span>. Che tipo di andamento ha il campo? (Fate riferimento all’approfondimento seguente sulle leggi di potenza qui sotto).</li>
 </ol>
 <h2 id="esempio-di-programma-2">Esempio di programma</h2>
-<p>Questo programma utilizza le nuove classi appena create: richiede di
-fornire come argomenti le tre coordinate cartesiane e poi stampa il
-campo elettrico di dipolo richiesto dall’esercizio [primo punto]:</p>
-<div class="sourceCode" id="cb15"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;puntomateriale.h&quot;</span></span>
+<p>Questo programma utilizza le nuove classi appena create: richiede di fornire come argomenti le tre coordinate cartesiane e poi stampa il campo elettrico di dipolo richiesto dall’esercizio [primo punto]:</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;puntomateriale.h&quot;</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;campovettoriale.h&quot;</span></span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;fmtlib.h&quot;</span></span>
@@ -850,19 +469,13 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb15-1"><a href="#
 <span id="cb15-32"><a href="#cb15-32" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb15-33"><a href="#cb15-33" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
 <span id="cb15-34"><a href="#cb15-34" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
-<p>A partire da questo esempio completare le richieste
-dell’esercizio:</p>
+<p>A partire da questo esempio completare le richieste dell’esercizio:</p>
 <ul>
-<li><p>Si aggiunga un ciclo che permetta di calcolare il campo a
-distanze via via crescenti</p></li>
-<li><p>Si aggiunga eventualmente un grafico per visualizzare l’andamento
-del campo in funzione della distanza dal centro del dipolo. Potete usare
-ROOT o <a href="index.html#gplotinstall">gplot++</a>.</p></li>
+<li><p>Si aggiunga un ciclo che permetta di calcolare il campo a distanze via via crescenti</p></li>
+<li><p>Si aggiunga eventualmente un grafico per visualizzare l’andamento del campo in funzione della distanza dal centro del dipolo. Potete usare ROOT o <a href="index.html#gplotinstall">gplot++</a>.</p></li>
 </ul>
 <h2 id="il-makefile">Il <code>Makefile</code></h2>
-<p>Il numero di classi sta proliferando e quindi anche il
-<code>Makefile</code> diventa sempre più articolato. Questo esempio è
-pensato per ROOT:</p>
+<p>Il numero di classi sta proliferando e quindi anche il <code>Makefile</code> diventa sempre più articolato. Questo esempio è pensato per ROOT:</p>
 <pre class="make"><code>INCS=`root-config --cflags`
 LIBS=`root-config --libs`
 CXXFLAGS=-g -Wall --pedantic -std=c++23
@@ -887,8 +500,7 @@ campovettoriale.o: campovettoriale.cpp campovettoriale.h posizione.h
 
 clean:
        rm -f *.o</code></pre>
-<p>Questo invece è il caso in cui usiate gplot++: non c’è più bisogno di
-usare <code>INCS</code> e <code>LIBS</code>.</p>
+<p>Questo invece è il caso in cui usiate gplot++: non c’è più bisogno di usare <code>INCS</code> e <code>LIBS</code>.</p>
 <pre class="make"><code>CXXFLAGS=-g -Wall --pedantic -std=c++23
 
 esercizio_5.3: esercizio_5.3.o posizione.o puntomateriale.o campovettoriale.o particella.o
@@ -911,10 +523,7 @@ campovettoriale.o: campovettoriale.cpp campovettoriale.h posizione.h
 
 clean:
        rm -f *.o</code></pre>
-<p>Nel caso in cui decidiate di implementare tutte le classi nei file
-<code>.h</code> e di non usare quindi file <code>.cpp</code>, il
-<code>Makefile</code> si semplifica moltissimo. Ecco un esempio
-(assumendo che usiate gplot++):</p>
+<p>Nel caso in cui decidiate di implementare tutte le classi nei file <code>.h</code> e di non usare quindi file <code>.cpp</code>, il <code>Makefile</code> si semplifica moltissimo. Ecco un esempio (assumendo che usiate gplot++):</p>
 <pre class="make"><code>CXXFLAGS=-g -Wall --pedantic -std=c++23
 
 esercizio_5.3: esercizio_5.3.cpp posizione.h puntomateriale.h campovettoriale.h particella.h
@@ -923,41 +532,18 @@ esercizio_5.3: esercizio_5.3.cpp posizione.h puntomateriale.h campovettoriale.h 
 clean:
        rm -f *.o</code></pre>
 <h2 id="leggi-di-potenza">Leggi di potenza</h2>
-<p>Se un campo ha un andamento <span class="math inline">E = k
-R^\alpha</span> e valutiamo il campo in due punti diversi <span
-class="math inline">R_1</span> e <span class="math inline">R_2</span>:
-<span class="math display">
+<p>Se un campo ha un andamento <span class="math inline">E = k R^\alpha</span> e valutiamo il campo in due punti diversi <span class="math inline">R_1</span> e <span class="math inline">R_2</span>: <span class="math display">
   E_1 = E(R_1), \qquad E_2 = E(R_2),
-</span> allora possiamo ricavare <span class="math inline">\alpha</span>
-dalla relazione <span class="math display">
+</span> allora possiamo ricavare <span class="math inline">\alpha</span> dalla relazione <span class="math display">
   \alpha = \frac{\log\bigl(E_1 / E_2\bigr)}{\log\bigl(R_1 / R_2\bigr)}
 </span></p>
 <h2 id="creazione-di-plot">Creazione di plot</h2>
-<p>Potete fare riferimento a <a
-href="http://labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/lezioneROOT_1819.html">questa
-spiegazione</a> per produrre un grafico dell’andamento del campo usando
-la classe <code>TGraph</code> di ROOT.</p>
-<p>In alternativa potete usare <a
-href="https://github.com/ziotom78/gplotpp">gplot++</a>, che funziona
-sotto Mac e Linux ed è semplice da installare anche sotto Windows.
-Dovete innanzitutto <a
-href="https://github.com/ziotom78/gplotpp#installing-gnuplot-and-gploth">installare
-Gnuplot</a>, seguendo in particolare <a
-href="https://github.com/ziotom78/gplotpp#windows">questa avvertenza</a>
-se usate Windows. Una volta installato Gnuplot, scaricate nella
-directory del vostro esercizio il file <a
-href="https://raw.githubusercontent.com/ziotom78/gplotpp/master/gplot%2B%2B.h"><code>gplot++.h</code></a>,
-oppure se usate Linux o Mac eseguite questa linea di comando nella
-directory del vostro esercizio:</p>
+<p>Potete fare riferimento a <a href="http://labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/lezioneROOT_1819.html">questa spiegazione</a> per produrre un grafico dell’andamento del campo usando la classe <code>TGraph</code> di ROOT.</p>
+<p>In alternativa potete usare <a href="https://github.com/ziotom78/gplotpp">gplot++</a>, che funziona sotto Mac e Linux ed è semplice da installare anche sotto Windows. Dovete innanzitutto <a href="https://github.com/ziotom78/gplotpp#installing-gnuplot-and-gploth">installare Gnuplot</a>, seguendo in particolare <a href="https://github.com/ziotom78/gplotpp#windows">questa avvertenza</a> se usate Windows. Una volta installato Gnuplot, scaricate nella directory del vostro esercizio il file <a href="https://raw.githubusercontent.com/ziotom78/gplotpp/master/gplot%2B%2B.h"><code>gplot++.h</code></a>, oppure se usate Linux o Mac eseguite questa linea di comando nella directory del vostro esercizio:</p>
 <p><input type="text" value="curl 'https://raw.githubusercontent.com/ziotom78/gplotpp/master/gplot%2B%2B.h' > gplot++.h" id="installGplotpp" readonly="1" size="60"><button onclick='copyFmtInstallationScript("installGplotpp")'>Copia</button></p>
-<p>Per produrre un grafico di <span class="math inline">E = E(r)</span>
-con <a href="https://github.com/ziotom78/gplotpp">gplot++</a>, dovete
-salvare le ascisse e le ordinate dei punti del grafico in due
-<code>std::vector</code>, e poi chiamare il metodo
-<code>Gnuplot::plot(x, y)</code>.</p>
+<p>Per produrre un grafico di <span class="math inline">E = E(r)</span> con <a href="https://github.com/ziotom78/gplotpp">gplot++</a>, dovete salvare le ascisse e le ordinate dei punti del grafico in due <code>std::vector</code>, e poi chiamare il metodo <code>Gnuplot::plot(x, y)</code>.</p>
 <p>Di seguito viene riportato un esempio:</p>
-<div class="sourceCode" id="cb19"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;fmtlib.h&quot;</span></span>
+<div class="sourceCode" id="cb19"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;fmtlib.h&quot;</span></span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;gplot++.h&quot;</span></span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="co">// ...</span></span>
@@ -1011,134 +597,58 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb19-1"><a href="#
 <span id="cb19-52"><a href="#cb19-52" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 <p>Questo è il risultato atteso:</p>
 <p><img src="./images/esercizio05.3.png" /></p>
-<p>Notare che la pendenza della retta sul grafico bilogaritmico è −3:
-per un ordine di grandezza in più sull’asse <span
-class="math inline">x</span> (da 10 a 100 nm) ci sono tre ordini di
-grandezza in meno (da <span class="math inline">5 \times 10^5</span> a
-<span class="math inline">500\,\text{N/C}</span>) sull’asse <span
-class="math inline">y</span>. Questo corrisponde al fatto che se <span
-class="math inline">r \gg \delta</span> allora <span
-class="math display">
-\left|E_\text{dipolo}(r)\right| = \left|k\frac{q^+}{(r + \delta)^2} +
-k\frac{q^-}{(r - \delta)^2}\right|
-= \left|k\frac{e}{(r + \delta)^2} - k\frac{e}{(r - \delta)^2}\right|
-\approx \frac{4 k e \delta}{r^3} \propto r^{-3}.
+<p>Notare che la pendenza della retta sul grafico bilogaritmico è −3: per un ordine di grandezza in più sull’asse <span class="math inline">x</span> (da 10 a 100 nm) ci sono tre ordini di grandezza in meno (da <span class="math inline">5 \times 10^5</span> a <span class="math inline">500\,\text{N/C}</span>) sull’asse <span class="math inline">y</span>. Questo corrisponde al fatto che se <span class="math inline">r \gg \delta</span> allora <span class="math display">
+\left|E_\text{dipolo}(r)\right| = \left|k\frac{q^+}{(r + \delta)^2} + k\frac{q^-}{(r - \delta)^2}\right|
+= \left|k\frac{e}{(r + \delta)^2} - k\frac{e}{(r - \delta)^2}\right| \approx \frac{4 k e \delta}{r^3} \propto r^{-3}.
 </span></p>
-<h1 id="esercizio-5.4">Esercizio 5.4 - Campo di multipolo
-(approfondimento)</h1>
-<p>Scrivere un programma che calcoli il campo elettrico generato da un
-multipolo di ordine <span class="math inline">n</span>. In questo
-esercizio, un <span class="math inline">n</span>-polo (con <span
-class="math inline">n</span> pari) è una distribuzione di <span
-class="math inline">n</span> particelle, in cui la particella <span
-class="math inline">k</span>-esima ha carica <span
-class="math inline">(-1)^k e</span>, dove <span
-class="math inline">e</span> è la carica del protone, e si trova nel
-punto <span class="math display">
-P_k = \left(r_0 \cos\left(\frac{2\pi k}n\right), r_0
-\sin\left(\frac{2\pi k}n\right)\right)
-</span> dove <span class="math inline">r_0</span> è il raggio a cui sono
-messe le cariche.</p>
+<h1 id="esercizio-5.4">Esercizio 5.4 - Campo di multipolo (approfondimento)</h1>
+<p>Scrivere un programma che calcoli il campo elettrico generato da un multipolo di ordine <span class="math inline">n</span>. In questo esercizio, un <span class="math inline">n</span>-polo (con <span class="math inline">n</span> pari) è una distribuzione di <span class="math inline">n</span> particelle, in cui la particella <span class="math inline">k</span>-esima ha carica <span class="math inline">(-1)^k e</span>, dove <span class="math inline">e</span> è la carica del protone, e si trova nel punto <span class="math display">
+P_k = \left(r_0 \cos\left(\frac{2\pi k}n\right), r_0 \sin\left(\frac{2\pi k}n\right)\right)
+</span> dove <span class="math inline">r_0</span> è il raggio a cui sono messe le cariche.</p>
 <ul>
-<li><p>Verificare che a grande distanza (<span class="math inline">R \gg
-r_0</span>) il campo elettrico varia proporzionalmente a <span
-class="math inline">R^{-2 - n/2}</span>.</p></li>
-<li><p>Valutare fino a quali valori di <span
-class="math inline">n</span> si riesce a verificare questa
-dipendenza.</p></li>
+<li><p>Verificare che a grande distanza (<span class="math inline">R \gg r_0</span>) il campo elettrico varia proporzionalmente a <span class="math inline">R^{-2 - n/2}</span>.</p></li>
+<li><p>Valutare fino a quali valori di <span class="math inline">n</span> si riesce a verificare questa dipendenza.</p></li>
 </ul>
-<p>Questo è un problema abbastanza interessante, perché bisogna
-scegliere una distanza abbastanza grande perché sia valido il
-comportamento asintotico, ma abbastanza ridotta per evitare problemi di
-arrotondamento nella somma di molti termini di segno contrario.</p>
-<h1 id="esercizio-5.5">Esercizio 5.5 - Gravità dallo spazio
-(approfondimento)</h1>
-<p>Il <a href="http://www.goceitaly.asi.it/GoceIT/">satellite GOCE</a>
-si trova in orbita a 250 km dalla superficie terrestre e dotato di
-accelerometri in grado di misurare variazioni dell’accelerazione di
-gravità fino a <span class="math inline">\delta g / g = 10^{-13}</span>.
-Lo scopo della missione includeva una mappatura dettagliata del campo
-gravitazionale terrestre, prodotto dalle distribuzioni non omogenee di
-massa. Costruire un programma che:</p>
+<p>Questo è un problema abbastanza interessante, perché bisogna scegliere una distanza abbastanza grande perché sia valido il comportamento asintotico, ma abbastanza ridotta per evitare problemi di arrotondamento nella somma di molti termini di segno contrario.</p>
+<h1 id="esercizio-5.5">Esercizio 5.5 - Gravità dallo spazio (approfondimento)</h1>
+<p>Il <a href="http://www.goceitaly.asi.it/GoceIT/">satellite GOCE</a> si trova in orbita a 250 km dalla superficie terrestre e dotato di accelerometri in grado di misurare variazioni dell’accelerazione di gravità fino a <span class="math inline">\delta g / g = 10^{-13}</span>. Lo scopo della missione includeva una mappatura dettagliata del campo gravitazionale terrestre, prodotto dalle distribuzioni non omogenee di massa. Costruire un programma che:</p>
 <ol>
-<li>calcoli l’accelerazione di gravità sul satellite per una Terra
-perfettamene sferica e dimensioni pari al raggio medio (<a
-href="http://it.wikipedia.org/wiki/Terra">wikipedia</a>).</li>
-<li>calcoli la variazione relativa di g prodotta da una catena montuosa,
-schematizzata come una fila di 100 sfere di 1 km di raggio poste sopra
-la superficie media della Terra (usare 3000 kg/m³ come densità della
-roccia) e produca un grafico della variazione in funzione della
-posizione del satellite sull’orbita.</li>
+<li>calcoli l’accelerazione di gravità sul satellite per una Terra perfettamene sferica e dimensioni pari al raggio medio (<a href="http://it.wikipedia.org/wiki/Terra">wikipedia</a>).</li>
+<li>calcoli la variazione relativa di g prodotta da una catena montuosa, schematizzata come una fila di 100 sfere di 1 km di raggio poste sopra la superficie media della Terra (usare 3000 kg/m³ come densità della roccia) e produca un grafico della variazione in funzione della posizione del satellite sull’orbita.</li>
 </ol>
-<p>Per risolvere questo esercizio si costruisca dapprima il sistema di
-sorgenti di campo (Terra e catena montuosa). Si calcoli il campo
-generato da tutte le sorgenti in un punto a distanza dal centro della
-terra pari al raggio terrestre più la distanza del satellite dalla
-superficie terrestre. Muovere questo punto in modo che percorra tutta
-l’orbita (in passi da 10 Km).</p>
-<p><img
-src="http://labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/figure/schema_montagne.png" /></p>
+<p>Per risolvere questo esercizio si costruisca dapprima il sistema di sorgenti di campo (Terra e catena montuosa). Si calcoli il campo generato da tutte le sorgenti in un punto a distanza dal centro della terra pari al raggio terrestre più la distanza del satellite dalla superficie terrestre. Muovere questo punto in modo che percorra tutta l’orbita (in passi da 10 Km).</p>
+<p><img src="http://labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/figure/schema_montagne.png" /></p>
 <h2 id="grafici">Grafici</h2>
-<p>Nel creare un grafico dell’andamento della distorsione
-dell’accelerazione gravitazionale <span class="math inline">\delta g /
-g</span> è meglio usare la scala logaritmica sull’asse <span
-class="math inline">y</span>, visto che il valore di <span
-class="math inline">\delta g/g</span> varia di diversi ordini di
-grandezza:</p>
+<p>Nel creare un grafico dell’andamento della distorsione dell’accelerazione gravitazionale <span class="math inline">\delta g / g</span> è meglio usare la scala logaritmica sull’asse <span class="math inline">y</span>, visto che il valore di <span class="math inline">\delta g/g</span> varia di diversi ordini di grandezza:</p>
 <p><img src="./images/esercizio05.5.png" /></p>
-<p>La posizione del picco dipende dal punto rispetto all’angolo zero in
-cui sono state poste le sfere che rappresentano la catena montuosa. Nel
-grafico qui sopra, la montagna <span class="math inline">k</span>-esima
-è stata posta ad un angolo <span class="math inline">\theta_k = 90^\circ
-+ k \delta\theta</span>, con <span class="math inline">k = 0\ldots
-99</span> e <span class="math inline">\delta\theta = 1\,\text{km} / 2\pi
-R_T</span> l’incremento angolare associato a sfere di raggio 1 km e
-poste sulla superficie terrestre, con <span
-class="math inline">R_T</span> raggio medio della Terra.</p>
+<p>La posizione del picco dipende dal punto rispetto all’angolo zero in cui sono state poste le sfere che rappresentano la catena montuosa. Nel grafico qui sopra, la montagna <span class="math inline">k</span>-esima è stata posta ad un angolo <span class="math inline">\theta_k = 90^\circ + k \delta\theta</span>, con <span class="math inline">k = 0\ldots 99</span> e <span class="math inline">\delta\theta = 1\,\text{km} / 2\pi R_T</span> l’incremento angolare associato a sfere di raggio 1 km e poste sulla superficie terrestre, con <span class="math inline">R_T</span> raggio medio della Terra.</p>
 <h1 id="errori-comuni">Errori comuni</h1>
-<p>Come di consueto, elenco alcuni errori molto comuni che ho trovato
-negli anni passati correggendo gli esercizi che gli studenti hanno
-consegnato all’esame:</p>
+<p>Come di consueto, elenco alcuni errori molto comuni che ho trovato negli anni passati correggendo gli esercizi che gli studenti hanno consegnato all’esame:</p>
 <ul>
-<li><p>L’errore di gran lunga più comune è sbagliare l’implementazione
-della formula del campo, che oggettivamente è complicata! Riguardate in
-particolare queste cose:</p>
+<li><p>L’errore di gran lunga più comune è sbagliare l’implementazione della formula del campo, che oggettivamente è complicata! Riguardate in particolare queste cose:</p>
 <ol>
 <li><p>Unità di misura delle costanti;</p></li>
-<li><p>Attenzione a come scrivete i numeri in notazione scientifica! Il
-numero <span class="math inline">10^{-4}</span> si scrive
-<code>1e-4</code>, <strong>non</strong> <code>10e-4</code>, perché la
-scrittura <code>1e-4</code> indica effettivamente <span
-class="math inline">1 \times 10^{-4}</span>, così come 7.5e-3 indica
-<span class="math inline">7.5\times 10^{-3}</span>.</p></li>
-<li><p>Verificate che ciò che deve stare al numeratore stia veramente al
-numeratore, e idem per il denominatore!</p></li>
-<li><p>Ovviamente, il campo di una singola carica deve andare come <span
-class="math inline">1/r^2</span>! Eppure un bel po’ di studenti
-consegnano codice che non segue neppure questa semplice
-proprietà…</p></li>
-<li><p>Quando calcolate la distanza <span class="math inline">d</span>
-tra due posizioni, assicuratevi di restituire <span
-class="math inline">d</span> e non <span class="math inline">d^2</span>
-(quante volte l’ho visto negli esercizi!).</p></li>
+<li><p>Attenzione a come scrivete i numeri in notazione scientifica! Il numero <span class="math inline">10^{-4}</span> si scrive <code>1e-4</code>, <strong>non</strong> <code>10e-4</code>, perché la scrittura <code>1e-4</code> indica effettivamente <span class="math inline">1 \times 10^{-4}</span>, così come 7.5e-3 indica <span class="math inline">7.5\times 10^{-3}</span>.</p></li>
+<li><p>Verificate che ciò che deve stare al numeratore stia veramente al numeratore, e idem per il denominatore!</p></li>
+<li><p>Ovviamente, il campo di una singola carica deve andare come <span class="math inline">1/r^2</span>! Eppure un bel po’ di studenti consegnano codice che non segue neppure questa semplice proprietà…</p></li>
+<li><p>Quando calcolate la distanza <span class="math inline">d</span> tra due posizioni, assicuratevi di restituire <span class="math inline">d</span> e non <span class="math inline">d^2</span> (quante volte l’ho visto negli esercizi!).</p></li>
 </ol></li>
-<li><p>Stranamente, ogni anno più di uno studente sbaglia a implementare
-<code>operator+</code> per i vettori, e invece di calcolare
-<code>v + w</code> calcola in realtà <code>v + v = 2v</code>, oppure
-<code>w + w = 2w</code>.</p></li>
-<li><p>Nel leggere la posizione <code>x y z</code> a cui calcolare il
-campo del dipolo da linea di comando, assicuratevi di usare la funzione
-<a
-href="https://en.cppreference.com/w/cpp/string/basic_string/stof"><code>std::stod</code></a>
-oppure <a
-href="https://cplusplus.com/reference/cstdlib/atof/"><code>std::atof</code></a>,
-anziché <code>std::stoi</code> o <code>std::atoi</code>, perché queste
-ultime due restituiscono valori interi.</p></li>
-</ul>                    
-                </div>
-            </div>
+<li><p>Stranamente, ogni anno più di uno studente sbaglia a implementare <code>operator+</code> per i vettori, e invece di calcolare <code>v + w</code> calcola in realtà <code>v + v = 2v</code>, oppure <code>w + w = 2w</code>.</p></li>
+<li><p>Nel leggere la posizione <code>x y z</code> a cui calcolare il campo del dipolo da linea di comando, assicuratevi di usare la funzione <a href="https://en.cppreference.com/w/cpp/string/basic_string/stof"><code>std::stod</code></a> oppure <a href="https://cplusplus.com/reference/cstdlib/atof/"><code>std::atof</code></a>, anziché <code>std::stoi</code> o <code>std::atoi</code>, perché queste ultime due restituiscono valori interi.</p></li>
+</ul>
+</main>
 
-            <script src="https://vjs.zencdn.net/5.4.4/video.js"></script>
-        </div>
-    </body>
+<script>
+;(function() {
+  // Non-essential if user has JavaScript off. Just makes checkboxes look nicer.
+  var selector = '.task-list > li > input[type="checkbox"]';
+  var checkboxes = document.querySelectorAll(selector);
+  Array.from(checkboxes).forEach((checkbox) => {
+    var wasChecked = checkbox.checked;
+    checkbox.disabled = false;
+    checkbox.addEventListener('click', (ev) => {ev.target.checked = wasChecked});
+  });
+})();
+</script>
+</body>
 </html>

@@ -1,100 +1,16 @@
 <!DOCTYPE html>
-<html  lang="it-IT"  dir="ltr">
-
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Lezione 8: Equazioni differenziali</title>
-        <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
-        <link rel="apple-touch-icon-precomposed" href="images/apple-touch-icon.png">
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/2.26.4/css/uikit.gradient.css">
-
-        <!-- <link rel="stylesheet" href="style.css"> -->
-        <link rel="stylesheet" href="https://cdn.rawgit.com/diversen/pandoc-uikit/master/style.css">
-        <link href="css/custom.css" rel="stylesheet" />
-        <link href="https://vjs.zencdn.net/5.4.4/video-js.css" rel="stylesheet" />
-        <script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
-        <!-- <script src="uikit.js"></script> -->
-        <script src="https://cdn.rawgit.com/diversen/pandoc-uikit/master/uikit.js"></script>
-        <!-- <script src="scripts.js"></script> -->
-        <script src="https://cdn.rawgit.com/diversen/pandoc-uikit/master/scripts.js"></script>
-        <!-- <script src="jquery.sticky-kit.js "></script> -->
-        <script src="https://cdn.rawgit.com/diversen/pandoc-uikit/master/jquery.sticky-kit.js"></script>
-
-        <meta name="generator" content="pandoc-uikit" />
-                <meta name="author" content="Leonardo Carminati" />
-                <meta name="author" content="Maurizio Tomasi" />
-                        <title>Lezione 8: Equazioni differenziali</title>
-        <style type="text/css">code{white-space: pre;}</style>
-                        <style type="text/css">
-            pre > code.sourceCode { white-space: pre; position: relative; }
-            pre > code.sourceCode > span { line-height: 1.25; }
-            pre > code.sourceCode > span:empty { height: 1.2em; }
-            .sourceCode { overflow: visible; }
-            code.sourceCode > span { color: inherit; text-decoration: inherit; }
-            div.sourceCode { margin: 1em 0; }
-            pre.sourceCode { margin: 0; }
-            @media screen {
-            div.sourceCode { overflow: auto; }
-            }
-            @media print {
-            pre > code.sourceCode { white-space: pre-wrap; }
-            pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-            }
-            pre.numberSource code
-              { counter-reset: source-line 0; }
-            pre.numberSource code > span
-              { position: relative; left: -4em; counter-increment: source-line; }
-            pre.numberSource code > span > a:first-child::before
-              { content: counter(source-line);
-                position: relative; left: -1em; text-align: right; vertical-align: baseline;
-                border: none; display: inline-block;
-                -webkit-touch-callout: none; -webkit-user-select: none;
-                -khtml-user-select: none; -moz-user-select: none;
-                -ms-user-select: none; user-select: none;
-                padding: 0 4px; width: 4em;
-                color: #aaaaaa;
-              }
-            pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-            div.sourceCode
-              {   }
-            @media screen {
-            pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-            }
-            code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-            code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-            code span.at { color: #7d9029; } /* Attribute */
-            code span.bn { color: #40a070; } /* BaseN */
-            code span.bu { color: #008000; } /* BuiltIn */
-            code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-            code span.ch { color: #4070a0; } /* Char */
-            code span.cn { color: #880000; } /* Constant */
-            code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-            code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-            code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-            code span.dt { color: #902000; } /* DataType */
-            code span.dv { color: #40a070; } /* DecVal */
-            code span.er { color: #ff0000; font-weight: bold; } /* Error */
-            code span.ex { } /* Extension */
-            code span.fl { color: #40a070; } /* Float */
-            code span.fu { color: #06287e; } /* Function */
-            code span.im { color: #008000; font-weight: bold; } /* Import */
-            code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-            code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-            code span.op { color: #666666; } /* Operator */
-            code span.ot { color: #007020; } /* Other */
-            code span.pp { color: #bc7a00; } /* Preprocessor */
-            code span.sc { color: #4070a0; } /* SpecialChar */
-            code span.ss { color: #bb6688; } /* SpecialString */
-            code span.st { color: #4070a0; } /* String */
-            code span.va { color: #19177c; } /* Variable */
-            code span.vs { color: #4070a0; } /* VerbatimString */
-            code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-        </style>
-                                            <script defer=""
-                                            src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js"></script>
-                                            <script>document.addEventListener("DOMContentLoaded", function () {
+<html xmlns="http://www.w3.org/1999/xhtml" lang="it-IT" xml:lang="it-IT">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc-markdown-css-theme" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Leonardo Carminati" />
+  <meta name="author" content="Maurizio Tomasi" />
+  <title>Lezione 8: Equazioni differenziali</title>
+  <link rel="stylesheet" href="css/theme.css" />
+  <link rel="stylesheet" href="css/skylighting-solarized-theme.css" />
+  <script defer="" src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
  var mathElements = document.getElementsByClassName("math");
  var macros = [];
  for (var i = 0; i < mathElements.length; i++) {
@@ -107,392 +23,155 @@
     fleqn: false
    });
 }}});
-                                            </script>
-                                            <link rel="stylesheet"
-                                            href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css" />
-                                          <script src="./fmtinstall.js"></script>
-                 
-    </head>
+  </script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css" />
+  <script src="./fmtinstall.js"></script>
+</head>
+<body>
 
-    <body>
+<header>
+<h1 class="title">Lezione 8: Equazioni differenziali</h1>
+<blockquote class="metadata">
+<p class="author">
+      Leonardo CarminatiMaurizio Tomasi
+  </p>
+<p class="date before-toc"><time datetime="A.A. 2023−2024">A.A. 2023−2024</time></p>
+</blockquote>
+</header>
 
+<nav id="TOC" role="doc-toc">
+    <strong>Contents</strong><label for="contents">⊕</label>
+  <input type="checkbox" id="contents">
+  <ul>
+  <li><a href="#introduzione-a-stdarray" id="toc-introduzione-a-stdarray">Introduzione a <code>std::array</code></a></li>
+  <li><a href="#esercizio-8.0" id="toc-esercizio-8.0">Esercizio 8.0 - Algebra vettoriale</a></li>
+  <li><a href="#esercizio-8.1" id="toc-esercizio-8.1">Esercizio 8.1 - Risoluzione tramite metodo di Eulero</a>
+  <ul>
+  <li><a href="#il-metodo-di-eulero" id="toc-il-metodo-di-eulero">Il metodo di Eulero</a></li>
+  <li><a href="#struttura-del-programma" id="toc-struttura-del-programma">Struttura del programma</a></li>
+  <li><a href="#risultati-attesi" id="toc-risultati-attesi">Risultati attesi</a></li>
+  </ul></li>
+  <li><a href="#esercizio-8.2" id="toc-esercizio-8.2">Esercizio 8.2 - Risoluzione tramite Runge-Kutta (da consegnare)</a>
+  <ul>
+  <li><a href="#il-metodo-di-runge-kutta" id="toc-il-metodo-di-runge-kutta">Il metodo di Runge-Kutta</a></li>
+  <li><a href="#cosa-ci-aspettiamo" id="toc-cosa-ci-aspettiamo">Cosa ci aspettiamo?</a></li>
+  </ul></li>
+  <li><a href="#esercizio-8.3" id="toc-esercizio-8.3">Esercizio 8.3 - Moto del pendolo (da consegnare)</a>
+  <ul>
+  <li><a href="#il-moto-del-pendolo" id="toc-il-moto-del-pendolo">Il moto del pendolo</a></li>
+  <li><a href="#calcolo-del-periodo" id="toc-calcolo-del-periodo">Calcolo del periodo</a></li>
+  <li><a href="#risultati-attesi-1" id="toc-risultati-attesi-1">Risultati attesi</a></li>
+  </ul></li>
+  <li><a href="#esercizio-8.4" id="toc-esercizio-8.4">Esercizio 8.4 - Oscillazione forzate e risonanza (da consegnare)</a>
+  <ul>
+  <li><a href="#oscillatore-armonico-con-forzante" id="toc-oscillatore-armonico-con-forzante">Oscillatore armonico con forzante</a></li>
+  <li><a href="#risultati-attesi-2" id="toc-risultati-attesi-2">Risultati attesi</a></li>
+  </ul></li>
+  <li><a href="#esercizio-8.5" id="toc-esercizio-8.5">Esercizio 8.5 - Moto in campo gravitazionale</a>
+  <ul>
+  <li><a href="#moto-in-campo-gravitazionale" id="toc-moto-in-campo-gravitazionale">Moto in campo gravitazionale</a></li>
+  <li><a href="#risultati-attesi-3" id="toc-risultati-attesi-3">Risultati attesi</a></li>
+  </ul></li>
+  <li><a href="#esercizio-8.6" id="toc-esercizio-8.6">Esercizio 8.6 - Moto di una particella carica in un campo elettrico e magnetico uniforme</a>
+  <ul>
+  <li><a href="#moto-in-campo-elettrico-e-magnetico-uniformi" id="toc-moto-in-campo-elettrico-e-magnetico-uniformi">Moto in campo elettrico e magnetico uniformi</a></li>
+  </ul></li>
+  <li><a href="#errori-comuni" id="toc-errori-comuni">Errori comuni</a></li>
+  </ul>
+</nav>
 
-        <div class="uk-container uk-container-center uk-margin-top uk-margin-large-bottom">
-
-                        <div class="uk-grid" data-uk-grid-margin>
-                <div class="uk-width-1-1">
-                    <h1 class="uk-heading-large">Lezione 8: Equazioni
-differenziali</h1>
-                                        <h3 class="uk-heading-large">A.A.
-2023−2024</p></h3>
-                                                            <p class="uk-text-large">Leonardo
-Carminati</p>
-                                        <p class="uk-text-large">Maurizio
-Tomasi</p>
-                                    </div>
-            </div>
-            
-            <div class="uk-grid" data-uk-grid-margin >          
-                <div class="uk-width-medium-1-4">
-                    <div class="uk-overflow-container" data-uk-sticky="{top:25,media: 768}">
-                        <div class="uk-panel uk-panel-box menu-begin" >
-
-                                                        <ul>
-                                                        <li><a
-                                                        href="#introduzione-a-stdarray"
-                                                        id="toc-introduzione-a-stdarray">Introduzione
-                                                        a
-                                                        <code>std::array</code></a></li>
-                                                        <li><a
-                                                        href="#esercizio-8.0"
-                                                        id="toc-esercizio-8.0">Esercizio
-                                                        8.0 - Algebra
-                                                        vettoriale</a></li>
-                                                        <li><a
-                                                        href="#esercizio-8.1"
-                                                        id="toc-esercizio-8.1">Esercizio
-                                                        8.1 -
-                                                        Risoluzione
-                                                        tramite metodo
-                                                        di Eulero</a>
-                                                        <ul>
-                                                        <li><a
-                                                        href="#il-metodo-di-eulero"
-                                                        id="toc-il-metodo-di-eulero">Il
-                                                        metodo di
-                                                        Eulero</a></li>
-                                                        <li><a
-                                                        href="#struttura-del-programma"
-                                                        id="toc-struttura-del-programma">Struttura
-                                                        del
-                                                        programma</a></li>
-                                                        <li><a
-                                                        href="#risultati-attesi"
-                                                        id="toc-risultati-attesi">Risultati
-                                                        attesi</a></li>
-                                                        </ul></li>
-                                                        <li><a
-                                                        href="#esercizio-8.2"
-                                                        id="toc-esercizio-8.2">Esercizio
-                                                        8.2 -
-                                                        Risoluzione
-                                                        tramite
-                                                        Runge-Kutta (da
-                                                        consegnare)</a>
-                                                        <ul>
-                                                        <li><a
-                                                        href="#il-metodo-di-runge-kutta"
-                                                        id="toc-il-metodo-di-runge-kutta">Il
-                                                        metodo di
-                                                        Runge-Kutta</a></li>
-                                                        <li><a
-                                                        href="#cosa-ci-aspettiamo"
-                                                        id="toc-cosa-ci-aspettiamo">Cosa
-                                                        ci
-                                                        aspettiamo?</a></li>
-                                                        </ul></li>
-                                                        <li><a
-                                                        href="#esercizio-8.3"
-                                                        id="toc-esercizio-8.3">Esercizio
-                                                        8.3 - Moto del
-                                                        pendolo (da
-                                                        consegnare)</a>
-                                                        <ul>
-                                                        <li><a
-                                                        href="#il-moto-del-pendolo"
-                                                        id="toc-il-moto-del-pendolo">Il
-                                                        moto del
-                                                        pendolo</a></li>
-                                                        <li><a
-                                                        href="#calcolo-del-periodo"
-                                                        id="toc-calcolo-del-periodo">Calcolo
-                                                        del
-                                                        periodo</a></li>
-                                                        <li><a
-                                                        href="#risultati-attesi-1"
-                                                        id="toc-risultati-attesi-1">Risultati
-                                                        attesi</a></li>
-                                                        </ul></li>
-                                                        <li><a
-                                                        href="#esercizio-8.4"
-                                                        id="toc-esercizio-8.4">Esercizio
-                                                        8.4 -
-                                                        Oscillazione
-                                                        forzate e
-                                                        risonanza (da
-                                                        consegnare)</a>
-                                                        <ul>
-                                                        <li><a
-                                                        href="#oscillatore-armonico-con-forzante"
-                                                        id="toc-oscillatore-armonico-con-forzante">Oscillatore
-                                                        armonico con
-                                                        forzante</a></li>
-                                                        <li><a
-                                                        href="#risultati-attesi-2"
-                                                        id="toc-risultati-attesi-2">Risultati
-                                                        attesi</a></li>
-                                                        </ul></li>
-                                                        <li><a
-                                                        href="#esercizio-8.5"
-                                                        id="toc-esercizio-8.5">Esercizio
-                                                        8.5 - Moto in
-                                                        campo
-                                                        gravitazionale</a>
-                                                        <ul>
-                                                        <li><a
-                                                        href="#moto-in-campo-gravitazionale"
-                                                        id="toc-moto-in-campo-gravitazionale">Moto
-                                                        in campo
-                                                        gravitazionale</a></li>
-                                                        <li><a
-                                                        href="#risultati-attesi-3"
-                                                        id="toc-risultati-attesi-3">Risultati
-                                                        attesi</a></li>
-                                                        </ul></li>
-                                                        <li><a
-                                                        href="#esercizio-8.6"
-                                                        id="toc-esercizio-8.6">Esercizio
-                                                        8.6 - Moto di
-                                                        una particella
-                                                        carica in un
-                                                        campo elettrico
-                                                        e magnetico
-                                                        uniforme</a>
-                                                        <ul>
-                                                        <li><a
-                                                        href="#moto-in-campo-elettrico-e-magnetico-uniformi"
-                                                        id="toc-moto-in-campo-elettrico-e-magnetico-uniformi">Moto
-                                                        in campo
-                                                        elettrico e
-                                                        magnetico
-                                                        uniformi</a></li>
-                                                        </ul></li>
-                                                        <li><a
-                                                        href="#errori-comuni"
-                                                        id="toc-errori-comuni">Errori
-                                                        comuni</a></li>
-                                                        </ul>
-                            
-                        </div>
-                    </div>
-                </div>
-
-                <div class="uk-width-medium-3-4">
-<p>[La pagina con la spiegazione originale degli esercizi si trova qui:
-<a href="https://labtnds.docs.cern.ch/Lezione8/Lezione8/"
-class="uri">https://labtnds.docs.cern.ch/Lezione8/Lezione8/</a>.]</p>
-<p>In questa lezione introdurremo alcuni metodi per la risoluzione di
-equazioni differenziali ordinarie. Implementeremo la risoluzione
-numerica di queste equazioni con i metodi di <em>Eulero</em> e di
-<em>Runge-Kutta</em>.</p>
-<p>Per risolvere l’esercizio vedremo come è possibile definire le
-principali operazioni algebriche per classi della STL come
-<code>std::vector</code> o il nuovo <code>std::array</code>. Questo ci
-permetterà di realizzare i metodi di integrazione di equazioni
-differenziali usando una notazione vettoriale, molto simile al
-formalismo matematico.</p>
-<h1 id="introduzione-a-stdarray">Introduzione a
-<code>std::array</code></h1>
-<p>La STL fornisce varie implementazioni del concetto di “array”. Finora
-abbiamo sempre usato il tipo <code>std::vector</code>, che è una
-versione più potente degli array del C. Le due variabili
-<code>array</code> e <code>vec</code> nell’esempio contengono gli stessi
-elementi:</p>
-<div class="sourceCode" id="cb1"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> array<span class="op">[]</span> <span class="op">=</span> <span class="op">{</span><span class="fl">1.0</span><span class="op">,</span> <span class="fl">2.0</span><span class="op">,</span> <span class="fl">3.0</span><span class="op">};</span></span>
+<main>
+<p>[La pagina con la spiegazione originale degli esercizi si trova qui: <a href="https://labtnds.docs.cern.ch/Lezione8/Lezione8/" class="uri">https://labtnds.docs.cern.ch/Lezione8/Lezione8/</a>.]</p>
+<p>In questa lezione introdurremo alcuni metodi per la risoluzione di equazioni differenziali ordinarie. Implementeremo la risoluzione numerica di queste equazioni con i metodi di <em>Eulero</em> e di <em>Runge-Kutta</em>.</p>
+<p>Per risolvere l’esercizio vedremo come è possibile definire le principali operazioni algebriche per classi della STL come <code>std::vector</code> o il nuovo <code>std::array</code>. Questo ci permetterà di realizzare i metodi di integrazione di equazioni differenziali usando una notazione vettoriale, molto simile al formalismo matematico.</p>
+<h1 id="introduzione-a-stdarray">Introduzione a <code>std::array</code></h1>
+<p>La STL fornisce varie implementazioni del concetto di “array”. Finora abbiamo sempre usato il tipo <code>std::vector</code>, che è una versione più potente degli array del C. Le due variabili <code>array</code> e <code>vec</code> nell’esempio contengono gli stessi elementi:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> array<span class="op">[]</span> <span class="op">=</span> <span class="op">{</span><span class="fl">1.0</span><span class="op">,</span> <span class="fl">2.0</span><span class="op">,</span> <span class="fl">3.0</span><span class="op">};</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="bu">std::</span>vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> stl_vec<span class="op">{</span><span class="fl">1.0</span><span class="op">,</span> <span class="fl">2.0</span><span class="op">,</span> <span class="fl">3.0</span><span class="op">};</span></span></code></pre></div>
 <p>ma la variabile <code>stl_vec</code> ha più funzionalità:</p>
 <ul>
-<li><p>È sempre possibile sapere quanti elementi contenga con il metodo
-<code>stl_vec.size()</code> (o in C++20 mediante
-<code>ssize(stl_vec)</code>);</p></li>
-<li><p>Si possono aggiungere elementi in coda con
-<code>stl_vec.push_back()</code> e <a
-href="https://en.cppreference.com/w/cpp/container/vector/emplace_back"><code>stl_vec.emplace_back()</code></a>;</p></li>
-<li><p>Si possono rimuovere elementi con <a
-href="https://cplusplus.com/reference/vector/vector/erase/"><code>stl_vec.erase()</code></a>.</p></li>
-<li><p>Se si usa la scrittura <code>stl_vec.at(4)</code> anziché
-<code>stl_vec[4]</code>, l’accesso a un elemento non esistente
-dell’array causa un messaggio di errore esplicito.</p></li>
+<li><p>È sempre possibile sapere quanti elementi contenga con il metodo <code>stl_vec.size()</code> (o in C++20 mediante <code>ssize(stl_vec)</code>);</p></li>
+<li><p>Si possono aggiungere elementi in coda con <code>stl_vec.push_back()</code> e <a href="https://en.cppreference.com/w/cpp/container/vector/emplace_back"><code>stl_vec.emplace_back()</code></a>;</p></li>
+<li><p>Si possono rimuovere elementi con <a href="https://cplusplus.com/reference/vector/vector/erase/"><code>stl_vec.erase()</code></a>.</p></li>
+<li><p>Se si usa la scrittura <code>stl_vec.at(4)</code> anziché <code>stl_vec[4]</code>, l’accesso a un elemento non esistente dell’array causa un messaggio di errore esplicito.</p></li>
 </ul>
-<p>Oltre a <code>std::vector</code>, la STL offre la possibilità di
-usare <a
-href="https://en.cppreference.com/w/cpp/container/array"><code>std::array</code></a>,
-che si comporta esattamente come <code>std::vector</code> a parte queste
-differenze:</p>
+<p>Oltre a <code>std::vector</code>, la STL offre la possibilità di usare <a href="https://en.cppreference.com/w/cpp/container/array"><code>std::array</code></a>, che si comporta esattamente come <code>std::vector</code> a parte queste differenze:</p>
 <ul>
-<li><p>È allocato sullo <em>stack</em> anziché sullo <em>heap</em>,
-quindi è molto veloce da creare;</p></li>
-<li><p>Proibisce di aggiungere e togliere elementi: il numero di
-elementi va definito in fase di dichiarazione e non può essere
-modificato;</p></li>
-<li><p>Va usato quando il numero di elementi nell’array è piccolo
-(qualche decina al massimo), altrimenti si rischia di riempire tutto lo
-<em>stack</em>;</p></li>
-<li><p>Il compilatore è sempre in grado di verificare che le dimensioni
-di un array siano consistenti. Ad esempio, se si somma un array
-<code>a</code> di due elementi ad un array <code>b</code> di quattro
-elementi, il compilatore produce un errore di compilazione. Questo non
-sarebbe vero se <code>a</code> e <code>b</code> fossero di tipo
-<code>std::vector</code>!</p></li>
+<li><p>È allocato sullo <em>stack</em> anziché sullo <em>heap</em>, quindi è molto veloce da creare;</p></li>
+<li><p>Proibisce di aggiungere e togliere elementi: il numero di elementi va definito in fase di dichiarazione e non può essere modificato;</p></li>
+<li><p>Va usato quando il numero di elementi nell’array è piccolo (qualche decina al massimo), altrimenti si rischia di riempire tutto lo <em>stack</em>;</p></li>
+<li><p>Il compilatore è sempre in grado di verificare che le dimensioni di un array siano consistenti. Ad esempio, se si somma un array <code>a</code> di due elementi ad un array <code>b</code> di quattro elementi, il compilatore produce un errore di compilazione. Questo non sarebbe vero se <code>a</code> e <code>b</code> fossero di tipo <code>std::vector</code>!</p></li>
 </ul>
-<p>Il testo originale degli esercizi di Carminati assume che negli
-esercizi di oggi si usi <code>std::vector</code>, ma il testo qui sotto
-vi mostrerà invece come usare <code>std::array</code>, perché rende
-impossibile alcuni errori che gli studenti tendono a fare.</p>
+<p>Il testo originale degli esercizi di Carminati assume che negli esercizi di oggi si usi <code>std::vector</code>, ma il testo qui sotto vi mostrerà invece come usare <code>std::array</code>, perché rende impossibile alcuni errori che gli studenti tendono a fare.</p>
 <p>Questo è il modo in cui si usa:</p>
-<div class="sourceCode" id="cb2"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Notare che bisogna indicare il numero di elementi</span></span>
+<div class="sourceCode" id="cb2"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Notare che bisogna indicare il numero di elementi</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co">// *dentro* le parentesi angolari &lt;&gt; del template!</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="bu">std::</span>array<span class="op">&lt;</span><span class="dt">double</span><span class="op">,</span> <span class="dv">3</span><span class="op">&gt;</span> stl_arr<span class="op">{</span><span class="fl">1.0</span><span class="op">,</span> <span class="fl">2.0</span><span class="op">,</span> <span class="fl">3.0</span><span class="op">};</span></span></code></pre></div>
-<p>La scrittura <code>array&lt;double, 3&gt;</code> può sembrare strana:
-finora abbiamo sempre visto nelle parentesi angolari
-<code>&lt;&gt;</code> dei template tipi come <code>double</code> oppure
-<code>int</code>, ma il C++ permette anche di specificare
-<em>valori</em> come parametri dei template.</p>
-<p>È poi possibile implementare codice come se si stesse usando un
-oggetto di tipo <code>std::vector</code>:</p>
-<div class="sourceCode" id="cb3"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span><span class="op">(</span><span class="dt">int</span> i<span class="op">{};</span> i <span class="op">&lt;</span> <span class="op">(</span><span class="dt">int</span><span class="op">)</span> stl_arr<span class="op">.</span>size<span class="op">();</span> <span class="op">++</span>i<span class="op">)</span> <span class="op">{</span></span>
+<p>La scrittura <code>array&lt;double, 3&gt;</code> può sembrare strana: finora abbiamo sempre visto nelle parentesi angolari <code>&lt;&gt;</code> dei template tipi come <code>double</code> oppure <code>int</code>, ma il C++ permette anche di specificare <em>valori</em> come parametri dei template.</p>
+<p>È poi possibile implementare codice come se si stesse usando un oggetto di tipo <code>std::vector</code>:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span><span class="op">(</span><span class="dt">int</span> i<span class="op">{};</span> i <span class="op">&lt;</span> <span class="op">(</span><span class="dt">int</span><span class="op">)</span> stl_arr<span class="op">.</span>size<span class="op">();</span> <span class="op">++</span>i<span class="op">)</span> <span class="op">{</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Ok anche `stl_arr[i]`, ma non controlla la</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="co">// correttezza di `i`</span></span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> stl_arr<span class="op">.</span>at<span class="op">(</span>i<span class="op">)</span> <span class="op">&lt;&lt;</span> <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">;</span></span>
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
-<p>ma è vietato chiamare metodi come
-<code>stl_arr.push_back(5.0)</code>, perché la dimensione dell’array non
-cambia mai!</p>
-<p>Se si vogliono definire funzioni che operano su un array, nel
-template bisogna non solo indicare <code>&lt;typename T&gt;</code> come
-nel caso di <code>std::vector</code>, perché qui anche la
-<em>dimensione</em> dell’array è un parametro (che purtroppo va indicata
-come <code>size_t</code> anziché <code>int</code> ☹):</p>
-<div class="sourceCode" id="cb4"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">template</span> <span class="op">&lt;</span><span class="kw">typename</span> T<span class="op">,</span> <span class="dt">size_t</span> n<span class="op">&gt;</span></span>
+<p>ma è vietato chiamare metodi come <code>stl_arr.push_back(5.0)</code>, perché la dimensione dell’array non cambia mai!</p>
+<p>Se si vogliono definire funzioni che operano su un array, nel template bisogna non solo indicare <code>&lt;typename T&gt;</code> come nel caso di <code>std::vector</code>, perché qui anche la <em>dimensione</em> dell’array è un parametro (che purtroppo va indicata come <code>size_t</code> anziché <code>int</code> ☹):</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">template</span> <span class="op">&lt;</span><span class="kw">typename</span> T<span class="op">,</span> <span class="dt">size_t</span> n<span class="op">&gt;</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> print<span class="op">(</span><span class="at">const</span> <span class="bu">std::</span>array<span class="op">&lt;</span>T<span class="op">,</span> n<span class="op">&gt;</span> <span class="op">&amp;</span> arr<span class="op">)</span> <span class="op">{</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="co">// …</span></span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
-<p>Notate che <code>T</code> è dichiarata come <code>typename</code>,
-perché questo parametro rappresenta un <em>tipo</em> come
-<code>double</code> oppure <code>int</code>, mentre <code>n</code> è un
-numero (<code>size_t</code> è un intero senza segno), perché questo non
-deve essere un tipo bensì un <em>valore</em> come <code>2</code>,
-<code>5</code>, <code>14</code>…</p>
+<p>Notate che <code>T</code> è dichiarata come <code>typename</code>, perché questo parametro rappresenta un <em>tipo</em> come <code>double</code> oppure <code>int</code>, mentre <code>n</code> è un numero (<code>size_t</code> è un intero senza segno), perché questo non deve essere un tipo bensì un <em>valore</em> come <code>2</code>, <code>5</code>, <code>14</code>…</p>
 <h1 id="esercizio-8.0">Esercizio 8.0 - Algebra vettoriale</h1>
-<p>Come prima cosa, proviamo a dotare il tipo <code>std::array</code>
-della STL di tutte le funzionalità algebriche che ci possono essere
-utili, definendo opportunamente gli operatori <code>+</code>,
-<code>*</code>, <code>/</code>, <code>+=</code>. Dal momento che non
-possiamo modificare gli header files e i files di implementazione della
-classe <code>std::array</code>, implementiamo questi operatori come
-funzioni libere in un header file apposito da includere quando
-necessario. Potete trovarne un esempio <a
-href="codici/array_operations.h">qui</a>.</p>
-<p>Notate la presenza della funzione
-<code>test_array_operations()</code>, che verifica la correttezza delle
-operazioni su <code>std::array</code>. Usando solo numeri interi per le
-componenti dei vettori, non c’è bisogno di invocare la nostra solita
-funzione <code>are_close()</code> perché in questo caso la variabile
-<code>double</code> opera senza arrotondamenti.</p>
-<p>Ovviamente, per eseguire i test basta invocarli all’inizio di
-<code>main()</code>, come al solito:</p>
-<div class="sourceCode" id="cb5"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;array_operations.h&quot;</span></span>
+<p>Come prima cosa, proviamo a dotare il tipo <code>std::array</code> della STL di tutte le funzionalità algebriche che ci possono essere utili, definendo opportunamente gli operatori <code>+</code>, <code>*</code>, <code>/</code>, <code>+=</code>. Dal momento che non possiamo modificare gli header files e i files di implementazione della classe <code>std::array</code>, implementiamo questi operatori come funzioni libere in un header file apposito da includere quando necessario. Potete trovarne un esempio <a href="codici/array_operations.h">qui</a>.</p>
+<p>Notate la presenza della funzione <code>test_array_operations()</code>, che verifica la correttezza delle operazioni su <code>std::array</code>. Usando solo numeri interi per le componenti dei vettori, non c’è bisogno di invocare la nostra solita funzione <code>are_close()</code> perché in questo caso la variabile <code>double</code> opera senza arrotondamenti.</p>
+<p>Ovviamente, per eseguire i test basta invocarli all’inizio di <code>main()</code>, come al solito:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;array_operations.h&quot;</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;array&gt;</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
 <span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  test_array_operations<span class="op">();</span></span>
 <span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
-<h1 id="esercizio-8.1">Esercizio 8.1 - Risoluzione tramite metodo di
-Eulero</h1>
-<p>Nel primo esercizio implementeremo un codice per la risoluzione
-numerica dell’equazione differenziale che descrive il moto di un
-oscillatore armonico tramite il metodo di Eulero. Gli obiettivi
-principali di questo esercizio sono due:</p>
+<h1 id="esercizio-8.1">Esercizio 8.1 - Risoluzione tramite metodo di Eulero</h1>
+<p>Nel primo esercizio implementeremo un codice per la risoluzione numerica dell’equazione differenziale che descrive il moto di un oscillatore armonico tramite il metodo di Eulero. Gli obiettivi principali di questo esercizio sono due:</p>
 <ol type="1">
-<li><p>Studiare l’andamento della posizione in funzione del tempo
-<code>t</code> (per <code>t</code> che va da 0 a 70 secondi) per un
-fissato passo di integrazione <code>h</code> (si potrebbe costruire un
-grafico, per esempio) e confrontare l’errore commesso con la soluzione
-esatta.</p></li>
-<li><p>Studiare l’andamento dell’errore che si commette utilizzando il
-metodo di Eulero quando confrontiamo la soluzione approssimata con la
-soluzione esatta nell’istante t = 70 s in funzione del passo di
-integrazione <code>h</code> in un intervallo compreso tra 0.1 e
-0.001.</p></li>
+<li><p>Studiare l’andamento della posizione in funzione del tempo <code>t</code> (per <code>t</code> che va da 0 a 70 secondi) per un fissato passo di integrazione <code>h</code> (si potrebbe costruire un grafico, per esempio) e confrontare l’errore commesso con la soluzione esatta.</p></li>
+<li><p>Studiare l’andamento dell’errore che si commette utilizzando il metodo di Eulero quando confrontiamo la soluzione approssimata con la soluzione esatta nell’istante t = 70 s in funzione del passo di integrazione <code>h</code> in un intervallo compreso tra 0.1 e 0.001.</p></li>
 </ol>
 <p>Per testare il metodo, risolviamo l’equazione differenziale:</p>
 <p><span class="math display">
 \frac{\mathrm{d}}{\mathrm{d}t} \begin{pmatrix}x\\v\end{pmatrix} =
-\begin{pmatrix}v\\-\omega_0^2 x\end{pmatrix},\quad x(0) = 0, \quad v(0)
-= 1\,\text{m/s}, \quad \omega_0 = 1\,\text{s}^{-1},
+\begin{pmatrix}v\\-\omega_0^2 x\end{pmatrix},\quad x(0) = 0, \quad v(0) = 1\,\text{m/s}, \quad \omega_0 = 1\,\text{s}^{-1},
 </span></p>
-<p>mettendo in grafico il valore della <span
-class="math inline">x</span> in funzione del tempo <span
-class="math inline">t</span> ed eventualmente anche il suo errore
-rispetto alla soluzione esatta del problema, che è <span
-class="math inline">x(t) = \sin (t)</span>. Si consiglia di svolgere
-l’integrazione per un certo numero di periodi, in modo da vedere se
-l’ampiezza di oscillazione rimane costante. Integrare fino a <span
-class="math inline">t = 70\,\text{s}</span> permette di vedere circa 10
-periodi.</p>
+<p>mettendo in grafico il valore della <span class="math inline">x</span> in funzione del tempo <span class="math inline">t</span> ed eventualmente anche il suo errore rispetto alla soluzione esatta del problema, che è <span class="math inline">x(t) = \sin (t)</span>. Si consiglia di svolgere l’integrazione per un certo numero di periodi, in modo da vedere se l’ampiezza di oscillazione rimane costante. Integrare fino a <span class="math inline">t = 70\,\text{s}</span> permette di vedere circa 10 periodi.</p>
 <h2 id="il-metodo-di-eulero">Il metodo di Eulero</h2>
 <p>Consideriamo la seconda legge della dinamica di Newton:</p>
 <p><span class="math display">
 a = \frac{\mathrm{d}^2 x}{\mathrm{d}t^2} = \frac{F}m.
 </span></p>
-<p>Essa è un’equazione differenziale del secondo ordine che può essere
-ridotta ad un’equazione differenziale del prim’ordine introducendo la
-variabile velocità:</p>
+<p>Essa è un’equazione differenziale del secondo ordine che può essere ridotta ad un’equazione differenziale del prim’ordine introducendo la variabile velocità:</p>
 <p><span class="math display">
 \begin{aligned}
 \frac{\mathrm{d} x}{\mathrm{d}t} &amp;= v,\\
 \frac{\mathrm{d} v}{\mathrm{d}t} &amp;= \frac{F}m.
 \end{aligned}
 </span></p>
-<p>Il metodo di Eulero consiste nel calcolare lo stato della soluzione
-al tempo <span class="math inline">t + h</span> dato quello ad un tempo
-<span class="math inline">t</span> tramite le espressioni:</p>
+<p>Il metodo di Eulero consiste nel calcolare lo stato della soluzione al tempo <span class="math inline">t + h</span> dato quello ad un tempo <span class="math inline">t</span> tramite le espressioni:</p>
 <p><span class="math display">
 \begin{aligned}
 x(t + h) &amp;\approx x(t) + h \cdot \dot{x}(t) = x(t) + h \cdot v,\\
-v(t + h) &amp;\approx v(t) + h \cdot \dot{v}(t) = x(t) + h \cdot
-\frac{F}m.
+v(t + h) &amp;\approx v(t) + h \cdot \dot{v}(t) = x(t) + h \cdot \frac{F}m.
 \end{aligned}
 </span></p>
 <h2 id="struttura-del-programma">Struttura del programma</h2>
-<p>Struttureremo la soluzione del problema in modo simile a quanto fatto
-nelle precedenti lezioni su ricerca degli zeri e integrazione
-numerica:</p>
+<p>Struttureremo la soluzione del problema in modo simile a quanto fatto nelle precedenti lezioni su ricerca degli zeri e integrazione numerica:</p>
 <ul>
-<li>Definiamo una classe astratta <code>FunzioneVettorialeBase</code>
-con un unico metodo <code>Eval</code>, puramente virtuale, che dato un
-<code>array</code> ed un <code>double</code>, rappresentante il tempo,
-restituisce il valore della derivata prima nel punto e nell’istante
-considerati.</li>
-<li>Da questa classe astratta, deriviamo una classe concreta
-<code>OscillatoreArmonico</code>, nella quale implementeremo il metodo
-<code>Eval</code> concreto relativo all’oscillatore armonico.</li>
-<li>Definiamo una classe astratta
-<code>EquazioneDifferenzialeBase</code> che contenga il metodo virtuale
-puro <code>Passo</code>, puramente virtuale, che dati il tempo <span
-class="math inline">t</span>, un vettore <span class="math inline">\vec
-x</span>, il passo di integrazione <span class="math inline">h</span> e
-un puntatore ad una <code>FunzioneVettorialeBase</code>, restituisca la
-una stima del valore della posizione <span class="math inline">\vec
-x</span> al tempo <span class="math inline">t + h</span>. Avere il tempo
-<span class="math inline">t</span> come argomento esplicito non serve
-per questo esercizio in particolare, ma permetterà in futuro (come ad
-esempio nell’esercizio <a
-href="carminati-esercizi-08.html#esercizio-8.4">8.4</a>) di avere
-forzanti esterne o parametri dipendenti dal tempo.</li>
-<li>Da questa classe astratta, deriviamo una classe concreta che
-implementi il metodo <code>Passo</code> relativo al metodo di
-Eulero.</li>
+<li>Definiamo una classe astratta <code>FunzioneVettorialeBase</code> con un unico metodo <code>Eval</code>, puramente virtuale, che dato un <code>array</code> ed un <code>double</code>, rappresentante il tempo, restituisce il valore della derivata prima nel punto e nell’istante considerati.</li>
+<li>Da questa classe astratta, deriviamo una classe concreta <code>OscillatoreArmonico</code>, nella quale implementeremo il metodo <code>Eval</code> concreto relativo all’oscillatore armonico.</li>
+<li>Definiamo una classe astratta <code>EquazioneDifferenzialeBase</code> che contenga il metodo virtuale puro <code>Passo</code>, puramente virtuale, che dati il tempo <span class="math inline">t</span>, un vettore <span class="math inline">\vec x</span>, il passo di integrazione <span class="math inline">h</span> e un puntatore ad una <code>FunzioneVettorialeBase</code>, restituisca la una stima del valore della posizione <span class="math inline">\vec x</span> al tempo <span class="math inline">t + h</span>. Avere il tempo <span class="math inline">t</span> come argomento esplicito non serve per questo esercizio in particolare, ma permetterà in futuro (come ad esempio nell’esercizio <a href="carminati-esercizi-08.html#esercizio-8.4">8.4</a>) di avere forzanti esterne o parametri dipendenti dal tempo.</li>
+<li>Da questa classe astratta, deriviamo una classe concreta che implementi il metodo <code>Passo</code> relativo al metodo di Eulero.</li>
 </ul>
-<p>Per comodità possiamo mettere tutte queste classi nello stesso header
-file che potrebbe avere l’aspetto seguente:</p>
-<div class="sourceCode" id="cb6"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#pragma once</span></span>
+<p>Per comodità possiamo mettere tutte queste classi nello stesso header file che potrebbe avere l’aspetto seguente:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#pragma once</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;array_operations.h&quot;</span></span>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;cmath&gt;</span></span>
@@ -581,11 +260,8 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb6-1"><a href="#c
 <span id="cb6-87"><a href="#cb6-87" aria-hidden="true" tabindex="-1"></a>  <span class="ot">assert</span><span class="op">(</span>are_close<span class="op">(</span>x<span class="op">[</span><span class="dv">0</span><span class="op">],</span> <span class="fl">0.817256</span><span class="op">,</span> <span class="fl">1e-6</span><span class="op">));</span></span>
 <span id="cb6-88"><a href="#cb6-88" aria-hidden="true" tabindex="-1"></a>  <span class="ot">assert</span><span class="op">(</span>are_close<span class="op">(</span>x<span class="op">[</span><span class="dv">1</span><span class="op">],</span> <span class="fl">0.652516</span><span class="op">,</span> <span class="fl">1e-6</span><span class="op">));</span></span>
 <span id="cb6-89"><a href="#cb6-89" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
-<p>Una volta implementate le classi (l’implementazione di Eulero è
-semplicissima se si usano le operazioni di algebra vettoriale), un
-possibile programma per risolvere l’esercizio è il seguente:</p>
-<div class="sourceCode" id="cb7"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;array_operations.h&quot;</span></span>
+<p>Una volta implementate le classi (l’implementazione di Eulero è semplicissima se si usano le operazioni di algebra vettoriale), un possibile programma per risolvere l’esercizio è il seguente:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;array_operations.h&quot;</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;equazioni_differenziali.h&quot;</span></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;fmtlib.h&quot;</span></span>
@@ -657,24 +333,11 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb7-1"><a href="#c
 <span id="cb7-70"><a href="#cb7-70" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-71"><a href="#cb7-71" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
 <span id="cb7-72"><a href="#cb7-72" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
-<p>Come al solito, potete installare la libreria <code>fmtlib</code>
-usando lo script <a
-href="./install_fmt_library"><code>install_fmt_library</code></a>:
-scaricatelo nella directory dell’esercizio ed eseguitelo con
-<code>sh install_fmt_library</code>, oppure eseguite direttamente questo
-comando:</p>
+<p>Come al solito, potete installare la libreria <code>fmtlib</code> usando lo script <a href="./install_fmt_library"><code>install_fmt_library</code></a>: scaricatelo nella directory dell’esercizio ed eseguitelo con <code>sh install_fmt_library</code>, oppure eseguite direttamente questo comando:</p>
 <p><input type="text" value="curl https://ziotom78.github.io/tnds-tomasi-notebooks/install_fmt_library | sh" id="installFmtCommand" readonly="1" size="60"><button onclick='copyFmtInstallationScript("installFmtCommand")'>Copia</button></p>
-<p>In alternativa, scaricate questo <a href="./fmtlib.zip">file zip</a>
-nella directory dell’esercizio e decomprimetelo. Le istruzioni
-dettagliate sono qui: <a
-href="index.html#fmtinstall">index.html#fmtinstall</a>.</p>
-<p>Il codice sopra usa la libreria <a
-href="https://github.com/ziotom78/gplotpp">gplot++</a> per salvare il
-grafico della soluzione in un file PNG. Se invece volete usare ROOT,
-queste sono le righe da aggiungere alla seconda parte del
-<code>main</code>:</p>
-<div class="sourceCode" id="cb8"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>TApplication myApp<span class="op">{</span><span class="st">&quot;myApp&quot;</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">0</span><span class="op">};</span></span>
+<p>In alternativa, scaricate questo <a href="./fmtlib.zip">file zip</a> nella directory dell’esercizio e decomprimetelo. Le istruzioni dettagliate sono qui: <a href="index.html#fmtinstall">index.html#fmtinstall</a>.</p>
+<p>Il codice sopra usa la libreria <a href="https://github.com/ziotom78/gplotpp">gplot++</a> per salvare il grafico della soluzione in un file PNG. Se invece volete usare ROOT, queste sono le righe da aggiungere alla seconda parte del <code>main</code>:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>TApplication myApp<span class="op">{</span><span class="st">&quot;myApp&quot;</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">0</span><span class="op">};</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>TGraph <span class="op">*</span>myGraph<span class="op">{</span><span class="kw">new</span> TGraph<span class="op">()};</span></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> step<span class="op">{};</span> step <span class="op">&lt;</span> num_of_steps<span class="op">;</span> step<span class="op">++)</span> <span class="op">{</span></span>
@@ -694,43 +357,20 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb8-1"><a href="#c
 <span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>myGraph<span class="op">-&gt;</span>Draw<span class="op">(</span><span class="st">&quot;AL&quot;</span><span class="op">);</span></span>
 <span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>myApp<span class="op">.</span>Run<span class="op">();</span></span></code></pre></div>
-<p>Si riveda il solito esempio (<a
-href="./codici/test_tgraph.cpp">qui</a>) per l’uso dei
-<code>TGraph</code> di ROOT.</p>
+<p>Si riveda il solito esempio (<a href="./codici/test_tgraph.cpp">qui</a>) per l’uso dei <code>TGraph</code> di ROOT.</p>
 <h2 id="risultati-attesi">Risultati attesi</h2>
-<p>Il metodo di Eulero non è molto preciso; in effetti, con un passo di
-integrazione modesto si vede come esso possa risultare instabile,
-mostrando oscillazioni la cui ampiezza varia con il tempo. La figura
-sotto mostra l’andamento di <span class="math inline">x(t)</span> con un
-passo di integrazione di 0.1 s:</p>
-<p><img
-src="https://labtnds.docs.cern.ch/Lezione8/pictures/Eulero-01.png" /></p>
-<p>Per avere qualcosa di anche solo visivamente accettabile, bisogna
-andare a passi di almeno 0.0002 s:</p>
-<p><img
-src="https://labtnds.docs.cern.ch/Lezione8/pictures/Eulero-00001.png" /></p>
-<p>La figura seguente riporta l’errore accumulato dopo 70 s di
-integrazione per diversi valori del passo:</p>
-<p><img
-src="https://labtnds.docs.cern.ch/Lezione8/pictures/errore_eulero.png" /></p>
-<p>Si noti come la pendenza della curva sia 1 in una scala log-log,
-mostrando come l’errore ottenuto sia proporzionale al passo <span
-class="math inline">h</span>.</p>
-<h1 id="esercizio-8.2">Esercizio 8.2 - Risoluzione tramite Runge-Kutta
-(da consegnare)</h1>
-<p>Ripetere l’esercizio 8.1 con il metodo di risoluzione di equazioni
-differenziali di Runge-Kutta (del quarto ordine) e confrontare quindi in
-condizioni analoghe (<span class="math inline">t</span> massimo e <span
-class="math inline">h</span>) la stabilità dei due metodi.</p>
-<p>Per svolgere l’esercizio, basterà realizzare una nuova classe
-concreta a partire da <code>EquazioneDifferenzialeBase</code>.
-Implementate anche un metodo <code>test_runge_kutta()</code> sulla
-falsariga di <code>test_euler()</code> per l’<a
-href="http://0.0.0.0:8000/carminati-esercizi-08.html#struttura-del-programma">esercizio
-8.1</a>.</p>
+<p>Il metodo di Eulero non è molto preciso; in effetti, con un passo di integrazione modesto si vede come esso possa risultare instabile, mostrando oscillazioni la cui ampiezza varia con il tempo. La figura sotto mostra l’andamento di <span class="math inline">x(t)</span> con un passo di integrazione di 0.1 s:</p>
+<p><img src="https://labtnds.docs.cern.ch/Lezione8/pictures/Eulero-01.png" /></p>
+<p>Per avere qualcosa di anche solo visivamente accettabile, bisogna andare a passi di almeno 0.0002 s:</p>
+<p><img src="https://labtnds.docs.cern.ch/Lezione8/pictures/Eulero-00001.png" /></p>
+<p>La figura seguente riporta l’errore accumulato dopo 70 s di integrazione per diversi valori del passo:</p>
+<p><img src="https://labtnds.docs.cern.ch/Lezione8/pictures/errore_eulero.png" /></p>
+<p>Si noti come la pendenza della curva sia 1 in una scala log-log, mostrando come l’errore ottenuto sia proporzionale al passo <span class="math inline">h</span>.</p>
+<h1 id="esercizio-8.2">Esercizio 8.2 - Risoluzione tramite Runge-Kutta (da consegnare)</h1>
+<p>Ripetere l’esercizio 8.1 con il metodo di risoluzione di equazioni differenziali di Runge-Kutta (del quarto ordine) e confrontare quindi in condizioni analoghe (<span class="math inline">t</span> massimo e <span class="math inline">h</span>) la stabilità dei due metodi.</p>
+<p>Per svolgere l’esercizio, basterà realizzare una nuova classe concreta a partire da <code>EquazioneDifferenzialeBase</code>. Implementate anche un metodo <code>test_runge_kutta()</code> sulla falsariga di <code>test_euler()</code> per l’<a href="http://0.0.0.0:8000/carminati-esercizi-08.html#struttura-del-programma">esercizio 8.1</a>.</p>
 <h2 id="il-metodo-di-runge-kutta">Il metodo di Runge-Kutta</h2>
-<p>Il noto metodo di Runge-Kutta è un metodo del quarto ordine ed
-utilizza la seguente determinazione dell’incremento:</p>
+<p>Il noto metodo di Runge-Kutta è un metodo del quarto ordine ed utilizza la seguente determinazione dell’incremento:</p>
 <p><span class="math display">
 \begin{aligned}
 k_1 &amp;= \dot{x}(t, x),\\
@@ -741,80 +381,35 @@ x(t+h) &amp;= x(t) + (k_1 + 2k_2 + 2k_3 + k_4)\frac{h}6.
 \end{aligned}
 </span></p>
 <h2 id="cosa-ci-aspettiamo">Cosa ci aspettiamo?</h2>
-<p>Il metodo di Runge-Kutta del quarto ordine è molto più preciso del
-metodo di Eulero: infatti produce oscillazioni molto stabili anche con
-un passo di integrazione di 0.1 s:</p>
-<p><img
-src="https://labtnds.docs.cern.ch/Lezione8/pictures/RungeKutta-01.png" /></p>
-<p>La figura seguente riporta l’errore accumulato dopo 70 s di
-integrazione per diversi valori del passo:</p>
-<p><img
-src="https://labtnds.docs.cern.ch/Lezione8/pictures/errore_rk.png" /></p>
-<p>Si noti come la pendenza della curva nella sua parte iniziale sia 4
-in una scala log-log, mostrando come l’errore ottenuto sia proporzionale
-a <span class="math inline">h^4</span>. Quando l’errore di troncamento
-del metodo diventa minore degli errori di arrotondamento della macchina
-si vede che non c’è più alcun miglioramento nel ridurre il passo, anzi,
-il maggior numero di calcoli richiesto risulta in un peggioramento
-globale dell’errore.</p>
-<h1 id="esercizio-8.3">Esercizio 8.3 - Moto del pendolo (da
-consegnare)</h1>
-<p>Incominciamo ora con una carrellata di interessanti applicazioni dei
-metodi che abbiamo appena studiato. In questo esercizio proveremo ad
-implementare la risoluzione dell’equazione del moto del pendolo: per
-prima cosa possiamo provare a fare un grafico dell’andamento
-dell’ampiezza dell’oscillazione in funzione del tempo. La cosa più
-interessante che possiamo studiare con questo codice è l’andamento del
-periodo di oscillazione in funzione dell’ampiezza di oscillazione: in
-questo modo possiamo verificare che per angoli grandi le oscillazioni
-non sono più isocrone. La struttura logica dell’esercizio dovrebbe
-essere la seguente:</p>
+<p>Il metodo di Runge-Kutta del quarto ordine è molto più preciso del metodo di Eulero: infatti produce oscillazioni molto stabili anche con un passo di integrazione di 0.1 s:</p>
+<p><img src="https://labtnds.docs.cern.ch/Lezione8/pictures/RungeKutta-01.png" /></p>
+<p>La figura seguente riporta l’errore accumulato dopo 70 s di integrazione per diversi valori del passo:</p>
+<p><img src="https://labtnds.docs.cern.ch/Lezione8/pictures/errore_rk.png" /></p>
+<p>Si noti come la pendenza della curva nella sua parte iniziale sia 4 in una scala log-log, mostrando come l’errore ottenuto sia proporzionale a <span class="math inline">h^4</span>. Quando l’errore di troncamento del metodo diventa minore degli errori di arrotondamento della macchina si vede che non c’è più alcun miglioramento nel ridurre il passo, anzi, il maggior numero di calcoli richiesto risulta in un peggioramento globale dell’errore.</p>
+<h1 id="esercizio-8.3">Esercizio 8.3 - Moto del pendolo (da consegnare)</h1>
+<p>Incominciamo ora con una carrellata di interessanti applicazioni dei metodi che abbiamo appena studiato. In questo esercizio proveremo ad implementare la risoluzione dell’equazione del moto del pendolo: per prima cosa possiamo provare a fare un grafico dell’andamento dell’ampiezza dell’oscillazione in funzione del tempo. La cosa più interessante che possiamo studiare con questo codice è l’andamento del periodo di oscillazione in funzione dell’ampiezza di oscillazione: in questo modo possiamo verificare che per angoli grandi le oscillazioni non sono più isocrone. La struttura logica dell’esercizio dovrebbe essere la seguente:</p>
 <ol type="1">
 <li><p>Portare il sistema in una condizione iniziale (θ₀, 0);</p></li>
-<li><p>Far evolvere il sistema usando il metodo di Eulero o di
-Runge-Kutta con passo di integrazione <span class="math inline">h</span>
-opportuno;</p></li>
+<li><p>Far evolvere il sistema usando il metodo di Eulero o di Runge-Kutta con passo di integrazione <span class="math inline">h</span> opportuno;</p></li>
 <li><p>Calcolare il periodo di oscillazione del pendolo;</p></li>
-<li><p>Riportare il sistema ad una condizione iniziale con ampiezza θ₀
-variata e ripetere la sequenza di operazioni</p></li>
+<li><p>Riportare il sistema ad una condizione iniziale con ampiezza θ₀ variata e ripetere la sequenza di operazioni</p></li>
 </ol>
-<p>Si suggerisce di far variare θ₀ tra 0.1 e 3 radianti, in passi di 0.1
-radianti.</p>
+<p>Si suggerisce di far variare θ₀ tra 0.1 e 3 radianti, in passi di 0.1 radianti.</p>
 <h2 id="il-moto-del-pendolo">Il moto del pendolo</h2>
 <p>L’equazione del pendolo è data dalla relazione</p>
 <p><span class="math display">
 \frac{\mathrm{d}^2\theta}{\mathrm{d}t^2} = -\frac{g}{l}\sin\theta,
 </span></p>
-<p>dove <span class="math inline">g = 9.8\,\text{m/s}^2</span> è
-l’accellerazione di gravità sulla superficie terreste, mentre <span
-class="math inline">l</span> è la lunghezza del pendolo.</p>
-<p>L’equazione differenziale si può approssimare con quella di un
-oscillatore armonico per piccole oscillazioni, <span
-class="math inline">\sin\theta\sim\theta</span>. In tal caso, le
-oscillazioni risultano isocrone, cioè con periodo indipendente
-dall’ampiezza delle oscillazioni. Questa però è solo un’approssimazione,
-e per grandi oscillazioni bisogna usare l’equazione esatta.</p>
+<p>dove <span class="math inline">g = 9.8\,\text{m/s}^2</span> è l’accellerazione di gravità sulla superficie terreste, mentre <span class="math inline">l</span> è la lunghezza del pendolo.</p>
+<p>L’equazione differenziale si può approssimare con quella di un oscillatore armonico per piccole oscillazioni, <span class="math inline">\sin\theta\sim\theta</span>. In tal caso, le oscillazioni risultano isocrone, cioè con periodo indipendente dall’ampiezza delle oscillazioni. Questa però è solo un’approssimazione, e per grandi oscillazioni bisogna usare l’equazione esatta.</p>
 <h2 id="calcolo-del-periodo">Calcolo del periodo</h2>
-<p>In questo caso l’integrazione numerica dell’equazione differenziale
-non si può effettuare per un tempo predefinito, ma deve essere portata
-avanti fino a quando non si raggiunge una condizione compatibile con
-l’aver terminato l’oscillazione.</p>
+<p>In questo caso l’integrazione numerica dell’equazione differenziale non si può effettuare per un tempo predefinito, ma deve essere portata avanti fino a quando non si raggiunge una condizione compatibile con l’aver terminato l’oscillazione.</p>
 <ul>
-<li><p>Una possibile soluzione consiste nel portare avanti
-l’integrazione fino a quando non si registra un cambiamento di segno
-della velocità angolare;</p></li>
-<li><p>Siccome possiamo calcolare la velocità solo con granularità pari
-al passo di integrazione, possiamo migliorare la stima del periodo di
-oscillazione interpolando linearmente tra i punti <span
-class="math inline">(t,v(t))</span> e <span
-class="math inline">(t+h,v(t+h))</span> calcolando quando la retta
-ottenuta passa per lo zero; il tempo così calcolato corrisponde al
-semiperiodo dell’oscillazione.</p></li>
+<li><p>Una possibile soluzione consiste nel portare avanti l’integrazione fino a quando non si registra un cambiamento di segno della velocità angolare;</p></li>
+<li><p>Siccome possiamo calcolare la velocità solo con granularità pari al passo di integrazione, possiamo migliorare la stima del periodo di oscillazione interpolando linearmente tra i punti <span class="math inline">(t,v(t))</span> e <span class="math inline">(t+h,v(t+h))</span> calcolando quando la retta ottenuta passa per lo zero; il tempo così calcolato corrisponde al semiperiodo dell’oscillazione.</p></li>
 </ul>
-<p>Un frammento di codice che implementa questo algoritmo è il
-seguente:</p>
-<div class="sourceCode" id="cb9"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> A<span class="op">{</span><span class="fl">0.1</span> <span class="op">*</span> <span class="op">(</span>i <span class="op">+</span> <span class="dv">1</span><span class="op">)};</span></span>
+<p>Un frammento di codice che implementa questo algoritmo è il seguente:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> A<span class="op">{</span><span class="fl">0.1</span> <span class="op">*</span> <span class="op">(</span>i <span class="op">+</span> <span class="dv">1</span><span class="op">)};</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> v<span class="op">{};</span></span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> t<span class="op">{};</span> </span>
 <span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="bu">std::</span>array<span class="op">&lt;</span><span class="dt">double</span><span class="op">,</span> <span class="dv">2</span><span class="op">&gt;</span> x<span class="op">{-</span>A <span class="op">,</span> v<span class="op">}</span> <span class="op">;</span></span>
@@ -829,126 +424,64 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb9-1"><a href="#c
 <span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a><span class="co">// Il periodo è il *doppio* del tempo che abbiamo trovato!</span></span>
 <span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> period<span class="op">{</span><span class="dv">2</span> <span class="op">*</span> t<span class="op">};</span></span></code></pre></div>
 <h2 id="risultati-attesi-1">Risultati attesi</h2>
-<p>La figura illustra il periodo al variare dell’ampiezza per un pendolo
-con <span class="math inline">l = 1\,\text{m}</span>:</p>
-<p><img
-src="https://labtnds.docs.cern.ch/Lezione8/pictures/periodo_pendolo.png" /></p>
-<p>Si noti come per piccole oscillazioni il periodo sia effettivamente
-quello atteso dall’approssimazione dell’oscillatore armonico:</p>
+<p>La figura illustra il periodo al variare dell’ampiezza per un pendolo con <span class="math inline">l = 1\,\text{m}</span>:</p>
+<p><img src="https://labtnds.docs.cern.ch/Lezione8/pictures/periodo_pendolo.png" /></p>
+<p>Si noti come per piccole oscillazioni il periodo sia effettivamente quello atteso dall’approssimazione dell’oscillatore armonico:</p>
 <p><span class="math display">
 T = \frac{2\pi}{\sqrt{\frac{g}l}} \approx 2.007\,\text{s},
 </span></p>
 <p>ma aumenti significativamente per grandi ampiezze.</p>
-<h1 id="esercizio-8.4">Esercizio 8.4 - Oscillazione forzate e risonanza
-(da consegnare)</h1>
-<p>Implementare la risoluzione dell’equazione di un oscillatore armonico
-smorzato con forzante. Fare quindi un grafico della soluzione
-stazionaria in funzione della frequenza dell’oscillatore, ricostruendo
-la curva di risonanza. La struttura logica dell’esercizio dovrebbe
-essere la seguente:</p>
+<h1 id="esercizio-8.4">Esercizio 8.4 - Oscillazione forzate e risonanza (da consegnare)</h1>
+<p>Implementare la risoluzione dell’equazione di un oscillatore armonico smorzato con forzante. Fare quindi un grafico della soluzione stazionaria in funzione della frequenza dell’oscillatore, ricostruendo la curva di risonanza. La struttura logica dell’esercizio dovrebbe essere la seguente:</p>
 <ul>
-<li><p>Costruiamo un oscillatore armonico forzato con smorzante con una
-pulsazione propria ω₀=10 rad/s e una costante α=1/30 s.</p></li>
-<li><p>Impostiamo un valore della pulsazione della forzante ω (si
-consiglia di esplorare un intervallo per ω tra 9 rad/s e 11 rad/s in
-passi da 0.05 rad/s).</p></li>
-<li><p>Mettiamo il sistema nella sua condizione iniziale <span
-class="math inline">x=0</span> e <span
-class="math inline">v_x=0</span>.</p></li>
-<li><p>Facciamo evolvere il sistema usando il metodo di Runge-Kutta con
-passo di integrazione h opportuno fino all’esaurirsi del
-transiente.</p></li>
+<li><p>Costruiamo un oscillatore armonico forzato con smorzante con una pulsazione propria ω₀=10 rad/s e una costante α=1/30 s.</p></li>
+<li><p>Impostiamo un valore della pulsazione della forzante ω (si consiglia di esplorare un intervallo per ω tra 9 rad/s e 11 rad/s in passi da 0.05 rad/s).</p></li>
+<li><p>Mettiamo il sistema nella sua condizione iniziale <span class="math inline">x=0</span> e <span class="math inline">v_x=0</span>.</p></li>
+<li><p>Facciamo evolvere il sistema usando il metodo di Runge-Kutta con passo di integrazione h opportuno fino all’esaurirsi del transiente.</p></li>
 <li><p>Calcoliamo l’ampiezza dell’oscillazione.</p></li>
-<li><p>Modifichiamo il valore della pulsazione della forzante ω e
-riportiamo il sistema alle condizioni iniziali <span
-class="math inline">x=0</span> e <span class="math inline">v_x=0</span>,
-ripetendo poi la sequenza di operazioni</p></li>
+<li><p>Modifichiamo il valore della pulsazione della forzante ω e riportiamo il sistema alle condizioni iniziali <span class="math inline">x=0</span> e <span class="math inline">v_x=0</span>, ripetendo poi la sequenza di operazioni</p></li>
 </ul>
-<h2 id="oscillatore-armonico-con-forzante">Oscillatore armonico con
-forzante</h2>
-<p>L’equazione dell’oscillatore armonico smorzato con forzante è data
-dalla relazione</p>
+<h2 id="oscillatore-armonico-con-forzante">Oscillatore armonico con forzante</h2>
+<p>L’equazione dell’oscillatore armonico smorzato con forzante è data dalla relazione</p>
 <p><span class="math display">
-\frac{\mathrm{d}^2x}{\mathrm{d}t^2} = -\omega_0^2 x - \alpha \dot{x}(t)
-+ a_0 \sin(\omega t).
+\frac{\mathrm{d}^2x}{\mathrm{d}t^2} = -\omega_0^2 x - \alpha \dot{x}(t) + a_0 \sin(\omega t).
 </span></p>
-<p>Nell’esercizio proposto, utilizzare i seguenti valori iniziali: <span
-class="math display">
-\omega_0 = 10\,\text{rad/s}, \quad \alpha = \frac1{30\,\text{s}}, \quad
-a_0 = 1\,\text{m/s}^2.
+<p>Nell’esercizio proposto, utilizzare i seguenti valori iniziali: <span class="math display">
+\omega_0 = 10\,\text{rad/s}, \quad \alpha = \frac1{30\,\text{s}}, \quad a_0 = 1\,\text{m/s}^2.
 </span></p>
 <h2 id="risultati-attesi-2">Risultati attesi</h2>
-<p>La figura seguente riporta l’andamento dell’ampiezza in funzione del
-tempo nel caso in cui la frequenza propria del sistema (ω₀) e quella
-della forzante (ω) coincidano: ω₀ = ω = 10 rad/s.</p>
-<p><img
-src="https://labtnds.docs.cern.ch/Lezione8/pictures/forzato_10_short.png" /></p>
-<p>È bene ricordare che per determinare l’ampiezza bisogna aspettare che
-il transiente delle oscillazioni si esaurisca. Questo avviene con una
-costante di tempo pari a 1/α (ovvero, dopo un tempo 1/α l’ampiezza di
-oscillazione si riduce di un fattore 1/e).</p>
-<p><img
-src="https://labtnds.docs.cern.ch/Lezione8/pictures/forzato_10_long.png" /></p>
-<p>Si consiglia quindi di integrare l’equazione differenziale per un
-tempo pari ad almeno dieci volte 1/α, in modo da raggiungere una
-situazione in cui l’oscillazione è stabile, e poi valutare l’ampiezza.
-Anche in questo caso si può assumere di aver raggiunto il massimo
-dell’oscillazione nel momento in cui si trova un punto in cui la
-velocità cambia di segno.</p>
+<p>La figura seguente riporta l’andamento dell’ampiezza in funzione del tempo nel caso in cui la frequenza propria del sistema (ω₀) e quella della forzante (ω) coincidano: ω₀ = ω = 10 rad/s.</p>
+<p><img src="https://labtnds.docs.cern.ch/Lezione8/pictures/forzato_10_short.png" /></p>
+<p>È bene ricordare che per determinare l’ampiezza bisogna aspettare che il transiente delle oscillazioni si esaurisca. Questo avviene con una costante di tempo pari a 1/α (ovvero, dopo un tempo 1/α l’ampiezza di oscillazione si riduce di un fattore 1/e).</p>
+<p><img src="https://labtnds.docs.cern.ch/Lezione8/pictures/forzato_10_long.png" /></p>
+<p>Si consiglia quindi di integrare l’equazione differenziale per un tempo pari ad almeno dieci volte 1/α, in modo da raggiungere una situazione in cui l’oscillazione è stabile, e poi valutare l’ampiezza. Anche in questo caso si può assumere di aver raggiunto il massimo dell’oscillazione nel momento in cui si trova un punto in cui la velocità cambia di segno.</p>
 <p>Una curva di risonanza è illustrata in figura:</p>
-<p><img
-src="https://labtnds.docs.cern.ch/Lezione8/pictures/risonanza.png" /></p>
+<p><img src="https://labtnds.docs.cern.ch/Lezione8/pictures/risonanza.png" /></p>
 <h1 id="esercizio-8.5">Esercizio 8.5 - Moto in campo gravitazionale</h1>
-<p>Implementare la risoluzione dell’equazione del moto di un corpo in un
-campo gravitazionale.</p>
+<p>Implementare la risoluzione dell’equazione del moto di un corpo in un campo gravitazionale.</p>
 <ul>
-<li><p>Verificare, nel caso del sistema Terra-Sole, che il periodo di
-rivoluzione della Terra intorno al Sole sia effettivamente di un anno e
-che l’orbita sia periodica. Calcolare quindi il rapporto tra perielio ed
-afelio.</p></li>
-<li><p>Provare ad aggiungere una piccola perturbazione al potenziale
-gravitazionale (ad esempio un termine proporzionale ad <span
-class="math inline">1/r^3</span> nella forza) e verificare che le orbite
-non sono più chiuse ma formano una rosetta.</p></li>
+<li><p>Verificare, nel caso del sistema Terra-Sole, che il periodo di rivoluzione della Terra intorno al Sole sia effettivamente di un anno e che l’orbita sia periodica. Calcolare quindi il rapporto tra perielio ed afelio.</p></li>
+<li><p>Provare ad aggiungere una piccola perturbazione al potenziale gravitazionale (ad esempio un termine proporzionale ad <span class="math inline">1/r^3</span> nella forza) e verificare che le orbite non sono più chiuse ma formano una rosetta.</p></li>
 </ul>
 <h2 id="moto-in-campo-gravitazionale">Moto in campo gravitazionale</h2>
-<p>Nell’implementare il moto di un corpo in un campo gravitazionale
-utilizzare le seguenti condizioni:</p>
+<p>Nell’implementare il moto di un corpo in un campo gravitazionale utilizzare le seguenti condizioni:</p>
 <ul>
-<li>costante gravitazionale <span class="math inline">G = 6.6742\times
-10^{-11}\,\text{m}^3\,\text{kg}^{-1}\,\text{s}^{-2}</span>;</li>
-<li>massa del Sole <span class="math inline">M_\odot = 1.988441030\times
-10^{30}\,\text{kg}</span>;</li>
-<li>distanza Terra-Sole al perielio <span class="math inline">D_p =
-1.47098074\times 10^{11}\,\text{m}</span>;</li>
-<li>velocità al perielio <span class="math inline">v_p = 3.0287\times
-10^4\,\text{m/s}</span>.</li>
+<li>costante gravitazionale <span class="math inline">G = 6.6742\times 10^{-11}\,\text{m}^3\,\text{kg}^{-1}\,\text{s}^{-2}</span>;</li>
+<li>massa del Sole <span class="math inline">M_\odot = 1.988441030\times 10^{30}\,\text{kg}</span>;</li>
+<li>distanza Terra-Sole al perielio <span class="math inline">D_p = 1.47098074\times 10^{11}\,\text{m}</span>;</li>
+<li>velocità al perielio <span class="math inline">v_p = 3.0287\times 10^4\,\text{m/s}</span>.</li>
 </ul>
 <h2 id="risultati-attesi-3">Risultati attesi</h2>
-<p>Nel caso di potenziale gravitazionale standard dovremmo ottenere una
-traiettoria di questo tipo:</p>
-<p><img
-src="https://labtnds.docs.cern.ch/Lezione8/pictures/orbita.png" /></p>
-<p>Aggiungendo un termine di perturbazione α/r³ al potenziale
-gravitazionale, la traiettoria diventa la seguente:</p>
-<p><img
-src="https://labtnds.docs.cern.ch/Lezione8/pictures/rosetta.png" /></p>
-<h1 id="esercizio-8.6">Esercizio 8.6 - Moto di una particella carica in
-un campo elettrico e magnetico uniforme</h1>
-<p>Implementare la risoluzione dell’equazione del moto di una particella
-carica in un magnetico uniforme. Disegnare la traiettoria della
-particella e determinarne il diametro dell’orbita. Se si aggiunge un
-campo elettrico con componente lungo l’asse x pari a <span
-class="math inline">E_x = 10000\,\text{V/m}</span>, in che direzione si
-muove ora la particella?</p>
-<h2 id="moto-in-campo-elettrico-e-magnetico-uniformi">Moto in campo
-elettrico e magnetico uniformi</h2>
-<p>Il moto di una particella carica in un campo elettrico e magnetico
-uniformi risente della forza di Lorentz e pertanto è descritto
-dall’equazione <span class="math display">
+<p>Nel caso di potenziale gravitazionale standard dovremmo ottenere una traiettoria di questo tipo:</p>
+<p><img src="https://labtnds.docs.cern.ch/Lezione8/pictures/orbita.png" /></p>
+<p>Aggiungendo un termine di perturbazione α/r³ al potenziale gravitazionale, la traiettoria diventa la seguente:</p>
+<p><img src="https://labtnds.docs.cern.ch/Lezione8/pictures/rosetta.png" /></p>
+<h1 id="esercizio-8.6">Esercizio 8.6 - Moto di una particella carica in un campo elettrico e magnetico uniforme</h1>
+<p>Implementare la risoluzione dell’equazione del moto di una particella carica in un magnetico uniforme. Disegnare la traiettoria della particella e determinarne il diametro dell’orbita. Se si aggiunge un campo elettrico con componente lungo l’asse x pari a <span class="math inline">E_x = 10000\,\text{V/m}</span>, in che direzione si muove ora la particella?</p>
+<h2 id="moto-in-campo-elettrico-e-magnetico-uniformi">Moto in campo elettrico e magnetico uniformi</h2>
+<p>Il moto di una particella carica in un campo elettrico e magnetico uniformi risente della forza di Lorentz e pertanto è descritto dall’equazione <span class="math display">
 m\ddot{x}(t) = q E + q v\times B,
-</span> che si può riscrivere in forma matriciale come <span
-class="math display">
+</span> che si può riscrivere in forma matriciale come <span class="math display">
 \frac{\mathrm{d}}{\mathrm{d}t} \begin{pmatrix}
 x\\ y\\ z\\ v_x\\ v_y\\ v_z
 \end{pmatrix} =
@@ -966,57 +499,23 @@ x\\ y\\ z\\ v_x\\ v_y\\ v_z
 \begin{pmatrix}
 0\\ 0\\ 0\\ \frac{q}m E_x\\ \frac{q}m E_y\\ \frac{q}m E_z
 \end{pmatrix}.
-</span> È un problema tridimensionale, e richiede quindi uno spazio
-delle fasi a sei dimensioni. Bisognerà quindi usare tipi
-<code>std::array&lt;double, 6&gt;</code>.</p>
-<p>Consideriamo il moto nel piano <span class="math inline">(x,
-y)</span> di un elettrone in un campo magnetico costante con i seguenti
-valori:</p>
+</span> È un problema tridimensionale, e richiede quindi uno spazio delle fasi a sei dimensioni. Bisognerà quindi usare tipi <code>std::array&lt;double, 6&gt;</code>.</p>
+<p>Consideriamo il moto nel piano <span class="math inline">(x, y)</span> di un elettrone in un campo magnetico costante con i seguenti valori:</p>
 <ul>
-<li><span class="math inline">q = -1.60217653\times
-10^{-19}\,\text{C}</span>;</li>
-<li><span class="math inline">m =
-9.1093826\times10^{-31}\,\text{kg}</span>;</li>
-<li><span class="math inline">v_x(0) =
-8\times10^6\,\text{m/s}</span>;</li>
-<li><span class="math inline">B_z =
-5\times10^{-3}\,\text{T}</span>;</li>
-<li>tutte le altre componenti di campi e velocità iniziali sono
-nulle.</li>
+<li><span class="math inline">q = -1.60217653\times 10^{-19}\,\text{C}</span>;</li>
+<li><span class="math inline">m = 9.1093826\times10^{-31}\,\text{kg}</span>;</li>
+<li><span class="math inline">v_x(0) = 8\times10^6\,\text{m/s}</span>;</li>
+<li><span class="math inline">B_z = 5\times10^{-3}\,\text{T}</span>;</li>
+<li>tutte le altre componenti di campi e velocità iniziali sono nulle.</li>
 </ul>
-<p>Questi parametri corrispondono grosso modo all’apparato sperimentale
-per la misura di <span class="math inline">e/m</span> del laboratorio
-del II anno.</p>
+<p>Questi parametri corrispondono grosso modo all’apparato sperimentale per la misura di <span class="math inline">e/m</span> del laboratorio del II anno.</p>
 <h1 id="errori-comuni">Errori comuni</h1>
-<p>Come di consueto, elenco alcuni errori molto comuni che ho trovato
-negli anni passati correggendo gli esercizi che gli studenti hanno
-consegnato all’esame:</p>
+<p>Come di consueto, elenco alcuni errori molto comuni che ho trovato negli anni passati correggendo gli esercizi che gli studenti hanno consegnato all’esame:</p>
 <ul>
-<li><p>Se seguite il testo originale degli esercizi e implementate tutto
-il codice di questa lezione usando <code>std::vector</code> anziché
-<code>std::array</code>, fate molta attenzione al numero di elementi in
-ogni vettore che usate all’interno di un calcolo come
-<code>a + b</code>: se <code>a</code> ha 2 dimensioni ma <code>b</code>
-ne ha 3, è un errore e i risultati del vostro programma saranno
-sbagliati!</p></li>
-<li><p>Attenzione al fattore <span class="math inline">1/6</span> nel
-codice del metodo Runge-Kutta: se scrivete <code>1 / 6</code> nel vostro
-codice C++, il risultato è zero!</p></li>
-<li><p>Nell’<a
-href="http://0.0.0.0:8000/carminati-esercizi-08.html#esercizio-8.3">esercizio
-8.3</a> bisogna risolvere più volte l’equazione del pendolo col metodo
-Runge-Kutta. Attenzione a resettare ogni volta le variabili! Dopo aver
-risolto l’equazione per una certa ampiezza iniziale <span
-class="math inline">A</span>, bisogna resettare sia il tempo
-<code>t</code> a zero che la variabile <code>x</code>, in modo che
-questa contenga di nuovo la condizione iniziale (con un valore diverso
-di <span class="math inline">A</span>), prima di far ripartire il
-Runge-Kutta.</p></li>
-<li><p>Questi esercizi richiedono di passare una serie di parametri
-numerici dalla linea di comando. Assicuratevi di stampare una buona
-documentazione se l’utente non li specifica, e fate magari in modo che
-il comando <code>make esegui</code> avvii il vostro programma con
-parametri sensati.</p>
+<li><p>Se seguite il testo originale degli esercizi e implementate tutto il codice di questa lezione usando <code>std::vector</code> anziché <code>std::array</code>, fate molta attenzione al numero di elementi in ogni vettore che usate all’interno di un calcolo come <code>a + b</code>: se <code>a</code> ha 2 dimensioni ma <code>b</code> ne ha 3, è un errore e i risultati del vostro programma saranno sbagliati!</p></li>
+<li><p>Attenzione al fattore <span class="math inline">1/6</span> nel codice del metodo Runge-Kutta: se scrivete <code>1 / 6</code> nel vostro codice C++, il risultato è zero!</p></li>
+<li><p>Nell’<a href="http://0.0.0.0:8000/carminati-esercizi-08.html#esercizio-8.3">esercizio 8.3</a> bisogna risolvere più volte l’equazione del pendolo col metodo Runge-Kutta. Attenzione a resettare ogni volta le variabili! Dopo aver risolto l’equazione per una certa ampiezza iniziale <span class="math inline">A</span>, bisogna resettare sia il tempo <code>t</code> a zero che la variabile <code>x</code>, in modo che questa contenga di nuovo la condizione iniziale (con un valore diverso di <span class="math inline">A</span>), prima di far ripartire il Runge-Kutta.</p></li>
+<li><p>Questi esercizi richiedono di passare una serie di parametri numerici dalla linea di comando. Assicuratevi di stampare una buona documentazione se l’utente non li specifica, e fate magari in modo che il comando <code>make esegui</code> avvii il vostro programma con parametri sensati.</p>
 <p>Ecco un buon esempio:</p>
 <pre><code>$ ./esercizio_9.4
 Uso: esercizio_9.4 passo_h omega0 alpha omega_forzante
@@ -1029,11 +528,20 @@ Uso: esercizio_9.4 passo_h omega0 alpha omega_forzante
 $ make esegui
 ./esercizio_9.4 1e-2 10 0.033333 5
 ... [segue l&#39;output del programma]</code></pre></li>
-</ul>                    
-                </div>
-            </div>
+</ul>
+</main>
 
-            <script src="https://vjs.zencdn.net/5.4.4/video.js"></script>
-        </div>
-    </body>
+<script>
+;(function() {
+  // Non-essential if user has JavaScript off. Just makes checkboxes look nicer.
+  var selector = '.task-list > li > input[type="checkbox"]';
+  var checkboxes = document.querySelectorAll(selector);
+  Array.from(checkboxes).forEach((checkbox) => {
+    var wasChecked = checkbox.checked;
+    checkbox.disabled = false;
+    checkbox.addEventListener('click', (ev) => {ev.target.checked = wasChecked});
+  });
+})();
+</script>
+</body>
 </html>

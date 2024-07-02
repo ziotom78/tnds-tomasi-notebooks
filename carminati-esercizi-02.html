@@ -1,290 +1,79 @@
 <!DOCTYPE html>
-<html  lang="it-IT"  dir="ltr">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="it-IT" xml:lang="it-IT">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc-markdown-css-theme" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Leonardo Carminati" />
+  <meta name="author" content="Maurizio Tomasi" />
+  <title>Lezione 2: Analisi dei dati (classe Vettore)</title>
+  <link rel="stylesheet" href="css/theme.css" />
+  <link rel="stylesheet" href="css/skylighting-solarized-theme.css" />
+</head>
+<body>
 
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Lezione 2: Analisi dei dati (classe Vettore)</title>
-        <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
-        <link rel="apple-touch-icon-precomposed" href="images/apple-touch-icon.png">
+<header>
+<h1 class="title">Lezione 2: Analisi dei dati (classe Vettore)</h1>
+<blockquote class="metadata">
+<p class="author">
+      Leonardo CarminatiMaurizio Tomasi
+  </p>
+<p class="date before-toc"><time datetime="A.A. 2023−2024">A.A. 2023−2024</time></p>
+</blockquote>
+</header>
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/2.26.4/css/uikit.gradient.css">
+<nav id="TOC" role="doc-toc">
+    <strong>Contents</strong><label for="contents">⊕</label>
+  <input type="checkbox" id="contents">
+  <ul>
+  <li><a href="#esercizio-2.0" id="toc-esercizio-2.0">Esercizio 2.0 - Creazione della classe Vettore</a>
+  <ul>
+  <li><a href="#header-file-della-classe" id="toc-header-file-della-classe">Header file della classe</a></li>
+  <li><a href="#esempio-di-implementazione-della-classe" id="toc-esempio-di-implementazione-della-classe">Esempio di implementazione della classe</a></li>
+  <li><a href="#programma-di-test" id="toc-programma-di-test">Programma di test</a></li>
+  </ul></li>
+  <li><a href="#esercizio-2.1" id="toc-esercizio-2.1">Esercizio 2.1 - Completamento della classe <code>Vettore</code></a>
+  <ul>
+  <li><a href="#copy-constructor" id="toc-copy-constructor">Copy constructor</a></li>
+  <li><a href="#operatore-di-assegnazione" id="toc-operatore-di-assegnazione">Operatore di assegnazione</a></li>
+  <li><a href="#il-puntatore-this" id="toc-il-puntatore-this">Il puntatore <code>this</code></a></li>
+  <li><a href="#operatore-di-accesso" id="toc-operatore-di-accesso">Operatore di accesso <code>[]</code></a></li>
+  <li><a href="#esempio-di-codice" id="toc-esempio-di-codice">Esempio di codice</a></li>
+  </ul></li>
+  <li><a href="#esercizio-2.2" id="toc-esercizio-2.2">Esercizio 2.2 - Codice di analisi dati utilizzando la classe <code>Vettore</code> (da consegnare)</a>
+  <ul>
+  <li><a href="#struttura-del-programma" id="toc-struttura-del-programma">Struttura del programma</a></li>
+  <li><a href="#implementazione-delle-funzioni" id="toc-implementazione-delle-funzioni">Implementazione delle funzioni</a></li>
+  <li><a href="#passaggio-dati-by-reference-con-qualificatore-const" id="toc-passaggio-dati-by-reference-con-qualificatore-const">Passaggio dati <em>by reference</em> con qualificatore <code>const</code></a></li>
+  <li><a href="#il-makefile" id="toc-il-makefile">Il Makefile</a></li>
+  <li><a href="#tipo-del-parametro-di-calcolamediana" id="toc-tipo-del-parametro-di-calcolamediana">Tipo del parametro di <code>CalcolaMediana</code></a></li>
+  <li><a href="#approfondimenti" id="toc-approfondimenti">Approfondimenti</a></li>
+  <li><a href="#eccezioni-in-c" id="toc-eccezioni-in-c">Eccezioni in C++</a></li>
+  </ul></li>
+  <li><a href="#errori-comuni" id="toc-errori-comuni">Errori comuni</a></li>
+  </ul>
+</nav>
 
-        <!-- <link rel="stylesheet" href="style.css"> -->
-        <link rel="stylesheet" href="https://cdn.rawgit.com/diversen/pandoc-uikit/master/style.css">
-        <link href="css/custom.css" rel="stylesheet" />
-        <link href="https://vjs.zencdn.net/5.4.4/video-js.css" rel="stylesheet" />
-        <script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
-        <!-- <script src="uikit.js"></script> -->
-        <script src="https://cdn.rawgit.com/diversen/pandoc-uikit/master/uikit.js"></script>
-        <!-- <script src="scripts.js"></script> -->
-        <script src="https://cdn.rawgit.com/diversen/pandoc-uikit/master/scripts.js"></script>
-        <!-- <script src="jquery.sticky-kit.js "></script> -->
-        <script src="https://cdn.rawgit.com/diversen/pandoc-uikit/master/jquery.sticky-kit.js"></script>
-
-        <meta name="generator" content="pandoc-uikit" />
-                <meta name="author" content="Leonardo Carminati" />
-                <meta name="author" content="Maurizio Tomasi" />
-                        <title>Lezione 2: Analisi dei dati (classe Vettore)</title>
-        <style type="text/css">code{white-space: pre;}</style>
-                        <style type="text/css">
-            pre > code.sourceCode { white-space: pre; position: relative; }
-            pre > code.sourceCode > span { line-height: 1.25; }
-            pre > code.sourceCode > span:empty { height: 1.2em; }
-            .sourceCode { overflow: visible; }
-            code.sourceCode > span { color: inherit; text-decoration: inherit; }
-            div.sourceCode { margin: 1em 0; }
-            pre.sourceCode { margin: 0; }
-            @media screen {
-            div.sourceCode { overflow: auto; }
-            }
-            @media print {
-            pre > code.sourceCode { white-space: pre-wrap; }
-            pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-            }
-            pre.numberSource code
-              { counter-reset: source-line 0; }
-            pre.numberSource code > span
-              { position: relative; left: -4em; counter-increment: source-line; }
-            pre.numberSource code > span > a:first-child::before
-              { content: counter(source-line);
-                position: relative; left: -1em; text-align: right; vertical-align: baseline;
-                border: none; display: inline-block;
-                -webkit-touch-callout: none; -webkit-user-select: none;
-                -khtml-user-select: none; -moz-user-select: none;
-                -ms-user-select: none; user-select: none;
-                padding: 0 4px; width: 4em;
-                color: #aaaaaa;
-              }
-            pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-            div.sourceCode
-              {   }
-            @media screen {
-            pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-            }
-            code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-            code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-            code span.at { color: #7d9029; } /* Attribute */
-            code span.bn { color: #40a070; } /* BaseN */
-            code span.bu { color: #008000; } /* BuiltIn */
-            code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-            code span.ch { color: #4070a0; } /* Char */
-            code span.cn { color: #880000; } /* Constant */
-            code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-            code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-            code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-            code span.dt { color: #902000; } /* DataType */
-            code span.dv { color: #40a070; } /* DecVal */
-            code span.er { color: #ff0000; font-weight: bold; } /* Error */
-            code span.ex { } /* Extension */
-            code span.fl { color: #40a070; } /* Float */
-            code span.fu { color: #06287e; } /* Function */
-            code span.im { color: #008000; font-weight: bold; } /* Import */
-            code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-            code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-            code span.op { color: #666666; } /* Operator */
-            code span.ot { color: #007020; } /* Other */
-            code span.pp { color: #bc7a00; } /* Preprocessor */
-            code span.sc { color: #4070a0; } /* SpecialChar */
-            code span.ss { color: #bb6688; } /* SpecialString */
-            code span.st { color: #4070a0; } /* String */
-            code span.va { color: #19177c; } /* Variable */
-            code span.vs { color: #4070a0; } /* VerbatimString */
-            code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-        </style>
-                                               
-    </head>
-
-    <body>
-
-
-        <div class="uk-container uk-container-center uk-margin-top uk-margin-large-bottom">
-
-                        <div class="uk-grid" data-uk-grid-margin>
-                <div class="uk-width-1-1">
-                    <h1 class="uk-heading-large">Lezione 2: Analisi dei
-dati (classe Vettore)</h1>
-                                        <h3 class="uk-heading-large">A.A.
-2023−2024</p></h3>
-                                                            <p class="uk-text-large">Leonardo
-Carminati</p>
-                                        <p class="uk-text-large">Maurizio
-Tomasi</p>
-                                    </div>
-            </div>
-            
-            <div class="uk-grid" data-uk-grid-margin >          
-                <div class="uk-width-medium-1-4">
-                    <div class="uk-overflow-container" data-uk-sticky="{top:25,media: 768}">
-                        <div class="uk-panel uk-panel-box menu-begin" >
-
-                                                        <ul>
-                                                        <li><a
-                                                        href="#esercizio-2.0"
-                                                        id="toc-esercizio-2.0">Esercizio
-                                                        2.0 - Creazione
-                                                        della classe
-                                                        Vettore</a>
-                                                        <ul>
-                                                        <li><a
-                                                        href="#header-file-della-classe"
-                                                        id="toc-header-file-della-classe">Header
-                                                        file della
-                                                        classe</a></li>
-                                                        <li><a
-                                                        href="#esempio-di-implementazione-della-classe"
-                                                        id="toc-esempio-di-implementazione-della-classe">Esempio
-                                                        di
-                                                        implementazione
-                                                        della
-                                                        classe</a></li>
-                                                        <li><a
-                                                        href="#programma-di-test"
-                                                        id="toc-programma-di-test">Programma
-                                                        di test</a></li>
-                                                        </ul></li>
-                                                        <li><a
-                                                        href="#esercizio-2.1"
-                                                        id="toc-esercizio-2.1">Esercizio
-                                                        2.1 -
-                                                        Completamento
-                                                        della classe
-                                                        <code>Vettore</code></a>
-                                                        <ul>
-                                                        <li><a
-                                                        href="#copy-constructor"
-                                                        id="toc-copy-constructor">Copy
-                                                        constructor</a></li>
-                                                        <li><a
-                                                        href="#operatore-di-assegnazione"
-                                                        id="toc-operatore-di-assegnazione">Operatore
-                                                        di
-                                                        assegnazione</a></li>
-                                                        <li><a
-                                                        href="#il-puntatore-this"
-                                                        id="toc-il-puntatore-this">Il
-                                                        puntatore
-                                                        <code>this</code></a></li>
-                                                        <li><a
-                                                        href="#operatore-di-accesso"
-                                                        id="toc-operatore-di-accesso">Operatore
-                                                        di accesso
-                                                        <code>[]</code></a></li>
-                                                        <li><a
-                                                        href="#esempio-di-codice"
-                                                        id="toc-esempio-di-codice">Esempio
-                                                        di
-                                                        codice</a></li>
-                                                        </ul></li>
-                                                        <li><a
-                                                        href="#esercizio-2.2"
-                                                        id="toc-esercizio-2.2">Esercizio
-                                                        2.2 - Codice di
-                                                        analisi dati
-                                                        utilizzando la
-                                                        classe
-                                                        <code>Vettore</code>
-                                                        (da
-                                                        consegnare)</a>
-                                                        <ul>
-                                                        <li><a
-                                                        href="#struttura-del-programma"
-                                                        id="toc-struttura-del-programma">Struttura
-                                                        del
-                                                        programma</a></li>
-                                                        <li><a
-                                                        href="#implementazione-delle-funzioni"
-                                                        id="toc-implementazione-delle-funzioni">Implementazione
-                                                        delle
-                                                        funzioni</a></li>
-                                                        <li><a
-                                                        href="#passaggio-dati-by-reference-con-qualificatore-const"
-                                                        id="toc-passaggio-dati-by-reference-con-qualificatore-const">Passaggio
-                                                        dati <em>by
-                                                        reference</em>
-                                                        con
-                                                        qualificatore
-                                                        <code>const</code></a></li>
-                                                        <li><a
-                                                        href="#il-makefile"
-                                                        id="toc-il-makefile">Il
-                                                        Makefile</a></li>
-                                                        <li><a
-                                                        href="#tipo-del-parametro-di-calcolamediana"
-                                                        id="toc-tipo-del-parametro-di-calcolamediana">Tipo
-                                                        del parametro di
-                                                        <code>CalcolaMediana</code></a></li>
-                                                        <li><a
-                                                        href="#approfondimenti"
-                                                        id="toc-approfondimenti">Approfondimenti</a>
-                                                        <ul>
-                                                        <li><a
-                                                        href="#semantica-di-move"
-                                                        id="toc-semantica-di-move">Semantica
-                                                        di
-                                                        <code>move</code></a></li>
-                                                        </ul></li>
-                                                        <li><a
-                                                        href="#eccezioni-in-c"
-                                                        id="toc-eccezioni-in-c">Eccezioni
-                                                        in C++</a></li>
-                                                        </ul></li>
-                                                        <li><a
-                                                        href="#errori-comuni"
-                                                        id="toc-errori-comuni">Errori
-                                                        comuni</a></li>
-                                                        </ul>
-                            
-                        </div>
-                    </div>
-                </div>
-
-                <div class="uk-width-medium-3-4">
-<p>[La pagina con la spiegazione originale degli esercizi si trova qui:
-<a href="https://labtnds.docs.cern.ch/Lezione2/Lezione2/"
-class="uri">https://labtnds.docs.cern.ch/Lezione2/Lezione2/</a>.]</p>
-<p>In questa seconda lezione affronteremo gli stessi problemi della
-prima (lettura di dati da un file, calcolo di media, varianza e mediana)
-utilizzando però un contenitore di dati di nostra invenzione, idealmente
-più evoluto del semplice array dinamico del C. A questo proposito nella
-prima parte della lezione costruiremo la nostra prima classe, la classe
-<code>Vettore</code>, che sostituirà l’array dinamico del C. Nella
-seconda parte adatteremo le funzioni già scritte nella lezione scorsa in
-modo che possano funzionare con oggetti di tipo <code>Vettore</code>.
-Quindi in sintesi:</p>
+<main>
+<p>[La pagina con la spiegazione originale degli esercizi si trova qui: <a href="https://labtnds.docs.cern.ch/Lezione2/Lezione2/" class="uri">https://labtnds.docs.cern.ch/Lezione2/Lezione2/</a>.]</p>
+<p>In questa seconda lezione affronteremo gli stessi problemi della prima (lettura di dati da un file, calcolo di media, varianza e mediana) utilizzando però un contenitore di dati di nostra invenzione, idealmente più evoluto del semplice array dinamico del C. A questo proposito nella prima parte della lezione costruiremo la nostra prima classe, la classe <code>Vettore</code>, che sostituirà l’array dinamico del C. Nella seconda parte adatteremo le funzioni già scritte nella lezione scorsa in modo che possano funzionare con oggetti di tipo <code>Vettore</code>. Quindi in sintesi:</p>
 <ul>
-<li>Tipo di dato da leggere è constituito da numeri <code>double</code>
-immagazzinati in un file <code>data.dat</code>.</li>
-<li>Tipo di contenitore di dati è la classe <code>Vettore</code> che
-scriveremo noi.</li>
-<li>Operazioni sui dati vengono svolte mediante funzioni che lavorano su
-oggetti di tipo <code>Vettore</code>.</li>
+<li>Tipo di dato da leggere è constituito da numeri <code>double</code> immagazzinati in un file <code>data.dat</code>.</li>
+<li>Tipo di contenitore di dati è la classe <code>Vettore</code> che scriveremo noi.</li>
+<li>Operazioni sui dati vengono svolte mediante funzioni che lavorano su oggetti di tipo <code>Vettore</code>.</li>
 </ul>
-<h1 id="esercizio-2.0">Esercizio 2.0 - Creazione della classe
-Vettore</h1>
-<p>In questo esercizio proviamo ad implementare una classe che abbia
-come data membri privati un intero (dimensione del vettore) ed un
-puntatore a <code>double</code> (puntatore alla zona di memoria dove
-sono immagazzinati i dati).</p>
+<h1 id="esercizio-2.0">Esercizio 2.0 - Creazione della classe Vettore</h1>
+<p>In questo esercizio proviamo ad implementare una classe che abbia come data membri privati un intero (dimensione del vettore) ed un puntatore a <code>double</code> (puntatore alla zona di memoria dove sono immagazzinati i dati).</p>
 <p>La classe dovrà poi implementare:</p>
 <ul>
-<li>Un costruttore di default, che assegni valori nulli alla lunghezza
-del vettore ed al puntatore.</li>
-<li>Un costruttore che abbia come argomento un intero: questo deve
-creare un vettore di lunghezza uguale al valore dell’intero e tutte le
-componenti nulle (usando un <code>new</code> per allocare la memoria
-necessaria).</li>
-<li>Un distruttore: deve chiaramente deallocare con
-<code>delete[]</code> la zona di memoria allocata con new.</li>
-<li>Dei metodi per inserire e leggere i valori della componenti: questi
-metodi devono controllare che l’indice delle componenti richieste sia
-compatibile con la lunghezza del vettore.</li>
+<li>Un costruttore di default, che assegni valori nulli alla lunghezza del vettore ed al puntatore.</li>
+<li>Un costruttore che abbia come argomento un intero: questo deve creare un vettore di lunghezza uguale al valore dell’intero e tutte le componenti nulle (usando un <code>new</code> per allocare la memoria necessaria).</li>
+<li>Un distruttore: deve chiaramente deallocare con <code>delete[]</code> la zona di memoria allocata con new.</li>
+<li>Dei metodi per inserire e leggere i valori della componenti: questi metodi devono controllare che l’indice delle componenti richieste sia compatibile con la lunghezza del vettore.</li>
 </ul>
 <h2 id="header-file-della-classe">Header file della classe</h2>
-<p>L’header file della classe iniziale (<code>vettore.h</code>) potrebbe
-essere così:</p>
-<div class="sourceCode" id="cb1"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#pragma once</span></span>
+<p>L’header file della classe iniziale (<code>vettore.h</code>) potrebbe essere così:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#pragma once</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co">// La scrittura `#pragma once` è equivalente a scrivere:</span></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co">//</span></span>
@@ -324,17 +113,8 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb1-1"><a href="#c
 <span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a><span class="op">};</span> <span class="co">// Necessario usare `;` dopo la parentesi graffa *solo* quando si chiude una classe!</span></span>
 <span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a></span></code></pre></div>
 <ul>
-<li><p>L’utilizzo del costrutto
-<code>#ifndef</code>…<code>#define</code>…<code>#endif</code> al posto
-di <code>#pragma once</code> merita una spiegazione. Queste direttive di
-preprocessore sono normalmente utilizzate per evitare inclusioni
-multiple di uno stesso header file che, nel caso specifico, porterebbero
-ad una doppia dichiarazione della classe <code>Vettore</code>.
-Immaginate infatti di voler compilare un codice <code>main.cpp</code>
-che includa sia <code>vettore.h</code> che <code>funzioni.h</code>, e
-che quest’ultimo file abbia bisogno di <code>vettore.h</code>:</p>
-<div class="sourceCode" id="cb2"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">////////////////////////////////////////</span></span>
+<li><p>L’utilizzo del costrutto <code>#ifndef</code>…<code>#define</code>…<code>#endif</code> al posto di <code>#pragma once</code> merita una spiegazione. Queste direttive di preprocessore sono normalmente utilizzate per evitare inclusioni multiple di uno stesso header file che, nel caso specifico, porterebbero ad una doppia dichiarazione della classe <code>Vettore</code>. Immaginate infatti di voler compilare un codice <code>main.cpp</code> che includa sia <code>vettore.h</code> che <code>funzioni.h</code>, e che quest’ultimo file abbia bisogno di <code>vettore.h</code>:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">////////////////////////////////////////</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co">// File vettore.h, che implementa la classe `Vettore`</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Vettore <span class="op">{</span></span>
@@ -352,12 +132,8 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb2-1"><a href="#c
 <span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="co">// File main.cpp</span></span>
 <span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;vettore.h&quot;</span></span>
 <span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;funzioni.h&quot;</span></span></code></pre></div>
-<p>In fase di compilazione il compilatore si lamenterebbe per una doppia
-dichiarazione della classe <code>Vettore</code>, perché il contenuto di
-<code>vettore.h</code> viene <strong>copiato due volte</strong> in
-<code>main.cpp</code>:</p>
-<div class="sourceCode" id="cb3"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">// File main.cpp come viene visto dal compilatore:</span></span>
+<p>In fase di compilazione il compilatore si lamenterebbe per una doppia dichiarazione della classe <code>Vettore</code>, perché il contenuto di <code>vettore.h</code> viene <strong>copiato due volte</strong> in <code>main.cpp</code>:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">// File main.cpp come viene visto dal compilatore:</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co">// La riga #include &quot;vettore.h&quot; viene sostituita col</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co">// contenuto del file vettore.h:</span></span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Vettore <span class="op">{</span></span>
@@ -376,10 +152,8 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb3-1"><a href="#c
 <span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a><span class="co">// Ora continua col contenuto di `main.cpp`</span></span>
 <span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a><span class="co">// ...</span></span></code></pre></div>
-<p>Se si riporta lo stesso esempio sopra senza però i commenti, è chiaro
-dove sta il problema:</p>
-<div class="sourceCode" id="cb4"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Vettore <span class="op">{</span></span>
+<p>Se si riporta lo stesso esempio sopra senza però i commenti, è chiaro dove sta il problema:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Vettore <span class="op">{</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="co">// ...</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
@@ -390,53 +164,16 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb4-1"><a href="#c
 <span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> calcolaMedia<span class="op">(</span><span class="at">const</span> Vettore <span class="op">&amp;</span> v<span class="op">);</span></span>
 <span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="co">// ...</span></span></code></pre></div>
-<p>La classe <code>Vettore</code> è stata inclusa due volte! La
-soluzione migliore a questo problema <em>non</em> è quella di rimuovere
-uno dei due <code>#include</code>, perché sono entrambi logicamente
-necessari: il primo in <code>main.cpp</code> serve perché nel
-<code>main</code> verosimilmente si deve usare <code>Vettore</code>, il
-secondo in <code>funzioni.h</code> serve per dare un senso alla
-definizione di <code>calcolaMedia</code>.</p>
-<p>Con il meccanismo basato su <code>#ifndef …</code>, alla prima
-inclusione di <code>vettore.h</code>, viene creata una “variabile”
-<code>__vettore_h__</code> (il termine esatto è <em>macro</em>). Al
-secondo tentativo di inclusione l’esistenza di
-<code>__vettore_h__</code> globale forza il compilatore a saltare tutte
-le righe tra <code>#define</code> ed <code>#endif</code>, di fatto
-evitando la seconda inclusione del file <code>vettore.h</code>.</p>
-<p>La scrittura <code>#pragma once</code> abbrevia la sequenza di
-<code>#ifndef</code>/<code>#define</code>/<code>#endif</code> in una
-sola riga; non è nello standard C++, ma è così comoda che è implementata
-su tutti i compilatori C++ in commercio.</p>
-<p>Questa parte è spiegata anche sulle <a
-href="tomasi-lezione-02.html#/uso-di-header-files">slides</a>.</p></li>
-<li><p>Notate l’impementazione <em>in-line</em> del metodo
-<code>GetN()</code>: i metodi di una classe possono essere anche
-implementati direttamente nell’header file (<code>.h</code>) e non nel
-file <code>.cpp</code>. L’implementazione inline implica che il
-compilatore metta una copia della funzione ogni volta che questa viene
-chiamata, anziché mantenerne <strong>una sola copia</strong> ed
-invocarla da vari punti del codice. In questo modo il file eseguibile
-aumenta di dimensioni (ci sono ora N copie dell’implementazione di
-<code>GetN()</code>), ma le prestazioni sono migliori in quanto non si
-deve effettuare una chiamata alla funzione. In genere l’implementazione
-inline viene effettuata per funzioni brevi e invocate spesso.</p></li>
-<li><p>Notate l’uso del qualificatore <code>const</code> nella
-definizione del metodo <code>GetN()</code>: in questo modo ogni
-istruzione dentro <code>GetN()</code> che tenti di modificare il
-contenuto della classe verrà segnalata come errore di compilazione. Il
-metodo <code>GetN()</code> è un metodo di accesso e logicamente non ci
-aspettiamo che effettui alcuna operazione di modifica del contenuto
-della classe: in questo caso è buona pratica dichiararlo
-<code>const</code> al fine di rendere l’utilizzo della nostra classe da
-parte di eventuali utenti più sicuro.</p></li>
+<p>La classe <code>Vettore</code> è stata inclusa due volte! La soluzione migliore a questo problema <em>non</em> è quella di rimuovere uno dei due <code>#include</code>, perché sono entrambi logicamente necessari: il primo in <code>main.cpp</code> serve perché nel <code>main</code> verosimilmente si deve usare <code>Vettore</code>, il secondo in <code>funzioni.h</code> serve per dare un senso alla definizione di <code>calcolaMedia</code>.</p>
+<p>Con il meccanismo basato su <code>#ifndef …</code>, alla prima inclusione di <code>vettore.h</code>, viene creata una “variabile” <code>__vettore_h__</code> (il termine esatto è <em>macro</em>). Al secondo tentativo di inclusione l’esistenza di <code>__vettore_h__</code> globale forza il compilatore a saltare tutte le righe tra <code>#define</code> ed <code>#endif</code>, di fatto evitando la seconda inclusione del file <code>vettore.h</code>.</p>
+<p>La scrittura <code>#pragma once</code> abbrevia la sequenza di <code>#ifndef</code>/<code>#define</code>/<code>#endif</code> in una sola riga; non è nello standard C++, ma è così comoda che è implementata su tutti i compilatori C++ in commercio.</p>
+<p>Questa parte è spiegata anche sulle <a href="tomasi-lezione-02.html#/uso-di-header-files">slides</a>.</p></li>
+<li><p>Notate l’impementazione <em>in-line</em> del metodo <code>GetN()</code>: i metodi di una classe possono essere anche implementati direttamente nell’header file (<code>.h</code>) e non nel file <code>.cpp</code>. L’implementazione inline implica che il compilatore metta una copia della funzione ogni volta che questa viene chiamata, anziché mantenerne <strong>una sola copia</strong> ed invocarla da vari punti del codice. In questo modo il file eseguibile aumenta di dimensioni (ci sono ora N copie dell’implementazione di <code>GetN()</code>), ma le prestazioni sono migliori in quanto non si deve effettuare una chiamata alla funzione. In genere l’implementazione inline viene effettuata per funzioni brevi e invocate spesso.</p></li>
+<li><p>Notate l’uso del qualificatore <code>const</code> nella definizione del metodo <code>GetN()</code>: in questo modo ogni istruzione dentro <code>GetN()</code> che tenti di modificare il contenuto della classe verrà segnalata come errore di compilazione. Il metodo <code>GetN()</code> è un metodo di accesso e logicamente non ci aspettiamo che effettui alcuna operazione di modifica del contenuto della classe: in questo caso è buona pratica dichiararlo <code>const</code> al fine di rendere l’utilizzo della nostra classe da parte di eventuali utenti più sicuro.</p></li>
 </ul>
-<h2 id="esempio-di-implementazione-della-classe">Esempio di
-implementazione della classe</h2>
-<p>Il file di implementazione <code>vettore.cpp</code> potrebbe essere
-così:</p>
-<div class="sourceCode" id="cb5"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;vettore.h&quot;</span></span>
+<h2 id="esempio-di-implementazione-della-classe">Esempio di implementazione della classe</h2>
+<p>Il file di implementazione <code>vettore.cpp</code> potrebbe essere così:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;vettore.h&quot;</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;iomanip&gt;</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;cmath&gt;</span></span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;cstdlib&gt;</span></span>
@@ -509,18 +246,10 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb5-1"><a href="#c
 <span id="cb5-71"><a href="#cb5-71" aria-hidden="true" tabindex="-1"></a>  crashIfInvalidIndex<span class="op">(</span>i<span class="op">);</span></span>
 <span id="cb5-72"><a href="#cb5-72" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="va">m_v</span><span class="op">[</span>i<span class="op">];</span></span>
 <span id="cb5-73"><a href="#cb5-73" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
-<p>Notate l’ultimo metodo implementato (dovete ovviamente aggiungerlo
-anche nell’header file della classe) che rappresenta l’overloading
-dell’operatore di accesso <code>[]</code> ad un elemento (eg.
-<code>double a = v[2]</code> se <code>v</code> è un oggetto di tipo
-<code>Vettore</code>). Questo è spiegato anche sulle <a
-href="tomasi-lezione-02.html#operator-array">slide addizionali</a>.</p>
+<p>Notate l’ultimo metodo implementato (dovete ovviamente aggiungerlo anche nell’header file della classe) che rappresenta l’overloading dell’operatore di accesso <code>[]</code> ad un elemento (eg. <code>double a = v[2]</code> se <code>v</code> è un oggetto di tipo <code>Vettore</code>). Questo è spiegato anche sulle <a href="tomasi-lezione-02.html#operator-array">slide addizionali</a>.</p>
 <h2 id="programma-di-test">Programma di test</h2>
-<p>Questo programma usa un copy constructor per creare il
-<code>Vettore c</code> ed un’assegnazione per il
-<code>Vettore b</code>.</p>
-<div class="sourceCode" id="cb6"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;vettore.h&quot;</span></span>
+<p>Questo programma usa un copy constructor per creare il <code>Vettore c</code> ed un’assegnazione per il <code>Vettore b</code>.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;vettore.h&quot;</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="kw">using</span> <span class="kw">namespace</span> std<span class="op">;</span></span>
@@ -564,50 +293,27 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb6-1"><a href="#c
 <span id="cb6-42"><a href="#cb6-42" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-43"><a href="#cb6-43" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
 <span id="cb6-44"><a href="#cb6-44" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
-<h1 id="esercizio-2.1">Esercizio 2.1 - Completamento della classe
-<code>Vettore</code></h1>
-<p>La classe <code>vettore</code> costruita sopra non è però ancora
-completa, anzi può essere addirittura pericolosa! In particolare
-vogliamo:</p>
+<h1 id="esercizio-2.1">Esercizio 2.1 - Completamento della classe <code>Vettore</code></h1>
+<p>La classe <code>vettore</code> costruita sopra non è però ancora completa, anzi può essere addirittura pericolosa! In particolare vogliamo:</p>
 <ol type="1">
-<li><p>Aggiungere la possibilità di costruire un <code>Vettore</code> a
-partire da un <code>Vettore</code> esistente (<em>costruttore di
-copia</em>)</p></li>
-<li><p>Aggiungere la possibilità di eguagliare due oggetti di tipo
-<code>vettore</code> (<em>operatore di assegnazione</em>)</p></li>
-<li><p>Aggiungere un operatore di accesso rapido alle componenti
-(<code>[]</code>).</p></li>
+<li><p>Aggiungere la possibilità di costruire un <code>Vettore</code> a partire da un <code>Vettore</code> esistente (<em>costruttore di copia</em>)</p></li>
+<li><p>Aggiungere la possibilità di eguagliare due oggetti di tipo <code>vettore</code> (<em>operatore di assegnazione</em>)</p></li>
+<li><p>Aggiungere un operatore di accesso rapido alle componenti (<code>[]</code>).</p></li>
 </ol>
 <h2 id="copy-constructor">Copy constructor</h2>
-<p>Il <em>copy constructor</em> (o costruttore di copia) viene
-utilizzato per creare una copia di un <code>Vettore</code> esistente:
-esso deve accettare in input un <code>Vettore</code> e costruirne una
-copia del <code>Vettore</code> argomento.</p>
-<p>Il <em>copy constructor</em> viene invocato implicitamente ogni volta
-che utilizziamo sintassi come:</p>
-<div class="sourceCode" id="cb7"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>Vettore a<span class="op">;</span>       <span class="co">// costruttore standard senza argomenti</span></span>
+<p>Il <em>copy constructor</em> (o costruttore di copia) viene utilizzato per creare una copia di un <code>Vettore</code> esistente: esso deve accettare in input un <code>Vettore</code> e costruirne una copia del <code>Vettore</code> argomento.</p>
+<p>Il <em>copy constructor</em> viene invocato implicitamente ogni volta che utilizziamo sintassi come:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>Vettore a<span class="op">;</span>       <span class="co">// costruttore standard senza argomenti</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>Vettore b <span class="op">=</span> a<span class="op">;</span>   <span class="co">// copy constructor</span></span></code></pre></div>
 <p>oppure la sintassi equivalente:</p>
-<div class="sourceCode" id="cb8"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>Vettore a<span class="op">;</span>     <span class="co">// costruttore standard senza argomenti</span></span>
+<div class="sourceCode" id="cb8"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>Vettore a<span class="op">;</span>     <span class="co">// costruttore standard senza argomenti</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>Vettore b<span class="op">(</span>a<span class="op">);</span>  <span class="co">// copy constructor (idem al caso sopra)</span></span></code></pre></div>
-<p>ed in tutti i casi in cui si passa un oggetto per valore. Il
-compilatore mette a disposizione un costruttore di copia di default che
-eguaglia i data membri. In questo caso i due puntatori <code>m_v</code>
-dei due oggetti <code>Vettore</code> punterebbero alla stessa area di
-memoria generando possibili problemi di memoria. In questi casi si deve
-procedere a fornire al compilatore una implementazione esplicita del
-costruttore di copia, che si effettua seguendo questi passaggi:</p>
+<p>ed in tutti i casi in cui si passa un oggetto per valore. Il compilatore mette a disposizione un costruttore di copia di default che eguaglia i data membri. In questo caso i due puntatori <code>m_v</code> dei due oggetti <code>Vettore</code> punterebbero alla stessa area di memoria generando possibili problemi di memoria. In questi casi si deve procedere a fornire al compilatore una implementazione esplicita del costruttore di copia, che si effettua seguendo questi passaggi:</p>
 <ul>
-<li><p>Il <em>copy constructor</em> viene dichiarato nell’header con
-questo prototipo:</p>
-<div class="sourceCode" id="cb9"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>Vettore<span class="op">(</span><span class="at">const</span> Vettore<span class="op">&amp;);</span></span></code></pre></div></li>
-<li><p>Nell’implementazione, dobbiamo assicurarci che l’oggetto
-costruito abbia la sua zona di memoria riservata:</p>
-<div class="sourceCode" id="cb10"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">// overloading costruttore di copia</span></span>
+<li><p>Il <em>copy constructor</em> viene dichiarato nell’header con questo prototipo:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>Vettore<span class="op">(</span><span class="at">const</span> Vettore<span class="op">&amp;);</span></span></code></pre></div></li>
+<li><p>Nell’implementazione, dobbiamo assicurarci che l’oggetto costruito abbia la sua zona di memoria riservata:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">// overloading costruttore di copia</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>Vettore<span class="op">::</span>Vettore<span class="op">(</span><span class="at">const</span> Vettore<span class="op">&amp;</span> V<span class="op">)</span> <span class="op">{</span></span>
 <span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="va">m_N</span> <span class="op">=</span> V<span class="op">.</span>GetN<span class="op">();</span></span>
@@ -621,12 +327,8 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb10-1"><a href="#
 <span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div></li>
 </ul>
 <h2 id="operatore-di-assegnazione">Operatore di assegnazione</h2>
-<p>L’ <em>operatore di assegnazione</em> viene utilizzato per eguagliare
-un vettore ad un altro (entrambi già esistenti); esso viene invocato
-implicitamente ogni volta che utilizziamo una sintassi come la
-seguente:</p>
-<div class="sourceCode" id="cb11"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>Vettore a <span class="op">;</span></span>
+<p>L’ <em>operatore di assegnazione</em> viene utilizzato per eguagliare un vettore ad un altro (entrambi già esistenti); esso viene invocato implicitamente ogni volta che utilizziamo una sintassi come la seguente:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>Vettore a <span class="op">;</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="co">// ... riempimento delle componenti di a</span></span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>Vettore b <span class="op">;</span></span>
 <span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co">// ... riempimento delle componenti di b</span></span>
@@ -634,25 +336,16 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb11-1"><a href="#
 <span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="co">// Qui invoco l&#39;operatore di assegnazione</span></span>
 <span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> b<span class="op">;</span></span></code></pre></div>
 <p>oppure la sintassi equivalente, ma più ostica:</p>
-<div class="sourceCode" id="cb12"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>Vettore a<span class="op">;</span></span>
+<div class="sourceCode" id="cb12"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>Vettore a<span class="op">;</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="co">// ... riempimento delle componenti di a</span></span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>Vettore b<span class="op">;</span></span>
 <span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="co">// ... riempimento delle componenti di b</span></span>
 <span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>a<span class="op">.</span><span class="kw">operator</span><span class="op">=(</span>b<span class="op">);</span></span></code></pre></div>
-<p>In questo caso <code>a</code> e <code>b</code> sono oggetti della
-stessa classe. Di fatto, un’assegnazione come <code>a = b</code> non è
-altro che una abbreviazione per indicare la chiamata ad un metodo della
-classe di nome <code>operator=</code>:</p>
-<div class="sourceCode" id="cb13"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>a<span class="op">.</span><span class="kw">operator</span><span class="op">=(</span>b<span class="op">);</span></span></code></pre></div>
-<p>Il compilatore fornisce un’implementazione di default di questo
-operatore, che corrisponde ad un assegnazione membro a membro di tutti i
-data membri. Nel caso di <code>Vettore</code>, il compilatore C++ genera
-quindi un costruttore di copia come il seguente:</p>
-<div class="sourceCode" id="cb14"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Il C++ genera automaticamente questo operatore di assegnazione</span></span>
+<p>In questo caso <code>a</code> e <code>b</code> sono oggetti della stessa classe. Di fatto, un’assegnazione come <code>a = b</code> non è altro che una abbreviazione per indicare la chiamata ad un metodo della classe di nome <code>operator=</code>:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>a<span class="op">.</span><span class="kw">operator</span><span class="op">=(</span>b<span class="op">);</span></span></code></pre></div>
+<p>Il compilatore fornisce un’implementazione di default di questo operatore, che corrisponde ad un assegnazione membro a membro di tutti i data membri. Nel caso di <code>Vettore</code>, il compilatore C++ genera quindi un costruttore di copia come il seguente:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Il C++ genera automaticamente questo operatore di assegnazione</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="co">// (che però in questo caso particolare è sbagliato!)</span></span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>Vettore <span class="op">&amp;</span> Vettore<span class="op">::</span><span class="kw">operator</span><span class="op">=(</span><span class="at">const</span> Vettore <span class="op">&amp;</span> v<span class="op">)</span> <span class="op">{</span></span>
 <span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="va">m_N</span> <span class="op">=</span> v<span class="op">.</span><span class="va">m_N</span><span class="op">;</span>  <span class="co">// Questo andrebbe pure bene…</span></span>
@@ -662,12 +355,8 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb14-1"><a href="#
 <span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>  <span class="co">// metterebbe automaticamente qui anche l&#39;assegnazione di questi</span></span>
 <span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>  <span class="co">// nuovi membri</span></span>
 <span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
-<p>In casi come quello di <code>Vettore</code> però, questo operatore di
-assegnazione non è corretto: il puntatore <code>m_v</code> è ora
-condiviso tra l’oggetto <code>V</code> e il nuovo oggetto. Ecco un
-codice che mostra dove sta il problema:</p>
-<div class="sourceCode" id="cb15"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>Vettore a <span class="op">;</span></span>
+<p>In casi come quello di <code>Vettore</code> però, questo operatore di assegnazione non è corretto: il puntatore <code>m_v</code> è ora condiviso tra l’oggetto <code>V</code> e il nuovo oggetto. Ecco un codice che mostra dove sta il problema:</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>Vettore a <span class="op">;</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="co">// ... riempimento delle componenti di a</span></span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>Vettore b <span class="op">;</span></span>
 <span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="co">// ... riempimento delle componenti di b</span></span>
@@ -681,17 +370,11 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb15-1"><a href="#
 <span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a><span class="co">// l&#39;elemento n. 10 in `b` che quello in `a`: infatti</span></span>
 <span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a><span class="co">// a.m_v e b.m_v puntano alla stessa area di memoria!</span></span>
 <span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>b<span class="op">.</span>SetElement<span class="op">(</span><span class="dv">0</span><span class="op">,</span> <span class="dv">10</span><span class="op">);</span></span></code></pre></div>
-<p>Dobbiamo quindi realizzare un’implementazione sicura
-dell’assegnazione, facendo una copia dei dati in una nuova locazione di
-memoria anziché copiare superficialmente il valore di
-<code>m_v</code>.</p>
-<p>Nel nostro caso, l’header file <code>vettore.h</code> dovrà quindi
-contenere una dichiarazione:</p>
-<div class="sourceCode" id="cb16"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>Vettore<span class="op">&amp;</span> <span class="kw">operator</span><span class="op">=(</span><span class="at">const</span> Vettore<span class="op">&amp;);</span></span></code></pre></div>
+<p>Dobbiamo quindi realizzare un’implementazione sicura dell’assegnazione, facendo una copia dei dati in una nuova locazione di memoria anziché copiare superficialmente il valore di <code>m_v</code>.</p>
+<p>Nel nostro caso, l’header file <code>vettore.h</code> dovrà quindi contenere una dichiarazione:</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>Vettore<span class="op">&amp;</span> <span class="kw">operator</span><span class="op">=(</span><span class="at">const</span> Vettore<span class="op">&amp;);</span></span></code></pre></div>
 <p>Una possibile implementazione è data qui sotto:</p>
-<div class="sourceCode" id="cb17"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>    <span class="co">// overloading operatore di assegnazione</span></span>
+<div class="sourceCode" id="cb17"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>    <span class="co">// overloading operatore di assegnazione</span></span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>    Vettore<span class="op">&amp;</span> Vettore<span class="op">::</span><span class="kw">operator</span><span class="op">=(</span><span class="at">const</span> Vettore<span class="op">&amp;</span> V<span class="op">)</span> <span class="op">{</span></span>
 <span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>      <span class="va">m_N</span> <span class="op">=</span> V<span class="op">.</span>GetN<span class="op">();</span></span>
@@ -709,51 +392,25 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb17-1"><a href="#
 <span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a>      <span class="cf">return</span> <span class="op">*</span><span class="kw">this</span><span class="op">;</span></span>
 <span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span></code></pre></div>
 <h2 id="il-puntatore-this">Il puntatore <code>this</code></h2>
-<p>Il puntatore <code>this</code> indica un puntatore all’oggetto cui si
-sta applicando un metodo. È particolarmente utile in alcune occasioni,
-come nel caso dell’operatore di assegnazione, in cui si deve restituire
-una copia dell’oggetto corrente.</p>
-<p>(Se conoscete Python, il valore <code>*this</code> dei metodi C++ è
-equivalente al <code>self</code> dei metodi Python: ma in Python è
-esplicito, mentre in C++ la sua presenza è implicita.)</p>
+<p>Il puntatore <code>this</code> indica un puntatore all’oggetto cui si sta applicando un metodo. È particolarmente utile in alcune occasioni, come nel caso dell’operatore di assegnazione, in cui si deve restituire una copia dell’oggetto corrente.</p>
+<p>(Se conoscete Python, il valore <code>*this</code> dei metodi C++ è equivalente al <code>self</code> dei metodi Python: ma in Python è esplicito, mentre in C++ la sua presenza è implicita.)</p>
 <h2 id="operatore-di-accesso">Operatore di accesso <code>[]</code></h2>
-<p>Se vogliamo semplificare la codifica dell’accesso alle componenti di
-un <code>Vettore</code> (sia in lettura sia in scrittura ) potremmo
-pensare di fare un <em>overloading</em> dell’operatore di accesso
-<code>operator[](int)</code>. Questo permetterebbe ad esempio di
-accedere alla seconda componente di un vettore v semplicemente
-scrivendo</p>
-<div class="sourceCode" id="cb18"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> a <span class="op">=</span> v<span class="op">[</span><span class="dv">1</span><span class="op">]</span></span></code></pre></div>
-<p>Per aggiungere questa funzionalità alla nostra classe
-<code>Vettore</code> dobbiamo come al solito compiere queste azioni:</p>
+<p>Se vogliamo semplificare la codifica dell’accesso alle componenti di un <code>Vettore</code> (sia in lettura sia in scrittura ) potremmo pensare di fare un <em>overloading</em> dell’operatore di accesso <code>operator[](int)</code>. Questo permetterebbe ad esempio di accedere alla seconda componente di un vettore v semplicemente scrivendo</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> a <span class="op">=</span> v<span class="op">[</span><span class="dv">1</span><span class="op">]</span></span></code></pre></div>
+<p>Per aggiungere questa funzionalità alla nostra classe <code>Vettore</code> dobbiamo come al solito compiere queste azioni:</p>
 <ul>
-<li><p>Aggiungere la dichiarazione del metodo nell’header file
-(<code>.h</code>):</p>
-<div class="sourceCode" id="cb19"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span><span class="op">&amp;</span> <span class="kw">operator</span><span class="op">[](</span><span class="dt">int</span><span class="op">)</span> <span class="at">const</span><span class="op">;</span></span></code></pre></div></li>
-<li><p>Aggiungere l’implementazione del metodo nel file di
-implementazione (<code>.cpp</code>):</p>
-<div class="sourceCode" id="cb20"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span><span class="op">&amp;</span> Vettore<span class="op">::</span><span class="kw">operator</span><span class="op">[]</span> <span class="op">(</span><span class="dt">int</span> i<span class="op">)</span> <span class="at">const</span> <span class="op">{</span></span>
+<li><p>Aggiungere la dichiarazione del metodo nell’header file (<code>.h</code>):</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span><span class="op">&amp;</span> <span class="kw">operator</span><span class="op">[](</span><span class="dt">int</span><span class="op">)</span> <span class="at">const</span><span class="op">;</span></span></code></pre></div></li>
+<li><p>Aggiungere l’implementazione del metodo nel file di implementazione (<code>.cpp</code>):</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span><span class="op">&amp;</span> Vettore<span class="op">::</span><span class="kw">operator</span><span class="op">[]</span> <span class="op">(</span><span class="dt">int</span> i<span class="op">)</span> <span class="at">const</span> <span class="op">{</span></span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  crashIfInvalidIndex<span class="op">(</span>i<span class="op">);</span></span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="va">m_v</span><span class="op">[</span>i<span class="op">];</span></span>
 <span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div></li>
 </ul>
 <h2 id="esempio-di-codice">Esempio di codice</h2>
-<p>A questo punto possiamo utilizzare il seguente codice di test che
-include anche un esempio di utilizzo di <em>copy constructor</em> ,
-<em>operatore di assegnazione</em> e <em>operatore di accesso</em>.</p>
-<p><strong>Avvertenza</strong>: Questo esempio di codice darebbe
-problemi di <em>memory corruption</em> senza l’implementazione corretta
-del copy constructor e dell’operatore di assegnazione ma basandosi su
-quelli generati automaticamente dal compilatore! Infatti avremmo
-ottenuto due vettori che condividono esattamente la stessa area di
-memoria: una modifica su un vettore implica che anche l’altro venga
-modificato. Avendo implementato esplicitamente ed in maniera corretta i
-due operatori questo problema non si presenta.</p>
-<div class="sourceCode" id="cb21"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;Vettore.h&quot;</span></span>
+<p>A questo punto possiamo utilizzare il seguente codice di test che include anche un esempio di utilizzo di <em>copy constructor</em> , <em>operatore di assegnazione</em> e <em>operatore di accesso</em>.</p>
+<p><strong>Avvertenza</strong>: Questo esempio di codice darebbe problemi di <em>memory corruption</em> senza l’implementazione corretta del copy constructor e dell’operatore di assegnazione ma basandosi su quelli generati automaticamente dal compilatore! Infatti avremmo ottenuto due vettori che condividono esattamente la stessa area di memoria: una modifica su un vettore implica che anche l’altro venga modificato. Avendo implementato esplicitamente ed in maniera corretta i due operatori questo problema non si presenta.</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;Vettore.h&quot;</span></span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="kw">using</span> <span class="kw">namespace</span> std<span class="op">;</span></span>
@@ -835,30 +492,16 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb21-1"><a href="#
 <span id="cb21-80"><a href="#cb21-80" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb21-81"><a href="#cb21-81" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
 <span id="cb21-82"><a href="#cb21-82" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
-<h1 id="esercizio-2.2">Esercizio 2.2 - Codice di analisi dati
-utilizzando la classe <code>Vettore</code> (da consegnare)</h1>
-<p>Proviamo ora a riscrivere il codice della prima lezione utilizzando
-un contenitore di dati più raffinato: la classe <code>Vettore</code> ci
-permetterà di riempire il contenitore dati controllando per esempio che
-non stiamo sforando la dimensione allocata. La classe
-<code>Vettore</code> inoltre mantiene al suo interno anche la sua
-dimensione (nel campo <code>m_N</code>): se dobbiamo calcolare la media
-degli elementi di un <code>Vettore</code> <strong>non dobbiamo più
-passare la dimensione come argomento esterno</strong>! Per svolgere
-questo esercizio dobbiamo:</p>
+<h1 id="esercizio-2.2">Esercizio 2.2 - Codice di analisi dati utilizzando la classe <code>Vettore</code> (da consegnare)</h1>
+<p>Proviamo ora a riscrivere il codice della prima lezione utilizzando un contenitore di dati più raffinato: la classe <code>Vettore</code> ci permetterà di riempire il contenitore dati controllando per esempio che non stiamo sforando la dimensione allocata. La classe <code>Vettore</code> inoltre mantiene al suo interno anche la sua dimensione (nel campo <code>m_N</code>): se dobbiamo calcolare la media degli elementi di un <code>Vettore</code> <strong>non dobbiamo più passare la dimensione come argomento esterno</strong>! Per svolgere questo esercizio dobbiamo:</p>
 <ul>
-<li>modificare tutte le funzioni in <code>funzioni.h</code> e
-<code>funzioni.cpp</code> in modo che lavorino con oggetti di tipo
-<code>Vettore</code> invece che con semplici array del C.</li>
-<li>modificare il <code>main</code> in modo che utilizzi la nuova classe
-<code>Vettore</code> e le nuove funzioni.</li>
+<li>modificare tutte le funzioni in <code>funzioni.h</code> e <code>funzioni.cpp</code> in modo che lavorino con oggetti di tipo <code>Vettore</code> invece che con semplici array del C.</li>
+<li>modificare il <code>main</code> in modo che utilizzi la nuova classe <code>Vettore</code> e le nuove funzioni.</li>
 <li>modificare il <code>Makefile</code></li>
 </ul>
-<p>Se non ci riuscite da soli potete dare un’occhiata ai suggerimenti
-qui sotto.</p>
+<p>Se non ci riuscite da soli potete dare un’occhiata ai suggerimenti qui sotto.</p>
 <h2 id="struttura-del-programma">Struttura del programma</h2>
-<div class="sourceCode" id="cb22"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;cstdlib&gt;</span></span>
+<div class="sourceCode" id="cb22"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;cstdlib&gt;</span></span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;string&gt;</span></span>
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
 <span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a></span>
@@ -897,15 +540,11 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb22-1"><a href="#
 <span id="cb22-37"><a href="#cb22-37" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb22-38"><a href="#cb22-38" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
 <span id="cb22-39"><a href="#cb22-39" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
-<p>La funzione <code>test_statistical_functions()</code> è spiegata
-nelle <a href="tomasi-lezione-02.html#/scrittura-di-test">slide di
-Tomasi</a>.</p>
-<h2 id="implementazione-delle-funzioni">Implementazione delle
-funzioni</h2>
+<p>La funzione <code>test_statistical_functions()</code> è spiegata nelle <a href="tomasi-lezione-02.html#/scrittura-di-test">slide di Tomasi</a>.</p>
+<h2 id="implementazione-delle-funzioni">Implementazione delle funzioni</h2>
 <ul>
 <li><p>L’header file (<code>.h</code>) potrebbe risultare così:</p>
-<div class="sourceCode" id="cb23"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#pragma once</span></span>
+<div class="sourceCode" id="cb23"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#pragma once</span></span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;fstream&gt;</span></span>
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
 <span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a></span>
@@ -921,11 +560,8 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb23-1"><a href="#
 <span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> Print<span class="op">(</span><span class="at">const</span> Vettore <span class="op">&amp;,</span> <span class="at">const</span> <span class="dt">char</span> <span class="op">*);</span></span>
 <span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> selection_sort<span class="op">(</span>Vettore <span class="op">&amp;);</span></span></code></pre></div></li>
-<li><p>Il file di implementazione (<code>.cpp</code>) potrebbe risultare
-così per il calcolo della media (aggiungere tutte le funzioni
-restanti):</p>
-<div class="sourceCode" id="cb24"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;funzioni.h&quot;</span></span>
+<li><p>Il file di implementazione (<code>.cpp</code>) potrebbe risultare così per il calcolo della media (aggiungere tutte le funzioni restanti):</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;funzioni.h&quot;</span></span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> CalcolaMedia<span class="op">(</span><span class="at">const</span> Vettore <span class="op">&amp;</span> v<span class="op">)</span> <span class="op">{</span></span>
 <span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> accumulo <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
@@ -935,28 +571,12 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb24-1"><a href="#
 <span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> accumulo <span class="op">/</span> <span class="dt">double</span> <span class="op">(</span>v<span class="op">.</span>GetN<span class="op">())</span> <span class="op">;</span></span>
 <span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div></li>
-<li><p>Assicuratevi di implementare i test con <code>assert</code> come
-spiegato in <a
-href="tomasi-lezione-02.html#/esercizio-1.1-assert">questa slide</a>: il
-codice fornito nella slide va bene per gli esercizi della scorsa
-lezione, che richiedono di passare sia l’array che la lunghezza
-dell’array, ma è facile adattarli al caso di oggi. (Se non ci riuscite,
-chiedete al docente!)</p></li>
+<li><p>Assicuratevi di implementare i test con <code>assert</code> come spiegato in <a href="tomasi-lezione-02.html#/esercizio-1.1-assert">questa slide</a>: il codice fornito nella slide va bene per gli esercizi della scorsa lezione, che richiedono di passare sia l’array che la lunghezza dell’array, ma è facile adattarli al caso di oggi. (Se non ci riuscite, chiedete al docente!)</p></li>
 </ul>
-<h2 id="passaggio-dati-by-reference-con-qualificatore-const">Passaggio
-dati <em>by reference</em> con qualificatore <code>const</code></h2>
-<p>Nella funzione <code>CalcolaMedia</code>, il vettore di input viene
-passato con la sintassi <code>const Vettore &amp; v</code>, quindi il
-passaggio avviene <em>by reference</em> evitando una inutile e pesante
-copia dell’oggetto vettore di input. Il passaggio <em>by reference</em>
-darebbe alla funzione la possibilità di modificare (per sbaglio) il
-contenuto del vettore del <code>main</code>: per questo motivo si
-aggiunge il qualificatore <code>const</code>, che non permette (pena un
-errore di compilazione) operazioni di modifica del contenuto del vettore
-da dentro la funzione.</p>
+<h2 id="passaggio-dati-by-reference-con-qualificatore-const">Passaggio dati <em>by reference</em> con qualificatore <code>const</code></h2>
+<p>Nella funzione <code>CalcolaMedia</code>, il vettore di input viene passato con la sintassi <code>const Vettore &amp; v</code>, quindi il passaggio avviene <em>by reference</em> evitando una inutile e pesante copia dell’oggetto vettore di input. Il passaggio <em>by reference</em> darebbe alla funzione la possibilità di modificare (per sbaglio) il contenuto del vettore del <code>main</code>: per questo motivo si aggiunge il qualificatore <code>const</code>, che non permette (pena un errore di compilazione) operazioni di modifica del contenuto del vettore da dentro la funzione.</p>
 <h2 id="il-makefile">Il Makefile</h2>
-<p>Il makefile va modificato aggiungendo la compilazione della classe
-<code>Vettore</code>:</p>
+<p>Il makefile va modificato aggiungendo la compilazione della classe <code>Vettore</code>:</p>
 <pre><code>esercizio2.2: esercizio2.2.o Vettore.o funzioni.o
         g++ -o esercizio2.2 esercizio2.2.o Vettore.o funzioni.o
 funzioni.o: funzioni.cpp funzioni.h Vettore.h
@@ -970,51 +590,19 @@ clean:
         rm *.o
 cleanall: clean
         rm esercizio2.2</code></pre>
-<h2 id="tipo-del-parametro-di-calcolamediana">Tipo del parametro di
-<code>CalcolaMediana</code></h2>
-<p>Perché <code>CalcolaMedia</code> richiede un parametro di tipo
-<code>const Vettore &amp;</code>, mentre <code>CalcolaMediana</code>
-richiede semplicemente il tipo <code>Vettore</code>?:</p>
+<h2 id="tipo-del-parametro-di-calcolamediana">Tipo del parametro di <code>CalcolaMediana</code></h2>
+<p>Perché <code>CalcolaMedia</code> richiede un parametro di tipo <code>const Vettore &amp;</code>, mentre <code>CalcolaMediana</code> richiede semplicemente il tipo <code>Vettore</code>?:</p>
 <ul>
-<li><p>Nel caso di <code>CalcolaMedia(...)</code> o
-<code>CalcolaVarianza(...)</code> il passaggio avviene <em>by
-reference</em> per ottimizzare l’uso della memoria. Con questa modalità
-di passaggio dati la funzione lavora sul <code>Vettore</code> del
-<code>main</code> e pertanto una modifica accidentale del
-<code>Vettore</code> di input all’interno della funzione ha un effetto
-anche nel <code>main</code>. Il qualificatore <code>const</code> vieta
-alla funzione di fare qualsiasi operazione di cambiamento del contenuto
-del vettore di input pena un errore di compilazione.</p></li>
-<li><p>Nel caso invece di <code>CalcolaMediana(...)</code> il passaggio
-e’ effettuato <em>by value</em> e senza il qualificatore
-<code>const</code>: in questo modo permettiamo che il metodo proceda al
-riodinamento del <code>Vettore</code>. Dal momento che con il passaggio
-by value il <code>Vettore</code> nella funzione è una copia del
-<code>Vettore</code> di input ogni cambiamento effettuato nella funzione
-non si ripercuote sul <code>main</code>.</p></li>
+<li><p>Nel caso di <code>CalcolaMedia(...)</code> o <code>CalcolaVarianza(...)</code> il passaggio avviene <em>by reference</em> per ottimizzare l’uso della memoria. Con questa modalità di passaggio dati la funzione lavora sul <code>Vettore</code> del <code>main</code> e pertanto una modifica accidentale del <code>Vettore</code> di input all’interno della funzione ha un effetto anche nel <code>main</code>. Il qualificatore <code>const</code> vieta alla funzione di fare qualsiasi operazione di cambiamento del contenuto del vettore di input pena un errore di compilazione.</p></li>
+<li><p>Nel caso invece di <code>CalcolaMediana(...)</code> il passaggio e’ effettuato <em>by value</em> e senza il qualificatore <code>const</code>: in questo modo permettiamo che il metodo proceda al riodinamento del <code>Vettore</code>. Dal momento che con il passaggio by value il <code>Vettore</code> nella funzione è una copia del <code>Vettore</code> di input ogni cambiamento effettuato nella funzione non si ripercuote sul <code>main</code>.</p></li>
 </ul>
 <h2 id="approfondimenti">Approfondimenti</h2>
 <h3 id="semantica-di-move">Semantica di <code>move</code></h3>
-<p>[Vedi anche le <a href="tomasi-lezione-02.html#/move-semantics">slide
-di Tomasi</a>]</p>
-<p>La <em>move semantic</em> è un nuovo modo (dal C++11) di spostare le
-risorse in un modo ottimale evitando di creare copie non necessarie di
-oggetti temporanei ed è basato sulle <em>r-value</em> references. La
-potenza della <em>move semantic</em> si può capire affrontando il caso
-in cui si voglia costruire un oggetto della classe <code>Vettore</code>
-a partire dall’output di una funzione:</p>
-<div class="sourceCode" id="cb26"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>Vettore v <span class="op">=</span> Read<span class="op">(</span>ndata<span class="op">,</span> filename<span class="op">);</span></span></code></pre></div>
-<p>La funzione <code>Read()</code> restituirà un oggetto temporaneo di
-tipo `<code>Vettore</code> che poi verrà utilizzato come input del
-costruttore di copia per la creazione di <code>v</code>. Chiaramente
-questo riduce notevolmente le performance del nostro codice. Perché non
-realizzare un costruttore di copia (e un operatore di assegnazione) che
-siano in grado di rubare i data membri all’oggetto temporaneo senza
-dover copiare dati? Questo è lo spirito del <em>move constructor</em> e
-del <em>move assignment operator</em>:</p>
-<div class="sourceCode" id="cb27"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co">// overloading del move constructor</span></span>
+<p>[Vedi anche le <a href="tomasi-lezione-02.html#/move-semantics">slide di Tomasi</a>]</p>
+<p>La <em>move semantic</em> è un nuovo modo (dal C++11) di spostare le risorse in un modo ottimale evitando di creare copie non necessarie di oggetti temporanei ed è basato sulle <em>r-value</em> references. La potenza della <em>move semantic</em> si può capire affrontando il caso in cui si voglia costruire un oggetto della classe <code>Vettore</code> a partire dall’output di una funzione:</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>Vettore v <span class="op">=</span> Read<span class="op">(</span>ndata<span class="op">,</span> filename<span class="op">);</span></span></code></pre></div>
+<p>La funzione <code>Read()</code> restituirà un oggetto temporaneo di tipo `<code>Vettore</code> che poi verrà utilizzato come input del costruttore di copia per la creazione di <code>v</code>. Chiaramente questo riduce notevolmente le performance del nostro codice. Perché non realizzare un costruttore di copia (e un operatore di assegnazione) che siano in grado di rubare i data membri all’oggetto temporaneo senza dover copiare dati? Questo è lo spirito del <em>move constructor</em> e del <em>move assignment operator</em>:</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co">// overloading del move constructor</span></span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>Vettore<span class="op">::</span>Vettore<span class="op">(</span>Vettore <span class="op">&amp;&amp;</span>V<span class="op">)</span> <span class="op">{</span></span>
 <span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>  cout <span class="op">&lt;&lt;</span> <span class="st">&quot;Calling move constructor&quot;</span> <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span>
@@ -1040,37 +628,14 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb27-1"><a href="#
 <span id="cb27-24"><a href="#cb27-24" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="op">*</span><span class="kw">this</span><span class="op">;</span></span>
 <span id="cb27-25"><a href="#cb27-25" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 <ul>
-<li>Notare la presenza della doppia <code>&amp;&amp;</code> nel tipo del
-parametro <code>V</code> di input: si sta dicendo al C++ che è richiesto
-un <em>r-value</em></li>
-<li>Il <em>move constructor</em> e il <em>move assignment operator</em>
-semplicemente “rubano” i dati all’oggetto temporaneo (non c’è copia
-elemento per elemento)</li>
+<li>Notare la presenza della doppia <code>&amp;&amp;</code> nel tipo del parametro <code>V</code> di input: si sta dicendo al C++ che è richiesto un <em>r-value</em></li>
+<li>Il <em>move constructor</em> e il <em>move assignment operator</em> semplicemente “rubano” i dati all’oggetto temporaneo (non c’è copia elemento per elemento)</li>
 <li>Il puntatore dell’oggetto di input viene sganciato dai dati</li>
-<li>Per vedere il <em>move constructor</em> all’opera potrebbe essere
-necessario aggiungere la flag <code>-fno-elide-constructors</code>, in
-modo da disattivare eventuali ottimizzazioni interne del compilatore che
-maschererebbero l’uso del move constructor (fate questo giusto come
-prova, però poi rimuovete quella flag!).</li>
+<li>Per vedere il <em>move constructor</em> all’opera potrebbe essere necessario aggiungere la flag <code>-fno-elide-constructors</code>, in modo da disattivare eventuali ottimizzazioni interne del compilatore che maschererebbero l’uso del move constructor (fate questo giusto come prova, però poi rimuovete quella flag!).</li>
 </ul>
 <h2 id="eccezioni-in-c">Eccezioni in C++</h2>
-<p>Nei metodi della classe <code>Vettore</code> o nelle funzioni
-corrispondenti abbiamo spesso utilizzato la funzione <code>exit()</code>
-per interrompere l’esecuzione del programma in caso si incontri una
-condizione patologica (per esempio tentiamo di accedere ad una
-componenete che non esiste). Questo approccio non è considerato buon
-conding: in generale non vogliamo che il comportamento di una funzione
-(magari scritta da altri) possa decidere la sorte del programma. Sarebbe
-meglio che la funzione potesse fornire al <code>main</code>
-l’informazione su eventuali errori di esecuzione e lasciare al
-<code>main</code> la possibilità di decidere della sorte del programa.
-In C++ esiste un meccanismo di gestione delle <a
-href="https://cplusplus.com/doc/tutorial/exceptions/">eccezioni</a>. Per
-capire meglio come utilizzare le eccezioni in C++ proviamo a tenere come
-esempio il metodo di accesso ad un elemento
-(<code>GetComponent()</code>). Con la modifica seguente:</p>
-<div class="sourceCode" id="cb28"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Vettore <span class="op">{</span></span>
+<p>Nei metodi della classe <code>Vettore</code> o nelle funzioni corrispondenti abbiamo spesso utilizzato la funzione <code>exit()</code> per interrompere l’esecuzione del programma in caso si incontri una condizione patologica (per esempio tentiamo di accedere ad una componenete che non esiste). Questo approccio non è considerato buon conding: in generale non vogliamo che il comportamento di una funzione (magari scritta da altri) possa decidere la sorte del programma. Sarebbe meglio che la funzione potesse fornire al <code>main</code> l’informazione su eventuali errori di esecuzione e lasciare al <code>main</code> la possibilità di decidere della sorte del programa. In C++ esiste un meccanismo di gestione delle <a href="https://cplusplus.com/doc/tutorial/exceptions/">eccezioni</a>. Per capire meglio come utilizzare le eccezioni in C++ proviamo a tenere come esempio il metodo di accesso ad un elemento (<code>GetComponent()</code>). Con la modifica seguente:</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Vettore <span class="op">{</span></span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span><span class="op">:</span></span>
 <span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>  <span class="co">// ....</span></span>
@@ -1086,10 +651,8 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb28-1"><a href="#
 <span id="cb28-14"><a href="#cb28-14" aria-hidden="true" tabindex="-1"></a>  <span class="dt">int</span> <span class="va">m_N</span><span class="op">;</span></span>
 <span id="cb28-15"><a href="#cb28-15" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> <span class="op">*</span><span class="va">m_v</span><span class="op">;</span></span>
 <span id="cb28-16"><a href="#cb28-16" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code></pre></div>
-<p>il metodo <code>GetComponent()</code> può essere usato nel modo
-seguente dal <code>main()</code>:</p>
-<div class="sourceCode" id="cb29"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;Vettore.h&quot;</span></span>
+<p>il metodo <code>GetComponent()</code> può essere usato nel modo seguente dal <code>main()</code>:</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;Vettore.h&quot;</span></span>
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
 <span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a></span>
@@ -1106,31 +669,26 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb29-1"><a href="#
 <span id="cb29-15"><a href="#cb29-15" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb29-16"><a href="#cb29-16" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
 <span id="cb29-17"><a href="#cb29-17" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
-<p>Come si può notare, quando si tenta di leggere la componente 4 (che
-non esiste) il metodo <code>GetComponent()</code> solleva un’eccezione
-che viene propagata al <code>main</code>. A questo punto si può decidere
-cosa fare direttamente nel <code>main()</code>.</p>
+<p>Come si può notare, quando si tenta di leggere la componente 4 (che non esiste) il metodo <code>GetComponent()</code> solleva un’eccezione che viene propagata al <code>main</code>. A questo punto si può decidere cosa fare direttamente nel <code>main()</code>.</p>
 <h1 id="errori-comuni">Errori comuni</h1>
-<p>Tra errori che gli studenti hanno fatto negli anni precedenti, ci
-sono ovviamente già quelli elencati per la <a
-href="carminati-esercizi-01.html#errori-comuni">prima lezione</a>. A
-questi se ne aggiungono i seguenti:</p>
+<p>Tra errori che gli studenti hanno fatto negli anni precedenti, ci sono ovviamente già quelli elencati per la <a href="carminati-esercizi-01.html#errori-comuni">prima lezione</a>. A questi se ne aggiungono i seguenti:</p>
 <ul>
-<li><p>Stranamente, molti studenti che avevano consegnato esercizi della
-lezione 1 con un calcolo corretto di media, mediana e varianza
-consegnano per la lezione 2 esercizi che calcolano quegli stessi valori
-in modo sbagliato!</p></li>
-<li><p>È capitato più di una volta che gli esercizi di alcuni studenti
-che implementavano il <em>move constructor</em> non compilavano neppure.
-Questo ha lasciato basiti noi docenti: idealmente,
-<strong>tutti</strong> gli esercizi che si consegnano devono compilare
-senza errori… Se non riuscite a trovare la causa dell’errore, contattate
-i docenti prima di consegnare!</p></li>
-</ul>                    
-                </div>
-            </div>
+<li><p>Stranamente, molti studenti che avevano consegnato esercizi della lezione 1 con un calcolo corretto di media, mediana e varianza consegnano per la lezione 2 esercizi che calcolano quegli stessi valori in modo sbagliato!</p></li>
+<li><p>È capitato più di una volta che gli esercizi di alcuni studenti che implementavano il <em>move constructor</em> non compilavano neppure. Questo ha lasciato basiti noi docenti: idealmente, <strong>tutti</strong> gli esercizi che si consegnano devono compilare senza errori… Se non riuscite a trovare la causa dell’errore, contattate i docenti prima di consegnare!</p></li>
+</ul>
+</main>
 
-            <script src="https://vjs.zencdn.net/5.4.4/video.js"></script>
-        </div>
-    </body>
+<script>
+;(function() {
+  // Non-essential if user has JavaScript off. Just makes checkboxes look nicer.
+  var selector = '.task-list > li > input[type="checkbox"]';
+  var checkboxes = document.querySelectorAll(selector);
+  Array.from(checkboxes).forEach((checkbox) => {
+    var wasChecked = checkbox.checked;
+    checkbox.disabled = false;
+    checkbox.addEventListener('click', (ev) => {ev.target.checked = wasChecked});
+  });
+})();
+</script>
+</body>
 </html>

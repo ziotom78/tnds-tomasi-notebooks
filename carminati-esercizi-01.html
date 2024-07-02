@@ -1,100 +1,16 @@
 <!DOCTYPE html>
-<html  lang="it-IT"  dir="ltr">
-
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Lezione 1: Analisi dei dati (arrays)</title>
-        <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
-        <link rel="apple-touch-icon-precomposed" href="images/apple-touch-icon.png">
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/2.26.4/css/uikit.gradient.css">
-
-        <!-- <link rel="stylesheet" href="style.css"> -->
-        <link rel="stylesheet" href="https://cdn.rawgit.com/diversen/pandoc-uikit/master/style.css">
-        <link href="css/custom.css" rel="stylesheet" />
-        <link href="https://vjs.zencdn.net/5.4.4/video-js.css" rel="stylesheet" />
-        <script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
-        <!-- <script src="uikit.js"></script> -->
-        <script src="https://cdn.rawgit.com/diversen/pandoc-uikit/master/uikit.js"></script>
-        <!-- <script src="scripts.js"></script> -->
-        <script src="https://cdn.rawgit.com/diversen/pandoc-uikit/master/scripts.js"></script>
-        <!-- <script src="jquery.sticky-kit.js "></script> -->
-        <script src="https://cdn.rawgit.com/diversen/pandoc-uikit/master/jquery.sticky-kit.js"></script>
-
-        <meta name="generator" content="pandoc-uikit" />
-                <meta name="author" content="Leonardo Carminati" />
-                <meta name="author" content="Maurizio Tomasi" />
-                        <title>Lezione 1: Analisi dei dati (arrays)</title>
-        <style type="text/css">code{white-space: pre;}</style>
-                        <style type="text/css">
-            pre > code.sourceCode { white-space: pre; position: relative; }
-            pre > code.sourceCode > span { line-height: 1.25; }
-            pre > code.sourceCode > span:empty { height: 1.2em; }
-            .sourceCode { overflow: visible; }
-            code.sourceCode > span { color: inherit; text-decoration: inherit; }
-            div.sourceCode { margin: 1em 0; }
-            pre.sourceCode { margin: 0; }
-            @media screen {
-            div.sourceCode { overflow: auto; }
-            }
-            @media print {
-            pre > code.sourceCode { white-space: pre-wrap; }
-            pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-            }
-            pre.numberSource code
-              { counter-reset: source-line 0; }
-            pre.numberSource code > span
-              { position: relative; left: -4em; counter-increment: source-line; }
-            pre.numberSource code > span > a:first-child::before
-              { content: counter(source-line);
-                position: relative; left: -1em; text-align: right; vertical-align: baseline;
-                border: none; display: inline-block;
-                -webkit-touch-callout: none; -webkit-user-select: none;
-                -khtml-user-select: none; -moz-user-select: none;
-                -ms-user-select: none; user-select: none;
-                padding: 0 4px; width: 4em;
-                color: #aaaaaa;
-              }
-            pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-            div.sourceCode
-              {   }
-            @media screen {
-            pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-            }
-            code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-            code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-            code span.at { color: #7d9029; } /* Attribute */
-            code span.bn { color: #40a070; } /* BaseN */
-            code span.bu { color: #008000; } /* BuiltIn */
-            code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-            code span.ch { color: #4070a0; } /* Char */
-            code span.cn { color: #880000; } /* Constant */
-            code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-            code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-            code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-            code span.dt { color: #902000; } /* DataType */
-            code span.dv { color: #40a070; } /* DecVal */
-            code span.er { color: #ff0000; font-weight: bold; } /* Error */
-            code span.ex { } /* Extension */
-            code span.fl { color: #40a070; } /* Float */
-            code span.fu { color: #06287e; } /* Function */
-            code span.im { color: #008000; font-weight: bold; } /* Import */
-            code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-            code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-            code span.op { color: #666666; } /* Operator */
-            code span.ot { color: #007020; } /* Other */
-            code span.pp { color: #bc7a00; } /* Preprocessor */
-            code span.sc { color: #4070a0; } /* SpecialChar */
-            code span.ss { color: #bb6688; } /* SpecialString */
-            code span.st { color: #4070a0; } /* String */
-            code span.va { color: #19177c; } /* Variable */
-            code span.vs { color: #4070a0; } /* VerbatimString */
-            code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-        </style>
-                                            <script defer=""
-                                            src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js"></script>
-                                            <script>document.addEventListener("DOMContentLoaded", function () {
+<html xmlns="http://www.w3.org/1999/xhtml" lang="it-IT" xml:lang="it-IT">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc-markdown-css-theme" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Leonardo Carminati" />
+  <meta name="author" content="Maurizio Tomasi" />
+  <title>Lezione 1: Analisi dei dati (arrays)</title>
+  <link rel="stylesheet" href="css/theme.css" />
+  <link rel="stylesheet" href="css/skylighting-solarized-theme.css" />
+  <script defer="" src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
  var mathElements = document.getElementsByClassName("math");
  var macros = [];
  for (var i = 0; i < mathElements.length; i++) {
@@ -107,236 +23,92 @@
     fleqn: false
    });
 }}});
-                                            </script>
-                                            <link rel="stylesheet"
-                                            href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css" />
-                               
-    </head>
+  </script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css" />
+</head>
+<body>
 
-    <body>
+<header>
+<h1 class="title">Lezione 1: Analisi dei dati (arrays)</h1>
+<blockquote class="metadata">
+<p class="author">
+      Leonardo CarminatiMaurizio Tomasi
+  </p>
+<p class="date before-toc"><time datetime="A.A. 2021−2022">A.A. 2021−2022</time></p>
+</blockquote>
+</header>
 
+<nav id="TOC" role="doc-toc">
+    <strong>Contents</strong><label for="contents">⊕</label>
+  <input type="checkbox" id="contents">
+  <ul>
+  <li><a href="#passaggio-di-input-da-linea-di-comando" id="toc-passaggio-di-input-da-linea-di-comando">Passaggio di input da linea di comando</a>
+  <ul>
+  <li><a href="#le-funzioni-atoi-e-atof" id="toc-le-funzioni-atoi-e-atof">Le funzioni <code>atoi</code> e <code>atof</code></a></li>
+  <li><a href="#cin-cout-e-cerr" id="toc-cin-cout-e-cerr">Cin, cout e cerr</a></li>
+  <li><a href="#allocazione-dinamica-della-memoria" id="toc-allocazione-dinamica-della-memoria">Allocazione dinamica della memoria</a></li>
+  <li><a href="#fstream" id="toc-fstream">Fstream</a></li>
+  </ul></li>
+  <li><a href="#esercizio-1.0" id="toc-esercizio-1.0">Esercizio 1.0 - Primo codice per analisi</a>
+  <ul>
+  <li><a href="#struttura-del-programma" id="toc-struttura-del-programma">Struttura del programma</a></li>
+  <li><a href="#caricamento-elementi-da-file-1" id="toc-caricamento-elementi-da-file-1">Caricamento elementi da file (1)</a></li>
+  <li><a href="#calcolo-della-media-e-della-varianza-2" id="toc-calcolo-della-media-e-della-varianza-2">Calcolo della media e della varianza (2)</a></li>
+  <li><a href="#riordino-elementi-di-un-array-3" id="toc-riordino-elementi-di-un-array-3">Riordino elementi di un array (3)</a></li>
+  <li><a href="#calcolo-della-mediana-4" id="toc-calcolo-della-mediana-4">Calcolo della mediana (4)</a></li>
+  <li><a href="#scrittura-elementi-su-file-5" id="toc-scrittura-elementi-su-file-5">Scrittura elementi su file (5)</a></li>
+  </ul></li>
+  <li><a href="#esercizio-1.1" id="toc-esercizio-1.1">Esercizio 1.1 - Codice di analisi con funzioni</a>
+  <ul>
+  <li><a href="#funzioni-con-argomenti-by-reference-by-value-e-by-pointer" id="toc-funzioni-con-argomenti-by-reference-by-value-e-by-pointer">Funzioni con argomenti <em>by reference</em>, <em>by value</em> e <em>by pointer</em></a></li>
+  <li><a href="#struttura-del-programma-1" id="toc-struttura-del-programma-1">Struttura del programma</a></li>
+  </ul></li>
+  <li><a href="#esercizio-1.2" id="toc-esercizio-1.2">Esercizio 1.2 - Codice di analisi con funzioni e Makefile</a>
+  <ul>
+  <li><a href="#il-makefile" id="toc-il-makefile">Il Makefile</a></li>
+  </ul></li>
+  <li><a href="#esercizio-1.3" id="toc-esercizio-1.3">Esercizio 1.3 - Overloading di funzione (da consegnare)</a>
+  <ul>
+  <li><a href="#overloading-di-funzioni" id="toc-overloading-di-funzioni">Overloading di funzioni</a></li>
+  <li><a href="#formattazione-delloutput" id="toc-formattazione-delloutput">Formattazione dell’output</a></li>
+  <li><a href="#implementazione-migliorata" id="toc-implementazione-migliorata">Implementazione migliorata</a></li>
+  </ul></li>
+  <li><a href="#errori-comuni" id="toc-errori-comuni">Errori comuni</a></li>
+  </ul>
+</nav>
 
-        <div class="uk-container uk-container-center uk-margin-top uk-margin-large-bottom">
-
-                        <div class="uk-grid" data-uk-grid-margin>
-                <div class="uk-width-1-1">
-                    <h1 class="uk-heading-large">Lezione 1: Analisi dei
-dati (arrays)</h1>
-                                        <h3 class="uk-heading-large">A.A.
-2021−2022</p></h3>
-                                                            <p class="uk-text-large">Leonardo
-Carminati</p>
-                                        <p class="uk-text-large">Maurizio
-Tomasi</p>
-                                    </div>
-            </div>
-            
-            <div class="uk-grid" data-uk-grid-margin >          
-                <div class="uk-width-medium-1-4">
-                    <div class="uk-overflow-container" data-uk-sticky="{top:25,media: 768}">
-                        <div class="uk-panel uk-panel-box menu-begin" >
-
-                                                        <ul>
-                                                        <li><a
-                                                        href="#passaggio-di-input-da-linea-di-comando"
-                                                        id="toc-passaggio-di-input-da-linea-di-comando">Passaggio
-                                                        di input da
-                                                        linea di
-                                                        comando</a>
-                                                        <ul>
-                                                        <li><a
-                                                        href="#le-funzioni-atoi-e-atof"
-                                                        id="toc-le-funzioni-atoi-e-atof">Le
-                                                        funzioni
-                                                        <code>atoi</code>
-                                                        e
-                                                        <code>atof</code></a></li>
-                                                        <li><a
-                                                        href="#cin-cout-e-cerr"
-                                                        id="toc-cin-cout-e-cerr">Cin,
-                                                        cout e
-                                                        cerr</a></li>
-                                                        <li><a
-                                                        href="#allocazione-dinamica-della-memoria"
-                                                        id="toc-allocazione-dinamica-della-memoria">Allocazione
-                                                        dinamica della
-                                                        memoria</a></li>
-                                                        <li><a
-                                                        href="#fstream"
-                                                        id="toc-fstream">Fstream</a></li>
-                                                        </ul></li>
-                                                        <li><a
-                                                        href="#esercizio-1.0"
-                                                        id="toc-esercizio-1.0">Esercizio
-                                                        1.0 - Primo
-                                                        codice per
-                                                        analisi</a>
-                                                        <ul>
-                                                        <li><a
-                                                        href="#struttura-del-programma"
-                                                        id="toc-struttura-del-programma">Struttura
-                                                        del
-                                                        programma</a></li>
-                                                        <li><a
-                                                        href="#caricamento-elementi-da-file-1"
-                                                        id="toc-caricamento-elementi-da-file-1">Caricamento
-                                                        elementi da file
-                                                        (1)</a></li>
-                                                        <li><a
-                                                        href="#calcolo-della-media-e-della-varianza-2"
-                                                        id="toc-calcolo-della-media-e-della-varianza-2">Calcolo
-                                                        della media e
-                                                        della varianza
-                                                        (2)</a></li>
-                                                        <li><a
-                                                        href="#riordino-elementi-di-un-array-3"
-                                                        id="toc-riordino-elementi-di-un-array-3">Riordino
-                                                        elementi di un
-                                                        array
-                                                        (3)</a></li>
-                                                        <li><a
-                                                        href="#calcolo-della-mediana-4"
-                                                        id="toc-calcolo-della-mediana-4">Calcolo
-                                                        della mediana
-                                                        (4)</a></li>
-                                                        <li><a
-                                                        href="#scrittura-elementi-su-file-5"
-                                                        id="toc-scrittura-elementi-su-file-5">Scrittura
-                                                        elementi su file
-                                                        (5)</a></li>
-                                                        </ul></li>
-                                                        <li><a
-                                                        href="#esercizio-1.1"
-                                                        id="toc-esercizio-1.1">Esercizio
-                                                        1.1 - Codice di
-                                                        analisi con
-                                                        funzioni</a>
-                                                        <ul>
-                                                        <li><a
-                                                        href="#funzioni-con-argomenti-by-reference-by-value-e-by-pointer"
-                                                        id="toc-funzioni-con-argomenti-by-reference-by-value-e-by-pointer">Funzioni
-                                                        con argomenti
-                                                        <em>by
-                                                        reference</em>,
-                                                        <em>by
-                                                        value</em> e
-                                                        <em>by
-                                                        pointer</em></a></li>
-                                                        <li><a
-                                                        href="#struttura-del-programma-1"
-                                                        id="toc-struttura-del-programma-1">Struttura
-                                                        del
-                                                        programma</a></li>
-                                                        </ul></li>
-                                                        <li><a
-                                                        href="#esercizio-1.2"
-                                                        id="toc-esercizio-1.2">Esercizio
-                                                        1.2 - Codice di
-                                                        analisi con
-                                                        funzioni e
-                                                        Makefile</a>
-                                                        <ul>
-                                                        <li><a
-                                                        href="#il-makefile"
-                                                        id="toc-il-makefile">Il
-                                                        Makefile</a></li>
-                                                        </ul></li>
-                                                        <li><a
-                                                        href="#esercizio-1.3"
-                                                        id="toc-esercizio-1.3">Esercizio
-                                                        1.3 -
-                                                        Overloading di
-                                                        funzione (da
-                                                        consegnare)</a>
-                                                        <ul>
-                                                        <li><a
-                                                        href="#overloading-di-funzioni"
-                                                        id="toc-overloading-di-funzioni">Overloading
-                                                        di
-                                                        funzioni</a></li>
-                                                        <li><a
-                                                        href="#formattazione-delloutput"
-                                                        id="toc-formattazione-delloutput">Formattazione
-                                                        dell’output</a></li>
-                                                        <li><a
-                                                        href="#implementazione-migliorata"
-                                                        id="toc-implementazione-migliorata">Implementazione
-                                                        migliorata</a></li>
-                                                        </ul></li>
-                                                        <li><a
-                                                        href="#errori-comuni"
-                                                        id="toc-errori-comuni">Errori
-                                                        comuni</a></li>
-                                                        </ul>
-                            
-                        </div>
-                    </div>
-                </div>
-
-                <div class="uk-width-medium-3-4">
-<p>[La pagina con la spiegazione originale degli esercizi si trova qui:
-<a href="https://labtnds.docs.cern.ch/Lezione1/Lezione1/"
-class="uri">https://labtnds.docs.cern.ch/Lezione1/Lezione1/</a>.]</p>
-<p>In questa prima lezione proviamo a rinfrescare la memoria sulla
-programmazione lavorando direttamente su un caso concreto: abbiamo a
-disposizione un file in cui sono immagazzinati i valori ottenuti da una
-certa misura e vogliamo scrivere un codice per farci sopra una analisi
-statistica minimale.</p>
+<main>
+<p>[La pagina con la spiegazione originale degli esercizi si trova qui: <a href="https://labtnds.docs.cern.ch/Lezione1/Lezione1/" class="uri">https://labtnds.docs.cern.ch/Lezione1/Lezione1/</a>.]</p>
+<p>In questa prima lezione proviamo a rinfrescare la memoria sulla programmazione lavorando direttamente su un caso concreto: abbiamo a disposizione un file in cui sono immagazzinati i valori ottenuti da una certa misura e vogliamo scrivere un codice per farci sopra una analisi statistica minimale.</p>
 <ol type="1">
-<li>Carichiamo in memoria dei dati che provengono da un file di
-misure;</li>
+<li>Carichiamo in memoria dei dati che provengono da un file di misure;</li>
 <li>Calcoliamo media, varianza e mediana del campione.</li>
 </ol>
-<p>Il calcolo della mediana in particolare richiede che il set di dati
-sia ordinato e quindi ci obbliga a fare un po’ di esercizio
-aggiuntivo.</p>
+<p>Il calcolo della mediana in particolare richiede che il set di dati sia ordinato e quindi ci obbliga a fare un po’ di esercizio aggiuntivo.</p>
 <p>In questa lezione lavoreremo con questi ingredienti:</p>
 <ul>
-<li>Tipo di dato da leggere è constituito da numeri <code>double</code>
-immagazzinati in un file <code>data.dat</code>.</li>
+<li>Tipo di dato da leggere è constituito da numeri <code>double</code> immagazzinati in un file <code>data.dat</code>.</li>
 <li>Tipo di contenitore di dati è un array (dinamico) del C.</li>
 <li>Operazioni sui dati vengono svolte mediante funzioni.</li>
 </ul>
-<p>Prima di incominciare a scrivere il codice è utile ripassare
-rapidamente alcuni elementi base del linguaggio.</p>
-<h1 id="passaggio-di-input-da-linea-di-comando">Passaggio di input da
-linea di comando</h1>
-<p>È possibile passare al programma degli input direttamente da riga di
-comando, ad esempio:</p>
+<p>Prima di incominciare a scrivere il codice è utile ripassare rapidamente alcuni elementi base del linguaggio.</p>
+<h1 id="passaggio-di-input-da-linea-di-comando">Passaggio di input da linea di comando</h1>
+<p>È possibile passare al programma degli input direttamente da riga di comando, ad esempio:</p>
 <pre><code>./programma &lt;input1&gt; &lt;input2&gt;</code></pre>
-<p>per fare questo nella dichiarazione del main bisogna aggiungere due
-argomenti:</p>
-<div class="sourceCode" id="cb2"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>main<span class="op">(</span><span class="dt">int</span> argc<span class="op">,</span> <span class="dt">char</span> <span class="op">*</span>argv<span class="op">[])</span></span></code></pre></div>
+<p>per fare questo nella dichiarazione del main bisogna aggiungere due argomenti:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>main<span class="op">(</span><span class="dt">int</span> argc<span class="op">,</span> <span class="dt">char</span> <span class="op">*</span>argv<span class="op">[])</span></span></code></pre></div>
 <ul>
-<li><code>argc</code> è il numero di argomenti presenti sulla riga di
-comando. Il valore di <code>argc</code> è sempre maggiore di 0 poiché il
-primo argomento è il nome del programma.</li>
-<li><code>argv</code> è un array di <code>argc</code> elementi che
-contiene gli array di caratteri passati da riga di comando. Quindi
-<code>argv[0]</code> è il nome del programma, <code>argv[1]</code> il
-primo argomento, ecc…</li>
+<li><code>argc</code> è il numero di argomenti presenti sulla riga di comando. Il valore di <code>argc</code> è sempre maggiore di 0 poiché il primo argomento è il nome del programma.</li>
+<li><code>argv</code> è un array di <code>argc</code> elementi che contiene gli array di caratteri passati da riga di comando. Quindi <code>argv[0]</code> è il nome del programma, <code>argv[1]</code> il primo argomento, ecc…</li>
 </ul>
-<p>Se da riga di comando passiamo un numero, esso verrà passato tramite
-<code>argv</code> come un array di caratteri; per convertire un array di
-caratteri in un numero intero si usa la funzione
-<code>std::stoi(const std::string &amp;)</code> (che è contenuta in
-<code>&lt;string&gt;</code>):</p>
-<div class="sourceCode" id="cb3"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> N<span class="op">;</span></span>
+<p>Se da riga di comando passiamo un numero, esso verrà passato tramite <code>argv</code> come un array di caratteri; per convertire un array di caratteri in un numero intero si usa la funzione <code>std::stoi(const std::string &amp;)</code> (che è contenuta in <code>&lt;string&gt;</code>):</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> N<span class="op">;</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>N <span class="op">=</span> <span class="bu">std::</span>stoi<span class="op">(</span>argv<span class="op">[</span><span class="dv">1</span><span class="op">]);</span></span></code></pre></div>
-<p>La funzione corrispondente per convertire un array di caratteri in un
-numero <code>double</code> è
-<code>std::stod(const std::string &amp;)</code>, anch’essa disponibile
-in <code>&lt;string&gt;</code>.</p>
+<p>La funzione corrispondente per convertire un array di caratteri in un numero <code>double</code> è <code>std::stod(const std::string &amp;)</code>, anch’essa disponibile in <code>&lt;string&gt;</code>.</p>
 <section id="le-funzioni-atoi-e-atof" class="warning-box">
 <h2>Le funzioni <code>atoi</code> e <code>atof</code></h2>
-<p>Il C++ fornisce anche le funzioni <code>atoi</code> e
-<code>atof</code>, che sono state definite nello standard C del 1971, ma
-<strong>sono da evitare</strong>. In caso di errore infatti
-restituiscono il valore <code>0</code>, come mostra questo esempio:</p>
-<div class="sourceCode" id="cb4"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
+<p>Il C++ fornisce anche le funzioni <code>atoi</code> e <code>atof</code>, che sono state definite nello standard C del 1971, ma <strong>sono da evitare</strong>. In caso di errore infatti restituiscono il valore <code>0</code>, come mostra questo esempio:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;cstdlib&gt;</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="kw">using</span> <span class="kw">namespace</span> std<span class="op">;</span></span>
@@ -350,22 +122,16 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb4-1"><a href="#c
 <span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>  <span class="dt">int</span> i <span class="op">=</span> atoi<span class="op">(</span>argv<span class="op">[</span><span class="dv">1</span><span class="op">]);</span></span>
 <span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>  cout <span class="op">&lt;&lt;</span> argv<span class="op">[</span><span class="dv">1</span><span class="op">]</span> <span class="op">&lt;&lt;</span> <span class="st">&quot; convertito in un intero è &quot;</span> <span class="op">&lt;&lt;</span> i <span class="op">&lt;&lt;</span> <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">;</span></span>
 <span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
-<p>Come vedete, il programma restituisce lo stesso output sia che si
-passi il valore <code>0</code> (corretto) sia che si passi
-<code>pippo</code> (sbagliato):</p>
+<p>Come vedete, il programma restituisce lo stesso output sia che si passi il valore <code>0</code> (corretto) sia che si passi <code>pippo</code> (sbagliato):</p>
 <pre><code>$ ./test 5
 5 convertito in un intero è 5
 $ ./test 0
 0 convertito in un intero è 0
 $ ./test pippo
 pippo convertito in un intero è 0</code></pre>
-<p>Se invece si usa <code>std::stoi</code> anziché <code>atoi</code> per
-inizializzare <code>i</code>:</p>
-<div class="sourceCode" id="cb6"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> i <span class="op">=</span> stoi<span class="op">(</span>argv<span class="op">[</span><span class="dv">1</span><span class="op">]);</span></span></code></pre></div>
-<p>il programma funziona come sopra con gli input corretti
-(<code>5</code> e <code>0</code>), ma stavolta segnala l’errore quando
-si inserisce <code>pippo</code>:</p>
+<p>Se invece si usa <code>std::stoi</code> anziché <code>atoi</code> per inizializzare <code>i</code>:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> i <span class="op">=</span> stoi<span class="op">(</span>argv<span class="op">[</span><span class="dv">1</span><span class="op">]);</span></span></code></pre></div>
+<p>il programma funziona come sopra con gli input corretti (<code>5</code> e <code>0</code>), ma stavolta segnala l’errore quando si inserisce <code>pippo</code>:</p>
 <pre><code>$ ./test 5
 5 convertito in un intero è 5
 $ ./test 0
@@ -376,30 +142,18 @@ terminate called after throwing an instance of &#39;std::invalid_argument&#39;
 Aborted (core dumped)</code></pre>
 </section>
 <h2 id="cin-cout-e-cerr">Cin, cout e cerr</h2>
-<p>L’output su schermo e l’input da tastiera sono gestiti in C++ usando
-gli oggetti <code>cin</code>, <code>cout</code> e <code>cerr</code>, che
-sono definiti nella libreria <code>&lt;iostream&gt;</code>. Vediamo un
-esempio:</p>
-<div class="sourceCode" id="cb8"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Usato per messaggi</span></span>
+<p>L’output su schermo e l’input da tastiera sono gestiti in C++ usando gli oggetti <code>cin</code>, <code>cout</code> e <code>cerr</code>, che sono definiti nella libreria <code>&lt;iostream&gt;</code>. Vediamo un esempio:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Usato per messaggi</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>cout <span class="op">&lt;&lt;</span> <span class="st">&quot;A = &quot;</span> <span class="op">&lt;&lt;</span> a <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co">// Usato per segnalare condizioni di errore</span></span>
 <span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>cerr <span class="op">&lt;&lt;</span> <span class="st">&quot;Errore nel parametro a: &quot;</span> <span class="op">&lt;&lt;</span> a <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span></code></pre></div>
 <ul>
-<li><p><code>&lt;&lt;</code> serve a passare le variabili allo stream di
-output;</p></li>
-<li><p><code>&lt;&lt; "A = "</code> stampa <code>A =</code> (senza
-apici) a schermo;</p></li>
-<li><p><code>&lt;&lt; a</code> stampa il valore della variabile a a
-schermo, qualsiasi sia il tipo di <code>a</code>;</p></li>
-<li><p><code>&lt;&lt; endl</code> (end line) stampa la fine della riga e
-svuota il buffer. È necessario con <code>cout</code>, perché altrimenti
-nessuna scritta appare (subito) a video. Per <code>cerr</code> invece è
-equivalente all’uso di <code>\n</code> (ritorno a capo), perché l’output
-è sempre immediato:</p>
-<div class="sourceCode" id="cb9"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Ok, uso `endl` con `cout`</span></span>
+<li><p><code>&lt;&lt;</code> serve a passare le variabili allo stream di output;</p></li>
+<li><p><code>&lt;&lt; "A = "</code> stampa <code>A =</code> (senza apici) a schermo;</p></li>
+<li><p><code>&lt;&lt; a</code> stampa il valore della variabile a a schermo, qualsiasi sia il tipo di <code>a</code>;</p></li>
+<li><p><code>&lt;&lt; endl</code> (end line) stampa la fine della riga e svuota il buffer. È necessario con <code>cout</code>, perché altrimenti nessuna scritta appare (subito) a video. Per <code>cerr</code> invece è equivalente all’uso di <code>\n</code> (ritorno a capo), perché l’output è sempre immediato:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Ok, uso `endl` con `cout`</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>cout <span class="op">&lt;&lt;</span> <span class="st">&quot;Errore, occorre specificare un nome di file!&quot;</span> <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co">// Potrebbe non essere stampato subito, ma solo quando il programma termina</span></span>
 <span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>cout <span class="op">&lt;&lt;</span> <span class="st">&quot;Errore, occorre specificare un nome di file!</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">;</span></span>
@@ -408,56 +162,25 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb9-1"><a href="#c
 <span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>cerr <span class="op">&lt;&lt;</span> <span class="st">&quot;Errore, occorre specificare un nome di file!&quot;</span> <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span>
 <span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>cerr <span class="op">&lt;&lt;</span> <span class="st">&quot;Errore, occorre specificare un nome di file!</span><span class="sc">\n</span><span class="st">&quot;</span></span></code></pre></div></li>
 </ul>
-<p>Si dovrebbe usare <code>cout</code> per i messaggi informativi e
-<code>cerr</code> per i messaggi d’errore; vedremo nelle prossime
-lezioni quale sia la ragione di questa regola.</p>
+<p>Si dovrebbe usare <code>cout</code> per i messaggi informativi e <code>cerr</code> per i messaggi d’errore; vedremo nelle prossime lezioni quale sia la ragione di questa regola.</p>
 <p>Uso di <code>cin</code>:</p>
-<div class="sourceCode" id="cb10"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> a<span class="op">;</span></span>
+<div class="sourceCode" id="cb10"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> a<span class="op">;</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>cin <span class="op">&gt;&gt;</span> a<span class="op">;</span></span></code></pre></div>
 <ul>
-<li><code>&gt;&gt;</code> serve a prendere le variabili dallo stream di
-input;</li>
-<li><code>&gt;&gt; a</code> legge da video un contenuto appropriato e lo
-salva nella variabile a.</li>
+<li><code>&gt;&gt;</code> serve a prendere le variabili dallo stream di input;</li>
+<li><code>&gt;&gt; a</code> legge da video un contenuto appropriato e lo salva nella variabile a.</li>
 </ul>
-<p><strong>Attenzione</strong>: se <code>a</code> è una variabile
-<code>int</code> e digitate da tastiera 2.34, il valore di
-<code>a</code> sarà convertito a 2. Se digitate <code>pippo</code>, non
-sarà possibile convertirlo in un numero, ed il valore di <code>a</code>
-rimarrà inalterato.</p>
-<h2 id="allocazione-dinamica-della-memoria">Allocazione dinamica della
-memoria</h2>
-<p>L’allocazione dinamica della memoria consente di decidere <em>al
-momento dell’esecuzione</em> (<em>runtime</em>) quanta memoria il
-programma deve allocare. In C++ l’allocazione (e la de-allocazione)
-dinamica della memoria viene effettuata con gli operatori
-<code>new</code> e <code>delete</code>. Il comando</p>
-<div class="sourceCode" id="cb11"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> <span class="op">*</span>x <span class="op">=</span> <span class="kw">new</span> <span class="dt">double</span><span class="op">[</span>N<span class="op">];</span></span></code></pre></div>
-<p>crea un puntatore <code>x</code> a una zona di memoria di
-<code>N</code> double (cioè a un array di <code>double</code> con
-<code>N</code> elementi). Il comando</p>
-<div class="sourceCode" id="cb12"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">delete</span><span class="op">[]</span> x<span class="op">;</span></span></code></pre></div>
-<p>dealloca la memoria; ciò vuol dire che un tentativo di accedere agli
-elementi di <code>x</code> dopo il comando delete potrebbe portare ad un
-errore di <em>segmentation violation</em>.</p>
-<p>È estremamente importante ricordarsi di deallocare la memoria.
-Infatti in programmi complessi che utilizzano molta memoria (o in cicli
-che continuano ad allocare memoria), l’assenza della deallocazione può
-portare a consumare progressivamente tutta la memoria RAM della macchina
-(<em>memory leak</em>), causando un blocco del sistema. Nel caso in cui
-si allochino array (come nel nostro caso), la presenza delle parantesi
-<code>[]</code> dopo <code>delete</code> indica che bisogna deallocare
-tutta la zona di memoria. Il comando</p>
-<div class="sourceCode" id="cb13"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="kw">delete</span> x<span class="op">;</span></span></code></pre></div>
-<p>crea un <em>memory leak</em>, perché dealloca solo il puntatore
-all’array ma non il suo contenuto. Questo programma quindi è
-<strong>sbagliato</strong>:</p>
-<div class="sourceCode" id="cb14"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;cstdlib&gt;</span></span>
+<p><strong>Attenzione</strong>: se <code>a</code> è una variabile <code>int</code> e digitate da tastiera 2.34, il valore di <code>a</code> sarà convertito a 2. Se digitate <code>pippo</code>, non sarà possibile convertirlo in un numero, ed il valore di <code>a</code> rimarrà inalterato.</p>
+<h2 id="allocazione-dinamica-della-memoria">Allocazione dinamica della memoria</h2>
+<p>L’allocazione dinamica della memoria consente di decidere <em>al momento dell’esecuzione</em> (<em>runtime</em>) quanta memoria il programma deve allocare. In C++ l’allocazione (e la de-allocazione) dinamica della memoria viene effettuata con gli operatori <code>new</code> e <code>delete</code>. Il comando</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> <span class="op">*</span>x <span class="op">=</span> <span class="kw">new</span> <span class="dt">double</span><span class="op">[</span>N<span class="op">];</span></span></code></pre></div>
+<p>crea un puntatore <code>x</code> a una zona di memoria di <code>N</code> double (cioè a un array di <code>double</code> con <code>N</code> elementi). Il comando</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">delete</span><span class="op">[]</span> x<span class="op">;</span></span></code></pre></div>
+<p>dealloca la memoria; ciò vuol dire che un tentativo di accedere agli elementi di <code>x</code> dopo il comando delete potrebbe portare ad un errore di <em>segmentation violation</em>.</p>
+<p>È estremamente importante ricordarsi di deallocare la memoria. Infatti in programmi complessi che utilizzano molta memoria (o in cicli che continuano ad allocare memoria), l’assenza della deallocazione può portare a consumare progressivamente tutta la memoria RAM della macchina (<em>memory leak</em>), causando un blocco del sistema. Nel caso in cui si allochino array (come nel nostro caso), la presenza delle parantesi <code>[]</code> dopo <code>delete</code> indica che bisogna deallocare tutta la zona di memoria. Il comando</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="kw">delete</span> x<span class="op">;</span></span></code></pre></div>
+<p>crea un <em>memory leak</em>, perché dealloca solo il puntatore all’array ma non il suo contenuto. Questo programma quindi è <strong>sbagliato</strong>:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;cstdlib&gt;</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">(</span><span class="dt">int</span> argc<span class="op">,</span> <span class="dt">char</span> <span class="op">*</span>argv<span class="op">[])</span> <span class="op">{</span></span>
 <span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> <span class="op">*</span> array <span class="op">=</span> <span class="kw">new</span> <span class="dt">double</span><span class="op">[</span><span class="dv">10</span><span class="op">];</span></span>
@@ -465,13 +188,10 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb14-1"><a href="#
 <span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>  <span class="kw">delete</span> array<span class="op">;</span>    <span class="co">// Errore, sarebbe dovuto essere &quot;delete[] array;&quot;</span></span>
 <span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
 <span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
-<p>Il compilatore <code>g++</code> non segnala questo tipo di
-errore:</p>
+<p>Il compilatore <code>g++</code> non segnala questo tipo di errore:</p>
 <pre><code>$ g++ -o test test.cpp
 $ </code></pre>
-<p>Potete però usare il flag <code>-Wall</code>
-(<strong>consigliatissimo per tutti i vostri programmi!</strong>), in
-modo che il compilatore vi avvisi:</p>
+<p>Potete però usare il flag <code>-Wall</code> (<strong>consigliatissimo per tutti i vostri programmi!</strong>), in modo che il compilatore vi avvisi:</p>
 <pre><code>$ g++ -Wall -o test test.cpp
 test.cpp: In function ‘int main(int, const char**)’:
 test.cpp:6:10: warning: ‘void operator delete(void*, long unsigned int)’ called on pointer returned from a mismatched allocation function [-Wmismatched-new-delete]
@@ -482,46 +202,29 @@ test.cpp:4:33: note: returned from ‘void* operator new [](long unsigned int)�
       |                                 ^
 $ </code></pre>
 <h2 id="fstream">Fstream</h2>
-<p>L’input e l’output da files è gestito in C++ dalla libreria
-<code>fstream</code>. I principali oggetti sono <code>ifstream</code>
-(<em>input file stream</em>) e <code>ofstream</code> (<em>output file
-stream</em>). Gli stream vengono dichiarati e inizializati come:</p>
-<div class="sourceCode" id="cb17"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;fstream&gt;</span></span>
+<p>L’input e l’output da files è gestito in C++ dalla libreria <code>fstream</code>. I principali oggetti sono <code>ifstream</code> (<em>input file stream</em>) e <code>ofstream</code> (<em>output file stream</em>). Gli stream vengono dichiarati e inizializati come:</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;fstream&gt;</span></span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="kw">using</span> <span class="kw">namespace</span> std<span class="op">;</span></span>
 <span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>ifstream inputFile<span class="op">(</span><span class="st">&quot;nomeInput.txt&quot;</span><span class="op">);</span></span>
 <span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>ofstream outputFile<span class="op">(</span><span class="st">&quot;nomeOutput.txt&quot;</span><span class="op">);</span></span></code></pre></div>
-<p>Per controllare che il file sia stato aperto con successo si può
-usare il seguente codice</p>
-<div class="sourceCode" id="cb18"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span><span class="op">(!</span> inputFile<span class="op">)</span> <span class="op">{</span></span>
+<p>Per controllare che il file sia stato aperto con successo si può usare il seguente codice</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span><span class="op">(!</span> inputFile<span class="op">)</span> <span class="op">{</span></span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  cerr <span class="op">&lt;&lt;</span> <span class="st">&quot;Error ....</span><span class="sc">\n</span><span class="st">&quot;</span>l<span class="op">;</span> <span class="co">//stampa un messaggio</span></span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="dv">1</span><span class="op">;</span> <span class="co">// Ritorna un valore diverso da quello usuale</span></span>
 <span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
-<p>L’utilizzo degli stream per scrivere su un file di output o per
-caricare da un file di input è uguale all’uso di <code>cin</code>,
-<code>cout</code> e <code>cerr</code>:</p>
-<div class="sourceCode" id="cb19"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>inputFile <span class="op">&gt;&gt;</span> a<span class="op">;</span></span>
+<p>L’utilizzo degli stream per scrivere su un file di output o per caricare da un file di input è uguale all’uso di <code>cin</code>, <code>cout</code> e <code>cerr</code>:</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>inputFile <span class="op">&gt;&gt;</span> a<span class="op">;</span></span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>outputFile <span class="op">&lt;&lt;</span> <span class="st">&quot;pippo &quot;</span> <span class="op">&lt;&lt;</span> a <span class="op">&lt;&lt;</span> <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">;</span></span></code></pre></div>
-<p>Siccome di solito il contenuto di un file viene ispezionato dopo il
-termine del programma, quando si scrive in file non è di solito
-rilevante la differenza tra <code>endl</code> e <code>"\n"</code>.</p>
+<p>Siccome di solito il contenuto di un file viene ispezionato dopo il termine del programma, quando si scrive in file non è di solito rilevante la differenza tra <code>endl</code> e <code>"\n"</code>.</p>
 <p>Un metodo estremamente utile di <code>ifstream</code> è</p>
-<div class="sourceCode" id="cb20"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>inputFile<span class="op">.</span>eof<span class="op">();</span>   <span class="co">// Restituisce un valore Booleano</span></span></code></pre></div>
-<p>che restituisce <code>true</code> se si è raggiunta la fine del file,
-<code>false</code> altrimenti. Dopo l’utilizzo del file è possibile
-chiuderlo con il metodo <code>close()</code>:</p>
-<div class="sourceCode" id="cb21"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>inputFile<span class="op">.</span>close<span class="op">();</span></span>
+<div class="sourceCode" id="cb20"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>inputFile<span class="op">.</span>eof<span class="op">();</span>   <span class="co">// Restituisce un valore Booleano</span></span></code></pre></div>
+<p>che restituisce <code>true</code> se si è raggiunta la fine del file, <code>false</code> altrimenti. Dopo l’utilizzo del file è possibile chiuderlo con il metodo <code>close()</code>:</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>inputFile<span class="op">.</span>close<span class="op">();</span></span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>outputFile<span class="op">.</span>close<span class="op">();</span></span></code></pre></div>
-<p>Questo metodo viene però invocato automaticamente dal compilatore
-C++, quindi questa funzione:</p>
-<div class="sourceCode" id="cb22"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> readDoubleFromFile<span class="op">(</span><span class="at">const</span> string <span class="op">&amp;</span> file_name<span class="op">)</span> <span class="op">{</span></span>
+<p>Questo metodo viene però invocato automaticamente dal compilatore C++, quindi questa funzione:</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> readDoubleFromFile<span class="op">(</span><span class="at">const</span> string <span class="op">&amp;</span> file_name<span class="op">)</span> <span class="op">{</span></span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  ifstream inputFile<span class="op">(</span>file_name<span class="op">);</span></span>
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> a</span>
 <span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>  inputFile <span class="op">&gt;&gt;</span> a<span class="op">;</span></span>
@@ -529,8 +232,7 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb22-1"><a href="#
 <span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> a<span class="op">;</span></span>
 <span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 <p>è esattamente uguale a questa:</p>
-<div class="sourceCode" id="cb23"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> readDoubleFromFile<span class="op">()</span> <span class="op">{</span></span>
+<div class="sourceCode" id="cb23"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> readDoubleFromFile<span class="op">()</span> <span class="op">{</span></span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  ifstream inputFile<span class="op">(</span><span class="st">&quot;data.dat&quot;</span><span class="op">);</span></span>
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> a<span class="op">;</span></span>
 <span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>  inputFile <span class="op">&gt;&gt;</span> a<span class="op">;</span></span>
@@ -538,18 +240,10 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb23-1"><a href="#
 <span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> a<span class="op">;</span></span>
 <span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 <h1 id="esercizio-1.0">Esercizio 1.0 - Primo codice per analisi</h1>
-<p>Proviamo a scrivere un unico codice che legga dati da file, li
-immagazzini in un array dinamico, calcoli la media, la varianza e la
-mediana dei dati raccolti. Scriviamo su un file di output i dati
-riordinati in ordine crescente. Il numero di elementi da caricare e il
-nome del file in cui trovare i dati sono passati da tastiera nel momento
-in cui il programma viene eseguito. Cerchiamo di costruire il codice
-passo passo.</p>
+<p>Proviamo a scrivere un unico codice che legga dati da file, li immagazzini in un array dinamico, calcoli la media, la varianza e la mediana dei dati raccolti. Scriviamo su un file di output i dati riordinati in ordine crescente. Il numero di elementi da caricare e il nome del file in cui trovare i dati sono passati da tastiera nel momento in cui il programma viene eseguito. Cerchiamo di costruire il codice passo passo.</p>
 <h2 id="struttura-del-programma">Struttura del programma</h2>
-<p>Per questo primo esercizio ripassiamo la struttura generale di un
-programma:</p>
-<div class="sourceCode" id="cb24"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;fstream&gt;</span></span>
+<p>Per questo primo esercizio ripassiamo la struttura generale di un programma:</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;fstream&gt;</span></span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
 <span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;string&gt;</span></span>
 <span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a></span>
@@ -614,14 +308,10 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb24-1"><a href="#
 <span id="cb24-63"><a href="#cb24-63" aria-hidden="true" tabindex="-1"></a>  <span class="kw">delete</span><span class="op">[]</span> vcopy<span class="op">;</span></span>
 <span id="cb24-64"><a href="#cb24-64" aria-hidden="true" tabindex="-1"></a>  <span class="kw">delete</span><span class="op">[]</span> data<span class="op">;</span></span>
 <span id="cb24-65"><a href="#cb24-65" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
-<p>Provate ad implementare le parti mancanti. Se non ci riuscite
-sbirciate pure sotto.</p>
-<h2 id="caricamento-elementi-da-file-1">Caricamento elementi da file
-(1)</h2>
-<p>In questo frammento di codice apriamo un file utilizzando un
-<code>ifstream</code> e carichiamo <code>ndata</code> elementi:</p>
-<div class="sourceCode" id="cb25"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co">// leggi dati da file e caricali nel c-array data</span></span>
+<p>Provate ad implementare le parti mancanti. Se non ci riuscite sbirciate pure sotto.</p>
+<h2 id="caricamento-elementi-da-file-1">Caricamento elementi da file (1)</h2>
+<p>In questo frammento di codice apriamo un file utilizzando un <code>ifstream</code> e carichiamo <code>ndata</code> elementi:</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co">// leggi dati da file e caricali nel c-array data</span></span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>ifstream fin<span class="op">(</span>filename<span class="op">);</span></span>
 <span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a></span>
@@ -636,13 +326,9 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb25-1"><a href="#
 <span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a>            exit<span class="op">(</span><span class="dv">1</span><span class="op">);</span></span>
 <span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
 <span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
-<h2 id="calcolo-della-media-e-della-varianza-2">Calcolo della media e
-della varianza (2)</h2>
-<p>In questo frammento di codice calcoliamo la media degli elementi
-immagazzinati nell’array data. Costruite voi usando lo stesso schema il
-frammento di codice per il calcolo della varianza.</p>
-<div class="sourceCode" id="cb26"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co">// calcolo la media degli elementi caricati</span></span>
+<h2 id="calcolo-della-media-e-della-varianza-2">Calcolo della media e della varianza (2)</h2>
+<p>In questo frammento di codice calcoliamo la media degli elementi immagazzinati nell’array data. Costruite voi usando lo stesso schema il frammento di codice per il calcolo della varianza.</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co">// calcolo la media degli elementi caricati</span></span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> media <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
 <span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span><span class="op">(</span><span class="dt">int</span> k <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> k <span class="op">&lt;</span> ndata<span class="op">;</span> <span class="op">++</span>k<span class="op">)</span> <span class="op">{</span></span>
@@ -653,16 +339,9 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb26-1"><a href="#
 <span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a><span class="co">// tutto ok, nessun arrotondamento!</span></span>
 <span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>media <span class="op">/=</span> ndata<span class="op">;</span></span>
 <span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a>cout <span class="op">&lt;&lt;</span> <span class="st">&quot;Valore medio del set di dati caricato: &quot;</span> <span class="op">&lt;&lt;</span> media <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span></code></pre></div>
-<h2 id="riordino-elementi-di-un-array-3">Riordino elementi di un array
-(3)</h2>
-<p>Esistono vari tipi di algoritmi di riordinamento con prestazioni
-molto diverse. Qui implementiamo uno dei più semplici (ma anche dei più
-lenti), che viene chiamato <em>simple sort</em> o <a
-href="https://it.wikipedia.org/wiki/Selection_sort"><em>selection
-sort</em></a>. Sentitevi liberi di implementare algoritmi più
-raffinati.</p>
-<div class="sourceCode" id="cb27"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Prima riordino gli elementi del vettore dal minore al maggiore.</span></span>
+<h2 id="riordino-elementi-di-un-array-3">Riordino elementi di un array (3)</h2>
+<p>Esistono vari tipi di algoritmi di riordinamento con prestazioni molto diverse. Qui implementiamo uno dei più semplici (ma anche dei più lenti), che viene chiamato <em>simple sort</em> o <a href="https://it.wikipedia.org/wiki/Selection_sort"><em>selection sort</em></a>. Sentitevi liberi di implementare algoritmi più raffinati.</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Prima riordino gli elementi del vettore dal minore al maggiore.</span></span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="co">// Devo farne una copia, in modo che il vettore originale resti</span></span>
 <span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="co">// inalterato.</span></span>
 <span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a></span>
@@ -689,10 +368,8 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb27-1"><a href="#
 <span id="cb27-25"><a href="#cb27-25" aria-hidden="true" tabindex="-1"></a>    vcopy<span class="op">[</span>imin<span class="op">]</span> <span class="op">=</span> c<span class="op">;</span></span>
 <span id="cb27-26"><a href="#cb27-26" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 <h2 id="calcolo-della-mediana-4">Calcolo della mediana (4)</h2>
-<p>In questo frammento di codice calcoliamo la mediana lavorando
-sull’array ordinato <code>vcopy</code>:</p>
-<div class="sourceCode" id="cb28"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co">// prendo il valore centrale (`ndata` dispari) o la media tra i due</span></span>
+<p>In questo frammento di codice calcoliamo la mediana lavorando sull’array ordinato <code>vcopy</code>:</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co">// prendo il valore centrale (`ndata` dispari) o la media tra i due</span></span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="co">// centrali (`ndata` pari) dell&#39;array ordinato</span></span>
 <span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> mediana <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
@@ -704,58 +381,32 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb28-1"><a href="#
 <span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
 <span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a>cout <span class="op">&lt;&lt;</span> <span class="st">&quot;Mediana = &quot;</span> <span class="op">&lt;&lt;</span> mediana <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span></code></pre></div>
-<h2 id="scrittura-elementi-su-file-5">Scrittura elementi su file
-(5)</h2>
-<p>Infine scriviamo il vettore ordinato su un file
-<code>output_file.txt</code>:</p>
-<div class="sourceCode" id="cb29"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>ofstream fout<span class="op">(</span><span class="st">&quot;output_file.txt&quot;</span><span class="op">);</span></span>
+<h2 id="scrittura-elementi-su-file-5">Scrittura elementi su file (5)</h2>
+<p>Infine scriviamo il vettore ordinato su un file <code>output_file.txt</code>:</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>ofstream fout<span class="op">(</span><span class="st">&quot;output_file.txt&quot;</span><span class="op">);</span></span>
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span><span class="op">(</span><span class="dt">int</span> k <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> k <span class="op">&lt;</span> ndata<span class="op">;</span> <span class="op">++</span>k<span class="op">)</span> <span class="op">{</span></span>
 <span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>    fout <span class="op">&lt;&lt;</span> vcopy<span class="op">[</span>k<span class="op">]</span> <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span>
 <span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
 <span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>fout<span class="op">.</span>close<span class="op">();</span></span></code></pre></div>
 <ul>
-<li><p>Compiliamo il programma invocando come al solito
-<code>g++</code>:</p>
+<li><p>Compiliamo il programma invocando come al solito <code>g++</code>:</p>
 <pre><code>g++ main.cpp  -Wall -o main</code></pre></li>
 <li><p>Eseguiamo il programma:</p>
 <pre><code>./main 1000000 data.dat</code></pre></li>
 </ul>
-<p><strong>Domanda</strong>: Quanti elementi contiene il file
-<code>data.dat</code>? Cosa succede se tento di leggere 1.000.000 di
-elementi ?</p>
-<h1 id="esercizio-1.1">Esercizio 1.1 - Codice di analisi con
-funzioni</h1>
-<p>Vogliamo ora riorganizzare il codice precedente per renderlo più
-modulare e facilmente riutilizzabile. Per capirci meglio: il calcolo
-della media è una operazione generale che può essere immaginata come un
-blocco di codice che accetta in input un array di dati e una dimensione
-e restituisce un valore (la media, appunto). Se in uno stesso codice
-principale dobbiamo calcolare più volte la media di array di dati
-diversi, non vogliamo ripetere più volte il frammento di codice
-relativo; lo stesso vale per la lettura di un set di dati da un file o
-per il calcolo della mediana. Il codice dovrebbe avere quindi una
-struttura del tipo:</p>
+<p><strong>Domanda</strong>: Quanti elementi contiene il file <code>data.dat</code>? Cosa succede se tento di leggere 1.000.000 di elementi ?</p>
+<h1 id="esercizio-1.1">Esercizio 1.1 - Codice di analisi con funzioni</h1>
+<p>Vogliamo ora riorganizzare il codice precedente per renderlo più modulare e facilmente riutilizzabile. Per capirci meglio: il calcolo della media è una operazione generale che può essere immaginata come un blocco di codice che accetta in input un array di dati e una dimensione e restituisce un valore (la media, appunto). Se in uno stesso codice principale dobbiamo calcolare più volte la media di array di dati diversi, non vogliamo ripetere più volte il frammento di codice relativo; lo stesso vale per la lettura di un set di dati da un file o per il calcolo della mediana. Il codice dovrebbe avere quindi una struttura del tipo:</p>
 <ul>
 <li>Dichiarazione di tutte le funzioni che verranno utilizzate.</li>
-<li>Programma vero e proprio <code>int main() {...}</code> in cui le
-funzioni vengono utilizzate.</li>
-<li>Al termine del programma principale l’implementazione di tutte le
-funzioni dichiarate.</li>
+<li>Programma vero e proprio <code>int main() {...}</code> in cui le funzioni vengono utilizzate.</li>
+<li>Al termine del programma principale l’implementazione di tutte le funzioni dichiarate.</li>
 </ul>
-<p>Dal momento che abbiamo deciso di spezzare il codice in funzioni
-proviamo a fare uso di una funzione dedicata che scambi tra loro due
-elementi di un array. In questo caso ripassiamo prima rapidamente come
-funziona il passaggio di dati in una funzione.</p>
-<h2
-id="funzioni-con-argomenti-by-reference-by-value-e-by-pointer">Funzioni
-con argomenti <em>by reference</em>, <em>by value</em> e <em>by
-pointer</em></h2>
-<p>Il passaggio di valori a una funzione può avvenire <em>by value</em>,
-<em>by reference</em> o <em>by pointer</em>.</p>
-<p>Consideriamo l’esempio di una funzione che scambi il valore di due
-variabili. Abbiamo tre possibilità:</p>
+<p>Dal momento che abbiamo deciso di spezzare il codice in funzioni proviamo a fare uso di una funzione dedicata che scambi tra loro due elementi di un array. In questo caso ripassiamo prima rapidamente come funziona il passaggio di dati in una funzione.</p>
+<h2 id="funzioni-con-argomenti-by-reference-by-value-e-by-pointer">Funzioni con argomenti <em>by reference</em>, <em>by value</em> e <em>by pointer</em></h2>
+<p>Il passaggio di valori a una funzione può avvenire <em>by value</em>, <em>by reference</em> o <em>by pointer</em>.</p>
+<p>Consideriamo l’esempio di una funzione che scambi il valore di due variabili. Abbiamo tre possibilità:</p>
 <table>
 <thead>
 <tr>
@@ -779,8 +430,7 @@ Tipo
 Implementazione
 </td>
 <td>
-<div class="sourceCode" id="cb32"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> scambiaByValue<span class="op">(</span></span>
+<div class="sourceCode" id="cb32"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> scambiaByValue<span class="op">(</span></span>
 <span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">double</span> a<span class="op">,</span></span>
 <span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">double</span> b</span>
 <span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a><span class="op">)</span> <span class="op">{</span></span>
@@ -790,8 +440,7 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb32-1"><a href="#
 <span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 </td>
 <td>
-<div class="sourceCode" id="cb33"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> scambiaByRef<span class="op">(</span></span>
+<div class="sourceCode" id="cb33"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> scambiaByRef<span class="op">(</span></span>
 <span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">double</span> <span class="op">&amp;</span> a<span class="op">,</span></span>
 <span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">double</span> <span class="op">&amp;</span> b</span>
 <span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a><span class="op">)</span> <span class="op">{</span></span>
@@ -801,8 +450,7 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb33-1"><a href="#
 <span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 </td>
 <td>
-<div class="sourceCode" id="cb34"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> scambiaByPtr<span class="op">(</span></span>
+<div class="sourceCode" id="cb34"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> scambiaByPtr<span class="op">(</span></span>
 <span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">double</span> <span class="op">*</span> a<span class="op">,</span> </span>
 <span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">double</span> <span class="op">*</span> b</span>
 <span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a><span class="op">)</span> <span class="op">{</span></span>
@@ -817,20 +465,17 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb34-1"><a href="#
 Chiamata
 </td>
 <td>
-<div class="sourceCode" id="cb35"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> a <span class="op">=</span> <span class="dv">5</span><span class="op">;</span></span>
+<div class="sourceCode" id="cb35"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> a <span class="op">=</span> <span class="dv">5</span><span class="op">;</span></span>
 <span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> b <span class="op">=</span> <span class="dv">4</span><span class="op">;</span></span>
 <span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>scambia<span class="op">(</span>a<span class="op">,</span> b<span class="op">);</span></span></code></pre></div>
 </td>
 <td>
-<div class="sourceCode" id="cb36"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> a <span class="op">=</span> <span class="dv">5</span><span class="op">;</span></span>
+<div class="sourceCode" id="cb36"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> a <span class="op">=</span> <span class="dv">5</span><span class="op">;</span></span>
 <span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> b <span class="op">=</span> <span class="dv">4</span><span class="op">;</span></span>
 <span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>scambiaByRef<span class="op">(</span>a<span class="op">,</span> b<span class="op">);</span></span></code></pre></div>
 </td>
 <td>
-<div class="sourceCode" id="cb37"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> a <span class="op">=</span> <span class="dv">5</span><span class="op">;</span></span>
+<div class="sourceCode" id="cb37"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> a <span class="op">=</span> <span class="dv">5</span><span class="op">;</span></span>
 <span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> b <span class="op">=</span> <span class="dv">4</span><span class="op">;</span></span>
 <span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>scambiaByPtr<span class="op">(&amp;</span>a<span class="op">,</span> <span class="op">&amp;</span>b<span class="op">);</span></span></code></pre></div>
 </td>
@@ -840,8 +485,7 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb37-1"><a href="#
 Effetto
 </td>
 <td>
-<code>a</code> e <code>b</code> restano gli stessi!
-<strong>Errore!</strong>
+<code>a</code> e <code>b</code> restano gli stessi! <strong>Errore!</strong>
 </td>
 <td>
 <code>a = 4</code>, <code>b = 5</code>: ok!
@@ -852,20 +496,12 @@ Effetto
 </tr>
 </tbody>
 </table>
-<p>Il passaggio dei parametri <em>by value</em> non funziona poiché alla
-funzione vengono passate copie dei parametri, e la funzione chiamata
-opera su queste copie dei parametri. Qualunque cambiamento apportato
-alle copie non ha alcun effetto sui valori originali dei parametri
-<code>a</code> e <code>b</code> presenti nella funzione chiamante.</p>
-<p>Le chiamate <em>by pointer</em> e <em>by reference</em> passano alla
-funzione l’indirizzo di memoria in cui il programma ha memorizzato la
-variabile <code>a</code>, per cui la funzione agisce direttamente sulla
-variabile <code>a</code> e non su una copia.</p>
+<p>Il passaggio dei parametri <em>by value</em> non funziona poiché alla funzione vengono passate copie dei parametri, e la funzione chiamata opera su queste copie dei parametri. Qualunque cambiamento apportato alle copie non ha alcun effetto sui valori originali dei parametri <code>a</code> e <code>b</code> presenti nella funzione chiamante.</p>
+<p>Le chiamate <em>by pointer</em> e <em>by reference</em> passano alla funzione l’indirizzo di memoria in cui il programma ha memorizzato la variabile <code>a</code>, per cui la funzione agisce direttamente sulla variabile <code>a</code> e non su una copia.</p>
 <p>Vediamo ora passo passo come fare.</p>
 <h2 id="struttura-del-programma-1">Struttura del programma</h2>
 <p>Ecco come potrebbe diventare il vostro codice dopo la cura:</p>
-<div class="sourceCode" id="cb38"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;fstream&gt;</span></span>
+<div class="sourceCode" id="cb38"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;fstream&gt;</span></span>
 <span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
 <span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;string&gt;</span></span>
 <span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a></span>
@@ -909,8 +545,7 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb38-1"><a href="#
 <span id="cb38-42"><a href="#cb38-42" aria-hidden="true" tabindex="-1"></a>  <span class="kw">delete</span><span class="op">[]</span> data<span class="op">;</span></span>
 <span id="cb38-43"><a href="#cb38-43" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 <p>Queste le funzioni da definire a parte:</p>
-<div class="sourceCode" id="cb39"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> <span class="op">*</span> ReadDataFromFile<span class="op">(</span><span class="at">const</span> <span class="dt">char</span> <span class="op">*</span> filename<span class="op">,</span> <span class="dt">int</span> size<span class="op">)</span> <span class="op">{</span></span>
+<div class="sourceCode" id="cb39"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> <span class="op">*</span> ReadDataFromFile<span class="op">(</span><span class="at">const</span> <span class="dt">char</span> <span class="op">*</span> filename<span class="op">,</span> <span class="dt">int</span> size<span class="op">)</span> <span class="op">{</span></span>
 <span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> <span class="op">*</span> data <span class="op">=</span> <span class="kw">new</span> <span class="dt">double</span><span class="op">[</span>size<span class="op">];</span></span>
 <span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>  <span class="co">// ...</span></span>
@@ -992,35 +627,22 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb39-1"><a href="#
 <span id="cb39-80"><a href="#cb39-80" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb39-81"><a href="#cb39-81" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> mediana<span class="op">;</span></span>
 <span id="cb39-82"><a href="#cb39-82" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
-<p>Il <code>main</code> è ora decisamente più compatto e leggibile.
-Quasi tutte le principali funzionalità del codice sono state scorporate
-in un opportuno set di funzioni.</p>
-<p>Come nel caso dell’esercizio precedente compiliamo il programma
-invocando come al solito <code>g++</code>:</p>
+<p>Il <code>main</code> è ora decisamente più compatto e leggibile. Quasi tutte le principali funzionalità del codice sono state scorporate in un opportuno set di funzioni.</p>
+<p>Come nel caso dell’esercizio precedente compiliamo il programma invocando come al solito <code>g++</code>:</p>
 <pre><code>g++ main.cpp -Wall -o main</code></pre>
 <p>Eseguiamo il programma :</p>
 <pre><code>./main 1000000 data.dat</code></pre>
-<h1 id="esercizio-1.2">Esercizio 1.2 - Codice di analisi con funzioni e
-Makefile</h1>
-<p>In questo esercizio terminiamo il processo di riorganizzazione
-dell’esercizio 1.0. Procederemo in questo modo:</p>
+<h1 id="esercizio-1.2">Esercizio 1.2 - Codice di analisi con funzioni e Makefile</h1>
+<p>In questo esercizio terminiamo il processo di riorganizzazione dell’esercizio 1.0. Procederemo in questo modo:</p>
 <ul>
-<li>Spostiamo tutte le dichiarazioni di variabili che abbiamo messo in
-testa al programma in un file separato <code>funzioni.h</code>.</li>
-<li>Spostiamo tutte le implementazioni delle funzioni in coda al
-programma in un file separato <code>funzioni.cpp</code>.</li>
-<li>Ricordiamoci di includere il file <code>funzioni.h</code> sia in
-<code>main.cpp</code> sia in <code>funzioni.cpp</code> tramite il solito
-<code>#include "funzioni.h"</code></li>
-<li>Compiliamo separatamente <code>main.cpp</code> e
-<code>funzioni.cpp</code> utilizzando un <code>Makefile</code></li>
+<li>Spostiamo tutte le dichiarazioni di variabili che abbiamo messo in testa al programma in un file separato <code>funzioni.h</code>.</li>
+<li>Spostiamo tutte le implementazioni delle funzioni in coda al programma in un file separato <code>funzioni.cpp</code>.</li>
+<li>Ricordiamoci di includere il file <code>funzioni.h</code> sia in <code>main.cpp</code> sia in <code>funzioni.cpp</code> tramite il solito <code>#include "funzioni.h"</code></li>
+<li>Compiliamo separatamente <code>main.cpp</code> e <code>funzioni.cpp</code> utilizzando un <code>Makefile</code></li>
 </ul>
-<p>Prima di incominciare, rivediamo rapidamente come si scrive un
-<code>Makefile</code>.</p>
+<p>Prima di incominciare, rivediamo rapidamente come si scrive un <code>Makefile</code>.</p>
 <h2 id="il-makefile">Il Makefile</h2>
-<p>Vogliamo creare un <code>Makefile</code> che ci permetta di compilare
-il nostro programma quando questo è composto/spezzato in diversi file
-sorgenti. Supponiamo di avere un codice spezzato in tre file:</p>
+<p>Vogliamo creare un <code>Makefile</code> che ci permetta di compilare il nostro programma quando questo è composto/spezzato in diversi file sorgenti. Supponiamo di avere un codice spezzato in tre file:</p>
 <ol>
 <li><code>main.cpp</code></li>
 <li><code>funzioni.cpp</code></li>
@@ -1028,39 +650,26 @@ sorgenti. Supponiamo di avere un codice spezzato in tre file:</p>
 </ol>
 <p>Ovviamente possiamo compilare il tutto con</p>
 <pre><code>g++ main.cpp funzioni.cpp -Wall -o main</code></pre>
-<p>ma possiamo farlo in maniera più efficace. La struttura/sintassi del
-<code>Makefile</code> è la seguente:</p>
+<p>ma possiamo farlo in maniera più efficace. La struttura/sintassi del <code>Makefile</code> è la seguente:</p>
 <pre><code>target: dipendenze
 ↹system command</code></pre>
-<p>dove <code>↹</code> indica che dovete proprio premere il tasto TAB
-della tastiera (a sinistra del tasto Q). Se usate il tasto TAB, il
-<code>Makefile</code> apparirà così sullo schermo:</p>
+<p>dove <code>↹</code> indica che dovete proprio premere il tasto TAB della tastiera (a sinistra del tasto Q). Se usate il tasto TAB, il <code>Makefile</code> apparirà così sullo schermo:</p>
 <pre><code>target: dipendenze
     system command</code></pre>
-<p>Il tasto TAB è come una serie di spazi, ma attenzione! Usare gli
-spazi in questo contesto è un errore!</p>
+<p>Il tasto TAB è come una serie di spazi, ma attenzione! Usare gli spazi in questo contesto è un errore!</p>
 <p>Nel nostro caso, con il <code>Makefile</code> contenente le righe</p>
-<div class="sourceCode" id="cb45"><pre
-class="sourceCode makefile"><code class="sourceCode makefile"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="dv">main:</span><span class="dt"> funzioni.cpp main.cpp</span></span>
+<div class="sourceCode" id="cb45"><pre class="sourceCode makefile"><code class="sourceCode makefile"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="dv">main:</span><span class="dt"> funzioni.cpp main.cpp</span></span>
 <span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>↹g++ funzioni.cpp main.cpp -Wall -o main</span></code></pre></div>
-<p>è possibile compilare tutto lanciando il comando
-<code>make</code>.</p>
-<p>Possiamo scrivere il <code>Makefile</code> anche esplicitando le
-dipendenze, in modo che anche quando cambiamo il file <code>.h</code> il
-tutto venga propriamente ricompilato. In questo caso il
-<code>Makefile</code> diventa:</p>
-<div class="sourceCode" id="cb46"><pre
-class="sourceCode makefile"><code class="sourceCode makefile"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="dv">main:</span><span class="dt"> main.o funzioni.o</span></span>
+<p>è possibile compilare tutto lanciando il comando <code>make</code>.</p>
+<p>Possiamo scrivere il <code>Makefile</code> anche esplicitando le dipendenze, in modo che anche quando cambiamo il file <code>.h</code> il tutto venga propriamente ricompilato. In questo caso il <code>Makefile</code> diventa:</p>
+<div class="sourceCode" id="cb46"><pre class="sourceCode makefile"><code class="sourceCode makefile"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="dv">main:</span><span class="dt"> main.o funzioni.o</span></span>
 <span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a><span class="er">    </span>g++ -g3 -Wall --pedantic -std=c++23 main.o funzioni.o -o main</span>
 <span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a><span class="dv">main.o:</span><span class="dt"> main.cpp funzioni.h</span></span>
 <span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a><span class="er">    </span>g++ -g3 -Wall --pedantic -std=c++23 -c main.cpp -o main.o</span>
 <span id="cb46-5"><a href="#cb46-5" aria-hidden="true" tabindex="-1"></a><span class="dv">funzioni.o:</span><span class="dt"> funzioni.cpp funzioni.h</span></span>
 <span id="cb46-6"><a href="#cb46-6" aria-hidden="true" tabindex="-1"></a><span class="er">    </span>g++ -g3 -Wall --pedantic -std=c++23 -c funzioni.cpp -o funzioni.o</span></code></pre></div>
-<p>Notate però quanto il <code>Makefile</code> sia ripetitivo. È
-possibile definire delle <em>variabili</em> nel Makefile per
-semplificarlo:</p>
-<div class="sourceCode" id="cb47"><pre
-class="sourceCode makefile"><code class="sourceCode makefile"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="dt">CXXFLAGS</span> <span class="ch">=</span><span class="st"> -g3 -Wall --pedantic -std=c++23</span></span>
+<p>Notate però quanto il <code>Makefile</code> sia ripetitivo. È possibile definire delle <em>variabili</em> nel Makefile per semplificarlo:</p>
+<div class="sourceCode" id="cb47"><pre class="sourceCode makefile"><code class="sourceCode makefile"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="dt">CXXFLAGS</span> <span class="ch">=</span><span class="st"> -g3 -Wall --pedantic -std=c++23</span></span>
 <span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a><span class="dv">main:</span><span class="dt"> main.o funzioni.o</span></span>
 <span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a><span class="er">    </span>g++ main.o funzioni.o -o main <span class="ch">$(</span><span class="dt">CXXFLAGS</span><span class="ch">)</span></span>
@@ -1070,79 +679,39 @@ class="sourceCode makefile"><code class="sourceCode makefile"><span id="cb47-1">
 <span id="cb47-8"><a href="#cb47-8" aria-hidden="true" tabindex="-1"></a>    </span>
 <span id="cb47-9"><a href="#cb47-9" aria-hidden="true" tabindex="-1"></a><span class="dv">funzioni.o:</span><span class="dt"> funzioni.cpp funzioni.h</span></span>
 <span id="cb47-10"><a href="#cb47-10" aria-hidden="true" tabindex="-1"></a><span class="er">    </span>g++ -c funzioni.cpp -o funzioni.o <span class="ch">$(</span><span class="dt">CXXFLAGS</span><span class="ch">)</span></span></code></pre></div>
-<p>La variabile <code>$@</code> è una cosiddetta <em>variabile
-implicita</em>, e viene sostituita di volta in volta col nome del
-<em>target</em> corrente (che nell’esempio sopra è <code>main</code>,
-<code>main.o</code> e infine <code>funzioni.o</code>). I flag
-<code>-g -Wall --pedantic -std=c++23</code> servono per rendere la
-compilazione e l’esecuzione del codice più sicura, perché abilitano dei
-controlli addizionali, spiegati nelle <a
-href="tomasi-lezione-01.html#flag-del-compilatore">slide</a>.</p>
-<h1 id="esercizio-1.3">Esercizio 1.3 - Overloading di funzione (da
-consegnare)</h1>
-<p>Aggiungete alla vostra libreria di funzioni una funzione
-<code>void Print(const double *, int)</code> che permetta di scrivere
-gli elementi di un array a video. Questo è possibile grazie
-all’<em>overloading</em> (funzioni con stesso nome, ma con argomenti
-differenti).</p>
+<p>La variabile <code>$@</code> è una cosiddetta <em>variabile implicita</em>, e viene sostituita di volta in volta col nome del <em>target</em> corrente (che nell’esempio sopra è <code>main</code>, <code>main.o</code> e infine <code>funzioni.o</code>). I flag <code>-g -Wall --pedantic -std=c++23</code> servono per rendere la compilazione e l’esecuzione del codice più sicura, perché abilitano dei controlli addizionali, spiegati nelle <a href="tomasi-lezione-01.html#flag-del-compilatore">slide</a>.</p>
+<h1 id="esercizio-1.3">Esercizio 1.3 - Overloading di funzione (da consegnare)</h1>
+<p>Aggiungete alla vostra libreria di funzioni una funzione <code>void Print(const double *, int)</code> che permetta di scrivere gli elementi di un array a video. Questo è possibile grazie all’<em>overloading</em> (funzioni con stesso nome, ma con argomenti differenti).</p>
 <h2 id="overloading-di-funzioni">Overloading di funzioni</h2>
-<p>L’overloading delle funzioni è una funzionalità specifica del C++ che
-non è presente in C. Questa funzionalità permette di poter utilizzare lo
-stesso nome per funzioni diverse (cioè che compiono operazioni diverse)
-all’interno dello stesso programma, a patto però che gli argomenti
-forniti alla funzione siano differenti. In maniera automatica, il
-compilatore sceglierà la funzione appropriata a seconda del tipo di
-argomenti passati. In pratica:</p>
-<div class="sourceCode" id="cb48"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> Print<span class="op">(</span><span class="at">const</span> <span class="dt">double</span> <span class="op">*</span>  data<span class="op">,</span> <span class="dt">int</span> ndata<span class="op">)</span> <span class="op">{...}</span></span>
+<p>L’overloading delle funzioni è una funzionalità specifica del C++ che non è presente in C. Questa funzionalità permette di poter utilizzare lo stesso nome per funzioni diverse (cioè che compiono operazioni diverse) all’interno dello stesso programma, a patto però che gli argomenti forniti alla funzione siano differenti. In maniera automatica, il compilatore sceglierà la funzione appropriata a seconda del tipo di argomenti passati. In pratica:</p>
+<div class="sourceCode" id="cb48"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> Print<span class="op">(</span><span class="at">const</span> <span class="dt">double</span> <span class="op">*</span>  data<span class="op">,</span> <span class="dt">int</span> ndata<span class="op">)</span> <span class="op">{...}</span></span>
 <span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> Print<span class="op">(</span><span class="at">const</span> <span class="dt">char</span> <span class="op">*</span> filename<span class="op">,</span> <span class="at">const</span> <span class="dt">double</span> <span class="op">*</span> data<span class="op">,</span> <span class="dt">int</span> ndata<span class="op">)</span> <span class="op">{...}</span></span></code></pre></div>
-<p>Le due funzioni hanno lo stesso nome, ma ovviamente ci si aspetta che
-facciano cose diverse. Si noti che per poter fare l’overloading di una
-funzione non basta che soltanto il tipo restituito dalla funzione sia
-differente, ma occorre che siano diversi i tipi e/o il numero dei
-parametri passati alla funzione.</p>
+<p>Le due funzioni hanno lo stesso nome, ma ovviamente ci si aspetta che facciano cose diverse. Si noti che per poter fare l’overloading di una funzione non basta che soltanto il tipo restituito dalla funzione sia differente, ma occorre che siano diversi i tipi e/o il numero dei parametri passati alla funzione.</p>
 <p>Seguono ulteriori suggerimenti.</p>
 <h2 id="formattazione-delloutput">Formattazione dell’output</h2>
-<p>La C++ Standard Library permette di manipolare la formattazione
-dell’output utilizzando i manipolatori, alcuni dei quali sono dichiarati
-nell’header <code>&lt;iomanip&gt;</code>. In generale i manipolatori
-modificano lo stato di uno stream (<code>cout</code>, <code>cin</code>,
-<code>cerr</code>, <code>ofstream</code>, <code>ifstream</code>…).</p>
-<p>I manipolatori che ci serviranno per modificare l’output di numeri
-floating-point sono:</p>
+<p>La C++ Standard Library permette di manipolare la formattazione dell’output utilizzando i manipolatori, alcuni dei quali sono dichiarati nell’header <code>&lt;iomanip&gt;</code>. In generale i manipolatori modificano lo stato di uno stream (<code>cout</code>, <code>cin</code>, <code>cerr</code>, <code>ofstream</code>, <code>ifstream</code>…).</p>
+<p>I manipolatori che ci serviranno per modificare l’output di numeri floating-point sono:</p>
 <ul>
-<li><code>fixed</code>: stampa i numeri senza l’uso di esponenti, ove
-possibile</li>
-<li><code>scientific</code>: stampa i numeri utilizzando gli
-esponenti</li>
-<li><code>setprecision(int n)</code>: stampa <code>n</code> cifre dopo
-la virgola</li>
+<li><code>fixed</code>: stampa i numeri senza l’uso di esponenti, ove possibile</li>
+<li><code>scientific</code>: stampa i numeri utilizzando gli esponenti</li>
+<li><code>setprecision(int n)</code>: stampa <code>n</code> cifre dopo la virgola</li>
 </ul>
 <p>Esempio:</p>
-<div class="sourceCode" id="cb49"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>cout <span class="op">&lt;&lt;</span> <span class="st">&quot;double number: &quot;</span> <span class="op">&lt;&lt;</span> setprecision<span class="op">(</span><span class="dv">4</span><span class="op">)</span> <span class="op">&lt;&lt;</span> double_number<span class="op">;</span></span></code></pre></div>
+<div class="sourceCode" id="cb49"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>cout <span class="op">&lt;&lt;</span> <span class="st">&quot;double number: &quot;</span> <span class="op">&lt;&lt;</span> setprecision<span class="op">(</span><span class="dv">4</span><span class="op">)</span> <span class="op">&lt;&lt;</span> double_number<span class="op">;</span></span></code></pre></div>
 <p>Utili per stampare i dati in una tabella sono</p>
 <ul>
 <li><code>setw(int n)</code>: imposta la larghezza di un campo ad n</li>
-<li><code>setfill(char c)</code>: usa c come carattere di riempimento
-(quello di default è lo spazio)</li>
+<li><code>setfill(char c)</code>: usa c come carattere di riempimento (quello di default è lo spazio)</li>
 </ul>
 <p>Ad esempio:</p>
-<div class="sourceCode" id="cb50"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>cout <span class="op">&lt;&lt;</span> setw<span class="op">(</span><span class="dv">5</span><span class="op">)</span> <span class="op">&lt;&lt;</span> <span class="st">&quot;0.132&quot;</span> <span class="op">&lt;&lt;</span> setw<span class="op">(</span><span class="dv">5</span><span class="op">)</span> <span class="op">&lt;&lt;</span> <span class="st">&quot;234&quot;</span> <span class="op">&lt;&lt;</span> endl</span>
+<div class="sourceCode" id="cb50"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>cout <span class="op">&lt;&lt;</span> setw<span class="op">(</span><span class="dv">5</span><span class="op">)</span> <span class="op">&lt;&lt;</span> <span class="st">&quot;0.132&quot;</span> <span class="op">&lt;&lt;</span> setw<span class="op">(</span><span class="dv">5</span><span class="op">)</span> <span class="op">&lt;&lt;</span> <span class="st">&quot;234&quot;</span> <span class="op">&lt;&lt;</span> endl</span>
 <span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>     <span class="op">&lt;&lt;</span> setw<span class="op">(</span><span class="dv">5</span><span class="op">)</span> <span class="op">&lt;&lt;</span> <span class="st">&quot;10&quot;</span> <span class="op">&lt;&lt;</span> setw<span class="op">(</span><span class="dv">5</span><span class="op">)</span> <span class="op">&lt;&lt;</span> <span class="st">&quot;12&quot;</span> <span class="op">&lt;&lt;</span> endl</span></code></pre></div>
 <p>stampa i numeri in due colonne allineate.</p>
-<p>Questi comandi sono stati introdotti nel C++ tra gli anni ’80 e ’90,
-ed oggi non sono più usati. Vedremo nelle prossime lezioni che le
-versioni più recenti del C++ forniscono un metodo più semplice,
-versatile e intuitivo per stampare il valore di variabili.</p>
+<p>Questi comandi sono stati introdotti nel C++ tra gli anni ’80 e ’90, ed oggi non sono più usati. Vedremo nelle prossime lezioni che le versioni più recenti del C++ forniscono un metodo più semplice, versatile e intuitivo per stampare il valore di variabili.</p>
 <h2 id="implementazione-migliorata">Implementazione migliorata</h2>
-<p>In generale l’implementazione di algoritmi in una funzione può
-avvenira in diversi modi. Proviamo a vedere alcune possibili varianti
-per le funzioni relative al calcolo della media e della varianza:</p>
-<div class="sourceCode" id="cb51"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Versione 1</span></span>
+<p>In generale l’implementazione di algoritmi in una funzione può avvenira in diversi modi. Proviamo a vedere alcune possibili varianti per le funzioni relative al calcolo della media e della varianza:</p>
+<div class="sourceCode" id="cb51"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Versione 1</span></span>
 <span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> CalcolaMedia<span class="op">(</span><span class="dt">double</span> <span class="op">*</span> data<span class="op">,</span> <span class="dt">int</span> size<span class="op">)</span> <span class="op">{</span></span>
 <span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> accumulo <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
 <span id="cb51-4"><a href="#cb51-4" aria-hidden="true" tabindex="-1"></a></span>
@@ -1172,16 +741,10 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb51-1"><a href="#
 <span id="cb51-28"><a href="#cb51-28" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb51-29"><a href="#cb51-29" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> accumulo<span class="op">;</span></span>
 <span id="cb51-30"><a href="#cb51-30" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
-<p>La prima funzione implementa il calcolo in modo intuitivo. La seconda
-è meno ovvia, perché ad ogni passo incrementa <code>accumulo</code> con
-il valore <span class="math display">
-\frac{k}{k + 1}\times \texttt{accumulo} + \frac{\texttt{data[k]}}{k +
-1}.
-</span> Non è difficile dimostrare che il risultato finale è lo stesso;
-questa versione però ha il vantaggio di non conservare la somma di tutti
-i valori che potrebbe diventare troppo grande.</p>
-<div class="sourceCode" id="cb52"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Versione 1</span></span>
+<p>La prima funzione implementa il calcolo in modo intuitivo. La seconda è meno ovvia, perché ad ogni passo incrementa <code>accumulo</code> con il valore <span class="math display">
+\frac{k}{k + 1}\times \texttt{accumulo} + \frac{\texttt{data[k]}}{k + 1}.
+</span> Non è difficile dimostrare che il risultato finale è lo stesso; questa versione però ha il vantaggio di non conservare la somma di tutti i valori che potrebbe diventare troppo grande.</p>
+<div class="sourceCode" id="cb52"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Versione 1</span></span>
 <span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> CalcolaVarianza<span class="op">(</span><span class="dt">double</span> <span class="op">*</span> data<span class="op">,</span> <span class="dt">int</span> size<span class="op">)</span> <span class="op">{</span></span>
 <span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> result <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
 <span id="cb52-4"><a href="#cb52-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span><span class="op">(</span>size <span class="op">==</span> <span class="dv">0</span><span class="op">)</span> <span class="op">{</span></span>
@@ -1224,79 +787,54 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb52-1"><a href="#
 <span id="cb52-41"><a href="#cb52-41" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb52-42"><a href="#cb52-42" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> result<span class="op">;</span></span>
 <span id="cb52-43"><a href="#cb52-43" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
-<p>Nel caso della varianza la prima implementazione richiede una
-chiamata alla funzione CalcolaMedia() mentre la seconda no. La terza
-infine implementa il calcolo nello stesso modo visto per la media,
-ovvero evitando di immagazzinare somme troppo elevate.</p>
+<p>Nel caso della varianza la prima implementazione richiede una chiamata alla funzione CalcolaMedia() mentre la seconda no. La terza infine implementa il calcolo nello stesso modo visto per la media, ovvero evitando di immagazzinare somme troppo elevate.</p>
 <h1 id="errori-comuni">Errori comuni</h1>
-<p>Elenco qui gli errori più comuni che ho riscontrato negli ultimi anni
-correggendo gli esercizi della lezione 1 consegnati prima dell’esame
-scritto:</p>
+<p>Elenco qui gli errori più comuni che ho riscontrato negli ultimi anni correggendo gli esercizi della lezione 1 consegnati prima dell’esame scritto:</p>
 <ul>
-<li><p>Assicuratevi di leggere da file proprio il numero <code>N</code>
-di elementi specificato da linea di comando: in certi codici vengono
-letti <code>N - 1</code> elementi. Chiedete al vostro programma di
-caricarne un numero molto limitato (es., <code>N = 3</code>) e
-verificate ad occhio che abbia effettivamente caricato tre
-numeri.</p></li>
-<li><p>Molti studenti hanno dei programmi che richiedono moltissimo per
-calcolare la varianza. Una implementazione come questa ricalcola ogni
-volta la media, ed è da evitare:</p>
-<div class="sourceCode" id="cb53"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> accum <span class="op">=</span> <span class="fl">0.0</span><span class="op">;</span></span>
+<li><p>Assicuratevi di leggere da file proprio il numero <code>N</code> di elementi specificato da linea di comando: in certi codici vengono letti <code>N - 1</code> elementi. Chiedete al vostro programma di caricarne un numero molto limitato (es., <code>N = 3</code>) e verificate ad occhio che abbia effettivamente caricato tre numeri.</p></li>
+<li><p>Molti studenti hanno dei programmi che richiedono moltissimo per calcolare la varianza. Una implementazione come questa ricalcola ogni volta la media, ed è da evitare:</p>
+<div class="sourceCode" id="cb53"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> accum <span class="op">=</span> <span class="fl">0.0</span><span class="op">;</span></span>
 <span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span><span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> N<span class="op">;</span> <span class="op">++</span>i<span class="op">)</span> <span class="op">{</span></span>
 <span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Ogni volta CalcolaMedia deve sommare gli N elementi</span></span>
 <span id="cb53-4"><a href="#cb53-4" aria-hidden="true" tabindex="-1"></a>  accum <span class="op">+=</span> pow<span class="op">(</span>x<span class="op">[</span>i<span class="op">]</span> <span class="op">-</span> CalcolaMedia<span class="op">(</span>x<span class="op">,</span> N<span class="op">),</span> <span class="dv">2</span><span class="op">);</span></span>
 <span id="cb53-5"><a href="#cb53-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
-<p>Siccome la media è sempre la stessa, conviene calcolarla <strong>una
-volta sola</strong> prima del ciclo <code>for</code>:</p>
-<div class="sourceCode" id="cb54"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> accum <span class="op">=</span> <span class="fl">0.0</span><span class="op">;</span></span>
+<p>Siccome la media è sempre la stessa, conviene calcolarla <strong>una volta sola</strong> prima del ciclo <code>for</code>:</p>
+<div class="sourceCode" id="cb54"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> accum <span class="op">=</span> <span class="fl">0.0</span><span class="op">;</span></span>
 <span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a><span class="co">// Calcola la media una volta per tutte</span></span>
 <span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a><span class="at">const</span> <span class="dt">double</span> media <span class="op">=</span> CalcolaMedia<span class="op">(</span>x<span class="op">,</span> N<span class="op">);</span></span>
 <span id="cb54-4"><a href="#cb54-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span><span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> N<span class="op">;</span> <span class="op">++</span>i<span class="op">)</span> <span class="op">{</span></span>
 <span id="cb54-5"><a href="#cb54-5" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Riutilizza il valore della media calcolato sopra: è molto più veloce!</span></span>
 <span id="cb54-6"><a href="#cb54-6" aria-hidden="true" tabindex="-1"></a>  accum <span class="op">+=</span> pow<span class="op">(</span>x<span class="op">[</span>i<span class="op">]</span> <span class="op">-</span> media<span class="op">,</span> <span class="dv">2</span><span class="op">);</span></span>
 <span id="cb54-7"><a href="#cb54-7" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div></li>
-<li><p>Spesso il codice per il calcolo della mediana funziona solo se N
-è pari, oppure se N è dispari, ma non viceversa. Assicuratevi che
-funzioni con <code>N=3</code> e con <code>N=4</code>, che sono casi
-facili da controllare!</p></li>
-<li><p>Alcuni studenti richiedono di specificare il numero N da linea di
-comando, ma poi ignorano quanto specificato dall’utente e leggono sempre
-<code>N=10000</code>.</p></li>
-<li><p>Alcuni studenti si affidano all’ordine di inclusione degli header
-per evitare qualche <code>#include</code> in più. Se in
-<code>vectors.h</code> avete definito funzioni che lavorano su vettori,
-e in <code>newton.h</code> avete ulteriori funzioni che risolvono
-problemi di fisica Newtoniana, dovete assicurarvi che all’inizio di
-<code>newton.h</code> ci sia un <code>#include "vectors.h"</code>:</p>
-<div class="sourceCode" id="cb55"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="co">// newton.h</span></span>
+<li><p>Spesso il codice per il calcolo della mediana funziona solo se N è pari, oppure se N è dispari, ma non viceversa. Assicuratevi che funzioni con <code>N=3</code> e con <code>N=4</code>, che sono casi facili da controllare!</p></li>
+<li><p>Alcuni studenti richiedono di specificare il numero N da linea di comando, ma poi ignorano quanto specificato dall’utente e leggono sempre <code>N=10000</code>.</p></li>
+<li><p>Alcuni studenti si affidano all’ordine di inclusione degli header per evitare qualche <code>#include</code> in più. Se in <code>vectors.h</code> avete definito funzioni che lavorano su vettori, e in <code>newton.h</code> avete ulteriori funzioni che risolvono problemi di fisica Newtoniana, dovete assicurarvi che all’inizio di <code>newton.h</code> ci sia un <code>#include "vectors.h"</code>:</p>
+<div class="sourceCode" id="cb55"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="co">// newton.h</span></span>
 <span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#pragma once</span></span>
 <span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;vectors.h&quot;</span></span>
 <span id="cb55-4"><a href="#cb55-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb55-5"><a href="#cb55-5" aria-hidden="true" tabindex="-1"></a><span class="co">// Qui segue il resto del file</span></span>
 <span id="cb55-6"><a href="#cb55-6" aria-hidden="true" tabindex="-1"></a><span class="op">...</span></span></code></pre></div>
-<p>Alcuni studenti omettono la riga <code>#include "vectors.h"</code> e
-la mettono nel <code>main</code>, prima di
-<code>#include "newton.h"</code>:</p>
-<div class="sourceCode" id="cb56"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;vectors.h&quot;</span></span>
+<p>Alcuni studenti omettono la riga <code>#include "vectors.h"</code> e la mettono nel <code>main</code>, prima di <code>#include "newton.h"</code>:</p>
+<div class="sourceCode" id="cb56"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;vectors.h&quot;</span></span>
 <span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;newton.h&quot;</span></span>
 <span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb56-4"><a href="#cb56-4" aria-hidden="true" tabindex="-1"></a><span class="co">// ...</span></span></code></pre></div>
-<p>Anche se il codice compila lo stesso, è concettualmente sbagliato: il
-file <code>newton.h</code> richiede <code>vectors.h</code>, e dovrebbe
-quindi includerlo al suo interno. Altrimenti, tutte le volte che userete
-<code>newton.h</code> in altri programmi, dovrete sempre ricordarvi di
-anteporre <code>#include "vectors.h"</code>, e questa è una cosa facile
-da dimenticare.</p></li>
-</ul>                    
-                </div>
-            </div>
+<p>Anche se il codice compila lo stesso, è concettualmente sbagliato: il file <code>newton.h</code> richiede <code>vectors.h</code>, e dovrebbe quindi includerlo al suo interno. Altrimenti, tutte le volte che userete <code>newton.h</code> in altri programmi, dovrete sempre ricordarvi di anteporre <code>#include "vectors.h"</code>, e questa è una cosa facile da dimenticare.</p></li>
+</ul>
+</main>
 
-            <script src="https://vjs.zencdn.net/5.4.4/video.js"></script>
-        </div>
-    </body>
+<script>
+;(function() {
+  // Non-essential if user has JavaScript off. Just makes checkboxes look nicer.
+  var selector = '.task-list > li > input[type="checkbox"]';
+  var checkboxes = document.querySelectorAll(selector);
+  Array.from(checkboxes).forEach((checkbox) => {
+    var wasChecked = checkbox.checked;
+    checkbox.disabled = false;
+    checkbox.addEventListener('click', (ev) => {ev.target.checked = wasChecked});
+  });
+})();
+</script>
+</body>
 </html>
