@@ -42,20 +42,20 @@
     <strong>Contents</strong><label for="contents">⊕</label>
   <input type="checkbox" id="contents">
   <ul>
-  <li><a href="#esercizi-e-delle-spiegazioni" id="toc-esercizi-e-delle-spiegazioni">Esercizi e delle spiegazioni</a></li>
+  <li><a href="#esercizi-e-spiegazioni" id="toc-esercizi-e-spiegazioni">Esercizi e spiegazioni</a></li>
   <li><a href="#suggerimenti-vari" id="toc-suggerimenti-vari">Suggerimenti vari</a>
   <ul>
   <li><a href="#installazione-di-root-e-gnuplot" id="toc-installazione-di-root-e-gnuplot">Installazione di ROOT e Gnuplot</a></li>
   <li><a href="#fmtinstall" id="toc-fmtinstall">Uso della libreria <code>fmt</code></a></li>
   <li><a href="#gplotinstall" id="toc-gplotinstall">Gplot++</a></li>
   <li><a href="#rootvscode" id="toc-rootvscode">ROOT e Visual Studio Code</a></li>
-  <li><a href="#cose-da-fare-il-giorno-dello-scritto" id="toc-cose-da-fare-il-giorno-dello-scritto">Cose da fare il giorno dello scritto</a></li>
+  <li><a href="#come-prepararsi-allesame-scritto" id="toc-come-prepararsi-allesame-scritto">Come prepararsi all’esame scritto</a></li>
   </ul></li>
   </ul>
 </nav>
 
 <main>
-<h1 id="esercizi-e-delle-spiegazioni">Esercizi e delle spiegazioni</h1>
+<h1 id="esercizi-e-spiegazioni">Esercizi e spiegazioni</h1>
 <center>
 <table>
 <colgroup>
@@ -72,7 +72,7 @@
 </thead>
 <tbody>
 <tr class="odd">
-<td>26 Settembre 2022</td>
+<td>26 Settembre 2023</td>
 <td><a href="carminati-esercizi-01.html">Arrays</a></td>
 <td><a href="tomasi-lezione-01.html">Lezione 1</a></td>
 </tr>
@@ -170,9 +170,42 @@ Google form per il seminario finale su C++, Python e Julia: <https://forms.gle/9
 <p>Un modo per togliere queste segnalazioni di errore è quello di aprire il menu “Impostazioni”, e scegliere la voce “Estensioni”/“C/C++”/“Intellisense” e selezionare “Default: Include Path”. Premere il bottone “Aggiungi elemento”, ed inserire nella casella di testo il contenuto dell’output del comando</p>
 <pre><code>root-config --incdir</code></pre>
 <p><img src="images/root-vscode-config.png" /></p>
-<h2 id="cose-da-fare-il-giorno-dello-scritto">Cose da fare il giorno dello scritto</h2>
-<p>Fornisco un piccolo vademecum per aiutarvi a svolgere nel migliore di modi l’esame scritto.</p>
+<h2 id="come-prepararsi-allesame-scritto">Come prepararsi all’esame scritto</h2>
+<p>Fornisco un piccolo vademecum per aiutarvi a svolgere nel migliore dei modi l’esame scritto.</p>
 <ol>
+<li><p>Dovete sapere <strong>molto bene</strong> la teoria per affrontare lo scritto, perché c’è sempre almeno una domanda la cui risposta è banalissima se si conoscono le equazioni che giustificano un metodo, quasi impossibile se non le si sanno. (Esempio: un problema potrebbe chiedere di determinare l’errore atteso da un integrale col metodo di Simpson, ma voi non sapete il valore vero. Nelle lezioni teoriche però si spiega qual è la relazione tra il passo <span class="math inline">h</span> del metodo di Simpson e l’errore atteso, e si fornisce pure una formula matematica per stimare l’errore senza sapere il valore esatto dell’integrale).</p></li>
+<li><p>Curate benissimo gli esercizi, ed arrivate il giorno dello scritto con un archivio ordinato di tutti i file che vi serviranno. Vi raccomando di mettere tutto il codice in file <code>.h</code> evitando i file <code>.cpp</code>. Se quindi avete implementato una classe in questo modo:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">// File RandomGen.h</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#pragma once</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> RandomGen <span class="op">{</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  RandomGen<span class="op">::</span>RandomGen<span class="op">(</span><span class="dt">int</span> seed<span class="op">);</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Etc.</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="co">// File RandomGen.cpp</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;RandomGen.h&quot;</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>RandomGen<span class="op">::</span>RandomGen<span class="op">(</span><span class="dt">int</span> seed<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Implementation…</span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p>sarebbe meglio levare di mezzo il file <code>RandomGen.cpp</code> e avere tutto nel file <code>RandomGen.h</code>:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">// File RandomGen.h</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#pragma once</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> RandomGen <span class="op">{</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  RandomGen<span class="op">::</span>RandomGen<span class="op">(</span><span class="dt">int</span> seed<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Here comes the implementation that was originally in RandomGen.cpp</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Etc.</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code></pre></div>
+<p>Avere solo i file <code>.h</code> vi dà un grande vantaggio: non dovete complicare troppo il <code>Makefile</code> che scriverete durante il compito, perché basta includere i file <code>.h</code> che vi servono nel <code>main.cpp</code> e siete a posto. (Questo è esattamente quanto ho fatto nel file <code>gplot++.hpp</code>, che infatti non richiede modifiche al <code>Makefile</code> per essere usato).</p></li>
 <li><p>Leggete con attenzione il testo, e annotate a margine (o su un foglio di brutta) le cose che sono esplicitamente richieste e quali no. Capita che gli studenti si incaponiscano a produrre un grafico fatto in un certo modo, quando il testo richiedeva semplicemente di “tabulare i risultati” (ossia, stamparli semplicemente a video!)</p></li>
 <li><p>Prima di iniziare a scrivere codice come forsennati, provate a stimare almeno l’ordine di grandezza delle risposte. Alcuni esempi pratici:</p>
 <ul>
@@ -183,118 +216,117 @@ Google form per il seminario finale su C++, Python e Julia: <https://forms.gle/9
 </ul>
 <p>Non spendete però troppo tempo per arrivare a una stima con carta e penna: se dopo dieci minuti di lavoro siete ancora in alto mare, lasciate perdere!</p></li>
 <li><p>Leggete <em>tutto</em> il testo dell’esame prima di iniziare a scrivere il codice. Magari nel primo punto vi viene chiesto di assumere una certa quantità fisica (una massa, una velocità…) come costante, ma in uno dei punti successivi dovete cambiarne il valore oppure addirittura trasformarla in una quantità che dipende dal tempo o dallo spazio. Se leggete prima tutto il testo, potete già fare caso a queste cose e progettare la struttura del codice in maniera più efficace.</p></li>
-<li><p>I temi di esame sono solitamente espressi come una lista di punti, ciascuno dei quali è una domanda. <strong>MAI</strong> implementare il codice che risolve tutti i punti e poi eseguirlo! Implementate il codice che vi serve per risolvere il primo punto, stampatelo, verificate i risultati, e quando vi convince passate al secondo. In questo modo, se i numeri prodotti per il primo punto appaiono strani, potete correggere gli errori prima di passare al punto successivo. Altrimenti rischiate di dover buttare via tutto il lavoro: magari vi rendete conto che per risolvere bene il primo punto avevate bisogno di <em>due</em> variabili <code>std::vector</code> anziché una sola, e di conseguenza quanto avete implementato per i punti successivi non è più valido.</p></li>
+<li><p>I temi di esame sono solitamente espressi come una lista di punti, ciascuno dei quali è una domanda. <strong>MAI</strong> implementare tutto il codice, da cima a fondo, che risolve tutti i punti e solo alla fine eseguirlo! Implementate il codice che vi serve per risolvere il primo punto, stampatelo, verificate i risultati, e quando vi convince passate al secondo. In questo modo, se i numeri prodotti per il primo punto appaiono strani, potete correggere gli errori prima di passare al punto successivo. Altrimenti rischiate di dover buttare via tutto il lavoro: magari vi rendete conto che per risolvere bene il primo punto avevate bisogno di <em>due</em> variabili <code>std::vector</code> anziché una sola, e di conseguenza quanto avete implementato per i punti successivi non è più valido.</p></li>
 <li><p>Non succederà mai che viene richiesto l’uso di ROOT o di Gnuplot esplicitamente; fare però i grafici è utile per avere l’intuizione se i risultati che il vostro codice produce sono sensati oppure no.</p></li>
-<li><p>Prima di fare i grafici, preoccupatevi però <strong>sempre</strong> di stampare con <code>cout</code> o con <code>fmt::println</code> i valori tabulati delle quantità che andate a mettere nei grafici. Noi docenti siamo sempre disposti a chiudere un occhio se un grafico risulta sbagliato o vuoto, ma i valori stampati a video sono corretti: vuol dire che avete semplicemente sbagliato a creare il grafico, e questo è un errore assolutamente perdonabile.</p>
+<li><p>Prima di fare i grafici, preoccupatevi <strong>sempre</strong> di stampare con <code>cout</code> o con <code>fmt::println</code> i valori tabulati delle quantità che andate a mettere nei grafici. Noi docenti siamo sempre disposti a chiudere un occhio se un grafico risulta sbagliato o vuoto, però i valori che il programma stampa a video sono corretti: vuol dire che avete semplicemente sbagliato a creare il grafico, e questo è un errore assolutamente perdonabile.</p>
 <p>Nel caso di simulazioni Monte Carlo, i numeri da stampare sono sempre moltissimi, quindi stampatene giusto qualcuno:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="at">const</span> <span class="dt">int</span> num_of_simulations <span class="op">=</span> <span class="dv">10&#39;000</span><span class="op">;</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="bu">std::</span>vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> results<span class="op">{</span>num_of_simulations<span class="op">};</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span><span class="op">(</span><span class="dt">int</span> i<span class="op">{};</span> i <span class="op">&lt;</span> num_of_simulations<span class="op">;</span> <span class="op">++</span>i<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  results<span class="op">[</span>i<span class="op">]</span> <span class="op">=</span> run_simulation<span class="op">();</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Stampo i primi 5 valori calcolati a video</span></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span><span class="op">(</span>i <span class="op">&lt;</span> <span class="dv">5</span><span class="op">)</span> <span class="op">{</span></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    fmt<span class="op">::</span>println<span class="op">(</span><span class="st">&quot;</span><span class="sc">{}\t{}</span><span class="st">&quot;</span><span class="op">,</span> i<span class="op">,</span> results<span class="op">[</span>i<span class="op">]);</span></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div></li>
+<div class="sourceCode" id="cb5"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="at">const</span> <span class="dt">int</span> num_of_simulations <span class="op">=</span> <span class="dv">10&#39;000</span><span class="op">;</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="bu">std::</span>vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> results<span class="op">{</span>num_of_simulations<span class="op">};</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span><span class="op">(</span><span class="dt">int</span> i<span class="op">{};</span> i <span class="op">&lt;</span> num_of_simulations<span class="op">;</span> <span class="op">++</span>i<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  results<span class="op">[</span>i<span class="op">]</span> <span class="op">=</span> run_simulation<span class="op">();</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Stampo i primi 5 valori calcolati a video, giusto come controllo</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span><span class="op">(</span>i <span class="op">&lt;</span> <span class="dv">5</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    fmt<span class="op">::</span>println<span class="op">(</span><span class="st">&quot;</span><span class="sc">{}\t{}</span><span class="st">&quot;</span><span class="op">,</span> i<span class="op">,</span> results<span class="op">[</span>i<span class="op">]);</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div></li>
 <li><p>Capita spesso che venga richiesto di ripetere un’analisi più volte. Ad esempio, si deve calcolare un integrale col metodo di Simpson usando un numero di step via via crescente, o si deve risolvere un’equazione differenziale variando il numero di passi, etc.</p>
 <p>Alcuni studenti, presi dal “panico dell’esame”, lavorano di copia-e-incolla: risolvono il problema nel primo caso, poi copiano e incollano lo stesso codice nel <code>main</code> tante volte quante sono i casi da studiare, e aggiustano a mano quei parametri che vanno aggiornati. Ecco un esempio:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Il tema d&#39;esame richiede di simulare un esperimento N volte</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="co">// e stimare l&#39;errore su un certo parametro A, e chiede di</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="co">// vedere come l&#39;errore su A cambia al variare di N. Il testo</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="co">// chiede di far assumere a N i valori { 100, 500, 1000, 5000 }.</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> risultato<span class="op">{};</span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Codice per N = 100</span></span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span><span class="op">(</span><span class="dt">int</span> i<span class="op">{};</span> i <span class="op">&lt;</span> <span class="dv">100</span><span class="op">;</span> <span class="op">++</span>i<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Qui aggiorno la variabile `risultato`</span></span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>  fmt<span class="op">::</span>println<span class="op">(</span><span class="st">&quot;Risultato per N = 100: </span><span class="sc">{}</span><span class="st">&quot;</span><span class="op">,</span> risultato<span class="op">);</span></span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Codice per N = 500, copiato da sopra</span></span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span><span class="op">(</span><span class="dt">int</span> i<span class="op">{};</span> i <span class="op">&lt;</span> <span class="dv">500</span><span class="op">;</span> <span class="op">++</span>i<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Qui aggiorno la variabile `risultato`</span></span>
-<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
-<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>  fmt<span class="op">::</span>println<span class="op">(</span><span class="st">&quot;Risultato per N = 500: </span><span class="sc">{}</span><span class="st">&quot;</span><span class="op">,</span> risultato<span class="op">);</span></span>
-<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Codice per N = 1000, copiato da sopra</span></span>
-<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span><span class="op">(</span><span class="dt">int</span> i<span class="op">{};</span> i <span class="op">&lt;</span> <span class="dv">1000</span><span class="op">;</span> <span class="op">++</span>i<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Qui aggiorno la variabile `risultato`</span></span>
-<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
-<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>  fmt<span class="op">::</span>println<span class="op">(</span><span class="st">&quot;Risultato per N = 1000: </span><span class="sc">{}</span><span class="st">&quot;</span><span class="op">,</span> risultato<span class="op">);</span></span>
-<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Codice per N = 5000, copiato da sopra</span></span>
-<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span><span class="op">(</span><span class="dt">int</span> i<span class="op">{};</span> i <span class="op">&lt;</span> <span class="dv">1000</span><span class="op">;</span> <span class="op">++</span>i<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Qui aggiorno la variabile `risultato`</span></span>
-<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
-<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>  fmt<span class="op">::</span>println<span class="op">(</span><span class="st">&quot;Risultato per N = 5000: </span><span class="sc">{}</span><span class="st">&quot;</span><span class="op">,</span> risultato<span class="op">);</span></span>
-<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Il tema d&#39;esame richiede di simulare un esperimento N volte</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="co">// e stimare l&#39;errore su un certo parametro A, e chiede di</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="co">// vedere come l&#39;errore su A cambia al variare di N. Il testo</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="co">// chiede di far assumere a N i valori { 100, 500, 1000, 5000 }.</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> risultato<span class="op">{};</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Codice per N = 100</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span><span class="op">(</span><span class="dt">int</span> i<span class="op">{};</span> i <span class="op">&lt;</span> <span class="dv">100</span><span class="op">;</span> <span class="op">++</span>i<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Qui aggiorno la variabile `risultato`</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>  fmt<span class="op">::</span>println<span class="op">(</span><span class="st">&quot;Risultato per N = 100: </span><span class="sc">{}</span><span class="st">&quot;</span><span class="op">,</span> risultato<span class="op">);</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Codice per N = 500, copiato da sopra</span></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span><span class="op">(</span><span class="dt">int</span> i<span class="op">{};</span> i <span class="op">&lt;</span> <span class="dv">500</span><span class="op">;</span> <span class="op">++</span>i<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Qui aggiorno la variabile `risultato`</span></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>  fmt<span class="op">::</span>println<span class="op">(</span><span class="st">&quot;Risultato per N = 500: </span><span class="sc">{}</span><span class="st">&quot;</span><span class="op">,</span> risultato<span class="op">);</span></span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Codice per N = 1000, copiato da sopra</span></span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span><span class="op">(</span><span class="dt">int</span> i<span class="op">{};</span> i <span class="op">&lt;</span> <span class="dv">1000</span><span class="op">;</span> <span class="op">++</span>i<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Qui aggiorno la variabile `risultato`</span></span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>  fmt<span class="op">::</span>println<span class="op">(</span><span class="st">&quot;Risultato per N = 1000: </span><span class="sc">{}</span><span class="st">&quot;</span><span class="op">,</span> risultato<span class="op">);</span></span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Codice per N = 5000, copiato da sopra</span></span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span><span class="op">(</span><span class="dt">int</span> i<span class="op">{};</span> i <span class="op">&lt;</span> <span class="dv">1000</span><span class="op">;</span> <span class="op">++</span>i<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Qui aggiorno la variabile `risultato`</span></span>
+<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a>  fmt<span class="op">::</span>println<span class="op">(</span><span class="st">&quot;Risultato per N = 5000: </span><span class="sc">{}</span><span class="st">&quot;</span><span class="op">,</span> risultato<span class="op">);</span></span>
+<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 <p>Questo porta ad alcuni problemi gravi:</p>
 <ul>
-<li><p>Vi fa fare una <strong>pessima</strong> figura davanti al docente, che probabilmente scalerà qualche punto dal giudizio finale per il vostro scritto;</p></li>
 <li><p>Se vi accorgete solo dopo aver fatto copia-e-incolla che c’era un errore nel caso con <code>N = 100</code>, lo dovrete correggere per tutti gli altri casi. Questo vi farà sprecare molto tempo, che in un esame è una risorsa preziosa;</p></li>
 <li><p>In ognuna delle copie del codice che avete incollato bisogna ovviamente cambiare qualcosa qua e là; è facile che ci sia almeno una di quelle copie in cui modificate la riga sbagliata, oppure non la modificate del tutto. (È il caso dell’esempio sopra: ve ne eravate accorti?)</p></li>
 </ul>
 <p>La cosa migliore da fare è quella di spostare il codice che va ripetuto all’interno di una funzione, e poi chiamarla più volte nel <code>main</code>:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> calcola_risultato<span class="op">(</span><span class="dt">int</span> N<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Qui va tutta l&#39;implementazione del calcolo</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="co">// ...</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  <span class="bu">std::</span>vector<span class="op">&lt;</span><span class="dt">int</span><span class="op">&gt;</span> list_of_N<span class="op">{</span><span class="dv">100</span><span class="op">,</span> <span class="dv">500</span><span class="op">,</span> <span class="dv">1000</span><span class="op">,</span> <span class="dv">5000</span><span class="op">};</span></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span><span class="op">(</span><span class="dt">int</span> i<span class="op">{};</span> i <span class="op">&lt;</span> <span class="op">(</span><span class="dt">int</span><span class="op">)</span> list_of_N<span class="op">.</span>size<span class="op">();</span> <span class="op">++</span>i<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Ricordate di usare list_of_N.at(i) anziché list_of_N[i],</span></span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>    <span class="co">// perché così il compilatore controlla che il valore di `i`</span></span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>    <span class="co">// non esca dai limiti del vettore</span></span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> cur_N<span class="op">{</span>list_of_N<span class="op">.</span>at<span class="op">(</span>i<span class="op">)};</span></span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>    <span class="dt">double</span> risultato<span class="op">{</span>calcola_risultato<span class="op">(</span>cur_N<span class="op">)};</span></span>
-<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>    fmt<span class="op">::</span>println<span class="op">(</span><span class="st">&quot;Risultato per N = </span><span class="sc">{}</span><span class="st">: </span><span class="sc">{}</span><span class="st">&quot;</span><span class="op">,</span> cur_N<span class="op">,</span> risultato<span class="op">);</span></span>
-<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
-<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> calcola_risultato<span class="op">(</span><span class="dt">int</span> N<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Qui va tutta l&#39;implementazione del calcolo</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="co">// ...</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  <span class="bu">std::</span>vector<span class="op">&lt;</span><span class="dt">int</span><span class="op">&gt;</span> list_of_N<span class="op">{</span><span class="dv">100</span><span class="op">,</span> <span class="dv">500</span><span class="op">,</span> <span class="dv">1000</span><span class="op">,</span> <span class="dv">5000</span><span class="op">};</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span><span class="op">(</span><span class="dt">int</span> i<span class="op">{};</span> i <span class="op">&lt;</span> <span class="op">(</span><span class="dt">int</span><span class="op">)</span> list_of_N<span class="op">.</span>size<span class="op">();</span> <span class="op">++</span>i<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Ricordate di usare list_of_N.at(i) anziché list_of_N[i],</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>    <span class="co">// perché così il compilatore controlla che il valore di `i`</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>    <span class="co">// non esca dai limiti del vettore</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> cur_N<span class="op">{</span>list_of_N<span class="op">.</span>at<span class="op">(</span>i<span class="op">)};</span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>    <span class="dt">double</span> risultato<span class="op">{</span>calcola_risultato<span class="op">(</span>cur_N<span class="op">)};</span></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>    fmt<span class="op">::</span>println<span class="op">(</span><span class="st">&quot;Risultato per N = </span><span class="sc">{}</span><span class="st">: </span><span class="sc">{}</span><span class="st">&quot;</span><span class="op">,</span> cur_N<span class="op">,</span> risultato<span class="op">);</span></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 <p>Per fare un esempio un po’ più complicato, immaginiamo che vi venga chiesto di fare la simulazione di un esperimento dati tre parametri <span class="math inline">A</span>, <span class="math inline">B</span> e <span class="math inline">C</span>, e che l’esercizio si articoli in tre punti:</p>
 <ul>
 <li><p>Prima dovete calcolare il risultato dell’esperimento supponendo che il parametro <span class="math inline">A</span> sia affetto da errore, mentre altre due quantità <span class="math inline">B</span> e <span class="math inline">C</span> usate nella simulazione non hanno errore;</p></li>
 <li><p>Poi dovete invece supporre che sia <span class="math inline">B</span> affetto da errore, ma non <span class="math inline">A</span> e <span class="math inline">C</span>;</p></li>
 <li><p>Infine dovete supporre che solo <span class="math inline">C</span> sia affetto da un errore.</p></li>
 </ul>
-<p>Si possono inventare soluzioni sofisticate che impieghino un <code>std::vector</code> per seguire l’idea della variabile <code>list_of_N</code> nell’esempio precedente, ma nel caso di uno scritto (in cui il tempo è limitato) è meglio non stare a lambiccarsi troppo, e il codice seguente va più che bene:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> calcola_risultato<span class="op">(</span><span class="dt">double</span> A<span class="op">,</span> <span class="dt">double</span> err_A<span class="op">,</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>                         <span class="dt">double</span> B<span class="op">,</span> <span class="dt">double</span> err_B<span class="op">,</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>                         <span class="dt">double</span> C<span class="op">,</span> <span class="dt">double</span> err_C<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Qui va tutta l&#39;implementazione della logica, che può essere lunga!</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="co">// ...</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Questi sono i parametri dell&#39;esperimento, che immaginiamo siano</span></span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>  <span class="co">// forniti nel testo dell&#39;esercizio</span></span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> A_rif<span class="op">{</span><span class="fl">1.0</span><span class="op">};</span></span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> B_rif<span class="op">{</span><span class="fl">2.0</span><span class="op">};</span></span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> C_rif<span class="op">{</span><span class="fl">3.0</span><span class="op">};</span></span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> err_A_rif<span class="op">{</span><span class="fl">0.03</span><span class="op">};</span></span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> err_B_rif<span class="op">{</span><span class="fl">0.05</span><span class="op">};</span></span>
-<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> err_C_rif<span class="op">{</span><span class="fl">0.02</span><span class="op">};</span></span>
-<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Soluzione del primo punto: introduco solo un errore su A</span></span>
-<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> risultato1<span class="op">{</span>calcola_risultato<span class="op">(</span>A_rif<span class="op">,</span> err_A_rif<span class="op">,</span> B_rif<span class="op">,</span> <span class="fl">0.0</span><span class="op">,</span> C_rif<span class="op">,</span> <span class="fl">0.0</span><span class="op">)};</span></span>
-<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Soluzione del secondo punto: introduco solo un errore su B</span></span>
-<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> risultato2<span class="op">{</span>calcola_risultato<span class="op">(</span>A_rif<span class="op">,</span> <span class="fl">0.0</span><span class="op">,</span> B_rif<span class="op">,</span> err_B_rif<span class="op">,</span> C_rif<span class="op">,</span> <span class="fl">0.0</span><span class="op">)};</span></span>
-<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Soluzione del terzo punto: introduco solo un errore su C</span></span>
-<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> risultato3<span class="op">{</span>calcola_risultato<span class="op">(</span>A_rif<span class="op">,</span> <span class="fl">0.0</span><span class="op">,</span> B_rif<span class="op">,</span> <span class="fl">0.0</span><span class="op">,</span> C_rif<span class="op">,</span> err_C_rif<span class="op">)};</span></span>
-<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Stampo i risultati</span></span>
-<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a>  fmt<span class="op">::</span>println<span class="op">(</span><span class="st">&quot;Punto 1 (errore solo su A): </span><span class="sc">%f</span><span class="st">&quot;</span><span class="op">,</span> risultato1<span class="op">);</span></span>
-<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>  fmt<span class="op">::</span>println<span class="op">(</span><span class="st">&quot;Punto 2 (errore solo su B): </span><span class="sc">%f</span><span class="st">&quot;</span><span class="op">,</span> risultato2<span class="op">);</span></span>
-<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a>  fmt<span class="op">::</span>println<span class="op">(</span><span class="st">&quot;Punto 3 (errore solo su C): </span><span class="sc">%f</span><span class="st">&quot;</span><span class="op">,</span> risultato3<span class="op">);</span></span>
-<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div></li>
+<p>Si possono inventare soluzioni sofisticate che impieghino un <code>std::vector</code> per seguire l’idea della variabile <code>list_of_N</code> nell’esempio precedente, ma nel caso di uno scritto (in cui il tempo è limitato) è meglio non stare a lambiccarsi troppo… Il codice seguente va più che bene:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> calcola_risultato<span class="op">(</span><span class="dt">double</span> A<span class="op">,</span> <span class="dt">double</span> err_A<span class="op">,</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>                         <span class="dt">double</span> B<span class="op">,</span> <span class="dt">double</span> err_B<span class="op">,</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>                         <span class="dt">double</span> C<span class="op">,</span> <span class="dt">double</span> err_C<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Qui va tutta l&#39;implementazione della logica, che può essere lunga!</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="co">// ...</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Questi sono i parametri dell&#39;esperimento, che immaginiamo siano</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>  <span class="co">// forniti nel testo dell&#39;esercizio</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> A_rif<span class="op">{</span><span class="fl">1.0</span><span class="op">};</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> B_rif<span class="op">{</span><span class="fl">2.0</span><span class="op">};</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> C_rif<span class="op">{</span><span class="fl">3.0</span><span class="op">};</span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> err_A_rif<span class="op">{</span><span class="fl">0.03</span><span class="op">};</span></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> err_B_rif<span class="op">{</span><span class="fl">0.05</span><span class="op">};</span></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> err_C_rif<span class="op">{</span><span class="fl">0.02</span><span class="op">};</span></span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Soluzione del primo punto: introduco solo un errore su A</span></span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> risultato1<span class="op">{</span>calcola_risultato<span class="op">(</span>A_rif<span class="op">,</span> err_A_rif<span class="op">,</span> B_rif<span class="op">,</span> <span class="fl">0.0</span><span class="op">,</span> C_rif<span class="op">,</span> <span class="fl">0.0</span><span class="op">)};</span></span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Soluzione del secondo punto: introduco solo un errore su B</span></span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> risultato2<span class="op">{</span>calcola_risultato<span class="op">(</span>A_rif<span class="op">,</span> <span class="fl">0.0</span><span class="op">,</span> B_rif<span class="op">,</span> err_B_rif<span class="op">,</span> C_rif<span class="op">,</span> <span class="fl">0.0</span><span class="op">)};</span></span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Soluzione del terzo punto: introduco solo un errore su C</span></span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> risultato3<span class="op">{</span>calcola_risultato<span class="op">(</span>A_rif<span class="op">,</span> <span class="fl">0.0</span><span class="op">,</span> B_rif<span class="op">,</span> <span class="fl">0.0</span><span class="op">,</span> C_rif<span class="op">,</span> err_C_rif<span class="op">)};</span></span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Stampo i risultati</span></span>
+<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a>  fmt<span class="op">::</span>println<span class="op">(</span><span class="st">&quot;Punto 1 (errore solo su A): </span><span class="sc">{}</span><span class="st">&quot;</span><span class="op">,</span> risultato1<span class="op">);</span></span>
+<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a>  fmt<span class="op">::</span>println<span class="op">(</span><span class="st">&quot;Punto 2 (errore solo su B): </span><span class="sc">{}</span><span class="st">&quot;</span><span class="op">,</span> risultato2<span class="op">);</span></span>
+<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a>  fmt<span class="op">::</span>println<span class="op">(</span><span class="st">&quot;Punto 3 (errore solo su C): </span><span class="sc">{}</span><span class="st">&quot;</span><span class="op">,</span> risultato3<span class="op">);</span></span>
+<span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div></li>
 <li><p>Prima di consegnare lo scritto, rimettete a posto la formattazione. Se usate Replit, è sufficiente premere Ctrl+S dopo aver modificato ciascun file. Altrimenti, dal terminale eseguite questo comando, che è molto più rapido:</p>
 <pre><code>clang-format -i *.cpp *.h</code></pre>
 <p>per sistemare le indentazioni e i rientri di tutti i file <code>*.h</code> e <code>*.cpp</code> presenti nella cartella. Questo vi farà fare un figurone! (Sarebbe stata un’ottima cosa fare lo stesso anche per gli esercizi che avete consegnato. Ma se state leggendo queste righe per la prima volta solo il giorno dello scritto, ahimè è troppo tardi…)</p></li>

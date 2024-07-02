@@ -8,12 +8,12 @@ css:
 - ./css/asciinema-player.css
 ...
 
-# Esercizi e delle spiegazioni
+# Esercizi e spiegazioni
 
 <center>
 | Data              | Esercizi                                                        | Spiegazione                                                         |
 |-------------------|-----------------------------------------------------------------|---------------------------------------------------------------------|
-| 26 Settembre 2022 | [Arrays](carminati-esercizi-01.html)                            | [Lezione 1](tomasi-lezione-01.html)                                 |
+| 26 Settembre 2023 | [Arrays](carminati-esercizi-01.html)                            | [Lezione 1](tomasi-lezione-01.html)                                 |
 | 3 Ottobre 2023    | [Classe `Vettore`](carminati-esercizi-02.html)                  | [Lezione 2](tomasi-lezione-02.html)                                 |
 | 10 Ottobre 2023   | [Template e `vector`](carminati-esercizi-03.html)               | [Lezione 3](tomasi-lezione-03.html)                                 |
 | 17 Ottobre 2023   | [Esercizi facoltativi](carminati-esercizi-04.html)              |                                                                     |
@@ -90,9 +90,52 @@ root-config --incdir
 ![](images/root-vscode-config.png)
 
 
-## Cose da fare il giorno dello scritto
+## Come prepararsi all'esame scritto
 
-Fornisco un piccolo vademecum per aiutarvi a svolgere nel migliore di modi l'esame scritto.
+Fornisco un piccolo vademecum per aiutarvi a svolgere nel migliore dei modi l'esame scritto.
+
+#.  Dovete sapere **molto bene** la teoria per affrontare lo scritto, perché c'è sempre almeno una domanda la cui risposta è banalissima se si conoscono le equazioni che giustificano un metodo, quasi impossibile se non le si sanno. (Esempio: un problema potrebbe chiedere di determinare l'errore atteso da un integrale col metodo di Simpson, ma voi non sapete il valore vero. Nelle lezioni teoriche però si spiega qual è la relazione tra il passo $h$ del metodo di Simpson e l'errore atteso, e si fornisce pure una formula matematica per stimare l'errore senza sapere il valore esatto dell'integrale).
+
+#.  Curate benissimo gli esercizi, ed arrivate il giorno dello scritto con un archivio ordinato di tutti i file che vi serviranno. Vi raccomando di mettere tutto il codice in file `.h` evitando i file `.cpp`. Se quindi avete implementato una classe in questo modo:
+
+    ```c++
+    // File RandomGen.h
+
+    #pragma once
+
+    class RandomGen {
+      RandomGen::RandomGen(int seed);
+
+      // Etc.
+    };
+
+
+    // File RandomGen.cpp
+
+    #include "RandomGen.h"
+
+    RandomGen::RandomGen(int seed) {
+      // Implementation…
+    }
+    ```
+
+    sarebbe meglio levare di mezzo il file `RandomGen.cpp` e avere tutto nel file `RandomGen.h`:
+
+    ```c++
+    // File RandomGen.h
+
+    #pragma once
+
+    class RandomGen {
+      RandomGen::RandomGen(int seed) {
+        // Here comes the implementation that was originally in RandomGen.cpp
+      }
+
+      // Etc.
+    };
+    ```
+
+    Avere solo i file `.h` vi dà un grande vantaggio: non dovete complicare troppo il `Makefile` che scriverete durante il compito, perché basta includere i file `.h` che vi servono nel `main.cpp` e siete a posto. (Questo è esattamente quanto ho fatto nel file `gplot++.hpp`, che infatti non richiede modifiche al `Makefile` per essere usato).
 
 #.  Leggete con attenzione il testo, e annotate a margine (o su un foglio di brutta) le cose che sono esplicitamente richieste e quali no. Capita che gli studenti si incaponiscano a produrre un grafico fatto in un certo modo, quando il testo richiedeva semplicemente di “tabulare i risultati” (ossia, stamparli semplicemente a video!)
 
@@ -110,11 +153,11 @@ Fornisco un piccolo vademecum per aiutarvi a svolgere nel migliore di modi l'esa
 
 #.  Leggete *tutto* il testo dell'esame prima di iniziare a scrivere il codice. Magari nel primo punto vi viene chiesto di assumere una certa quantità fisica (una massa, una velocità…) come costante, ma in uno dei punti successivi dovete cambiarne il valore oppure addirittura trasformarla in una quantità che dipende dal tempo o dallo spazio. Se leggete prima tutto il testo, potete già fare caso a queste cose e progettare la struttura del codice in maniera più efficace.
 
-#.  I temi di esame sono solitamente espressi come una lista di punti, ciascuno dei quali è una domanda. **MAI** implementare il codice che risolve tutti i punti e poi eseguirlo! Implementate il codice che vi serve per risolvere il primo punto, stampatelo, verificate i risultati, e quando vi convince passate al secondo. In questo modo, se i numeri prodotti per il primo punto appaiono strani, potete correggere gli errori prima di passare al punto successivo. Altrimenti rischiate di dover buttare via tutto il lavoro: magari vi rendete conto che per risolvere bene il primo punto avevate bisogno di *due* variabili `std::vector` anziché una sola, e di conseguenza quanto avete implementato per i punti successivi non è più valido.
+#.  I temi di esame sono solitamente espressi come una lista di punti, ciascuno dei quali è una domanda. **MAI** implementare tutto il codice, da cima a fondo, che risolve tutti i punti e solo alla fine eseguirlo! Implementate il codice che vi serve per risolvere il primo punto, stampatelo, verificate i risultati, e quando vi convince passate al secondo. In questo modo, se i numeri prodotti per il primo punto appaiono strani, potete correggere gli errori prima di passare al punto successivo. Altrimenti rischiate di dover buttare via tutto il lavoro: magari vi rendete conto che per risolvere bene il primo punto avevate bisogno di *due* variabili `std::vector` anziché una sola, e di conseguenza quanto avete implementato per i punti successivi non è più valido.
 
 #.  Non succederà mai che viene richiesto l'uso di ROOT o di Gnuplot esplicitamente; fare però i grafici è utile per avere l'intuizione se i risultati che il vostro codice produce sono sensati oppure no.
 
-#.  Prima di fare i grafici, preoccupatevi però **sempre** di stampare con `cout` o con `fmt::println` i valori tabulati delle quantità che andate a mettere nei grafici. Noi docenti siamo sempre disposti a chiudere un occhio se un grafico risulta sbagliato o vuoto, ma i valori stampati a video sono corretti: vuol dire che avete semplicemente sbagliato a creare il grafico, e questo è un errore assolutamente perdonabile.
+#.  Prima di fare i grafici, preoccupatevi **sempre** di stampare con `cout` o con `fmt::println` i valori tabulati delle quantità che andate a mettere nei grafici. Noi docenti siamo sempre disposti a chiudere un occhio se un grafico risulta sbagliato o vuoto, però i valori che il programma stampa a video sono corretti: vuol dire che avete semplicemente sbagliato a creare il grafico, e questo è un errore assolutamente perdonabile.
 
     Nel caso di simulazioni Monte Carlo, i numeri da stampare sono sempre moltissimi, quindi stampatene giusto qualcuno:
 
@@ -125,7 +168,7 @@ Fornisco un piccolo vademecum per aiutarvi a svolgere nel migliore di modi l'esa
     for(int i{}; i < num_of_simulations; ++i) {
       results[i] = run_simulation();
 
-      // Stampo i primi 5 valori calcolati a video
+      // Stampo i primi 5 valori calcolati a video, giusto come controllo
       if(i < 5) {
         fmt::println("{}\t{}", i, results[i]);
       }
@@ -173,8 +216,6 @@ Fornisco un piccolo vademecum per aiutarvi a svolgere nel migliore di modi l'esa
 
     Questo porta ad alcuni problemi gravi:
 
-    -   Vi fa fare una **pessima** figura davanti al docente, che probabilmente scalerà qualche punto dal giudizio finale per il vostro scritto;
-
     -   Se vi accorgete solo dopo aver fatto copia-e-incolla che c'era un errore nel caso con `N = 100`, lo dovrete correggere per tutti gli altri casi. Questo vi farà sprecare molto tempo, che in un esame è una risorsa preziosa;
 
     -   In ognuna delle copie del codice che avete incollato bisogna ovviamente cambiare qualcosa qua e là; è facile che ci sia almeno una di quelle copie in cui modificate la riga sbagliata, oppure non la modificate del tutto. (È il caso dell'esempio sopra: ve ne eravate accorti?)
@@ -210,7 +251,7 @@ Fornisco un piccolo vademecum per aiutarvi a svolgere nel migliore di modi l'esa
 
     -   Infine dovete supporre che solo $C$ sia affetto da un errore.
 
-    Si possono inventare soluzioni sofisticate che impieghino un `std::vector` per seguire l'idea della variabile `list_of_N` nell'esempio precedente, ma nel caso di uno scritto (in cui il tempo è limitato) è meglio non stare a lambiccarsi troppo, e il codice seguente va più che bene:
+    Si possono inventare soluzioni sofisticate che impieghino un `std::vector` per seguire l'idea della variabile `list_of_N` nell'esempio precedente, ma nel caso di uno scritto (in cui il tempo è limitato) è meglio non stare a lambiccarsi troppo… Il codice seguente va più che bene:
 
     ```c++
     double calcola_risultato(double A, double err_A,
@@ -240,9 +281,9 @@ Fornisco un piccolo vademecum per aiutarvi a svolgere nel migliore di modi l'esa
       double risultato3{calcola_risultato(A_rif, 0.0, B_rif, 0.0, C_rif, err_C_rif)};
 
       // Stampo i risultati
-      fmt::println("Punto 1 (errore solo su A): %f", risultato1);
-      fmt::println("Punto 2 (errore solo su B): %f", risultato2);
-      fmt::println("Punto 3 (errore solo su C): %f", risultato3);
+      fmt::println("Punto 1 (errore solo su A): {}", risultato1);
+      fmt::println("Punto 2 (errore solo su B): {}", risultato2);
+      fmt::println("Punto 3 (errore solo su C): {}", risultato3);
     }
     ```
 
