@@ -26,20 +26,29 @@ all: \
 
 index.html: index.md
 	$(PANDOC) \
-		--standalone \
-		-A asciinema-include.html \
-                --template ./template.html5 \
+		--katex \
+		--to html5+smart \
+		--toc \
+		--toc-depth 2 \
+		--template ./template.html5 \
+		--css css/theme.css \
+		--css css/skylighting-solarized-theme.css \
+		--wrap=none \
+		-f markdown+tex_math_single_backslash+subscript+superscript \
 		-o $@ \
 		$<
 
 carminati-esercizi-%.html: carminati-esercizi-%.md
 	$(PANDOC) \
-	    	--standalone \
 		--katex \
+		--to html5+smart \
 		--toc \
-                --template ./template.html5 \
+		--toc-depth 2 \
+		--template ./template.html5 \
+		--css css/theme.css \
+		--css css/skylighting-solarized-theme.css \
+		--wrap=none \
 		-f markdown+tex_math_single_backslash+subscript+superscript \
-		-t html5 \
 		-o $@ $<
 
 tomasi-c++-python-julia.html: tomasi-c++-python-julia.md

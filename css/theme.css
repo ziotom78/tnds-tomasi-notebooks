@@ -27,8 +27,8 @@
 
   /* --- Text --- */
 
-  --font-family-prose: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen,Ubuntu,Cantarell,"Open Sans","Helvetica Neue",sans-serif;
-  --font-family-heading: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen,Ubuntu,Cantarell,"Open Sans","Helvetica Neue",sans-serif;
+  --font-family-prose: system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen,Ubuntu,Cantarell,"Open Sans","Helvetica Neue",sans-serif;
+  --font-family-heading: system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen,Ubuntu,Cantarell,"Open Sans","Helvetica Neue",sans-serif;
   --font-family-code: Menlo, monospace;
   --side-note-number-font-family: var(--font-family-prose);
 
@@ -99,7 +99,39 @@
   /* --- Layout --- */
 
   --main-width: 745px;
+  /* The name doesn't indicate it, but this variable actually specifies an
+   * effective minimum width. (It didn't previously behave this way, but the
+   * change to do so was made in a backwards-compatible way, so the variable
+   * was not renamed.)
+   **/
   --main-width-narrow: 550px;
+  --side-note-max-width: 300px;
+
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background-color: #161313;
+
+    --color-text: #f7f5f2;
+    --color-text-secondary: #9d9b99;
+    --color-link: #2994ff;
+    --color-sidenote: #b4b2af;
+
+    --highlight-red: #660000;
+    --highlight-yellow: #7f6000;
+    --highlight-green: #274e13;
+    --highlight-blue: #1c4587;
+    --highlight-purple: #351c75;
+
+    --color-inline-code: #f7f5f2;
+    --color-inline-code-bg: #242121;
+
+    --color-border: #393635;
+    --color-border-heavy: #524f4d;
+
+    --color-table-heading: #242121;
+  }
 }
 
 *, *:after, *:before {
@@ -142,6 +174,23 @@ body {
 }
 
 /* }}} */
+/* ----- Utility classes -----------------------------------------------  {{{ */
+.only-light-mode {
+  display: inherit;
+}
+.only-dark-mode {
+  display: none;
+}
+
+@media (prefers-color-scheme: dark) {
+  .only-light-mode {
+    display: none;
+  }
+  .only-dark-mode {
+    display: inherit;
+  }
+}
+/* }}} */
 /* ----- Side notes and margin notes ----------------------------------- {{{ */
 /* --- Side note text and numbering --- {{{ */
 
@@ -162,7 +211,7 @@ body {
   color: var(--color-sidenote);
 }
 
-body {
+main {
   counter-reset: sidenote-counter;
 }
 
@@ -688,6 +737,18 @@ table {
   background-color: var(--background-color);
 }
 
+thead, tbody {
+  vertical-align: top;
+}
+
+td > *:first-child {
+  margin-top: 0;
+}
+td > *:last-child {
+  margin-bottom: 0;
+}
+
+
 @media print {
   table {
     background-color: initial;
@@ -819,7 +880,7 @@ nav#TOC > input:checked + ul {
 
     max-width: calc((100vw - var(--main-width)) / 2 - 2 * var(--line-height));
     max-height: calc(100vh - 2 * var(--line-height));
-    overflow-y: scroll;
+    overflow-y: auto;
   }
 
   nav#TOC label {
@@ -833,6 +894,12 @@ nav#TOC > input:checked + ul {
   }
   nav#TOC > ul {
     margin-left: 0;
+  }
+
+  nav#TOC li {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   nav#TOC code {
@@ -862,14 +929,12 @@ nav#TOC > input:checked + ul {
   clear: right;
   position: relative;
 
-  --side-note-max-width: 300px;
-
   width: var(--computed-width);
   max-width: var(--side-note-max-width);
   margin-right: calc(-1 * min(var(--computed-width), var(--side-note-max-width)) - var(--margin-left));
 }
 
-/* --- Side notes always visible --- {{{ */
+/* --- Side notes and table of contents always visible --- {{{ */
 
 /* Unfortunately, variables aren't in scope here.
  * 745px = --main-width
@@ -878,7 +943,6 @@ nav#TOC > input:checked + ul {
  */
 @media screen and (min-width: calc(745px + 2 * (52px + 206px + 52px))) {
   header,
-  nav#TOC,
   main,
   footer {
     max-width: var(--main-width);
@@ -900,7 +964,7 @@ nav#TOC > input:checked + ul {
 
   .wide {
     width: 100%;
-    overflow-x: scroll;
+    overflow-x: auto;
   }
 
   .wide.extra-wide {
@@ -928,6 +992,9 @@ nav#TOC > input:checked + ul {
   }
 }
 
+/* }}} */
+/* --- Side notes visibile, table of contents collapsed, double-wide margins --- {{{ */
+
 /* Unfortunately, variables aren't in scope here.
  * 745px = --main-width
  * 52px = 2 * --line-height
@@ -952,7 +1019,7 @@ nav#TOC > input:checked + ul {
 
   .wide {
     width: 100%;
-    overflow-x: scroll;
+    overflow-x: auto;
     overflow-y: hidden;
   }
 
@@ -991,6 +1058,9 @@ nav#TOC > input:checked + ul {
   }
 }
 
+/* }}} */
+/* --- Side notes visibile, table of contents collapsed --- {{{ */
+
 /* Unfortunately, variables aren't in scope here.
  * 550px = --main-width-narrow
  * 26px = --line-height
@@ -1002,7 +1072,7 @@ nav#TOC > input:checked + ul {
   main,
   footer {
     margin-left: var(--line-height);
-    max-width: var(--main-width-narrow);
+    max-width: calc(max(var(--main-width-narrow), 100vw - (3 * var(--line-height)) - var(--side-note-max-width)));
     margin-right: auto;
   }
 
@@ -1015,7 +1085,7 @@ nav#TOC > input:checked + ul {
 
   .wide {
     width: var(--main-width);
-    overflow-x: scroll;
+    overflow-x: auto;
     overflow-y: hidden;
   }
 
@@ -1037,7 +1107,7 @@ nav#TOC > input:checked + ul {
 }
 
 /* }}} */
-/* --- Side notes collapsed --- {{{ */
+/* --- Side notes and table of contents collapsed --- {{{ */
 
 /* Unfortunately, variables aren't in scope here.
  * See calculations above.
@@ -1067,7 +1137,7 @@ nav#TOC > input:checked + ul {
 
   .wide {
     width: 100%;
-    overflow-x: scroll;
+    overflow-x: auto;
     overflow-y: hidden;
   }
 
@@ -1088,11 +1158,73 @@ nav#TOC > input:checked + ul {
 @page {
   size: letter;
   margin: 0.5in;
+  /* To make room for line numbers in left margin. */
+  margin-left: 0.25in;
 }
 
 @media print {
+  :root {
+    --line-height: 18px;
+    --font-size: 12px;
+
+    --inline-code-font-size: 11px;
+    --code-block-font-size: 10px;
+    --code-block-side-padding: 6px;
+    --line-numbers-font-size: 8.5px;
+
+    --tight-code-line-height: 12.5px;
+    --tight-code-padding-top: 2px;
+
+    --side-note-line-height: 14px;
+    --side-note-font-size: 9px;
+    --side-note-code-font-size: 9px;
+    --side-note-baseline-offset: 3px;
+    --side-note-sup-offset: -4px;
+    --side-note-number-hang-left: -4px;
+    --side-note-text-indent: -6.5px;
+
+    --title-font-size: 30px;
+    --title-code-font-size: 29px;
+    --title-line-height: 37px;
+    --title-margin-top: 71px;
+
+    --h1-font-size: 22px;
+    --h1-code-font-size: 20px;
+    --h1-line-height: 28px;
+    --h1-word-spacing: 0.5px;
+    --h1-margin-top: 18px;
+    --h1-margin-bottom: 6px;
+
+    --h2-font-size: 16.5px;
+    --h2-code-font-size: 15px;
+    --h2-line-height: 22px;
+    --h2-word-spacing: 0px;
+    --h2-margin-top: 14px;
+    --h2-margin-bottom: 4.5px;
+
+    --ul-indent-size: 18px;
+    --ol-indent-size: 14px;
+
+    --hr-margin-top: 14px;
+
+    --figcaption-line-height: 16px;
+    --figcaption-font-size: 10px;
+    --figcaption-code-font-size: 9.5px;
+    --figcaption-gap: 4.5px;
+    --captioned-figure-gap: 7.5px;
+
+    --table-line-height: 16px;
+    --table-font-size: 10px;
+    --table-code-font-size: 9.5px;
+
+    --nav-toc-font-size: 8.5px;
+    --nav-toc-code-font-size: 8.5px;
+  }
+
   body {
     padding-top: 0;
+    /* To make room for line numbers in left margin. */
+    padding-left: 0.25in;
   }
 
   header,
@@ -1135,7 +1267,7 @@ h1, h2, h3 {
   page-break-after: avoid;
 }
 
-table, figure, pre {
+table, figure, pre, img {
   page-break-inside: avoid;
 }
 /* }}} */
