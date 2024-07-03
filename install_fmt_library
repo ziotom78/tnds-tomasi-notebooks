@@ -5,7 +5,7 @@
 # This Bash script downloads the "fmt" C++ library and installs it in
 # the current directory.
 
-FMT_VERSION="10.1.1"
+FMT_VERSION="11.0.0"
 
 download_file() {
     filename="$1"
@@ -23,7 +23,7 @@ download_file() {
     printf "Downloading file '%s' (version %s)\n" "$filename" "$FMT_VERSION"
 
     url="https://raw.githubusercontent.com/fmtlib/fmt/${FMT_VERSION}/$filename"
-    
+
     if which curl >/dev/null 2>/dev/null; then
         curl -s "$url" > "$dest"
     elif which wget >/dev/null 2>/dev/null; then
