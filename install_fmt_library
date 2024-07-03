@@ -38,7 +38,7 @@ echo "Going to download fmt library version ${FMT_VERSION} in current directory"
 echo "Press ENTER to continue, or Ctrl+C to quit…"
 read -s
 
-for filename in fmt/args.h fmt/chrono.h fmt/color.h fmt/compile.h fmt/core.h fmt/format-inl.h fmt/format.h fmt/os.h fmt/ostream.h fmt/printf.h fmt/ranges.h fmt/std.h fmt/xchar.h; do
+for filename in fmt/base.h fmt/args.h fmt/chrono.h fmt/color.h fmt/compile.h fmt/core.h fmt/format-inl.h fmt/format.h fmt/os.h fmt/ostream.h fmt/printf.h fmt/ranges.h fmt/std.h fmt/xchar.h; do
     download_file "include/$filename" "$filename"
 done
 
