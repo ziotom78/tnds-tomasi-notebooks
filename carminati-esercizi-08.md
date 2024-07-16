@@ -151,7 +151,7 @@ Struttureremo la soluzione del problema in modo simile a quanto fatto nelle prec
 -   Definiamo una classe astratta `FunzioneVettorialeBase` con un unico metodo `Eval`, puramente virtuale, che dato un `array` ed un `double`, rappresentante il tempo, restituisce il valore della derivata prima nel punto e nell'istante considerati.
 -   Da questa classe astratta, deriviamo una classe concreta `OscillatoreArmonico`, nella quale implementeremo il metodo `Eval` concreto relativo all'oscillatore armonico.
 -   Definiamo una classe astratta `EquazioneDifferenzialeBase` che contenga il metodo virtuale puro `Passo`, puramente virtuale, che dati il tempo $t$, un vettore $\vec x$, il passo di integrazione $h$ e un puntatore ad una `FunzioneVettorialeBase`, restituisca la una stima del valore della posizione $\vec x$ al tempo $t + h$. Avere il tempo $t$ come argomento esplicito non serve per questo esercizio in particolare, ma permetterà in futuro (come ad esempio nell'esercizio [8.4](carminati-esercizi-08.html#esercizio-8.4)) di avere forzanti esterne o parametri dipendenti dal tempo.
--   Da questa classe astratta, deriviamo una classe concreta che implementi il metodo `Passo` relativo al metodo di Eulero. 
+-   Da questa classe astratta, deriviamo una classe concreta che implementi il metodo `Passo` relativo al metodo di Eulero.
 
 Per comodità possiamo mettere tutte queste classi nello stesso header file che potrebbe avere l'aspetto seguente:
 
@@ -326,7 +326,7 @@ int main(int argc, char *argv[]) {
 
 Come al solito, potete installare la libreria `fmtlib` usando lo script [`install_fmt_library`](./install_fmt_library): scaricatelo nella directory dell'esercizio ed eseguitelo con `sh install_fmt_library`, oppure eseguite direttamente questo comando:
 
-<input type="text" value="curl https://ziotom78.github.io/tnds-tomasi-notebooks/install_fmt_library | sh" id="installFmtCommand" readonly="1" size="60"><button onclick='copyFmtInstallationScript("installFmtCommand")'>Copia</button> 
+<input type="text" value="curl https://ziotom78.github.io/tnds-tomasi-notebooks/install_fmt_library | sh" id="installFmtCommand" readonly="1" size="60"><button onclick='copyFmtInstallationScript("installFmtCommand")'>Copia</button>
 
 In alternativa, scaricate questo [file zip](./fmtlib.zip) nella directory dell'esercizio e decomprimetelo.  Le istruzioni dettagliate sono qui: [index.html#fmtinstall](index.html#fmtinstall).
 
@@ -439,17 +439,17 @@ In questo caso l'integrazione numerica dell'equazione differenziale non si può 
 
 -   Una possibile soluzione consiste nel portare avanti l'integrazione fino a quando non si registra un cambiamento di segno della velocità angolare;
 
--   Siccome possiamo calcolare la velocità solo con granularità pari al passo di integrazione, possiamo migliorare la stima del periodo di oscillazione interpolando linearmente tra i punti $(t,v(t))$ e $(t+h,v(t+h))$ calcolando quando la retta ottenuta passa per lo zero; il tempo così calcolato corrisponde al semiperiodo dell'oscillazione. 
+-   Siccome possiamo calcolare la velocità solo con granularità pari al passo di integrazione, possiamo migliorare la stima del periodo di oscillazione interpolando linearmente tra i punti $(t,v(t))$ e $(t+h,v(t+h))$ calcolando quando la retta ottenuta passa per lo zero; il tempo così calcolato corrisponde al semiperiodo dell'oscillazione.
 
 Un frammento di codice che implementa questo algoritmo è il seguente:
 
 ```c++
 double A{0.1 * (i + 1)};
 double v{};
-double t{}; 
+double t{};
 std::array<double, 2> x{-A , v} ;
 while (x[1] >= 0) {
-    v = x[1];    
+    v = x[1];
     x = myRK4.Passo(t, x, h, osc);
     t = t + h;
     fmt::println("{} {} {}", A, x[0], t);
@@ -473,7 +473,7 @@ $$
 T = \frac{2\pi}{\sqrt{\frac{g}l}} \approx 2.007\,\text{s},
 $$
 
-ma aumenti significativamente per grandi ampiezze. 
+ma aumenti significativamente per grandi ampiezze.
 
 
 # Esercizio 8.4 - Oscillazione forzate e risonanza (da consegnare) {#esercizio-8.4}
@@ -589,7 +589,7 @@ Consideriamo il moto nel piano $(x, y)$ di un elettrone in un campo magnetico co
 -   $m = 9.1093826\times10^{-31}\,\text{kg}$;
 -   $v_x(0) = 8\times10^6\,\text{m/s}$;
 -   $B_z = 5\times10^{-3}\,\text{T}$;
--   tutte le altre componenti di campi e velocità iniziali sono nulle. 
+-   tutte le altre componenti di campi e velocità iniziali sono nulle.
 
 Questi parametri corrispondono grosso modo all'apparato sperimentale per la misura di $e/m$ del laboratorio del II anno.
 
@@ -607,7 +607,7 @@ Come di consueto, elenco alcuni errori molto comuni che ho trovato negli anni pa
 -   Questi esercizi richiedono di passare una serie di parametri numerici dalla linea di comando. Assicuratevi di stampare una buona documentazione se l'utente non li specifica, e fate magari in modo che il comando `make esegui` avvii il vostro programma con parametri sensati.
 
     Ecco un buon esempio:
-    
+
     ```
     $ ./esercizio_9.4
     Uso: esercizio_9.4 passo_h omega0 alpha omega_forzante

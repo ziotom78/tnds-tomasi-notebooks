@@ -142,7 +142,7 @@ private:
     Con il meccanismo basato su `#ifndef …`, alla prima inclusione di `vettore.h`, viene creata una “variabile” `__vettore_h__` (il termine esatto è *macro*). Al secondo tentativo di inclusione l'esistenza di `__vettore_h__` globale forza il compilatore a saltare tutte le righe tra `#define` ed `#endif`, di fatto evitando la seconda inclusione del file `vettore.h`.
 
     La scrittura `#pragma once` abbrevia la sequenza di `#ifndef`/`#define`/`#endif` in una sola riga; non è nello standard C++, ma è così comoda che è implementata su tutti i compilatori C++ in commercio.
-    
+
     Questa parte è spiegata anche sulle [slides](tomasi-lezione-02.html#/uso-di-header-files).
 
 -   Notate l'impementazione *in-line* del metodo `GetN()`: i metodi di una classe possono essere anche implementati direttamente nell'header file (`.h`) e non nel file `.cpp`. L'implementazione inline implica che il compilatore metta una copia della funzione ogni volta che questa viene chiamata, anziché mantenerne **una sola copia** ed invocarla da vari punti del codice. In questo modo il file eseguibile aumenta di dimensioni (ci sono ora N copie dell'implementazione di `GetN()`), ma le prestazioni sono migliori in quanto non si deve effettuare una chiamata alla funzione. In genere l'implementazione inline viene effettuata per funzioni brevi e invocate spesso.
@@ -426,7 +426,7 @@ Una possibile implementazione è data qui sotto:
 
       // Qui richiediamo una nuova area di memoria
       m_v = new double[m_N];
-      
+
       // Copiamo nella nuova area di memoria gli elementi di `V`
       for (int i = 0; i < m_N; i++) {
           m_v[i] = V.GetComponent(i);
@@ -592,7 +592,7 @@ using namespace std;
 int main(int argc, char *argv[]) {
   // Vedi le slide
   test_statistical_functions();
-  
+
   if (argc != 3) {
     cout << "Uso del programma: " << argv[0] << " <n_data> <filename> " << endl;
     return 1;

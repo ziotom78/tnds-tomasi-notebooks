@@ -1,6 +1,6 @@
 ---
 title: "Lezione 6: Ricerca di zeri"
-author: 
+author:
 - "Leonardo Carminati"
 - "Maurizio Tomasi"
 date: "A.A. 2023−2024"
@@ -87,7 +87,7 @@ In questo e nei prossimi esercizi avremo a che fare con diverse funzioni $y = f(
       Parabola() : m_a{}, m_b{}, m_c{1.0} {}
       Parabola(double a, double b, double c) : m_a{a}, m_b{b}, m_c{c} {}
       ~Parabola() {}
-      double Eval(double x) const override { 
+      double Eval(double x) const override {
           // Horner's method, see https://en.wikipedia.org/wiki/Horner%27s_method
           return (m_a * x + m_b) * x + m_c;
       }
@@ -249,17 +249,17 @@ public:
   Solutore();
   Solutore(double prec);
   virtual ~Solutore() {}
-  
+
   // For pedagogical purposes, you find here two definitions: one
   // uses a pointer (*), the other one a reference (&). In your code
   // you just have to implement one of them. (The one with the reference
   // should be preferred).
-  
+
   virtual double CercaZeriPointer(double xmin, double xmax, const FunzioneBase * f,
                                   double prec = 1e-3, int nmax = 100) = 0;
   virtual double CercaZeriReference(double xmin, double xmax, const FunzioneBase & f,
                                     double prec = 1e-3, int nmax = 100) = 0;
-                                    
+
   void SetPrecisione(double epsilon) { m_prec = epsilon; }
   double GetPrecisione() const { return m_prec;}
 
@@ -278,7 +278,7 @@ protected:
 
 ## La classe concreta `Bisezione`
 
-L'implementazione dell'algoritmo di bisezione dovrà necessariamente avvenire costruendo una classe dedicata `Bisezione` che erediti da `Solutore` e implementi una versione concreta del metodo `CercaZeri`. 
+L'implementazione dell'algoritmo di bisezione dovrà necessariamente avvenire costruendo una classe dedicata `Bisezione` che erediti da `Solutore` e implementi una versione concreta del metodo `CercaZeri`.
 
 ```c++
 class Bisezione : public Solutore {
@@ -289,10 +289,10 @@ public:
 
   // Here too we provide two definitions. You must only implement the one you
   // provided in `Solutore`!
-  
+
   virtual double CercaZeriPointer(double xmin, double xmax, const FunzioneBase * f,
                                   double prec = 1e-3, int nmax = 100);
-                                  
+
   virtual double CercaZeriReference(double xmin, double xmax, const FunzioneBase & f,
                                     double prec = 1e-3, int nmax = 100);
 };
@@ -319,7 +319,7 @@ Ci sono alcuni aspetti da tenere in considerazione:
 -   Nell'implementazione delle condizioni di ricerca dall'intervallo di incertezza occorre prestare attenzione alle operazioni tra *floating point* soprattutto in prossimità della radice.
 
     Ad esempio, le espressioni $f(a)\cdot f(c)$ e $f(c)\cdot f(b)$ hanno una buona probabilità di essere approssimate a zero, dal momento che entrambi gli argomenti convergono a una radice di $f$. Per evitare questa eventualità, è meglio valutare, il prodotto dei segni $\text{sign} f(a) \cdot \text{sign} f(c)$ e così via. (Ecco perché sopra abbiamo implementato la funzione `sign`).
-    
+
 -   Un altro controllo utile è contare il numero di iterazioni dell'algoritmo e stampare un avviso nel caso queste siano troppo grandi (sopra il centinaio). In tal modo ci si accorge se ci sono possibili errori nell'implementazione del ciclo o nelle caratteristiche della funzione $f$.
 
 
@@ -345,7 +345,7 @@ fmt::print("x0 = {0:.{1}f}", zero, cifre_significative);
 
 Potete installare la libreria `fmtlib` eseguendo questo comando:
 
-<input type="text" value="curl https://ziotom78.github.io/tnds-tomasi-notebooks/install_fmt_library | sh" id="installFmtCommand" readonly="1" size="60"><button onclick='copyFmtInstallationScript("installFmtCommand")'>Copia</button> 
+<input type="text" value="curl https://ziotom78.github.io/tnds-tomasi-notebooks/install_fmt_library | sh" id="installFmtCommand" readonly="1" size="60"><button onclick='copyFmtInstallationScript("installFmtCommand")'>Copia</button>
 
 e seguite poi le istruzioni fornite a video.
 
@@ -389,7 +389,7 @@ Come di consueto, elenco alcuni errori molto comuni che ho trovato negli anni pa
     $$
 
     nell'intervallo $[-4, -2]$, il programma dovrebbe riportare correttamente che c'è uno zero in $x = 4$, anche se è un punto all'estremità dell'intervallo. (Lo stesso vale ovviamente se si specifica l'intervallo $[-2, 0]$).
-    
+
 -   Un errore un po' più subdolo è quello di non individuare lo zero se si trova esattamente in mezzo all'intervallo: nell'esempio della funzione $f(x)$ vista sopra, il codice di alcuni studenti non trova una soluzione se si specifica l'intervallo $[-3, -1]$, perché lo zero cade esattamente a metà e il codice non si accorge che $f(c) = 0$ quando $c = (a + b)/2$.
 
 -   Il codice di alcuni studenti non si accorge di aver raggiunto la precisione richiesta, e continua ad iterare fino al numero massimo di iterazioni `m_nmax`.

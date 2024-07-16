@@ -109,7 +109,7 @@ int main() {
 ```
 
 Il programma usa [gplot++](https://github.com/ziotom78/gplotpp), installabile con i soliti comandi descritti [qui](./index.html#gplotinstall).
-    
+
 Se eseguite il programma, otterrete questo grafico, non molto incoraggiante:
 
 <center>![](./media/histogram-bad.png)</center>
@@ -128,7 +128,7 @@ plt.set_yrange(0, NAN);
 Passare `NAN` come estremo superiore indica a Gnuplot che ci va bene che sia lui a calcolare il valore ottimale per l'estremo superiore, perché a noi interessa indicare solo l'estremo inferiore. Il risultato diventa questo:
 
 <center>![](./media/histogram-good.png)</center>
-    
+
 
 Se invece volete usare ROOT, aggiungete in coda al `main` qualcosa di simile:
 
@@ -358,7 +358,7 @@ Studiamo in questo esercizio il comportamento delle tecniche Montecarlo per il c
 
 #.  Stimare l'errore sul calcolo dell'integrale a 100, 500, 1000, 5000, 10 000 punti come deviazione standard dei 10 000 valori calcolati per ogni $N$. Far un grafico di questo errore in funzione di $N$.
 
-#.  Assumendo che l'andamento dell'errore sia noto (del tipo $k / \sqrt{N}$), si determini quanti punti sono necessari per ottenere una precisione di 0.001. Si ripeta lo stesso lavoro con il metodo hit-or-miss. 
+#.  Assumendo che l'andamento dell'errore sia noto (del tipo $k / \sqrt{N}$), si determini quanti punti sono necessari per ottenere una precisione di 0.001. Si ripeta lo stesso lavoro con il metodo hit-or-miss.
 
 Alcune osservazioni per lo svolgimento dell'esercizio:
 

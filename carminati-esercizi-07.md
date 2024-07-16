@@ -109,7 +109,7 @@ private:
         cerr << "Errore, il numero di passi non può essere negativo!\n";
         exit(1);
     }
-    
+
     m_h = (getB() - getA()) / nstep;
     double sum{};
 
@@ -138,7 +138,7 @@ In questo modo il metodo `calculate` può usare gli estremi restituiti da `getA(
 
 Viene ora fornito un codice per verificare il funzionamento di quanto implementato finora, che usa la libreria `fmtlib`. Come al solito, potete installarla usando lo script [`install_fmt_library`](./install_fmt_library): scaricatelo nella directory dell'esercizio ed eseguitelo con `sh install_fmt_library`, oppure eseguite direttamente questo comando:
 
-<input type="text" value="curl https://ziotom78.github.io/tnds-tomasi-notebooks/install_fmt_library | sh" id="installFmtCommand" readonly="1" size="60"><button onclick='copyFmtInstallationScript("installFmtCommand")'>Copia</button> 
+<input type="text" value="curl https://ziotom78.github.io/tnds-tomasi-notebooks/install_fmt_library | sh" id="installFmtCommand" readonly="1" size="60"><button onclick='copyFmtInstallationScript("installFmtCommand")'>Copia</button>
 
 In alternativa, scaricate questo [file zip](./fmtlib.zip) nella directory dell'esercizio e decomprimetelo. Le istruzioni dettagliate sono qui: [index.html#fmtinstall](index.html#fmtinstall).
 
@@ -166,7 +166,7 @@ int main (int argc, char* argv[]) {
   Seno f{};
   Midpoint myInt{};
 
-  double I{myInt.integrate(0, M_PI, nstep, f)}; 
+  double I{myInt.integrate(0, M_PI, nstep, f)};
 
   fmt::print("Passi: {}, I = {}\n", nstep, I);
 }
@@ -185,7 +185,7 @@ std::vector<double> errors(steps.size());
 double true_value{2};
 fmt::print("Passi        Intervallo h  Errore");
 for (size_t i{}; i < (int) steps.size(); ++i) {
-  double estimated_value{myInt.integrate(steps[i], f)}; 
+  double estimated_value{myInt.integrate(steps[i], f)};
   errors[i] = fabs(estimated_value - true_value);
   step_sizes[i] = myInt.GetH();
   fmt::print("{:12d} {:14.8e} {:20.8e}\n", steps[i], step_sizes[i], errors[i]);
@@ -213,7 +213,7 @@ TGraph g_errore{};
 double true_value{2};
 fmt::print("Passi        Errore")
 for (int i{}; i < (int) steps.size(); i++) {
-  double estimated_value{myInt.integrate(steps[i], f)}; 
+  double estimated_value{myInt.integrate(steps[i], f)};
   double err{fabs(estimated_value - true_value)};
   fmt::print("{:12d} {:20.8e}\n", steps[i], err);
   g_errore.SetPoint(i, myInt.GetH(), err);
@@ -260,7 +260,7 @@ Come scritto per l'esercizio 7.0, il notebook Julia per la lezione corrente all'
 
 # Esercizio 7.2 - Integrazione con la formula dei trapezi con precisione fissata (da consegnare) {#esercizio-7.2}
 
-Concludiamo l'esercitazione implementando l'integrazione della funzione $\sin x$ su $[0, \pi]$ con il metodo dei trapezi. In quest'ultimo esercizio proviamo a riflettere sull'uso di un algoritmo di integrazione numerica a precisione fissata invece che a numero di passi fissato. Negli esercizi precedenti il calcolo a numero di passi fissato non ci da alcuna indicazione sulla qualità del risultato: integrare con 10 passi è sufficiente? L'idea che vogliamo sviluppare è che l'utente fornisca una precisione desiderata e l'algoritmo sia in grado di aumentare automaticamente il numero di passi fino a raggiungere la precisione richiesta sul valore dell'integrale. L'algoritmo dovrà accettare in input il valore della precisione e raddoppiare il numero di passi finché l'errore (stimato runtime, si veda sotto) non diventa inferiore alla precisione impostata. 
+Concludiamo l'esercitazione implementando l'integrazione della funzione $\sin x$ su $[0, \pi]$ con il metodo dei trapezi. In quest'ultimo esercizio proviamo a riflettere sull'uso di un algoritmo di integrazione numerica a precisione fissata invece che a numero di passi fissato. Negli esercizi precedenti il calcolo a numero di passi fissato non ci da alcuna indicazione sulla qualità del risultato: integrare con 10 passi è sufficiente? L'idea che vogliamo sviluppare è che l'utente fornisca una precisione desiderata e l'algoritmo sia in grado di aumentare automaticamente il numero di passi fino a raggiungere la precisione richiesta sul valore dell'integrale. L'algoritmo dovrà accettare in input il valore della precisione e raddoppiare il numero di passi finché l'errore (stimato runtime, si veda sotto) non diventa inferiore alla precisione impostata.
 
 1.  Come nei casi precedenti si può costruire una classe dedicata per l'implementazione del metodo dei trapezi.
 
@@ -304,7 +304,7 @@ I - I_{2N} = k\left(\frac{h}2\right)^2.
 \end{cases}
 $$
 
-Sottraendo per esempio la prima equazione alla seconda, non è difficile ricavare che una stima dell'errore pari a 
+Sottraendo per esempio la prima equazione alla seconda, non è difficile ricavare che una stima dell'errore pari a
 $$
 \epsilon(N) = \frac43 \left|I_{2N} - I_N\right|.
 $$
@@ -351,7 +351,7 @@ e così via secondolo schema in figura, con $L = b - a$:
 
 ![](https://labtnds.docs.cern.ch/Lezione7/intervallo.png)
 
-I valori dell'ultima approssimazione dell'integrale e dell'ultima somma calcolata sono memorizzati all'interno dell'oggetto. In questo modo, se viene richiesto di ricalcolare l'integrale, non è necessario ricominciare da capo. 
+I valori dell'ultima approssimazione dell'integrale e dell'ultima somma calcolata sono memorizzati all'interno dell'oggetto. In questo modo, se viene richiesto di ricalcolare l'integrale, non è necessario ricominciare da capo.
 
 
 

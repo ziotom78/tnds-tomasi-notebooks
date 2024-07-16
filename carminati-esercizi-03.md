@@ -244,7 +244,7 @@ using namespace str;
 int main (int argc, char * argv[]) {
   // Esegui i test sull'implementazione di `Vettore` (v. slide di Tomasi)
   test_vettore();
-  
+
   if(argc < 3) {
       cerr << "Uso del programma: " << argv[0] << " <n_data> <filename>\n";
       return 1;
@@ -311,7 +311,7 @@ using namespace std;
 template <typename T> vector<T> Read(int N, const char* filename) {
   // Crea un vettore “vuoto”, ossia privo di elementi
   vector<T> v;
-  
+
   ifstream in{filename};
   if(in) {
       cerr << "Impossibile aprire il file " << filename << "\n";
@@ -321,10 +321,10 @@ template <typename T> vector<T> Read(int N, const char* filename) {
   for (int i{}; i < N; i++) {
       T val{};
       in >> val;
-      
+
       // Aggiungi in coda a `v` un nuovo elemento
       v.push_back(val);
-      
+
       if(in.eof()) {
           cerr << "Fine del file raggiunta prematuramente\n";
           exit(1);
@@ -458,13 +458,13 @@ template <typename T> vector<T> Read(const char* filename) {
       cerr << "Impossibile aprire il file " << filename << "\n";
       exit(1);
   }
-  
+
   while(! in.eof()) {
       T val;
       in >> val;
       v.push_back(val);
   }
-  
+
   return v;
 }
 ```
@@ -506,7 +506,7 @@ using namespace std;
 int main(int argc, char * argv[]) {
   // Stessi test dell'esercizio 3.1, ma qui adattateli per std::vector
   test_statistical_functions();
-  
+
   if(argc < 3) {
       cerr << "Uso del programma: " << argv[0] << " <n_data> <filename>\n";
       return 1;
@@ -530,7 +530,7 @@ int main(int argc, char * argv[]) {
   for (int k{}; k < v.size(); k++) {
       histo.Fill(v[k]);
   }
-  
+
   // accedo a informazioni statistiche
   cout << "Media dei valori caricati = " << histo.GetMean() << endl;
 
