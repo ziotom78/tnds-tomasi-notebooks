@@ -122,7 +122,7 @@
 <section id="title-slide">
   <h1 class="title">Laboratorio di TNDS – Lezione 3</h1>
   <p class="author">Maurizio Tomasi</p>
-  <p class="date">Martedì 10 Ottobre 2023</p>
+  <p class="date">Martedì 8 Ottobre 2024</p>
 </section>
 
 <section id="esercizi-per-oggi" class="slide level1">
@@ -503,6 +503,44 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb18-1"><a href="#
 TNDS</strong>.</p></li>
 </ul>
 </section>
+<section id="esempio-tratto-dalla-vita-vera-12" class="slide level1">
+<h1>Esempio tratto dalla vita vera (1/2)</h1>
+<ul>
+<li><p>In uno degli esercizi che faremo nelle prossime settimane, il
+codice richiedeva da linea di comando i valori <span
+class="math inline">a</span> e <span class="math inline">b</span> degli
+estremi di un intervallo <span class="math inline">[a, b]</span>, nonché
+la precisione <span class="math inline">\varepsilon</span> richiesta per
+un calcolo.</p></li>
+<li><p>Uno studente aveva implementato il codice nel <code>main</code>
+così:</p>
+<div class="sourceCode" id="cb19"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> a <span class="op">=</span> stoi<span class="op">(</span>argv<span class="op">[</span><span class="dv">1</span><span class="op">]);</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> b <span class="op">=</span> stoi<span class="op">(</span>argv<span class="op">[</span><span class="dv">2</span><span class="op">]);</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> prec <span class="op">=</span> stod<span class="op">(</span>argv<span class="op">[</span><span class="dv">3</span><span class="op">]);</span></span></code></pre></div>
+<p>non accorgendosi di aver usato <code>atoi</code> (che restituisce un
+<em>intero</em>) anziché <code>atod</code>.</p></li>
+</ul>
+</section>
+<section id="esempio-tratto-dalla-vita-vera-22" class="slide level1">
+<h1>Esempio tratto dalla vita vera (2/2)</h1>
+<ul>
+<li><p>Il programma quindi andava in crash quando lo si invocava con la
+linea <code>./esercizio 0.1 0.2</code>, perché sia <code>0.1</code> che
+<code>0.2</code> erano arrotondati a <code>0</code> e l’intervallo aveva
+quindi ampiezza nulla!</p></li>
+<li><p>Se lo studente avesse usato la <em>uniform initialization</em> in
+questo modo:</p>
+<div class="sourceCode" id="cb20"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> a<span class="op">{</span>stoi<span class="op">(</span>argv<span class="op">[</span><span class="dv">1</span><span class="op">])};</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> b<span class="op">{</span>stoi<span class="op">(</span>argv<span class="op">[</span><span class="dv">2</span><span class="op">])};</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> prec<span class="op">{</span>stod<span class="op">(</span>argv<span class="op">[</span><span class="dv">3</span><span class="op">])};</span></span></code></pre></div>
+<p>il compilatore avrebbe segnalato che nelle prime due righe c’era un
+errore, perché <code>atoi</code> restituisce un intero ma sia
+<code>a</code> che <code>b</code> devono essere
+<code>double</code>!</p></li>
+</ul>
+</section>
 <section id="int-e-unsigned-int" class="slide level1">
 <h1><code>int</code> e <code>unsigned int</code></h1>
 </section>
@@ -538,44 +576,6 @@ TNDS</strong>.</p></li>
 </table></li>
 </ul>
 </section>
-<section id="cicli-for-su-array" class="slide level1">
-<h1>Cicli <code>for</code> su array</h1>
-<ul>
-<li><p>La classe <code>std::vector</code> (esercizio 3.1) restituisce la
-dimensione degli array come un intero senza segno di tipo
-<code>int</code>: un vettore non può avere un numero negativo di
-elementi!</p></li>
-<li><p>Questo codice fornisce un <em>warning</em> (<a
-href="https://ziotom78.github.io/tnds-tomasi-notebooks/tomasi-lezione-01.html#/flag-del-compilatore">se
-usate <code>-Wall --pedantic</code></a>):</p>
-<div class="sourceCode" id="cb19"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="bu">std::</span>vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> v<span class="op">(</span>…<span class="op">);</span></span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span><span class="op">(</span><span class="dt">int</span> i<span class="op">{};</span> i <span class="op">&lt;</span> v<span class="op">.</span>size<span class="op">();</span> <span class="op">++</span>i<span class="op">)</span> <span class="op">{</span>  <span class="co">// What happens if v.size() is 3 billions?</span></span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>    v<span class="op">[</span>i<span class="op">]</span> <span class="op">=</span> <span class="fl">0.0</span><span class="op">;</span></span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
-<p>perché nella condizione <code>i &lt; v.size()</code> si confronta un
-intero con segno (<code>i</code>) e uno senza segno
-(<code>v.size()</code>).</p></li>
-</ul>
-</section>
-<section id="cicli-for-su-array-1" class="slide level1">
-<h1>Cicli <code>for</code> su array</h1>
-<ul>
-<li><p>Per togliere il warning è sufficiente effettuare un
-<em>casting</em> a <code>int</code> del risultato di
-<code>v.size()</code>:</p>
-<div class="sourceCode" id="cb20"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="bu">std::</span>vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> v<span class="op">(</span><span class="dv">3</span><span class="op">);</span></span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span><span class="op">(</span><span class="dt">int</span> i<span class="op">{};</span> i <span class="op">&lt;</span> <span class="op">(</span><span class="dt">int</span><span class="op">)</span> v<span class="op">.</span>size<span class="op">();</span> <span class="op">++</span>i<span class="op">)</span> <span class="op">{</span>  <span class="co">// No more warnings</span></span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>    v<span class="op">[</span>i<span class="op">]</span> <span class="op">=</span> <span class="fl">0.0</span><span class="op">;</span></span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div></li>
-<li><p>In linguaggi più rigorosi del C++ (es., Ada) confrontare tipi con
-e senza segno è un <em>errore</em> anziché un warning. Prendete quindi
-sul serio questi warning!</p></li>
-</ul>
-</section>
 <section id="int-e-unsigned-int-1" class="slide level1">
 <h1><code>int</code> e <code>unsigned int</code></h1>
 <ul>
@@ -595,25 +595,40 @@ Instead, use assertions for this.</p>
 <code>unsigned</code>!</p></li>
 </ul>
 </section>
+<section id="cicli-for-su-array" class="slide level1">
+<h1>Cicli <code>for</code> su array</h1>
+<ul>
+<li><p>La classe <code>std::vector</code> (esercizio 3.1) implementa un
+metodo <code>.size()</code> che restituisce la dimensione degli array
+come un intero <strong>senza segno</strong> di tipo <code>int</code>.
+Questo è apparentemente sensato: dopotutto, un vettore non può avere un
+numero negativo di elementi, no?</p></li>
+<li><p>L’uso di <code>unsigned</code> per le dimensione degli array
+produce però più problemi di quanti ne risolva! Per questo motivo,
+linguaggi più moderni scoraggiano l’uso di <code>unsigned</code> (Kotlin
+2.0, Nim, Julia…), quando addirittura non lo vietano (Kotlin
+1.0).</p></li>
+<li><p>Fino all’anno scorso spiegavamo quindi come usare
+<code>vector::size()</code> e come fare attenzione con i tipi
+<code>unsigned</code> e <code>int</code>.</p></li>
+</ul>
+</section>
 <section id="il-c20" class="slide level1">
 <h1>Il C++20</h1>
 <ul>
-<li><p>Alcuni esperti di C++ hanno dichiarato che usare
-<code>unsigned</code> per la dimensione degli array è stato uno dei
-peggiori errori che potessero fare.</p></li>
-<li><p>Dal C++20 è disponibile la funzione <code>ssize()</code>, che
-funziona su vettori e altri tipi della STL e restituisce sempre un
-<code>int</code>:</p>
+<li><p>Fortunatamente, dal C++20 è disponibile la funzione
+<code>ssize()</code>, che funziona su vettori e altri tipi della STL e
+restituisce sempre un <code>int</code>:</p>
 <div class="sourceCode" id="cb21"><pre
 class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="bu">std::</span>vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> v<span class="op">(</span><span class="dv">3</span><span class="op">);</span></span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span><span class="op">(</span><span class="dt">int</span> i<span class="op">{};</span> i <span class="op">&lt;</span> ssize<span class="op">(</span>v<span class="op">);</span> <span class="op">++</span>i<span class="op">)</span> <span class="op">{</span></span>
 <span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>    v<span class="op">[</span>i<span class="op">]</span> <span class="op">=</span> <span class="fl">0.0</span><span class="op">;</span></span>
-<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
-<p>Se usate Replit, basta usare <code>-std=c++20</code> oppure
-<code>-std=c++23</code> anziché <code>-std=c++17</code>. Se usate i
-computer del laboratorio invece, siete sfortunati e dovete usare il cast
-a <code>(int)</code>.</p></li>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div></li>
+<li><p>Di conseguenza, in questo corso non usate <strong>mai</strong>
+numeri <code>unsigned</code> per iterare sugli elementi dei vettori.
+Usate sempre <code>int</code> e la funzione
+<code>ssize()</code>!</p></li>
 </ul>
 </section>
 <section id="cicli-for-e-while" class="slide level1">

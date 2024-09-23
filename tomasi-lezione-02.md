@@ -102,11 +102,11 @@ int main() {
     $ ./test1
     Insert two numbers: 4 6
     The result is 10
-    
+
     $ ./test1
     Insert two numbers: -1 3
     The result is 2
-    
+
     $
     ```
 
@@ -119,7 +119,7 @@ int main() {
 
     ```c++
     #include <cassert>
-    
+
     void test_sum() {
         // No need to write std::assert, as it is a macro
         assert(sum(4, 6) == 10);
@@ -145,7 +145,7 @@ int main() {
     int main(int argc, char *argv[]) {
         // This must be the very first thing!
         test_sum();
-        
+
         // Now implement the exercise as requested
         …
     }
@@ -265,7 +265,7 @@ Questi `assert` vanno bene anche per gli esercizi di oggi, con opportuni aggiust
     v.SetComponent(1, 431.7);
     std::cout << v.GetComponent(1) << endl;   // Print 431.7
     ```
-    
+
 -   Questo è però più scomodo rispetto ai semplici array:
 
     ```c++
@@ -315,7 +315,7 @@ Questi `assert` vanno bene anche per gli esercizi di oggi, con opportuni aggiust
     v[1] = 431.7;  // Ditto
     std::cout << v[1] << endl;                // Print 431.7
     ```
-    
+
 # Uso di header files
 
 # Uso di header files
@@ -328,10 +328,10 @@ Questi `assert` vanno bene anche per gli esercizi di oggi, con opportuni aggiust
 
     ```c++
     // File main.cpp
-    
+
     #include "vettore.h"
     #include "statistiche.h"
-    
+
     int main() {
         // ...
     }
@@ -346,7 +346,7 @@ Questi `assert` vanno bene anche per gli esercizi di oggi, con opportuni aggiust
 
     ```c++
     // File vettore.h
-    
+
     class Vettore {
         // ...
     };
@@ -356,9 +356,9 @@ Questi `assert` vanno bene anche per gli esercizi di oggi, con opportuni aggiust
 
     ```c++
     // File statistiche.h
-    
+
     #include "vettore.h"
-    
+
     double CalcolaMedia(const Vettore & vett);
     ```
 
@@ -372,10 +372,10 @@ Compilare il programma `main.cpp` provocherebbe un errore di compilazione:
 
 ```c++
 // File main.cpp
-    
+
 #include "vettore.h"
 #include "statistiche.h"
-    
+
 int main() {
     // ...
 }
@@ -410,11 +410,11 @@ int main() { /* ... */ }
     // File vettore.h
     #ifndef __VETTORE_H__
     #define __VETTORE_H__
-    
+
     class Vettore {
         // ...
     };
-    
+
     #endif
     ```
 
@@ -429,7 +429,7 @@ int main() { /* ... */ }
 
     ```c++
     #pragma once  // Questo file sarà incluso una volta sola
-    
+
     class Vettore {
         // ...
     };
@@ -446,19 +446,19 @@ L'uso di `#pragma once` mette al riparo anche da una serie di errori che gli stu
 // Primo esempio
 #ifndef __vettore_h__
 #define __vettore_h_
-    
+
 #endif
 
 // Secondo esempio
 #ifdef  __vettore_h__
 #define __vettore_h__
-    
+
 #endif
 
 // Terzo esempio
 #ifdef  __vettore_h__
 #define __Vettore_h__
-    
+
 #endif
 ```
 
@@ -471,16 +471,16 @@ L'uso di `#pragma once` mette al riparo anche da una serie di errori che gli stu
 
     1.  Allocazione della memoria necessaria;
     2.  Inizializzazione della memoria.
-    
+
 -   Esempio:
 
     ```c++
     int x;  // Allocation
     x = 15; // Initialization
-    
+
     int y = 30; // Shortcut, but there are still *two* operations here.
     ```
-    
+
 # «Costruzione» di `Vettore`
 
 -   Le classi, a differenza di `int`, richiedono l'invocazione di un costruttore.
@@ -490,13 +490,13 @@ L'uso di `#pragma once` mette al riparo anche da una serie di errori che gli stu
     ```c++
     int x;
     x = 15;         // Ok: first allocate, then initialize
-    
+
     Vettore v;
     v(10);          // Error, you cannot call the constructor here!
-    
+
     Vettore w(10);  // Ok: allocate, then initialize
     ```
-    
+
 -   I costruttori possono richiedere molto tempo per essere eseguiti, ad esempio se al loro interno invocano `new` (com'è il caso di `Vettore`).
 
 
@@ -639,7 +639,7 @@ Vettore v4 = Read(10, "data.dat"); // Move constructor
 ---
 title: Laboratorio di TNDS -- Lezione 2
 author: Maurizio Tomasi
-date: Martedì 3 Ottobre 2023
+date: Martedì 1 Ottobre 2024
 css:
 - css/custom.css
 - css/asciinema-player.css

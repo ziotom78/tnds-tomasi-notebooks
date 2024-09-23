@@ -341,53 +341,48 @@ Di conseguenza, il programmatore è «costretto» a verificare la correttezza de
 -   Questo è **uno dei più comuni errori degli studenti di TNDS**.
 
 
+
+# Esempio tratto dalla vita vera (1/2)
+
+-   In uno degli esercizi che faremo nelle prossime settimane, il codice richiedeva da linea di comando i valori $a$ e $b$ degli estremi di un intervallo $[a, b]$, nonché la precisione $\varepsilon$ richiesta per un calcolo.
+
+-   Uno studente aveva implementato il codice nel `main` così:
+
+    ```c++
+    double a = stoi(argv[1]);
+    double b = stoi(argv[2]);
+    double prec = stod(argv[3]);
+    ```
+
+    non accorgendosi di aver usato `atoi` (che restituisce un *intero*) anziché `atod`.
+
+# Esempio tratto dalla vita vera (2/2)
+
+-   Il programma quindi andava in crash quando lo si invocava con la linea `./esercizio 0.1 0.2`, perché sia `0.1` che `0.2` erano arrotondati a `0` e l'intervallo aveva quindi ampiezza nulla!
+
+-   Se lo studente avesse usato la *uniform initialization* in questo modo:
+
+    ```c++
+    double a{stoi(argv[1])};
+    double b{stoi(argv[2])};
+    double prec{stod(argv[3])};
+    ```
+
+    il compilatore avrebbe segnalato che nelle prime due righe c'era un errore, perché `atoi` restituisce un intero ma sia `a` che `b` devono essere `double`!
+
+
 # `int` e `unsigned int`
 
 # Interi con e senza segno
 
--   In C++ esistono gli interi con segno (`char`, `short`, `int`,
-    `long`, `long long`) e quelli senza segno (in cui si mette
-    `unsigned` davanti al tipo).
+-   In C++ esistono gli interi con segno (`char`, `short`, `int`, `long`, `long long`) e quelli senza segno (in cui si mette `unsigned` davanti al tipo).
 
--   Ovviamente la differenza sta nel fatto che gli interi con segno
-    (`int`) ammettono anche numeri negativi:
+-   Ovviamente la differenza sta nel fatto che gli interi con segno (`int`) ammettono anche numeri negativi:
 
     | Tipo       | Minimo      | Massimo    |
     |:-----------|------------:|-----------:|
     | `int`      | −2147483648 | 2147483647 |
     | `unsigned` |           0 | 4294967295 |
-
-
-# Cicli `for` su array
-
--   La classe `std::vector` (esercizio 3.1) restituisce la dimensione degli array come un intero senza segno di tipo `int`: un vettore non può avere un numero negativo di elementi!
--   Questo codice fornisce un *warning* ([se usate
-    `-Wall --pedantic`](https://ziotom78.github.io/tnds-tomasi-notebooks/tomasi-lezione-01.html#/flag-del-compilatore)):
-
-    ```c++
-    std::vector<double> v(…);
-
-    for(int i{}; i < v.size(); ++i) {  // What happens if v.size() is 3 billions?
-        v[i] = 0.0;
-    }
-    ```
-
-    perché nella condizione `i < v.size()` si confronta un intero con
-    segno (`i`) e uno senza segno (`v.size()`).
-
-# Cicli `for` su array
-
--   Per togliere il warning è sufficiente effettuare un *casting* a `int` del risultato di `v.size()`:
-
-    ```c++
-    std::vector<double> v(3);
-
-    for(int i{}; i < (int) v.size(); ++i) {  // No more warnings
-        v[i] = 0.0;
-    }
-    ```
-
--   In linguaggi più rigorosi del C++ (es., Ada) confrontare tipi con e senza segno è un *errore* anziché un warning. Prendete quindi sul serio questi warning!
 
 # `int` e `unsigned int`
 
@@ -399,11 +394,18 @@ Di conseguenza, il programmatore è «costretto» a verificare la correttezza de
 
 -   Preferite quindi sempre `int` a `unsigned`!
 
+
+# Cicli `for` su array
+
+-   La classe `std::vector` (esercizio 3.1) implementa un metodo `.size()` che restituisce la dimensione degli array come un intero **senza segno** di tipo `int`. Questo è apparentemente sensato: dopotutto, un vettore non può avere un numero negativo di elementi, no?
+
+-   L'uso di `unsigned` per le dimensione degli array produce però più problemi di quanti ne risolva! Per questo motivo, linguaggi più moderni scoraggiano l'uso di `unsigned` (Kotlin 2.0, Nim, Julia…), quando addirittura non lo vietano (Kotlin 1.0).
+
+-   Fino all'anno scorso spiegavamo quindi come usare `vector::size()` e come fare attenzione con i tipi `unsigned` e `int`.
+
 # Il C++20
 
--   Alcuni esperti di C++ hanno dichiarato che usare `unsigned` per la dimensione degli array è stato uno dei peggiori errori che potessero fare.
-
--   Dal C++20 è disponibile la funzione `ssize()`, che funziona su vettori e altri tipi della STL e restituisce sempre un `int`:
+-   Fortunatamente, dal C++20 è disponibile la funzione `ssize()`, che funziona su vettori e altri tipi della STL e restituisce sempre un `int`:
 
     ```c++
     std::vector<double> v(3);
@@ -413,7 +415,8 @@ Di conseguenza, il programmatore è «costretto» a verificare la correttezza de
     }
     ```
 
-    Se usate Replit, basta usare `-std=c++20` oppure `-std=c++23` anziché `-std=c++17`. Se usate i computer del laboratorio invece, siete sfortunati e dovete usare il cast a `(int)`.
+-   Di conseguenza, in questo corso non usate **mai** numeri `unsigned` per iterare sugli elementi dei vettori. Usate sempre `int` e la funzione `ssize()`!
+
 
 # Cicli `for` e `while`
 
@@ -473,7 +476,7 @@ Di conseguenza, il programmatore è «costretto» a verificare la correttezza de
 ---
 title: Laboratorio di TNDS -- Lezione 3
 author: Maurizio Tomasi
-date: Martedì 10 Ottobre 2023
+date: Martedì 8 Ottobre 2024
 theme: white
 progress: true
 slideNumber: true

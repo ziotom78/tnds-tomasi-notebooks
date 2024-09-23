@@ -21,7 +21,7 @@
 ---
 title: "Laboratorio di TNDS -- Lezione 4"
 author: "Maurizio Tomasi"
-date: "Martedì 17 Ottobre 2023"
+date: "Martedì 15 Ottobre 2024"
 theme: white
 progress: true
 slideNumber: true

@@ -3,19 +3,20 @@
 <center>
 | Data              | Esercizi                                                        | Spiegazione                                                         |
 |-------------------|-----------------------------------------------------------------|---------------------------------------------------------------------|
-| 26 Settembre 2023 | [Arrays](carminati-esercizi-01.html)                            | [Lezione 1](tomasi-lezione-01.html)                                 |
-| 3 Ottobre 2023    | [Classe `Vettore`](carminati-esercizi-02.html)                  | [Lezione 2](tomasi-lezione-02.html)                                 |
-| 10 Ottobre 2023   | [Template e `vector`](carminati-esercizi-03.html)               | [Lezione 3](tomasi-lezione-03.html)                                 |
-| 17 Ottobre 2023   | [Esercizi facoltativi](carminati-esercizi-04.html)              |                                                                     |
-| 24 Ottobre 2023   | [Classi ed ereditarietà](carminati-esercizi-05.html)            | [Lezione 5](tomasi-lezione-05.html)                                 |
-| 31 Ottobre 2023   | [Ricerca di zeri](carminati-esercizi-06.html)                   | [Lezione 6](tomasi-lezione-06.html)                                 |
-| 7 Novembre 2023   | [Quadratura numerica](carminati-esercizi-07.html)               | [Notebook 7](https://ziotom78.github.io/tnds-notebooks/lezione07/)  |
-| 14 Novembre 2023  | [Equazioni differenziali](carminati-esercizi-08.html)           | [Notebook 8](https://ziotom78.github.io/tnds-notebooks/lezione08/), [slides](tomasi-lezione-08.html) |
-| 20 Novembre 2023  | Idem                                                            | [Esempio svolto](2023-11-21 Equazioni differenziali Tomasi.pdf)     |
-| 28 Novembre 2023  | [Numeri pseudo-casuali e integrali](carminati-esercizi-10.html) | [Notebook 10](https://ziotom78.github.io/tnds-notebooks/lezione10/) |
-| 5 Dicembre 2023   | Idem                                                            | Idem                                                                |
-| 12 Dicembre 2023  | [Metodi Monte Carlo](carminati-esercizi-12.html)                | [Notebook 10](https://ziotom78.github.io/tnds-notebooks/lezione10/) |
-
+| 24 Settembre 2024 | [Arrays](carminati-esercizi-01.html)                            | [Lezione 1](tomasi-lezione-01.html)                                 |
+<!--
+| 3 Ottobre 2024    | [Classe `Vettore`](carminati-esercizi-02.html)                  | [Lezione 2](tomasi-lezione-02.html)                                 |
+| 10 Ottobre 2024   | [Template e `vector`](carminati-esercizi-03.html)               | [Lezione 3](tomasi-lezione-03.html)                                 |
+| 17 Ottobre 2024   | [Esercizi facoltativi](carminati-esercizi-04.html)              |                                                                     |
+| 24 Ottobre 2024   | [Classi ed ereditarietà](carminati-esercizi-05.html)            | [Lezione 5](tomasi-lezione-05.html)                                 |
+| 31 Ottobre 2024   | [Ricerca di zeri](carminati-esercizi-06.html)                   | [Lezione 6](tomasi-lezione-06.html)                                 |
+| 7 Novembre 2024   | [Quadratura numerica](carminati-esercizi-07.html)               | [Notebook 7](https://ziotom78.github.io/tnds-notebooks/lezione07/)  |
+| 14 Novembre 2024  | [Equazioni differenziali](carminati-esercizi-08.html)           | [Notebook 8](https://ziotom78.github.io/tnds-notebooks/lezione08/), [slides](tomasi-lezione-08.html) |
+| 20 Novembre 2024  | Idem                                                            | [Esempio svolto](2024-11-21 Equazioni differenziali Tomasi.pdf)     |
+| 28 Novembre 2024  | [Numeri pseudo-casuali e integrali](carminati-esercizi-10.html) | [Notebook 10](https://ziotom78.github.io/tnds-notebooks/lezione10/) |
+| 5 Dicembre 2024   | Idem                                                            | Idem                                                                |
+| 12 Dicembre 2024  | [Metodi Monte Carlo](carminati-esercizi-12.html)                | [Notebook 10](https://ziotom78.github.io/tnds-notebooks/lezione10/) |
+-->
 </center>
 
 <!--
@@ -23,6 +24,7 @@ Google form per il seminario finale su C++, Python e Julia: <https://forms.gle/9
 -->
 
 Link al Google Form per il [seminario su C++, Python e Julia](tomasi-lezione-08.html#/seminario-su-c-python-e-julia): <https://forms.gle/ZaDv5n6PjDEaNRoT8>. [Slides](tomasi-c++-python-julia.html).
+
 
 # Temi d'esame svolti
 
@@ -238,6 +240,28 @@ Di seguito un piccolo vademecum per aiutarvi a svolgere nel migliore dei modi l'
 
 
 # Suggerimenti vari
+
+
+## Configurazione del compilatore {#gcc}
+
+Per fare in modo di usare l'ultima versione disponibile del compilatore GCC, digitate questo comando:
+
+```
+/home/comune/labTNDS_programmi/enable-latest-gcc
+```
+
+Dopodiché chiudete il terminale e riapritelo. Verificate che ora il comando `g++` usi la versione 13 del compilatore:
+
+```
+$ g++ --version
+g++ (GCC) 13.2.1 20231205 (Red Hat 13.2.1-6)
+Copyright (C) 2023 Free Software Foundation, Inc.
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+```
+
+È sufficiente eseguire il programma `enable-latest-gcc` **una volta sola**, perché poi la configurazione resta salvata.
+
 
 ## Installazione di ROOT e Gnuplot {#rootgnuplot}
 

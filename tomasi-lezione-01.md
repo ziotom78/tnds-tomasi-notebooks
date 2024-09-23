@@ -19,6 +19,26 @@
 
     2. Contiene la documentazione e gli esempi d'uso per tutte le funzioni della libreria standard del C++
 
+
+# Configurare il compilatore
+
+-   Cosa **molto** importante da fare, una volta per tutte
+
+-   Aprite la finestra del terminale ed eseguite il comando
+
+    ```
+    /home/comune/labTNDS_programmi/enable-latest-gcc
+    ```
+
+-   Chiudete la finestra del terminale, riapritela ed eseguite `g++ --version`. Dovreste vedere questo:
+
+    ```
+    g++ (GCC) 13.2.1 20231205 (Red Hat 13.2.1-6)
+    Copyright (C) 2023 Free Software Foundation, Inc.
+    This is free software; see the source for copying conditions.  There is NO
+    warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+    ```
+
 # Esercizi per oggi
 
 -   La spiegazione dettagliata degli esercizi si trova qui: [carminati-esercizi-01.html](carminati-esercizi-01.html).
@@ -533,7 +553,7 @@ Fonte: [Pagina Wikipedia del PDP-11](https://en.wikipedia.org/wiki/PDP-11)
 ---
 title: Laboratorio di TNDS -- Lezione 1
 author: Maurizio Tomasi
-date: Martedì 26 Settembre 2023
+date: Martedì 24 Settembre 2024
 lang: it-IT
 theme: white
 progress: true

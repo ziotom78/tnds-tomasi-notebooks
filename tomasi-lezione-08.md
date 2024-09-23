@@ -211,7 +211,7 @@
 ---
 title: "Laboratorio di TNDS -- Lezione 8"
 author: "Maurizio Tomasi"
-date: "Martedì 14 Novembre 2023"
+date: "Martedì 12 Novembre 2024"
 theme: "white"
 progress: true
 slideNumber: true

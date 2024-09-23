@@ -493,7 +493,7 @@ Per esempi e documentazione, andate alla pagina [github.com/ziotom78/gplotpp](ht
 ---
 title: Laboratorio di TNDS -- Lezione 5
 author: Maurizio Tomasi
-date: Martedì 24 Ottobre 2023
+date: "Martedì 22 Ottobre 2024"
 theme: white
 progress: true
 slideNumber: true

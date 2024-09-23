@@ -331,7 +331,7 @@ void main() {
 ---
 title: "Laboratorio di TNDS -- Lezione 6"
 author: "Maurizio Tomasi"
-date: "Martedì 31 Ottobre 2023"
+date: "Martedì 29 Ottobre 2024"
 theme: "white"
 progress: true
 slideNumber: true
