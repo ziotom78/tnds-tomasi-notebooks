@@ -1,0 +1,28 @@
+#!/usr/bin/env python3
+
+import shutil
+import os
+
+TOOLSET = "gcc-toolset-13"
+FILENAME = os.path.expanduser("~/.bashrc")
+BACKUP_FILENAME = FILENAME + ".bak"
+
+def check_if_already_patched(file_lines) -> bool:
+    return TOOLSET in "".join(file_lines)
+
+def main():
+    with open(FILENAME, "rt") as inpf:
+        file_contents = inpf.readlines()
+
+    if check_if_already_patched(file_contents):
+        print("File {} was already patched".format(FILENAME))
+    else:
+        shutil.copy(FILENAME, BACKUP_FILENAME)
+        file_contents.append("# Enable a newer version of GCC\n")
+        file_contents.append("source scl_source enable {}\n".format(TOOLSET))
+        with open(FILENAME, "wt") as outf:
+            outf.writelines(file_contents)
+        print("File {} has been patched successfully, a copy has been saved into".format(FILENAME, BACKUP_FILENAME))
+
+if __name__ == "__main__":
+    main()
