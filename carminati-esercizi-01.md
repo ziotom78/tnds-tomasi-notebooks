@@ -16,11 +16,15 @@ In questa prima lezione proviamo a rinfrescare la memoria sulla programmazione l
 
 Il calcolo della mediana in particolare richiede che il set di dati sia ordinato e quindi ci obbliga a fare un po' di esercizio aggiuntivo.
 
+# Che dati analizzeremo?
+
+Useremo un file [1941.txt](1941.txt) che contiene le differenze tra la temperatura stimata ogni giorno dell'anno 1941 dal modello e la media delle temperature dal 1941 a 2023 per quel giorno. Questi dati possono essere scaricati dal sito https://open-meteo.com/ e si riferiscono alla re-analisi ERA5. Nelle prossime lezioni dovremo imparare ad aprire tutti i files, uno per ogni anno di misure.
+
 In questa lezione lavoreremo con questi ingredienti:
 
-- Tipo di dato da leggere è constituito da numeri `double` immagazzinati in un file `data.dat`.
-- Tipo di contenitore di dati è un array (dinamico) del C.
-- Operazioni sui dati vengono svolte mediante funzioni.
+- Il tipo di dato da leggere è constituito da numeri `double` immagazzinati in un file [1941.txt](1941.txt).
+- Il tipo di contenitore di dati è un *array* (dinamico) del C.
+- Le operazioni sui dati vengono svolte mediante funzioni.
 
 Prima di incominciare a scrivere il codice è utile ripassare rapidamente alcuni elementi base del linguaggio.
 
@@ -65,7 +69,7 @@ int main(int argc, char *argv[]) {
 	cerr << "Errore, devi specificare un numero intero da linea di comando.\n";
 	return 1;
   }
-  
+
   int i = atoi(argv[1]);
   cout << argv[1] << " convertito in un intero è " << i << "\n";
 }
@@ -124,7 +128,7 @@ cerr << "Errore nel parametro a: " << a << endl;
     cout << "Errore, occorre specificare un nome di file!" << endl;
     // Potrebbe non essere stampato subito, ma solo quando il programma termina
     cout << "Errore, occorre specificare un nome di file!\n";
-    
+
     // Questi due casi sono equivalenti, perché scriviamo su `cerr`
     cerr << "Errore, occorre specificare un nome di file!" << endl;
     cerr << "Errore, occorre specificare un nome di file!\n"
@@ -183,7 +187,7 @@ Il compilatore `g++` non segnala questo tipo di errore:
 
 ```
 $ g++ -o test test.cpp
-$ 
+$
 ```
 
 Potete però usare il flag `-Wall` (**consigliatissimo per tutti i vostri programmi!**), in modo che il compilatore vi avvisi:
@@ -197,7 +201,7 @@ test.cpp:6:10: warning: ‘void operator delete(void*, long unsigned int)’ cal
 test.cpp:4:33: note: returned from ‘void* operator new [](long unsigned int)’
     4 |   double * array = new double[10];
       |                                 ^
-$ 
+$
 ```
 
 ## Fstream
@@ -456,16 +460,16 @@ fout.close();
 -   Compiliamo il programma invocando come al solito `g++`:
 
     ```
-    g++ main.cpp  -Wall -o main
+    g++ esercizio1.0.cpp  -Wall -o main
     ```
 
 -   Eseguiamo il programma:
 
     ```
-    ./main 1000000 data.dat
+    ./main 365 1941.txt
     ```
 
-**Domanda**: Quanti elementi contiene il file `data.dat`? Cosa succede se tento di leggere 1.000.000 di elementi ?
+**Domanda**: Quanti elementi contiene il file [1941.txt](1941.txt)? Cosa succede se tento di leggere un milione di elementi ?
 
 
 # Esercizio 1.1 - Codice di analisi con funzioni {#esercizio-1.1}
@@ -528,7 +532,7 @@ void scambiaByRef(
 
 ```c++
 void scambiaByPtr(
-    double * a, 
+    double * a,
     double * b
 ) {
   double c = *a;
@@ -725,11 +729,11 @@ Il `main` è ora decisamente più compatto e leggibile. Quasi tutte le principal
 
 Come nel caso dell'esercizio precedente compiliamo il programma invocando come al solito `g++`:
 
-    g++ main.cpp -Wall -o main
+    g++ esercizio1.1.cpp -Wall -o esercizio1.1
 
 Eseguiamo il programma :
 
-    ./main 1000000 data.dat
+    ./esercizio1.1 365 1941.txt
 
 
 # Esercizio 1.2 - Codice di analisi con funzioni e Makefile {#esercizio-1.2}
@@ -738,8 +742,8 @@ In questo esercizio terminiamo il processo di riorganizzazione dell'esercizio 1
 
 -   Spostiamo tutte le dichiarazioni di variabili che abbiamo messo in testa al programma in un file separato `funzioni.h`.
 -   Spostiamo tutte le implementazioni delle funzioni in coda al programma in un file separato `funzioni.cpp`.
--   Ricordiamoci di includere il file `funzioni.h` sia in `main.cpp` sia in `funzioni.cpp` tramite il solito `#include "funzioni.h"`
--   Compiliamo separatamente `main.cpp` e `funzioni.cpp` utilizzando un `Makefile`
+-   Ricordiamoci di includere il file `funzioni.h` sia in `esercizio1.0.cpp` sia in `funzioni.cpp` tramite il solito `#include "funzioni.h"`
+-   Compiliamo separatamente `esercizio1.2.cpp` e `funzioni.cpp` utilizzando un `Makefile`
 
 Prima di incominciare, rivediamo rapidamente come si scrive un `Makefile`.
 
@@ -747,13 +751,13 @@ Prima di incominciare, rivediamo rapidamente come si scrive un `Makefile`.
 
 Vogliamo creare un `Makefile` che ci permetta di compilare il nostro programma quando questo è composto/spezzato in diversi file sorgenti. Supponiamo di avere un codice spezzato in tre file:
 
-#.  `main.cpp`
+#.  `esercizio1.2.cpp`
 #.  `funzioni.cpp`
 #.  `funzioni.h`
 
 Ovviamente possiamo compilare il tutto con
 
-    g++ main.cpp funzioni.cpp -Wall -o main
+    g++ esercizio1.2.cpp funzioni.cpp -Wall -o main
 
 ma possiamo farlo in maniera più efficace. La struttura/sintassi del `Makefile` è la seguente:
 
@@ -774,8 +778,8 @@ Il tasto TAB è come una serie di spazi, ma attenzione! Usare gli spazi in quest
 Nel nostro caso, con il `Makefile` contenente le righe
 
 ```makefile
-main: funzioni.cpp main.cpp
-↹g++ funzioni.cpp main.cpp -Wall -o main
+main: funzioni.cpp esercizio1.2.cpp
+↹g++ funzioni.cpp esercizio1.2.cpp -Wall -o main
 ```
 
 è possibile compilare tutto lanciando il comando `make`.
@@ -785,8 +789,8 @@ Possiamo scrivere il `Makefile` anche esplicitando le dipendenze, in modo che an
 ```makefile
 main: main.o funzioni.o
     g++ -g3 -Wall --pedantic -std=c++23 main.o funzioni.o -o main
-main.o: main.cpp funzioni.h
-    g++ -g3 -Wall --pedantic -std=c++23 -c main.cpp -o main.o
+main.o: esercizio1.2.cpp funzioni.h
+    g++ -g3 -Wall --pedantic -std=c++23 -c esercizio1.2.cpp -o main.o
 funzioni.o: funzioni.cpp funzioni.h
     g++ -g3 -Wall --pedantic -std=c++23 -c funzioni.cpp -o funzioni.o
 ```
@@ -799,9 +803,9 @@ CXXFLAGS = -g3 -Wall --pedantic -std=c++23
 main: main.o funzioni.o
     g++ main.o funzioni.o -o main $(CXXFLAGS)
 
-main.o: main.cpp funzioni.h
-    g++ -c main.cpp -o main.o $(CXXFLAGS)
-    
+main.o: esercizio1.2.cpp funzioni.h
+    g++ -c esercizio1.2.cpp -o main.o $(CXXFLAGS)
+
 funzioni.o: funzioni.cpp funzioni.h
     g++ -c funzioni.cpp -o funzioni.o $(CXXFLAGS)
 ```
@@ -967,9 +971,9 @@ Elenco qui gli errori più comuni che ho riscontrato negli ultimi anni correggen
 	  accum += pow(x[i] - CalcolaMedia(x, N), 2);
     }
     ```
-    
+
     Siccome la media è sempre la stessa, conviene calcolarla **una volta sola** prima del ciclo `for`:
-    
+
     ```c++
     double accum = 0.0;
     // Calcola la media una volta per tutte
@@ -990,18 +994,18 @@ Elenco qui gli errori più comuni che ho riscontrato negli ultimi anni correggen
     // newton.h
     #pragma once
     #include "vectors.h"
-    
+
     // Qui segue il resto del file
     ...
     ```
-    
+
     Alcuni studenti omettono la riga `#include "vectors.h"` e la mettono nel `main`, prima di `#include "newton.h"`:
-    
+
     ```c++
     #include "vectors.h"
     #include "newton.h"
-    
+
     // ...
     ```
-    
+
     Anche se il codice compila lo stesso, è concettualmente sbagliato: il file `newton.h` richiede `vectors.h`, e dovrebbe quindi includerlo al suo interno. Altrimenti, tutte le volte che userete `newton.h` in altri programmi, dovrete sempre ricordarvi di anteporre `#include "vectors.h"`, e questa è una cosa facile da dimenticare.

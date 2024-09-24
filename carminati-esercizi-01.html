@@ -42,6 +42,7 @@
     <strong>Contents</strong><label for="contents">⊕</label>
   <input type="checkbox" id="contents">
   <ul>
+  <li><a href="#che-dati-analizzeremo" id="toc-che-dati-analizzeremo">Che dati analizzeremo?</a></li>
   <li><a href="#passaggio-di-input-da-linea-di-comando" id="toc-passaggio-di-input-da-linea-di-comando">Passaggio di input da linea di comando</a>
   <ul>
   <li><a href="#le-funzioni-atoi-e-atof" id="toc-le-funzioni-atoi-e-atof">Le funzioni <code>atoi</code> e <code>atof</code></a></li>
@@ -85,11 +86,13 @@
 <li>Calcoliamo media, varianza e mediana del campione.</li>
 </ol>
 <p>Il calcolo della mediana in particolare richiede che il set di dati sia ordinato e quindi ci obbliga a fare un po’ di esercizio aggiuntivo.</p>
+<h1 id="che-dati-analizzeremo">Che dati analizzeremo?</h1>
+<p>Useremo un file <a href="1941.txt">1941.txt</a> che contiene le differenze tra la temperatura stimata ogni giorno dell’anno 1941 dal modello e la media delle temperature dal 1941 a 2023 per quel giorno. Questi dati possono essere scaricati dal sito https://open-meteo.com/ e si riferiscono alla re-analisi ERA5. Nelle prossime lezioni dovremo imparare ad aprire tutti i files, uno per ogni anno di misure.</p>
 <p>In questa lezione lavoreremo con questi ingredienti:</p>
 <ul>
-<li>Tipo di dato da leggere è constituito da numeri <code>double</code> immagazzinati in un file <code>data.dat</code>.</li>
-<li>Tipo di contenitore di dati è un array (dinamico) del C.</li>
-<li>Operazioni sui dati vengono svolte mediante funzioni.</li>
+<li>Il tipo di dato da leggere è constituito da numeri <code>double</code> immagazzinati in un file <a href="1941.txt">1941.txt</a>.</li>
+<li>Il tipo di contenitore di dati è un <em>array</em> (dinamico) del C.</li>
+<li>Le operazioni sui dati vengono svolte mediante funzioni.</li>
 </ul>
 <p>Prima di incominciare a scrivere il codice è utile ripassare rapidamente alcuni elementi base del linguaggio.</p>
 <h1 id="passaggio-di-input-da-linea-di-comando">Passaggio di input da linea di comando</h1>
@@ -118,7 +121,7 @@
 <span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    cerr <span class="op">&lt;&lt;</span> <span class="st">&quot;Errore, devi specificare un numero intero da linea di comando.</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">;</span></span>
 <span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">1</span><span class="op">;</span></span>
 <span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>  <span class="dt">int</span> i <span class="op">=</span> atoi<span class="op">(</span>argv<span class="op">[</span><span class="dv">1</span><span class="op">]);</span></span>
 <span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>  cout <span class="op">&lt;&lt;</span> argv<span class="op">[</span><span class="dv">1</span><span class="op">]</span> <span class="op">&lt;&lt;</span> <span class="st">&quot; convertito in un intero è &quot;</span> <span class="op">&lt;&lt;</span> i <span class="op">&lt;&lt;</span> <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">;</span></span>
 <span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
@@ -190,7 +193,7 @@ Aborted (core dumped)</code></pre>
 <span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 <p>Il compilatore <code>g++</code> non segnala questo tipo di errore:</p>
 <pre><code>$ g++ -o test test.cpp
-$ </code></pre>
+$</code></pre>
 <p>Potete però usare il flag <code>-Wall</code> (<strong>consigliatissimo per tutti i vostri programmi!</strong>), in modo che il compilatore vi avvisi:</p>
 <pre><code>$ g++ -Wall -o test test.cpp
 test.cpp: In function ‘int main(int, const char**)’:
@@ -200,7 +203,7 @@ test.cpp:6:10: warning: ‘void operator delete(void*, long unsigned int)’ cal
 test.cpp:4:33: note: returned from ‘void* operator new [](long unsigned int)’
     4 |   double * array = new double[10];
       |                                 ^
-$ </code></pre>
+$</code></pre>
 <h2 id="fstream">Fstream</h2>
 <p>L’input e l’output da files è gestito in C++ dalla libreria <code>fstream</code>. I principali oggetti sono <code>ifstream</code> (<em>input file stream</em>) e <code>ofstream</code> (<em>output file stream</em>). Gli stream vengono dichiarati e inizializati come:</p>
 <div class="sourceCode" id="cb17"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;fstream&gt;</span></span>
@@ -391,11 +394,11 @@ $ </code></pre>
 <span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>fout<span class="op">.</span>close<span class="op">();</span></span></code></pre></div>
 <ul>
 <li><p>Compiliamo il programma invocando come al solito <code>g++</code>:</p>
-<pre><code>g++ main.cpp  -Wall -o main</code></pre></li>
+<pre><code>g++ esercizio1.0.cpp  -Wall -o main</code></pre></li>
 <li><p>Eseguiamo il programma:</p>
-<pre><code>./main 1000000 data.dat</code></pre></li>
+<pre><code>./main 365 1941.txt</code></pre></li>
 </ul>
-<p><strong>Domanda</strong>: Quanti elementi contiene il file <code>data.dat</code>? Cosa succede se tento di leggere 1.000.000 di elementi ?</p>
+<p><strong>Domanda</strong>: Quanti elementi contiene il file <a href="1941.txt">1941.txt</a>? Cosa succede se tento di leggere un milione di elementi ?</p>
 <h1 id="esercizio-1.1">Esercizio 1.1 - Codice di analisi con funzioni</h1>
 <p>Vogliamo ora riorganizzare il codice precedente per renderlo più modulare e facilmente riutilizzabile. Per capirci meglio: il calcolo della media è una operazione generale che può essere immaginata come un blocco di codice che accetta in input un array di dati e una dimensione e restituisce un valore (la media, appunto). Se in uno stesso codice principale dobbiamo calcolare più volte la media di array di dati diversi, non vogliamo ripetere più volte il frammento di codice relativo; lo stesso vale per la lettura di un set di dati da un file o per il calcolo della mediana. Il codice dovrebbe avere quindi una struttura del tipo:</p>
 <ul>
@@ -451,7 +454,7 @@ Implementazione
 </td>
 <td>
 <div class="sourceCode" id="cb34"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> scambiaByPtr<span class="op">(</span></span>
-<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">double</span> <span class="op">*</span> a<span class="op">,</span> </span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">double</span> <span class="op">*</span> a<span class="op">,</span></span>
 <span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">double</span> <span class="op">*</span> b</span>
 <span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a><span class="op">)</span> <span class="op">{</span></span>
 <span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> c <span class="op">=</span> <span class="op">*</span>a<span class="op">;</span></span>
@@ -629,27 +632,27 @@ Effetto
 <span id="cb39-82"><a href="#cb39-82" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 <p>Il <code>main</code> è ora decisamente più compatto e leggibile. Quasi tutte le principali funzionalità del codice sono state scorporate in un opportuno set di funzioni.</p>
 <p>Come nel caso dell’esercizio precedente compiliamo il programma invocando come al solito <code>g++</code>:</p>
-<pre><code>g++ main.cpp -Wall -o main</code></pre>
+<pre><code>g++ esercizio1.1.cpp -Wall -o esercizio1.1</code></pre>
 <p>Eseguiamo il programma :</p>
-<pre><code>./main 1000000 data.dat</code></pre>
+<pre><code>./esercizio1.1 365 1941.txt</code></pre>
 <h1 id="esercizio-1.2">Esercizio 1.2 - Codice di analisi con funzioni e Makefile</h1>
 <p>In questo esercizio terminiamo il processo di riorganizzazione dell’esercizio 1.0. Procederemo in questo modo:</p>
 <ul>
 <li>Spostiamo tutte le dichiarazioni di variabili che abbiamo messo in testa al programma in un file separato <code>funzioni.h</code>.</li>
 <li>Spostiamo tutte le implementazioni delle funzioni in coda al programma in un file separato <code>funzioni.cpp</code>.</li>
-<li>Ricordiamoci di includere il file <code>funzioni.h</code> sia in <code>main.cpp</code> sia in <code>funzioni.cpp</code> tramite il solito <code>#include "funzioni.h"</code></li>
-<li>Compiliamo separatamente <code>main.cpp</code> e <code>funzioni.cpp</code> utilizzando un <code>Makefile</code></li>
+<li>Ricordiamoci di includere il file <code>funzioni.h</code> sia in <code>esercizio1.0.cpp</code> sia in <code>funzioni.cpp</code> tramite il solito <code>#include "funzioni.h"</code></li>
+<li>Compiliamo separatamente <code>esercizio1.2.cpp</code> e <code>funzioni.cpp</code> utilizzando un <code>Makefile</code></li>
 </ul>
 <p>Prima di incominciare, rivediamo rapidamente come si scrive un <code>Makefile</code>.</p>
 <h2 id="il-makefile">Il Makefile</h2>
 <p>Vogliamo creare un <code>Makefile</code> che ci permetta di compilare il nostro programma quando questo è composto/spezzato in diversi file sorgenti. Supponiamo di avere un codice spezzato in tre file:</p>
 <ol>
-<li><code>main.cpp</code></li>
+<li><code>esercizio1.2.cpp</code></li>
 <li><code>funzioni.cpp</code></li>
 <li><code>funzioni.h</code></li>
 </ol>
 <p>Ovviamente possiamo compilare il tutto con</p>
-<pre><code>g++ main.cpp funzioni.cpp -Wall -o main</code></pre>
+<pre><code>g++ esercizio1.2.cpp funzioni.cpp -Wall -o main</code></pre>
 <p>ma possiamo farlo in maniera più efficace. La struttura/sintassi del <code>Makefile</code> è la seguente:</p>
 <pre><code>target: dipendenze
 ↹system command</code></pre>
@@ -658,14 +661,14 @@ Effetto
     system command</code></pre>
 <p>Il tasto TAB è come una serie di spazi, ma attenzione! Usare gli spazi in questo contesto è un errore!</p>
 <p>Nel nostro caso, con il <code>Makefile</code> contenente le righe</p>
-<div class="sourceCode" id="cb45"><pre class="sourceCode makefile"><code class="sourceCode makefile"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="dv">main:</span><span class="dt"> funzioni.cpp main.cpp</span></span>
-<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>↹g++ funzioni.cpp main.cpp -Wall -o main</span></code></pre></div>
+<div class="sourceCode" id="cb45"><pre class="sourceCode makefile"><code class="sourceCode makefile"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="dv">main:</span><span class="dt"> funzioni.cpp esercizio1.2.cpp</span></span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>↹g++ funzioni.cpp esercizio1.2.cpp -Wall -o main</span></code></pre></div>
 <p>è possibile compilare tutto lanciando il comando <code>make</code>.</p>
 <p>Possiamo scrivere il <code>Makefile</code> anche esplicitando le dipendenze, in modo che anche quando cambiamo il file <code>.h</code> il tutto venga propriamente ricompilato. In questo caso il <code>Makefile</code> diventa:</p>
 <div class="sourceCode" id="cb46"><pre class="sourceCode makefile"><code class="sourceCode makefile"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="dv">main:</span><span class="dt"> main.o funzioni.o</span></span>
 <span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a><span class="er">    </span>g++ -g3 -Wall --pedantic -std=c++23 main.o funzioni.o -o main</span>
-<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a><span class="dv">main.o:</span><span class="dt"> main.cpp funzioni.h</span></span>
-<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a><span class="er">    </span>g++ -g3 -Wall --pedantic -std=c++23 -c main.cpp -o main.o</span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a><span class="dv">main.o:</span><span class="dt"> esercizio1.2.cpp funzioni.h</span></span>
+<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a><span class="er">    </span>g++ -g3 -Wall --pedantic -std=c++23 -c esercizio1.2.cpp -o main.o</span>
 <span id="cb46-5"><a href="#cb46-5" aria-hidden="true" tabindex="-1"></a><span class="dv">funzioni.o:</span><span class="dt"> funzioni.cpp funzioni.h</span></span>
 <span id="cb46-6"><a href="#cb46-6" aria-hidden="true" tabindex="-1"></a><span class="er">    </span>g++ -g3 -Wall --pedantic -std=c++23 -c funzioni.cpp -o funzioni.o</span></code></pre></div>
 <p>Notate però quanto il <code>Makefile</code> sia ripetitivo. È possibile definire delle <em>variabili</em> nel Makefile per semplificarlo:</p>
@@ -674,9 +677,9 @@ Effetto
 <span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a><span class="dv">main:</span><span class="dt"> main.o funzioni.o</span></span>
 <span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a><span class="er">    </span>g++ main.o funzioni.o -o main <span class="ch">$(</span><span class="dt">CXXFLAGS</span><span class="ch">)</span></span>
 <span id="cb47-5"><a href="#cb47-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb47-6"><a href="#cb47-6" aria-hidden="true" tabindex="-1"></a><span class="dv">main.o:</span><span class="dt"> main.cpp funzioni.h</span></span>
-<span id="cb47-7"><a href="#cb47-7" aria-hidden="true" tabindex="-1"></a><span class="er">    </span>g++ -c main.cpp -o main.o <span class="ch">$(</span><span class="dt">CXXFLAGS</span><span class="ch">)</span></span>
-<span id="cb47-8"><a href="#cb47-8" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb47-6"><a href="#cb47-6" aria-hidden="true" tabindex="-1"></a><span class="dv">main.o:</span><span class="dt"> esercizio1.2.cpp funzioni.h</span></span>
+<span id="cb47-7"><a href="#cb47-7" aria-hidden="true" tabindex="-1"></a><span class="er">    </span>g++ -c esercizio1.2.cpp -o main.o <span class="ch">$(</span><span class="dt">CXXFLAGS</span><span class="ch">)</span></span>
+<span id="cb47-8"><a href="#cb47-8" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb47-9"><a href="#cb47-9" aria-hidden="true" tabindex="-1"></a><span class="dv">funzioni.o:</span><span class="dt"> funzioni.cpp funzioni.h</span></span>
 <span id="cb47-10"><a href="#cb47-10" aria-hidden="true" tabindex="-1"></a><span class="er">    </span>g++ -c funzioni.cpp -o funzioni.o <span class="ch">$(</span><span class="dt">CXXFLAGS</span><span class="ch">)</span></span></code></pre></div>
 <p>La variabile <code>$@</code> è una cosiddetta <em>variabile implicita</em>, e viene sostituita di volta in volta col nome del <em>target</em> corrente (che nell’esempio sopra è <code>main</code>, <code>main.o</code> e infine <code>funzioni.o</code>). I flag <code>-g -Wall --pedantic -std=c++23</code> servono per rendere la compilazione e l’esecuzione del codice più sicura, perché abilitano dei controlli addizionali, spiegati nelle <a href="tomasi-lezione-01.html#flag-del-compilatore">slide</a>.</p>

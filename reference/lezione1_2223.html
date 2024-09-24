@@ -459,83 +459,6 @@
   
 
     
-      
-      
-      
-
-  
-  
-  
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-      
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_12" type="checkbox" id="__nav_12" >
-      
-      
-      
-      
-        <label class="md-nav__link" for="__nav_12">
-          Survival guides
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <nav class="md-nav" aria-label="Survival guides" data-md-level="1">
-        <label class="md-nav__title" for="__nav_12">
-          <span class="md-nav__icon md-icon"></span>
-          Survival guides
-        </label>
-        <ul class="md-nav__list" data-md-scrollfix>
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../Survival/unix/" class="md-nav__link">
-        Principali comandi UNIX
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../Survival/root/" class="md-nav__link">
-        Principali oggetti di ROOT
-      </a>
-    </li>
-  
-
-            
-          
-        </ul>
-      </nav>
-    </li>
-  
-
-    
-      
-      
-      
-
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../ProveEsame/TemiEsame/" class="md-nav__link">
-        Temi d'esame
-      </a>
-    </li>
-  
-
-    
   </ul>
 </nav>
                   </div>
@@ -624,13 +547,9 @@
 <li>Calcoliamo media, varianza e mediana del campione</li>
 </ol>
 <p>Il calcolo della mediana in particolare richiede che il set di dati sia ordinato e quindi ci obbliga a fare un pò di esercizio aggiuntivo. </p>
-<details class="info">
-<summary>Che dati vogliamo guardare ?</summary>
-<p>In questo caso guardiamo un file <a href="../1941.txt">1941.txt</a> che contiene le differenze tra la temperatura stimata ogni giorno dell'anno 1941 dal modello e la media delle temperature dal 1941 a 2023 per quel giorno. Questi dati possono essere scaricati dal sito <a href="https://open-meteo.com/">https://open-meteo.com/</a> e si riferiscono alla re-analisi <a href="https://cds.climate.copernicus.eu/cdsapp#!/dataset/reanalysis-era5-single-levels?tab=overview">ERA5</a>. Nelle prossime lezioni dovremo imparare ad aprire tutti i files, uno per ogni anno di misure.  </p>
-</details>
 <p>In questa lezione lavoreremo con questi ingredienti:</p>
 <ul>
-<li>Tipo di dato da leggere è constituito da numeri <code>double</code> immagazzinati in un file <a href="../1941.txt">1941.txt</a>.</li>
+<li>Tipo di dato da leggere è constituito da numeri <code>double</code> immagazzinati in un file <code>data.dat</code>.</li>
 <li>Tipo di contenitore di dati è un array (dinamico) del C.</li>
 <li>Operazioni sui dati vengono svolte mediante funzioni. </li>
 </ul>
@@ -774,7 +693,7 @@ Dopo l'utilizzo del file è buona norma chiuderlo con il metodo <code>close()</c
 <span class="k">delete</span><span class="w"> </span><span class="p">[]</span><span class="w"> </span><span class="n">vcopy</span><span class="w"> </span><span class="p">;</span>
 <span class="k">delete</span><span class="w"> </span><span class="p">[]</span><span class="w"> </span><span class="n">data</span><span class="p">;</span>
 
-<span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="k">return</span><span class="w"> </span><span class="mi">0</span>
 
 <span class="p">}</span>
 </code></pre></div>
@@ -879,14 +798,14 @@ Dopo l'utilizzo del file è buona norma chiuderlo con il metodo <code>close()</c
 </li>
 <li>
 <p>Eseguiamo il programma :</p>
-<pre><code>./esercizio1.0 365 1941.txt
+<pre><code>./esercizio1.0 1000000 data.dat
 </code></pre>
 </li>
 </ul>
 <div class="admonition question">
 <p class="admonition-title">Question</p>
 </div>
-<p>Quanti elementi contiene il file <a href="../1941.txt">1941.txt</a> ? Cosa succede se tento di leggere 1000000 di elementi ?</p>
+<p>Quanti elementi contiene il file <code>data.dat</code> ? Cosa succede se tento di leggere 1000000 di elementi ?</p>
 <h2 id="esercizio-11-codice-di-analisi-con-funzioni">ESERCIZIO 1.1 - Codice di analisi con funzioni:</h2>
 <p>Vogliamo ora riorganizzare il codice precedente per renderlo più modulare e facilmente riutilizzabile. Per capirci meglio: il calcolo della media è una operazione generale che può essere immaginata come un blocco di codice che accetta in input un array di dati e una dimensione e restituisce un valore ( la media appunto ). Se in uno stesso codice principale dobbiamo calcolare più volte la media di array di dati diversi non vogliamo ripetere più volte il frammento di codice relativo. Lo stesso vale per la lettura di un set di dati da un file o per il calcolo della mediana. Il codice dovrebbe avere quindi una struttura del tipo</p>
 <ul>
@@ -1112,7 +1031,7 @@ la chiamata nel main viene effettuata
 <div class="highlight"><pre><span></span><code>g++ esercizio1.1.cpp -o esercizio1.1
 </code></pre></div></li>
 <li>Eseguiamo il programma :
-<div class="highlight"><pre><span></span><code>./esercizio1.1 365 [1941.txt](1941.txt)
+<div class="highlight"><pre><span></span><code>./esercizio1.1 1000000 data.dat 
 </code></pre></div></li>
 </ul>
 <h2 id="esercizio-12-codice-di-analisi-con-funzioni-esterne-e-makefile">ESERCIZIO 1.2 - Codice di analisi con funzioni esterne e Makefile:</h2>
