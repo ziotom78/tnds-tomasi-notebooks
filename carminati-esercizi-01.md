@@ -34,23 +34,28 @@ Prima di incominciare a scrivere il codice è utile ripassare rapidamente alcuni
 
     ./programma <input1> <input2>
 
-per fare questo nella dichiarazione del main bisogna aggiungere due argomenti:
+Per fare questo, nella dichiarazione del main bisogna aggiungere due argomenti:
 
 ```c++
-main(int argc, char *argv[])
+int main(int argc, char *argv[])
 ```
 
 -   `argc` è il numero di argomenti presenti sulla riga di comando. Il valore di `argc` è sempre maggiore di 0 poiché il primo argomento è il nome del programma.
 -   `argv` è un array di `argc` elementi che contiene gli array di caratteri passati da riga di comando. Quindi `argv[0]` è il nome del programma, `argv[1]` il primo argomento, ecc…
 
-Se da riga di comando passiamo un numero, esso verrà passato tramite `argv` come un array di caratteri; per convertire un array di caratteri in un numero intero si usa la funzione `std::stoi(const std::string &)` (che è contenuta in `<string>`):
+Se da riga di comando passiamo un numero, esso verrà passato tramite `argv` come un array di caratteri; per convertire un array di caratteri in un numero **intero** (`int`) si usa la funzione `std::stoi(const std::string &)` (che è contenuta in `<string>`):
 
 ```c++
 int N;
 N = std::stoi(argv[1]);
 ```
 
-La funzione corrispondente per convertire un array di caratteri in un numero `double` è `std::stod(const std::string &)`, anch'essa disponibile in `<string>`.
+Se avessimo avuto bisogno di convertire una stringa in un numero **floating-point** (`double`), la funzione da usare sarebbe invece stata `std::stod(const std::string &)` (notare la `d` alla fine anziché la `i`!), anch'essa disponibile in `<string>`:
+
+```c++
+double fl;
+fl = std::stod(argv[1]);
+```
 
 <div class="warning-box">
 
@@ -134,7 +139,7 @@ cerr << "Errore nel parametro a: " << a << endl;
     cerr << "Errore, occorre specificare un nome di file!\n"
     ```
 
-Si dovrebbe usare `cout` per i messaggi informativi e `cerr` per i messaggi d'errore; vedremo nelle prossime lezioni quale sia la ragione di questa regola.
+Si dovrebbe usare `cout` per i messaggi informativi (ad esempio, quando stampate il risultato di un calcolo) e `cerr` per i messaggi d'errore; vedremo nelle prossime lezioni quale sia la ragione di questa regola.
 
 Uso di `cin`:
 
@@ -170,7 +175,7 @@ dealloca la memoria; ciò vuol dire che un tentativo di accedere agli elementi d
 delete x;
 ```
 
-crea un *memory leak*, perché dealloca solo il puntatore all'array ma non il suo contenuto. Questo programma quindi è **sbagliato**:
+crea un *memory leak*, perché dealloca solo il puntatore all'array ma non il suo contenuto. Questo programma quindi è in linea di principio **sbagliato**:
 
 ```c++
 #include <cstdlib>
@@ -221,7 +226,7 @@ Per controllare che il file sia stato aperto con successo si può usare il segue
 
 ```c++
 if(! inputFile) {
-  cerr << "Error ....\n"l; //stampa un messaggio
+  cerr << "Error ....\n"; //stampa un messaggio
   return 1; // Ritorna un valore diverso da quello usuale
 }
 ```
@@ -267,14 +272,14 @@ double readDoubleFromFile() {
   ifstream inputFile("data.dat");
   double a;
   inputFile >> a;
-  // Non c'è bisogno di invocaqre inputFile.close(), lo farà il g++
+  // Non c'è bisogno di invocare inputFile.close(): ci pensa g++
   return a;
 }
 ```
 
 # Esercizio 1.0 - Primo codice per analisi {#esercizio-1.0}
 
-Proviamo a scrivere un unico codice che legga dati da file, li immagazzini in un array dinamico, calcoli la media, la varianza e la mediana dei dati raccolti. Scriviamo su un file di output i dati riordinati in ordine crescente. Il numero di elementi da caricare e il nome del file in cui trovare i dati sono passati da tastiera nel momento in cui il programma viene eseguito. Cerchiamo di costruire il codice passo passo.
+Scriviamo un unico codice che legge i dati da file, li immagazzina in un array dinamico, e infine calcola la media, la varianza e la mediana dei dati raccolti. Scriviamo su un file di output i dati riordinati in ordine crescente. Il numero di elementi da caricare e il nome del file in cui trovare i dati sono passati da tastiera nel momento in cui il programma viene eseguito. Cerchiamo di costruire il codice passo passo.
 
 ## Struttura del programma
 
@@ -960,9 +965,9 @@ Nel caso della varianza la prima implementazione richiede una chiamata alla funz
 
 Elenco qui gli errori più comuni che ho riscontrato negli ultimi anni correggendo gli esercizi della lezione 1 consegnati prima dell'esame scritto:
 
--   Assicuratevi di leggere da file proprio il numero `N` di elementi specificato da linea di comando: in certi codici vengono letti `N - 1` elementi. Chiedete al vostro programma di caricarne un numero molto limitato (es., `N = 3`) e verificate ad occhio che abbia effettivamente caricato tre numeri.
+-   Assicuratevi di leggere da file proprio il numero `N` di elementi specificato da linea di comando: in certi codici che abbiamo corretto negli anni passati venivano letti `N - 1` elementi. Chiedete al vostro programma di caricarne un numero molto limitato (es., `N = 3`) e verificate ad occhio che abbia effettivamente caricato tre numeri.
 
--   Molti studenti hanno dei programmi che richiedono moltissimo per calcolare la varianza. Una implementazione come questa ricalcola ogni volta la media, ed è da evitare:
+-   Molti studenti in passato hanno consegnato dei programmi che richiedevano moltissimo per calcolare la varianza di file di dati grandi (molto più grandi di [1941.txt](1941.txt)). Una implementazione come questa ricalcola ogni volta la media, ed è da evitare:
 
     ```c++
     double accum = 0.0;
@@ -986,7 +991,7 @@ Elenco qui gli errori più comuni che ho riscontrato negli ultimi anni correggen
 
 -   Spesso il codice per il calcolo della mediana funziona solo se N è pari, oppure se N è dispari, ma non viceversa. Assicuratevi che funzioni con `N=3` e con `N=4`, che sono casi facili da controllare!
 
--   Alcuni studenti richiedono di specificare il numero N da linea di comando, ma poi ignorano quanto specificato dall'utente e leggono sempre `N=10000`.
+-   Alcuni studenti richiedono di specificare il numero N da linea di comando, ma poi ignorano quanto specificato dall'utente e leggono sempre `N=365`.
 
 -   Alcuni studenti si affidano all'ordine di inclusione degli header per evitare qualche `#include` in più. Se in `vectors.h` avete definito funzioni che lavorano su vettori, e in `newton.h` avete ulteriori funzioni che risolvono problemi di fisica Newtoniana, dovete assicurarvi che all'inizio di `newton.h` ci sia un `#include "vectors.h"`:
 
@@ -999,13 +1004,16 @@ Elenco qui gli errori più comuni che ho riscontrato negli ultimi anni correggen
     ...
     ```
 
-    Alcuni studenti omettono la riga `#include "vectors.h"` e la mettono nel `main`, prima di `#include "newton.h"`:
+    Alcuni studenti omettono la riga `#include "vectors.h"` nel file qui sopra, e la mettono nel `main` prima di `#include "newton.h"`:
 
     ```c++
+    // main.cpp
     #include "vectors.h"
     #include "newton.h"
 
     // ...
     ```
 
-    Anche se il codice compila lo stesso, è concettualmente sbagliato: il file `newton.h` richiede `vectors.h`, e dovrebbe quindi includerlo al suo interno. Altrimenti, tutte le volte che userete `newton.h` in altri programmi, dovrete sempre ricordarvi di anteporre `#include "vectors.h"`, e questa è una cosa facile da dimenticare.
+    Anche se il codice compila lo stesso, è concettualmente sbagliato: il file `newton.h` richiede `vectors.h`, e dovrebbe quindi includerlo al suo interno. In altre parole, senza `#include "vectors.h"` il file `newton.h` è inconsistente!
+
+    Questo è importante perché poi tutte le volte che userete `newton.h` in altri programmi (ad esempio nell'esame scritto!), dovrete sempre ricordarvi di anteporre `#include "vectors.h"`, e questa è una cosa facile da dimenticare se sono passati alcuni mesi da quando avete scritto quel file.

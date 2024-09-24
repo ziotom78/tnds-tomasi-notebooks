@@ -198,25 +198,25 @@ precedente)</li>
 precedente)</li>
 </ul></li>
 <li><p>Dovrete leggere i dati dal file <a
-href="./data/data.dat"><code>data.dat</code></a> (fate click col tasto
-destro e salvate il link sul vostro computer).</p></li>
+href="1941.txt"><code>1941.txt</code></a> (fate click col tasto destro e
+salvate il link nella vostra cartella di lavoro).</p></li>
 </ul>
 </section>
 <section id="esercizi-per-oggi-1" class="slide level1">
 <h1>Esercizi per oggi</h1>
-<pre class="text"><code>$ head -n 4 data.dat
-8.50763
-11.6275
-20.9615
-9.55072
-$ ./esercizio01.1 4 data.dat
-Media = 12.6618
-Varianza = 32.2969
-Mediana = 10.5891
-8.50763
-11.6275
-20.9615
-9.55072</code></pre>
+<pre class="text"><code>$ head -n 4 1941.txt
+0.536144578313253
+-1.7373493975903613
+0.9650602409638556
+1.2216867469879515
+$ ./esercizio01.1 4 1941.txt
+Media = 0.246386
+Varianza = 1.37172
+Mediana = 0.750602
+-1.73735
+0.536145
+0.96506
+1.22169</code></pre>
 <p><strong>Nota</strong>: la <em>varianza</em> è il quadrato della
 <em>deviazione standard</em>; quest’ultima si indica anche con RMS
 (<em>Root Mean Square</em>).</p>
@@ -237,23 +237,23 @@ class="math inline">N</span> nel calcolo della varianza).</p></li>
 </section>
 <section id="risultati-di-riferimento" class="slide level1">
 <h1>Risultati di riferimento</h1>
-<pre><code>N = 100000:
-  - Mean               : 30.23231
-  - Variance           : 282326.76577 (corrected: 282329.58906)
-  - Standard deviation : 531.34430 (corrected: 531.34696)
-  - Median             : 12.74255
+<pre><code>N = 365:
+  - Mean               : -1.0813335533916488
+  - Variance           : 6.67466568793561 (corrected: 6.693002681583785)
+  - Standard deviation : 2.5835374369138933 (corrected: 2.587083818043742)
+  - Median             : -0.9156626506024095
 
 N = 10:
-  - Mean               : 13.91472
-  - Variance           : 38.73156 (corrected: 43.03507)
-  - Standard deviation : 6.22347 (corrected: 6.56011)
-  - Median             : 10.58911
+  - Mean               : -1.1889156626506023
+  - Variance           : 4.270508578893889 (corrected: 4.745009532104321)
+  - Standard deviation : 2.0665208876016448 (corrected: 2.1783042790446703)
+  - Median             : -1.3186746987951807
 
 N = 9:
-  - Mean               : 13.85262
-  - Variance           : 42.99651 (corrected: 48.37107)
-  - Standard deviation : 6.55717 (corrected: 6.95493)
-  - Median             : 9.55072</code></pre>
+  - Mean               : -0.9204819277108434
+  - Variance           : 4.024442831567232 (corrected: 4.527498185513136)
+  - Standard deviation : 2.0061014011179075 (corrected: 2.12779185671746)
+  - Median             : -0.9</code></pre>
 </section>
 <section id="come-svolgere-gli-esercizi" class="slide level1">
 <h1>Come svolgere gli esercizi</h1>
@@ -263,9 +263,11 @@ N = 9:
 presenza);</li>
 <li>Se avete un portatile con un compilatore C++ installato
 (ragionevolmente recente), potete svolgere l’esercizio su di esso.</li>
-<li>Potete usare <a href="https://replit.com/~">Repl.it</a>: in questo
-caso non c’è bisogno di installare nulla, e potete usare anche un tablet
-(ma sarebbe meglio collegare una tastiera!).</li>
+<li>Negli anni passati suggerivamo <a
+href="https://replit.com/~">Repl.it</a>, ma recenti cambiamenti nelle
+loro licenze lo hanno reso un prodotto sconsigliabile. Se proprio volete
+usarlo, assicuratevi di fare spesso il backup del vostro lavoro sul
+vostro computer scaricando ogni Repl in un file ZIP.</li>
 </ol>
 </section>
 <section id="computer-di-laboratorio" class="slide level1">
@@ -284,13 +286,23 @@ laboratorio!</p></li>
 <section id="sistemare-vscode" class="slide level1">
 <h1>Sistemare VSCode</h1>
 <ul>
-<li><p>Il problema è che di default VS Code richiede 5 GB di spazio su
-disco per ottimizzare i suggerimenti di completamento della sintassi
-(vedi <a
+<li><p>Di default VS Code richiede 5 GB di spazio su disco per
+ottimizzare i suggerimenti di completamento della sintassi (vedi <a
 href="https://github.com/microsoft/vscode-cpptools/issues/3347">discussione</a>).</p></li>
+<li><p>Ma gli studenti hanno a disposizione solo 1 GB di spazio nelle
+proprie home.</p></li>
+<li><p>Il problema non si manifesta mai chiaramente (ad esempio col
+messaggio “spazio su disco esaurito”), ma di volta in volta compaiono
+problemi diversi:</p>
+<ul>
+<li>Non riuscite più ad aprire nuovi tab in Firefox;</li>
+<li>Non potete più salvare i file nell’editor;</li>
+<li>Il compilatore non crea l’eseguibile producendo errori
+incomprensibili.</li>
+</ul></li>
 <li><p>È possibile disabilitare la cache o ridurla a un valore
 ragionevole modificando nelle impostazioni di VS Code la voce
-<em>Intellisense cache size</em> (vedi video seguente).</p></li>
+<em>Intellisense cache size</em>.</p></li>
 </ul>
 </section>
 <section class="slide level1">
@@ -310,25 +322,21 @@ eseguite dal terminale del vostro computer il comando</p>
 <p>(Attenzione, se avete installato «Code OSS» il comando non funziona:
 occorre proprio la versione rilasciata da Microsoft per installare
 questa estensione).</p></li>
-<li><p>Di seguito c’è un breve filmato che vi mostra come scrivere ed
-eseguire un programma di esempio. Visual Studio Code presenta numerosi
-<em>plugin</em> per semplificare lo sviluppo; li vedremo meglio durante
-il corso.</p></li>
 </ul>
-</section>
-<section class="slide level1">
-
-<div style="padding:54.53% 0 0 0;position:relative;">
-<iframe src="https://player.vimeo.com/video/623206212?h=71f53f0f8b&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;" title="Visual Studio Code &amp;ndash; First steps with C++">
-</iframe>
-</div>
-<script src="https://player.vimeo.com/api/player.js"></script>
 </section>
 <section id="computer-del-laboratorio-12" class="slide level1">
 <h1>Computer del laboratorio (1/2)</h1>
-<p>Se usate un sistema Linux o Mac OS X, potete usare il comando
-<code>ssh</code> dal terminale:</p>
-<p><asciinema-player src="asciinema/connect-to-tolab-75×20.asciinema" cols="75" rows="20" font-size="medium"></asciinema-player></p>
+<ul>
+<li><p>Se usate un sistema Linux o Mac OS X, potete usare il comando
+<code>ssh</code> dal terminale.</p></li>
+<li><p>Digitate <code>ssh NOMEUTENTE@tolab.fisica.unimi.it</code>, dove
+<code>NOMEUTENTE</code> è il nome associato alla vostra email.</p></li>
+<li><p>Ad esempio, la mia email è <code>maurizio.tomasi@unimi.it</code>
+e quindi il mio nome utente è <code>maurizio.tomasi</code>:</p>
+<pre><code>$ ssh maurizio.tomasi@tolab.fisica.unimi.it
+Last login: Wed Dec 27 06:42:38 2023 from 93.45.84.151
+[maurizio.tomasi@lab05 ~]$</code></pre></li>
+</ul>
 </section>
 <section id="computer-del-laboratorio-22" class="slide level1">
 <h1>Computer del laboratorio (2/2)</h1>
@@ -354,30 +362,10 @@ da browser.</p></li>
 impiegarlo per questo corso…</p></li>
 <li><p>…ma il sito non si è sempre dimostrato affidabile: a volte resta
 offline, altre volte è estremamente lento.</p></li>
-<li><p>Se potete usare il vostro computer o quello del laboratorio, vi
-suggerirei di preferire questa opzione.</p></li>
-</ul>
-</section>
-<section class="slide level1">
-
-<iframe src="https://player.vimeo.com/video/623224728?h=87f213239a&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" width="1280" height="698" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen title="Repl.it &amp;ndash; How to write C++ code">
-</iframe>
-</section>
-<section id="accorgimenti-per-repl.it" class="slide level1">
-<h1>Accorgimenti per Repl.it</h1>
-<ul>
-<li><p>Nel video si mostra come creare un <em>nuovo</em> progetto, ma
-nel vostro caso dovreste invece fare il <em>fork</em> del template
-fornito dal docente. (Vi arriverà la mail non appena termina questa
-spiegazione).</p></li>
-<li><p>Alla fine di ogni lezione scaricare sul proprio computer un file
-<code>.zip</code> che contenga ogni esercizio.</p></li>
-<li><p>Prima dell’esame scritto dovrete «consegnare» gli esercizi. Non è
-necessario farlo alla fine della lezione, perché potreste volerci
-tornare sopra più volte nel corso del semestre.</p></li>
-<li><p>Si possono consegnare gli esercizi facendo «Submit» in Repl.it,
-ma <strong>dovete</strong> anche copiare gli esercizi nella vostra
-<em>home</em> sui computer di laboratorio.</p></li>
+<li><p>Inoltre i proprietari hanno recentemente cambiato il contratto di
+licenza (Agosto 2024), rendendo il suo uso
+<strong>sconsigliabile</strong>: usatelo a vostro rischio e
+pericolo!</p></li>
 </ul>
 </section>
 <section id="suggerimenti-vari" class="slide level1">
@@ -386,21 +374,20 @@ ma <strong>dovete</strong> anche copiare gli esercizi nella vostra
 <section id="uso-di-define" class="slide level1">
 <h1>Uso di <code>#define</code></h1>
 <ul>
-<li><p>Ogni anno si vedono studenti usare <code>#define</code> per
-definire costanti nel codice, ma è meglio usare un
-<code>const</code>:</p>
-<div class="sourceCode" id="cb6"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#define g </span><span class="fl">9.81</span><span class="pp">           </span><span class="co">// Don&#39;t do this!</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="at">const</span> <span class="dt">double</span> g <span class="op">=</span> <span class="fl">9.81</span><span class="op">;</span>   <span class="co">// Much better, I can explicitly declare the type</span></span></code></pre></div></li>
+<li><p>Anziché usare <code>#define</code> per definire costanti,
+preferite <code>const</code>:</p>
+<div class="sourceCode" id="cb7"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#define g </span><span class="fl">9.81</span><span class="pp">           </span><span class="co">// Don&#39;t do this!</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="at">const</span> <span class="dt">double</span> g <span class="op">=</span> <span class="fl">9.81</span><span class="op">;</span>   <span class="co">// Much better, I can explicitly declare the type</span></span></code></pre></div></li>
 <li><p>Con <code>#define</code> ci possono essere problemi con la
 precedenza degli operatori:</p>
-<div class="sourceCode" id="cb7"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#define time1_s       </span><span class="fl">1.62</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#define time2_s       </span><span class="fl">6.162</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#define total_time_s  </span>time1_s<span class="pp"> </span><span class="op">+</span><span class="pp"> </span>time2_s</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="pp">#define speed_m_s     </span><span class="fl">1.0</span></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>cout <span class="op">&lt;&lt;</span> <span class="st">&quot;The position is &quot;</span> <span class="op">&lt;&lt;</span> total_time_s <span class="op">*</span> speed_m_s <span class="op">&lt;&lt;</span> <span class="st">&quot; m</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">;</span></span></code></pre></div></li>
+<div class="sourceCode" id="cb8"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#define time1_s       </span><span class="fl">1.62</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#define time2_s       </span><span class="fl">6.162</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#define total_time_s  </span>time1_s<span class="pp"> </span><span class="op">+</span><span class="pp"> </span>time2_s</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="pp">#define speed_m_s     </span><span class="fl">1.0</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>cout <span class="op">&lt;&lt;</span> <span class="st">&quot;The position is &quot;</span> <span class="op">&lt;&lt;</span> total_time_s <span class="op">*</span> speed_m_s <span class="op">&lt;&lt;</span> <span class="st">&quot; m</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">;</span></span></code></pre></div></li>
 </ul>
 </section>
 <section id="uso-di-argc-e-argv" class="slide level1">
@@ -412,15 +399,13 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb7-1"><a href="#c
 <li><p>I parametri <code>argc</code> e <code>argv</code> passati come
 argomenti al <code>main</code> servono per leggere parametri passati
 dalla linea di comando, come nel caso seguente:</p>
-<div class="sourceCode" id="cb8"><pre
-class="sourceCode sh"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> ./main 10 data.dat</span></code></pre></div></li>
-<li><p>Si possono dichiarare in più modi, tutti equivalenti:</p>
 <div class="sourceCode" id="cb9"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">(</span><span class="dt">int</span> argc<span class="op">,</span> <span class="dt">char</span> <span class="op">**</span> argv<span class="op">);</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co">// My personal favorite</span></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">(</span><span class="dt">int</span> argc<span class="op">,</span> <span class="dt">char</span> <span class="op">*</span>argv<span class="op">[]);</span></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co">// You can pick whatever name you want</span></span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">(</span><span class="dt">int</span> num_of_arguments<span class="op">,</span> <span class="dt">char</span> <span class="op">*</span>args<span class="op">[]);</span></span></code></pre></div></li>
+class="sourceCode sh"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> ./main 10 1941.txt</span></code></pre></div></li>
+<li><p>Si possono dichiarare in più modi, tutti equivalenti:</p>
+<div class="sourceCode" id="cb10"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">(</span><span class="dt">int</span> argc<span class="op">,</span> <span class="dt">char</span> <span class="op">**</span> argv<span class="op">);</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">(</span><span class="dt">int</span> argc<span class="op">,</span> <span class="dt">char</span> <span class="op">*</span>argv<span class="op">[]);</span> <span class="co">// My personal favorite</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">(</span><span class="dt">int</span> num_of_arguments<span class="op">,</span> <span class="dt">char</span> <span class="op">*</span>args<span class="op">[]);</span> <span class="co">// Use whatever name you want</span></span></code></pre></div></li>
 </ul>
 </section>
 <section id="significato-di-argc-e-argv-12" class="slide level1">
@@ -439,23 +424,23 @@ etc.</p></li>
 </section>
 <section class="slide level1">
 
-<p><asciinema-player src="asciinema/argc-argv-79x19.asciinema" cols="79" rows="19" font-size="medium"></asciinema-player></p>
+<p><asciinema-player src="asciinema/argc-argv-86x22.asciinema" cols="86" rows="22" font-size="medium"></asciinema-player></p>
 </section>
-<section id="significato-di-argc-e-argv-12-1" class="slide level1">
-<h1>Significato di argc e argv (1/2)</h1>
+<section id="significato-di-argc-e-argv-22" class="slide level1">
+<h1>Significato di argc e argv (2/2)</h1>
 <p>Se eseguiamo più volte il programma, ecco il suo output:</p>
 <pre class="text"><code>$ ./args-example
 argc = 1
-argv[0] = ./args-example
+argv[0] = &quot;./args-example&quot;
 $ ./args-example 10
 argc = 2
-argv[0] = ./args-example
-argv[1] = 10
-$ ./args-example 10 ../data.dat
+argv[0] = &quot;./args-example&quot;
+argv[1] = &quot;10&quot;
+$ ./args-example 10 1941.txt
 argc = 3
-argv[0] = ./args-example
-argv[1] = 10
-argv[2] = ../data.dat</code></pre>
+argv[0] = &quot;./args-example&quot;
+argv[1] = &quot;10&quot;
+argv[2] = &quot;1941.txt&quot;</code></pre>
 </section>
 <section id="uso-di-makefile" class="slide level1">
 <h1>Uso di Makefile</h1>
@@ -463,21 +448,21 @@ argv[2] = ../data.dat</code></pre>
 <section id="compilare-un-programma-13" class="slide level1">
 <h1>Compilare un programma (1/3)</h1>
 <p>Prendiamo questo semplice esempio:</p>
-<div class="sourceCode" id="cb11"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> calc<span class="op">(</span><span class="dt">int</span> a<span class="op">,</span> <span class="dt">int</span> b<span class="op">)</span> <span class="op">{</span> <span class="cf">return</span> a <span class="op">+</span> b<span class="op">;</span> <span class="op">}</span></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>    <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> <span class="st">&quot;Insert two numbers: &quot;</span><span class="op">;</span></span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> a<span class="op">,</span> b<span class="op">;</span></span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>    <span class="bu">std::</span>cin <span class="op">&gt;&gt;</span> a <span class="op">&gt;&gt;</span> b<span class="op">;</span></span>
-<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>    <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> <span class="st">&quot;The result is &quot;</span></span>
-<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>              <span class="op">&lt;&lt;</span> calc<span class="op">(</span>a<span class="op">,</span> b<span class="op">)</span> <span class="op">&lt;&lt;</span> <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">;</span></span>
-<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> calc<span class="op">(</span><span class="dt">int</span> a<span class="op">,</span> <span class="dt">int</span> b<span class="op">)</span> <span class="op">{</span> <span class="cf">return</span> a <span class="op">+</span> b<span class="op">;</span> <span class="op">}</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>    <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> <span class="st">&quot;Insert two numbers: &quot;</span><span class="op">;</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> a<span class="op">,</span> b<span class="op">;</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>    <span class="bu">std::</span>cin <span class="op">&gt;&gt;</span> a <span class="op">&gt;&gt;</span> b<span class="op">;</span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>    <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> <span class="st">&quot;The result is &quot;</span></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>              <span class="op">&lt;&lt;</span> calc<span class="op">(</span>a<span class="op">,</span> b<span class="op">)</span> <span class="op">&lt;&lt;</span> <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">;</span></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 </section>
 <section id="compilare-un-programma-23" class="slide level1">
 <h1>Compilare un programma (2/3)</h1>
@@ -499,10 +484,10 @@ vetusto ma presente su qualsiasi sistema Unix: GNU Make.</p></li>
 <li><p>Partiamo da un caso molto semplice (l’esercizio 1.2 sarà più
 complicato). Create un file con nome <code>Makefile</code> (attenzione
 alla maiuscola iniziale!), e scrivete queste righe al suo interno:</p>
-<div class="sourceCode" id="cb12"><pre
-class="sourceCode makefile"><code class="sourceCode makefile"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="dt">CXXFLAGS</span> <span class="ch">=</span><span class="st"> -std=c++23 -g3 -Wall --pedantic</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="dv">main:</span><span class="dt"> main.cpp</span></span></code></pre></div></li>
+<div class="sourceCode" id="cb13"><pre
+class="sourceCode makefile"><code class="sourceCode makefile"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="dt">CXXFLAGS</span> <span class="ch">=</span><span class="st"> -std=c++23 -g3 -Wall --pedantic</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="dv">main:</span><span class="dt"> main.cpp</span></span></code></pre></div></li>
 <li><p>Infine, da linea di comando eseguite il comando <code>make</code>
 (<code>$</code> indica il prompt):</p>
 <pre class="text"><code>$ make
@@ -516,10 +501,10 @@ main   main.cpp   Makefile</code></pre></li>
 <ul>
 <li><p>È utile specificare dei flag aggiuntivi per la compilazione,
 tramite la riga</p>
-<div class="sourceCode" id="cb14"><pre
-class="sourceCode makefile"><code class="sourceCode makefile"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="dt">CXXFLAGS</span> <span class="ch">=</span><span class="st"> -std=c++23 -g3 -Wall --pedantic</span></span></code></pre></div></li>
-<li><p><code>-std=c++23</code> usa la versione più recente del
-C++.</p></li>
+<div class="sourceCode" id="cb15"><pre
+class="sourceCode makefile"><code class="sourceCode makefile"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="dt">CXXFLAGS</span> <span class="ch">=</span><span class="st"> -std=c++23 -g3 -Wall --pedantic</span></span></code></pre></div></li>
+<li><p><code>-std=c++23</code> abilita le caratteristiche più recenti
+(2023) del C++.</p></li>
 <li><p><code>-g3</code>: se il codice va in <em>crash</em>, stampa la
 riga di codice che ha causato l’errore.</p></li>
 <li><p><code>-Wall</code>: rende il compilatore C++ più brontolone del
@@ -532,8 +517,8 @@ solito.</p></li>
 <ul>
 <li><p>Il comando <code>make</code> serve per «creare» (appunto, <em>to
 make</em>) dei file partendo da altri. Con la scritta</p>
-<div class="sourceCode" id="cb15"><pre
-class="sourceCode makefile"><code class="sourceCode makefile"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="dv">main:</span><span class="dt"> main.cpp</span></span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre
+class="sourceCode makefile"><code class="sourceCode makefile"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="dv">main:</span><span class="dt"> main.cpp</span></span></code></pre></div>
 <p>si dice a Make che si vuole creare il file <code>main</code>
 (eseguibile) partendo dal file <code>main.cpp</code>.</p></li>
 <li><p>Make sa che i file con estensione <code>.cpp</code> sono
@@ -546,19 +531,18 @@ programmi C++, e quindi correttamente invoca l’eseguibile
 <h1>Comandi personalizzati</h1>
 <ul>
 <li><p>Se si vuole fornire manualmente la lista dei comandi da inviare,
-bisogna scriverli nella riga successiva, che va indentata inserendo un
-carattere <strong>TAB</strong>, solitamente indicato sulle tastiere con
-↹ (è a sinistra del tasto Q):</p>
-<div class="sourceCode" id="cb16"><pre
-class="sourceCode makefile"><code class="sourceCode makefile"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="dt">CXXFLAGS</span> <span class="ch">=</span><span class="st"> -std=c++23 -g3 -Wall --pedantic</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="dv">main:</span><span class="dt"> main.cpp</span></span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># You MUST use a Tab character ↹ to indent here!</span></span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>    g++ <span class="ch">$(</span><span class="dt">CXXFLAGS</span><span class="ch">)</span> main.cpp</span></code></pre></div></li>
-<li><p>Per inserire un Tab da Repl.it, impostate <em>Indent type</em>
-uguale a <em>Tab</em> e <em>Indent size</em> uguale a 8 in «Settings».
-<strong>Attenzione</strong>: con alcuni browser, Repl.it non permette di
-inserire un carattere Tab.</p></li>
+bisogna scriverli nella riga successiva</p></li>
+<li><p>Questa seconda riga va indentata <strong>obbligatoriamente
+inserendo un carattere </strong>TAB**, solitamente indicato sulle
+tastiere con ↹ (è a sinistra del tasto Q):</p>
+<div class="sourceCode" id="cb17"><pre
+class="sourceCode makefile"><code class="sourceCode makefile"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="dt">CXXFLAGS</span> <span class="ch">=</span><span class="st"> -std=c++23 -g3 -Wall --pedantic</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="dv">main:</span><span class="dt"> main.cpp</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># You MUST use a Tab character ↹ to indent here!</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>    g++ <span class="ch">$(</span><span class="dt">CXXFLAGS</span><span class="ch">)</span> main.cpp</span></code></pre></div></li>
+<li><p>Attenzione: se usate uno o più spazi anziché il
+<strong>TAB</strong>, <code>make</code> darà errore!</p></li>
 </ul>
 </section>
 <section id="esecuzione-di-un-makefile" class="slide level1">
@@ -583,11 +567,11 @@ delle date e ricreare tutto da capo, basta invocarlo così:
 <li><p>Nell’esercizio 1.2 si richiede di dividere il programma tra più
 file, e di compilarli separatamente. In questo caso la struttura del
 <code>Makefile</code> si complica:</p>
-<div class="sourceCode" id="cb18"><pre
-class="sourceCode makefile"><code class="sourceCode makefile"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="dv">esercizio1.2:</span><span class="dt"> esercizio1.2.cpp funzioni.cpp</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Con \ si può andare a capo</span></span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>    g++ esercizio1.2.cpp funzioni.cpp \</span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>        <span class="ch">-</span><span class="fu">o esercizio1.2 </span><span class="ch">$(</span><span class="dt">CXXFLAGS</span><span class="ch">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre
+class="sourceCode makefile"><code class="sourceCode makefile"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="dv">esercizio1.2:</span><span class="dt"> esercizio1.2.cpp funzioni.cpp</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Con \ si può andare a capo</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>    g++ esercizio1.2.cpp funzioni.cpp \</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>        <span class="ch">-</span><span class="fu">o esercizio1.2 </span><span class="ch">$(</span><span class="dt">CXXFLAGS</span><span class="ch">)</span></span></code></pre></div>
 <p>Questo esempio crea di nuovo l’eseguibile a partire da file
 <code>.cpp</code>.</p></li>
 <li><p>Quanto scritto qui sopra funziona, ma <strong>non è quanto
@@ -599,19 +583,18 @@ passaggio intermedio, ossia la creazione di file
 <section id="creare-i-file-oggetto-.o" class="slide level1">
 <h1>Creare i file oggetto (<code>.o</code>)</h1>
 <ul>
-<li><p>GNU Make permette di richiedere dipendenze «intermedie», ossia
-dipendenze da file che devono essere creati dallo stesso GNU
-Make.</p></li>
+<li><p>L’esercizio 1.2 richiede di esplicitare le dipendenze
+«intermedie».</p></li>
 <li><p>Questo è ciò che serve per i file <code>.o</code>:</p>
-<div class="sourceCode" id="cb19"><pre
-class="sourceCode makefile"><code class="sourceCode makefile"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="dv">esercizio1.2:</span><span class="dt"> esercizio1.2.o funzioni.o</span></span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="er">    </span>g++ esercizio1.2.o funzioni.o -o esercizio1.2</span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="dv">esercizio1.2.o:</span><span class="dt"> esercizio1.2.cpp funzioni.h</span></span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="er">    </span>g++ -c esercizio1.2.cpp -o esercizio1.2.o <span class="ch">$(</span><span class="dt">CXXFLAGS</span><span class="ch">)</span></span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a><span class="dv">funzioni.o:</span><span class="dt"> funzioni.cpp funzioni.h</span></span>
-<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a><span class="er">    </span>g++ -c funzioni.cpp -o funzioni.o <span class="ch">$(</span><span class="dt">CXXFLAGS</span><span class="ch">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb20"><pre
+class="sourceCode makefile"><code class="sourceCode makefile"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="dv">esercizio1.2:</span><span class="dt"> esercizio1.2.o funzioni.o</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="er">    </span>g++ esercizio1.2.o funzioni.o -o esercizio1.2</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="dv">esercizio1.2.o:</span><span class="dt"> esercizio1.2.cpp funzioni.h</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="er">    </span>g++ -c esercizio1.2.cpp -o esercizio1.2.o <span class="ch">$(</span><span class="dt">CXXFLAGS</span><span class="ch">)</span></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a><span class="dv">funzioni.o:</span><span class="dt"> funzioni.cpp funzioni.h</span></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a><span class="er">    </span>g++ -c funzioni.cpp -o funzioni.o <span class="ch">$(</span><span class="dt">CXXFLAGS</span><span class="ch">)</span></span></code></pre></div>
 <p>(<code>CXXFLAGS</code> non serve quando si mettono insieme più file
 <code>.o</code>: la compilazione del codice C++ è già
 avvenuta).</p></li>
@@ -624,15 +607,15 @@ avvenuta).</p></li>
 scrittura del <code>Makefile</code>. Una di queste è <code>$@</code>,
 che rappresenta il nome del file da creare.</p></li>
 <li><p>L’esempio nella slide precedente si può riscrivere così:</p>
-<div class="sourceCode" id="cb20"><pre
-class="sourceCode makefile"><code class="sourceCode makefile"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="dv">esercizio1.2:</span><span class="dt"> esercizio1.2.o funzioni.o</span></span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="er">    </span>g++ esercizio1.2.o funzioni.o -o <span class="ch">$@</span></span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="dv">esercizio1.2.o:</span><span class="dt"> esercizio1.2.cpp funzioni.h</span></span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="er">    </span>g++ -c esercizio1.2.cpp -o <span class="ch">$@</span> <span class="ch">$(</span><span class="dt">CXXFLAGS</span><span class="ch">)</span></span>
-<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a><span class="dv">funzioni.o:</span><span class="dt"> funzioni.cpp funzioni.h</span></span>
-<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a><span class="er">    </span>g++ -c funzioni.cpp -o <span class="ch">$@</span> <span class="ch">$(</span><span class="dt">CXXFLAGS</span><span class="ch">)</span></span></code></pre></div></li>
+<div class="sourceCode" id="cb21"><pre
+class="sourceCode makefile"><code class="sourceCode makefile"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="dv">esercizio1.2:</span><span class="dt"> esercizio1.2.o funzioni.o</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="er">    </span>g++ esercizio1.2.o funzioni.o -o <span class="ch">$@</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="dv">esercizio1.2.o:</span><span class="dt"> esercizio1.2.cpp funzioni.h</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="er">    </span>g++ -c esercizio1.2.cpp -o <span class="ch">$@</span> <span class="ch">$(</span><span class="dt">CXXFLAGS</span><span class="ch">)</span></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a><span class="dv">funzioni.o:</span><span class="dt"> funzioni.cpp funzioni.h</span></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a><span class="er">    </span>g++ -c funzioni.cpp -o <span class="ch">$@</span> <span class="ch">$(</span><span class="dt">CXXFLAGS</span><span class="ch">)</span></span></code></pre></div></li>
 <li><p>È più facile riciclare il <code>Makefile</code> nei nuovi
 esercizi!</p></li>
 </ul>
@@ -643,22 +626,21 @@ esercizi!</p></li>
 <section id="file-multipli-ed-header-1" class="slide level1">
 <h1>File multipli ed header</h1>
 <ul>
-<li><p>Dovete <strong>sempre</strong> includere in ogni header/file
-sorgente tutti gli header che servono per definire i simboli nel
-codice.</p></li>
+<li><p>Includete <strong>sempre</strong> nei vostri file tutti gli
+<code>#include</code> che servono!</p></li>
 <li><p>Ad esempio, se un file <code>main.cpp</code> contiene questi
 <code>#include</code>:</p>
-<div class="sourceCode" id="cb21"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co">// main.cpp</span></span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;vectors.h&quot;</span><span class="pp">   </span><span class="co">// Define 3D vectors</span></span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;newton.h&quot;</span><span class="pp">    </span><span class="co">// Define functions to solve Newton&#39;s problems</span></span></code></pre></div>
-<p>è buona cosa che in <code>newton.h</code> si includa comunque
-<code>vectors.h</code>:</p>
 <div class="sourceCode" id="cb22"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co">// newton.h</span></span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#pragma once</span></span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;vectors.h&quot;</span></span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="co">// etc.</span></span></code></pre></div></li>
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co">// main.cpp</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;vectors.h&quot;</span><span class="pp">   </span><span class="co">// Define 3D vectors</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;newton.h&quot;</span><span class="pp">    </span><span class="co">// Define functions to solve Newton&#39;s problems</span></span></code></pre></div>
+<p>è buona cosa includere comunque <code>vectors.h</code>
+<strong>anche</strong> dentro <code>newton.h</code>:</p>
+<div class="sourceCode" id="cb23"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co">// newton.h</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#pragma once</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;vectors.h&quot;</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="co">// etc.</span></span></code></pre></div></li>
 </ul>
 </section>
 <section id="motivo-1" class="slide level1">
@@ -667,15 +649,15 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb22-1"><a href="#
 <li><p>Programmi complessi usano moltissimi <code>#include</code>. In
 questo caso si tende a inserirli in ordine alfabetico, per individuare
 duplicati:</p>
-<div class="sourceCode" id="cb23"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;subdiv.h&quot;</span></span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;intersec.h&quot;</span></span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;memory.h&quot;</span></span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;roots.h&quot;</span></span>
-<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;glyph.h&quot;</span></span>
-<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;scan.h&quot;</span></span>
-<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;memory.h&quot;</span></span>
-<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;vector.h&quot;</span></span></code></pre></div></li>
+<div class="sourceCode" id="cb24"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;subdiv.h&quot;</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;intersec.h&quot;</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;memory.h&quot;</span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;roots.h&quot;</span></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;glyph.h&quot;</span></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;scan.h&quot;</span></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;memory.h&quot;</span></span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;vector.h&quot;</span></span></code></pre></div></li>
 <li><p>Formattatori automatici di codice come <code>clang-format</code>
 riordinano gli <code>#include</code>: nel nostro caso quindi metterebbe
 <code>newton.h</code> <strong>prima</strong> di <code>vectors.h</code>,
@@ -715,11 +697,24 @@ vi converrà usare sistemi più evoluti ed agili; tra questi, il più usato
 in assoluto è <a href="https://cmake.org/">CMake</a>.</p></li>
 </ul>
 </section>
-<section class="slide level1">
-
-<p><img data-src="images/540px-Pdp-11-40.jpg" /></p>
-<p>Fonte: <a href="https://en.wikipedia.org/wiki/PDP-11">Pagina
-Wikipedia del PDP-11</a></p>
+<section id="il-pdp-11" class="slide level1">
+<h1>Il PDP-11</h1>
+<table>
+<tr>
+<td>
+<img data-src="images/540px-Pdp-11-40.jpg" />
+</td>
+<td>
+<ul>
+<li><p>Vedi la <a href="https://en.wikipedia.org/wiki/PDP-11">Pagina
+Wikipedia del PDP-11</a>.</p></li>
+<li><p>La memoria RAM installata era di 4 KB.</p></li>
+<li><p>La fotografia a sinistra occupa quindi 20 volte più memoria di
+quanta ne fosse disponibile nel PDP-11!</p>
+</td>
+</tr>
+</table></li>
+</ul>
 </section>
 <section id="uso-di-cmake" class="slide level1">
 <h1>Uso di CMake</h1>

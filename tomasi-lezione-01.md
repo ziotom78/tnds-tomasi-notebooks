@@ -50,24 +50,24 @@
     -   [Esercizio 1.2](carminati-esercizi-01.html#esercizio-1.2): Codice di analisi con `Makefile` (variante del precedente)
     -   [Esercizio 1.3](carminati-esercizi-01.html#esercizio-1.3): Codice di analisi con overloading (variante del precedente)
 
--   Dovrete leggere i dati dal file [`data.dat`](./data/data.dat) (fate click col tasto destro e salvate il link sul vostro computer).
+-   Dovrete leggere i dati dal file [`1941.txt`](1941.txt) (fate click col tasto destro e salvate il link nella vostra cartella di lavoro).
 
 # Esercizi per oggi
 
 ```text
-$ head -n 4 data.dat
-8.50763
-11.6275
-20.9615
-9.55072
-$ ./esercizio01.1 4 data.dat
-Media = 12.6618
-Varianza = 32.2969
-Mediana = 10.5891
-8.50763
-11.6275
-20.9615
-9.55072
+$ head -n 4 1941.txt
+0.536144578313253
+-1.7373493975903613
+0.9650602409638556
+1.2216867469879515
+$ ./esercizio01.1 4 1941.txt
+Media = 0.246386
+Varianza = 1.37172
+Mediana = 0.750602
+-1.73735
+0.536145
+0.96506
+1.22169
 ```
 
 **Nota**: la *varianza* è il quadrato della *deviazione standard*;
@@ -86,23 +86,23 @@ quest'ultima si indica anche con RMS (*Root Mean Square*).
 # Risultati di riferimento
 
 ```
-N = 100000:
-  - Mean               : 30.23231
-  - Variance           : 282326.76577 (corrected: 282329.58906)
-  - Standard deviation : 531.34430 (corrected: 531.34696)
-  - Median             : 12.74255
+N = 365:
+  - Mean               : -1.0813335533916488
+  - Variance           : 6.67466568793561 (corrected: 6.693002681583785)
+  - Standard deviation : 2.5835374369138933 (corrected: 2.587083818043742)
+  - Median             : -0.9156626506024095
 
 N = 10:
-  - Mean               : 13.91472
-  - Variance           : 38.73156 (corrected: 43.03507)
-  - Standard deviation : 6.22347 (corrected: 6.56011)
-  - Median             : 10.58911
+  - Mean               : -1.1889156626506023
+  - Variance           : 4.270508578893889 (corrected: 4.745009532104321)
+  - Standard deviation : 2.0665208876016448 (corrected: 2.1783042790446703)
+  - Median             : -1.3186746987951807
 
 N = 9:
-  - Mean               : 13.85262
-  - Variance           : 42.99651 (corrected: 48.37107)
-  - Standard deviation : 6.55717 (corrected: 6.95493)
-  - Median             : 9.55072
+  - Mean               : -0.9204819277108434
+  - Variance           : 4.024442831567232 (corrected: 4.527498185513136)
+  - Standard deviation : 2.0061014011179075 (corrected: 2.12779185671746)
+  - Median             : -0.9
 ```
 
 
@@ -112,7 +112,7 @@ Potete svolgere gli esercizi in uno dei modi seguenti:
 
 1.   Usando il computer di laboratorio davanti a voi (per chi è in presenza);
 2.   Se avete un portatile con un compilatore C++ installato (ragionevolmente recente), potete svolgere l'esercizio su di esso.
-3.   Potete usare [Repl.it](https://replit.com/~): in questo caso non c'è bisogno di installare nulla, e potete usare anche un tablet (ma sarebbe meglio collegare una tastiera!).
+3.   Negli anni passati suggerivamo [Repl.it](https://replit.com/~), ma recenti cambiamenti nelle loro licenze lo hanno reso un prodotto sconsigliabile. Se proprio volete usarlo, assicuratevi di fare spesso il backup del vostro lavoro sul vostro computer scaricando ogni Repl in un file ZIP.
 
 
 # Computer di laboratorio
@@ -121,11 +121,20 @@ Potete svolgere gli esercizi in uno dei modi seguenti:
 
 -   Vi consiglio di usare come editor [Visual Studio Code](https://code.visualstudio.com/), che è installato sui computer del laboratorio. Attenzione però: la configurazione di default di VSCode causa problemi sui computer del laboratorio!
 
+
 # Sistemare VSCode
 
--   Il problema è che di default VS Code richiede 5 GB di spazio su disco per ottimizzare i suggerimenti di completamento della sintassi (vedi [discussione](https://github.com/microsoft/vscode-cpptools/issues/3347)).
+-   Di default VS Code richiede 5 GB di spazio su disco per ottimizzare i suggerimenti di completamento della sintassi (vedi [discussione](https://github.com/microsoft/vscode-cpptools/issues/3347)).
 
--   È possibile disabilitare la cache o ridurla a un valore ragionevole modificando nelle impostazioni di VS Code la voce *Intellisense cache size* (vedi video seguente).
+-   Ma gli studenti hanno a disposizione solo 1 GB di spazio nelle proprie home.
+
+-   Il problema non si manifesta mai chiaramente (ad esempio col messaggio “spazio su disco esaurito”), ma di volta in volta compaiono problemi diversi:
+
+    -   Non riuscite più ad aprire nuovi tab in Firefox;
+    -   Non potete più salvare i file nell'editor;
+    -   Il compilatore non crea l'eseguibile producendo errori incomprensibili.
+
+-   È possibile disabilitare la cache o ridurla a un valore ragionevole modificando nelle impostazioni di VS Code la voce *Intellisense cache size*.
 
 ---
 
@@ -142,19 +151,21 @@ Potete svolgere gli esercizi in uno dei modi seguenti:
 
     (Attenzione, se avete installato «Code OSS» il comando non funziona: occorre proprio la versione rilasciata da Microsoft per installare questa estensione).
 
--   Di seguito c'è un breve filmato che vi mostra come scrivere ed eseguire un programma di esempio. Visual Studio Code presenta numerosi *plugin* per semplificare lo sviluppo; li vedremo meglio durante il corso.
-
----
-
-<div style="padding:54.53% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/623206212?h=71f53f0f8b&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;" title="Visual Studio Code &amp;ndash; First steps with C++"></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
-
 
 # Computer del laboratorio (1/2)
 
-Se usate un sistema Linux o Mac OS X, potete usare il comando `ssh`
-dal terminale:
+-   Se usate un sistema Linux o Mac OS X, potete usare il comando `ssh` dal terminale.
 
-<asciinema-player src="asciinema/connect-to-tolab-75×20.asciinema" cols="75" rows="20" font-size="medium"></asciinema-player>
+-   Digitate `ssh NOMEUTENTE@tolab.fisica.unimi.it`, dove `NOMEUTENTE` è il nome associato alla vostra email.
+
+-   Ad esempio, la mia email è `maurizio.tomasi@unimi.it` e quindi il mio nome utente è `maurizio.tomasi`:
+
+    ```
+    $ ssh maurizio.tomasi@tolab.fisica.unimi.it
+    Last login: Wed Dec 27 06:42:38 2023 from 93.45.84.151
+    [maurizio.tomasi@lab05 ~]$
+    ```
+
 
 # Computer del laboratorio (2/2)
 
@@ -173,29 +184,14 @@ dal terminale:
 
 -   …ma il sito non si è sempre dimostrato affidabile: a volte resta offline, altre volte è estremamente lento.
 
--   Se potete usare il vostro computer o quello del laboratorio, vi suggerirei di preferire questa opzione.
-
----
-
-<iframe src="https://player.vimeo.com/video/623224728?h=87f213239a&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" width="1280" height="698" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen title="Repl.it &amp;ndash; How to write C++ code"></iframe>
-
-# Accorgimenti per Repl.it
-
--   Nel video si mostra come creare un *nuovo* progetto, ma nel vostro caso dovreste invece fare il *fork* del template fornito dal docente. (Vi arriverà la mail non appena termina questa spiegazione).
-
--   Alla fine di ogni lezione scaricare sul proprio computer un file `.zip` che contenga ogni esercizio.
-
--   Prima dell'esame scritto dovrete «consegnare» gli esercizi. Non è necessario farlo alla fine della lezione, perché potreste volerci tornare sopra più volte nel corso del semestre.
-
--   Si possono consegnare gli esercizi facendo «Submit» in Repl.it, ma **dovete** anche copiare gli esercizi nella vostra *home* sui
-    computer di laboratorio.
+-   Inoltre i proprietari hanno recentemente cambiato il contratto di licenza (Agosto 2024), rendendo il suo uso **sconsigliabile**: usatelo a vostro rischio e pericolo!
 
 
 # Suggerimenti vari
 
 # Uso di `#define`
 
--   Ogni anno si vedono studenti usare `#define` per definire costanti nel codice, ma è meglio usare un `const`:
+-   Anziché usare `#define` per definire costanti, preferite `const`:
 
     ```c++
     #define g 9.81           // Don't do this!
@@ -220,17 +216,15 @@ dal terminale:
 -   I parametri `argc` e `argv` passati come argomenti al `main` servono per leggere parametri passati dalla linea di comando, come nel caso seguente:
 
     ```sh
-    $ ./main 10 data.dat
+    $ ./main 10 1941.txt
     ```
 
 -   Si possono dichiarare in più modi, tutti equivalenti:
 
     ```c++
     int main(int argc, char ** argv);
-    // My personal favorite
-    int main(int argc, char *argv[]);
-    // You can pick whatever name you want
-    int main(int num_of_arguments, char *args[]);
+    int main(int argc, char *argv[]); // My personal favorite
+    int main(int num_of_arguments, char *args[]); // Use whatever name you want
     ```
 
 ---
@@ -245,27 +239,27 @@ dal terminale:
 
 ---
 
-<asciinema-player src="asciinema/argc-argv-79x19.asciinema" cols="79" rows="19" font-size="medium"></asciinema-player>
+<asciinema-player src="asciinema/argc-argv-86x22.asciinema" cols="86" rows="22" font-size="medium"></asciinema-player>
 
 ---
 
-# Significato di argc e argv (1/2)
+# Significato di argc e argv (2/2)
 
 Se eseguiamo più volte il programma, ecco il suo output:
 
 ```text
 $ ./args-example
 argc = 1
-argv[0] = ./args-example
+argv[0] = "./args-example"
 $ ./args-example 10
 argc = 2
-argv[0] = ./args-example
-argv[1] = 10
-$ ./args-example 10 ../data.dat
+argv[0] = "./args-example"
+argv[1] = "10"
+$ ./args-example 10 1941.txt
 argc = 3
-argv[0] = ./args-example
-argv[1] = 10
-argv[2] = ../data.dat
+argv[0] = "./args-example"
+argv[1] = "10"
+argv[2] = "1941.txt"
 ```
 
 
@@ -334,7 +328,7 @@ prompt):
     CXXFLAGS = -std=c++23 -g3 -Wall --pedantic
     ```
 
--   `-std=c++23` usa la versione più recente del C++.
+-   `-std=c++23` abilita le caratteristiche più recenti (2023) del C++.
 
 -   `-g3`: se il codice va in *crash*, stampa la riga di codice che ha causato l'errore.
 
@@ -358,7 +352,9 @@ prompt):
 
 # Comandi personalizzati
 
--   Se si vuole fornire manualmente la lista dei comandi da inviare, bisogna scriverli nella riga successiva, che va indentata inserendo un carattere **TAB**, solitamente indicato sulle tastiere con ↹ (è a sinistra del tasto Q):
+-   Se si vuole fornire manualmente la lista dei comandi da inviare, bisogna scriverli nella riga successiva
+
+-   Questa seconda riga va indentata **obbligatoriamente inserendo un carattere **TAB**, solitamente indicato sulle tastiere con ↹ (è a sinistra del tasto Q):
 
     ```makefile
     CXXFLAGS = -std=c++23 -g3 -Wall --pedantic
@@ -368,7 +364,7 @@ prompt):
         g++ $(CXXFLAGS) main.cpp
     ```
 
--   Per inserire un Tab da Repl.it, impostate *Indent type* uguale a *Tab* e *Indent size* uguale a 8 in «Settings». **Attenzione**: con alcuni browser, Repl.it non permette di inserire un carattere Tab.
+-   Attenzione: se usate uno o più spazi anziché il **TAB**, `make` darà errore!
 
 ---
 
@@ -408,8 +404,7 @@ e di compilarli separatamente. In questo caso la struttura del
 
 # Creare i file oggetto (`.o`)
 
--   GNU Make permette di richiedere dipendenze «intermedie», ossia
-dipendenze da file che devono essere creati dallo stesso GNU Make.
+-   L'esercizio 1.2 richiede di esplicitare le dipendenze «intermedie».
 
 -   Questo è ciò che serve per i file `.o`:
 
@@ -453,8 +448,7 @@ dipendenze da file che devono essere creati dallo stesso GNU Make.
 
 # File multipli ed header
 
--   Dovete **sempre** includere in ogni header/file sorgente tutti gli
-    header che servono per definire i simboli nel codice.
+-   Includete **sempre** nei vostri file tutti gli `#include` che servono!
 
 -   Ad esempio, se un file `main.cpp` contiene questi `#include`:
 
@@ -464,7 +458,7 @@ dipendenze da file che devono essere creati dallo stesso GNU Make.
     #include "newton.h"    // Define functions to solve Newton's problems
     ```
 
-    è buona cosa che in `newton.h` si includa comunque `vectors.h`:
+    è buona cosa includere comunque `vectors.h` **anche** dentro `newton.h`:
 
     ```c++
     // newton.h
@@ -524,11 +518,23 @@ dipendenze da file che devono essere creati dallo stesso GNU Make.
     corso) vi converrà usare sistemi più evoluti ed agili; tra questi,
     il più usato in assoluto è [CMake](https://cmake.org/).
 
----
 
-![](images/540px-Pdp-11-40.jpg)
+# Il PDP-11
 
-Fonte: [Pagina Wikipedia del PDP-11](https://en.wikipedia.org/wiki/PDP-11)
+<table>
+  <tr>
+    <td>
+      ![](images/540px-Pdp-11-40.jpg)
+    </td>
+    <td>
+-   Vedi la [Pagina Wikipedia del PDP-11](https://en.wikipedia.org/wiki/PDP-11).
+
+-   La memoria RAM installata era di 4 KB.
+
+-    La fotografia a sinistra occupa quindi 20 volte più memoria di quanta ne fosse disponibile nel PDP-11!
+    </td>
+  </tr>
+</table>
 
 ---
 
