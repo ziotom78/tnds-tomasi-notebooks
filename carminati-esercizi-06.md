@@ -1,13 +1,3 @@
----
-title: "Lezione 6: Ricerca di zeri"
-author:
-- "Leonardo Carminati"
-- "Maurizio Tomasi"
-date: "A.A. 2023−2024"
-lang: it-IT
-header-includes: <script src="./fmtinstall.js"></script>
-...
-
 [La pagina con la spiegazione originale degli esercizi si trova qui: <https://labtnds.docs.cern.ch/Lezione6/lezione6/>.]
 
 In questa sesta lezione affronteremo il problema della ricerca di zeri di una funzione. Per fare questo realizzeremo per prima cosa due classi astratte per rappresentare rispettivamente una generica funzione $y = f(x)$, ed un metodo generico per la ricerca di zeri. Affronteremo poi casi concreti (ricerca degli zeri per una parabola usando il metodo della bisezione) sfruttando *ereditarietà* e *polimorfismo*.
@@ -393,3 +383,13 @@ Come di consueto, elenco alcuni errori molto comuni che ho trovato negli anni pa
 -   Un errore un po' più subdolo è quello di non individuare lo zero se si trova esattamente in mezzo all'intervallo: nell'esempio della funzione $f(x)$ vista sopra, il codice di alcuni studenti non trova una soluzione se si specifica l'intervallo $[-3, -1]$, perché lo zero cade esattamente a metà e il codice non si accorge che $f(c) = 0$ quando $c = (a + b)/2$.
 
 -   Il codice di alcuni studenti non si accorge di aver raggiunto la precisione richiesta, e continua ad iterare fino al numero massimo di iterazioni `m_nmax`.
+
+---
+title: "Lezione 6: Ricerca di zeri"
+author:
+- "Leonardo Carminati"
+- "Maurizio Tomasi"
+date: "A.A. 2024−2025"
+lang: it-IT
+header-includes: <script src="./fmtinstall.js"></script>
+...

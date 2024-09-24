@@ -379,7 +379,7 @@ title: "Lezione 7: Quadratura numerica"
 author:
 - "Leonardo Carminati"
 - "Maurizio Tomasi"
-date: "A.A. 2023−2024"
+date: "A.A. 2024−2025"
 lang: it-IT
 header-includes: <script src="./fmtinstall.js"></script>
 ...

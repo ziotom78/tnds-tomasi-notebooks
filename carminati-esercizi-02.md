@@ -1,12 +1,3 @@
----
-title: "Lezione 2: Analisi dei dati (classe Vettore)"
-author:
-- "Leonardo Carminati"
-- "Maurizio Tomasi"
-date: "A.A. 2023−2024"
-lang: it-IT
-...
-
 [La pagina con la spiegazione originale degli esercizi si trova qui: <https://labtnds.docs.cern.ch/Lezione2/Lezione2/>.]
 
 In questa seconda lezione affronteremo gli stessi problemi della prima (lettura di dati da un file, calcolo di media, varianza e mediana) utilizzando però un contenitore di dati di nostra invenzione, idealmente più evoluto del semplice array dinamico del C. A questo proposito nella prima parte della lezione costruiremo la nostra prima classe, la classe `Vettore`, che sostituirà l'array dinamico del C. Nella seconda parte adatteremo le funzioni già scritte nella lezione scorsa in modo che possano funzionare con oggetti di tipo `Vettore`. Quindi in sintesi:
@@ -795,3 +786,12 @@ Tra errori che gli studenti hanno fatto negli anni precedenti, ci sono ovviament
 -   Stranamente, molti studenti che avevano consegnato esercizi della lezione 1 con un calcolo corretto di media, mediana e varianza consegnano per la lezione 2 esercizi che calcolano quegli stessi valori in modo sbagliato!
 
 -   È capitato più di una volta che gli esercizi di alcuni studenti che implementavano il *move constructor* non compilavano neppure. Questo ha lasciato basiti noi docenti: idealmente, **tutti** gli esercizi che si consegnano devono compilare senza errori… Se non riuscite a trovare la causa dell'errore, contattate i docenti prima di consegnare!
+
+---
+title: "Lezione 2: Analisi dei dati (classe Vettore)"
+author:
+- "Leonardo Carminati"
+- "Maurizio Tomasi"
+date: "A.A. 2024−2025"
+lang: it-IT
+...

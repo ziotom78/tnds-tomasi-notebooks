@@ -1,13 +1,3 @@
----
-title: "Lezione 10 e 11: Metodi Montecarlo"
-author:
-- "Leonardo Carminati"
-- "Maurizio Tomasi"
-date: "A.A. 2023−2024"
-lang: it-IT
-header-includes: <script src="./fmtinstall.js"></script>
-...
-
 [La pagina con la spiegazione originale degli esercizi si trova qui: <https://labtnds.docs.cern.ch/Lezione10-11/Lezione1011/>.]
 
 In questa lezione familiarizzeremo con l'utilizzo di tecniche numeriche basate su numeri casuali. Per prima cosa costruiremo un semplice generatore di numeri casuali. Lo utilizzeremo quindi per generare numeri che seguano diverse distribuzioni di probabilità (uniforme, esponenziale e Gaussiana). Come applicazione utilizzeremo la generazione di numeri casuali per calcolare numericamente integrali mono e multi-dimensionali. Nella prossima lezione utilizzeremo un generatore di numeri casuali per simulare il comportamento di un apparato sperimentale.
@@ -563,3 +553,13 @@ Come di consueto, elenco alcuni errori molto comuni che ho trovato negli anni pa
 -   Sempre nell'esercizio 10.2, imparate ad usare giudiziosamente i cicli `for` per studiare i vari casi, anziché usare spietatamente il copia-e-incolla! Vedete il cosiddetto “esempio maledetto” nella [sezione nel notebook Julia](https://ziotom78.github.io/tnds-notebooks/lezione10/#esercizio_101) per imparare cosa **non** fare in questo genere di esercizi!
 
 -   Come già detto a proposito della [lezione 8](carminati-esercizi-08.html#errori-comuni), se il vostro programma richiede una serie di parametri da linea di comando, assicuratevi di documentarli e di permettere all'utente di avviare il programma con `make esegui`.
+
+---
+title: "Lezione 10 e 11: Metodi Montecarlo"
+author:
+- "Leonardo Carminati"
+- "Maurizio Tomasi"
+date: "A.A. 2024−2025"
+lang: it-IT
+header-includes: <script src="./fmtinstall.js"></script>
+...

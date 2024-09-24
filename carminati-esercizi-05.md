@@ -1,13 +1,3 @@
----
-title: "Lezione 5: Classi ed ereditarietà"
-author: 
-- "Leonardo Carminati"
-- "Maurizio Tomasi"
-date: "A.A. 2023−2024"
-lang: it-IT
-header-includes: <script src="./fmtinstall.js"></script>
-...
-
 [La pagina con la spiegazione originale degli esercizi si trova qui: <https://labtnds.docs.cern.ch/Lezione5/Lezione5/>.]
 
 In questa quinta lezione vogliamo affrontare un semplice problema di elettrostatica utilizzando un codice numerico. In particolare, vogliamo calcolare il campo elettrico generato da un dipolo. Vedremo poi come il codice si può estendere in modo immediato a problemi più complessi (ad esempio per studiare il campo generato da un multi-polo o il campo gravitazionale generato da un sistema di masse). Nell'affrontare questo problema fisico approfondiremo il concetto di ereditarietà in C++. Come al solito dovremo prima preparare un set di classi utili per lo svolgimento dell'esercizio.
@@ -100,7 +90,7 @@ double Posizione::getRho() const { return sqrt(m_x * m_x + m_y * m_y); }
 
 // distanza da un altro punto
 double Posizione::Distanza(const Posizione &b) const {
-  return sqrt(pow(getX() - b.getX(), 2) + 
+  return sqrt(pow(getX() - b.getX(), 2) +
               pow(getY() - b.getY(), 2) +
               pow(getZ() - b.getZ(), 2));
 }
@@ -112,7 +102,7 @@ Questo programma utilizza la nuova classe appena creata: richiede di fornire com
 
 Il programma è pensato per usare la libreria [`fmt`](https://github.com/fmtlib/fmt), che potete installare usando lo script [`install_fmt_library`](./install_fmt_library): scaricatelo nella directory dell'esercizio ed eseguitelo con `sh install_fmt_library`, oppure eseguite questo comando:
 
-<input type="text" value="curl https://ziotom78.github.io/tnds-tomasi-notebooks/install_fmt_library | sh" id="installFmtCommand" readonly="1" size="60"><button onclick='copyFmtInstallationScript("installFmtCommand")'>Copia</button> 
+<input type="text" value="curl https://ziotom78.github.io/tnds-tomasi-notebooks/install_fmt_library | sh" id="installFmtCommand" readonly="1" size="60"><button onclick='copyFmtInstallationScript("installFmtCommand")'>Copia</button>
 
 (Se invece usate Windows, scaricate questo [file zip](./fmtlib.zip) nella directory dell'esercizio e decomprimetelo). Le istruzioni dettagliate sono qui: [index.html#fmtinstall](index.html#fmtinstall).
 
@@ -189,11 +179,11 @@ Incominciamo a definire due classi che ci permetteranno di rappresentare le sorg
 -   Costruiamo una classe `Particella` caratterizzata dall'avere una massa ed una carica, quindi dotata dei seguenti metodi:
 
     #.  Un construttore avente come argomenti massa e carica.
-    
+
     #.  Dei metodi di accesso ai valori di massa e carica.
-    
-    #.  Un metodo per stampare tali valori. 
-    
+
+    #.  Un metodo per stampare tali valori.
+
 -   Siccome vogliamo che questa classe sia la classe base di altre classi, dichiareremo i data membri come `protected``.
 
 -   Costruiamo, attraverso il meccanismo di ereditarietà, una classe derivata `Elettrone` che, essendo una `Particella` di massa e carica note (i cui valori sono riportati su [wikipedia](http://it.wikipedia.org/wiki/Elettrone)), ha il solo costruttore di default, che inizializza correttamente i data membri. Modifichiamo il metodo di stampa in modo che indichi che si tratta di un elettrone.
@@ -201,7 +191,7 @@ Incominciamo a definire due classi che ci permetteranno di rappresentare le sorg
 Verifichiamo che le nuovi classi e l'ereditarietà funzioni correttamente:
 
 #.  Istanziamo dinamicamente un oggetto per ogni classe.
-#.  Verifichiamo che su tutti questi operano i metodi accessori di massa e carica di `Particella`, ma il metodo di stampa delle classi derivate. 
+#.  Verifichiamo che su tutti questi operano i metodi accessori di massa e carica di `Particella`, ma il metodo di stampa delle classi derivate.
 
 
 ## Classe `Particella`
@@ -243,7 +233,7 @@ Implementazione nel file `particella.cpp`:
 
 // Metodi per la classe base
 
-Particella::Particella(double massa, double carica) 
+Particella::Particella(double massa, double carica)
   : m_massa{massa}, m_carica{carica} {}
 
 void Particella::Print() const {
@@ -271,7 +261,7 @@ public:
   // Costruttore
   Elettrone() : Particella{9.1093826e-31, -1.60217653e-19} {
       // Invoco il costruttore della classe base con i parametri
-      // opportuni,  ma poi non c'e' altro da fare    
+      // opportuni,  ma poi non c'e' altro da fare
   }
 
   // Distruttore (vuoto, si può omettere)
@@ -341,11 +331,11 @@ Questo esercizio richiede di costruire una classe `CampoVettoriale`, che erediti
 
 #.  un metodo `double Modulo() const` che restituisca la lunghezza del vettore;
 
-#.  overloading di `operator+` e `operator+=` in modo da poter facilmente sommare campi. 
+#.  overloading di `operator+` e `operator+=` in modo da poter facilmente sommare campi.
 
 
 ## Header file della classe `CampoVettoriale`
-    
+
 ```c++
 #pragma once
 
@@ -380,7 +370,7 @@ private:
 Per risolvere facilmente questo tipo di problemi è molto utile ridefinire gli operatori `operator+` e `operator+=` per la classe `CampoVettoriale`. Di seguito una possibile implementazione comoda di questo overloading. Notate che nell'operatore `operator+` viene creato un nuovo vettore (somma) che viene restituito *by value*. Per `operator+=` invece la modifica viene effettuata sull'oggetto che chiama l'operatore. L'oggetto stesso (modificato) viene poi restituito *by reference*.
 
 ```c++
-CampoVettoriale CampoVettoriale::operator+(const CampoVettoriale & v) const {  
+CampoVettoriale CampoVettoriale::operator+(const CampoVettoriale & v) const {
   if ((v.getX() != getX()) || (v.getY() != getY()) || (v.getZ() != getZ())) {
       // fmt::print accetta come primo argomento lo stream su cui
       // scrivere (se non si specifica, usa stdout, che è analogo a std::cout).
@@ -389,12 +379,12 @@ CampoVettoriale CampoVettoriale::operator+(const CampoVettoriale & v) const {
       fmt::print(stderr,
                  "Somma di campi vettoriali in punti diversi non ammessa\n");
       exit(1);
-  } 
+  }
 
   CampoVettoriale sum{};
-  sum.setFx(getFx() + v.getFx());  
-  sum.setFy(getFy() + v.getFy());  
-  sum.setFz(getFz() + v.getFz());  
+  sum.setFx(getFx() + v.getFx());
+  sum.setFy(getFy() + v.getFy());
+  sum.setFz(getFz() + v.getFz());
 
   return sum;
 }
@@ -418,7 +408,7 @@ N.B.: per entrambe le classi di cui sopra, sentitevi liberi di aggiungere tutti 
 
 ## Header file della classe `PuntoMateriale`
 
-La classe `PuntoMateriale` ci servirà per rappresentare le sorgenti dei campi. 
+La classe `PuntoMateriale` ci servirà per rappresentare le sorgenti dei campi.
 
 ### Ereditarietà multipla
 
@@ -449,7 +439,7 @@ la cui implementazione è data da:
 
 ```c++
 PuntoMateriale::PuntoMateriale(double massa, double carica,
-                               double x, double y, double z) : 
+                               double x, double y, double z) :
     Particella{massa, carica}, Posizione{x, y, z} {
 
     // nothing more to be done !
@@ -508,7 +498,7 @@ int main(int argc, char * argv[]) {
 ```
 
 A partire da questo esempio completare le richieste dell'esercizio:
- 
+
 -   Si aggiunga un ciclo che permetta di calcolare il campo a distanze via via crescenti
 
 -   Si aggiunga eventualmente un grafico per visualizzare l'andamento del campo in funzione della distanza dal centro del dipolo. Potete usare ROOT o [gplot++](index.html#gplotinstall).
@@ -602,10 +592,10 @@ Potete fare riferimento a [questa spiegazione](http://labmaster.mi.infn.it/Labor
 
 In alternativa potete usare [gplot++](https://github.com/ziotom78/gplotpp), che funziona sotto Mac e Linux ed è semplice da installare anche sotto Windows. Dovete innanzitutto [installare Gnuplot](https://github.com/ziotom78/gplotpp#installing-gnuplot-and-gploth), seguendo in particolare [questa avvertenza](https://github.com/ziotom78/gplotpp#windows) se usate Windows. Una volta installato Gnuplot, scaricate nella directory del vostro esercizio il file [`gplot++.h`](https://raw.githubusercontent.com/ziotom78/gplotpp/master/gplot%2B%2B.h), oppure se usate Linux o Mac eseguite questa linea di comando nella directory del vostro esercizio:
 
-<input type="text" value="curl 'https://raw.githubusercontent.com/ziotom78/gplotpp/master/gplot%2B%2B.h' > gplot++.h" id="installGplotpp" readonly="1" size="60"><button onclick='copyFmtInstallationScript("installGplotpp")'>Copia</button> 
+<input type="text" value="curl 'https://raw.githubusercontent.com/ziotom78/gplotpp/master/gplot%2B%2B.h' > gplot++.h" id="installGplotpp" readonly="1" size="60"><button onclick='copyFmtInstallationScript("installGplotpp")'>Copia</button>
 
 
-Per produrre un grafico di $E = E(r)$ con [gplot++](https://github.com/ziotom78/gplotpp), dovete salvare le ascisse e le ordinate dei punti del grafico in due `std::vector`, e poi chiamare il metodo `Gnuplot::plot(x, y)`. 
+Per produrre un grafico di $E = E(r)$ con [gplot++](https://github.com/ziotom78/gplotpp), dovete salvare le ascisse e le ordinate dei punti del grafico in due `std::vector`, e poi chiamare il metodo `Gnuplot::plot(x, y)`.
 
 Di seguito viene riportato un esempio:
 
@@ -719,16 +709,26 @@ Come di consueto, elenco alcuni errori molto comuni che ho trovato negli anni pa
 -   L'errore di gran lunga più comune è sbagliare l'implementazione della formula del campo, che oggettivamente è complicata! Riguardate in particolare queste cose:
 
     #.   Unità di misura delle costanti;
-    
+
     #.   Attenzione a come scrivete i numeri in notazione scientifica! Il numero $10^{-4}$ si scrive `1e-4`, **non** `10e-4`, perché la scrittura `1e-4` indica effettivamente $1 \times 10^{-4}$, così come
            7.5e-3 indica $7.5\times 10^{-3}$.
-    
+
     #.   Verificate che ciò che deve stare al numeratore stia veramente al numeratore, e idem per il denominatore!
-    
+
     #.   Ovviamente, il campo di una singola carica deve andare come $1/r^2$! Eppure un bel po' di studenti consegnano codice che non segue neppure questa semplice proprietà…
-    
+
     #.   Quando calcolate la distanza $d$ tra due posizioni, assicuratevi di restituire $d$ e non $d^2$ (quante volte l'ho visto negli esercizi!).
 
 -   Stranamente, ogni anno più di uno studente sbaglia a implementare `operator+` per i vettori, e invece di calcolare `v + w` calcola in realtà `v + v = 2v`, oppure `w + w = 2w`.
 
 -   Nel leggere la posizione `x y z` a cui calcolare il campo del dipolo da linea di comando, assicuratevi di usare la funzione [`std::stod`](https://en.cppreference.com/w/cpp/string/basic_string/stof) oppure [`std::atof`](https://cplusplus.com/reference/cstdlib/atof/), anziché `std::stoi` o `std::atoi`, perché queste ultime due restituiscono valori interi.
+
+---
+title: "Lezione 5: Classi ed ereditarietà"
+author:
+- "Leonardo Carminati"
+- "Maurizio Tomasi"
+date: "A.A. 2024−2025"
+lang: it-IT
+header-includes: <script src="./fmtinstall.js"></script>
+...

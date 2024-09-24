@@ -2733,7 +2733,7 @@ in linea con quanto ci aspettavamo, ossia un valore compreso tra 5% e 6%.
 ---
 title: Temi d'esame svolti
 author: Maurizio Tomasi
-date: A.A. 2023−2024
+date: A.A. 2024−2025
 lang: it-IT
 header-includes: <script src="./fmtinstall.js"></script>
 css:

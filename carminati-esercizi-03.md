@@ -1,12 +1,3 @@
----
-title: "Lezione 3: Analisi dei dati (template e vector)"
-author:
-- "Leonardo Carminati"
-- "Maurizio Tomasi"
-date: "A.A. 2023−2024"
-lang: it-IT
-...
-
 [La pagina con la spiegazione originale degli esercizi si trova qui: <https://labtnds.docs.cern.ch/Lezione3/Lezione3/>.]
 
 In questa terza lezione affronteremo di nuovo gli stessi problemi della prima e seconda lezione (lettura di dati da un file, calcolo di media e mediana) utilizzando una evoluzione del contenitore di dati `Vettore`: possiamo rendere questa classe più flessibile in modo che sia capace di immagazzinare qualsiasi tipo di dato (e non necessariamente dei numeri `double`). Nella seconda parte spingeremo ancora oltre la generalizzazione imparando ad usare il contenitore vector della [STL](http://www.cplusplus.com/reference/stl/). Quindi, in sintesi:
@@ -579,3 +570,12 @@ I path vengono memorizzati nelle variabili `LIBS` e `CXXFLAGS`. Queste due varia
 Gli errori che gli studenti hanno fatto negli anni precedenti sono simili a quelli elencati per la [prima lezione](carminati-esercizi-01.html#errori-comuni).
 
 Ogni anno molti studenti hanno difficoltà ad usare ROOT, che è oggettivamente una libreria molto complessa e non semplice da installare né da usare. Per la lezione di oggi la consegna dell'esercizio 3.2 richiede però espressamente di usare ROOT. Se avete sinora usato il vostro portatile ma avete difficoltà ad installare ROOT su di esso, vi consiglio di usare Replit o i computer del laboratorio **solo per l'esercizio 3.2**; nelle prossime lezioni fornirò il link ad una libreria più semplice da installare ed usare, che funzionerà anche se usate Windows.
+
+---
+title: "Lezione 3: Analisi dei dati (template e vector)"
+author:
+- "Leonardo Carminati"
+- "Maurizio Tomasi"
+date: "A.A. 2024−2025"
+lang: it-IT
+...

@@ -1,12 +1,3 @@
----
-title: "Lezione 4"
-author:
-- "Leonardo Carminati"
-- "Maurizio Tomasi"
-date: "A.A. 2023−2024"
-lang: it-IT
-...
-
 [La pagina con la spiegazione originale degli esercizi si trova qui: <https://labtnds.docs.cern.ch/Lezione4/Lezione4/>.]
 
 In questa lezione non ci sono esercizi da consegnare per l'esame. Vi
@@ -827,3 +818,12 @@ int main() {
   app.Run();
 }
 ```
+
+---
+title: "Lezione 4"
+author:
+- "Leonardo Carminati"
+- "Maurizio Tomasi"
+date: "A.A. 2024−2025"
+lang: it-IT
+...

@@ -1,14 +1,3 @@
----
-title: "Lezione 8: Equazioni differenziali"
-author:
-- "Leonardo Carminati"
-- "Maurizio Tomasi"
-date: "A.A. 2023−2024"
-lang: it-IT
-header-includes: <script src="./fmtinstall.js"></script>
-...
-
-
 [La pagina con la spiegazione originale degli esercizi si trova qui: <https://labtnds.docs.cern.ch/Lezione8/Lezione8/>.]
 
 In questa lezione introdurremo alcuni metodi per la risoluzione di equazioni differenziali ordinarie. Implementeremo la risoluzione numerica di queste equazioni con i metodi di *Eulero* e di *Runge-Kutta*.
@@ -621,3 +610,13 @@ Come di consueto, elenco alcuni errori molto comuni che ho trovato negli anni pa
     ./esercizio_9.4 1e-2 10 0.033333 5
     ... [segue l'output del programma]
     ```
+
+---
+title: "Lezione 8: Equazioni differenziali"
+author:
+- "Leonardo Carminati"
+- "Maurizio Tomasi"
+date: "A.A. 2024−2025"
+lang: it-IT
+header-includes: <script src="./fmtinstall.js"></script>
+...

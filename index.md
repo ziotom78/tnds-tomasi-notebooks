@@ -20,10 +20,8 @@
 </center>
 
 <!--
-Google form per il seminario finale su C++, Python e Julia: <https://forms.gle/99kR6ZADstXEJZZaA>. Slide del seminario: [link](./tomasi-c++-python-julia.html).
--->
-
 Link al Google Form per il [seminario su C++, Python e Julia](tomasi-lezione-08.html#/seminario-su-c-python-e-julia): <https://forms.gle/ZaDv5n6PjDEaNRoT8>. [Slides](tomasi-c++-python-julia.html).
+-->
 
 
 # Temi d'esame svolti
@@ -320,7 +318,7 @@ root-config --incdir
 ---
 title: Lezioni del corso di TNDS
 author: Maurizio Tomasi
-date: A.A. 2023−2024
+date: A.A. 2024−2025
 lang: it-IT
 header-includes: <script src="./fmtinstall.js"></script>
 css:
