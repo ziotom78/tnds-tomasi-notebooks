@@ -18,7 +18,7 @@ Il calcolo della mediana in particolare richiede che il set di dati sia ordinato
 
 # Che dati analizzeremo?
 
-Useremo un file [1941.txt](1941.txt) che contiene le differenze tra la temperatura stimata ogni giorno dell'anno 1941 dal modello e la media delle temperature dal 1941 a 2023 per quel giorno. Questi dati possono essere scaricati dal sito https://open-meteo.com/ e si riferiscono alla re-analisi ERA5. Nelle prossime lezioni dovremo imparare ad aprire tutti i files, uno per ogni anno di misure.
+In questo caso guardiamo un file [1941.txt](1941.txt) che contiene le differenze tra la temperatura stimata ogni giorno dell'anno 1941 dal modello di re-analisi [ERA5](https://cds.climate.copernicus.eu/cdsapp#!/dataset/reanalysis-era5-single-levels?tab=overview) e la media delle temperature stimate dallo stesso modello dal 1941 a 2023 per quel giorno nell'area di Milano. Questi dati possono essere scaricati dal sito <https://open-meteo.com/>. Nelle prossime lezioni dovremo imparare ad aprire tutti i files, uno per ogni anno di misure.
 
 In questa lezione lavoreremo con questi ingredienti:
 
