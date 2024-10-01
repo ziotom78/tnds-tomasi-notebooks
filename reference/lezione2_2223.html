@@ -514,21 +514,6 @@
   
 
     
-      
-      
-      
-
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../ProveEsame/TemiEsame/" class="md-nav__link">
-        Temi d'esame
-      </a>
-    </li>
-  
-
-    
   </ul>
 </nav>
                   </div>
@@ -606,7 +591,7 @@
 <h1 id="lezione-2">Lezione 2</h1>
 <p>In questa seconda lezione affronteremo gli stessi problemi della prima (lettura di dati da un file, calcolo di media, varianza e mediana) utilizzando però un contenitore di dati di nostra invenzione, idealmente più evoluto del semplice array dinamico del C. A questo proposito nella prima parte della lezione costruiremo la nostra prima classe, la classe <code>Vettore</code> che sostiuirà l'array dinamico del C. Nella seconda parte adatteremo le funzioni già scritte nella lezione scorsa in modo che possano lavorare con oggetti di tipo <code>Vettore</code> invece che con array dinamici del C. Quindi in sintesi :</p>
 <ul>
-<li>Tipo di dato da leggere è constituito da numeri double immagazzinati nel solito file <a href="../1941.txt">1941.txt</a>.</li>
+<li>Tipo di dato da leggere è constituito da numeri double immagazzinati in un file <code>data.dat</code>.</li>
 <li>Tipo di contenitore di dati è la classe <code>Vettore</code> che scriveremo noi.</li>
 <li>Operazioni sui dati vengono svolte mediante funzioni che lavorano su oggetti di tipo <code>Vettore</code>. </li>
 </ul>
@@ -830,22 +815,22 @@ ed in tutti i casi in cui si passa un oggetto per valore. Il compilatore mette a
 <span class="n">a</span><span class="o">=</span><span class="n">b</span><span class="p">;</span>
 </code></pre></div>
 oppure la sintassi equivalente 
-<div class="highlight"><pre><span></span><code><span class="n">Vettore</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="p">;</span>
-<span class="c1">// ... riempimento delle componenti di a </span>
-<span class="n">Vettore</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="p">;</span><span class="w"> </span>
-<span class="c1">// ... riempimento delle componenti di b</span>
+``c++</p>
+<p>Vettore a ;
+// ... riempimento delle componenti di a 
+Vettore b ; 
+// ... riempimento delle componenti di b</p>
+<p>a.operator=(b);</p>
+<p><div class="highlight"><pre><span></span><code>In questo caso ```a``` e ```b``` sono oggetti della stessa classe, di fatto l&#39;assegnazione non è altro che una abbreviazione per indicare la chiamata ad un metodo della classe di nome `operator=`: 
+```a.operator=(b);```
+Il compilatore fornisce un&#39;implementazione di default di questo operatore, che corrisponde ad un assegnazione membro a membro di tutti i data membri. Ma questo non funzione se alcuni data membri sono puntatori, perché avremmo diversi oggetti che condividono la stessa area di memoria.
+Dobbiamo quindi realizzare un&#39;implementazione sicura dell&#39;assegnazione, facendo una copia dei dati in una nuova locazione di memoria.
 
-<span class="n">a</span><span class="p">.</span><span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="n">b</span><span class="p">);</span>
-</code></pre></div></p>
-<p>In questo caso <code>a</code> e <code>b</code> sono oggetti della stessa classe, di fatto l'assegnazione non è altro che una abbreviazione per indicare la chiamata ad un metodo della classe di nome <code>operator=</code>: 
-<code>a.operator=(b);</code>
-Il compilatore fornisce un'implementazione di default di questo operatore, che corrisponde ad un assegnazione membro a membro di tutti i data membri. Ma questo non funzione se alcuni data membri sono puntatori, perché avremmo diversi oggetti che condividono la stessa area di memoria.
-Dobbiamo quindi realizzare un'implementazione sicura dell'assegnazione, facendo una copia dei dati in una nuova locazione di memoria.</p>
-<ul>
-<li>L'header file dovrà contenere una dichiarazione:
-<div class="highlight"><pre><span></span><code><span class="n">Vettore</span><span class="o">&amp;</span><span class="w"> </span><span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">Vettore</span><span class="o">&amp;</span><span class="w"> </span><span class="p">)</span>
-</code></pre></div></li>
-<li>Una possibile implementazione è data qui sotto:
+* L&#39;header file dovrà contenere una dichiarazione:
+```c++
+Vettore&amp; operator=(const Vettore&amp; )
+</code></pre></div>
+* Una possibile implementazione è data qui sotto:
 <div class="highlight"><pre><span></span><code><span class="c1">// overloading operatore di assegnazione</span>
 
 <span class="n">Vettore</span><span class="o">&amp;</span><span class="w"> </span><span class="n">Vettore</span><span class="o">::</span><span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">Vettore</span><span class="o">&amp;</span><span class="w"> </span><span class="n">V</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
@@ -855,8 +840,7 @@ Dobbiamo quindi realizzare un'implementazione sicura dell'assegnazione, facendo 
 <span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">&lt;</span><span class="n">m_N</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="n">m_v</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="n">V</span><span class="p">.</span><span class="n">GetComponent</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
 <span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="o">*</span><span class="k">this</span><span class="p">;</span>
 <span class="p">}</span>
-</code></pre></div></li>
-</ul>
+</code></pre></div></p>
 <details class="tip">
 <summary>Il puntatore <code>this</code></summary>
 <p>Il puntatore <code>this</code> indica un puntatore all'oggetto cui si sta applicando un metodo. E' particolarmente utile in alcune occasioni, come nel caso dell'operatore di assegnazione, in cui si deve restituire una copia dell'oggetto corrente. </p>

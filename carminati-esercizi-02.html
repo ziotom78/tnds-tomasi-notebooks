@@ -58,7 +58,7 @@
 <p>[La pagina con la spiegazione originale degli esercizi si trova qui: <a href="https://labtnds.docs.cern.ch/Lezione2/Lezione2/" class="uri">https://labtnds.docs.cern.ch/Lezione2/Lezione2/</a>.]</p>
 <p>In questa seconda lezione affronteremo gli stessi problemi della prima (lettura di dati da un file, calcolo di media, varianza e mediana) utilizzando però un contenitore di dati di nostra invenzione, idealmente più evoluto del semplice array dinamico del C. A questo proposito nella prima parte della lezione costruiremo la nostra prima classe, la classe <code>Vettore</code>, che sostituirà l’array dinamico del C. Nella seconda parte adatteremo le funzioni già scritte nella lezione scorsa in modo che possano funzionare con oggetti di tipo <code>Vettore</code>. Quindi in sintesi:</p>
 <ul>
-<li>Tipo di dato da leggere è constituito da numeri <code>double</code> immagazzinati in un file <code>data.dat</code>.</li>
+<li>Tipo di dato da leggere è constituito da numeri <code>double</code> immagazzinati in un file <a href="1941.txt">1941.txt</a>.</li>
 <li>Tipo di contenitore di dati è la classe <code>Vettore</code> che scriveremo noi.</li>
 <li>Operazioni sui dati vengono svolte mediante funzioni che lavorano su oggetti di tipo <code>Vettore</code>.</li>
 </ul>
@@ -110,8 +110,10 @@
 <span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>  <span class="dt">int</span> <span class="va">m_N</span><span class="op">;</span>                               <span class="co">// dimensione del vettore</span></span>
 <span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> <span class="op">*</span> <span class="va">m_v</span><span class="op">;</span>                         <span class="co">// puntatore all&#39;array dei dati</span></span>
 <span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>  <span class="dt">void</span> crashIfInvalidIndex<span class="op">(</span><span class="dt">int</span><span class="op">)</span> <span class="at">const</span><span class="op">;</span>  <span class="co">// verifica che l&#39;indice di un elemento sia corretto</span></span>
-<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a><span class="op">};</span> <span class="co">// Necessario usare `;` dopo la parentesi graffa *solo* quando si chiude una classe!</span></span>
-<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a></span></code></pre></div>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a><span class="co">// Necessario usare `;` dopo la parentesi graffa</span></span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a><span class="co">// *solo* quando si chiude una classe!</span></span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a></span></code></pre></div>
 <ul>
 <li><p>L’utilizzo del costrutto <code>#ifndef</code>…<code>#define</code>…<code>#endif</code> al posto di <code>#pragma once</code> merita una spiegazione. Queste direttive di preprocessore sono normalmente utilizzate per evitare inclusioni multiple di uno stesso header file che, nel caso specifico, porterebbero ad una doppia dichiarazione della classe <code>Vettore</code>. Immaginate infatti di voler compilare un codice <code>main.cpp</code> che includa sia <code>vettore.h</code> che <code>funzioni.h</code>, e che quest’ultimo file abbia bisogno di <code>vettore.h</code>:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">////////////////////////////////////////</span></span>

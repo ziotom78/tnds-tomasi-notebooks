@@ -4,8 +4,8 @@
 | Data                                      | Esercizi                                                        | Spiegazione                                                         |
 |-------------------------------------------|-----------------------------------------------------------------|---------------------------------------------------------------------|
 | 24 Settembre 2024                         | [Arrays](carminati-esercizi-01.html)                            | [Lezione 1](tomasi-lezione-01.html)                                 |
+| 1 Ottobre 2024                            | [Classe `Vettore`](carminati-esercizi-02.html)                  | [Lezione 2](tomasi-lezione-02.html)                                 |
 <!--
-| 3 Ottobre 2024                            | [Classe `Vettore`](carminati-esercizi-02.html)                  | [Lezione 2](tomasi-lezione-02.html)                                 |
 | 10 Ottobre 2024                           | [Template e `vector`](carminati-esercizi-03.html)               | [Lezione 3](tomasi-lezione-03.html)                                 |
 | 17 Ottobre 2024                           | [Esercizi facoltativi](carminati-esercizi-04.html)              |                                                                     |
 | 24 Ottobre 2024                           | [Classi ed ereditarietà](carminati-esercizi-05.html)            | [Lezione 5](tomasi-lezione-05.html)                                 |
@@ -77,6 +77,8 @@ Di seguito un piccolo vademecum per aiutarvi a svolgere nel migliore dei modi l'
     ```
 
     Avere solo i file `.h` vi dà un grande vantaggio: non dovete complicare troppo il `Makefile` che scriverete durante il compito, perché basta includere i file `.h` che vi servono nel `main.cpp` e siete a posto. (Questo è esattamente quanto ho fatto nel file `gplot++.hpp`, che infatti non richiede modifiche al `Makefile` per essere usato).
+
+    Per essere ancora più efficienti il giorno dello scritto, potreste addirittura decidere di mettere *tutte le funzioni e classi* che avete scritto in un unico file `.h`, chiamandolo ad esempio `mylibrary.h`. In questo modo sarà sufficiente scrivere `#include "mylibrary.h"` nel vostro file `main.cpp` ed avrete automaticamente a disposizione tutto il vostro lavoro! (**Attenzione**: in tal caso ricordatevi che ogni funzione che metterete in `mylibrary.h` dovrà essere dichiarata `inline`, ad esempio `inline double CalcolaMedia(const std::vector<double> & v)`, altrimenti potreste avere errori strani nella creazione dell'eseguibile).
 
 #.  Leggete con attenzione il testo, e annotate a margine (o su un foglio di brutta) le cose che sono esplicitamente richieste e quali no. Capita che gli studenti si incaponiscano a produrre un grafico fatto in un certo modo, quando il testo richiedeva semplicemente di “tabulare i risultati” (ossia, stamparli semplicemente a video!)
 

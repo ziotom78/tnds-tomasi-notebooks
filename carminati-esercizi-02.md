@@ -2,7 +2,7 @@
 
 In questa seconda lezione affronteremo gli stessi problemi della prima (lettura di dati da un file, calcolo di media, varianza e mediana) utilizzando però un contenitore di dati di nostra invenzione, idealmente più evoluto del semplice array dinamico del C. A questo proposito nella prima parte della lezione costruiremo la nostra prima classe, la classe `Vettore`, che sostituirà l'array dinamico del C. Nella seconda parte adatteremo le funzioni già scritte nella lezione scorsa in modo che possano funzionare con oggetti di tipo `Vettore`. Quindi in sintesi:
 
--   Tipo di dato da leggere è constituito da numeri `double` immagazzinati in un file `data.dat`.
+-   Tipo di dato da leggere è constituito da numeri `double` immagazzinati in un file [1941.txt](1941.txt).
 -   Tipo di contenitore di dati è la classe `Vettore` che scriveremo noi.
 -   Operazioni sui dati vengono svolte mediante funzioni che lavorano su oggetti di tipo `Vettore`.
 
@@ -60,7 +60,9 @@ private:
   int m_N;                               // dimensione del vettore
   double * m_v;                         // puntatore all'array dei dati
   void crashIfInvalidIndex(int) const;  // verifica che l'indice di un elemento sia corretto
-}; // Necessario usare `;` dopo la parentesi graffa *solo* quando si chiude una classe!
+};
+// Necessario usare `;` dopo la parentesi graffa
+// *solo* quando si chiude una classe!
 
 
 ```

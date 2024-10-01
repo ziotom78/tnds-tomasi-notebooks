@@ -6,6 +6,9 @@
 
 -   Come al solito, queste slides, che forniscono suggerimenti addizionali rispetto alla lezione di teoria, sono disponibili all'indirizzo [ziotom78.github.io/tnds-tomasi-notebooks](https://ziotom78.github.io/tnds-tomasi-notebooks/).
 
+-   Ricordo a quanti usano i computer del laboratorio di **configurare il compilatore**. Seguite le istruzioni che avevamo fornito settimana scorsa ([link](tomasi-lezione-01.html#/configurare-il-compilatore)).
+
+
 # Esercizi
 
 -   Lo scopo della lezione di oggi è introdurre il concetto di «classe», che è un tipo di dato complesso del linguaggio C++, creando una classe `Vettore` che implementa un array «intelligente» di valori `double`.
@@ -29,7 +32,7 @@
     }
     ```
 
--   Così però il vostro codice invoca `calcola_media` per `N` volte! Molto meglio scrivere così:
+-   Il codice invoca `calcola_media` per `N` volte! Molto meglio scrivere così:
 
     ```c++
     double media = calcola_media(v, N);
@@ -44,23 +47,23 @@
 # Verificate il vostro codice!
 
 ```
-N = 100000:
-  - Mean               : 30.23231
-  - Variance           : 282326.76577 (corrected: 282329.58906)
-  - Standard deviation : 531.34430 (corrected: 531.34696)
-  - Median             : 12.74255
+N = 365:
+  - Mean               : -1.0813335533916488
+  - Variance           : 6.67466568793561 (corrected: 6.693002681583785)
+  - Standard deviation : 2.5835374369138933 (corrected: 2.587083818043742)
+  - Median             : -0.9156626506024095
 
 N = 10:
-  - Mean               : 13.91472
-  - Variance           : 38.73156 (corrected: 43.03507)
-  - Standard deviation : 6.22347 (corrected: 6.56011)
-  - Median             : 10.58911
+  - Mean               : -1.1889156626506023
+  - Variance           : 4.270508578893889 (corrected: 4.745009532104321)
+  - Standard deviation : 2.0665208876016448 (corrected: 2.1783042790446703)
+  - Median             : -1.3186746987951807
 
 N = 9:
-  - Mean               : 13.85262
-  - Variance           : 42.99651 (corrected: 48.37107)
-  - Standard deviation : 6.55717 (corrected: 6.95493)
-  - Median             : 9.55072
+  - Mean               : -0.9204819277108434
+  - Variance           : 4.024442831567232 (corrected: 4.527498185513136)
+  - Standard deviation : 2.0061014011179075 (corrected: 2.12779185671746)
+  - Median             : -0.9
 ```
 
 
@@ -166,12 +169,12 @@ int main() {
     $
     ```
 
--   **Avvertenza**: questo output si ottiene solo se avete implementato il [suggerimento della scorsa lezione](https://ziotom78.github.io/tnds-tomasi-notebooks/tomasi-lezione-01.html#/flag-del-compilatore) e usate il flag `-g` nel `Makefile`.
+-   **Avvertenza**: questo output si ottiene solo se avete implementato il [suggerimento della scorsa lezione](https://ziotom78.github.io/tnds-tomasi-notebooks/tomasi-lezione-01.html#/flag-del-compilatore) e usate il flag `-g3` nel `Makefile`.
 
 
 # Test automatici
 
--   È sempre buona cosa inserire all'inizio del `main` una serie di test che verifichino il funzionamento corretto delle funzioni implementate.
+-   Inserite sempre all'inizio del `main` una serie di test.
 
 -   Il `main` dei vostri prossimi esercizi sembrerà questo:
 

@@ -137,6 +137,10 @@ href="carminati-esercizi-02.html">carminati-esercizi-02.html</a>.</p></li>
 addizionali rispetto alla lezione di teoria, sono disponibili
 all’indirizzo <a
 href="https://ziotom78.github.io/tnds-tomasi-notebooks/">ziotom78.github.io/tnds-tomasi-notebooks</a>.</p></li>
+<li><p>Ricordo a quanti usano i computer del laboratorio di
+<strong>configurare il compilatore</strong>. Seguite le istruzioni che
+avevamo fornito settimana scorsa (<a
+href="tomasi-lezione-01.html#/configurare-il-compilatore">link</a>).</p></li>
 </ul>
 </section>
 <section id="esercizi" class="slide level1">
@@ -170,8 +174,8 @@ varianza così:</p>
 class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span><span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> N<span class="op">;</span> <span class="op">++</span>i<span class="op">)</span> <span class="op">{</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  accum <span class="op">+=</span> pow<span class="op">(</span>v<span class="op">[</span>i<span class="op">]</span> <span class="op">-</span> calcola_media<span class="op">(</span>v<span class="op">,</span> N<span class="op">),</span> <span class="dv">2</span><span class="op">);</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div></li>
-<li><p>Così però il vostro codice invoca <code>calcola_media</code> per
-<code>N</code> volte! Molto meglio scrivere così:</p>
+<li><p>Il codice invoca <code>calcola_media</code> per <code>N</code>
+volte! Molto meglio scrivere così:</p>
 <div class="sourceCode" id="cb2"><pre
 class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> media <span class="op">=</span> calcola_media<span class="op">(</span>v<span class="op">,</span> N<span class="op">);</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span><span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> N<span class="op">;</span> <span class="op">++</span>i<span class="op">)</span> <span class="op">{</span></span>
@@ -184,23 +188,23 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb2-1"><a href="#c
 </section>
 <section id="verificate-il-vostro-codice" class="slide level1">
 <h1>Verificate il vostro codice!</h1>
-<pre><code>N = 100000:
-  - Mean               : 30.23231
-  - Variance           : 282326.76577 (corrected: 282329.58906)
-  - Standard deviation : 531.34430 (corrected: 531.34696)
-  - Median             : 12.74255
+<pre><code>N = 365:
+  - Mean               : -1.0813335533916488
+  - Variance           : 6.67466568793561 (corrected: 6.693002681583785)
+  - Standard deviation : 2.5835374369138933 (corrected: 2.587083818043742)
+  - Median             : -0.9156626506024095
 
 N = 10:
-  - Mean               : 13.91472
-  - Variance           : 38.73156 (corrected: 43.03507)
-  - Standard deviation : 6.22347 (corrected: 6.56011)
-  - Median             : 10.58911
+  - Mean               : -1.1889156626506023
+  - Variance           : 4.270508578893889 (corrected: 4.745009532104321)
+  - Standard deviation : 2.0665208876016448 (corrected: 2.1783042790446703)
+  - Median             : -1.3186746987951807
 
 N = 9:
-  - Mean               : 13.85262
-  - Variance           : 42.99651 (corrected: 48.37107)
-  - Standard deviation : 6.55717 (corrected: 6.95493)
-  - Median             : 9.55072</code></pre>
+  - Mean               : -0.9204819277108434
+  - Variance           : 4.024442831567232 (corrected: 4.527498185513136)
+  - Standard deviation : 2.0061014011179075 (corrected: 2.12779185671746)
+  - Median             : -0.9</code></pre>
 </section>
 <section id="verifica-della-correttezza-dei-codici"
 class="slide level1">
@@ -305,16 +309,15 @@ $</code></pre></li>
 <li><p><strong>Avvertenza</strong>: questo output si ottiene solo se
 avete implementato il <a
 href="https://ziotom78.github.io/tnds-tomasi-notebooks/tomasi-lezione-01.html#/flag-del-compilatore">suggerimento
-della scorsa lezione</a> e usate il flag <code>-g</code> nel
+della scorsa lezione</a> e usate il flag <code>-g3</code> nel
 <code>Makefile</code>.</p></li>
 </ul>
 </section>
 <section id="test-automatici-3" class="slide level1">
 <h1>Test automatici</h1>
 <ul>
-<li><p>È sempre buona cosa inserire all’inizio del <code>main</code> una
-serie di test che verifichino il funzionamento corretto delle funzioni
-implementate.</p></li>
+<li><p>Inserite sempre all’inizio del <code>main</code> una serie di
+test.</p></li>
 <li><p>Il <code>main</code> dei vostri prossimi esercizi sembrerà
 questo:</p>
 <div class="sourceCode" id="cb10"><pre
