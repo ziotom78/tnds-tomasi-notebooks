@@ -8,7 +8,6 @@ all: \
 	tomasi-lezione-08.html \
 	tomasi-lezione-06.html \
 	tomasi-lezione-05.html \
-	tomasi-lezione-04.html \
 	tomasi-lezione-03.html \
 	tomasi-lezione-02.html \
 	tomasi-lezione-01.html \
