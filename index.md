@@ -86,7 +86,7 @@ Di seguito un piccolo vademecum per aiutarvi a svolgere nel migliore dei modi l'
 
     -   Se si fornisce una funzione e si chiedono gli zeri, fate un grafico con Gnuplot o con Excel per stimarli grossolanamente;
 
-    -   Se si deve fare una simulazione di un esperimento per stimare l'errore su un certo parametro, provate a fare una semplice propagazione degli errori (se i conti non risultano troppo complicati!);
+    -   Se si deve fare una simulazione di un esperimento per stimare l'errore su un certo parametro, provate a fare una semplice propagazione degli errori. Può però capitare che i conti risultino troppo lunghi da svolgere a mano (la formula di propagazione include derivate, quadrati e radici quadrate, e può facilmente diventare complicata!). In tal caso limitatevi ad usare il buon senso: se un parametro di input ha una precisione intorno al percento, ci si aspetta che anche il risultato sia più o meno dello stesso ordine di grandezza, e quindi se il vostro codice stima un errore del 100% o dello 0.001% c'è sicuramente un errore!
 
     -   Se si devono generare numeri casuali con una specifica distribuzione, implementate come prima cosa nel `main` un codice per estrarre ~10 000 numeri e fatene un istogramma: la sua forma corrisponde alla distribuzione fornita?
 
@@ -94,13 +94,15 @@ Di seguito un piccolo vademecum per aiutarvi a svolgere nel migliore dei modi l'
 
     Non spendete però troppo tempo per arrivare a una stima con carta e penna: se dopo dieci minuti di lavoro siete ancora in alto mare, lasciate perdere!
 
-#.  Leggete *tutto* il testo dell'esame prima di iniziare a scrivere il codice. Magari nel primo punto vi viene chiesto di assumere una certa quantità fisica (una massa, una velocità…) come costante, ma in uno dei punti successivi dovete cambiarne il valore oppure addirittura trasformarla in una quantità che dipende dal tempo o dallo spazio. Se leggete prima tutto il testo, potete già fare caso a queste cose e progettare la struttura del codice in maniera più efficace.
+#.  Leggete *tutto* il testo dell'esame prima di iniziare a scrivere il codice. Magari nel primo punto vi viene chiesto di assumere una certa quantità fisica (una massa, una velocità…) come costante, ma in uno dei punti successivi dovete cambiarne il valore oppure addirittura trasformarla in una quantità che dipende dal tempo o dallo spazio. Se leggete prima tutto il testo, potete già fare caso a queste cose e progettare la struttura del codice in maniera più efficace. Questo è l'approccio seguito negli svolgimenti dei temi d'esame riportati nella [pagina dedicata](temi-svolti.html).
+
+#.  Mettete *sempre* all'inizio del `main()` le chiamate alle [funzioni di test](tomasi-lezione-02.html#test-automatici) che avete scritto durante il semestre e che testano le funzioni prese dai vostri esercizi. Ad esempio, se usate le funzioni per gli zeri nello svolgimento, fate iniziare il `main()` con una chiamata a [`test_zeroes()`](tomasi-lezione-06.html#verifica-funzioni-ricerca-zeri). Il motivo di questo è che a volte gli studenti si rendono conto che il codice dei loro esercizi andrebbe esteso o parzialmente modificato, ma nel toccarlo inseriscono inavvertitamente degli errori. Chiamare le funzioni di test vi mette al riparo da questa eventualità.
 
 #.  I temi di esame sono solitamente espressi come una lista di punti, ciascuno dei quali è una domanda. **MAI** implementare tutto il codice, da cima a fondo, che risolve tutti i punti e solo alla fine eseguirlo! Implementate il codice che vi serve per risolvere il primo punto, stampatelo, verificate i risultati, e quando vi convince passate al secondo. In questo modo, se i numeri prodotti per il primo punto appaiono strani, potete correggere gli errori prima di passare al punto successivo. Altrimenti rischiate di dover buttare via tutto il lavoro: magari vi rendete conto che per risolvere bene il primo punto avevate bisogno di *due* variabili `std::vector` anziché una sola, e di conseguenza quanto avete implementato per i punti successivi non è più valido.
 
 #.  Non succederà mai che viene richiesto l'uso di ROOT o di Gnuplot esplicitamente; fare però i grafici è utile per avere l'intuizione se i risultati che il vostro codice produce sono sensati oppure no.
 
-#.  Prima di fare i grafici, preoccupatevi **sempre** di stampare con `cout` o con `fmt::println` i valori tabulati delle quantità che andate a mettere nei grafici. Noi docenti siamo sempre disposti a chiudere un occhio se un grafico risulta sbagliato o vuoto, però i valori che il programma stampa a video sono corretti: vuol dire che avete semplicemente sbagliato a creare il grafico, e questo è un errore assolutamente perdonabile.
+#.  Prima di fare i grafici, preoccupatevi **sempre** di stampare con `cout` o con `fmt::println` i valori tabulati delle quantità che andate a mettere nei grafici. Noi docenti siamo sempre disposti a chiudere un occhio se un grafico risulta sbagliato o vuoto, però i valori che il programma stampa a video sono corretti: vuol dire che avete semplicemente sbagliato a creare il grafico, e questo è un errore perdonabile.
 
     Nel caso di simulazioni Monte Carlo, i numeri da stampare sono sempre moltissimi, quindi stampatene giusto qualcuno:
 
@@ -117,6 +119,8 @@ Di seguito un piccolo vademecum per aiutarvi a svolgere nel migliore dei modi l'
       }
     }
     ```
+
+    L'utilità di questo consiglio sta nel fatto che a volte ci sono errori banali nel codice che producono una sfilza di zeri o di numeri [NaN](https://en.wikipedia.org/wiki/NaN): se stampate i primi 5 numeri, ve ne accorgete subito.
 
 #.  Capita spesso che venga richiesto di ripetere un'analisi più volte. Ad esempio, si deve calcolare un integrale col metodo di Simpson usando un numero di step via via crescente, o si deve risolvere un'equazione differenziale variando il numero di passi, etc.
 
