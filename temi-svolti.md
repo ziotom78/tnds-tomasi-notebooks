@@ -422,7 +422,7 @@ Procediamo ora con la lettura del secondo punto:
 
 > Assumendo che l’errore scali con una legge del tipo $\varepsilon = k_1 h^{k_2}$, dove $h$ è la dimensione del passo di integrazione, stimare i valori dei coefficienti $k_1$ e $k_2$.
 
-Ok, leggendo questo ci rendiamo conto che nel punto precedente sarà bene non limitarsi a stampare la tabella, ma fare anche il grafico: il testo infatti qui ci dice che l'andamento dell'errore, se plottato in scala logaritmica, deve seguire una retta della forma $y = m x + q$, con $y = \log\varepsilon$, $x = \log h$, pendenza $m = k_2$ e intercetta $q = \log k_1$.
+Leggendo questo punto, ci rendiamo conto che nel punto precedente sarà bene non limitarsi a stampare la tabella, ma fare anche il grafico: il testo infatti qui ci dice che l'andamento dell'errore, se plottato in scala logaritmica, deve seguire una retta della forma $y = m x + q$, con $y = \log\varepsilon$, $x = \log h$, pendenza $m = k_2$ e intercetta $q = \log k_1$.
 
 (Questo può essere un buon momento per prendere un foglio di brutta e fare un paio di calcoli per ridurre espressioni come $\varepsilon = k_1 h^{k_2}$ e capire se si vorrà usare una scala lineare, o logaritmica sulle x, o sulle y, o come nel caso di questo esercizio specifico **bilogaritmica**…).
 
@@ -1062,7 +1062,7 @@ double error_mc{run_integral_mc_mean(N)};
 
 L'output prodotto è il seguente:
 
-```c++
+```
 # Point #5
 
 Estimate of the integral using the mean method with N=16 points: 1.08628 ± 0.41611
@@ -1083,7 +1083,7 @@ assert(midpoint_results.num_of_steps[row_index] == 16);
 const double target_error{midpoint_results.error[row_index]};
 ```
 
-In questo modo, se prima di consegnare lo scritto ci accorgeremo di aver sbagliato a produrre la tabella e la riga corrispondente non sarà più la numero 3, il codice ci avviserà del problema.
+In questo modo, se prima di consegnare lo scritto ci accorgeremo di aver sbagliato a produrre la tabella e la riga corrispondente non sarà più la numero 3, il codice ci avviserà del problema. Ricordate sempre che è meglio essere prudenti, e spendere un po' di tempo per implementare questi `assert()` può evitare di avere errori la cui correzione richiede molto tempo!
 
 Sapendo che l'errore nel metodo della media varia come $\varepsilon(N) = \sigma / \sqrt{N}$, manipolando l'espressione otteniamo che
 $$
@@ -1104,7 +1104,7 @@ run_integral_mc_mean(new_N);
 
 Questo è l'output:
 
-```c++
+```
 # Point #6
 
 Number of points required for the mean method to achieve an error of 3.654e-03: 207466
@@ -1143,7 +1143,7 @@ void test_code() {
   // ...
 ```
 
-Notate che verifichiamo che in $x = 2$ la funzione sia uguale a $\infty$: la funzione `isinf` restituisce `true` in questo caso.
+Notate che verifichiamo che in $x = 2$ la funzione sia uguale a $\infty$: la funzione `isinf` restituisce `true` se il numero floating-point è uno dei [tipi di infinito](https://www.doc.ic.ac.uk/~eedwards/compsys/float/nan.html) supportati da `double`.
 
 Ovviamente dobbiamo usare il metodo del mid-point con la seconda integranda, perché il mid-right richiederebbe di calcolarla in $x = 2$, dove non è definita. Dobbiamo anche ricordarci di confrontare il valore stimato dell'integrale con `true_value2` (ossia $\pi / 2$) anziché `true_value1`:
 
@@ -1228,7 +1228,7 @@ Il primo punto chiede di usare il metodo Runge-Kutta per risolvere un'equazione 
 >
 > 5. ?
 
-Passiamo al secondo punto, che richiede di stimare l'errore nella posizione. Dobbiamo ricordarci che il metodo Runge-Kutta è un metodo del *quarto* ordine (la sapete bene la teoria, vero?!?), e usare quindi le formule insegnate a lezione per stimare l'errore quando non si conosce la soluzione analitica: risolvere il problema con passo $h$, poi con passo $h/2$, e poi combinare i due risultati. Aggiorniamo il nostro foglio:
+Passiamo al secondo punto, che richiede di stimare l'errore nella posizione. Dobbiamo ricordarci che il metodo Runge-Kutta è un metodo del *quarto* ordine (sapete bene la teoria, vero?!? 🫵), e usare quindi le formule insegnate a lezione per stimare l'errore quando non si conosce la soluzione analitica: risolvere il problema con passo $h$, poi con passo $h/2$, e poi combinare i due risultati. Aggiorniamo il nostro foglio:
 
 > Cose da fare:
 >
@@ -1289,7 +1289,7 @@ Leggendo questa lista, possiamo capire che ci sono una ridotta serie di compiti 
 -   Eseguire una simulazione RK con un passo fissato finché non si raggiunge il tempo $t = 43\,\text{s}$ (punti 1, 2, 4, 5);
 -   Eseguire un Monte Carlo facendo variare il valore di $v_0$ e stimando l'errore sulla posizione al tempo $t = 43\,\text{s}$ (punti 4 e 5).
 
-Notiamo anche che il secondo compito può benissimo basarsi sul codice del primo. Dovremo quindi implementare due funzioni:
+Notiamo anche che il secondo punto di questa lista può basarsi sul codice del primo. Dovremo quindi implementare due funzioni:
 
 1.  Una funzione `estimate_end_position()` che esegua il metodo RK:
 
@@ -1365,6 +1365,9 @@ using namespace std;
 array<double, 2> oscill(double t, array<double, 2> v) {
   // Neat trick: *always* assign the components of the vector `v` to
   // variables with a meaningful name, e.g., `x`, `y`, `vx`, `vy`, etc.
+  // This make the formula below easier to read, and it costs nothing
+  // in terms of performance, as the compiler will optimize `x` and
+  // `vx` away.
   double x{v[0]};
   double vx{v[1]};
 
@@ -1500,7 +1503,7 @@ $$
 N' = \left(\frac{k}{\varepsilon'}\right)^{1/4} \cdot t_f = N \left(\frac{\varepsilon}{\varepsilon'}\right)^{1/4}
 $$
 
-che ha una forma ragionevole: se $\varepsilon' < \varepsilon$ cerchiamo un errore più piccolo e quindi $N' > N$. Il punto 3 si risolve quindi con poche righe di codice:
+che ha una forma ragionevole: se vogliamo un errore più piccolo ($\varepsilon' < \varepsilon$), allora $N' > N$ e quindi dobbiamo aumentare il numero di punti. Il punto 3 si risolve quindi con poche righe di codice:
 
 ```c++
 const double target_error{50e-6};
@@ -1618,7 +1621,7 @@ Questo è il link per aprire il testo: <https://labtnds.docs.cern.ch/ProveEsame/
 
 ## Lettura del testo
 
-Il testo consiste di tre domande, quindi ci aspettiamo che almeno una di esse sia abbastanza articolata. E infatti già la lettura del primo punto presenta una complicazione: occorre simulare l'orbita di una particella in un moto periodico, usando Runge Kutta, e contare il numero di rivoluzioni attorno all'origine per capire quando arrestare la simulazione. Si tratta quindi di qualcosa di un po' più complesso dell'[esercizio 8.2](carminati-esercizi-08.html#esercizio-8.2), dove bastava iterare finché non si raggiungeva un tempo finale.
+Il testo consiste di tre domande, quindi ci aspettiamo che almeno una di esse sia abbastanza articolata. E infatti già la lettura del primo punto presenta una complicazione: occorre simulare l'orbita di una particella in un moto periodico, usando Runge-Kutta, e contare il numero di rivoluzioni attorno all'origine per capire quando arrestare la simulazione. Si tratta quindi di qualcosa di un po' più complesso dell'[esercizio 8.2](carminati-esercizi-08.html#esercizio-8.2), dove bastava iterare finché non si raggiungeva un tempo finale.
 
 Nel nostro foglio degli appunti, annotiamo quindi questo:
 
@@ -1755,7 +1758,7 @@ int main() {
 Dobbiamo ora implementare il codice che risolve il punto 1. Queste sono le cose da fare:
 
 1.  Creare un'istanza di `Synchrotron` con i valori di $\alpha$ e $c$ appropriati;
-2.  Integrare con Runge Kutta, contando quante volte il segno della componente $y$ si inverte e interrompendosi dopo la decima inversione;
+2.  Integrare con Runge-Kutta, contando quante volte il segno della componente $y$ si inverte e interrompendosi dopo la decima inversione;
 3.  Fare un'interpolazione lineare per stabilire qual era l'ultima posizione in cui $y = 0$.
 
 Il primo punto è semplice:
