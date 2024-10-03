@@ -20,7 +20,7 @@
     2. Contiene la documentazione e gli esempi d'uso per tutte le funzioni della libreria standard del C++
 
 
-# Configurare il compilatore
+# Configurare il compilatore {#config-latest-gcc}
 
 -   Cosa **molto** importante da fare, una volta per tutte
 

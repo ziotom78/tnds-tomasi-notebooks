@@ -14,8 +14,8 @@
 -   Lo scopo della lezione di oggi è introdurre il concetto di «classe», che è un tipo di dato complesso del linguaggio C++, creando una classe `Vettore` che implementa un array «intelligente» di valori `double`.
 
 -   [Esercizio 2.0](carminati-esercizi-02.html#esercizio-2.0): creazione della classe `Vettore`.
--   [Esercizio 2.0](carminati-esercizi-02.html#esercizio-2.1): completamento dell'esercizio 2.0.
--   [Esercizio 2.1](carminati-esercizi-02.html#esercizio-2.2) (da consegnare per l'esame scritto): è lo stesso tipo di esercizio della scorsa lezione, ma ora occorre usare quanto si è scritto per gli esercizi 2.0 e 2.1.
+-   [Esercizio 2.1](carminati-esercizi-02.html#esercizio-2.1): completamento dell'esercizio 2.0.
+-   [Esercizio 2.2](carminati-esercizi-02.html#esercizio-2.2) (da consegnare per l'esame scritto): è lo stesso tipo di esercizio della scorsa lezione, ma ora occorre usare quanto si è scritto per gli esercizi 2.0 e 2.1.
 
 
 # Velocità del codice
@@ -116,7 +116,7 @@ int main() {
 -   Il conto però, come abbiamo visto, va verificato a mano ogni volta.
 
 
-# Test automatici
+# Test automatici {#test-automatici}
 
 -   Si può verificare automaticamente la correttezza del codice con `assert`:
 
@@ -220,11 +220,28 @@ void test_statistical_functions(void) {
   assert(are_close(CalcolaMediana(mydata, 3), 2));    // Odd
 
   // Continue from here …
+
+  // At the end, be sure to print a message stating that everything was ok
+  cerr << "All the statistical tests have passed! 🥳\n";
 }
 ```
 
 Questi `assert` vanno bene anche per gli esercizi di oggi, con opportuni aggiustamenti (es., usare `Vettore` anziché `double *`).
 
+
+# Messaggio alla fine dei test
+
+-   Se gli `assert()` ricevono un valore `true`, non stampano nulla.
+
+-   È meglio però avere un feedback a video, altrimenti potreste non essere sicuri che i test siano effettivamente stati eseguiti. Ad esempio, potreste dimenticarvi di chiamare `test_statistical_functions()` nel `main()`!
+
+-   Il codice della slide precedente produce questo messaggio:
+
+    ```
+    All the statistical tests have passed! 🥳
+    ```
+
+    Abituatevi ad aspettarvi questo genere di messaggio in cima ad ogni esercizio che scriverete d'ora in poi.
 
 
 # Esempio di output
@@ -239,7 +256,7 @@ Questi `assert` vanno bene anche per gli esercizi di oggi, con opportuni aggiust
     $
     ```
 
--   Anche quando avete verificato che gli `assert` passano con successo, lasciateli al loro posto: nel caso in cui in futuro dobbiate modificare l'implementazione delle funzioni (ad esempio per renderla più veloce), continueranno a fungere da controllo.
+-   Anche quando avete verificato che gli `assert` passano con successo, lasciateli al loro posto: nel caso in cui in futuro dobbiate modificare l'implementazione delle funzioni (ad esempio per renderla più veloce), continueranno a fungere da controllo. (Ed è appagante vedere la faccina che festeggia 🥳!)
 
 
 

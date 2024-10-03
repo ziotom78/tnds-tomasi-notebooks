@@ -178,7 +178,7 @@ x_{1/2} = \frac{-5 \pm \sqrt{25 + 24}}6 = \begin{cases} -2,\\ \frac13.
 \end{cases}
 $$
 
-# Verifica dell'algoritmo
+# Verifica dell'algoritmo {#verifica-funzioni-ricerca-zeri}
 
 ```c++
 // You might even pass a reference to `Solutore & s` and call in `main`
@@ -195,6 +195,8 @@ void test_zeroes() {
   assert(are_close(s.CercaZeri(-4.0, -2.0, f), -2.0)); // Zero is at b
 
   assert(are_close(s.CercaZeri(0.0, 1.0, f), 1.0 / 3)); // Do NOT write 1 / 3 !
+
+  cerr << "Root finding works correctly! 🥳\n";
 }
 ```
 

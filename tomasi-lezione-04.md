@@ -4,8 +4,6 @@
 
 -   La spiegazione dettagliata degli esercizi si trova qui: [carminati-esercizi-05.html](carminati-esercizi-05.html).
 
--   Sul sito Repl.it, la lezione odierna è classificata come «5» perché in realtà inizieremo oggi ad implementare gli esercizi, ma li termineremo settimana prossima.
-
 -   Come al solito, queste slides, che forniscono suggerimenti addizionali rispetto alla lezione di teoria, sono disponibili all'indirizzo [ziotom78.github.io/tnds-tomasi-notebooks](https://ziotom78.github.io/tnds-tomasi-notebooks/).
 
 # Esercizi per oggi

@@ -56,6 +56,8 @@ void test_coordinates(void) {
   assert(are_close(p.getTheta(), 0.64052231267943);
 
   assert(are_close(p.getRho(), 2.2360679774998);
+
+  cerr << "The coordinates work correctly! 🥳\n";
 }
 ```
 
@@ -95,6 +97,8 @@ void test_coulomb_law(void) {
   assert(are_close(V.getFx(), -69.41150052142065));
   assert(are_close(V.getFy(), 9.915928645917235));
   assert(are_close(V.getFz(), 29.747785937751708));
+
+  cerr << "Coulomb's law works correctly! 🥳\n";
 }
 
 void test_newton_law(void) {
@@ -107,6 +111,8 @@ void test_newton_law(void) {
   assert(are_close(V.getFx(), -1.0302576701177));
   assert(are_close(V.getFy(), 0.14717966715968));
   assert(are_close(V.getFz(), 0.44153900147903));
+
+  cerr << "Newton's law works correctly! 🥳\n";
 }
 ```
 

@@ -41,6 +41,8 @@ void test_vettore() {
       assert(v.GetComponent(0) == 456);
       assert(v[1] == 123);
   }
+
+  cerr << "Vettore works as expected! 🥳\n";
 }
 ```
 
@@ -67,20 +69,23 @@ void test_statistical_functions(void) {
 
       assert(are_close(CalcolaMediana<double>(mydata), 2));    // Odd
   }
+
+  cerr << "Statistical functions work as expected! 🥳\n";
 }
 ```
 
 
 # ROOT
 
--   Nell'esercizio 3.2 è richiesto l'uso di ROOT, una libreria di funzioni per generare grafici.
+-   Nell'esercizio 3.2 è richiesto l'uso di ROOT, una libreria di funzioni per il calcolo scentifico che noi useremo per generare grafici.
 
--   Chi usa Repl.it o le macchine del laboratorio, dovrebbe averlo già installato.
+-   Chi usa le macchine del laboratorio, dovrebbe averlo già installato.
 
 -   Chi usa il proprio computer… Auguri! Sotto Linux e Mac dovrebbe essere relativamente facile installarlo, sotto Windows la cosa è più complessa.
 
 -   Di tutti gli esercizi che farete questo semestre, solo il 3.2 richiede obbligatoriamente di usare ROOT. (Neppure i temi d'esami dello scritto hanno mai imposto, né imporranno, l'uso di ROOT).
 
+-   Nelle prossime lezioni vi mostrerò una libreria per produrre plot, che è semplice da installare sia su Windows che Linux che Mac.
 
 # `cout` e `cerr` {#cout-e-cerr}
 
@@ -162,7 +167,7 @@ Con l'esempio seguente, è possibile usare il reindirizzamento:
 
     Il fatto di leggere oltre la fine dell'array è un errore imputabile a chi ha scritto il programma, non a chi lo usa.
 
--   In questo caso `assert` è la soluzione migliore, perché dice al programmatore dove si trova la linea di codice da correggere ([se si compila con `-g`](https://ziotom78.github.io/tnds-tomasi-notebooks/tomasi-lezione-01.html#/flag-del-compilatore)).
+-   In questo caso `assert` è la soluzione migliore, perché dice al programmatore dove si trova la linea di codice da correggere ([se si compila con `-g3`](https://ziotom78.github.io/tnds-tomasi-notebooks/tomasi-lezione-01.html#/flag-del-compilatore)).
 
 ---
 
@@ -324,7 +329,7 @@ Di conseguenza, il programmatore è «costretto» a verificare la correttezza de
 
 # «Most vexing parse»
 
--   Il fatto che la *uniform initialization* possa essere usata anche per invocare i costruttori previene il problema del cosiddetto [*most vexing parse*](https://en.wikipedia.org/wiki/Most_vexing_parse):
+-   La *uniform initialization* previene il problema del [*most vexing parse*](https://en.wikipedia.org/wiki/Most_vexing_parse):
 
     ```c++
     // I want to invoke a constructor that has no parameters
@@ -342,7 +347,7 @@ Di conseguenza, il programmatore è «costretto» a verificare la correttezza de
 
 
 
-# Esempio tratto dalla vita vera (1/2)
+# Esempio di vita vera (1/2)
 
 -   In uno degli esercizi che faremo nelle prossime settimane, il codice richiedeva da linea di comando i valori $a$ e $b$ degli estremi di un intervallo $[a, b]$, nonché la precisione $\varepsilon$ richiesta per un calcolo.
 
@@ -356,7 +361,7 @@ Di conseguenza, il programmatore è «costretto» a verificare la correttezza de
 
     non accorgendosi di aver usato `atoi` (che restituisce un *intero*) anziché `atod`.
 
-# Esempio tratto dalla vita vera (2/2)
+# Esempio di vita vera (2/2)
 
 -   Il programma quindi andava in crash quando lo si invocava con la linea `./esercizio 0.1 0.2`, perché sia `0.1` che `0.2` erano arrotondati a `0` e l'intervallo aveva quindi ampiezza nulla!
 
@@ -401,7 +406,7 @@ Di conseguenza, il programmatore è «costretto» a verificare la correttezza de
 
 -   L'uso di `unsigned` per le dimensione degli array produce però più problemi di quanti ne risolva! Per questo motivo, linguaggi più moderni scoraggiano l'uso di `unsigned` (Kotlin 2.0, Nim, Julia…), quando addirittura non lo vietano (Kotlin 1.0).
 
--   Fino all'anno scorso spiegavamo quindi come usare `vector::size()` e come fare attenzione con i tipi `unsigned` e `int`.
+-   In giro per Internet ci sono ancora moltissimi esempi di codice che usano `vector::size()`.
 
 # Il C++20
 
@@ -415,39 +420,7 @@ Di conseguenza, il programmatore è «costretto» a verificare la correttezza de
     }
     ```
 
--   Di conseguenza, in questo corso non usate **mai** numeri `unsigned` per iterare sugli elementi dei vettori. Usate sempre `int` e la funzione `ssize()`!
-
-
-# Cicli `for` e `while`
-
-# `for`, `while`, `do … while`
-
--   Non sempre i cicli `for` sono la cosa migliore da usare. Ci sono anche `while` e `do … while`
-
--   Non è immediato capire quale sia meglio:
-
-    -   Il `for` itera finché una condizione non viene verificata alla **fine** di ogni loop
-    -   Il `while` itera finché una condizione non viene verificata all'**inizio** di ogni loop
-    -   Il `do … while` itera finché una condizione non viene verificata alla **fine** di ogni loop
-
-
-# Il ciclo `while(true)`
-
--   Vi insegno un trucco per decidere quale usare: usate `while(true)`
-
-    ```c++
-    while(true) {
-        if (condition 1) break;   // *1*
-        // … do stuff …
-        if (condition 2) break;   // *2*
-        // … do other stuff …
-        if (condition 3) break;   // *3*
-    }
-    ```
-
--   Se c'è solo `*1*`, potete usare `while(condition 1)`.
--   Se c'è solo `*3*`, potete usare `do … while(condition 3)` oppure `for`.
--   Se c'è `*2*`, lasciate tutto così
+-   Di conseguenza, in questo corso non usate **mai** numeri `unsigned` per iterare sugli elementi dei vettori. Usate sempre `int` e la funzione `ssize()`! (Ma ovviamente dovete [usare un compilatore recente](tomasi-lezione-01.html#config-latest-gcc)…)
 
 
 # Iteratori nella STL

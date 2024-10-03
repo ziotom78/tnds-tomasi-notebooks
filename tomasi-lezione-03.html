@@ -182,7 +182,9 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb1-1"><a href="#c
 <span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>      <span class="ot">assert</span><span class="op">(</span>v<span class="op">.</span>GetComponent<span class="op">(</span><span class="dv">0</span><span class="op">)</span> <span class="op">==</span> <span class="dv">456</span><span class="op">);</span></span>
 <span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>      <span class="ot">assert</span><span class="op">(</span>v<span class="op">[</span><span class="dv">1</span><span class="op">]</span> <span class="op">==</span> <span class="dv">123</span><span class="op">);</span></span>
 <span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>  cerr <span class="op">&lt;&lt;</span> <span class="st">&quot;Vettore works as expected! 🥳</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">;</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 </section>
 <section id="test-per-esercizio-3.1" class="slide level1">
 <h1>Test per esercizio 3.1</h1>
@@ -207,21 +209,27 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb2-1"><a href="#c
 <span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>      <span class="ot">assert</span><span class="op">(</span>are_close<span class="op">(</span>CalcolaMediana<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;(</span>mydata<span class="op">),</span> <span class="dv">2</span><span class="op">));</span>    <span class="co">// Odd</span></span>
 <span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>  cerr <span class="op">&lt;&lt;</span> <span class="st">&quot;Statistical functions work as expected! 🥳</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">;</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 </section>
 <section id="root" class="slide level1">
 <h1>ROOT</h1>
 <ul>
 <li><p>Nell’esercizio 3.2 è richiesto l’uso di ROOT, una libreria di
-funzioni per generare grafici.</p></li>
-<li><p>Chi usa Repl.it o le macchine del laboratorio, dovrebbe averlo
-già installato.</p></li>
+funzioni per il calcolo scentifico che noi useremo per generare
+grafici.</p></li>
+<li><p>Chi usa le macchine del laboratorio, dovrebbe averlo già
+installato.</p></li>
 <li><p>Chi usa il proprio computer… Auguri! Sotto Linux e Mac dovrebbe
 essere relativamente facile installarlo, sotto Windows la cosa è più
 complessa.</p></li>
 <li><p>Di tutti gli esercizi che farete questo semestre, solo il 3.2
 richiede obbligatoriamente di usare ROOT. (Neppure i temi d’esami dello
 scritto hanno mai imposto, né imporranno, l’uso di ROOT).</p></li>
+<li><p>Nelle prossime lezioni vi mostrerò una libreria per produrre
+plot, che è semplice da installare sia su Windows che Linux che
+Mac.</p></li>
 </ul>
 </section>
 <section id="cout-e-cerr" class="slide level1">
@@ -322,7 +330,7 @@ chi ha scritto il programma, non a chi lo usa.</p></li>
 perché dice al programmatore dove si trova la linea di codice da
 correggere (<a
 href="https://ziotom78.github.io/tnds-tomasi-notebooks/tomasi-lezione-01.html#/flag-del-compilatore">se
-si compila con <code>-g</code></a>).</p></li>
+si compila con <code>-g3</code></a>).</p></li>
 </ul>
 </section>
 <section class="slide level1">
@@ -486,9 +494,7 @@ subito!</p></li>
 <section id="most-vexing-parse" class="slide level1">
 <h1>«Most vexing parse»</h1>
 <ul>
-<li><p>Il fatto che la <em>uniform initialization</em> possa essere
-usata anche per invocare i costruttori previene il problema del
-cosiddetto <a
+<li><p>La <em>uniform initialization</em> previene il problema del <a
 href="https://en.wikipedia.org/wiki/Most_vexing_parse"><em>most vexing
 parse</em></a>:</p>
 <div class="sourceCode" id="cb17"><pre
@@ -503,8 +509,8 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb18-1"><a href="#
 TNDS</strong>.</p></li>
 </ul>
 </section>
-<section id="esempio-tratto-dalla-vita-vera-12" class="slide level1">
-<h1>Esempio tratto dalla vita vera (1/2)</h1>
+<section id="esempio-di-vita-vera-12" class="slide level1">
+<h1>Esempio di vita vera (1/2)</h1>
 <ul>
 <li><p>In uno degli esercizi che faremo nelle prossime settimane, il
 codice richiedeva da linea di comando i valori <span
@@ -522,8 +528,8 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb19-1"><a href="#
 <em>intero</em>) anziché <code>atod</code>.</p></li>
 </ul>
 </section>
-<section id="esempio-tratto-dalla-vita-vera-22" class="slide level1">
-<h1>Esempio tratto dalla vita vera (2/2)</h1>
+<section id="esempio-di-vita-vera-22" class="slide level1">
+<h1>Esempio di vita vera (2/2)</h1>
 <ul>
 <li><p>Il programma quindi andava in crash quando lo si invocava con la
 linea <code>./esercizio 0.1 0.2</code>, perché sia <code>0.1</code> che
@@ -608,9 +614,8 @@ produce però più problemi di quanti ne risolva! Per questo motivo,
 linguaggi più moderni scoraggiano l’uso di <code>unsigned</code> (Kotlin
 2.0, Nim, Julia…), quando addirittura non lo vietano (Kotlin
 1.0).</p></li>
-<li><p>Fino all’anno scorso spiegavamo quindi come usare
-<code>vector::size()</code> e come fare attenzione con i tipi
-<code>unsigned</code> e <code>int</code>.</p></li>
+<li><p>In giro per Internet ci sono ancora moltissimi esempi di codice
+che usano <code>vector::size()</code>.</p></li>
 </ul>
 </section>
 <section id="il-c20" class="slide level1">
@@ -627,48 +632,10 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb21-1"><a href="#
 <span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div></li>
 <li><p>Di conseguenza, in questo corso non usate <strong>mai</strong>
 numeri <code>unsigned</code> per iterare sugli elementi dei vettori.
-Usate sempre <code>int</code> e la funzione
-<code>ssize()</code>!</p></li>
-</ul>
-</section>
-<section id="cicli-for-e-while" class="slide level1">
-<h1>Cicli <code>for</code> e <code>while</code></h1>
-</section>
-<section id="for-while-do-while" class="slide level1">
-<h1><code>for</code>, <code>while</code>, <code>do … while</code></h1>
-<ul>
-<li><p>Non sempre i cicli <code>for</code> sono la cosa migliore da
-usare. Ci sono anche <code>while</code> e
-<code>do … while</code></p></li>
-<li><p>Non è immediato capire quale sia meglio:</p>
-<ul>
-<li>Il <code>for</code> itera finché una condizione non viene verificata
-alla <strong>fine</strong> di ogni loop</li>
-<li>Il <code>while</code> itera finché una condizione non viene
-verificata all’<strong>inizio</strong> di ogni loop</li>
-<li>Il <code>do … while</code> itera finché una condizione non viene
-verificata alla <strong>fine</strong> di ogni loop</li>
-</ul></li>
-</ul>
-</section>
-<section id="il-ciclo-whiletrue" class="slide level1">
-<h1>Il ciclo <code>while(true)</code></h1>
-<ul>
-<li><p>Vi insegno un trucco per decidere quale usare: usate
-<code>while(true)</code></p>
-<div class="sourceCode" id="cb22"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span><span class="op">(</span><span class="kw">true</span><span class="op">)</span> <span class="op">{</span></span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>condition <span class="dv">1</span><span class="op">)</span> <span class="cf">break</span><span class="op">;</span>   <span class="co">// *1*</span></span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">// … do stuff …</span></span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>condition <span class="dv">2</span><span class="op">)</span> <span class="cf">break</span><span class="op">;</span>   <span class="co">// *2*</span></span>
-<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>    <span class="co">// … do other stuff …</span></span>
-<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>condition <span class="dv">3</span><span class="op">)</span> <span class="cf">break</span><span class="op">;</span>   <span class="co">// *3*</span></span>
-<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div></li>
-<li><p>Se c’è solo <code>*1*</code>, potete usare
-<code>while(condition 1)</code>.</p></li>
-<li><p>Se c’è solo <code>*3*</code>, potete usare
-<code>do … while(condition 3)</code> oppure <code>for</code>.</p></li>
-<li><p>Se c’è <code>*2*</code>, lasciate tutto così</p></li>
+Usate sempre <code>int</code> e la funzione <code>ssize()</code>! (Ma
+ovviamente dovete <a
+href="tomasi-lezione-01.html#config-latest-gcc">usare un compilatore
+recente</a>…)</p></li>
 </ul>
 </section>
 <section id="iteratori-nella-stl" class="slide level1">
