@@ -507,21 +507,6 @@
   
 
     
-      
-      
-      
-
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../ProveEsame/TemiEsame/" class="md-nav__link">
-        Temi d'esame
-      </a>
-    </li>
-  
-
-    
   </ul>
 </nav>
                   </div>
@@ -592,7 +577,7 @@
 <h1 id="lezione-3">Lezione 3</h1>
 <p>In questa terza lezione affronteremo di nuovo gli stessi problemi della prima e seconda lezione (lettura di dati da un file, calcolo di media e mediana) utilizzando una evoluzione del contenitore di dati <code>Vettore</code>: proveremo infatti a rendere questa classe più flessibile in modo che sia capace di immagazzinare qualsiasi tipo di dato ( e non necessariamente dei numeri double ). Nella seconda parte della lezione ci spingeremo ancora oltre imparando ad usare il contenitore <code>std::vector</code> della STL . Quindi in sintesi :</p>
 <ul>
-<li>Tipo di dato da leggere è constituito da numeri double immagazzinati nel solito file <a href="../1941.txt">1941.txt</a>.</li>
+<li>Tipo di dato da leggere è constituito da numeri double immagazzinati nel solito file <code>data.dat</code>.</li>
 <li>Tipo di contenitore di dati è una generalizzazione della classe <code>Vettore</code> della lezione 2 o il contenitore <code>std::vector</code> della STL.</li>
 <li>Operazioni sui dati vengono svolte mediante funzioni che agiscono su oggetti di tipo <code>Vettore</code> o <code>std::vector</code>. </li>
 </ul>
@@ -913,9 +898,9 @@ clean:
 <details>
 <p><summary> Riempire un vettore da file : </summary></p>
 <p>In questa funzione creiamo un vettore, lo riempiamo con tutti i dati letti da un file aggiungendo di volta in volta una componente. Il processo si ferma al termine del file:</p>
-<div class="highlight"><pre><span></span><code><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">typename</span><span class="w"> </span><span class="nc">T</span><span class="o">&gt;</span><span class="w"> </span><span class="n">vector</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="n">Read</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">filename</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<div class="highlight"><pre><span></span><code><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">typename</span><span class="w"> </span><span class="nc">T</span><span class="o">&gt;</span><span class="w"> </span><span class="n">Vettore</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="n">Read</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">filename</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 
-<span class="w">  </span><span class="n">vector</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="n">v</span><span class="p">;</span>
+<span class="w">  </span><span class="n">Vettore</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="n">v</span><span class="p">(</span><span class="n">N</span><span class="p">);</span>
 
 <span class="w">  </span><span class="n">ifstream</span><span class="w"> </span><span class="nf">in</span><span class="p">(</span><span class="n">filename</span><span class="p">);</span>
 

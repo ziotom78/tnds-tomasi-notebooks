@@ -2,7 +2,7 @@
 
 In questa terza lezione affronteremo di nuovo gli stessi problemi della prima e seconda lezione (lettura di dati da un file, calcolo di media e mediana) utilizzando una evoluzione del contenitore di dati `Vettore`: possiamo rendere questa classe più flessibile in modo che sia capace di immagazzinare qualsiasi tipo di dato (e non necessariamente dei numeri `double`). Nella seconda parte spingeremo ancora oltre la generalizzazione imparando ad usare il contenitore vector della [STL](http://www.cplusplus.com/reference/stl/). Quindi, in sintesi:
 
--   Tipo di dato da leggere è constituito da numeri `double` immagazzinati nel solito file `data.dat`.
+-   Tipo di dato da leggere è constituito da numeri `double` immagazzinati nel solito file [1941.txt](1941.txt).
 -   Tipo di contenitore di dati è una generalizzazione della classe `Vettore` della lezione 2 o il contenitore vector della STL.
 -   Operazioni sui dati vengono svolte mediante funzioni che agiscono su oggetti di tipo `Vettore` o `vector`.
 
