@@ -49,7 +49,7 @@
     template <typename T>
     std::vector<T> operator+(const std::vector<T> &a, const std::vector<T> &b) {
 
-      assert(a.size() == b.size());  // Don't forget to do this!
+      assert(ssize(a) == ssize(b));  // Don't forget to do this!
 
       // ...
     }

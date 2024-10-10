@@ -70,7 +70,7 @@ int main() {
   RandomGen myGen{1};
   vector<double> samples(10000); // Usare parentesi tonde () e non graffe {} qui!
 
-  for(int k{}; k < (int) samples.size(); k++) {
+  for(int k{}; k < ssize(samples); k++) {
       samples[k] = myGen.Unif(5, 10);
       // Stampa i primi 10 valori per controllo
       if (k < 10)
@@ -402,14 +402,14 @@ Per chi usa ROOT, in alcuni casi può essere comodo conservare una serie di isto
 ```c++
 vector<TH1F*> vhistos;
 
-for(int k{}; k < (int) cases.size(); k++ ) {     // ciclo sui casi da studiare
-  TH1F* h{new TH1F( ... )};                      // costruzione istogramma
+for(int k{}; k < ssize(cases); k++ ) {   // ciclo sui casi da studiare
+  TH1F* h{new TH1F( ... )};              // costruzione istogramma
   for (int j{}; j < n ; j++ )
-      h->Fill(...) ;                             // riempimento istogramma
-  vhistos.push_back(h);                          // conserviamo i puntatori
+      h->Fill(...) ;                     // riempimento istogramma
+  vhistos.push_back(h);                  // conserviamo i puntatori
 }
 
-for(int k{}; k < (int) cases.size(); k++) {
+for(int k{}; k < ssize(cases); k++) {
   // ...
   vhistos[k]->Draw();
   // ...
@@ -449,7 +449,7 @@ Siccome il programma deve fare molti calcoli, vi consiglio di fornire qualche fe
   // Useremo 2 colonne per mostrare l'istogramma della media
   // e di hit-or-miss, e tante righe quanti sono i valori in
   // "num_of_points_list"
-  plt_histograms.multiplot(num_of_points_list.size(), 2);
+  plt_histograms.multiplot(ssize(num_of_points_list), 2);
 
   // Itera `num_of_points` su tutti i valori di `num_of_points_list`:
   // prima num_of_points = 500, poi num_of_points = 1000, poi etc.
@@ -462,7 +462,7 @@ Siccome il programma deve fare molti calcoli, vi consiglio di fornire qualche fe
 
     // Esegue molte volte il calcolo dell'integrale per vedere la
     // variabilità dei risultati
-    for(int k{}; k < (int) estimates_mean.size(); ++k) {
+    for(int k{}; k < ssize(estimates_mean); ++k) {
       estimates_mean.at(k) = integral_mean(rng, f_sin, 0.0, M_PI, num_of_points);
       estimates_hom.at(k) = integral_hom(rng, f_sin, 0.0, M_PI, 1.0, num_of_points);
     }

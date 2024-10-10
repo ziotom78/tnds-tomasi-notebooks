@@ -159,8 +159,8 @@ Con l'esempio seguente, è possibile usare il reindirizzamento:
 -   Questo codice ha un errore molto comune:
 
     ```c++
-    // The `<=` is wrong! It should be `i < v.size()`
-    for(int i = 0; i <= v.size(); ++i) {
+    // The `<=` is wrong! It should be `i < ssize(v)`
+    for(int i = 0; i <= ssize(v); ++i) {
         v.setComponent(i, 0.0);
     }
     ```
@@ -243,8 +243,8 @@ int main() {
 
     cerr << "Inserisci la posizione del vettore: ";
     cin >> position;
-    if (position >= v.size()) {
-        cerr << "Errore, la posizione deve essere < " << v.size() << endl;
+    if (position >= ssize(v)) {
+        cerr << "Errore, la posizione deve essere < " << ssize(v) << endl;
         exit(1);
     }
     v.setComponent(position, 1.0);

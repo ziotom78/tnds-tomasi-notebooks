@@ -178,7 +178,7 @@ Di seguito un piccolo vademecum per aiutarvi a svolgere nel migliore dei modi l'
     int main() {
       std::vector<int> list_of_N{100, 500, 1000, 5000};
 
-      for(int i{}; i < (int) list_of_N.size(); ++i) {
+      for(int i{}; i < ssize(list_of_N); ++i) {
         // Ricordate di usare list_of_N.at(i) anziché list_of_N[i],
         // perché così il compilatore controlla che il valore di `i`
         // non esca dai limiti del vettore

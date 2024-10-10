@@ -15,7 +15,7 @@ std::vector<double> stl_vec{1.0, 2.0, 3.0};
 
 ma la variabile `stl_vec` ha più funzionalità:
 
--   È sempre possibile sapere quanti elementi contenga con il metodo `stl_vec.size()` (o in C++20 mediante `ssize(stl_vec)`);
+-   È sempre possibile sapere quanti elementi contenga con il metodo `size(stl_vec)` (o nel vecchio C++ `stl_vec.size()`, che è però **sconsigliato**);
 
 -   Si possono aggiungere elementi in coda con `stl_vec.push_back()` e [`stl_vec.emplace_back()`](https://en.cppreference.com/w/cpp/container/vector/emplace_back);
 
@@ -48,7 +48,7 @@ La scrittura `array<double, 3>` può sembrare strana: finora abbiamo sempre vist
 È poi possibile implementare codice come se si stesse usando un oggetto di tipo `std::vector`:
 
 ```c++
-for(int i{}; i < (int) stl_arr.size(); ++i) {
+for(int i{}; i < ssize(stl_arr); ++i) {
   // Ok anche `stl_arr[i]`, ma non controlla la
   // correttezza di `i`
   std::cout << stl_arr.at(i) << "\n";

@@ -178,13 +178,13 @@ Per creare i grafici, potete ovviamente usare ROOT, oppure [gplot++](https://git
 caso, scaricate il file [gplot++.h](https://raw.githubusercontent.com/ziotom78/gplotpp/master/gplot%2B%2B.h) (facendo click col tasto destro sul link) e scrivete un codice del genere:
 ```cpp
 std::vector<int> steps{10, 50, 100, 500, 1000};
-std::vector<double> step_sizes(steps.size());
-std::vector<double> errors(steps.size());
+std::vector<double> step_sizes(ssize(steps));
+std::vector<double> errors(ssize(steps));
 
 // Calcola gli errori e stampa una tabella usando "fmtlib.h"
 double true_value{2};
 fmt::print("Passi        Intervallo h  Errore");
-for (size_t i{}; i < (int) steps.size(); ++i) {
+for (size_t i{}; i < ssize(steps); ++i) {
   double estimated_value{myInt.integrate(steps[i], f)};
   errors[i] = fabs(estimated_value - true_value);
   step_sizes[i] = myInt.GetH();
@@ -212,7 +212,7 @@ std::vector<int> steps{10, 50, 100, 500, 1000};
 TGraph g_errore{};
 double true_value{2};
 fmt::print("Passi        Errore")
-for (int i{}; i < (int) steps.size(); i++) {
+for (int i{}; i < size(steps); i++) {
   double estimated_value{myInt.integrate(steps[i], f)};
   double err{fabs(estimated_value - true_value)};
   fmt::print("{:12d} {:20.8e}\n", steps[i], err);

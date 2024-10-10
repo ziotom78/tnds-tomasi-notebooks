@@ -326,21 +326,7 @@ template <typename T> vector<T> Read(int N, const char* filename) {
 }
 
 template <typename T> void Print(const vector<T> & v) {
-  // Purtroppo è necessario usare (int) sul risultato di vector::size(),
-  // altrimenti il compilatore produce un warning.
-  //
-  // Se il vostro compilatore supporta il C++20, potete usare `ssize()`:
-  //
-  // for (int i{}; i < ssize(v); i++) {
-  //    cout << v[i] << endl;
-  //
-  // In Replit, è sufficiente mettere nel Makefile `--std=c++23` anziché
-  // `--std=c++23` per abilitare `ssize()`, che è molto comodo!
-  //
-  // Se usate i computer del laboratorio, purtroppo implementano un
-  // compilatore troppo vecchio per supportare ssize().
-
-  for (int i{}; i < (int) v.size(); i++) {
+  for (int i{}; i < ssize(v); i++) {
       cout << v[i] << endl;
 }
 
@@ -353,7 +339,7 @@ template <typename T> void Print(const vector<T> & v, const char * filename) {
   }
 
   // Anche qui bisogna usare (int), oppure invocare `ssize()`.
-  for (int i{}; i < (int) v.size(); i++) {
+  for (int i{}; i < ssize(v); i++) {
       out << v[i] << endl;
   }
 }
@@ -373,10 +359,10 @@ template <typename T> double CalcolaMediana(vector<T> v) {
   sort(v.begin(), v.end()) ;
   double mediana{};
 
-  if (v.size() % 2 == 0) {
-      mediana = (v[v.size() /2 - 1] + v[v.size(D) / 2]) / 2;
+  if (ssize(v) % 2 == 0) {
+      mediana = (v[ssize(v) /2 - 1] + v[ssize(v) / 2]) / 2;
   } else {
-      mediana = v[v.size() / 2];
+      mediana = v[ssize(v) / 2];
   }
 
   return mediana;
@@ -518,7 +504,7 @@ int main(int argc, char * argv[]) {
   TH1F histo{"histo", "histo", 100, -10, 100};
   histo.StatOverflows(true);
 
-  for (int k{}; k < v.size(); k++) {
+  for (int k{}; k < ssize(v); k++) {
       histo.Fill(v[k]);
   }
 

@@ -77,7 +77,7 @@ TGraphErrors DoPlot(vector<double> myx, vector<double> myy,
 
   TGraphErrors mygraph;
 
-  for (int k{}; k < (int) myx.size(); k++) {
+  for (int k{}; k < ssize(myx); k++) {
     mygraph.SetPoint(k, myx[k], myy[k]);
     mygraph.SetPointError(k, 0, myerry[k]);
   }
@@ -181,9 +181,9 @@ template <typename T>
 LinearFitResults<T> linear_fit(const std::vector<T> &x_vec,
                                const std::vector<T> &y_vec,
                                const std::vector<T> &y_err_vec) {
-  assert(x_vec.size() == y_vec.size());
-  assert(y_vec.size() == y_err_vec.size());
-  const int num_of_samples{(int) x_vec.size()};
+  assert(ssize(x_vec) == ssize(y_vec));
+  assert(ssize(y_vec) == ssize(y_err_vec));
+  const int num_of_samples{ssize(x_vec)};
 
   // See Numerical recipes, Eqq. 15.2.16–21
 
@@ -257,7 +257,7 @@ template <typename T> struct Measurements {
   vector<T> rb;
   vector<T> rb_err;
 
-  int size() const { return (int) voltage.size(); }
+  int size() const { return (int) ssize(voltage); }
 };
 
 /**
@@ -314,7 +314,7 @@ int main(int argc, const char *argv[]) {
   Measurements<float> data;
   read_from_file(input_file, data);
 
-  cerr << fmt::format("{} elements have been read from \"{}\"\n", data.size(),
+  cerr << fmt::format("{} elements have been read from \"{}\"\n", ssize(data),
                       file_name);
 
   auto result = linear_fit(data.voltage, data.rb, data.rb_err);
@@ -474,7 +474,7 @@ vector<double> ParseFile(string filename) {
 double fun(double q, vector<double> params) {
   double sum{};
 
-  for (int k{}; k < (int)params.size(); k++)
+  for (int k{}; k < ssize(params); k++)
     sum += pow(q - params[k] / (round(params[k] / q)), 2);
 
   return sum;
@@ -486,9 +486,9 @@ double fun(double q, vector<double> params) {
 
 double deriv(double qmin, vector<double> params) {
   double sum{};
-  for (int k{}; k < (int)params.size(); k++)
+  for (int k{}; k < ssize(params); k++)
     sum += (params[k] / round(params[k] / qmin));
-  return sum / params.size();
+  return sum / ssize(params);
 }
 ```
 
@@ -532,7 +532,7 @@ int main() {
   TCanvas can1{};
   can1.cd();
   TH1F histo{"cariche", "Charges distribution", 100, 0, 20e-19};
-  for (int i{}; i < (int)charges.size(); i++) {
+  for (int i{}; i < ssize(charges); i++) {
     cout << charges[i] << endl;
     histo.Fill(charges[i]);
   }
@@ -566,7 +566,7 @@ int main() {
 
   double mycharge{deriv(qmin, charges)};
   double uncer{
-      sqrt(fun(mycharge, charges) / (charges.size() * (charges.size() - 1)))};
+      sqrt(fun(mycharge, charges) / (ssize(charges) * (ssize(charges) - 1)))};
   cout << "Measured charge = " << mycharge << " ± " << uncer << "(stat only)"
        << endl;
 
@@ -654,7 +654,7 @@ int main() {
 
   double mycharge{deriv(qmin, charges)};
   double uncer{
-      sqrt(fun(mycharge, charges) / (charges.size() * (charges.size() - 1)))};
+      sqrt(fun(mycharge, charges) / (ssize(charges) * (ssize(charges) - 1)))};
   fmt::print("Measured charge = {0:.4e} ± {1:.4e} C (stat only)\n", mycharge,
              uncer);
 }
