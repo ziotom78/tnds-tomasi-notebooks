@@ -623,6 +623,26 @@ esercizi!</p></li>
 <section id="file-multipli-ed-header" class="slide level1">
 <h1>File multipli ed header</h1>
 </section>
+<section id="funzionamento-degli-include" class="slide level1">
+<h1>Funzionamento degli <code>#include</code></h1>
+<ul>
+<li><p>I comandi che iniziano con <code>#</code> storicamente venivano
+analizzati da un programma separato, <code>cpp</code>, invocato
+<em>prima</em> del compilatore. (Oggi non è più così, ma dal punto di
+vista concettuale non cambia).</p></li>
+<li><p>Il programma <code>cpp</code> fa una semplice sostituzione
+<em>testuale</em>, e non capisce praticamente nulla del
+linguaggio.</p></li>
+<li><p>Il video seguente mostra che un file <code>include.h</code> non
+deve neppure essere sintatticamente valido: basta che, una volta
+“espanso” con <code>cpp</code>, il programma principale sia
+corretto.</p></li>
+</ul>
+</section>
+<section class="slide level1">
+
+<p><asciinema-player src="asciinema/cpp-example-86x22.asciinema" cols="86" rows="22" font-size="medium"></asciinema-player></p>
+</section>
 <section id="file-multipli-ed-header-1" class="slide level1">
 <h1>File multipli ed header</h1>
 <ul>

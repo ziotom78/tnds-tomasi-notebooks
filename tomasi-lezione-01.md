@@ -446,6 +446,19 @@ e di compilarli separatamente. In questo caso la struttura del
 
 # File multipli ed header
 
+# Funzionamento degli `#include`
+
+-   I comandi che iniziano con `#` storicamente venivano analizzati da un programma separato, `cpp`, invocato *prima* del compilatore. (Oggi non è più così, ma dal punto di vista concettuale non cambia).
+
+-   Il programma `cpp` fa una semplice sostituzione *testuale*, e non capisce praticamente nulla del linguaggio.
+
+-   Il video seguente mostra che un file `include.h` non deve neppure essere sintatticamente valido: basta che, una volta “espanso” con `cpp`, il programma principale sia corretto.
+
+---
+
+<asciinema-player src="asciinema/cpp-example-86x22.asciinema" cols="86" rows="22" font-size="medium"></asciinema-player>
+
+
 # File multipli ed header
 
 -   Includete **sempre** nei vostri file tutti gli `#include` che servono!
