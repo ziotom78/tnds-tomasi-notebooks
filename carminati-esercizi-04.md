@@ -1,14 +1,89 @@
 [La pagina con la spiegazione originale degli esercizi si trova qui: <https://labtnds.docs.cern.ch/Lezione4/Lezione4/>.]
 
-In questa lezione non ci sono esercizi da consegnare per l'esame. Vi
-proponiamo alcuni temi specifici che si possono affrontare con gli
-strumenti che abbiamo sviluppato sinora: l'analisi dei dati raccolti
-in un tipico esperimento del laboratorio di fisica (esperimento di
-Millikan e misura del rapporto $q/m$ per l'elettrone) e un semplice
-problema di riordinamento, per fare qualche esercizio con gli
-strumenti della STL.
+In questa lezione proveremo ad applicare gli strumenti sviluppati nelle scorse lezioni a casi concreti di studio. Per prima cosa cercheremo di chiudere il capitolo dell'analisi dei dati climatici studiando l'andamento temporale delle variazioni medie di temperatura dal 1941 al 2023. Vi proponiamo inoltre alcuni temi specifici (facoltativi) che si possono affrontare con gli strumenti che abbiamo sviluppato sinora: l'analisi dei dati raccolti in un tipico esperimento del laboratorio di fisica (esperimento di Millikan e misura del rapporto q/m per l'elettrone) e un semplice problema di riordinamento (per fare qualche esercizio con gli strumenti della STL).
 
-# Esercizio 4.0 — Misura del rapporto $q/m$ per l'elettrone (analisi dati)  {#esercizio-4.0}
+
+# Esercizio 4.0 — Analisi andamento temporale temperature Milano (da consegnare) {#esercizio-4.0}
+
+In questa lezione tireremo le somme del lavoro svolto in tutte le sessioni precedenti. Scriveremo un codice di analisi (da consegnare) che ci permetta di visualizzare l'andamento del delta giornaliero (calcolato rispetto alla media sul perioro 1941-2023) medio annuale rispetto all'anno dal 1941 al 2023 nell'area di Milano. Per analizzare l'andamento temporale del Δ in funzione del tempo l'oggetto giusto di ROOT da utilzzare è [`TGraphErrors`](https://root.cern.ch/doc/v630/classTGraphErrors.html). La struttura del codice potrebbe essere logicamente la seguente:
+
+-   Loop principale sugli anni che vogliamo investigare;
+
+-   Per ogni anno apriamo il file corrispondente, calcoliamo media ed errore e riempiamo un grafico;
+
+-   A fine ciclo disegnamo il grafico.
+
+Potete scaricare i file di dati usando questo [link](https://labtnds.docs.cern.ch/Lezione4/TemperatureMilano.tar.gz).
+
+Per svolgere questo esercizio (e tutti i successivi) potete chiaramente utilizzare lo strumento di rappresentazione grafica che preferite (GNUPLOT o Matplotlib).
+
+## Esempio di codice con ROOT
+
+```c++
+// put here all required includes
+
+using namespace std;
+
+int main() {
+
+  TApplication app{"app", 0, 0};
+
+  // oggetto per rappresentare un andamento x (anno) verso y (delta medio)
+  TGraphErrors trend;
+
+  // …
+
+  int index{};
+
+  // loop principale su tutti i files (anni) da analizzare
+
+  for (int i{1941}; i < 2024; i++) {
+    string filename{format("{}.txt", i)};
+
+    vector v{Read<double>(filename.c_str()};
+
+    // qui fate i vostri calcoli
+    // …
+
+    cout << format("Anno {}  Δ medio = {} ± {}\n", i, ave, err);
+
+    // inserisco media e deviazione standard dalla media nel grafico
+
+    trend.SetPoint(index, i, ave);
+    trend.SetPointError(index, 0, err);
+
+    index++;
+  }
+
+  // grafica
+
+  TCanvas c{"Temperature trend","Temperature trend"};
+  c.cd();
+  c.SetGridx();
+  c.SetGridy();
+
+  trend.SetMarkerSize(1.0);
+  trend.SetMarkerStyle(20);
+  trend.SetFillColor(5);
+
+  trend.SetTitle("Temperature trend");
+  trend.GetXaxis()->SetTitle("Anno");
+  trend.GetYaxis()->SetTitle("#Delta (#circ C)");
+  trend.Draw("apl3");
+  trend.Draw("pX");
+
+  c.SaveAs("trend.pdf");
+
+  app.Run();
+}
+```
+
+## Quale errore associare ai Δ?
+
+In linea di principio lo stimatore corretto sarebbe la deviazione standard dalla media. In questo caso la stima è più complicata, perché i valori di Δ giornalieri non sono scorrelati tra loro. Per ridurre l'impatto della correlazione e quindi utilizzare uno stimatore dell'errore più corretto, potremmo limitarci ad utilizzare una misura ogni 7 giorni: ci aspettiamo infatti che una misura sia solo debolmente correlata a quello che è successo 7 giorni prima.
+
+
+# Esercizio 4.1 — Misura del rapporto $q/m$ per l'elettrone (analisi dati)  {#esercizio-4.1}
 
 Un esperimento molto interessante che si svolge nel laboratorio di
 fisica riguarda la misura del rapporto tra la carica e la massa di un
@@ -234,10 +309,8 @@ LinearFitResults<T> linear_fit(const std::vector<T> &x_vec,
 
 Con questo file si può usare il programma seguente, che memorizza
 tutti i dati in una struttura `Measurements`. Il programma usa la
-libreria [fmtlib](https://github.com/fmtlib/fmt), che permette di
-scrivere in maniera più semplice messaggi all'utente. Vedremo meglio
-sia gplot++ che fmtlib nella prossima lezione, se volete provare ad
-installarle già oggi le istruzioni sono a questi link:
+libreria [fmtlib](https://github.com/fmtlib/fmt) e [gplot++](https://github.com/ziotom78/gplotpp); se volete provare ad
+installarle, le istruzioni sono a questi link:
 [gplot](index.html#gplotinstall), [fmtlib](index.html#fmtinstall).
 
 ```c++
@@ -394,7 +467,7 @@ Una volta che il programma è stato salvato in un file
     python esercizio4.0.py
 
 
-# Esercizio 4.1 — Misura della carica dell'elettrone (analisi dati)  {#esercizio-4.1}
+# Esercizio 4.2 — Misura della carica dell'elettrone (analisi dati)  {#esercizio-4.2}
 
 La carica dell'elettrone è stata misurata per la prima volta nel 1909
 in uno storico esperimento dal fisico statunitense Robert Millikan.
@@ -668,7 +741,7 @@ esercizio4.1: esercizio4.1.cpp common.cpp common.h
     g++ -g3 -Wall --pedantic -std=c++23 -o esercizio4.1 esercizio4.1.cpp common.cpp
 ```
 
-# Esercizio 4.2 — Determinazione del cammino minimo (approfondimento uso STL)  {#esercizio-4.2}
+# Esercizio 4.3 — Determinazione del cammino minimo (approfondimento uso STL)  {#esercizio-4.3}
 
 In questo esercizio possiamo provare ad approfondire l'uso di
 contenitori e algoritmi della STL. Proviamo ad affrontare questo
@@ -689,7 +762,7 @@ effettuato.
 
 
 ## Esempio di codice (ROOT)
-  
+
 ```c++
 #include "TApplication.h"
 #include "TAxis.h"
@@ -713,16 +786,16 @@ public:
 
   friend std::istream &operator>>(std::istream &is, Posizione &p) {
     string temp;
-	
+
     getline(is, temp, ',');
     p.m_x = stod(temp);
-	
+
     getline(is, temp, ',');
     p.m_y = stod(temp);
-	
+
     getline(is, temp, '\n');
     p.m_z = stod(temp);
-	
+
     return is;
   }
 
@@ -779,7 +852,7 @@ int main() {
 	cerr << "Cannot open file " << filename << endl;
 	exit(1);
   }
-  
+
   vector<Posizione> vp{};
 
   Posizione p{};

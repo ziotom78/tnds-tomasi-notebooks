@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="author" content="Maurizio Tomasi">
+  <title>Laboratorio di TNDS – Lezione 4</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js@^4//dist/reset.css">
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js@^4//dist/reveal.css">
+  <style>
+    .reveal .sourceCode {  /* see #7635 */
+      /* overflow: visible; */
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { color: #008000; } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { color: #008000; font-weight: bold; } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js@^4//dist/theme/white.css" id="theme">
+  <link rel="stylesheet" href="./css/custom.css"/>
+  <link rel="stylesheet" href="./css/asciinema-player.css"/>
+  <script defer=""
+  src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <link rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css" />
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide">
+  <h1 class="title">Laboratorio di TNDS – Lezione 4</h1>
+  <p class="author">Maurizio Tomasi</p>
+  <p class="date">Martedì 15 Ottobre 2024</p>
+</section>
+
+<section id="esercizi-per-oggi" class="slide level1">
+<h1>Esercizi per oggi</h1>
+</section>
+<section id="link-alle-risorse-online" class="slide level1">
+<h1>Link alle risorse online</h1>
+<ul>
+<li><p>La spiegazione dettagliata degli esercizi si trova qui: <a
+href="carminati-esercizi-04.html">carminati-esercizi-04.html</a>.</p></li>
+<li><p>Come al solito, queste slides, che forniscono suggerimenti
+addizionali rispetto alla lezione di teoria, sono disponibili
+all’indirizzo <a
+href="https://ziotom78.github.io/tnds-tomasi-notebooks/">ziotom78.github.io/tnds-tomasi-notebooks</a>.</p></li>
+</ul>
+</section>
+<section id="esercizi-per-oggi-1" class="slide level1">
+<h1>Esercizi per oggi</h1>
+<ul>
+<li><a href="carminati-esercizi-04.html#4.0">Esercizio 4.0</a>:
+Andamento temporale delle temperature di Milano (<strong>da
+consegnare</strong>);</li>
+<li><a href="carminati-esercizi-04.html#4.1">Esercizio 4.1</a>: Misura
+del rapporto <span class="math inline">q/m</span> per l’elettrone;</li>
+<li><a href="carminati-esercizi-04.html#4.2">Esercizio 4.2</a>: Misura
+della carica <span class="math inline">e</span> dell’elettrone;</li>
+<li><a href="carminati-esercizi-04.html#4.3">Esercizio 4.3</a>:
+Determinazione del cammino minimo.</li>
+</ul>
+</section>
+<section id="formattazione-di-numeri" class="slide level1">
+<h1>Formattazione di numeri</h1>
+</section>
+<section id="formattazione-di-numeri-1" class="slide level1">
+<h1>Formattazione di numeri</h1>
+<ul>
+<li><p>Stampare dati usando formattazioni speciali in C++ è uno
+strazio!</p></li>
+<li><p>Supponiamo di voler stampare le coordinate cartesiane di un
+punto:</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Posizione di un punto 3D</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> pos_x<span class="op">,</span> pos_y<span class="op">,</span> pos_z<span class="op">;</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>cout <span class="op">&lt;&lt;</span> <span class="st">&quot;La posizione è (&quot;</span> <span class="op">&lt;&lt;</span> pos_x <span class="op">&lt;&lt;</span> <span class="st">&quot;, &quot;</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>     <span class="op">&lt;&lt;</span> pos_y<span class="op">,</span> <span class="op">&lt;&lt;</span> <span class="st">&quot;, &quot;</span> <span class="op">&lt;&lt;</span> pos_z <span class="op">&lt;&lt;</span> <span class="st">&quot;)&quot;</span> <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span></code></pre></div></li>
+<li><p>Questo codice è complicato da leggere, perché ci sono troppi
+operatori <code>&lt;&lt;</code> (e infatti c’è un errore: lo
+trovate?).</p></li>
+</ul>
+</section>
+<section id="formattare-stringhe-in-c20" class="slide level1">
+<h1>Formattare stringhe in C++20</h1>
+<ul>
+<li><p>Nel Luglio 2019 <a
+href="http://www.zverovich.net/2019/07/23/std-format-cpp20.html">è stato
+annunciato</a> che la release 2020 dello standard C++ avrebbe incluso
+una libreria per la formattazione di stringhe.</p></li>
+<li><p>Questa libreria è ispirata ad alcune soluzioni introdotte negli
+scorsi anni in <a
+href="https://docs.python.org/3/library/string.html#format-string-syntax">Python</a>,
+<a
+href="https://msdn.microsoft.com/en-us/library/system.string.format(v=vs.110).aspx">C#</a>
+e <a href="https://doc.rust-lang.org/std/fmt/">Rust</a>, e l’approccio
+sta prendendo piede in molti altri linguaggi.</p></li>
+</ul>
+</section>
+<section id="unanalogia" class="slide level1">
+<h1>Un’analogia</h1>
+<p><img data-src="images/autodichiarazione.jpg" /></p>
+</section>
+<section id="stdformat-in-c20" class="slide level1">
+<h1><code>std::format</code> in C++20</h1>
+<ul>
+<li><p>La nuova libreria <code>&lt;format&gt;</code> permette di usare
+lo stesso meccanismo dell’autocertificazione nella slide precedente: si
+fornisce un <em>template</em>, ossia una stringa che va riempita in
+certi punti con i valori delle variabili</p></li>
+<li><p>La libreria <code>std::format</code> usa <code>{}</code> al posto
+di <code>____</code>:</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> pos_x<span class="op">,</span> pos_y<span class="op">,</span> pos_z<span class="op">;</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>cout <span class="op">&lt;&lt;</span> format<span class="op">(</span><span class="st">&quot;La posizione è (</span><span class="sc">{}</span><span class="st">, </span><span class="sc">{}</span><span class="st">, </span><span class="sc">{}</span><span class="st">)</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">,</span> pos_x<span class="op">,</span> pos_y<span class="op">,</span> pos_z<span class="op">);</span></span></code></pre></div></li>
+<li><p>Si può fare riferimento alle variabili usando il loro indice:</p>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>cout <span class="op">&lt;&lt;</span> format<span class="op">(</span><span class="st">&quot;La posizione è (</span><span class="sc">{0}</span><span class="st">, </span><span class="sc">{1}</span><span class="st">, </span><span class="sc">{2}</span><span class="st">)</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">,</span> pos_x<span class="op">,</span> pos_y<span class="op">,</span> pos_z<span class="op">);</span></span></code></pre></div></li>
+</ul>
+</section>
+<section id="formattazioni-più-elaborate" class="slide level1">
+<h1>Formattazioni più elaborate</h1>
+<ul>
+<li><p>È possibile specificare il modo in cui un valore va scritto
+inserendo degli argomenti dentro <code>{}</code> dopo i due punti
+(<code>:</code>). Ad esempio, per formattare numeri floating-point con 2
+cifre dopo la virgola si scrive <code>{:.2f}</code></p></li>
+<li><p>Se si vuole usare la notazione scientifica, si usa la lettera
+<code>e</code>: la scrittura <code>{:.5e}</code> indica che si
+richiedono 5 cifre dopo la virgola</p></li>
+<li><p>Si può indicare il numero di caratteri da usare inserendo un
+numero subito dopo <code>:</code>: così <code>{:5}</code> chiede di
+usare almeno 5 caratteri per scrivere il valore. Questo è utile per
+allineare i campi nelle tabelle.</p></li>
+<li><p>È possibile mettere insieme l’indice (<code>0</code>), l’ampiezza
+(<code>5</code>) e il numero di cifre dopo la virgola (<code>.2</code>)
+scrivendoli uno dopo l’altro: <code>{0:5.2e}</code>.</p></li>
+</ul>
+</section>
+<section id="print-e-println" class="slide level1">
+<h1><code>print</code> e <code>println</code></h1>
+<ul>
+<li><p>Nel C++23 vengono anche introdotte le funzioni <a
+href="https://en.cppreference.com/w/cpp/io/print"><code>print</code></a>
+e <a
+href="https://en.cppreference.com/w/cpp/io/println"><code>println</code></a>.</p></li>
+<li><p>La differenza tra le due è che <code>println</code> aggiunge un
+ritorno a capo:</p>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">// This line…</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>print<span class="op">(</span><span class="st">&quot;Hello, world!</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co">// is equivalent to this one</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>println<span class="op">(</span><span class="st">&quot;Hello, world!&quot;</span><span class="op">);</span>   <span class="co">// No need to put &#39;\n&#39; at the end</span></span></code></pre></div></li>
+<li><p>Entrambe le funzioni possono essere usate come
+<code>format</code>:</p>
+<div class="sourceCode" id="cb5"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>println<span class="op">(</span><span class="st">&quot;Coordinates: (</span><span class="sc">{}</span><span class="st">, </span><span class="sc">{}</span><span class="st">, </span><span class="sc">{}</span><span class="st">)&quot;</span><span class="op">,</span> pos_x<span class="op">,</span> pos_y<span class="op">,</span> pos_z<span class="op">);</span></span></code></pre></div></li>
+</ul>
+</section>
+<section id="il-futuro-ora" class="slide level1">
+<h1>Il futuro… ora!</h1>
+<ul>
+<li><p>Il compilatore <code>g++</code> sui computer del laboratorio
+supporta già <code>format</code>, ma non ancora <code>print</code> e
+<code>println</code></p></li>
+<li><p>Una libreria di formattazione completa, che implementa anche
+<code>print</code> e <code>println</code> e funziona anche su
+compilatori vecchi, è disponibile al sito <a
+href="https://github.com/fmtlib/fmt">github.com/fmtlib/fmt</a>.</p></li>
+<li><p>Per installarla, fate click col tasto destro sul link <a
+href="./install_fmt_library">install_fmt_library</a> e salvate il file
+nella cartella del vostro programma (con Windows, eseguitela in WSL),
+poi eseguitelo così:</p>
+<pre><code>sh install_fmt_library</code></pre></li>
+<li><p>L’animazione seguente mostra come usarla nei vostri
+codici.</p></li>
+</ul>
+</section>
+<section class="slide level1">
+
+<p><asciinema-player src="asciinema/install-fmt-94x25.cast" cols="94" rows="25" font-size="medium"></asciinema-player></p>
+</section>
+<section id="differenze-tra-fmt-e-c20" class="slide level1">
+<h1>Differenze tra <code>fmt</code> e C++20</h1>
+<ul>
+<li><p>La libreria installata da
+<a url="./install_fmt_library" download><code>install_fmt_library</code></a>
+ha alcune differenze con lo standard C++20:</p>
+<ol type="1">
+<li><p>Il namespace è diverso: è <code>fmt::</code> anziché
+<code>std::</code>;</p></li>
+<li><p>Il file da includere è diverso.</p></li>
+</ol></li>
+<li><p>Se usate <code>#include "fmtlib.h"</code>, vi basterà usare
+sempre il namespace <code>fmt::</code>.</p></li>
+</ul>
+</section>
+<section id="creazione-di-grafici" class="slide level1">
+<h1>Creazione di grafici</h1>
+</section>
+<section id="root-e-gnuplot" class="slide level1">
+<h1>ROOT e Gnuplot</h1>
+<ul>
+<li><p>Nelle lezioni precedenti avete visto come usare ROOT per produrre
+grafici.</p></li>
+<li><p>Nel laboratorio di TNDS, ROOT è usato come libreria C++, ossia
+come un insieme di classi invocabili all’interno dei vostri
+programmi.</p></li>
+<li><p>Un’alternativa a ROOT, per coloro che hanno avuto problemi a
+installarlo sui propri laptop, è <a
+href="http://www.gnuplot.info/">Gnuplot</a>:</p>
+<ul>
+<li>È facilmente installabile anche sotto Windows;</li>
+<li>È usabile anche all’interno di programmi C++, mediante una piccola
+libreria.</li>
+</ul></li>
+</ul>
+</section>
+<section class="slide level1">
+
+<iframe src="https://player.vimeo.com/video/638755770?h=2e3e2ab3eb&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" width="1339" height="720" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen title="How to use Gnuplot">
+</iframe>
+</section>
+<section id="chiamare-gnuplot-dal-c" class="slide level1">
+<h1>Chiamare Gnuplot dal C++</h1>
+<ul>
+<li><p>Ho sviluppato una libreria C++ che invoca Gnuplot all’interno di
+programmi C++. È disponibile all’indirizzo <a
+href="https://github.com/ziotom78/gplotpp">github.com/ziotom78/gplotpp</a>.</p></li>
+<li><p>Se avete anche voi problemi con ROOT, potete provare ad usarla: è
+più veloce e non richiede installazioni complesse. Inoltre <a
+href="https://vimeo.com/638098854">funziona anche sotto Windows</a>, se
+prima <a href="https://vimeo.com/638098416">installate Gnuplot nel modo
+giusto</a>.</p></li>
+<li><p>Sui vostri laptop dovete scaricare il file <a
+href="https://raw.githubusercontent.com/ziotom78/gplotpp/master/gplot%2B%2B.h">gplot++.h</a>
+nella cartella dove vi serve, oppure eseguite (sotto Linux/Mac OS
+X):</p>
+<p><input type="text" value="curl 'https://raw.githubusercontent.com/ziotom78/gplotpp/master/gplot%2B%2B.h' > gplot++.h" id="installGplotpp" readonly="1" size="60"><button onclick='copyFmtInstallationScript("installGplotpp")'>Copia</button></p></li>
+<li><p>Basta poi scrivere <code>#include "gplot++.h"</code> per
+usarla.</p></li>
+</ul>
+</section>
+<section id="vantaggi-di-gplot" class="slide level1">
+<h1>Vantaggi di gplot++</h1>
+<ul>
+<li><p>Visual Studio Code è in grado di visualizzare finestre di aiuto,
+se spostate il mouse sui comandi di plot.</p></li>
+<li><p>Si possono passare direttamente array di vettori di tipo
+<code>std::vector</code>, invece di chiamare ripetutamente
+<code>TGraph::SetPoint</code>;</p></li>
+<li><p>Non serve cambiare i <code>Makefile</code> per invocare
+<code>root-config</code>;</p></li>
+<li><p>Se lavorate sui vostri computer, non serve ricordarsi di eseguire
+<code>source root/bin/thisroot.sh</code>;</p></li>
+<li><p>Occupa appena 9 KB, quindi si può installare una copia dentro
+ogni cartella di esercizi;</p></li>
+</ul>
+</section>
+<section id="semplice-esempio" class="slide level1">
+<h1>Semplice esempio</h1>
+<div class="sourceCode" id="cb7"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;gplot++.h&quot;</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="bu">std::</span>vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> values<span class="op">{</span><span class="dv">1</span><span class="op">,</span> <span class="dv">7</span><span class="op">,</span> <span class="dv">3</span><span class="op">,</span> <span class="dv">5</span><span class="op">,</span> <span class="dv">8</span><span class="op">,</span> <span class="op">-</span><span class="dv">4</span><span class="op">};</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  Gnuplot plt<span class="op">{};</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  plt<span class="op">.</span>plot<span class="op">(</span>values<span class="op">);</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  plt<span class="op">.</span>show<span class="op">();</span>  <span class="co">// IMPORTANT! If you forget this, you’ll see nothing!</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+</section>
+<section id="semplice-esempio-1" class="slide level1">
+<h1>Semplice esempio</h1>
+<p><img data-src="images/gplot++.png" style="width:50.0%" /></p>
+</section>
+<section id="salvare-i-plot-in-file" class="slide level1">
+<h1>Salvare i plot in file</h1>
+<ul>
+<li><p>L’esempio precedente apre una finestra. Questa soluzione è comoda
+perché la finestra è «navigabile»: si può zoomare con il mouse come si
+fa in ROOT!</p></li>
+<li><p>Per maggiore praticità è però meglio che salviate i plot in file
+PNG, che sono apribili direttamente in Visual Studio Code.</p></li>
+<li><p>È sufficiente usare il metodo
+<code>Gnuplot::redirect_to_png</code> subito dopo aver creato una
+variabile di tipo <code>Gnuplot</code>:</p>
+<div class="sourceCode" id="cb8"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>Gnuplot plt<span class="op">{};</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>plt<span class="op">.</span>redirect_to_png<span class="op">(</span><span class="st">&quot;output.png&quot;</span><span class="op">);</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co">// Now use plt.plot(...) as usual</span></span></code></pre></div></li>
+</ul>
+</section>
+<section id="salvare-i-plot-in-file-png" class="slide level1">
+<h1>Salvare i plot in file PNG</h1>
+<div class="sourceCode" id="cb9"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;gplot++.h&quot;</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="bu">std::</span>vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> values<span class="op">{</span><span class="dv">1</span><span class="op">,</span> <span class="dv">7</span><span class="op">,</span> <span class="dv">3</span><span class="op">,</span> <span class="dv">5</span><span class="op">,</span> <span class="dv">8</span><span class="op">,</span> <span class="op">-</span><span class="dv">4</span><span class="op">};</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  Gnuplot plt<span class="op">{};</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Save the plot in a PNG file</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>  plt<span class="op">.</span>redirect_to_png<span class="op">(</span><span class="st">&quot;output.png&quot;</span><span class="op">);</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>  plt<span class="op">.</span>plot<span class="op">(</span>values<span class="op">);</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>  plt<span class="op">.</span>show<span class="op">();</span>  <span class="co">// IMPORTANT! If you forget this, you’ll see nothing!</span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+</section>
+<section id="esempio-più-complesso" class="slide level1">
+<h1>Esempio più complesso</h1>
+<div class="sourceCode" id="cb10"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">(</span><span class="dt">void</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  Gnuplot plt<span class="op">{};</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="bu">std::</span>vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> x<span class="op">{</span><span class="dv">1</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">3</span><span class="op">,</span> <span class="dv">4</span><span class="op">,</span> <span class="dv">5</span><span class="op">},</span> y<span class="op">{</span><span class="dv">5</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">4</span><span class="op">,</span> <span class="dv">1</span><span class="op">,</span> <span class="dv">3</span><span class="op">};</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  plt<span class="op">.</span>multiplot<span class="op">(</span><span class="dv">2</span><span class="op">,</span> <span class="dv">1</span><span class="op">,</span> <span class="st">&quot;Title&quot;</span><span class="op">);</span> <span class="co">// Two plots in two rows</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  plt<span class="op">.</span>set_xlabel<span class="op">(</span><span class="st">&quot;X axis&quot;</span><span class="op">);</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>  plt<span class="op">.</span>set_ylabel<span class="op">(</span><span class="st">&quot;Y axis&quot;</span><span class="op">);</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>  plt<span class="op">.</span>plot<span class="op">(</span>x<span class="op">,</span> y<span class="op">,</span> <span class="st">&quot;x-y plot&quot;</span><span class="op">);</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>  plt<span class="op">.</span>plot<span class="op">(</span>y<span class="op">,</span> x<span class="op">,</span> <span class="st">&quot;y-x plot&quot;</span><span class="op">,</span> Gnuplot<span class="op">::</span>LineStyle<span class="op">::</span>LINESPOINTS<span class="op">);</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>  plt<span class="op">.</span>show<span class="op">();</span> <span class="co">// Create the plot and move to the next row</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>  plt<span class="op">.</span>set_xlabel<span class="op">(</span><span class="st">&quot;Value&quot;</span><span class="op">);</span></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>  plt<span class="op">.</span>set_ylabel<span class="op">(</span><span class="st">&quot;Number of counts&quot;</span><span class="op">);</span></span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>  plt<span class="op">.</span>histogram<span class="op">(</span>y<span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="st">&quot;Histogram&quot;</span><span class="op">);</span> <span class="co">// Two bins</span></span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>  plt<span class="op">.</span>set_xrange<span class="op">(-</span><span class="dv">1</span><span class="op">,</span> <span class="dv">7</span><span class="op">);</span></span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>  plt<span class="op">.</span>set_yrange<span class="op">(</span><span class="dv">0</span><span class="op">,</span> <span class="dv">5</span><span class="op">);</span></span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>  plt<span class="op">.</span>show<span class="op">();</span> <span class="co">// Finalize the figure</span></span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+</section>
+<section id="esempio-più-complesso-1" class="slide level1">
+<h1>Esempio più complesso</h1>
+<p><img data-src="images/gplot++-complex.png" style="width:50.0%" /></p>
+<p>Per esempi e documentazione, andate alla pagina <a
+href="https://github.com/ziotom78/gplotpp">github.com/ziotom78/gplotpp</a>.</p>
+</section>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/reveal.js@^4//dist/reveal.js"></script>
+
+  <!-- reveal.js plugins -->
+  <script src="https://unpkg.com/reveal.js@^4//plugin/notes/notes.js"></script>
+  <script src="https://unpkg.com/reveal.js@^4//plugin/search/search.js"></script>
+  <script src="https://unpkg.com/reveal.js@^4//plugin/zoom/zoom.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+        // Display controls in the bottom right corner
+        controls: true,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: true,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'bottom-right',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: true,
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: true,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: true,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'default',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: true,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'slide',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'fade',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+       // Parallax background image
+       parallaxBackgroundImage: './media/background.png', // e.g. "'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg'"
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1440,
+
+        height: 810,
+
+        // reveal.js plugins
+        plugins: [
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    <script src="js/asciinema-player.js"></script>
+    </body>
+</html>

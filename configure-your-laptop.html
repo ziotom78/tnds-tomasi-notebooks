@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="it-IT" xml:lang="it-IT">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc-markdown-css-theme" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Maurizio Tomasi" />
+  <title>Configurare un compilatore C++ sul proprio portatile</title>
+  <link rel="stylesheet" href="css/theme.css" />
+  <link rel="stylesheet" href="css/skylighting-solarized-theme.css" />
+  <script src="./fmtinstall.js"></script>
+</head>
+<body>
+
+<header>
+<h1 class="title">Configurare un compilatore C++ sul proprio portatile</h1>
+<blockquote class="metadata">
+<p class="author">
+      Maurizio Tomasi
+  </p>
+</blockquote>
+</header>
+
+<nav id="TOC" role="doc-toc">
+    <strong>Contents</strong><label for="contents">⊕</label>
+  <input type="checkbox" id="contents">
+  <ul>
+  <li><a href="#windows" id="toc-windows">Windows</a>
+  <ul>
+  <li><a href="#wsl" id="toc-wsl">WSL</a></li>
+  <li><a href="#virtualbox" id="toc-virtualbox">VirtualBox</a></li>
+  <li><a href="#msys2" id="toc-msys2">MSYS2</a></li>
+  <li><a href="#mobaxterm" id="toc-mobaxterm">MobaXTerm</a></li>
+  </ul></li>
+  <li><a href="#mac-os-x" id="toc-mac-os-x">Mac OS X</a></li>
+  <li><a href="#debianubuntulinux-mint" id="toc-debianubuntulinux-mint">Debian/Ubuntu/Linux Mint</a></li>
+  </ul>
+</nav>
+
+<main>
+<p>In questa pagina fornisco alcune indicazioni su come installare un compilatore C++ e un editor che permettano di sviluppare i programmi richiesti nelle ore di esercitazione.</p>
+<h1 id="windows">Windows</h1>
+<p>Non è semplice installare un compilatore C++ sotto Windows che soddisfi le richieste dell’insegnamento di TNDS. La soluzione più diffusa su Internet è quella di installare l’ambiente Microsoft Visual Studio, che ha però una serie di svantaggi:</p>
+<ul>
+<li><p>Richiede molte risorse;</p></li>
+<li><p>Non è possibile usare il comando <code>make</code> come richiesto nelle prime tre esercitazioni;</p></li>
+<li><p>Usa delle convenzioni più complicate del necessario nel modo in cui vengono strutturati i progetti (file CMake annidati).</p></li>
+</ul>
+<p>Le soluzioni che consiglio sono le seguenti:</p>
+<ol type="1">
+<li><p>Usare WSL (Windows Subsystem for Linux);</p></li>
+<li><p>Installare Virtual Box e creare una macchina virtuale Ubuntu;</p></li>
+<li><p>Installare MSYS2;</p></li>
+<li><p>Installare MobaXTerm e connettersi ai computer del laboratorio.</p></li>
+</ol>
+<h2 id="wsl">WSL</h2>
+<p>WSL è un meccanismo che consente a Windows di eseguire una macchina virtuale Linux in maniera semi-trasparente. È la scelta più usata dagli studenti, ma potrebbe non funzionare su alcuni computer per cui il BIOS non supporta la virtualizzazione. Se questo è il vostro caso, dovete tentare un’altra strada.</p>
+<p>Seguite le <a href="https://learn.microsoft.com/en-us/windows/wsl/install">istruzioni sul sito Microsoft</a>, perché i dettagli cambiano spesso.</p>
+<h2 id="virtualbox">VirtualBox</h2>
+<p>Oracle VirtualBox consente di creare una vera e propria macchina virtuale. È concettualmente analogo all’uso di WSL (vedi sopra), con lo svantaggio di essere leggermente più complicato da configurare. Però ha il grande vantaggio che l’ambiente di sviluppo (Linux + Gnome) è identico a quello dei computer del laboratorio.</p>
+<p>Se avete avuto problemi ad usare WSL, è possibile che neppure questo metodo funzioni, perché richiede un supporto per la virtualizzazione da parte del BIOS.</p>
+<p>I passaggi da seguire sono i seguenti:</p>
+<ol type="1">
+<li><p>Installate Virtual Box scaricandolo da <a href="https://www.virtualbox.org/">questo sito</a>;</p></li>
+<li><p>Scaricate il file ISO dell’ultima versione di Ubuntu da <a href="https://ubuntu.com/desktop">questo sito</a>.</p></li>
+<li><p>Create una macchina virtuale selezionando dal menu <em>Machine</em> la voce <em>New…</em>; nella finestra che compare indicate il file ISO che avete scaricato poco prima, e lasciate tutto il resto come da default.</p></li>
+<li><p>Avviate la macchina con il bottone <em>Start</em> (da menu è la voce <em>Machine</em> | <em>Start</em> | <em>Normal start</em>).</p></li>
+<li><p>Installate il sistema operativo configurandolo come preferite.</p></li>
+<li><p>Una volta che il sistema è installato e funzionante, aprite il terminale e scrivete il comando</p>
+<pre><code>sudo apt update &amp;&amp; sudo apt install build-essential</code></pre>
+<p>Questo installerà il compilatore <code>g++</code>.</p></li>
+</ol>
+<p><strong>Annotazione importante</strong>: i file che creerete nella macchina Ubuntu non saranno visibili da Windows! È possibile invece fare il viceversa, ossia far comparire una directory del sistema Windows all’interno di Ubuntu: in questo modo sarà possibile editare lo stesso file in entrambi gli ambienti. Queste directory si configurano con il bottone <em>Settings</em>, alla voce <em>Shared folders</em>.</p>
+<h2 id="msys2">MSYS2</h2>
+<p>A differenza di WSL e Virtual Box, MSYS2 non usa la virtualizzazione, e può quindi essere impiegato in tutti i tipi di portatile. MSYS2 è un sistema che installa una serie di programmi compilati nativamente per Windows, che però funzionano in maniera molto simile a Linux.</p>
+<p>Questi sono i passi da compiere per installare MSYS2 e i compilatori C++:</p>
+<ol type="1">
+<li><p>Andate sul sito <a href="https://www.msys2.org" class="uri">https://www.msys2.org</a> e scaricate il programma di installazione di MSYS2.</p></li>
+<li><p>Avviate l’installazione, accettando la directory di default <code>C:\msys64</code>.</p></li>
+<li><p>Al termine dell’installazione, avviate MSYS2. Vedrete comparire un terminale simile a quello Linux:</p>
+<p><img src="images/msys2-terminal.png" /></p>
+<p>Questo è un ambiente Windows fatto per assomigliare il più possibile a Linux.</p></li>
+<li><p>Per installare il compilatore C++ e <code>make</code>, eseguite il comando</p>
+<pre><code>pacman -S gcc make</code></pre></li>
+<li><p>Bisogna ricordare che MSYS2 usa una convenzione particolare per indicare i percorsi dei file: lettere di unità come <code>C:</code> e <code>D:</code> in Windows si traducono in <code>/c</code> e <code>/d</code> nel terminale di MSYS2, e i backslash come <code>\</code> si traducono in <code>/</code>.</p>
+<p>Quindi, se con Visual Studio avete salvato un file in <code>C:\Utenti\Pippo\prova.cpp</code>, in MSYS2 figurerà come <code>/c/Utenti/Pippo/prova.cpp</code> e il comando per compilarlo sarà quindi</p>
+<pre><code>$ cd /c/Utenti/Pippo
+$ g++ -o prova -std=c++20 -g3 prova.cpp</code></pre></li>
+<li><p>Se volete usare un editor da terminale dentro MSYS2, potete installare <a href="https://www.nano-editor.org/">GNU Nano</a>:</p>
+<pre><code>pacman -S nano nano-syntax-highlighting</code></pre></li>
+<li><p>Se volete aprire con “Esplora risorse” o con Visual Studio Code un file creato all’interno della home in MSYS2, il percorso è in <code>C:\msys64\home</code>.</p></li>
+</ol>
+<h2 id="mobaxterm">MobaXTerm</h2>
+<p>Questa soluzione è indicata se avete la garanzia di una connessione veloce. Ha il vantaggio che sfruttate i computer del laboratorio per eseguire il vostro codice e quindi avete ROOT già pronto da usare, ma lo svantaggio è che la visualizzazione di grafici e l’apertura di finestre sarà più lenta. Inoltre è complicato configurare Visual Studio Code, e vi consiglio invece di usare un programma da linea di comando come <code>nano</code> per editare il codice.</p>
+<p>Il programma è scaricabile dal sito <a href="https://mobaxterm.mobatek.net/" class="uri">https://mobaxterm.mobatek.net/</a>; tenete presente che la versione di default è a pagamento, ma è possibile scaricarne una versione ridotta gratuita che è più che sufficiente per l’insegnamento di TNDS.</p>
+<p>Una volta installata l’applicazione, create una connessione SSH al computer <code>tolab.fisica.unimi.it</code>, indicando il vostro nome utente (lo stesso della vostra email, senza <code>@studenti.unimi.it</code>) e la vostra password della posta. Avviando la connessione, verrete fatti accedere a uno dei computer del laboratorio, e potrete anche avviare comandi grafici.</p>
+<h1 id="mac-os-x">Mac OS X</h1>
+<p>Il sistema operativo Mac OS X già include il compilatore Clang, che potete invocare con <code>clang++</code>; esiste anche l’alias <code>g++</code>, che non fa altro che invocare <code>clang++</code>.</p>
+<p>Se installate <a href="https://apps.apple.com/us/app/xcode/id497799835">XCode dall’App Store</a>, avrete probabilmente a disposizione un compilatore più aggiornato e strumenti in più.</p>
+<h1 id="debianubuntulinux-mint">Debian/Ubuntu/Linux Mint</h1>
+<p>Se usate una distribuzione Linux basata su Debian (come Ubuntu), installate il compilatore C++ e il comando <code>make</code> con il comando</p>
+<pre><code>sudo apt update &amp;&amp; sudo apt install build-essential</code></pre>
+</main>
+
+<script>
+;(function() {
+  // Non-essential if user has JavaScript off. Just makes checkboxes look nicer.
+  var selector = '.task-list > li > input[type="checkbox"]';
+  var checkboxes = document.querySelectorAll(selector);
+  Array.from(checkboxes).forEach((checkbox) => {
+    var wasChecked = checkbox.checked;
+    checkbox.disabled = false;
+    checkbox.addEventListener('click', (ev) => {ev.target.checked = wasChecked});
+  });
+})();
+</script>
+</body>
+</html>

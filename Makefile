@@ -8,6 +8,7 @@ all: \
 	tomasi-lezione-08.html \
 	tomasi-lezione-06.html \
 	tomasi-lezione-05.html \
+	tomasi-lezione-04.html \
 	tomasi-lezione-03.html \
 	tomasi-lezione-02.html \
 	tomasi-lezione-01.html \
@@ -22,6 +23,8 @@ all: \
 	carminati-esercizi-02.html \
 	carminati-esercizi-01.html \
 	temi-svolti.html \
+	qt-creator.html \
+	configure-your-laptop.html \
 	index.html
 
 index.html: index.md
@@ -33,6 +36,8 @@ index.html: index.md
 		--template ./template.html5 \
 		--css css/theme.css \
 		--css css/skylighting-solarized-theme.css \
+		--css ./css/asciinema-player.css \
+		-A asciinema-include.html \
 		--wrap=none \
 		-f markdown+tex_math_single_backslash+subscript+superscript \
 		-o $@ \
@@ -52,6 +57,32 @@ carminati-esercizi-%.html: carminati-esercizi-%.md
 		-o $@ $<
 
 temi-svolti.html: temi-svolti.md
+	$(PANDOC) \
+		--katex \
+		--to html5+smart \
+		--toc \
+		--toc-depth 2 \
+		--template ./template.html5 \
+		--css css/theme.css \
+		--css css/skylighting-solarized-theme.css \
+		--wrap=none \
+		-f markdown+tex_math_single_backslash+subscript+superscript \
+		-o $@ $<
+
+configure-your-laptop.html: configure-your-laptop.md
+	$(PANDOC) \
+		--katex \
+		--to html5+smart \
+		--toc \
+		--toc-depth 2 \
+		--template ./template.html5 \
+		--css css/theme.css \
+		--css css/skylighting-solarized-theme.css \
+		--wrap=none \
+		-f markdown+tex_math_single_backslash+subscript+superscript \
+		-o $@ $<
+
+qt-creator.html: qt-creator.md
 	$(PANDOC) \
 		--katex \
 		--to html5+smart \

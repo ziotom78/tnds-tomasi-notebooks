@@ -8,6 +8,7 @@
   <title>Lezioni del corso di TNDS</title>
   <link rel="stylesheet" href="css/theme.css" />
   <link rel="stylesheet" href="css/skylighting-solarized-theme.css" />
+  <link rel="stylesheet" href="./css/asciinema-player.css" />
   <script defer="" src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js"></script>
   <script>document.addEventListener("DOMContentLoaded", function () {
  var mathElements = document.getElementsByClassName("math");
@@ -43,11 +44,13 @@
   <input type="checkbox" id="contents">
   <ul>
   <li><a href="#esercizi-e-spiegazioni" id="toc-esercizi-e-spiegazioni">Esercizi e spiegazioni</a></li>
+  <li><a href="#configure-your-laptop" id="toc-configure-your-laptop">Configurare il proprio laptop</a></li>
+  <li><a href="#uso-di-qt-creator-sui-computer-dei-laboratorio" id="toc-uso-di-qt-creator-sui-computer-dei-laboratorio">Uso di Qt Creator sui computer dei laboratorio</a></li>
   <li><a href="#temi-desame-svolti" id="toc-temi-desame-svolti">Temi d’esame svolti</a></li>
   <li><a href="#esamescritto" id="toc-esamescritto">Come prepararsi all’esame scritto</a></li>
   <li><a href="#suggerimenti-vari" id="toc-suggerimenti-vari">Suggerimenti vari</a>
   <ul>
-  <li><a href="#gcc" id="toc-gcc">Configurazione del compilatore</a></li>
+  <li><a href="#gcc" id="toc-gcc">Configurazione del compilatore sui computer del laboratorio</a></li>
   <li><a href="#rootgnuplot" id="toc-rootgnuplot">Installazione di ROOT e Gnuplot</a></li>
   <li><a href="#fmtinstall" id="toc-fmtinstall">Uso della libreria <code>fmt</code></a></li>
   <li><a href="#gplotinstall" id="toc-gplotinstall">Gplot++</a></li>
@@ -88,10 +91,14 @@
 <td><a href="carminati-esercizi-03.html">Template e <code>vector</code></a></td>
 <td><a href="tomasi-lezione-03.html">Lezione 3</a></td>
 </tr>
+<tr class="even">
+<td>15 Ottobre 2024</td>
+<td><a href="carminati-esercizi-04.html">Analisi dati</a></td>
+<td><a href="tomasi-lezione-04.html">Lezione 4</a></td>
+</tr>
 </tbody>
 </table>
 <!--
-| 17 Ottobre 2024                           | [Esercizi facoltativi](carminati-esercizi-04.html)              |                                                                     |
 | 24 Ottobre 2024                           | [Classi ed ereditarietà](carminati-esercizi-05.html)            | [Lezione 5](tomasi-lezione-05.html)                                 |
 | 31 Ottobre 2024                           | [Ricerca di zeri](carminati-esercizi-06.html)                   | [Lezione 6](tomasi-lezione-06.html)                                 |
 | 7 Novembre 2024                           | [Quadratura numerica](carminati-esercizi-07.html)               | [Notebook 7](https://ziotom78.github.io/tnds-notebooks/lezione07/)  |
@@ -105,6 +112,10 @@
 <!--
 Link al Google Form per il [seminario su C++, Python e Julia](tomasi-lezione-08.html#/seminario-su-c-python-e-julia): <https://forms.gle/ZaDv5n6PjDEaNRoT8>. [Slides](tomasi-c++-python-julia.html).
 -->
+<h1 id="configure-your-laptop">Configurare il proprio laptop</h1>
+<p>È disponibile una <a href="configure-your-laptop.html">pagina dedicata</a> che illustra come configurare il proprio laptop per poter scrivere programmi C++.</p>
+<h1 id="uso-di-qt-creator-sui-computer-dei-laboratorio">Uso di Qt Creator sui computer dei laboratorio</h1>
+<p>In questa <a href="qt-creator.html">pagina dedicata</a> si mostra come usare Qt Creator per gestire progetti C++ e fare debugging.</p>
 <h1 id="temi-desame-svolti">Temi d’esame svolti</h1>
 <p>Carminati ha pubblicato sul sito del corso una serie di temi d’esame: <a href="https://labtnds.docs.cern.ch/ProveEsame/TemiEsame/" class="uri">https://labtnds.docs.cern.ch/ProveEsame/TemiEsame/</a>. Su questo sito ho pubblicato una traccia di soluzione per ciascuno di essi, con una serie di commenti: <a href="temi-svolti.html">temi-svolti.html</a>.</p>
 <h1 id="esamescritto">Come prepararsi all’esame scritto</h1>
@@ -273,7 +284,7 @@ Link al Google Form per il [seminario su C++, Python e Julia](tomasi-lezione-08.
 <p>per sistemare le indentazioni e i rientri di tutti i file <code>*.h</code> e <code>*.cpp</code> presenti nella cartella. Questo vi farà fare un figurone! (Sarebbe stata un’ottima cosa fare lo stesso anche per gli esercizi che avete consegnato. Ma se state leggendo queste righe per la prima volta solo il giorno dello scritto, ahimè è troppo tardi…)</p></li>
 </ol>
 <h1 id="suggerimenti-vari">Suggerimenti vari</h1>
-<h2 id="gcc">Configurazione del compilatore</h2>
+<h2 id="gcc">Configurazione del compilatore sui computer del laboratorio</h2>
 <p>Per fare in modo di usare l’ultima versione disponibile del compilatore GCC, digitate questo comando:</p>
 <pre><code>/home/comune/labTNDS_programmi/enable-latest-gcc</code></pre>
 <p>Dopodiché chiudete il terminale e riapritelo. Verificate che ora il comando <code>g++</code> usi la versione 13 del compilatore:</p>
@@ -299,9 +310,7 @@ warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.</cod
 <p><strong>Importante</strong>: Il comando va dato all’interno della directory in cui codificate l’esercizio. Ciò significa che <strong>ciascuna</strong> delle directory che contiene un esercizio per cui è necessario usare <code>fmt</code> deve contenere una copia della libreria. Non preoccupatevi di sprecare spazio, perché la libreria <code>fmt</code> occupa pochi centinaia di KB.</p>
 <p>Se non avete il comando <code>curl</code> o state usando Windows, scaricate questo <a href="./fmtlib.zip">file zip</a> nella directory di ciascun esercizio in cui prevedete di usare <code>fmt</code> e decomprimetelo.</p>
 <p>Questo è un esempio che mostra come installare ed usare la libreria:</p>
-<center>
-<script id="asciicast-FolwvNAVKQTqGXQs4grz4qjFk" src="https://asciinema.org/a/FolwvNAVKQTqGXQs4grz4qjFk.js" async></script>
-</center>
+<p><asciinema-player src="asciinema/install-fmt-94x25.cast" cols="94" rows="25" font-size="medium"></asciinema-player></p>
 <h2 id="gplotinstall">Gplot++</h2>
 <p>Se avete difficoltà ad usare ROOT, potete interfacciare il vostro codice a <a href="http://www.gnuplot.info/">Gnuplot</a> mediante la libreria <a href="https://github.com/ziotom78/gplotpp">gplot++</a>: è sufficiente scaricare il file <a href="https://raw.githubusercontent.com/ziotom78/gplotpp/master/gplot%2B%2B.h"><code>gplot++.h</code></a>, oppure eseguire questo comando:</p>
 <p>
@@ -328,5 +337,6 @@ warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.</cod
   });
 })();
 </script>
+<script src="js/asciinema-player.js"></script>
 </body>
 </html>

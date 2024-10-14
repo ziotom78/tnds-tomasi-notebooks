@@ -6,8 +6,8 @@
 | 24 Settembre 2024                         | [Arrays](carminati-esercizi-01.html)                            | [Lezione 1](tomasi-lezione-01.html)                                 |
 | 1 Ottobre 2024                            | [Classe `Vettore`](carminati-esercizi-02.html)                  | [Lezione 2](tomasi-lezione-02.html)                                 |
 | 8 Ottobre 2024                            | [Template e `vector`](carminati-esercizi-03.html)               | [Lezione 3](tomasi-lezione-03.html)                                 |
+| 15 Ottobre 2024                           | [Analisi dati](carminati-esercizi-04.html)                      | [Lezione 4](tomasi-lezione-04.html)                                 |
 <!--
-| 17 Ottobre 2024                           | [Esercizi facoltativi](carminati-esercizi-04.html)              |                                                                     |
 | 24 Ottobre 2024                           | [Classi ed ereditarietà](carminati-esercizi-05.html)            | [Lezione 5](tomasi-lezione-05.html)                                 |
 | 31 Ottobre 2024                           | [Ricerca di zeri](carminati-esercizi-06.html)                   | [Lezione 6](tomasi-lezione-06.html)                                 |
 | 7 Novembre 2024                           | [Quadratura numerica](carminati-esercizi-07.html)               | [Notebook 7](https://ziotom78.github.io/tnds-notebooks/lezione07/)  |
@@ -22,6 +22,16 @@
 <!--
 Link al Google Form per il [seminario su C++, Python e Julia](tomasi-lezione-08.html#/seminario-su-c-python-e-julia): <https://forms.gle/ZaDv5n6PjDEaNRoT8>. [Slides](tomasi-c++-python-julia.html).
 -->
+
+
+# Configurare il proprio laptop {#configure-your-laptop}
+
+È disponibile una [pagina dedicata](configure-your-laptop.html) che illustra come configurare il proprio laptop per poter scrivere programmi C++.
+
+
+# Uso di Qt Creator sui computer dei laboratorio
+
+In questa [pagina dedicata](qt-creator.html) si mostra come usare Qt Creator per gestire progetti C++ e fare debugging.
 
 
 # Temi d'esame svolti
@@ -246,7 +256,7 @@ Di seguito un piccolo vademecum per aiutarvi a svolgere nel migliore dei modi l'
 # Suggerimenti vari
 
 
-## Configurazione del compilatore {#gcc}
+## Configurazione del compilatore sui computer del laboratorio {#gcc}
 
 Per fare in modo di usare l'ultima versione disponibile del compilatore GCC, digitate questo comando:
 
@@ -291,9 +301,8 @@ Se non avete il comando `curl` o state usando Windows, scaricate questo [file zi
 
 Questo è un esempio che mostra come installare ed usare la libreria:
 
-<center>
-  <script id="asciicast-FolwvNAVKQTqGXQs4grz4qjFk" src="https://asciinema.org/a/FolwvNAVKQTqGXQs4grz4qjFk.js" async></script>
-</center>
+<asciinema-player src="asciinema/install-fmt-94x25.cast" cols="94" rows="25" font-size="medium"></asciinema-player>
+
 
 ## Gplot++ {#gplotinstall}
 
