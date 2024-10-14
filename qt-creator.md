@@ -239,6 +239,10 @@ Basta copiare il file `gplot++.h` nella cartella del progetto. Non è necessario
 
 # E i Makefile?
 
+Qt Creator **non** usa il programma `make`; di default usa [Ninja](https://ninja-build.org/), che è una versione più moderna di `make` (soprattutto, è molto più efficiente!).
+
+Se l'eseguibile `ninja` non è presente, Qt Creator dovrebbe essere in grado di appoggiarsi a `make`.
+
 
 ---
 title: Usare Qt Creator

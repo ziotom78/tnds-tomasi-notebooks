@@ -13,6 +13,25 @@
 -   [Esercizio 4.2](carminati-esercizi-04.html#4.2): Misura della carica $e$ dell'elettrone;
 -   [Esercizio 4.3](carminati-esercizi-04.html#4.3): Determinazione del cammino minimo.
 
+# Compilatori C++
+
+# Compilatori C++
+
+-   Ho aggiunto una [pagina](configure-your-laptop.html) in cui ho raccolto un po' di informazioni su come installare compilatori C++
+
+-   Le istruzioni per Windows sono le più estese
+
+-   Segnalatemi cosa non funziona, in modo che possa correggerlo
+
+# Qt Creator
+
+# Qt Creator
+
+-   Mostro oggi come usare Qt Creator sui computer del laboratorio per creare e gestire progetti C++
+
+-   Non è obbligatorio usarlo, anche perché non usa i `Makefile`: se dovete fare ancora pratica con essi, è meglio che continuiate ad usare Visual Studio Code!
+
+-   Quanto mostro ora è riassunto in una [pagina dedicata](qt-creator.html)
 
 # Formattazione di numeri
 

@@ -182,6 +182,8 @@ target_link_libraries(main ${ROOT_LIBRARIES})</code></pre>
 <h1 id="usare-gplot-con-qt-creator">Usare gplot++ con Qt Creator</h1>
 <p>Basta copiare il file <code>gplot++.h</code> nella cartella del progetto. Non è necessario aggiornare <code>CMakeLists.txt</code>, perché la libreria consiste solo del file header.</p>
 <h1 id="e-i-makefile">E i Makefile?</h1>
+<p>Qt Creator <strong>non</strong> usa il programma <code>make</code>; di default usa <a href="https://ninja-build.org/">Ninja</a>, che è una versione più moderna di <code>make</code> (soprattutto, è molto più efficiente!).</p>
+<p>Se l’eseguibile <code>ninja</code> non è presente, Qt Creator dovrebbe essere in grado di appoggiarsi a <code>make</code>.</p>
 </main>
 
 <script>
