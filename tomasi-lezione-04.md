@@ -13,25 +13,48 @@
 -   [Esercizio 4.2](carminati-esercizi-04.html#4.2): Misura della carica $e$ dell'elettrone;
 -   [Esercizio 4.3](carminati-esercizi-04.html#4.3): Determinazione del cammino minimo.
 
-# Compilatori C++
+
+# Esercizio 4.0
+
+# Statistiche con *stride*
+
+-   L'esercizio richiede di calcolare la media e la deviazione standard usando una *stride*, ossia considerando solo un elemento ogni $N$ nel vettore.
+
+-   È un metodo molto usato nelle serie temporali, dove valori consecutivi hanno una correlazione significativa che invaliderebbe l'uso della media e della deviazione standard *tout court*.
+
+
+# Statistiche con *stride*
+
+-   Il mio testo dell'[Esercizio 4.0](carminati-esercizi-04.html#4.0) contiene alcune indicazioni in più;
+
+-   In particolare, contiene il codice per verificare la correttezza delle nuove funzioni statistiche:
+
+    ```c++
+    void test_statistics_with_stride() {
+      vector<double> v{1.0, 2.0, 3.0, 4.0, 5.0, 6.0};
+      assert(are_close(mean(v, 1), 3.5));
+      assert(are_close(mean(v, 2), 3.0));
+      assert(are_close(mean(v, 3), 2.5));
+
+      assert(are_close(stddev(v, 1), 1.707825127659933));
+      assert(are_close(stddev(v, 2), 1.632993161855452));
+      assert(are_close(stddev(v, 3), 1.5));
+
+      cerr << "All the tests have passed. Hurrah! 🥳\n";
+    }
+    ```
 
 # Compilatori C++
 
--   Ho aggiunto una [pagina](configure-your-laptop.html) in cui ho raccolto un po' di informazioni su come installare compilatori C++
+# Compilatori C++
 
--   Le istruzioni per Windows sono le più estese
+-   Ho aggiunto una [pagina](configure-your-laptop.html) in cui ho raccolto un po' di informazioni su come installare compilatori C++.
 
--   Segnalatemi cosa non funziona, in modo che possa correggerlo
+-   Le istruzioni per Windows sono le più estese, ed elencano ben quattro modalità diverse per compilare programmi C++ sotto Windows.
 
-# Qt Creator
+-   Ci sono istruzioni (scarne) anche per Linux e Mac OS X.
 
-# Qt Creator
-
--   Mostro oggi come usare Qt Creator sui computer del laboratorio per creare e gestire progetti C++
-
--   Non è obbligatorio usarlo, anche perché non usa i `Makefile`: se dovete fare ancora pratica con essi, è meglio che continuiate ad usare Visual Studio Code!
-
--   Quanto mostro ora è riassunto in una [pagina dedicata](qt-creator.html)
+-   Segnalatemi cosa non funziona, in modo che possa correggerlo.
 
 # Formattazione di numeri
 
@@ -137,7 +160,11 @@
 
     2. Il file da includere è diverso.
 
--   Se usate `#include "fmtlib.h"`, vi basterà usare sempre il namespace `fmt::`.
+-   Se usate `#include "fmtlib.h"`, vi basterà usare sempre il namespace `fmt::`. Scrivete quindi `fmt::print`, `fmt::println` e `fmt::format`:
+
+    ```c++
+    fmt::println("The result is {:.3f} ± {:.3f}\n", mean, stddev);
+    ```
 
 
 # Creazione di grafici
@@ -263,6 +290,17 @@ int main(void) {
 ![](images/gplot++-complex.png){width=50%}
 
 Per esempi e documentazione, andate alla pagina [github.com/ziotom78/gplotpp](https://github.com/ziotom78/gplotpp).
+
+
+# Qt Creator
+
+# Qt Creator
+
+-   Mostro oggi come usare Qt Creator sui computer del laboratorio per creare e gestire progetti C++
+
+-   Non è obbligatorio usarlo, anche perché non usa i `Makefile`: se dovete fare ancora pratica con essi, è meglio che continuiate ad usare Visual Studio Code!
+
+-   Quanto mostro ora è riassunto in una [pagina dedicata](qt-creator.html)
 
 
 ---

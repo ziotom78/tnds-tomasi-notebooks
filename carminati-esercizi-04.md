@@ -15,7 +15,10 @@ In questa lezione tireremo le somme del lavoro svolto in tutte le sessioni prece
 
 Potete scaricare i file di dati usando questo link: [TemperatureMilano.tar.gz](https://labtnds.docs.cern.ch/Lezione4/TemperatureMilano.tar.gz).
 
-Per svolgere questo esercizio (e tutti i successivi) potete chiaramente utilizzare lo strumento di rappresentazione grafica che preferite (GNUPLOT o Matplotlib).
+Per svolgere questo esercizio (e tutti i successivi) potete chiaramente utilizzare lo strumento di rappresentazione grafica che preferite (GNUPLOT o Matplotlib). In particolare, potete dare un'occhiata al contenuto di ciascun file `.txt` all'interno dell'archivio `TemperatureMilano.tar.gz` con il comando `plot "NOMEFILE"` eseguito dalla linea di comando di `gnuplot`:
+
+![](images/gnuplot-exercise40.png)
+
 
 ## Quale errore associare ai Δ?
 

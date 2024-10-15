@@ -78,7 +78,8 @@
 <li><p>A fine ciclo disegnamo il grafico.</p></li>
 </ul>
 <p>Potete scaricare i file di dati usando questo link: <a href="https://labtnds.docs.cern.ch/Lezione4/TemperatureMilano.tar.gz">TemperatureMilano.tar.gz</a>.</p>
-<p>Per svolgere questo esercizio (e tutti i successivi) potete chiaramente utilizzare lo strumento di rappresentazione grafica che preferite (GNUPLOT o Matplotlib).</p>
+<p>Per svolgere questo esercizio (e tutti i successivi) potete chiaramente utilizzare lo strumento di rappresentazione grafica che preferite (GNUPLOT o Matplotlib). In particolare, potete dare un’occhiata al contenuto di ciascun file <code>.txt</code> all’interno dell’archivio <code>TemperatureMilano.tar.gz</code> con il comando <code>plot "NOMEFILE"</code> eseguito dalla linea di comando di <code>gnuplot</code>:</p>
+<p><img src="images/gnuplot-exercise40.png" /></p>
 <h2 id="quale-errore-associare-ai-δ">Quale errore associare ai Δ?</h2>
 <p>In linea di principio lo stimatore corretto sarebbe la deviazione standard dalla media. In questo caso la stima è più complicata, perché i valori di Δ giornalieri non sono scorrelati tra loro. Per ridurre l’impatto della correlazione e quindi utilizzare uno stimatore dell’errore più corretto, potremmo limitarci ad utilizzare una misura ogni 7 giorni: ci aspettiamo infatti che una misura sia solo debolmente correlata a quello che è successo 7 giorni prima.</p>
 <p>Questa è una tecnica molto usata; il valore <code>7</code> è detto <em>stride</em>, e ricorre molto spesso nelle librerie numeriche (vedi ad esempio il medesimo concetto nella libreria Python <a href="https://numpy.org/doc/2.0/reference/generated/numpy.ndarray.strides.html">NumPy</a>).</p>
