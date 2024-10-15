@@ -13,11 +13,105 @@ In questa lezione tireremo le somme del lavoro svolto in tutte le sessioni prece
 
 -   A fine ciclo disegnamo il grafico.
 
-Potete scaricare i file di dati usando questo [link](https://labtnds.docs.cern.ch/Lezione4/TemperatureMilano.tar.gz).
+Potete scaricare i file di dati usando questo link: [TemperatureMilano.tar.gz](https://labtnds.docs.cern.ch/Lezione4/TemperatureMilano.tar.gz).
 
 Per svolgere questo esercizio (e tutti i successivi) potete chiaramente utilizzare lo strumento di rappresentazione grafica che preferite (GNUPLOT o Matplotlib).
 
+## Quale errore associare ai Δ?
+
+In linea di principio lo stimatore corretto sarebbe la deviazione standard dalla media. In questo caso la stima è più complicata, perché i valori di Δ giornalieri non sono scorrelati tra loro. Per ridurre l'impatto della correlazione e quindi utilizzare uno stimatore dell'errore più corretto, potremmo limitarci ad utilizzare una misura ogni 7 giorni: ci aspettiamo infatti che una misura sia solo debolmente correlata a quello che è successo 7 giorni prima.
+
+Questa è una tecnica molto usata; il valore `7` è detto *stride*, e ricorre molto spesso nelle librerie numeriche (vedi ad esempio il medesimo concetto nella libreria Python [NumPy](https://numpy.org/doc/2.0/reference/generated/numpy.ndarray.strides.html)).
+
+Potreste implementare media e deviazione standard in questo modo:
+
+```c++
+// Set the default stride to 1 so that if you avoid passing the
+// second parameter, the usual definition of “mean” will be used
+double mean(const vector<double> & v, int stride = 1) {
+  double accum{};
+  int n{};
+  for(int k{}; k < ssize(v); k += stride, n++) {  // Note we increment both k and n!
+    accum += v.at(k);
+  }
+
+  return accum / n;
+}
+```
+
+Ovviamente dovete tenere conto del numero effettivo di campioni che sommate in `accum`: la riga finale deve essere `accum / n`, non certo `accum / ssize(v)`! Il codice per la deviazione standard si calcola allo stesso modo.
+
+**Attenzione:** non è corretto calcolare la media su *tutti* i campioni e la deviazione standard prendendone uno ogni sette, perché i due numeri farebbero riferimento a distribuzioni diverse!
+
+Vi fornisco il codice per i test:
+
+```c++
+void test_statistics_with_stride() {
+  vector<double> v{1.0, 2.0, 3.0, 4.0, 5.0, 6.0};
+  assert(are_close(mean(v, 1), 3.5));
+  assert(are_close(mean(v, 2), 3.0));
+  assert(are_close(mean(v, 3), 2.5));
+
+  assert(are_close(stddev(v, 1), 1.707825127659933));
+  assert(are_close(stddev(v, 2), 1.632993161855452));
+  assert(are_close(stddev(v, 3), 1.5));
+
+  cerr << "All the tests have passed. Hurrah! 🥳\n";
+}
+```
+
+## Esempio di codice con GnuPlot
+
+Ecco come si potrebbe implementare il `main()` usando la libreria [gplot++](index.html#gplotinstall); il programma salva il grafico nel file `plot.png`:
+
+```c++
+int main() {
+  test_statistics_with_stride();
+
+  const int stride{7};
+  Gnuplot plt{};
+  plt.redirect_to_png("plot.png");
+
+  // loop principale su tutti i files (anni) da analizzare
+
+  for (int year{1941}, index{}; year < 2024; year++, index++) {
+    string filename{format("temperature_data/{}.txt", year)};
+
+    vector v{Read<double>(filename.c_str())};
+
+    double ave{mean(v, stride)};
+    double err{stddev(v, stride)};
+
+    cout << format("Anno {} Δ medio = {:.3f} ± {:.3f}\n", year, ave, err);
+
+    // inserisco media e deviazione standard dalla media nel grafico
+    plt.add_point_yerr(year, ave, err);
+  }
+
+  plt.plot_yerr();
+  plt.show();
+}
+```
+
+L'output atteso inizia così:
+
+```
+All the tests have passed. Hurrah! 🥳
+Anno 1941 Δ medio = -1.100 ± 2.207
+Anno 1942 Δ medio = -0.033 ± 2.951
+Anno 1943 Δ medio = +0.909 ± 2.322
+Anno 1944 Δ medio = -0.334 ± 2.305
+…
+```
+
+Questo è il grafico atteso:
+
+![](images/esercizio04.0.png)
+
+
 ## Esempio di codice con ROOT
+
+Ecco invece come realizzare il `main()` nel caso in cui vogliate usare ROOT:
 
 ```c++
 // put here all required includes
@@ -25,6 +119,7 @@ Per svolgere questo esercizio (e tutti i successivi) potete chiaramente utilizza
 using namespace std;
 
 int main() {
+  test_statistics_with_stride();
 
   TApplication app{"app", 0, 0};
 
@@ -33,19 +128,20 @@ int main() {
 
   // …
 
-  int index{};
-
   // loop principale su tutti i files (anni) da analizzare
 
-  for (int i{1941}; i < 2024; i++) {
-    string filename{format("{}.txt", i)};
+  // Note that in `for` loops you can use more than one variable.
+  // Here we use `year` to denote the full year, while `index`
+  // starts from zero and is used because ROOT requires it.
+  for (int year{1941}, index{}; year < 2024; year++, index++) {
+    string filename{format("temperature_data/{}.txt", i)};
 
     vector v{Read<double>(filename.c_str()};
 
     // qui fate i vostri calcoli
     // …
 
-    cout << format("Anno {}  Δ medio = {} ± {}\n", i, ave, err);
+    cout << format("Anno {} Δ medio = {:+.3f} ± {:.3f}\n", i, ave, err);
 
     // inserisco media e deviazione standard dalla media nel grafico
 
@@ -77,10 +173,6 @@ int main() {
   app.Run();
 }
 ```
-
-## Quale errore associare ai Δ?
-
-In linea di principio lo stimatore corretto sarebbe la deviazione standard dalla media. In questo caso la stima è più complicata, perché i valori di Δ giornalieri non sono scorrelati tra loro. Per ridurre l'impatto della correlazione e quindi utilizzare uno stimatore dell'errore più corretto, potremmo limitarci ad utilizzare una misura ogni 7 giorni: ci aspettiamo infatti che una misura sia solo debolmente correlata a quello che è successo 7 giorni prima.
 
 
 # Esercizio 4.1 — Misura del rapporto $q/m$ per l'elettrone (analisi dati)  {#esercizio-4.1}
