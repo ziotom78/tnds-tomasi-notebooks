@@ -479,13 +479,16 @@
 <h2 id="makefile-modificato">Makefile modificato</h2>
 <p>Ecco come dobbiamo modificare il <code>Makefile</code> per compilare includendo oggetti di ROOT:</p>
 <div class="sourceCode" id="cb16"><pre class="sourceCode makefile"><code class="sourceCode makefile"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="dt">LIBS</span> <span class="ch">:=</span><span class="st"> `root-config --libs`</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="dt">CXXFLAGS</span> <span class="ch">:=</span><span class="st"> -g3 -Wall --pedantic -std=c++23 `root-config --cflags`</span></span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="dv">esercizio3.2:</span><span class="dt"> esercizio3.2.cpp funzioni.h</span></span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="er">    </span>g++ -o esercizio3.2 esercizio3.2.cpp <span class="ch">${</span><span class="dt">CXXFLAGS</span><span class="ch">}</span> <span class="ch">${</span><span class="dt">LIBS</span><span class="ch">}</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Warning: it is EXTREMELY IMPORTANT that you follow this order:</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="co"># root-config sets its own -std=c++NN, and thus `-std=c++23` must</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="co"># be the last item in the line!</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="dt">CXXFLAGS</span> <span class="ch">:=</span><span class="st"> `root-config --cflags` -g3 -Wall --pedantic -std=c++23</span></span>
 <span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="dv">clean:</span></span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="er">    </span>rm -f esercizio3.2</span></code></pre></div>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="dv">esercizio3.2:</span><span class="dt"> esercizio3.2.cpp funzioni.h</span></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="er">    </span>g++ -o esercizio3.2 esercizio3.2.cpp <span class="ch">${</span><span class="dt">CXXFLAGS</span><span class="ch">}</span> <span class="ch">${</span><span class="dt">LIBS</span><span class="ch">}</span></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a><span class="dv">clean:</span></span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a><span class="er">    </span>rm -f esercizio3.2</span></code></pre></div>
 <p>Notate l’utilizzo dei comandi <code>root-config --libs</code> e <code>root-config --cflags</code>, che restituiscono rispettivamente il path per raggiungere le librerie di ROOT e il gli header files, come potete provare anche dalla linea di comando:</p>
 <pre><code>$ root-config --cflags
 -pthread -std=c++23 -m64 -I/usr/include/root

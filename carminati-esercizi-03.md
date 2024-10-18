@@ -527,7 +527,10 @@ Ecco come dobbiamo modificare il `Makefile` per compilare includendo oggetti di 
 
 ```makefile
 LIBS := `root-config --libs`
-CXXFLAGS := -g3 -Wall --pedantic -std=c++23 `root-config --cflags`
+# Warning: it is EXTREMELY IMPORTANT that you follow this order:
+# root-config sets its own -std=c++NN, and thus `-std=c++23` must
+# be the last item in the line!
+CXXFLAGS := `root-config --cflags` -g3 -Wall --pedantic -std=c++23
 
 esercizio3.2: esercizio3.2.cpp funzioni.h
     g++ -o esercizio3.2 esercizio3.2.cpp ${CXXFLAGS} ${LIBS}
