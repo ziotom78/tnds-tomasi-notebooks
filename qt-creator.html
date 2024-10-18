@@ -41,6 +41,7 @@
     <strong>Contents</strong><label for="contents">⊕</label>
   <input type="checkbox" id="contents">
   <ul>
+  <li><a href="#configurare-qt-creator" id="toc-configurare-qt-creator">Configurare Qt Creator</a></li>
   <li><a href="#come-usare-qt-creator" id="toc-come-usare-qt-creator">Come usare Qt Creator</a></li>
   <li><a href="#compilare-ed-eseguire-il-programma" id="toc-compilare-ed-eseguire-il-programma">Compilare ed eseguire il programma</a></li>
   <li><a href="#aggiungere-altri-file-al-progetto" id="toc-aggiungere-altri-file-al-progetto">Aggiungere altri file al progetto</a></li>
@@ -64,6 +65,18 @@
 <li><p>Una finestra di terminale da cui eseguire i propri programmi.</p></li>
 </ul>
 <p>Il nome IDE deriva proprio dal rendere tutte queste potenzialità disponibili nel medesimo ambiente.</p>
+<h1 id="configurare-qt-creator">Configurare Qt Creator</h1>
+<p>Di default, la versione di Qt Creator sui computer del laboratorio usa un compilatore che non è compatibile con i nostri programmi. Prima di usarlo occorre quindi configurare i compilatori.</p>
+<p>Avviate Qt Creator e dal menu <em>Edit</em> in alto a destra selezionate la voce <em>Preferences…</em>.</p>
+<p>Tra le voci nella lista a sinistra, scegliete <em>Kits</em>:</p>
+<p><img src="images/qtcreator-settings.png" /></p>
+<p>Selezionate dalla lista centrale la voce che è scritta in corsivo e riporta in coda “<em>(default)</em>”; nell’immagine sotto è <em>Desktop (default)</em>. Quando fate click con il mouse, dovrebbero comparire una serie di controlli in basso: <em>Name</em>, <em>File system name</em>, <em>Run device type</em>, etc.</p>
+<p><img src="images/qtcreator-settings-default.png" /></p>
+<p>Scorrete verso il basso e controllate cosa viene riportato alla voce <em>Compiler</em>. Se compare <em>Clang</em> per il compilatore C++, questo è <strong>sbagliato</strong>:</p>
+<p><img src="images/qtcreator-settings-wrong.png" /></p>
+<p>Scegliete il compilatore GCC (opzionalmente, fatelo non solo per il C++ ma anche per il C), poi scegliete il bottone <em>Apply</em> e quindi <em>Ok</em>:</p>
+<p><img src="images/qtcreator-settings-ok.png" /></p>
+<p>Ora Qt Creator dovrebbe essere configurato correttamente.</p>
 <h1 id="come-usare-qt-creator">Come usare Qt Creator</h1>
 <p>Di default, Qt Creator crea un progetto che usa le librerie Qt, il prodotto più famoso dell’azienda Trolltech. (Potete vederla come una libreria analoga a ROOT per dimensioni e complessità, che consente di sviluppare applicazioni grafiche per desktop e per dispositivi mobili come smartphone e tablet).</p>
 <p>A noi <strong>non</strong> interessa però sviluppare con le librerie Qt, e avremo bisogno di impostazioni diverse da quelle di default, quindi per creare un nuovo progetto seguite queste istruzioni:</p>

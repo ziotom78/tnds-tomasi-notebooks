@@ -15,6 +15,31 @@ Qt Creator è un'Integrated Development Environment (IDE) per il C++, sviluppato
 Il nome IDE deriva proprio dal rendere tutte queste potenzialità disponibili nel medesimo ambiente.
 
 
+# Configurare Qt Creator
+
+Di default, la versione di Qt Creator sui computer del laboratorio usa un compilatore che non è compatibile con i nostri programmi. Prima di usarlo occorre quindi configurare i compilatori.
+
+Avviate Qt Creator e dal menu *Edit* in alto a destra selezionate la voce *Preferences…*.
+
+Tra le voci nella lista a sinistra, scegliete *Kits*:
+
+![](images/qtcreator-settings.png)
+
+Selezionate dalla lista centrale la voce che è scritta in corsivo e riporta in coda “*(default)*”; nell'immagine sotto è *Desktop (default)*. Quando fate click con il mouse, dovrebbero comparire una serie di controlli in basso: *Name*, *File system name*, *Run device type*, etc.
+
+![](images/qtcreator-settings-default.png)
+
+Scorrete verso il basso e controllate cosa viene riportato alla voce *Compiler*. Se compare *Clang* per il compilatore C++, questo è **sbagliato**:
+
+![](images/qtcreator-settings-wrong.png)
+
+Scegliete il compilatore GCC (opzionalmente, fatelo non solo per il C++ ma anche per il C), poi scegliete il bottone *Apply* e quindi *Ok*:
+
+![](images/qtcreator-settings-ok.png)
+
+Ora Qt Creator dovrebbe essere configurato correttamente.
+
+
 # Come usare Qt Creator
 
 Di default, Qt Creator crea un progetto che usa le librerie Qt, il prodotto più famoso dell'azienda Trolltech. (Potete vederla come una libreria analoga a ROOT per dimensioni e complessità, che consente di sviluppare applicazioni grafiche per desktop e per dispositivi mobili come smartphone e tablet).
