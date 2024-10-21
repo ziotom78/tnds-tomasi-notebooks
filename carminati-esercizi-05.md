@@ -158,7 +158,7 @@ Coordinate sferiche: 5.477225575051661, 1.1071487177940904, 0.420534335283965
 
 ## Incapsulamento e *data hiding*
 
-Proviamo ad utilizzare l'esempio della classe `Posizione` per riflettere sul concetto di *incapsulamento*. La nostra classe “nasconde” i dati principali (le tre coordinate nel caso specifico) in un set di data-membri privati (`m_x`, `m_y`, `m_z`). Tali data-membri non sono per definizione accessibili al programma principale in modo diretto, ma solo attraverso una serie di metodi pubblici (interfacce) che proteggono il dato da un utilizzo incontrollato. Inoltre la protezione del dato dietro interfacce pubbliche mette al riparo da possibili cambiamenti o correzioni nel design di una classe.
+Utilizziamo l'esempio della classe `Posizione` per riflettere sul concetto di *incapsulamento*. La nostra classe “nasconde” i dati principali (le tre coordinate nel caso specifico) in un set di data-membri privati (`m_x`, `m_y`, `m_z`). Tali data-membri non sono per definizione accessibili al programma principale in modo diretto, ma solo attraverso una serie di metodi pubblici (interfacce) che proteggono il dato da un utilizzo incontrollato. Inoltre la protezione del dato dietro interfacce pubbliche mette al riparo da possibili cambiamenti o correzioni nel design di una classe.
 
 Per fare un esempio, supponiamo che per qualche ragione l'autore della classe decida che è meglio rappresentare la posizione utilizzando una terna di numeri che corrispondono alle coordinate sferiche. Se l'autore della classe adegua di conseguenza le interfacce pubbliche, un eventuale utilizzatore della classe (il nostro `main`) non si accorgerebbe della variazione. Se invece il `main`` avesse avuto libero accesso alle tre coordinate e le avesse utilizzate direttamente, il cambiamento di design della classe avrebbe richiesto rendendo pesanti cambiamenti anche nel `main``.
 
@@ -184,14 +184,14 @@ Incominciamo a definire due classi che ci permetteranno di rappresentare le sorg
 
     #.  Un metodo per stampare tali valori.
 
--   Siccome vogliamo che questa classe sia la classe base di altre classi, dichiareremo i data membri come `protected``.
+-   Siccome vogliamo che questa classe sia la classe base di altre classi, dichiareremo i data membri come `protected`.
 
 -   Costruiamo, attraverso il meccanismo di ereditarietà, una classe derivata `Elettrone` che, essendo una `Particella` di massa e carica note (i cui valori sono riportati su [wikipedia](http://it.wikipedia.org/wiki/Elettrone)), ha il solo costruttore di default, che inizializza correttamente i data membri. Modifichiamo il metodo di stampa in modo che indichi che si tratta di un elettrone.
 
 Verifichiamo che le nuovi classi e l'ereditarietà funzioni correttamente:
 
 #.  Istanziamo dinamicamente un oggetto per ogni classe.
-#.  Verifichiamo che su tutti questi operano i metodi accessori di massa e carica di `Particella`, ma il metodo di stampa delle classi derivate.
+#.  Verifichiamo che su tutti questi operino i metodi accessori di massa e carica di `Particella`, ma il metodo di stampa delle classi derivate.
 
 
 ## Classe `Particella`
