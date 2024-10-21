@@ -142,7 +142,7 @@ Prova::Prova() : a{1} { // Initializer: use ":" *before* the {
 
 -   I due metodi non sono equivalenti!
 
--   Costruiamo una classe `DaylightPeriod` che contiene al suo interno due variabili, `a` e `b`, dello stesso tipo `Object` ma inizializzate in modo diverso:
+-   Costruiamo una classe `DaylightPeriod` che contiene al suo interno due variabili dello stesso tipo `Time`, ma inizializzate in modo diverso:
 
     ```c++
     class DaylightPeriod {
@@ -180,7 +180,7 @@ accade nel costruttore:
 
 ```c++
 int main(void) {
-  DaylightPeriod c;
+  DaylightPeriod c{};
   return 0;
 }
 ```
