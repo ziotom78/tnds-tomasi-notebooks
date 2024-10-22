@@ -123,7 +123,7 @@ using namespace std;
 int main(int argc, char *argv[]) {
   // Controlla gli argomenti
   if (argc != 4) {
-    fmt::print(stderr, "Usage: {} X Y Z\n", argv[0]);
+    fmt::println(stderr, "Usage: {} X Y Z", argv[0]);
     return -1;
   }
 
@@ -136,12 +136,12 @@ int main(int argc, char *argv[]) {
   Posizione P{x, y, z};
 
   // Invece di `cout`, usiamo fmtlib: molto più comodo!
-  fmt::print("Coordinate cartesiane: {}, {}, {}\n",
-             P.getX(), P.getY(), P.getZ());
-  fmt::print("Coordinate cilindriche: {}, {}, {}\n",
-             P.getRho(), P.getPhi(), P.getZ());
-  fmt::print("Coordinate sferiche: {}, {}, {}\n",
-             P.getR(), P.getPhi(), P.getTheta());
+  fmt::println("Coordinate cartesiane: {}, {}, {}",
+               P.getX(), P.getY(), P.getZ());
+  fmt::print("Coordinate cilindriche: {}, {}, {}",
+               P.getRho(), P.getPhi(), P.getZ());
+  fmt::println("Coordinate sferiche: {}, {}, {}",
+               P.getR(), P.getPhi(), P.getTheta());
 
   return 0;
 }
@@ -237,7 +237,7 @@ Particella::Particella(double massa, double carica)
   : m_massa{massa}, m_carica{carica} {}
 
 void Particella::Print() const {
-  fmt::print("Particella: m = {}, q = {}\n", m_massa, m_carica);
+  fmt::println("Particella: m = {}, q = {}", m_massa, m_carica);
 }
 ```
 
@@ -268,7 +268,7 @@ public:
   ~Elettrone() {}
 
   void Print() const {
-      fmt::print("Elettrone: m = {}, q = {}\n", m_massa, m_carica);
+      fmt::println("Elettrone: m = {}, q = {}", m_massa, m_carica);
   }
 };
 ```
@@ -291,15 +291,15 @@ int main() {
   Elettrone *e{new Elettrone{}};
 
   // Metodi della classe base. Notare che qui la sintassi è `a.NOMEMETODO(…)`
-  fmt::print("Particella con massa {} kg e carica {} C\n", a.GetMassa(),
-             a.GetCarica());
+  fmt::println("Particella con massa {} kg e carica {} C", a.GetMassa(),
+               a.GetCarica());
   a.Print();
 
   // Metodi della classe derivata. Qui invece la sintassi è
   // `e->NOMEMETODO(…)` e non `e.NOMEMETODO(…)`,
   // perché `e` è un puntatore
-  fmt::print("Elettrone con massa {} kg e carica {} C\n", e->GetMassa(),
-             e->GetCarica());
+  fmt::println("Elettrone con massa {} kg e carica {} C", e->GetMassa(),
+               e->GetCarica());
   e->Print();
 
   Particella b{a};  // costruisco una Particella a partire da una Particella
@@ -376,8 +376,8 @@ CampoVettoriale CampoVettoriale::operator+(const CampoVettoriale & v) const {
       // scrivere (se non si specifica, usa stdout, che è analogo a std::cout).
       // Siccome questo è un messaggio di errore, usiamo stderr, analogo a
       // std::cerr
-      fmt::print(stderr,
-                 "Somma di campi vettoriali in punti diversi non ammessa\n");
+      fmt::println(stderr,
+                   "Somma di campi vettoriali in punti diversi non ammessa");
       exit(1);
   }
 
@@ -478,7 +478,7 @@ const double d{1.E-10};
 
 int main(int argc, char * argv[]) {
   if (argc != 4) {
-      fmt::print(stderr, "Usage: {} <x> <y> <z>\n", argv[0]);
+      fmt::println(stderr, "Usage: {} <x> <y> <z>", argv[0]);
       exit(1);
   }
 
@@ -491,7 +491,7 @@ int main(int argc, char * argv[]) {
   PuntoMateriale protone  {mp,  e, 0, 0, -d / 2};
 
   CampoVettoriale E{elettrone.CampoElettrico(r) + protone.CampoElettrico(r)};
-  fmt::print("E = ({}, {}, {}) N/C\n", E.getFx(), E.getFy(), E.getFz());
+  fmt::println("E = ({}, {}, {}) N/C", E.getFx(), E.getFy(), E.getFz());
 
   return 0;
 }
@@ -631,7 +631,7 @@ int main() {
     E_vec.push_back(e_field);
 
     // Stampa anche a video: è sempre bene farlo per controllare i numeri!
-    fmt::print("{:.5e} {:.5e}\n", dist, e_field);
+    fmt::println("{:.5e} {:.5e}", dist, e_field);
   }
 
   Gnuplot plt{};
