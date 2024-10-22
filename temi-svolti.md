@@ -1465,7 +1465,7 @@ fmt::println("End position: {:.4f} m", end_position_h);
 // We don't ask `estimate_end_position` to save a plot here
 double end_position_h2{estimate_end_position(0.0, h / 2, 2 * N)};
 double error_h{16. / 15 * abs(end_position_h - end_position_h2)};
-fmt::print("Error on the end position (h = {} s): {:.2e} m\n, h, error_h);
+fmt::println("Error on the end position (h = {} s): {:.2e} m", h, error_h);
 ```
 
 L'output del programma è il seguente:
@@ -1570,8 +1570,8 @@ RandomGen rnd{1};
 
 double mc_error{estimate_stddev_from_mc(rnd, 3e-3, new_h, new_N, true)};
 
-fmt::print("Error on the end position estimated from MC: {:.2f} mm\n",
-           mc_error * 1e3);
+fmt::println("Error on the end position estimated from MC: {:.2f} mm",
+             mc_error * 1e3);
 ```
 
 Questo è l'output:
@@ -1799,8 +1799,8 @@ while (true) {
       break;
     } else {
       // This is useful for debugging
-      fmt::print("Got a full loop (#{}) at t = {} with x = {}\n",
-                 loop_counter, t, cur_y);
+      fmt::println("Got a full loop (#{}) at t = {} with x = {}",
+                   loop_counter, t, cur_y);
     }
   }
 }

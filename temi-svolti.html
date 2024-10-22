@@ -1134,7 +1134,7 @@ A plot has been saved in file point1.png</code></pre>
 <span id="cb72-5"><a href="#cb72-5" aria-hidden="true" tabindex="-1"></a><span class="co">// We don&#39;t ask `estimate_end_position` to save a plot here</span></span>
 <span id="cb72-6"><a href="#cb72-6" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> end_position_h2<span class="op">{</span>estimate_end_position<span class="op">(</span><span class="fl">0.0</span><span class="op">,</span> h <span class="op">/</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">2</span> <span class="op">*</span> N<span class="op">)};</span></span>
 <span id="cb72-7"><a href="#cb72-7" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> error_h<span class="op">{</span><span class="fl">16.</span> <span class="op">/</span> <span class="dv">15</span> <span class="op">*</span> abs<span class="op">(</span>end_position_h <span class="op">-</span> end_position_h2<span class="op">)};</span></span>
-<span id="cb72-8"><a href="#cb72-8" aria-hidden="true" tabindex="-1"></a>fmt<span class="op">::</span>print<span class="op">(</span><span class="st">&quot;Error on the end position (h = </span><span class="sc">{}</span><span class="st"> s): </span><span class="sc">{:.2e}</span><span class="st"> m</span><span class="sc">\n</span><span class="st">, h, error_h);</span></span></code></pre></div>
+<span id="cb72-8"><a href="#cb72-8" aria-hidden="true" tabindex="-1"></a>fmt<span class="op">::</span>println<span class="op">(</span><span class="st">&quot;Error on the end position (h = </span><span class="sc">{}</span><span class="st"> s): </span><span class="sc">{:.2e}</span><span class="st"> m&quot;</span><span class="op">,</span> h<span class="op">,</span> error_h<span class="op">);</span></span></code></pre></div>
 <p>L’output del programma è il seguente:</p>
 <pre><code># Point 2
 
@@ -1205,8 +1205,8 @@ Number of steps required to reach an error ε = 5e-05 m: 415 (h&#39; = 1.04e-0
 <span id="cb78-4"><a href="#cb78-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb78-5"><a href="#cb78-5" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> mc_error<span class="op">{</span>estimate_stddev_from_mc<span class="op">(</span>rnd<span class="op">,</span> <span class="fl">3e-3</span><span class="op">,</span> new_h<span class="op">,</span> new_N<span class="op">,</span> <span class="kw">true</span><span class="op">)};</span></span>
 <span id="cb78-6"><a href="#cb78-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb78-7"><a href="#cb78-7" aria-hidden="true" tabindex="-1"></a>fmt<span class="op">::</span>print<span class="op">(</span><span class="st">&quot;Error on the end position estimated from MC: </span><span class="sc">{:.2f}</span><span class="st"> mm</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">,</span></span>
-<span id="cb78-8"><a href="#cb78-8" aria-hidden="true" tabindex="-1"></a>           mc_error <span class="op">*</span> <span class="fl">1e3</span><span class="op">);</span></span></code></pre></div>
+<span id="cb78-7"><a href="#cb78-7" aria-hidden="true" tabindex="-1"></a>fmt<span class="op">::</span>println<span class="op">(</span><span class="st">&quot;Error on the end position estimated from MC: </span><span class="sc">{:.2f}</span><span class="st"> mm&quot;</span><span class="op">,</span></span>
+<span id="cb78-8"><a href="#cb78-8" aria-hidden="true" tabindex="-1"></a>             mc_error <span class="op">*</span> <span class="fl">1e3</span><span class="op">);</span></span></code></pre></div>
 <p>Questo è l’output:</p>
 <pre><code># Point 4
 
@@ -1374,8 +1374,8 @@ B(r) = \frac1{r^\alpha} + c,
 <span id="cb88-27"><a href="#cb88-27" aria-hidden="true" tabindex="-1"></a>      <span class="cf">break</span><span class="op">;</span></span>
 <span id="cb88-28"><a href="#cb88-28" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
 <span id="cb88-29"><a href="#cb88-29" aria-hidden="true" tabindex="-1"></a>      <span class="co">// This is useful for debugging</span></span>
-<span id="cb88-30"><a href="#cb88-30" aria-hidden="true" tabindex="-1"></a>      fmt<span class="op">::</span>print<span class="op">(</span><span class="st">&quot;Got a full loop (#</span><span class="sc">{}</span><span class="st">) at t = </span><span class="sc">{}</span><span class="st"> with x = </span><span class="sc">{}\n</span><span class="st">&quot;</span><span class="op">,</span></span>
-<span id="cb88-31"><a href="#cb88-31" aria-hidden="true" tabindex="-1"></a>                 loop_counter<span class="op">,</span> t<span class="op">,</span> cur_y<span class="op">);</span></span>
+<span id="cb88-30"><a href="#cb88-30" aria-hidden="true" tabindex="-1"></a>      fmt<span class="op">::</span>println<span class="op">(</span><span class="st">&quot;Got a full loop (#</span><span class="sc">{}</span><span class="st">) at t = </span><span class="sc">{}</span><span class="st"> with x = </span><span class="sc">{}</span><span class="st">&quot;</span><span class="op">,</span></span>
+<span id="cb88-31"><a href="#cb88-31" aria-hidden="true" tabindex="-1"></a>                   loop_counter<span class="op">,</span> t<span class="op">,</span> cur_y<span class="op">);</span></span>
 <span id="cb88-32"><a href="#cb88-32" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
 <span id="cb88-33"><a href="#cb88-33" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
 <span id="cb88-34"><a href="#cb88-34" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>

@@ -330,7 +330,7 @@ Per impostare il numero di cifre significative nella scrittura a video usando `f
 // {1} → value of variable `cifre_significative`.
 // We must use a dot '.' before {1}, because we're specifying how many digits
 // should be used for the decimal part
-fmt::print("x0 = {0:.{1}f}", zero, cifre_significative);
+fmt::println("x0 = {0:.{1}f}", zero, cifre_significative);
 ```
 
 Potete installare la libreria `fmtlib` eseguendo questo comando:

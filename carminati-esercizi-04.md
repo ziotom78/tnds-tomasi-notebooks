@@ -487,16 +487,16 @@ int main(int argc, const char *argv[]) {
 
   auto result = linear_fit(data.voltage, data.rb, data.rb_err);
 
-  fmt::print("Data have been fitted on a curve y = A + B × x:\n");
-  fmt::print("A = {:.4e} ± {:.4e}\n", result.a, result.a_err);
-  fmt::print("B = {:.4e} ± {:.4e}\n", result.b, result.b_err);
+  fmt::println("Data have been fitted on a curve y = A + B × x:");
+  fmt::println("A = {:.4e} ± {:.4e}", result.a, result.a_err);
+  fmt::println("B = {:.4e} ± {:.4e}", result.b, result.b_err);
 
   plot_data_and_fit("output_plot.png", data, result.a, result.b);
 
   auto q_over_m{1 / result.b};
   auto error{sqrt(pow(q_over_m, 4) * pow(result.b_err, 2))};
 
-  fmt::print("q/m = {:.4e} ± {:.4e}\n", q_over_m, error);
+  fmt::println("q/m = {:.4e} ± {:.4e}", q_over_m, error);
 }
 ```
 
@@ -818,13 +818,13 @@ int main() {
 
   plt.show();
 
-  fmt::print("Found approximate minimum at q = {0:.4e} C\n", qmin);
+  fmt::println("Found approximate minimum at q = {0:.4e} C", qmin);
 
   double mycharge{deriv(qmin, charges)};
   double uncer{
       sqrt(fun(mycharge, charges) / (ssize(charges) * (ssize(charges) - 1)))};
-  fmt::print("Measured charge = {0:.4e} ± {1:.4e} C (stat only)\n", mycharge,
-             uncer);
+  fmt::println("Measured charge = {0:.4e} ± {1:.4e} C (stat only)", mycharge,
+               uncer);
 }
 ```
 

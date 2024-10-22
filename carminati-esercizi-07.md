@@ -157,7 +157,7 @@ using namespace std;
 
 int main (int argc, char* argv[]) {
   if (argc != 2) {
-    fmt::print(stderr, "Usage: {} <NSTEP>\n", argv[0]);
+    fmt::println(stderr, "Usage: {} <NSTEP>", argv[0]);
     return 1;
   }
 
@@ -168,7 +168,7 @@ int main (int argc, char* argv[]) {
 
   double I{myInt.integrate(0, M_PI, nstep, f)};
 
-  fmt::print("Passi: {}, I = {}\n", nstep, I);
+  fmt::println("Passi: {}, I = {}", nstep, I);
 }
 ```
 
@@ -183,12 +183,12 @@ std::vector<double> errors(ssize(steps));
 
 // Calcola gli errori e stampa una tabella usando "fmtlib.h"
 double true_value{2};
-fmt::print("Passi        Intervallo h  Errore");
+fmt::println("Passi        Intervallo h  Errore");
 for (size_t i{}; i < ssize(steps); ++i) {
   double estimated_value{myInt.integrate(steps[i], f)};
   errors[i] = fabs(estimated_value - true_value);
   step_sizes[i] = myInt.GetH();
-  fmt::print("{:12d} {:14.8e} {:20.8e}\n", steps[i], step_sizes[i], errors[i]);
+  fmt::println("{:12d} {:14.8e} {:20.8e}", steps[i], step_sizes[i], errors[i]);
 }
 
 // Crea un plot
@@ -203,7 +203,7 @@ plt.show();
 // È sempre consigliato fornire un messaggio all'utente
 // per comunicare che è stato salvato un plot. Includete
 // sempre il nome del file nel messaggio!
-fmt::print("Plot saved in '{}'\n", output_file_name);
+fmt::println("Plot saved in '{}'", output_file_name);
 ```
 
 Con ROOT si scriverebbe invece qualcosa del genere:
@@ -211,11 +211,11 @@ Con ROOT si scriverebbe invece qualcosa del genere:
 std::vector<int> steps{10, 50, 100, 500, 1000};
 TGraph g_errore{};
 double true_value{2};
-fmt::print("Passi        Errore")
+fmt::println("Passi        Errore")
 for (int i{}; i < size(steps); i++) {
   double estimated_value{myInt.integrate(steps[i], f)};
   double err{fabs(estimated_value - true_value)};
-  fmt::print("{:12d} {:20.8e}\n", steps[i], err);
+  fmt::println("{:12d} {:20.8e}", steps[i], err);
   g_errore.SetPoint(i, myInt.GetH(), err);
 }
 ```

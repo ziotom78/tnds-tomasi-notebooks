@@ -138,7 +138,7 @@ int main(int argc, char *argv[]) {
   // Invece di `cout`, usiamo fmtlib: molto più comodo!
   fmt::println("Coordinate cartesiane: {}, {}, {}",
                P.getX(), P.getY(), P.getZ());
-  fmt::print("Coordinate cilindriche: {}, {}, {}",
+  fmt::println("Coordinate cilindriche: {}, {}, {}",
                P.getRho(), P.getPhi(), P.getZ());
   fmt::println("Coordinate sferiche: {}, {}, {}",
                P.getR(), P.getPhi(), P.getTheta());
