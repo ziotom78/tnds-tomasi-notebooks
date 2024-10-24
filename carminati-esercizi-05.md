@@ -352,8 +352,8 @@ public:
   // Distruttore (vuoto, si può tralasciare)
   ~CampoVettoriale() {}
 
-  CampoVettoriale &operator+=(const CampoVettoriale &);
-  CampoVettoriale operator+(const CampoVettoriale &) const;
+  // Operatore di incremento
+  void operator+=(const CampoVettoriale &);
 
   double getFx() const { return m_Fx; }
   double getFy() const { return m_Fy; }
@@ -363,15 +363,48 @@ public:
 private:
   double m_Fx, m_Fy, m_Fz;
 };
+
+// Somma di due campi vettoriale (in una funzione,
+// non in un metodo!)
+inline CampoVettoriale operator+(const CampoVettoriale &a,
+                                 const CampoVettoriale &b) {
+  // …
+}
 ```
+
+Abbiamo scelto di implementare la somma di due campi vettoriali come una *funzione* anziché un metodo, quindi non è definita all'interno delle parentesi graffe di `class CampoVettoriale : public Posizione { … }`. Sarebbe stato possibile definire un metodo in base al fatto che per il compilatore C++ la scrittura
+
+```c++
+c = a + b;
+```
+
+è equivalente a
+
+```c++
+c = a.operator+(b);
+```
+
+Avremmo quindi potuto definire un metodo
+
+```c++
+CampoVettoriale CampoVettoriale::operator+(const CampoVettoriale &b) {
+  // …
+}
+```
+
+Questa pratica è però scoraggiata negli operatori binari come la somma, perché è poco leggibile: infatti a differenza della forma funzionale, `a` non è esplicito in questo caso (equivale a `*this`).
+
 
 ### Overloading operatori
 
-Per risolvere facilmente questo tipo di problemi è molto utile ridefinire gli operatori `operator+` e `operator+=` per la classe `CampoVettoriale`. Di seguito una possibile implementazione comoda di questo overloading. Notate che nell'operatore `operator+` viene creato un nuovo vettore (somma) che viene restituito *by value*. Per `operator+=` invece la modifica viene effettuata sull'oggetto che chiama l'operatore. L'oggetto stesso (modificato) viene poi restituito *by reference*.
+Per risolvere facilmente questo tipo di problemi è molto utile ridefinire gli operatori `operator+` e `operator+=` per la classe `CampoVettoriale`. Di seguito una possibile implementazione comoda di questo overloading. Notate che nell'operatore `operator+` viene creato un nuovo vettore (`sum`) che viene restituito *by value*. Per `operator+=` invece la modifica viene effettuata sull'oggetto che chiama l'operatore. L'oggetto stesso (modificato) viene poi restituito *by reference*.
 
 ```c++
-CampoVettoriale CampoVettoriale::operator+(const CampoVettoriale & v) const {
-  if ((v.getX() != getX()) || (v.getY() != getY()) || (v.getZ() != getZ())) {
+inline CampoVettoriale operator+(const CampoVettoriale &a,
+                                 const CampoVettoriale &b) {
+  if ((a.getX() != b.getX()) ||
+	  (a.getY() != b.getY()) ||
+	  (a.getZ() != b.getZ())) {
       // fmt::print accetta come primo argomento lo stream su cui
       // scrivere (se non si specifica, usa stdout, che è analogo a std::cout).
       // Siccome questo è un messaggio di errore, usiamo stderr, analogo a
@@ -381,10 +414,14 @@ CampoVettoriale CampoVettoriale::operator+(const CampoVettoriale & v) const {
       exit(1);
   }
 
-  CampoVettoriale sum{};
-  sum.setFx(getFx() + v.getFx());
-  sum.setFy(getFy() + v.getFy());
-  sum.setFz(getFz() + v.getFz());
+  CampoVettoriale sum{
+      a.getX(),
+      a.getY(),
+      a.getZ(),
+      a.getFx() + b.getFx(),
+	  a.getFy() + b.getFy(),
+	  a.getFz() + b.getFz(),
+  };
 
   return sum;
 }
@@ -396,12 +433,52 @@ CampoVettoriale CampoVettoriale::operator+(const CampoVettoriale & v) const {
 // viene considerato dal compilatore C++ come
 //
 //    w.operator+=(v);
-//
-// Nel metodo qui sotto, la variabile `w` dell'esempio corrisponde a `*this`.
-CampoVettoriale & CampoVettoriale::operator+=(const CampoVettoriale & v) {
-  return (*this) = (*this) + v;
+void CampoVettoriale::operator+=(const CampoVettoriale & v) {
+  // Non c'è bisogno di usare le funzioni getFx(), getFy(), getFz():
+  // siamo in un metodo di CampoVettoriale, quindi abbiamo accesso
+  // ai membri privati (non è così per operator+ definito sopra)
+
+  m_Fx += v.m_Fx;
+  m_Fy += v.m_Fy;
+  m_Fz += v.m_Fz;
 }
 ```
+
+In alcuni codici si può trovare l'operatore di incremento che restituisce un *reference* all'istanza stessa della classe che ha subito l'incremento (`*this`):
+
+```c++
+CampoVettoriale & CampoVettoriale::operator+=(const CampoVettoriale & v) {
+  // …
+
+  return *this;
+}
+```
+
+Il fatto di tornare un `CampoVettoriale &` anziché un `void` permette di usare la scrittura
+
+```c++
+c = a += b;
+```
+
+che per il compilatore C++ è equivalente a
+
+```c++
+c = a.operator+=(b);
+```
+
+e corrisponde ai seguenti passaggi:
+
+1. Incremento di `a` del campo `b`;
+
+2. Una volta che `a` è stato incrementato, assegnamento del valore risultante a `c`.
+
+Noi non useremo *mai* la scrittura `c = a += b`, perché è difficile da leggere e mai realmente utile; è infatti più chiaro spezzare la riga in due istruzioni:
+
+```c++
+a += b;
+c = a;
+```
+
 
 N.B.: per entrambe le classi di cui sopra, sentitevi liberi di aggiungere tutti i metodi addizionali che ritenete utili per risolvere questo esercizio o i successivi.
 
@@ -710,16 +787,15 @@ Come di consueto, elenco alcuni errori molto comuni che ho trovato negli anni pa
 
     #.   Unità di misura delle costanti;
 
-    #.   Attenzione a come scrivete i numeri in notazione scientifica! Il numero $10^{-4}$ si scrive `1e-4`, **non** `10e-4`, perché la scrittura `1e-4` indica effettivamente $1 \times 10^{-4}$, così come
-           7.5e-3 indica $7.5\times 10^{-3}$.
+    #.   Attenzione a come scrivete i numeri in notazione scientifica! Il numero $10^{-4}$ si scrive `1e-4`, **non** `10e-4`, perché la scrittura `1e-4` indica effettivamente $1 \times 10^{-4}$, così come `7.5e-3` indica $7.5\times 10^{-3}$.
 
     #.   Verificate che ciò che deve stare al numeratore stia veramente al numeratore, e idem per il denominatore!
 
     #.   Ovviamente, il campo di una singola carica deve andare come $1/r^2$! Eppure un bel po' di studenti consegnano codice che non segue neppure questa semplice proprietà…
 
-    #.   Quando calcolate la distanza $d$ tra due posizioni, assicuratevi di restituire $d$ e non $d^2$ (quante volte l'ho visto negli esercizi!).
+    #.   Quando calcolate la distanza $d$ tra due posizioni, assicuratevi di restituire $d$ e non $d^2$ (errore molto comune!).
 
--   Stranamente, ogni anno più di uno studente sbaglia a implementare `operator+` per i vettori, e invece di calcolare `v + w` calcola in realtà `v + v = 2v`, oppure `w + w = 2w`.
+-   Stranamente, ogni anno più di uno studente sbaglia a implementare `operator+` per i vettori, e invece di calcolare `z = v + w` calcola in realtà `z = v + v = 2v`, oppure `z = w + w = 2w`.
 
 -   Nel leggere la posizione `x y z` a cui calcolare il campo del dipolo da linea di comando, assicuratevi di usare la funzione [`std::stod`](https://en.cppreference.com/w/cpp/string/basic_string/stof) oppure [`std::atof`](https://cplusplus.com/reference/cstdlib/atof/), anziché `std::stoi` o `std::atoi`, perché queste ultime due restituiscono valori interi.
 

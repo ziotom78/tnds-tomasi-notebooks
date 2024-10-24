@@ -358,8 +358,8 @@ Coordinate sferiche: 5.477225575051661, 1.1071487177940904, 0.420534335283965</c
 <span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Distruttore (vuoto, si può tralasciare)</span></span>
 <span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>  <span class="op">~</span>CampoVettoriale<span class="op">()</span> <span class="op">{}</span></span>
 <span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>  CampoVettoriale <span class="op">&amp;</span><span class="kw">operator</span><span class="op">+=(</span><span class="at">const</span> CampoVettoriale <span class="op">&amp;);</span></span>
-<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>  CampoVettoriale <span class="kw">operator</span><span class="op">+(</span><span class="at">const</span> CampoVettoriale <span class="op">&amp;)</span> <span class="at">const</span><span class="op">;</span></span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Operatore di incremento</span></span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>  <span class="dt">void</span> <span class="kw">operator</span><span class="op">+=(</span><span class="at">const</span> CampoVettoriale <span class="op">&amp;);</span></span>
 <span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> getFx<span class="op">()</span> <span class="at">const</span> <span class="op">{</span> <span class="cf">return</span> <span class="va">m_Fx</span><span class="op">;</span> <span class="op">}</span></span>
 <span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> getFy<span class="op">()</span> <span class="at">const</span> <span class="op">{</span> <span class="cf">return</span> <span class="va">m_Fy</span><span class="op">;</span> <span class="op">}</span></span>
@@ -368,64 +368,109 @@ Coordinate sferiche: 5.477225575051661, 1.1071487177940904, 0.420534335283965</c
 <span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a><span class="kw">private</span><span class="op">:</span></span>
 <span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> <span class="va">m_Fx</span><span class="op">,</span> <span class="va">m_Fy</span><span class="op">,</span> <span class="va">m_Fz</span><span class="op">;</span></span>
-<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code></pre></div>
+<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span>
+<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a><span class="co">// Somma di due campi vettoriale (in una funzione,</span></span>
+<span id="cb10-29"><a href="#cb10-29" aria-hidden="true" tabindex="-1"></a><span class="co">// non in un metodo!)</span></span>
+<span id="cb10-30"><a href="#cb10-30" aria-hidden="true" tabindex="-1"></a><span class="kw">inline</span> CampoVettoriale <span class="kw">operator</span><span class="op">+(</span><span class="at">const</span> CampoVettoriale <span class="op">&amp;</span>a<span class="op">,</span></span>
+<span id="cb10-31"><a href="#cb10-31" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">const</span> CampoVettoriale <span class="op">&amp;</span>b<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb10-32"><a href="#cb10-32" aria-hidden="true" tabindex="-1"></a>  <span class="co">// …</span></span>
+<span id="cb10-33"><a href="#cb10-33" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p>Abbiamo scelto di implementare la somma di due campi vettoriali come una <em>funzione</em> anziché un metodo, quindi non è definita all’interno delle parentesi graffe di <code>class CampoVettoriale : public Posizione { … }</code>. Sarebbe stato possibile definire un metodo in base al fatto che per il compilatore C++ la scrittura</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>c <span class="op">=</span> a <span class="op">+</span> b<span class="op">;</span></span></code></pre></div>
+<p>è equivalente a</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>c <span class="op">=</span> a<span class="op">.</span><span class="kw">operator</span><span class="op">+(</span>b<span class="op">);</span></span></code></pre></div>
+<p>Avremmo quindi potuto definire un metodo</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>CampoVettoriale CampoVettoriale<span class="op">::</span><span class="kw">operator</span><span class="op">+(</span><span class="at">const</span> CampoVettoriale <span class="op">&amp;</span>b<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="co">// …</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p>Questa pratica è però scoraggiata negli operatori binari come la somma, perché è poco leggibile: infatti a differenza della forma funzionale, <code>a</code> non è esplicito in questo caso (equivale a <code>*this</code>).</p>
 <h3 id="overloading-operatori">Overloading operatori</h3>
-<p>Per risolvere facilmente questo tipo di problemi è molto utile ridefinire gli operatori <code>operator+</code> e <code>operator+=</code> per la classe <code>CampoVettoriale</code>. Di seguito una possibile implementazione comoda di questo overloading. Notate che nell’operatore <code>operator+</code> viene creato un nuovo vettore (somma) che viene restituito <em>by value</em>. Per <code>operator+=</code> invece la modifica viene effettuata sull’oggetto che chiama l’operatore. L’oggetto stesso (modificato) viene poi restituito <em>by reference</em>.</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>CampoVettoriale CampoVettoriale<span class="op">::</span><span class="kw">operator</span><span class="op">+(</span><span class="at">const</span> CampoVettoriale <span class="op">&amp;</span> v<span class="op">)</span> <span class="at">const</span> <span class="op">{</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> <span class="op">((</span>v<span class="op">.</span>getX<span class="op">()</span> <span class="op">!=</span> getX<span class="op">())</span> <span class="op">||</span> <span class="op">(</span>v<span class="op">.</span>getY<span class="op">()</span> <span class="op">!=</span> getY<span class="op">())</span> <span class="op">||</span> <span class="op">(</span>v<span class="op">.</span>getZ<span class="op">()</span> <span class="op">!=</span> getZ<span class="op">()))</span> <span class="op">{</span></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>      <span class="co">// fmt::print accetta come primo argomento lo stream su cui</span></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>      <span class="co">// scrivere (se non si specifica, usa stdout, che è analogo a std::cout).</span></span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>      <span class="co">// Siccome questo è un messaggio di errore, usiamo stderr, analogo a</span></span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>      <span class="co">// std::cerr</span></span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>      fmt<span class="op">::</span>println<span class="op">(</span>stderr<span class="op">,</span></span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>                   <span class="st">&quot;Somma di campi vettoriali in punti diversi non ammessa&quot;</span><span class="op">);</span></span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>      exit<span class="op">(</span><span class="dv">1</span><span class="op">);</span></span>
-<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
-<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>  CampoVettoriale sum<span class="op">{};</span></span>
-<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>  sum<span class="op">.</span>setFx<span class="op">(</span>getFx<span class="op">()</span> <span class="op">+</span> v<span class="op">.</span>getFx<span class="op">());</span></span>
-<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>  sum<span class="op">.</span>setFy<span class="op">(</span>getFy<span class="op">()</span> <span class="op">+</span> v<span class="op">.</span>getFy<span class="op">());</span></span>
-<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>  sum<span class="op">.</span>setFz<span class="op">(</span>getFz<span class="op">()</span> <span class="op">+</span> v<span class="op">.</span>getFz<span class="op">());</span></span>
-<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> sum<span class="op">;</span></span>
-<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
-<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a><span class="co">// Ricordare che, se `v` e `w` sono due oggetti di tipo `CampoVettoriale`, allora</span></span>
-<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a><span class="co">//</span></span>
-<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a><span class="co">//    w += v;</span></span>
-<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a><span class="co">//</span></span>
-<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a><span class="co">// viene considerato dal compilatore C++ come</span></span>
-<span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a><span class="co">//</span></span>
-<span id="cb11-26"><a href="#cb11-26" aria-hidden="true" tabindex="-1"></a><span class="co">//    w.operator+=(v);</span></span>
-<span id="cb11-27"><a href="#cb11-27" aria-hidden="true" tabindex="-1"></a><span class="co">//</span></span>
-<span id="cb11-28"><a href="#cb11-28" aria-hidden="true" tabindex="-1"></a><span class="co">// Nel metodo qui sotto, la variabile `w` dell&#39;esempio corrisponde a `*this`.</span></span>
-<span id="cb11-29"><a href="#cb11-29" aria-hidden="true" tabindex="-1"></a>CampoVettoriale <span class="op">&amp;</span> CampoVettoriale<span class="op">::</span><span class="kw">operator</span><span class="op">+=(</span><span class="at">const</span> CampoVettoriale <span class="op">&amp;</span> v<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb11-30"><a href="#cb11-30" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="op">(*</span><span class="kw">this</span><span class="op">)</span> <span class="op">=</span> <span class="op">(*</span><span class="kw">this</span><span class="op">)</span> <span class="op">+</span> v<span class="op">;</span></span>
-<span id="cb11-31"><a href="#cb11-31" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p>Per risolvere facilmente questo tipo di problemi è molto utile ridefinire gli operatori <code>operator+</code> e <code>operator+=</code> per la classe <code>CampoVettoriale</code>. Di seguito una possibile implementazione comoda di questo overloading. Notate che nell’operatore <code>operator+</code> viene creato un nuovo vettore (<code>sum</code>) che viene restituito <em>by value</em>. Per <code>operator+=</code> invece la modifica viene effettuata sull’oggetto che chiama l’operatore. L’oggetto stesso (modificato) viene poi restituito <em>by reference</em>.</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="kw">inline</span> CampoVettoriale <span class="kw">operator</span><span class="op">+(</span><span class="at">const</span> CampoVettoriale <span class="op">&amp;</span>a<span class="op">,</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">const</span> CampoVettoriale <span class="op">&amp;</span>b<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> <span class="op">((</span>a<span class="op">.</span>getX<span class="op">()</span> <span class="op">!=</span> b<span class="op">.</span>getX<span class="op">())</span> <span class="op">||</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>      <span class="op">(</span>a<span class="op">.</span>getY<span class="op">()</span> <span class="op">!=</span> b<span class="op">.</span>getY<span class="op">())</span> <span class="op">||</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>      <span class="op">(</span>a<span class="op">.</span>getZ<span class="op">()</span> <span class="op">!=</span> b<span class="op">.</span>getZ<span class="op">()))</span> <span class="op">{</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>      <span class="co">// fmt::print accetta come primo argomento lo stream su cui</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>      <span class="co">// scrivere (se non si specifica, usa stdout, che è analogo a std::cout).</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>      <span class="co">// Siccome questo è un messaggio di errore, usiamo stderr, analogo a</span></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>      <span class="co">// std::cerr</span></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>      fmt<span class="op">::</span>println<span class="op">(</span>stderr<span class="op">,</span></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>                   <span class="st">&quot;Somma di campi vettoriali in punti diversi non ammessa&quot;</span><span class="op">);</span></span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>      exit<span class="op">(</span><span class="dv">1</span><span class="op">);</span></span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>  CampoVettoriale sum<span class="op">{</span></span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>      a<span class="op">.</span>getX<span class="op">(),</span></span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a>      a<span class="op">.</span>getY<span class="op">(),</span></span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a>      a<span class="op">.</span>getZ<span class="op">(),</span></span>
+<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a>      a<span class="op">.</span>getFx<span class="op">()</span> <span class="op">+</span> b<span class="op">.</span>getFx<span class="op">(),</span></span>
+<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a>      a<span class="op">.</span>getFy<span class="op">()</span> <span class="op">+</span> b<span class="op">.</span>getFy<span class="op">(),</span></span>
+<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a>      a<span class="op">.</span>getFz<span class="op">()</span> <span class="op">+</span> b<span class="op">.</span>getFz<span class="op">(),</span></span>
+<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a>  <span class="op">};</span></span>
+<span id="cb14-23"><a href="#cb14-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-24"><a href="#cb14-24" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> sum<span class="op">;</span></span>
+<span id="cb14-25"><a href="#cb14-25" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb14-26"><a href="#cb14-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-27"><a href="#cb14-27" aria-hidden="true" tabindex="-1"></a><span class="co">// Ricordare che, se `v` e `w` sono due oggetti di tipo `CampoVettoriale`, allora</span></span>
+<span id="cb14-28"><a href="#cb14-28" aria-hidden="true" tabindex="-1"></a><span class="co">//</span></span>
+<span id="cb14-29"><a href="#cb14-29" aria-hidden="true" tabindex="-1"></a><span class="co">//    w += v;</span></span>
+<span id="cb14-30"><a href="#cb14-30" aria-hidden="true" tabindex="-1"></a><span class="co">//</span></span>
+<span id="cb14-31"><a href="#cb14-31" aria-hidden="true" tabindex="-1"></a><span class="co">// viene considerato dal compilatore C++ come</span></span>
+<span id="cb14-32"><a href="#cb14-32" aria-hidden="true" tabindex="-1"></a><span class="co">//</span></span>
+<span id="cb14-33"><a href="#cb14-33" aria-hidden="true" tabindex="-1"></a><span class="co">//    w.operator+=(v);</span></span>
+<span id="cb14-34"><a href="#cb14-34" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> CampoVettoriale<span class="op">::</span><span class="kw">operator</span><span class="op">+=(</span><span class="at">const</span> CampoVettoriale <span class="op">&amp;</span> v<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb14-35"><a href="#cb14-35" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Non c&#39;è bisogno di usare le funzioni getFx(), getFy(), getFz():</span></span>
+<span id="cb14-36"><a href="#cb14-36" aria-hidden="true" tabindex="-1"></a>  <span class="co">// siamo in un metodo di CampoVettoriale, quindi abbiamo accesso</span></span>
+<span id="cb14-37"><a href="#cb14-37" aria-hidden="true" tabindex="-1"></a>  <span class="co">// ai membri privati (non è così per operator+ definito sopra)</span></span>
+<span id="cb14-38"><a href="#cb14-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-39"><a href="#cb14-39" aria-hidden="true" tabindex="-1"></a>  <span class="va">m_Fx</span> <span class="op">+=</span> v<span class="op">.</span><span class="va">m_Fx</span><span class="op">;</span></span>
+<span id="cb14-40"><a href="#cb14-40" aria-hidden="true" tabindex="-1"></a>  <span class="va">m_Fy</span> <span class="op">+=</span> v<span class="op">.</span><span class="va">m_Fy</span><span class="op">;</span></span>
+<span id="cb14-41"><a href="#cb14-41" aria-hidden="true" tabindex="-1"></a>  <span class="va">m_Fz</span> <span class="op">+=</span> v<span class="op">.</span><span class="va">m_Fz</span><span class="op">;</span></span>
+<span id="cb14-42"><a href="#cb14-42" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p>In alcuni codici si può trovare l’operatore di incremento che restituisce un <em>reference</em> all’istanza stessa della classe che ha subito l’incremento (<code>*this</code>):</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>CampoVettoriale <span class="op">&amp;</span> CampoVettoriale<span class="op">::</span><span class="kw">operator</span><span class="op">+=(</span><span class="at">const</span> CampoVettoriale <span class="op">&amp;</span> v<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="co">// …</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="op">*</span><span class="kw">this</span><span class="op">;</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p>Il fatto di tornare un <code>CampoVettoriale &amp;</code> anziché un <code>void</code> permette di usare la scrittura</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>c <span class="op">=</span> a <span class="op">+=</span> b<span class="op">;</span></span></code></pre></div>
+<p>che per il compilatore C++ è equivalente a</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>c <span class="op">=</span> a<span class="op">.</span><span class="kw">operator</span><span class="op">+=(</span>b<span class="op">);</span></span></code></pre></div>
+<p>e corrisponde ai seguenti passaggi:</p>
+<ol type="1">
+<li><p>Incremento di <code>a</code> del campo <code>b</code>;</p></li>
+<li><p>Una volta che <code>a</code> è stato incrementato, assegnamento del valore risultante a <code>c</code>.</p></li>
+</ol>
+<p>Noi non useremo <em>mai</em> la scrittura <code>c = a += b</code>, perché è difficile da leggere e mai realmente utile; è infatti più chiaro spezzare la riga in due istruzioni:</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>a <span class="op">+=</span> b<span class="op">;</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>c <span class="op">=</span> a<span class="op">;</span></span></code></pre></div>
 <p>N.B.: per entrambe le classi di cui sopra, sentitevi liberi di aggiungere tutti i metodi addizionali che ritenete utili per risolvere questo esercizio o i successivi.</p>
 <h2 id="header-file-della-classe-puntomateriale">Header file della classe <code>PuntoMateriale</code></h2>
 <p>La classe <code>PuntoMateriale</code> ci servirà per rappresentare le sorgenti dei campi.</p>
 <h3 id="ereditarietà-multipla">Ereditarietà multipla</h3>
 <p>In C++, una classe può ereditare da più di una classe madre. In questo caso mantiene le proprietà (metodi e data membri) di tutte le classi madri. Nell’header file <code>puntomateriale.h</code> vanno elencate tutte le classi da cui si vuole ereditare, specificando la modalità con cui si vuole ereditare (<code>public</code>, <code>private</code> o <code>protected</code>):</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#pragma once</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;particella.h&quot;</span></span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;posizione.h&quot;</span></span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> PuntoMateriale <span class="op">:</span> <span class="kw">public</span> Particella<span class="op">,</span> <span class="kw">public</span> Posizione <span class="op">{</span></span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>    <span class="co">// …</span></span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#pragma once</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;particella.h&quot;</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;posizione.h&quot;</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> PuntoMateriale <span class="op">:</span> <span class="kw">public</span> Particella<span class="op">,</span> <span class="kw">public</span> Posizione <span class="op">{</span></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>    <span class="co">// …</span></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code></pre></div>
 <p>La nuova classe avrà, per esempio, definiti sia i metodi <code>GetMassa()</code> e <code>GetCarica()</code> di <code>Particella</code> e anche <code>GetX()</code>, <code>GetR()</code>, … di <code>Posizione</code>.</p>
 <h3 id="utilizzo-di-costruttori-delle-classi-madri">Utilizzo di costruttori delle classi madri</h3>
 <p>Specialmente nel caso di ereditarietà multipla, è buona norma utilizzare i costruttori già esistenti della classe madre. Tali costruttori possono venire chiamati esplicemente dando il nome della classe madre seguito dagli argomenti opportuni. Ad esempio, siccome esistono i costruttori di <code>Posizione</code> con le tre coordinate cartesiane, e di <code>Particella</code> con massa e carica, possiamo definire un costruttore:</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>PuntoMateriale<span class="op">(</span><span class="dt">double</span> massa<span class="op">,</span> <span class="dt">double</span> carica<span class="op">,</span> <span class="dt">double</span> x<span class="op">,</span> <span class="dt">double</span> y<span class="op">,</span> <span class="dt">double</span> z<span class="op">);</span></span></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>PuntoMateriale<span class="op">(</span><span class="dt">double</span> massa<span class="op">,</span> <span class="dt">double</span> carica<span class="op">,</span> <span class="dt">double</span> x<span class="op">,</span> <span class="dt">double</span> y<span class="op">,</span> <span class="dt">double</span> z<span class="op">);</span></span></code></pre></div>
 <p>la cui implementazione è data da:</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>PuntoMateriale<span class="op">::</span>PuntoMateriale<span class="op">(</span><span class="dt">double</span> massa<span class="op">,</span> <span class="dt">double</span> carica<span class="op">,</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>                               <span class="dt">double</span> x<span class="op">,</span> <span class="dt">double</span> y<span class="op">,</span> <span class="dt">double</span> z<span class="op">)</span> <span class="op">:</span></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    Particella<span class="op">{</span>massa<span class="op">,</span> carica<span class="op">},</span> Posizione<span class="op">{</span>x<span class="op">,</span> y<span class="op">,</span> z<span class="op">}</span> <span class="op">{</span></span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>    <span class="co">// nothing more to be done !</span></span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>PuntoMateriale<span class="op">::</span>PuntoMateriale<span class="op">(</span><span class="dt">double</span> massa<span class="op">,</span> <span class="dt">double</span> carica<span class="op">,</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>                               <span class="dt">double</span> x<span class="op">,</span> <span class="dt">double</span> y<span class="op">,</span> <span class="dt">double</span> z<span class="op">)</span> <span class="op">:</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>    Particella<span class="op">{</span>massa<span class="op">,</span> carica<span class="op">},</span> Posizione<span class="op">{</span>x<span class="op">,</span> y<span class="op">,</span> z<span class="op">}</span> <span class="op">{</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>    <span class="co">// nothing more to be done !</span></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 <p>Come si può notare in questo esempio la costruzione di <code>PuntoMateriale</code> è completamente delegata si costruttori delle classi madre.</p>
 <h1 id="esercizio-5.3">Esercizio 5.3 - Calcolo del campo elettrico generato da un dipolo (da consegnare)</h1>
 <p>A questo punto possiamo utilizzare tutti gli ingredienti realizzati sopra per affrontare un interessante problema di elettrostatica ovvero lo studio del campo elettrico generato da un dipolo. Per fare questo sviluppiamo un codice che costuisca un dipolo costituito da un elettrone e un protone posizionati ad una distanza <span class="math inline">\delta = 10^{-10}\,\text{m}</span> e determini:</p>
@@ -435,40 +480,40 @@ Coordinate sferiche: 5.477225575051661, 1.1071487177940904, 0.420534335283965</c
 </ol>
 <h2 id="esempio-di-programma-2">Esempio di programma</h2>
 <p>Questo programma utilizza le nuove classi appena create: richiede di fornire come argomenti le tre coordinate cartesiane e poi stampa il campo elettrico di dipolo richiesto dall’esercizio [primo punto]:</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;puntomateriale.h&quot;</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;campovettoriale.h&quot;</span></span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;fmtlib.h&quot;</span></span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
-<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;string&gt;</span></span>
-<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a><span class="kw">using</span> <span class="kw">namespace</span> std<span class="op">;</span></span>
-<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a><span class="at">const</span> <span class="dt">double</span> e<span class="op">{</span><span class="fl">1.60217653E-19</span><span class="op">};</span></span>
-<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a><span class="at">const</span> <span class="dt">double</span> me<span class="op">{</span><span class="fl">9.1093826E-31</span><span class="op">};</span></span>
-<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a><span class="at">const</span> <span class="dt">double</span> mp<span class="op">{</span><span class="fl">1.67262171E-27</span><span class="op">};</span></span>
-<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a><span class="at">const</span> <span class="dt">double</span> d<span class="op">{</span><span class="fl">1.E-10</span><span class="op">};</span></span>
-<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">(</span><span class="dt">int</span> argc<span class="op">,</span> <span class="dt">char</span> <span class="op">*</span> argv<span class="op">[])</span> <span class="op">{</span></span>
-<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> <span class="op">(</span>argc <span class="op">!=</span> <span class="dv">4</span><span class="op">)</span> <span class="op">{</span></span>
-<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a>      fmt<span class="op">::</span>println<span class="op">(</span>stderr<span class="op">,</span> <span class="st">&quot;Usage: </span><span class="sc">{}</span><span class="st"> &lt;x&gt; &lt;y&gt; &lt;z&gt;&quot;</span><span class="op">,</span> argv<span class="op">[</span><span class="dv">0</span><span class="op">]);</span></span>
-<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a>      exit<span class="op">(</span><span class="dv">1</span><span class="op">);</span></span>
-<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
-<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> x<span class="op">{</span>stod<span class="op">(</span>argv<span class="op">[</span><span class="dv">1</span><span class="op">])};</span></span>
-<span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> y<span class="op">{</span>stod<span class="op">(</span>argv<span class="op">[</span><span class="dv">2</span><span class="op">])};</span></span>
-<span id="cb15-24"><a href="#cb15-24" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> z<span class="op">{</span>stod<span class="op">(</span>argv<span class="op">[</span><span class="dv">3</span><span class="op">])};</span></span>
-<span id="cb15-25"><a href="#cb15-25" aria-hidden="true" tabindex="-1"></a>  Posizione r<span class="op">{</span>x<span class="op">,</span>y<span class="op">,</span>z<span class="op">};</span></span>
-<span id="cb15-26"><a href="#cb15-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-27"><a href="#cb15-27" aria-hidden="true" tabindex="-1"></a>  PuntoMateriale elettrone<span class="op">{</span>me<span class="op">,</span> <span class="op">-</span>e<span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span>  d <span class="op">/</span> <span class="dv">2</span><span class="op">};</span></span>
-<span id="cb15-28"><a href="#cb15-28" aria-hidden="true" tabindex="-1"></a>  PuntoMateriale protone  <span class="op">{</span>mp<span class="op">,</span>  e<span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="op">-</span>d <span class="op">/</span> <span class="dv">2</span><span class="op">};</span></span>
-<span id="cb15-29"><a href="#cb15-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-30"><a href="#cb15-30" aria-hidden="true" tabindex="-1"></a>  CampoVettoriale E<span class="op">{</span>elettrone<span class="op">.</span>CampoElettrico<span class="op">(</span>r<span class="op">)</span> <span class="op">+</span> protone<span class="op">.</span>CampoElettrico<span class="op">(</span>r<span class="op">)};</span></span>
-<span id="cb15-31"><a href="#cb15-31" aria-hidden="true" tabindex="-1"></a>  fmt<span class="op">::</span>println<span class="op">(</span><span class="st">&quot;E = (</span><span class="sc">{}</span><span class="st">, </span><span class="sc">{}</span><span class="st">, </span><span class="sc">{}</span><span class="st">) N/C&quot;</span><span class="op">,</span> E<span class="op">.</span>getFx<span class="op">(),</span> E<span class="op">.</span>getFy<span class="op">(),</span> E<span class="op">.</span>getFz<span class="op">());</span></span>
-<span id="cb15-32"><a href="#cb15-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-33"><a href="#cb15-33" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb15-34"><a href="#cb15-34" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;puntomateriale.h&quot;</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;campovettoriale.h&quot;</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;fmtlib.h&quot;</span></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;string&gt;</span></span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a><span class="kw">using</span> <span class="kw">namespace</span> std<span class="op">;</span></span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a><span class="at">const</span> <span class="dt">double</span> e<span class="op">{</span><span class="fl">1.60217653E-19</span><span class="op">};</span></span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a><span class="at">const</span> <span class="dt">double</span> me<span class="op">{</span><span class="fl">9.1093826E-31</span><span class="op">};</span></span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a><span class="at">const</span> <span class="dt">double</span> mp<span class="op">{</span><span class="fl">1.67262171E-27</span><span class="op">};</span></span>
+<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a><span class="at">const</span> <span class="dt">double</span> d<span class="op">{</span><span class="fl">1.E-10</span><span class="op">};</span></span>
+<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">(</span><span class="dt">int</span> argc<span class="op">,</span> <span class="dt">char</span> <span class="op">*</span> argv<span class="op">[])</span> <span class="op">{</span></span>
+<span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> <span class="op">(</span>argc <span class="op">!=</span> <span class="dv">4</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb22-18"><a href="#cb22-18" aria-hidden="true" tabindex="-1"></a>      fmt<span class="op">::</span>println<span class="op">(</span>stderr<span class="op">,</span> <span class="st">&quot;Usage: </span><span class="sc">{}</span><span class="st"> &lt;x&gt; &lt;y&gt; &lt;z&gt;&quot;</span><span class="op">,</span> argv<span class="op">[</span><span class="dv">0</span><span class="op">]);</span></span>
+<span id="cb22-19"><a href="#cb22-19" aria-hidden="true" tabindex="-1"></a>      exit<span class="op">(</span><span class="dv">1</span><span class="op">);</span></span>
+<span id="cb22-20"><a href="#cb22-20" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb22-21"><a href="#cb22-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-22"><a href="#cb22-22" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> x<span class="op">{</span>stod<span class="op">(</span>argv<span class="op">[</span><span class="dv">1</span><span class="op">])};</span></span>
+<span id="cb22-23"><a href="#cb22-23" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> y<span class="op">{</span>stod<span class="op">(</span>argv<span class="op">[</span><span class="dv">2</span><span class="op">])};</span></span>
+<span id="cb22-24"><a href="#cb22-24" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> z<span class="op">{</span>stod<span class="op">(</span>argv<span class="op">[</span><span class="dv">3</span><span class="op">])};</span></span>
+<span id="cb22-25"><a href="#cb22-25" aria-hidden="true" tabindex="-1"></a>  Posizione r<span class="op">{</span>x<span class="op">,</span>y<span class="op">,</span>z<span class="op">};</span></span>
+<span id="cb22-26"><a href="#cb22-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-27"><a href="#cb22-27" aria-hidden="true" tabindex="-1"></a>  PuntoMateriale elettrone<span class="op">{</span>me<span class="op">,</span> <span class="op">-</span>e<span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span>  d <span class="op">/</span> <span class="dv">2</span><span class="op">};</span></span>
+<span id="cb22-28"><a href="#cb22-28" aria-hidden="true" tabindex="-1"></a>  PuntoMateriale protone  <span class="op">{</span>mp<span class="op">,</span>  e<span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="op">-</span>d <span class="op">/</span> <span class="dv">2</span><span class="op">};</span></span>
+<span id="cb22-29"><a href="#cb22-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-30"><a href="#cb22-30" aria-hidden="true" tabindex="-1"></a>  CampoVettoriale E<span class="op">{</span>elettrone<span class="op">.</span>CampoElettrico<span class="op">(</span>r<span class="op">)</span> <span class="op">+</span> protone<span class="op">.</span>CampoElettrico<span class="op">(</span>r<span class="op">)};</span></span>
+<span id="cb22-31"><a href="#cb22-31" aria-hidden="true" tabindex="-1"></a>  fmt<span class="op">::</span>println<span class="op">(</span><span class="st">&quot;E = (</span><span class="sc">{}</span><span class="st">, </span><span class="sc">{}</span><span class="st">, </span><span class="sc">{}</span><span class="st">) N/C&quot;</span><span class="op">,</span> E<span class="op">.</span>getFx<span class="op">(),</span> E<span class="op">.</span>getFy<span class="op">(),</span> E<span class="op">.</span>getFz<span class="op">());</span></span>
+<span id="cb22-32"><a href="#cb22-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-33"><a href="#cb22-33" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb22-34"><a href="#cb22-34" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 <p>A partire da questo esempio completare le richieste dell’esercizio:</p>
 <ul>
 <li><p>Si aggiunga un ciclo che permetta di calcolare il campo a distanze via via crescenti</p></li>
@@ -543,58 +588,58 @@ clean:
 <p><input type="text" value="curl 'https://raw.githubusercontent.com/ziotom78/gplotpp/master/gplot%2B%2B.h' > gplot++.h" id="installGplotpp" readonly="1" size="60"><button onclick='copyFmtInstallationScript("installGplotpp")'>Copia</button></p>
 <p>Per produrre un grafico di <span class="math inline">E = E(r)</span> con <a href="https://github.com/ziotom78/gplotpp">gplot++</a>, dovete salvare le ascisse e le ordinate dei punti del grafico in due <code>std::vector</code>, e poi chiamare il metodo <code>Gnuplot::plot(x, y)</code>.</p>
 <p>Di seguito viene riportato un esempio:</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;fmtlib.h&quot;</span></span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;gplot++.h&quot;</span></span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="co">// ...</span></span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a><span class="kw">using</span> <span class="kw">namespace</span> std<span class="op">;</span></span>
-<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a><span class="at">const</span> <span class="dt">double</span> delta <span class="op">=</span> <span class="fl">1e-10</span><span class="op">;</span></span>
-<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a><span class="co">// Siccome questo programma non richiede di leggere parametri dalla linea di</span></span>
-<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a><span class="co">// comando, non c&#39;è bisogno di specificare &quot;argc&quot; e &quot;argv&quot;. (Se lo faceste,</span></span>
-<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a><span class="co">// il compilatore probabilmente emetterebbe qualche tipo di warning, perché</span></span>
-<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a><span class="co">// l&#39;argomento è stato dichiarato ma mai usato).</span></span>
-<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
-<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>  vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> d_vec<span class="op">;</span> <span class="co">// Vettore delle distanze (asse x)</span></span>
-<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a>  vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> E_vec<span class="op">;</span> <span class="co">// Vettore dei moduli del campo elettrico (asse y)</span></span>
-<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Questo ciclo &quot;for&quot; calcola il valore del campo per 90 punti,</span></span>
-<span id="cb19-19"><a href="#cb19-19" aria-hidden="true" tabindex="-1"></a>  <span class="co">// da 100δ a 1000δ in passi di 10δ</span></span>
-<span id="cb19-20"><a href="#cb19-20" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> <span class="op">(</span><span class="dt">double</span> dist<span class="op">{</span><span class="dv">100</span> <span class="op">*</span> delta<span class="op">};</span> dist <span class="op">&lt;=</span> <span class="dv">1000</span> <span class="op">*</span> delta<span class="op">;</span> dist <span class="op">+=</span> <span class="dv">10</span> <span class="op">*</span> delta<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb19-21"><a href="#cb19-21" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Il vettore `d_vec` è usato per la stampa a video e il plot, non per i</span></span>
-<span id="cb19-22"><a href="#cb19-22" aria-hidden="true" tabindex="-1"></a>    <span class="co">// calcoli, quindi è meglio salvare il dato in nm anziché m (è più leggibile).</span></span>
-<span id="cb19-23"><a href="#cb19-23" aria-hidden="true" tabindex="-1"></a>    d_vec<span class="op">.</span>push_back<span class="op">(</span>dist <span class="op">*</span> <span class="fl">1e9</span><span class="op">);</span></span>
-<span id="cb19-24"><a href="#cb19-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-25"><a href="#cb19-25" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Inserire qui il codice che calcola il modulo del campo alla distanza</span></span>
-<span id="cb19-26"><a href="#cb19-26" aria-hidden="true" tabindex="-1"></a>    <span class="co">// `dist`</span></span>
-<span id="cb19-27"><a href="#cb19-27" aria-hidden="true" tabindex="-1"></a>    <span class="dt">double</span> e_field<span class="op">{...};</span></span>
-<span id="cb19-28"><a href="#cb19-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-29"><a href="#cb19-29" aria-hidden="true" tabindex="-1"></a>    E_vec<span class="op">.</span>push_back<span class="op">(</span>e_field<span class="op">);</span></span>
-<span id="cb19-30"><a href="#cb19-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-31"><a href="#cb19-31" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Stampa anche a video: è sempre bene farlo per controllare i numeri!</span></span>
-<span id="cb19-32"><a href="#cb19-32" aria-hidden="true" tabindex="-1"></a>    fmt<span class="op">::</span>println<span class="op">(</span><span class="st">&quot;</span><span class="sc">{:.5e}</span><span class="st"> </span><span class="sc">{:.5e}</span><span class="st">&quot;</span><span class="op">,</span> dist<span class="op">,</span> e_field<span class="op">);</span></span>
-<span id="cb19-33"><a href="#cb19-33" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
-<span id="cb19-34"><a href="#cb19-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-35"><a href="#cb19-35" aria-hidden="true" tabindex="-1"></a>  Gnuplot plt<span class="op">{};</span></span>
-<span id="cb19-36"><a href="#cb19-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-37"><a href="#cb19-37" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Togliere questa riga se si preferisce che il grafico appaia in una finestra</span></span>
-<span id="cb19-38"><a href="#cb19-38" aria-hidden="true" tabindex="-1"></a>  <span class="co">// interattiva (consigliato sul proprio computer o su quelli del laboratorio,</span></span>
-<span id="cb19-39"><a href="#cb19-39" aria-hidden="true" tabindex="-1"></a>  <span class="co">// sconsigliato se si usa Repl.it)</span></span>
-<span id="cb19-40"><a href="#cb19-40" aria-hidden="true" tabindex="-1"></a>  plt<span class="op">.</span>redirect_to_png<span class="op">(</span><span class="st">&quot;esercizio05.3.png&quot;</span><span class="op">);</span></span>
-<span id="cb19-41"><a href="#cb19-41" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-42"><a href="#cb19-42" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Disegna le ascisse usando una scala bilogaritmica, così che y ∝ 1/r³ viene</span></span>
-<span id="cb19-43"><a href="#cb19-43" aria-hidden="true" tabindex="-1"></a>  <span class="co">// trasformato in una legge lineare y&#39; = ξ − 3r&#39;, con y&#39; = log(y), r&#39; = log(r).</span></span>
-<span id="cb19-44"><a href="#cb19-44" aria-hidden="true" tabindex="-1"></a>  plt<span class="op">.</span>set_logscale<span class="op">(</span>Gnuplot<span class="op">::</span>AxisScale<span class="op">::</span>LOGXY<span class="op">);</span></span>
-<span id="cb19-45"><a href="#cb19-45" aria-hidden="true" tabindex="-1"></a>  plt<span class="op">.</span>set_xlabel<span class="op">(</span><span class="st">&quot;Distance [nm]&quot;</span><span class="op">);</span></span>
-<span id="cb19-46"><a href="#cb19-46" aria-hidden="true" tabindex="-1"></a>  plt<span class="op">.</span>set_ylabel<span class="op">(</span><span class="st">&quot;Electric field [N/C]&quot;</span><span class="op">);</span></span>
-<span id="cb19-47"><a href="#cb19-47" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-48"><a href="#cb19-48" aria-hidden="true" tabindex="-1"></a>  plt<span class="op">.</span>plot<span class="op">(</span>d_vec<span class="op">,</span> E_vec<span class="op">);</span></span>
-<span id="cb19-49"><a href="#cb19-49" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-50"><a href="#cb19-50" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Ricordarsi di chiamarlo, altrimenti il grafico non verrà salvato/visualizzato</span></span>
-<span id="cb19-51"><a href="#cb19-51" aria-hidden="true" tabindex="-1"></a>  plt<span class="op">.</span>show<span class="op">();</span></span>
-<span id="cb19-52"><a href="#cb19-52" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;fmtlib.h&quot;</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;gplot++.h&quot;</span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="co">// ...</span></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a><span class="kw">using</span> <span class="kw">namespace</span> std<span class="op">;</span></span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a><span class="at">const</span> <span class="dt">double</span> delta <span class="op">=</span> <span class="fl">1e-10</span><span class="op">;</span></span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a><span class="co">// Siccome questo programma non richiede di leggere parametri dalla linea di</span></span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a><span class="co">// comando, non c&#39;è bisogno di specificare &quot;argc&quot; e &quot;argv&quot;. (Se lo faceste,</span></span>
+<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a><span class="co">// il compilatore probabilmente emetterebbe qualche tipo di warning, perché</span></span>
+<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a><span class="co">// l&#39;argomento è stato dichiarato ma mai usato).</span></span>
+<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb26-15"><a href="#cb26-15" aria-hidden="true" tabindex="-1"></a>  vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> d_vec<span class="op">;</span> <span class="co">// Vettore delle distanze (asse x)</span></span>
+<span id="cb26-16"><a href="#cb26-16" aria-hidden="true" tabindex="-1"></a>  vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> E_vec<span class="op">;</span> <span class="co">// Vettore dei moduli del campo elettrico (asse y)</span></span>
+<span id="cb26-17"><a href="#cb26-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-18"><a href="#cb26-18" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Questo ciclo &quot;for&quot; calcola il valore del campo per 90 punti,</span></span>
+<span id="cb26-19"><a href="#cb26-19" aria-hidden="true" tabindex="-1"></a>  <span class="co">// da 100δ a 1000δ in passi di 10δ</span></span>
+<span id="cb26-20"><a href="#cb26-20" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> <span class="op">(</span><span class="dt">double</span> dist<span class="op">{</span><span class="dv">100</span> <span class="op">*</span> delta<span class="op">};</span> dist <span class="op">&lt;=</span> <span class="dv">1000</span> <span class="op">*</span> delta<span class="op">;</span> dist <span class="op">+=</span> <span class="dv">10</span> <span class="op">*</span> delta<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb26-21"><a href="#cb26-21" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Il vettore `d_vec` è usato per la stampa a video e il plot, non per i</span></span>
+<span id="cb26-22"><a href="#cb26-22" aria-hidden="true" tabindex="-1"></a>    <span class="co">// calcoli, quindi è meglio salvare il dato in nm anziché m (è più leggibile).</span></span>
+<span id="cb26-23"><a href="#cb26-23" aria-hidden="true" tabindex="-1"></a>    d_vec<span class="op">.</span>push_back<span class="op">(</span>dist <span class="op">*</span> <span class="fl">1e9</span><span class="op">);</span></span>
+<span id="cb26-24"><a href="#cb26-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-25"><a href="#cb26-25" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Inserire qui il codice che calcola il modulo del campo alla distanza</span></span>
+<span id="cb26-26"><a href="#cb26-26" aria-hidden="true" tabindex="-1"></a>    <span class="co">// `dist`</span></span>
+<span id="cb26-27"><a href="#cb26-27" aria-hidden="true" tabindex="-1"></a>    <span class="dt">double</span> e_field<span class="op">{...};</span></span>
+<span id="cb26-28"><a href="#cb26-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-29"><a href="#cb26-29" aria-hidden="true" tabindex="-1"></a>    E_vec<span class="op">.</span>push_back<span class="op">(</span>e_field<span class="op">);</span></span>
+<span id="cb26-30"><a href="#cb26-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-31"><a href="#cb26-31" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Stampa anche a video: è sempre bene farlo per controllare i numeri!</span></span>
+<span id="cb26-32"><a href="#cb26-32" aria-hidden="true" tabindex="-1"></a>    fmt<span class="op">::</span>println<span class="op">(</span><span class="st">&quot;</span><span class="sc">{:.5e}</span><span class="st"> </span><span class="sc">{:.5e}</span><span class="st">&quot;</span><span class="op">,</span> dist<span class="op">,</span> e_field<span class="op">);</span></span>
+<span id="cb26-33"><a href="#cb26-33" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb26-34"><a href="#cb26-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-35"><a href="#cb26-35" aria-hidden="true" tabindex="-1"></a>  Gnuplot plt<span class="op">{};</span></span>
+<span id="cb26-36"><a href="#cb26-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-37"><a href="#cb26-37" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Togliere questa riga se si preferisce che il grafico appaia in una finestra</span></span>
+<span id="cb26-38"><a href="#cb26-38" aria-hidden="true" tabindex="-1"></a>  <span class="co">// interattiva (consigliato sul proprio computer o su quelli del laboratorio,</span></span>
+<span id="cb26-39"><a href="#cb26-39" aria-hidden="true" tabindex="-1"></a>  <span class="co">// sconsigliato se si usa Repl.it)</span></span>
+<span id="cb26-40"><a href="#cb26-40" aria-hidden="true" tabindex="-1"></a>  plt<span class="op">.</span>redirect_to_png<span class="op">(</span><span class="st">&quot;esercizio05.3.png&quot;</span><span class="op">);</span></span>
+<span id="cb26-41"><a href="#cb26-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-42"><a href="#cb26-42" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Disegna le ascisse usando una scala bilogaritmica, così che y ∝ 1/r³ viene</span></span>
+<span id="cb26-43"><a href="#cb26-43" aria-hidden="true" tabindex="-1"></a>  <span class="co">// trasformato in una legge lineare y&#39; = ξ − 3r&#39;, con y&#39; = log(y), r&#39; = log(r).</span></span>
+<span id="cb26-44"><a href="#cb26-44" aria-hidden="true" tabindex="-1"></a>  plt<span class="op">.</span>set_logscale<span class="op">(</span>Gnuplot<span class="op">::</span>AxisScale<span class="op">::</span>LOGXY<span class="op">);</span></span>
+<span id="cb26-45"><a href="#cb26-45" aria-hidden="true" tabindex="-1"></a>  plt<span class="op">.</span>set_xlabel<span class="op">(</span><span class="st">&quot;Distance [nm]&quot;</span><span class="op">);</span></span>
+<span id="cb26-46"><a href="#cb26-46" aria-hidden="true" tabindex="-1"></a>  plt<span class="op">.</span>set_ylabel<span class="op">(</span><span class="st">&quot;Electric field [N/C]&quot;</span><span class="op">);</span></span>
+<span id="cb26-47"><a href="#cb26-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-48"><a href="#cb26-48" aria-hidden="true" tabindex="-1"></a>  plt<span class="op">.</span>plot<span class="op">(</span>d_vec<span class="op">,</span> E_vec<span class="op">);</span></span>
+<span id="cb26-49"><a href="#cb26-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-50"><a href="#cb26-50" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Ricordarsi di chiamarlo, altrimenti il grafico non verrà salvato/visualizzato</span></span>
+<span id="cb26-51"><a href="#cb26-51" aria-hidden="true" tabindex="-1"></a>  plt<span class="op">.</span>show<span class="op">();</span></span>
+<span id="cb26-52"><a href="#cb26-52" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 <p>Questo è il risultato atteso:</p>
 <p><img src="./images/esercizio05.3.png" /></p>
 <p>Notare che la pendenza della retta sul grafico bilogaritmico è −3: per un ordine di grandezza in più sull’asse <span class="math inline">x</span> (da 10 a 100 nm) ci sono tre ordini di grandezza in meno (da <span class="math inline">5 \times 10^5</span> a <span class="math inline">500\,\text{N/C}</span>) sull’asse <span class="math inline">y</span>. Questo corrisponde al fatto che se <span class="math inline">r \gg \delta</span> allora <span class="math display">
@@ -628,12 +673,12 @@ P_k = \left(r_0 \cos\left(\frac{2\pi k}n\right), r_0 \sin\left(\frac{2\pi k}n\ri
 <li><p>L’errore di gran lunga più comune è sbagliare l’implementazione della formula del campo, che oggettivamente è complicata! Riguardate in particolare queste cose:</p>
 <ol>
 <li><p>Unità di misura delle costanti;</p></li>
-<li><p>Attenzione a come scrivete i numeri in notazione scientifica! Il numero <span class="math inline">10^{-4}</span> si scrive <code>1e-4</code>, <strong>non</strong> <code>10e-4</code>, perché la scrittura <code>1e-4</code> indica effettivamente <span class="math inline">1 \times 10^{-4}</span>, così come 7.5e-3 indica <span class="math inline">7.5\times 10^{-3}</span>.</p></li>
+<li><p>Attenzione a come scrivete i numeri in notazione scientifica! Il numero <span class="math inline">10^{-4}</span> si scrive <code>1e-4</code>, <strong>non</strong> <code>10e-4</code>, perché la scrittura <code>1e-4</code> indica effettivamente <span class="math inline">1 \times 10^{-4}</span>, così come <code>7.5e-3</code> indica <span class="math inline">7.5\times 10^{-3}</span>.</p></li>
 <li><p>Verificate che ciò che deve stare al numeratore stia veramente al numeratore, e idem per il denominatore!</p></li>
 <li><p>Ovviamente, il campo di una singola carica deve andare come <span class="math inline">1/r^2</span>! Eppure un bel po’ di studenti consegnano codice che non segue neppure questa semplice proprietà…</p></li>
-<li><p>Quando calcolate la distanza <span class="math inline">d</span> tra due posizioni, assicuratevi di restituire <span class="math inline">d</span> e non <span class="math inline">d^2</span> (quante volte l’ho visto negli esercizi!).</p></li>
+<li><p>Quando calcolate la distanza <span class="math inline">d</span> tra due posizioni, assicuratevi di restituire <span class="math inline">d</span> e non <span class="math inline">d^2</span> (errore molto comune!).</p></li>
 </ol></li>
-<li><p>Stranamente, ogni anno più di uno studente sbaglia a implementare <code>operator+</code> per i vettori, e invece di calcolare <code>v + w</code> calcola in realtà <code>v + v = 2v</code>, oppure <code>w + w = 2w</code>.</p></li>
+<li><p>Stranamente, ogni anno più di uno studente sbaglia a implementare <code>operator+</code> per i vettori, e invece di calcolare <code>z = v + w</code> calcola in realtà <code>z = v + v = 2v</code>, oppure <code>z = w + w = 2w</code>.</p></li>
 <li><p>Nel leggere la posizione <code>x y z</code> a cui calcolare il campo del dipolo da linea di comando, assicuratevi di usare la funzione <a href="https://en.cppreference.com/w/cpp/string/basic_string/stof"><code>std::stod</code></a> oppure <a href="https://cplusplus.com/reference/cstdlib/atof/"><code>std::atof</code></a>, anziché <code>std::stoi</code> o <code>std::atoi</code>, perché queste ultime due restituiscono valori interi.</p></li>
 </ul>
 </main>
