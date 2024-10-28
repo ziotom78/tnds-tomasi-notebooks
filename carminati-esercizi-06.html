@@ -46,6 +46,7 @@
   <li><a href="#esercizio-6.0" id="toc-esercizio-6.0">Esercizio 6.0 - Metodi virtuali</a>
   <ul>
   <li><a href="#metodi-virtuali-e-classi-astratte" id="toc-metodi-virtuali-e-classi-astratte">Metodi virtuali e classi astratte</a></li>
+  <li><a href="#nota-sullorganizzazione-del-codice" id="toc-nota-sullorganizzazione-del-codice">Nota sull’organizzazione del codice</a></li>
   </ul></li>
   <li><a href="#esercizio-6.1" id="toc-esercizio-6.1">Esercizio 6.1 - Classe astratta FunzioneBase</a>
   <ul>
@@ -102,6 +103,8 @@
 </ul>
 <h2 id="metodi-virtuali-e-classi-astratte">Metodi virtuali e classi astratte</h2>
 <p>La parola chiave <code>virtual</code> informa il compilatore che il metodo indicato potrà venire sovrascritto dalle classi figlie, mentre la parola chiave <code>override</code> si segnala che si sta “sovrascrivendo” un metodo all’interno di una classe figlia. Quando si usano queste due parole chiave, durante l’esecuzione del programma, al momento di chiamare il metodo a partire da un puntatore alla classe madre, il programma valuterà se l’oggetto indirizzato è del tipo classe madre o una delle figlie. In quest’ultimo caso, invocherà il metodo appropriato della classe figlia reale. Un metodo virtuale può anche essere posto uguale a <code>0</code> (vedi prossimo esercizio): in tal caso è <em>obbligatorio</em> per le classi figlie implementarlo con <code>override</code>. In questo caso il metodo si dice “virtuale puro” e una classe che implementa almeno un metodo virtuale puro si dice <em>classe astratta</em>.</p>
+<h2 id="nota-sullorganizzazione-del-codice">Nota sull’organizzazione del codice</h2>
+<p>In linea di principio, si potrebbe pensare di costruire una coppia di files <code>.h</code> e <code>.cpp</code> per ogni classe che scriviamo. Questo potrebbe portare ad una proliferazione incontrollata del numero di files del nostro progetto. Per limitare questo effetto possiamo pensare di scrivere nello stesso file un set di classi affini tra loro: in questo caso specifico per esempio <code>Particella</code> ed <code>Elettrone</code> possono stare ragionevolmente nello stesso file.</p>
 <h1 id="esercizio-6.1">Esercizio 6.1 - Classe astratta FunzioneBase</h1>
 <p>In questo e nei prossimi esercizi avremo a che fare con diverse funzioni <span class="math inline">y = f(x)</span> di una sola variabilee e dovremo effettuare delle operazioni generiche su queste funzioni (come trovarne gli zeri o calclarne l’integrale in un certo intervallo). Dovremo pertanto strutturare il codice in modo che ogni algoritmo possa lavorare allo stesso modo su funzioni che possono essere diverse. Per fare questo è utile definire una classe astratta che implementi le proprietà generali della classe attraverso metodi virtuali puri, e poi lasciare alle classi derivate il compito di implementare concretamente tutti questi metodi (ed eventualmente quelli aggiuntivi necessari). Notate in questo caso che è buona prassi definire il distruttore di una classe madre astratta come <code>virtual</code>, in modo che il distruttore della classe figlia venga invocato correttamente quando un oggetto di tipo classe figlia viene distrutto. Per capire meglio la struttura del codice procediamo per passi. In questo esercizio scriviamo un set di classi per modellizzare una generica funzione di una variabile:</p>
 <ol>

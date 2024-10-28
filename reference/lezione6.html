@@ -521,6 +521,21 @@
   
 
     
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ProveEsame/TemiEsame/" class="md-nav__link">
+        Temi d'esame
+      </a>
+    </li>
+  
+
+    
   </ul>
 </nav>
                   </div>
@@ -640,8 +655,12 @@ Mentre le prime due chiamate <code>p-&gt;Print();</code> e <code>e-&gt;Print();<
 Se essa viene fornita, durante l'esecuzione del programma, al momento di chiamare il metodo a partire da un puntatore alla classe madre, il programma valuterà se l'oggetto indirizzato è del tipo classe madre o una delle figlie. In quest'ultimo caso, invocherà il metodo appropriato della classe figlia reale.
 Un metodo virtuale può anche essere posto a 0 (vedi prossimo esercizio), in tal caso è <em>obbligatorio</em> per le classi figlie implementarlo. In questo caso il metodo si dice <em>virtuale puro</em> e una classe che implementa almeno un metodo virtuale puro si dice <em>classe astratta</em>.</p>
 </details>
+<details class="tip">
+<summary>Nota sull'organizzazione del codice</summary>
+<p>In linea di principio si potrebbe pensare di costruire una coppia di files <code>.h</code> e <code>.cpp</code> per ogni classe che scriviamo. Questo potrebbe portare ad una proliferazione incontrollata del numero di files del nostro progetto. Per limitare questo effetto possiamo pensare di scrivere nello stesso file un set di classi affini tra loro: in questo caso specifico per esempio <code>Particella</code> ed <code>Elettrone</code> possono stare ragionevolemnte nello stesso file. </p>
+</details>
 <h2 id="esercizio-61-classe-astratta-funzionebase">ESERCIZIO 6.1 - Classe astratta FunzioneBase :</h2>
-<p>In questo e nei prossimi esercizi avremo a che fare con diverse funzioni di una sola variabile e dovremo effettuare delle operazioni generiche su queste funzioni (come trovarne gli zeri o  calclarne l'integrale in un certo intervallo). Dovremo pertanto strutturare il codice in modo che ogni algoritmo possa lavorare allo stesso modo su funzioni che possono essere diverse. Per fare questo è utile definire una classe astratta che implementi le proprietà generali della classe attraverso metodi virtuali puri e poi lasciare alle classi derivate il compito di implementare concretamente tutti questi metodi ( ed eventualmente quelli aggiuntivi necessari). Notate in questo caso che è buona prassi definire il distruttore di una classe madre astratta come <code>virtual</code> in modo che il distruttore della classe figlia venga invocato correttamente quando un oggetto di tipo classe figlia viene distrutto. 
+<p>In questo e nei prossimi esercizi avremo a che fare con diverse funzioni di una sola variabile e dovremo effettuare delle operazioni generiche su queste funzioni (come trovarne gli zeri o  calcolarne l'integrale in un certo intervallo). Dovremo pertanto strutturare il codice in modo che ogni algoritmo possa lavorare allo stesso modo su funzioni che possono essere diverse. Per fare questo è utile definire una classe astratta che implementi le proprietà generali della classe attraverso metodi virtuali puri e poi lasciare alle classi derivate il compito di implementare concretamente tutti questi metodi ( ed eventualmente quelli aggiuntivi necessari). Notate in questo caso che è buona prassi definire il distruttore di una classe madre astratta come <code>virtual</code> in modo che il distruttore della classe figlia venga invocato correttamente quando un oggetto di tipo classe figlia viene distrutto. 
 Per capire meglio la struttura del codice procediamo per passi. In questo esercizio scriviamo un set di classi per modellizzare una generica funzione di una variabile:</p>
 <ul>
 <li>definire la classe astratta <code>FunzioneBase</code> che implementi un metodo <code>double Eval(double x)</code> che modellizza l'effetto di applicare <script type="math/tex">f</script> in <script type="math/tex">x</script>.</li>
@@ -692,10 +711,6 @@ Per capire meglio la struttura del codice procediamo per passi. In questo eserci
 <p>Quando dichiariamo nullo un metodo virtual, la classe difetta dell'implementazione di tale metodo, e quindi non si possono creare oggetti di quella classe. Solo le sue classi derivate implementeranno il metodo, e possono essere implementate.
 Siccome non si possono costruire oggetti di tale classe, non è necessario definire dei costruttori.
 Se una classe astratta implementa solo metodi virtuali nulli, come in questo caso, non è neanche necessario realizzare un file di implementazione, né creare un file oggetto, dato che tutta l'informazione è contenuta nell'header. </p>
-</details>
-<details class="tip">
-<summary>Nota sull'organizzazione del codice</summary>
-<p>In linea di principio si potrebbe pensare di costruire una coppia di files <code>.h</code> e <code>.cpp</code> per ogni classe che scriviamo. Questo potrebbe portare ad una proliferazione incontrollata del numero di files del nostro progetto. Per limitare questo effetto possiamo pensare di scrivere nello stesso file un set di classi affini tra loro: in questo caso specifico per esempio <code>Particella</code> ed <code>Elettrone</code> possono stare ragionevolemnte nello stesso file. </p>
 </details>
 <h2 id="esercizio-62-metodo-della-bisezione-da-consegnare">ESERCIZIO 6.2 - Metodo della bisezione (da consegnare):</h2>
 <p>Passiamo ora alla codifica della parte relativa agli algoritmi di ricerca degli zeri di una funzione: proviamo a scrivere un programma che calcoli gli zeri della funzione <script type="math/tex">f(x) = 3x^{2}+5x-2</script>. Il programma dovrà leggere da riga di comando gli estremi dell'intervallo in cui cercare lo zero e la precisione richiesta. Per calcolare gli zeri, implementeremo una classe astratta <code>Solutore</code> ed una classe concreta che realizza il <em>metodo della bisezione</em> visto a lezione. Nulla vieta di implementare anche il <em>metodo delle secanti</em> usando lo stesso schema.
@@ -809,7 +824,7 @@ Come nel caso della <code>FunzioneBase</code> notate l'implementazione del distr
 <span class="w">                                  </span><span class="kt">double</span><span class="w"> </span><span class="n">prec</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.001</span><span class="w"> </span><span class="p">,</span>
 <span class="w">                                  </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">nmax</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">100</span><span class="p">)</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="p">;</span>
 
-<span class="w">  </span><span class="k">virtual</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="nf">CercaReference</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">xmin</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">xmax</span><span class="p">,</span>
+<span class="w">  </span><span class="k">virtual</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="nf">CercaZeriReference</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">xmin</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">xmax</span><span class="p">,</span>
 <span class="w">                                </span><span class="k">const</span><span class="w"> </span><span class="n">FunzioneBase</span><span class="o">&amp;</span><span class="w"> </span><span class="n">f</span><span class="p">,</span>
 <span class="w">                                </span><span class="kt">double</span><span class="w"> </span><span class="n">prec</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.001</span><span class="p">,</span>
 <span class="w">                                </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">nmax</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">100</span><span class="p">)</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="p">;</span>
@@ -848,13 +863,13 @@ Per cui per impostare il numero di cifre significative nella scrittura a video i
 <details class="tip">
 <summary>Valori di default nelle funzioni</summary>
 <p>Avrete probabilmente notato che nella dichiarazione di <code>CercaZeri</code> abbiamo assegnato dei valori di default a <code>prec</code> e <code>nmax</code>.
-<div class="highlight"><pre><span></span><code><span class="k">virtual</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="nf">CercaReference</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">xmin</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">xmax</span><span class="p">,</span>
+<div class="highlight"><pre><span></span><code><span class="k">virtual</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="nf">CercaZeriReference</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">xmin</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">xmax</span><span class="p">,</span>
 <span class="w">                              </span><span class="k">const</span><span class="w"> </span><span class="n">FunzioneBase</span><span class="o">&amp;</span><span class="w"> </span><span class="n">f</span><span class="p">,</span>
 <span class="w">                              </span><span class="kt">double</span><span class="w"> </span><span class="n">prec</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.001</span><span class="p">,</span>
 <span class="w">                              </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">nmax</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">100</span><span class="p">)</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="p">;</span>
 </code></pre></div>
 Questo significa che le ulttime due variabili possono essere omesse nella chiamata nel <code>main</code> 
-<div class="highlight"><pre><span></span><code><span class="n">bisettore</span><span class="p">.</span><span class="n">CercaReference</span><span class="p">(</span><span class="w"> </span><span class="n">xmin</span><span class="p">,</span><span class="w"> </span><span class="n">xmax</span><span class="p">,</span><span class="w"> </span><span class="n">f</span><span class="w"> </span><span class="p">);</span>
+<div class="highlight"><pre><span></span><code><span class="n">bisettore</span><span class="p">.</span><span class="n">CercaZeriReference</span><span class="p">(</span><span class="w"> </span><span class="n">xmin</span><span class="p">,</span><span class="w"> </span><span class="n">xmax</span><span class="p">,</span><span class="w"> </span><span class="n">f</span><span class="w"> </span><span class="p">);</span>
 </code></pre></div>
 e il metodo utilizzerà i valori  si 0.001 e 100 per <code>prec</code> e <code>nmax</code>. </p>
 </details>
