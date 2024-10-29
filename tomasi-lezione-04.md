@@ -72,7 +72,7 @@
          << pos_y, << ", " << pos_z << ")" << endl;
     ```
 
--   Questo codice è complicato da leggere, perché ci sono troppi operatori `<<` (e infatti c'è un errore: lo trovate?).
+-   Questo codice è complicato da leggere, perché ci sono troppi operatori `<<` (e infatti c'è un errore: lo trovate?). Già nel 2010 Herb Sutter scriveva che `cout` è [*a pain to use*](https://stackoverflow.com/questions/2485963/c-alignment-when-printing-cout/2486085#2486085)!
 
 
 # Formattare stringhe in C++20
