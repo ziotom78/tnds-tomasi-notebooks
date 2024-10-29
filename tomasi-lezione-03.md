@@ -149,8 +149,8 @@ Con l'esempio seguente, è possibile usare il reindirizzamento:
 
 -   Esistono due tipi di errori in un programma:
 
-    1.  Errori del **programmatore**, che ha sbagliato a scrivere il codice;
-    2.  Errori dell'**utente**, che ha invocato il programma in modo scorretto.
+    1.  Errori del **programmatore**, che ha sbagliato a scrivere il codice: per correggerli, bisogna modificare il programma e ricompilare;
+    2.  Errori dell'**utente**, che ha invocato il programma in modo scorretto: per correggerli, l'utente deve sistemare gli input.
 
 -   È importante gestire i due casi in modo diverso, perché l'azione più appropriata dipende dal contesto.
 

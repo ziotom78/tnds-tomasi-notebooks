@@ -73,7 +73,7 @@ In questo e nei prossimi esercizi avremo a che fare con diverse funzioni $y = f(
     };
     ```
 
-#.  Implementare una classe derivata `Parabola` che descriva una funzione del tipo $f(x) = a x^2 + b x + c$ (chiaramente questa classe dovrà avere i data membri per i parameteri $a$, $b$ e $c$, ed i metodi per definirli e accederci):
+#.  Implementare una classe derivata `Parabola` che descriva una funzione del tipo $f(x) = a x^2 + b x + c$ (chiaramente questa classe dovrà avere i data membri per i parametri $a$, $b$ e $c$, ed i metodi per definirli e accederci):
 
     ```c++
     class Parabola : public FunzioneBase {
@@ -198,7 +198,7 @@ Ci sono vari modi di implementare una funzione segno da utilizzare nella codific
     }
     ```
 
-#.  La libreria standard C++11 fornisce la funzione `std::copysign`, definita in `<cmath>`, che copia il segno di una variabile `double` in un valore, e la cui esecuzione è particolarmente ottimizzata (perché corrisponde a una singla istruzione sulle CPU x86_64). Si può quindi usare questa definizione:
+#.  La libreria standard C++11 fornisce la funzione `std::copysign`, definita in `<cmath>`, che copia il segno di una variabile `double` in un valore, e la cui esecuzione è particolarmente ottimizzata (perché corrisponde a una singla istruzione in linguaggio macchina sulle CPU x86_64). Si può quindi usare questa definizione:
 
     ```c++
     // Use "inline" if you're going to put this definition in a .h file!
@@ -293,7 +293,7 @@ public:
 };
 ```
 
-Per segnalare condizioni di errore potete usare i suggerimenti spiegati nelle [slide di approfondimento](./tomasi-lezione-06.html#use-of-nan).
+Per segnalare condizioni di errore potete usare i suggerimenti spiegati nelle [slide di approfondimento](./tomasi-lezione-06.html#gestione-errori).
 
 
 
@@ -370,7 +370,28 @@ $$
 
 # Esercizio 6.4 - Ricerca di zeri di una funzione senza uso del polimorfismo {#esercizio-6.4}
 
-Si provi ad implementare un algoritmo di ricerca degli zeri di una funzione senza utilizzare il polimorfismo. Prendere come spunto le soluzioni indicate nelle trasparenze finali della lezione teorica. Si potrebbe codificare il metodo della bisezione in una funzione che accetti in input una `std::function`, e modellizzare la funzione di cui si vuole cercare lo zero con una funzione lambda.
+Si provi ad implementare un algoritmo di ricerca degli zeri di una funzione senza utilizzare il polimorfismo. Prendere come spunto le soluzioni indicate nelle trasparenze finali della lezione teorica.
+
+Una possibilità è codificare il metodo della bisezione in una funzione che accetti in input una `std::function`, e modellizzare la funzione di cui si vuole cercare lo zero con una funzione lambda.
+
+Un'altra possibilità è implementare una funzione template:
+
+```c++
+template<typename T>
+std::expected<double, string> bisect(double xmin, double xmax, T fn) {
+    // Here you can write `fn(x)` to call `fn`:
+}
+
+double f(double x) {
+  return 3 * x * x + 5 * x - 2;
+}
+
+int main() {
+  // …
+  auto result{bisect(xmin, xmax, f)};
+  // …
+}
+```
 
 
 # Errori comuni
@@ -387,7 +408,7 @@ Come di consueto, elenco alcuni errori molto comuni che ho trovato negli anni pa
 
 -   Un errore un po' più subdolo è quello di non individuare lo zero se si trova esattamente in mezzo all'intervallo: nell'esempio della funzione $f(x)$ vista sopra, il codice di alcuni studenti non trova una soluzione se si specifica l'intervallo $[-3, -1]$, perché lo zero cade esattamente a metà e il codice non si accorge che $f(c) = 0$ quando $c = (a + b)/2$.
 
--   Il codice di alcuni studenti non si accorge di aver raggiunto la precisione richiesta, e continua ad iterare fino al numero massimo di iterazioni `m_nmax`.
+-   Mi è capitato di aver visto codici che non si accorgono di aver raggiunto la precisione richiesta, e continuano ad iterare fino al numero massimo di iterazioni `m_nmax`; di solito il problema è la mancanza dell'uso di `fabs()` per calcolare l'ampiezza dell'intervallo $\left|b - a\right|$.
 
 ---
 title: "Lezione 6: Ricerca di zeri"

@@ -149,7 +149,8 @@ href="https://ziotom78.github.io/tnds-tomasi-notebooks/">ziotom78.github.io/tnds
 6.3</a>: Equazioni non risolubili analiticamente (<strong>da
 consegnare</strong>)</li>
 <li><a href="./carminati-esercizi-06.html#esercizio-6.4">Esercizio
-6.4</a>: Ricerca di zeri di una funzione senza uso del polimorfismo</li>
+6.4</a>: Ricerca di zeri di una funzione senza uso del polimorfismo
+(facoltativo, ma <strong>MOLTO IMPORTANTE</strong>!)</li>
 </ul>
 </section>
 <section id="virtual-methods" class="slide level1">
@@ -286,7 +287,8 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb6-1"><a href="#c
 <li>Si crea una variabile di un tipo base
 (<code>Particella</code>)…</li>
 <li>…ma poi le si vuole assegnare una variabile di un tipo derivato
-(<code>Elettrone</code>).</li>
+(<code>Elettrone</code>), che <strong>non è noto in fase di
+compilazione</strong>.</li>
 </ol></li>
 </ul>
 </section>
@@ -364,130 +366,238 @@ sono di segno concorde.</p></li>
 <div class="sourceCode" id="cb11"><pre
 class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="op">(</span>f<span class="op">(</span>a<span class="op">)</span> <span class="op">*</span> f<span class="op">(</span>b<span class="op">)</span> <span class="op">&lt;</span> <span class="dv">0</span><span class="op">)</span> <span class="op">{</span> … <span class="op">}</span></span></code></pre></div>
 <p>non è consigliabile, perché se <code>f(a)</code> o <code>f(b)</code>
-sono molto piccoli, il risultato potrebbe essere nullo. Meglio usare
-un’espressione come</p>
+sono molto piccoli, il risultato potrebbe essere nullo. Meglio <a
+href="carminati-esercizi-06.html#la-funzione-segno">usare una funzione
+<code>sign</code></a></p>
 <div class="sourceCode" id="cb12"><pre
 class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="op">(</span>sign<span class="op">(</span>f<span class="op">(</span>a<span class="op">))</span> <span class="op">*</span> sign<span class="op">(</span>f<span class="op">(</span>b<span class="op">))</span> <span class="op">&lt;</span> <span class="dv">0</span><span class="op">)</span> <span class="op">{</span> … <span class="op">}</span></span></code></pre></div></li>
 </ul>
 </section>
-<section id="use-of-nan" class="slide level1">
-<h1>Uso di NaN</h1>
+<section id="gestione-errori" class="slide level1">
+<h1>Gestione di errori</h1>
 </section>
 <section id="condizioni-derrore" class="slide level1">
 <h1>Condizioni d’errore</h1>
-<p>Il metodo di bisezione fallisce se le ipotesi del teorema degli zeri
-non valgono. Cosa fare in questo caso?</p>
+<ul>
+<li><p>Il metodo di bisezione fallisce se le ipotesi del teorema degli
+zeri non valgono. Cosa fare in questo caso?</p></li>
+<li><p>Ricordiamo che esistono <a
+href="tomasi-lezione-03.html#tipi-di-errore">due tipi di errori</a>:</p>
+<ul>
+<li><p><strong>Errori dell’utente</strong>: è l’utente che ha sbagliato
+a usare il programma, e deve rimediare facendolo ripartire con gli input
+giusti;</p></li>
+<li><p><strong>Errori del programmatore</strong>: è il programmatore che
+deve rimediare modificando il programma e ricompilandolo.</p></li>
+</ul></li>
+<li><p>Oggi implementiamo due esercizi in cui il metodo di bisezione può
+fallire per colpa dell’utente (<a
+href="carminati-esercizi-06.html#esercizio-6.2">esercizio 6.2</a>) o del
+programmatore (<a
+href="carminati-esercizi-06.html#esercizio-6.3">esercizio 6.3</a>). Come
+facciamo?</p></li>
+</ul>
+</section>
+<section id="condizioni-di-errore" class="slide level1">
+<h1>Condizioni di errore</h1>
+<pre><code>$ ./esercizio-6.2 4 6
+Errore, il teorema degli zeri non è valido nell&#39;intervallo [4, 6]. Usa un altro intervallo
+
+$ ./esercizio-6.3
+fish: Job 1, &#39;./esercizio-6.3&#39; terminated by signal SIGABRT (Abort)</code></pre>
+<p>(Se un programma termina invocando <code>abort()</code>, eseguendolo
+all’interno di <a href="qt-creator.html">QtCreator</a> in modalità
+debugging si può ispezionare il valore delle variabili al momento in cui
+è andato in crash: molto utile per correggere il bug!)</p>
+</section>
+<section id="approcci-possibili" class="slide level1">
+<h1>Approcci possibili</h1>
 <ol type="1">
-<li><p>Scrivere un messaggio di errore e invocare
-<code>abort()</code>;</p></li>
-<li><p>Restituire un valore fissato (es., zero). Questo è però
-ambiguo!</p></li>
+<li><p>Scrivere un messaggio di errore e invocare <code>abort()</code>:
+bene se l’errore è del programmatore, male se l’errore è dell’utente!
+😠</p></li>
+<li><p>Restituire un valore fissato (es., zero): molto ambiguo, come fa
+l’utente a sapere se la funzione si annulla veramente per <span
+class="math inline">x = 0</span> o se c’è stato un errore? 😠</p></li>
 <li><p>Accettare un parametro aggiuntivo <code>bool &amp;found</code>
 per <code>CercaZeri</code>:</p>
-<div class="sourceCode" id="cb13"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> CercaZeri<span class="op">(</span><span class="dt">double</span> xmin<span class="op">,</span> <span class="dt">double</span> xmax<span class="op">,</span> <span class="at">const</span> FunzioneBase <span class="op">*</span> f<span class="op">,</span> <span class="dt">bool</span> <span class="op">&amp;</span>found<span class="op">);</span></span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> CercaZeri<span class="op">(</span><span class="dt">double</span> xmin<span class="op">,</span> <span class="dt">double</span> xmax<span class="op">,</span> <span class="at">const</span> FunzioneBase <span class="op">*</span> f<span class="op">,</span> <span class="dt">bool</span> <span class="op">&amp;</span>found<span class="op">);</span></span></code></pre></div>
 <p>(In alternativa si può dichiarare <code>found</code> variabile membro
 di <code>Solutore</code>).</p></li>
 </ol>
 </section>
-<section id="condizioni-di-errore-con-nan" class="slide level1">
-<h1>Condizioni di errore con NaN</h1>
-<ul>
-<li><p>Una possibile alternativa è l’uso di un valore
-<em>Not-a-number</em> (NaN) come risultato della chiamata:</p>
-<div class="sourceCode" id="cb14"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;cmath&gt;</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> my_function<span class="op">(</span>…<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span><span class="op">(</span>something_is_invalid<span class="op">())</span> <span class="op">{</span></span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>      <span class="cf">return</span> <span class="bu">std::</span>nan<span class="op">(</span><span class="st">&quot;&quot;</span><span class="op">);</span> <span class="co">// Return a NaN</span></span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Continue</span></span>
-<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div></li>
-<li><p>È una implementazione dell’idea numero 2 (restituire un valore
-fissato in caso di errore) che non ha ambiguità.</p></li>
-</ul>
-</section>
-<section id="controllo-di-nan" class="slide level1">
-<h1>Controllo di NaN</h1>
-<ul>
-<li><p>Per controllare se il valore restituito è un NaN, si può usare la
-funzione <code>isnan</code> (in <code>&lt;cmath&gt;</code>):</p>
+<section id="segnalare-lerrore" class="slide level1">
+<h1>Segnalare l’errore</h1>
+<p>Con il terzo approccio è possibile differenziare la “reazione”
+all’errore nel <code>main</code> dei due esercizi</p>
 <div class="sourceCode" id="cb15"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Codice nel `main`</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> x<span class="op">{</span>CercaZeri<span class="op">(</span><span class="fl">0.</span><span class="op">,</span> <span class="fl">1.</span><span class="op">,</span> f<span class="op">)};</span></span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span><span class="op">(</span>isnan<span class="op">(</span>x<span class="op">))</span> <span class="op">{</span></span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Print a error message to std::cerr</span></span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div></li>
-<li><p>I NaN hanno anche la proprietà che non sono uguali a se
-stessi:</p>
-<div class="sourceCode" id="cb16"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span><span class="op">(</span>x <span class="op">!=</span> x<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">// This is true only if `x` is a NaN</span></span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div></li>
-</ul>
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co">// main() dell&#39;esercizio 6.2 (errore dell&#39;utente):</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> xmin<span class="op">{</span>stod<span class="op">(</span>argv<span class="op">[</span><span class="dv">1</span><span class="op">])},</span> xmax<span class="op">{</span>stod<span class="op">(</span>argv<span class="op">[</span><span class="dv">2</span><span class="op">])};</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="dt">bool</span> found<span class="op">;</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> x<span class="op">{</span>bisezione<span class="op">.</span>CercaZeri<span class="op">(</span>xmin<span class="op">,</span> xmax<span class="op">,</span> f<span class="op">,</span> found<span class="op">)};</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="op">(!</span> found<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>    fmt<span class="op">::</span>println<span class="op">(</span><span class="st">&quot;Errore, il teorema degli zeri non è valido nell&#39;intervallo &quot;</span></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>                 <span class="st">&quot;[</span><span class="sc">{}</span><span class="st">, </span><span class="sc">{}</span><span class="st">]. Usa un altro intervallo&quot;</span><span class="op">,</span> xmin<span class="op">,</span> xmax<span class="op">);</span></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a><span class="co">// main() dell&#39;esercizio 6.3 (errore dell&#39;utente):</span></span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> xmin<span class="op">{</span> … <span class="op">};</span>  <span class="co">// Formula matematica implementata dal programmatore;</span></span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> xmax<span class="op">{</span> … <span class="op">};</span>  <span class="co">// Idem</span></span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a><span class="dt">bool</span> found<span class="op">;</span></span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> x<span class="op">{</span>bisezione<span class="op">.</span>CercaZeri<span class="op">(</span>xmin<span class="op">,</span> xmax<span class="op">,</span> f<span class="op">,</span> found<span class="op">)};</span></span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="op">(!</span> found<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a>    abort<span class="op">();</span></span>
+<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 </section>
-<section id="vantaggi-dei-nan" class="slide level1">
-<h1>Vantaggi dei NaN</h1>
-<p>I numeri NaN sono vantaggiosi perché si «propagano»: operazioni con
-numeri NaN restituiscono sempre NaN.</p>
-<div class="sourceCode" id="cb17"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> x<span class="op">{</span>nan<span class="op">(</span><span class="st">&quot;&quot;</span><span class="op">)};</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>cout <span class="op">&lt;&lt;</span> x <span class="op">+</span> <span class="dv">1</span> <span class="op">&lt;&lt;</span> <span class="st">&quot;, &quot;</span> <span class="op">&lt;&lt;</span> x <span class="op">*</span> <span class="dv">2</span> <span class="op">&lt;&lt;</span> <span class="st">&quot;, &quot;</span> <span class="op">&lt;&lt;</span> x <span class="op">/</span> x <span class="op">&lt;&lt;</span> <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">;</span></span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="co">// Output: nan, nan, nan</span></span></code></pre></div>
-<p>Inoltre hanno un comportamento molto particolare nelle operazioni di
-confronto:</p>
-<div class="sourceCode" id="cb18"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>cout <span class="op">&lt;&lt;</span> <span class="op">(</span>x <span class="op">&lt;</span> x<span class="op">)</span> <span class="op">&lt;&lt;</span> <span class="st">&quot;, &quot;</span><span class="op">;</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>cout <span class="op">&lt;&lt;</span> <span class="op">(</span>x <span class="op">&gt;</span> x<span class="op">)</span> <span class="op">&lt;&lt;</span> <span class="st">&quot;, &quot;</span><span class="op">;</span></span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>cout <span class="op">&lt;&lt;</span> <span class="op">(</span>x <span class="op">==</span> x<span class="op">)</span> <span class="op">&lt;&lt;</span> <span class="st">&quot;, &quot;</span><span class="op">;</span></span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>cout <span class="op">&lt;&lt;</span> <span class="op">(</span>x <span class="op">!=</span> x<span class="op">)</span> <span class="op">&lt;&lt;</span> <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">;</span>  <span class="co">// See previous slide</span></span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a><span class="co">// Output: 0, 0, 0, 1</span></span></code></pre></div>
-</section>
-<section id="un-po-di-curiosità" class="slide level1">
-<h1>Un po’ di curiosità</h1>
+<section id="uso-di-stdexpected-15" class="slide level1">
+<h1>Uso di <code>std::expected</code> (1/5)</h1>
 <ul>
-<li><p><a href="https://en.wikipedia.org/wiki/Walter_Bright">Walter
-Bright</a>, sviluppatore dello storico compilatore <a
-href="https://en.wikipedia.org/wiki/Digital_Mars">Zortech C/C++</a>
-(1988), ha creato il <a href="https://dlang.org/">linguaggio D</a> nel
-2001.</p></li>
-<li><p>Bright adora il C ma detesta il C++, e ha creato D per superarne
-alcune limitazioni (come gli header files, che lui detesta!)</p></li>
-<li><p>Molte idee del linguaggio D sono state poi incorporate nelle
-ultime versioni del C++ (<a
-href="https://en.wikipedia.org/wiki/Module_(programming)">moduli</a>, <a
-href="https://en.wikipedia.org/wiki/Range_(computer_programming)">range</a>,
-<a href="https://en.wikipedia.org/wiki/Anonymous_functions">funzioni
-anonime</a>…)</p></li>
-<li><p>In D, variabili <code>double</code> non inizializzate sono poste
-dal compilatore uguali a <code>NaN</code>: in questo modo, è immediato
-accorgersi quando ci si dimentica di inizializzarle (Vedere <a
-href="https://forum.dlang.org/thread/dowtxwcvlsunqugffcnp@forum.dlang.org">questo
-thread</a> per maggiore contesto).</p></li>
+<li><p>Con il C++23 è stato introdotto il tipo <a
+href="https://en.cppreference.com/w/cpp/utility/expected"><code>std::expected</code></a>,
+che è stato mutuato da linguaggi come Rust e OCaml. (Nella compilazione
+bisogna quindi usare <code>-std=c++23</code>, non
+<code>-std=c++20</code>!)</p></li>
+<li><p>Il template <code>std::expected&lt;T, U&gt;</code> rappresenta il
+concetto “di solito questa variabile è del tipo <code>T</code>, ma se
+c’è un errore allora è del tipo <code>U</code>”:</p>
+<div class="sourceCode" id="cb16"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;expected&gt;</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="co">// If everything is ok, `val` is a `double`; if there is an error,</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="co">// `val` is a string (presumably, an error message).</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="bu">std::</span>expected<span class="op">&lt;</span><span class="dt">double</span><span class="op">,</span> string<span class="op">&gt;</span> val<span class="op">;</span></span></code></pre></div></li>
 </ul>
 </section>
-<section id="esempio-di-codice-d-sbagliato" class="slide level1">
-<h1>Esempio di codice D (sbagliato)</h1>
-<div class="sourceCode" id="cb19"><pre class="sourceCode d"><code class="sourceCode d"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="pp">import</span><span class="im"> std.stdio</span><span class="op">;</span>  <span class="co">// No header files in D: hurrah!</span></span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> mean<span class="op">(</span><span class="dt">double</span><span class="op">[]</span> values<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">double</span> accum<span class="op">;</span>  <span class="co">// Ooops, I forgot to initialize this!</span></span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">foreach</span><span class="op">(</span>value<span class="op">;</span> values<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>        accum <span class="op">+=</span> value<span class="op">;</span></span>
-<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>    <span class="kw">return</span> accum <span class="op">/</span> values.<span class="dt">length</span><span class="op">;</span></span>
-<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
-<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> main<span class="op">()</span> <span class="op">{</span></span>
-<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>    <span class="dt">double</span><span class="op">[]</span> vec <span class="op">=</span> <span class="op">[</span><span class="fl">1.0</span><span class="op">,</span> <span class="fl">5.0</span><span class="op">,</span> <span class="fl">4.0</span><span class="op">,</span> <span class="fl">3.0</span><span class="op">];</span></span>
-<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>    writeln<span class="op">(</span>mean<span class="op">(</span>vec<span class="op">));</span></span>
-<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a>    <span class="co">// This prints &quot;nan&quot; because of the forgotten initialization</span></span>
-<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<section id="uso-di-stdexpected-25" class="slide level1">
+<h1>Uso di <code>std::expected</code> (2/5)</h1>
+<ul>
+<li><p>Una variabile <code>std::expected</code> può essere inizializzata
+usando un valore del <strong>primo</strong> tipo (<code>T</code>) senza
+bisogno di sintassi particolari:</p>
+<div class="sourceCode" id="cb17"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="bu">std::</span>expected<span class="op">&lt;</span><span class="dt">double</span><span class="op">,</span> string<span class="op">&gt;</span> val<span class="op">{</span><span class="fl">3.5</span><span class="op">};</span>  <span class="co">// Initialized with a double</span></span></code></pre></div></li>
+<li><p>Per inizializzarla al valore “erroneo”, bisogna usare la funzione
+<code>std::unexpected</code>:</p>
+<div class="sourceCode" id="cb18"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="bu">std::</span>expected<span class="op">&lt;</span><span class="dt">double</span><span class="op">,</span> string<span class="op">&gt;</span> val<span class="op">{</span><span class="bu">std::</span>unexpected<span class="op">(</span><span class="st">&quot;Errore!&quot;</span><span class="op">)};</span></span></code></pre></div></li>
+</ul>
+</section>
+<section id="uso-di-stdexpected-35" class="slide level1">
+<h1>Uso di <code>std::expected</code> (3/5)</h1>
+<ul>
+<li><p>Nel <code>main()</code> è laborioso definire il tipo della
+variabile che riceve il risultato:</p>
+<div class="sourceCode" id="cb19"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="bu">std::</span>expected<span class="op">&lt;</span><span class="dt">double</span><span class="op">,</span> string<span class="op">&gt;</span> result<span class="op">{</span>bisezione<span class="op">.</span>CercaZeri<span class="op">(</span>…<span class="op">)};</span></span></code></pre></div></li>
+<li><p>Il C++ fornisce (a partire dal C++11) la keyword
+<code>auto</code>, che dice al compilatore: “sai benissimo tu qual è il
+tipo di ritorno, quindi non farmelo specificare!”. Quindi possiamo
+scrivere:</p>
+<div class="sourceCode" id="cb20"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Much easier!</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="kw">auto</span> result<span class="op">{</span>bisezione<span class="op">.</span>CercaZeri<span class="op">(</span>…<span class="op">)};</span></span></code></pre></div></li>
+</ul>
+</section>
+<section id="uso-di-stdexpected-45" class="slide level1">
+<h1>Uso di <code>std::expected</code> (4/5)</h1>
+<ul>
+<li><p>Si controlla se la variabile è “giusta” o “sbagliata” col metodo
+<code>has_value()</code>:</p>
+<div class="sourceCode" id="cb21"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="kw">auto</span> result<span class="op">{</span>bisezione<span class="op">.</span>CercaZeri<span class="op">(</span>…<span class="op">)};</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="op">(</span>result<span class="op">.</span>has_value<span class="op">())</span> <span class="op">{</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>   <span class="co">// Everything is ok!</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>   <span class="co">// ERROR!</span></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div></li>
+<li><p>C’è anche la comoda scorciatoia di usare <code>result</code> come
+una variabile booleana:</p>
+<div class="sourceCode" id="cb22"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="op">(</span>result<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>   <span class="co">// Everything is ok!</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div></li>
+</ul>
+</section>
+<section id="uso-di-stdexpected-55" class="slide level1">
+<h1>Uso di <code>std::expected</code> (5/5)</h1>
+<ul>
+<li><p>Il metodo <code>value()</code> estrae il valore giusto, il metodo
+<code>error()</code> il valore erroneo:</p>
+<div class="sourceCode" id="cb23"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="op">(</span>result<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>   <span class="dt">double</span> true_value<span class="op">{</span>result<span class="op">.</span>value<span class="op">()};</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>   <span class="co">// …</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>   fmt<span class="op">::</span>println<span class="op">(</span>stderr<span class="op">,</span> <span class="st">&quot;Error: </span><span class="sc">{}</span><span class="st">&quot;</span><span class="op">,</span> result<span class="op">.</span>error<span class="op">());</span></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div></li>
+<li><p>Invece di <code>value()</code> si può usare l’operatore di
+deferenziazione <code>*result</code>:</p>
+<div class="sourceCode" id="cb24"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> true_value<span class="op">{*</span>result<span class="op">};</span></span></code></pre></div></li>
+</ul>
+</section>
+<section id="stdexpected-nella-bisezione" class="slide level1">
+<h1><code>std::expected</code> nella bisezione</h1>
+<div class="sourceCode" id="cb25"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="bu">std::</span>expected<span class="op">&lt;</span><span class="dt">double</span><span class="op">,</span> string<span class="op">&gt;</span>  <span class="co">// Ideally we return a `double`, unless there are problems</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>Bisezione<span class="op">::</span>CercaZeri<span class="op">(</span><span class="dt">double</span> xmin<span class="op">,</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>                     <span class="dt">double</span> xmax<span class="op">,</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>                     <span class="at">const</span> FunzioneBase <span class="op">*</span> f<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">double</span> signfa<span class="op">{</span>sign<span class="op">(</span>f<span class="op">-&gt;</span>Eval<span class="op">(</span>xmin<span class="op">))},</span> signfb<span class="op">{</span>sign<span class="op">(</span>f<span class="op">-&gt;</span>Eval<span class="op">(</span>xmax<span class="op">))};</span></span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span><span class="op">(</span>signfa <span class="op">==</span> <span class="dv">0</span><span class="op">)</span> <span class="cf">return</span> xmin<span class="op">;</span></span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span><span class="op">(</span>signfb <span class="op">==</span> <span class="dv">0</span><span class="op">)</span> <span class="cf">return</span> xmax<span class="op">;</span></span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span><span class="op">(</span>signfa <span class="op">*</span> signfb <span class="op">&gt;</span> <span class="dv">0</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="bu">std::</span>unexpected<span class="op">(</span>fmt<span class="op">::</span>format<span class="op">(</span><span class="st">&quot;Invalid range [</span><span class="sc">{}</span><span class="st">, </span><span class="sc">{}</span><span class="st">]&quot;</span><span class="op">,</span> xmin<span class="op">,</span> xmax<span class="op">));</span></span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a>    <span class="co">// ...</span></span>
+<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> x<span class="op">;</span>  <span class="co">// `x` is a boring `double`</span></span>
+<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+</section>
+<section id="stdexpected-nel-main" class="slide level1">
+<h1><code>std::expected</code> nel <code>main</code></h1>
+<ul>
+<li><p>Nel <code>main</code> dell’<a
+href="carminati-esercizi-06.html#esercizio-6.2">esercizio 6.2</a>
+stampiamo l’errore in maniera <em>user-frendly</em>:</p>
+<div class="sourceCode" id="cb26"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="kw">auto</span> result<span class="op">{</span>bisezione<span class="op">.</span>CercaZeri<span class="op">(</span>xmin<span class="op">,</span> xmax<span class="op">,</span> f<span class="op">)};</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span><span class="op">(!</span> result<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>    fmt<span class="op">::</span>println<span class="op">(</span>stderr<span class="op">,</span> <span class="st">&quot;Error: </span><span class="sc">{}</span><span class="st">&quot;</span><span class="op">,</span> result<span class="op">.</span>error<span class="op">());</span></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> x<span class="op">{</span>result<span class="op">.</span>value<span class="op">()};</span></span></code></pre></div></li>
+<li><p>Nell’<a href="carminati-esercizi-06.html#esercizio-6.3">esercizio
+6.3</a> invece chiamiamo <code>abort()</code> (in
+<code>&lt;cstdlib&gt;</code>):</p>
+<div class="sourceCode" id="cb27"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="kw">auto</span> result<span class="op">{</span>bisezione<span class="op">.</span>CercaZeri<span class="op">(</span>xmin<span class="op">,</span> xmax<span class="op">,</span> f<span class="op">)};</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span><span class="op">(!</span> result<span class="op">)</span> <span class="op">{</span> abort<span class="op">();</span> <span class="op">}</span></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> x<span class="op">{</span>result<span class="op">.</span>value<span class="op">()};</span></span></code></pre></div></li>
+</ul>
+</section>
+<section id="esercizio-6.4" class="slide level1">
+<h1>Esercizio 6.4</h1>
+<ul>
+<li><p>Nell’<a href="carminati-esercizi-06.html#esercizio-6.4">esercizio
+6.4</a> si illustra un modo alternativo di implementare la bisezione,
+che <em>non</em> usa il polimorfismo.</p></li>
+<li><p>Questo approccio è importante da imparare:</p>
+<ol>
+<li>È applicabile al 99% dei casi della vita reale;</li>
+<li>Ha preso il sopravvento rispetto alla programmazione OOP usata in
+ROOT, ed è usato in molte librerie di calcolo numerico moderne (<a
+href="https://arma.sourceforge.net/">Armadillo</a>, <a
+href="https://eigen.tuxfamily.org/index.php?title=Main_Page">Eigen</a>,
+…);</li>
+<li>Il codice è più veloce da scrivere e semplice da leggere;</li>
+<li>È anche più veloce da eseguire.</li>
+</ol></li>
+</ul>
 </section>
     </div>
   </div>
