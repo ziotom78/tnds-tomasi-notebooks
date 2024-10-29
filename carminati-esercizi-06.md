@@ -258,10 +258,10 @@ public:
   void SetPrecisione(double epsilon) { m_prec = epsilon; }
   double GetPrecisione() const { return m_prec;}
 
-  void SetNMaxIterations(unsigned int n) { m_nmax = n; }
+  void SetNMaxIterations(int n) { m_nmax = n; }
   int GetNMaxIterations() const { return m_nmax; }
 
-  unsigned int GetNiterations() const { return m_niterations; }
+  int GetNiterations() const { return m_niterations; }
 
 protected:
   double m_a, m_b; // range of the interval to explore
