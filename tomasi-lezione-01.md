@@ -442,7 +442,17 @@ e di compilarli separatamente. In questo caso la struttura del
 
 -   È più facile riciclare il `Makefile` nei nuovi esercizi!
 
----
+
+# Variabili automatiche
+
+La variabile `$@` è detta [automatica](https://www.gnu.org/software/make/manual/html_node/Automatic-Variables.html). Ecco le variabili più importanti, con dei trucchi per ricordarne il significato:
+
+| Variabile | Significato               | Trucco                                                                                                    |
+|-----------|---------------------------|-----------------------------------------------------------------------------------------------------------|
+| `$@`      | File da creare            | Il simbolo `@` è quello delle email, quindi è come l’«indirizzo» di destinazione di una lettera           |
+| `$^`      | Lista dei file dipendenti | Il simbolo `^` ricorda la freccia ↑, che indica la riga precedente in cui c'è la lista di file dipendenti |
+| `$<`      | Primo file dipendente     | Il simbolo `<` ricorda la freccia ←, che indica la posizione del primo elemento nella lista               |
+
 
 # File multipli ed header
 
