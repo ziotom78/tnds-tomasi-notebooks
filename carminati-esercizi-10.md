@@ -225,7 +225,7 @@ Qui sotto trovate una implementazione di tale metodo:
 double RandomGen::Gaus(double mean, double sigma) {
   double s{Rand()};
   double t{Rand()};
-  double x{sqrt(-2 * log(s)) * cos(2 * M_PI * t)};
+  double x{sqrt(-2 * log(s)) * cos(2 * numbers::pi * t)};
   return mean + x * sigma;
 }
 ```
@@ -463,8 +463,8 @@ Siccome il programma deve fare molti calcoli, vi consiglio di fornire qualche fe
     // Esegue molte volte il calcolo dell'integrale per vedere la
     // variabilità dei risultati
     for(int k{}; k < ssize(estimates_mean); ++k) {
-      estimates_mean.at(k) = integral_mean(rng, f_sin, 0.0, M_PI, num_of_points);
-      estimates_hom.at(k) = integral_hom(rng, f_sin, 0.0, M_PI, 1.0, num_of_points);
+      estimates_mean.at(k) = integral_mean(rng, f_sin, 0.0, numbers::pi, num_of_points);
+      estimates_hom.at(k) = integral_hom(rng, f_sin, 0.0, numbers::pi, 1.0, num_of_points);
     }
 
     // Mette nella colonna di sinistra l'istogramma delle stime

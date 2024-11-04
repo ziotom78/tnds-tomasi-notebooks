@@ -156,7 +156,7 @@ La configurazione dell'esperimento, con il calcolo di tutti i valori 'veri' per 
 
 EsperimentoPrisma::EsperimentoPrisma(unsigned int seed)
     : m_rgen{seed}, m_lambda1{579.1E-9}, m_lambda2{404.7E-9},
-      m_alpha{60. * M_PI / 180.}, m_sigmat{0.3E-3}, m_A_input{2.7},
+      m_alpha{60. * numbers::pi / 180.}, m_sigmat{0.3E-3}, m_A_input{2.7},
       m_B_input{60000E-18} {
 
   // calcolo degli indici di rifrazione attesi
@@ -164,9 +164,9 @@ EsperimentoPrisma::EsperimentoPrisma(unsigned int seed)
   m_n1_input = std::sqrt(m_A_input + m_B_input / (m_lambda1 * m_lambda1));
   m_n2_input = std::sqrt(m_A_input + m_B_input / (m_lambda2 * m_lambda2));
 
-  // theta0 e' arbitrario, scelgo M_PI/2.
+  // theta0 e' arbitrario, scelgo numbers::pi/2.
 
-  m_th0_input = M_PI / 2.;
+  m_th0_input = numbers::pi / 2.;
 
   // determino theta1 e theta2
 
