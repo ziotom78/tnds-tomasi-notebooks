@@ -392,6 +392,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#esercizio-73-integrazione-di-una-funzione-gaussiana-facoltativo" class="md-nav__link">
+    ESERCIZIO 7.3 - Integrazione di una funzione Gaussiana ( facoltativo ):
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -507,6 +514,21 @@
   
 
     
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ProveEsame/TemiEsame/" class="md-nav__link">
+        Temi d'esame
+      </a>
+    </li>
+  
+
+    
   </ul>
 </nav>
                   </div>
@@ -554,6 +576,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#esercizio-73-integrazione-di-una-funzione-gaussiana-facoltativo" class="md-nav__link">
+    ESERCIZIO 7.3 - Integrazione di una funzione Gaussiana ( facoltativo ):
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -578,10 +607,10 @@
 <h1 id="lezione-7-quadratura-numerica">Lezione 7 : quadratura numerica</h1>
 <p>In questa lezione implementeremo alcuni algoritmi di <em>quadratura numerica</em>, cioè algoritmi per il calcolo di integrali definiti di funzioni continue in un intervallo chiuso e limitato. I metodi numerici che studieremo in questa sessione si possono rendere necessari in varie occasioni: quando non sappiamo valutare analiticamente l'integrale in esame, quando la soluzione analitica è molto complicata ed il calcolo numerico è molto più semplice, oppure quando la funzione è conosciuta in un numeri finito di punti.</p>
 <h2 id="esercizio-70-integrazione-con-il-metodo-midpoint-a-numero-di-passi-fissato">ESERCIZIO 7.0 - Integrazione con il metodo <em>midpoint</em> a numero di passi fissato:</h2>
-<p>In questo primo esercizio proviamo ad implementare un codice per il calcolo dell'integrale della funzione <script type="math/tex">sin(x)</script> tra <script type="math/tex">[0,\pi]</script> con il metodo midpoint.</p>
+<p>In questo primo esercizio proviamo ad implementare un codice per il calcolo dell'integrale della funzione <script type="math/tex">x sin(x)</script> tra <script type="math/tex">[0,\pi]</script> con il metodo midpoint.</p>
 <ol>
 <li>Per prima cosa costruiamo un programma di test che calcoli l'integrale utilizzando un numero di intervalli fissato e passato da riga di comando. </li>
-<li>Per controllare la precisione ottenuta con un numero di passi fissato proviamo a stampare una tabella con la differenza tra il risultato numerico ed il valore esatto (ottenuto analiticamente) in funzione del numero di passi (o della lunghezza del passo h). In aggiunta alla tabella si può rappresentare l'andamento dell'errore in funzione della lunghezza del passo h con un TGraph di ROOT (una traccia su come visualizzare i dati usando un TGraph di ROOT si può trovare <a href="./Survival/root.md">qui</a>).</li>
+<li>Per controllare la precisione ottenuta con un numero di passi fissato proviamo a stampare una tabella con la differenza tra il risultato numerico ed il valore esatto (ottenuto analiticamente) in funzione del numero di passi (o della lunghezza del passo h). In aggiunta alla tabella si può rappresentare l'andamento dell'errore in funzione della lunghezza del passo h con un TGraph di ROOT (una traccia su come visualizzare i dati usando un TGraph di ROOT si può trovare <a href="../../Survival/root/">qui</a>).</li>
 </ol>
 <details class="tip">
 <summary>Il metodo <em>midpoint</em></summary>
@@ -595,7 +624,7 @@
 </p>
 <p>e</p>
 <p>
-<script type="math/tex; mode=display"> x_{k} = a + \left( k + \frac{1}{2}  h \right)   k = 0, 1.... N-1 </script>
+<script type="math/tex; mode=display"> x_{k} = a + \left( k + \frac{1}{2} \right)  h   \qquad k = 0, 1.... N-1 </script>
 </p>
 <p>Questa formula fornisce un'accuratezza dell'integrale di <script type="math/tex">O(h^{2})</script>. Notate che questo metodo non richiede il calcolo della funzione negli estremi di integrazione.</p>
 </details>
@@ -696,7 +725,7 @@ Per verificare il funzionamento dell'algoritmo di integrazione appena scritto po
 
 <span class="w">  </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">nstep</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
 
-<span class="w">  </span><span class="n">Seno</span><span class="w"> </span><span class="n">f</span><span class="p">;</span>
+<span class="w">  </span><span class="n">xsinx</span><span class="w"> </span><span class="n">f</span><span class="p">;</span>
 
 <span class="w">  </span><span class="n">Midpoint</span><span class="w"> </span><span class="n">myInt</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">M_PI</span><span class="p">)</span><span class="w"> </span><span class="p">;</span>
 
@@ -713,7 +742,7 @@ Si può poi aggiungere in coda o in un altro codice lo studio dell'andamento del
 <span class="w">  </span><span class="n">TGraph</span><span class="w"> </span><span class="n">g_errore</span><span class="p">;</span>
 
 <span class="w">  </span><span class="n">nstep</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">4</span><span class="p">;</span>
-<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">Iv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">2.</span><span class="w"> </span><span class="p">;</span>
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">Iv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">M_PI</span><span class="w"> </span><span class="p">;</span>
 <span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">I</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">err</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="n">h</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">;</span>
 
 <span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span><span class="w"> </span><span class="n">k</span><span class="o">++</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
@@ -730,9 +759,9 @@ Si può poi aggiungere in coda o in un altro codice lo studio dell'andamento del
 </details>
 <h2 id="esercizio-71-integrazione-con-metodo-di-simpson-a-numero-di-passi-fissato-da-consegnare">ESERCIZIO 7.1 - Integrazione con metodo di <em>Simpson</em> a numero di passi fissato (da consegnare):</h2>
 <p>Implementare l'integrazione con il metodo di Simpson con un numero di passi fissato. Si può utilizzare lo stesso schema dell'esercizio precedente costruendo una classe derivata <code>Simpson</code> . Come nell'esercizio 7.0 fornire il valore dell'integrale calcolato con numero di passi inserito da linea di comando e stampare una tabella (o costruire un TGraph di ROOT) con la precisione raggiunta in funzione del numero di passi.</p>
-<details>
-<p><summary> Il metodo Simpson : </summary>
-Nel metodo di integrazione alla Simpson, la funzione integranda è approssimata, negli intervalli <script type="math/tex">[x_{k},x_{k+2}]</script> (dove <script type="math/tex">k</script> è un intero pari e <script type="math/tex">x_{k}=a+kh</script>) con un polinomio di secondo grado i cui nodi sono nei punti <script type="math/tex">(x_{k},f(x_{k}))</script>, <script type="math/tex">(x_{k+1},f(x_{k+1})</script> e <script type="math/tex">(x_{k+2},f(x_{k+2}))</script>. Esso fornisce una valutazione dell'integrale con una precisione pari a <script type="math/tex">h^{4}</script>.
+<details class="tip">
+<summary>Il metodo Simpson</summary>
+<p>Nel metodo di integrazione alla Simpson, la funzione integranda è approssimata, negli intervalli <script type="math/tex">[x_{k},x_{k+2}]</script> (dove <script type="math/tex">k</script> è un intero pari e <script type="math/tex">x_{k}=a+kh</script>) con un polinomio di secondo grado i cui nodi sono nei punti <script type="math/tex">(x_{k},f(x_{k}))</script>, <script type="math/tex">(x_{k+1},f(x_{k+1})</script> e <script type="math/tex">(x_{k+2},f(x_{k+2}))</script>. Esso fornisce una valutazione dell'integrale con una precisione pari a <script type="math/tex">h^{4}</script>.
 La sua applicazione richiede che il numero di passi sia <em>pari</em> e la formula che approssima l'integrale è :</p>
 <p>
 <script type="math/tex; mode=display"> \int_{a}^{b} f(x) dx \approx \left( \frac{1}{3}f(x_{0})  +  \frac{4}{3} f(x_{1}) + \frac{2}{3} f(x_{2}) + \frac{4}{3} f(x_{3}) + ... + \frac{2}{3} f(x_{N-2}) + \frac{4}{3} f(x_{N-1}) + \frac{1}{3} f(x_{N}) \right) h </script>
@@ -743,11 +772,11 @@ La sua applicazione richiede che il numero di passi sia <em>pari</em> e la formu
 </p>
 <p>e</p>
 <p>
-<script type="math/tex; mode=display"> x_{k} = a + k h </script>
+<script type="math/tex; mode=display"> x_{k} = a + k h  \qquad k = 0, 1.... N </script>
 </p>
 </details>
 <h2 id="esercizio-72-integrazione-con-metodo-dei-trapezi-a-precisione-fissata-da-consegnare">ESERCIZIO 7.2 - Integrazione con metodo dei <em>trapezi</em> a precisione fissata (da consegnare):</h2>
-<p>Concludiamo l'esercitazione implementando l'integrazione della funzione <script type="math/tex">sin(x)</script> tra <script type="math/tex">[0,\pi]</script> con il metodo dei <em>trapezi</em>. In quest'ultimo esercizio proviamo a riflettere sull'uso di un algoritmo di integrazione numerica <em>a precisione fissata</em> invece che a numero di passi fissato. Negli esercizi precedenti il calcolo a numero di passi fissato non ci da alcuna indicazione sulla qualità del risultato : integrare a 10 step è sufficiente ? 
+<p>Concludiamo l'esercitazione implementando l'integrazione della funzione <script type="math/tex">x sin(x)</script> tra <script type="math/tex">[0,\pi]</script> con il metodo dei <em>trapezi</em>. In quest'ultimo esercizio proviamo a riflettere sull'uso di un algoritmo di integrazione numerica <em>a precisione fissata</em> invece che a numero di passi fissato. Negli esercizi precedenti il calcolo a numero di passi fissato non ci da alcuna indicazione sulla qualità del risultato : integrare a 10 step è sufficiente ? 
 L'idea di base che vogliamo sviluppare è che l'utente fornisca una precisione desiderata e l'algoritmo debba essere in grado di aumentare automaticamente il numero di passi fino a raggiungere la precisione richiesta sul valore dell'integrale. L'algoritmo dovrà accettare in input il valore della precisione e raddoppiare il numero di passi finchè l'errore (stimato <em>runtime</em>, si veda sotto) non diventa inferiore alla precisione impostata. </p>
 <ol>
 <li>Come nei casi precedenti si può costruire una classe dedicata per l'implementazione del metodo dei trapezi</li>
@@ -761,6 +790,21 @@ che contenga il calcolo con il metodo dei trapezi a numero di passi fissato.</li
 L'algoritmo dovrà raddoppiare il numero di passi finché l'errore non diventa minore della richiesta dell'utente (<code>prec</code>). La struttura di base sarè quindi un ciclo <code>while</code> nel quale la condizione di uscita è rappresentata dal controllo sull'errore runtime.</li>
 </ol>
 <p>Un algoritmo a precisione fissata si può implementare anche per il metodo midpoint e per il metodo di Simpson ma nel caso dei trapezoidi si presta ad una implementazione particolarmente efficiente (si veda la nota sotto).</p>
+<details class="tip">
+<summary>Il metodo dei trapezi</summary>
+<p>Il metodo dei trapezi rappresenta la prima formula chiusa di Newton-Cotes e si basa su una interpolazione polinomiale di ordine 1 sui due punti che delimitano l'intervallo. La formula che approssima l'integrale è :</p>
+<p>
+<script type="math/tex; mode=display"> \int_{a}^{b} f(x) dx \approx \left( \frac{1}{2}f(x_{0})  + f(x_{1}) + ...  + f(x_{N-1}) + \frac{1}{2} f(x_{N}) \right) h </script>
+</p>
+<p>dove </p>
+<p>
+<script type="math/tex; mode=display"> h = \frac{b-a}{N} </script>
+</p>
+<p>e</p>
+<p>
+<script type="math/tex; mode=display"> x_{k} = a + k h \qquad k = 0, 1.... N </script>
+</p>
+</details>
 <details class="tip">
 <summary>Stima runtime dell'errore</summary>
 <p>Come possiamo fare a stimare l'errore che stiamo commettendo nel calcolo di un integrale se non conosciamo il valore vero <script type="math/tex">I</script> dell'integrale ? Partendo dalla conoscenza dell'andamento teorico dell'errore in funzione del passo <script type="math/tex">h</script> possiamo trovare un modo semplice per la stima dell'errore che stiamo commettendo. Nel caso della regola dei trapezi l'adamento dell'errore è <script type="math/tex">err= k h^{2}</script>. Calcolando l'integrale <script type="math/tex">I_{N}</script> utilizzando un passo <script type="math/tex">h</script> e successivamente l'intgrale <script type="math/tex">I_{2N}</script> con un passo <script type="math/tex">h/2</script> possiamo scrivere il seguente sistema di equazioni:
@@ -796,6 +840,18 @@ L'algoritmo dei trapezoidi si presta ad una implementazione ottimizzata descritt
 <p>e così secondo lo schema in figura ( <script type="math/tex">L=(b-a)</script> ) :</p>
 <p><img alt="" src="../intervallo.png" /></p>
 <p>I valori dell'ultima approssimazione dell'integrale e dell'ultima somma calcolata sono memorizzati all'interno dell'oggetto. In questo modo, se viene richiesto di ricalcolare l'integrale, non è necessario ricominciare da capo. </p>
+</details>
+<h2 id="esercizio-73-integrazione-di-una-funzione-gaussiana-facoltativo">ESERCIZIO 7.3 - Integrazione di una funzione Gaussiana ( facoltativo ):</h2>
+<p>Come esercizio facoltativo vi proponiamo il calcolo di un integrale non risolubile analiticamente. Assumendo che una misura abbia un valore vero di <script type="math/tex">\mu</script> e una deviazione standard <script type="math/tex">\sigma</script> proviamo a calcolare la probabilità che una misura cada entro <script type="math/tex">\pm t \sigma</script> dal valore vero per <script type="math/tex">t</script> che va da 0 a 5. </p>
+<ol>
+<li>Provate a costruire una funzione <code>Gaussiana</code> generica. I parametri <script type="math/tex">\mu</script> e <script type="math/tex">\sigma</script> della funzione possono essere passati nel costruttore.</li>
+<li>Integrate la funzione <code>Gaussiana</code> con il metodo dei <em>Trapezi</em> a precisione fissata in un intervallo <script type="math/tex">[ \mu - t \sigma, \mu + t \sigma]</script> con <script type="math/tex">t</script> variabile da 0 a 5</li>
+<li>Produrre un grafico dell'integrale ottenuto in funzione del numero di <script type="math/tex">\sigma</script>. Vi torna ?</li>
+</ol>
+<details class="tip">
+<summary>Risultato atteso</summary>
+<p>Il risultato non dovrebbe sorprendere :
+<img alt="" src="../probability.png" /></p>
 </details>
 
 

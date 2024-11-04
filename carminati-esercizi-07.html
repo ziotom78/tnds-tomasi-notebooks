@@ -57,10 +57,12 @@
   </ul></li>
   <li><a href="#esercizio-7.2" id="toc-esercizio-7.2">Esercizio 7.2 - Integrazione con la formula dei trapezi con precisione fissata (da consegnare)</a>
   <ul>
-  <li><a href="#stima-dellerrore" id="toc-stima-dellerrore">Stima dell’errore</a></li>
+  <li><a href="#il-metodo-dei-trapezi" id="toc-il-metodo-dei-trapezi">Il metodo dei trapezi</a></li>
+  <li><a href="#stima-runtime-dellerrore" id="toc-stima-runtime-dellerrore">Stima runtime dell’errore</a></li>
   <li><a href="#cenni-sullimplementazione-1" id="toc-cenni-sullimplementazione-1">Cenni sull’implementazione</a></li>
   <li><a href="#test-1" id="toc-test-1">Test</a></li>
   </ul></li>
+  <li><a href="#esercizio-7.3" id="toc-esercizio-7.3">Esercizio 7.3 - Integrazione di una funzione Gaussiana (facoltativo)</a></li>
   <li><a href="#errori-comuni" id="toc-errori-comuni">Errori comuni</a></li>
   </ul>
 </nav>
@@ -70,19 +72,19 @@
 <p>[La pagina con la spiegazione originale degli esercizi si trova qui: <a href="https://labtnds.docs.cern.ch/Lezione7/Lezione7/" class="uri">https://labtnds.docs.cern.ch/Lezione7/Lezione7/</a>.]</p>
 <p>In questa lezione implementeremo alcuni algoritmi di <em>quadratura numerica</em>, cioè algoritmi per il calcolo di integrali definiti di funzioni in un intervallo chiuso e limitato. I metodi numerici che studieremo in questa sessione si possono rendere necessari in varie occasioni: quando non sappiamo valutare analiticamente l’integrale in esame, quando la soluzione analitica è molto complicata ed il calcolo numerico è molto più semplice, oppure quando la funzione è conosciuta in un numeri finito di punti.</p>
 <h1 id="esercizio-7.0">Esercizio 7.0 - Integrazione con il metodo <em>midpoint</em> a numero di passi fissato</h1>
-<p>Implementare un codice per il calcolo della funzione <span class="math inline">\sin(x)</span> su <span class="math inline">[0, \pi]</span> con il metodo midpoint.</p>
+<p>Implementare un codice per il calcolo della funzione <span class="math inline">x \sin(x)</span> su <span class="math inline">[0, \pi]</span> con il metodo midpoint.</p>
 <ol type="1">
 <li><p>Per prima cosa, costruiamo un programma di test che calcoli l’integrale utilizzando un numero di intervalli fissato e passato da riga di comando.</p></li>
-<li><p>Per controllare la precisione ottenuta con un numero di passi fissato proviamo a stampare una tabella con la differenza tra il risultato numerico ed il valore esatto (ottenuto analiticamente) in funzione del numero di passi (o della lunghezza del passo <span class="math inline">h</span>). In aggiunta alla tabella si può rappresentare l’andamento dell’errore in funzione della lunghezza del passo <span class="math inline">h</span> con un grafico, usando <a href="https://github.com/ziotom78/gplotpp">gplot++</a> oppure un <code>TGraph</code> di ROOT.</p></li>
+<li><p>Per controllare la precisione ottenuta con un numero di passi fissato, stampiamo una tabella con la differenza tra il risultato numerico ed il valore esatto (ottenuto analiticamente) in funzione del numero di passi (o della lunghezza del passo <span class="math inline">h</span>). In aggiunta alla tabella si può rappresentare l’andamento dell’errore in funzione della lunghezza del passo <span class="math inline">h</span> con un grafico, usando <a href="https://github.com/ziotom78/gplotpp">gplot++</a> oppure un <code>TGraph</code> di ROOT.</p></li>
 </ol>
 <h2 id="il-metodo-del-mid-point">Il metodo del mid-point</h2>
 <p>Ricordiamo che in questo metodo l’approssimazione dell’integrale è definita dalla formula</p>
 <p><span class="math display">
-\int_a^b f(x)\,\mathrm{d}x = h \cdot \bigl(f(x_0) + f(x_1) + \ldots + f(x_{N - 1})\bigl),\quad h = \frac{b - a}N, \quad x_k = a + \left(k + \frac12\right) h,
+\int_a^b f(x)\,\mathrm{d}x = h \cdot \bigl(f(x_0) + f(x_1) + \ldots + f(x_{N - 1})\bigl),
 </span> dove <span class="math display">
 h = \frac{b - a}N
 </span> e <span class="math display">
-x_k = a + \left(k + \frac12 h\right),\qquad k = 0, 1, \ldots, N - 1.
+x_k = a + \left(k + \frac12 \right) h,\qquad k = 0, 1, \ldots, N - 1.
 </span></p>
 <p>La formula fornisce un’accuratezza dell’integrale di <span class="math inline">O(h^2)</span>. Notate che questo metodo non richiede il calcolo della funzione negli estremi di integrazione.</p>
 <h2 id="cenni-sullimplementazione">Cenni sull’implementazione</h2>
@@ -197,14 +199,14 @@ x_k = a + \left(k + \frac12 h\right),\qquad k = 0, 1, \ldots, N - 1.
 <span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>  <span class="dt">int</span> nstep<span class="op">{</span>stoi<span class="op">(</span>argv<span class="op">[</span><span class="dv">1</span><span class="op">])};</span></span>
 <span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>  Seno f<span class="op">{};</span></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>  XSinX f<span class="op">{};</span></span>
 <span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>  Midpoint myInt<span class="op">{};</span></span>
 <span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> I<span class="op">{</span>myInt<span class="op">.</span>integrate<span class="op">(</span><span class="dv">0</span><span class="op">,</span> M_PI<span class="op">,</span> nstep<span class="op">,</span> f<span class="op">)};</span></span>
 <span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>  fmt<span class="op">::</span>println<span class="op">(</span><span class="st">&quot;Passi: </span><span class="sc">{}</span><span class="st">, I = </span><span class="sc">{}</span><span class="st">&quot;</span><span class="op">,</span> nstep<span class="op">,</span> I<span class="op">);</span></span>
 <span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
-<p>dove abbiamo utilizzato una classe <code>Seno</code> che eredita dalla classe astratta <code>FunzioneBase</code>.</p>
+<p>dove abbiamo utilizzato una classe <code>XSinX</code> che eredita dalla classe astratta <code>FunzioneBase</code>.</p>
 <p>Per creare i grafici, potete ovviamente usare ROOT, oppure <a href="https://github.com/ziotom78/gplotpp">gplot++</a>. In quest’ultimo caso, scaricate il file <a href="https://raw.githubusercontent.com/ziotom78/gplotpp/master/gplot%2B%2B.h">gplot++.h</a> (facendo click col tasto destro sul link) e scrivete un codice del genere:</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="bu">std::</span>vector<span class="op">&lt;</span><span class="dt">int</span><span class="op">&gt;</span> steps<span class="op">{</span><span class="dv">10</span><span class="op">,</span> <span class="dv">50</span><span class="op">,</span> <span class="dv">100</span><span class="op">,</span> <span class="dv">500</span><span class="op">,</span> <span class="dv">1000</span><span class="op">};</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="bu">std::</span>vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> step_sizes<span class="op">(</span>ssize<span class="op">(</span>steps<span class="op">));</span></span>
@@ -260,18 +262,19 @@ x_k = a + \left(k + \frac12 h\right),\qquad k = 0, 1, \ldots, N - 1.
 </span></p>
 <p>dove vale che</p>
 <p><span class="math display">
-h = \frac{b - a}N, \quad x_k = a + k h.
+h = \frac{b - a}N, \quad x_k = a + k h \qquad k = 0, 1, \ldots N.
 </span></p>
 <h2 id="test">Test</h2>
 <p>Come scritto per l’esercizio 7.0, il notebook Julia per la lezione corrente all’indirizzo <a href="https://ziotom78.github.io/tnds-notebooks/lezione07/" class="uri">https://ziotom78.github.io/tnds-notebooks/lezione07/</a> contiene una serie di risultati che potete usare per scrivere i vostri test.</p>
 <h1 id="esercizio-7.2">Esercizio 7.2 - Integrazione con la formula dei trapezi con precisione fissata (da consegnare)</h1>
-<p>Concludiamo l’esercitazione implementando l’integrazione della funzione <span class="math inline">\sin x</span> su <span class="math inline">[0, \pi]</span> con il metodo dei trapezi. In quest’ultimo esercizio proviamo a riflettere sull’uso di un algoritmo di integrazione numerica a precisione fissata invece che a numero di passi fissato. Negli esercizi precedenti il calcolo a numero di passi fissato non ci da alcuna indicazione sulla qualità del risultato: integrare con 10 passi è sufficiente? L’idea che vogliamo sviluppare è che l’utente fornisca una precisione desiderata e l’algoritmo sia in grado di aumentare automaticamente il numero di passi fino a raggiungere la precisione richiesta sul valore dell’integrale. L’algoritmo dovrà accettare in input il valore della precisione e raddoppiare il numero di passi finché l’errore (stimato runtime, si veda sotto) non diventa inferiore alla precisione impostata.</p>
+<p>Concludiamo l’esercitazione implementando l’integrazione della funzione <span class="math inline">x \sin x</span> su <span class="math inline">[0, \pi]</span> con il metodo dei trapezi. In quest’ultimo esercizio implementiamo un algoritmo di integrazione numerica a precisione fissata invece che a numero di passi fissato. Negli esercizi precedenti il calcolo a numero di passi fissato non ci dà alcuna indicazione sulla qualità del risultato: integrare con 10 passi è sufficiente? L’idea che vogliamo sviluppare è che l’utente fornisca una precisione desiderata e l’algoritmo sia in grado di aumentare automaticamente il numero di passi fino a raggiungere la precisione richiesta sul valore dell’integrale. L’algoritmo dovrà accettare in input il valore della precisione e raddoppiare il numero di passi finché l’errore (stimato runtime, si veda sotto) non diventa inferiore alla precisione impostata.</p>
 <ol type="1">
 <li><p>Come nei casi precedenti si può costruire una classe dedicata per l’implementazione del metodo dei trapezi.</p></li>
 <li><p>Possiamo implementare come nei casi precedenti un metodo privato</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> calculate<span class="op">(</span><span class="dt">int</span> nstep<span class="op">,</span> <span class="at">const</span> FunzioneBase <span class="op">&amp;</span> f<span class="op">)</span> <span class="kw">override</span> <span class="op">{</span> <span class="op">...</span> <span class="op">}</span></span></code></pre></div></li>
-<li><p>Il punto che ci interessa maggiormente è provare a realizzare un metodo dei trapezi che lavori a precisione fissata. Noi implementeremo il calcolo a precisione fissata solo per il metodo dei trapezi, quindi non toccheremo la classe <code>Integral</code>; di conseguenza, implementeremo solo un metodo <code>integrate_prec</code> in <code>Trapezi</code>:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> integrate_prec<span class="op">(</span><span class="dt">double</span> a<span class="op">,</span> <span class="dt">double</span> b<span class="op">,</span> <span class="dt">double</span> prec<span class="op">,</span> <span class="at">const</span> FunzioneBase <span class="op">&amp;</span> f<span class="op">)</span> <span class="op">{</span> <span class="op">...</span> <span class="op">}</span></span></code></pre></div>
+<li><p>Il punto che ci interessa maggiormente è realizzare un metodo dei trapezi che lavori a precisione fissata. Noi implementeremo il calcolo a precisione fissata solo per il metodo dei trapezi, quindi non toccheremo la classe <code>Integral</code>; di conseguenza, implementeremo solo un metodo <code>integrate_prec</code> in <code>Trapezi</code>:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> integrate_prec<span class="op">(</span><span class="dt">double</span> a<span class="op">,</span> <span class="dt">double</span> b<span class="op">,</span> <span class="dt">double</span> prec<span class="op">,</span> <span class="at">const</span> FunzioneBase <span class="op">&amp;</span> f<span class="op">)</span> <span class="op">{</span> <span class="op">...</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 <p>Ovviamente, è possibile definire una coppia di funzioni <code>integrate_prec</code> (pubblica) e <code>calculate_prec</code> (privata) già nella classe <code>Integral</code> e poi implementare <code>calculate_prec</code> in ogni classe derivata. Bisogna però fare attenzione, perché il calcolo dell’errore dipende dall’ordine dell’algoritmo, quindi sarebbe necessario definire un nuovo metodo astratto <code>calculate_error()</code> che accetti l’integrale calcolato con passo <span class="math inline">h</span> e con passo <span class="math inline">h/2</span> per determinare l’errore corretto, e invocarlo poi in <code>integrate_prec</code> (il metodo pubblico). Noi, come già detto, non faremo nulla di ciò: ci basta implementare l’algoritmo a precisione fissata per il solo metodo dei trapezi. La classe <code>Trapezoids</code> avrà quindi un’implementazione simile:</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Trapezoids <span class="op">:</span> <span class="kw">public</span> Integral <span class="op">{</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="kw">private</span><span class="op">:</span></span>
@@ -279,14 +282,29 @@ h = \frac{b - a}N, \quad x_k = a + k h.
 <span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> calculate<span class="op">(</span><span class="dt">int</span> nstep<span class="op">,</span> <span class="at">const</span> FunzioneBase <span class="op">&amp;</span> f<span class="op">)</span> <span class="kw">override</span> <span class="op">{</span> <span class="op">...</span> <span class="op">}</span></span>
 <span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span><span class="op">:</span></span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Metodo dei trapezi con PRECISIONE FISSATA (nuovo!). Questo metodo si implementa</span></span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>  <span class="co">// direttamente come pubblico</span></span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> integrate_prec<span class="op">(</span><span class="dt">double</span> a<span class="op">,</span> <span class="dt">double</span> b<span class="op">,</span> <span class="dt">double</span> prec<span class="op">,</span> <span class="at">const</span> FunzioneBase <span class="op">&amp;</span> f<span class="op">)</span> <span class="op">{</span> <span class="op">...</span> <span class="op">}</span></span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code></pre></div></li>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Metodo dei trapezi con PRECISIONE FISSATA (nuovo!). Questo metodo si</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>  <span class="co">// implementa direttamente come pubblico</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> integrate_prec<span class="op">(</span><span class="dt">double</span> a<span class="op">,</span> <span class="dt">double</span> b<span class="op">,</span> <span class="dt">double</span> prec<span class="op">,</span> <span class="at">const</span> FunzioneBase <span class="op">&amp;</span> f<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>    <span class="op">...</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code></pre></div></li>
 </ol>
 <p>Un algoritmo a precisione fissata si può implementare anche per il metodo midpoint e per il metodo di Simpson ma nel caso dei trapezoidi si presta ad una implementazione particolarmente efficiente (si veda la sezione sotto).</p>
-<h2 id="stima-dellerrore">Stima dell’errore</h2>
-<p>Come possiamo fare a stimare l’errore che stiamo commettendo nel calcolo di un integrale se non conosciamo il valore vero <span class="math inline">I</span> dell’integrale? Partendo dalla conoscenza dell’andamento teorico dell’errore in funzione del passo <span class="math inline">h</span>, possiamo trovare un modo semplice per la stima dell’errore che stiamo commettendo. Nel caso della regola dei trapezi, l’adamento dell’errore è <span class="math inline">\epsilon = k h^2</span>. Calcolando l’integrale <span class="math inline">I_N</span> utilizzando un passo <span class="math inline">h</span> e successivamente l’intgrale <span class="math inline">I_{2N}</span> con un passo <span class="math inline">h/2</span>, possiamo scrivere il seguente sistema di equazioni: <span class="math display">
+<h2 id="il-metodo-dei-trapezi">Il metodo dei trapezi</h2>
+<p>Il metodo dei trapezi rappresenta la prima formula chiusa di Newton-Cotes e si basa su una interpolazione polinomiale di ordine 1 sui due punti che delimitano l’intervallo. La formula che approssima l’integrale è</p>
+<p><span class="math display">
+\int_a^b f(x)\,\mathrm{d}x \approx \left(\frac12 f(x_0) + f(x_1) + \dots + f(x_{N - 1}) + \frac12 f(x_N)\right)h,
+</span></p>
+<p>dove</p>
+<p><span class="math display">
+h = \frac{b - a}N
+</span></p>
+<p>e</p>
+<p><span class="math display">
+x_k = a + k h, \qquad k = 0, 1, \ldots N.
+</span></p>
+<h2 id="stima-runtime-dellerrore">Stima runtime dell’errore</h2>
+<p>Come possiamo stimare l’errore che stiamo commettendo nel calcolo di un integrale se non conosciamo il valore vero <span class="math inline">I</span> dell’integrale? Partendo dalla conoscenza dell’andamento teorico dell’errore in funzione del passo <span class="math inline">h</span>, possiamo trovare un modo semplice per la stima dell’errore che stiamo commettendo. Nel caso della regola dei trapezi, l’adamento dell’errore è <span class="math inline">\epsilon = k h^2</span>. Calcolando l’integrale <span class="math inline">I_N</span> utilizzando un passo <span class="math inline">h</span> e successivamente l’intgrale <span class="math inline">I_{2N}</span> con un passo <span class="math inline">h/2</span>, possiamo scrivere il seguente sistema di equazioni: <span class="math display">
 \begin{cases}
 I - I_N = k h^2,\\
 I - I_{2N} = k\left(\frac{h}2\right)^2.
@@ -328,6 +346,18 @@ I_3 = \Sigma_3 \times \frac{b - a}8.
 <p>I valori dell’ultima approssimazione dell’integrale e dell’ultima somma calcolata sono memorizzati all’interno dell’oggetto. In questo modo, se viene richiesto di ricalcolare l’integrale, non è necessario ricominciare da capo.</p>
 <h2 id="test-1">Test</h2>
 <p>Come scritto per l’esercizio 7.0, il notebook Julia per la lezione corrente all’indirizzo <a href="https://ziotom78.github.io/tnds-notebooks/lezione07/" class="uri">https://ziotom78.github.io/tnds-notebooks/lezione07/</a> contiene una serie di risultati che potete usare per scrivere i vostri test.</p>
+<h1 id="esercizio-7.3">Esercizio 7.3 - Integrazione di una funzione Gaussiana (facoltativo)</h1>
+<p>Come esercizio facoltativo vi proponiamo il calcolo di un integrale non risolubile analiticamente. Assumendo che una misura abbia un valore vero <span class="math inline">\mu</span> e una deviazione standard <span class="math inline">\sigma</span>, calcoliamo la probabilità che una misura cada entro <span class="math inline">\pm t\sigma</span> dal valore vero per <span class="math inline">t</span> che va da 0 a 5. La probabilità è ovviamente data dalla <a href="https://en.wikipedia.org/wiki/Normal_distribution">distribuzione Gaussiana</a>:</p>
+<p><span class="math display">
+f(x) = \frac1{\sqrt{2\pi\sigma^2}} \exp\left(-\frac{(x - \mu)^2}{2\sigma^2}\right).
+</span></p>
+<ol>
+<li><p>Costruite una classe <code>Gaussian</code> generica. I parametri <span class="math inline">\mu</span> e <span class="math inline">\sigma</span> della funzione <span class="math inline">f(x)</span> possono essere passati nel costruttore.</p></li>
+<li><p>Integrate la funzione Gaussiana con il metodo dei trapezi a precisione fissata in un intervallo <span class="math inline">[\mu - t\sigma, \mu + t\sigma]</span> con <span class="math inline">t</span> variabile da 0 a 5.</p></li>
+<li><p>Producete un grafico dell’integrale ottenuto in funzione del numero di <span class="math inline">\sigma</span>. Vi torna?</p></li>
+</ol>
+<p>Il risultato non dovrebbe sorprendere:</p>
+<p><img src="https://labtnds.docs.cern.ch/Lezione7/probability.png" /></p>
 <h1 id="errori-comuni">Errori comuni</h1>
 <p>Come di consueto, elenco alcuni errori molto comuni che ho trovato negli anni passati correggendo gli esercizi che gli studenti hanno consegnato all’esame:</p>
 <ul>

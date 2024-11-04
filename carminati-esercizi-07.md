@@ -6,18 +6,18 @@ In questa lezione implementeremo alcuni algoritmi di *quadratura numerica*, cio�
 
 # Esercizio 7.0 - Integrazione con il metodo *midpoint* a numero di passi fissato {#esercizio-7.0}
 
-Implementare un codice per il calcolo della funzione $\sin(x)$ su $[0, \pi]$ con il metodo midpoint.
+Implementare un codice per il calcolo della funzione $x \sin(x)$ su $[0, \pi]$ con il metodo midpoint.
 
 1. Per prima cosa, costruiamo un programma di test che calcoli l'integrale utilizzando un numero di intervalli fissato e passato da riga di comando.
 
-2. Per controllare la precisione ottenuta con un numero di passi fissato proviamo a stampare una tabella con la differenza tra il risultato numerico ed il valore esatto (ottenuto analiticamente) in funzione del numero di passi (o della lunghezza del passo $h$). In aggiunta alla tabella si può rappresentare l'andamento dell'errore in funzione della lunghezza del passo $h$ con un grafico, usando [gplot++](https://github.com/ziotom78/gplotpp) oppure un `TGraph` di ROOT.
+2. Per controllare la precisione ottenuta con un numero di passi fissato, stampiamo una tabella con la differenza tra il risultato numerico ed il valore esatto (ottenuto analiticamente) in funzione del numero di passi (o della lunghezza del passo $h$). In aggiunta alla tabella si può rappresentare l'andamento dell'errore in funzione della lunghezza del passo $h$ con un grafico, usando [gplot++](https://github.com/ziotom78/gplotpp) oppure un `TGraph` di ROOT.
 
 ## Il metodo del mid-point
 
 Ricordiamo che in questo metodo l'approssimazione dell'integrale è definita dalla formula
 
 $$
-\int_a^b f(x)\,\mathrm{d}x = h \cdot \bigl(f(x_0) + f(x_1) + \ldots + f(x_{N - 1})\bigl),\quad h = \frac{b - a}N, \quad x_k = a + \left(k + \frac12\right) h,
+\int_a^b f(x)\,\mathrm{d}x = h \cdot \bigl(f(x_0) + f(x_1) + \ldots + f(x_{N - 1})\bigl),
 $$
 dove
 $$
@@ -25,7 +25,7 @@ h = \frac{b - a}N
 $$
 e
 $$
-x_k = a + \left(k + \frac12 h\right),\qquad k = 0, 1, \ldots, N - 1.
+x_k = a + \left(k + \frac12 \right) h,\qquad k = 0, 1, \ldots, N - 1.
 $$
 
 La formula fornisce un'accuratezza dell'integrale di $O(h^2)$. Notate che questo metodo non richiede il calcolo della funzione negli estremi di integrazione.
@@ -163,7 +163,7 @@ int main (int argc, char* argv[]) {
 
   int nstep{stoi(argv[1])};
 
-  Seno f{};
+  XSinX f{};
   Midpoint myInt{};
 
   double I{myInt.integrate(0, M_PI, nstep, f)};
@@ -172,7 +172,7 @@ int main (int argc, char* argv[]) {
 }
 ```
 
-dove abbiamo utilizzato una classe `Seno` che eredita dalla classe astratta `FunzioneBase`.
+dove abbiamo utilizzato una classe `XSinX` che eredita dalla classe astratta `FunzioneBase`.
 
 Per creare i grafici, potete ovviamente usare ROOT, oppure [gplot++](https://github.com/ziotom78/gplotpp). In quest'ultimo
 caso, scaricate il file [gplot++.h](https://raw.githubusercontent.com/ziotom78/gplotpp/master/gplot%2B%2B.h) (facendo click col tasto destro sul link) e scrivete un codice del genere:
@@ -249,7 +249,7 @@ $$
 dove vale che
 
 $$
-h = \frac{b - a}N, \quad x_k = a + k h.
+h = \frac{b - a}N, \quad x_k = a + k h \qquad k = 0, 1, \ldots N.
 $$
 
 
@@ -260,7 +260,7 @@ Come scritto per l'esercizio 7.0, il notebook Julia per la lezione corrente all'
 
 # Esercizio 7.2 - Integrazione con la formula dei trapezi con precisione fissata (da consegnare) {#esercizio-7.2}
 
-Concludiamo l'esercitazione implementando l'integrazione della funzione $\sin x$ su $[0, \pi]$ con il metodo dei trapezi. In quest'ultimo esercizio proviamo a riflettere sull'uso di un algoritmo di integrazione numerica a precisione fissata invece che a numero di passi fissato. Negli esercizi precedenti il calcolo a numero di passi fissato non ci da alcuna indicazione sulla qualità del risultato: integrare con 10 passi è sufficiente? L'idea che vogliamo sviluppare è che l'utente fornisca una precisione desiderata e l'algoritmo sia in grado di aumentare automaticamente il numero di passi fino a raggiungere la precisione richiesta sul valore dell'integrale. L'algoritmo dovrà accettare in input il valore della precisione e raddoppiare il numero di passi finché l'errore (stimato runtime, si veda sotto) non diventa inferiore alla precisione impostata.
+Concludiamo l'esercitazione implementando l'integrazione della funzione $x \sin x$ su $[0, \pi]$ con il metodo dei trapezi. In quest'ultimo esercizio implementiamo un algoritmo di integrazione numerica a precisione fissata invece che a numero di passi fissato. Negli esercizi precedenti il calcolo a numero di passi fissato non ci dà alcuna indicazione sulla qualità del risultato: integrare con 10 passi è sufficiente? L'idea che vogliamo sviluppare è che l'utente fornisca una precisione desiderata e l'algoritmo sia in grado di aumentare automaticamente il numero di passi fino a raggiungere la precisione richiesta sul valore dell'integrale. L'algoritmo dovrà accettare in input il valore della precisione e raddoppiare il numero di passi finché l'errore (stimato runtime, si veda sotto) non diventa inferiore alla precisione impostata.
 
 1.  Come nei casi precedenti si può costruire una classe dedicata per l'implementazione del metodo dei trapezi.
 
@@ -270,10 +270,11 @@ Concludiamo l'esercitazione implementando l'integrazione della funzione $\sin x$
     double calculate(int nstep, const FunzioneBase & f) override { ... }
     ```
 
-3.  Il punto che ci interessa maggiormente è provare a realizzare un metodo dei trapezi che lavori a precisione fissata. Noi implementeremo il calcolo a precisione fissata solo per il metodo dei trapezi, quindi non toccheremo la classe `Integral`; di conseguenza, implementeremo solo un metodo `integrate_prec` in `Trapezi`:
+3.  Il punto che ci interessa maggiormente è realizzare un metodo dei trapezi che lavori a precisione fissata. Noi implementeremo il calcolo a precisione fissata solo per il metodo dei trapezi, quindi non toccheremo la classe `Integral`; di conseguenza, implementeremo solo un metodo `integrate_prec` in `Trapezi`:
 
     ```c++
-    double integrate_prec(double a, double b, double prec, const FunzioneBase & f) { ... }
+    double integrate_prec(double a, double b, double prec, const FunzioneBase & f) { ...
+    }
     ```
 
     Ovviamente, è possibile definire una coppia di funzioni `integrate_prec` (pubblica) e `calculate_prec` (privata) già nella classe `Integral` e poi implementare `calculate_prec` in ogni classe derivata. Bisogna però fare attenzione, perché il calcolo dell'errore dipende dall'ordine dell'algoritmo, quindi sarebbe necessario definire un nuovo metodo astratto `calculate_error()` che accetti l'integrale calcolato con passo $h$ e con passo $h/2$ per determinare l'errore corretto, e invocarlo poi in `integrate_prec` (il metodo pubblico). Noi, come già detto, non faremo nulla di ciò: ci basta implementare l'algoritmo a precisione fissata per il solo metodo dei trapezi. La classe `Trapezoids` avrà quindi un'implementazione simile:
@@ -285,18 +286,41 @@ Concludiamo l'esercitazione implementando l'integrazione della funzione $\sin x$
       double calculate(int nstep, const FunzioneBase & f) override { ... }
 
     public:
-      // Metodo dei trapezi con PRECISIONE FISSATA (nuovo!). Questo metodo si implementa
-      // direttamente come pubblico
-      double integrate_prec(double a, double b, double prec, const FunzioneBase & f) { ... }
+      // Metodo dei trapezi con PRECISIONE FISSATA (nuovo!). Questo metodo si
+      // implementa direttamente come pubblico
+      double integrate_prec(double a, double b, double prec, const FunzioneBase & f) {
+        ...
+      }
     };
     ```
 
 Un algoritmo a precisione fissata si può implementare anche per il metodo midpoint e per il metodo di Simpson ma nel caso dei trapezoidi si presta ad una implementazione particolarmente efficiente (si veda la sezione sotto).
 
 
-## Stima dell'errore
+## Il metodo dei trapezi
 
-Come possiamo fare a stimare l'errore che stiamo commettendo nel calcolo di un integrale se non conosciamo il valore vero $I$ dell'integrale? Partendo dalla conoscenza dell'andamento teorico dell'errore in funzione del passo $h$, possiamo trovare un modo semplice per la stima dell'errore che stiamo commettendo. Nel caso della regola dei trapezi, l'adamento dell'errore è $\epsilon = k h^2$. Calcolando l'integrale $I_N$ utilizzando un passo $h$ e successivamente l'intgrale $I_{2N}$ con un passo $h/2$, possiamo scrivere il seguente sistema di equazioni:
+Il metodo dei trapezi rappresenta la prima formula chiusa di Newton-Cotes e si basa su una interpolazione polinomiale di ordine 1 sui due punti che delimitano l'intervallo. La formula che approssima l'integrale è
+
+$$
+\int_a^b f(x)\,\mathrm{d}x \approx \left(\frac12 f(x_0) + f(x_1) + \dots + f(x_{N - 1}) + \frac12 f(x_N)\right)h,
+$$
+
+dove
+
+$$
+h = \frac{b - a}N
+$$
+
+e
+
+$$
+x_k = a + k h, \qquad k = 0, 1, \ldots N.
+$$
+
+
+## Stima runtime dell'errore
+
+Come possiamo stimare l'errore che stiamo commettendo nel calcolo di un integrale se non conosciamo il valore vero $I$ dell'integrale? Partendo dalla conoscenza dell'andamento teorico dell'errore in funzione del passo $h$, possiamo trovare un modo semplice per la stima dell'errore che stiamo commettendo. Nel caso della regola dei trapezi, l'adamento dell'errore è $\epsilon = k h^2$. Calcolando l'integrale $I_N$ utilizzando un passo $h$ e successivamente l'intgrale $I_{2N}$ con un passo $h/2$, possiamo scrivere il seguente sistema di equazioni:
 $$
 \begin{cases}
 I - I_N = k h^2,\\
@@ -358,6 +382,25 @@ I valori dell'ultima approssimazione dell'integrale e dell'ultima somma calcolat
 ## Test
 
 Come scritto per l'esercizio 7.0, il notebook Julia per la lezione corrente all'indirizzo <https://ziotom78.github.io/tnds-notebooks/lezione07/> contiene una serie di risultati che potete usare per scrivere i vostri test.
+
+
+# Esercizio 7.3 - Integrazione di una funzione Gaussiana (facoltativo) {#esercizio-7.3}
+
+Come esercizio facoltativo vi proponiamo il calcolo di un integrale non risolubile analiticamente. Assumendo che una misura abbia un valore vero $\mu$ e una deviazione standard $\sigma$, calcoliamo la probabilità che una misura cada entro $\pm t\sigma$ dal valore vero per $t$ che va da 0 a 5. La probabilità è ovviamente data dalla [distribuzione Gaussiana](https://en.wikipedia.org/wiki/Normal_distribution):
+
+$$
+f(x) = \frac1{\sqrt{2\pi\sigma^2}} \exp\left(-\frac{(x - \mu)^2}{2\sigma^2}\right).
+$$
+
+#.  Costruite una classe `Gaussian` generica. I parametri $\mu$ e $\sigma$ della funzione $f(x)$ possono essere passati nel costruttore.
+
+#.  Integrate la funzione Gaussiana con il metodo dei trapezi a precisione fissata in un intervallo $[\mu - t\sigma, \mu + t\sigma]$ con $t$ variabile da 0 a 5.
+
+#.  Producete un grafico dell'integrale ottenuto in funzione del numero di $\sigma$. Vi torna?
+
+Il risultato non dovrebbe sorprendere:
+
+![](https://labtnds.docs.cern.ch/Lezione7/probability.png)
 
 
 # Errori comuni
