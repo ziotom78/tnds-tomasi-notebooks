@@ -72,7 +72,7 @@
 <p>[La pagina con la spiegazione originale degli esercizi si trova qui: <a href="https://labtnds.docs.cern.ch/Lezione7/Lezione7/" class="uri">https://labtnds.docs.cern.ch/Lezione7/Lezione7/</a>.]</p>
 <p>In questa lezione implementeremo alcuni algoritmi di <em>quadratura numerica</em>, cioè algoritmi per il calcolo di integrali definiti di funzioni in un intervallo chiuso e limitato. I metodi numerici che studieremo in questa sessione si possono rendere necessari in varie occasioni: quando non sappiamo valutare analiticamente l’integrale in esame, quando la soluzione analitica è molto complicata ed il calcolo numerico è molto più semplice, oppure quando la funzione è conosciuta in un numeri finito di punti.</p>
 <h1 id="esercizio-7.0">Esercizio 7.0 - Integrazione con il metodo <em>midpoint</em> a numero di passi fissato</h1>
-<p>Implementare un codice per il calcolo della funzione <span class="math inline">x \sin(x)</span> su <span class="math inline">[0, \pi]</span> con il metodo midpoint.</p>
+<p>Implementare un codice per il calcolo della funzione <span class="math inline">x \sin(x)</span> su <span class="math inline">[0, \pi/2]</span> con il metodo midpoint.</p>
 <ol type="1">
 <li><p>Per prima cosa, costruiamo un programma di test che calcoli l’integrale utilizzando un numero di intervalli fissato e passato da riga di comando.</p></li>
 <li><p>Per controllare la precisione ottenuta con un numero di passi fissato, stampiamo una tabella con la differenza tra il risultato numerico ed il valore esatto (ottenuto analiticamente) in funzione del numero di passi (o della lunghezza del passo <span class="math inline">h</span>). In aggiunta alla tabella si può rappresentare l’andamento dell’errore in funzione della lunghezza del passo <span class="math inline">h</span> con un grafico, usando <a href="https://github.com/ziotom78/gplotpp">gplot++</a> oppure un <code>TGraph</code> di ROOT.</p></li>
@@ -161,7 +161,7 @@ x_k = a + \left(k + \frac12 \right) h,\qquad k = 0, 1, \ldots, N - 1.
 <span id="cb2-62"><a href="#cb2-62" aria-hidden="true" tabindex="-1"></a>    <span class="va">m_h</span> <span class="op">=</span> <span class="op">(</span>getB<span class="op">()</span> <span class="op">-</span> getA<span class="op">())</span> <span class="op">/</span> nstep<span class="op">;</span></span>
 <span id="cb2-63"><a href="#cb2-63" aria-hidden="true" tabindex="-1"></a>    <span class="dt">double</span> sum<span class="op">{};</span></span>
 <span id="cb2-64"><a href="#cb2-64" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-65"><a href="#cb2-65" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i<span class="op">{</span><span class="dv">0</span><span class="op">};</span> i <span class="op">&lt;</span> nstep<span class="op">;</span> i<span class="op">++)</span> <span class="op">{</span></span>
+<span id="cb2-65"><a href="#cb2-65" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i<span class="op">{};</span> i <span class="op">&lt;</span> nstep<span class="op">;</span> i<span class="op">++)</span> <span class="op">{</span></span>
 <span id="cb2-66"><a href="#cb2-66" aria-hidden="true" tabindex="-1"></a>      sum <span class="op">+=</span> f<span class="op">.</span>Eval<span class="op">(</span><span class="va">m_a</span> <span class="op">+</span> <span class="op">(</span>i <span class="op">+</span> <span class="fl">0.5</span><span class="op">)</span> <span class="op">*</span> <span class="va">m_h</span><span class="op">);</span></span>
 <span id="cb2-67"><a href="#cb2-67" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
 <span id="cb2-68"><a href="#cb2-68" aria-hidden="true" tabindex="-1"></a></span>
@@ -186,26 +186,27 @@ x_k = a + \left(k + \frac12 \right) h,\qquad k = 0, 1, \ldots, N - 1.
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;cmath&gt;</span></span>
 <span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;string&gt;</span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;fmtlib.h&quot;</span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="kw">using</span> <span class="kw">namespace</span> std<span class="op">;</span></span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main <span class="op">(</span><span class="dt">int</span> argc<span class="op">,</span> <span class="dt">char</span><span class="op">*</span> argv<span class="op">[])</span> <span class="op">{</span></span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> <span class="op">(</span>argc <span class="op">!=</span> <span class="dv">2</span><span class="op">)</span> <span class="op">{</span></span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    fmt<span class="op">::</span>println<span class="op">(</span>stderr<span class="op">,</span> <span class="st">&quot;Usage: </span><span class="sc">{}</span><span class="st"> &lt;NSTEP&gt;&quot;</span><span class="op">,</span> argv<span class="op">[</span><span class="dv">0</span><span class="op">]);</span></span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">1</span><span class="op">;</span></span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>  <span class="dt">int</span> nstep<span class="op">{</span>stoi<span class="op">(</span>argv<span class="op">[</span><span class="dv">1</span><span class="op">])};</span></span>
-<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>  XSinX f<span class="op">{};</span></span>
-<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>  Midpoint myInt<span class="op">{};</span></span>
-<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> I<span class="op">{</span>myInt<span class="op">.</span>integrate<span class="op">(</span><span class="dv">0</span><span class="op">,</span> M_PI<span class="op">,</span> nstep<span class="op">,</span> f<span class="op">)};</span></span>
-<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>  fmt<span class="op">::</span>println<span class="op">(</span><span class="st">&quot;Passi: </span><span class="sc">{}</span><span class="st">, I = </span><span class="sc">{}</span><span class="st">&quot;</span><span class="op">,</span> nstep<span class="op">,</span> I<span class="op">);</span></span>
-<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;numbers&gt;</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;string&gt;</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;fmtlib.h&quot;</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="kw">using</span> <span class="kw">namespace</span> std<span class="op">;</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main <span class="op">(</span><span class="dt">int</span> argc<span class="op">,</span> <span class="dt">char</span><span class="op">*</span> argv<span class="op">[])</span> <span class="op">{</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> <span class="op">(</span>argc <span class="op">!=</span> <span class="dv">2</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>    fmt<span class="op">::</span>println<span class="op">(</span>stderr<span class="op">,</span> <span class="st">&quot;Usage: </span><span class="sc">{}</span><span class="st"> &lt;NSTEP&gt;&quot;</span><span class="op">,</span> argv<span class="op">[</span><span class="dv">0</span><span class="op">]);</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>  <span class="dt">int</span> nstep<span class="op">{</span>stoi<span class="op">(</span>argv<span class="op">[</span><span class="dv">1</span><span class="op">])};</span></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>  XSinX f<span class="op">{};</span></span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>  Midpoint myInt<span class="op">{};</span></span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> I<span class="op">{</span>myInt<span class="op">.</span>integrate<span class="op">(</span><span class="dv">0</span><span class="op">,</span> numbers<span class="op">::</span>pi<span class="op">,</span> nstep<span class="op">,</span> f<span class="op">)};</span></span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>  fmt<span class="op">::</span>println<span class="op">(</span><span class="st">&quot;Passi: </span><span class="sc">{}</span><span class="st">, I = </span><span class="sc">{}</span><span class="st">&quot;</span><span class="op">,</span> nstep<span class="op">,</span> I<span class="op">);</span></span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 <p>dove abbiamo utilizzato una classe <code>XSinX</code> che eredita dalla classe astratta <code>FunzioneBase</code>.</p>
 <p>Per creare i grafici, potete ovviamente usare ROOT, oppure <a href="https://github.com/ziotom78/gplotpp">gplot++</a>. In quest’ultimo caso, scaricate il file <a href="https://raw.githubusercontent.com/ziotom78/gplotpp/master/gplot%2B%2B.h">gplot++.h</a> (facendo click col tasto destro sul link) e scrivete un codice del genere:</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="bu">std::</span>vector<span class="op">&lt;</span><span class="dt">int</span><span class="op">&gt;</span> steps<span class="op">{</span><span class="dv">10</span><span class="op">,</span> <span class="dv">50</span><span class="op">,</span> <span class="dv">100</span><span class="op">,</span> <span class="dv">500</span><span class="op">,</span> <span class="dv">1000</span><span class="op">};</span></span>
@@ -361,10 +362,10 @@ f(x) = \frac1{\sqrt{2\pi\sigma^2}} \exp\left(-\frac{(x - \mu)^2}{2\sigma^2}\righ
 <h1 id="errori-comuni">Errori comuni</h1>
 <p>Come di consueto, elenco alcuni errori molto comuni che ho trovato negli anni passati correggendo gli esercizi che gli studenti hanno consegnato all’esame:</p>
 <ul>
-<li><p>Molte volte gli studenti usano la funzione <code>abs</code> anziché <code>fabs</code> nel determinare l’ampiezza dell’intervallo di integrazione. Attenzione! Se <code>fabs</code> restituisce sempre un numero floating-point, la funzione <code>abs</code> lo fa <strong>solo</strong> se si include <code>&lt;cmath&gt;</code>, altrimenti restituisce un intero: se quindi l’intervallo di integrazione <code>b-a</code> è inferiore a 1, <code>abs(b - a) == 0</code>!</p></li>
-<li><p>Alcuni studenti calcolano le somme dei termini degli integrali saltando l’ultimo punto a destra dell’intervallo (e sottostimando quindi l’integrale di <span class="math inline">\sin x</span>).</p></li>
+<li><p>Molte volte gli studenti usano la funzione <code>abs</code> anziché <code>fabs</code> nel determinare l’ampiezza dell’intervallo di integrazione. Attenzione! Se <code>fabs</code> restituisce sempre un numero floating-point, la funzione <code>abs</code> lo fa <strong>solo</strong> se si include <code>&lt;cmath&gt;</code>, altrimenti restituisce un intero: se quindi non includete <code>&lt;cmath&gt;</code> e l’intervallo di integrazione <code>b-a</code> è inferiore a 1, avrete che <code>abs(b - a) == 0</code>!</p></li>
+<li><p>Alcuni studenti calcolano le somme dei termini degli integrali saltando l’ultimo punto a destra dell’intervallo (e sottostimando quindi l’integrale di <span class="math inline">h \cdot \pi/2 \cdot \sin \pi/2</span>).</p></li>
 <li><p>Attenzione ai coefficienti nella formula di Simpson, perché a volte gli studenti scambiano di posto il 4 con il 2!</p></li>
-<li><p>Non confondete il significato di “numero di passi” quando calcolate l’errore di un metodo di integrazione: se per calcolare l’errore dovete stimare l’integrale con passo <code>h</code> e con passo <code>h/2</code>, l’errore che ottenete si riferisce al passo <code>h</code>, non al passo <code>h/2</code>!</p></li>
+<li><p>Non confondete il significato di “numero di passi” quando calcolate l’errore di un metodo di integrazione: se per calcolare l’errore dovete stimare l’integrale con passo <code>h</code> e con passo <code>h/2</code>, l’errore che ottenete si riferisce al passo <code>h</code>, non al passo <code>h/2</code>! (Va detto però che quest’errore è più frequente negli esami scritti che negli esercizi.)</p></li>
 </ul>
 <p>Il notebook all’indirizzo <a href="https://ziotom78.github.io/tnds-notebooks/lezione07/" class="uri">https://ziotom78.github.io/tnds-notebooks/lezione07/</a> fornisce una lunga serie di test: se li implementate tutti, avete il 99.9% di essere sicuri che la vostra implementazione sia corretta!</p>
 </main>

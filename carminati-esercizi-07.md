@@ -6,7 +6,7 @@ In questa lezione implementeremo alcuni algoritmi di *quadratura numerica*, cio�
 
 # Esercizio 7.0 - Integrazione con il metodo *midpoint* a numero di passi fissato {#esercizio-7.0}
 
-Implementare un codice per il calcolo della funzione $x \sin(x)$ su $[0, \pi]$ con il metodo midpoint.
+Implementare un codice per il calcolo della funzione $x \sin(x)$ su $[0, \pi/2]$ con il metodo midpoint.
 
 1. Per prima cosa, costruiamo un programma di test che calcoli l'integrale utilizzando un numero di intervalli fissato e passato da riga di comando.
 
@@ -113,7 +113,7 @@ private:
     m_h = (getB() - getA()) / nstep;
     double sum{};
 
-    for (int i{0}; i < nstep; i++) {
+    for (int i{}; i < nstep; i++) {
       sum += f.Eval(m_a + (i + 0.5) * m_h);
     }
 
@@ -150,6 +150,7 @@ Ecco il codice di esempio:
 
 #include <cmath>
 #include <iostream>
+#include <numbers>
 #include <string>
 #include "fmtlib.h"
 
@@ -166,7 +167,7 @@ int main (int argc, char* argv[]) {
   XSinX f{};
   Midpoint myInt{};
 
-  double I{myInt.integrate(0, M_PI, nstep, f)};
+  double I{myInt.integrate(0, numbers::pi, nstep, f)};
 
   fmt::println("Passi: {}, I = {}", nstep, I);
 }
@@ -407,13 +408,13 @@ Il risultato non dovrebbe sorprendere:
 
 Come di consueto, elenco alcuni errori molto comuni che ho trovato negli anni passati correggendo gli esercizi che gli studenti hanno consegnato all'esame:
 
--   Molte volte gli studenti usano la funzione `abs` anziché `fabs` nel determinare l'ampiezza dell'intervallo di integrazione. Attenzione! Se `fabs` restituisce sempre un numero floating-point, la funzione `abs` lo fa **solo** se si include `<cmath>`, altrimenti restituisce un intero: se quindi l'intervallo di integrazione `b-a` è inferiore a 1, `abs(b - a) == 0`!
+-   Molte volte gli studenti usano la funzione `abs` anziché `fabs` nel determinare l'ampiezza dell'intervallo di integrazione. Attenzione! Se `fabs` restituisce sempre un numero floating-point, la funzione `abs` lo fa **solo** se si include `<cmath>`, altrimenti restituisce un intero: se quindi non includete `<cmath>` e l'intervallo di integrazione `b-a` è inferiore a 1, avrete che `abs(b - a) == 0`!
 
--   Alcuni studenti calcolano le somme dei termini degli integrali saltando l'ultimo punto a destra dell'intervallo (e sottostimando quindi l'integrale di $\sin x$).
+-   Alcuni studenti calcolano le somme dei termini degli integrali saltando l'ultimo punto a destra dell'intervallo (e sottostimando quindi l'integrale di $h \cdot \pi/2 \cdot \sin \pi/2$).
 
 -   Attenzione ai coefficienti nella formula di Simpson, perché a volte gli studenti scambiano di posto il 4 con il 2!
 
--   Non confondete il significato di “numero di passi” quando calcolate l'errore di un metodo di integrazione: se per calcolare l'errore dovete stimare l'integrale con passo `h` e con passo `h/2`, l'errore che ottenete si riferisce al passo `h`, non al passo `h/2`!
+-   Non confondete il significato di “numero di passi” quando calcolate l'errore di un metodo di integrazione: se per calcolare l'errore dovete stimare l'integrale con passo `h` e con passo `h/2`, l'errore che ottenete si riferisce al passo `h`, non al passo `h/2`! (Va detto però che quest'errore è più frequente negli esami scritti che negli esercizi.)
 
 Il notebook all'indirizzo <https://ziotom78.github.io/tnds-notebooks/lezione07/> fornisce una lunga serie di test: se li implementate tutti, avete il 99.9% di essere sicuri che la vostra implementazione sia corretta!
 
