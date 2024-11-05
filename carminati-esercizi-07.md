@@ -167,7 +167,7 @@ int main (int argc, char* argv[]) {
   XSinX f{};
   Midpoint myInt{};
 
-  double I{myInt.integrate(0, numbers::pi, nstep, f)};
+  double I{myInt.integrate(0, numbers::pi / 2, nstep, f)};
 
   fmt::println("Passi: {}, I = {}", nstep, I);
 }
