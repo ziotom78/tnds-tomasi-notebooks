@@ -74,6 +74,7 @@ public:
   double getB() const { return m_b; }
   double getSign() const { return m_sign; }
   double getH() const { return m_h; }
+  void setH(double h) { m_h = h; }
 
 private:
   // Questa è la funzione da ridefinire con `override` nelle classi derivate
@@ -124,6 +125,8 @@ private:
   }
 };
 ```
+
+(Attenzione: il codice sopra ha un problema di accessibilità e non compila. Cercate di capire da soli in che modo sistemarlo, e se non riuscite, chiedete al docente o all'assistente).
 
 Notate in che modo il codice implementa il calcolo: il metodo pubblico è `Integral::integrate`, che **non** è virtuale: esso si preoccupa di invocare `Integral::checkInterval` (privato) per verificare gli estremi di integrazione, e poi invoca il metodo privato `Integral::calculate` che fa il conto vero e proprio:
 
