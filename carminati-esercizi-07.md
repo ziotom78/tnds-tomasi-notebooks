@@ -183,7 +183,7 @@ std::vector<double> step_sizes(ssize(steps));
 std::vector<double> errors(ssize(steps));
 
 // Calcola gli errori e stampa una tabella usando "fmtlib.h"
-double true_value{2};
+double true_value{1};
 fmt::println("Passi        Intervallo h  Errore");
 for (size_t i{}; i < ssize(steps); ++i) {
   double estimated_value{myInt.integrate(steps[i], f)};
@@ -211,7 +211,7 @@ Con ROOT si scriverebbe invece qualcosa del genere:
 ```c++
 std::vector<int> steps{10, 50, 100, 500, 1000};
 TGraph g_errore{};
-double true_value{2};
+double true_value{1};
 fmt::println("Passi        Errore")
 for (int i{}; i < size(steps); i++) {
   double estimated_value{myInt.integrate(steps[i], f)};
