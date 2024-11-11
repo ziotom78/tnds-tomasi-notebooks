@@ -408,7 +408,7 @@ Di conseguenza, il programmatore è «costretto» a verificare la correttezza de
 
 -   In giro per Internet ci sono ancora moltissimi esempi di codice che usano `vector::size()`.
 
-# Il C++20
+# Il C++20 {#ssize-cpp}
 
 -   Fortunatamente, dal C++20 è disponibile la funzione `ssize()`, che funziona su vettori e altri tipi della STL e restituisce sempre un `int`:
 
