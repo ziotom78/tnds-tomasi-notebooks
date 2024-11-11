@@ -90,7 +90,7 @@
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="bu">std::</span>vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> stl_vec<span class="op">{</span><span class="fl">1.0</span><span class="op">,</span> <span class="fl">2.0</span><span class="op">,</span> <span class="fl">3.0</span><span class="op">};</span></span></code></pre></div>
 <p>ma la variabile <code>stl_vec</code> ha più funzionalità:</p>
 <ul>
-<li><p>È sempre possibile sapere quanti elementi contenga con il metodo <code>size(stl_vec)</code> (o nel vecchio C++ <code>stl_vec.size()</code>, che è però <strong>sconsigliato</strong>);</p></li>
+<li><p>È sempre possibile sapere quanti elementi contenga con il metodo <code>ssize(stl_vec)</code> (o nel vecchio C++ <code>stl_vec.size()</code>, che <a href="tomasi-lezione-03.html#ssize-cpp">come abbiamo più volte ripetuto</a> è però <strong>sconsigliato</strong>);</p></li>
 <li><p>Si possono aggiungere elementi in coda con <code>stl_vec.push_back()</code> e <a href="https://en.cppreference.com/w/cpp/container/vector/emplace_back"><code>stl_vec.emplace_back()</code></a>;</p></li>
 <li><p>Si possono rimuovere elementi con <a href="https://cplusplus.com/reference/vector/vector/erase/"><code>stl_vec.erase()</code></a>.</p></li>
 <li><p>Se si usa la scrittura <code>stl_vec.at(4)</code> anziché <code>stl_vec[4]</code>, l’accesso a un elemento non esistente dell’array causa un messaggio di errore esplicito.</p></li>
@@ -99,7 +99,7 @@
 <ul>
 <li><p>È allocato sullo <em>stack</em> anziché sullo <em>heap</em>, quindi è molto veloce da creare;</p></li>
 <li><p>Proibisce di aggiungere e togliere elementi: il numero di elementi va definito in fase di dichiarazione e non può essere modificato;</p></li>
-<li><p>Va usato quando il numero di elementi nell’array è piccolo (qualche decina al massimo), altrimenti si rischia di riempire tutto lo <em>stack</em>;</p></li>
+<li><p>Va usato quando il numero di elementi nell’array è piccolo (<strong>qualche decina al massimo</strong>), altrimenti si rischia di riempire tutto lo <em>stack</em>;</p></li>
 <li><p>Il compilatore è sempre in grado di verificare che le dimensioni di un array siano consistenti. Ad esempio, se si somma un array <code>a</code> di due elementi ad un array <code>b</code> di quattro elementi, il compilatore produce un errore di compilazione. Questo non sarebbe vero se <code>a</code> e <code>b</code> fossero di tipo <code>std::vector</code>!</p></li>
 </ul>
 <p>Il testo originale degli esercizi di Carminati assume che negli esercizi di oggi si usi <code>std::vector</code>, ma il testo qui sotto vi mostrerà invece come usare <code>std::array</code>, perché rende impossibile alcuni errori che gli studenti tendono a fare.</p>
@@ -112,14 +112,15 @@
 <div class="sourceCode" id="cb3"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span><span class="op">(</span><span class="dt">int</span> i<span class="op">{};</span> i <span class="op">&lt;</span> ssize<span class="op">(</span>stl_arr<span class="op">);</span> <span class="op">++</span>i<span class="op">)</span> <span class="op">{</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Ok anche `stl_arr[i]`, ma non controlla la</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="co">// correttezza di `i`</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> stl_arr<span class="op">.</span>at<span class="op">(</span>i<span class="op">)</span> <span class="op">&lt;&lt;</span> <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">;</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  fmt<span class="op">::</span>println<span class="op">(</span><span class="st">&quot;Valore #</span><span class="sc">{}</span><span class="st">: </span><span class="sc">{}</span><span class="st">&quot;</span><span class="op">,</span> i<span class="op">,</span> stl_arr<span class="op">.</span>at<span class="op">(</span>i<span class="op">));</span></span>
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 <p>ma è vietato chiamare metodi come <code>stl_arr.push_back(5.0)</code>, perché la dimensione dell’array non cambia mai!</p>
-<p>Se si vogliono definire funzioni che operano su un array, nel template bisogna non solo indicare <code>&lt;typename T&gt;</code> come nel caso di <code>std::vector</code>, perché qui anche la <em>dimensione</em> dell’array è un parametro (che purtroppo va indicata come <code>size_t</code> anziché <code>int</code> ☹):</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">template</span> <span class="op">&lt;</span><span class="kw">typename</span> T<span class="op">,</span> <span class="dt">size_t</span> n<span class="op">&gt;</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> print<span class="op">(</span><span class="at">const</span> <span class="bu">std::</span>array<span class="op">&lt;</span>T<span class="op">,</span> n<span class="op">&gt;</span> <span class="op">&amp;</span> arr<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="co">// …</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p>Se si vogliono definire funzioni che operano su un array, nel template bisogna non solo indicare <code>&lt;typename T&gt;</code> come nel caso di <code>std::vector</code>, perché qui anche la <em>dimensione</em> dell’array è un parametro (che purtroppo va indicata come <code>size_t</code> anziché <code>int</code> 🙁):</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Using `int` instead of `size_t` doesn’t work…</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="kw">template</span> <span class="op">&lt;</span><span class="kw">typename</span> T<span class="op">,</span> <span class="dt">size_t</span> n<span class="op">&gt;</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> print<span class="op">(</span><span class="at">const</span> <span class="bu">std::</span>array<span class="op">&lt;</span>T<span class="op">,</span> n<span class="op">&gt;</span> <span class="op">&amp;</span> arr<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="co">// …</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 <p>Notate che <code>T</code> è dichiarata come <code>typename</code>, perché questo parametro rappresenta un <em>tipo</em> come <code>double</code> oppure <code>int</code>, mentre <code>n</code> è un numero (<code>size_t</code> è un intero senza segno), perché questo non deve essere un tipo bensì un <em>valore</em> come <code>2</code>, <code>5</code>, <code>14</code>…</p>
 <h1 id="esercizio-8.0">Esercizio 8.0 - Algebra vettoriale</h1>
 <p>Come prima cosa, proviamo a dotare il tipo <code>std::array</code> della STL di tutte le funzionalità algebriche che ci possono essere utili, definendo opportunamente gli operatori <code>+</code>, <code>*</code>, <code>/</code>, <code>+=</code>. Dal momento che non possiamo modificare gli header files e i files di implementazione della classe <code>std::array</code>, implementiamo questi operatori come funzioni libere in un header file apposito da includere quando necessario. Potete trovarne un esempio <a href="codici/array_operations.h">qui</a>.</p>
@@ -131,6 +132,7 @@
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
 <span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  test_array_operations<span class="op">();</span></span>
 <span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p>Verificate che venga stampato il messaggio che certifica il successo dei test!</p>
 <h1 id="esercizio-8.1">Esercizio 8.1 - Risoluzione tramite metodo di Eulero</h1>
 <p>Nel primo esercizio implementeremo un codice per la risoluzione numerica dell’equazione differenziale che descrive il moto di un oscillatore armonico tramite il metodo di Eulero. Gli obiettivi principali di questo esercizio sono due:</p>
 <ol type="1">
@@ -359,7 +361,7 @@ v(t + h) &amp;\approx v(t) + h \cdot \dot{v}(t) = x(t) + h \cdot \frac{F}m.
 <span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>myApp<span class="op">.</span>Run<span class="op">();</span></span></code></pre></div>
 <p>Si riveda il solito esempio (<a href="./codici/test_tgraph.cpp">qui</a>) per l’uso dei <code>TGraph</code> di ROOT.</p>
 <h2 id="risultati-attesi">Risultati attesi</h2>
-<p>Il metodo di Eulero non è molto preciso; in effetti, con un passo di integrazione modesto si vede come esso possa risultare instabile, mostrando oscillazioni la cui ampiezza varia con il tempo. La figura sotto mostra l’andamento di <span class="math inline">x(t)</span> con un passo di integrazione di 0.1 s:</p>
+<p>Il metodo di Eulero non è molto accurato; in effetti, con un passo di integrazione modesto si vede come esso possa risultare instabile, mostrando oscillazioni la cui ampiezza varia con il tempo. La figura sotto mostra l’andamento di <span class="math inline">x(t)</span> con un passo di integrazione di 0.1 s:</p>
 <p><img src="https://labtnds.docs.cern.ch/Lezione8/pictures/Eulero-01.png" /></p>
 <p>Per avere qualcosa di anche solo visivamente accettabile, bisogna andare a passi di almeno 0.0002 s:</p>
 <p><img src="https://labtnds.docs.cern.ch/Lezione8/pictures/Eulero-00001.png" /></p>
@@ -367,7 +369,7 @@ v(t + h) &amp;\approx v(t) + h \cdot \dot{v}(t) = x(t) + h \cdot \frac{F}m.
 <p><img src="https://labtnds.docs.cern.ch/Lezione8/pictures/errore_eulero.png" /></p>
 <p>Si noti come la pendenza della curva sia 1 in una scala log-log, mostrando come l’errore ottenuto sia proporzionale al passo <span class="math inline">h</span>.</p>
 <h1 id="esercizio-8.2">Esercizio 8.2 - Risoluzione tramite Runge-Kutta (da consegnare)</h1>
-<p>Ripetere l’esercizio 8.1 con il metodo di risoluzione di equazioni differenziali di Runge-Kutta (del quarto ordine) e confrontare quindi in condizioni analoghe (<span class="math inline">t</span> massimo e <span class="math inline">h</span>) la stabilità dei due metodi.</p>
+<p>Ripetere l’<a href="carminati-esercizi-08.html#esercizio-8.1">esercizio 8.1</a> con il metodo di risoluzione di equazioni differenziali di Runge-Kutta (del quarto ordine) e confrontare quindi in condizioni analoghe (<span class="math inline">t</span> massimo e <span class="math inline">h</span>) la stabilità dei due metodi.</p>
 <p>Per svolgere l’esercizio, basterà realizzare una nuova classe concreta a partire da <code>EquazioneDifferenzialeBase</code>. Implementate anche un metodo <code>test_runge_kutta()</code> sulla falsariga di <code>test_euler()</code> per l’<a href="http://0.0.0.0:8000/carminati-esercizi-08.html#struttura-del-programma">esercizio 8.1</a>.</p>
 <h2 id="il-metodo-di-runge-kutta">Il metodo di Runge-Kutta</h2>
 <p>Il noto metodo di Runge-Kutta è un metodo del quarto ordine ed utilizza la seguente determinazione dell’incremento:</p>
@@ -423,6 +425,7 @@ x(t+h) &amp;= x(t) + (k_1 + 2k_2 + 2k_3 + k_4)\frac{h}6.
 <span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a><span class="co">// Il periodo è il *doppio* del tempo che abbiamo trovato!</span></span>
 <span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> period<span class="op">{</span><span class="dv">2</span> <span class="op">*</span> t<span class="op">};</span></span></code></pre></div>
+<p><strong>Controllate la formula di interpolazione!</strong></p>
 <h2 id="risultati-attesi-1">Risultati attesi</h2>
 <p>La figura illustra il periodo al variare dell’ampiezza per un pendolo con <span class="math inline">l = 1\,\text{m}</span>:</p>
 <p><img src="https://labtnds.docs.cern.ch/Lezione8/pictures/periodo_pendolo.png" /></p>
@@ -512,8 +515,9 @@ x\\ y\\ z\\ v_x\\ v_y\\ v_z
 <h1 id="errori-comuni">Errori comuni</h1>
 <p>Come di consueto, elenco alcuni errori molto comuni che ho trovato negli anni passati correggendo gli esercizi che gli studenti hanno consegnato all’esame:</p>
 <ul>
-<li><p>Se seguite il testo originale degli esercizi e implementate tutto il codice di questa lezione usando <code>std::vector</code> anziché <code>std::array</code>, fate molta attenzione al numero di elementi in ogni vettore che usate all’interno di un calcolo come <code>a + b</code>: se <code>a</code> ha 2 dimensioni ma <code>b</code> ne ha 3, è un errore e i risultati del vostro programma saranno sbagliati!</p></li>
-<li><p>Attenzione al fattore <span class="math inline">1/6</span> nel codice del metodo Runge-Kutta: se scrivete <code>1 / 6</code> nel vostro codice C++, il risultato è zero!</p></li>
+<li><p>Attenti a come gestite il tempo <span class="math inline">t</span>: se la simulazione deve terminare dopo 70 s ed usate un passo <span class="math inline">h</span> non rappresentabile esattamente da un numero floating-point (ad esempio, <code>t = 0.1</code>), può essere che non avvenga mai che <code>t == 70.0</code>, ma <code>t == 69.9999999</code> a causa di arrotondamenti. Fate riferimento al <a href="https://ziotom78.github.io/tnds-notebooks/lezione08">notebook Julia</a>, dove si spiega come implementare un ciclo in modo robusto, calcolando ad esempio il numero di step necessari <strong>prima</strong> del ciclo.</p></li>
+<li><p>Se seguite il testo originale degli esercizi e implementate tutto il codice di questa lezione usando <code>std::vector</code> anziché <code>std::array</code>, fate molta attenzione al numero di elementi in ogni vettore che usate all’interno di un calcolo come <code>a + b</code>: se <code>a</code> ha 2 dimensioni ma <code>b</code> ne ha 3, è un errore e i risultati del vostro programma saranno sbagliati! Dovete implementare un controllo esplicito sulla consistenza della dimensione di <code>a</code> e di <code>b</code> per <strong>tutti</strong> gli operatori, perché a differenza di <code>std::array</code> il compilatore non lo fa per voi.</p></li>
+<li><p>Attenzione al fattore <span class="math inline">1/6</span> nel codice del metodo Runge-Kutta: se scrivete <code>1 / 6</code> nel vostro codice C++, il risultato è zero! (Divisione tra due interi)</p></li>
 <li><p>Nell’<a href="http://0.0.0.0:8000/carminati-esercizi-08.html#esercizio-8.3">esercizio 8.3</a> bisogna risolvere più volte l’equazione del pendolo col metodo Runge-Kutta. Attenzione a resettare ogni volta le variabili! Dopo aver risolto l’equazione per una certa ampiezza iniziale <span class="math inline">A</span>, bisogna resettare sia il tempo <code>t</code> a zero che la variabile <code>x</code>, in modo che questa contenga di nuovo la condizione iniziale (con un valore diverso di <span class="math inline">A</span>), prima di far ripartire il Runge-Kutta.</p></li>
 <li><p>Questi esercizi richiedono di passare una serie di parametri numerici dalla linea di comando. Assicuratevi di stampare una buona documentazione se l’utente non li specifica, e fate magari in modo che il comando <code>make esegui</code> avvii il vostro programma con parametri sensati.</p>
 <p>Ecco un buon esempio:</p>

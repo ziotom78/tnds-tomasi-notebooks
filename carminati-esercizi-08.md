@@ -15,7 +15,7 @@ std::vector<double> stl_vec{1.0, 2.0, 3.0};
 
 ma la variabile `stl_vec` ha più funzionalità:
 
--   È sempre possibile sapere quanti elementi contenga con il metodo `size(stl_vec)` (o nel vecchio C++ `stl_vec.size()`, che è però **sconsigliato**);
+-   È sempre possibile sapere quanti elementi contenga con il metodo `ssize(stl_vec)` (o nel vecchio C++ `stl_vec.size()`, che [come abbiamo più volte ripetuto](tomasi-lezione-03.html#ssize-cpp) è però **sconsigliato**);
 
 -   Si possono aggiungere elementi in coda con `stl_vec.push_back()` e [`stl_vec.emplace_back()`](https://en.cppreference.com/w/cpp/container/vector/emplace_back);
 
@@ -29,7 +29,7 @@ Oltre a `std::vector`, la STL offre la possibilità di usare [`std::array`](http
 
 -   Proibisce di aggiungere e togliere elementi: il numero di elementi va definito in fase di dichiarazione e non può essere modificato;
 
--   Va usato quando il numero di elementi nell'array è piccolo (qualche decina al massimo), altrimenti si rischia di riempire tutto lo *stack*;
+-   Va usato quando il numero di elementi nell'array è piccolo (**qualche decina al massimo**), altrimenti si rischia di riempire tutto lo *stack*;
 
 -   Il compilatore è sempre in grado di verificare che le dimensioni di un array siano consistenti. Ad esempio, se si somma un array `a` di due elementi ad un array `b` di quattro elementi, il compilatore produce un errore di compilazione. Questo non sarebbe vero se `a` e `b` fossero di tipo `std::vector`!
 
@@ -51,15 +51,16 @@ La scrittura `array<double, 3>` può sembrare strana: finora abbiamo sempre vist
 for(int i{}; i < ssize(stl_arr); ++i) {
   // Ok anche `stl_arr[i]`, ma non controlla la
   // correttezza di `i`
-  std::cout << stl_arr.at(i) << "\n";
+  fmt::println("Valore #{}: {}", i, stl_arr.at(i));
 }
 ```
 
 ma è vietato chiamare metodi come `stl_arr.push_back(5.0)`, perché la dimensione dell'array non cambia mai!
 
-Se si vogliono definire funzioni che operano su un array, nel template bisogna non solo indicare `<typename T>` come nel caso di `std::vector`, perché qui anche la *dimensione* dell'array è un parametro (che purtroppo va indicata come `size_t` anziché `int` ☹):
+Se si vogliono definire funzioni che operano su un array, nel template bisogna non solo indicare `<typename T>` come nel caso di `std::vector`, perché qui anche la *dimensione* dell'array è un parametro (che purtroppo va indicata come `size_t` anziché `int` 🙁):
 
 ```c++
+// Using `int` instead of `size_t` doesn’t work…
 template <typename T, size_t n>
 void print(const std::array<T, n> & arr) {
   // …
@@ -86,6 +87,8 @@ int main() {
   test_array_operations();
 }
 ```
+
+Verificate che venga stampato il messaggio che certifica il successo dei test!
 
 
 # Esercizio 8.1 - Risoluzione tramite metodo di Eulero {#esercizio-8.1}
@@ -348,7 +351,7 @@ Si riveda il solito esempio ([qui](./codici/test_tgraph.cpp)) per l'uso dei `TGr
 
 ## Risultati attesi
 
-Il metodo di Eulero non è molto preciso; in effetti, con un passo di integrazione modesto si vede come esso possa risultare instabile, mostrando oscillazioni la cui ampiezza varia con il tempo. La figura sotto mostra l'andamento di $x(t)$ con un passo di integrazione di 0.1&nbsp;s:
+Il metodo di Eulero non è molto accurato; in effetti, con un passo di integrazione modesto si vede come esso possa risultare instabile, mostrando oscillazioni la cui ampiezza varia con il tempo. La figura sotto mostra l'andamento di $x(t)$ con un passo di integrazione di 0.1&nbsp;s:
 
 ![](https://labtnds.docs.cern.ch/Lezione8/pictures/Eulero-01.png)
 
@@ -365,7 +368,7 @@ Si noti come la pendenza della curva sia 1 in una scala log-log, mostrando come 
 
 # Esercizio 8.2 - Risoluzione tramite Runge-Kutta (da consegnare) {#esercizio-8.2}
 
-Ripetere l'esercizio 8.1 con il metodo di risoluzione di equazioni differenziali di Runge-Kutta (del quarto ordine) e confrontare quindi in condizioni analoghe ($t$ massimo e $h$) la stabilità dei due metodi.
+Ripetere l'[esercizio 8.1](carminati-esercizi-08.html#esercizio-8.1) con il metodo di risoluzione di equazioni differenziali di Runge-Kutta (del quarto ordine) e confrontare quindi in condizioni analoghe ($t$ massimo e $h$) la stabilità dei due metodi.
 
 Per svolgere l'esercizio, basterà realizzare una nuova classe concreta a partire da `EquazioneDifferenzialeBase`. Implementate anche un metodo `test_runge_kutta()` sulla falsariga di `test_euler()` per l'[esercizio 8.1](http://0.0.0.0:8000/carminati-esercizi-08.html#struttura-del-programma).
 
@@ -448,6 +451,8 @@ t = t - v * h / (x[1] - v);
 // Il periodo è il *doppio* del tempo che abbiamo trovato!
 double period{2 * t};
 ```
+
+**Controllate la formula di interpolazione!**
 
 
 ## Risultati attesi
@@ -587,9 +592,11 @@ Questi parametri corrispondono grosso modo all'apparato sperimentale per la misu
 
 Come di consueto, elenco alcuni errori molto comuni che ho trovato negli anni passati correggendo gli esercizi che gli studenti hanno consegnato all'esame:
 
--   Se seguite il testo originale degli esercizi e implementate tutto il codice di questa lezione usando `std::vector` anziché `std::array`, fate molta attenzione al numero di elementi in ogni vettore che usate all'interno di un calcolo come `a + b`: se `a` ha 2 dimensioni ma `b` ne ha 3, è un errore e i risultati del vostro programma saranno sbagliati!
+-   Attenti a come gestite il tempo $t$: se la simulazione deve terminare dopo 70&nbsp;s ed usate un passo $h$ non rappresentabile esattamente da un numero floating-point (ad esempio, `t = 0.1`), può essere che non avvenga mai che `t == 70.0`, ma `t == 69.9999999` a causa di arrotondamenti. Fate riferimento al [notebook Julia](https://ziotom78.github.io/tnds-notebooks/lezione08), dove si spiega come implementare un ciclo in modo robusto, calcolando ad esempio il numero di step necessari **prima** del ciclo.
 
--   Attenzione al fattore $1/6$ nel codice del metodo Runge-Kutta: se scrivete `1 / 6` nel vostro codice C++, il risultato è zero!
+-   Se seguite il testo originale degli esercizi e implementate tutto il codice di questa lezione usando `std::vector` anziché `std::array`, fate molta attenzione al numero di elementi in ogni vettore che usate all'interno di un calcolo come `a + b`: se `a` ha 2 dimensioni ma `b` ne ha 3, è un errore e i risultati del vostro programma saranno sbagliati! Dovete implementare un controllo esplicito sulla consistenza della dimensione di `a` e di `b` per **tutti** gli operatori, perché a differenza di `std::array` il compilatore non lo fa per voi.
+
+-   Attenzione al fattore $1/6$ nel codice del metodo Runge-Kutta: se scrivete `1 / 6` nel vostro codice C++, il risultato è zero! (Divisione tra due interi)
 
 -   Nell'[esercizio 8.3](http://0.0.0.0:8000/carminati-esercizi-08.html#esercizio-8.3) bisogna risolvere più volte l'equazione del pendolo col metodo Runge-Kutta. Attenzione a resettare ogni volta le variabili! Dopo aver risolto l'equazione per una certa ampiezza iniziale $A$, bisogna resettare sia il tempo `t` a zero che la variabile `x`, in modo che questa contenga di nuovo la condizione iniziale (con un valore diverso di $A$), prima di far ripartire il Runge-Kutta.
 
