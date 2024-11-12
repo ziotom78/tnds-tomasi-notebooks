@@ -19,8 +19,9 @@
 -->
 </center>
 
+Link al Google Form per il [seminario su C++, Python e Julia](tomasi-lezione-08.html#/seminario-su-c-python-e-julia): <https://forms.gle/saJjERRmYR6KxPpe9>.
 <!--
-Link al Google Form per il [seminario su C++, Python e Julia](tomasi-lezione-08.html#/seminario-su-c-python-e-julia): <https://forms.gle/ZaDv5n6PjDEaNRoT8>. [Slides](tomasi-c++-python-julia.html).
+[Slides](tomasi-c++-python-julia.html).
 -->
 
 

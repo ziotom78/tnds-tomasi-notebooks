@@ -2,9 +2,7 @@
 
 # `std::vector`
 
--   Finora abbiamo sempre usato `std::vector` per memorizzare sequenze di valori
-
--   Gli esercizi sulle equazioni differenziali proposti da Carminati non fanno eccezione:
+-   Finora abbiamo sempre usato `std::vector` per memorizzare sequenze di valori, e si potrebbero usare anche nell'esercitazione di oggi:
 
     ```c++
     struct FunzioneVettorialeBase {
@@ -206,7 +204,7 @@
 
 -   Nel seminario spiego le differenze tra di loro, mostro come sono progettati i rispettivi compilatori, e do indicazioni su come scegliere lo strumento di lavoro migliore.
 
--   Se siete interessati, compilate il Google Form all'indirizzo <https://forms.gle/ZaDv5n6PjDEaNRoT8>: alla fine del semestre contatterò chi l'ha compilato per decidere la data migliore per tutti.
+-   Se siete interessati, compilate il Google Form all'indirizzo <https://forms.gle/saJjERRmYR6KxPpe9>: alla fine del semestre contatterò chi l'ha compilato per decidere la data migliore per tutti.
 
 ---
 title: "Laboratorio di TNDS -- Lezione 8"
