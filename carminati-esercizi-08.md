@@ -543,6 +543,112 @@ Aggiungendo un termine di perturbazione α/r³ al potenziale gravitazionale, la 
 
 ![](https://labtnds.docs.cern.ch/Lezione8/pictures/rosetta.png)
 
+# Visualizzare l'evoluzione temporale
+
+In questo caso potrebbe essere interessante visualizzare l'evoluzione temporale della traiettoria della terra in modo dinamico. Per fare questo possiamo semplicemente visualizzare il grafico della traiettoria ogni volta che viene aggiunto un nuovo punto, introducendo un'attesa nel ciclo `for` per regolare la velocità dell'animazione: il C++ fornisce la funzione `std::this_thread::sleep_for()`, che richiede un tempo definito tramite le funzioni in `<chrono>`, quindi occorrono queste librerie:
+
+```c++
+#include <chrono>
+#include <thread>
+```
+
+Per introdurre un ritardo prima di eseguire il ciclo seguente, bisogna quindi invocare `sleep_for` nel modo seguente:
+
+```c++
+Gnuplot gpl{};
+
+// ...
+
+const double plot_range{160e9}; // Maximum distance from the Sun
+
+for (int npoint{}; npoint < nstep ; npoint++) {
+  // Add the point, plot the graph and show the new frame
+  gpl.add_point(x[0], x[1]);
+  gpl.plot();  // Make the plot in memory (hidden from the user)
+  // Be sure that the axes don't change during the animation
+  gpl.set_xrange(-plot_range, plot_range);
+  gpl.set_yrange(-plot_range, plot_range);
+  gpl.show();  // Show the plot in the Gnuplot window
+
+  // Wait for 1 ms
+  std::this_thread::sleep_for(std::chrono::milliseconds(1));
+
+  // Step to the next point
+  x = integratore->Passo(t, x, h, f);
+  t += h;
+}
+```
+
+A partire dalla versione 0.9.0, Gplot++ fornisce però il metodo `redirect_to_animated_gif`, che crea un file GIF animato contenente l'animazione; in questo caso non serve includere `<chrono>` o `<thread>`. Il metodo richiede questi parametri:
+
+- Nome del file GIF da creare;
+- Dimensioni del file, in forma di stringa (es., `"800,600"`);
+- Numero di millisecondi di attesa tra un fotogramma e il successivo.
+
+Con Gplot++, il codice diventerebbe questo:
+
+```c++
+Gnuplot gpl{};
+
+// ...
+gpl.redirect_to_animated_gif("es8.4.gif", "800,600", 1);
+
+for (int npoint{}; npoint < nstep ; npoint++) {
+  // Add the point, plot the graph and show the new frame
+  gpl.add_point(x[0], x[1]);
+  gpl.plot();  // Make the plot in memory (hidden from the user)
+  // Be sure that the axes don't change during the animation
+  gpl.set_xrange(-plot_range, plot_range);
+  gpl.set_yrange(-plot_range, plot_range);
+  gpl.show();  // Show the plot in the Gnuplot window
+
+  // Step to the next point
+  x = integratore->Passo(t, x, h, f);
+  t += h;
+}
+```
+
+Di seguito un esempio di file GIF creato con un termine aggiuntivo di forza espresso come
+\[
+F'(\vec r) = -\alpha G \frac{M_\odot\,M_t\,D_p}{r^4} \vec r,
+\]
+dove $\alpha = 0.3$ è un numero puro e $D_p$ è la distanza Terra-Sole al perielio:
+
+![](images/es8.5.gif)
+
+Se usate ROOT anziché Gplot++, dovete includere anche `TSystem.h` perché ROOT deve sincronizzare le operazioni di disegno tramite `gSystem->ProcessEvents()`:
+
+```c++
+#include "TSystem.h"
+```
+
+e il codice diventerebbe il seguente:
+
+```c++
+// creazione TGraph e TCanvas
+
+TGraph tRosetta;
+TCanvas CRosetta{"CRosetta", "CRosetta", 600, 600};
+tRosetta.GetXaxis()->SetTitle("x (m)");
+tRosetta.GetYaxis()->SetTitle("y (m)");
+
+for (int npoint{}; npoint < nstep ; npoint++) {
+  // add the point, plot the graph and update the view
+  tRosetta.SetPoint(npoint, x[0], x[1]);
+  tRosetta.Draw("ALP");
+  CRosetta.Update();
+  gSystem->ProcessEvents();
+
+  // Wait for 1 ms
+  std::this_thread::sleep_for(std::chrono::milliseconds(1));
+
+  // Step to the next point
+  x = integratore->Passo(t, x, h, f);
+  t += h;
+}
+```
+
+Potete ovviamente usare queste tecniche anche per gli esercizi precedenti.
 
 # Esercizio 8.6 - Moto di una particella carica in un campo elettrico e magnetico uniforme {#esercizio-8.6}
 
@@ -583,9 +689,12 @@ Consideriamo il moto nel piano $(x, y)$ di un elettrone in un campo magnetico co
 -   $m = 9.1093826\times10^{-31}\,\text{kg}$;
 -   $v_x(0) = 8\times10^6\,\text{m/s}$;
 -   $B_z = 5\times10^{-3}\,\text{T}$;
+-   $E_z = -1000\,\text{V/m}$;
 -   tutte le altre componenti di campi e velocità iniziali sono nulle.
 
 Questi parametri corrispondono grosso modo all'apparato sperimentale per la misura di $e/m$ del laboratorio del II anno.
+
+Per rappresentare la traiettoria dell'elettrone si può utilizzare la classe [TGraph2D](https://root.cern.ch/doc/master/classTGraph2D.html) di ROOT
 
 
 # Errori comuni

@@ -72,6 +72,7 @@
   <li><a href="#moto-in-campo-gravitazionale" id="toc-moto-in-campo-gravitazionale">Moto in campo gravitazionale</a></li>
   <li><a href="#risultati-attesi-3" id="toc-risultati-attesi-3">Risultati attesi</a></li>
   </ul></li>
+  <li><a href="#visualizzare-levoluzione-temporale" id="toc-visualizzare-levoluzione-temporale">Visualizzare l’evoluzione temporale</a></li>
   <li><a href="#esercizio-8.6" id="toc-esercizio-8.6">Esercizio 8.6 - Moto di una particella carica in un campo elettrico e magnetico uniforme</a>
   <ul>
   <li><a href="#moto-in-campo-elettrico-e-magnetico-uniformi" id="toc-moto-in-campo-elettrico-e-magnetico-uniformi">Moto in campo elettrico e magnetico uniformi</a></li>
@@ -479,6 +480,87 @@ T = \frac{2\pi}{\sqrt{\frac{g}l}} \approx 2.007\,\text{s},
 <p><img src="https://labtnds.docs.cern.ch/Lezione8/pictures/orbita.png" /></p>
 <p>Aggiungendo un termine di perturbazione α/r³ al potenziale gravitazionale, la traiettoria diventa la seguente:</p>
 <p><img src="https://labtnds.docs.cern.ch/Lezione8/pictures/rosetta.png" /></p>
+<h1 id="visualizzare-levoluzione-temporale">Visualizzare l’evoluzione temporale</h1>
+<p>In questo caso potrebbe essere interessante visualizzare l’evoluzione temporale della traiettoria della terra in modo dinamico. Per fare questo possiamo semplicemente visualizzare il grafico della traiettoria ogni volta che viene aggiunto un nuovo punto, introducendo un’attesa nel ciclo <code>for</code> per regolare la velocità dell’animazione: il C++ fornisce la funzione <code>std::this_thread::sleep_for()</code>, che richiede un tempo definito tramite le funzioni in <code>&lt;chrono&gt;</code>, quindi occorrono queste librerie:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;chrono&gt;</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;thread&gt;</span></span></code></pre></div>
+<p>Per introdurre un ritardo prima di eseguire il ciclo seguente, bisogna quindi invocare <code>sleep_for</code> nel modo seguente:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>Gnuplot gpl<span class="op">{};</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="co">// ...</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="at">const</span> <span class="dt">double</span> plot_range<span class="op">{</span><span class="fl">160e9</span><span class="op">};</span> <span class="co">// Maximum distance from the Sun</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> npoint<span class="op">{};</span> npoint <span class="op">&lt;</span> nstep <span class="op">;</span> npoint<span class="op">++)</span> <span class="op">{</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Add the point, plot the graph and show the new frame</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>  gpl<span class="op">.</span>add_point<span class="op">(</span>x<span class="op">[</span><span class="dv">0</span><span class="op">],</span> x<span class="op">[</span><span class="dv">1</span><span class="op">]);</span></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>  gpl<span class="op">.</span>plot<span class="op">();</span>  <span class="co">// Make the plot in memory (hidden from the user)</span></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Be sure that the axes don&#39;t change during the animation</span></span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>  gpl<span class="op">.</span>set_xrange<span class="op">(-</span>plot_range<span class="op">,</span> plot_range<span class="op">);</span></span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>  gpl<span class="op">.</span>set_yrange<span class="op">(-</span>plot_range<span class="op">,</span> plot_range<span class="op">);</span></span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>  gpl<span class="op">.</span>show<span class="op">();</span>  <span class="co">// Show the plot in the Gnuplot window</span></span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Wait for 1 ms</span></span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>  <span class="bu">std::</span>this_thread::sleep_for<span class="op">(</span><span class="bu">std::</span>chrono::milliseconds<span class="op">(</span><span class="dv">1</span><span class="op">));</span></span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Step to the next point</span></span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a>  x <span class="op">=</span> integratore<span class="op">-&gt;</span>Passo<span class="op">(</span>t<span class="op">,</span> x<span class="op">,</span> h<span class="op">,</span> f<span class="op">);</span></span>
+<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a>  t <span class="op">+=</span> h<span class="op">;</span></span>
+<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p>A partire dalla versione 0.9.0, Gplot++ fornisce però il metodo <code>redirect_to_animated_gif</code>, che crea un file GIF animato contenente l’animazione; in questo caso non serve includere <code>&lt;chrono&gt;</code> o <code>&lt;thread&gt;</code>. Il metodo richiede questi parametri:</p>
+<ul>
+<li>Nome del file GIF da creare;</li>
+<li>Dimensioni del file, in forma di stringa (es., <code>"800,600"</code>);</li>
+<li>Numero di millisecondi di attesa tra un fotogramma e il successivo.</li>
+</ul>
+<p>Con Gplot++, il codice diventerebbe questo:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>Gnuplot gpl<span class="op">{};</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co">// ...</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>gpl<span class="op">.</span>redirect_to_animated_gif<span class="op">(</span><span class="st">&quot;es8.4.gif&quot;</span><span class="op">,</span> <span class="st">&quot;800,600&quot;</span><span class="op">,</span> <span class="dv">1</span><span class="op">);</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> npoint<span class="op">{};</span> npoint <span class="op">&lt;</span> nstep <span class="op">;</span> npoint<span class="op">++)</span> <span class="op">{</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Add the point, plot the graph and show the new frame</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>  gpl<span class="op">.</span>add_point<span class="op">(</span>x<span class="op">[</span><span class="dv">0</span><span class="op">],</span> x<span class="op">[</span><span class="dv">1</span><span class="op">]);</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>  gpl<span class="op">.</span>plot<span class="op">();</span>  <span class="co">// Make the plot in memory (hidden from the user)</span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Be sure that the axes don&#39;t change during the animation</span></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>  gpl<span class="op">.</span>set_xrange<span class="op">(-</span>plot_range<span class="op">,</span> plot_range<span class="op">);</span></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>  gpl<span class="op">.</span>set_yrange<span class="op">(-</span>plot_range<span class="op">,</span> plot_range<span class="op">);</span></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>  gpl<span class="op">.</span>show<span class="op">();</span>  <span class="co">// Show the plot in the Gnuplot window</span></span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Step to the next point</span></span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>  x <span class="op">=</span> integratore<span class="op">-&gt;</span>Passo<span class="op">(</span>t<span class="op">,</span> x<span class="op">,</span> h<span class="op">,</span> f<span class="op">);</span></span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>  t <span class="op">+=</span> h<span class="op">;</span></span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p>Di seguito un esempio di file GIF creato con un termine aggiuntivo di forza espresso come <span class="math display">
+F&#39;(\vec r) = -\alpha G \frac{M_\odot\,M_t\,D_p}{r^4} \vec r,
+</span> dove <span class="math inline">\alpha = 0.3</span> è un numero puro e <span class="math inline">D_p</span> è la distanza Terra-Sole al perielio:</p>
+<p><img src="images/es8.5.gif" /></p>
+<p>Se usate ROOT anziché Gplot++, dovete includere anche <code>TSystem.h</code> perché ROOT deve sincronizzare le operazioni di disegno tramite <code>gSystem-&gt;ProcessEvents()</code>:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;TSystem.h&quot;</span></span></code></pre></div>
+<p>e il codice diventerebbe il seguente:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co">// creazione TGraph e TCanvas</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>TGraph tRosetta<span class="op">;</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>TCanvas CRosetta<span class="op">{</span><span class="st">&quot;CRosetta&quot;</span><span class="op">,</span> <span class="st">&quot;CRosetta&quot;</span><span class="op">,</span> <span class="dv">600</span><span class="op">,</span> <span class="dv">600</span><span class="op">};</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>tRosetta<span class="op">.</span>GetXaxis<span class="op">()-&gt;</span>SetTitle<span class="op">(</span><span class="st">&quot;x (m)&quot;</span><span class="op">);</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>tRosetta<span class="op">.</span>GetYaxis<span class="op">()-&gt;</span>SetTitle<span class="op">(</span><span class="st">&quot;y (m)&quot;</span><span class="op">);</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> npoint<span class="op">{};</span> npoint <span class="op">&lt;</span> nstep <span class="op">;</span> npoint<span class="op">++)</span> <span class="op">{</span></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>  <span class="co">// add the point, plot the graph and update the view</span></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>  tRosetta<span class="op">.</span>SetPoint<span class="op">(</span>npoint<span class="op">,</span> x<span class="op">[</span><span class="dv">0</span><span class="op">],</span> x<span class="op">[</span><span class="dv">1</span><span class="op">]);</span></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>  tRosetta<span class="op">.</span>Draw<span class="op">(</span><span class="st">&quot;ALP&quot;</span><span class="op">);</span></span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>  CRosetta<span class="op">.</span>Update<span class="op">();</span></span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>  gSystem<span class="op">-&gt;</span>ProcessEvents<span class="op">();</span></span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Wait for 1 ms</span></span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>  <span class="bu">std::</span>this_thread::sleep_for<span class="op">(</span><span class="bu">std::</span>chrono::milliseconds<span class="op">(</span><span class="dv">1</span><span class="op">));</span></span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Step to the next point</span></span>
+<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a>  x <span class="op">=</span> integratore<span class="op">-&gt;</span>Passo<span class="op">(</span>t<span class="op">,</span> x<span class="op">,</span> h<span class="op">,</span> f<span class="op">);</span></span>
+<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a>  t <span class="op">+=</span> h<span class="op">;</span></span>
+<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p>Potete ovviamente usare queste tecniche anche per gli esercizi precedenti.</p>
 <h1 id="esercizio-8.6">Esercizio 8.6 - Moto di una particella carica in un campo elettrico e magnetico uniforme</h1>
 <p>Implementare la risoluzione dell’equazione del moto di una particella carica in un magnetico uniforme. Disegnare la traiettoria della particella e determinarne il diametro dell’orbita. Se si aggiunge un campo elettrico con componente lungo l’asse x pari a <span class="math inline">E_x = 10000\,\text{V/m}</span>, in che direzione si muove ora la particella?</p>
 <h2 id="moto-in-campo-elettrico-e-magnetico-uniformi">Moto in campo elettrico e magnetico uniformi</h2>
@@ -509,9 +591,11 @@ x\\ y\\ z\\ v_x\\ v_y\\ v_z
 <li><span class="math inline">m = 9.1093826\times10^{-31}\,\text{kg}</span>;</li>
 <li><span class="math inline">v_x(0) = 8\times10^6\,\text{m/s}</span>;</li>
 <li><span class="math inline">B_z = 5\times10^{-3}\,\text{T}</span>;</li>
+<li><span class="math inline">E_z = -1000\,\text{V/m}</span>;</li>
 <li>tutte le altre componenti di campi e velocità iniziali sono nulle.</li>
 </ul>
 <p>Questi parametri corrispondono grosso modo all’apparato sperimentale per la misura di <span class="math inline">e/m</span> del laboratorio del II anno.</p>
+<p>Per rappresentare la traiettoria dell’elettrone si può utilizzare la classe <a href="https://root.cern.ch/doc/master/classTGraph2D.html">TGraph2D</a> di ROOT</p>
 <h1 id="errori-comuni">Errori comuni</h1>
 <p>Come di consueto, elenco alcuni errori molto comuni che ho trovato negli anni passati correggendo gli esercizi che gli studenti hanno consegnato all’esame:</p>
 <ul>

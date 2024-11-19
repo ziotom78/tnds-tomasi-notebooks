@@ -994,8 +994,48 @@ ma aumenti significativamente per grandi ampiezze. </p>
 <p>Aggiungendo un termine di perturbazione <script type="math/tex">\alpha/r^{3}</script> al potenziale gravitazionale la traiettoria diventa il seguente:</p>
 <p><img alt="" src="../pictures/rosetta.png" /></p>
 </details>
+<details>
+<p><summary> Visualizzare evoluzione temporale con ROOT : </summary></p>
+<p>In questo caso potrebbe essere interessante visualizzare l'evoluzione temporale della traiettoria della terra in modo dinamico. Per fare questo possiamo semplicemente visualizzare il grafico della traiettoria ogni volta che viene aggiunto un nuovo punto. Facciamo in modo che un nuovo punto venga aggiunto dopo una breve attesa. Vediamo alcuni frammenti di codice :</p>
+<p>Per prima cosa ggiungiamo alcune librerie utili.</p>
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;chrono&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;thread&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;TSystem.h&quot;</span>
+</code></pre></div>
+<p>La visualizzazione dinamica si potrebbe implementare in questo modo </p>
+<div class="highlight"><pre><span></span><code><span class="w">  </span><span class="c1">// creazione TGraph e TCanvas</span>
+
+<span class="w">  </span><span class="n">TGraph</span><span class="w"> </span><span class="n">tRosetta</span><span class="w"> </span><span class="p">;</span>
+<span class="w">  </span><span class="n">TCanvas</span><span class="w"> </span><span class="n">CRosetta</span><span class="p">(</span><span class="s">&quot;CRosetta&quot;</span><span class="p">,</span><span class="s">&quot;CRosetta&quot;</span><span class="p">,</span><span class="mi">600</span><span class="p">,</span><span class="mi">600</span><span class="p">);</span>
+<span class="w">  </span><span class="n">tRosetta</span><span class="p">.</span><span class="n">GetXaxis</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">SetTitle</span><span class="p">(</span><span class="s">&quot;x (m)&quot;</span><span class="p">);</span>
+<span class="w">  </span><span class="n">tRosetta</span><span class="p">.</span><span class="n">GetYaxis</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">SetTitle</span><span class="p">(</span><span class="s">&quot;y (m)&quot;</span><span class="p">);</span>
+
+<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">npoint</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">npoint</span><span class="o">&lt;</span><span class="w"> </span><span class="n">nstep</span><span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="n">npoint</span><span class="o">++</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="c1">// aggiungi il punto, disegna e aggiorna</span>
+
+<span class="w">    </span><span class="n">tRosetta</span><span class="p">.</span><span class="n">SetPoint</span><span class="p">(</span><span class="w"> </span><span class="n">npoint</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w">  </span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="p">);</span>
+<span class="w">    </span><span class="n">tRosetta</span><span class="p">.</span><span class="n">Draw</span><span class="p">(</span><span class="s">&quot;ALP&quot;</span><span class="p">);</span><span class="w"> </span>
+<span class="w">    </span><span class="n">CRosetta</span><span class="p">.</span><span class="n">Update</span><span class="p">();</span>
+<span class="w">    </span><span class="n">gSystem</span><span class="o">-&gt;</span><span class="n">ProcessEvents</span><span class="p">();</span>
+
+<span class="w">    </span><span class="c1">// attendi </span>
+
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">this_thread</span><span class="o">::</span><span class="n">sleep_for</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="o">::</span><span class="n">milliseconds</span><span class="p">(</span><span class="mi">1</span><span class="p">));</span>
+
+<span class="w">    </span><span class="c1">// calcola il nuovo punto</span>
+
+<span class="w">    </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">integratore</span><span class="o">-&gt;</span><span class="n">Passo</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">h</span><span class="p">,</span><span class="n">f</span><span class="p">);</span>
+<span class="w">    </span><span class="n">t</span><span class="o">+=</span><span class="n">h</span><span class="p">;</span>
+
+<span class="w"> </span><span class="p">}</span>
+
+<span class="p">}</span>
+</code></pre></div>
+<p>La stessa struttura può essere utilizzata per tutti i casi che vogliamo studiare.</p>
+</details>
 <h2 id="esercizio-86-moto-di-una-particella-carica-in-un-campo-elettrico-e-magnetico-uniforme">ESERCIZIO 8.6 - Moto di una particella carica in un campo elettrico e magnetico uniforme :</h2>
-<p>Implementare la risoluzione dell'equazione del moto di una particella carica in un magnetico uniforme. Disegnare la traiettoria della particella e determinarne il diametro dell'orbita. Se si aggiunge un campo elettrico con componente lungo l'asse x pari a <script type="math/tex">E_{x}</script> = 10000 V/m, in che direzione si muove ora la particella?</p>
+<p>Implementare la risoluzione dell'equazione del moto di una particella carica in un magnetico uniforme. Disegnare la traiettoria della particella e determinarne il diametro dell'orbita. Se si aggiunge un campo elettrico con componente lungo l'asse z pari a <script type="math/tex">E_{z}</script> = -1000 V/m, in che direzione si muove ora la particella?</p>
 <details class="tip">
 <summary>Moto in campo elettrico e magnetico uniformi</summary>
 <p>Il moto di una particella carica in un campo elettrico e magnetico uniformi risente della forza di Lorentz e pertanto è descritto dall'equazione</p>
@@ -1016,9 +1056,12 @@ ma aumenti significativamente per grandi ampiezze. </p>
 <li>m = 9.1093826 <script type="math/tex">10^{-31}</script> kg</li>
 <li>v<script type="math/tex">_{x}</script>(0) = 8 <script type="math/tex">10^{6}</script> m/s</li>
 <li>B<script type="math/tex">_{z}</script> = 5 <script type="math/tex">10^{-3}</script> T</li>
+<li>
+<script type="math/tex">E_{z}</script> = -1000 V/m</li>
 <li>tutte le altre componenti di campi e velocità iniziali sono nulle. </li>
 </ul>
 <p>Questi parametri corrispondono grosso modo all'apparato sperimentale per la misura di <script type="math/tex">e/m</script> del laboratorio del II anno.</p>
+<p>Per rappresentare la traiettoria dell'elettrone si può utilizzare il <a href="https://root.cern.ch/doc/master/classTGraph2D.html">TGRaph2D</a> di ROOT.</p>
 </details>
 
 
