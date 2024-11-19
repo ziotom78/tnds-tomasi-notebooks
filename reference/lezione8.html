@@ -1035,7 +1035,7 @@ ma aumenti significativamente per grandi ampiezze. </p>
 <p>La stessa struttura può essere utilizzata per tutti i casi che vogliamo studiare.</p>
 </details>
 <h2 id="esercizio-86-moto-di-una-particella-carica-in-un-campo-elettrico-e-magnetico-uniforme">ESERCIZIO 8.6 - Moto di una particella carica in un campo elettrico e magnetico uniforme :</h2>
-<p>Implementare la risoluzione dell'equazione del moto di una particella carica in un magnetico uniforme. Disegnare la traiettoria della particella e determinarne il diametro dell'orbita. Se si aggiunge un campo elettrico con componente lungo l'asse z pari a <script type="math/tex">E_{z}</script> = -1000 V/m, in che direzione si muove ora la particella?</p>
+<p>Implementare la risoluzione dell'equazione del moto di una particella carica in un magnetico uniforme. Disegnare la traiettoria della particella e determinarne il diametro dell'orbita. Cosa succede se si aggiunge un campo elettrico con componente lungo l'asse z pari a <script type="math/tex">E_{z}</script> = -1000 V/m ?</p>
 <details class="tip">
 <summary>Moto in campo elettrico e magnetico uniformi</summary>
 <p>Il moto di una particella carica in un campo elettrico e magnetico uniformi risente della forza di Lorentz e pertanto è descritto dall'equazione</p>
@@ -1061,7 +1061,16 @@ ma aumenti significativamente per grandi ampiezze. </p>
 <li>tutte le altre componenti di campi e velocità iniziali sono nulle. </li>
 </ul>
 <p>Questi parametri corrispondono grosso modo all'apparato sperimentale per la misura di <script type="math/tex">e/m</script> del laboratorio del II anno.</p>
-<p>Per rappresentare la traiettoria dell'elettrone si può utilizzare il <a href="https://root.cern.ch/doc/master/classTGraph2D.html">TGRaph2D</a> di ROOT.</p>
+</details>
+<details class="success">
+<summary>Risultati attesi</summary>
+<p>Per prima cosa potremmo cercare di disegnare la traiettoria nel piano (x,y) :</p>
+<p><img alt="" src="../pictures/r.png" /></p>
+<p>e poi ( a titolo di esempio ) l'andamento della coordinata z in funzione del tempo :</p>
+<p><img alt="" src="../pictures/z.png" /></p>
+<p>è infine possibile visualizzare la traiettoria della particella in tre dimensioni :</p>
+<p><img alt="" src="../pictures/elica.png" /></p>
+<p>Per rappresentare la traiettoria dell'elettrone in 3D si può utilizzare il <a href="https://root.cern.ch/doc/master/classTGraph2D.html">TGRaph2D</a> di ROOT.</p>
 </details>
 
 

@@ -76,6 +76,7 @@
   <li><a href="#esercizio-8.6" id="toc-esercizio-8.6">Esercizio 8.6 - Moto di una particella carica in un campo elettrico e magnetico uniforme</a>
   <ul>
   <li><a href="#moto-in-campo-elettrico-e-magnetico-uniformi" id="toc-moto-in-campo-elettrico-e-magnetico-uniformi">Moto in campo elettrico e magnetico uniformi</a></li>
+  <li><a href="#risultati-attesi-4" id="toc-risultati-attesi-4">Risultati attesi</a></li>
   </ul></li>
   <li><a href="#errori-comuni" id="toc-errori-comuni">Errori comuni</a></li>
   </ul>
@@ -508,13 +509,13 @@ T = \frac{2\pi}{\sqrt{\frac{g}l}} \approx 2.007\,\text{s},
 <span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a>  x <span class="op">=</span> integratore<span class="op">-&gt;</span>Passo<span class="op">(</span>t<span class="op">,</span> x<span class="op">,</span> h<span class="op">,</span> f<span class="op">);</span></span>
 <span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a>  t <span class="op">+=</span> h<span class="op">;</span></span>
 <span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
-<p>A partire dalla versione 0.9.0, Gplot++ fornisce però il metodo <code>redirect_to_animated_gif</code>, che crea un file GIF animato contenente l’animazione; in questo caso non serve includere <code>&lt;chrono&gt;</code> o <code>&lt;thread&gt;</code>. Il metodo richiede questi parametri:</p>
+<p>A partire dalla versione 0.9.0, <a href="https://github.com/ziotom78/gplotpp">gplot++</a> fornisce però il metodo <code>redirect_to_animated_gif</code>, che crea un file GIF animato contenente l’animazione; in questo caso non serve includere <code>&lt;chrono&gt;</code> o <code>&lt;thread&gt;</code>. Il metodo richiede questi parametri:</p>
 <ul>
 <li>Nome del file GIF da creare;</li>
 <li>Dimensioni del file, in forma di stringa (es., <code>"800,600"</code>);</li>
 <li>Numero di millisecondi di attesa tra un fotogramma e il successivo.</li>
 </ul>
-<p>Con Gplot++, il codice diventerebbe questo:</p>
+<p>Con <a href="https://github.com/ziotom78/gplotpp">gplot++</a>, il codice diventerebbe questo:</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>Gnuplot gpl<span class="op">{};</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co">// ...</span></span>
@@ -539,7 +540,7 @@ T = \frac{2\pi}{\sqrt{\frac{g}l}} \approx 2.007\,\text{s},
 F&#39;(\vec r) = -\alpha G \frac{M_\odot\,M_t\,D_p}{r^4} \vec r,
 </span> dove <span class="math inline">\alpha = 0.3</span> è un numero puro e <span class="math inline">D_p</span> è la distanza Terra-Sole al perielio. Lo step usato per l’animazione è cinque giorni (ossia, <span class="math inline">h = 86\,400\,\text{s/day} \times 5\,\text{day}</span>):</p>
 <p><img src="images/es8.5.gif" /></p>
-<p>Se usate ROOT anziché Gplot++, dovete includere anche <code>TSystem.h</code> perché ROOT deve sincronizzare le operazioni di disegno tramite <code>gSystem-&gt;ProcessEvents()</code>:</p>
+<p>Se usate ROOT anziché <a href="https://github.com/ziotom78/gplotpp">gplot++</a>, dovete includere anche <code>TSystem.h</code> perché ROOT deve sincronizzare le operazioni di disegno tramite <code>gSystem-&gt;ProcessEvents()</code>:</p>
 <div class="sourceCode" id="cb13"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;TSystem.h&quot;</span></span></code></pre></div>
 <p>e il codice diventerebbe il seguente:</p>
 <div class="sourceCode" id="cb14"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co">// creazione TGraph e TCanvas</span></span>
@@ -565,7 +566,7 @@ F&#39;(\vec r) = -\alpha G \frac{M_\odot\,M_t\,D_p}{r^4} \vec r,
 <span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 <p>Potete ovviamente usare queste tecniche anche per gli esercizi precedenti.</p>
 <h1 id="esercizio-8.6">Esercizio 8.6 - Moto di una particella carica in un campo elettrico e magnetico uniforme</h1>
-<p>Implementare la risoluzione dell’equazione del moto di una particella carica in un magnetico uniforme. Disegnare la traiettoria della particella e determinarne il diametro dell’orbita. Se si aggiunge un campo elettrico con componente lungo l’asse x pari a <span class="math inline">E_x = 10000\,\text{V/m}</span>, in che direzione si muove ora la particella?</p>
+<p>Implementare la risoluzione dell’equazione del moto di una particella carica in un magnetico uniforme. Disegnare la traiettoria della particella e determinarne il diametro dell’orbita. Cosa succede se si aggiunge un campo elettrico con componente lungo l’asse z pari a <span class="math inline">E_z = -1000\,\text{V/m}</span>?</p>
 <h2 id="moto-in-campo-elettrico-e-magnetico-uniformi">Moto in campo elettrico e magnetico uniformi</h2>
 <p>Il moto di una particella carica in un campo elettrico e magnetico uniformi risente della forza di Lorentz e pertanto è descritto dall’equazione <span class="math display">
 m\ddot{x}(t) = q E + q v\times B,
@@ -598,7 +599,14 @@ x\\ y\\ z\\ v_x\\ v_y\\ v_z
 <li>tutte le altre componenti di campi e velocità iniziali sono nulle.</li>
 </ul>
 <p>Questi parametri corrispondono grosso modo all’apparato sperimentale per la misura di <span class="math inline">e/m</span> del laboratorio del II anno.</p>
-<p>Per rappresentare la traiettoria dell’elettrone si può utilizzare la classe <a href="https://root.cern.ch/doc/master/classTGraph2D.html">TGraph2D</a> di ROOT</p>
+<h2 id="risultati-attesi-4">Risultati attesi</h2>
+<p>Per prima cosa potremmo cercare di disegnare la traiettoria nel piano <span class="math inline">(x, y)</span>:</p>
+<p><img src="https://labtnds.docs.cern.ch/Lezione8/pictures/r.png" /></p>
+<p>e poi (a titolo di esempio) l’andamento della coordinata z in funzione del tempo:</p>
+<p><img src="https://labtnds.docs.cern.ch/Lezione8/pictures/z.png" /></p>
+<p>È infine possibile visualizzare la traiettoria della particella in tre dimensioni:</p>
+<p><img src="https://labtnds.docs.cern.ch/Lezione8/pictures/elica.png" /></p>
+<p>Per rappresentare la traiettoria dell’elettrone con <a href="https://github.com/ziotom78/gplotpp">gplot++</a> si può usare la funzione <a href="https://github.com/ziotom78/gplotpp?tab=readme-ov-file#3d-plots">plot3d</a>, salvando i punti della traiettoria in tre vettori di <code>double</code>. Con ROOT si può invece utilizzare la classe <a href="https://root.cern.ch/doc/master/classTGraph2D.html">TGraph2D</a>.</p>
 <h1 id="errori-comuni">Errori comuni</h1>
 <p>Come di consueto, elenco alcuni errori molto comuni che ho trovato negli anni passati correggendo gli esercizi che gli studenti hanno consegnato all’esame:</p>
 <ul>

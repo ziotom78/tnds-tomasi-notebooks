@@ -581,13 +581,13 @@ for (int npoint{}; npoint < nstep ; npoint++) {
 }
 ```
 
-A partire dalla versione 0.9.0, Gplot++ fornisce però il metodo `redirect_to_animated_gif`, che crea un file GIF animato contenente l'animazione; in questo caso non serve includere `<chrono>` o `<thread>`. Il metodo richiede questi parametri:
+A partire dalla versione 0.9.0, [gplot++](https://github.com/ziotom78/gplotpp) fornisce però il metodo `redirect_to_animated_gif`, che crea un file GIF animato contenente l'animazione; in questo caso non serve includere `<chrono>` o `<thread>`. Il metodo richiede questi parametri:
 
 - Nome del file GIF da creare;
 - Dimensioni del file, in forma di stringa (es., `"800,600"`);
 - Numero di millisecondi di attesa tra un fotogramma e il successivo.
 
-Con Gplot++, il codice diventerebbe questo:
+Con [gplot++](https://github.com/ziotom78/gplotpp), il codice diventerebbe questo:
 
 ```c++
 Gnuplot gpl{};
@@ -620,7 +620,7 @@ dove $\alpha = 0.3$ è un numero puro e $D_p$ è la distanza Terra-Sole al perie
 
 ![](images/es8.5.gif)
 
-Se usate ROOT anziché Gplot++, dovete includere anche `TSystem.h` perché ROOT deve sincronizzare le operazioni di disegno tramite `gSystem->ProcessEvents()`:
+Se usate ROOT anziché [gplot++](https://github.com/ziotom78/gplotpp), dovete includere anche `TSystem.h` perché ROOT deve sincronizzare le operazioni di disegno tramite `gSystem->ProcessEvents()`:
 
 ```c++
 #include "TSystem.h"
@@ -656,7 +656,7 @@ Potete ovviamente usare queste tecniche anche per gli esercizi precedenti.
 
 # Esercizio 8.6 - Moto di una particella carica in un campo elettrico e magnetico uniforme {#esercizio-8.6}
 
-Implementare la risoluzione dell'equazione del moto di una particella carica in un magnetico uniforme. Disegnare la traiettoria della particella e determinarne il diametro dell'orbita. Se si aggiunge un campo elettrico con componente lungo l'asse x pari a $E_x = 10000\,\text{V/m}$, in che direzione si muove ora la particella?
+Implementare la risoluzione dell'equazione del moto di una particella carica in un magnetico uniforme. Disegnare la traiettoria della particella e determinarne il diametro dell'orbita. Cosa succede se si aggiunge un campo elettrico con componente lungo l'asse z pari a $E_z = -1000\,\text{V/m}$?
 
 ## Moto in campo elettrico e magnetico uniformi
 
@@ -698,7 +698,21 @@ Consideriamo il moto nel piano $(x, y)$ di un elettrone in un campo magnetico co
 
 Questi parametri corrispondono grosso modo all'apparato sperimentale per la misura di $e/m$ del laboratorio del II anno.
 
-Per rappresentare la traiettoria dell'elettrone si può utilizzare la classe [TGraph2D](https://root.cern.ch/doc/master/classTGraph2D.html) di ROOT
+## Risultati attesi
+
+Per prima cosa potremmo cercare di disegnare la traiettoria nel piano $(x, y)$:
+
+![](https://labtnds.docs.cern.ch/Lezione8/pictures/r.png)
+
+e poi (a titolo di esempio) l'andamento della coordinata z in funzione del tempo:
+
+![](https://labtnds.docs.cern.ch/Lezione8/pictures/z.png)
+
+È infine possibile visualizzare la traiettoria della particella in tre dimensioni:
+
+![](https://labtnds.docs.cern.ch/Lezione8/pictures/elica.png)
+
+Per rappresentare la traiettoria dell'elettrone con [gplot++](https://github.com/ziotom78/gplotpp) si può usare la funzione [plot3d](https://github.com/ziotom78/gplotpp?tab=readme-ov-file#3d-plots), salvando i punti della traiettoria in tre vettori di `double`. Con ROOT si può invece utilizzare la classe [TGraph2D](https://root.cern.ch/doc/master/classTGraph2D.html).
 
 
 # Errori comuni
