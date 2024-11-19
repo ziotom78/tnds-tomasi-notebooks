@@ -533,6 +533,8 @@ Nell'implementare il moto di un corpo in un campo gravitazionale utilizzare le s
 - distanza Terra-Sole al perielio $D_p = 1.47098074\times 10^{11}\,\text{m}$;
 - velocità al perielio $v_p = 3.0287\times 10^4\,\text{m/s}$.
 
+Ovviamente, essendo tutti voi studenti di fisica, non c'è alcun bisogno di ricordarvi che nel vostro codice le unità di misura devono essere consistenti… quindi non ve lo ricorderò! 😉
+
 ## Risultati attesi
 
 Nel caso di potenziale gravitazionale standard dovremmo ottenere una traiettoria di questo tipo:
@@ -614,7 +616,7 @@ Di seguito un esempio di file GIF creato con un termine aggiuntivo di forza espr
 \[
 F'(\vec r) = -\alpha G \frac{M_\odot\,M_t\,D_p}{r^4} \vec r,
 \]
-dove $\alpha = 0.3$ è un numero puro e $D_p$ è la distanza Terra-Sole al perielio:
+dove $\alpha = 0.3$ è un numero puro e $D_p$ è la distanza Terra-Sole al perielio. Lo step usato per l'animazione è cinque giorni (ossia, $h = 86\,400\,\text{s/day} \times 5\,\text{day}$):
 
 ![](images/es8.5.gif)
 

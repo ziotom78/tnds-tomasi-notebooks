@@ -475,6 +475,7 @@ T = \frac{2\pi}{\sqrt{\frac{g}l}} \approx 2.007\,\text{s},
 <li>distanza Terra-Sole al perielio <span class="math inline">D_p = 1.47098074\times 10^{11}\,\text{m}</span>;</li>
 <li>velocità al perielio <span class="math inline">v_p = 3.0287\times 10^4\,\text{m/s}</span>.</li>
 </ul>
+<p>Ovviamente, essendo tutti voi studenti di fisica, non c’è alcun bisogno di ricordarvi che nel vostro codice le unità di misura devono essere consistenti… quindi non ve lo ricorderò! 😉</p>
 <h2 id="risultati-attesi-3">Risultati attesi</h2>
 <p>Nel caso di potenziale gravitazionale standard dovremmo ottenere una traiettoria di questo tipo:</p>
 <p><img src="https://labtnds.docs.cern.ch/Lezione8/pictures/orbita.png" /></p>
@@ -536,7 +537,7 @@ T = \frac{2\pi}{\sqrt{\frac{g}l}} \approx 2.007\,\text{s},
 <span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 <p>Di seguito un esempio di file GIF creato con un termine aggiuntivo di forza espresso come <span class="math display">
 F&#39;(\vec r) = -\alpha G \frac{M_\odot\,M_t\,D_p}{r^4} \vec r,
-</span> dove <span class="math inline">\alpha = 0.3</span> è un numero puro e <span class="math inline">D_p</span> è la distanza Terra-Sole al perielio:</p>
+</span> dove <span class="math inline">\alpha = 0.3</span> è un numero puro e <span class="math inline">D_p</span> è la distanza Terra-Sole al perielio. Lo step usato per l’animazione è cinque giorni (ossia, <span class="math inline">h = 86\,400\,\text{s/day} \times 5\,\text{day}</span>):</p>
 <p><img src="images/es8.5.gif" /></p>
 <p>Se usate ROOT anziché Gplot++, dovete includere anche <code>TSystem.h</code> perché ROOT deve sincronizzare le operazioni di disegno tramite <code>gSystem-&gt;ProcessEvents()</code>:</p>
 <div class="sourceCode" id="cb13"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;TSystem.h&quot;</span></span></code></pre></div>
