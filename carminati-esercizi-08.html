@@ -519,19 +519,21 @@ T = \frac{2\pi}{\sqrt{\frac{g}l}} \approx 2.007\,\text{s},
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co">// ...</span></span>
 <span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>gpl<span class="op">.</span>redirect_to_animated_gif<span class="op">(</span><span class="st">&quot;es8.4.gif&quot;</span><span class="op">,</span> <span class="st">&quot;800,600&quot;</span><span class="op">,</span> <span class="dv">1</span><span class="op">);</span></span>
 <span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> npoint<span class="op">{};</span> npoint <span class="op">&lt;</span> nstep <span class="op">;</span> npoint<span class="op">++)</span> <span class="op">{</span></span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Add the point, plot the graph and show the new frame</span></span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>  gpl<span class="op">.</span>add_point<span class="op">(</span>x<span class="op">[</span><span class="dv">0</span><span class="op">],</span> x<span class="op">[</span><span class="dv">1</span><span class="op">]);</span></span>
-<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>  gpl<span class="op">.</span>plot<span class="op">();</span>  <span class="co">// Make the plot in memory (hidden from the user)</span></span>
-<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Be sure that the axes don&#39;t change during the animation</span></span>
-<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>  gpl<span class="op">.</span>set_xrange<span class="op">(-</span>plot_range<span class="op">,</span> plot_range<span class="op">);</span></span>
-<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>  gpl<span class="op">.</span>set_yrange<span class="op">(-</span>plot_range<span class="op">,</span> plot_range<span class="op">);</span></span>
-<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>  gpl<span class="op">.</span>show<span class="op">();</span>  <span class="co">// Show the plot in the Gnuplot window</span></span>
-<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Step to the next point</span></span>
-<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>  x <span class="op">=</span> integratore<span class="op">-&gt;</span>Passo<span class="op">(</span>t<span class="op">,</span> x<span class="op">,</span> h<span class="op">,</span> f<span class="op">);</span></span>
-<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>  t <span class="op">+=</span> h<span class="op">;</span></span>
-<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="at">const</span> <span class="dt">double</span> plot_range<span class="op">{</span><span class="fl">160e9</span><span class="op">};</span> <span class="co">// Maximum distance from the Sun</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> npoint<span class="op">{};</span> npoint <span class="op">&lt;</span> nstep <span class="op">;</span> npoint<span class="op">++)</span> <span class="op">{</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Add the point, plot the graph and show the new frame</span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>  gpl<span class="op">.</span>add_point<span class="op">(</span>x<span class="op">[</span><span class="dv">0</span><span class="op">],</span> x<span class="op">[</span><span class="dv">1</span><span class="op">]);</span></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>  gpl<span class="op">.</span>plot<span class="op">();</span>  <span class="co">// Make the plot in memory (hidden from the user)</span></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Be sure that the axes don&#39;t change during the animation</span></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>  gpl<span class="op">.</span>set_xrange<span class="op">(-</span>plot_range<span class="op">,</span> plot_range<span class="op">);</span></span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>  gpl<span class="op">.</span>set_yrange<span class="op">(-</span>plot_range<span class="op">,</span> plot_range<span class="op">);</span></span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>  gpl<span class="op">.</span>show<span class="op">();</span>  <span class="co">// Show the plot in the Gnuplot window</span></span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Step to the next point</span></span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>  x <span class="op">=</span> integratore<span class="op">-&gt;</span>Passo<span class="op">(</span>t<span class="op">,</span> x<span class="op">,</span> h<span class="op">,</span> f<span class="op">);</span></span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>  t <span class="op">+=</span> h<span class="op">;</span></span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 <p>Di seguito un esempio di file GIF creato con un termine aggiuntivo di forza espresso come <span class="math display">
 F&#39;(\vec r) = -\alpha G \frac{M_\odot\,M_t\,D_p}{r^4} \vec r,
 </span> dove <span class="math inline">\alpha = 0.3</span> è un numero puro e <span class="math inline">D_p</span> è la distanza Terra-Sole al perielio:</p>

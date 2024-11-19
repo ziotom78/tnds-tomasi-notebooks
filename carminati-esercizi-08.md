@@ -593,6 +593,8 @@ Gnuplot gpl{};
 // ...
 gpl.redirect_to_animated_gif("es8.4.gif", "800,600", 1);
 
+const double plot_range{160e9}; // Maximum distance from the Sun
+
 for (int npoint{}; npoint < nstep ; npoint++) {
   // Add the point, plot the graph and show the new frame
   gpl.add_point(x[0], x[1]);
