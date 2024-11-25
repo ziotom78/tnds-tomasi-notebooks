@@ -12,9 +12,9 @@
 | 5 Novembre 2024                           | [Quadratura numerica](carminati-esercizi-07.html)               | [Notebook 7](https://ziotom78.github.io/tnds-notebooks/lezione07/)  |
 | 12 Novembre 2024                          | [Equazioni differenziali](carminati-esercizi-08.html)           | [Notebook 8](https://ziotom78.github.io/tnds-notebooks/lezione08/), [slides](tomasi-lezione-08.html) |
 | 18 Novembre 2024                          | Idem                                                            | [Esempio svolto](2024-11-12 Equazioni differenziali Tomasi.pdf)     |
-<!--
 | 26 Novembre 2024                          | [Numeri pseudo-casuali e integrali](carminati-esercizi-10.html) | [Notebook 10](https://ziotom78.github.io/tnds-notebooks/lezione10/) |
 | 3 Dicembre 2024                           | Idem                                                            | Idem                                                                |
+<!--
 | 10 Dicembre 2024                          | [Metodi Monte Carlo](carminati-esercizi-12.html)                | [Notebook 10](https://ziotom78.github.io/tnds-notebooks/lezione10/) |
 -->
 </center>
