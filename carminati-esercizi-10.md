@@ -43,7 +43,9 @@ private:
 };
 ```
 
-Il costruttore deve accettare un `unsigned int` come *seed* di input e inizializzare i parametri del generatore ai valori nominali `m_a = 1664525`, `m_c = 1013904223` e `m_m = 1U << 31`.
+Il costruttore deve accettare un `unsigned int` come *seed* di input e inizializzare i parametri del generatore ai valori nominali `m_a = 1664525`, `m_c = 1013904223` e `m_m = 1U << 31`. È possibile usare altri valori per i parametri, come spiegato nella [pagina Wikipedia](https://en.m.wikipedia.org/wiki/Linear_congruential_generator#Parameters_in_common_use), ma vi consiglio di usare questi numeri in modo da poter confrontare i vostri risultati con quelli del [notebook Julia](https://ziotom78.github.io/tnds-notebooks/lezione10/#esercizio_101).
+
+**Attenzione!** Qui è *indispensabile* usare `unsigned int`, perché il generatore lineare congruenziale si appoggia a una precisa semantica per gli *overflow*, che è garantita solo dai tipi `unsigned`. Quello che succede è che la formula matematica sopra spesso genera numeri troppo grandi per stare in 32 bit, ma questo è voluto perché `unsigned` gestisce gli overflow troncando i bit più significativi. Questa cosa *non* è vera per gli interi senza segno.
 
 
 ## `main` per il test del generatore `RandomGen`
@@ -104,7 +106,9 @@ Se eseguite il programma, otterrete questo grafico, non molto incoraggiante:
 
 <center>![](./media/histogram-bad.png)</center>
 
-I dati non sembrano affatto essere distribuiti uniformemente! Il problema è che per default Gnuplot sceglie una scala per l'asse $y$ che non parte da zero, e questo distorce l'aspetto del grafico. Dobbiamo quindi forzarlo a partire da zero con il metodo `plt.set_yrange`:
+I dati non sembrano affatto essere distribuiti uniformemente!
+
+Il problema è che per default Gnuplot sceglie una scala per l'asse $y$ che non parte da zero, e questo distorce l'aspetto del grafico. Dobbiamo quindi forzarlo a partire da zero con il metodo `plt.set_yrange`:
 
 ```c++
 // Nel main visto sopra
@@ -426,7 +430,7 @@ $$
 
 ## Calcolo di integrali con il metodo hit-or-miss
 
-Il metodo hit-or-miss si basa sulla generazione di una coppia di numeri $x \elem [a, b]$  e $y \elem [0, f_\text{max}]$, dove $f_\text{max}$ è un numero maggiore del massimo valore assunto da $f(x)$ nell'intervallo $[a, b]$. Generata la coppia $(x, y)$, si incrementa un contatore $N_\text{tot}$ e si valuta quindi $f(x)$: se $y < f(x)$, allora si incrementa anche il contatore $N_\text{hit}$. La procedura viene ripetuta fino a che il numero di estrazioni è pari al valore di $N_\text{max}$ richiesto. La stima dell'integrale si ottiene poi dalla seguente formula:
+Il metodo hit-or-miss si basa sulla generazione di una coppia di numeri $x \in [a, b]$  e $y \in [0, f_\text{max}]$, dove $f_\text{max}$ è un numero maggiore del massimo valore assunto da $f(x)$ nell'intervallo $[a, b]$. Generata la coppia $(x, y)$, si incrementa un contatore $N_\text{tot}$ e si valuta quindi $f(x)$: se $y < f(x)$, allora si incrementa anche il contatore $N_\text{hit}$. La procedura viene ripetuta fino a che il numero di estrazioni è pari al valore di $N_\text{max}$ richiesto. La stima dell'integrale si ottiene poi dalla seguente formula:
 
 $$
 \int_a^b f(x)\,\mathrm{d}x \approx (b - a) f_\text{max}\frac{N_\text{hit}}{N_\text{tot}}.
@@ -539,9 +543,9 @@ Integrando la funzione sopra con 100 000 punti, si dovrebbe ottenere come risu
 Provare a ripetere le consegne dell'[esercizio 10.2](#esercizio-10.2) applicate all'integrale multidimensionale dell'[esercizio 10.3](#esercizio-10.3). In questo modo si può facilmente verificare che la legge con cui scala l'errore è indipendente dalla dimensione dell'integrale.
 
 
-## Qualche approfondimento su generatori di numeri casuali in C++11
+# Qualche approfondimento su generatori di numeri casuali in C++11
 
-Nel C++ 11 è stata inserita una libreria per la generazione di numeri casuali: si veda per esempio [qui](http://www.cplusplus.com/reference/random/). Provate a dare un'occhiata a questo [codice](https://labtnds.docs.cern.ch/Lezione10-11/Random_numbers.cpp) per trovare un esempio su come utilizzare questa libreria e su come usare le librerie di ROOT ( si faccia riferimento alla [referenza](https://root.cern.ch/doc/master/classTRandom.html)).
+Nel C++ 11 è stata inserita una libreria per la generazione di numeri casuali: si veda per esempio [qui](http://www.cplusplus.com/reference/random/). Provate a dare un'occhiata a questo [codice](https://labtnds.docs.cern.ch/Lezione10-11/Random_numbers.cpp) per trovare un esempio su come utilizzare questa libreria e su come usare le librerie di ROOT (si faccia riferimento alla [referenza](https://root.cern.ch/doc/master/classTRandom.html)).
 
 
 # Errori comuni

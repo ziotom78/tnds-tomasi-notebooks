@@ -66,10 +66,8 @@
   <li><a href="#risultati-attesi-1" id="toc-risultati-attesi-1">Risultati attesi</a></li>
   </ul></li>
   <li><a href="#esercizio-10.3" id="toc-esercizio-10.3">Esercizio 10.3 - Calcolo di integrali multidimensionali con metodi Montecarlo (facoltativo)</a></li>
-  <li><a href="#esercizio-10.4" id="toc-esercizio-10.4">Esercizio 10.4 - Errore nel caso di integrali multimensionali (facoltativo)</a>
-  <ul>
+  <li><a href="#esercizio-10.4" id="toc-esercizio-10.4">Esercizio 10.4 - Errore nel caso di integrali multimensionali (facoltativo)</a></li>
   <li><a href="#qualche-approfondimento-su-generatori-di-numeri-casuali-in-c11" id="toc-qualche-approfondimento-su-generatori-di-numeri-casuali-in-c11">Qualche approfondimento su generatori di numeri casuali in C++11</a></li>
-  </ul></li>
   <li><a href="#errori-comuni" id="toc-errori-comuni">Errori comuni</a></li>
   </ul>
 </nav>
@@ -110,7 +108,8 @@
 <span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>  <span class="dt">unsigned</span> <span class="dt">int</span> <span class="va">m_a</span><span class="op">,</span> <span class="va">m_c</span><span class="op">,</span> <span class="va">m_m</span><span class="op">;</span></span>
 <span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>  <span class="dt">unsigned</span> <span class="dt">int</span> <span class="va">m_seed</span><span class="op">;</span></span>
 <span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code></pre></div>
-<p>Il costruttore deve accettare un <code>unsigned int</code> come <em>seed</em> di input e inizializzare i parametri del generatore ai valori nominali <code>m_a = 1664525</code>, <code>m_c = 1013904223</code> e <code>m_m = 1U &lt;&lt; 31</code>.</p>
+<p>Il costruttore deve accettare un <code>unsigned int</code> come <em>seed</em> di input e inizializzare i parametri del generatore ai valori nominali <code>m_a = 1664525</code>, <code>m_c = 1013904223</code> e <code>m_m = 1U &lt;&lt; 31</code>. È possibile usare altri valori per i parametri, come spiegato nella <a href="https://en.m.wikipedia.org/wiki/Linear_congruential_generator#Parameters_in_common_use">pagina Wikipedia</a>, ma vi consiglio di usare questi numeri in modo da poter confrontare i vostri risultati con quelli del <a href="https://ziotom78.github.io/tnds-notebooks/lezione10/#esercizio_101">notebook Julia</a>.</p>
+<p><strong>Attenzione!</strong> Qui è <em>indispensabile</em> usare <code>unsigned int</code>, perché il generatore lineare congruenziale si appoggia a una precisa semantica per gli <em>overflow</em>, che è garantita solo dai tipi <code>unsigned</code>. Quello che succede è che la formula matematica sopra spesso genera numeri troppo grandi per stare in 32 bit, ma questo è voluto perché <code>unsigned</code> gestisce gli overflow troncando i bit più significativi. Questa cosa <em>non</em> è vera per gli interi senza segno.</p>
 <h2 id="main-per-il-test-del-generatore-randomgen"><code>main</code> per il test del generatore <code>RandomGen</code></h2>
 <p>Un possibile <code>main</code> per provare il generatore appena costruito è indicato di seguito:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
@@ -163,7 +162,8 @@
 <center>
 <img src="./media/histogram-bad.png" />
 </center>
-<p>I dati non sembrano affatto essere distribuiti uniformemente! Il problema è che per default Gnuplot sceglie una scala per l’asse <span class="math inline">y</span> che non parte da zero, e questo distorce l’aspetto del grafico. Dobbiamo quindi forzarlo a partire da zero con il metodo <code>plt.set_yrange</code>:</p>
+<p>I dati non sembrano affatto essere distribuiti uniformemente!</p>
+<p>Il problema è che per default Gnuplot sceglie una scala per l’asse <span class="math inline">y</span> che non parte da zero, e questo distorce l’aspetto del grafico. Dobbiamo quindi forzarlo a partire da zero con il metodo <code>plt.set_yrange</code>:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Nel main visto sopra</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co">// …</span></span>
@@ -386,7 +386,7 @@ y &amp;= M \cdot t.
 \int_a^b f(x)\,\mathrm{d}x \approx (b - a) \frac{\sum_{n=1}^N f\bigl(x_n\bigr)}N.
 </span></p>
 <h2 id="calcolo-di-integrali-con-il-metodo-hit-or-miss">Calcolo di integrali con il metodo hit-or-miss</h2>
-<p>Il metodo hit-or-miss si basa sulla generazione di una coppia di numeri <span class="math inline">x \elem [a, b]</span> e <span class="math inline">y \elem [0, f_\text{max}]</span>, dove <span class="math inline">f_\text{max}</span> è un numero maggiore del massimo valore assunto da <span class="math inline">f(x)</span> nell’intervallo <span class="math inline">[a, b]</span>. Generata la coppia <span class="math inline">(x, y)</span>, si incrementa un contatore <span class="math inline">N_\text{tot}</span> e si valuta quindi <span class="math inline">f(x)</span>: se <span class="math inline">y &lt; f(x)</span>, allora si incrementa anche il contatore <span class="math inline">N_\text{hit}</span>. La procedura viene ripetuta fino a che il numero di estrazioni è pari al valore di <span class="math inline">N_\text{max}</span> richiesto. La stima dell’integrale si ottiene poi dalla seguente formula:</p>
+<p>Il metodo hit-or-miss si basa sulla generazione di una coppia di numeri <span class="math inline">x \in [a, b]</span> e <span class="math inline">y \in [0, f_\text{max}]</span>, dove <span class="math inline">f_\text{max}</span> è un numero maggiore del massimo valore assunto da <span class="math inline">f(x)</span> nell’intervallo <span class="math inline">[a, b]</span>. Generata la coppia <span class="math inline">(x, y)</span>, si incrementa un contatore <span class="math inline">N_\text{tot}</span> e si valuta quindi <span class="math inline">f(x)</span>: se <span class="math inline">y &lt; f(x)</span>, allora si incrementa anche il contatore <span class="math inline">N_\text{hit}</span>. La procedura viene ripetuta fino a che il numero di estrazioni è pari al valore di <span class="math inline">N_\text{max}</span> richiesto. La stima dell’integrale si ottiene poi dalla seguente formula:</p>
 <p><span class="math display">
 \int_a^b f(x)\,\mathrm{d}x \approx (b - a) f_\text{max}\frac{N_\text{hit}}{N_\text{tot}}.
 </span></p>
@@ -470,8 +470,8 @@ I = \int_1^2\int_1^2\left(
 <p>Integrando la funzione sopra con 100 000 punti, si dovrebbe ottenere come risultato 10.241 ± 0.004.</p>
 <h1 id="esercizio-10.4">Esercizio 10.4 - Errore nel caso di integrali multimensionali (facoltativo)</h1>
 <p>Provare a ripetere le consegne dell’<a href="#esercizio-10.2">esercizio 10.2</a> applicate all’integrale multidimensionale dell’<a href="#esercizio-10.3">esercizio 10.3</a>. In questo modo si può facilmente verificare che la legge con cui scala l’errore è indipendente dalla dimensione dell’integrale.</p>
-<h2 id="qualche-approfondimento-su-generatori-di-numeri-casuali-in-c11">Qualche approfondimento su generatori di numeri casuali in C++11</h2>
-<p>Nel C++ 11 è stata inserita una libreria per la generazione di numeri casuali: si veda per esempio <a href="http://www.cplusplus.com/reference/random/">qui</a>. Provate a dare un’occhiata a questo <a href="https://labtnds.docs.cern.ch/Lezione10-11/Random_numbers.cpp">codice</a> per trovare un esempio su come utilizzare questa libreria e su come usare le librerie di ROOT ( si faccia riferimento alla <a href="https://root.cern.ch/doc/master/classTRandom.html">referenza</a>).</p>
+<h1 id="qualche-approfondimento-su-generatori-di-numeri-casuali-in-c11">Qualche approfondimento su generatori di numeri casuali in C++11</h1>
+<p>Nel C++ 11 è stata inserita una libreria per la generazione di numeri casuali: si veda per esempio <a href="http://www.cplusplus.com/reference/random/">qui</a>. Provate a dare un’occhiata a questo <a href="https://labtnds.docs.cern.ch/Lezione10-11/Random_numbers.cpp">codice</a> per trovare un esempio su come utilizzare questa libreria e su come usare le librerie di ROOT (si faccia riferimento alla <a href="https://root.cern.ch/doc/master/classTRandom.html">referenza</a>).</p>
 <h1 id="errori-comuni">Errori comuni</h1>
 <p>Come di consueto, elenco alcuni errori molto comuni che ho trovato negli anni passati correggendo gli esercizi che gli studenti hanno consegnato all’esame:</p>
 <ul>

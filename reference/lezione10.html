@@ -521,6 +521,21 @@
   
 
     
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ProveEsame/TemiEsame/" class="md-nav__link">
+        Temi d'esame
+      </a>
+    </li>
+  
+
+    
   </ul>
 </nav>
                   </div>
@@ -617,7 +632,7 @@ Per prima cosa impareremo a costruire un generatore di numeri casuali. Lo utiliz
 <p>Per risolvere questo esercizio si può seguire lo schema seguente:</p>
 <ol>
 <li>Scrivere una classe opportuna <code>RandomGen</code> per la generazione di numeri casuali. La classe dovrà avere un costruttore che accetti un <em>seed</em> di input e si faccia carico di inizializzare i parametri del generatore ai valori nominali. La classe dovrà inoltre contenere un metodo che implementi un generatore lineare congruenziale di base e tutti i metodi necessari per le distribuzioni richieste.</li>
-<li>Preparare un semplice main per provare le funzionalità della classe <code>RandomGen</code> producendo quattro istogrammi per le distribuzioni indicate sopra.</li>
+<li>Preparare un semplice <code>main</code> per provare le funzionalità della classe <code>RandomGen</code> producendo quattro istogrammi per le distribuzioni indicate sopra.</li>
 </ol>
 <details>
 <p><summary>Header file della classe RandomGen:: </summary></p>
@@ -649,14 +664,16 @@ Per prima cosa impareremo a costruire un generatore di numeri casuali. Lo utiliz
 
 <span class="cp">#endif</span>
 </code></pre></div>
-Il costruttore deve accettare un `unsigned int`` come <em>seed</em> di input e farsi carico di inizializzare i parametri del generatore ai valori nominali 
-* m_a = 1664525
-* m_c = 1013904223 
-* m_m = <script type="math/tex">2^{31}</script>.</p>
+Il costruttore deve accettare un <code>unsigned int</code> come <em>seed</em> di input e farsi carico di inizializzare i parametri del generatore ai valori nominali </p>
+<ul>
+<li>m_a = 1664525</li>
+<li>m_c = 1013904223 </li>
+<li>m_m = <script type="math/tex">2^{31}</script>.</li>
+</ul>
 </details>
 <details>
 <p><summary> Main per il test del generatore RandomGen: </summary></p>
-<p>Un possibile <code>main</code> per provare il generatore appena costruito è indicato di seguito :</p>
+<p>Un possibile <code>main</code> per provare il generatore appena costruito è riportato di seguito :</p>
 <div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;TApplication.h&quot;</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;TCanvas.h&quot;</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;TH1F.h&quot;</span>
@@ -706,7 +723,7 @@ Quindi è necessario tenere in memoria il valore del numero intero generato al p
 <script type="math/tex; mode=display">d_{i} = n_{i}/m</script>
 </p>
 <p>Ricordiamo che in C++ l'operazione <code>mod</code> può essere eseguita con l'operatore <code>%</code> che ritorna il resto della divisione (intera) per cui, per esempio, 
-<script type="math/tex; mode=display">7 % 5 = 2</script>.</p>
+<script type="math/tex; mode=display">7 \% 5 = 2</script>.</p>
 </details>
 <details class="tip">
 <summary>Generatore esponenziale</summary>
@@ -745,7 +762,7 @@ Se ci limitiamo per comodità a considerare solo una delle due possiamo generali
 <p><div class="highlight"><pre><span></span><code><span class="kt">double</span><span class="w"> </span><span class="nf">RandomGen::Gaus</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">mean</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">sigma</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">s</span><span class="o">=</span><span class="n">Rand</span><span class="p">();</span>
 <span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">t</span><span class="o">=</span><span class="n">Rand</span><span class="p">();</span>
-<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">x</span><span class="o">=</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">-2.</span><span class="o">*</span><span class="n">log</span><span class="p">(</span><span class="n">s</span><span class="p">))</span><span class="o">*</span><span class="n">cos</span><span class="p">(</span><span class="mf">2.</span><span class="o">*</span><span class="n">M_PI</span><span class="o">*</span><span class="n">t</span><span class="p">);</span>
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">x</span><span class="o">=</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">-2.</span><span class="o">*</span><span class="n">log</span><span class="p">(</span><span class="mf">1.</span><span class="o">-</span><span class="n">s</span><span class="p">))</span><span class="o">*</span><span class="n">cos</span><span class="p">(</span><span class="mf">2.</span><span class="o">*</span><span class="n">M_PI</span><span class="o">*</span><span class="n">t</span><span class="p">);</span>
 <span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">mean</span><span class="o">+</span><span class="n">x</span><span class="o">*</span><span class="n">sigma</span><span class="p">;</span><span class="w"> </span>
 <span class="p">}</span>
 </code></pre></div>
@@ -756,8 +773,8 @@ Si noti che tecnicamente dati due numeri s e t possiamo generare due numeri x e 
 <p>Il metodo accept-reject può essere utilizzato per generare numeri casuali distribuiti secondo una qualsivoglia forma funzionale. Consideriamo di voler generare numeri nell'intervallo <script type="math/tex">[a,b]</script> secondo la distribuzione <script type="math/tex">f(x)</script> in figura</p>
 <p><img alt="" src="../pictures/accrej.png" /></p>
 <p>Il metodo si basa sulla generazione di una coppia di numeri <script type="math/tex">x \in [a,b]</script> e <script type="math/tex">y \in [0,max]</script> dove <script type="math/tex">max</script> è un numero maggiore del massimo valore assunto da <script type="math/tex">f(x)</script> nell'intervallo <script type="math/tex">[a,b]</script>. La coppia <script type="math/tex">x,y</script> può essere facilmente generata a partire da due numeri <script type="math/tex">s</script> e <script type="math/tex">t</script> generati uniformemente in <script type="math/tex">[0,1]</script> usando le formule
-<script type="math/tex; mode=display"> x = a + (b-a) \; s </script>
-<script type="math/tex; mode=display"> y = max \; t </script>
+<script type="math/tex; mode=display"> x = a + (b-a) \cdot s </script>
+<script type="math/tex; mode=display"> y = max \cdot t </script>
 Generata la coppia <script type="math/tex">x,y</script> si valuta quindi <script type="math/tex">f(x)</script> e si accetta <script type="math/tex">x</script> se <script type="math/tex">y<f(x)</script>, altrimenti si ripete la procedura. Così facendo si avrà un maggior numero di punti generati laddove <script type="math/tex">f(x)</script> assume valori più grandi. 
 Potete pensare di scrivere un metodo <em>accept-reject</em> specifico per la gaussiana o pensarene uno più generale che per esempio accetti una generica <em>FunzioneBase</em> come input.</p>
 </details>
@@ -787,20 +804,25 @@ e un grafico che mostri la varianza delle distribuzioni precedenti in funzione d
 <h2 id="esercizio-102-calcolo-di-integrali-con-metodi-montecarlo-da-consegnare">ESERCIZIO 10.2 - Calcolo di integrali con metodi MonteCarlo (da consegnare):</h2>
 <p>Proviamo in questo esercizio a studiare il comportamento delle tecniche MonteCarlo per il calcolo numerico di un integrale mono-dimensionale.</p>
 <ol>
-<li>Calcolare 10000 volte il valore dell'integrale di sin(x) tra [0,π] utilizzando il <em>metodo della media</em> con N=100 punti e fare un grafico ( istogramma ) della distribuzione dei valori ottenuti.</li>
-<li>Estendere il punto precedente calcolando 10000 volte il valore dell'integrale di sin(x) tra [0,π] utilizzando il metodo della media a N punti con N pari a 500, 1000, 5000, 10000, 50000 e 100000 punti. Per ogni valore di N produrre il grafico della distribuzione dei 10000 valori ottenuti. </li>
+<li>Calcolare 10000 volte il valore dell'integrale di <script type="math/tex">xsin(x)</script> tra [0,π/2] utilizzando il <em>metodo della media</em> con N=100 punti e fare un grafico ( istogramma ) della distribuzione dei valori ottenuti.</li>
+<li>Estendere il punto precedente calcolando 10000 volte il valore dell'integrale di <script type="math/tex">xsin(x)</script> tra [0,π/2] utilizzando il metodo della media a N punti con N pari a 500, 1000, 5000, 10000, 50000 e 100000 punti. Per ogni valore di N produrre il grafico della distribuzione dei 10000 valori ottenuti. </li>
 <li>Stimare l'errore sul calcolo dell'integrale a 500, 1000, 5000, 10000, 50000, 100000 punti come deviazione standard dei 10000 valori calcolati per ogni N. Far un grafico di questo errore in funzione di N.</li>
 <li>Assumendo che l'andamento dell'errore sia noto ( del tipo <script type="math/tex">k/ \sqrt{N} </script>) si determini quanti punti sono necessari per ottenere una precisione di 0.001. Si ripeta lo stesso lavoro con il <em>metodo hit-or-miss</em>. </li>
 </ol>
 <p>Alcune osservazioni per lo svolgimento dell'esercizio :</p>
 <ul>
 <li>
-<p>Per il calcolo di integrali con metodi MonteCarlo si può decidere di scrivere una nuova classe dedicata o estendere la classe `Integrale`` della lezione 7. Notate che in questo caso la nuova classe avrà avere un generatore di numeri casuali come data membro. </p>
+<p>Per il calcolo di integrali con metodi MonteCarlo si può decidere di scrivere una nuova classe dedicata o estendere la classe <code>Integrale</code> della lezione 7. Notate che in questo caso la nuova classe avrà avere un generatore di numeri casuali come data membro. </p>
 </li>
 <li>
-<p>poichè il calcolo degli integrali con N molto elevato potrebbe richiedere un certo tempo, diventa molto utile spezzare il <code>main</code> in due <code>main</code> separati: il primo calcola gli integrali e li salva in diversi files di testo (uno per ogni valore di N) mentre il secondo legge i files scritti dal primo e li analizza. In questo modo possiamo agevolemnte ripetere molto volte l'analisi dei dati senza dover ricalcolare ogni volta gli integrali.</p>
+<p>poichè il calcolo degli integrali con N molto elevato potrebbe richiedere un certo tempo, diventa molto utile spezzare il <code>main</code> in due <code>main</code> separati: </p>
 </li>
+<li>
+<p>il primo calcola gli integrali e li salva in diversi files di testo (uno per ogni valore di N). </p>
+</li>
+<li>il secondo legge i files scritti dal primo e li analizza. </li>
 </ul>
+<p>In questo modo possiamo agevolemnte ripetere molto volte l'analisi dei dati senza dover ricalcolare ogni volta gli integrali.</p>
 <details>
 <p><summary> La classe <code>IntegraleMC</code>: </summary></p>
 <p>Come al solito possiamo pensare ad una interfaccia generica <code>IntegraleMC</code> dalla quale derivano le classi concrete <code>IntegratoreMedia</code> e <code>IntegratoreHoM</code></p>
@@ -852,8 +874,10 @@ e un grafico che mostri la varianza delle distribuzioni precedenti in funzione d
 
 <span class="w">  </span><span class="p">}</span>
 </code></pre></div>
-<p>potete trovare una buona spiegazione dell'utilizzo delle liste di inizializzazione in <a href="https://www.learncpp.com/cpp-tutorial/8-5a-constructor-member-initializer-lists/">qui</a>. 
-* Per salvare la struttura delle classi virtuale/concreta siamo stati costretti ad aggiungere il campo <code>fmax</code> anche ad <code>IntegratoreMedia</code> anche se non necessario. In questo caso non è veramente vantaggioso utilizzare questo tipo di schema.</p>
+<p>potete trovare una buona spiegazione dell'utilizzo delle liste di inizializzazione in <a href="https://www.learncpp.com/cpp-tutorial/8-5a-constructor-member-initializer-lists/">qui</a>. </p>
+<ul>
+<li>Per salvare la struttura delle classi virtuale/concreta siamo stati costretti ad aggiungere il campo <code>fmax</code> anche ad <code>IntegratoreMedia</code> anche se non necessario. In questo caso non è veramente vantaggioso utilizzare questo tipo di schema.</li>
+</ul>
 </details>
 <details>
 <p><summary> Un vector di istogrammi: </summary></p>
@@ -883,7 +907,7 @@ e un grafico che mostri la varianza delle distribuzioni precedenti in funzione d
 </details>
 <details class="tip">
 <summary>Calcolo di integrali con il metodo della media</summary>
-<p>Come discusso a lezione il <em>metodo della media</em> consiste nel valutare la media delle valutazioni della funzione <script type="math/tex">f(x)</script> in un set di N punti distribuiti uniformemente tra <script type="math/tex">a</script> (minimo estremo di integrazione) e <script type="math/tex">b</script> (massimo estremo integrazione). La stima dell'integrale si ottiene poi dalla seguente formula: 
+<p>Come discusso a lezione il <em>metodo della media</em> consiste nel valutare la media delle valutazioni della funzione <script type="math/tex">f(x)</script> in un set di N punti <script type="math/tex">x_{i}</script> casuali e distribuiti uniformemente tra <script type="math/tex">a</script> (minimo estremo di integrazione) e <script type="math/tex">b</script> (massimo estremo integrazione). La stima dell'integrale si ottiene poi dalla seguente formula: 
 <script type="math/tex; mode=display"> \int_{a}^{b} f(x) dx \simeq (b-a) \frac{ \sum_{n=1}^{N} f(x_{n})}{N} </script>
 </p>
 </details>
