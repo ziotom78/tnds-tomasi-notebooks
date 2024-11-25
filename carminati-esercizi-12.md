@@ -45,7 +45,7 @@ L'analisi dei dati consiste nella seguente procedura:
     \delta_m(\lambda_2) &= \theta_m(\lambda_2) - \theta_0.\\
     \end{aligned}
     $$
-    
+
 #.  calcolo degli indici di rifrazione $n(\lambda)$ dalla relazione
 
     $$
@@ -74,11 +74,11 @@ Per costruire la nostra simulazione, procediamo per gradi:
     -   nel costruttore deve definire tutti i valori “veri” delle quantità misurabili a partire dai parametri $A$, $B$, $\alpha$ e dalle lunghezze d'onda.
 
     N.B.: il valore di $\theta_0$ è arbitrario, ma, una volta definito, i $\theta_m$ sono fissati.
-    
+
 -   Aggiungere un metodo `Esegui()`` che effettua la misura sperimentale e determina dei valori misurati di $\theta_0$, $\theta_m(\lambda_1)$, $\theta_m (\lambda_2)$;
 
     N.B.: il valore misurato di un angolo si ottiene estraendo un numero distribuito in maniera gaussiana intorno al suo valore “vero” nella simulazione e deviazione standard $\sigma_\theta$.
-    
+
 -   Aggiungere alla classe un metodo `Analizza()` che, a partire dalle pseudomisure, svolga l'analisi dei dati sino alla determinazione di $A$ e $B$ (misurati).
 
 -   Implementare i metodi necessari per accedere ai valori dei data membri, sia quelli “veri” sia quelli misurati.
@@ -93,7 +93,7 @@ In particolare, è utile studiare le seguenti distribuzioni:
 
 #.  Distribuzione della differenza tra i valori misurati e quelli attesi di $n(\lambda_1)$ e $n(\lambda_2)$, calcolare media e deviazione standard delle distribuzioni. Produrre un istogramma bidimensionale delle differenze per le due lunghezze d'onda, e calcolare il coefficiente di correlazione.
 
-#.  Distribuzione delle differenza tra i valori misurati e quelli attesi di $A$ e $B$, calcolare media e deviazione standard delle distribuzioni. Produrre un istogramma bidimensionale delle differenze e calcolare il coefficiente di correlazione. 
+#.  Distribuzione delle differenza tra i valori misurati e quelli attesi di $A$ e $B$, calcolare media e deviazione standard delle distribuzioni. Produrre un istogramma bidimensionale delle differenze e calcolare il coefficiente di correlazione.
 
 In caso provate a confrontare l'errore stimato su $A$ e $B$ dalla simulazione con quello ottenuto dalla propagazione degli errori.
 
@@ -188,7 +188,7 @@ Per costruire questi istogrammi, si può usare un classico «scatter plot», ide
 
 ```c++
   Gnuplot plt{};
-  
+
   plt.set_xlabel("Variabile X");
   plt.set_ylabel("Variabile Y");
   // `x` e `y` sono due vettori che contengono le due variabili
