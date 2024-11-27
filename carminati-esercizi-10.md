@@ -43,7 +43,7 @@ private:
 };
 ```
 
-Il costruttore deve accettare un `unsigned int` come *seed* di input e inizializzare i parametri del generatore ai valori nominali `m_a = 1664525`, `m_c = 1013904223` e `m_m = 1U << 31`. È possibile usare altri valori per i parametri, come spiegato nella [pagina Wikipedia](https://en.m.wikipedia.org/wiki/Linear_congruential_generator#Parameters_in_common_use), ma vi consiglio di usare questi numeri in modo da poter confrontare i vostri risultati con quelli del [notebook Julia](https://ziotom78.github.io/tnds-notebooks/lezione10/#esercizio_101).
+Il costruttore deve accettare un `unsigned int` come *seed* di input e inizializzare i parametri del generatore ai valori nominali `m_a = 1664525`, `m_c = 1013904223` e `m_m = 1U << 31`. È possibile usare altri valori per i parametri, come spiegato nella [pagina Wikipedia](https://en.m.wikipedia.org/wiki/Linear_congruential_generator#Parameters_in_common_use), ma vi consiglio di usare questi numeri in modo da poter confrontare i vostri risultati con quelli del [notebook Julia](https://ziotom78.github.io/tnds-notebooks/lezione10/#esercizio_101). (Nel notebook è anche spiegata la strana scrittura `1U << 31`).
 
 **Attenzione!** Qui è *indispensabile* usare `unsigned int`, perché il generatore lineare congruenziale si appoggia a una precisa semantica per gli *overflow*, che è garantita solo dai tipi `unsigned`. Quello che succede è che la formula matematica sopra spesso genera numeri troppo grandi per stare in 32 bit, ma questo è voluto perché `unsigned` gestisce gli overflow troncando i bit più significativi. Questa cosa *non* è vera per gli interi senza segno.
 
@@ -346,9 +346,9 @@ plt_errors.show();
 
 Studiamo in questo esercizio il comportamento delle tecniche Montecarlo per il calcolo numerico di un integrale mono-dimensionale.
 
-#.  Calcolare 10 000 volte il valore dell'integrale di $\sin(x)$ su $[0, \pi]$ utilizzando il metodo della media con $N = 100$ punti e fare un grafico (istogramma) della distribuzione dei valori ottenuti.
+#.  Calcolare 10 000 volte il valore dell'integrale di $x \sin(x)$ su $[0, \pi/2]$ utilizzando il metodo della media con $N = 100$ punti e fare un grafico (istogramma) della distribuzione dei valori ottenuti.
 
-#.  Estendere il punto precedente calcolando 10 000 volte il valore dell'integrale di $\sin(x)$ su $[0, \pi]$ utilizzando il metodo della media a $N$ punti, con $N$ pari a 100, 500, 1000, 5000, 10 000 punti. Per ogni valore di $N$ produrre il grafico della distribuzione dei 10 000 valori ottenuti.
+#.  Estendere il punto precedente calcolando 10 000 volte il valore dell'integrale di $x\sin(x)$ su $[0, \pi/2]$ utilizzando il metodo della media a $N$ punti, con $N$ pari a 100, 500, 1000, 5000, 10 000 punti. Per ogni valore di $N$ produrre il grafico della distribuzione dei 10 000 valori ottenuti.
 
 #.  Stimare l'errore sul calcolo dell'integrale a 100, 500, 1000, 5000, 10 000 punti come deviazione standard dei 10 000 valori calcolati per ogni $N$. Far un grafico di questo errore in funzione di $N$.
 
@@ -394,9 +394,9 @@ public:
 
 Alcune osservazioni:
 
--   Negli anni passati, il codice proposto sopra da Carminati dichiarava all'interno di `IntegraleMC` un **puntatore** a `RandomGen` (ossia, `m_myrand` era dichiarato come `RandomGen * m_myrand`), e questo obbligava ad invocare `new` nel costruttore e `delete` nel distruttore, nonché a definire un costruttore di copia e un /move constructor/. Quest'anno evitiamo di usare il puntatore, e quindi il codice è molto più semplice e più consono alla moderna programmazione C++. Ovviamente, per chiamare il costruttore occorre usare una *initialization list*, che noi ben conosciamo. Carminati propone [questa pagina](https://www.learncpp.com/cpp-tutorial/constructor-member-initializer-lists/) come approfondimento.
+-   Negli anni passati, il codice proposto sopra da Carminati dichiarava all'interno di `IntegraleMC` un **puntatore** a `RandomGen` (ossia, `m_myrand` era dichiarato come `RandomGen * m_myrand`), e questo obbligava ad invocare `new` nel costruttore e `delete` nel distruttore, nonché a definire un costruttore di copia e un *move constructor*. Quest'anno evitiamo di usare il puntatore, e quindi il codice è molto più semplice e più consono alla moderna programmazione C++. Ovviamente, per chiamare il costruttore occorre usare una *initialization list*, che noi ben conosciamo. Carminati propone [questa pagina](https://www.learncpp.com/cpp-tutorial/constructor-member-initializer-lists/) come approfondimento.
 
--   Per salvare la struttura delle classi virtuale/concreta siamo stati costretti ad aggiungere il campo `fmax` anche ad `IntegraleMedia`, anche se non necessario: serve infatti soltanto per il metodo /hit-or-miss/. In questo caso non è veramente vantaggioso utilizzare questo tipo di schema.
+-   Per salvare la struttura delle classi virtuale/concreta siamo stati costretti ad aggiungere il campo `fmax` anche ad `IntegraleMedia`, anche se non necessario: serve infatti soltanto per il metodo *hit-or-miss*. In questo caso non è veramente vantaggioso utilizzare questo tipo di schema.
 
 
 ## Un vettore di istogrammi in ROOT
@@ -494,7 +494,7 @@ L'andamento dell'errore nei due casi dovrebbe invece essere così:
 
 ![](images/es10.3_errors.png)
 
-**Attenzione**: fareste meglio a stimare l'errore come la deviazione standard della distribuzione, anziché contare sul fatto che sapete che $\int_0^\pi\sin x\,\mathrm{d}x = 2$, perché in questo modo il codice che scrivete per questo esercizio sarà più facile da riutilizzare il giorno dell'esame (in cui non è affatto detto che voi saprete il valore degli integrali che dovete calcolare…)!
+**Attenzione**: fareste meglio a stimare l'errore come la deviazione standard della distribuzione, anziché contare sul fatto che sapete che $\int_0^{\pi/2} x \sin x\,\mathrm{d}x = 1$, perché in questo modo il codice che scrivete per questo esercizio sarà più facile da riutilizzare il giorno dell'esame (in cui non è affatto detto che voi saprete il valore degli integrali che dovete calcolare…)!
 
 
 # Esercizio 10.3 - Calcolo di integrali multidimensionali con metodi Montecarlo (facoltativo) {#esercizio-10.3}
@@ -551,6 +551,86 @@ Nel C++ 11 è stata inserita una libreria per la generazione di numeri casuali: 
 # Errori comuni
 
 Come di consueto, elenco alcuni errori molto comuni che ho trovato negli anni passati correggendo gli esercizi che gli studenti hanno consegnato all'esame:
+
+-   Attenzione nell'implementare i test per `RandomGen`! Il [notebook Julia](https://ziotom78.github.io/tnds-notebooks/lezione10/#esercizio_101) usa un *nuovo* generatore per ogni test. Non dovete quindi riutilizzare lo stesso generatore per verificare `Unif()`, `Exp()`, `Gauss()` e `GaussAR()`; il codice seguente è **sbagliato**, perché riusa `rnd` ogni volta:
+
+    ```c++
+    RandomGen rnd{1};
+
+    // Test for Unif
+    assert(are_close(rnd.Unif(0.0, 1.0), 0.47291105054318905));
+    // …and so on for the other four numbers
+
+    // Test for Exp
+    assert(are_close(rnd.Exp(1.0), 0.6403859601352556));           // WRONG!
+    // …and so on for the other four numbers
+
+    // Test for Gauss
+    assert(are_close(rnd.Gauss(2.0, 1.0), 1.9119660920460757));    // WRONG!
+    // …and so on for the other four numbers
+
+    // Test for GaussAR
+    assert(are_close(rnd.GaussAR(2.0, 1.0), 1.7291105054318905));  // WRONG!
+    // …and so on for the other four numbers
+    ```
+
+    Potete usare le parentesi graffe `{}` per delimitare uno /scope/ per ciascuna delle quattro famiglie di test:
+
+    ```c++
+    ```c++
+    {
+      RandomGen rnd{1};
+
+      // Test for Unif
+      assert(are_close(rnd.Unif(0.0, 1.0), 0.47291105054318905));
+      // …and so on for the other four numbers
+    } // `rnd` gets destroyed here
+
+    {
+      RandomGen rnd{1};
+
+      // Test for Exp
+      assert(are_close(rnd.Exp(1.0), 0.6403859601352556));           // Ok
+      // …and so on for the other four numbers
+    } // `rnd` gets destroyed here
+
+    {
+      RandomGen rnd{1};
+
+      // Test for Gauss
+      assert(are_close(rnd.Gauss(2.0, 1.0), 1.9119660920460757));    // Ok
+      // …and so on for the other four numbers
+    } // `rnd` gets destroyed here
+
+    {
+      RandomGen rnd{1};
+
+      // Test for GaussAR
+      assert(are_close(rnd.GaussAR(2.0, 1.0), 1.7291105054318905));  // Ok
+      // …and so on for the other four numbers
+    ```
+
+    Alternativamente, se avete implementato un metodo `RandomGen::SetSeed()`, potete invocare `rnd.SetSeed(1)` prima di procedere con i test del metodo successivo.
+
+-   Capita spesso che gli studenti, nell'implementare il costruttore `RandomGen::RandomGen(unsigned int seed)`, siano così preoccupati di inizializzare `m_a`, `m_c` e `m_m` ai valori giusti che si dimenticano di inizializzare `m_seed`! Questo porta il loro codice a produrre valori che sono casuali e distribuiti correttamente, ma **non** sono identici a quelli calcolati nel [notebook Julia](https://ziotom78.github.io/tnds-notebooks/lezione10/#esercizio_101), e quindi i test non passano.
+
+-   In tutti gli esercizi di oggi dovete generare $N$ numeri casuali, per cui quindi serve implementare un ciclo `for`. Attenzione a **non** creare l'oggetto `RandomGen` all'interno del ciclo `for`, perché in tal caso il generatore parte sempre dallo stesso seme e quindi genera una sequenza di numeri tutti identici tra loro:
+
+    ```c++
+    vector<double> samples{N};
+    for(int i{}; i < ssize(samples); ++i) {
+      RandomGen rnd{1};   // No, this line should be *before* the `for` loop!
+      samples[i] = rnd.Rand();
+    }
+    ```
+
+-   La funzione `Rand()` dovrebbe restituire un numero casuale in $[0, 1)$, ma la formula del generatore lineare congruenziale lavora restituisce numeri interi nell'intervallo $[0, m - 1]$; di conseguenza bisogna normalizzare il nuovo valore di `m_seed` dividendolo per `m_m`. Attenzione a questi due errori molto comuni:
+
+    #.  Il nuovo valore del seme è quello restituito dalla formula *prima* della divisione per `m_m`, perché deve essere un numero intero nell'intervallo $[0, m - 1]$.
+
+    #.  Non è corretto scrivere `m_seed / m_m`, perché è una divisione *intera*, e dal momento che `m_seed < m_m`, il risultato è sempre zero. Dovete scrivere `static_cast<double>(m_seed) / m_m` per ottenere un numero a virgola mobile.
+
+    Se avete problemi, fate riferimento al codice di `rand(glc::GLC, xmin, xmax)` nel [notebook Julia](https://ziotom78.github.io/tnds-notebooks/lezione10/#generatore_lineare_congruenziale).
 
 -   Stranamente, un certo numero di studenti non segue quanto richiesto per l'esercizio 10.2 ed inventa metodi alternativi (spesso molto più lenti) per stimare l'errore. Cercate di attenervi a quanto richiesto nel testo, perché si tratta di un approccio risolutivo che si ripropone spesso nei temi d'esame.
 
