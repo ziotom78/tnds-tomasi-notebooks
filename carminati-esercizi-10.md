@@ -494,6 +494,8 @@ L'andamento dell'errore nei due casi dovrebbe invece essere così:
 
 ![](images/es10.3_errors.png)
 
+Nel caso del metodo della media sono necessari ~ 650.000 punti per ottenere un integrale con un errore di 0.001.
+
 **Attenzione**: fareste meglio a stimare l'errore come la deviazione standard della distribuzione, anziché contare sul fatto che sapete che $\int_0^{\pi/2} x \sin x\,\mathrm{d}x = 1$, perché in questo modo il codice che scrivete per questo esercizio sarà più facile da riutilizzare il giorno dell'esame (in cui non è affatto detto che voi saprete il valore degli integrali che dovete calcolare…)!
 
 
