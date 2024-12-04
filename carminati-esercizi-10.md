@@ -100,7 +100,7 @@ int main() {
 }
 ```
 
-Il programma usa [gplot++](https://github.com/ziotom78/gplotpp), installabile con i soliti comandi descritti [qui](./index.html#gplotinstall).
+Il programma usa [gplot++](https://github.com/ziotom78/gplotpp), installabile con i soliti comandi descritti [qui](miscellanea.html#gplotinstall).
 
 Se eseguite il programma, otterrete questo grafico, non molto incoraggiante:
 

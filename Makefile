@@ -23,6 +23,8 @@ all: \
 	carminati-esercizi-02.html \
 	carminati-esercizi-01.html \
 	temi-svolti.html \
+	prepararsi-esame.html \
+	miscellanea.html \
 	qt-creator.html \
 	configure-your-laptop.html \
 	index.html
@@ -57,6 +59,32 @@ carminati-esercizi-%.html: carminati-esercizi-%.md
 		-o $@ $<
 
 temi-svolti.html: temi-svolti.md
+	$(PANDOC) \
+		--katex \
+		--to html5+smart \
+		--toc \
+		--toc-depth 2 \
+		--template ./template.html5 \
+		--css css/theme.css \
+		--css css/skylighting-solarized-theme.css \
+		--wrap=none \
+		-f markdown+tex_math_single_backslash+subscript+superscript \
+		-o $@ $<
+
+prepararsi-esame.html: prepararsi-esame.md
+	$(PANDOC) \
+		--katex \
+		--to html5+smart \
+		--toc \
+		--toc-depth 2 \
+		--template ./template.html5 \
+		--css css/theme.css \
+		--css css/skylighting-solarized-theme.css \
+		--wrap=none \
+		-f markdown+tex_math_single_backslash+subscript+superscript \
+		-o $@ $<
+
+miscellanea.html: miscellanea.md
 	$(PANDOC) \
 		--katex \
 		--to html5+smart \

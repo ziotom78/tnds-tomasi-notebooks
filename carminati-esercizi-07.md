@@ -143,7 +143,7 @@ Viene ora fornito un codice per verificare il funzionamento di quanto implementa
 
 <input type="text" value="curl https://ziotom78.github.io/tnds-tomasi-notebooks/install_fmt_library | sh" id="installFmtCommand" readonly="1" size="60"><button onclick='copyFmtInstallationScript("installFmtCommand")'>Copia</button>
 
-In alternativa, scaricate questo [file zip](./fmtlib.zip) nella directory dell'esercizio e decomprimetelo. Le istruzioni dettagliate sono qui: [index.html#fmtinstall](index.html#fmtinstall).
+In alternativa, scaricate questo [file zip](./fmtlib.zip) nella directory dell'esercizio e decomprimetelo. Le istruzioni dettagliate sono in [questa pagina](miscellanea.html#fmtinstall).
 
 Ecco il codice di esempio:
 

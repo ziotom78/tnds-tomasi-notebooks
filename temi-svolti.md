@@ -12,11 +12,11 @@ Prima di discutere come svolgere i temi d'esame proposti da Carminati, vi fornis
 
 -   Assumo che ciascuno di voi usi lo standard C++20: questo significa usare il flag `-std=c++20` con il compilatore.
 
--   Nei miei svolgimento non uso ROOT, ma Gnuplot interfacciato con la libreria [gplot++](https://github.com/ziotom78/gplotpp): lo trovo molto più semplice e veloce da usare. Fate riferimento a [questo link](index.html#gplotinstall) per sapere come installarlo sul vostro computer
+-   Nei miei svolgimento non uso ROOT, ma Gnuplot interfacciato con la libreria [gplot++](https://github.com/ziotom78/gplotpp): lo trovo molto più semplice e veloce da usare. Fate riferimento a [questo link](miscellanea.html#gplotinstall) per sapere come installarlo sul vostro computer
 
--   Similmente, uso `cout` e `cerr` solo nei casi più semplici, mentre quando si tratta di stampare numeri formattati uso la libreria [fmt](https://github.com/fmtlib/fmt). Fate riferimento a [questo link](index.html#fmtinstall) per maggiori informazioni.
+-   Similmente, uso `cout` e `cerr` solo nei casi più semplici, mentre quando si tratta di stampare numeri formattati uso la libreria [fmt](https://github.com/fmtlib/fmt). Fate riferimento a [questo link](miscellanea.html#fmtinstall) per maggiori informazioni.
 
--   Siete caldamente invitati a tenere presente i punti elencati al link [Come prepararsi all'esame scritto](index.html#esamescritto) mentre leggete questa pagina!
+-   Siete caldamente invitati a tenere presente i punti elencati al link [Come prepararsi all'esame scritto](prepararsi-esame.html) mentre leggete questa pagina!
 
 
 # Alcuni trucchi sempre utili
@@ -406,7 +406,7 @@ Si tratta di un tema molto articolato, con ben sette punti, ma ciascuno di quest
 
 ## Lettura del testo {#letturaTestoA}
 
-Uno dei consigli più importanti forniti nella sezione [Come prepararsi all'esame scritto](index.html#esamescritto) è quello di leggere il testo da cima a fondo prima di iniziare a scrivere del codice: è necessario infatti capire se ci sono più punti che possono essere svolti in modo simile, o delle peculiarità che richiedono di impostare il codice in un certo modo.
+Uno dei consigli più importanti forniti nel documento [Come prepararsi all'esame scritto](prepararsi-esame.html) è quello di leggere il testo da cima a fondo prima di iniziare a scrivere del codice: è necessario infatti capire se ci sono più punti che possono essere svolti in modo simile, o delle peculiarità che richiedono di impostare il codice in un certo modo.
 
 In questo primo tema mostrerò come si legge un tema in modo “evoluto”; potreste restarne spaventati, ma non temete! Nei temi successivi mostrerò una serie di tecniche operative che vi permetteranno di imparare a fare questo lavoro essenziale.
 
@@ -793,7 +793,7 @@ struct ErrorTable {
 };
 ```
 
-Ovviamente il codice fa uso della libreria [fmtlib](index.html#fmtinstall) per stampare la tabella in un formato gradevole.
+Ovviamente il codice fa uso della libreria [fmtlib](miscellanea.html#fmtinstall) per stampare la tabella in un formato gradevole.
 
 Dobbiamo ora implementare il `main`, che è banale:
 

@@ -65,7 +65,7 @@ void test_statistics_with_stride() {
 
 ## Esempio di codice con GnuPlot
 
-Ecco come si potrebbe implementare il `main()` usando la libreria [gplot++](index.html#gplotinstall); il programma salva il grafico nel file `plot.png`:
+Ecco come si potrebbe implementare il `main()` usando la libreria [gplot++](miscellanea.html#gplotinstall); il programma salva il grafico nel file `plot.png`:
 
 ```c++
 int main() {
@@ -406,7 +406,7 @@ Con questo file si può usare il programma seguente, che memorizza
 tutti i dati in una struttura `Measurements`. Il programma usa la
 libreria [fmtlib](https://github.com/fmtlib/fmt) e [gplot++](https://github.com/ziotom78/gplotpp); se volete provare ad
 installarle, le istruzioni sono a questi link:
-[gplot](index.html#gplotinstall), [fmtlib](index.html#fmtinstall).
+[gplot](miscellanea.html#gplotinstall), [fmtlib](miscellanea.html#fmtinstall).
 
 ```c++
 #include "fmtlib.h"

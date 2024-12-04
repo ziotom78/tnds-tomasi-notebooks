@@ -102,9 +102,9 @@
 <li><p>Non ripeto concetti già spiegati a lezione, ed assumo anzi che chi legge questa pagina abbia già una buona infarinatura della teoria ed abbia svolto e sistemato tutti gli esercizi.</p></li>
 <li><p>In ogni tema uso tecniche un po’ diverse da quelle che avete visto a lezione; di solito, queste varianti che vi mostro servono per rendere il codice più veloce da scrivere (importante nell’esame scritto, dove avete a disposizione solo due ore!).</p></li>
 <li><p>Assumo che ciascuno di voi usi lo standard C++20: questo significa usare il flag <code>-std=c++20</code> con il compilatore.</p></li>
-<li><p>Nei miei svolgimento non uso ROOT, ma Gnuplot interfacciato con la libreria <a href="https://github.com/ziotom78/gplotpp">gplot++</a>: lo trovo molto più semplice e veloce da usare. Fate riferimento a <a href="index.html#gplotinstall">questo link</a> per sapere come installarlo sul vostro computer</p></li>
-<li><p>Similmente, uso <code>cout</code> e <code>cerr</code> solo nei casi più semplici, mentre quando si tratta di stampare numeri formattati uso la libreria <a href="https://github.com/fmtlib/fmt">fmt</a>. Fate riferimento a <a href="index.html#fmtinstall">questo link</a> per maggiori informazioni.</p></li>
-<li><p>Siete caldamente invitati a tenere presente i punti elencati al link <a href="index.html#esamescritto">Come prepararsi all’esame scritto</a> mentre leggete questa pagina!</p></li>
+<li><p>Nei miei svolgimento non uso ROOT, ma Gnuplot interfacciato con la libreria <a href="https://github.com/ziotom78/gplotpp">gplot++</a>: lo trovo molto più semplice e veloce da usare. Fate riferimento a <a href="miscellanea.html#gplotinstall">questo link</a> per sapere come installarlo sul vostro computer</p></li>
+<li><p>Similmente, uso <code>cout</code> e <code>cerr</code> solo nei casi più semplici, mentre quando si tratta di stampare numeri formattati uso la libreria <a href="https://github.com/fmtlib/fmt">fmt</a>. Fate riferimento a <a href="miscellanea.html#fmtinstall">questo link</a> per maggiori informazioni.</p></li>
+<li><p>Siete caldamente invitati a tenere presente i punti elencati al link <a href="prepararsi-esame.html">Come prepararsi all’esame scritto</a> mentre leggete questa pagina!</p></li>
 </ul>
 <h1 id="alcuni-trucchi-sempre-utili">Alcuni trucchi sempre utili</h1>
 <p>Nello svolgimento dei temi d’esame presentato sotto faccio spesso ricorso ad alcuni trucchi, che illustro una volta per tutte in questa sezione</p>
@@ -355,7 +355,7 @@
 <p>Questo è il link per aprire il testo: <a href="https://labtnds.docs.cern.ch/ProveEsame/AppelloTNDS_1.pdf" class="uri">https://labtnds.docs.cern.ch/ProveEsame/AppelloTNDS_1.pdf</a></p>
 <p>Si tratta di un tema molto articolato, con ben sette punti, ma ciascuno di questi è abbastanza veloce da implementare.</p>
 <h2 id="letturaTestoA">Lettura del testo</h2>
-<p>Uno dei consigli più importanti forniti nella sezione <a href="index.html#esamescritto">Come prepararsi all’esame scritto</a> è quello di leggere il testo da cima a fondo prima di iniziare a scrivere del codice: è necessario infatti capire se ci sono più punti che possono essere svolti in modo simile, o delle peculiarità che richiedono di impostare il codice in un certo modo.</p>
+<p>Uno dei consigli più importanti forniti nel documento <a href="prepararsi-esame.html">Come prepararsi all’esame scritto</a> è quello di leggere il testo da cima a fondo prima di iniziare a scrivere del codice: è necessario infatti capire se ci sono più punti che possono essere svolti in modo simile, o delle peculiarità che richiedono di impostare il codice in un certo modo.</p>
 <p>In questo primo tema mostrerò come si legge un tema in modo “evoluto”; potreste restarne spaventati, ma non temete! Nei temi successivi mostrerò una serie di tecniche operative che vi permetteranno di imparare a fare questo lavoro essenziale.</p>
 <p>Vediamo quindi come fare per leggere i sette punti di questo tema in modo corretto.</p>
 <blockquote>
@@ -656,7 +656,7 @@
 <span id="cb42-21"><a href="#cb42-21" aria-hidden="true" tabindex="-1"></a>    cout <span class="op">&lt;&lt;</span> <span class="st">&quot;</span><span class="sc">\n\n</span><span class="st">&quot;</span><span class="op">;</span></span>
 <span id="cb42-22"><a href="#cb42-22" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
 <span id="cb42-23"><a href="#cb42-23" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code></pre></div>
-<p>Ovviamente il codice fa uso della libreria <a href="index.html#fmtinstall">fmtlib</a> per stampare la tabella in un formato gradevole.</p>
+<p>Ovviamente il codice fa uso della libreria <a href="miscellanea.html#fmtinstall">fmtlib</a> per stampare la tabella in un formato gradevole.</p>
 <p>Dobbiamo ora implementare il <code>main</code>, che è banale:</p>
 <div class="sourceCode" id="cb43"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
 <span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Chiamiamo i test che verificano il codice che abbiamo scritto</span></span>

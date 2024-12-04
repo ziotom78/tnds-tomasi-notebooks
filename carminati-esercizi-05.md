@@ -104,7 +104,7 @@ Il programma è pensato per usare la libreria [`fmt`](https://github.com/fmtlib/
 
 <input type="text" value="curl https://ziotom78.github.io/tnds-tomasi-notebooks/install_fmt_library | sh" id="installFmtCommand" readonly="1" size="60"><button onclick='copyFmtInstallationScript("installFmtCommand")'>Copia</button>
 
-(Se invece usate Windows, scaricate questo [file zip](./fmtlib.zip) nella directory dell'esercizio e decomprimetelo). Le istruzioni dettagliate sono qui: [index.html#fmtinstall](index.html#fmtinstall).
+(Se invece usate Windows, scaricate questo [file zip](./fmtlib.zip) nella directory dell'esercizio e decomprimetelo). Le istruzioni dettagliate sono in [questa pagina](miscellanea.html#fmtinstall).
 
 ```c++
 #include "posizione.h"
@@ -578,7 +578,7 @@ A partire da questo esempio completare le richieste dell'esercizio:
 
 -   Si aggiunga un ciclo che permetta di calcolare il campo a distanze via via crescenti
 
--   Si aggiunga eventualmente un grafico per visualizzare l'andamento del campo in funzione della distanza dal centro del dipolo. Potete usare ROOT o [gplot++](index.html#gplotinstall).
+-   Si aggiunga eventualmente un grafico per visualizzare l'andamento del campo in funzione della distanza dal centro del dipolo. Potete usare ROOT o [gplot++](miscellanea.html#gplotinstall).
 
 
 ## Il `Makefile`

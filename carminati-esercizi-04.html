@@ -111,7 +111,7 @@
 <span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  cerr <span class="op">&lt;&lt;</span> <span class="st">&quot;All the tests have passed. Hurrah! 🥳</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">;</span></span>
 <span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 <h2 id="esempio-di-codice-con-gnuplot">Esempio di codice con GnuPlot</h2>
-<p>Ecco come si potrebbe implementare il <code>main()</code> usando la libreria <a href="index.html#gplotinstall">gplot++</a>; il programma salva il grafico nel file <code>plot.png</code>:</p>
+<p>Ecco come si potrebbe implementare il <code>main()</code> usando la libreria <a href="miscellanea.html#gplotinstall">gplot++</a>; il programma salva il grafico nel file <code>plot.png</code>:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  test_statistics_with_stride<span class="op">();</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -396,7 +396,7 @@ B)^2</span>. Provate a scrivere un codice che pemetta di visualizzare i dati rac
 <span id="cb7-87"><a href="#cb7-87" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-88"><a href="#cb7-88" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> LinearFitResults<span class="op">&lt;</span>T<span class="op">&gt;{</span>a<span class="op">,</span> a_err<span class="op">,</span> b<span class="op">,</span> b_err<span class="op">};</span></span>
 <span id="cb7-89"><a href="#cb7-89" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
-<p>Con questo file si può usare il programma seguente, che memorizza tutti i dati in una struttura <code>Measurements</code>. Il programma usa la libreria <a href="https://github.com/fmtlib/fmt">fmtlib</a> e <a href="https://github.com/ziotom78/gplotpp">gplot++</a>; se volete provare ad installarle, le istruzioni sono a questi link: <a href="index.html#gplotinstall">gplot</a>, <a href="index.html#fmtinstall">fmtlib</a>.</p>
+<p>Con questo file si può usare il programma seguente, che memorizza tutti i dati in una struttura <code>Measurements</code>. Il programma usa la libreria <a href="https://github.com/fmtlib/fmt">fmtlib</a> e <a href="https://github.com/ziotom78/gplotpp">gplot++</a>; se volete provare ad installarle, le istruzioni sono a questi link: <a href="miscellanea.html#gplotinstall">gplot</a>, <a href="miscellanea.html#fmtinstall">fmtlib</a>.</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;fmtlib.h&quot;</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;gplot++.h&quot;</span></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;linearfit.h&quot;</span></span>

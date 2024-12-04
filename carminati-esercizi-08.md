@@ -320,7 +320,7 @@ Come al solito, potete installare la libreria `fmtlib` usando lo script [`instal
 
 <input type="text" value="curl https://ziotom78.github.io/tnds-tomasi-notebooks/install_fmt_library | sh" id="installFmtCommand" readonly="1" size="60"><button onclick='copyFmtInstallationScript("installFmtCommand")'>Copia</button>
 
-In alternativa, scaricate questo [file zip](./fmtlib.zip) nella directory dell'esercizio e decomprimetelo.  Le istruzioni dettagliate sono qui: [index.html#fmtinstall](index.html#fmtinstall).
+In alternativa, scaricate questo [file zip](./fmtlib.zip) nella directory dell'esercizio e decomprimetelo.  Le istruzioni dettagliate sono in [questa pagina](miscellanea.html#fmtinstall).
 
 Il codice sopra usa la libreria [gplot++](https://github.com/ziotom78/gplotpp) per salvare il grafico della soluzione in un file PNG. Se invece volete usare ROOT, queste sono le righe da aggiungere alla seconda parte del `main`:
 
