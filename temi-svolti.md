@@ -1368,8 +1368,8 @@ array<double, 2> oscill(double t, array<double, 2> v) {
   // This make the formula below easier to read, and it costs nothing
   // in terms of performance, as the compiler will optimize `x` and
   // `vx` away.
-  double x{v[0]};
-  double vx{v[1]};
+  double x{v.at(0)};   // We use v.at(0) instead of v[0] to enable runtime checks
+  double vx{v.at(1)};  // Ditto
 
   array result{vx, -pow(omega0, 2.0) * x - alpha * vx};
   return result;
@@ -1390,7 +1390,7 @@ double estimate_end_position(double vx0, double h, int nsteps,
   double t{};
   for (int i{}; i < nsteps; ++i) {
     time.at(i) = t;
-    position.at(i) = pos[0];
+    position.at(i) = pos.at(0);
 
     pos = runge_kutta(t, pos, h, oscill);
     t += h;
@@ -1407,7 +1407,7 @@ double estimate_end_position(double vx0, double h, int nsteps,
   }
 
   // Return the value of x at the end of the simulation
-  return pos[0];
+  return pos.at(0);
 }
 ```
 
@@ -1722,10 +1722,10 @@ struct Synchrotron {
   double bfield(double r) const { return 1 / pow(r, alpha) + c; }
 
   array<double, 4> operator()(double t, array<double, 4> v) {
-    double x{v[0]};
-    double y{v[1]};
-    double vx{v[2]};
-    double vy{v[3]};
+    double x{v.at(0)};
+    double y{v.at(1)};
+    double vx{v.at(2)};
+    double vy{v.at(3)};
     double r{distance(x, y)};
 
     array result{vx, vy, -bfield(r) * vy, bfield(r) * vx};
@@ -1784,7 +1784,7 @@ cerr << "Going to plot the trajectory for point #1 in file 'point.png'\n";
 double prev_y;
 double cur_y;
 while (true) {
-  gpl.add_point(pos[0], pos[1]);
+  gpl.add_point(pos.at(0), pos.at(1));
 
   prev_y = pos[1];
 
@@ -1812,7 +1812,7 @@ gpl.show();
 
 fmt::println(
     "After {} loops I am at t = {:.3f} s, x = {:.3e} m, y = {:.3e} m",
-    num_of_loops_point1, t, pos[0], cur_y);
+    num_of_loops_point1, t, pos.at(0), cur_y);
 fmt::println("Previous value of x was {} m", prev_y);
 ```
 
@@ -1863,7 +1863,7 @@ pos = runge_kutta(t, pos, delta_time, synchrotron_point1);
 t += delta_time; // Remember that delta_time < 0
 
 fmt::println("Back to time t = {:.4f} s, x = {:.3e} m, y = {:.3e} m", t,
-             pos[0], pos[1]);
+             pos.at(0), pos.at(1));
 
 if (abs(pos[1]) < 1e-4) {
   cout << "Ok, we're within 10⁻⁴ m from zero.\n";
@@ -1908,11 +1908,11 @@ double simulate_for_a_fixed_time(double x0, auto synchrotron_fn,
   vector<double> r_vec(nsteps);
 
   for (int i{}; i < nsteps; ++i) {
-    x_vec.at(i) = pos[0];
-    y_vec.at(i) = pos[1];
+    x_vec.at(i) = pos.at(0);
+    y_vec.at(i) = pos.at(1);
 
     t_vec.at(i) = t;
-    r_vec.at(i) = distance(pos[0], pos[1]);
+    r_vec.at(i) = distance(pos.at(0), pos.at(1));
 
     pos = runge_kutta(t, pos, h, synchrotron_fn);
     t += h;
@@ -1930,7 +1930,7 @@ double simulate_for_a_fixed_time(double x0, auto synchrotron_fn,
   gpl.plot(t_vec, r_vec);
   gpl.show();
 
-  return distance(pos[0], pos[1]);
+  return distance(pos.at(0), pos.at(1));
 }
 ```
 
