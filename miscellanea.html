@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="it-IT" xml:lang="it-IT">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc-markdown-css-theme" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Maurizio Tomasi" />
+  <title>Suggerimenti vari</title>
+  <link rel="stylesheet" href="css/theme.css" />
+  <link rel="stylesheet" href="css/skylighting-solarized-theme.css" />
+  <script src="./fmtinstall.js"></script>
+</head>
+<body>
+
+<header>
+<h1 class="title">Suggerimenti vari</h1>
+<blockquote class="metadata">
+<p class="author">
+      Maurizio Tomasi
+  </p>
+<p class="date before-toc"><time datetime="A.A. 2024−2025">A.A. 2024−2025</time></p>
+</blockquote>
+</header>
+
+<nav id="TOC" role="doc-toc">
+    <strong>Contents</strong><label for="contents">⊕</label>
+  <input type="checkbox" id="contents">
+  <ul>
+  <li><a href="#gcc" id="toc-gcc">Configurazione del compilatore sui computer del laboratorio</a></li>
+  <li><a href="#fmtinstall" id="toc-fmtinstall">Uso della libreria <code>fmt</code></a></li>
+  <li><a href="#gplotinstall" id="toc-gplotinstall">Gplot++</a></li>
+  <li><a href="#rootvscode" id="toc-rootvscode">ROOT e Visual Studio Code</a></li>
+  <li><a href="#rootgnuplot" id="toc-rootgnuplot">Installazione di ROOT e Gnuplot in Replit (obsoleto)</a></li>
+  </ul>
+</nav>
+
+<main>
+<h1 id="gcc">Configurazione del compilatore sui computer del laboratorio</h1>
+<p>Per fare in modo di usare l’ultima versione disponibile del compilatore GCC, digitate questo comando:</p>
+<pre><code>/home/comune/labTNDS_programmi/enable-latest-gcc</code></pre>
+<p>Dopodiché chiudete il terminale e riapritelo. Verificate che ora il comando <code>g++</code> usi la versione 13 del compilatore:</p>
+<pre><code>$ g++ --version
+g++ (GCC) 13.2.1 20231205 (Red Hat 13.2.1-6)
+Copyright (C) 2023 Free Software Foundation, Inc.
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.</code></pre>
+<p>È sufficiente eseguire il programma <code>enable-latest-gcc</code> <strong>una volta sola</strong>, perché poi la configurazione resta salvata.</p>
+<h1 id="fmtinstall">Uso della libreria <code>fmt</code></h1>
+<p>Siete invitati ad impratichirvi con la libreria <a href="https://github.com/fmtlib/fmt">fmt</a>, che potete installare usando lo script <a href="./install_fmt_library"><code>install_fmt_library</code></a>: si esegue con il comando <code>sh install_fmt_library</code>, e il comando <strong>va eseguito nella directory in cui avete i vostri codici!</strong>.</p>
+<p>Se usate Replit o una macchina Mac/Linux, potete installarlo anche in altre Repl con questo comando:</p>
+<p>
+<input type="text" value="curl https://ziotom78.github.io/tnds-tomasi-notebooks/install_fmt_library | sh" id="installFmt" readonly="1" size="60"><button onclick='copyFmtInstallationScript("installFmt")'>Copia</button>
+</p>
+<p><strong>Importante</strong>: Il comando va dato all’interno della directory in cui codificate l’esercizio. Ciò significa che <strong>ciascuna</strong> delle directory che contiene un esercizio per cui è necessario usare <code>fmt</code> deve contenere una copia della libreria. Non preoccupatevi di sprecare spazio, perché la libreria <code>fmt</code> occupa pochi centinaia di KB.</p>
+<p>Se non avete il comando <code>curl</code> o state usando Windows, scaricate questo <a href="./fmtlib.zip">file zip</a> nella directory di ciascun esercizio in cui prevedete di usare <code>fmt</code> e decomprimetelo.</p>
+<p>Questo è un esempio che mostra come installare ed usare la libreria:</p>
+<p><asciinema-player src="asciinema/install-fmt-94x25.cast" cols="94" rows="25" font-size="medium"></asciinema-player></p>
+<h1 id="gplotinstall">Gplot++</h1>
+<p>Se avete difficoltà ad usare ROOT, potete interfacciare il vostro codice a <a href="http://www.gnuplot.info/">Gnuplot</a> mediante la libreria <a href="https://github.com/ziotom78/gplotpp">gplot++</a>: è sufficiente scaricare il file <a href="https://raw.githubusercontent.com/ziotom78/gplotpp/master/gplot%2B%2B.h"><code>gplot++.h</code></a>, oppure eseguire questo comando:</p>
+<p>
+<input type="text" value="curl 'https://raw.githubusercontent.com/ziotom78/gplotpp/master/gplot%2B%2B.h' > gplot++.h" id="installGplot" readonly="1" size="60"><button onclick='copyFmtInstallationScript("installGplot")'>Copia</button>
+</p>
+<p>A differenza di ROOT, non è necessario modificare il Makefile per usarla, perché è una libreria <em>header-only</em>.</p>
+<p>Ricordate che la libreria funziona a patto che abbiate installato Gnuplot sul vostro computer. Seguite le <a href="https://github.com/ziotom78/gplotpp?tab=readme-ov-file#installing-gnuplot-and-gploth">istruzioni nel README</a>, specialmente se usate Windows.</p>
+<h1 id="rootvscode">ROOT e Visual Studio Code</h1>
+<p>(Suggerimento di Matteo Bettoni) Di default, Visual Studio Code non riconosce le librerie di ROOT e segnala quindi errore quando incontra istruzioni come</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;TGraph.h&quot;</span></span></code></pre></div>
+<p>Un modo per togliere queste segnalazioni di errore è quello di aprire il menu “Impostazioni”, e scegliere la voce “Estensioni”/“C/C++”/“Intellisense” e selezionare “Default: Include Path”. Premere il bottone “Aggiungi elemento”, ed inserire nella casella di testo il contenuto dell’output del comando</p>
+<pre><code>root-config --incdir</code></pre>
+<p><img src="images/root-vscode-config.png" /></p>
+<h1 id="rootgnuplot">Installazione di ROOT e Gnuplot in Replit (obsoleto)</h1>
+<p>A partire dal Gennaio 2022, Repl.it non fornisce più una serie di programmi nelle proprie Repl, e purtroppo tra i programmi rimossi c’è anche Gnuplot. I docenti hanno provveduto ad installare sia ROOT che Gnuplot in ciascuno dei template usati per gli esercizi, ma questo non avviene se volete creare voi Repl aggiuntive.</p>
+<p>Se avete creato una Repl per conto vostro e volete configurarla esattamente come quelle usate a lezione, eseguite questo comando dalla console della nuova Repl:</p>
+<p>
+<input type="text" value="curl -s https://ziotom78.github.io/tnds-tomasi-notebooks/install_standard_packages | sh" id="installStdPackages" readonly="1" size="60"><button onclick='copyFmtInstallationScript("installStdPackages")'>Copia</button>
+</p>
+<p>Una volta eseguito, ROOT e Gnuplot, più altri utili programmi, saranno installati ed operativi.</p>
+</main>
+
+<script>
+;(function() {
+  // Non-essential if user has JavaScript off. Just makes checkboxes look nicer.
+  var selector = '.task-list > li > input[type="checkbox"]';
+  var checkboxes = document.querySelectorAll(selector);
+  Array.from(checkboxes).forEach((checkbox) => {
+    var wasChecked = checkbox.checked;
+    checkbox.disabled = false;
+    checkbox.addEventListener('click', (ev) => {ev.target.checked = wasChecked});
+  });
+})();
+</script>
+</body>
+</html>
