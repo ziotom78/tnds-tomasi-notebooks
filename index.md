@@ -14,8 +14,8 @@
 | 18 Novembre 2024                          | Idem                                                            | [Esempio svolto](2024-11-12 Equazioni differenziali Tomasi.pdf)     |
 | 26 Novembre 2024                          | [Numeri pseudo-casuali e integrali](carminati-esercizi-10.html) | [Notebook 10](https://ziotom78.github.io/tnds-notebooks/lezione10/) |
 | 3 Dicembre 2024                           | Idem                                                            | Idem                                                                |
-<!--
 | 10 Dicembre 2024                          | [Metodi Monte Carlo](carminati-esercizi-12.html)                | [Notebook 10](https://ziotom78.github.io/tnds-notebooks/lezione10/) |
+<!--
 -->
 </center>
 
