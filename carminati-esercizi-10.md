@@ -384,7 +384,7 @@ private:
   int m_punti;
 };
 
-class IntegraleMedia() : public IntegraleMC {
+class IntegraleMedia : public IntegraleMC {
 public:
   double Integra(const FunzioneBase & f, double inf, double sup, int punti, double fmax) override {
       // Implementazione qui
