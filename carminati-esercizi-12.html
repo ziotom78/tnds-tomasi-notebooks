@@ -291,7 +291,10 @@ B &amp;= 60000\,\text{nm}^2\\
 <h1 id="esercizio-11.1">Esercizio 11.1 - Attrito viscoso (facoltativo)</h1>
 <p>Svolgere il tema d’esame sulla simulazione di un esperimento per la misura della viscosità di un materiale: <a href="http://labmaster.mi.infn.it/Laboratorio2/Compiti/Compito_lab2_pre09_6.pdf">preappello del gennaio 2009, esercizio 6</a>.</p>
 <h1 id="errori-comuni">Errori comuni</h1>
-<p>L’unico errore (davvero comune!) che ho visto in questi anni è di evitare di calcolare il coefficiente di correlazione come richiesto dall’esercizio. A quanto pare alcuni studenti credono che il grafico che mostra la correlazione sia sufficiente; il testo invece vi chiede di implementare proprio il calcolo della formula!</p>
+<ul>
+<li>Tantissime persone (il ~30%) non calcolano il coefficiente di correlazione come richiesto dall’esercizio. A quanto pare alcuni studenti credono che il grafico che mostra la correlazione sia sufficiente; il testo invece vi chiede di implementare proprio il calcolo della formula!</li>
+<li>Non usate <code>TH1F</code> di ROOT per calcolare medie e deviazioni standard, ma affidatevi alle funzioni che avete implementato nelle prime tre lezioni. Il problema di <code>TH1F</code> è che richiede di specificare l’intervallo entro cui considerare i campioni, ed esclude quelli che stanno al di fuori. Non è un grosso problema nello svolgimento di questo esercizio, ma quando in un tema d’esame si richiede di simulare un esperimento, gli studenti copiano il codice sorgente dell’esercizio 11.0 e si dimenticano di aggiornare gli estremi, oppure li aggiornano andando a naso e specificandoli troppo stretti. Le funzioni che avete scritto nelle prime tre lezioni di laboratorio non hanno questo fastidioso problema, e sono quindi molto più sicure da usare.</li>
+</ul>
 </main>
 
 <script>
