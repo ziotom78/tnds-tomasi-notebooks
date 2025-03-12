@@ -29,8 +29,9 @@
       vertical-align: middle;
     }
     /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
     pre > code.sourceCode { white-space: pre; position: relative; }
-    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
     pre > code.sourceCode > span:empty { height: 1.2em; }
     .sourceCode { overflow: visible; }
     code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -41,7 +42,7 @@
     }
     @media print {
     pre > code.sourceCode { white-space: pre-wrap; }
-    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
     }
     pre.numberSource code
       { counter-reset: source-line 0; }
@@ -420,7 +421,7 @@ bene se l’errore è del programmatore, male se l’errore è dell’utente!
 l’utente a sapere se la funzione si annulla veramente per <span
 class="math inline">x = 0</span> o se c’è stato un errore? 😠</p></li>
 <li><p>Accettare un parametro aggiuntivo <code>bool &amp;found</code>
-per <code>CercaZeri</code>:</p>
+(<strong>reference</strong>!) per <code>CercaZeri</code>:</p>
 <div class="sourceCode" id="cb14"><pre
 class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> CercaZeri<span class="op">(</span><span class="dt">double</span> xmin<span class="op">,</span> <span class="dt">double</span> xmax<span class="op">,</span> <span class="at">const</span> FunzioneBase <span class="op">*</span> f<span class="op">,</span> <span class="dt">bool</span> <span class="op">&amp;</span>found<span class="op">);</span></span></code></pre></div>
 <p>(In alternativa si può dichiarare <code>found</code> variabile membro

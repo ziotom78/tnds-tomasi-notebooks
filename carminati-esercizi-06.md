@@ -410,6 +410,8 @@ Come di consueto, elenco alcuni errori molto comuni che ho trovato negli anni pa
 
 -   Mi è capitato di aver visto codici che non si accorgono di aver raggiunto la precisione richiesta, e continuano ad iterare fino al numero massimo di iterazioni `m_nmax`; di solito il problema è la mancanza dell'uso di `fabs()` per calcolare l'ampiezza dell'intervallo $\left|b - a\right|$.
 
+-   Se si segue il consiglio presentato nelle [slide di approfondimento](./tomasi-lezione-06.html#gestione-errori) di aggiungere a `CercaZeri` un parametro `bool &found` per indicare se lo zero è stato trovato o no, assicurarsi che sia un **reference** (o almeno un puntatore). Dichiararlo come `bool found` non funziona perché al termine della chiamata a `CercaZeri` il valore di `found` non sarà aggiornato!
+
 ---
 title: "Lezione 6: Ricerca di zeri"
 author:

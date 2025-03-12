@@ -250,14 +250,13 @@ fish: Job 1, './esercizio-6.3' terminated by signal SIGABRT (Abort)
 
 2.   Restituire un valore fissato (es., zero): molto ambiguo, come fa l'utente a sapere se la funzione si annulla veramente per $x = 0$ o se c'è stato un errore? 😠
 
-3.   Accettare un parametro aggiuntivo `bool &found` per `CercaZeri`:
+3.   Accettare un parametro aggiuntivo `bool &found` (**reference**!) per `CercaZeri`:
 
      ```c++
      double CercaZeri(double xmin, double xmax, const FunzioneBase * f, bool &found);
      ```
 
-     (In alternativa si può dichiarare `found` variabile membro di
-     `Solutore`).
+     (In alternativa si può dichiarare `found` variabile membro di `Solutore`).
 
 # Segnalare l'errore
 
