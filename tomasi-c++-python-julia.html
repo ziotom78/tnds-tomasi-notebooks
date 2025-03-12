@@ -29,8 +29,9 @@
       vertical-align: middle;
     }
     /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
     pre > code.sourceCode { white-space: pre; position: relative; }
-    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
     pre > code.sourceCode > span:empty { height: 1.2em; }
     .sourceCode { overflow: visible; }
     code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -41,7 +42,7 @@
     }
     @media print {
     pre > code.sourceCode { white-space: pre-wrap; }
-    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
     }
     pre.numberSource code
       { counter-reset: source-line 0; }
@@ -94,6 +95,7 @@
     code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
   </style>
   <link rel="stylesheet" href="https://unpkg.com/reveal.js@^4//dist/theme/white.css" id="theme">
+  <link rel="stylesheet" href="./css/custom.css"/>
   <link rel="stylesheet" href="./css/asciinema-player.css"/>
 </head>
 <body>
@@ -128,6 +130,10 @@ linguaggio macchina delle CPU.</li>
 <li><strong>Accede alla memoria</strong>: fondamentale!</li>
 </ul>
 </section>
+<section class="slide level1">
+
+<p><img data-src="images/computer-inside.png" height="800" /></p>
+</section>
 <section id="tipi-di-memoria" class="slide level1">
 <h1>Tipi di memoria</h1>
 <ul>
@@ -135,7 +141,7 @@ linguaggio macchina delle CPU.</li>
 <ul>
 <li>Registro (qualche kB, 64 bit/ciclo)</li>
 <li>Cache (128 kB–128 MB, 40-700 GB/s)</li>
-<li>RAM (4–32 GB, 10 GB/s)</li>
+<li>RAM (4–64 GB, 10 GB/s)</li>
 </ul></li>
 <li><strong>Memoria permanente</strong>:
 <ul>
@@ -251,8 +257,8 @@ linguaggio macchina</p></li>
 <ul>
 <li>Un compilatore traduce il codice di un linguaggio ad alto livello
 (come il C++) in codice macchina</li>
-<li>Trasforma cicli <code>for</code> in cicli che usano
-<code>goto</code></li>
+<li>Trasforma cicli <code>for</code> in cicli più semplici che la CPU
+può eseguire</li>
 <li>Decide quando usare i registri e quando la RAM</li>
 <li>Il compilatore deve conoscere l’assembler di ogni architettura.
 Quelle più diffuse sono:
@@ -270,12 +276,27 @@ recenti</li>
 <ul>
 <li><p>Fino agli anni ’90 i compilatori non producevano codice macchina
 efficiente</p></li>
-<li><p>A quei tempi era possibile quindi scrivere direttamente codice
-assembler nei propri programmi C/C++/Pascal…</p>
-<center>
-<p><img data-src="./images/bp_asm.png" /></p>
-</center></li>
+<li><p>Spesso un programmatore con una minima infarinatura di assembler
+poteva scrivere codice più efficiente!</p></li>
+<li><p>Alcuni versioni dei compilatori C/C++/Pascal offrivano la
+possibilità di inserire codice assembler direttamente all’interno di
+programmi scritti in altri linguaggi!</p></li>
 </ul>
+</section>
+<section class="slide level1">
+
+<center>
+<img data-src="./images/bp_asm.png" />
+</center>
+</section>
+<section class="slide level1">
+
+<center>
+<img data-src="./images/byte-feb-1989-c-compilers.png" height="640" />
+</center>
+<p align="right">
+<small>(Byte magazine, Febbraio 1989)</small>
+</p>
 </section>
 <section id="compilatori-2" class="slide level1">
 <h1>Compilatori</h1>
@@ -286,9 +307,10 @@ complesse, ed è quindi difficile per un programmatore umano scrivere
 codice assembler che sfrutti efficientemente la macchina…</p></li>
 <li><p>…e d’altra parte i compilatori moderni sono così sofisticati da
 produrre codice macchina imbattibile!</p></li>
-<li><p>Scrivere codice assembler è quindi una cosa che oggi non è
-praticamente mai necessaria (e per giunta rende il codice poco
-portabile)</p></li>
+<li><p>Scrivere codice assembler è quindi una cosa che oggi non è quasi
+mai necessaria, anche perché rende il codice poco portabile. (Ma ci sono
+eccezioni, come <a
+href="https://github.com/FFmpeg/asm-lessons/blob/main/lesson_01/index.md">FFmpeg</a>…)</p></li>
 </ul>
 </section>
 <section id="esplorare-il-codice-assembler" class="slide level1">
@@ -317,7 +339,7 @@ slide)</li>
 <tr>
 <td>
 <div class="sourceCode" id="cb2"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> n<span class="op">;</span> <span class="op">++</span>i<span class="op">)</span></span>
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i<span class="op">{};</span> i <span class="op">&lt;</span> n<span class="op">;</span> <span class="op">++</span>i<span class="op">)</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">// loop body</span></span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
@@ -487,8 +509,8 @@ class="sourceCode asm"><code class="sourceCode fasm"><span id="cb8-1"><a href="#
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="bu">movsd</span> <span class="dt">QWORD</span> <span class="dt">PTR</span> <span class="op">[</span><span class="kw">rbp</span><span class="op">-</span><span class="dv">8</span><span class="op">],</span> <span class="kw">xmm0</span>   <span class="co">; x = xmm0</span></span></code></pre></div></li>
 </ul>
 </section>
-<section id="section-2" class="slide level1">
-<h1></h1>
+<section class="slide level1">
+
 <ul>
 <li><p>Consideriamo ora questo programma Python:</p>
 <div class="sourceCode" id="cb9"><pre
@@ -522,7 +544,7 @@ elementi in coda al vettore, fanno un’operazione su di essi, e mettono
 il risultato in coda al vettore</p></li>
 </ul>
 </section>
-<section id="section-3" class="slide level1">
+<section id="section-2" class="slide level1">
 <h1></h1>
 <p>Per eseguire il file <code>test.py</code>, occorre sempre chiamare
 <code>python3</code>:</p>
@@ -554,7 +576,7 @@ di quel particolare comando (<code>load_fast</code>,
 <code>store_fast</code>, <code>binary_add</code>, …)</p></li>
 </ul>
 </section>
-<section id="section-4" class="slide level1">
+<section id="section-3" class="slide level1">
 <h1></h1>
 <p>Questa è una possibile implementazione per
 <code>binary_add</code>:</p>
@@ -596,10 +618,11 @@ errori</p></li>
 più facile che vada in crash un programma Python piuttosto che un
 programma C++. Esempio:</p>
 <pre class="shell"><code>$ python3 test.py
+Computing results… Please wait!
 Traceback (most recent call last):
-  File &quot;/home/tomasi/test.py&quot;, line 1, in &lt;module&gt;
-    function_call(3.0)
-NameError: name &#39;function_call&#39; is not defined</code></pre></li>
+  File &quot;/home/tomasi/test.py&quot;, line 1429, in &lt;module&gt;
+    print_results(results)
+NameError: name &#39;print_results&#39; is not defined</code></pre></li>
 <li><p><strong>I programmi sono molto più lenti del C++!</strong></p>
 <div class="sourceCode" id="cb15"><pre
 class="sourceCode python"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1_000_000</span>):  <span class="co"># Run this for i=0 to i=999_999</span></span>
@@ -676,6 +699,7 @@ numerici su milioni di elementi?</li>
 <li>Negli anni sono state sviluppate librerie Python molto potenti per
 il calcolo scientifico: <a href="https://numpy.org/">NumPy</a>, <a
 href="https://numba.pydata.org/">Numba</a>, <a
+href="https://www.taichi-lang.org/">Taichi</a>, <a
 href="https://www.numfys.net/howto/F2PY/">f2py</a>, <a
 href="https://cython.org/">Cython</a>, <a
 href="https://dask.org/">Dask</a>, <a
@@ -695,7 +719,7 @@ href="https://pandas.pydata.org/">Pandas</a>…</li>
 2013)</li>
 <li>Pensato espressamente per il calcolo scientifico</li>
 <li>Veloce come C++ e facile come Python…?</li>
-<li>Versione corrente: 1.10.2</li>
+<li>Versione corrente: 1.11.4</li>
 </ul>
 </section>
 <section id="dove-si-colloca-julia" class="slide level1">
@@ -711,7 +735,7 @@ href="https://pandas.pydata.org/">Pandas</a>…</li>
 </dd>
 <dt>Just-in-time compilers</dt>
 <dd>
-<p>Java, Kotlin, C#, LuaJIT, Julia, etc.</p>
+<p>Java, Kotlin, C#, LuaJIT, 👉<strong>Julia</strong>👈, etc.</p>
 </dd>
 </dl>
 </section>
@@ -1031,9 +1055,9 @@ venga tradotto in linguaggio macchina</p></li>
 <li><p>Possono quindi essere usate per modificare del codice presente
 nel file sorgente, o addirittura per <em>generarlo
 automaticamente</em></p></li>
-<li><p>Ma a cosa può servire una caratteristica simile? Dopotutto, è da
-tempo ormai che programmate in C++ e non ne avete mai sentito il
-bisogno…</p></li>
+<li><p>Ma una caratteristica simile non è troppo esotica e “accademica”?
+No, anzi, è straordinariamente pratica! Ma bisogna avere mente aperta
+per immaginarne le applicazioni…</p></li>
 </ul>
 </section>
 <section id="latexify.jl" class="slide level1">

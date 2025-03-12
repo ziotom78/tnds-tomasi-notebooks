@@ -15,12 +15,16 @@
 -   Accede a periferiche attraverso dei *bus*
 -   **Accede alla memoria**: fondamentale!
 
+---
+
+![](images/computer-inside.png){height=800}
+
 # Tipi di memoria
 
 -   **Memoria volatile**:
     -   Registro (qualche kB, 64 bit/ciclo)
     -   Cache (128 kB–128 MB, 40-700 GB/s)
-    -   RAM (4–32 GB, 10 GB/s)
+    -   RAM (4–64 GB, 10 GB/s)
 -   **Memoria permanente**:
     -   Disco fisso SSD (1 GB/s)
     -   Disco fisso HDD (120 MB/s)
@@ -100,7 +104,7 @@
 
 -   Un compilatore traduce il codice di un linguaggio ad alto livello
     (come il C++) in codice macchina
--   Trasforma cicli `for` in cicli che usano `goto`
+-   Trasforma cicli `for` in cicli più semplici che la CPU può eseguire
 -   Decide quando usare i registri e quando la RAM
 -   Il compilatore deve conoscere l'assembler di ogni architettura. Quelle più diffuse
     sono:
@@ -114,34 +118,34 @@
 
 -   Fino agli anni '90 i compilatori non producevano codice macchina efficiente
 
--   A quei tempi era possibile quindi scrivere direttamente codice
-    assembler nei propri programmi C/C++/Pascal…
+-   Spesso un programmatore con una minima infarinatura di assembler poteva scrivere codice più efficiente!
 
-    <center>![](./images/bp_asm.png)</center>
+-   Alcuni versioni dei compilatori C/C++/Pascal offrivano la possibilità di inserire codice assembler direttamente all’interno di programmi scritti in altri linguaggi!
+
+---
+
+<center>![](./images/bp_asm.png)</center>
+
+---
+
+<center>![](./images/byte-feb-1989-c-compilers.png){height=640px}</center>
+<p align="right"><small>(Byte magazine, Febbraio 1989)</small></p>
 
 # Compilatori
 
 -   Oggi siamo in una situazione completamente rovesciata!
 
--   Da un lato, le CPU più recenti usano ottimizzazioni molto
-    complesse, ed è quindi difficile per un programmatore umano
-    scrivere codice assembler che sfrutti efficientemente la macchina…
+-   Da un lato, le CPU più recenti usano ottimizzazioni molto complesse, ed è quindi difficile per un programmatore umano scrivere codice assembler che sfrutti efficientemente la macchina…
 
--   …e d'altra parte i compilatori moderni sono così sofisticati da
-    produrre codice macchina imbattibile!
+-   …e d'altra parte i compilatori moderni sono così sofisticati da produrre codice macchina imbattibile!
 
--   Scrivere codice assembler è quindi una cosa che oggi non è
-    praticamente mai necessaria (e per giunta rende il codice poco
-    portabile)
+-   Scrivere codice assembler è quindi una cosa che oggi non è quasi mai necessaria, anche perché rende il codice poco portabile. (Ma ci sono eccezioni, come [FFmpeg](https://github.com/FFmpeg/asm-lessons/blob/main/lesson_01/index.md)…)
 
 # Esplorare il codice assembler
 
--   Molti compilatori possono produrre file di testo con l'assembler
-    generato, prima della traduzione in linguaggio macchina
+-   Molti compilatori possono produrre file di testo con l'assembler generato, prima della traduzione in linguaggio macchina
 -   Se usate `gcc` e `clang`, esiste il flag `-S`
--   Potete fare esperimenti online sul sito
-    [godbolt.org](https://godbolt.org) (che ho usato per le prossime
-    slide)
+-   Potete fare esperimenti online sul sito [godbolt.org](https://godbolt.org) (che ho usato per le prossime slide)
 
 # Esempio: un ciclo `for`
 
@@ -157,7 +161,7 @@
 <tr>
 <td>
 ```c++
-for (int i = 0; i < n; ++i)
+for (int i{}; i < n; ++i)
 {
     // loop body
 }
@@ -182,12 +186,9 @@ LoopEnd:
 
 # Uso di registri
 
--   Per ogni dato, il compilatore deve decidere se usare un registro o
-    la RAM: nell'esempio, `n` era nella RAM mentre `i` in un registro (`eax`)
--   Trovare la scelta ottimale è molto difficile (vedi
-    [Wikipedia](https://en.wikipedia.org/wiki/Register_allocation))
--   In passato il C/C++ offriva la parola chiave `register` (oggi
-    deprecata):
+-   Per ogni dato, il compilatore deve decidere se usare un registro o la RAM: nell'esempio, `n` era nella RAM mentre `i` in un registro (`eax`)
+-   Trovare la scelta ottimale è molto difficile (vedi [Wikipedia](https://en.wikipedia.org/wiki/Register_allocation))
+-   In passato il C/C++ offriva la parola chiave `register` (oggi deprecata):
 
     ```c
     void fn(void) {
@@ -199,50 +200,24 @@ LoopEnd:
 
 # Produrre codice assembler
 
--   Il compilatore `g++` si basa su [GCC](https://gcc.gnu.org/), che
-    implementa una serie di algoritmi per capire quale sia il modo più
-    performante di usare i registri e ordinare le istruzioni
--   Il compilatore `clang` si basa sulla libreria
-    [LLVM](https://llvm.org/), che prende in input una descrizione «ad
-    alto livello» della sequenza di operazioni da eseguire e le
-    traduce in codice assembler ottimizzato
+-   Il compilatore `g++` si basa su [GCC](https://gcc.gnu.org/), che implementa una serie di algoritmi per capire quale sia il modo più performante di usare i registri e ordinare le istruzioni
+-   Il compilatore `clang` si basa sulla libreria [LLVM](https://llvm.org/), che prende in input una descrizione «ad alto livello» della sequenza di operazioni da eseguire e le traduce in codice assembler ottimizzato
 
 # Altri linguaggi
 
--   [GCC](https://gcc.gnu.org/) supporta molti linguaggi oltre al C++, usando lo stesso generatore di codice assembler: C e Objective-C (`gcc`),
-    [D](https://wiki.dlang.org/GDC) (`gdc`),
-    [Go](https://gcc.gnu.org/onlinedocs/gcc-9.3.0/gccgo/) (`gccgo`),
-    [Fortran](https://gcc.gnu.org/onlinedocs/gcc-9.3.0/gfortran/)
-    (`gfortran`),
-    [Ada](https://gcc.gnu.org/onlinedocs/gcc-9.3.0/gnat_ugn/)
-    (`gnat`).
--   La libreria LLVM è impiegata da molti compilatori:
-    [clang](https://clang.llvm.org/) (C/Objective-C/C++),
-    [LDC](https://wiki.dlang.org/LDC) (D),
-    [flang](https://github.com/flang-compiler/flang) (Fortran),
-    [Crystal](https://crystal-lang.org/), [Swift](https://swift.org/),
-    [Rust](https://www.rust-lang.org/), [Zig](https://ziglang.org/),
-    [Julia](https://julialang.org/)
--   Altri compilatori implementano un proprio generatore di codice
-    assembler: [FreePascal](https://freepascal.org/),
-    [DMD](https://dlang.org/) (D), [Go](https://golang.org/), [Visual
-    Studio](https://visualstudio.microsoft.com/vs/) (C/C++), etc.
--   Alcuni linguaggi, come [Nim](https://nim-lang.org/), producono
-    codice C, che va poi compilato da un compilatore C.
+-   [GCC](https://gcc.gnu.org/) supporta molti linguaggi oltre al C++, usando lo stesso generatore di codice assembler: C e Objective-C (`gcc`), [D](https://wiki.dlang.org/GDC) (`gdc`), [Go](https://gcc.gnu.org/onlinedocs/gcc-9.3.0/gccgo/) (`gccgo`), [Fortran](https://gcc.gnu.org/onlinedocs/gcc-9.3.0/gfortran/) (`gfortran`), [Ada](https://gcc.gnu.org/onlinedocs/gcc-9.3.0/gnat_ugn/) (`gnat`).
+-   La libreria LLVM è impiegata da molti compilatori: [clang](https://clang.llvm.org/) (C/Objective-C/C++), [LDC](https://wiki.dlang.org/LDC) (D), [flang](https://github.com/flang-compiler/flang) (Fortran), [Crystal](https://crystal-lang.org/), [Swift](https://swift.org/), [Rust](https://www.rust-lang.org/), [Zig](https://ziglang.org/), [Julia](https://julialang.org/)
+-   Altri compilatori implementano un proprio generatore di codice assembler: [FreePascal](https://freepascal.org/), [DMD](https://dlang.org/) (D), [Go](https://golang.org/), [Visual Studio](https://visualstudio.microsoft.com/vs/) (C/C++), etc.
+-   Alcuni linguaggi, come [Nim](https://nim-lang.org/), producono codice C, che va poi compilato da un compilatore C.
 
 # Python
 
 # L'approccio di Python
 
--   Python nasce all’inizio degli anni 90, 20 anni dopo il C e 7 dopo
-    il C++
--   Quando nasce il Python c’è la consapevolezza che i computer
-    saranno sempre più veloci: programmi «lenti» sono sempre meno un
-    problema
--   L'approccio di Python è completamente diverso rispetto al C++: non
-    è più **compilato**, ma **interpretato**
--   In campo scientifico si usa molto la distribuzione **Anaconda
-    Python**
+-   Python nasce all’inizio degli anni 90, 20 anni dopo il C e 7 dopo il C++
+-   Quando nasce il Python c’è la consapevolezza che i computer saranno sempre più veloci: programmi «lenti» sono sempre meno un problema
+-   L'approccio di Python è completamente diverso rispetto al C++: non è più **compilato**, ma **interpretato**
+-   In campo scientifico si usa molto la distribuzione **Anaconda Python**
 
 # Confronto C++/Python
 
@@ -314,7 +289,7 @@ print(result)
     movsd QWORD PTR [rbp-8], xmm0   ; x = xmm0
     ```
 
-#
+---
 
 -   Consideriamo ora questo programma Python:
 
@@ -427,10 +402,11 @@ void binary_add(PyObject * val1,
 
     ```shell
     $ python3 test.py
+    Computing results… Please wait!
     Traceback (most recent call last):
-      File "/home/tomasi/test.py", line 1, in <module>
-        function_call(3.0)
-    NameError: name 'function_call' is not defined
+      File "/home/tomasi/test.py", line 1429, in <module>
+        print_results(results)
+    NameError: name 'print_results' is not defined
     ```
 
 -   **I programmi sono molto più lenti del C++!**
@@ -494,27 +470,16 @@ upper_flange         (T = 301.76 K)
 
 # Quando usare Python?
 
--   Se un programma non richiede molti calcoli complessi, Python è
-    solitamente la scelta migliore
--   Se un programma Python è 100 volte più lento di un programma C++,
-    ma completa sempre l’esecuzione in 0,1 secondi, vale la pena
-    velocizzarlo?
--   Scrivere programmi in Python è molto più veloce che scriverli in
-    C++
+-   Se un programma non richiede molti calcoli complessi, Python è solitamente la scelta migliore
+-   Se un programma Python è 100 volte più lento di un programma C++, ma completa sempre l’esecuzione in 0,1 secondi, vale la pena velocizzarlo?
+-   Scrivere programmi in Python è molto più veloce che scriverli in C++
 
 # Python nel calcolo scientifico
 
--   È possibile usare Python per simulazioni Monte Carlo? O per
-    calcoli numerici su milioni di elementi?
+-   È possibile usare Python per simulazioni Monte Carlo? O per calcoli numerici su milioni di elementi?
 -   Python permette di invocare funzioni scritte in C e in Fortran
--   Negli anni sono state sviluppate librerie Python molto potenti per
-    il calcolo scientifico: [NumPy](https://numpy.org/),
-    [Numba](https://numba.pydata.org/),
-    [f2py](https://www.numfys.net/howto/F2PY/),
-    [Cython](https://cython.org/), [Dask](https://dask.org/),
-    [Pandas](https://pandas.pydata.org/)…
--   Lo svantaggio è che queste librerie scientifiche sono spesso
-    **poco integrate** col linguaggio
+-   Negli anni sono state sviluppate librerie Python molto potenti per il calcolo scientifico: [NumPy](https://numpy.org/), [Numba](https://numba.pydata.org/), [Taichi](https://www.taichi-lang.org/), [f2py](https://www.numfys.net/howto/F2PY/), [Cython](https://cython.org/), [Dask](https://dask.org/), [Pandas](https://pandas.pydata.org/)…
+-   Lo svantaggio è che queste librerie scientifiche sono spesso **poco integrate** col linguaggio
 
 # Julia
 
@@ -524,7 +489,7 @@ upper_flange         (T = 301.76 K)
 -   Linguaggio molto recente (versione 0.1 rilasciata a Febbraio 2013)
 -   Pensato espressamente per il calcolo scientifico
 -   Veloce come C++ e facile come Python…?
--   Versione corrente: 1.10.2
+-   Versione corrente: 1.11.4
 
 # Dove si colloca Julia?
 
@@ -538,7 +503,7 @@ Interpreti
 
 Just-in-time compilers
 
-: Java, Kotlin, C#, LuaJIT, Julia, etc.
+: Java, Kotlin, C#, LuaJIT, 👉**Julia**👈, etc.
 
 # Un assaggio del linguaggio
 
@@ -815,7 +780,7 @@ end
 
 -   Possono quindi essere usate per modificare del codice presente nel file sorgente, o addirittura per *generarlo automaticamente*
 
--   Ma a cosa può servire una caratteristica simile? Dopotutto, è da tempo ormai che programmate in C++ e non ne avete mai sentito il bisogno…
+-   Ma una caratteristica simile non è troppo esotica e “accademica”? No, anzi, è straordinariamente pratica! Ma bisogna avere mente aperta per immaginarne le applicazioni…
 
 # [Latexify.jl](https://github.com/korsbo/Latexify.jl)
 
