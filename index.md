@@ -19,10 +19,7 @@
 -->
 </center>
 
-Link al Google Form per il [seminario su C++, Python e Julia](tomasi-lezione-08.html#/seminario-su-c-python-e-julia): <https://forms.gle/saJjERRmYR6KxPpe9>.
-<!--
-[Slides](tomasi-c++-python-julia.html).
--->
+Link al Google Form per il [seminario su C++, Python e Julia](tomasi-lezione-08.html#/seminario-su-c-python-e-julia): <https://forms.gle/saJjERRmYR6KxPpe9>. [Slides](tomasi-c++-python-julia.html).
 
 
 # Configurare il proprio laptop {#configure-your-laptop}
