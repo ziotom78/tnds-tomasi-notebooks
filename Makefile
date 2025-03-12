@@ -128,6 +128,7 @@ tomasi-c++-python-julia.html: tomasi-c++-python-julia.md
 	  	--standalone \
 		--filter pandoc-imagine \
 		--katex \
+		--css ./css/custom.css \
 		--css ./css/asciinema-player.css \
 		-A asciinema-include.html \
 		-V theme=white \
