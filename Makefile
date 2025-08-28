@@ -138,6 +138,7 @@ tomasi-c++-python-julia.html: tomasi-c++-python-julia.md
 		-V background-image=./media/background.png \
 		-V width=1440 \
 		-V height=810 \
+		-V "revealjs-url=reveal.js-5.2.1" \
 		-f markdown+tex_math_single_backslash+subscript+superscript \
 		-t revealjs \
 		-o $@ $<
@@ -150,6 +151,8 @@ tomasi-lezione-%.html: tomasi-lezione-%.md
                 --template ./template-revealjs.html5 \
 		--katex \
 		-f markdown+tex_math_single_backslash+subscript+superscript \
+                -V "transition=slide" \
+		-V "revealjs-url=reveal.js-5.2.1" \
 		-t revealjs \
 		-o $@ $<
 
