@@ -195,10 +195,10 @@ $ g++ -o test test.cpp
 $
 ```
 
-Potete però usare il flag `-Wall` (**consigliatissimo per tutti i vostri programmi!**), in modo che il compilatore vi avvisi:
+Potete però usare i flag `-Wall -Wextra -Werror --pedantic` (**consigliatissimi per tutti i vostri programmi!**), in modo che il compilatore vi avvisi:
 
 ```
-$ g++ -Wall -o test test.cpp
+$ g++ -std=c++23 -g3 -Wall -Wextra -Werror --pedantic -o test test.cpp
 test.cpp: In function ‘int main(int, const char**)’:
 test.cpp:6:10: warning: ‘void operator delete(void*, long unsigned int)’ called on pointer returned from a mismatched allocation function [-Wmismatched-new-delete]
     6 |   delete array;
@@ -465,7 +465,7 @@ fout.close();
 -   Compiliamo il programma invocando come al solito `g++`:
 
     ```
-    g++ esercizio1.0.cpp  -Wall -o main
+    g++ esercizio1.0.cpp -std=c++23 -g -Wall -Wextra -Werror --pedantic -o main
     ```
 
 -   Eseguiamo il programma:
@@ -734,7 +734,7 @@ Il `main` è ora decisamente più compatto e leggibile. Quasi tutte le principal
 
 Come nel caso dell'esercizio precedente compiliamo il programma invocando come al solito `g++`:
 
-    g++ esercizio1.1.cpp -Wall -o esercizio1.1
+    g++ esercizio1.1.cpp -std=c++23 -g3 -Wall -Wextra -Werror --pedantic -o esercizio1.1
 
 Eseguiamo il programma :
 
@@ -762,7 +762,7 @@ Vogliamo creare un `Makefile` che ci permetta di compilare il nostro programma q
 
 Ovviamente possiamo compilare il tutto con
 
-    g++ esercizio1.2.cpp funzioni.cpp -Wall -o main
+    g++ esercizio1.2.cpp funzioni.cpp -std=c++23 -g3 -Wall -Wextra -Werror --pedantic -o main
 
 ma possiamo farlo in maniera più efficace. La struttura/sintassi del `Makefile` è la seguente:
 
@@ -784,7 +784,7 @@ Nel nostro caso, con il `Makefile` contenente le righe
 
 ```makefile
 main: funzioni.cpp esercizio1.2.cpp
-↹g++ funzioni.cpp esercizio1.2.cpp -Wall -o main
+↹g++ funzioni.cpp esercizio1.2.cpp -std=c++23 -g3 -Wall -Wextra -Werror --pedantic -o main
 ```
 
 è possibile compilare tutto lanciando il comando `make`.
@@ -815,7 +815,7 @@ funzioni.o: funzioni.cpp funzioni.h
     g++ -c funzioni.cpp -o funzioni.o $(CXXFLAGS)
 ```
 
-La variabile `$@` è una cosiddetta *variabile implicita*, e viene sostituita di volta in volta col nome del *target* corrente (che nell'esempio sopra è `main`, `main.o` e infine `funzioni.o`). I flag `-g -Wall -Wextra -Werror --pedantic -std=c++23` servono per rendere la compilazione e l'esecuzione del codice più sicura, perché abilitano dei controlli addizionali, spiegati nelle [slide](tomasi-lezione-01.html#flag-del-compilatore).
+La variabile `$@` è una cosiddetta *variabile implicita*, e viene sostituita di volta in volta col nome del *target* corrente (che nell'esempio sopra è `main`, `main.o` e infine `funzioni.o`). I flag `-g3 -Wall -Wextra -Werror --pedantic -std=c++23` servono per rendere la compilazione e l'esecuzione del codice più sicura, perché abilitano dei controlli addizionali, spiegati nelle [slide](tomasi-lezione-01.html#flag-del-compilatore).
 
 
 # Esercizio 1.3 - Overloading di funzione (da consegnare) {#esercizio-1.3}

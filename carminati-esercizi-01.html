@@ -196,8 +196,8 @@ Aborted (core dumped)</code></pre>
 <p>Il compilatore <code>g++</code> non segnala questo tipo di errore:</p>
 <pre><code>$ g++ -o test test.cpp
 $</code></pre>
-<p>Potete però usare il flag <code>-Wall</code> (<strong>consigliatissimo per tutti i vostri programmi!</strong>), in modo che il compilatore vi avvisi:</p>
-<pre><code>$ g++ -Wall -o test test.cpp
+<p>Potete però usare i flag <code>-Wall -Wextra -Werror --pedantic</code> (<strong>consigliatissimi per tutti i vostri programmi!</strong>), in modo che il compilatore vi avvisi:</p>
+<pre><code>$ g++ -std=c++23 -g3 -Wall -Wextra -Werror --pedantic -o test test.cpp
 test.cpp: In function ‘int main(int, const char**)’:
 test.cpp:6:10: warning: ‘void operator delete(void*, long unsigned int)’ called on pointer returned from a mismatched allocation function [-Wmismatched-new-delete]
     6 |   delete array;
@@ -396,7 +396,7 @@ $</code></pre>
 <span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>fout<span class="op">.</span>close<span class="op">();</span></span></code></pre></div>
 <ul>
 <li><p>Compiliamo il programma invocando come al solito <code>g++</code>:</p>
-<pre><code>g++ esercizio1.0.cpp  -Wall -o main</code></pre></li>
+<pre><code>g++ esercizio1.0.cpp -std=c++23 -g -Wall -Wextra -Werror --pedantic -o main</code></pre></li>
 <li><p>Eseguiamo il programma:</p>
 <pre><code>./main 365 1941.txt</code></pre></li>
 </ul>
@@ -634,7 +634,7 @@ Effetto
 <span id="cb40-82"><a href="#cb40-82" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 <p>Il <code>main</code> è ora decisamente più compatto e leggibile. Quasi tutte le principali funzionalità del codice sono state scorporate in un opportuno set di funzioni.</p>
 <p>Come nel caso dell’esercizio precedente compiliamo il programma invocando come al solito <code>g++</code>:</p>
-<pre><code>g++ esercizio1.1.cpp -Wall -o esercizio1.1</code></pre>
+<pre><code>g++ esercizio1.1.cpp -std=c++23 -g3 -Wall -Wextra -Werror --pedantic -o esercizio1.1</code></pre>
 <p>Eseguiamo il programma :</p>
 <pre><code>./esercizio1.1 365 1941.txt</code></pre>
 <h1 id="esercizio-1.2">Esercizio 1.2 - Codice di analisi con funzioni e Makefile</h1>
@@ -654,7 +654,7 @@ Effetto
 <li><code>funzioni.h</code></li>
 </ol>
 <p>Ovviamente possiamo compilare il tutto con</p>
-<pre><code>g++ esercizio1.2.cpp funzioni.cpp -Wall -o main</code></pre>
+<pre><code>g++ esercizio1.2.cpp funzioni.cpp -std=c++23 -g3 -Wall -Wextra -Werror --pedantic -o main</code></pre>
 <p>ma possiamo farlo in maniera più efficace. La struttura/sintassi del <code>Makefile</code> è la seguente:</p>
 <pre><code>target: dipendenze
 ↹system command</code></pre>
@@ -664,7 +664,7 @@ Effetto
 <p>Il tasto TAB è come una serie di spazi, ma attenzione! Usare gli spazi in questo contesto è un errore!</p>
 <p>Nel nostro caso, con il <code>Makefile</code> contenente le righe</p>
 <div class="sourceCode" id="cb46"><pre class="sourceCode makefile"><code class="sourceCode makefile"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="dv">main:</span><span class="dt"> funzioni.cpp esercizio1.2.cpp</span></span>
-<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>↹g++ funzioni.cpp esercizio1.2.cpp -Wall -o main</span></code></pre></div>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>↹g++ funzioni.cpp esercizio1.2.cpp -std=c++23 -g3 -Wall -Wextra -Werror --pedantic -o main</span></code></pre></div>
 <p>è possibile compilare tutto lanciando il comando <code>make</code>.</p>
 <p>Possiamo scrivere il <code>Makefile</code> anche esplicitando le dipendenze, in modo che anche quando cambiamo il file <code>.h</code> il tutto venga propriamente ricompilato. In questo caso il <code>Makefile</code> diventa:</p>
 <div class="sourceCode" id="cb47"><pre class="sourceCode makefile"><code class="sourceCode makefile"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="dv">main:</span><span class="dt"> main.o funzioni.o</span></span>
@@ -684,7 +684,7 @@ Effetto
 <span id="cb48-8"><a href="#cb48-8" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb48-9"><a href="#cb48-9" aria-hidden="true" tabindex="-1"></a><span class="dv">funzioni.o:</span><span class="dt"> funzioni.cpp funzioni.h</span></span>
 <span id="cb48-10"><a href="#cb48-10" aria-hidden="true" tabindex="-1"></a><span class="er">    </span>g++ -c funzioni.cpp -o funzioni.o <span class="ch">$(</span><span class="dt">CXXFLAGS</span><span class="ch">)</span></span></code></pre></div>
-<p>La variabile <code>$@</code> è una cosiddetta <em>variabile implicita</em>, e viene sostituita di volta in volta col nome del <em>target</em> corrente (che nell’esempio sopra è <code>main</code>, <code>main.o</code> e infine <code>funzioni.o</code>). I flag <code>-g -Wall -Wextra -Werror --pedantic -std=c++23</code> servono per rendere la compilazione e l’esecuzione del codice più sicura, perché abilitano dei controlli addizionali, spiegati nelle <a href="tomasi-lezione-01.html#flag-del-compilatore">slide</a>.</p>
+<p>La variabile <code>$@</code> è una cosiddetta <em>variabile implicita</em>, e viene sostituita di volta in volta col nome del <em>target</em> corrente (che nell’esempio sopra è <code>main</code>, <code>main.o</code> e infine <code>funzioni.o</code>). I flag <code>-g3 -Wall -Wextra -Werror --pedantic -std=c++23</code> servono per rendere la compilazione e l’esecuzione del codice più sicura, perché abilitano dei controlli addizionali, spiegati nelle <a href="tomasi-lezione-01.html#flag-del-compilatore">slide</a>.</p>
 <h1 id="esercizio-1.3">Esercizio 1.3 - Overloading di funzione (da consegnare)</h1>
 <p>Aggiungete alla vostra libreria di funzioni una funzione <code>void Print(const double *, int)</code> che permetta di scrivere gli elementi di un array a video. Questo è possibile grazie all’<em>overloading</em> (funzioni con stesso nome, ma con argomenti differenti).</p>
 <h2 id="overloading-di-funzioni">Overloading di funzioni</h2>

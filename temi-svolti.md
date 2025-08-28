@@ -212,7 +212,7 @@ double midpoint(auto fn, double a, double b, int n) {
 
 (È come se `auto` servisse per dire al compilatore: “non fare tante storie sul tipo di `fn`, decidi tu quale tipo ti va meglio!”).
 
-Le due scritture sono equivalenti, ma la seconda è molto più veloce da scrivere. (Però dovete ricordare di usare un compilatore C++ abbastanza recente e passare il flag `-std=c++20`). Attenzione però che ogni `auto` che usate è un tipo diverso. Quindi la funzione
+Le due scritture sono equivalenti, ma la seconda è molto più veloce da scrivere. (Però dovete ricordare di usare un compilatore C++ abbastanza recente e passare il flag `-std=c++23`). Attenzione però che ogni `auto` che usate è un tipo diverso. Quindi la funzione
 
 ```c++
 void myfun(auto a, auto b) {

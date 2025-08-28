@@ -231,7 +231,7 @@
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="co">// ...</span></span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 <p>(È come se <code>auto</code> servisse per dire al compilatore: “non fare tante storie sul tipo di <code>fn</code>, decidi tu quale tipo ti va meglio!”).</p>
-<p>Le due scritture sono equivalenti, ma la seconda è molto più veloce da scrivere. (Però dovete ricordare di usare un compilatore C++ abbastanza recente e passare il flag <code>-std=c++20</code>). Attenzione però che ogni <code>auto</code> che usate è un tipo diverso. Quindi la funzione</p>
+<p>Le due scritture sono equivalenti, ma la seconda è molto più veloce da scrivere. (Però dovete ricordare di usare un compilatore C++ abbastanza recente e passare il flag <code>-std=c++23</code>). Attenzione però che ogni <code>auto</code> che usate è un tipo diverso. Quindi la funzione</p>
 <div class="sourceCode" id="cb14"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> myfun<span class="op">(</span><span class="kw">auto</span> a<span class="op">,</span> <span class="kw">auto</span> b<span class="op">)</span> <span class="op">{</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="co">// ...</span></span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>

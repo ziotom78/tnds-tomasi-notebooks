@@ -86,7 +86,7 @@ Questi sono i passi da compiere per installare MSYS2 e i compilatori C++:
 
     ```
     $ cd /c/Utenti/Pippo
-    $ g++ -o prova -std=c++20 -g3 prova.cpp
+    $ g++ -o prova -std=c++23 -g3 prova.cpp
     ```
 
 6.  Se volete usare un editor da terminale dentro MSYS2, potete installare [GNU Nano](https://www.nano-editor.org/):

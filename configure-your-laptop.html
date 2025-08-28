@@ -84,7 +84,7 @@
 <li><p>Bisogna ricordare che MSYS2 usa una convenzione particolare per indicare i percorsi dei file: lettere di unità come <code>C:</code> e <code>D:</code> in Windows si traducono in <code>/c</code> e <code>/d</code> nel terminale di MSYS2, e i backslash come <code>\</code> si traducono in <code>/</code>.</p>
 <p>Quindi, se con Visual Studio avete salvato un file in <code>C:\Utenti\Pippo\prova.cpp</code>, in MSYS2 figurerà come <code>/c/Utenti/Pippo/prova.cpp</code> e il comando per compilarlo sarà quindi</p>
 <pre><code>$ cd /c/Utenti/Pippo
-$ g++ -o prova -std=c++20 -g3 prova.cpp</code></pre></li>
+$ g++ -o prova -std=c++23 -g3 prova.cpp</code></pre></li>
 <li><p>Se volete usare un editor da terminale dentro MSYS2, potete installare <a href="https://www.nano-editor.org/">GNU Nano</a>:</p>
 <pre><code>pacman -S nano nano-syntax-highlighting</code></pre></li>
 <li><p>Se volete aprire con “Esplora risorse” o con Visual Studio Code un file creato all’interno della home in MSYS2, il percorso è in <code>C:\msys64\home</code>.</p></li>
