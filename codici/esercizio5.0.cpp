@@ -1,8 +1,8 @@
-#include "fmtlib.h"
 #include "posizione.h"
 
 #include <cstdlib>
-#include <iostream>
+#include <cstdio>
+#include <print>
 
 using namespace std;
 
@@ -14,7 +14,7 @@ int main(int argc, const char *argv[]) {
 
   // Controlla gli argomenti
   if (argc != 4) {
-    fmt::print(stderr, "Usage: {} <x> <y> <z>\n", argv[0]);
+    println(stderr, "Usage: {} <x> <y> <z>", argv[0]);
     return 1;
   }
 
@@ -26,10 +26,10 @@ int main(int argc, const char *argv[]) {
 
   Posizione P{x, y, z};
 
-  fmt::print("Coordinate cartesiane: [x = {}, y = {}, z = {}]\n", P.getX(),
+  println("Coordinate cartesiane: [x = {}, y = {}, z = {}]", P.getX(),
              P.getY(), P.getZ());
-  fmt::print("Coordinate cilindriche: [ρ = {}, φ = {}, z = {}]\n", P.getRho(),
+  println("Coordinate cilindriche: [ρ = {}, φ = {}, z = {}]", P.getRho(),
              P.getPhi(), P.getZ());
-  fmt::print("Coordinate sferiche: [R = {}, φ = {}, θ = {}]\n", P.getR(),
+  println("Coordinate sferiche: [R = {}, φ = {}, θ = {}]", P.getR(),
              P.getPhi(), P.getTheta());
 }

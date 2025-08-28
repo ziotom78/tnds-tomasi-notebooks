@@ -1,6 +1,5 @@
-#include "fmtlib.h"
 #include "particella.h"
-#include <iostream>
+#include <print>
 
 using namespace std;
 
@@ -9,13 +8,13 @@ int main() {
   Elettrone *e{new Elettrone{}};
 
   // Metodi della classe base
-  fmt::print("Particella con massa {} e carica {}\n", a->GetMassa(),
-             a->GetCarica());
+  println("Particella con massa {} e carica {}", a->GetMassa(),
+          a->GetCarica());
   a->Print();
 
   // Metodi della classe derivata
-  fmt::print("Elettrone con massa {} e carica {}\n", e->GetMassa(),
-             e->GetCarica());
+  print("Elettrone con massa {} e carica {}", e->GetMassa(),
+        e->GetCarica());
   e->Print();
 
   Particella b{*a}; // costruisco una Particella a partire da una Particella

@@ -1,7 +1,6 @@
 // standard header files
 
-#include "fmtlib.h"
-#include <iostream>
+#include <print>
 
 // include header files for all ROOT objetcs used in the program
 
@@ -96,7 +95,7 @@ int main() {
 
   myGraph3.Draw("AP");
   myGraph3.Fit(myFitFun);
-  fmt::print("Esponente = {}\n", myFitFun->GetParameter(1));
+  println("Esponente = {}", myFitFun->GetParameter(1));
 
   // trick to force the program to wait before closing so that one
   // can look at the plots before they disappear
