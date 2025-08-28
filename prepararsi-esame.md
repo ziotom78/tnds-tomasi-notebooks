@@ -69,7 +69,7 @@ Di seguito un piccolo vademecum per aiutarvi a svolgere nel migliore dei modi l'
 
 #.  Non succederà mai che viene richiesto l'uso di ROOT o di Gnuplot esplicitamente; fare però i grafici è utile per avere l'intuizione se i risultati che il vostro codice produce sono sensati oppure no.
 
-#.  Prima di fare i grafici, preoccupatevi **sempre** di stampare con `cout` o con `fmt::println` i valori tabulati delle quantità che andate a mettere nei grafici. Noi docenti siamo sempre disposti a chiudere un occhio se un grafico risulta sbagliato o vuoto, nel caso in cui i valori che il programma stampa a video sono corretti: vuol dire che avete semplicemente sbagliato a creare il grafico, e questo è un errore perdonabile.
+#.  Prima di fare i grafici, preoccupatevi **sempre** di stampare con `println` i valori tabulati delle quantità che andate a mettere nei grafici. Noi docenti siamo sempre disposti a chiudere un occhio se un grafico risulta sbagliato o vuoto, nel caso in cui i valori che il programma stampa a video sono corretti: vuol dire che avete semplicemente sbagliato a creare il grafico, e questo è un errore perdonabile.
 
     Nel caso di simulazioni Monte Carlo, i numeri da stampare sono sempre moltissimi, quindi stampatene giusto qualcuno:
 
@@ -82,7 +82,7 @@ Di seguito un piccolo vademecum per aiutarvi a svolgere nel migliore dei modi l'
 
       // Stampo i primi 5 valori calcolati a video, giusto come controllo
       if(i < 5) {
-        fmt::println("{}\t{}", i, results[i]);
+        println("{}\t{}", i, results[i]);
       }
     }
     ```
@@ -106,25 +106,25 @@ Di seguito un piccolo vademecum per aiutarvi a svolgere nel migliore dei modi l'
       for(int i{}; i < 100; ++i) {
         // Qui aggiorno la variabile `risultato`
       }
-      fmt::println("Risultato per N = 100: {}", risultato);
+      println("Risultato per N = 100: {}", risultato);
 
       // Codice per N = 500, copiato da sopra
       for(int i{}; i < 500; ++i) {
         // Qui aggiorno la variabile `risultato`
       }
-      fmt::println("Risultato per N = 500: {}", risultato);
+      println("Risultato per N = 500: {}", risultato);
 
       // Codice per N = 1000, copiato da sopra
       for(int i{}; i < 1000; ++i) {
         // Qui aggiorno la variabile `risultato`
       }
-      fmt::println("Risultato per N = 1000: {}", risultato);
+      println("Risultato per N = 1000: {}", risultato);
 
       // Codice per N = 5000, copiato da sopra
       for(int i{}; i < 1000; ++i) {
         // Qui aggiorno la variabile `risultato`
       }
-      fmt::println("Risultato per N = 5000: {}", risultato);
+      println("Risultato per N = 5000: {}", risultato);
     }
     ```
 
@@ -152,7 +152,7 @@ Di seguito un piccolo vademecum per aiutarvi a svolgere nel migliore dei modi l'
         int cur_N{list_of_N.at(i)};
 
         double risultato{calcola_risultato(cur_N)};
-        fmt::println("Risultato per N = {}: {}", cur_N, risultato);
+        println("Risultato per N = {}: {}", cur_N, risultato);
       }
     }
     ```
@@ -195,9 +195,9 @@ Di seguito un piccolo vademecum per aiutarvi a svolgere nel migliore dei modi l'
       double risultato3{calcola_risultato(A_rif, 0.0, B_rif, 0.0, C_rif, err_C_rif)};
 
       // Stampo i risultati
-      fmt::println("Punto 1 (errore solo su A): {}", risultato1);
-      fmt::println("Punto 2 (errore solo su B): {}", risultato2);
-      fmt::println("Punto 3 (errore solo su C): {}", risultato3);
+      println("Punto 1 (errore solo su A): {}", risultato1);
+      println("Punto 2 (errore solo su B): {}", risultato2);
+      println("Punto 3 (errore solo su C): {}", risultato3);
     }
     ```
 
@@ -214,7 +214,6 @@ title: Come prepararsi all'esame scritto
 author: Maurizio Tomasi
 date: A.A. 2024−2025
 lang: it-IT
-header-includes: <script src="./fmtinstall.js"></script>
 css:
 - ./css/asciinema-player.css
 ...

@@ -1,13 +1,3 @@
----
-title: "Lezione 12: Metodi Monte Carlo"
-author:
-- "Leonardo Carminati"
-- "Maurizio Tomasi"
-date: "A.A. 2021−2022"
-lang: it-IT
-header-includes: <script src="./fmtinstall.js"></script>
-...
-
 [La pagina con la spiegazione originale dell'esercizio si trova qui: <https://labtnds.docs.cern.ch/Lezione12/Lezione12/>]
 
 In questa lezione vedremo una applicazione delle tecniche Monte Carlo per la simulazione di una delle esperienze dei laboratori di fisica. Come vedremo, la simulazione ci aiuterà a capire meglio il comportamento dell'apparato sperimentale, permettendoci per esempio di stimare l'incertezza attesa sulle grandezze da misurare.
@@ -311,3 +301,12 @@ Svolgere il tema d'esame sulla simulazione di un esperimento per la misura della
 
 -   Tantissime persone (il ~30%) non calcolano il coefficiente di correlazione come richiesto dall'esercizio. A quanto pare alcuni studenti credono che il grafico che mostra la correlazione sia sufficiente; il testo invece vi chiede di implementare proprio il calcolo della formula!
 -   Non usate `TH1F` di ROOT per calcolare medie e deviazioni standard, ma affidatevi alle funzioni che avete implementato nelle prime tre lezioni. Il problema di `TH1F` è che richiede di specificare l’intervallo entro cui considerare i campioni, ed esclude quelli che stanno al di fuori. Non è un grosso problema nello svolgimento di questo esercizio, ma quando in un tema d’esame si richiede di simulare un esperimento, gli studenti copiano il codice sorgente dell’esercizio 11.0 e si dimenticano di aggiornare gli estremi, oppure li aggiornano andando a naso e specificandoli troppo stretti. Le funzioni che avete scritto nelle prime tre lezioni di laboratorio non hanno questo fastidioso problema, e sono quindi molto più sicure da usare.
+
+---
+title: "Lezione 12: Metodi Monte Carlo"
+author:
+- "Leonardo Carminati"
+- "Maurizio Tomasi"
+date: "A.A. 2021−2022"
+lang: it-IT
+...

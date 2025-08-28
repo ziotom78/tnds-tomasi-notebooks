@@ -30,17 +30,17 @@
 
 struct Animal {
   // Dichiaro `greet` come un metodo che può essere sovrascritto
-  virtual void greet() const { std::cout << "?\n"; }
+  virtual void greet() const { std::println("?"); }
 };
 
 struct Dog : public Animal {
   // Chiedo al C++ di sovrascrivere `greet` tramite `override`
-  void greet() const override { std::cout << "Woof!\n"; }
+  void greet() const override { std::println("Woof!"); }
 };
 
 struct Cat : public Animal {
   // Chiedo al C++ di sovrascrivere `greet` tramite `override`
-  void greet() const override { std::cout << "Meow!\n"; }
+  void greet() const override { std::println("Meow!"); }
 };
 ```
 
@@ -88,17 +88,17 @@ La parola `virtual` è obbligatoria solo all'interno della classe base:
 
 ```c++
 struct Animal {
-  virtual void greet() const { std::cout << "?\n"; }
+  virtual void greet() const { std::println("?"); }
 };
 
 struct Dog : public Animal {
   // I can repeat "virtual" here, but it's optional
-  virtual void greet() const override { std::cout << "Woof!\n"; }
+  virtual void greet() const override { std::println("Woof!"); }
 };
 
 struct Cat : public Animal {
   // You usually avoid repeating "virtual", if there is "override"
-  void greet() const override { std::cout << "Meow!\n"; }
+  void greet() const override { std::println("Meow!"); }
 };
 ```
 
@@ -109,12 +109,12 @@ struct Cat : public Animal {
     ```c++
     struct Dog : public Animal {
       // Ok, compila e funziona come atteso, ma NON FATELO!
-      virtual void greet() const { std::cout << "Woof!\n"; }
+      virtual void greet() const { std::println("Woof!"); }
     };
 
     struct Cat : public Animal {
       // Anche questo è ok e compila senza errori, ma NON FATELO!
-      void greet() const { std::cout << "Meow!\n"; }
+      void greet() const { std::println("Meow!"); }
     };
     ```
 
@@ -196,7 +196,7 @@ void test_zeroes() {
 
   assert(are_close(s.CercaZeri(0.0, 1.0, f), 1.0 / 3)); // Do NOT write 1 / 3 !
 
-  cerr << "Root finding works correctly! 🥳\n";
+  println(stderr, "Root finding works correctly! 🥳");
 }
 ```
 
@@ -269,8 +269,8 @@ double xmin{stod(argv[1])}, xmax{stod(argv[2])};
 bool found;
 double x{bisezione.CercaZeri(xmin, xmax, f, found)};
 if (! found) {
-    fmt::println("Errore, il teorema degli zeri non è valido nell'intervallo "
-                 "[{}, {}]. Usa un altro intervallo", xmin, xmax);
+    println("Errore, il teorema degli zeri non è valido nell'intervallo "
+            "[{}, {}]. Usa un altro intervallo", xmin, xmax);
     return 1;
 }
 
@@ -358,7 +358,7 @@ if (! found) {
        double true_value{result.value()};
        // …
     } else {
-       fmt::println(stderr, "Error: {}", result.error());
+       println(stderr, "Error: {}", result.error());
     }
     ```
 
@@ -379,7 +379,7 @@ Bisezione::CercaZeri(double xmin,
     if(signfa == 0) return xmin;
     if(signfb == 0) return xmax;
     if(signfa * signfb > 0) {
-        return std::unexpected(fmt::format("Invalid range [{}, {}]", xmin, xmax));
+        return std::unexpected(format("Invalid range [{}, {}]", xmin, xmax));
     }
 
     // ...
@@ -394,7 +394,7 @@ Bisezione::CercaZeri(double xmin,
     ```c++
     auto result{bisezione.CercaZeri(xmin, xmax, f)};
     if(! result) {
-        fmt::println(stderr, "Error: {}", result.error());
+        println(stderr, "Error: {}", result.error());
         return 1;
     }
     double x{result.value()};

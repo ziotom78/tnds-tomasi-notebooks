@@ -326,8 +326,7 @@ std::vector<double> result(100'000);
 
 for(int N{1}; N <= 12; ++N) {
   compute_sums(rng, N, result);
-  // Qui uso "fmtlib.h" per formattare l'etichetta dell'istogramma
-  plt_histograms.histogram(result, 100, fmt::format("N = {}", N));
+  plt_histograms.histogram(result, 100, format("N = {}", N));
   plt_histograms.show();
 
   // Aggiunge il punto con la σ al grafico degli errori
@@ -438,7 +437,7 @@ $$
 
 ## Risultati attesi
 
-Siccome il programma deve fare molti calcoli, vi consiglio di fornire qualche feedback all'utente usando la libreria `fmtlib`:
+Siccome il programma deve fare molti calcoli, vi consiglio di fornire qualche feedback all'utente:
 
 ```c++
   const int num_of_estimates{1000};
@@ -460,9 +459,9 @@ Siccome il programma deve fare molti calcoli, vi consiglio di fornire qualche fe
   for(auto num_of_points: num_of_points_list) {
     // Questo è un feedback da dare all'utente. Notare che usiamo
     // `stderr`, così il messaggio viene stampato subito!
-    fmt::println(stderr, "N = {}", num_of_points);
-    std::vector<double> estimates_mean(num_of_estimates);
-    std::vector<double> estimates_hom(num_of_estimates);
+    println(stderr, "N = {}", num_of_points);
+    vector<double> estimates_mean(num_of_estimates);
+    vector<double> estimates_hom(num_of_estimates);
 
     // Esegue molte volte il calcolo dell'integrale per vedere la
     // variabilità dei risultati
@@ -474,13 +473,13 @@ Siccome il programma deve fare molti calcoli, vi consiglio di fornire qualche fe
     // Mette nella colonna di sinistra l'istogramma delle stime
     // con il metodo della media…
     plt_histograms.histogram(estimates_mean, 20,
-                  fmt::format("Media, N = {}", num_of_points));
+                             format("Media, N = {}", num_of_points));
     plt_histograms.set_xrange(1.8, 2.2);
     plt_histograms.show();
 
     // …e nella colonna di destra quello con hit-or-miss
     plt_histograms.histogram(estimates_hom, 20,
-                  fmt::format("Hit-or-miss, N = {}", num_of_points));
+                             format("Hit-or-miss, N = {}", num_of_points));
     plt_histograms.set_xrange(1.8, 2.2);
     plt_histograms.show();
   }
@@ -647,5 +646,4 @@ author:
 - "Maurizio Tomasi"
 date: "A.A. 2024−2025"
 lang: it-IT
-header-includes: <script src="./fmtinstall.js"></script>
 ...

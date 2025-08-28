@@ -51,7 +51,7 @@ La scrittura `array<double, 3>` può sembrare strana: finora abbiamo sempre vist
 for(int i{}; i < ssize(stl_arr); ++i) {
   // Ok anche `stl_arr[i]`, ma non controlla la
   // correttezza di `i`
-  fmt::println("Valore #{}: {}", i, stl_arr.at(i));
+  println("Valore #{}: {}", i, stl_arr.at(i));
 }
 ```
 
@@ -245,7 +245,6 @@ Una volta implementate le classi (l'implementazione di Eulero è semplicissima s
 #include "array_operations.h"
 #include "equazioni_differenziali.h"
 
-#include "fmtlib.h"
 #include "gplot++.h"
 #include <string>
 
@@ -254,7 +253,7 @@ int main(int argc, char *argv[]) {
   test_euler();
 
   if (argc != 2) {
-    fmt::println(stderr, "Uso: {} PASSO", argv[0]);
+    println(stderr, "Uso: {} PASSO", argv[0]);
     return 1;
   }
 
@@ -292,7 +291,7 @@ int main(int argc, char *argv[]) {
 
     // Stampa i risultati in forma di tabella
     // (da fare sempre! aiuta nel trovare errori)
-    fmt::println("{:.1f} {:.6f} {:.6f}", t, x[0], x[1]);
+    println("{:.1f} {:.6f} {:.6f}", t, x[0], x[1]);
 
     // “Avanza” di un passo `h` la soluzione in `x`
     x = my_euler.Passo(t, x, h, osc);
@@ -310,17 +309,11 @@ int main(int argc, char *argv[]) {
 
   // È sempre bene dare all'utente un feedback di ciò che
   // si è fatto: in questo modo l'utente saprà quale file aprire!
-  fmt::println("Finito, il risultato è nel grafico '{}'", filename);
+  println("Finito, il risultato è nel grafico '{}'", filename);
 
   return 0;
 }
 ```
-
-Come al solito, potete installare la libreria `fmtlib` usando lo script [`install_fmt_library`](./install_fmt_library): scaricatelo nella directory dell'esercizio ed eseguitelo con `sh install_fmt_library`, oppure eseguite direttamente questo comando:
-
-<input type="text" value="curl https://ziotom78.github.io/tnds-tomasi-notebooks/install_fmt_library | sh" id="installFmtCommand" readonly="1" size="60"><button onclick='copyFmtInstallationScript("installFmtCommand")'>Copia</button>
-
-In alternativa, scaricate questo [file zip](./fmtlib.zip) nella directory dell'esercizio e decomprimetelo.  Le istruzioni dettagliate sono in [questa pagina](miscellanea.html#fmtinstall).
 
 Il codice sopra usa la libreria [gplot++](https://github.com/ziotom78/gplotpp) per salvare il grafico della soluzione in un file PNG. Se invece volete usare ROOT, queste sono le righe da aggiungere alla seconda parte del `main`:
 
@@ -337,7 +330,7 @@ print(t, x);
 
 TCanvas *c{new TCanvas()};
 c->cd();
-string title{fmt::format("Oscillatore armonico (Eulero, h = {})", h)};
+string title{format("Oscillatore armonico (Eulero, h = {})", h)};
 
 myGraph->SetTitle(title.c_str());
 myGraph->GetXaxis()->SetTitle("Tempo [s]1");
@@ -444,7 +437,7 @@ while (x[1] >= 0) {
     v = x[1];
     x = myRK4.Passo(t, x, h, osc);
     t = t + h;
-    fmt::println("{} {} {}", A, x[0], t);
+    println("{} {} {}", A, x[0], t);
 }
 t = t - v * h / (x[1] - v);
 
@@ -752,5 +745,4 @@ author:
 - "Maurizio Tomasi"
 date: "A.A. 2024−2025"
 lang: it-IT
-header-includes: <script src="./fmtinstall.js"></script>
 ...

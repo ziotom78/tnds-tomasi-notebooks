@@ -86,12 +86,12 @@ N = 9:
 int calc(int a, int b) { return a + b; }
 
 int main() {
-    std::cout << "Inserisci due numeri: ";
+    std::println("Insert two numbers: ");
 
     int a, b;
     std::cin >> a >> b;
 
-    std::cout << "Il risultato è " << calc(a, b) << "\n";
+    std::println("The result is {}", calc(a, b));
     return 0;
 }
 ```
@@ -169,7 +169,7 @@ int main() {
     $
     ```
 
--   **Avvertenza**: questo output si ottiene solo se avete implementato il [suggerimento della scorsa lezione](https://ziotom78.github.io/tnds-tomasi-notebooks/tomasi-lezione-01.html#/flag-del-compilatore) e usate il flag `-g3` nel `Makefile`.
+-   **Avvertenza**: questo output si ottiene solo se avete implementato il [suggerimento della scorsa lezione](tomasi-lezione-01.html#/flag-del-compilatore) e usate il flag `-g3` nel `Makefile`.
 
 
 # Test automatici
@@ -200,15 +200,16 @@ int main() {
 
 -   Occorre fissare una tolleranza $\epsilon$ e verificare che il risultato del calcolo $x_\text{calc}$ differisca dal valore atteso $x_\text{exp}$ per meno di $\epsilon$, ossia
 
-    $$\left|x_\text{calc} - x_\text{exp}\right| < \epsilon.$$
+    $$\left|x_\text{calc} - x_\text{exp}\right| < \epsilon \cdot \left|x_\text{exp}\right|.$$
 
 
 # Esercizio 1.1: assert
 
 ```c++
-// Return true if `calculated` and `expected` differ by less than `epsilon`
+// Return true if the relative difference between `calculated` and
+// `expected` differs by less than `epsilon`
 bool are_close(double calculated, double expected, double epsilon = 1e-7) {
-  return fabs(calculated - expected) < epsilon;
+  return fabs(calculated - expected) < epsilon * fabs(expected);
 }
 
 void test_statistical_functions(void) {
@@ -222,7 +223,7 @@ void test_statistical_functions(void) {
   // Continue from here …
 
   // At the end, be sure to print a message stating that everything was ok
-  cerr << "All the statistical tests have passed! 🥳\n";
+  std::println(stderr, "All the statistical tests have passed! 🥳");
 }
 ```
 
@@ -283,7 +284,7 @@ Questi `assert` vanno bene anche per gli esercizi di oggi, con opportuni aggiust
     Vettore v(2);
     v.SetComponent(0, 162.3);
     v.SetComponent(1, 431.7);
-    std::cout << v.GetComponent(1) << endl;   // Print 431.7
+    println("v[1] = {}", v.GetComponent(1));   // Print 431.7
     ```
 
 -   Questo è però più scomodo rispetto ai semplici array:
@@ -292,7 +293,7 @@ Questi `assert` vanno bene anche per gli esercizi di oggi, con opportuni aggiust
     double v[2];
     v[0] = 162.3;
     v[1] = 431.7;
-    std::cout << v[1] << endl;                // Print 431.7
+    println("v[1] = {}", v[1]);                // Print 431.7
     ```
 
 
@@ -307,11 +308,11 @@ Questi `assert` vanno bene anche per gli esercizi di oggi, con opportuni aggiust
     }
     ```
 
--   In questo modo la linea di codice `std::cout << miovett[5] << "\n"` sarà equivalente a
+-   In questo modo la linea di codice `println("{}", miovett[5])` sarà equivalente a
 
     ```c++
     assert(5 >= 0 && 5 < miovett.m_size);
-    std::cout << miovett.m_arr[5] << endl;
+    std::println("{}", miovett.m_arr[5]);
     ```
 
 
@@ -333,7 +334,7 @@ Questi `assert` vanno bene anche per gli esercizi di oggi, con opportuni aggiust
     Vettore v(2);
     v[0] = 162.3;  // Assignment, works thanks to the reference
     v[1] = 431.7;  // Ditto
-    std::cout << v[1] << endl;                // Print 431.7
+    std::println("{}", v[1]);                // Print 431.7
     ```
 
 # Uso di header files

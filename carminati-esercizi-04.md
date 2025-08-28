@@ -404,17 +404,16 @@ LinearFitResults<T> linear_fit(const std::vector<T> &x_vec,
 
 Con questo file si può usare il programma seguente, che memorizza
 tutti i dati in una struttura `Measurements`. Il programma usa la
-libreria [fmtlib](https://github.com/fmtlib/fmt) e [gplot++](https://github.com/ziotom78/gplotpp); se volete provare ad
-installarle, le istruzioni sono a questi link:
-[gplot](miscellanea.html#gplotinstall), [fmtlib](miscellanea.html#fmtinstall).
+libreria [gplot++](https://github.com/ziotom78/gplotpp); se volete provare ad
+installarla, le istruzioni sono a [questo link](miscellanea.html#gplotinstall).
 
 ```c++
-#include "fmtlib.h"
 #include "gplot++.h"
 #include "linearfit.h"
 #include <cmath>
+#include <cstdio>
 #include <fstream>
-#include <iostream>
+#include <print>
 #include <string>
 #include <vector>
 
@@ -464,39 +463,39 @@ void plot_data_and_fit(const string &filename, const Measurements<T> &data,
   gnuplot.set_ylabel("(r×B)² [m²·T²]");
   gnuplot.show();
 
-  cerr << fmt::format("plot saved in file \"{}\"\n", filename);
+  println(stderr, "plot saved in file \"{}\"", filename));
 }
 
 int main(int argc, const char *argv[]) {
   if (argc != 2) {
-    cerr << fmt::format("usage: {} DATA_FILE\n", argv[0]);
+    println(stderr, "usage: {} DATA_FILE\n", argv[0]);
     return 1;
   }
   const string file_name{argv[1]};
   ifstream input_file{file_name};
   if (!input_file) {
-    cerr << fmt::format("error, unable to load file \"{}\"\n", file_name);
+    println(stderr, "error, unable to load file \"{}\"", file_name);
     return 1;
   }
 
   Measurements<float> data;
   read_from_file(input_file, data);
 
-  cerr << fmt::format("{} elements have been read from \"{}\"\n", ssize(data),
-                      file_name);
+  println(stderr, "{} elements have been read from \"{}\"", ssize(data),
+          file_name);
 
   auto result = linear_fit(data.voltage, data.rb, data.rb_err);
 
-  fmt::println("Data have been fitted on a curve y = A + B × x:");
-  fmt::println("A = {:.4e} ± {:.4e}", result.a, result.a_err);
-  fmt::println("B = {:.4e} ± {:.4e}", result.b, result.b_err);
+  println("Data have been fitted on a curve y = A + B × x:");
+  println("A = {:.4e} ± {:.4e}", result.a, result.a_err);
+  println("B = {:.4e} ± {:.4e}", result.b, result.b_err);
 
   plot_data_and_fit("output_plot.png", data, result.a, result.b);
 
   auto q_over_m{1 / result.b};
   auto error{sqrt(pow(q_over_m, 4) * pow(result.b_err, 2))};
 
-  fmt::println("q/m = {:.4e} ± {:.4e}", q_over_m, error);
+  println("q/m = {:.4e} ± {:.4e}", q_over_m, error);
 }
 ```
 
@@ -551,7 +550,7 @@ rel_error = m_over_e_err / m_over_e
 e_over_m = 1 / m_over_e
 e_over_m_err = rel_error * e_over_m
 
-# Strings beginning with `f` are treated similarly to the C++ fmt library
+# Strings beginning with `f` are treated similarly to the C++ print() function
 print(f"e/m = {e_over_m:.2e} ± {e_over_m_err:.2e}")
 print("reference: 1.76×10^11 C⋅kg^−1")
 ```
@@ -748,18 +747,16 @@ passaggio a parte: è molto più semplice!
 
 ```make
 esercizio4.1: esercizio4.1.cpp common.cpp common.h
-    g++ -g3 -Wall --pedantic -std=c++23 -o esercizio4.1 esercizio4.1.cpp common.cpp
+    g++ -g3 -Wall -Wextra -Werror --pedantic -std=c++23 -o esercizio4.1 esercizio4.1.cpp common.cpp
 ```
 
-## Esempio (gplot++, fmtlib)
+## Esempio (gplot++)
 
 Questa è invece una implementazione che usa
-[gplot++](https://github.com/ziotom78/gplotpp) e
-[fmtlib](https://github.com/fmtlib/fmt):
+[gplot++](https://github.com/ziotom78/gplotpp):
 
 ```c++
 #include "gplot++.h"
-#include "fmtlib.h"
 #include <cmath>
 #include <cfloat>
 #include <fstream>
@@ -818,13 +815,13 @@ int main() {
 
   plt.show();
 
-  fmt::println("Found approximate minimum at q = {0:.4e} C", qmin);
+  println("Found approximate minimum at q = {0:.4e} C", qmin);
 
   double mycharge{deriv(qmin, charges)};
   double uncer{
       sqrt(fun(mycharge, charges) / (ssize(charges) * (ssize(charges) - 1)))};
-  fmt::println("Measured charge = {0:.4e} ± {1:.4e} C (stat only)", mycharge,
-               uncer);
+  println("Measured charge = {0:.4e} ± {1:.4e} C (stat only)", mycharge,
+          uncer);
 }
 ```
 
@@ -833,7 +830,7 @@ Come sopra, consiglio di compilare insieme `esercizio4.1.cpp` e
 
 ```make
 esercizio4.1: esercizio4.1.cpp common.cpp common.h
-    g++ -g3 -Wall --pedantic -std=c++23 -o esercizio4.1 esercizio4.1.cpp common.cpp
+    g++ -g3 -Wall -Wextra -Werror --pedantic -std=c++23 -o esercizio4.1 esercizio4.1.cpp common.cpp
 ```
 
 # Esercizio 4.3 — Determinazione del cammino minimo (approfondimento uso STL)  {#esercizio-4.3}

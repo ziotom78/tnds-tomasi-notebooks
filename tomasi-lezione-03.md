@@ -42,7 +42,7 @@ void test_vettore() {
       assert(v[1] == 123);
   }
 
-  cerr << "Vettore works as expected! 🥳\n";
+  println(stderr, "Vettore works as expected! 🥳");
 }
 ```
 
@@ -52,7 +52,7 @@ Questo è il test per l'esercizio 3.1, che usa `std::vector`; adattatelo poi per
 
 ```c++
 bool are_close(double calculated, double expected, double epsilon = 1e-7) {
-  return fabs(calculated - expected) < epsilon;
+  return fabs(calculated - expected) < epsilon * fabs(expected);
 }
 
 void test_statistical_functions(void) {
@@ -70,7 +70,7 @@ void test_statistical_functions(void) {
       assert(are_close(CalcolaMediana<double>(mydata), 2));    // Odd
   }
 
-  cerr << "Statistical functions work as expected! 🥳\n";
+  println(stderr, "Statistical functions work as expected! 🥳");
 }
 ```
 
@@ -87,49 +87,52 @@ void test_statistical_functions(void) {
 
 -   Nelle prossime lezioni vi mostrerò una libreria per produrre plot, che è semplice da installare sia su Windows che Linux che Mac.
 
-# `cout` e `cerr` {#cout-e-cerr}
+# Uso di `stderr` {#stderr}
 
 # Scrittura a video
 
--   Quando si scrive a video, si può scegliere se usare `cout` o `cerr`.
+-   Quando si usa `std::print` o `std::println`, si può scegliere se scrivere su `stderr`.
 
 -   Le regole da seguire **sempre** sono le seguenti:
 
-    -   Usare `cerr` per scrivere messaggi.
+    -   Usare `stderr` per scrivere messaggi.
 
-    -   Usare `cout` per scrivere il risultato di conti.
+    -   **Non** usare `stderr` per scrivere il risultato di conti.
 
--   La differenza è che quanto viene scritto su `cerr` finisce sempre sullo schermo, anche se da linea di comando si usano gli operatori di reindirizzamento `>` e `|`.
+-   La differenza è che quanto viene scritto su `stderr` finisce sempre sullo schermo, anche se da linea di comando si usano gli operatori di reindirizzamento `>` e `|`.
 
--   Ci sono anche altre differenze; vi basti sapere che per stampare un [*progress indicator*](https://en.wikipedia.org/wiki/Progress_indicator) sul terminale è sempre meglio usare `cerr`.
+-   Ci sono anche altre differenze; vi basti sapere che per stampare un [*progress indicator*](https://en.wikipedia.org/wiki/Progress_indicator) sul terminale è sempre meglio usare `stderr`.
 
 
-# Esempio di uso di `cout` e `cerr`
+# Esempio di uso di `stderr`
 
 ```c++
+#include <cstdio>  // `stderr` is defined here
+#include <print>
+
 int main(void) {
-    std::cerr << "1. Leggo i dati da file...\n";
+    std::println(stderr, "1. Leggo i dati da file...");
 
     // ...
 
-    std::cerr << "2. Stampo a video i risultati:\n";
+    std::println(stderr, "2. Stampo a video i risultati:");
     for (int i = 0; i < num; ++i) {
-        std::cout << result[i] << "\n";
+        std::println("{}", result[i]);
     }
 
-    std::cerr << "3. Programma completato\n";
+    std::println(stderr, "3. Programma completato");
 }
 ```
 
-# Esempio di uso di `cout` e `cerr`
+# Esempio di uso di `stderr`
 
 Con l'esempio seguente, è possibile usare il reindirizzamento:
 
 <asciinema-player src="asciinema/cerr-cout-65×21.cast" cols="65" rows="21" font-size="medium"></asciinema-player>
 
-# Esempio di uso di `cout` e `cerr`
+# Esempio di uso di `stderr`
 
--   Se non avessimo usato la distinzione tra `cout` e `cerr` ma avessimo scritto tutto su `cout`, comandi come `sort` avrebbero mescolato risultati e messaggi:
+-   Se non avessimo usato `stderr`, comandi come `sort` avrebbero mescolato risultati e messaggi:
 
     ```
     $ esempio | sort -g
@@ -141,7 +144,7 @@ Con l'esempio seguente, è possibile usare il reindirizzamento:
     5.91573
     ```
 
--   In generale, stampate su `cerr` tutto ciò che bisogna mostrare all'utente *subito*, e non ha senso salvare in un file per essere eventualmente guardato dopo.
+-   In generale, stampate su `stderr` tutto ciò che bisogna mostrare all'utente *subito*, e non ha senso salvare in un file per essere eventualmente guardato dopo.
 
 # Tipi di errore {#tipi-di-errore}
 
@@ -241,10 +244,10 @@ int main() {
     int position;
     Vettore v(10);
 
-    cerr << "Inserisci la posizione del vettore: ";
+    println(stderr, "Inserisci la posizione del vettore: ");
     cin >> position;
     if (position >= ssize(v)) {
-        cerr << "Errore, la posizione deve essere < " << ssize(v) << endl;
+        println(stderr, "Errore, la posizione deve essere < {}", ssize(v));
         exit(1);
     }
     v.setComponent(position, 1.0);

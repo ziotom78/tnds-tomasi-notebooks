@@ -326,33 +326,16 @@ Poiché la precisione richiesta all'algoritmo è passata al programma runtime, a
 int cifre_significative = -log10(precision);
 ```
 
-Per impostare il numero di cifre significative nella scrittura a video usando `fmtlib.h`, il codice da usare è questo:
+Per impostare il numero di cifre significative nella scrittura a video, il codice da usare è questo:
 
 ```c++
-#include "fmtlib.h"
+#include <print>
 
 // {0} → value of variable `zero`,
 // {1} → value of variable `cifre_significative`.
 // We must use a dot '.' before {1}, because we're specifying how many digits
 // should be used for the decimal part
-fmt::println("x0 = {0:.{1}f}", zero, cifre_significative);
-```
-
-Potete installare la libreria `fmtlib` eseguendo questo comando:
-
-<input type="text" value="curl https://ziotom78.github.io/tnds-tomasi-notebooks/install_fmt_library | sh" id="installFmtCommand" readonly="1" size="60"><button onclick='copyFmtInstallationScript("installFmtCommand")'>Copia</button>
-
-e seguite poi le istruzioni fornite a video.
-
-In alternativa, scaricate manualmente lo script [`install_fmt_library`](./install_fmt_library) (click col tasto destro sul link e scegliere «Salva come…») ed avviatelo con `sh install_fmt_library`. Lo script funziona solo sotto Linux e Mac; se usate Windows, scaricate questo [file zip](./fmtlib.zip) nella directory dell'esercizio e decomprimetelo.
-
-Le istruzioni dettagliate sono in [questa pagina](miscellanea.html#fmtinstall).
-
-
-Se invece usate `cout` e `<iomanip>`:
-
-```c++
-cout << "x0 = " << fixed << setprecision(cifre_significative) << zero << endl;
+std::println("x0 = {0:.{1}f}", zero, cifre_significative);
 ```
 
 
@@ -419,5 +402,4 @@ author:
 - "Maurizio Tomasi"
 date: "A.A. 2024−2025"
 lang: it-IT
-header-includes: <script src="./fmtinstall.js"></script>
 ...

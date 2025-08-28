@@ -22,7 +22,7 @@
 
 # Configurare il compilatore {#config-latest-gcc}
 
--   Cosa **molto** importante da fare, una volta per tutte
+-   Cosa **molto** importante da fare, una volta per tutte (vedi [questo link](miscellanea.html#gcc))
 
 -   Aprite la finestra del terminale ed eseguite il comando
 
@@ -33,8 +33,8 @@
 -   Chiudete la finestra del terminale, riapritela ed eseguite `g++ --version`. Dovreste vedere questo:
 
     ```
-    g++ (GCC) 13.2.1 20231205 (Red Hat 13.2.1-6)
-    Copyright (C) 2023 Free Software Foundation, Inc.
+    g++ (GCC) 14.2.1 20250110 (Red Hat 14.2.1-7)
+    Copyright (C) 2024 Free Software Foundation, Inc.
     This is free software; see the source for copying conditions.  There is NO
     warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
     ```
@@ -184,7 +184,7 @@ Potete svolgere gli esercizi in uno dei modi seguenti:
 
 -   …ma il sito non si è sempre dimostrato affidabile: a volte resta offline, altre volte è estremamente lento.
 
--   Inoltre i proprietari hanno recentemente cambiato il contratto di licenza (Agosto 2024), rendendo il suo uso **sconsigliabile**: usatelo a vostro rischio e pericolo!
+-   Inoltre nell’agosto 2024 i proprietari hanno cambiato il contratto di licenza, rendendo il suo uso **sconsigliabile**: usatelo a vostro rischio e pericolo!
 
 
 # Suggerimenti vari
@@ -206,7 +206,7 @@ Potete svolgere gli esercizi in uno dei modi seguenti:
     #define total_time_s  time1_s + time2_s
     #define speed_m_s     1.0
 
-    cout << "The position is " << total_time_s * speed_m_s << " m\n";
+    println("The position is {} m", total_time_s * speed_m_s);
     ```
 
 # Uso di argc e argv
@@ -272,17 +272,17 @@ Prendiamo questo semplice esempio:
 
 ```c++
 #include <iostream>
+#include <print>
 
 int calc(int a, int b) { return a + b; }
 
 int main() {
-    std::cout << "Insert two numbers: ";
+    std::println("Insert two numbers: ");
 
     int a, b;
     std::cin >> a >> b;
 
-    std::cout << "The result is "
-              << calc(a, b) << "\n";
+    std::println("The result is {}", calc(a, b));
     return 0;
 }
 ```
@@ -303,7 +303,7 @@ int main() {
 -   Partiamo da un caso molto semplice (l'esercizio 1.2 sarà più complicato). Create un file con nome `Makefile` (attenzione alla maiuscola iniziale!), e scrivete queste righe al suo interno:
 
     ```makefile
-    CXXFLAGS = -std=c++23 -g3 -Wall --pedantic
+    CXXFLAGS = -std=c++23 -g3 -Wall -Wextra -Werror --pedantic
 
     main: main.cpp
     ```
@@ -313,7 +313,7 @@ prompt):
 
     ```text
     $ make
-    g++ -std=c++23 -g3 -Wall --pedantic    main.cpp   -o main
+    g++ -std=c++23 -g3 -Wall -Wextra -Werror --pedantic    main.cpp   -o main
     $ ls
     main   main.cpp   Makefile
     ```
@@ -325,14 +325,16 @@ prompt):
 -   È utile specificare dei flag aggiuntivi per la compilazione, tramite la riga
 
     ```makefile
-    CXXFLAGS = -std=c++23 -g3 -Wall --pedantic
+    CXXFLAGS = -std=c++23 -g3 -Wall -Wextra -Werror --pedantic
     ```
 
 -   `-std=c++23` abilita le caratteristiche più recenti (2023) del C++.
 
 -   `-g3`: se il codice va in *crash*, stampa la riga di codice che ha causato l'errore.
 
--   `-Wall`: rende il compilatore C++ più brontolone del solito.
+-   `-Wall -Wextra`: rende il compilatore C++ più brontolone del solito.
+
+-   `-Wextra`: impedisce di compilare se ci sono warning
 
 -   `--pedantic`: lo rende ancora più brontolone.
 
@@ -357,7 +359,7 @@ prompt):
 -   Questa seconda riga va indentata **obbligatoriamente inserendo un carattere **TAB**, solitamente indicato sulle tastiere con ↹ (è a sinistra del tasto Q):
 
     ```makefile
-    CXXFLAGS = -std=c++23 -g3 -Wall --pedantic
+    CXXFLAGS = -std=c++23 -g3 -Wall -Wextra -Werror --pedantic
 
     main: main.cpp
         # You MUST use a Tab character ↹ to indent here!
@@ -421,37 +423,33 @@ e di compilarli separatamente. In questo caso la struttura del
 
     (`CXXFLAGS` non serve quando si mettono insieme più file `.o`: la compilazione del codice C++ è già avvenuta).
 
----
-
-# Un trucco
-
--   GNU Make definisce alcune variabili speciali che semplificano la scrittura del `Makefile`. Una di queste è `$@`, che rappresenta il nome del file da creare.
-
--   L'esempio nella slide precedente si può riscrivere così:
-
-    ```makefile
-    esercizio1.2: esercizio1.2.o funzioni.o
-        g++ esercizio1.2.o funzioni.o -o $@
-
-    esercizio1.2.o: esercizio1.2.cpp funzioni.h
-        g++ -c esercizio1.2.cpp -o $@ $(CXXFLAGS)
-
-    funzioni.o: funzioni.cpp funzioni.h
-        g++ -c funzioni.cpp -o $@ $(CXXFLAGS)
-    ```
-
--   È più facile riciclare il `Makefile` nei nuovi esercizi!
-
-
 # Variabili automatiche
 
-La variabile `$@` è detta [automatica](https://www.gnu.org/software/make/manual/html_node/Automatic-Variables.html). Ecco le variabili più importanti, con dei trucchi per ricordarne il significato:
+GNU Make definisce alcune variabili speciali, dette [automatiche](https://www.gnu.org/software/make/manual/html_node/Automatic-Variables.html), che semplificano la scrittura del `Makefile`.
 
 | Variabile | Significato               | Trucco                                                                                                    |
 |-----------|---------------------------|-----------------------------------------------------------------------------------------------------------|
 | `$@`      | File da creare            | Il simbolo `@` è quello delle email, quindi è come l’«indirizzo» di destinazione di una lettera           |
 | `$^`      | Lista dei file dipendenti | Il simbolo `^` ricorda la freccia ↑, che indica la riga precedente in cui c'è la lista di file dipendenti |
 | `$<`      | Primo file dipendente     | Il simbolo `<` ricorda la freccia ←, che indica la posizione del primo elemento nella lista               |
+
+# Variabili automatiche
+
+-   L'esempio nella slide precedente si può riscrivere così:
+
+    ```makefile
+    esercizio1.2: esercizio1.2.o funzioni.o
+        g++ $^ -o $@
+
+    esercizio1.2.o: esercizio1.2.cpp funzioni.h
+        g++ -c $< -o $@ $(CXXFLAGS)
+
+    funzioni.o: funzioni.cpp funzioni.h
+        g++ -c $< -o $@ $(CXXFLAGS)
+    ```
+
+-   È più facile riciclare il `Makefile` nei nuovi esercizi!
+
 
 
 # File multipli ed header
@@ -507,13 +505,12 @@ La variabile `$@` è detta [automatica](https://www.gnu.org/software/make/manual
     ```
 
 -   Formattatori automatici di codice come `clang-format` riordinano
-    gli `#include`: nel nostro caso quindi metterebbe
-    `newton.h` **prima** di `vectors.h`, e la compilazione fallirebbe!
+    gli `#include`, mettendo `newton.h` **prima** di `vectors.h`: errore!
 
 # Motivo #2
 
 -   Ogni `#include` richiede tempo per la compilazione. Di tanto in
-    tanto nei progetti si fa un /purge/ degli `#include` inutili: in
+    tanto nei progetti si fa un *purge* degli `#include` inutili: in
     ogni file, si controlla se ci sono degli header che definiscono
     cose non usate all'interno del file.
 

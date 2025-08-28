@@ -100,17 +100,8 @@ double Posizione::Distanza(const Posizione &b) const {
 
 Questo programma utilizza la nuova classe appena creata: richiede di fornire come argomenti le tre coordinate cartesiane e poi stampa le terne di coordinate cartesiane, sferiche e cilindriche.
 
-Il programma è pensato per usare la libreria [`fmt`](https://github.com/fmtlib/fmt), che potete installare usando lo script [`install_fmt_library`](./install_fmt_library): scaricatelo nella directory dell'esercizio ed eseguitelo con `sh install_fmt_library`, oppure eseguite questo comando:
-
-<input type="text" value="curl https://ziotom78.github.io/tnds-tomasi-notebooks/install_fmt_library | sh" id="installFmtCommand" readonly="1" size="60"><button onclick='copyFmtInstallationScript("installFmtCommand")'>Copia</button>
-
-(Se invece usate Windows, scaricate questo [file zip](./fmtlib.zip) nella directory dell'esercizio e decomprimetelo). Le istruzioni dettagliate sono in [questa pagina](miscellanea.html#fmtinstall).
-
 ```c++
 #include "posizione.h"
-
-// Installarla con ./install_fmt_library
-#include "fmtlib.h"
 
 #include <iostream>
 #include <string>
@@ -123,7 +114,7 @@ using namespace std;
 int main(int argc, char *argv[]) {
   // Controlla gli argomenti
   if (argc != 4) {
-    fmt::println(stderr, "Usage: {} X Y Z", argv[0]);
+    println(stderr, "Usage: {} X Y Z", argv[0]);
     return -1;
   }
 
@@ -135,13 +126,12 @@ int main(int argc, char *argv[]) {
 
   Posizione P{x, y, z};
 
-  // Invece di `cout`, usiamo fmtlib: molto più comodo!
-  fmt::println("Coordinate cartesiane: {}, {}, {}",
-               P.getX(), P.getY(), P.getZ());
-  fmt::println("Coordinate cilindriche: {}, {}, {}",
-               P.getRho(), P.getPhi(), P.getZ());
-  fmt::println("Coordinate sferiche: {}, {}, {}",
-               P.getR(), P.getPhi(), P.getTheta());
+  println("Coordinate cartesiane: {}, {}, {}",
+          P.getX(), P.getY(), P.getZ());
+  println("Coordinate cilindriche: {}, {}, {}",
+          P.getRho(), P.getPhi(), P.getZ());
+  println("Coordinate sferiche: {}, {}, {}",
+          P.getR(), P.getPhi(), P.getTheta());
 
   return 0;
 }
@@ -229,15 +219,13 @@ protected:
 Implementazione nel file `particella.cpp`:
 
 ```c++
-#include "fmtlib.h"
-
 // Metodi per la classe base
 
 Particella::Particella(double massa, double carica)
   : m_massa{massa}, m_carica{carica} {}
 
 void Particella::Print() const {
-  fmt::println("Particella: m = {}, q = {}", m_massa, m_carica);
+  println("Particella: m = {}, q = {}", m_massa, m_carica);
 }
 ```
 
@@ -250,7 +238,7 @@ di creare un file `elettrone.cpp`: molto più comodo!):
 ```c++
 #pragma once
 
-#include "fmtlib.h"
+#include <print>
 
 // Implementazione concreta di una particella elementare
 // In questo caso tutte le proprietà della particella
@@ -268,7 +256,7 @@ public:
   ~Elettrone() {}
 
   void Print() const {
-      fmt::println("Elettrone: m = {}, q = {}", m_massa, m_carica);
+      std::println("Elettrone: m = {}, q = {}", m_massa, m_carica);
   }
 };
 ```
@@ -278,9 +266,8 @@ public:
 Questo programma utilizza le nuove classi appena create. Verifica il funzionamento dell'ereditarietà e la dereferenziazione dei puntatori a classe.
 
 ```c++
-#include "fmtlib.h"
 #include "particella.h"
-#include <iostream>
+#include <print>
 
 using namespace std;
 
@@ -291,15 +278,15 @@ int main() {
   Elettrone *e{new Elettrone{}};
 
   // Metodi della classe base. Notare che qui la sintassi è `a.NOMEMETODO(…)`
-  fmt::println("Particella con massa {} kg e carica {} C", a.GetMassa(),
-               a.GetCarica());
+  println("Particella con massa {} kg e carica {} C", a.GetMassa(),
+          a.GetCarica());
   a.Print();
 
   // Metodi della classe derivata. Qui invece la sintassi è
   // `e->NOMEMETODO(…)` e non `e.NOMEMETODO(…)`,
   // perché `e` è un puntatore
-  fmt::println("Elettrone con massa {} kg e carica {} C", e->GetMassa(),
-               e->GetCarica());
+  println("Elettrone con massa {} kg e carica {} C", e->GetMassa(),
+          e->GetCarica());
   e->Print();
 
   Particella b{a};  // costruisco una Particella a partire da una Particella
@@ -405,12 +392,11 @@ inline CampoVettoriale operator+(const CampoVettoriale &a,
   if ((a.getX() != b.getX()) ||
 	  (a.getY() != b.getY()) ||
 	  (a.getZ() != b.getZ())) {
-      // fmt::print accetta come primo argomento lo stream su cui
-      // scrivere (se non si specifica, usa stdout, che è analogo a std::cout).
-      // Siccome questo è un messaggio di errore, usiamo stderr, analogo a
-      // std::cerr
-      fmt::println(stderr,
-                   "Somma di campi vettoriali in punti diversi non ammessa");
+      // print accetta come primo argomento lo stream su cui
+      // scrivere (se non si specifica, usa stdout).
+      // Siccome questo è un messaggio di errore, usiamo stderr
+      println(stderr,
+              "Somma di campi vettoriali in punti diversi non ammessa");
       exit(1);
   }
 
@@ -541,9 +527,7 @@ Questo programma utilizza le nuove classi appena create: richiede di fornire com
 #include "puntomateriale.h"
 #include "campovettoriale.h"
 
-#include "fmtlib.h"
-
-#include <iostream>
+#include <print>
 #include <string>
 
 using namespace std;
@@ -555,7 +539,7 @@ const double d{1.E-10};
 
 int main(int argc, char * argv[]) {
   if (argc != 4) {
-      fmt::println(stderr, "Usage: {} <x> <y> <z>", argv[0]);
+      println(stderr, "Usage: {} <x> <y> <z>", argv[0]);
       exit(1);
   }
 
@@ -568,7 +552,7 @@ int main(int argc, char * argv[]) {
   PuntoMateriale protone  {mp,  e, 0, 0, -d / 2};
 
   CampoVettoriale E{elettrone.CampoElettrico(r) + protone.CampoElettrico(r)};
-  fmt::println("E = ({}, {}, {}) N/C", E.getFx(), E.getFy(), E.getFz());
+  println("E = ({}, {}, {}) N/C", E.getFx(), E.getFy(), E.getFz());
 
   return 0;
 }
@@ -588,7 +572,7 @@ Il numero di classi sta proliferando e quindi anche il `Makefile` diventa sempre
 ```make
 INCS=`root-config --cflags`
 LIBS=`root-config --libs`
-CXXFLAGS=-g -Wall --pedantic -std=c++23
+CXXFLAGS=-g -Wall -Wextra -Werror --pedantic -std=c++23
 
 esercizio_5.3: esercizio_5.3.o posizione.o puntomateriale.o campovettoriale.o particella.o
        g++ -o esercizio_5.3 esercizio_5.3.o posizione.o puntomateriale.o campovettoriale.o particella.o ${LIBS}
@@ -615,7 +599,7 @@ clean:
 Questo invece è il caso in cui usiate gplot++: non c'è più bisogno di usare `INCS` e `LIBS`.
 
 ```make
-CXXFLAGS=-g -Wall --pedantic -std=c++23
+CXXFLAGS=-g -Wall -Wextra -Werror --pedantic -std=c++23
 
 esercizio_5.3: esercizio_5.3.o posizione.o puntomateriale.o campovettoriale.o particella.o
        g++ -o esercizio_5.3 esercizio_5.3.o posizione.o puntomateriale.o campovettoriale.o particella.o
@@ -642,7 +626,7 @@ clean:
 Nel caso in cui decidiate di implementare tutte le classi nei file `.h` e di non usare quindi file `.cpp`, il `Makefile` si semplifica moltissimo. Ecco un esempio (assumendo che usiate gplot++):
 
 ```make
-CXXFLAGS=-g -Wall --pedantic -std=c++23
+CXXFLAGS=-g -Wall -Wextra -Werror --pedantic -std=c++23
 
 esercizio_5.3: esercizio_5.3.cpp posizione.h puntomateriale.h campovettoriale.h particella.h
        g++ -o esercizio_5.3 esercizio_5.3.cpp ${CXXFLAGS}
@@ -677,7 +661,6 @@ Per produrre un grafico di $E = E(r)$ con [gplot++](https://github.com/ziotom78/
 Di seguito viene riportato un esempio:
 
 ```c++
-#include "fmtlib.h"
 #include "gplot++.h"
 
 // ...
@@ -708,7 +691,7 @@ int main() {
     E_vec.push_back(e_field);
 
     // Stampa anche a video: è sempre bene farlo per controllare i numeri!
-    fmt::println("{:.5e} {:.5e}", dist, e_field);
+    println("{:.5e} {:.5e}", dist, e_field);
   }
 
   Gnuplot plt{};
@@ -806,5 +789,4 @@ author:
 - "Maurizio Tomasi"
 date: "A.A. 2024−2025"
 lang: it-IT
-header-includes: <script src="./fmtinstall.js"></script>
 ...

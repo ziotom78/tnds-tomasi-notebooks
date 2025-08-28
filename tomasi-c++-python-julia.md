@@ -233,14 +233,14 @@ LoopEnd:
 <tr>
 <td>
 ```c++
-#include <iostream>
+#include <print>
 
 int main() {
   double result{};
   for(double i{}; i < 10'000'000; i += 1) {
       result += i;
   }
-  std::cout << result << "\n";
+  std::println("Risultato: {}", result);
 }
 ```
 </td>
@@ -713,9 +713,9 @@ Consideriamo una funzione che accetta come argomento un intero `x`, e stampa `"A
 ```c++
 void f(int x) {
     if(x > 2) {
-        std::cout << "A\n";
+        std::println("A");
     } else {
-        std::cout << "B\n";
+        std::println("B");
     }
 }
 ```
@@ -814,7 +814,7 @@ end
 
     ```c++
 	if (argc != 5) {
-	  std::cerr << "Error, 5 parameters are needed: <a> <b> <nstep_max> <prec>\n";
+	  std::println(stderr, "Error, 5 parameters are needed: <a> <b> <nstep_max> <prec>");
 	  return 1;
 	}
 

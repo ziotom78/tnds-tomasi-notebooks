@@ -21,11 +21,13 @@
 
 Link al Google Form per il [seminario su C++, Python e Julia](tomasi-lezione-08.html#/seminario-su-c-python-e-julia): <https://forms.gle/saJjERRmYR6KxPpe9>. [Slides](tomasi-c++-python-julia.html).
 
-
 # Configurare il proprio laptop {#configure-your-laptop}
 
 È disponibile una [pagina dedicata](configure-your-laptop.html) che illustra come configurare il proprio laptop per poter scrivere programmi C++.
 
+# Flag da usare con GCC
+
+Sono indicati in [questa slide](tomasi-lezione-01.html#/flag-del-compilatore).
 
 # Uso di Qt Creator sui computer dei laboratorio
 
@@ -43,14 +45,13 @@ C'è una [pagina dedicata](prepararsi-esame.html) a questo.
 
 # Suggerimenti vari
 
-Per informazioni su come configurare i compilatori sulle macchine del laboratorio, installare fmt e gplot++, etc., vedete la [pagina dedicata](miscellanea.html).
+Per informazioni su come configurare i compilatori sulle macchine del laboratorio, installare gplot++, etc., vedete la [pagina dedicata](miscellanea.html).
 
 ---
 title: Lezioni del corso di TNDS
 author: Maurizio Tomasi
 date: A.A. 2024−2025
 lang: it-IT
-header-includes: <script src="./fmtinstall.js"></script>
 css:
 - ./css/asciinema-player.css
 ...

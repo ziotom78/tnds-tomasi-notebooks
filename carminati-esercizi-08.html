@@ -25,7 +25,6 @@
 }}});
   </script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css" />
-  <script src="./fmtinstall.js"></script>
 </head>
 <body>
 
@@ -114,7 +113,7 @@
 <div class="sourceCode" id="cb3"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span><span class="op">(</span><span class="dt">int</span> i<span class="op">{};</span> i <span class="op">&lt;</span> ssize<span class="op">(</span>stl_arr<span class="op">);</span> <span class="op">++</span>i<span class="op">)</span> <span class="op">{</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Ok anche `stl_arr[i]`, ma non controlla la</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="co">// correttezza di `i`</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  fmt<span class="op">::</span>println<span class="op">(</span><span class="st">&quot;Valore #</span><span class="sc">{}</span><span class="st">: </span><span class="sc">{}</span><span class="st">&quot;</span><span class="op">,</span> i<span class="op">,</span> stl_arr<span class="op">.</span>at<span class="op">(</span>i<span class="op">));</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  println<span class="op">(</span><span class="st">&quot;Valore #</span><span class="sc">{}</span><span class="st">: </span><span class="sc">{}</span><span class="st">&quot;</span><span class="op">,</span> i<span class="op">,</span> stl_arr<span class="op">.</span>at<span class="op">(</span>i<span class="op">));</span></span>
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 <p>ma è vietato chiamare metodi come <code>stl_arr.push_back(5.0)</code>, perché la dimensione dell’array non cambia mai!</p>
 <p>Se si vogliono definire funzioni che operano su un array, nel template bisogna non solo indicare <code>&lt;typename T&gt;</code> come nel caso di <code>std::vector</code>, perché qui anche la <em>dimensione</em> dell’array è un parametro (che purtroppo va indicata come <code>size_t</code> anziché <code>int</code> 🙁):</p>
@@ -268,78 +267,74 @@ v(t + h) &amp;\approx v(t) + h \cdot \dot{v}(t) = x(t) + h \cdot \frac{F}m.
 <div class="sourceCode" id="cb7"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;array_operations.h&quot;</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;equazioni_differenziali.h&quot;</span></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;fmtlib.h&quot;</span></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;gplot++.h&quot;</span></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;string&gt;</span></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">(</span><span class="dt">int</span> argc<span class="op">,</span> <span class="dt">char</span> <span class="op">*</span>argv<span class="op">[])</span> <span class="op">{</span></span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>  test_array_operations<span class="op">();</span></span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>  test_euler<span class="op">();</span></span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> <span class="op">(</span>argc <span class="op">!=</span> <span class="dv">2</span><span class="op">)</span> <span class="op">{</span></span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>    fmt<span class="op">::</span>println<span class="op">(</span>stderr<span class="op">,</span> <span class="st">&quot;Uso: </span><span class="sc">{}</span><span class="st"> PASSO&quot;</span><span class="op">,</span> argv<span class="op">[</span><span class="dv">0</span><span class="op">]);</span></span>
-<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">1</span><span class="op">;</span></span>
-<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
-<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>  Eulero<span class="op">&lt;</span><span class="dv">2</span><span class="op">&gt;</span> my_euler<span class="op">{};</span></span>
-<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>  OscillatoreArmonico osc<span class="op">{</span><span class="fl">1.</span><span class="op">};</span></span>
-<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>  <span class="at">const</span> <span class="dt">double</span> tmax<span class="op">{</span><span class="fl">70.</span><span class="op">};</span></span>
-<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>  <span class="at">const</span> <span class="dt">double</span> h<span class="op">{</span>stof<span class="op">(</span>argv<span class="op">[</span><span class="dv">1</span><span class="op">])};</span></span>
-<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> t<span class="op">{};</span></span>
-<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>  array<span class="op">&lt;</span><span class="dt">double</span><span class="op">,</span> <span class="dv">2</span><span class="op">&gt;</span> x<span class="op">{</span><span class="fl">0.</span><span class="op">,</span> <span class="fl">1.</span><span class="op">};</span></span>
-<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a>  <span class="at">const</span> <span class="dt">int</span> num_of_steps<span class="op">{(</span><span class="dt">int</span><span class="op">)</span>lround<span class="op">(</span>tmax <span class="op">/</span> h<span class="op">)};</span></span>
-<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a>  <span class="co">// evoluzione del sistema fino a 70 s</span></span>
-<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a>  Gnuplot plt<span class="op">{};</span></span>
-<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Ho bisogno di costruire due vettori per poter poi</span></span>
-<span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a>  <span class="co">// fare il plot. Qui uso &quot;vector&quot; anziché &quot;array&quot;,</span></span>
-<span id="cb7-34"><a href="#cb7-34" aria-hidden="true" tabindex="-1"></a>  <span class="co">// perché le due liste potrebbero essere molto grandi</span></span>
-<span id="cb7-35"><a href="#cb7-35" aria-hidden="true" tabindex="-1"></a>  <span class="co">// e si rischierebbe quindi di riempire lo stack.</span></span>
-<span id="cb7-36"><a href="#cb7-36" aria-hidden="true" tabindex="-1"></a>  <span class="co">//</span></span>
-<span id="cb7-37"><a href="#cb7-37" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Notare che uso `()` anziché `{}` per passare i</span></span>
-<span id="cb7-38"><a href="#cb7-38" aria-hidden="true" tabindex="-1"></a>  <span class="co">// parametri del costruttore, perché voglio</span></span>
-<span id="cb7-39"><a href="#cb7-39" aria-hidden="true" tabindex="-1"></a>  <span class="co">// specificare il *numero di elementi* del vettore!</span></span>
-<span id="cb7-40"><a href="#cb7-40" aria-hidden="true" tabindex="-1"></a>  <span class="bu">std::</span>vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> <span class="dt">list_of_t</span><span class="op">(</span>num_of_steps<span class="op">);</span></span>
-<span id="cb7-41"><a href="#cb7-41" aria-hidden="true" tabindex="-1"></a>  <span class="bu">std::</span>vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> list_of_x<span class="op">(</span>num_of_steps<span class="op">);</span></span>
-<span id="cb7-42"><a href="#cb7-42" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-43"><a href="#cb7-43" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> step <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> step <span class="op">&lt;</span> num_of_steps<span class="op">;</span> step<span class="op">++)</span> <span class="op">{</span></span>
-<span id="cb7-44"><a href="#cb7-44" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Salva le coordinate del punto (t, x) per</span></span>
-<span id="cb7-45"><a href="#cb7-45" aria-hidden="true" tabindex="-1"></a>    <span class="co">// fare poi il grafico</span></span>
-<span id="cb7-46"><a href="#cb7-46" aria-hidden="true" tabindex="-1"></a>    <span class="dt">list_of_t</span><span class="op">.</span>at<span class="op">(</span>step<span class="op">)</span> <span class="op">=</span> t<span class="op">;</span></span>
-<span id="cb7-47"><a href="#cb7-47" aria-hidden="true" tabindex="-1"></a>    list_of_x<span class="op">.</span>at<span class="op">(</span>step<span class="op">)</span> <span class="op">=</span> x<span class="op">[</span><span class="dv">0</span><span class="op">];</span></span>
-<span id="cb7-48"><a href="#cb7-48" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-49"><a href="#cb7-49" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Stampa i risultati in forma di tabella</span></span>
-<span id="cb7-50"><a href="#cb7-50" aria-hidden="true" tabindex="-1"></a>    <span class="co">// (da fare sempre! aiuta nel trovare errori)</span></span>
-<span id="cb7-51"><a href="#cb7-51" aria-hidden="true" tabindex="-1"></a>    fmt<span class="op">::</span>println<span class="op">(</span><span class="st">&quot;</span><span class="sc">{:.1f}</span><span class="st"> </span><span class="sc">{:.6f}</span><span class="st"> </span><span class="sc">{:.6f}</span><span class="st">&quot;</span><span class="op">,</span> t<span class="op">,</span> x<span class="op">[</span><span class="dv">0</span><span class="op">],</span> x<span class="op">[</span><span class="dv">1</span><span class="op">]);</span></span>
-<span id="cb7-52"><a href="#cb7-52" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-53"><a href="#cb7-53" aria-hidden="true" tabindex="-1"></a>    <span class="co">// “Avanza” di un passo `h` la soluzione in `x`</span></span>
-<span id="cb7-54"><a href="#cb7-54" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> my_euler<span class="op">.</span>Passo<span class="op">(</span>t<span class="op">,</span> x<span class="op">,</span> h<span class="op">,</span> osc<span class="op">);</span></span>
-<span id="cb7-55"><a href="#cb7-55" aria-hidden="true" tabindex="-1"></a>    t <span class="op">=</span> t <span class="op">+</span> h<span class="op">;</span></span>
-<span id="cb7-56"><a href="#cb7-56" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
-<span id="cb7-57"><a href="#cb7-57" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-58"><a href="#cb7-58" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Ora si può produrre il grafico</span></span>
-<span id="cb7-59"><a href="#cb7-59" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-60"><a href="#cb7-60" aria-hidden="true" tabindex="-1"></a>  <span class="bu">std::</span>string filename<span class="op">{</span><span class="st">&quot;euler.png&quot;</span><span class="op">};</span></span>
-<span id="cb7-61"><a href="#cb7-61" aria-hidden="true" tabindex="-1"></a>  plt<span class="op">.</span>redirect_to_png<span class="op">(</span>filename<span class="op">);</span></span>
-<span id="cb7-62"><a href="#cb7-62" aria-hidden="true" tabindex="-1"></a>  plt<span class="op">.</span>plot<span class="op">(</span><span class="dt">list_of_t</span><span class="op">,</span> list_of_x<span class="op">);</span></span>
-<span id="cb7-63"><a href="#cb7-63" aria-hidden="true" tabindex="-1"></a>  plt<span class="op">.</span>set_xlabel<span class="op">(</span><span class="st">&quot;Tempo [s]&quot;</span><span class="op">);</span></span>
-<span id="cb7-64"><a href="#cb7-64" aria-hidden="true" tabindex="-1"></a>  plt<span class="op">.</span>set_ylabel<span class="op">(</span><span class="st">&quot;Oscillazione [m]&quot;</span><span class="op">);</span></span>
-<span id="cb7-65"><a href="#cb7-65" aria-hidden="true" tabindex="-1"></a>  plt<span class="op">.</span>show<span class="op">();</span></span>
-<span id="cb7-66"><a href="#cb7-66" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-67"><a href="#cb7-67" aria-hidden="true" tabindex="-1"></a>  <span class="co">// È sempre bene dare all&#39;utente un feedback di ciò che</span></span>
-<span id="cb7-68"><a href="#cb7-68" aria-hidden="true" tabindex="-1"></a>  <span class="co">// si è fatto: in questo modo l&#39;utente saprà quale file aprire!</span></span>
-<span id="cb7-69"><a href="#cb7-69" aria-hidden="true" tabindex="-1"></a>  fmt<span class="op">::</span>println<span class="op">(</span><span class="st">&quot;Finito, il risultato è nel grafico &#39;</span><span class="sc">{}</span><span class="st">&#39;&quot;</span><span class="op">,</span> filename<span class="op">);</span></span>
-<span id="cb7-70"><a href="#cb7-70" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-71"><a href="#cb7-71" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb7-72"><a href="#cb7-72" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
-<p>Come al solito, potete installare la libreria <code>fmtlib</code> usando lo script <a href="./install_fmt_library"><code>install_fmt_library</code></a>: scaricatelo nella directory dell’esercizio ed eseguitelo con <code>sh install_fmt_library</code>, oppure eseguite direttamente questo comando:</p>
-<p><input type="text" value="curl https://ziotom78.github.io/tnds-tomasi-notebooks/install_fmt_library | sh" id="installFmtCommand" readonly="1" size="60"><button onclick='copyFmtInstallationScript("installFmtCommand")'>Copia</button></p>
-<p>In alternativa, scaricate questo <a href="./fmtlib.zip">file zip</a> nella directory dell’esercizio e decomprimetelo. Le istruzioni dettagliate sono in <a href="miscellanea.html#fmtinstall">questa pagina</a>.</p>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;gplot++.h&quot;</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;string&gt;</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">(</span><span class="dt">int</span> argc<span class="op">,</span> <span class="dt">char</span> <span class="op">*</span>argv<span class="op">[])</span> <span class="op">{</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>  test_array_operations<span class="op">();</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>  test_euler<span class="op">();</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> <span class="op">(</span>argc <span class="op">!=</span> <span class="dv">2</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>    println<span class="op">(</span>stderr<span class="op">,</span> <span class="st">&quot;Uso: </span><span class="sc">{}</span><span class="st"> PASSO&quot;</span><span class="op">,</span> argv<span class="op">[</span><span class="dv">0</span><span class="op">]);</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>  Eulero<span class="op">&lt;</span><span class="dv">2</span><span class="op">&gt;</span> my_euler<span class="op">{};</span></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>  OscillatoreArmonico osc<span class="op">{</span><span class="fl">1.</span><span class="op">};</span></span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>  <span class="at">const</span> <span class="dt">double</span> tmax<span class="op">{</span><span class="fl">70.</span><span class="op">};</span></span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>  <span class="at">const</span> <span class="dt">double</span> h<span class="op">{</span>stof<span class="op">(</span>argv<span class="op">[</span><span class="dv">1</span><span class="op">])};</span></span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> t<span class="op">{};</span></span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>  array<span class="op">&lt;</span><span class="dt">double</span><span class="op">,</span> <span class="dv">2</span><span class="op">&gt;</span> x<span class="op">{</span><span class="fl">0.</span><span class="op">,</span> <span class="fl">1.</span><span class="op">};</span></span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a>  <span class="at">const</span> <span class="dt">int</span> num_of_steps<span class="op">{(</span><span class="dt">int</span><span class="op">)</span>lround<span class="op">(</span>tmax <span class="op">/</span> h<span class="op">)};</span></span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a>  <span class="co">// evoluzione del sistema fino a 70 s</span></span>
+<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a>  Gnuplot plt<span class="op">{};</span></span>
+<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Ho bisogno di costruire due vettori per poter poi</span></span>
+<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a>  <span class="co">// fare il plot. Qui uso &quot;vector&quot; anziché &quot;array&quot;,</span></span>
+<span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a>  <span class="co">// perché le due liste potrebbero essere molto grandi</span></span>
+<span id="cb7-34"><a href="#cb7-34" aria-hidden="true" tabindex="-1"></a>  <span class="co">// e si rischierebbe quindi di riempire lo stack.</span></span>
+<span id="cb7-35"><a href="#cb7-35" aria-hidden="true" tabindex="-1"></a>  <span class="co">//</span></span>
+<span id="cb7-36"><a href="#cb7-36" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Notare che uso `()` anziché `{}` per passare i</span></span>
+<span id="cb7-37"><a href="#cb7-37" aria-hidden="true" tabindex="-1"></a>  <span class="co">// parametri del costruttore, perché voglio</span></span>
+<span id="cb7-38"><a href="#cb7-38" aria-hidden="true" tabindex="-1"></a>  <span class="co">// specificare il *numero di elementi* del vettore!</span></span>
+<span id="cb7-39"><a href="#cb7-39" aria-hidden="true" tabindex="-1"></a>  <span class="bu">std::</span>vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> <span class="dt">list_of_t</span><span class="op">(</span>num_of_steps<span class="op">);</span></span>
+<span id="cb7-40"><a href="#cb7-40" aria-hidden="true" tabindex="-1"></a>  <span class="bu">std::</span>vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> list_of_x<span class="op">(</span>num_of_steps<span class="op">);</span></span>
+<span id="cb7-41"><a href="#cb7-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-42"><a href="#cb7-42" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> step <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> step <span class="op">&lt;</span> num_of_steps<span class="op">;</span> step<span class="op">++)</span> <span class="op">{</span></span>
+<span id="cb7-43"><a href="#cb7-43" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Salva le coordinate del punto (t, x) per</span></span>
+<span id="cb7-44"><a href="#cb7-44" aria-hidden="true" tabindex="-1"></a>    <span class="co">// fare poi il grafico</span></span>
+<span id="cb7-45"><a href="#cb7-45" aria-hidden="true" tabindex="-1"></a>    <span class="dt">list_of_t</span><span class="op">.</span>at<span class="op">(</span>step<span class="op">)</span> <span class="op">=</span> t<span class="op">;</span></span>
+<span id="cb7-46"><a href="#cb7-46" aria-hidden="true" tabindex="-1"></a>    list_of_x<span class="op">.</span>at<span class="op">(</span>step<span class="op">)</span> <span class="op">=</span> x<span class="op">[</span><span class="dv">0</span><span class="op">];</span></span>
+<span id="cb7-47"><a href="#cb7-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-48"><a href="#cb7-48" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Stampa i risultati in forma di tabella</span></span>
+<span id="cb7-49"><a href="#cb7-49" aria-hidden="true" tabindex="-1"></a>    <span class="co">// (da fare sempre! aiuta nel trovare errori)</span></span>
+<span id="cb7-50"><a href="#cb7-50" aria-hidden="true" tabindex="-1"></a>    println<span class="op">(</span><span class="st">&quot;</span><span class="sc">{:.1f}</span><span class="st"> </span><span class="sc">{:.6f}</span><span class="st"> </span><span class="sc">{:.6f}</span><span class="st">&quot;</span><span class="op">,</span> t<span class="op">,</span> x<span class="op">[</span><span class="dv">0</span><span class="op">],</span> x<span class="op">[</span><span class="dv">1</span><span class="op">]);</span></span>
+<span id="cb7-51"><a href="#cb7-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-52"><a href="#cb7-52" aria-hidden="true" tabindex="-1"></a>    <span class="co">// “Avanza” di un passo `h` la soluzione in `x`</span></span>
+<span id="cb7-53"><a href="#cb7-53" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> my_euler<span class="op">.</span>Passo<span class="op">(</span>t<span class="op">,</span> x<span class="op">,</span> h<span class="op">,</span> osc<span class="op">);</span></span>
+<span id="cb7-54"><a href="#cb7-54" aria-hidden="true" tabindex="-1"></a>    t <span class="op">=</span> t <span class="op">+</span> h<span class="op">;</span></span>
+<span id="cb7-55"><a href="#cb7-55" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb7-56"><a href="#cb7-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-57"><a href="#cb7-57" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Ora si può produrre il grafico</span></span>
+<span id="cb7-58"><a href="#cb7-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-59"><a href="#cb7-59" aria-hidden="true" tabindex="-1"></a>  <span class="bu">std::</span>string filename<span class="op">{</span><span class="st">&quot;euler.png&quot;</span><span class="op">};</span></span>
+<span id="cb7-60"><a href="#cb7-60" aria-hidden="true" tabindex="-1"></a>  plt<span class="op">.</span>redirect_to_png<span class="op">(</span>filename<span class="op">);</span></span>
+<span id="cb7-61"><a href="#cb7-61" aria-hidden="true" tabindex="-1"></a>  plt<span class="op">.</span>plot<span class="op">(</span><span class="dt">list_of_t</span><span class="op">,</span> list_of_x<span class="op">);</span></span>
+<span id="cb7-62"><a href="#cb7-62" aria-hidden="true" tabindex="-1"></a>  plt<span class="op">.</span>set_xlabel<span class="op">(</span><span class="st">&quot;Tempo [s]&quot;</span><span class="op">);</span></span>
+<span id="cb7-63"><a href="#cb7-63" aria-hidden="true" tabindex="-1"></a>  plt<span class="op">.</span>set_ylabel<span class="op">(</span><span class="st">&quot;Oscillazione [m]&quot;</span><span class="op">);</span></span>
+<span id="cb7-64"><a href="#cb7-64" aria-hidden="true" tabindex="-1"></a>  plt<span class="op">.</span>show<span class="op">();</span></span>
+<span id="cb7-65"><a href="#cb7-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-66"><a href="#cb7-66" aria-hidden="true" tabindex="-1"></a>  <span class="co">// È sempre bene dare all&#39;utente un feedback di ciò che</span></span>
+<span id="cb7-67"><a href="#cb7-67" aria-hidden="true" tabindex="-1"></a>  <span class="co">// si è fatto: in questo modo l&#39;utente saprà quale file aprire!</span></span>
+<span id="cb7-68"><a href="#cb7-68" aria-hidden="true" tabindex="-1"></a>  println<span class="op">(</span><span class="st">&quot;Finito, il risultato è nel grafico &#39;</span><span class="sc">{}</span><span class="st">&#39;&quot;</span><span class="op">,</span> filename<span class="op">);</span></span>
+<span id="cb7-69"><a href="#cb7-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-70"><a href="#cb7-70" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb7-71"><a href="#cb7-71" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 <p>Il codice sopra usa la libreria <a href="https://github.com/ziotom78/gplotpp">gplot++</a> per salvare il grafico della soluzione in un file PNG. Se invece volete usare ROOT, queste sono le righe da aggiungere alla seconda parte del <code>main</code>:</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>TApplication myApp<span class="op">{</span><span class="st">&quot;myApp&quot;</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">0</span><span class="op">};</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>TGraph <span class="op">*</span>myGraph<span class="op">{</span><span class="kw">new</span> TGraph<span class="op">()};</span></span>
@@ -353,7 +348,7 @@ v(t + h) &amp;\approx v(t) + h \cdot \dot{v}(t) = x(t) + h \cdot \frac{F}m.
 <span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>TCanvas <span class="op">*</span>c<span class="op">{</span><span class="kw">new</span> TCanvas<span class="op">()};</span></span>
 <span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>c<span class="op">-&gt;</span>cd<span class="op">();</span></span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>string title<span class="op">{</span>fmt<span class="op">::</span>format<span class="op">(</span><span class="st">&quot;Oscillatore armonico (Eulero, h = </span><span class="sc">{}</span><span class="st">)&quot;</span><span class="op">,</span> h<span class="op">)};</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>string title<span class="op">{</span>format<span class="op">(</span><span class="st">&quot;Oscillatore armonico (Eulero, h = </span><span class="sc">{}</span><span class="st">)&quot;</span><span class="op">,</span> h<span class="op">)};</span></span>
 <span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>myGraph<span class="op">-&gt;</span>SetTitle<span class="op">(</span>title<span class="op">.</span>c_str<span class="op">());</span></span>
 <span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>myGraph<span class="op">-&gt;</span>GetXaxis<span class="op">()-&gt;</span>SetTitle<span class="op">(</span><span class="st">&quot;Tempo [s]1&quot;</span><span class="op">);</span></span>
@@ -421,7 +416,7 @@ x(t+h) &amp;= x(t) + (k_1 + 2k_2 + 2k_3 + k_4)\frac{h}6.
 <span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    v <span class="op">=</span> x<span class="op">[</span><span class="dv">1</span><span class="op">];</span></span>
 <span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> myRK4<span class="op">.</span>Passo<span class="op">(</span>t<span class="op">,</span> x<span class="op">,</span> h<span class="op">,</span> osc<span class="op">);</span></span>
 <span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    t <span class="op">=</span> t <span class="op">+</span> h<span class="op">;</span></span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>    fmt<span class="op">::</span>println<span class="op">(</span><span class="st">&quot;</span><span class="sc">{}</span><span class="st"> </span><span class="sc">{}</span><span class="st"> </span><span class="sc">{}</span><span class="st">&quot;</span><span class="op">,</span> A<span class="op">,</span> x<span class="op">[</span><span class="dv">0</span><span class="op">],</span> t<span class="op">);</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>    println<span class="op">(</span><span class="st">&quot;</span><span class="sc">{}</span><span class="st"> </span><span class="sc">{}</span><span class="st"> </span><span class="sc">{}</span><span class="st">&quot;</span><span class="op">,</span> A<span class="op">,</span> x<span class="op">[</span><span class="dv">0</span><span class="op">],</span> t<span class="op">);</span></span>
 <span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
 <span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>t <span class="op">=</span> t <span class="op">-</span> v <span class="op">*</span> h <span class="op">/</span> <span class="op">(</span>x<span class="op">[</span><span class="dv">1</span><span class="op">]</span> <span class="op">-</span> v<span class="op">);</span></span>
 <span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a></span>

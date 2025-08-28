@@ -42,7 +42,7 @@
 
 ```c++
 bool are_close(double calculated, double expected, double epsilon = 1e-7) {
-  return fabs(calculated - expected) < epsilon;
+  return fabs(calculated - expected) < epsilon * fabs(expected);
 }
 
 void test_coordinates(void) {
@@ -58,7 +58,7 @@ void test_coordinates(void) {
 
   assert(are_close(p.getRho(), 2.2360679774998);
 
-  cerr << "The coordinates work correctly! 🥳\n";
+  println(stderr, "The coordinates work correctly! 🥳");
 }
 ```
 
@@ -100,7 +100,7 @@ void test_coulomb_law(void) {
   assert(are_close(V.getFy(), 9.915928645917235));
   assert(are_close(V.getFz(), 29.747785937751708));
 
-  cerr << "Coulomb's law works correctly! 🥳\n";
+  println(stderr, "Coulomb's law works correctly! 🥳");
 }
 
 void test_newton_law(void) {
@@ -114,7 +114,7 @@ void test_newton_law(void) {
   assert(are_close(V.getFy(), 0.14717966715968));
   assert(are_close(V.getFz(), 0.44153900147903));
 
-  cerr << "Newton's law works correctly! 🥳\n";
+  println(stderr, "Newton's law works correctly! 🥳");
 }
 ```
 
@@ -162,13 +162,13 @@ Per capire cosa succede, definiamo `Time` in modo che stampi a video un messaggi
 ```c++
 class Time {
 public:
-  Time() { std::cout << "Time() called with no arguments\n"; }
+  Time() { std::println("Time() called with no arguments"); }
   Time(const char *time) {
-    std::cout << std::format("Call to Time constructor with time \"{}\"\n", time);
+    std::println("Call to Time constructor with time \"{}\"", time);
   }
 
   void operator=(const Time &) {
-    std::cout << "Call to Time::operator=\n";
+    std::println("Call to Time::operator=");
   }
 };
 ```

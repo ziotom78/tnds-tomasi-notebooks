@@ -1,5 +1,15 @@
 # Configurazione del compilatore sui computer del laboratorio {#gcc}
 
+Il compilatore `g++` disponibile di default sui computer del laboratorio è molto vecchio:
+
+```sh
+$ g++ --version
+g++ (GCC) 8.5.0 20210514 (Red Hat 8.5.0-26)
+Copyright (C) 2018 Free Software Foundation, Inc.
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+```
+
 Per fare in modo di usare l'ultima versione disponibile del compilatore GCC, digitate questo comando:
 
 ```
@@ -10,30 +20,13 @@ Dopodiché chiudete il terminale e riapritelo. Verificate che ora il comando `g+
 
 ```
 $ g++ --version
-g++ (GCC) 13.2.1 20231205 (Red Hat 13.2.1-6)
-Copyright (C) 2023 Free Software Foundation, Inc.
+g++ (GCC) 14.2.1 20250110 (Red Hat 14.2.1-7)
+Copyright (C) 2024 Free Software Foundation, Inc.
 This is free software; see the source for copying conditions.  There is NO
 warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 ```
 
 È sufficiente eseguire il programma `enable-latest-gcc` **una volta sola**, perché poi la configurazione resta salvata.
-
-
-# Uso della libreria `fmt` {#fmtinstall}
-
-Siete invitati ad impratichirvi con la libreria [fmt](https://github.com/fmtlib/fmt), che potete installare usando lo script [`install_fmt_library`](./install_fmt_library): si esegue con il comando `sh install_fmt_library`, e il comando **va eseguito nella directory in cui avete i vostri codici!**.
-
-Se usate Replit o una macchina Mac/Linux, potete installarlo anche in altre Repl con questo comando:
-
-<p><input type="text" value="curl https://ziotom78.github.io/tnds-tomasi-notebooks/install_fmt_library | sh" id="installFmt" readonly="1" size="60"><button onclick='copyFmtInstallationScript("installFmt")'>Copia</button></p>
-
-**Importante**: Il comando va dato all'interno della directory in cui codificate l'esercizio. Ciò significa che **ciascuna** delle directory che contiene un esercizio per cui è necessario usare `fmt` deve contenere una copia della libreria. Non preoccupatevi di sprecare spazio, perché la libreria `fmt` occupa pochi centinaia di KB.
-
-Se non avete il comando `curl` o state usando Windows, scaricate questo [file zip](./fmtlib.zip) nella directory di ciascun esercizio in cui prevedete di usare `fmt` e decomprimetelo.
-
-Questo è un esempio che mostra come installare ed usare la libreria:
-
-<asciinema-player src="asciinema/install-fmt-94x25.cast" cols="94" rows="25" font-size="medium"></asciinema-player>
 
 
 # Gplot++ {#gplotinstall}
@@ -79,7 +72,6 @@ title: Suggerimenti vari
 author: Maurizio Tomasi
 date: A.A. 2024−2025
 lang: it-IT
-header-includes: <script src="./fmtinstall.js"></script>
 css:
 - ./css/asciinema-player.css
 ...

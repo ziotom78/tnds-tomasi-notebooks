@@ -40,7 +40,7 @@
       assert(are_close(stddev(v, 2), 1.632993161855452));
       assert(are_close(stddev(v, 3), 1.5));
 
-      cerr << "All the tests have passed. Hurrah! 🥳\n";
+      println(stderr, "All the tests have passed. Hurrah! 🥳");
     }
     ```
 
@@ -58,49 +58,32 @@
 
 # Formattazione di numeri
 
-# Formattazione di numeri
-
--   Stampare dati usando formattazioni speciali in C++ è uno strazio!
-
--   Supponiamo di voler stampare le coordinate cartesiane di un punto:
-
-    ```c++
-    // Posizione di un punto 3D
-    double pos_x, pos_y, pos_z;
-
-    cout << "La posizione è (" << pos_x << ", "
-         << pos_y, << ", " << pos_z << ")" << endl;
-    ```
-
--   Questo codice è complicato da leggere, perché ci sono troppi operatori `<<` (e infatti c'è un errore: lo trovate?). Già nel 2010 Herb Sutter scriveva che `cout` è [*a pain to use*](https://stackoverflow.com/questions/2485963/c-alignment-when-printing-cout/2486085#2486085)!
-
-
 # Formattare stringhe in C++20
 
--   Nel Luglio 2019 [è stato annunciato](http://www.zverovich.net/2019/07/23/std-format-cpp20.html) che la release 2020 dello standard C++ avrebbe incluso una libreria per la formattazione di stringhe.
+-   Sin dal 2020 lo standard C++ include una libreria per la formattazione di stringhe
 
--   Questa libreria è ispirata ad alcune soluzioni introdotte negli scorsi anni in [Python](https://docs.python.org/3/library/string.html#format-string-syntax), [C#](https://msdn.microsoft.com/en-us/library/system.string.format(v=vs.110).aspx) e [Rust](https://doc.rust-lang.org/std/fmt/), e l'approccio sta prendendo piede in molti altri linguaggi.
+-   Avete usato questa libreria tutte le volte che avete invocato `std::print()` o `std::println()`, ma non abbiamo mai approfondito il funzionamento: sappiamo solo che quando mettiamo `{}` si può stampare il valore di una variabile
+
+-   Oggi approfondiremo queste funzionalità, che si ispirano ad altri linguaggi come [Python](https://docs.python.org/3/library/string.html#format-string-syntax), [C#](https://msdn.microsoft.com/en-us/library/system.string.format(v=vs.110).aspx) e [Rust](https://doc.rust-lang.org/std/fmt/)
 
 # Un'analogia
 
 ![](images/autodichiarazione.jpg)
 
 
-# `std::format` in C++20
+# Come funziona `std::print`
 
--   La nuova libreria `<format>` permette di usare lo stesso meccanismo dell'autocertificazione nella slide precedente: si fornisce un *template*, ossia una stringa che va riempita in certi punti con i valori delle variabili
-
--   La libreria `std::format` usa `{}` al posto di `____`:
+-   Le funzioni `print()` e `println()` usano `{}` al posto di `____`:
 
     ```c++
     double pos_x, pos_y, pos_z;
-    cout << format("La posizione è ({}, {}, {})\n", pos_x, pos_y, pos_z);
+    std::println("La posizione è ({}, {}, {})", pos_x, pos_y, pos_z);
     ```
 
 -   Si può fare riferimento alle variabili usando il loro indice:
 
     ```c++
-    cout << format("La posizione è ({0}, {1}, {2})\n", pos_x, pos_y, pos_z);
+    std::println("La posizione è ({0}, {1}, {2})", pos_x, pos_y, pos_z);
     ```
 
 # Formattazioni più elaborate
@@ -113,57 +96,15 @@
 
 -   È possibile mettere insieme l'indice (`0`), l'ampiezza (`5`) e il numero di cifre dopo la virgola (`.2`) scrivendoli uno dopo l'altro: `{0:5.2e}`.
 
-# `print` e `println`
+# Stringhe formattate
 
--   Nel C++23 vengono anche introdotte le funzioni [`print`](https://en.cppreference.com/w/cpp/io/print) e [`println`](https://en.cppreference.com/w/cpp/io/println).
-
--   La differenza tra le due è che `println` aggiunge un ritorno a capo:
-
-    ```c++
-    // This line…
-    print("Hello, world!\n");
-
-    // is equivalent to this one
-    println("Hello, world!");   // No need to put '\n' at the end
-    ```
-
--   Entrambe le funzioni possono essere usate come `format`:
+-   Le funzioni `print` e `println` stampano stringhe a video, sostituendo `{}` con valori di variabili
+-   Ci sono però situazioni in cui questa funzionalità serve per passare stringhe ad altre funzioni, e non per stamparle a video
+-   Ad esempio, potreste voler salvare un grafico e usare la sostituzione `{}` nel titolo
+-   Questo è possibile con `std::format()`, che restituisce una stringa formattata (includete `<format>`:
 
     ```c++
-    println("Coordinates: ({}, {}, {})", pos_x, pos_y, pos_z);
-    ```
-
-# Il futuro… ora!
-
--   Il compilatore `g++` sui computer del laboratorio supporta già `format`, ma non ancora `print` e `println`
-
--   Una libreria di formattazione completa, che implementa anche `print` e `println` e funziona anche su compilatori vecchi, è disponibile al sito [github.com/fmtlib/fmt](https://github.com/fmtlib/fmt).
-
--   Per installarla, fate click col tasto destro sul link [install_fmt_library](./install_fmt_library) e salvate il file nella cartella del vostro programma (con Windows, eseguitela in WSL), poi eseguitelo così:
-
-    ```
-    sh install_fmt_library
-    ```
-
--   L'animazione seguente mostra come usarla nei vostri codici.
-
----
-
-<asciinema-player src="asciinema/install-fmt-94x25.cast" cols="94" rows="25" font-size="medium"></asciinema-player>
-
-
-# Differenze tra `fmt` e C++20
-
--   La libreria installata da <a url="./install_fmt_library" download>`install_fmt_library`</a> ha alcune differenze con lo standard C++20:
-
-    1. Il namespace è diverso: è `fmt::` anziché `std::`;
-
-    2. Il file da includere è diverso.
-
--   Se usate `#include "fmtlib.h"`, vi basterà usare sempre il namespace `fmt::`. Scrivete quindi `fmt::print`, `fmt::println` e `fmt::format`:
-
-    ```c++
-    fmt::println("The result is {:.3f} ± {:.3f}\n", mean, stddev);
+    my_plot.set_title(format("Data for year {}", current_year));
     ```
 
 

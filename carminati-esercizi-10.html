@@ -25,7 +25,6 @@
 }}});
   </script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css" />
-  <script src="./fmtinstall.js"></script>
 </head>
 <body>
 
@@ -307,19 +306,18 @@ y &amp;= M \cdot t.
 <span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span><span class="op">(</span><span class="dt">int</span> N<span class="op">{</span><span class="dv">1</span><span class="op">};</span> N <span class="op">&lt;=</span> <span class="dv">12</span><span class="op">;</span> <span class="op">++</span>N<span class="op">)</span> <span class="op">{</span></span>
 <span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>  compute_sums<span class="op">(</span>rng<span class="op">,</span> N<span class="op">,</span> result<span class="op">);</span></span>
-<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Qui uso &quot;fmtlib.h&quot; per formattare l&#39;etichetta dell&#39;istogramma</span></span>
-<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a>  plt_histograms<span class="op">.</span>histogram<span class="op">(</span>result<span class="op">,</span> <span class="dv">100</span><span class="op">,</span> fmt<span class="op">::</span>format<span class="op">(</span><span class="st">&quot;N = </span><span class="sc">{}</span><span class="st">&quot;</span><span class="op">,</span> N<span class="op">));</span></span>
-<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a>  plt_histograms<span class="op">.</span>show<span class="op">();</span></span>
-<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Aggiunge il punto con la σ al grafico degli errori</span></span>
-<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a>  plt_errors<span class="op">.</span>add_point<span class="op">(</span>N<span class="op">,</span> calculate_standard_deviation<span class="op">(</span>result<span class="op">));</span></span>
-<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
-<span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a><span class="co">// Fai un grafico dei punti aggiunti con plt_errors.add_point()</span></span>
-<span id="cb8-33"><a href="#cb8-33" aria-hidden="true" tabindex="-1"></a>plt_errors<span class="op">.</span>plot<span class="op">();</span></span>
-<span id="cb8-34"><a href="#cb8-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-35"><a href="#cb8-35" aria-hidden="true" tabindex="-1"></a><span class="co">// Salva il file con il grafico degli errori</span></span>
-<span id="cb8-36"><a href="#cb8-36" aria-hidden="true" tabindex="-1"></a>plt_errors<span class="op">.</span>show<span class="op">();</span></span></code></pre></div>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>  plt_histograms<span class="op">.</span>histogram<span class="op">(</span>result<span class="op">,</span> <span class="dv">100</span><span class="op">,</span> format<span class="op">(</span><span class="st">&quot;N = </span><span class="sc">{}</span><span class="st">&quot;</span><span class="op">,</span> N<span class="op">));</span></span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a>  plt_histograms<span class="op">.</span>show<span class="op">();</span></span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Aggiunge il punto con la σ al grafico degli errori</span></span>
+<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a>  plt_errors<span class="op">.</span>add_point<span class="op">(</span>N<span class="op">,</span> calculate_standard_deviation<span class="op">(</span>result<span class="op">));</span></span>
+<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a><span class="co">// Fai un grafico dei punti aggiunti con plt_errors.add_point()</span></span>
+<span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a>plt_errors<span class="op">.</span>plot<span class="op">();</span></span>
+<span id="cb8-33"><a href="#cb8-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-34"><a href="#cb8-34" aria-hidden="true" tabindex="-1"></a><span class="co">// Salva il file con il grafico degli errori</span></span>
+<span id="cb8-35"><a href="#cb8-35" aria-hidden="true" tabindex="-1"></a>plt_errors<span class="op">.</span>show<span class="op">();</span></span></code></pre></div>
 <h1 id="esercizio-10.2">Esercizio 10.2 - Calcolo di integrali con metodi Montecarlo (da consegnare)</h1>
 <p>Studiamo in questo esercizio il comportamento delle tecniche Montecarlo per il calcolo numerico di un integrale mono-dimensionale.</p>
 <ol>
@@ -391,7 +389,7 @@ y &amp;= M \cdot t.
 \int_a^b f(x)\,\mathrm{d}x \approx (b - a) f_\text{max}\frac{N_\text{hit}}{N_\text{tot}}.
 </span></p>
 <h2 id="risultati-attesi-1">Risultati attesi</h2>
-<p>Siccome il programma deve fare molti calcoli, vi consiglio di fornire qualche feedback all’utente usando la libreria <code>fmtlib</code>:</p>
+<p>Siccome il programma deve fare molti calcoli, vi consiglio di fornire qualche feedback all’utente:</p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>  <span class="at">const</span> <span class="dt">int</span> num_of_estimates<span class="op">{</span><span class="dv">1000</span><span class="op">};</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">const</span> <span class="bu">std::</span>vector num_of_points_list<span class="op">{</span><span class="dv">500</span><span class="op">,</span> <span class="dv">1000</span><span class="op">,</span> <span class="dv">5000</span><span class="op">,</span> <span class="dv">10&#39;000</span><span class="op">,</span> <span class="dv">50&#39;000</span><span class="op">,</span> <span class="dv">100&#39;000</span><span class="op">};</span></span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -411,9 +409,9 @@ y &amp;= M \cdot t.
 <span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span><span class="op">(</span><span class="kw">auto</span> num_of_points<span class="op">:</span> num_of_points_list<span class="op">)</span> <span class="op">{</span></span>
 <span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Questo è un feedback da dare all&#39;utente. Notare che usiamo</span></span>
 <span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a>    <span class="co">// `stderr`, così il messaggio viene stampato subito!</span></span>
-<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a>    fmt<span class="op">::</span>println<span class="op">(</span>stderr<span class="op">,</span> <span class="st">&quot;N = </span><span class="sc">{}</span><span class="st">&quot;</span><span class="op">,</span> num_of_points<span class="op">);</span></span>
-<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a>    <span class="bu">std::</span>vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> estimates_mean<span class="op">(</span>num_of_estimates<span class="op">);</span></span>
-<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a>    <span class="bu">std::</span>vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> estimates_hom<span class="op">(</span>num_of_estimates<span class="op">);</span></span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a>    println<span class="op">(</span>stderr<span class="op">,</span> <span class="st">&quot;N = </span><span class="sc">{}</span><span class="st">&quot;</span><span class="op">,</span> num_of_points<span class="op">);</span></span>
+<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a>    vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> estimates_mean<span class="op">(</span>num_of_estimates<span class="op">);</span></span>
+<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a>    vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> estimates_hom<span class="op">(</span>num_of_estimates<span class="op">);</span></span>
 <span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Esegue molte volte il calcolo dell&#39;integrale per vedere la</span></span>
 <span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a>    <span class="co">// variabilità dei risultati</span></span>
@@ -425,13 +423,13 @@ y &amp;= M \cdot t.
 <span id="cb11-31"><a href="#cb11-31" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Mette nella colonna di sinistra l&#39;istogramma delle stime</span></span>
 <span id="cb11-32"><a href="#cb11-32" aria-hidden="true" tabindex="-1"></a>    <span class="co">// con il metodo della media…</span></span>
 <span id="cb11-33"><a href="#cb11-33" aria-hidden="true" tabindex="-1"></a>    plt_histograms<span class="op">.</span>histogram<span class="op">(</span>estimates_mean<span class="op">,</span> <span class="dv">20</span><span class="op">,</span></span>
-<span id="cb11-34"><a href="#cb11-34" aria-hidden="true" tabindex="-1"></a>                  fmt<span class="op">::</span>format<span class="op">(</span><span class="st">&quot;Media, N = </span><span class="sc">{}</span><span class="st">&quot;</span><span class="op">,</span> num_of_points<span class="op">));</span></span>
+<span id="cb11-34"><a href="#cb11-34" aria-hidden="true" tabindex="-1"></a>                             format<span class="op">(</span><span class="st">&quot;Media, N = </span><span class="sc">{}</span><span class="st">&quot;</span><span class="op">,</span> num_of_points<span class="op">));</span></span>
 <span id="cb11-35"><a href="#cb11-35" aria-hidden="true" tabindex="-1"></a>    plt_histograms<span class="op">.</span>set_xrange<span class="op">(</span><span class="fl">1.8</span><span class="op">,</span> <span class="fl">2.2</span><span class="op">);</span></span>
 <span id="cb11-36"><a href="#cb11-36" aria-hidden="true" tabindex="-1"></a>    plt_histograms<span class="op">.</span>show<span class="op">();</span></span>
 <span id="cb11-37"><a href="#cb11-37" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb11-38"><a href="#cb11-38" aria-hidden="true" tabindex="-1"></a>    <span class="co">// …e nella colonna di destra quello con hit-or-miss</span></span>
 <span id="cb11-39"><a href="#cb11-39" aria-hidden="true" tabindex="-1"></a>    plt_histograms<span class="op">.</span>histogram<span class="op">(</span>estimates_hom<span class="op">,</span> <span class="dv">20</span><span class="op">,</span></span>
-<span id="cb11-40"><a href="#cb11-40" aria-hidden="true" tabindex="-1"></a>                  fmt<span class="op">::</span>format<span class="op">(</span><span class="st">&quot;Hit-or-miss, N = </span><span class="sc">{}</span><span class="st">&quot;</span><span class="op">,</span> num_of_points<span class="op">));</span></span>
+<span id="cb11-40"><a href="#cb11-40" aria-hidden="true" tabindex="-1"></a>                             format<span class="op">(</span><span class="st">&quot;Hit-or-miss, N = </span><span class="sc">{}</span><span class="st">&quot;</span><span class="op">,</span> num_of_points<span class="op">));</span></span>
 <span id="cb11-41"><a href="#cb11-41" aria-hidden="true" tabindex="-1"></a>    plt_histograms<span class="op">.</span>set_xrange<span class="op">(</span><span class="fl">1.8</span><span class="op">,</span> <span class="fl">2.2</span><span class="op">);</span></span>
 <span id="cb11-42"><a href="#cb11-42" aria-hidden="true" tabindex="-1"></a>    plt_histograms<span class="op">.</span>show<span class="op">();</span></span>
 <span id="cb11-43"><a href="#cb11-43" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span></code></pre></div>

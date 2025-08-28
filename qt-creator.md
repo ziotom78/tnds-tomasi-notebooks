@@ -273,7 +273,6 @@ Se l'eseguibile `ninja` non è presente, Qt Creator dovrebbe essere in grado di 
 title: Usare Qt Creator
 author: Maurizio Tomasi
 lang: it-IT
-header-includes: <script src="./fmtinstall.js"></script>
 css:
 - ./css/asciinema-player.css
 ...

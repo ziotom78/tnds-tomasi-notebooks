@@ -264,7 +264,7 @@ int main (int argc, char * argv[]) {
 Nel caso si utilizzino classi o funzioni `template`, la dichiarazione e l'implementazione vanno codificate entrambe nell'*header file*. Come si potrebbe infatti compilare una classe template senza sapere con che tipi di dato verrà utilizzata? Di conseguenza la compilazione si riduce alla singola istruzione:
 
 ```makefile
-CXXFLAGS = -g3 -Wall --pedantic -std=c++23
+CXXFLAGS = -g3 -Wall -Wextra -Werror --pedantic -std=c++23
 
 esercizio3.0: esercizio3.0.cpp funzioni.h Vettore.h
     g++ -o $@ esercizio3.0.cpp $(CXXFLAGS)
@@ -411,7 +411,7 @@ int main(int argc, char * argv[]) {
 Ecco il `Makefile`:
 
 ```makefile
-CXXFLAGS = -g3 -Wall --pedantic -std=c++23
+CXXFLAGS = -g3 -Wall -Wextra -Werror --pedantic -std=c++23
 
 esercizio3.1: esercizio3.1.cpp funzioni.h
     g++ -o esercizio3.1 esercizio3.1.cpp $(CXXFLAGS)
@@ -530,7 +530,7 @@ LIBS := `root-config --libs`
 # Warning: it is EXTREMELY IMPORTANT that you follow this order:
 # root-config sets its own -std=c++NN, and thus `-std=c++23` must
 # be the last item in the line!
-CXXFLAGS := `root-config --cflags` -g3 -Wall --pedantic -std=c++23
+CXXFLAGS := `root-config --cflags` -g3 -Wall -Wextra -Werror --pedantic -std=c++23
 
 esercizio3.2: esercizio3.2.cpp funzioni.h
     g++ -o esercizio3.2 esercizio3.2.cpp ${CXXFLAGS} ${LIBS}

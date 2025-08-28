@@ -58,7 +58,7 @@
   <ul>
   <li><a href="#parte-comune" id="toc-parte-comune">Parte comune</a></li>
   <li><a href="#esempio-di-codice-root" id="toc-esempio-di-codice-root">Esempio di codice (ROOT)</a></li>
-  <li><a href="#esempio-gplot-fmtlib" id="toc-esempio-gplot-fmtlib">Esempio (gplot++, fmtlib)</a></li>
+  <li><a href="#esempio-gplot" id="toc-esempio-gplot">Esempio (gplot++)</a></li>
   </ul></li>
   <li><a href="#esercizio-4.3" id="toc-esercizio-4.3">Esercizio 4.3 — Determinazione del cammino minimo (approfondimento uso STL)</a>
   <ul>
@@ -396,13 +396,13 @@ B)^2</span>. Provate a scrivere un codice che pemetta di visualizzare i dati rac
 <span id="cb7-87"><a href="#cb7-87" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-88"><a href="#cb7-88" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> LinearFitResults<span class="op">&lt;</span>T<span class="op">&gt;{</span>a<span class="op">,</span> a_err<span class="op">,</span> b<span class="op">,</span> b_err<span class="op">};</span></span>
 <span id="cb7-89"><a href="#cb7-89" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
-<p>Con questo file si può usare il programma seguente, che memorizza tutti i dati in una struttura <code>Measurements</code>. Il programma usa la libreria <a href="https://github.com/fmtlib/fmt">fmtlib</a> e <a href="https://github.com/ziotom78/gplotpp">gplot++</a>; se volete provare ad installarle, le istruzioni sono a questi link: <a href="miscellanea.html#gplotinstall">gplot</a>, <a href="miscellanea.html#fmtinstall">fmtlib</a>.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;fmtlib.h&quot;</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;gplot++.h&quot;</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;linearfit.h&quot;</span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;cmath&gt;</span></span>
+<p>Con questo file si può usare il programma seguente, che memorizza tutti i dati in una struttura <code>Measurements</code>. Il programma usa la libreria <a href="https://github.com/ziotom78/gplotpp">gplot++</a>; se volete provare ad installarla, le istruzioni sono a <a href="miscellanea.html#gplotinstall">questo link</a>.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;gplot++.h&quot;</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;linearfit.h&quot;</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;cmath&gt;</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;cstdio&gt;</span></span>
 <span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;fstream&gt;</span></span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;print&gt;</span></span>
 <span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;string&gt;</span></span>
 <span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;vector&gt;</span></span>
 <span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a></span>
@@ -452,39 +452,39 @@ B)^2</span>. Provate a scrivere un codice che pemetta di visualizzare i dati rac
 <span id="cb8-53"><a href="#cb8-53" aria-hidden="true" tabindex="-1"></a>  gnuplot<span class="op">.</span>set_ylabel<span class="op">(</span><span class="st">&quot;(r×B)² [m²·T²]&quot;</span><span class="op">);</span></span>
 <span id="cb8-54"><a href="#cb8-54" aria-hidden="true" tabindex="-1"></a>  gnuplot<span class="op">.</span>show<span class="op">();</span></span>
 <span id="cb8-55"><a href="#cb8-55" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-56"><a href="#cb8-56" aria-hidden="true" tabindex="-1"></a>  cerr <span class="op">&lt;&lt;</span> fmt<span class="op">::</span>format<span class="op">(</span><span class="st">&quot;plot saved in file </span><span class="sc">\&quot;{}\&quot;\n</span><span class="st">&quot;</span><span class="op">,</span> filename<span class="op">);</span></span>
+<span id="cb8-56"><a href="#cb8-56" aria-hidden="true" tabindex="-1"></a>  println<span class="op">(</span>stderr<span class="op">,</span> <span class="st">&quot;plot saved in file </span><span class="sc">\&quot;{}\&quot;</span><span class="st">&quot;</span><span class="op">,</span> filename<span class="op">));</span></span>
 <span id="cb8-57"><a href="#cb8-57" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
 <span id="cb8-58"><a href="#cb8-58" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-59"><a href="#cb8-59" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">(</span><span class="dt">int</span> argc<span class="op">,</span> <span class="at">const</span> <span class="dt">char</span> <span class="op">*</span>argv<span class="op">[])</span> <span class="op">{</span></span>
 <span id="cb8-60"><a href="#cb8-60" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> <span class="op">(</span>argc <span class="op">!=</span> <span class="dv">2</span><span class="op">)</span> <span class="op">{</span></span>
-<span id="cb8-61"><a href="#cb8-61" aria-hidden="true" tabindex="-1"></a>    cerr <span class="op">&lt;&lt;</span> fmt<span class="op">::</span>format<span class="op">(</span><span class="st">&quot;usage: </span><span class="sc">{}</span><span class="st"> DATA_FILE</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">,</span> argv<span class="op">[</span><span class="dv">0</span><span class="op">]);</span></span>
+<span id="cb8-61"><a href="#cb8-61" aria-hidden="true" tabindex="-1"></a>    println<span class="op">(</span>stderr<span class="op">,</span> <span class="st">&quot;usage: </span><span class="sc">{}</span><span class="st"> DATA_FILE</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">,</span> argv<span class="op">[</span><span class="dv">0</span><span class="op">]);</span></span>
 <span id="cb8-62"><a href="#cb8-62" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">1</span><span class="op">;</span></span>
 <span id="cb8-63"><a href="#cb8-63" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
 <span id="cb8-64"><a href="#cb8-64" aria-hidden="true" tabindex="-1"></a>  <span class="at">const</span> string file_name<span class="op">{</span>argv<span class="op">[</span><span class="dv">1</span><span class="op">]};</span></span>
 <span id="cb8-65"><a href="#cb8-65" aria-hidden="true" tabindex="-1"></a>  ifstream input_file<span class="op">{</span>file_name<span class="op">};</span></span>
 <span id="cb8-66"><a href="#cb8-66" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> <span class="op">(!</span>input_file<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb8-67"><a href="#cb8-67" aria-hidden="true" tabindex="-1"></a>    cerr <span class="op">&lt;&lt;</span> fmt<span class="op">::</span>format<span class="op">(</span><span class="st">&quot;error, unable to load file </span><span class="sc">\&quot;{}\&quot;\n</span><span class="st">&quot;</span><span class="op">,</span> file_name<span class="op">);</span></span>
+<span id="cb8-67"><a href="#cb8-67" aria-hidden="true" tabindex="-1"></a>    println<span class="op">(</span>stderr<span class="op">,</span> <span class="st">&quot;error, unable to load file </span><span class="sc">\&quot;{}\&quot;</span><span class="st">&quot;</span><span class="op">,</span> file_name<span class="op">);</span></span>
 <span id="cb8-68"><a href="#cb8-68" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">1</span><span class="op">;</span></span>
 <span id="cb8-69"><a href="#cb8-69" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
 <span id="cb8-70"><a href="#cb8-70" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-71"><a href="#cb8-71" aria-hidden="true" tabindex="-1"></a>  Measurements<span class="op">&lt;</span><span class="dt">float</span><span class="op">&gt;</span> data<span class="op">;</span></span>
 <span id="cb8-72"><a href="#cb8-72" aria-hidden="true" tabindex="-1"></a>  read_from_file<span class="op">(</span>input_file<span class="op">,</span> data<span class="op">);</span></span>
 <span id="cb8-73"><a href="#cb8-73" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-74"><a href="#cb8-74" aria-hidden="true" tabindex="-1"></a>  cerr <span class="op">&lt;&lt;</span> fmt<span class="op">::</span>format<span class="op">(</span><span class="st">&quot;</span><span class="sc">{}</span><span class="st"> elements have been read from </span><span class="sc">\&quot;{}\&quot;\n</span><span class="st">&quot;</span><span class="op">,</span> ssize<span class="op">(</span>data<span class="op">),</span></span>
-<span id="cb8-75"><a href="#cb8-75" aria-hidden="true" tabindex="-1"></a>                      file_name<span class="op">);</span></span>
+<span id="cb8-74"><a href="#cb8-74" aria-hidden="true" tabindex="-1"></a>  println<span class="op">(</span>stderr<span class="op">,</span> <span class="st">&quot;</span><span class="sc">{}</span><span class="st"> elements have been read from </span><span class="sc">\&quot;{}\&quot;</span><span class="st">&quot;</span><span class="op">,</span> ssize<span class="op">(</span>data<span class="op">),</span></span>
+<span id="cb8-75"><a href="#cb8-75" aria-hidden="true" tabindex="-1"></a>          file_name<span class="op">);</span></span>
 <span id="cb8-76"><a href="#cb8-76" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-77"><a href="#cb8-77" aria-hidden="true" tabindex="-1"></a>  <span class="kw">auto</span> result <span class="op">=</span> linear_fit<span class="op">(</span>data<span class="op">.</span>voltage<span class="op">,</span> data<span class="op">.</span>rb<span class="op">,</span> data<span class="op">.</span>rb_err<span class="op">);</span></span>
 <span id="cb8-78"><a href="#cb8-78" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-79"><a href="#cb8-79" aria-hidden="true" tabindex="-1"></a>  fmt<span class="op">::</span>println<span class="op">(</span><span class="st">&quot;Data have been fitted on a curve y = A + B × x:&quot;</span><span class="op">);</span></span>
-<span id="cb8-80"><a href="#cb8-80" aria-hidden="true" tabindex="-1"></a>  fmt<span class="op">::</span>println<span class="op">(</span><span class="st">&quot;A = </span><span class="sc">{:.4e}</span><span class="st"> ± </span><span class="sc">{:.4e}</span><span class="st">&quot;</span><span class="op">,</span> result<span class="op">.</span>a<span class="op">,</span> result<span class="op">.</span>a_err<span class="op">);</span></span>
-<span id="cb8-81"><a href="#cb8-81" aria-hidden="true" tabindex="-1"></a>  fmt<span class="op">::</span>println<span class="op">(</span><span class="st">&quot;B = </span><span class="sc">{:.4e}</span><span class="st"> ± </span><span class="sc">{:.4e}</span><span class="st">&quot;</span><span class="op">,</span> result<span class="op">.</span>b<span class="op">,</span> result<span class="op">.</span>b_err<span class="op">);</span></span>
+<span id="cb8-79"><a href="#cb8-79" aria-hidden="true" tabindex="-1"></a>  println<span class="op">(</span><span class="st">&quot;Data have been fitted on a curve y = A + B × x:&quot;</span><span class="op">);</span></span>
+<span id="cb8-80"><a href="#cb8-80" aria-hidden="true" tabindex="-1"></a>  println<span class="op">(</span><span class="st">&quot;A = </span><span class="sc">{:.4e}</span><span class="st"> ± </span><span class="sc">{:.4e}</span><span class="st">&quot;</span><span class="op">,</span> result<span class="op">.</span>a<span class="op">,</span> result<span class="op">.</span>a_err<span class="op">);</span></span>
+<span id="cb8-81"><a href="#cb8-81" aria-hidden="true" tabindex="-1"></a>  println<span class="op">(</span><span class="st">&quot;B = </span><span class="sc">{:.4e}</span><span class="st"> ± </span><span class="sc">{:.4e}</span><span class="st">&quot;</span><span class="op">,</span> result<span class="op">.</span>b<span class="op">,</span> result<span class="op">.</span>b_err<span class="op">);</span></span>
 <span id="cb8-82"><a href="#cb8-82" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-83"><a href="#cb8-83" aria-hidden="true" tabindex="-1"></a>  plot_data_and_fit<span class="op">(</span><span class="st">&quot;output_plot.png&quot;</span><span class="op">,</span> data<span class="op">,</span> result<span class="op">.</span>a<span class="op">,</span> result<span class="op">.</span>b<span class="op">);</span></span>
 <span id="cb8-84"><a href="#cb8-84" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-85"><a href="#cb8-85" aria-hidden="true" tabindex="-1"></a>  <span class="kw">auto</span> q_over_m<span class="op">{</span><span class="dv">1</span> <span class="op">/</span> result<span class="op">.</span>b<span class="op">};</span></span>
 <span id="cb8-86"><a href="#cb8-86" aria-hidden="true" tabindex="-1"></a>  <span class="kw">auto</span> error<span class="op">{</span>sqrt<span class="op">(</span>pow<span class="op">(</span>q_over_m<span class="op">,</span> <span class="dv">4</span><span class="op">)</span> <span class="op">*</span> pow<span class="op">(</span>result<span class="op">.</span>b_err<span class="op">,</span> <span class="dv">2</span><span class="op">))};</span></span>
 <span id="cb8-87"><a href="#cb8-87" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-88"><a href="#cb8-88" aria-hidden="true" tabindex="-1"></a>  fmt<span class="op">::</span>println<span class="op">(</span><span class="st">&quot;q/m = </span><span class="sc">{:.4e}</span><span class="st"> ± </span><span class="sc">{:.4e}</span><span class="st">&quot;</span><span class="op">,</span> q_over_m<span class="op">,</span> error<span class="op">);</span></span>
+<span id="cb8-88"><a href="#cb8-88" aria-hidden="true" tabindex="-1"></a>  println<span class="op">(</span><span class="st">&quot;q/m = </span><span class="sc">{:.4e}</span><span class="st"> ± </span><span class="sc">{:.4e}</span><span class="st">&quot;</span><span class="op">,</span> q_over_m<span class="op">,</span> error<span class="op">);</span></span>
 <span id="cb8-89"><a href="#cb8-89" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 <h2 id="esempio-di-codice-in-python">Esempio di codice in Python</h2>
 <p>Python è probabilmente il linguaggio di programmazione più usato in ambito scientifico. Per quelli di voi curiosi, fornisco una implementazione dello stesso codice sopra usando questo linguaggio:</p>
@@ -531,7 +531,7 @@ B)^2</span>. Provate a scrivere un codice che pemetta di visualizzare i dati rac
 <span id="cb9-41"><a href="#cb9-41" aria-hidden="true" tabindex="-1"></a>e_over_m <span class="op">=</span> <span class="dv">1</span> <span class="op">/</span> m_over_e</span>
 <span id="cb9-42"><a href="#cb9-42" aria-hidden="true" tabindex="-1"></a>e_over_m_err <span class="op">=</span> rel_error <span class="op">*</span> e_over_m</span>
 <span id="cb9-43"><a href="#cb9-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-44"><a href="#cb9-44" aria-hidden="true" tabindex="-1"></a><span class="co"># Strings beginning with `f` are treated similarly to the C++ fmt library</span></span>
+<span id="cb9-44"><a href="#cb9-44" aria-hidden="true" tabindex="-1"></a><span class="co"># Strings beginning with `f` are treated similarly to the C++ print() function</span></span>
 <span id="cb9-45"><a href="#cb9-45" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;e/m = </span><span class="sc">{</span>e_over_m<span class="sc">:.2e}</span><span class="ss"> ± </span><span class="sc">{</span>e_over_m_err<span class="sc">:.2e}</span><span class="ss">&quot;</span>)</span>
 <span id="cb9-46"><a href="#cb9-46" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;reference: 1.76×10^11 C⋅kg^−1&quot;</span>)</span></code></pre></div>
 <p>Una volta che il programma è stato salvato in un file <code>esercizio4.0.py</code>, potete compilarlo ed eseguirlo con un solo comando:</p>
@@ -685,80 +685,79 @@ S(q) = \sum \left[\frac{Q_i}{k_i} - q\right]^2,
 <span id="cb13-74"><a href="#cb13-74" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 <p>Vi consiglio di compilare nel <code>Makefile</code> i file <code>esercizio4.1.cpp</code> e <code>common.cpp</code> insieme, anziché creare i file <code>.o</code> e linkarli con un passaggio a parte: è molto più semplice!</p>
 <pre class="make"><code>esercizio4.1: esercizio4.1.cpp common.cpp common.h
-    g++ -g3 -Wall --pedantic -std=c++23 -o esercizio4.1 esercizio4.1.cpp common.cpp</code></pre>
-<h2 id="esempio-gplot-fmtlib">Esempio (gplot++, fmtlib)</h2>
-<p>Questa è invece una implementazione che usa <a href="https://github.com/ziotom78/gplotpp">gplot++</a> e <a href="https://github.com/fmtlib/fmt">fmtlib</a>:</p>
+    g++ -g3 -Wall -Wextra -Werror --pedantic -std=c++23 -o esercizio4.1 esercizio4.1.cpp common.cpp</code></pre>
+<h2 id="esempio-gplot">Esempio (gplot++)</h2>
+<p>Questa è invece una implementazione che usa <a href="https://github.com/ziotom78/gplotpp">gplot++</a>:</p>
 <div class="sourceCode" id="cb15"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;gplot++.h&quot;</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;fmtlib.h&quot;</span></span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;cmath&gt;</span></span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;cfloat&gt;</span></span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;fstream&gt;</span></span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;iomanip&gt;</span></span>
-<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
-<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;vector&gt;</span></span>
-<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;common.h&quot;</span></span>
-<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a><span class="kw">using</span> <span class="kw">namespace</span> std<span class="op">;</span></span>
-<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a><span class="co">// ===========================================================</span></span>
-<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a><span class="co">// This code estimates the best value of qe from a set of</span></span>
-<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a><span class="co">// measurements (drop charges)</span></span>
-<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a><span class="co">// ===========================================================</span></span>
-<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
-<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a>  <span class="co">// read charges from file</span></span>
-<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a>  vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> charges<span class="op">{</span>ParseFile<span class="op">(</span><span class="st">&quot;data_millikan.dat&quot;</span><span class="op">)};</span></span>
-<span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-24"><a href="#cb15-24" aria-hidden="true" tabindex="-1"></a>  <span class="co">// show charges distribution</span></span>
-<span id="cb15-25"><a href="#cb15-25" aria-hidden="true" tabindex="-1"></a>  Gnuplot plt<span class="op">{};</span></span>
-<span id="cb15-26"><a href="#cb15-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-27"><a href="#cb15-27" aria-hidden="true" tabindex="-1"></a>  plt<span class="op">.</span>multiplot<span class="op">(</span><span class="dv">2</span><span class="op">,</span> <span class="dv">1</span><span class="op">,</span> <span class="st">&quot;Millikan&quot;</span><span class="op">);</span></span>
-<span id="cb15-28"><a href="#cb15-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-29"><a href="#cb15-29" aria-hidden="true" tabindex="-1"></a>  plt<span class="op">.</span>set_title<span class="op">(</span><span class="st">&quot;Charge distribution&quot;</span><span class="op">);</span></span>
-<span id="cb15-30"><a href="#cb15-30" aria-hidden="true" tabindex="-1"></a>  plt<span class="op">.</span>set_xlabel<span class="op">(</span><span class="st">&quot;Charge [C]&quot;</span><span class="op">);</span></span>
-<span id="cb15-31"><a href="#cb15-31" aria-hidden="true" tabindex="-1"></a>  plt<span class="op">.</span>set_ylabel<span class="op">(</span><span class="st">&quot;Number of counts&quot;</span><span class="op">);</span></span>
-<span id="cb15-32"><a href="#cb15-32" aria-hidden="true" tabindex="-1"></a>  plt<span class="op">.</span>histogram<span class="op">(</span>charges<span class="op">,</span> <span class="dv">10</span><span class="op">);</span></span>
-<span id="cb15-33"><a href="#cb15-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-34"><a href="#cb15-34" aria-hidden="true" tabindex="-1"></a>  plt<span class="op">.</span>show<span class="op">();</span></span>
-<span id="cb15-35"><a href="#cb15-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-36"><a href="#cb15-36" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> qmin<span class="op">{</span><span class="dv">0</span><span class="op">};</span></span>
-<span id="cb15-37"><a href="#cb15-37" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> sqmin<span class="op">{</span>DBL_MAX<span class="op">};</span></span>
-<span id="cb15-38"><a href="#cb15-38" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-39"><a href="#cb15-39" aria-hidden="true" tabindex="-1"></a>  <span class="co">// These vector will contain the X,Y coordinates</span></span>
-<span id="cb15-40"><a href="#cb15-40" aria-hidden="true" tabindex="-1"></a>  <span class="co">// of the points to plot</span></span>
-<span id="cb15-41"><a href="#cb15-41" aria-hidden="true" tabindex="-1"></a>  vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> x_charge<span class="op">{};</span></span>
-<span id="cb15-42"><a href="#cb15-42" aria-hidden="true" tabindex="-1"></a>  vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> y_fun<span class="op">{};</span></span>
-<span id="cb15-43"><a href="#cb15-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-44"><a href="#cb15-44" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> <span class="op">(</span><span class="dt">double</span> value<span class="op">{</span><span class="fl">1.4e-19</span><span class="op">};</span> value <span class="op">&lt;</span> <span class="fl">1.8e-19</span><span class="op">;</span> value <span class="op">+=</span> <span class="fl">0.001e-19</span><span class="op">)</span> <span class="op">{</span></span>
-<span id="cb15-45"><a href="#cb15-45" aria-hidden="true" tabindex="-1"></a>    <span class="dt">double</span> cur_value<span class="op">{</span>fun<span class="op">(</span>value<span class="op">,</span> charges<span class="op">)};</span></span>
-<span id="cb15-46"><a href="#cb15-46" aria-hidden="true" tabindex="-1"></a>    x_charge<span class="op">.</span>push_back<span class="op">(</span>value<span class="op">);</span></span>
-<span id="cb15-47"><a href="#cb15-47" aria-hidden="true" tabindex="-1"></a>    y_fun<span class="op">.</span>push_back<span class="op">(</span>cur_value<span class="op">);</span></span>
-<span id="cb15-48"><a href="#cb15-48" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-49"><a href="#cb15-49" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>cur_value <span class="op">&lt;</span> sqmin<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb15-50"><a href="#cb15-50" aria-hidden="true" tabindex="-1"></a>      sqmin <span class="op">=</span> cur_value<span class="op">;</span></span>
-<span id="cb15-51"><a href="#cb15-51" aria-hidden="true" tabindex="-1"></a>      qmin <span class="op">=</span> value<span class="op">;</span></span>
-<span id="cb15-52"><a href="#cb15-52" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb15-53"><a href="#cb15-53" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
-<span id="cb15-54"><a href="#cb15-54" aria-hidden="true" tabindex="-1"></a>  plt<span class="op">.</span>set_title<span class="op">(</span><span class="st">&quot;Best charge value&quot;</span><span class="op">);</span></span>
-<span id="cb15-55"><a href="#cb15-55" aria-hidden="true" tabindex="-1"></a>  plt<span class="op">.</span>set_xlabel<span class="op">(</span><span class="st">&quot;Charge [C]&quot;</span><span class="op">);</span></span>
-<span id="cb15-56"><a href="#cb15-56" aria-hidden="true" tabindex="-1"></a>  plt<span class="op">.</span>set_ylabel<span class="op">(</span><span class="st">&quot;S(q) [C²]&quot;</span><span class="op">);</span></span>
-<span id="cb15-57"><a href="#cb15-57" aria-hidden="true" tabindex="-1"></a>  plt<span class="op">.</span>plot<span class="op">(</span>x_charge<span class="op">,</span> y_fun<span class="op">);</span></span>
-<span id="cb15-58"><a href="#cb15-58" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-59"><a href="#cb15-59" aria-hidden="true" tabindex="-1"></a>  plt<span class="op">.</span>show<span class="op">();</span></span>
-<span id="cb15-60"><a href="#cb15-60" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-61"><a href="#cb15-61" aria-hidden="true" tabindex="-1"></a>  fmt<span class="op">::</span>println<span class="op">(</span><span class="st">&quot;Found approximate minimum at q = </span><span class="sc">{0:.4e}</span><span class="st"> C&quot;</span><span class="op">,</span> qmin<span class="op">);</span></span>
-<span id="cb15-62"><a href="#cb15-62" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-63"><a href="#cb15-63" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> mycharge<span class="op">{</span>deriv<span class="op">(</span>qmin<span class="op">,</span> charges<span class="op">)};</span></span>
-<span id="cb15-64"><a href="#cb15-64" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> uncer<span class="op">{</span></span>
-<span id="cb15-65"><a href="#cb15-65" aria-hidden="true" tabindex="-1"></a>      sqrt<span class="op">(</span>fun<span class="op">(</span>mycharge<span class="op">,</span> charges<span class="op">)</span> <span class="op">/</span> <span class="op">(</span>ssize<span class="op">(</span>charges<span class="op">)</span> <span class="op">*</span> <span class="op">(</span>ssize<span class="op">(</span>charges<span class="op">)</span> <span class="op">-</span> <span class="dv">1</span><span class="op">)))};</span></span>
-<span id="cb15-66"><a href="#cb15-66" aria-hidden="true" tabindex="-1"></a>  fmt<span class="op">::</span>println<span class="op">(</span><span class="st">&quot;Measured charge = </span><span class="sc">{0:.4e}</span><span class="st"> ± </span><span class="sc">{1:.4e}</span><span class="st"> C (stat only)&quot;</span><span class="op">,</span> mycharge<span class="op">,</span></span>
-<span id="cb15-67"><a href="#cb15-67" aria-hidden="true" tabindex="-1"></a>               uncer<span class="op">);</span></span>
-<span id="cb15-68"><a href="#cb15-68" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;cmath&gt;</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;cfloat&gt;</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;fstream&gt;</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;iomanip&gt;</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;vector&gt;</span></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;common.h&quot;</span></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a><span class="kw">using</span> <span class="kw">namespace</span> std<span class="op">;</span></span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a><span class="co">// ===========================================================</span></span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a><span class="co">// This code estimates the best value of qe from a set of</span></span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a><span class="co">// measurements (drop charges)</span></span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a><span class="co">// ===========================================================</span></span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a>  <span class="co">// read charges from file</span></span>
+<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a>  vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> charges<span class="op">{</span>ParseFile<span class="op">(</span><span class="st">&quot;data_millikan.dat&quot;</span><span class="op">)};</span></span>
+<span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a>  <span class="co">// show charges distribution</span></span>
+<span id="cb15-24"><a href="#cb15-24" aria-hidden="true" tabindex="-1"></a>  Gnuplot plt<span class="op">{};</span></span>
+<span id="cb15-25"><a href="#cb15-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-26"><a href="#cb15-26" aria-hidden="true" tabindex="-1"></a>  plt<span class="op">.</span>multiplot<span class="op">(</span><span class="dv">2</span><span class="op">,</span> <span class="dv">1</span><span class="op">,</span> <span class="st">&quot;Millikan&quot;</span><span class="op">);</span></span>
+<span id="cb15-27"><a href="#cb15-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-28"><a href="#cb15-28" aria-hidden="true" tabindex="-1"></a>  plt<span class="op">.</span>set_title<span class="op">(</span><span class="st">&quot;Charge distribution&quot;</span><span class="op">);</span></span>
+<span id="cb15-29"><a href="#cb15-29" aria-hidden="true" tabindex="-1"></a>  plt<span class="op">.</span>set_xlabel<span class="op">(</span><span class="st">&quot;Charge [C]&quot;</span><span class="op">);</span></span>
+<span id="cb15-30"><a href="#cb15-30" aria-hidden="true" tabindex="-1"></a>  plt<span class="op">.</span>set_ylabel<span class="op">(</span><span class="st">&quot;Number of counts&quot;</span><span class="op">);</span></span>
+<span id="cb15-31"><a href="#cb15-31" aria-hidden="true" tabindex="-1"></a>  plt<span class="op">.</span>histogram<span class="op">(</span>charges<span class="op">,</span> <span class="dv">10</span><span class="op">);</span></span>
+<span id="cb15-32"><a href="#cb15-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-33"><a href="#cb15-33" aria-hidden="true" tabindex="-1"></a>  plt<span class="op">.</span>show<span class="op">();</span></span>
+<span id="cb15-34"><a href="#cb15-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-35"><a href="#cb15-35" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> qmin<span class="op">{</span><span class="dv">0</span><span class="op">};</span></span>
+<span id="cb15-36"><a href="#cb15-36" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> sqmin<span class="op">{</span>DBL_MAX<span class="op">};</span></span>
+<span id="cb15-37"><a href="#cb15-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-38"><a href="#cb15-38" aria-hidden="true" tabindex="-1"></a>  <span class="co">// These vector will contain the X,Y coordinates</span></span>
+<span id="cb15-39"><a href="#cb15-39" aria-hidden="true" tabindex="-1"></a>  <span class="co">// of the points to plot</span></span>
+<span id="cb15-40"><a href="#cb15-40" aria-hidden="true" tabindex="-1"></a>  vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> x_charge<span class="op">{};</span></span>
+<span id="cb15-41"><a href="#cb15-41" aria-hidden="true" tabindex="-1"></a>  vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> y_fun<span class="op">{};</span></span>
+<span id="cb15-42"><a href="#cb15-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-43"><a href="#cb15-43" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> <span class="op">(</span><span class="dt">double</span> value<span class="op">{</span><span class="fl">1.4e-19</span><span class="op">};</span> value <span class="op">&lt;</span> <span class="fl">1.8e-19</span><span class="op">;</span> value <span class="op">+=</span> <span class="fl">0.001e-19</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb15-44"><a href="#cb15-44" aria-hidden="true" tabindex="-1"></a>    <span class="dt">double</span> cur_value<span class="op">{</span>fun<span class="op">(</span>value<span class="op">,</span> charges<span class="op">)};</span></span>
+<span id="cb15-45"><a href="#cb15-45" aria-hidden="true" tabindex="-1"></a>    x_charge<span class="op">.</span>push_back<span class="op">(</span>value<span class="op">);</span></span>
+<span id="cb15-46"><a href="#cb15-46" aria-hidden="true" tabindex="-1"></a>    y_fun<span class="op">.</span>push_back<span class="op">(</span>cur_value<span class="op">);</span></span>
+<span id="cb15-47"><a href="#cb15-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-48"><a href="#cb15-48" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>cur_value <span class="op">&lt;</span> sqmin<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb15-49"><a href="#cb15-49" aria-hidden="true" tabindex="-1"></a>      sqmin <span class="op">=</span> cur_value<span class="op">;</span></span>
+<span id="cb15-50"><a href="#cb15-50" aria-hidden="true" tabindex="-1"></a>      qmin <span class="op">=</span> value<span class="op">;</span></span>
+<span id="cb15-51"><a href="#cb15-51" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb15-52"><a href="#cb15-52" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb15-53"><a href="#cb15-53" aria-hidden="true" tabindex="-1"></a>  plt<span class="op">.</span>set_title<span class="op">(</span><span class="st">&quot;Best charge value&quot;</span><span class="op">);</span></span>
+<span id="cb15-54"><a href="#cb15-54" aria-hidden="true" tabindex="-1"></a>  plt<span class="op">.</span>set_xlabel<span class="op">(</span><span class="st">&quot;Charge [C]&quot;</span><span class="op">);</span></span>
+<span id="cb15-55"><a href="#cb15-55" aria-hidden="true" tabindex="-1"></a>  plt<span class="op">.</span>set_ylabel<span class="op">(</span><span class="st">&quot;S(q) [C²]&quot;</span><span class="op">);</span></span>
+<span id="cb15-56"><a href="#cb15-56" aria-hidden="true" tabindex="-1"></a>  plt<span class="op">.</span>plot<span class="op">(</span>x_charge<span class="op">,</span> y_fun<span class="op">);</span></span>
+<span id="cb15-57"><a href="#cb15-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-58"><a href="#cb15-58" aria-hidden="true" tabindex="-1"></a>  plt<span class="op">.</span>show<span class="op">();</span></span>
+<span id="cb15-59"><a href="#cb15-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-60"><a href="#cb15-60" aria-hidden="true" tabindex="-1"></a>  println<span class="op">(</span><span class="st">&quot;Found approximate minimum at q = </span><span class="sc">{0:.4e}</span><span class="st"> C&quot;</span><span class="op">,</span> qmin<span class="op">);</span></span>
+<span id="cb15-61"><a href="#cb15-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-62"><a href="#cb15-62" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> mycharge<span class="op">{</span>deriv<span class="op">(</span>qmin<span class="op">,</span> charges<span class="op">)};</span></span>
+<span id="cb15-63"><a href="#cb15-63" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> uncer<span class="op">{</span></span>
+<span id="cb15-64"><a href="#cb15-64" aria-hidden="true" tabindex="-1"></a>      sqrt<span class="op">(</span>fun<span class="op">(</span>mycharge<span class="op">,</span> charges<span class="op">)</span> <span class="op">/</span> <span class="op">(</span>ssize<span class="op">(</span>charges<span class="op">)</span> <span class="op">*</span> <span class="op">(</span>ssize<span class="op">(</span>charges<span class="op">)</span> <span class="op">-</span> <span class="dv">1</span><span class="op">)))};</span></span>
+<span id="cb15-65"><a href="#cb15-65" aria-hidden="true" tabindex="-1"></a>  println<span class="op">(</span><span class="st">&quot;Measured charge = </span><span class="sc">{0:.4e}</span><span class="st"> ± </span><span class="sc">{1:.4e}</span><span class="st"> C (stat only)&quot;</span><span class="op">,</span> mycharge<span class="op">,</span></span>
+<span id="cb15-66"><a href="#cb15-66" aria-hidden="true" tabindex="-1"></a>          uncer<span class="op">);</span></span>
+<span id="cb15-67"><a href="#cb15-67" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 <p>Come sopra, consiglio di compilare insieme <code>esercizio4.1.cpp</code> e <code>common.cpp</code> nel <code>Makefile</code>:</p>
 <pre class="make"><code>esercizio4.1: esercizio4.1.cpp common.cpp common.h
-    g++ -g3 -Wall --pedantic -std=c++23 -o esercizio4.1 esercizio4.1.cpp common.cpp</code></pre>
+    g++ -g3 -Wall -Wextra -Werror --pedantic -std=c++23 -o esercizio4.1 esercizio4.1.cpp common.cpp</code></pre>
 <h1 id="esercizio-4.3">Esercizio 4.3 — Determinazione del cammino minimo (approfondimento uso STL)</h1>
 <p>In questo esercizio possiamo provare ad approfondire l’uso di contenitori e algoritmi della STL. Proviamo ad affrontare questo problema: dato un set di punti nel piano cerchiamo il percorso che ci permette (partendo dall’origine) di toccare tutti i punti percorrendo la minor distanza possibile. Le coordinate dei punti si trovano in un file. Eventualmente cercate di produrre un grafico del percorso effettuato.</p>
 <ul>

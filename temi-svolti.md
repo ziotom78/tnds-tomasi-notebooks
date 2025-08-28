@@ -10,11 +10,9 @@ Prima di discutere come svolgere i temi d'esame proposti da Carminati, vi fornis
 
 -   In ogni tema uso tecniche un po' diverse da quelle che avete visto a lezione; di solito, queste varianti che vi mostro servono per rendere il codice più veloce da scrivere (importante nell'esame scritto, dove avete a disposizione solo due ore!).
 
--   Assumo che ciascuno di voi usi lo standard C++20: questo significa usare il flag `-std=c++20` con il compilatore.
+-   Assumo che ciascuno di voi usi lo standard C++23: questo significa usare il flag `-std=c++23` con il compilatore.
 
 -   Nei miei svolgimento non uso ROOT, ma Gnuplot interfacciato con la libreria [gplot++](https://github.com/ziotom78/gplotpp): lo trovo molto più semplice e veloce da usare. Fate riferimento a [questo link](miscellanea.html#gplotinstall) per sapere come installarlo sul vostro computer
-
--   Similmente, uso `cout` e `cerr` solo nei casi più semplici, mentre quando si tratta di stampare numeri formattati uso la libreria [fmt](https://github.com/fmtlib/fmt). Fate riferimento a [questo link](miscellanea.html#fmtinstall) per maggiori informazioni.
 
 -   Siete caldamente invitati a tenere presente i punti elencati al link [Come prepararsi all'esame scritto](prepararsi-esame.html) mentre leggete questa pagina!
 
@@ -183,7 +181,7 @@ double myfn(double x) {
 }
 
 int main() {
-  fmt::println("The integral is {}\n", midpoint(myfn, 0.0, 2.0, 10));
+  println("The integral is {}\n", midpoint(myfn, 0.0, 2.0, 10));
 }
 ```
 
@@ -247,7 +245,7 @@ Per quanto riguarda il punto in cui si **usa** il template, ossia quando nel nos
 ```c++
 // Shortest version ever: just five lines!!!
 int main() {
-  fmt::println("The integral is {}\n",
+  println("The integral is {}\n",
                midpoint([](double x) { return x * x - 3 * x + 4; },
                         0.0, 2.0, 10));
 }
@@ -268,7 +266,7 @@ public:
 int main() {
   Midpoint midpoint;
   Parabola myfun
-  fmt::println("The integral is {}\n",
+  println("The integral is {}\n",
                Eval.integrate(0.0, 2.0, 10, myfun));
 }
 ```
@@ -325,7 +323,7 @@ double myfn(double x) {
 }
 
 int main() {
-  fmt::println("The integral is {}\n", midpoint(myfn, 0.0, 2.0, 10));
+  println("The integral is {}\n", midpoint(myfn, 0.0, 2.0, 10));
 }
 ```
 
@@ -379,10 +377,10 @@ int main() {
   Parabola par2{2.0, 0.0, -1.0}; // 2x² - 1
 
   // par1 looks like a function, but it's a class!
-  fmt::println("par1 in x = 3 is {}", par1(3.0));
+  println("par1 in x = 3 is {}", par1(3.0));
 
   // The same for par2
-  fmt::println("par2 in x = 3 is {}", par2(3.0));
+  println("par2 in x = 3 is {}", par2(3.0));
 }
 ```
 
@@ -391,7 +389,7 @@ Con la definizione di `operator()`, gli oggetti `Parabola` possono essere passat
 ```c++
 Parabola par{1.0, 2.0, 3.0};
 
-cout << midpoint(par, 0.0, 2.0, 50) << "\n";
+println("{}", midpoint(par, 0.0, 2.0, 50));
 ```
 
 Dal momento che `Parabola` è comunque una classe derivata da `FunzioneBase`, essa può essere passata anche a tutte quelle funzioni che avevate definito negli esercizi e che usano la programmazione ad oggetti.
@@ -466,14 +464,14 @@ e poi ovviamente immaginiamo di usare questa ipotetica `calculate_errors()` nel 
 
 ```c++
 int main(void) {
-    cout << "# Svolgimento punto 1:\n\n";
+    println("# Svolgimento punto 1:\n");
     MidPoint midpoint{};
     calculate_errors(midpoint);  // Qui dico di integrare col midpoint
 
-    cout << "# Svolgimento punto 2:\n\n";
+    println("# Svolgimento punto 2:\n");
     // ...
 
-    cout << "# Svolgimento punto 3:\n\n";
+    println("# Svolgimento punto 3:\n");
     MidRight midright{};
     calculate_errors(midright);  // Qui dico di integrare col midright
 
@@ -777,23 +775,21 @@ struct ErrorTable {
   double k1{};
   double k2{};
 
-  /// Output the table with the errors to `cout`
+  /// Output the table with the errors
   void print_error_table() {
-    cout << "Error table:\n\n";
-    fmt::println("{:>6s}\t{:>20s}\t{:>20s}\t{:>20s}\t{:>20s}", "N", "h",
-                 "Value", "Error", "Estimated error");
+    println("Error table:\n");
+    println("{:>6s}\t{:>20s}\t{:>20s}\t{:>20s}\t{:>20s}", "N", "h",
+            "Value", "Error", "Estimated error");
     for (int i{}; i < ssize(step_size); ++i) {
       double estimated_error{interpolated_error(step_size[i])};
-      fmt::println("{:6d}\t{:20.7e}\t{:20.7e}\t{:20.7e}\t{:20.7e}",
-                   num_of_steps.at(i), step_size.at(i), value.at(i),
-                   error.at(i), estimated_error);
+      println("{:6d}\t{:20.7e}\t{:20.7e}\t{:20.7e}\t{:20.7e}",
+              num_of_steps.at(i), step_size.at(i), value.at(i),
+              error.at(i), estimated_error);
     }
-    cout << "\n\n";
+    println("\n");
   }
 };
 ```
-
-Ovviamente il codice fa uso della libreria [fmtlib](miscellanea.html#fmtinstall) per stampare la tabella in un formato gradevole.
 
 Dobbiamo ora implementare il `main`, che è banale:
 
@@ -803,11 +799,11 @@ int main() {
   test_code();
 
   // Stampiamo il valore vero dell'integrale, in modo da tenerlo sott'occhio
-  fmt::print(
+  print(
       "True value of the integral between a={:.3f} and b={:.3f}: {:.5f}\n\n", a,
       b, true_value1);
 
-  cout << "# Point #1\n\n";
+  println("# Point #1\n");
 
   Midpoint midpoint;
   Function1 fun1;
@@ -867,8 +863,8 @@ calculate_errors(const Integral & integral,
 
   results.print_error_table();
 
-  fmt::println("k₁ = {:.2f}, k₂ = {:.2f}", results.k1, results.k2);
-  cout << "\n\n";
+  println("k₁ = {:.2f}, k₂ = {:.2f}", results.k1, results.k2);
+  println("\n");
 
   return results;
 }
@@ -972,7 +968,7 @@ int main() {
   // Il codice per i punti #1 e #2 resta ovviamente uguale
   // ...
 
-  cout << "# Points 3 and 4\n\n";
+  println("# Points 3 and 4\n");
 
   MidRight midright;
   calculate_errors(midright, fun1, true_value1, "point3.png")};
@@ -1023,7 +1019,7 @@ double run_integral_mc_mean(int N) {
     mc_samples.at(i) = media.Integra(fun1, a, b, N, 0.0);
   }
   double error_mc{stddev(mc_samples)};
-  fmt::print("Estimate of the integral using the mean method with N={} points: "
+  print("Estimate of the integral using the mean method with N={} points: "
              "{:.5f} ± {:.5f}\n\n",
              N,
              mc_samples.front(), // Let's take the first sample
@@ -1042,7 +1038,7 @@ Se volete potete produrre anche un istogramma di `mc_samples`, per verificare la
 -   Attenzione al valore che attribuite all'integrale! Anche se avete 1000 stime dell'integrale in `mc_mean`, non potete calcolarne la media e dire che quel valore è affetto dall'errore restituito dalla chiamata a `stddev`. In altre parole, questo codice è **errato**:
 
     ```c++
-    fmt::print("Estimate of the integral using the mean method with N={} points: "
+    print("Estimate of the integral using the mean method with N={} points: "
                "{:.5f} ± {:.5f}\n\n",
                N,
                mean(mc_samples), // WRONG WRONG WRONG!
@@ -1094,7 +1090,7 @@ che si traduce immediatamente nel seguente codice C++:
 const int new_N{static_cast<int>(N * pow(error_mc / target_error, 2.0))};
 
 
-fmt::print("Number of points required for the mean method to achieve an "
+print("Number of points required for the mean method to achieve an "
            "error of {:.3e}: {}\n\n",
            target_error, new_N);
 
@@ -1153,10 +1149,10 @@ int main() {
 
   // ...
 
-  cout << "# Point #7\n\n";
+  println("# Point #7\n");
 
-  cout << "We must use mid-point, otherwise the function to integrate is "
-          "estimated outside of its domain.\n\n";
+  println("We must use mid-point, otherwise the function to integrate is "
+          "estimated outside of its domain.\n");
   Funzione2 fun2;
   ErrorTable fun2_results{calculate_errors(midpoint, fun2,
                                            true_value2, "point7.png")};
@@ -1421,13 +1417,13 @@ int exam2() {
   test_euler();
   test_runge_kutta();
 
-  cout << "# Point 1\n\n";
+  println("# Point 1\n");
 
   const double h{0.05};
   double end_position_h{estimate_end_position(0.0, h, "point1.png")};
-  fmt::println("End position at t = {:.2f} s with step h = {:.2f} s: {:.5f} m",
+  println("End position at t = {:.2f} s with step h = {:.2f} s: {:.5f} m",
                end_time, h, end_position_h);
-  cout << "A plot has been saved in file point1.png\n\n";
+  println("A plot has been saved in file point1.png\n");
 }
 ```
 
@@ -1458,14 +1454,14 @@ $$
 dove $x_f^{(h)}$ e $x_f^{(h/2)}$ sono le posizioni finali calcolate nei due casi. Si tratta quindi banalmente di implementare la formula:
 
 ```c++
-cout << "# Point 2\n\n";
+println("# Point 2\n");
 
-fmt::println("End position: {:.4f} m", end_position_h);
+println("End position: {:.4f} m", end_position_h);
 
 // We don't ask `estimate_end_position` to save a plot here
 double end_position_h2{estimate_end_position(0.0, h / 2, 2 * N)};
 double error_h{16. / 15 * abs(end_position_h - end_position_h2)};
-fmt::println("Error on the end position (h = {} s): {:.2e} m", h, error_h);
+println("Error on the end position (h = {} s): {:.2e} m", h, error_h);
 ```
 
 L'output del programma è il seguente:
@@ -1510,7 +1506,7 @@ const double target_error{50e-6};
 int new_N{static_cast<int>(N * pow(error_h / target_error, 0.25))};
 double new_h{end_time / new_N};
 
-fmt::print("Number of steps required to reach an error ε = {} m: {} (h' = "
+print("Number of steps required to reach an error ε = {} m: {} (h' = "
            "{:.2e} s)\n\n",
            target_error, new_N, new_h);
 ```
@@ -1553,7 +1549,7 @@ double estimate_stddev_from_mc(RandomGen &rnd, double err_on_vx0, double h,
 
   // When needed, print these parameters to debug the code
   if (debug_print) {
-    fmt::println("Position from MC samples: {:.5f} ± {:.5f} m", avg, err);
+    println("Position from MC samples: {:.5f} ± {:.5f} m", avg, err);
   }
 
   // Just return the error
@@ -1564,13 +1560,13 @@ double estimate_stddev_from_mc(RandomGen &rnd, double err_on_vx0, double h,
 Una volta implementata questa funzione, è sufficiente invocarla nel `main()`:
 
 ```c++
-cout << "# Point 4\n\n";
+println("# Point 4\n");
 
 RandomGen rnd{1};
 
 double mc_error{estimate_stddev_from_mc(rnd, 3e-3, new_h, new_N, true)};
 
-fmt::println("Error on the end position estimated from MC: {:.2f} mm",
+println("Error on the end position estimated from MC: {:.2f} mm",
              mc_error * 1e3);
 ```
 
@@ -1589,7 +1585,7 @@ Error on the end position estimated from MC: 1.54 mm
 Il punto 5 richiede semplicemente di invocare la funzione `estimate_stddev_from_mc()` più volte e salvare gli errori nel vettore `error_list`:
 
 ```c++
-cout << "# Point 5\n\n";
+println("# Point 5\n");
 
 vector<double> prec_mm_list{3, 5, 8, 12, 15};
 vector<double> error_list;
@@ -1597,17 +1593,18 @@ vector<double> error_list;
 for (auto cur_prec_mm : prec_mm_list) {
   error_list.push_back(
       estimate_stddev_from_mc(rnd, cur_prec_mm * 1e-3, new_h, new_N));
-  fmt::println("{}\t{:.6f}", cur_prec_mm, error_list.back());
+  println("{}\t{:.6f}", cur_prec_mm, error_list.back());
 }
 
 Gnuplot plt{};
-plt.redirect_to_png("error_plot.png");
+const string file_name = "error_plot.png";
+plt.redirect_to_png(file_name);
 plt.plot(prec_mm_list, error_list, "", Gnuplot::LineStyle::LINESPOINTS);
 plt.set_xlabel("Error on the velocity [mm/s]");
 plt.set_ylabel("Error on the final position [m]");
 plt.show();
 
-cout << "Plot saved to error_plot.png" << endl;
+println("Plot saved to {}", file_name);
 ```
 
 Questo è il plot prodotto dal programma:
@@ -1770,7 +1767,7 @@ Synchrotron synchrotron_point1{0.0, 0.0};
 Scriviamo ora il codice che esegue l'integrazione di Runge-Kutta per 10 rivoluzioni, e nel contempo fa il plot della soluzione:
 
 ```c++
-cout << "# Point #1\n\n";
+println("# Point #1\n");
 
 int loop_counter{};
 
@@ -1799,7 +1796,7 @@ while (true) {
       break;
     } else {
       // This is useful for debugging
-      fmt::println("Got a full loop (#{}) at t = {} with x = {}",
+      println("Got a full loop (#{}) at t = {} with x = {}",
                    loop_counter, t, cur_y);
     }
   }
@@ -1810,10 +1807,10 @@ gpl.set_ylabel("y [m]");
 gpl.plot();
 gpl.show();
 
-fmt::println(
+println(
     "After {} loops I am at t = {:.3f} s, x = {:.3e} m, y = {:.3e} m",
     num_of_loops_point1, t, pos.at(0), cur_y);
-fmt::println("Previous value of x was {} m", prev_y);
+println("Previous value of x was {} m", prev_y);
 ```
 
 Anche se non abbiamo ancora terminato l'implementazione, compiliamo ed eseguiamo: è sempre bene verificare il prima possibile anche i risultati intermedi del nostro codice. Questo è l'output:
@@ -1862,13 +1859,13 @@ assert(delta_time < 0);
 pos = runge_kutta(t, pos, delta_time, synchrotron_point1);
 t += delta_time; // Remember that delta_time < 0
 
-fmt::println("Back to time t = {:.4f} s, x = {:.3e} m, y = {:.3e} m", t,
+println("Back to time t = {:.4f} s, x = {:.3e} m, y = {:.3e} m", t,
              pos.at(0), pos.at(1));
 
 if (abs(pos[1]) < 1e-4) {
-  cout << "Ok, we're within 10⁻⁴ m from zero.\n";
+  println("Ok, we're within 10⁻⁴ m from zero.");
 } else {
-  cerr << "ERROR! Use a smaller value for h!\n";
+  println(stderr, "ERROR! Use a smaller value for h!");
   return 1;
 }
 ```
@@ -1940,18 +1937,18 @@ Invochiamo la funzione due volte nel `main()`:
 Synchrotron synchrotron_point2_plus{+2.0, 0.0};
 Synchrotron synchrotron_point2_minus{-2.0, 0.0};
 
-cout << "# Point #2\n\n";
+println("# Point #2\n");
 
 double r_plus{simulate_for_a_fixed_time(1.1, synchrotron_point2_plus,
                                         "point2_plus.png")};
 double r_minus{simulate_for_a_fixed_time(1.1, synchrotron_point2_minus,
                                          "point2_minus.png")};
 
-fmt::println("Distance with α=+2: {} m, with α=−2: {} m", r_plus, r_minus);
+println("Distance with α=+2: {} m, with α=−2: {} m", r_plus, r_minus);
 if (r_plus > r_minus) {
-  cout << "α=+2 makes the charge diverge\n";
+  println("α=+2 makes the charge diverge");
 } else {
-  cout << "α=−2 makes the charge diverge\n";
+  println("α=−2 makes the charge diverge");
 }
 ```
 
@@ -1974,7 +1971,7 @@ Correttamente, il nostro programma stampa questo output:
 È così banale da essere quasi imbarazzante! 😀 Sono appena tre righe di codice nel `main()`:
 
 ```c++
-cout << "# Point #3\n\n";
+println("# Point #3\n");
 Synchrotron synchrotron_point3{2.0, 1.0};
 simulate_for_a_fixed_time(1.0, synchrotron_point3, "point3.png");
 ```
@@ -2155,7 +2152,7 @@ const double lambda_point1{500e-9};
 
 A fn_A{lambda_point1};
 
-cout << "# Point #1\n\n";
+println("# Point #1\n");
 
 Gnuplot gpl{};
 gpl.redirect_to_png("point1.png");
@@ -2237,10 +2234,10 @@ Notate che nell'invocazione di `bisect()` ho specificato che lo zero è nell'int
 L'implementazione della soluzione per il punto 2 è a questo punto banale:
 
 ```c++
-cout << "# Point #2\n\n";
+println("# Point #2\n");
 
-fmt::println("First null for λ = {} nm: {:.6f} m", lambda_point1 * 1e9,
-             find_first_null(lambda_point1));
+println("First null for λ = {} nm: {:.6f} m", lambda_point1 * 1e9,
+        find_first_null(lambda_point1));
 ```
 
 e questo è l'output:
@@ -2256,15 +2253,15 @@ First null for λ = 500 nm: 0.031434 m
 È banalmente una riproposizione del punto 2:
 
 ```c++
-cout << "# Point #3\n\n";
+println("# Point #3\n");
 
 constexpr double lambda1_point3{400e-9};
 constexpr double lambda2_point3{450e-9};
 
-fmt::println("First null for λ = {} nm: {:.6f} m", lambda1_point3 * 1e9,
-             find_first_null(lambda1_point3));
-fmt::println("First null for λ = {} nm: {:.6f} m", lambda2_point3 * 1e9,
-             find_first_null(lambda2_point3));
+println("First null for λ = {} nm: {:.6f} m", lambda1_point3 * 1e9,
+        find_first_null(lambda1_point3));
+println("First null for λ = {} nm: {:.6f} m", lambda2_point3 * 1e9,
+        find_first_null(lambda2_point3));
 ```
 
 Questo è l'output:
@@ -2357,12 +2354,12 @@ Idealmente, il `double` restituito dalla funzione `run_experiment()` dovrebbe es
 Chiediamoci però se una funzione fatta così possa andare bene per *tutti* i punti. Se nel `main()` la usassimo così:
 
 ```c++
-cout << run_experiment(…) << endl;
+println("{}", run_experiment(…));
 ```
 
 leggeremmo a video solo la deviazione standard di $C$. Ma sarebbe meglio invece produrre a video anche una *stima* del valore di $C$, per controllare che stiamo facendo tutto bene! (Se ad esempio venisse stampato un valore di $C$ nullo, oppure negativo, oppure grandissimo, vuol dire che c'è qualche errore nel codice).
 
-Potremmo allora inserire un `cout` alla fine dell'esecuzione di `run_experiment()`:
+Potremmo allora inserire un `println()` alla fine dell'esecuzione di `run_experiment()`:
 
 ```c++
 MCResults run_experiment(int N, double delta_t_rel_error, double R_rel_error,
@@ -2371,7 +2368,7 @@ MCResults run_experiment(int N, double delta_t_rel_error, double R_rel_error,
   // ...
 
   // Ora stampa il risultato
-  cout << format("The best estimate for C is {} ± {}\n", mean_value, error);
+  println("The best estimate for C is {} ± {}\n", mean_value, error);
 
   return error;
 }
@@ -2425,7 +2422,7 @@ struct MCResults {
   double rel_error() const { return C_stddev / C_mean; }
 
   void print_results() {
-    fmt::println(
+    println(
         "After {} runs, C = {:.4f} ± {:.4f} µF, with an error of {:.1f}%", N,
         C_mean * 1e6, C_stddev * 1e6, rel_error() * 100.0);
   }
@@ -2474,7 +2471,7 @@ int main() {
   RandomGen rnd{1};
   // Point 1
 
-  cout << "# Point 1\n\n";
+  println("# Point 1\n");
   MCResults point1{run_experiment(rnd, 1000, 0.03, 0.03, 0.03, 0.03)};
   point1.print_results();
 
@@ -2561,7 +2558,7 @@ Per risolvere il punto 2 eseguiamo una serie di simulazioni in cui assumiamo di 
 ```c++
 // Point 2
 
-cout << "# Point 2\n\n";
+println("# Point 2\n");
 
 // Error on Δt
 MCResults point2_delta_t{run_experiment(rnd, 1000, 0.03, 0, 0, 0)};
@@ -2602,7 +2599,7 @@ $$
 Per risolvere il punto 3 del tema d'esame non dobbiamo fare altro che costruire un ciclo per iterare sui valori dell'errore relativo per il voltaggio; dal momento che la variabile iteratrice è un `double`, usiamo un ciclo `while` anziché un `for` (il C++ permette di usare anche `double` nei `for`, ma molti compilatori producono *warning* perché in questi casi è facile introdurre bug causati da piccoli errori di arrotondamento):
 
 ```c++
-cout << "# Point 3\n\n";
+println("# Point 3\n");
 
 vector<MCResults> point3_results{};
 double V_rel_error = 0.02;
@@ -2615,12 +2612,12 @@ plt.redirect_to_png("point3.png");
 vector<double> V_rel_error_list{};
 vector<double> C_rel_error_list{};
 
-fmt::println("{:>8s}\t{:>8s}\t{:>8s}\t{:>8s}", "σ_V[%]", "C [µF]", "σ_C [µF]",
+println("{:>8s}\t{:>8s}\t{:>8s}\t{:>8s}", "σ_V[%]", "C [µF]", "σ_C [µF]",
              "σ_C [%]");
 while (V_rel_error < 0.08) {
   MCResults cur_results{
       run_experiment(rnd, 1000, 0.03, 0.03, V_rel_error, V_rel_error)};
-  fmt::println("{:8.0f}\t{:8.4f}\t{:8.4f}\t{:8.1f}", V_rel_error * 100,
+  println("{:8.0f}\t{:8.4f}\t{:8.4f}\t{:8.1f}", V_rel_error * 100,
                cur_results.C_mean * 1e6, cur_results.C_stddev * 1e6,
                cur_results.rel_error() * 100.0);
 
@@ -2663,7 +2660,7 @@ E questo è il grafico prodotto; come potevamo aspettarci, all'aumentare dell'er
 Dal momento che al punto precedente abbiamo salvato i valori del grafico, si tratta qui semplicemente di fare una interpolazione lineare; per semplicità limitiamoci ai due punti che sono a ridosso dell'errore desiderato (7%). Dobbiamo innanzitutto trovare l'indice dell'elemento appena inferiore al 7% e quello successivo, e possiamo farlo assumendo che, come mostrato dal nostro grafico prodotto al punto 3, gli errori siano crescenti:
 
 ```c++
-cout << "# Point 4\n\n";
+println("# Point 4\n");
 
 constexpr double target_C_rel_error{7.0};
 int idx0, idx1;
@@ -2688,7 +2685,7 @@ double errVB{V_rel_error_list.at(idx1)};
 double errCA{C_rel_error_list.at(idx0)};
 double errCB{C_rel_error_list.at(idx1)};
 
-fmt::println(
+println(
     "We're going to interpolate between point ({:.2f}, {:.2f}) (row #{}) "
     "and point ({:.2f}, {:.2f}) (row #{})",
     errVA, errCA, idx0 + 1, errVB, errCB, idx1 + 1);
@@ -2721,8 +2718,8 @@ da cui deriva il codice
 ```c++
 double target_V_rel_error{
     errVA + (errVB - errVA) * (target_C_rel_error - errCA) / (errCB - errCA)};
-fmt::println("We get {:.2f}% error on C if the error on V is {:.2f}%",
-             target_C_rel_error, target_V_rel_error);
+println("We get {:.2f}% error on C if the error on V is {:.2f}%",
+        target_C_rel_error, target_V_rel_error);
 ```
 
 che produce come output
@@ -2738,7 +2735,6 @@ title: Temi d'esame svolti
 author: Maurizio Tomasi
 date: A.A. 2024−2025
 lang: it-IT
-header-includes: <script src="./fmtinstall.js"></script>
 css:
 - ./css/asciinema-player.css
 ...

@@ -128,7 +128,6 @@ sudo apt update && sudo apt install build-essential
 title: Configurare un compilatore C++ sul proprio portatile
 author: Maurizio Tomasi
 lang: it-IT
-header-includes: <script src="./fmtinstall.js"></script>
 css:
 - ./css/asciinema-player.css
 ...

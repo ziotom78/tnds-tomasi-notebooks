@@ -139,29 +139,23 @@ double integrate(double a, double b, int nstep, FunzioneBase &f) {
 
 In questo modo il metodo `calculate` può usare gli estremi restituiti da `getA()`/`getB()` senza doversi preoccupare del caso $a > b$. Se vi stupisce che il metodo `calculate`, pur essendo dichiarato `private`, possa essere ridefinito nella classe derivata `Midpoint`, considerate che `private` indica chi può **chiamare** il metodo (solo la classe `Integrate` e non le sue derivate), ma non pone restrizioni su chi possa **ridefinirlo**.
 
-Viene ora fornito un codice per verificare il funzionamento di quanto implementato finora, che usa la libreria `fmtlib`. Come al solito, potete installarla usando lo script [`install_fmt_library`](./install_fmt_library): scaricatelo nella directory dell'esercizio ed eseguitelo con `sh install_fmt_library`, oppure eseguite direttamente questo comando:
-
-<input type="text" value="curl https://ziotom78.github.io/tnds-tomasi-notebooks/install_fmt_library | sh" id="installFmtCommand" readonly="1" size="60"><button onclick='copyFmtInstallationScript("installFmtCommand")'>Copia</button>
-
-In alternativa, scaricate questo [file zip](./fmtlib.zip) nella directory dell'esercizio e decomprimetelo. Le istruzioni dettagliate sono in [questa pagina](miscellanea.html#fmtinstall).
-
-Ecco il codice di esempio:
+Viene ora fornito un codice per verificare il funzionamento di quanto implementato finora:
 
 ```c++
 #include "integral.h"
 #include "funzioni.h"
 
 #include <cmath>
-#include <iostream>
+#include <cstdio>
+#include <print>
 #include <numbers>
 #include <string>
-#include "fmtlib.h"
 
 using namespace std;
 
 int main (int argc, char* argv[]) {
   if (argc != 2) {
-    fmt::println(stderr, "Usage: {} <NSTEP>", argv[0]);
+    println(stderr, "Usage: {} <NSTEP>", argv[0]);
     return 1;
   }
 
@@ -172,7 +166,7 @@ int main (int argc, char* argv[]) {
 
   double I{myInt.integrate(0, numbers::pi / 2, nstep, f)};
 
-  fmt::println("Passi: {}, I = {}", nstep, I);
+  println("Passi: {}, I = {}", nstep, I);
 }
 ```
 
@@ -185,14 +179,14 @@ std::vector<int> steps{10, 50, 100, 500, 1000};
 std::vector<double> step_sizes(ssize(steps));
 std::vector<double> errors(ssize(steps));
 
-// Calcola gli errori e stampa una tabella usando "fmtlib.h"
+// Calcola gli errori e stampa una tabella
 double true_value{1};
-fmt::println("Passi        Intervallo h  Errore");
+println("Passi        Intervallo h  Errore");
 for (size_t i{}; i < ssize(steps); ++i) {
   double estimated_value{myInt.integrate(steps[i], f)};
   errors[i] = fabs(estimated_value - true_value);
   step_sizes[i] = myInt.GetH();
-  fmt::println("{:12d} {:14.8e} {:20.8e}", steps[i], step_sizes[i], errors[i]);
+  println("{:12d} {:14.8e} {:20.8e}", steps[i], step_sizes[i], errors[i]);
 }
 
 // Crea un plot
@@ -207,7 +201,7 @@ plt.show();
 // È sempre consigliato fornire un messaggio all'utente
 // per comunicare che è stato salvato un plot. Includete
 // sempre il nome del file nel messaggio!
-fmt::println("Plot saved in '{}'", output_file_name);
+println("Plot saved in '{}'", output_file_name);
 ```
 
 Con ROOT si scriverebbe invece qualcosa del genere:
@@ -215,11 +209,11 @@ Con ROOT si scriverebbe invece qualcosa del genere:
 std::vector<int> steps{10, 50, 100, 500, 1000};
 TGraph g_errore{};
 double true_value{1};
-fmt::println("Passi        Errore")
+println("Passi        Errore")
 for (int i{}; i < size(steps); i++) {
   double estimated_value{myInt.integrate(steps[i], f)};
   double err{fabs(estimated_value - true_value)};
-  fmt::println("{:12d} {:20.8e}", steps[i], err);
+  println("{:12d} {:20.8e}", steps[i], err);
   g_errore.SetPoint(i, myInt.GetH(), err);
 }
 ```
@@ -428,5 +422,4 @@ author:
 - "Maurizio Tomasi"
 date: "A.A. 2024−2025"
 lang: it-IT
-header-includes: <script src="./fmtinstall.js"></script>
 ...

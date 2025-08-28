@@ -25,7 +25,6 @@
 }}});
   </script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css" />
-  <script src="./fmtinstall.js"></script>
 </head>
 <body>
 
@@ -299,21 +298,14 @@ f(x) = 3x^2 + 5x - 2.
 <h2 id="precisione-sulle-cifre-significative">Precisione sulle cifre significative</h2>
 <p>Poiché la precisione richiesta all’algoritmo è passata al programma runtime, abbiamo bisogno di determinare runtime quante cifre significative stampare nel nostro risultato. È facile rendersi conto che il numero di cifre significative è dato da</p>
 <div class="sourceCode" id="cb13"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> cifre_significative <span class="op">=</span> <span class="op">-</span>log10<span class="op">(</span>precision<span class="op">);</span></span></code></pre></div>
-<p>Per impostare il numero di cifre significative nella scrittura a video usando <code>fmtlib.h</code>, il codice da usare è questo:</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;fmtlib.h&quot;</span></span>
+<p>Per impostare il numero di cifre significative nella scrittura a video, il codice da usare è questo:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;print&gt;</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="co">// {0} → value of variable `zero`,</span></span>
 <span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="co">// {1} → value of variable `cifre_significative`.</span></span>
 <span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="co">// We must use a dot &#39;.&#39; before {1}, because we&#39;re specifying how many digits</span></span>
 <span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="co">// should be used for the decimal part</span></span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>fmt<span class="op">::</span>println<span class="op">(</span><span class="st">&quot;x0 = </span><span class="sc">{0:.{1}f}</span><span class="st">&quot;</span><span class="op">,</span> zero<span class="op">,</span> cifre_significative<span class="op">);</span></span></code></pre></div>
-<p>Potete installare la libreria <code>fmtlib</code> eseguendo questo comando:</p>
-<p><input type="text" value="curl https://ziotom78.github.io/tnds-tomasi-notebooks/install_fmt_library | sh" id="installFmtCommand" readonly="1" size="60"><button onclick='copyFmtInstallationScript("installFmtCommand")'>Copia</button></p>
-<p>e seguite poi le istruzioni fornite a video.</p>
-<p>In alternativa, scaricate manualmente lo script <a href="./install_fmt_library"><code>install_fmt_library</code></a> (click col tasto destro sul link e scegliere «Salva come…») ed avviatelo con <code>sh install_fmt_library</code>. Lo script funziona solo sotto Linux e Mac; se usate Windows, scaricate questo <a href="./fmtlib.zip">file zip</a> nella directory dell’esercizio e decomprimetelo.</p>
-<p>Le istruzioni dettagliate sono in <a href="miscellanea.html#fmtinstall">questa pagina</a>.</p>
-<p>Se invece usate <code>cout</code> e <code>&lt;iomanip&gt;</code>:</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>cout <span class="op">&lt;&lt;</span> <span class="st">&quot;x0 = &quot;</span> <span class="op">&lt;&lt;</span> fixed <span class="op">&lt;&lt;</span> setprecision<span class="op">(</span>cifre_significative<span class="op">)</span> <span class="op">&lt;&lt;</span> zero <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span></code></pre></div>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="bu">std::</span>println<span class="op">(</span><span class="st">&quot;x0 = </span><span class="sc">{0:.{1}f}</span><span class="st">&quot;</span><span class="op">,</span> zero<span class="op">,</span> cifre_significative<span class="op">);</span></span></code></pre></div>
 <h1 id="esercizio-6.3">Esercizio 6.3 - Equazioni non risolubili analiticamente (da consegnare)</h1>
 <p>In problemi di meccanica quantistica che verranno studiati nel prossimo anno, ci si può imbattere in equazioni del tipo: <span class="math display">
 x = \tan x.
@@ -324,20 +316,20 @@ x = \tan x.
 <p>Si provi ad implementare un algoritmo di ricerca degli zeri di una funzione senza utilizzare il polimorfismo. Prendere come spunto le soluzioni indicate nelle trasparenze finali della lezione teorica.</p>
 <p>Una possibilità è codificare il metodo della bisezione in una funzione che accetti in input una <code>std::function</code>, e modellizzare la funzione di cui si vuole cercare lo zero con una funzione lambda.</p>
 <p>Un’altra possibilità è implementare una funzione template:</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="kw">template</span><span class="op">&lt;</span><span class="kw">typename</span> T<span class="op">&gt;</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="bu">std::</span>expected<span class="op">&lt;</span><span class="dt">double</span><span class="op">,</span> string<span class="op">&gt;</span> bisect<span class="op">(</span><span class="dt">double</span> xmin<span class="op">,</span> <span class="dt">double</span> xmax<span class="op">,</span> T fn<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Here you can write `fn(x)` to call `fn`:</span></span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> f<span class="op">(</span><span class="dt">double</span> x<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="dv">3</span> <span class="op">*</span> x <span class="op">*</span> x <span class="op">+</span> <span class="dv">5</span> <span class="op">*</span> x <span class="op">-</span> <span class="dv">2</span><span class="op">;</span></span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
-<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
-<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>  <span class="co">// …</span></span>
-<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>  <span class="kw">auto</span> result<span class="op">{</span>bisect<span class="op">(</span>xmin<span class="op">,</span> xmax<span class="op">,</span> f<span class="op">)};</span></span>
-<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>  <span class="co">// …</span></span>
-<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="kw">template</span><span class="op">&lt;</span><span class="kw">typename</span> T<span class="op">&gt;</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="bu">std::</span>expected<span class="op">&lt;</span><span class="dt">double</span><span class="op">,</span> string<span class="op">&gt;</span> bisect<span class="op">(</span><span class="dt">double</span> xmin<span class="op">,</span> <span class="dt">double</span> xmax<span class="op">,</span> T fn<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Here you can write `fn(x)` to call `fn`:</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> f<span class="op">(</span><span class="dt">double</span> x<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="dv">3</span> <span class="op">*</span> x <span class="op">*</span> x <span class="op">+</span> <span class="dv">5</span> <span class="op">*</span> x <span class="op">-</span> <span class="dv">2</span><span class="op">;</span></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>  <span class="co">// …</span></span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>  <span class="kw">auto</span> result<span class="op">{</span>bisect<span class="op">(</span>xmin<span class="op">,</span> xmax<span class="op">,</span> f<span class="op">)};</span></span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>  <span class="co">// …</span></span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 <h1 id="errori-comuni">Errori comuni</h1>
 <p>Come di consueto, elenco alcuni errori molto comuni che ho trovato negli anni passati correggendo gli esercizi che gli studenti hanno consegnato all’esame:</p>
 <ul>
