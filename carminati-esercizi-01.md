@@ -200,7 +200,7 @@ Potete però usare i flag `-Wall -Wextra -Werror --pedantic` (**consigliatissimi
 ```
 $ g++ -std=c++23 -g3 -Wall -Wextra -Werror --pedantic -o test test.cpp
 test.cpp: In function ‘int main(int, const char**)’:
-test.cpp:6:10: warning: ‘void operator delete(void*, long unsigned int)’ called on pointer returned from a mismatched allocation function [-Wmismatched-new-delete]
+test.cpp:6:10: error: ‘void operator delete(void*, long unsigned int)’ called on pointer returned from a mismatched allocation function [-Wmismatched-new-delete]
     6 |   delete array;
       |          ^~~~~
 test.cpp:4:33: note: returned from ‘void* operator new [](long unsigned int)’
