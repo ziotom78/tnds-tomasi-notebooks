@@ -13,13 +13,15 @@ Non è semplice installare un compilatore C++ sotto Windows che soddisfi le rich
 
 Le soluzioni che consiglio sono le seguenti:
 
-1.  Usare WSL (Windows Subsystem for Linux);
+#.  Usare WSL (Windows Subsystem for Linux);
 
-2.  Installare Virtual Box e creare una macchina virtuale Ubuntu;
+#.  Installare Virtual Box e creare una macchina virtuale Ubuntu;
 
-3.  Installare MSYS2;
+#.  Installare MSYS2;
 
-4.  Installare MobaXTerm e connettersi ai computer del laboratorio.
+#.  Installare w64devkit;
+
+#.  Installare MobaXTerm e connettersi ai computer del laboratorio.
 
 
 ## WSL
@@ -80,7 +82,7 @@ Questi sono i passi da compiere per installare MSYS2 e i compilatori C++:
     pacman -S gcc make
     ```
 
-5.  Bisogna ricordare che MSYS2 usa una convenzione particolare per indicare i percorsi dei file: lettere di unità come `C:` e `D:` in Windows si traducono in `/c` e `/d` nel terminale di MSYS2, e i backslash come `\` si traducono in `/`. 
+5.  Bisogna ricordare che MSYS2 usa una convenzione particolare per indicare i percorsi dei file: lettere di unità come `C:` e `D:` in Windows si traducono in `/c` e `/d` nel terminale di MSYS2, e i backslash come `\` si traducono in `/`.
 
     Quindi, se con Visual Studio avete salvato un file in `C:\Utenti\Pippo\prova.cpp`, in MSYS2 figurerà come `/c/Utenti/Pippo/prova.cpp` e il comando per compilarlo sarà quindi
 
@@ -97,6 +99,22 @@ Questi sono i passi da compiere per installare MSYS2 e i compilatori C++:
 
 7.  Se volete aprire con “Esplora risorse” o con Visual Studio Code un file creato all'interno della home in MSYS2, il percorso è in `C:\msys64\home`.
 
+
+## [w64devkit](https://github.com/skeeto/w64devkit)
+
+Questa soluzione è simile a MSYS2, ma è più agevole e veloce da installare, e soprattutto è molto facile da disinstallare.
+
+-   Scaricate il file [w64devkit-x64-2.4.0.7z.exe](https://github.com/skeeto/w64devkit/releases/download/v2.4.0/w64devkit-x64-2.4.0.7z.exe) ed eseguitelo. Vi verrà chiesta una directory di destinazione; potete scegliere `C:\`.
+
+-   Al termine dell’installazione, aprite il prompt dei comandi e scrivete
+
+    ```
+    cd c:\w64devkit
+    ```
+
+-   Eseguite il programma `w64devkit`. Questo aprirà un terminale simile a Linux, dove potrete creare i vostri programmi seguendo le istruzioni del corso.
+
+**Attenzione**: per compilare i programmi del corso, è **necessario** aggiungere `-lstdc++exp` alla **fine** di ogni invocazione di `g++` in cui si crea un eseguibile. (Vedi [questo link](https://gcc.gnu.org/gcc-14/changes.html#libstdcxx) per saperne il motivo).
 
 
 ## MobaXTerm

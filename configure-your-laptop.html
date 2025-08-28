@@ -29,6 +29,7 @@
   <li><a href="#wsl" id="toc-wsl">WSL</a></li>
   <li><a href="#virtualbox" id="toc-virtualbox">VirtualBox</a></li>
   <li><a href="#msys2" id="toc-msys2">MSYS2</a></li>
+  <li><a href="#w64devkit" id="toc-w64devkit">w64devkit</a></li>
   <li><a href="#mobaxterm" id="toc-mobaxterm">MobaXTerm</a></li>
   </ul></li>
   <li><a href="#mac-os-x" id="toc-mac-os-x">Mac OS X</a></li>
@@ -46,10 +47,11 @@
 <li><p>Usa delle convenzioni più complicate del necessario nel modo in cui vengono strutturati i progetti (file CMake annidati).</p></li>
 </ul>
 <p>Le soluzioni che consiglio sono le seguenti:</p>
-<ol type="1">
+<ol>
 <li><p>Usare WSL (Windows Subsystem for Linux);</p></li>
 <li><p>Installare Virtual Box e creare una macchina virtuale Ubuntu;</p></li>
 <li><p>Installare MSYS2;</p></li>
+<li><p>Installare w64devkit;</p></li>
 <li><p>Installare MobaXTerm e connettersi ai computer del laboratorio.</p></li>
 </ol>
 <h2 id="wsl">WSL</h2>
@@ -89,6 +91,15 @@ $ g++ -o prova -std=c++23 -g3 prova.cpp</code></pre></li>
 <pre><code>pacman -S nano nano-syntax-highlighting</code></pre></li>
 <li><p>Se volete aprire con “Esplora risorse” o con Visual Studio Code un file creato all’interno della home in MSYS2, il percorso è in <code>C:\msys64\home</code>.</p></li>
 </ol>
+<h2 id="w64devkit"><a href="https://github.com/skeeto/w64devkit">w64devkit</a></h2>
+<p>Questa soluzione è simile a MSYS2, ma è più agevole e veloce da installare, e soprattutto è molto facile da disinstallare.</p>
+<ul>
+<li><p>Scaricate il file <a href="https://github.com/skeeto/w64devkit/releases/download/v2.4.0/w64devkit-x64-2.4.0.7z.exe">w64devkit-x64-2.4.0.7z.exe</a> ed eseguitelo. Vi verrà chiesta una directory di destinazione; potete scegliere <code>C:\</code>.</p></li>
+<li><p>Al termine dell’installazione, aprite il prompt dei comandi e scrivete</p>
+<pre><code>cd c:\w64devkit</code></pre></li>
+<li><p>Eseguite il programma <code>w64devkit</code>. Questo aprirà un terminale simile a Linux, dove potrete creare i vostri programmi seguendo le istruzioni del corso.</p></li>
+</ul>
+<p><strong>Attenzione</strong>: per compilare i programmi del corso, è <strong>necessario</strong> aggiungere <code>-lstdc++exp</code> alla <strong>fine</strong> di ogni invocazione di <code>g++</code> in cui si crea un eseguibile. (Vedi <a href="https://gcc.gnu.org/gcc-14/changes.html#libstdcxx">questo link</a> per saperne il motivo).</p>
 <h2 id="mobaxterm">MobaXTerm</h2>
 <p>Questa soluzione è indicata se avete la garanzia di una connessione veloce. Ha il vantaggio che sfruttate i computer del laboratorio per eseguire il vostro codice e quindi avete ROOT già pronto da usare, ma lo svantaggio è che la visualizzazione di grafici e l’apertura di finestre sarà più lenta. Inoltre è complicato configurare Visual Studio Code, e vi consiglio invece di usare un programma da linea di comando come <code>nano</code> per editare il codice.</p>
 <p>Il programma è scaricabile dal sito <a href="https://mobaxterm.mobatek.net/" class="uri">https://mobaxterm.mobatek.net/</a>; tenete presente che la versione di default è a pagamento, ma è possibile scaricarne una versione ridotta gratuita che è più che sufficiente per l’insegnamento di TNDS.</p>
