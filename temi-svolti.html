@@ -498,7 +498,7 @@
 <span id="cb32-20"><a href="#cb32-20" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> error_to_return<span class="op">;</span></span>
 <span id="cb32-21"><a href="#cb32-21" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 <p>Nel <code>main()</code> quindi salverei l’errore restituito per lo svolgimento del punto #1 e lo userei poi quando è il tempo di risolvere il punto #6. (Se uno è elegante, può passare il valore <code>16</code> come parametro aggiuntivo di <code>calculate_errors()</code>).</p></li>
-<li><p>La soluzione più consigliabile però è quella di far restituire a <code>calculate_errors()</code> l’intera tabella calcolata. È vero che nel punto #6 ci serve solo l’errore per <span class="math inline">N = 16</span>, ma avere a disposizione tutta la tabella ci può permettere rapidamente di usare dei <code>print</code> per fare debug nel <code>main()</code>, nel caso in cui il risultato del punto #6 ci sembrasse strano.</p>
+<li><p>La soluzione più consigliabile però è quella di far restituire a <code>calculate_errors()</code> l’intera tabella calcolata. È vero che nel punto #6 ci serve solo l’errore per <span class="math inline">N = 16</span>, ma avere a disposizione tutta la tabella ci può permettere rapidamente di usare dei <code>print</code> per fare debug nel <code>main()</code> (o usare <a href="debugging.html">NND</a>!), nel caso in cui il risultato del punto #6 ci sembrasse strano.</p>
 <p>Proprio nell’ottica di aiutarci a fare debug, potremmo restituire queste quantità:</p>
 <ol>
 <li>I valori di <span class="math inline">N</span>;</li>

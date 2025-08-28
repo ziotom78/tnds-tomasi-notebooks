@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="it-IT" xml:lang="it-IT">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc-markdown-css-theme" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Maurizio Tomasi" />
+  <title>Fare debug di programming con NND</title>
+  <link rel="stylesheet" href="css/theme.css" />
+  <link rel="stylesheet" href="css/skylighting-solarized-theme.css" />
+</head>
+<body>
+
+<header>
+<h1 class="title">Fare debug di programming con NND</h1>
+<blockquote class="metadata">
+<p class="author">
+      Maurizio Tomasi
+  </p>
+</blockquote>
+</header>
+
+<nav id="TOC" role="doc-toc">
+    <strong>Contents</strong><label for="contents">⊕</label>
+  <input type="checkbox" id="contents">
+  <ul>
+  <li><a href="#fare-debug-di-programmi-con-nnd" id="toc-fare-debug-di-programmi-con-nnd">Fare debug di programmi con NND</a>
+  <ul>
+  <li><a href="#preliminari" id="toc-preliminari">Preliminari</a></li>
+  <li><a href="#come-usare-nnd-con-un-programma-che-va-in-crash" id="toc-come-usare-nnd-con-un-programma-che-va-in-crash">Come usare NND con un programma che va in crash</a></li>
+  <li><a href="#come-usare-nnd-per-investigare-lesecuzione-di-un-programma" id="toc-come-usare-nnd-per-investigare-lesecuzione-di-un-programma">Come usare NND per investigare l’esecuzione di un programma</a></li>
+  <li><a href="#altri-comandi-di-nnd" id="toc-altri-comandi-di-nnd">Altri comandi di NND</a></li>
+  </ul></li>
+  </ul>
+</nav>
+
+<main>
+<h1 id="fare-debug-di-programmi-con-nnd">Fare debug di programmi con NND</h1>
+<p>È possibile installare il programma <a href="https://github.com/al13n321/nnd">NND</a> nella propria home directory con il seguente script:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> /home/comune/labTNDS_programmi/install-ndd</span></code></pre></div>
+<p>Il programma <code>nnd</code> verrà installato in <code>~/.local/bin</code>, che dovrebbe essere già nel vostro <code>PATH</code>; questo vuol dire che dovreste poter eseguire <code>nnd</code> direttamente.</p>
+<h2 id="preliminari">Preliminari</h2>
+<p>Per poter usare un debugger, <strong>dovete</strong> usare la lista dei flag indicata durante la <a href="tomasi-lezione-01.html#flag-del-compilatore">prima lezione</a>, perché <code>-g3</code> è indispensabile.</p>
+<p>Per effettuare il debug di un programma, è sufficiente avviare <code>nnd</code> passandogli l’eseguibile del programma. <strong>Attenzione</strong>: se il vostro programma è nella directory corrente, dovete inserire <code>./</code> prima del suo nome:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> nnd ./mioprogramma      <span class="co"># &quot;nnd mioprogramma&quot; non funziona, ci vuole &quot;./&quot;!</span></span></code></pre></div>
+<h2 id="come-usare-nnd-con-un-programma-che-va-in-crash">Come usare NND con un programma che va in crash</h2>
+<p>Consideriamo questo programma:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">// abort.cpp</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;cstdlib&gt;</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;print&gt;</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="kw">using</span> <span class="kw">namespace</span> std<span class="op">;</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  <span class="dt">int</span> small<span class="op">{</span><span class="dv">150</span><span class="op">};</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  <span class="dt">int</span> large<span class="op">{</span><span class="dv">30</span><span class="op">};</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> <span class="op">(</span>small <span class="op">&gt;</span> large<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Something is wrong here!</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>    abort<span class="op">();</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p>Il programma controlla che la variabile <code>small</code> sia più piccola di <code>large</code>, e siccome questo non è vero (<code>150 &gt; 30</code>, probabilmente per un errore di battitura) il programma invoca <code>abort()</code>, che manda in crash il programma. Compiliamo il programma con <code>-O0</code> in modo da disabilitare ogni ottimizzazione (questo semplifica il debugging):</p>
+<pre><code>$ g++ -std=c++23 -g3 -O0 -o abort abort.cpp
+$ ./abort
+Aborted (core dumped)</code></pre>
+<p>Per verificare cosa succede, avviamo NND:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> nnd ./abort</span></code></pre></div>
+<p>Si aprirà questa schermata:</p>
+<p><img src="images/ndd-abort1.png" /></p>
+<p>NDD ha già eseguito il programma ed ha visto che è stata chiamata <code>abort()</code>, così si è fermato.</p>
+<p>Quello che a noi interessa è il pannello “stack 5”, sulla destra a metà altezza. Esso mostra la concatenazione di funzioni invocate che ha causato l’arresto del programma. Vediamo nell’ordine:</p>
+<ol type="1">
+<li><code>__GI…</code>, che sta per <code>__GI_raise</code>, una funzione usata internamente da <code>abort</code></li>
+<li><code>abort</code>, che è proprio la funzione che abbiamo chiamato nel nostro <code>main</code></li>
+<li><code>main</code>, la funzione principale del nostro programma</li>
+<li><code>__li…</code>, che sta per <code>__libc_start_main</code>, una funzione usata internamente da Linux</li>
+<li><code>_sta…</code>, che sta per <code>_start</code>, la primissima funzione invocata da Linux quando si esegue un programma.</li>
+</ol>
+<p>Noi però vogliamo vedere cosa nel <code>main</code> ha causato la chiamata ad <code>abort()</code>, quindi dobbiamo “risalire” la lista delle chiamate e passare da <code>__GI_raise</code> (la prima dell’elenco, che è quella selezionata di default) a <code>main</code>, che è la terza.</p>
+<p>Premendo il tasto <code>]</code> (parentesi quadra chiusa), ci abbassiamo di un livello, raggiungendo <code>abort</code>:</p>
+<p><img src="images/ndd-abort2.png" /></p>
+<p>Notate che nel pannello “stack 5” (che indica l’elenco delle funzioni chiamate in ordine temperale) la voce evidenziata è diventata la seconda. Premiamo ancora una volta <code>]</code> per raggiungere <code>main</code>:</p>
+<p><img src="images/ndd-abort3.png" /></p>
+<p>Ora che siamo nel “contesto” della chiamata ad <code>abort()</code>, ecco che è comparso il codice C++ nella finestra “code 3” in basso, e nella finestra in basso a sinistra (“watches 1”) sono comparsi i valori che le variabili <code>small</code> e <code>large</code> avevano nel momento in cui è stato invocato <code>abort()</code>.</p>
+<p>Per uscire da NDD basta premere <code>Ctrl+q</code> (una guida con i tasti è sempre disponibile in alto a sinistra).</p>
+<p>Questo tipo di uso di NDD è molto comodo per investigare in quale punto del codice è stata chiamata <code>abort()</code>, e per visualizzare il valore delle variabili al momento del crash.</p>
+<h2 id="come-usare-nnd-per-investigare-lesecuzione-di-un-programma">Come usare NND per investigare l’esecuzione di un programma</h2>
+<p>NND non è solo utile per analizzare il momento in cui un programma va in crash. Esso può eseguire un programma passo passo, mostrando in che modo cambia il valore delle variabili dopo ogni istruzione.</p>
+<p>Consideriamo quest’altro esempio:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">// calc.cpp</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;print&gt;</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="kw">using</span> <span class="kw">namespace</span> std<span class="op">;</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  <span class="dt">int</span> sum <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span><span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">1</span><span class="op">;</span> i <span class="op">&lt;</span> <span class="dv">5</span><span class="op">;</span> <span class="op">++</span>i<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>    sum <span class="op">+=</span> i <span class="op">*</span> i<span class="op">;</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>  println<span class="op">(</span><span class="st">&quot;The sum of the first 5 squares is </span><span class="sc">{}</span><span class="st">&quot;</span><span class="op">,</span> sum<span class="op">);</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p>Compiliamo il programma con <code>-g3 -O0</code> (togliete poi <code>-O0</code> quando avete finito di fare il debugging):</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> g++ <span class="at">-std</span><span class="op">=</span>c++23 <span class="at">-g3</span> <span class="at">-O0</span> <span class="at">-o</span> calc calc.cpp</span></code></pre></div>
+<p>Avviamo NND:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> nnd ./calc</span></code></pre></div>
+<p>Questa è la schermata iniziale:</p>
+<p><img src="images/nnd-debug1.png" /></p>
+<p>Siccome il programma non ha causato alcun crash, il pannello “stack 5” sulla sinistra è vuoto. Stavolta infatti vogliamo eseguire il programma passo passo, per verificare che il funzionamento sia quello atteso. Premiamo <code>s</code> (che sta per <strong>S</strong>tart) per far partire l’esecuzione e arrestarla all’inizio del <code>main</code>:</p>
+<p><img src="images/nnd-debug2.png" /></p>
+<p>NND ha fatto partire il programma, ma ne ha congelato l’esecuzione all’inizio del <code>main</code>, come dice il pannello a sinistra “status 2”, che riporta la scritta “suspended”. Notate che nel pannello “watches 1” in basso a sinistra è già comparsa la variabile <code>sum</code>, che al momento ha valore <code>0</code>.</p>
+<p>Possiamo ora eseguire il programma un’istruzione alla volta col tasto <code>n</code> (che sta per <strong>N</strong>ext). Vedrete che la riga verde nel codice di <code>calc.cpp</code> va avanti di una posizione, passando dalla parentesi graffa <code>{</code> alla riga dove si dichiara <code>sum</code>:</p>
+<p><img src="images/nnd-debug3.png" /></p>
+<p>Premendo ancora <code>n</code>, si passa alla riga con <code>for</code>, e la variabile <code>i</code> appare col suo valore iniziale (<code>0</code>) nel pannello “watches 1”:</p>
+<p><img src="images/nnd-debug4.png" /></p>
+<p>Continuando a premere <code>n</code> si può osservare come le variabili <code>i</code> e <code>sum</code> cambiano di valore ad ogni iterazione.</p>
+<p>Se però non si è interessati all’iterazione nel suo dettaglio, si può ordinare a NND di eseguire il programma fino ad una riga prestabilita. Per fare ciò basta muoversi nella finestra del codice sorgente “code 3” premendo il tasto <code>3</code> (ecco perché questi numeri sono mostrati sottolineati!), spostarsi con la freccia su <code>↑</code> e giù <code>↓</code>, e premere <code>C</code> (che sta per <strong>C</strong>ursor). Nell’immagine qui sotto mi sono spostato sulla riga con <code>println</code> prima di premere <code>C</code>:</p>
+<p><img src="images/nnd-debug5.png" /></p>
+<p>Come vedete, l’esecuzione è proseguita fino alla riga evidenziata, ed ora il pannello “watches 3” riporta per <code>sum</code> il suo valore al termine del ciclo (<code>30</code>).</p>
+<p>Per uscire, come al solito basta premere <code>Ctrl+q</code>.</p>
+<p>Usare NND per eseguire programmi in modo interattivo è estremamente utile.</p>
+<h2 id="altri-comandi-di-nnd">Altri comandi di NND</h2>
+<p>NND offre moltissimi altri comandi, che sono disponibili nella guida (premere <code>?</code> per consultarla). Vi consiglio di dare un’occhiata a questi comandi:</p>
+<ul>
+<li>Premere <code>s</code> anziché <code>n</code> quando si esegue un programma passo passo permette di “entrare” dentro funzioni chiamate nel <code>main</code></li>
+<li>Premere <code>Enter</code> in corrispondenza di una riga inserisce un <em>breakpoint</em>, ossia un punto di arresto: vuol dire che il programma si arresterà non appena raggiunge quella riga. È funzionalmente equivalente al tasto <code>C</code>, che esegue fino al cursore, ma i <em>breakpoint</em> possono essere multipli</li>
+<li>Spostandosi nel pannello “watches 1” (col tasto <code>1</code>), è possibile cambiare il valore di variabili durante l’esecuzione premendo <code>Enter</code>.</li>
+<li>Sempre nel pannello “watches 1”, se una variabile è una classe, premendo la freccia a destra <code>→</code> è possibile visualizzare le sue variabili membro. (Premendo <code>←</code> si fanno sparire di nuovo).</li>
+</ul>
+</main>
+
+<script>
+;(function() {
+  // Non-essential if user has JavaScript off. Just makes checkboxes look nicer.
+  var selector = '.task-list > li > input[type="checkbox"]';
+  var checkboxes = document.querySelectorAll(selector);
+  Array.from(checkboxes).forEach((checkbox) => {
+    var wasChecked = checkbox.checked;
+    checkbox.disabled = false;
+    checkbox.addEventListener('click', (ev) => {ev.target.checked = wasChecked});
+  });
+})();
+</script>
+</body>
+</html>

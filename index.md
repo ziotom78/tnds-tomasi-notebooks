@@ -29,9 +29,9 @@ Link al Google Form per il [seminario su C++, Python e Julia](tomasi-lezione-08.
 
 Sono indicati in [questa slide](tomasi-lezione-01.html#/flag-del-compilatore).
 
-# Uso di Qt Creator sui computer dei laboratorio
+# Debugging {#debugging}
 
-In questa [pagina dedicata](qt-creator.html) si mostra come usare Qt Creator per gestire progetti C++ e fare debugging.
+In questa [pagina dedicata](debugging.html) si mostra come usare [NND](https://github.com/al13n321/nnd) per fare debugging di programming.
 
 
 # Temi d'esame svolti

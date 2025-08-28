@@ -588,7 +588,7 @@ Ci sono vari modi per fare questo:
 
     Nel `main()` quindi salverei l'errore restituito per lo svolgimento del punto \#1 e lo userei poi quando è il tempo di risolvere il punto \#6. (Se uno è elegante, può passare il valore `16` come parametro aggiuntivo di `calculate_errors()`).
 
-#.  La soluzione più consigliabile però è quella di far restituire a `calculate_errors()` l'intera tabella calcolata. È vero che nel punto \#6 ci serve solo l'errore per $N = 16$, ma avere a disposizione tutta la tabella ci può permettere rapidamente di usare dei `print` per fare debug nel `main()`, nel caso in cui il risultato del punto \#6 ci sembrasse strano.
+#.  La soluzione più consigliabile però è quella di far restituire a `calculate_errors()` l'intera tabella calcolata. È vero che nel punto \#6 ci serve solo l'errore per $N = 16$, ma avere a disposizione tutta la tabella ci può permettere rapidamente di usare dei `print` per fare debug nel `main()` (o usare [NND](debugging.html)!), nel caso in cui il risultato del punto \#6 ci sembrasse strano.
 
     Proprio nell'ottica di aiutarci a fare debug, potremmo restituire queste quantità:
 

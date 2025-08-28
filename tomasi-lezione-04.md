@@ -233,17 +233,6 @@ int main(void) {
 Per esempi e documentazione, andate alla pagina [github.com/ziotom78/gplotpp](https://github.com/ziotom78/gplotpp).
 
 
-# Qt Creator
-
-# Qt Creator
-
--   Mostro oggi come usare Qt Creator sui computer del laboratorio per creare e gestire progetti C++
-
--   Non è obbligatorio usarlo, anche perché non usa i `Makefile`: se dovete fare ancora pratica con essi, è meglio che continuiate ad usare Visual Studio Code!
-
--   Quanto mostro ora è riassunto in una [pagina dedicata](qt-creator.html)
-
-
 ---
 title: Laboratorio di TNDS -- Lezione 4
 author: Maurizio Tomasi

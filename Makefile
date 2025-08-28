@@ -25,7 +25,7 @@ all: \
 	temi-svolti.html \
 	prepararsi-esame.html \
 	miscellanea.html \
-	qt-creator.html \
+	debugging.html \
 	configure-your-laptop.html \
 	index.html
 
@@ -110,7 +110,7 @@ configure-your-laptop.html: configure-your-laptop.md
 		-f markdown+tex_math_single_backslash+subscript+superscript \
 		-o $@ $<
 
-qt-creator.html: qt-creator.md
+debugging.html: debugging.md
 	$(PANDOC) \
 		--katex \
 		--to html5+smart \

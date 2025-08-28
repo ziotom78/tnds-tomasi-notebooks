@@ -242,7 +242,7 @@ $ ./esercizio-6.3
 fish: Job 1, './esercizio-6.3' terminated by signal SIGABRT (Abort)
 ```
 
-(Se un programma termina invocando `abort()`, eseguendolo all'interno di [QtCreator](qt-creator.html) in modalità debugging si può ispezionare il valore delle variabili al momento in cui è andato in crash: molto utile per correggere il bug!)
+(Se un programma termina invocando `abort()`, eseguendolo all'interno di [NND](debugging.html) in modalità debugging si può ispezionare il valore delle variabili al momento in cui è andato in crash: molto utile per correggere il bug!)
 
 # Approcci possibili
 
