@@ -398,9 +398,9 @@ Di conseguenza, il programmatore è «costretto» a verificare la correttezza de
 
 -   Citazione da [Google Coding Guidelines](https://google.github.io/styleguide/cppguide.html#Integer_Types):
 
-    > You should not use the unsigned integer types such as uint32_t, unless there is a valid reason such as representing a bit pattern rather than a number, or you need defined overflow modulo 2^N. In particular, do not use unsigned types to say a number will never be negative. Instead, use assertions for this.
+    > You should not use the unsigned integer types […], unless there is a valid reason such as representing a bit pattern rather than a number, or you need defined overflow modulo 2^N. In particular, do not use unsigned types to say a number will never be negative. Instead, use assertions for this.
 
--   Preferite quindi sempre `int` a `unsigned`!
+-   Anche il creatore del C++ ([Bjarne Stroustrup](https://en.wikipedia.org/wiki/Bjarne_Stroustrup)) [è d’accordo](https://youtu.be/pnaZ0x9Mmm0&t=209). Preferite quindi sempre `int` a `unsigned`!
 
 
 # Cicli `for` su array

@@ -595,13 +595,16 @@ errore, perché <code>atoi</code> restituisce un intero ma sia
 href="https://google.github.io/styleguide/cppguide.html#Integer_Types">Google
 Coding Guidelines</a>:</p>
 <blockquote>
-<p>You should not use the unsigned integer types such as uint32_t,
-unless there is a valid reason such as representing a bit pattern rather
-than a number, or you need defined overflow modulo 2^N. In particular,
-do not use unsigned types to say a number will never be negative.
-Instead, use assertions for this.</p>
+<p>You should not use the unsigned integer types […], unless there is a
+valid reason such as representing a bit pattern rather than a number, or
+you need defined overflow modulo 2^N. In particular, do not use unsigned
+types to say a number will never be negative. Instead, use assertions
+for this.</p>
 </blockquote></li>
-<li><p>Preferite quindi sempre <code>int</code> a
+<li><p>Anche il creatore del C++ (<a
+href="https://en.wikipedia.org/wiki/Bjarne_Stroustrup">Bjarne
+Stroustrup</a>) <a href="https://youtu.be/pnaZ0x9Mmm0&amp;t=209">è
+d’accordo</a>. Preferite quindi sempre <code>int</code> a
 <code>unsigned</code>!</p></li>
 </ul>
 </section>
