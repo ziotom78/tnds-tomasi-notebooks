@@ -31,9 +31,10 @@
   <li><a href="#msys2" id="toc-msys2">MSYS2</a></li>
   <li><a href="#w64devkit" id="toc-w64devkit">w64devkit</a></li>
   <li><a href="#mobaxterm" id="toc-mobaxterm">MobaXTerm</a></li>
+  <li><a href="#windows-riassunto" id="toc-windows-riassunto">Tabella riassuntiva</a></li>
   </ul></li>
   <li><a href="#mac-os-x" id="toc-mac-os-x">Mac OS X</a></li>
-  <li><a href="#debianubuntulinux-mint" id="toc-debianubuntulinux-mint">Debian/Ubuntu/Linux Mint</a></li>
+  <li><a href="#linux" id="toc-linux">Linux</a></li>
   </ul>
 </nav>
 
@@ -54,16 +55,17 @@
 <li><p>Installare w64devkit;</p></li>
 <li><p>Installare MobaXTerm e connettersi ai computer del laboratorio.</p></li>
 </ol>
+<p>Illustro ora tutte le possibilità, e mostro alla fine una <a href="#windows-riassunto">tabella riassuntiva</a>.</p>
 <h2 id="wsl">WSL</h2>
 <p>WSL è un meccanismo che consente a Windows di eseguire una macchina virtuale Linux in maniera semi-trasparente. È la scelta più usata dagli studenti, ma potrebbe non funzionare su alcuni computer per cui il BIOS non supporta la virtualizzazione. Se questo è il vostro caso, dovete tentare un’altra strada.</p>
-<p>Seguite le <a href="https://learn.microsoft.com/en-us/windows/wsl/install">istruzioni sul sito Microsoft</a>, perché i dettagli cambiano spesso.</p>
+<p>Non riporto qui le istruzioni per installare WSL, perché cambiano spesso. Seguite le <a href="https://learn.microsoft.com/en-us/windows/wsl/install">istruzioni sul sito Microsoft</a>.</p>
 <h2 id="virtualbox">VirtualBox</h2>
 <p>Oracle VirtualBox consente di creare una vera e propria macchina virtuale. È concettualmente analogo all’uso di WSL (vedi sopra), con lo svantaggio di essere leggermente più complicato da configurare. Però ha il grande vantaggio che l’ambiente di sviluppo (Linux + Gnome) è identico a quello dei computer del laboratorio.</p>
 <p>Se avete avuto problemi ad usare WSL, è possibile che neppure questo metodo funzioni, perché richiede un supporto per la virtualizzazione da parte del BIOS.</p>
 <p>I passaggi da seguire sono i seguenti:</p>
 <ol type="1">
 <li><p>Installate Virtual Box scaricandolo da <a href="https://www.virtualbox.org/">questo sito</a>;</p></li>
-<li><p>Scaricate il file ISO dell’ultima versione di Ubuntu da <a href="https://ubuntu.com/desktop">questo sito</a>.</p></li>
+<li><p>Scaricate il file ISO di una distribuzione Linux a vostro piacimento. Una delle mie preferite è <a href="https://linuxmint.com/">Linux Mint</a>, ma gli studenti alle prime armi scelgono spesso <a href="https://ubuntu.com/desktop">Ubuntu</a>. Una valida alternativa è <a href="https://www.fedoraproject.org/">Fedora</a>, che è abbastanza simile a quella usata sulle macchine di laboratorio. Se vi chiede di scegliere tra Gnome, KDE, XFCE, Mate o Cinnamon, vi consiglio KDE: è l’esperienza più simile a Windows (nel senso buono!) che si possa trovare.</p></li>
 <li><p>Create una macchina virtuale selezionando dal menu <em>Machine</em> la voce <em>New…</em>; nella finestra che compare indicate il file ISO che avete scaricato poco prima, e lasciate tutto il resto come da default.</p></li>
 <li><p>Avviate la macchina con il bottone <em>Start</em> (da menu è la voce <em>Machine</em> | <em>Start</em> | <em>Normal start</em>).</p></li>
 <li><p>Installate il sistema operativo configurandolo come preferite.</p></li>
@@ -104,12 +106,162 @@ $ g++ -o prova -std=c++23 -g3 prova.cpp</code></pre></li>
 <p>Questa soluzione è indicata se avete la garanzia di una connessione veloce. Ha il vantaggio che sfruttate i computer del laboratorio per eseguire il vostro codice e quindi avete ROOT già pronto da usare, ma lo svantaggio è che la visualizzazione di grafici e l’apertura di finestre sarà più lenta. Inoltre è complicato configurare Visual Studio Code, e vi consiglio invece di usare un programma da linea di comando come <code>nano</code> per editare il codice.</p>
 <p>Il programma è scaricabile dal sito <a href="https://mobaxterm.mobatek.net/" class="uri">https://mobaxterm.mobatek.net/</a>; tenete presente che la versione di default è a pagamento, ma è possibile scaricarne una versione ridotta gratuita che è più che sufficiente per l’insegnamento di TNDS.</p>
 <p>Una volta installata l’applicazione, create una connessione SSH al computer <code>tolab.fisica.unimi.it</code>, indicando il vostro nome utente (lo stesso della vostra email, senza <code>@studenti.unimi.it</code>) e la vostra password della posta. Avviando la connessione, verrete fatti accedere a uno dei computer del laboratorio, e potrete anche avviare comandi grafici.</p>
+<h2 id="windows-riassunto">Tabella riassuntiva</h2>
+<table class="cmp-table">
+<caption>
+Soluzioni per usare GCC/C++ su Windows (punteggi 1–5)
+</caption>
+<thead>
+<tr>
+<th>
+Soluzione
+</th>
+<th class="crit">
+Facilità di installazione
+</th>
+<th class="crit">
+Somiglianza con il laboratorio
+</th>
+<th class="crit">
+Integrazione con VS Code
+</th>
+<th class="crit">
+Prestazioni
+</th>
+<th class="crit">
+Compatibilità del compilatore
+</th>
+<th class="crit">
+Stabilità/Manutenzione
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="#wsl">WSL</a>
+</td>
+<td>
+★★★★
+</td>
+<td>
+★★★
+</td>
+<td>
+★★★★★
+</td>
+<td>
+★★★★
+</td>
+<td>
+★★★★★
+</td>
+<td>
+★★★★
+</td>
+</tr>
+<tr>
+<td>
+<a href="#virtualbox">VirtualBox</a> (con VS Code installato al suo interno)
+</td>
+<td>
+★★★
+</td>
+<td>
+★★★★★
+</td>
+<td>
+★★★★★
+</td>
+<td>
+★★★★
+</td>
+<td>
+★★★★★
+</td>
+<td>
+★★★
+</td>
+</tr>
+<tr>
+<td>
+<a href="#msys2">MSYS2</a>
+</td>
+<td>
+★★★★
+</td>
+<td>
+★★★
+</td>
+<td>
+★★★★
+</td>
+<td>
+★★★★
+</td>
+<td>
+★★★★
+</td>
+<td>
+★★★★
+</td>
+</tr>
+<tr>
+<td>
+<a href="#w64devkit">w64devkit</a>
+</td>
+<td>
+★★★★★
+</td>
+<td>
+★★
+</td>
+<td>
+★★★★
+</td>
+<td>
+★★★★★
+</td>
+<td>
+★★★
+</td>
+<td>
+★★★★
+</td>
+</tr>
+<tr>
+<td>
+<a href="#mobaxterm">MobaXterm</a> + SSH ai PC del Dipartimento
+</td>
+<td>
+★★★★
+</td>
+<td>
+★★★★★
+</td>
+<td>
+★★★
+</td>
+<td>
+★★
+</td>
+<td>
+★★★★★
+</td>
+<td>
+★★★★
+</td>
+</tr>
+</tbody>
+</table>
 <h1 id="mac-os-x">Mac OS X</h1>
 <p>Il sistema operativo Mac OS X già include il compilatore Clang, che potete invocare con <code>clang++</code>; esiste anche l’alias <code>g++</code>, che non fa altro che invocare <code>clang++</code>.</p>
 <p>Se installate <a href="https://apps.apple.com/us/app/xcode/id497799835">XCode dall’App Store</a>, avrete probabilmente a disposizione un compilatore più aggiornato e strumenti in più.</p>
-<h1 id="debianubuntulinux-mint">Debian/Ubuntu/Linux Mint</h1>
-<p>Se usate una distribuzione Linux basata su Debian (come Ubuntu), installate il compilatore C++ e il comando <code>make</code> con il comando</p>
+<h1 id="linux">Linux</h1>
+<p>Se usate una distribuzione Linux basata su Debian (come Ubuntu o Linux Mint), installate il compilatore C++ e il comando <code>make</code> con il comando</p>
 <pre><code>sudo apt update &amp;&amp; sudo apt install build-essential</code></pre>
+<p>Per Fedora, usate questo comando:</p>
+<pre><code>sudo dnf install g++ gdb</code></pre>
 </main>
 
 <script>

@@ -23,15 +23,17 @@ Le soluzioni che consiglio sono le seguenti:
 
 #.  Installare MobaXTerm e connettersi ai computer del laboratorio.
 
+Illustro ora tutte le possibilità, e mostro alla fine una [tabella riassuntiva](#windows-riassunto).
 
-## WSL
+
+## WSL {#wsl}
 
 WSL è un meccanismo che consente a Windows di eseguire una macchina virtuale Linux in maniera semi-trasparente. È la scelta più usata dagli studenti, ma potrebbe non funzionare su alcuni computer per cui il BIOS non supporta la virtualizzazione. Se questo è il vostro caso, dovete tentare un'altra strada.
 
-Seguite le [istruzioni sul sito Microsoft](https://learn.microsoft.com/en-us/windows/wsl/install), perché i dettagli cambiano spesso.
+Non riporto qui le istruzioni per installare WSL, perché cambiano spesso. Seguite le [istruzioni sul sito Microsoft](https://learn.microsoft.com/en-us/windows/wsl/install).
 
 
-## VirtualBox
+## VirtualBox {#virtualbox}
 
 Oracle VirtualBox consente di creare una vera e propria macchina virtuale. È concettualmente analogo all'uso di WSL (vedi sopra), con lo svantaggio di essere leggermente più complicato da configurare. Però ha il grande vantaggio che l'ambiente di sviluppo (Linux + Gnome) è identico a quello dei computer del laboratorio.
 
@@ -41,7 +43,7 @@ I passaggi da seguire sono i seguenti:
 
 1.  Installate Virtual Box scaricandolo da [questo sito](https://www.virtualbox.org/);
 
-2.  Scaricate il file ISO dell'ultima versione di Ubuntu da [questo sito](https://ubuntu.com/desktop).
+2.  Scaricate il file ISO di una distribuzione Linux a vostro piacimento. Una delle mie preferite è [Linux Mint](https://linuxmint.com/), ma gli studenti alle prime armi scelgono spesso [Ubuntu](https://ubuntu.com/desktop). Una valida alternativa è [Fedora](https://www.fedoraproject.org/), che è abbastanza simile a quella usata sulle macchine di laboratorio. Se vi chiede di scegliere tra Gnome, KDE, XFCE, Mate o Cinnamon, vi consiglio KDE: è l’esperienza più simile a Windows (nel senso buono!) che si possa trovare.
 
 3.  Create una macchina virtuale selezionando dal menu *Machine* la voce *New…*; nella finestra che compare indicate il file ISO che avete scaricato poco prima, e lasciate tutto il resto come da default.
 
@@ -60,7 +62,7 @@ I passaggi da seguire sono i seguenti:
 **Annotazione importante**: i file che creerete nella macchina Ubuntu non saranno visibili da Windows! È possibile invece fare il viceversa, ossia far comparire una directory del sistema Windows all'interno di Ubuntu: in questo modo sarà possibile editare lo stesso file in entrambi gli ambienti. Queste directory si configurano con il bottone *Settings*, alla voce *Shared folders*.
 
 
-## MSYS2
+## MSYS2 {#msys2}
 
 A differenza di WSL e Virtual Box, MSYS2 non usa la virtualizzazione, e può quindi essere impiegato in tutti i tipi di portatile. MSYS2 è un sistema che installa una serie di programmi compilati nativamente per Windows, che però funzionano in maniera molto simile a Linux.
 
@@ -100,7 +102,7 @@ Questi sono i passi da compiere per installare MSYS2 e i compilatori C++:
 7.  Se volete aprire con “Esplora risorse” o con Visual Studio Code un file creato all'interno della home in MSYS2, il percorso è in `C:\msys64\home`.
 
 
-## [w64devkit](https://github.com/skeeto/w64devkit)
+## [w64devkit](https://github.com/skeeto/w64devkit) {#w64devkit}
 
 Questa soluzione è simile a MSYS2, ma è più agevole e veloce da installare, e soprattutto è molto facile da disinstallare.
 
@@ -117,7 +119,7 @@ Questa soluzione è simile a MSYS2, ma è più agevole e veloce da installare, e
 **Attenzione**: per compilare i programmi del corso, è **necessario** aggiungere `-lstdc++exp` alla **fine** di ogni invocazione di `g++` in cui si crea un eseguibile. (Vedi [questo link](https://gcc.gnu.org/gcc-14/changes.html#libstdcxx) per saperne il motivo).
 
 
-## MobaXTerm
+## MobaXTerm {#mobaxterm}
 
 Questa soluzione è indicata se avete la garanzia di una connessione veloce. Ha il vantaggio che sfruttate i computer del laboratorio per eseguire il vostro codice e quindi avete ROOT già pronto da usare, ma lo svantaggio è che la visualizzazione di grafici e l'apertura di finestre sarà più lenta. Inoltre è complicato configurare Visual Studio Code, e vi consiglio invece di usare un programma da linea di comando come `nano` per editare il codice.
 
@@ -125,6 +127,69 @@ Il programma è scaricabile dal sito <https://mobaxterm.mobatek.net/>; tenete pr
 
 Una volta installata l'applicazione, create una connessione SSH al computer `tolab.fisica.unimi.it`, indicando il vostro nome utente (lo stesso della vostra email, senza `@studenti.unimi.it`) e la vostra password della posta. Avviando la connessione, verrete fatti accedere a uno dei computer del laboratorio, e potrete anche avviare comandi grafici.
 
+## Tabella riassuntiva {#windows-riassunto}
+
+<table class="cmp-table">
+  <caption>Soluzioni per usare GCC/C++ su Windows (punteggi 1–5)</caption>
+  <thead>
+    <tr>
+      <th>Soluzione</th>
+      <th class="crit">Facilit&agrave; di installazione</th>
+      <th class="crit">Somiglianza con il laboratorio</th>
+      <th class="crit">Integrazione con VS Code</th>
+      <th class="crit">Prestazioni</th>
+      <th class="crit">Compatibilit&agrave; del compilatore</th>
+      <th class="crit">Stabilit&agrave;/Manutenzione</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><a href="#wsl">WSL</a></td>
+      <td>★★★★</td>
+      <td>★★★</td>
+      <td>★★★★★</td>
+      <td>★★★★</td>
+      <td>★★★★★</td>
+      <td>★★★★</td>
+    </tr>
+    <tr>
+      <td><a href="#virtualbox">VirtualBox</a> (con VS Code installato al suo interno)</td>
+      <td>★★★</td>
+      <td>★★★★★</td>
+      <td>★★★★★</td>
+      <td>★★★★</td>
+      <td>★★★★★</td>
+      <td>★★★</td>
+    </tr>
+    <tr>
+      <td><a href="#msys2">MSYS2</a></td>
+      <td>★★★★</td>
+      <td>★★★</td>
+      <td>★★★★</td>
+      <td>★★★★</td>
+      <td>★★★★</td>
+      <td>★★★★</td>
+    </tr>
+    <tr>
+      <td><a href="#w64devkit">w64devkit</a></td>
+      <td>★★★★★</td>
+      <td>★★</td>
+      <td>★★★★</td>
+      <td>★★★★★</td>
+      <td>★★★</td>
+      <td>★★★★</td>
+    </tr>
+    <tr>
+      <td><a href="#mobaxterm">MobaXterm</a> + SSH ai PC del Dipartimento</td>
+      <td>★★★★</td>
+      <td>★★★★★</td>
+      <td>★★★</td>
+      <td>★★</td>
+      <td>★★★★★</td>
+      <td>★★★★</td>
+    </tr>
+  </tbody>
+</table>
 
 # Mac OS X
 
@@ -133,14 +198,19 @@ Il sistema operativo Mac OS X già include il compilatore Clang, che potete invo
 Se installate [XCode dall'App Store](https://apps.apple.com/us/app/xcode/id497799835), avrete probabilmente a disposizione un compilatore più aggiornato e strumenti in più.
 
 
-# Debian/Ubuntu/Linux Mint
+# Linux
 
-Se usate una distribuzione Linux basata su Debian (come Ubuntu), installate il compilatore C++ e il comando `make` con il comando
+Se usate una distribuzione Linux basata su Debian (come Ubuntu o Linux Mint), installate il compilatore C++ e il comando `make` con il comando
 
 ```
 sudo apt update && sudo apt install build-essential
 ```
 
+Per Fedora, usate questo comando:
+
+```
+sudo dnf install g++ gdb
+```
 
 ---
 title: Configurare un compilatore C++ sul proprio portatile
