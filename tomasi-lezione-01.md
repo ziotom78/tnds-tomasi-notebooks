@@ -413,9 +413,9 @@ prompt):
 
 -   `-Wall -Wextra`: rende il compilatore C++ più brontolone del solito.
 
--   `-Wextra`: impedisce di compilare se ci sono warning
-
 -   `--pedantic`: lo rende ancora più brontolone.
+
+-   `-Wextra`: impedisce di compilare se ci sono warning (**molto utile**!)
 
 ---
 
@@ -435,7 +435,7 @@ prompt):
 
 -   Se si vuole fornire manualmente la lista dei comandi da inviare, bisogna scriverli nella riga successiva
 
--   Questa seconda riga va indentata **obbligatoriamente inserendo un carattere **TAB**, solitamente indicato sulle tastiere con ↹ (è a sinistra del tasto Q):
+-   Questa seconda riga va indentata **obbligatoriamente inserendo un carattere TAB**, solitamente indicato sulle tastiere con ↹ (è a sinistra del tasto Q):
 
     ```makefile
     CXXFLAGS = -std=c++23 -g3 -Wall -Wextra -Werror --pedantic

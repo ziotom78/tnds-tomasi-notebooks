@@ -598,9 +598,9 @@ class="sourceCode makefile"><code class="sourceCode makefile"><span id="cb21-1">
 riga di codice che ha causato l’errore.</p></li>
 <li><p><code>-Wall -Wextra</code>: rende il compilatore C++ più
 brontolone del solito.</p></li>
-<li><p><code>-Wextra</code>: impedisce di compilare se ci sono
-warning</p></li>
 <li><p><code>--pedantic</code>: lo rende ancora più brontolone.</p></li>
+<li><p><code>-Wextra</code>: impedisce di compilare se ci sono warning
+(<strong>molto utile</strong>!)</p></li>
 </ul>
 </section>
 <section id="spiegazione-del-comando-make" class="slide level1">
@@ -624,8 +624,8 @@ programmi C++, e quindi correttamente invoca l’eseguibile
 <li><p>Se si vuole fornire manualmente la lista dei comandi da inviare,
 bisogna scriverli nella riga successiva</p></li>
 <li><p>Questa seconda riga va indentata <strong>obbligatoriamente
-inserendo un carattere </strong>TAB**, solitamente indicato sulle
-tastiere con ↹ (è a sinistra del tasto Q):</p>
+inserendo un carattere TAB</strong>, solitamente indicato sulle tastiere
+con ↹ (è a sinistra del tasto Q):</p>
 <div class="sourceCode" id="cb23"><pre
 class="sourceCode makefile"><code class="sourceCode makefile"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="dt">CXXFLAGS</span> <span class="ch">=</span><span class="st"> -std=c++23 -g3 -Wall -Wextra -Werror --pedantic</span></span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a></span>
