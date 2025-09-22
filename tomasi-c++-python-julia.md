@@ -131,9 +131,17 @@
 <center>![](./images/byte-feb-1989-c-compilers.png){height=640px}</center>
 <p align="right"><small>(Byte magazine, Febbraio 1989)</small></p>
 
+# Esempio
+
+-   Nel Capitolo 8 del bel libro di Bolboacă & Deák “[Debunking C++ myths](https://www.packtpub.com/en-us/product/debunking-c-myths-9781835884799)”, gli autori raccontano che negli anni ’90 riuscirono tramite l’assembler a rendere più veloce un loro programma C++
+
+-   Il programma doveva effettuare in modo efficiente una moltiplicazione di un intero per il numero 320. Il compilatore generava un banale prodotto, ma gli autori si accorsero che $320 = 256 + 64 = 2^8 + 26$ (vedi i dettagli nel testo), e sfruttarono operazioni sui bit per rendere il prodotto più veloce
+
+-   Ricompilando il loro vecchio codice ai giorni nostri (il libro è del 2024), gli autori hanno constatato che i compilatori moderni riescono a generare codice ancora più furbo e veloce del loro!
+
 # Compilatori
 
--   Oggi siamo in una situazione completamente rovesciata!
+-   Come mostra l’esempio di Bolboacă & Deák, oggi siamo in una situazione completamente rovesciata!
 
 -   Da un lato, le CPU più recenti usano ottimizzazioni molto complesse, ed è quindi difficile per un programmatore umano scrivere codice assembler che sfrutti efficientemente la macchina…
 
@@ -792,11 +800,11 @@ end
     L"$f\left( x; y = 2 \right) = \frac{x + 2}{y} - 1$"
     julia> render(latex_str)
     ```
-    
+
     <center>
     ![](images/latexify-example.png)
     </center>
-    
+
 -   Il modo in cui `@latexrun` opera è quello di esaminare pezzo per pezzo l'espressione, e tradurre le sue operazioni in simboli LaTeX.
 
 -   È utilissima per verificare una formula matematica complessa.
@@ -809,7 +817,7 @@ end
     $ ./esercizio6.2 0 3 100 1e-5
     Zero: 0.33333
     ```
-    
+
 -   Il codice all'inizio del `main` era il seguente:
 
     ```c++
@@ -838,7 +846,7 @@ end
     // Macro call… but C++ has not them, so let's mimick Julia's syntax
     @define_main(run_program);
     ```
-    
+
     La macro `@define_main` analizza i parametri di `run_program` e genera automaticamente il `main`, usando `stod` e `stoi` in modo appropriato.
 
 ---
@@ -846,7 +854,7 @@ end
 ```
 $ ./esercizio6.2 --help
 Usage:
-  fun [REQUIRED,optional-params] 
+  fun [REQUIRED,optional-params]
 An API call doc comment
 Options:
   -h, --help                           print this cligen-erated help
@@ -855,13 +863,13 @@ Options:
   -b=, --b=           float  REQUIRED  set b
   -n=, --nsteps-max=  int    REQUIRED  set nsteps_max
   -p=, --prec=        float  REQUIRED  set prec
-  
+
 $ ./esercizio6.2 -a=0 -b=3 --nsteps-max=100 --prec=1e-5
 Zero: 0.33333
 
 $ ./esercizio6.2 0 3 100 1e-5
 Zero: 0.33333
-$ 
+$
 ```
 
 # Altre applicazioni
