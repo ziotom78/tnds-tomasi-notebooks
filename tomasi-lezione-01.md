@@ -8,6 +8,12 @@
 
 -   Se vi è più comodo, potete ottenere una versione PDF producendola da soli: basta aggiungere `?print-pdf` alla fine della URL e stampare la pagina da browser in un file PDF (vedi le [istruzioni dettagliate](https://revealjs.com/pdf-export/)).
 
+---
+
+![](media/website-qr-code.svg){height=640px}
+
+<https://ziotom78.github.io/tnds-tomasi-notebooks/>
+
 
 # Avvertenze generale
 
