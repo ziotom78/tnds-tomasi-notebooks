@@ -59,11 +59,11 @@ Di seguito un piccolo vademecum per aiutarvi a svolgere nel migliore dei modi l'
 
     -   Etc.
 
-    Non spendete però troppo tempo per arrivare a una stima con carta e penna: se dopo dieci minuti di lavoro siete ancora in alto mare, lasciate perdere!
+    Non spendete però troppo tempo per arrivare a una stima con carta e penna: se dopo pochi minuti di lavoro siete ancora in alto mare, lasciate perdere!
 
 #.  Leggete *tutto* il testo dell'esame prima di iniziare a scrivere il codice. Magari nel primo punto vi viene chiesto di assumere una certa quantità fisica (una massa, una velocità…) come costante, ma in uno dei punti successivi dovete cambiarne il valore oppure addirittura trasformarla in una quantità che dipende dal tempo o dallo spazio. Se leggete prima tutto il testo, potete già fare caso a queste cose e progettare la struttura del codice in maniera più efficace. Questo è l'approccio seguito negli svolgimenti dei temi d'esame riportati nella [pagina dedicata](temi-svolti.html).
 
-#.  Mettete *sempre* all'inizio del `main()` le chiamate alle funzioni di test che avete scritto durante il semestre e che testano le funzioni prese dai vostri esercizi. Ad esempio, se usate le funzioni per gli zeri nello svolgimento, fate iniziare il `main()` con una chiamata a `test_zeroes()` (vedi lezione 6). Il motivo di questo è che a volte gli studenti si rendono conto che il codice dei loro esercizi andrebbe esteso o parzialmente modificato, ma nel toccarlo inseriscono inavvertitamente degli errori. Chiamare le funzioni di test vi mette al riparo da questa eventualità.
+#.  Mettete *sempre* all'inizio del `main()` le chiamate alle funzioni di test che avete scritto durante il semestre e che testano le funzioni prese dai vostri esercizi. Ad esempio, se usate le funzioni per gli zeri nello svolgimento, fate iniziare il `main()` con una chiamata a `test_zeroes()` (vedi lezione 6). Il motivo è che a volte gli studenti si rendono conto che il codice dei loro esercizi andrebbe esteso o parzialmente modificato **durante l’esame scritto**, ma nel toccarlo inseriscono inavvertitamente degli errori. Chiamare le funzioni di test vi mette al riparo da questa eventualità.
 
 #.  I temi di esame sono solitamente espressi come una lista di punti, ciascuno dei quali è una domanda. **MAI** implementare tutto il codice, da cima a fondo, che risolve tutti i punti e solo alla fine eseguirlo! Implementate il codice che vi serve per risolvere il primo punto, stampatelo, verificate i risultati, e quando vi convince passate al secondo. In questo modo, se i numeri prodotti per il primo punto appaiono strani, potete correggere gli errori prima di passare al punto successivo. Altrimenti rischiate di dover buttare via tutto il lavoro: magari vi rendete conto che per risolvere bene il primo punto avevate bisogno di *due* variabili `std::vector` anziché una sola, e di conseguenza quanto avete implementato per i punti successivi non è più valido.
 
@@ -74,7 +74,7 @@ Di seguito un piccolo vademecum per aiutarvi a svolgere nel migliore dei modi l'
     Nel caso di simulazioni Monte Carlo, i numeri da stampare sono sempre moltissimi, quindi stampatene giusto qualcuno:
 
     ```c++
-    const int num_of_simulations = 10'000;
+    const int num_of_simulations{10'000};
     std::vector<double> results{num_of_simulations};
 
     for(int i{}; i < num_of_simulations; ++i) {
@@ -151,6 +151,7 @@ Di seguito un piccolo vademecum per aiutarvi a svolgere nel migliore dei modi l'
         // non esca dai limiti del vettore
         int cur_N{list_of_N.at(i)};
 
+        // Invoca la funzione `calcola_risultato` implementata sopra
         double risultato{calcola_risultato(cur_N)};
         println("Risultato per N = {}: {}", cur_N, risultato);
       }
@@ -201,7 +202,7 @@ Di seguito un piccolo vademecum per aiutarvi a svolgere nel migliore dei modi l'
     }
     ```
 
-#.  Prima di consegnare lo scritto, rimettete a posto la formattazione. Se usate Replit, è sufficiente premere Ctrl+S dopo aver modificato ciascun file. Altrimenti, dal terminale eseguite questo comando, che è molto più rapido:
+#.  Prima di consegnare lo scritto, rimettete a posto la formattazione. Dal terminale eseguite questo comando:
 
     ```
     clang-format -i *.cpp *.h

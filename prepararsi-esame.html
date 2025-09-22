@@ -8,7 +8,7 @@
   <title>Come prepararsi all’esame scritto</title>
   <link rel="stylesheet" href="css/theme.css" />
   <link rel="stylesheet" href="css/skylighting-solarized-theme.css" />
-  <script defer="" src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
   <script>document.addEventListener("DOMContentLoaded", function () {
  var mathElements = document.getElementsByClassName("math");
  var macros = [];
@@ -23,7 +23,7 @@
    });
 }}});
   </script>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css" />
 </head>
 <body>
 
@@ -84,14 +84,14 @@
 <li><p>Se si devono generare numeri casuali con una specifica distribuzione, implementate come prima cosa nel <code>main</code> un codice per estrarre ~10 000 numeri e fatene un istogramma: la sua forma corrisponde alla distribuzione fornita?</p></li>
 <li><p>Etc.</p></li>
 </ul>
-<p>Non spendete però troppo tempo per arrivare a una stima con carta e penna: se dopo dieci minuti di lavoro siete ancora in alto mare, lasciate perdere!</p></li>
+<p>Non spendete però troppo tempo per arrivare a una stima con carta e penna: se dopo pochi minuti di lavoro siete ancora in alto mare, lasciate perdere!</p></li>
 <li><p>Leggete <em>tutto</em> il testo dell’esame prima di iniziare a scrivere il codice. Magari nel primo punto vi viene chiesto di assumere una certa quantità fisica (una massa, una velocità…) come costante, ma in uno dei punti successivi dovete cambiarne il valore oppure addirittura trasformarla in una quantità che dipende dal tempo o dallo spazio. Se leggete prima tutto il testo, potete già fare caso a queste cose e progettare la struttura del codice in maniera più efficace. Questo è l’approccio seguito negli svolgimenti dei temi d’esame riportati nella <a href="temi-svolti.html">pagina dedicata</a>.</p></li>
-<li><p>Mettete <em>sempre</em> all’inizio del <code>main()</code> le chiamate alle funzioni di test che avete scritto durante il semestre e che testano le funzioni prese dai vostri esercizi. Ad esempio, se usate le funzioni per gli zeri nello svolgimento, fate iniziare il <code>main()</code> con una chiamata a <code>test_zeroes()</code> (vedi lezione 6). Il motivo di questo è che a volte gli studenti si rendono conto che il codice dei loro esercizi andrebbe esteso o parzialmente modificato, ma nel toccarlo inseriscono inavvertitamente degli errori. Chiamare le funzioni di test vi mette al riparo da questa eventualità.</p></li>
+<li><p>Mettete <em>sempre</em> all’inizio del <code>main()</code> le chiamate alle funzioni di test che avete scritto durante il semestre e che testano le funzioni prese dai vostri esercizi. Ad esempio, se usate le funzioni per gli zeri nello svolgimento, fate iniziare il <code>main()</code> con una chiamata a <code>test_zeroes()</code> (vedi lezione 6). Il motivo è che a volte gli studenti si rendono conto che il codice dei loro esercizi andrebbe esteso o parzialmente modificato <strong>durante l’esame scritto</strong>, ma nel toccarlo inseriscono inavvertitamente degli errori. Chiamare le funzioni di test vi mette al riparo da questa eventualità.</p></li>
 <li><p>I temi di esame sono solitamente espressi come una lista di punti, ciascuno dei quali è una domanda. <strong>MAI</strong> implementare tutto il codice, da cima a fondo, che risolve tutti i punti e solo alla fine eseguirlo! Implementate il codice che vi serve per risolvere il primo punto, stampatelo, verificate i risultati, e quando vi convince passate al secondo. In questo modo, se i numeri prodotti per il primo punto appaiono strani, potete correggere gli errori prima di passare al punto successivo. Altrimenti rischiate di dover buttare via tutto il lavoro: magari vi rendete conto che per risolvere bene il primo punto avevate bisogno di <em>due</em> variabili <code>std::vector</code> anziché una sola, e di conseguenza quanto avete implementato per i punti successivi non è più valido.</p></li>
 <li><p>Non succederà mai che viene richiesto l’uso di ROOT o di Gnuplot esplicitamente; fare però i grafici è utile per avere l’intuizione se i risultati che il vostro codice produce sono sensati oppure no.</p></li>
 <li><p>Prima di fare i grafici, preoccupatevi <strong>sempre</strong> di stampare con <code>println</code> i valori tabulati delle quantità che andate a mettere nei grafici. Noi docenti siamo sempre disposti a chiudere un occhio se un grafico risulta sbagliato o vuoto, nel caso in cui i valori che il programma stampa a video sono corretti: vuol dire che avete semplicemente sbagliato a creare il grafico, e questo è un errore perdonabile.</p>
 <p>Nel caso di simulazioni Monte Carlo, i numeri da stampare sono sempre moltissimi, quindi stampatene giusto qualcuno:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="at">const</span> <span class="dt">int</span> num_of_simulations <span class="op">=</span> <span class="dv">10&#39;000</span><span class="op">;</span></span>
+<div class="sourceCode" id="cb3"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="at">const</span> <span class="dt">int</span> num_of_simulations<span class="op">{</span><span class="dv">10&#39;000</span><span class="op">};</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="bu">std::</span>vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> results<span class="op">{</span>num_of_simulations<span class="op">};</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span><span class="op">(</span><span class="dt">int</span> i<span class="op">{};</span> i <span class="op">&lt;</span> num_of_simulations<span class="op">;</span> <span class="op">++</span>i<span class="op">)</span> <span class="op">{</span></span>
@@ -157,10 +157,11 @@
 <span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>    <span class="co">// non esca dai limiti del vettore</span></span>
 <span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> cur_N<span class="op">{</span>list_of_N<span class="op">.</span>at<span class="op">(</span>i<span class="op">)};</span></span>
 <span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>    <span class="dt">double</span> risultato<span class="op">{</span>calcola_risultato<span class="op">(</span>cur_N<span class="op">)};</span></span>
-<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>    println<span class="op">(</span><span class="st">&quot;Risultato per N = </span><span class="sc">{}</span><span class="st">: </span><span class="sc">{}</span><span class="st">&quot;</span><span class="op">,</span> cur_N<span class="op">,</span> risultato<span class="op">);</span></span>
-<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
-<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Invoca la funzione `calcola_risultato` implementata sopra</span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>    <span class="dt">double</span> risultato<span class="op">{</span>calcola_risultato<span class="op">(</span>cur_N<span class="op">)};</span></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>    println<span class="op">(</span><span class="st">&quot;Risultato per N = </span><span class="sc">{}</span><span class="st">: </span><span class="sc">{}</span><span class="st">&quot;</span><span class="op">,</span> cur_N<span class="op">,</span> risultato<span class="op">);</span></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 <p>Per fare un esempio un po’ più complicato, immaginiamo che vi venga chiesto di fare la simulazione di un esperimento dati tre parametri <span class="math inline">A</span>, <span class="math inline">B</span> e <span class="math inline">C</span>, e che l’esercizio si articoli in tre punti:</p>
 <ul>
 <li><p>Prima dovete calcolare il risultato dell’esperimento supponendo che il parametro <span class="math inline">A</span> sia affetto da errore, mentre altre due quantità <span class="math inline">B</span> e <span class="math inline">C</span> usate nella simulazione non hanno errore;</p></li>
@@ -199,7 +200,7 @@
 <span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>  println<span class="op">(</span><span class="st">&quot;Punto 2 (errore solo su B): </span><span class="sc">{}</span><span class="st">&quot;</span><span class="op">,</span> risultato2<span class="op">);</span></span>
 <span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a>  println<span class="op">(</span><span class="st">&quot;Punto 3 (errore solo su C): </span><span class="sc">{}</span><span class="st">&quot;</span><span class="op">,</span> risultato3<span class="op">);</span></span>
 <span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div></li>
-<li><p>Prima di consegnare lo scritto, rimettete a posto la formattazione. Se usate Replit, è sufficiente premere Ctrl+S dopo aver modificato ciascun file. Altrimenti, dal terminale eseguite questo comando, che è molto più rapido:</p>
+<li><p>Prima di consegnare lo scritto, rimettete a posto la formattazione. Dal terminale eseguite questo comando:</p>
 <pre><code>clang-format -i *.cpp *.h</code></pre>
 <p>per sistemare le indentazioni e i rientri di tutti i file <code>*.h</code> e <code>*.cpp</code> presenti nella cartella. Questo vi farà fare un figurone! (Sarebbe stata un’ottima cosa fare lo stesso anche per gli esercizi che avete consegnato. Ma se state leggendo queste righe per la prima volta solo il giorno dello scritto, ahimè è troppo tardi…)</p></li>
 </ol>
