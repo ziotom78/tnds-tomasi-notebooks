@@ -179,7 +179,8 @@ tutte (vedi <a href="miscellanea.html#gcc">questo link</a>)</p></li>
 <pre><code>/home/comune/labTNDS_programmi/enable-latest-gcc</code></pre></li>
 <li><p>Chiudete la finestra del terminale, riapritela ed eseguite
 <code>g++ --version</code>. Dovreste vedere questo:</p>
-<pre><code>g++ (GCC) 14.2.1 20250110 (Red Hat 14.2.1-7)
+<pre><code>$ g++ --version
+g++ (GCC) 14.2.1 20250110 (Red Hat 14.2.1-7)
 Copyright (C) 2024 Free Software Foundation, Inc.
 This is free software; see the source for copying conditions.  There is NO
 warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.</code></pre></li>
@@ -269,12 +270,9 @@ N = 9:
 <li>Usando il computer di laboratorio davanti a voi (per chi è in
 presenza);</li>
 <li>Se avete un portatile con un compilatore C++ installato
-(ragionevolmente recente), potete svolgere l’esercizio su di esso.</li>
-<li>Negli anni passati suggerivamo <a
-href="https://replit.com/~">Repl.it</a>, ma recenti cambiamenti nelle
-loro licenze lo hanno reso un prodotto sconsigliabile. Se proprio volete
-usarlo, assicuratevi di fare spesso il backup del vostro lavoro sul
-vostro computer scaricando ogni Repl in un file ZIP.</li>
+(ragionevolmente recente), potete svolgere l’esercizio su di esso.
+Vedete <a href="configure-your-laptop.html">questa pagina</a> per
+indicazioni su come installare un compilatore C++ adatto.</li>
 </ol>
 </section>
 <section id="computer-di-laboratorio" class="slide level1">
@@ -359,22 +357,6 @@ MobaXTerm permetterà di aprire finestre grafiche in cui mostrare i
 vostri plot, quando introdurremo i comandi grafici.</p></li>
 </ul>
 </section>
-<section id="come-usare-repl.it" class="slide level1">
-<h1>Come usare Repl.it</h1>
-<ul>
-<li><p>Una soluzione che non richiede di installare nulla è <a
-href="https://replit.com/~">Repl.it</a>, un ambiente di sviluppo usabile
-da browser.</p></li>
-<li><p>È stato già usato negli anni passati, quindi è fattibile
-impiegarlo per questo corso…</p></li>
-<li><p>…ma il sito non si è sempre dimostrato affidabile: a volte resta
-offline, altre volte è estremamente lento.</p></li>
-<li><p>Inoltre nell’agosto 2024 i proprietari hanno cambiato il
-contratto di licenza, rendendo il suo uso
-<strong>sconsigliabile</strong>: usatelo a vostro rischio e
-pericolo!</p></li>
-</ul>
-</section>
 <section id="suggerimenti-vari" class="slide level1">
 <h1>Suggerimenti vari</h1>
 </section>
@@ -430,10 +412,8 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb10-1"><a href="#
 <span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div></li>
 <li><p>Negli anni ’70 capitava che i computer non avessero monitor e
 l’output venisse stampato su carta: se la carta finiva o la stampante si
-inceppava, era importante segnalare l’errore</p></li>
-<li><p>Ma oggi <code>puts</code> viene usata solo per scrivere a video,
-e nel 99,999…% dei casi quest’operazione non fallisce: è inutile quindi
-verificare il valore o no!</p></li>
+inceppava, era importante segnalare l’errore. Oggi però lo ignorano
+tutti!</p></li>
 </ul>
 </section>
 <section id="valori-di-ritorno-ignorati-2" class="slide level1">
@@ -899,10 +879,6 @@ produrre un <code>Makefile</code>.</p></li>
       // Full list of configuration options available at:
       // https://revealjs.com/config/
       Reveal.initialize({
-        // New feature in Reveal.js 5.0: see
-        // <https://revealjs.com/scroll-view/>
-        view: 'scroll',
-
         // Display controls in the bottom right corner
         controls: true,
 

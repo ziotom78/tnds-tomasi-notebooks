@@ -39,6 +39,7 @@
 -   Chiudete la finestra del terminale, riapritela ed eseguite `g++ --version`. Dovreste vedere questo:
 
     ```
+    $ g++ --version
     g++ (GCC) 14.2.1 20250110 (Red Hat 14.2.1-7)
     Copyright (C) 2024 Free Software Foundation, Inc.
     This is free software; see the source for copying conditions.  There is NO
@@ -117,9 +118,7 @@ N = 9:
 Potete svolgere gli esercizi in uno dei modi seguenti:
 
 1.   Usando il computer di laboratorio davanti a voi (per chi è in presenza);
-2.   Se avete un portatile con un compilatore C++ installato (ragionevolmente recente), potete svolgere l'esercizio su di esso.
-3.   Negli anni passati suggerivamo [Repl.it](https://replit.com/~), ma recenti cambiamenti nelle loro licenze lo hanno reso un prodotto sconsigliabile. Se proprio volete usarlo, assicuratevi di fare spesso il backup del vostro lavoro sul vostro computer scaricando ogni Repl in un file ZIP.
-
+2.   Se avete un portatile con un compilatore C++ installato (ragionevolmente recente), potete svolgere l'esercizio su di esso. Vedete [questa pagina](configure-your-laptop.html) per indicazioni su come installare un compilatore C++ adatto.
 
 # Computer di laboratorio
 
@@ -182,17 +181,6 @@ Potete svolgere gli esercizi in uno dei modi seguenti:
 -   È un'ottima soluzione anche se volete sviluppare sul **vostro** computer Windows usando WSL: in questo caso MobaXTerm permetterà di aprire finestre grafiche in cui mostrare i vostri plot, quando introdurremo i comandi grafici.
 
 
-# Come usare Repl.it
-
--   Una soluzione che non richiede di installare nulla è [Repl.it](https://replit.com/~), un ambiente di sviluppo usabile da browser.
-
--   È stato già usato negli anni passati, quindi è fattibile impiegarlo per questo corso…
-
--   …ma il sito non si è sempre dimostrato affidabile: a volte resta offline, altre volte è estremamente lento.
-
--   Inoltre nell’agosto 2024 i proprietari hanno cambiato il contratto di licenza, rendendo il suo uso **sconsigliabile**: usatelo a vostro rischio e pericolo!
-
-
 # Suggerimenti vari
 
 # Uso di `#define`
@@ -244,9 +232,7 @@ Potete svolgere gli esercizi in uno dei modi seguenti:
     }
     ```
 
--   Negli anni '70 capitava che i computer non avessero monitor e l’output venisse stampato su carta: se la carta finiva o la stampante si inceppava, era importante segnalare l’errore
-
--   Ma oggi `puts` viene usata solo per scrivere a video, e nel 99,999…% dei casi quest’operazione non fallisce: è inutile quindi verificare il valore o no!
+-   Negli anni '70 capitava che i computer non avessero monitor e l’output venisse stampato su carta: se la carta finiva o la stampante si inceppava, era importante segnalare l’errore. Oggi però lo ignorano tutti!
 
 # Valori di ritorno ignorati
 

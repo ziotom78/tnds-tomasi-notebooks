@@ -50,7 +50,7 @@
 
 -   Ho aggiunto una [pagina](configure-your-laptop.html) in cui ho raccolto un po' di informazioni su come installare compilatori C++.
 
--   Le istruzioni per Windows sono le più estese, ed elencano ben quattro modalità diverse per compilare programmi C++ sotto Windows.
+-   Le istruzioni per Windows sono le più estese, ed elencano varie modalità per compilare programmi C++ sotto Windows.
 
 -   Ci sono istruzioni (scarne) anche per Linux e Mac OS X.
 
