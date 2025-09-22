@@ -37,14 +37,14 @@ public:
   ~Posizione();
 
   // metodi
-  double getX() const; // Coordinate cartesiane
-  double getY() const;
-  double getZ() const;
-  double getR() const; // Coordinate sferiche
-  double getPhi() const;
-  double getTheta() const;
-  double getRho() const; // raggio delle coordinate cilindriche
-  double Distanza(const Posizione &) const; // distanza da un altro punto
+  [[nodiscard]] double getX() const; // Coordinate cartesiane
+  [[nodiscard]] double getY() const;
+  [[nodiscard]] double getZ() const;
+  [[nodiscard]] double getR() const; // Coordinate sferiche
+  [[nodiscard]] double getPhi() const;
+  [[nodiscard]] double getTheta() const;
+  [[nodiscard]] double getRho() const; // raggio delle coordinate cilindriche
+  [[nodiscard]] double Distanza(const Posizione &) const; // distanza da un altro punto
 
 private:
   double m_x, m_y, m_z;
@@ -206,8 +206,8 @@ public:
 
   // metodi
 
-  double GetMassa() const { return m_massa; }
-  double GetCarica() const { return m_carica; }
+  [[nodiscard]] double GetMassa() const { return m_massa; }
+  [[nodiscard]] double GetCarica() const { return m_carica; }
   void Print() const;
 
 protected:
@@ -342,10 +342,10 @@ public:
   // Operatore di incremento
   void operator+=(const CampoVettoriale &);
 
-  double getFx() const { return m_Fx; }
-  double getFy() const { return m_Fy; }
-  double getFz() const { return m_Fz; }
-  double Modulo() const;
+  [[nodiscard]] double getFx() const { return m_Fx; }
+  [[nodiscard]] double getFy() const { return m_Fy; }
+  [[nodiscard]] double getFz() const { return m_Fz; }
+  [[nodiscard]] double Modulo() const;
 
 private:
   double m_Fx, m_Fy, m_Fz;

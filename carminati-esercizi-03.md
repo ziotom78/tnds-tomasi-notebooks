@@ -29,7 +29,8 @@ Vettore <double> v;
 L'istruzione indicata qui sopra crea effettivamente una istanza della classe `Vettore` specializzata per lavorare con dei `double`. Analogamente se pensiamo per esempio alla funzione `CalcolaMedia()` possiamo scrivere
 
 ```c++
-template <typename T> double CalcolaMedia (const Vettore<T> &v, int ndata) {...}
+template <typename T>
+[[nodiscard]] double CalcolaMedia (const Vettore<T> &v, int ndata) {...}
 ```
 
 e possiamo quindi utilizzare la funzione `CalcolaMedia` nel `main` nel modo seguente:
@@ -84,13 +85,13 @@ public:
 
   ~Vettore() { delete [] m_v;  }
 
-  int GetN() const { return m_N; }
+  [[nodiscard]] int GetN() const { return m_N; }
 
   void SetComponent(int i, T a) { // modifica una componente
       // ...
   }
 
-  T GetComponent(int i) const { // accedi ad una componente
+  [[nodiscard]] T GetComponent(int i) const { // accedi ad una componente
       // ...
   }
 
@@ -128,11 +129,11 @@ public:
   Vettore& operator=(const Vettore& V);
   ~Vettore();
 
-  int GetN() const;
+  [[nodiscard]] int GetN() const;
   void SetComponent(int i, T a);
-  T GetComponent(int i) const;
+  [[nodiscard]] T GetComponent(int i) const;
   void Scambia(int primo, int secondo);
-  T& operator[](int i) const;
+  [[nodiscard]] T& operator[](int i) const;
 
 private:
   int m_N;
@@ -172,7 +173,8 @@ Analogamente a quanto fatto sopra, adattiamo il file di funzioni in modo tale ch
 
 using namespace std;
 
-template <typename T> Vettore<T> Read (int N , const char * filename) {
+template <typename T>
+[[nodiscard]] Vettore<T> Read (int N , const char * filename) {
   ifstream in{filename};   // Parentesi graffe: uniform initialization
   Vettore<T> v{N};
   if(! in) {
@@ -299,7 +301,8 @@ Analogamente a quanto fatto sopra, adattiamo il file di funzioni in modo che cia
 
 using namespace std;
 
-template <typename T> vector<T> Read(int N, const char* filename) {
+template <typename T>
+[[nodiscard]] vector<T> Read(int N, const char* filename) {
   // Crea un vettore “vuoto”, ossia privo di elementi
   vector<T> v;
 
@@ -355,7 +358,8 @@ In altre parole, le parentesi graffe usate con un `std::vector` indicano *l'elen
 Ecco l'esempio della funzione `CalcolaMediana`: notate l'utilizzo della funzione `sort()` della STL per ordinare gli elementi di un contenitore. Quando possibile, usiamo funzioni e algoritmi ufficiali! La funzione `sort()` lavora con un iteratore al primo elemento del contenitore (`v.begin()`) e uno all'ultimo (+1) (`v.end()`). I contenitori della STL come `vector` hanno i due metodi `begin()` e `end()`, e le funzioni STL hanno storicamente lavorano con iteratori: in questo modo la funzione può lavorare indifferentemente su ogni tipo di contenitore, indipendentemente dalla struttura interna del contenitore.
 
 ```c++
-template <typename T> double CalcolaMediana(vector<T> v) {
+template <typename T>
+[[nodiscard]] double CalcolaMediana(vector<T> v) {
   sort(v.begin(), v.end()) ;
   double mediana{};
 
@@ -427,7 +431,8 @@ Notate che la classe `vector` ci libera completamente dalla necessità di conosc
 In questa funzione creiamo un vettore, lo riempiamo con tutti i dati letti da un file aggiungendo di volta in volta una componente. Il processo si ferma al termine del file:
 
 ```c++
-template <typename T> vector<T> Read(const char* filename) {
+template <typename T>
+[[nodiscard]] vector<T> Read(const char* filename) {
   vector<T> v;
   ifstream in{filename};
 

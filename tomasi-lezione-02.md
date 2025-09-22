@@ -83,7 +83,7 @@ N = 9:
 ```c++
 #include <iostream>
 
-int calc(int a, int b) { return a + b; }
+[[nodiscard]] int calc(int a, int b) { return a + b; }
 
 int main() {
     std::println("Insert two numbers: ");
@@ -208,7 +208,9 @@ int main() {
 ```c++
 // Return true if the relative difference between `calculated` and
 // `expected` differs by less than `epsilon`
-bool are_close(double calculated, double expected, double epsilon = 1e-7) {
+[[nodiscard]] bool are_close(double calculated,
+                             double expected,
+                             double epsilon = 1e-7) {
   return fabs(calculated - expected) < epsilon * fabs(expected);
 }
 
@@ -380,7 +382,7 @@ Questi `assert` vanno bene anche per gli esercizi di oggi, con opportuni aggiust
 
     #include "vettore.h"
 
-    double CalcolaMedia(const Vettore & vett);
+    [[nodiscard]] double CalcolaMedia(const Vettore & vett);
     ```
 
 # Uso di header files
@@ -418,7 +420,7 @@ class Vettore {
     // ...
 };
 
-double CalcolaMedia(const Vettore & vett);
+[[nodiscard]] double CalcolaMedia(const Vettore & vett);
 
 int main() { /* ... */ }
 ```
@@ -634,7 +636,7 @@ Vettore::Vettore(Vettore && vett) : m_n(vett.m_N) {
 
 ```c++
 // Function "Read" creates a Vector and fill it with data read from file
-Vettore Read(int ndata, const char * filename) {
+[[nodiscard]] Vettore Read(int ndata, const char * filename) {
   Vettore result(ndata);
   // …
   return result;

@@ -10,7 +10,7 @@
     };
 
     struct OscillatoreArmonico : FunzioneVettorialeBase {
-      vector<double> Eval(const vector<double> &x) const override {
+      [[nodiscard]] vector<double> Eval(const vector<double> &x) const override {
         return vector<double>{x[1], -x[0]};
       }
     };
@@ -30,7 +30,7 @@
     public:
       vector(size_t size) : m_size{size} { m_data = new T[m_size]; }
       ~vector() { delete[] m_data; }
-      size_t size() const { return m_size; }
+      [[nodiscard]] size_t size() const { return m_size; }
       // ...
     };
     ```
@@ -45,7 +45,8 @@
 
     ```c++
     template <typename T>
-    std::vector<T> operator+(const std::vector<T> &a, const std::vector<T> &b) {
+    [[nodiscard]] std::vector<T> operator+(const std::vector<T> &a,
+                                           const std::vector<T> &b) {
 
       assert(ssize(a) == ssize(b));  // Don't forget to do this!
 
@@ -65,7 +66,7 @@
     };
 
     struct OscillatoreArmonico : FunzioneVettorialeBase {
-      vector<double> Eval(const vector<double> &x) override {
+      [[nodiscard]] vector<double> Eval(const vector<double> &x) override {
         // Lo spazio delle fasi è a 2 dimensioni, ma questo è chiaro solo
         // se si contano gli elementi del vettore restituito!
         return vector<double>{x[1], -x[0]};
@@ -93,7 +94,7 @@
     class array {                        // come `double` e valori come `size_t`
       T m_data[N];                       // Non è un puntatore, ma un array di dimensione nota
     public:
-      size_t size() const { return N; }  // Ritorna il valore costante N
+      [[nodiscard]] size_t size() const { return N; }  // Ritorna il valore costante N
       // ...
     };
     ```

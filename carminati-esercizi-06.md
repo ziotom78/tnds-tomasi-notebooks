@@ -91,11 +91,11 @@ In questo e nei prossimi esercizi avremo a che fare con diverse funzioni $y = f(
       void SetB(double b) { m_b = b; }
       void SetC(double c) { m_c = c; }
 
-      double GetA() const { return m_a; }
-      double GetB() const { return m_b; }
-      double GetC() const { return m_c; }
+      [[nodiscard]] double GetA() const { return m_a; }
+      [[nodiscard]] double GetB() const { return m_b; }
+      [[nodiscard]] double GetC() const { return m_c; }
 
-      double GetVertex() const { return -m_b / (2 * m_a); }
+      [[nodiscard]] double GetVertex() const { return -m_b / (2 * m_a); }
 
     private:
       double m_a, m_b, m_c;
@@ -167,7 +167,7 @@ Ci sono vari modi di implementare una funzione segno da utilizzare nella codific
 #.  Una banale funzione libera:
 
     ```c++
-    double sign(double x) {
+    [[nodiscard]] double sign(double x) {
         if(x < 0)
             return -1.0;
         else if (x > 0)
@@ -180,7 +180,7 @@ Ci sono vari modi di implementare una funzione segno da utilizzare nella codific
     oppure con l'implementazione più compatta ma meno leggibile
 
     ```c++
-    double sign(double x) {
+    [[nodiscard]] double sign(double x) {
         return x == 0. ? 0.0 : (x > 0 ? 1.0 : -1.0);
     }
     ```
@@ -192,7 +192,7 @@ Ci sono vari modi di implementare una funzione segno da utilizzare nella codific
     ```c++
     class Segno : public FunzioneBase {
     public :
-       double Eval(double x) const {
+       [[nodiscard]] double Eval(double x) const {
            return x == 0. ? 0.0 : (x > 0 ? 1.0 : -1.0);
        }
     }
@@ -202,7 +202,7 @@ Ci sono vari modi di implementare una funzione segno da utilizzare nella codific
 
     ```c++
     // Use "inline" if you're going to put this definition in a .h file!
-    inline double sign(double x) {
+    [[nodiscard]] inline double sign(double x) {
         // Questa chiamata a copysign ritorna ±1.0 a seconda
         // del segno di x, oppure zero se x == 0
         return x != 0 ? std::copysign(1.0, x) : 0.0;
@@ -250,18 +250,22 @@ public:
   // you just have to implement one of them. (The one with the reference
   // should be preferred).
 
-  virtual double CercaZeriPointer(double xmin, double xmax, const FunzioneBase * f,
-                                  double prec = 1e-3, int nmax = 100) = 0;
-  virtual double CercaZeriReference(double xmin, double xmax, const FunzioneBase & f,
-                                    double prec = 1e-3, int nmax = 100) = 0;
+  [[nodiscard]] virtual double CercaZeriPointer(double xmin, double xmax,
+                                                const FunzioneBase * f,
+                                                double prec = 1e-3,
+                                                int nmax = 100) = 0;
+  [[nodiscard]] virtual double CercaZeriReference(double xmin, double xmax,
+                                                  const FunzioneBase & f,
+                                                  double prec = 1e-3,
+                                                  int nmax = 100) = 0;
 
   void SetPrecisione(double epsilon) { m_prec = epsilon; }
-  double GetPrecisione() const { return m_prec;}
+  [[nodiscard]] double GetPrecisione() const { return m_prec;}
 
   void SetNMaxIterations(int n) { m_nmax = n; }
-  int GetNMaxIterations() const { return m_nmax; }
+  [[nodiscard]] int GetNMaxIterations() const { return m_nmax; }
 
-  int GetNiterations() const { return m_niterations; }
+  [[nodiscard]] int GetNiterations() const { return m_niterations; }
 
 protected:
   double m_a, m_b; // range of the interval to explore
@@ -285,11 +289,15 @@ public:
   // Here too we provide two definitions. You must only implement the one you
   // provided in `Solutore`!
 
-  virtual double CercaZeriPointer(double xmin, double xmax, const FunzioneBase * f,
-                                  double prec = 1e-3, int nmax = 100);
+  virtual [[nodiscard]] double CercaZeriPointer(double xmin, double xmax,
+                                                const FunzioneBase * f,
+                                                double prec = 1e-3,
+                                                int nmax = 100);
 
-  virtual double CercaZeriReference(double xmin, double xmax, const FunzioneBase & f,
-                                    double prec = 1e-3, int nmax = 100);
+  virtual [[nodiscard]] double CercaZeriReference(double xmin, double xmax,
+                                                  const FunzioneBase & f,
+                                                  double prec = 1e-3,
+                                                  int nmax = 100);
 };
 ```
 
@@ -361,11 +369,11 @@ Un'altra possibilità è implementare una funzione template:
 
 ```c++
 template<typename T>
-std::expected<double, string> bisect(double xmin, double xmax, T fn) {
+[[nodiscard]] std::expected<double, string> bisect(double xmin, double xmax, T fn) {
     // Here you can write `fn(x)` to call `fn`:
 }
 
-double f(double x) {
+[[nodiscard]] double f(double x) {
   return 3 * x * x + 5 * x - 2;
 }
 

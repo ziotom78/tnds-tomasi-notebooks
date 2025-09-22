@@ -604,10 +604,10 @@ Ecco come potrebbe diventare il vostro codice dopo la cura:
 
 using namespace std;
 
-double CalcolaMedia(double*, int);
-double CalcolaVarianza(double*, int);
-double CalcolaMediana(double[], int);
-double * ReadDataFromFile(const char *, int);
+[[nodiscard]] double CalcolaMedia(double*, int);
+[[nodiscard]] double CalcolaVarianza(double*, int);
+[[nodiscard]] double CalcolaMediana(double[], int);
+[[nodiscard]] double * ReadDataFromFile(const char *, int);
 void Print(const char *, double *, int);
 void scambiaByValue(double, double);
 void scambiaByRef(double &, double &);
@@ -646,6 +646,7 @@ int main(int argc, char *argv[]) {
 Queste le funzioni da definire a parte:
 
 ```c++
+// Non c’è bisogno di ripetere [[nodiscard]] nella definizione
 double * ReadDataFromFile(const char * filename, int size) {
   double * data = new double[size];
 

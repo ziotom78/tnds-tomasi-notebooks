@@ -9,7 +9,7 @@
   <title>Lezione 8: Equazioni differenziali</title>
   <link rel="stylesheet" href="css/theme.css" />
   <link rel="stylesheet" href="css/skylighting-solarized-theme.css" />
-  <script defer="" src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
   <script>document.addEventListener("DOMContentLoaded", function () {
  var mathElements = document.getElementsByClassName("math");
  var macros = [];
@@ -24,7 +24,7 @@
    });
 }}});
   </script>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css" />
 </head>
 <body>
 
@@ -198,7 +198,7 @@ v(t + h) &amp;\approx v(t) + h \cdot \dot{v}(t) = x(t) + h \cdot \frac{F}m.
 <span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span><span class="op">:</span></span>
 <span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>  OscillatoreArmonico<span class="op">(</span><span class="dt">double</span> omega0<span class="op">)</span> <span class="op">:</span> <span class="va">m_omega0</span><span class="op">{</span>omega0<span class="op">}</span> <span class="op">{}</span></span>
 <span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>  <span class="bu">std::</span>array<span class="op">&lt;</span><span class="dt">double</span><span class="op">,</span> <span class="dv">2</span><span class="op">&gt;</span></span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>  <span class="op">[[</span><span class="at">nodiscard</span><span class="op">]]</span> <span class="bu">std::</span>array<span class="op">&lt;</span><span class="dt">double</span><span class="op">,</span> <span class="dv">2</span><span class="op">&gt;</span></span>
 <span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>  Eval<span class="op">(</span><span class="dt">double</span> t<span class="op">,</span></span>
 <span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>       <span class="at">const</span> <span class="bu">std::</span>array<span class="op">&lt;</span><span class="dt">double</span><span class="op">,</span> <span class="dv">2</span><span class="op">&gt;</span> <span class="op">&amp;</span>x<span class="op">)</span> <span class="at">const</span> <span class="kw">override</span> <span class="op">{</span></span>
 <span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Implementare il metodo</span></span>
@@ -220,7 +220,7 @@ v(t + h) &amp;\approx v(t) + h \cdot \dot{v}(t) = x(t) + h \cdot \frac{F}m.
 <span id="cb6-44"><a href="#cb6-44" aria-hidden="true" tabindex="-1"></a><span class="co">// integratore concreto, metodo di Eulero a N dimensioni</span></span>
 <span id="cb6-45"><a href="#cb6-45" aria-hidden="true" tabindex="-1"></a><span class="kw">template</span> <span class="op">&lt;</span><span class="dt">size_t</span> n<span class="op">&gt;</span> <span class="kw">class</span> Eulero <span class="op">:</span> <span class="kw">public</span> EquazioneDifferenzialeBase<span class="op">&lt;</span>n<span class="op">&gt;</span> <span class="op">{</span></span>
 <span id="cb6-46"><a href="#cb6-46" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span><span class="op">:</span></span>
-<span id="cb6-47"><a href="#cb6-47" aria-hidden="true" tabindex="-1"></a>  <span class="bu">std::</span>array<span class="op">&lt;</span><span class="dt">double</span><span class="op">,</span> n<span class="op">&gt;</span></span>
+<span id="cb6-47"><a href="#cb6-47" aria-hidden="true" tabindex="-1"></a>  <span class="op">[[</span><span class="at">nodiscard</span><span class="op">]]</span> <span class="bu">std::</span>array<span class="op">&lt;</span><span class="dt">double</span><span class="op">,</span> n<span class="op">&gt;</span></span>
 <span id="cb6-48"><a href="#cb6-48" aria-hidden="true" tabindex="-1"></a>  Passo<span class="op">(</span><span class="dt">double</span> t<span class="op">,</span> <span class="at">const</span> <span class="bu">std::</span>array<span class="op">&lt;</span><span class="dt">double</span><span class="op">,</span> n<span class="op">&gt;</span> <span class="op">&amp;</span>x<span class="op">,</span> <span class="dt">double</span> h<span class="op">,</span></span>
 <span id="cb6-49"><a href="#cb6-49" aria-hidden="true" tabindex="-1"></a>        <span class="at">const</span> FunzioneVettorialeBase<span class="op">&lt;</span>n<span class="op">&gt;</span> <span class="op">&amp;</span>f<span class="op">)</span> <span class="at">const</span> <span class="kw">override</span> <span class="op">{</span></span>
 <span id="cb6-50"><a href="#cb6-50" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Implementare il metodo: basta una riga di codice per Eulero!</span></span>
@@ -229,8 +229,8 @@ v(t + h) &amp;\approx v(t) + h \cdot \dot{v}(t) = x(t) + h \cdot \frac{F}m.
 <span id="cb6-53"><a href="#cb6-53" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-54"><a href="#cb6-54" aria-hidden="true" tabindex="-1"></a><span class="co">// Test del metodo di Eulero</span></span>
 <span id="cb6-55"><a href="#cb6-55" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-56"><a href="#cb6-56" aria-hidden="true" tabindex="-1"></a><span class="kw">inline</span> <span class="dt">double</span> are_close<span class="op">(</span><span class="dt">double</span> a<span class="op">,</span> <span class="dt">double</span> b<span class="op">,</span> <span class="dt">double</span> eps <span class="op">=</span> <span class="fl">1e-7</span><span class="op">)</span> <span class="op">{</span></span>
-<span id="cb6-57"><a href="#cb6-57" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> abs<span class="op">(</span>a <span class="op">-</span> b<span class="op">)</span> <span class="op">&lt;</span> eps<span class="op">;</span></span>
+<span id="cb6-56"><a href="#cb6-56" aria-hidden="true" tabindex="-1"></a><span class="op">[[</span><span class="at">nodiscard</span><span class="op">]]</span> <span class="kw">inline</span> <span class="dt">double</span> are_close<span class="op">(</span><span class="dt">double</span> a<span class="op">,</span> <span class="dt">double</span> b<span class="op">,</span> <span class="dt">double</span> eps <span class="op">=</span> <span class="fl">1e-7</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb6-57"><a href="#cb6-57" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> abs<span class="op">(</span>a <span class="op">-</span> b<span class="op">)</span> <span class="op">&lt;</span> eps <span class="op">*</span> fabs<span class="op">(</span>a<span class="op">);</span></span>
 <span id="cb6-58"><a href="#cb6-58" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
 <span id="cb6-59"><a href="#cb6-59" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-60"><a href="#cb6-60" aria-hidden="true" tabindex="-1"></a><span class="kw">inline</span> <span class="dt">void</span> test_euler<span class="op">()</span> <span class="op">{</span></span>

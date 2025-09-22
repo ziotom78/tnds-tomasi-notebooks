@@ -209,6 +209,79 @@ Potete svolgere gli esercizi in uno dei modi seguenti:
     println("The position is {} m", total_time_s * speed_m_s);
     ```
 
+# Uso di `[[nodiscard]]`
+
+# Valori di ritorno ignorati
+
+-   Il C++ mutua dal C una “brutta” abitudine: è possibile ignorare i valori di ritorno delle funzioni senza conseguenze.
+
+-   In altre parole, si può scrivere codice del genere, e il compilatore lo compilerà senza problemi:
+
+    ```c++
+    int sum(int a, int b) { return a + b; }
+
+    int main() {
+        sum(1, 3);  // Non salva il valore di ritorno!
+    }
+    ```
+
+# Valori di ritorno ignorati
+
+-   Il C aveva previsto la possibilità di ignorare valori di ritorno perché molte funzioni restituivano valori non molto “interessanti”
+
+-   Ad esempio, la funzione `puts` stampa a video un messaggio, e restituisce `EOF` se non è riuscita a farlo:
+
+    ```c++
+    int result = puts("Hello, world!");
+    if(result == EOF) {
+        abort();  // Big failure here!
+    }
+    ```
+
+-   Negli anni '70 capitava che i computer non avessero monitor e l’output venisse stampato su carta: se la carta finiva o la stampante si inceppava, era importante segnalare l’errore
+
+-   Ma oggi `puts` viene usata solo per scrivere a video, e nel 99,999…% dei casi quest’operazione non fallisce: è inutile quindi verificare il valore o no!
+
+# Valori di ritorno ignorati
+
+-   Però capite che, se anche la scrittura
+
+    ```c++
+    puts("Hello, world!");  // Ignore the result
+    ```
+
+    non rappresenta un problema, la scrittura
+
+    ```c++
+    sin(x);  // Ignore the result
+    ```
+
+    indica invece molto probabilmente un bug!
+
+-   Il C++ introduce l’attributo `[[nodiscard]]`, che crea un warning (e blocca la compilazione, se usate `-Werror`) se ignorate il risultato.
+
+# `[[nodiscard]]`
+
+-   È sicuramente noioso dover scrivere `[[nodiscard]]` prima dei tipi di ritorno di funzioni e metodi
+-   Però mette al riparo da errori che sono impossibili in altri linguaggi. Ad esempio, in Ada è **sempre** un errore ignorare un valore di ritorno
+-   Volendo si può anche inserire un messaggio:
+
+    ```c++
+    [[nodiscard("You forgot to use the return value")]] double mean(…);
+    ```
+
+# `[[nodiscard]]`
+
+-   Ho modificato il testo originale degli esercizi di Carminati in modo che vi venga suggerito di usare `[[nodiscard]]`.
+
+-   Ad esempio, la funzione per calcolare la media è dichiarata così nel file `.h`:
+
+    ```c++
+    [[nodiscard]] double CalcolaMedia(double * data, int size);
+    ```
+
+-   È sufficiente usare `[[nodiscard]]` nel file `.h`: non c’è bisogno di ripeterlo nella definizione all’interno del file C++.
+
 # Uso di argc e argv
 
 # Linea di comando

@@ -52,7 +52,7 @@ public:
   void SetComponent(int, double);
 
   // Accede alla componente i-esima
-  double GetComponent(int) const;
+  [[nodiscard]] double GetComponent(int) const;
 
   void Scambia(int, int);
 
@@ -81,7 +81,7 @@ private:
     // File funzioni.h
     #include "vettore.h"
 
-    double calcolaMedia(const Vettore & v);
+    [[nodiscard]] double calcolaMedia(const Vettore & v);
     // ..
 
     ////////////////////////////////////////
@@ -108,7 +108,7 @@ private:
       // ...
     };
 
-    double calcolaMedia(const Vettore & v);
+    [[nodiscard]] double calcolaMedia(const Vettore & v);
 
     // Ora continua col contenuto di `main.cpp`
     // ...
@@ -125,7 +125,7 @@ private:
       // ...
     };
 
-    double calcolaMedia(const Vettore & v);
+    [[nodiscard]] double calcolaMedia(const Vettore & v);
 
     // ...
     ```
@@ -449,7 +449,7 @@ Per aggiungere questa funzionalità alla nostra classe `Vettore` dobbiamo come a
 -   Aggiungere la dichiarazione del metodo nell'header file (`.h`):
 
     ```c++
-    double& operator[](int) const;
+    [[nodiscard]] double& operator[](int) const;
     ```
 
 
@@ -624,9 +624,9 @@ La funzione `test_statistical_functions()` è spiegata nelle [slide di Tomasi](t
 
     Vettore Read(int, const char *);
 
-    double CalcolaMedia(const Vettore &);
-    double CalcolaVarianza(const Vettore &);
-    double CalcolaMediana(Vettore);
+    [[nodiscard]] double CalcolaMedia(const Vettore &);
+    [[nodiscard]] double CalcolaVarianza(const Vettore &);
+    [[nodiscard]] double CalcolaMediana(Vettore);
 
     void Print(const Vettore &);
     void Print(const Vettore &, const char *);

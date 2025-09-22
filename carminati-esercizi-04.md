@@ -31,7 +31,7 @@ Potreste implementare media e deviazione standard in questo modo:
 ```c++
 // Set the default stride to 1 so that if you avoid passing the
 // second parameter, the usual definition of “mean” will be used
-double mean(const vector<double> & v, int stride = 1) {
+[[nodiscard]] double mean(const vector<double> & v, int stride = 1) {
   double accum{};
   int n{};
   for(int k{}; k < ssize(v); k += stride, n++) {  // Note we increment both k and n!
@@ -242,8 +242,9 @@ void ParseFile(string filename, vector<double> &myx, vector<double> &myy,
   fin.close();
 }
 
-TGraphErrors DoPlot(vector<double> myx, vector<double> myy,
-                    vector<double> myerry) {
+[[nodiscard]] TGraphErrors DoPlot(vector<double> myx,
+                                  vector<double> myy,
+                                  vector<double> myerry) {
 
   TGraphErrors mygraph;
 
@@ -301,7 +302,7 @@ int main() {
 }
 ```
 
-## Esempio di codice con GnuPlot e FmtLib
+## Esempio di codice con GnuPlot
 
 È possibile usare la libreria
 [gplot++](https://github.com/ziotom78/gplotpp) per produrre grafici: è
@@ -435,7 +436,7 @@ template <typename T> struct Measurements {
  * @param data The object that will contain the result on exit
  */
 template <typename T>
-void read_from_file(istream &input, Measurements<T> &data) {
+[[nodiscard]] void read_from_file(istream &input, Measurements<T> &data) {
   T voltage, rb, rb_err;
   while (input >> voltage >> rb >> rb_err) {
     data.voltage.push_back(voltage);
@@ -597,9 +598,9 @@ Definiamo alcune funzioni generiche nei file `common.h` e `common.cpp`:
 
 using namespace std;
 
-vector<double> ParseFile(string filename);
-double fun(double q, vector<double> params);
-double deriv(double qmin, vector<double> params);
+[[nodiscard]] vector<double> ParseFile(string filename);
+[[nodiscard]] double fun(double q, vector<double> params);
+[[nodiscard]] double deriv(double qmin, vector<double> params);
 ```
 
 L'implementazione di queste funzioni è nel file `common.cpp`:
@@ -891,22 +892,22 @@ public:
     return is;
   }
 
-  double getDistance() const {
+  [[nodiscard]] double getDistance() const {
     return sqrt(m_x * m_x + m_y * m_y + m_z * m_z);
   }
 
-  double GetX() const { return m_x; }
-  double GetY() const { return m_y; }
-  double GetZ() const { return m_z; }
+  [[nodiscard]] double GetX() const { return m_x; }
+  [[nodiscard]] double GetY() const { return m_y; }
+  [[nodiscard]] double GetZ() const { return m_z; }
 
-  double getDistance(Posizione p) const {
+  [[nodiscard]] double getDistance(Posizione p) const {
     double dx{p.GetX() - m_x};
 	double dy{p.GetY() - m_y};
 	double dz{p.GetZ() - m_z};
     return sqrt(dx * dx + dy * dy + dz * dz);
   }
 
-  bool operator<(const Posizione &b) const {
+  [[nodiscard]] bool operator<(const Posizione &b) const {
     return (getDistance() > b.getDistance());
   }
 
@@ -921,8 +922,8 @@ private:
 
 // algoritmo di riordinamento dei vettore di punti
 
-template <typename T> void findBestPath(T start, T end) {
-
+template <typename T>
+void findBestPath(T start, T end) {
   Posizione ref{};
   for (auto it{start}; it != end; it++) {
     sort(it, end, [&](Posizione i, Posizione j) {

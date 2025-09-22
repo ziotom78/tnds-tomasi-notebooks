@@ -51,7 +51,9 @@ void test_vettore() {
 Questo è il test per l'esercizio 3.1, che usa `std::vector`; adattatelo poi per l'esercizio 3.2.
 
 ```c++
-bool are_close(double calculated, double expected, double epsilon = 1e-7) {
+[[nodiscard]] bool are_close(double calculated,
+                             double expected,
+                             double epsilon = 1e-7) {
   return fabs(calculated - expected) < epsilon * fabs(expected);
 }
 

@@ -98,7 +98,7 @@
   <link rel="stylesheet" href="./css/custom.css"/>
   <link rel="stylesheet" href="./css/asciinema-player.css"/>
   <script defer=""
-  src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js"></script>
+  src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
   <script>document.addEventListener("DOMContentLoaded", function () {
  var mathElements = document.getElementsByClassName("math");
  var macros = [];
@@ -114,7 +114,7 @@
 }}});
   </script>
   <link rel="stylesheet"
-  href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css" />
+  href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css" />
 </head>
 <body>
   <div class="reveal">
@@ -192,27 +192,29 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb1-1"><a href="#c
 <p>Questo è il test per l’esercizio 3.1, che usa
 <code>std::vector</code>; adattatelo poi per l’esercizio 3.2.</p>
 <div class="sourceCode" id="cb2"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="dt">bool</span> are_close<span class="op">(</span><span class="dt">double</span> calculated<span class="op">,</span> <span class="dt">double</span> expected<span class="op">,</span> <span class="dt">double</span> epsilon <span class="op">=</span> <span class="fl">1e-7</span><span class="op">)</span> <span class="op">{</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> fabs<span class="op">(</span>calculated <span class="op">-</span> expected<span class="op">)</span> <span class="op">&lt;</span> epsilon <span class="op">*</span> fabs<span class="op">(</span>expected<span class="op">);</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> test_statistical_functions<span class="op">(</span><span class="dt">void</span><span class="op">)</span> <span class="op">{</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="op">{</span>  <span class="co">// New scope</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>      <span class="bu">std::</span>vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> mydata<span class="op">{</span><span class="dv">1</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">3</span><span class="op">,</span> <span class="dv">4</span><span class="op">};</span>  <span class="co">// Use these instead of data.dat</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>      <span class="ot">assert</span><span class="op">(</span>are_close<span class="op">(</span>CalcolaMedia<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;(</span>mydata<span class="op">),</span> <span class="fl">2.5</span><span class="op">));</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>      <span class="ot">assert</span><span class="op">(</span>are_close<span class="op">(</span>CalcolaVarianza<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;(</span>mydata<span class="op">),</span> <span class="fl">1.25</span><span class="op">));</span></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>      <span class="ot">assert</span><span class="op">(</span>are_close<span class="op">(</span>CalcolaMediana<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;(</span>mydata<span class="op">),</span> <span class="fl">2.5</span><span class="op">));</span>  <span class="co">// Even</span></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>  <span class="op">{</span> <span class="co">// New scope: I can declare again a variable named `mydata`</span></span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>      <span class="bu">std::</span>vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> mydata<span class="op">{</span><span class="dv">1</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">3</span><span class="op">};</span>     <span class="co">// Shorter</span></span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>      <span class="ot">assert</span><span class="op">(</span>are_close<span class="op">(</span>CalcolaMediana<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;(</span>mydata<span class="op">),</span> <span class="dv">2</span><span class="op">));</span>    <span class="co">// Odd</span></span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>  println<span class="op">(</span>stderr<span class="op">,</span> <span class="st">&quot;Statistical functions work as expected! 🥳&quot;</span><span class="op">);</span></span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="op">[[</span><span class="at">nodiscard</span><span class="op">]]</span> <span class="dt">bool</span> are_close<span class="op">(</span><span class="dt">double</span> calculated<span class="op">,</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>                             <span class="dt">double</span> expected<span class="op">,</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>                             <span class="dt">double</span> epsilon <span class="op">=</span> <span class="fl">1e-7</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> fabs<span class="op">(</span>calculated <span class="op">-</span> expected<span class="op">)</span> <span class="op">&lt;</span> epsilon <span class="op">*</span> fabs<span class="op">(</span>expected<span class="op">);</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> test_statistical_functions<span class="op">(</span><span class="dt">void</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="op">{</span>  <span class="co">// New scope</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>      <span class="bu">std::</span>vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> mydata<span class="op">{</span><span class="dv">1</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">3</span><span class="op">,</span> <span class="dv">4</span><span class="op">};</span>  <span class="co">// Use these instead of data.dat</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>      <span class="ot">assert</span><span class="op">(</span>are_close<span class="op">(</span>CalcolaMedia<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;(</span>mydata<span class="op">),</span> <span class="fl">2.5</span><span class="op">));</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>      <span class="ot">assert</span><span class="op">(</span>are_close<span class="op">(</span>CalcolaVarianza<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;(</span>mydata<span class="op">),</span> <span class="fl">1.25</span><span class="op">));</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>      <span class="ot">assert</span><span class="op">(</span>are_close<span class="op">(</span>CalcolaMediana<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;(</span>mydata<span class="op">),</span> <span class="fl">2.5</span><span class="op">));</span>  <span class="co">// Even</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>  <span class="op">{</span> <span class="co">// New scope: I can declare again a variable named `mydata`</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>      <span class="bu">std::</span>vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> mydata<span class="op">{</span><span class="dv">1</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">3</span><span class="op">};</span>     <span class="co">// Shorter</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>      <span class="ot">assert</span><span class="op">(</span>are_close<span class="op">(</span>CalcolaMediana<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;(</span>mydata<span class="op">),</span> <span class="dv">2</span><span class="op">));</span>    <span class="co">// Odd</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>  println<span class="op">(</span>stderr<span class="op">,</span> <span class="st">&quot;Statistical functions work as expected! 🥳&quot;</span><span class="op">);</span></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 </section>
 <section id="root" class="slide level1">
 <h1>ROOT</h1>
@@ -565,19 +567,19 @@ errore, perché <code>atoi</code> restituisce un intero ma sia
 (<code>int</code>) ammettono anche numeri negativi:</p>
 <table>
 <thead>
-<tr class="header">
+<tr>
 <th style="text-align: left;">Tipo</th>
 <th style="text-align: right;">Minimo</th>
 <th style="text-align: right;">Massimo</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><code>int</code></td>
 <td style="text-align: right;">−2147483648</td>
 <td style="text-align: right;">2147483647</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><code>unsigned</code></td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">4294967295</td>

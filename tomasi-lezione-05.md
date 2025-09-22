@@ -41,7 +41,9 @@
 # Esercizio 5.0
 
 ```c++
-bool are_close(double calculated, double expected, double epsilon = 1e-7) {
+[[nodiscard]] bool are_close(double calculated,
+                             double expected,
+                             double epsilon = 1e-7) {
   return fabs(calculated - expected) < epsilon * fabs(expected);
 }
 

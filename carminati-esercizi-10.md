@@ -31,7 +31,7 @@ public:
   void SetC(unsigned int c) { m_c = c; }
   void SetM(unsigned int m) { m_m = m; }
 
-  double Rand();
+  double Rand();  // Do not use [[nodiscard]]: people might want to throw away numbers!
   double Unif(double xmin, double xmax); // distribuzione uniforme
   double Exp(double mean); // distribuzione esponenziale
   double Gaus(double mean, double sigma); // distribuzione gaussiana (Box-Muller)
@@ -374,8 +374,8 @@ public:
 
   virtual double Integra(const FunzioneBase & f, double inf, double sup, int punti, double fmax) = 0;
 
-  double GetErrore() const { return m_errore; }
-  int GetN() const { return m_punti; }
+  [[nodiscard]] double GetErrore() const { return m_errore; }
+  [[nodiscard]] int GetN() const { return m_punti; }
 
 private:
   RandomGen m_myrand;

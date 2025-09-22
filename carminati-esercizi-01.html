@@ -9,7 +9,7 @@
   <title>Lezione 1: Analisi dei dati (arrays)</title>
   <link rel="stylesheet" href="css/theme.css" />
   <link rel="stylesheet" href="css/skylighting-solarized-theme.css" />
-  <script defer="" src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
   <script>document.addEventListener("DOMContentLoaded", function () {
  var mathElements = document.getElementsByClassName("math");
  var macros = [];
@@ -24,7 +24,7 @@
    });
 }}});
   </script>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css" />
 </head>
 <body>
 
@@ -512,10 +512,10 @@ Effetto
 <span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a><span class="kw">using</span> <span class="kw">namespace</span> std<span class="op">;</span></span>
 <span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> CalcolaMedia<span class="op">(</span><span class="dt">double</span><span class="op">*,</span> <span class="dt">int</span><span class="op">);</span></span>
-<span id="cb39-8"><a href="#cb39-8" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> CalcolaVarianza<span class="op">(</span><span class="dt">double</span><span class="op">*,</span> <span class="dt">int</span><span class="op">);</span></span>
-<span id="cb39-9"><a href="#cb39-9" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> CalcolaMediana<span class="op">(</span><span class="dt">double</span><span class="op">[],</span> <span class="dt">int</span><span class="op">);</span></span>
-<span id="cb39-10"><a href="#cb39-10" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> <span class="op">*</span> ReadDataFromFile<span class="op">(</span><span class="at">const</span> <span class="dt">char</span> <span class="op">*,</span> <span class="dt">int</span><span class="op">);</span></span>
+<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a><span class="op">[[</span><span class="at">nodiscard</span><span class="op">]]</span> <span class="dt">double</span> CalcolaMedia<span class="op">(</span><span class="dt">double</span><span class="op">*,</span> <span class="dt">int</span><span class="op">);</span></span>
+<span id="cb39-8"><a href="#cb39-8" aria-hidden="true" tabindex="-1"></a><span class="op">[[</span><span class="at">nodiscard</span><span class="op">]]</span> <span class="dt">double</span> CalcolaVarianza<span class="op">(</span><span class="dt">double</span><span class="op">*,</span> <span class="dt">int</span><span class="op">);</span></span>
+<span id="cb39-9"><a href="#cb39-9" aria-hidden="true" tabindex="-1"></a><span class="op">[[</span><span class="at">nodiscard</span><span class="op">]]</span> <span class="dt">double</span> CalcolaMediana<span class="op">(</span><span class="dt">double</span><span class="op">[],</span> <span class="dt">int</span><span class="op">);</span></span>
+<span id="cb39-10"><a href="#cb39-10" aria-hidden="true" tabindex="-1"></a><span class="op">[[</span><span class="at">nodiscard</span><span class="op">]]</span> <span class="dt">double</span> <span class="op">*</span> ReadDataFromFile<span class="op">(</span><span class="at">const</span> <span class="dt">char</span> <span class="op">*,</span> <span class="dt">int</span><span class="op">);</span></span>
 <span id="cb39-11"><a href="#cb39-11" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> Print<span class="op">(</span><span class="at">const</span> <span class="dt">char</span> <span class="op">*,</span> <span class="dt">double</span> <span class="op">*,</span> <span class="dt">int</span><span class="op">);</span></span>
 <span id="cb39-12"><a href="#cb39-12" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> scambiaByValue<span class="op">(</span><span class="dt">double</span><span class="op">,</span> <span class="dt">double</span><span class="op">);</span></span>
 <span id="cb39-13"><a href="#cb39-13" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> scambiaByRef<span class="op">(</span><span class="dt">double</span> <span class="op">&amp;,</span> <span class="dt">double</span> <span class="op">&amp;);</span></span>
@@ -550,88 +550,89 @@ Effetto
 <span id="cb39-42"><a href="#cb39-42" aria-hidden="true" tabindex="-1"></a>  <span class="kw">delete</span><span class="op">[]</span> data<span class="op">;</span></span>
 <span id="cb39-43"><a href="#cb39-43" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 <p>Queste le funzioni da definire a parte:</p>
-<div class="sourceCode" id="cb40"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> <span class="op">*</span> ReadDataFromFile<span class="op">(</span><span class="at">const</span> <span class="dt">char</span> <span class="op">*</span> filename<span class="op">,</span> <span class="dt">int</span> size<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> <span class="op">*</span> data <span class="op">=</span> <span class="kw">new</span> <span class="dt">double</span><span class="op">[</span>size<span class="op">];</span></span>
-<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>  <span class="co">// ...</span></span>
-<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> data<span class="op">;</span></span>
-<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
-<span id="cb40-8"><a href="#cb40-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-9"><a href="#cb40-9" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> Print<span class="op">(</span><span class="at">const</span> <span class="dt">char</span> <span class="op">*</span> filename<span class="op">,</span> <span class="dt">double</span> <span class="op">*</span> data<span class="op">,</span> <span class="dt">int</span> size<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb40-10"><a href="#cb40-10" aria-hidden="true" tabindex="-1"></a>  <span class="co">// ..</span></span>
-<span id="cb40-11"><a href="#cb40-11" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
-<span id="cb40-12"><a href="#cb40-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-13"><a href="#cb40-13" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> CalcolaMedia<span class="op">(</span><span class="dt">double</span> <span class="op">*</span> data<span class="op">,</span> <span class="dt">int</span> size<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb40-14"><a href="#cb40-14" aria-hidden="true" tabindex="-1"></a>  <span class="co">// ..</span></span>
-<span id="cb40-15"><a href="#cb40-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-16"><a href="#cb40-16" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> media<span class="op">;</span></span>
-<span id="cb40-17"><a href="#cb40-17" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
-<span id="cb40-18"><a href="#cb40-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-19"><a href="#cb40-19" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> CalcolaVarianza<span class="op">(</span><span class="dt">double</span> <span class="op">*</span> data<span class="op">,</span> <span class="dt">int</span> size<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb40-20"><a href="#cb40-20" aria-hidden="true" tabindex="-1"></a>  <span class="co">// ..</span></span>
-<span id="cb40-21"><a href="#cb40-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-22"><a href="#cb40-22" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> varianza<span class="op">;</span></span>
-<span id="cb40-23"><a href="#cb40-23" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
-<span id="cb40-24"><a href="#cb40-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-25"><a href="#cb40-25" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> scambiaByValue<span class="op">(</span><span class="dt">double</span> a<span class="op">,</span> <span class="dt">double</span> b<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb40-26"><a href="#cb40-26" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> c <span class="op">=</span> a<span class="op">;</span></span>
-<span id="cb40-27"><a href="#cb40-27" aria-hidden="true" tabindex="-1"></a>  a <span class="op">=</span> b<span class="op">;</span></span>
-<span id="cb40-28"><a href="#cb40-28" aria-hidden="true" tabindex="-1"></a>  b <span class="op">=</span> c<span class="op">;</span></span>
-<span id="cb40-29"><a href="#cb40-29" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
-<span id="cb40-30"><a href="#cb40-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-31"><a href="#cb40-31" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> scambiaByRef<span class="op">(</span><span class="dt">double</span> <span class="op">&amp;</span>a<span class="op">,</span> <span class="dt">double</span> <span class="op">&amp;</span>b<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb40-32"><a href="#cb40-32" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> c <span class="op">=</span> a<span class="op">;</span></span>
-<span id="cb40-33"><a href="#cb40-33" aria-hidden="true" tabindex="-1"></a>  a <span class="op">=</span> b<span class="op">;</span></span>
-<span id="cb40-34"><a href="#cb40-34" aria-hidden="true" tabindex="-1"></a>  b <span class="op">=</span> c<span class="op">;</span></span>
-<span id="cb40-35"><a href="#cb40-35" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
-<span id="cb40-36"><a href="#cb40-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-37"><a href="#cb40-37" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> scambiaByPointer<span class="op">(</span><span class="dt">double</span> <span class="op">*</span>a<span class="op">,</span> <span class="dt">double</span> <span class="op">*</span>b<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb40-38"><a href="#cb40-38" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> c <span class="op">=</span> <span class="op">*</span>a<span class="op">;</span></span>
-<span id="cb40-39"><a href="#cb40-39" aria-hidden="true" tabindex="-1"></a>  <span class="op">*</span>a <span class="op">=</span> <span class="op">*</span>b<span class="op">;</span></span>
-<span id="cb40-40"><a href="#cb40-40" aria-hidden="true" tabindex="-1"></a>  <span class="op">*</span>b <span class="op">=</span> c<span class="op">;</span></span>
-<span id="cb40-41"><a href="#cb40-41" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
-<span id="cb40-42"><a href="#cb40-42" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-43"><a href="#cb40-43" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> selection_sort<span class="op">(</span><span class="dt">double</span> <span class="op">*</span> vec<span class="op">,</span> <span class="dt">int</span> size<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb40-44"><a href="#cb40-44" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span><span class="op">(</span><span class="dt">int</span> j <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> j <span class="op">&lt;</span> size <span class="op">-</span> <span class="dv">1</span><span class="op">;</span> <span class="op">++</span>j<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb40-45"><a href="#cb40-45" aria-hidden="true" tabindex="-1"></a>      <span class="dt">int</span> imin <span class="op">=</span> j<span class="op">;</span></span>
-<span id="cb40-46"><a href="#cb40-46" aria-hidden="true" tabindex="-1"></a>      <span class="dt">double</span> min <span class="op">=</span> vec<span class="op">[</span>imin<span class="op">];</span></span>
-<span id="cb40-47"><a href="#cb40-47" aria-hidden="true" tabindex="-1"></a>      <span class="cf">for</span><span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> j <span class="op">+</span> <span class="dv">1</span><span class="op">;</span> i <span class="op">&lt;</span> size<span class="op">;</span> <span class="op">++</span>i<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb40-48"><a href="#cb40-48" aria-hidden="true" tabindex="-1"></a>          <span class="cf">if</span><span class="op">(</span>vec<span class="op">[</span>i<span class="op">]</span> <span class="op">&lt;</span> min<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb40-49"><a href="#cb40-49" aria-hidden="true" tabindex="-1"></a>              min <span class="op">=</span> vec<span class="op">[</span>i<span class="op">];</span></span>
-<span id="cb40-50"><a href="#cb40-50" aria-hidden="true" tabindex="-1"></a>              imin <span class="op">=</span> i<span class="op">;</span></span>
-<span id="cb40-51"><a href="#cb40-51" aria-hidden="true" tabindex="-1"></a>          <span class="op">}</span></span>
-<span id="cb40-52"><a href="#cb40-52" aria-hidden="true" tabindex="-1"></a>      <span class="op">}</span></span>
-<span id="cb40-53"><a href="#cb40-53" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-54"><a href="#cb40-54" aria-hidden="true" tabindex="-1"></a>      scambiaByRef<span class="op">(</span>vec<span class="op">[</span>j<span class="op">],</span> vec<span class="op">[</span>imin<span class="op">]);</span></span>
-<span id="cb40-55"><a href="#cb40-55" aria-hidden="true" tabindex="-1"></a>      <span class="co">// equivalente:</span></span>
-<span id="cb40-56"><a href="#cb40-56" aria-hidden="true" tabindex="-1"></a>      <span class="co">// scambiaByPointer(vec + j, vec + imin);</span></span>
-<span id="cb40-57"><a href="#cb40-57" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
-<span id="cb40-58"><a href="#cb40-58" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
-<span id="cb40-59"><a href="#cb40-59" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-60"><a href="#cb40-60" aria-hidden="true" tabindex="-1"></a><span class="co">// Calcola la mediana di un array `vec` di dimensione `size`.</span></span>
-<span id="cb40-61"><a href="#cb40-61" aria-hidden="true" tabindex="-1"></a><span class="co">// Prima crea una copia dell&#39;array, poi lo riordina e quindi</span></span>
-<span id="cb40-62"><a href="#cb40-62" aria-hidden="true" tabindex="-1"></a><span class="co">// calcola la mediana</span></span>
-<span id="cb40-63"><a href="#cb40-63" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> CalcolaMediana<span class="op">(</span><span class="dt">double</span> <span class="op">*</span> data<span class="op">,</span> <span class="dt">int</span> size<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb40-64"><a href="#cb40-64" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> <span class="op">*</span> vcopy <span class="op">=</span> <span class="kw">new</span> <span class="dt">double</span><span class="op">[</span>size<span class="op">];</span></span>
-<span id="cb40-65"><a href="#cb40-65" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span><span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> size<span class="op">;</span> <span class="op">++</span>i<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb40-66"><a href="#cb40-66" aria-hidden="true" tabindex="-1"></a>      vcopy<span class="op">[</span>i<span class="op">]</span> <span class="op">=</span> vec<span class="op">[</span>i<span class="op">];</span></span>
-<span id="cb40-67"><a href="#cb40-67" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
-<span id="cb40-68"><a href="#cb40-68" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-69"><a href="#cb40-69" aria-hidden="true" tabindex="-1"></a>  selection_sort<span class="op">(</span>vcopy<span class="op">,</span> size<span class="op">);</span></span>
-<span id="cb40-70"><a href="#cb40-70" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-71"><a href="#cb40-71" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> mediana <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb40-72"><a href="#cb40-72" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-73"><a href="#cb40-73" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span><span class="op">(</span>size <span class="op">%</span> <span class="dv">2</span> <span class="op">==</span> <span class="dv">0</span><span class="op">)</span> <span class="op">{</span></span>
-<span id="cb40-74"><a href="#cb40-74" aria-hidden="true" tabindex="-1"></a>      mediana <span class="op">=</span> <span class="op">(</span>vcopy<span class="op">[</span>size <span class="op">/</span> <span class="dv">2</span> <span class="op">-</span> <span class="dv">1</span><span class="op">]</span> <span class="op">+</span> vcopy<span class="op">[</span>size <span class="op">/</span> <span class="dv">2</span><span class="op">])</span> <span class="op">/</span> <span class="dv">2</span><span class="op">;</span></span>
-<span id="cb40-75"><a href="#cb40-75" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
-<span id="cb40-76"><a href="#cb40-76" aria-hidden="true" tabindex="-1"></a>      mediana <span class="op">=</span> vcopy<span class="op">[</span>size <span class="op">/</span> <span class="dv">2</span><span class="op">];</span></span>
-<span id="cb40-77"><a href="#cb40-77" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
-<span id="cb40-78"><a href="#cb40-78" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-79"><a href="#cb40-79" aria-hidden="true" tabindex="-1"></a>  <span class="kw">delete</span><span class="op">[]</span> vcopy<span class="op">;</span></span>
-<span id="cb40-80"><a href="#cb40-80" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-81"><a href="#cb40-81" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> mediana<span class="op">;</span></span>
-<span id="cb40-82"><a href="#cb40-82" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb40"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Non c’è bisogno di ripetere [[nodiscard]] nella definizione</span></span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> <span class="op">*</span> ReadDataFromFile<span class="op">(</span><span class="at">const</span> <span class="dt">char</span> <span class="op">*</span> filename<span class="op">,</span> <span class="dt">int</span> size<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> <span class="op">*</span> data <span class="op">=</span> <span class="kw">new</span> <span class="dt">double</span><span class="op">[</span>size<span class="op">];</span></span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a>  <span class="co">// ...</span></span>
+<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> data<span class="op">;</span></span>
+<span id="cb40-8"><a href="#cb40-8" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb40-9"><a href="#cb40-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-10"><a href="#cb40-10" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> Print<span class="op">(</span><span class="at">const</span> <span class="dt">char</span> <span class="op">*</span> filename<span class="op">,</span> <span class="dt">double</span> <span class="op">*</span> data<span class="op">,</span> <span class="dt">int</span> size<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb40-11"><a href="#cb40-11" aria-hidden="true" tabindex="-1"></a>  <span class="co">// ..</span></span>
+<span id="cb40-12"><a href="#cb40-12" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb40-13"><a href="#cb40-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-14"><a href="#cb40-14" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> CalcolaMedia<span class="op">(</span><span class="dt">double</span> <span class="op">*</span> data<span class="op">,</span> <span class="dt">int</span> size<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb40-15"><a href="#cb40-15" aria-hidden="true" tabindex="-1"></a>  <span class="co">// ..</span></span>
+<span id="cb40-16"><a href="#cb40-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-17"><a href="#cb40-17" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> media<span class="op">;</span></span>
+<span id="cb40-18"><a href="#cb40-18" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb40-19"><a href="#cb40-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-20"><a href="#cb40-20" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> CalcolaVarianza<span class="op">(</span><span class="dt">double</span> <span class="op">*</span> data<span class="op">,</span> <span class="dt">int</span> size<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb40-21"><a href="#cb40-21" aria-hidden="true" tabindex="-1"></a>  <span class="co">// ..</span></span>
+<span id="cb40-22"><a href="#cb40-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-23"><a href="#cb40-23" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> varianza<span class="op">;</span></span>
+<span id="cb40-24"><a href="#cb40-24" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb40-25"><a href="#cb40-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-26"><a href="#cb40-26" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> scambiaByValue<span class="op">(</span><span class="dt">double</span> a<span class="op">,</span> <span class="dt">double</span> b<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb40-27"><a href="#cb40-27" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> c <span class="op">=</span> a<span class="op">;</span></span>
+<span id="cb40-28"><a href="#cb40-28" aria-hidden="true" tabindex="-1"></a>  a <span class="op">=</span> b<span class="op">;</span></span>
+<span id="cb40-29"><a href="#cb40-29" aria-hidden="true" tabindex="-1"></a>  b <span class="op">=</span> c<span class="op">;</span></span>
+<span id="cb40-30"><a href="#cb40-30" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb40-31"><a href="#cb40-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-32"><a href="#cb40-32" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> scambiaByRef<span class="op">(</span><span class="dt">double</span> <span class="op">&amp;</span>a<span class="op">,</span> <span class="dt">double</span> <span class="op">&amp;</span>b<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb40-33"><a href="#cb40-33" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> c <span class="op">=</span> a<span class="op">;</span></span>
+<span id="cb40-34"><a href="#cb40-34" aria-hidden="true" tabindex="-1"></a>  a <span class="op">=</span> b<span class="op">;</span></span>
+<span id="cb40-35"><a href="#cb40-35" aria-hidden="true" tabindex="-1"></a>  b <span class="op">=</span> c<span class="op">;</span></span>
+<span id="cb40-36"><a href="#cb40-36" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb40-37"><a href="#cb40-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-38"><a href="#cb40-38" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> scambiaByPointer<span class="op">(</span><span class="dt">double</span> <span class="op">*</span>a<span class="op">,</span> <span class="dt">double</span> <span class="op">*</span>b<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb40-39"><a href="#cb40-39" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> c <span class="op">=</span> <span class="op">*</span>a<span class="op">;</span></span>
+<span id="cb40-40"><a href="#cb40-40" aria-hidden="true" tabindex="-1"></a>  <span class="op">*</span>a <span class="op">=</span> <span class="op">*</span>b<span class="op">;</span></span>
+<span id="cb40-41"><a href="#cb40-41" aria-hidden="true" tabindex="-1"></a>  <span class="op">*</span>b <span class="op">=</span> c<span class="op">;</span></span>
+<span id="cb40-42"><a href="#cb40-42" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb40-43"><a href="#cb40-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-44"><a href="#cb40-44" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> selection_sort<span class="op">(</span><span class="dt">double</span> <span class="op">*</span> vec<span class="op">,</span> <span class="dt">int</span> size<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb40-45"><a href="#cb40-45" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span><span class="op">(</span><span class="dt">int</span> j <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> j <span class="op">&lt;</span> size <span class="op">-</span> <span class="dv">1</span><span class="op">;</span> <span class="op">++</span>j<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb40-46"><a href="#cb40-46" aria-hidden="true" tabindex="-1"></a>      <span class="dt">int</span> imin <span class="op">=</span> j<span class="op">;</span></span>
+<span id="cb40-47"><a href="#cb40-47" aria-hidden="true" tabindex="-1"></a>      <span class="dt">double</span> min <span class="op">=</span> vec<span class="op">[</span>imin<span class="op">];</span></span>
+<span id="cb40-48"><a href="#cb40-48" aria-hidden="true" tabindex="-1"></a>      <span class="cf">for</span><span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> j <span class="op">+</span> <span class="dv">1</span><span class="op">;</span> i <span class="op">&lt;</span> size<span class="op">;</span> <span class="op">++</span>i<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb40-49"><a href="#cb40-49" aria-hidden="true" tabindex="-1"></a>          <span class="cf">if</span><span class="op">(</span>vec<span class="op">[</span>i<span class="op">]</span> <span class="op">&lt;</span> min<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb40-50"><a href="#cb40-50" aria-hidden="true" tabindex="-1"></a>              min <span class="op">=</span> vec<span class="op">[</span>i<span class="op">];</span></span>
+<span id="cb40-51"><a href="#cb40-51" aria-hidden="true" tabindex="-1"></a>              imin <span class="op">=</span> i<span class="op">;</span></span>
+<span id="cb40-52"><a href="#cb40-52" aria-hidden="true" tabindex="-1"></a>          <span class="op">}</span></span>
+<span id="cb40-53"><a href="#cb40-53" aria-hidden="true" tabindex="-1"></a>      <span class="op">}</span></span>
+<span id="cb40-54"><a href="#cb40-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-55"><a href="#cb40-55" aria-hidden="true" tabindex="-1"></a>      scambiaByRef<span class="op">(</span>vec<span class="op">[</span>j<span class="op">],</span> vec<span class="op">[</span>imin<span class="op">]);</span></span>
+<span id="cb40-56"><a href="#cb40-56" aria-hidden="true" tabindex="-1"></a>      <span class="co">// equivalente:</span></span>
+<span id="cb40-57"><a href="#cb40-57" aria-hidden="true" tabindex="-1"></a>      <span class="co">// scambiaByPointer(vec + j, vec + imin);</span></span>
+<span id="cb40-58"><a href="#cb40-58" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb40-59"><a href="#cb40-59" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb40-60"><a href="#cb40-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-61"><a href="#cb40-61" aria-hidden="true" tabindex="-1"></a><span class="co">// Calcola la mediana di un array `vec` di dimensione `size`.</span></span>
+<span id="cb40-62"><a href="#cb40-62" aria-hidden="true" tabindex="-1"></a><span class="co">// Prima crea una copia dell&#39;array, poi lo riordina e quindi</span></span>
+<span id="cb40-63"><a href="#cb40-63" aria-hidden="true" tabindex="-1"></a><span class="co">// calcola la mediana</span></span>
+<span id="cb40-64"><a href="#cb40-64" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> CalcolaMediana<span class="op">(</span><span class="dt">double</span> <span class="op">*</span> data<span class="op">,</span> <span class="dt">int</span> size<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb40-65"><a href="#cb40-65" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> <span class="op">*</span> vcopy <span class="op">=</span> <span class="kw">new</span> <span class="dt">double</span><span class="op">[</span>size<span class="op">];</span></span>
+<span id="cb40-66"><a href="#cb40-66" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span><span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> size<span class="op">;</span> <span class="op">++</span>i<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb40-67"><a href="#cb40-67" aria-hidden="true" tabindex="-1"></a>      vcopy<span class="op">[</span>i<span class="op">]</span> <span class="op">=</span> vec<span class="op">[</span>i<span class="op">];</span></span>
+<span id="cb40-68"><a href="#cb40-68" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb40-69"><a href="#cb40-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-70"><a href="#cb40-70" aria-hidden="true" tabindex="-1"></a>  selection_sort<span class="op">(</span>vcopy<span class="op">,</span> size<span class="op">);</span></span>
+<span id="cb40-71"><a href="#cb40-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-72"><a href="#cb40-72" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> mediana <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb40-73"><a href="#cb40-73" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-74"><a href="#cb40-74" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span><span class="op">(</span>size <span class="op">%</span> <span class="dv">2</span> <span class="op">==</span> <span class="dv">0</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb40-75"><a href="#cb40-75" aria-hidden="true" tabindex="-1"></a>      mediana <span class="op">=</span> <span class="op">(</span>vcopy<span class="op">[</span>size <span class="op">/</span> <span class="dv">2</span> <span class="op">-</span> <span class="dv">1</span><span class="op">]</span> <span class="op">+</span> vcopy<span class="op">[</span>size <span class="op">/</span> <span class="dv">2</span><span class="op">])</span> <span class="op">/</span> <span class="dv">2</span><span class="op">;</span></span>
+<span id="cb40-76"><a href="#cb40-76" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
+<span id="cb40-77"><a href="#cb40-77" aria-hidden="true" tabindex="-1"></a>      mediana <span class="op">=</span> vcopy<span class="op">[</span>size <span class="op">/</span> <span class="dv">2</span><span class="op">];</span></span>
+<span id="cb40-78"><a href="#cb40-78" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb40-79"><a href="#cb40-79" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-80"><a href="#cb40-80" aria-hidden="true" tabindex="-1"></a>  <span class="kw">delete</span><span class="op">[]</span> vcopy<span class="op">;</span></span>
+<span id="cb40-81"><a href="#cb40-81" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-82"><a href="#cb40-82" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> mediana<span class="op">;</span></span>
+<span id="cb40-83"><a href="#cb40-83" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 <p>Il <code>main</code> è ora decisamente più compatto e leggibile. Quasi tutte le principali funzionalità del codice sono state scorporate in un opportuno set di funzioni.</p>
 <p>Come nel caso dell’esercizio precedente compiliamo il programma invocando come al solito <code>g++</code>:</p>
 <pre><code>g++ esercizio1.1.cpp -std=c++23 -g3 -Wall -Wextra -Werror --pedantic -o esercizio1.1</code></pre>

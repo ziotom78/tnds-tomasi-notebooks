@@ -167,25 +167,27 @@ href="https://en.wikipedia.org/wiki/Atan2"><code>atan2</code></a>.</p></li>
 <section id="esercizio-5.0-1" class="slide level1">
 <h1>Esercizio 5.0</h1>
 <div class="sourceCode" id="cb3"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="dt">bool</span> are_close<span class="op">(</span><span class="dt">double</span> calculated<span class="op">,</span> <span class="dt">double</span> expected<span class="op">,</span> <span class="dt">double</span> epsilon <span class="op">=</span> <span class="fl">1e-7</span><span class="op">)</span> <span class="op">{</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> fabs<span class="op">(</span>calculated <span class="op">-</span> expected<span class="op">)</span> <span class="op">&lt;</span> epsilon <span class="op">*</span> fabs<span class="op">(</span>expected<span class="op">);</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> test_coordinates<span class="op">(</span><span class="dt">void</span><span class="op">)</span> <span class="op">{</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  Posizione p<span class="op">{</span><span class="dv">1</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">3</span><span class="op">};</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  <span class="ot">assert</span><span class="op">(</span>are_close<span class="op">(</span>p<span class="op">.</span>getX<span class="op">(),</span> <span class="fl">1.0</span><span class="op">));</span></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  <span class="ot">assert</span><span class="op">(</span>are_close<span class="op">(</span>p<span class="op">.</span>getY<span class="op">(),</span> <span class="fl">2.0</span><span class="op">);</span></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>  <span class="ot">assert</span><span class="op">(</span>are_close<span class="op">(</span>p<span class="op">.</span>getZ<span class="op">(),</span> <span class="fl">3.0</span><span class="op">);</span></span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>  <span class="ot">assert</span><span class="op">(</span>are_close<span class="op">(</span>p<span class="op">.</span>getR<span class="op">(),</span> <span class="fl">3.7416573867739</span><span class="op">));</span></span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>  <span class="ot">assert</span><span class="op">(</span>are_close<span class="op">(</span>p<span class="op">.</span>getPhi<span class="op">(),</span> <span class="fl">1.1071487177941</span><span class="op">);</span></span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>  <span class="ot">assert</span><span class="op">(</span>are_close<span class="op">(</span>p<span class="op">.</span>getTheta<span class="op">(),</span> <span class="fl">0.64052231267943</span><span class="op">);</span></span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>  <span class="ot">assert</span><span class="op">(</span>are_close<span class="op">(</span>p<span class="op">.</span>getRho<span class="op">(),</span> <span class="fl">2.2360679774998</span><span class="op">);</span></span>
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="op">[[</span><span class="at">nodiscard</span><span class="op">]]</span> <span class="dt">bool</span> are_close<span class="op">(</span><span class="dt">double</span> calculated<span class="op">,</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>                             <span class="dt">double</span> expected<span class="op">,</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>                             <span class="dt">double</span> epsilon <span class="op">=</span> <span class="fl">1e-7</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> fabs<span class="op">(</span>calculated <span class="op">-</span> expected<span class="op">)</span> <span class="op">&lt;</span> epsilon <span class="op">*</span> fabs<span class="op">(</span>expected<span class="op">);</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> test_coordinates<span class="op">(</span><span class="dt">void</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  Posizione p<span class="op">{</span><span class="dv">1</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">3</span><span class="op">};</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>  <span class="ot">assert</span><span class="op">(</span>are_close<span class="op">(</span>p<span class="op">.</span>getX<span class="op">(),</span> <span class="fl">1.0</span><span class="op">));</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>  <span class="ot">assert</span><span class="op">(</span>are_close<span class="op">(</span>p<span class="op">.</span>getY<span class="op">(),</span> <span class="fl">2.0</span><span class="op">);</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>  <span class="ot">assert</span><span class="op">(</span>are_close<span class="op">(</span>p<span class="op">.</span>getZ<span class="op">(),</span> <span class="fl">3.0</span><span class="op">);</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>  <span class="ot">assert</span><span class="op">(</span>are_close<span class="op">(</span>p<span class="op">.</span>getR<span class="op">(),</span> <span class="fl">3.7416573867739</span><span class="op">));</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>  <span class="ot">assert</span><span class="op">(</span>are_close<span class="op">(</span>p<span class="op">.</span>getPhi<span class="op">(),</span> <span class="fl">1.1071487177941</span><span class="op">);</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>  <span class="ot">assert</span><span class="op">(</span>are_close<span class="op">(</span>p<span class="op">.</span>getTheta<span class="op">(),</span> <span class="fl">0.64052231267943</span><span class="op">);</span></span>
 <span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>  println<span class="op">(</span>stderr<span class="op">,</span> <span class="st">&quot;The coordinates work correctly! 🥳&quot;</span><span class="op">);</span></span>
-<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>  <span class="ot">assert</span><span class="op">(</span>are_close<span class="op">(</span>p<span class="op">.</span>getRho<span class="op">(),</span> <span class="fl">2.2360679774998</span><span class="op">);</span></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>  println<span class="op">(</span>stderr<span class="op">,</span> <span class="st">&quot;The coordinates work correctly! 🥳&quot;</span><span class="op">);</span></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 </section>
 <section id="esercizio-5.2" class="slide level1">
 <h1>Esercizio 5.2</h1>

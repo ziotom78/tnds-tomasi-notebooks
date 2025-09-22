@@ -172,7 +172,7 @@ class OscillatoreArmonico : public FunzioneVettorialeBase<2> {
 public:
   OscillatoreArmonico(double omega0) : m_omega0{omega0} {}
 
-  std::array<double, 2>
+  [[nodiscard]] std::array<double, 2>
   Eval(double t,
        const std::array<double, 2> &x) const override {
     // Implementare il metodo
@@ -194,7 +194,7 @@ public:
 // integratore concreto, metodo di Eulero a N dimensioni
 template <size_t n> class Eulero : public EquazioneDifferenzialeBase<n> {
 public:
-  std::array<double, n>
+  [[nodiscard]] std::array<double, n>
   Passo(double t, const std::array<double, n> &x, double h,
         const FunzioneVettorialeBase<n> &f) const override {
     // Implementare il metodo: basta una riga di codice per Eulero!
@@ -203,8 +203,8 @@ public:
 
 // Test del metodo di Eulero
 
-inline double are_close(double a, double b, double eps = 1e-7) {
-  return abs(a - b) < eps;
+[[nodiscard]] inline double are_close(double a, double b, double eps = 1e-7) {
+  return abs(a - b) < eps * fabs(a);
 }
 
 inline void test_euler() {

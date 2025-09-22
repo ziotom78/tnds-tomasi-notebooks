@@ -108,7 +108,7 @@ public:
   void Esegui();
   void Analizza();
 
-  double getAmis() { return m_A_misurato; };
+  [[nodiscard]] double getAmis() { return m_A_misurato; };
 
 private:
   // generatore di numeri casuali

@@ -61,7 +61,8 @@ class Integral {
 public:
   Integral() : m_a{}, m_b{}, m_sign{}, m_h{} {}
 
-  double integrate(double a, double b, int nstep, FunzioneBase &f) {
+  [[nodiscard]] double integrate(double a, double b, int nstep,
+                                 FunzioneBase &f) {
     // Questo metodo fa molto poco: imposta `a` e
     // `b`, verifica che a < b, e poi invoca il
     // metodo virtuale `calculate`, che va ridefinito
@@ -70,10 +71,10 @@ public:
     return m_sign * calculate(nstep, f);
   }
 
-  double getA() const { return m_a; }
-  double getB() const { return m_b; }
-  double getSign() const { return m_sign; }
-  double getH() const { return m_h; }
+  [[nodiscard]] double getA() const { return m_a; }
+  [[nodiscard]] double getB() const { return m_b; }
+  [[nodiscard]] double getSign() const { return m_sign; }
+  [[nodiscard]] double getH() const { return m_h; }
   void setH(double h) { m_h = h; }
 
 private:
@@ -82,6 +83,9 @@ private:
   // garantito che m_a < m_b (perché se ne occupa `Integral::integrate`)
   // (Notate che un metodo si può ridefinire nelle classi derivate anche
   // se è `private`!)
+  //
+  // P.S. È inutile usare l’attributo [[nodiscard]] con funzioni virtuali pure,
+  // perché non viene ereditato
   virtual double calculate(int nstep, FunzioneBase &f) = 0;
 
   void checkInterval(double a, double b) {
@@ -101,7 +105,7 @@ public:
   Midpoint() : Integral() {}
 
 private:
-  double calculate(int nstep, FunzioneBase &f) override {
+  [[nodiscard]] double calculate(int nstep, FunzioneBase &f) override {
     // Ricordare: in quest'implementazione possiamo
     // assumere che m_a < m_b, perché il controllo
     // viene fatto da `Integral::integrate`
@@ -265,13 +269,14 @@ Concludiamo l'esercitazione implementando l'integrazione della funzione $x \sin 
 2.  Possiamo implementare come nei casi precedenti un metodo privato
 
     ```c++
-    double calculate(int nstep, const FunzioneBase & f) override { ... }
+    [[nodiscard]] double calculate(int nstep, const FunzioneBase & f) override { ... }
     ```
 
 3.  Il punto che ci interessa maggiormente è realizzare un metodo dei trapezi che lavori a precisione fissata. Noi implementeremo il calcolo a precisione fissata solo per il metodo dei trapezi, quindi non toccheremo la classe `Integral`; di conseguenza, implementeremo solo un metodo `integrate_prec` in `Trapezi`:
 
     ```c++
-    double integrate_prec(double a, double b, double prec, const FunzioneBase & f) { ...
+    [[nodiscard]] double integrate_prec(double a, double b, double prec,
+                                        const FunzioneBase & f) { ...
     }
     ```
 
@@ -281,12 +286,14 @@ Concludiamo l'esercitazione implementando l'integrazione della funzione $x \sin 
     class Trapezoids : public Integral {
     private:
       // Metodo dei trapezi con NUMERO DI PASSI fissato (come negli esercizi 7.0 e 7.1)
-      double calculate(int nstep, const FunzioneBase & f) override { ... }
+      [[nodiscard]] double calculate(int nstep,
+                                     const FunzioneBase & f) override { ... }
 
     public:
       // Metodo dei trapezi con PRECISIONE FISSATA (nuovo!). Questo metodo si
       // implementa direttamente come pubblico
-      double integrate_prec(double a, double b, double prec, const FunzioneBase & f) {
+      [[nodiscard]] double integrate_prec(double a, double b, double prec,
+                                          const FunzioneBase & f) {
         ...
       }
     };

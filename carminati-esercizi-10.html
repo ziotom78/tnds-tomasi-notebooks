@@ -9,7 +9,7 @@
   <title>Lezione 10 e 11: Metodi Montecarlo</title>
   <link rel="stylesheet" href="css/theme.css" />
   <link rel="stylesheet" href="css/skylighting-solarized-theme.css" />
-  <script defer="" src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
   <script>document.addEventListener("DOMContentLoaded", function () {
  var mathElements = document.getElementsByClassName("math");
  var macros = [];
@@ -24,7 +24,7 @@
    });
 }}});
   </script>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css" />
 </head>
 <body>
 
@@ -97,7 +97,7 @@
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="dt">void</span> SetC<span class="op">(</span><span class="dt">unsigned</span> <span class="dt">int</span> c<span class="op">)</span> <span class="op">{</span> <span class="va">m_c</span> <span class="op">=</span> c<span class="op">;</span> <span class="op">}</span></span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="dt">void</span> SetM<span class="op">(</span><span class="dt">unsigned</span> <span class="dt">int</span> m<span class="op">)</span> <span class="op">{</span> <span class="va">m_m</span> <span class="op">=</span> m<span class="op">;</span> <span class="op">}</span></span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> Rand<span class="op">();</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> Rand<span class="op">();</span>  <span class="co">// Do not use [[nodiscard]]: people might want to throw away numbers!</span></span>
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> Unif<span class="op">(</span><span class="dt">double</span> xmin<span class="op">,</span> <span class="dt">double</span> xmax<span class="op">);</span> <span class="co">// distribuzione uniforme</span></span>
 <span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> Exp<span class="op">(</span><span class="dt">double</span> mean<span class="op">);</span> <span class="co">// distribuzione esponenziale</span></span>
 <span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> Gaus<span class="op">(</span><span class="dt">double</span> mean<span class="op">,</span> <span class="dt">double</span> sigma<span class="op">);</span> <span class="co">// distribuzione gaussiana (Box-Muller)</span></span>
@@ -343,8 +343,8 @@ y &amp;= M \cdot t.
 <span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>  <span class="kw">virtual</span> <span class="dt">double</span> Integra<span class="op">(</span><span class="at">const</span> FunzioneBase <span class="op">&amp;</span> f<span class="op">,</span> <span class="dt">double</span> inf<span class="op">,</span> <span class="dt">double</span> sup<span class="op">,</span> <span class="dt">int</span> punti<span class="op">,</span> <span class="dt">double</span> fmax<span class="op">)</span> <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
 <span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> GetErrore<span class="op">()</span> <span class="at">const</span> <span class="op">{</span> <span class="cf">return</span> <span class="va">m_errore</span><span class="op">;</span> <span class="op">}</span></span>
-<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>  <span class="dt">int</span> GetN<span class="op">()</span> <span class="at">const</span> <span class="op">{</span> <span class="cf">return</span> <span class="va">m_punti</span><span class="op">;</span> <span class="op">}</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>  <span class="op">[[</span><span class="at">nodiscard</span><span class="op">]]</span> <span class="dt">double</span> GetErrore<span class="op">()</span> <span class="at">const</span> <span class="op">{</span> <span class="cf">return</span> <span class="va">m_errore</span><span class="op">;</span> <span class="op">}</span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>  <span class="op">[[</span><span class="at">nodiscard</span><span class="op">]]</span> <span class="dt">int</span> GetN<span class="op">()</span> <span class="at">const</span> <span class="op">{</span> <span class="cf">return</span> <span class="va">m_punti</span><span class="op">;</span> <span class="op">}</span></span>
 <span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a><span class="kw">private</span><span class="op">:</span></span>
 <span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>  RandomGen <span class="va">m_myrand</span><span class="op">;</span></span>
