@@ -231,7 +231,7 @@ int main(void) {
 ---
 title: Laboratorio di TNDS -- Lezione 5
 author: Maurizio Tomasi
-date: "Martedì 22 Ottobre 2024"
+date: "Martedì 21 ottobre 2025"
 theme: white
 progress: true
 slideNumber: true

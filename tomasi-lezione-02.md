@@ -662,7 +662,7 @@ Vettore v4 = Read(10, "data.dat"); // Move constructor
 ---
 title: Laboratorio di TNDS -- Lezione 2
 author: Maurizio Tomasi
-date: Martedì 1 Ottobre 2024
+date: Martedì 30 settembre 2025
 css:
 - css/custom.css
 - css/asciinema-player.css

@@ -423,7 +423,7 @@ Bisezione::CercaZeri(double xmin,
 ---
 title: "Laboratorio di TNDS -- Lezione 6"
 author: "Maurizio Tomasi"
-date: "Martedì 29 Ottobre 2024"
+date: "Martedì 28 ottobre 2025"
 theme: "white"
 progress: true
 slideNumber: true

@@ -175,7 +175,7 @@ Tranne Fortran, tutti questi linguaggi sono interattivi.
 ---
 title: "Laboratorio di TNDS -- Lezione 11"
 author: "Maurizio Tomasi"
-date: "Martedì 11 Gennaio 2022"
+date: "Martedì 2 dicembre 2025"
 theme: "white"
 progress: true
 slideNumber: true

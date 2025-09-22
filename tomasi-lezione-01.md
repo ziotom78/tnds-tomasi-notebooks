@@ -652,7 +652,7 @@ GNU Make definisce alcune variabili speciali, dette [automatiche](https://www.gn
 ---
 title: Laboratorio di TNDS -- Lezione 1
 author: Maurizio Tomasi
-date: Martedì 24 Settembre 2024
+date: Martedì 23 settembre 2025
 lang: it-IT
 theme: white
 progress: true

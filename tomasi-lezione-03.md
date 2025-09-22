@@ -454,7 +454,7 @@ Di conseguenza, il programmatore è «costretto» a verificare la correttezza de
 ---
 title: Laboratorio di TNDS -- Lezione 3
 author: Maurizio Tomasi
-date: Martedì 8 Ottobre 2024
+date: Martedì 7 ottobre 2025
 theme: white
 progress: true
 slideNumber: true
