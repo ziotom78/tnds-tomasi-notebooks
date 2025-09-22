@@ -718,7 +718,7 @@ Un errore che compiono spesso gli studenti è quello di non verificare che le fu
 
 ```c++
 bool are_close(double a, double b, double eps = 1.0e-7) {
-  return abs(a - b) < eps;
+  return fabs(a - b) < eps * fabs(a);
 }
 
 void test_code() {
