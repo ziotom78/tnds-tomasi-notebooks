@@ -45,7 +45,7 @@ $include-before$
 $endfor$
   <div class="reveal">
     <div class="slides">
-<script src="/js/asciinema-player.min.js"></script>
+<script src="js/asciinema-player.min.js"></script>
 $if(title)$
 <section id="$idprefix$title-slide"$for(title-slide-attributes/pairs)$ $it.key$="$it.value$"$endfor$>
   <h1 class="title">$title$</h1>

@@ -518,7 +518,7 @@ Just-in-time compilers
 <div id="julia-first-example-asciinema"></div>
 <script>
 AsciinemaPlayer.create(
-    "/asciinema/julia-first-example-83x23.asciinema",
+    "asciinema/julia-first-example-83x23.asciinema",
     document.getElementById("julia-first-example-asciinema"), {
         cols: 83,
         rows: 23,
@@ -586,7 +586,7 @@ per Python in Julia non si specificano i tipi?
 <div id="julia-compilation-asciinema"></div>
 <script>
 AsciinemaPlayer.create(
-    "/asciinema/julia-compilation-83×23.asciinema",
+    "asciinema/julia-compilation-83×23.asciinema",
     document.getElementById("julia-compilation-asciinema"), {
         cols: 83,
         rows: 23,
