@@ -536,6 +536,21 @@
   
 
     
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Consegna/consegna/" class="md-nav__link">
+        Consegna Esercizi
+      </a>
+    </li>
+  
+
+    
   </ul>
 </nav>
                   </div>
@@ -626,7 +641,7 @@
 <p>Il calcolo della mediana in particolare richiede che il set di dati sia ordinato e quindi ci obbliga a fare un pò di esercizio aggiuntivo. </p>
 <details class="info">
 <summary>Che dati vogliamo guardare ?</summary>
-<p>In questo caso guardiamo un file <a href="../1941.txt">1941.txt</a> che contiene le differenze tra la temperatura stimata ogni giorno dell'anno 1941 dal modello e la media delle temperature dal 1941 a 2023 per quel giorno. Questi dati possono essere scaricati dal sito <a href="https://open-meteo.com/">https://open-meteo.com/</a> e si riferiscono alla re-analisi <a href="https://cds.climate.copernicus.eu/cdsapp#!/dataset/reanalysis-era5-single-levels?tab=overview">ERA5</a>. Nelle prossime lezioni dovremo imparare ad aprire tutti i files, uno per ogni anno di misure.  </p>
+<p>In questo caso guardiamo un file <a href="../1941.txt">1941.txt</a> che contiene le differenze tra la temperatura stimata ogni giorno dell'anno 1941 dal modello di re-analisi <a href="https://cds.climate.copernicus.eu/cdsapp#!/dataset/reanalysis-era5-single-levels?tab=overview">ERA5</a> e la media delle temperature stimate dallo stesso modello dal 1941 a 2023 per quel giorno nell'area di Milano. Questi dati possono essere scaricati dal sito <a href="https://open-meteo.com/">https://open-meteo.com/</a>. Nelle prossime lezioni dovremo imparare ad aprire tutti i files, uno per ogni anno di misure.  </p>
 </details>
 <p>In questa lezione lavoreremo con questi ingredienti:</p>
 <ul>
@@ -1112,7 +1127,7 @@ la chiamata nel main viene effettuata
 <div class="highlight"><pre><span></span><code>g++ esercizio1.1.cpp -o esercizio1.1
 </code></pre></div></li>
 <li>Eseguiamo il programma :
-<div class="highlight"><pre><span></span><code>./esercizio1.1 365 [1941.txt](1941.txt)
+<div class="highlight"><pre><span></span><code>./esercizio1.1 365 1941.txt
 </code></pre></div></li>
 </ul>
 <h2 id="esercizio-12-codice-di-analisi-con-funzioni-esterne-e-makefile">ESERCIZIO 1.2 - Codice di analisi con funzioni esterne e Makefile:</h2>
