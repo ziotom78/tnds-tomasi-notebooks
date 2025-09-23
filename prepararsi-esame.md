@@ -43,7 +43,7 @@ Di seguito un piccolo vademecum per aiutarvi a svolgere nel migliore dei modi l'
     };
     ```
 
-    Avere solo i file `.h` vi dà un grande vantaggio: non dovete complicare troppo il `Makefile` che scriverete durante il compito, perché basta includere i file `.h` che vi servono nel `main.cpp` e siete a posto. (Questo è esattamente quanto ho fatto nel file [`gplot++.hpp`](https://github.com/ziotom78/gplotpp/blob/master/gplot%2B%2B.h), che infatti potete usare con `#include` senza preoccuparvi di modificare il `Makefile`).
+    Avere solo i file `.h` vi dà un grande vantaggio: non dovete complicare troppo il `Makefile` che scriverete durante il compito, perché basta includere i file `.h` che vi servono nel `main.cpp` e siete a posto. (Questo è esattamente quanto ho fatto nel file [`gplot++.h`](https://github.com/ziotom78/gplotpp/blob/master/gplot%2B%2B.h), che infatti potete usare con `#include` senza preoccuparvi di modificare il `Makefile`).
 
     Per essere ancora più efficienti il giorno dello scritto, potreste addirittura decidere di mettere *tutte le funzioni e classi* che avete scritto in un unico file `.h`, chiamandolo ad esempio `mylibrary.h`. In questo modo sarà sufficiente scrivere `#include "mylibrary.h"` nel vostro file `main.cpp` ed avrete automaticamente a disposizione tutto il vostro lavoro! (**Attenzione**: in tal caso ricordatevi che ogni funzione che metterete in `mylibrary.h` dovrà essere dichiarata `inline`, ad esempio `inline double CalcolaMedia(const std::vector<double> & v)`, altrimenti potreste avere errori strani nella creazione dell'eseguibile).
 
