@@ -39,7 +39,6 @@ index.html: index.md
 		--css css/theme.css \
 		--css css/skylighting-solarized-theme.css \
 		--css ./css/asciinema-player.css \
-		-A asciinema-include.html \
 		--wrap=none \
 		-f markdown+tex_math_single_backslash+subscript+superscript \
 		-o $@ \
@@ -130,7 +129,6 @@ tomasi-c++-python-julia.html: tomasi-c++-python-julia.md
 		--katex \
 		--css ./css/custom.css \
 		--css ./css/asciinema-player.css \
-		-A asciinema-include.html \
 		-V theme=white \
 		-V progress=true \
 		-V slideNumber=true \
@@ -148,7 +146,6 @@ tomasi-lezione-%.html: tomasi-lezione-%.md
 	$(PANDOC) \
 	    	--standalone \
 		--filter $(PANDOC_IMAGINE) \
-		-A asciinema-include.html \
                 --template ./template-revealjs.html5 \
 		--katex \
 		-f markdown+tex_math_single_backslash+subscript+superscript \

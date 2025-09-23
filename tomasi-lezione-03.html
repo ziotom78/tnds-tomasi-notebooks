@@ -119,7 +119,7 @@
 <body>
   <div class="reveal">
     <div class="slides">
-
+<script src="/js/asciinema-player.min.js"></script>
 <section id="title-slide">
   <h1 class="title">Laboratorio di TNDS – Lezione 3</h1>
   <p class="author">Maurizio Tomasi</p>
@@ -284,7 +284,19 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb3-1"><a href="#c
 <section id="esempio-di-uso-di-stderr-1" class="slide level1">
 <h1>Esempio di uso di <code>stderr</code></h1>
 <p>Con l’esempio seguente, è possibile usare il reindirizzamento:</p>
-<p><asciinema-player src="asciinema/cerr-cout-65×21.cast" cols="65" rows="21" font-size="medium"></asciinema-player></p>
+<div id="cerr-cout-asciinema">
+
+</div>
+<script>
+AsciinemaPlayer.create(
+    "asciinema/cerr-cout-65×21.cast",
+    document.getElementById("cerr-cout-asciinema"), {
+        cols: 65,
+        rows: 21,
+        fit: false,
+        terminalFontSize: "medium"
+    });
+</script>
 </section>
 <section id="esempio-di-uso-di-stderr-2" class="slide level1">
 <h1>Esempio di uso di <code>stderr</code></h1>
@@ -873,6 +885,5 @@ href="https://www.cplusplus.com/reference/vector/vector/back/"><code>std::vector
         ]
       });
     </script>
-    <script src="js/asciinema-player.js"></script>
     </body>
 </html>

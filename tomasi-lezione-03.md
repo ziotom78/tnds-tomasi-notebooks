@@ -130,7 +130,17 @@ int main(void) {
 
 Con l'esempio seguente, è possibile usare il reindirizzamento:
 
-<asciinema-player src="asciinema/cerr-cout-65×21.cast" cols="65" rows="21" font-size="medium"></asciinema-player>
+<div id="cerr-cout-asciinema"></div>
+<script>
+AsciinemaPlayer.create(
+    "asciinema/cerr-cout-65×21.cast",
+    document.getElementById("cerr-cout-asciinema"), {
+        cols: 65,
+        rows: 21,
+        fit: false,
+        terminalFontSize: "medium"
+    });
+</script>
 
 # Esempio di uso di `stderr`
 

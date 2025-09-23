@@ -304,7 +304,17 @@ Potete svolgere gli esercizi in uno dei modi seguenti:
 
 ---
 
-<asciinema-player src="asciinema/argc-argv-86x22.asciinema" cols="86" rows="22" font-size="medium"></asciinema-player>
+<div id="argc-argv-asciinema"></div>
+<script>
+AsciinemaPlayer.create(
+    "asciinema/argc-argv-86x22.asciinema",
+    document.getElementById("argc-argv-asciinema"), {
+        cols: 86,
+        rows: 22,
+        fit: false,
+        terminalFontSize: "medium"
+    });
+</script>
 
 ---
 
@@ -579,7 +589,17 @@ GNU Make definisce alcune variabili speciali, dette [automatiche](https://www.gn
 
 ---
 
-<asciinema-player src="asciinema/cpp-example-86x22.asciinema" cols="86" rows="22" font-size="medium"></asciinema-player>
+<div id="cpp-example-asciinema"></div>
+<script>
+AsciinemaPlayer.create(
+    "asciinema/cpp-example-86x22.asciinema",
+    document.getElementById("cpp-example-asciinema"), {
+        cols: 86,
+        rows: 22,
+        fit: false,
+        terminalFontSize: "medium"
+    });
+</script>
 
 
 # File multipli ed header

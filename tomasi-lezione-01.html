@@ -119,7 +119,7 @@
 <body>
   <div class="reveal">
     <div class="slides">
-
+<script src="/js/asciinema-player.min.js"></script>
 <section id="title-slide">
   <h1 class="title">Laboratorio di TNDS – Lezione 1</h1>
   <p class="author">Maurizio Tomasi</p>
@@ -493,7 +493,19 @@ etc.</p></li>
 </section>
 <section class="slide level1">
 
-<p><asciinema-player src="asciinema/argc-argv-86x22.asciinema" cols="86" rows="22" font-size="medium"></asciinema-player></p>
+<div id="argc-argv-asciinema">
+
+</div>
+<script>
+AsciinemaPlayer.create(
+    "asciinema/argc-argv-86x22.asciinema",
+    document.getElementById("argc-argv-asciinema"), {
+        cols: 86,
+        rows: 22,
+        fit: false,
+        terminalFontSize: "medium"
+    });
+</script>
 </section>
 <section id="significato-di-argc-e-argv-22" class="slide level1">
 <h1>Significato di argc e argv (2/2)</h1>
@@ -798,7 +810,19 @@ corretto.</p></li>
 </section>
 <section class="slide level1">
 
-<p><asciinema-player src="asciinema/cpp-example-86x22.asciinema" cols="86" rows="22" font-size="medium"></asciinema-player></p>
+<div id="cpp-example-asciinema">
+
+</div>
+<script>
+AsciinemaPlayer.create(
+    "asciinema/cpp-example-86x22.asciinema",
+    document.getElementById("cpp-example-asciinema"), {
+        cols: 86,
+        rows: 22,
+        fit: false,
+        terminalFontSize: "medium"
+    });
+</script>
 </section>
 <section id="file-multipli-ed-header-1" class="slide level1">
 <h1>File multipli ed header</h1>
@@ -1085,6 +1109,5 @@ produrre un <code>Makefile</code>.</p></li>
         ]
       });
     </script>
-    <script src="js/asciinema-player.js"></script>
     </body>
 </html>

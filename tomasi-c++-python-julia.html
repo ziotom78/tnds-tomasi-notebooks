@@ -778,7 +778,19 @@ href="https://pandas.pydata.org/">Pandas</a>…</li>
 </section>
 <section id="un-assaggio-del-linguaggio" class="slide level1">
 <h1>Un assaggio del linguaggio</h1>
-<p><asciinema-player src="./asciinema/julia-first-example-83x23.asciinema" cols="83" rows="23" font-size="medium"></asciinema-player></p>
+<div id="julia-first-example-asciinema">
+
+</div>
+<script>
+AsciinemaPlayer.create(
+    "/asciinema/julia-first-example-83x23.asciinema",
+    document.getElementById("julia-first-example-asciinema"), {
+        cols: 83,
+        rows: 23,
+        fit: false,
+        terminalFontSize: "medium"
+    });
+</script>
 </section>
 <section id="confronto-pythonjulia" class="slide level1">
 <h1>Confronto Python/Julia</h1>
@@ -835,7 +847,19 @@ macchina.</p></li>
 </section>
 <section id="sessione-interattiva" class="slide level1">
 <h1>Sessione interattiva</h1>
-<p><asciinema-player src="./asciinema/julia-compilation-83×23.asciinema" cols="83" rows="23" font-size="medium"></asciinema-player></p>
+<div id="julia-compilation-asciinema">
+
+</div>
+<script>
+AsciinemaPlayer.create(
+    "/asciinema/julia-compilation-83×23.asciinema",
+    document.getElementById("julia-compilation-asciinema"), {
+        cols: 83,
+        rows: 23,
+        fit: false,
+        terminalFontSize: "medium"
+    });
+</script>
 </section>
 <section id="abbandono-della-programmazione-oop" class="slide level1">
 <h1>Abbandono della programmazione OOP</h1>
@@ -1379,6 +1403,5 @@ speaker spiega come calcolare efficacemente derivate con Julia</li>
         ]
       });
     </script>
-    <script src="js/asciinema-player.js"></script>
     </body>
 </html>

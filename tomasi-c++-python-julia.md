@@ -515,7 +515,17 @@ Just-in-time compilers
 
 # Un assaggio del linguaggio
 
-<asciinema-player src="./asciinema/julia-first-example-83x23.asciinema" cols="83" rows="23" font-size="medium"></asciinema-player>
+<div id="julia-first-example-asciinema"></div>
+<script>
+AsciinemaPlayer.create(
+    "/asciinema/julia-first-example-83x23.asciinema",
+    document.getElementById("julia-first-example-asciinema"), {
+        cols: 83,
+        rows: 23,
+        fit: false,
+        terminalFontSize: "medium"
+    });
+</script>
 
 # Confronto Python/Julia
 
@@ -573,7 +583,17 @@ per Python in Julia non si specificano i tipi?
 
 # Sessione interattiva
 
-<asciinema-player src="./asciinema/julia-compilation-83×23.asciinema" cols="83" rows="23" font-size="medium"></asciinema-player>
+<div id="julia-compilation-asciinema"></div>
+<script>
+AsciinemaPlayer.create(
+    "/asciinema/julia-compilation-83×23.asciinema",
+    document.getElementById("julia-compilation-asciinema"), {
+        cols: 83,
+        rows: 23,
+        fit: false,
+        terminalFontSize: "medium"
+    });
+</script>
 
 # Abbandono della programmazione OOP
 
