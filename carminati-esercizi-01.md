@@ -805,15 +805,19 @@ Notate però quanto il `Makefile` sia ripetitivo. È possibile definire delle *v
 
 ```makefile
 CXXFLAGS = -g3 -Wall -Wextra -Werror --pedantic -std=c++23
+.phony: clean
 
 main: main.o funzioni.o
-    g++ main.o funzioni.o -o main $(CXXFLAGS)
+    g++ $^ -o $@ $(CXXFLAGS)
 
 main.o: esercizio1.2.cpp funzioni.h
-    g++ -c esercizio1.2.cpp -o main.o $(CXXFLAGS)
+    g++ -c $< -o $@ $(CXXFLAGS)
 
 funzioni.o: funzioni.cpp funzioni.h
-    g++ -c funzioni.cpp -o funzioni.o $(CXXFLAGS)
+    g++ -c $< -o $@ $(CXXFLAGS)
+
+clean:
+    rm -f main *.o
 ```
 
 La variabile `$@` è una cosiddetta *variabile implicita*, e viene sostituita di volta in volta col nome del *target* corrente (che nell'esempio sopra è `main`, `main.o` e infine `funzioni.o`). I flag `-g3 -Wall -Wextra -Werror --pedantic -std=c++23` servono per rendere la compilazione e l'esecuzione del codice più sicura, perché abilitano dei controlli addizionali, spiegati nelle [slide](tomasi-lezione-01.html#flag-del-compilatore).

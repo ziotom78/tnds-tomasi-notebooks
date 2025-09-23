@@ -728,6 +728,55 @@ class="sourceCode makefile"><code class="sourceCode makefile"><span id="cb27-1">
 esercizi!</p></li>
 </ul>
 </section>
+<section id="eseguire-comandi" class="slide level1">
+<h1>Eseguire comandi</h1>
+<ul>
+<li><p>Da decenni c’è la prassi di usare <code>make</code> non solo per
+generare file, ma anche per eseguire comandi arbitrari</p></li>
+<li><p>Ad esempio, capita spesso che programmi richiedano argomenti
+complessi dalla linea di comando:</p>
+<pre><code>$ ./mio-programma 10 &quot;pippo&quot; 1.63413 output_dir/results</code></pre>
+<p>Non sempre è facile ricordarsi come fare per eseguire un
+programma!</p></li>
+</ul>
+</section>
+<section id="uso-di-file-fittizi" class="slide level1">
+<h1>Uso di file fittizi</h1>
+<ul>
+<li><p>Se ripensiamo alla struttura dei <code>Makefile</code>, vediamo
+che essi sono già in grado di eseguire programmi:</p>
+<div class="sourceCode" id="cb29"><pre
+class="sourceCode makefile"><code class="sourceCode makefile"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="dv">esercizio1.2:</span><span class="dt"> esercizio1.2.o funzioni.o</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="er">    </span>g++ <span class="ch">$^</span> -o <span class="ch">$@</span>      <span class="co"># ← This line runs the command &quot;g++&quot;!</span></span></code></pre></div></li>
+<li><p>È prassi antica chiedere a <code>make</code> di creare file
+“fittizi”, che in realtà non vengono creati, semplicemente per obbligare
+<code>make</code> ad eseguire una serie di programmi:</p>
+<div class="sourceCode" id="cb30"><pre
+class="sourceCode makefile"><code class="sourceCode makefile"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="dv">clean:</span><span class="dt">   </span><span class="co"># I am lying: I am not going to create a file named &quot;clean&quot;!</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="er">    </span>rm -f *.o *.backup</span></code></pre></div></li>
+<li><p>Scrivendo <code>make clean</code>, il comando
+<code>rm -f *.o *.backup</code> viene eseguito:</p>
+<pre><code>$ make clean
+rm -f *.o *.backup
+$</code></pre></li>
+</ul>
+</section>
+<section id="file-fasulli" class="slide level1">
+<h1>File fasulli</h1>
+<ul>
+<li><p>Il meccanismo potrebbe fallire però se qualcuno creasse un file
+chiamato proprio <code>clean</code> nella directory in cui
+lavorate!</p></li>
+<li><p>In questo caso, <code>make clean</code> vedrebbe che
+<code>clean</code> già esiste, e non farebbe nulla</p></li>
+<li><p>Si può ovviare a questo problema con la sintassi seguente:</p>
+<div class="sourceCode" id="cb32"><pre
+class="sourceCode makefile"><code class="sourceCode makefile"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="ot">.phony:</span><span class="dt"> clean       </span><span class="co"># “Phony” means “fake”</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="dv">clean:</span></span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a><span class="er">    </span>rm -f *.o *.backup</span></code></pre></div></li>
+</ul>
+</section>
 <section id="file-multipli-ed-header" class="slide level1">
 <h1>File multipli ed header</h1>
 </section>
@@ -758,17 +807,17 @@ corretto.</p></li>
 <code>#include</code> che servono!</p></li>
 <li><p>Ad esempio, se un file <code>main.cpp</code> contiene questi
 <code>#include</code>:</p>
-<div class="sourceCode" id="cb28"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co">// main.cpp</span></span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;vectors.h&quot;</span><span class="pp">   </span><span class="co">// Define 3D vectors</span></span>
-<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;newton.h&quot;</span><span class="pp">    </span><span class="co">// Define functions to solve Newton&#39;s problems</span></span></code></pre></div>
+<div class="sourceCode" id="cb33"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co">// main.cpp</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;vectors.h&quot;</span><span class="pp">   </span><span class="co">// Define 3D vectors</span></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;newton.h&quot;</span><span class="pp">    </span><span class="co">// Define functions to solve Newton&#39;s problems</span></span></code></pre></div>
 <p>è buona cosa includere comunque <code>vectors.h</code>
 <strong>anche</strong> dentro <code>newton.h</code>:</p>
-<div class="sourceCode" id="cb29"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co">// newton.h</span></span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#pragma once</span></span>
-<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;vectors.h&quot;</span></span>
-<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a><span class="co">// etc.</span></span></code></pre></div></li>
+<div class="sourceCode" id="cb34"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co">// newton.h</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#pragma once</span></span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;vectors.h&quot;</span></span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a><span class="co">// etc.</span></span></code></pre></div></li>
 </ul>
 </section>
 <section id="motivo-1" class="slide level1">
@@ -777,15 +826,15 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb29-1"><a href="#
 <li><p>Programmi complessi usano moltissimi <code>#include</code>. In
 questo caso si tende a inserirli in ordine alfabetico, per individuare
 duplicati:</p>
-<div class="sourceCode" id="cb30"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;subdiv.h&quot;</span></span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;intersec.h&quot;</span></span>
-<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;memory.h&quot;</span></span>
-<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;roots.h&quot;</span></span>
-<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;glyph.h&quot;</span></span>
-<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;scan.h&quot;</span></span>
-<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;memory.h&quot;</span></span>
-<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;vector.h&quot;</span></span></code></pre></div></li>
+<div class="sourceCode" id="cb35"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;subdiv.h&quot;</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;intersec.h&quot;</span></span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;memory.h&quot;</span></span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;roots.h&quot;</span></span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;glyph.h&quot;</span></span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;scan.h&quot;</span></span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;memory.h&quot;</span></span>
+<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;vector.h&quot;</span></span></code></pre></div></li>
 <li><p>Formattatori automatici di codice come <code>clang-format</code>
 riordinano gli <code>#include</code>, mettendo <code>newton.h</code>
 <strong>prima</strong> di <code>vectors.h</code>: errore!</p></li>

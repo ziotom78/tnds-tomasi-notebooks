@@ -516,6 +516,56 @@ GNU Make definisce alcune variabili speciali, dette [automatiche](https://www.gn
 -   È più facile riciclare il `Makefile` nei nuovi esercizi!
 
 
+# Eseguire comandi
+
+-   Da decenni c’è la prassi di usare `make` non solo per generare file, ma anche per eseguire comandi arbitrari
+
+-   Ad esempio, capita spesso che programmi richiedano argomenti complessi dalla linea di comando:
+
+    ```
+    $ ./mio-programma 10 "pippo" 1.63413 output_dir/results
+    ```
+
+    Non sempre è facile ricordarsi come fare per eseguire un programma!
+
+# Uso di file fittizi
+
+-   Se ripensiamo alla struttura dei `Makefile`, vediamo che essi sono già in grado di eseguire programmi:
+
+    ```makefile
+    esercizio1.2: esercizio1.2.o funzioni.o
+        g++ $^ -o $@      # ← This line runs the command "g++"!
+    ```
+
+-   È prassi antica chiedere a `make` di creare file “fittizi”, che in realtà non vengono creati, semplicemente per obbligare `make` ad eseguire una serie di programmi:
+
+    ```makefile
+    clean:   # I am lying: I am not going to create a file named "clean"!
+        rm -f *.o *.backup
+    ```
+
+-   Scrivendo `make clean`, il comando `rm -f *.o *.backup` viene eseguito:
+
+    ```
+    $ make clean
+    rm -f *.o *.backup
+    $
+    ```
+
+# File fasulli
+
+-   Il meccanismo potrebbe fallire però se qualcuno creasse un file chiamato proprio `clean` nella directory in cui lavorate!
+
+-   In questo caso, `make clean` vedrebbe che `clean` già esiste, e non farebbe nulla
+
+-   Si può ovviare a questo problema con la sintassi seguente:
+
+    ```makefile
+    .phony: clean       # “Phony” means “fake”
+
+    clean:
+        rm -f *.o *.backup
+    ```
 
 # File multipli ed header
 
