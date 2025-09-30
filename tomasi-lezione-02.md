@@ -199,7 +199,7 @@ int main() {
 
 -   Occorre fissare una tolleranza $\epsilon$ e verificare che il risultato del calcolo $x_\text{calc}$ differisca dal valore atteso $x_\text{exp}$ per meno di $\epsilon$, ossia
 
-    $$\left|x_\text{calc} - x_\text{exp}\right| < \epsilon \cdot \left|x_\text{exp}\right|.$$
+    $$\left|x_\text{calc} - x_\text{exp}\right| < \epsilon \cdot \left|x_\text{exp}\right|\quad\text{ if } x_\text{exp}\not= 0.$$
 
 
 # Esercizio 1.1: assert
@@ -210,6 +210,7 @@ int main() {
 [[nodiscard]] bool are_close(double calculated,
                              double expected,
                              double epsilon = 1e-7) {
+  // If you want, you can include a test for when expected==0
   return fabs(calculated - expected) < epsilon * fabs(expected);
 }
 
