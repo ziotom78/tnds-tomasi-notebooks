@@ -4,8 +4,8 @@
 | Data                                      | Esercizi                                                        | Spiegazione                                                         |
 |-------------------------------------------|-----------------------------------------------------------------|---------------------------------------------------------------------|
 | 23 Settembre 2025                         | [Arrays](carminati-esercizi-01.html)                            | [Lezione 1](tomasi-lezione-01.html)                                 |
-<!--
 | 30 settembre 2025                         | [Classe `Vettore`](carminati-esercizi-02.html)                  | [Lezione 2](tomasi-lezione-02.html)                                 |
+<!--
 | 7 Ottobre 2025                            | [Template e `vector`](carminati-esercizi-03.html)               | [Lezione 3](tomasi-lezione-03.html)                                 |
 | 14 Ottobre 2025                           | [Analisi dati](carminati-esercizi-04.html)                      | [Lezione 4](tomasi-lezione-04.html)                                 |
 | 21 Ottobre 2025                           | [Classi ed ereditarietà](carminati-esercizi-05.html)            | [Lezione 5](tomasi-lezione-05.html)                                 |
