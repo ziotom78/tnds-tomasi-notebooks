@@ -124,8 +124,7 @@ int main() {
     #include <cassert>
 
     void test_sum() {
-        // No need to write std::assert, as it is a macro
-        assert(sum(4, 6) == 10);
+        assert(sum(4, 6) == 10); // No need to write std::assert (it’s a macro)
         assert(sum(-1, 3) == 2);
     }
     ```
@@ -215,7 +214,7 @@ int main() {
 }
 
 void test_statistical_functions(void) {
-  double mydata[] = {1, 2, 3, 4};  // Use these instead of data.dat
+  double mydata[] = {3, 1, 2, 4};  // Use these instead of data.dat
 
   assert(are_close(CalcolaMedia(mydata, 4), 2.5));
   assert(are_close(CalcolaVarianza(mydata, 4), 1.25));
@@ -269,7 +268,7 @@ Questi `assert` vanno bene anche per gli esercizi di oggi, con opportuni aggiust
 
 -   Non presentatevi all'esame finché non riuscite a far passare **tutti** gli `assert` di **tutti** gli esercizi!
 
--   Molte volte degli studenti hanno presentato uno scritto in cui avevano usato librerie con errori! E quasi sempre ritrovavo commenti del genere negli esercizi che consegnavano:
+-   Molte volte degli studenti hanno presentato uno scritto insufficiente perché nelle librerie che avevano usato c’erano errori. E quasi sempre ritrovavo commenti del genere negli esercizi che consegnavano:
 
     ```c++
     // Siccome non riuscivo a far passare i test, ho commentato gli assert.
@@ -323,7 +322,7 @@ Questi `assert` vanno bene anche per gli esercizi di oggi, con opportuni aggiust
 -   Se si ritorna un *reference*, è possibile anche fare assegnamenti:
 
     ```c++
-    //     !
+    //     ↓
     double & Vettore::operator[](int index) {
         assert(index >= 0 && index < m_size);
         return m_arr[index];
