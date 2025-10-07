@@ -601,7 +601,7 @@ La funzione `test_statistical_functions()` è spiegata nelle [slide di Tomasi](t
 
     #include "Vettore.h"
 
-    Vettore Read(int, const char *);
+    [[nodiscard]] Vettore Read(int, const char *);
 
     [[nodiscard]] double CalcolaMedia(const Vettore &);
     [[nodiscard]] double CalcolaVarianza(const Vettore &);
