@@ -150,7 +150,7 @@ Viene ora fornito un codice per verificare il funzionamento di quanto implementa
 #include "funzioni.h"
 
 #include <cmath>
-#include <cstdio>
+#include <iostream>
 #include <print>
 #include <numbers>
 #include <string>
@@ -159,7 +159,7 @@ using namespace std;
 
 int main (int argc, char* argv[]) {
   if (argc != 2) {
-    println(stderr, "Usage: {} <NSTEP>", argv[0]);
+    println(cerr, "Usage: {} <NSTEP>", argv[0]);
     return 1;
   }
 

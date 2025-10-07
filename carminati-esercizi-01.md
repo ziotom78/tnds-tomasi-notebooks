@@ -65,18 +65,19 @@ Il C++ fornisce anche le funzioni `atoi` e `atof`, che sono state definite nello
 
 ```c++
 #include <iostream>
+#include <print>
 #include <cstdlib>
 
 using namespace std;
 
 int main(int argc, char *argv[]) {
   if (argc != 2) {
-	cerr << "Errore, devi specificare un numero intero da linea di comando.\n";
+	println(cerr, "Errore, devi specificare un numero intero da linea di comando.");
 	return 1;
   }
 
   int i = atoi(argv[1]);
-  cout << argv[1] << " convertito in un intero è " << i << "\n";
+  println("{} convertito in un intero è {}", argv[1], i);
 }
 ```
 
@@ -113,7 +114,7 @@ Aborted (core dumped)
 
 ## Cin, cout e cerr
 
-L'output su schermo e l'input da tastiera sono gestiti in C++ usando gli oggetti `cin`, `cout` e `cerr`, che sono definiti nella libreria `<iostream>`. Vediamo un esempio:
+L'output su schermo e l'input da tastiera sono stati storicamente gestiti in C++ usando gli oggetti `cin`, `cout` e `cerr`, che sono definiti nella libreria `<iostream>`. Vediamo un esempio:
 
 ```c++
 // Usato per messaggi
@@ -138,6 +139,28 @@ cerr << "Errore nel parametro a: " << a << endl;
     cerr << "Errore, occorre specificare un nome di file!" << endl;
     cerr << "Errore, occorre specificare un nome di file!\n"
     ```
+
+A partire dal C++23 è però meglio usare per la stampa le funzioni `print()` (senza ritorno a capo alla fine) e `println()` (con ritorno a capo), che permettono di mescolare più facilmente testo e variabili e sono più simili a linguaggi come Python e Rust:
+
+```c++
+// Questa riga…
+cout << "Le coordinate sono x = " << x << ", y = " << y << ", z = " << z << endl;
+// …equivale a questa
+println("Le coordinate sono x = {}, y = {}, z = {}", x, y, z);
+```
+
+Si può passare come primo argomento un oggetto stream come `cout` o `cerr` per specificare dove il messaggio vada stampato:
+
+```c++
+// Queste forme sono equivalenti, ma di solito si preferisce la seconda
+cout << "Ciao!" << endl;
+println("Ciao!");
+println(cout, "Ciao!");
+
+// Anche queste forme sono identiche
+cerr << "Errore!" << endl;
+println(cerr, "Errore!");
+```
 
 Si dovrebbe usare `cout` per i messaggi informativi (ad esempio, quando stampate il risultato di un calcolo) e `cerr` per i messaggi d'errore; vedremo nelle prossime lezioni quale sia la ragione di questa regola.
 
@@ -226,19 +249,17 @@ Per controllare che il file sia stato aperto con successo si può usare il segue
 
 ```c++
 if(! inputFile) {
-  cerr << "Error ....\n"; //stampa un messaggio
+  println(cerr, "Error ...");  //stampa un messaggio
   return 1; // Ritorna un valore diverso da quello usuale
 }
 ```
 
-L'utilizzo degli stream per scrivere su un file di output o per caricare da un file di input è uguale all'uso di `cin`, `cout` e `cerr`:
+L'utilizzo degli stream per scrivere su un file di output o per caricare da un file di input è uguale all'uso di `cin`, `cout` e `cerr`: si può quindi usare `print()` o `println()`. Ecco un esempio:
 
 ```c++
 inputFile >> a;
-outputFile << "pippo " << a << "\n";
+println(outputFile, "pippo {}", a);
 ```
-
-Siccome di solito il contenuto di un file viene ispezionato dopo il termine del programma, quando si scrive in file non è di solito rilevante la differenza tra `endl` e `"\n"`.
 
 Un metodo estremamente utile di `ifstream` è
 
@@ -287,14 +308,14 @@ Per questo primo esercizio ripassiamo la struttura generale di un programma:
 
 ```c++
 #include <fstream>
-#include <iostream>
+#include <print>
 #include <string>
 
 using namespace std;
 
 int main(int argc, char *argv[]) {
   if (argc < 3) {
-      cerr << "Uso del programma: " << argv[0] << " <n_data> <filename>\n";
+      println(cerr, "Uso del programma: {} <n_data> <filename>", argv[0]);
       return 1;
   }
 
@@ -307,15 +328,15 @@ int main(int argc, char *argv[]) {
 
   // dopo averli caricati, visualizzali a video
   for(int k = 0; k < ndata; ++k) {
-      cout << data[k] << endl;
+      println("{}", data[k]);
   }
 
   // 2) calcola la media e la varianza degli elementi caricati
   // ...
 
   // Stampa il risultato
-  cout << "Media = " << media << endl;
-  cout << "Varianza = " << varianza << endl;
+  println("Media = {}", media);
+  println("Varianza = {}", varianza);
 
   // calcola la mediana: prima crea una copia del vettore di partenza
   double * vcopy = new double[ndata];
@@ -327,22 +348,22 @@ int main(int argc, char *argv[]) {
   // ...
 
   // dopo averli riordinati, stampali a video
-  cout << "Valori riordinati:" << endl;
+  println("Valori riordinati:");
   for(int k = 0; k < ndata; ++k) {
-      cout << vcopy[k] << endl;
+      println("{}", vcopy[k]);
   }
 
   // 4) prendi il valore centrale (se `ndata` è dispari) o la media
   // tra i due centrali (se `ndata` è pari) dell'array ordinato `vcopy`
   // ...
 
-  cout << "Mediana = " << mediana << endl;
+  println("Mediana = {}", mediana);
 
   // visualizza l'array originale per verificare che non è stato
   // riordinato
 
   for(int k = 0; k < ndata; ++k) {
-      cout << data[k] << endl;
+      println("{}", data[k]);
   }
 
   // 5) scrivi i dati riordinati su un file
@@ -365,13 +386,14 @@ In questo frammento di codice apriamo un file utilizzando un `ifstream` e carich
 ifstream fin(filename);
 
 if (!fin) {
-    cerr << "Non riesco ad aprire il file " << filename << endl;
+    println(cerr, "Non riesco ad aprire il file '{}'", filename);
     exit(1);
 } else {
     for(int k = 0; k < ndata; ++k) {
         fin >> data[k];
         if (fin.eof()) {
-            cerr << "Raggiunta la fine del file prima di aver letto " << ndata << " dati, esco\n";
+            println(cerr, "Raggiunta la fine del file prima di aver letto {} dati",
+                    ndata);
             exit(1);
     }
 }
@@ -392,7 +414,7 @@ for(int k = 0; k < ndata; ++k) {
 // un `double` (media) diviso per un intero è un double:
 // tutto ok, nessun arrotondamento!
 media /= ndata;
-cout << "Valore medio del set di dati caricato: " << media << endl;
+println("Valore medio del set di dati caricato: {}", media);
 ```
 
 ## Riordino elementi di un array (3)
@@ -445,7 +467,7 @@ if (ndata % 2 == 0) {
     mediana = vcopy[ndata / 2];
 }
 
-cout << "Mediana = " << mediana << endl;
+println("Mediana = {}", mediana);
 ```
 
 
@@ -456,7 +478,7 @@ Infine scriviamo il vettore ordinato su un file `output_file.txt`:
 ```c++
 ofstream fout("output_file.txt");
 for(int k = 0; k < ndata; ++k) {
-    fout << vcopy[k] << endl;
+    println(fout, "{}", vcopy[k]);
 }
 
 fout.close();
@@ -600,6 +622,7 @@ Ecco come potrebbe diventare il vostro codice dopo la cura:
 ```c++
 #include <fstream>
 #include <iostream>
+#include <print>
 #include <string>
 
 using namespace std;
@@ -616,7 +639,7 @@ void selection_sort(double *, int);
 
 int main(int argc, char *argv[]) {
   if (argc < 3) {
-      cerr << "Uso del programma: " << argv[0] << " <n_data> <filename>\n";
+      println(cerr, "Uso del programma: <n_data> <filename>", argv[0]);
       return 1;
   }
 
@@ -628,13 +651,13 @@ int main(int argc, char *argv[]) {
 
   // dopo averli caricati, visualizzali a video
   for(int k = 0; k < ndata; ++k) {
-      cout << data[k] << endl;
+      println("{}", data[k]);
   }
 
   // calcola la media e la varianza degli elementi caricati
-  cout << "Media = " << CalcolaMedia(data, ndata) << endl;
-  cout << "Varianza = " << CalcolaVarianza(data, ndata) << endl;
-  cout << "Mediana = " << CalcolaMediana(data, ndata) << endl;
+  println("Media = {}", CalcolaMedia(data, ndata);
+  println("Varianza = {}", CalcolaVarianza(data, ndata);
+  println("Mediana = {}", CalcolaMediana(data, ndata);
 
   // scrivi i dati riordinati su un file
   Print("fileout.txt", data, ndata);
@@ -843,22 +866,55 @@ Seguono ulteriori suggerimenti.
 
 ## Formattazione dell'output
 
-La C++ Standard Library permette di manipolare la formattazione dell'output utilizzando i manipolatori, alcuni dei quali sono dichiarati nell'header `<iomanip>`.
+La C++ Standard Library permetteva di manipolare la formattazione dell'output utilizzando i manipolatori, alcuni dei quali sono dichiarati nell'header `<iomanip>`.
 In generale i manipolatori modificano lo stato di uno stream (`cout`, `cin`, `cerr`, `ofstream`, `ifstream`…).
 
-I manipolatori che ci serviranno per modificare l'output di numeri floating-point sono:
+Le funzioni `print()` e `println()` offrono però una sintassi molto più comoda. Queste sono le funzionalità che ci serviranno per modificare l’output di numeri floating-point:
+
+-   Scrivere `{:f}` stampa i numeri senza l’uso di esponenti, ove possibile
+-   Scrivere `{:e}` stampa i numeri usando la notazione esponenziale
+-   È possibile specificare che si vogliono (ad esempio) 4 cifre dopo la virgola usando `{:.4f}` o `{:.4e}`.
+
+Per curiosità, queste funzionalità prima del C++23 erano implementate con queste funzioni:
 
 -   `fixed`: stampa i numeri senza l'uso di esponenti, ove possibile
 -   `scientific`: stampa i numeri utilizzando gli esponenti
 -   `setprecision(int n)`: stampa `n` cifre dopo la virgola
 
-Esempio:
+Ecco un esempio dei due stili a confronto, da cui si vede come il C++23 renda comodo la stampa di numeri floating-point:
 
 ```c++
+// Stampa `double_number` con quattro cifre usando la vecchia sintassi…
+#include <iomanip>
+#include <iostream>
+
 cout << "double number: " << setprecision(4) << double_number;
+
+// Questo invece è sufficiente usando la nuova sintassi del C++23
+#include <print>
+
+println("double number: {:.4f}", double_number);
 ```
 
-Utili per stampare i dati in una tabella sono
+Si può specificare la larghezza di un campo indicando il numero di caratteri subito dopo `:` all’interno di `{}`; questo è utile per stampare tabelle con le colonne allineate:
+
+```c++
+println("{:6}{:6}", "0.132", "234");
+println("{:6}{:6}", "10", "12");
+// Output:
+// 0.132 234
+// 10    12
+```
+
+Si possono combinare questi elementi, ovviamente:
+
+```c++
+println("| {:6.3f} | {:6.3f} |", 0.1, 0.2);
+// Output:
+// |  0.100 |  0.200 |
+```
+
+Nella vecchia sintassi, per stampare i dati in una tabella bisognava usare queste funzioni:
 
 -   `setw(int n)`: imposta la larghezza di un campo ad n
 -   `setfill(char c)`: usa c come carattere di riempimento (quello di default è lo spazio)
@@ -871,8 +927,6 @@ cout << setw(5) << "0.132" << setw(5) << "234" << endl
 ```
 
 stampa i numeri in due colonne allineate.
-
-Questi comandi sono stati introdotti nel C++ tra gli anni '80 e '90, ed oggi non sono più usati. Vedremo nelle prossime lezioni che le versioni più recenti del C++ forniscono un metodo più semplice, versatile e intuitivo per stampare il valore di variabili.
 
 ## Implementazione migliorata
 

@@ -36,11 +36,11 @@ template <typename T>
 e possiamo quindi utilizzare la funzione `CalcolaMedia` nel `main` nel modo seguente:
 
 ```c++
-cout << "media    = " << CalcolaMedia<double>(v) << endl;
+println("media    = {}", CalcolaMedia<double>(v));
 
 // È valido anche omettere `<double>`, perché il compilatore può
 // capire da solo cosa mettere in `<…>` basandosi sul tipo di `v`
-// cout << "media    = " << CalcolaMedia(v) << endl;
+// println("media    = {}", CalcolaMedia(v));
 ```
 
 Si possono trovare più dettagli a [questo link](http://www.cplusplus.com/doc/oldtutorial/templates/).
@@ -60,7 +60,6 @@ Provate a lavorare sulla generalizzazione della classe `Vettore` in modo che div
 // File vettore.h
 #pragma once
 
-#include <iostream>
 #include <cassert>
 
 using namespace std;
@@ -116,7 +115,6 @@ In caso si può usare la forma alternativa che abbiamo visto a lezione per separ
 // File vettore.h
 #pragma once
 
-#include <iostream>
 #include <cassert>
 
 using namespace std;
@@ -166,9 +164,10 @@ Analogamente a quanto fatto sopra, adattiamo il file di funzioni in modo tale ch
 
 #pragma once
 
-#include <iostream>
-#include <fstream>
 #include <cstdlib>
+#include <fstream>
+#include <iostream>
+#include <print>
 #include "vettore.h"
 
 using namespace std;
@@ -178,7 +177,7 @@ template <typename T>
   ifstream in{filename};   // Parentesi graffe: uniform initialization
   Vettore<T> v{N};
   if(! in) {
-      cerr << "Il file di input non esiste\n";
+      println(cerr, "Il file di input non esiste");
       exit(1);
   }
 
@@ -188,7 +187,7 @@ template <typename T>
       in >> val ;
       v.SetComponent(i, val);
       if(in.eof()) {
-        cerr << "Fine del file inattesa\n";
+        println(cerr, "Fine del file inattesa");
         exit(1);
       }
 
@@ -199,20 +198,20 @@ template <typename T>
 template <typename T> void Print(const Vettore<T> & v) {
   // Parentesi graffe: uniform initialization
   for (int k{}; k < v.GetN(); k++) {
-      cout << v.GetComponent(k) << endl;
+      println("{}", v.GetComponent(k));
   }
 }
 
 template <typename T> void Print(const Vettore<T> & v, const char * filename) {
   ofstream out(filename);
   if(! out) {
-    cerr << "Non posso creare il file " << filename << "\n";
+    println(cerr, "Non posso creare il file {}", filename);
     exit(1);
   }
 
   // Parentesi graffe: uniform initialization
   for (int i{}; i < v.GetN(); i++) {
-      out << v.GetComponent(i) << endl;
+      println(out, "{}", v.GetComponent(i));
   }
 }
 ```
@@ -226,7 +225,7 @@ Ecco l'aspetto che potrebbe avere il `main`: come vedete, usiamo il contenitore 
 
 ```c++
 #include <fstream>
-#include <iostream>
+#include <print>
 #include <string>
 
 #include "vettore.h"
@@ -239,7 +238,7 @@ int main (int argc, char * argv[]) {
   test_vettore();
 
   if(argc < 3) {
-      cerr << "Uso del programma: " << argv[0] << " <n_data> <filename>\n";
+      println("Uso del programma: {} <n_data> <filename>", argv[0]);
       return 1;
   }
 
@@ -253,9 +252,9 @@ int main (int argc, char * argv[]) {
 
   // Se usate il flag -std=c++23, tutti questi <double> sono superflui e
   // potete toglierli: provate!
-  cout << "media = " << CalcolaMedia<double>(v) << endl;
-  cout << "varianza = " << CalcolaVarianza<double>(v) << endl;
-  cout << "mediana = " << CalcolaMediana<double>(v) << endl;
+  println("media = {}", CalcolaMedia<double>(v));
+  println("varianza = {}", CalcolaVarianza<double>(v));
+  println("mediana = {}", CalcolaMediana<double>(v));
 
   Print(v);
 }
@@ -297,6 +296,7 @@ Analogamente a quanto fatto sopra, adattiamo il file di funzioni in modo che cia
 #include <cassert>
 #include <fstream>
 #include <iostream>
+#include <print>
 #include <vector> // contenitore
 
 using namespace std;
@@ -308,7 +308,7 @@ template <typename T>
 
   ifstream in{filename};
   if(in) {
-      cerr << "Impossibile aprire il file " << filename << "\n";
+      println(cerr, "Impossibile aprire il file {}", filename);
       exit(1);
   }
 
@@ -320,7 +320,7 @@ template <typename T>
       v.push_back(val);
 
       if(in.eof()) {
-          cerr << "Fine del file raggiunta prematuramente\n";
+          println(cerr, "Fine del file raggiunta prematuramente");
           exit(1);
       }
   }
@@ -330,20 +330,20 @@ template <typename T>
 
 template <typename T> void Print(const vector<T> & v) {
   for (int i{}; i < ssize(v); i++) {
-      cout << v[i] << endl;
+      println("{}", v[i]);
 }
 
 template <typename T> void Print(const vector<T> & v, const char * filename) {
   ofstream out(filename);
 
   if(! out) {
-      cerr << "Non posso creare il file " << filename << "\n";
+      println(cerr, "Non posso creare il file {}", filename);
       return;
   }
 
   // Anche qui bisogna usare (int), oppure invocare `ssize()`.
   for (int i{}; i < ssize(v); i++) {
-      out << v[i] << endl;
+      println(out, "{}", v[i]);
   }
 }
 ```
@@ -383,6 +383,7 @@ Ecco l'aspetto che potrebbe avere il nostro nuovo codice:
 #include "funzioni.h"
 #include <fstream>
 #include <iostream>
+#include <print>
 #include <string>
 
 using namespace std;
@@ -392,7 +393,7 @@ int main(int argc, char * argv[]) {
   test_statistical_functions();
 
   if(argc < 3) {
-      cerr << "Uso del programma: " << argv[0] << " <n_data> <filename>\n";;
+      println(cerr, "Uso del programma: {} <n_data> <filename>", argv[0]);
       return 1;
   }
 
@@ -401,9 +402,9 @@ int main(int argc, char * argv[]) {
   Print(v);
 
   // Come già scritto sopra, in C++17 i <double> sono superflui.
-  cout << "media " << CalcolaMedia<double>(v) << endl;
-  cout << "varianza " << CalcolaVarianza<double>(v) << endl;
-  cout << "mediana " << CalcolaMediana<double>(v) << endl;
+  println("media = ", CalcolaMedia<double>(v));
+  println("varianza = ", CalcolaVarianza<double>(v));
+  println("mediana = ", CalcolaMediana<double>(v));
 
   Print(v);
 }
@@ -437,7 +438,7 @@ template <typename T>
   ifstream in{filename};
 
   if(! in) {
-      cerr << "Impossibile aprire il file " << filename << "\n";
+      println(cerr, "Impossibile aprire il file {}", filename);
       exit(1);
   }
 
@@ -481,6 +482,7 @@ Possiamo usare questo codice come esempio per l'utilizzo di un qualsiasi oggetto
 #include "funzioni.h"
 #include <fstream>
 #include <iostream>
+#include <print>
 #include <string>
 
 using namespace std;
@@ -490,7 +492,7 @@ int main(int argc, char * argv[]) {
   test_statistical_functions();
 
   if(argc < 3) {
-      cerr << "Uso del programma: " << argv[0] << " <n_data> <filename>\n";
+      println(cerr, "Uso del programma: {} <n_data> <filename>", argv[0]);
       return 1;
   }
 
@@ -514,7 +516,7 @@ int main(int argc, char * argv[]) {
   }
 
   // accedo a informazioni statistiche
-  cout << "Media dei valori caricati = " << histo.GetMean() << endl;
+  println("Media dei valori caricati = {}", histo.GetMean());
 
   // disegno
   TCanvas mycanvas{"Histo", "Histo"};

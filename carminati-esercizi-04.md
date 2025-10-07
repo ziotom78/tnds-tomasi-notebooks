@@ -412,7 +412,7 @@ installarla, le istruzioni sono a [questo link](miscellanea.html#gplotinstall).
 #include "gplot++.h"
 #include "linearfit.h"
 #include <cmath>
-#include <cstdio>
+#include <iostream>
 #include <fstream>
 #include <print>
 #include <string>

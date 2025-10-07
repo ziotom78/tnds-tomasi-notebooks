@@ -36,8 +36,6 @@ L'header file della classe iniziale (`vettore.h`) potrebbe essere così:
 // `__vettore_h__` due volte (spesso fonte di errore tra gli
 // studenti, che fanno copia-e-incolla da un file all'altro!)
 
-#include <iostream>
-
 class Vettore {
 public:
   Vettore();                     // costruttore di default
@@ -63,8 +61,6 @@ private:
 };
 // Necessario usare `;` dopo la parentesi graffa
 // *solo* quando si chiude una classe!
-
-
 ```
 
 -   L'utilizzo del costrutto `#ifndef`…`#define`…`#endif` al posto di `#pragma once` merita una spiegazione. Queste direttive di preprocessore sono normalmente utilizzate per evitare inclusioni multiple di uno stesso header file che, nel caso specifico, porterebbero ad una doppia dichiarazione della classe `Vettore`. Immaginate infatti di voler compilare un codice `main.cpp` che includa sia `vettore.h` che `funzioni.h`, e che quest'ultimo file abbia bisogno di `vettore.h`:
@@ -149,10 +145,11 @@ Il file di implementazione `vettore.cpp` potrebbe essere così:
 
 ```c++
 #include "vettore.h"
-#include <iomanip>
+#include <cassert>
 #include <cmath>
 #include <cstdlib>
-#include <cassert>
+#include <iostream>
+#include <print>
 
 using namespace std;
 
@@ -165,7 +162,7 @@ Vettore::Vettore() {
 // Costruttore con dimensione
 Vettore::Vettore(int N) {
   if (N < 0) {
-      cerr << "Errore, la dimensione deve essere positiva anziché " << N << endl;
+      println(cerr, "Errore, la dimensione deve essere positiva anziché {}", N);
       exit(1);
   }
 
@@ -184,7 +181,7 @@ void Vettore::crashIfInvalidIndex(int i) const {
   // Se `i` non è un indice valido nell'array, stampa un messaggio
   // di errore e termina il programma
   if (i < 0 || i >= m_N) {
-      cerr << "Errore, indice " << i << ", dimensione " << m_N << endl;
+      println("Errore, indice {}, dimensione {}", i, m_N);
       exit(1);
   }
 }
@@ -231,44 +228,44 @@ Questo programma usa un copy constructor per creare il `Vettore c` ed un'assegna
 
 ```c++
 #include "vettore.h"
-#include <iostream>
+#include <print>
 
 using namespace std;
 
 int main() {
   // costruttore senza argomenti → crea un vettore di dimensione nulla
   Vettore vnull;
-  cout << "Vettore vnull: dimensione = " << vnull.GetN() << endl;
+  println("Vettore vnull: dimensione = {}", vnull.GetN());
   for(int k = 0; k < vnull.getN(); k++) {
-      cout << vnull.GetComponent(k) << " ";
+      print("{} ", vnull.GetComponent(k));
   }
-  cout << endl;
+  println();
 
   // costruttore con intero: costruisco un vettore di lunghezza 10
   Vettore v(10);
-  cout << "Vettore v: dimensione = " << v.GetN() << endl;
+  println("Vettore v: dimensione = {}", v.GetN());
   for(int k = 0; k < v.GetN(); ++k) {
-      cout << v.GetComponent(k) << " ";
+      print("{} ", v.GetComponent(k));
   }
-  cout << endl;
+  println();
 
   int comp = 3;
-  cout << "Componente " << comp << " = " << v.GetComponent(comp) << endl;
+  println("Componente {} = {}", comp, v.GetComponent(comp));
 
   // Cambio la componente alla posizione `comp`
   v.SetComponent(comp, -999);
   for(int k = 0; k < v.GetN(); ++k) {
-      cout << v.GetComponent(k) << " ";
+      print("{} ", v.GetComponent(k));
   }
-  cout << endl;
+  println();
 
   // Anche come puntatore a memoria dinamica
   Vettore * vp = new Vettore(10);
-  cout << "Vettore vp: dimensione = " << vp->GetN() << endl;
+  println("Vettore vp: dimensione = {}", vp->GetN());
   for(int k = 0; k < v.GetN(); ++k) {
-      cout << vp->GetComponent(k) << " ";
+      print("{} ", vp->GetComponent(k));
   }
-  cout << endl;
+  println();
 
   delete vp;
 
@@ -470,82 +467,64 @@ A questo punto possiamo utilizzare il seguente codice di test che include anche 
 
 ```c++
 #include "Vettore.h"
-#include <iostream>
+#include <print>
 
 using namespace std;
+
+void PrintVettore(const char * nome, const Vettore & v) {
+  println("Vettore {}: dimensione = {}", nome, v.GetN());
+  for (int k = 0; k < v.GetN(); k++)
+    print("{} ", v.GetComponent(k));
+  println();
+}
 
 int main() {
 
   // costruttore senza argomenti → crea un vettore di dimensione nulla
   Vettore vnull;
-  cout << "Vettore vnull: dimensione = " << vnull.GetN() << endl;
+  println("Vettore vnull: dimensione = {}", vnull.GetN());
   for (int k = 0; k < vnull.GetN(); k++)
-    cout << vnull.GetComponent(k) << " ";
-  cout << endl;
+    print("{} ", vnull.GetComponent(k));
+  println();
 
   // construttore con intero: costruisco un OGGETTO di tipo vettore di
   // lunghezza 10
   Vettore v(10);
-  cout << "Vettore v: = dimensione = " << v.GetN() << endl;
-  for (int k = 0; k < v.GetN(); k++) {
-    cout << v.GetComponent(k) << " ";
-  }
-  cout << endl;
+  PrintVettore("v", v);
+
   int comp = 3;
-  cout << "Componente " << comp << " = " << v.GetComponent(comp) << endl;
-  cout << "Componente " << comp << " = " << v[comp] << endl;
+  println("Componente {} = {}", comp, v.GetComponent(comp));
+  println("Componente {} = {}", comp, v[comp]);
 
   v.SetComponent(comp, -999);
   v[comp] = -999;
 
-  for (int k = 0; k < v.GetN(); k++) {
-    cout << v.GetComponent(k) << " ";
-  }
-  cout << endl;
+  PrintVettore("v dopo SetComponent()", v);
 
   // anche come puntatore
 
   Vettore *vp = new Vettore(10);
-  cout << "Vettore vp: = dimensione = " << vp->GetN() << endl;
-  for (int k = 0; k < vp->GetN(); k++) {
-    cout << vp->GetComponent(k) << " ";
-  }
-  cout << endl;
+  PrintVettore("vp", *vp);
 
   // copy constructor: w viene creato come copia di v
 
   Vettore w = v; //  oppure la sintassi equivalente: Vettore w(v);
 
-  cout << "Vettore w: dimensione = " << w.GetN() << endl;
-  for (int k = 0; k < w.GetN(); k++)
-    cout << w.GetComponent(k) << " ";
-  cout << endl;
+  PrintVettore("w", w);
 
   v.SetComponent(4, 99); // WARNING: senza copy constructor opportuno, un
                          // cambio di v cambia anche w !!!!!!
 
-  cout << "Vettore v: dimensione = " << v.GetN() << endl;
-  for (int k = 0; k < v.GetN(); k++) {
-    cout << v.GetComponent(k) << " ";
-  }
-  cout << endl;
-
-  cout << "Vettore w: dimensione = " << w.GetN() << endl;
-  for (int k = 0; k < w.GetN(); k++) {
-    cout << w.GetComponent(k) << " ";
-  }
-  cout << endl;
+  // Stampa sia il vettore `v` che il vettore `w`
+  PrintVettore("v", v);
+  PrintVettore("w", w);
 
   // operatore di assegnazione: prima creo Z e poi lo eguagli a w
 
   Vettore z;
   z = w;
 
-  cout << "Vettore z: dimensione = " << z.GetN() << endl;
-  for (int k = 0; k < z.GetN(); k++) {
-    cout << z.GetComponent(k) << " ";
-  }
-  cout << endl;
+  PrintVettore("z", z);
 
   delete vp;
 
@@ -569,8 +548,9 @@ Se non ci riuscite da soli potete dare un'occhiata ai suggerimenti qui sotto.
 
 ```c++
 #include <cstdlib>
-#include <string>
 #include <iostream>
+#include <print>
+#include <string>
 
 // includo la dichiarazione della classe Vettore
 
@@ -587,7 +567,7 @@ int main(int argc, char *argv[]) {
   test_statistical_functions();
 
   if (argc != 3) {
-    cout << "Uso del programma: " << argv[0] << " <n_data> <filename> " << endl;
+    println(cerr, "Uso del programma: {} <n_data> <filename>", argv[0]);
     return 1;
   }
 
@@ -598,9 +578,9 @@ int main(int argc, char *argv[]) {
 
   Print(v);
 
-  cout << "media    = " << CalcolaMedia(v) << endl;
-  cout << "varianza = " << CalcolaVarianza(v) << endl;
-  cout << "mediana  = " << CalcolaMediana(v) << endl;
+  println("media    = {}", CalcolaMedia(v));
+  println("varianza = {}", CalcolaVarianza(v));
+  println("mediana  = {}", CalcolaMediana(v));
 
   Print(v);
   Print(v, "data_out.txt");
@@ -618,7 +598,6 @@ La funzione `test_statistical_functions()` è spiegata nelle [slide di Tomasi](t
     ```c++
     #pragma once
     #include <fstream>
-    #include <iostream>
 
     #include "Vettore.h"
 
@@ -702,18 +681,18 @@ La funzione `Read()` restituirà un oggetto temporaneo di tipo ``Vettore` che po
 // overloading del move constructor
 
 Vettore::Vettore(Vettore &&V) {
-  cout << "Calling move constructor" << endl;
+  println("Calling move constructor");
   m_N = V.m_N;
   m_v = V.m_v;
   V.m_N = 0;
   V.m_v = nullptr;
-  cout << "Move constructor called" << endl;
+  println("Move constructor called");
 }
 
 // overloading del move assignment operator
 
 Vettore &Vettore::operator=(Vettore &&V) {
-  cout << "Calling move assignment operator " << endl;
+  println("Calling move assignment operator");
   delete[] m_v;
 
   m_N = V.m_N;
@@ -721,7 +700,7 @@ Vettore &Vettore::operator=(Vettore &&V) {
 
   V.m_N = 0;
   V.m_v = nullptr;
-  cout << "Move assignment operator called" << endl;
+  println("Move assignment operator called");
   return *this;
 }
 ```
@@ -759,6 +738,8 @@ private:
 il metodo `GetComponent()` può essere usato nel modo seguente dal `main()`:
 
 ```c++
+#include <iostream>
+#include <print>
 #include "Vettore.h"
 
 int main() {
@@ -770,8 +751,8 @@ int main() {
   try {
     v.GetComponent(4);
   } catch (int errcode) {
-    cout << "Error code " << errcode << " exiting " << endl;
-    exit(44);
+    println(cerr, "Error code {}, exiting", errcode);
+    exit(1);
   }
 
   return 0;
