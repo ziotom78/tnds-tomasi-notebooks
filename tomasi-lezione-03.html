@@ -184,7 +184,7 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb1-1"><a href="#c
 <span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>      <span class="ot">assert</span><span class="op">(</span>v<span class="op">[</span><span class="dv">1</span><span class="op">]</span> <span class="op">==</span> <span class="dv">123</span><span class="op">);</span></span>
 <span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
 <span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>  println<span class="op">(</span>stderr<span class="op">,</span> <span class="st">&quot;Vettore works as expected! 🥳&quot;</span><span class="op">);</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>  println<span class="op">(</span>cerr<span class="op">,</span> <span class="st">&quot;Vettore works as expected! 🥳&quot;</span><span class="op">);</span></span>
 <span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 </section>
 <section id="test-per-esercizio-3.1" class="slide level1">
@@ -213,15 +213,13 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb2-1"><a href="#c
 <span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>      <span class="ot">assert</span><span class="op">(</span>are_close<span class="op">(</span>CalcolaMediana<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;(</span>mydata<span class="op">),</span> <span class="dv">2</span><span class="op">));</span>    <span class="co">// Odd</span></span>
 <span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
 <span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>  println<span class="op">(</span>stderr<span class="op">,</span> <span class="st">&quot;Statistical functions work as expected! 🥳&quot;</span><span class="op">);</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>  println<span class="op">(</span>cerr<span class="op">,</span> <span class="st">&quot;Statistical functions work as expected! 🥳&quot;</span><span class="op">);</span></span>
 <span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 </section>
 <section id="root" class="slide level1">
 <h1>ROOT</h1>
 <ul>
-<li><p>Nell’esercizio 3.2 è richiesto l’uso di ROOT, una libreria di
-funzioni per il calcolo scentifico che noi useremo per generare
-grafici.</p></li>
+<li><p>Nell’esercizio 3.2 è richiesto l’uso di ROOT.</p></li>
 <li><p>Chi usa le macchine del laboratorio, dovrebbe averlo già
 installato.</p></li>
 <li><p>Chi usa il proprio computer… Auguri! Sotto Linux e Mac dovrebbe
@@ -230,59 +228,59 @@ complessa.</p></li>
 <li><p>Di tutti gli esercizi che farete questo semestre, solo il 3.2
 richiede obbligatoriamente di usare ROOT. (Neppure i temi d’esami dello
 scritto hanno mai imposto, né imporranno, l’uso di ROOT).</p></li>
-<li><p>Nelle prossime lezioni vi mostrerò una libreria per produrre
-plot, che è semplice da installare sia su Windows che Linux che
-Mac.</p></li>
+<li><p>Nelle prossime lezioni vi mostrerò una libreria per produrre plot
+(<a href="https://github.com/ziotom78/gplotpp">Gplot++</a>), che è
+semplice da installare sia su Windows che Linux che Mac e che funziona
+bene con VSCode.</p></li>
 </ul>
 </section>
-<section id="stderr" class="slide level1">
-<h1>Uso di <code>stderr</code></h1>
+<section id="cerr" class="slide level1">
+<h1>Uso di <code>cerr</code></h1>
 </section>
 <section id="scrittura-a-video" class="slide level1">
 <h1>Scrittura a video</h1>
 <ul>
 <li><p>Quando si usa <code>std::print</code> o
 <code>std::println</code>, si può scegliere se scrivere su
-<code>stderr</code>.</p></li>
+<code>cerr</code> o no.</p></li>
 <li><p>Le regole da seguire <strong>sempre</strong> sono le
 seguenti:</p>
 <ul>
-<li><p>Usare <code>stderr</code> per scrivere messaggi.</p></li>
-<li><p><strong>Non</strong> usare <code>stderr</code> per scrivere il
+<li><p>Usare <code>cerr</code> per scrivere messaggi a video.</p></li>
+<li><p><strong>Non</strong> usare <code>cerr</code> per scrivere il
 risultato di conti.</p></li>
 </ul></li>
-<li><p>La differenza è che quanto viene scritto su <code>stderr</code>
-finisce sempre sullo schermo, anche se da linea di comando si usano gli
-operatori di reindirizzamento <code>&gt;</code> e
+<li><p>Quanto scritto su <code>cerr</code> finisce sullo schermo anche
+se da linea di comando si usano gli operatori <code>&gt;</code> e
 <code>|</code>.</p></li>
 <li><p>Ci sono anche altre differenze; vi basti sapere che per stampare
 un <a
 href="https://en.wikipedia.org/wiki/Progress_indicator"><em>progress
 indicator</em></a> sul terminale è sempre meglio usare
-<code>stderr</code>.</p></li>
+<code>cerr</code>.</p></li>
 </ul>
 </section>
-<section id="esempio-di-uso-di-stderr" class="slide level1">
-<h1>Esempio di uso di <code>stderr</code></h1>
+<section id="esempio-di-uso-di-cerr" class="slide level1">
+<h1>Esempio di uso di <code>cerr</code></h1>
 <div class="sourceCode" id="cb3"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;cstdio&gt;</span><span class="pp">  </span><span class="co">// `stderr` is defined here</span></span>
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span><span class="pp">  </span><span class="co">// `cerr` is defined here</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;print&gt;</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">(</span><span class="dt">void</span><span class="op">)</span> <span class="op">{</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">std::</span>println<span class="op">(</span>stderr<span class="op">,</span> <span class="st">&quot;1. Leggo i dati da file...&quot;</span><span class="op">);</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">std::</span>println<span class="op">(</span>cerr<span class="op">,</span> <span class="st">&quot;1. Leggo i dati da file...&quot;</span><span class="op">);</span></span>
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    <span class="co">// ...</span></span>
 <span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    <span class="bu">std::</span>println<span class="op">(</span>stderr<span class="op">,</span> <span class="st">&quot;2. Stampo a video i risultati:&quot;</span><span class="op">);</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    <span class="bu">std::</span>println<span class="op">(</span>cerr<span class="op">,</span> <span class="st">&quot;2. Stampo a video i risultati:&quot;</span><span class="op">);</span></span>
 <span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> num<span class="op">;</span> <span class="op">++</span>i<span class="op">)</span> <span class="op">{</span></span>
 <span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>        <span class="bu">std::</span>println<span class="op">(</span><span class="st">&quot;</span><span class="sc">{}</span><span class="st">&quot;</span><span class="op">,</span> result<span class="op">[</span>i<span class="op">]);</span></span>
 <span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
 <span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>    <span class="bu">std::</span>println<span class="op">(</span>stderr<span class="op">,</span> <span class="st">&quot;3. Programma completato&quot;</span><span class="op">);</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>    <span class="bu">std::</span>println<span class="op">(</span>cerr<span class="op">,</span> <span class="st">&quot;3. Programma completato&quot;</span><span class="op">);</span></span>
 <span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 </section>
-<section id="esempio-di-uso-di-stderr-1" class="slide level1">
-<h1>Esempio di uso di <code>stderr</code></h1>
+<section id="esempio-di-uso-di-cerr-1" class="slide level1">
+<h1>Esempio di uso di <code>cerr</code></h1>
 <p>Con l’esempio seguente, è possibile usare il reindirizzamento:</p>
 <div id="cerr-cout-asciinema">
 
@@ -298,10 +296,10 @@ AsciinemaPlayer.create(
     });
 </script>
 </section>
-<section id="esempio-di-uso-di-stderr-2" class="slide level1">
-<h1>Esempio di uso di <code>stderr</code></h1>
+<section id="esempio-di-uso-di-cerr-2" class="slide level1">
+<h1>Esempio di uso di <code>cerr</code></h1>
 <ul>
-<li><p>Se non avessimo usato <code>stderr</code>, comandi come
+<li><p>Se non avessimo usato <code>cerr</code>, comandi come
 <code>sort</code> avrebbero mescolato risultati e messaggi:</p>
 <pre><code>$ esempio | sort -g
 1.75123
@@ -310,9 +308,9 @@ AsciinemaPlayer.create(
 2. Stampo a video i risultati:
 3. Programma completato
 5.91573</code></pre></li>
-<li><p>In generale, stampate su <code>stderr</code> tutto ciò che
-bisogna mostrare all’utente <em>subito</em>, e non ha senso salvare in
-un file per essere eventualmente guardato dopo.</p></li>
+<li><p>In generale, stampate su <code>cerr</code> tutto ciò che bisogna
+mostrare all’utente <em>subito</em>, e non ha senso salvare in un file
+per essere eventualmente guardato dopo.</p></li>
 </ul>
 </section>
 <section id="tipi-di-errore" class="slide level1">
@@ -425,10 +423,10 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb9-1"><a href="#c
 <span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> position<span class="op">;</span></span>
 <span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>    Vettore v<span class="op">(</span><span class="dv">10</span><span class="op">);</span></span>
 <span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>    println<span class="op">(</span>stderr<span class="op">,</span> <span class="st">&quot;Inserisci la posizione del vettore: &quot;</span><span class="op">);</span></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>    println<span class="op">(</span>cerr<span class="op">,</span> <span class="st">&quot;Inserisci la posizione del vettore: &quot;</span><span class="op">);</span></span>
 <span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>    cin <span class="op">&gt;&gt;</span> position<span class="op">;</span></span>
 <span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>position <span class="op">&gt;=</span> ssize<span class="op">(</span>v<span class="op">))</span> <span class="op">{</span></span>
-<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>        println<span class="op">(</span>stderr<span class="op">,</span> <span class="st">&quot;Errore, la posizione deve essere &lt; </span><span class="sc">{}</span><span class="st">&quot;</span><span class="op">,</span> ssize<span class="op">(</span>v<span class="op">));</span></span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>        println<span class="op">(</span>cerr<span class="op">,</span> <span class="st">&quot;Errore, la posizione deve essere &lt; </span><span class="sc">{}</span><span class="st">&quot;</span><span class="op">,</span> ssize<span class="op">(</span>v<span class="op">));</span></span>
 <span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>        exit<span class="op">(</span><span class="dv">1</span><span class="op">);</span></span>
 <span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
 <span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>    v<span class="op">.</span>setComponent<span class="op">(</span>position<span class="op">,</span> <span class="fl">1.0</span><span class="op">);</span></span>
@@ -603,8 +601,8 @@ errore, perché <code>atoi</code> restituisce un intero ma sia
 <section id="int-e-unsigned-int-1" class="slide level1">
 <h1><code>int</code> e <code>unsigned int</code></h1>
 <ul>
-<li><p>Usando interi con segno, molti algoritmi diventano più semplici
-(es., scandire gli elementi di un array a ritroso).</p></li>
+<li><p>Usando interi con segno, molti algoritmi diventano più
+semplici.</p></li>
 <li><p>Citazione da <a
 href="https://google.github.io/styleguide/cppguide.html#Integer_Types">Google
 Coding Guidelines</a>:</p>
@@ -627,9 +625,8 @@ d’accordo</a>. Preferite quindi sempre <code>int</code> a
 <ul>
 <li><p>La classe <code>std::vector</code> (esercizio 3.1) implementa un
 metodo <code>.size()</code> che restituisce la dimensione degli array
-come un intero <strong>senza segno</strong> di tipo <code>int</code>.
-Questo è apparentemente sensato: dopotutto, un vettore non può avere un
-numero negativo di elementi, no?</p></li>
+come un intero <strong>senza segno</strong> di tipo
+<code>int</code>.</p></li>
 <li><p>L’uso di <code>unsigned</code> per le dimensione degli array
 produce però più problemi di quanti ne risolva! Per questo motivo,
 linguaggi più moderni scoraggiano l’uso di <code>unsigned</code> (Kotlin
@@ -648,9 +645,10 @@ restituisce sempre un <code>int</code>:</p>
 <div class="sourceCode" id="cb21"><pre
 class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="bu">std::</span>vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> v<span class="op">(</span><span class="dv">3</span><span class="op">);</span></span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span><span class="op">(</span><span class="dt">int</span> i<span class="op">{};</span> i <span class="op">&lt;</span> ssize<span class="op">(</span>v<span class="op">);</span> <span class="op">++</span>i<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>    v<span class="op">[</span>i<span class="op">]</span> <span class="op">=</span> <span class="fl">0.0</span><span class="op">;</span></span>
-<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div></li>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="co">// Nota: ssize(v) anziché v.size() perché `ssize` è una FUNZIONE e non un METODO</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span><span class="op">(</span><span class="dt">int</span> i<span class="op">{};</span> i <span class="op">&lt;</span> ssize<span class="op">(</span>v<span class="op">);</span> <span class="op">++</span>i<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>    v<span class="op">[</span>i<span class="op">]</span> <span class="op">=</span> <span class="fl">0.0</span><span class="op">;</span></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div></li>
 <li><p>Di conseguenza, in questo corso non usate <strong>mai</strong>
 numeri <code>unsigned</code> per iterare sugli elementi dei vettori.
 Usate sempre <code>int</code> e la funzione <code>ssize()</code>! (Ma

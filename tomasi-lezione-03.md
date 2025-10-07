@@ -42,7 +42,7 @@ void test_vettore() {
       assert(v[1] == 123);
   }
 
-  println(stderr, "Vettore works as expected! 🥳");
+  println(cerr, "Vettore works as expected! 🥳");
 }
 ```
 
@@ -72,14 +72,14 @@ void test_statistical_functions(void) {
       assert(are_close(CalcolaMediana<double>(mydata), 2));    // Odd
   }
 
-  println(stderr, "Statistical functions work as expected! 🥳");
+  println(cerr, "Statistical functions work as expected! 🥳");
 }
 ```
 
 
 # ROOT
 
--   Nell'esercizio 3.2 è richiesto l'uso di ROOT, una libreria di funzioni per il calcolo scentifico che noi useremo per generare grafici.
+-   Nell'esercizio 3.2 è richiesto l'uso di ROOT.
 
 -   Chi usa le macchine del laboratorio, dovrebbe averlo già installato.
 
@@ -87,46 +87,46 @@ void test_statistical_functions(void) {
 
 -   Di tutti gli esercizi che farete questo semestre, solo il 3.2 richiede obbligatoriamente di usare ROOT. (Neppure i temi d'esami dello scritto hanno mai imposto, né imporranno, l'uso di ROOT).
 
--   Nelle prossime lezioni vi mostrerò una libreria per produrre plot, che è semplice da installare sia su Windows che Linux che Mac.
+-   Nelle prossime lezioni vi mostrerò una libreria per produrre plot ([Gplot++](https://github.com/ziotom78/gplotpp)), che è semplice da installare sia su Windows che Linux che Mac e che funziona bene con VSCode.
 
-# Uso di `stderr` {#stderr}
+# Uso di `cerr` {#cerr}
 
 # Scrittura a video
 
--   Quando si usa `std::print` o `std::println`, si può scegliere se scrivere su `stderr`.
+-   Quando si usa `std::print` o `std::println`, si può scegliere se scrivere su `cerr` o no.
 
 -   Le regole da seguire **sempre** sono le seguenti:
 
-    -   Usare `stderr` per scrivere messaggi.
+    -   Usare `cerr` per scrivere messaggi a video.
 
-    -   **Non** usare `stderr` per scrivere il risultato di conti.
+    -   **Non** usare `cerr` per scrivere il risultato di conti.
 
--   La differenza è che quanto viene scritto su `stderr` finisce sempre sullo schermo, anche se da linea di comando si usano gli operatori di reindirizzamento `>` e `|`.
+-   Quanto scritto su `cerr` finisce sullo schermo anche se da linea di comando si usano gli operatori `>` e `|`.
 
--   Ci sono anche altre differenze; vi basti sapere che per stampare un [*progress indicator*](https://en.wikipedia.org/wiki/Progress_indicator) sul terminale è sempre meglio usare `stderr`.
+-   Ci sono anche altre differenze; vi basti sapere che per stampare un [*progress indicator*](https://en.wikipedia.org/wiki/Progress_indicator) sul terminale è sempre meglio usare `cerr`.
 
 
-# Esempio di uso di `stderr`
+# Esempio di uso di `cerr`
 
 ```c++
-#include <cstdio>  // `stderr` is defined here
+#include <iostream>  // `cerr` is defined here
 #include <print>
 
 int main(void) {
-    std::println(stderr, "1. Leggo i dati da file...");
+    std::println(cerr, "1. Leggo i dati da file...");
 
     // ...
 
-    std::println(stderr, "2. Stampo a video i risultati:");
+    std::println(cerr, "2. Stampo a video i risultati:");
     for (int i = 0; i < num; ++i) {
         std::println("{}", result[i]);
     }
 
-    std::println(stderr, "3. Programma completato");
+    std::println(cerr, "3. Programma completato");
 }
 ```
 
-# Esempio di uso di `stderr`
+# Esempio di uso di `cerr`
 
 Con l'esempio seguente, è possibile usare il reindirizzamento:
 
@@ -142,9 +142,9 @@ AsciinemaPlayer.create(
     });
 </script>
 
-# Esempio di uso di `stderr`
+# Esempio di uso di `cerr`
 
--   Se non avessimo usato `stderr`, comandi come `sort` avrebbero mescolato risultati e messaggi:
+-   Se non avessimo usato `cerr`, comandi come `sort` avrebbero mescolato risultati e messaggi:
 
     ```
     $ esempio | sort -g
@@ -156,7 +156,7 @@ AsciinemaPlayer.create(
     5.91573
     ```
 
--   In generale, stampate su `stderr` tutto ciò che bisogna mostrare all'utente *subito*, e non ha senso salvare in un file per essere eventualmente guardato dopo.
+-   In generale, stampate su `cerr` tutto ciò che bisogna mostrare all'utente *subito*, e non ha senso salvare in un file per essere eventualmente guardato dopo.
 
 # Tipi di errore {#tipi-di-errore}
 
@@ -256,10 +256,10 @@ int main() {
     int position;
     Vettore v(10);
 
-    println(stderr, "Inserisci la posizione del vettore: ");
+    println(cerr, "Inserisci la posizione del vettore: ");
     cin >> position;
     if (position >= ssize(v)) {
-        println(stderr, "Errore, la posizione deve essere < {}", ssize(v));
+        println(cerr, "Errore, la posizione deve essere < {}", ssize(v));
         exit(1);
     }
     v.setComponent(position, 1.0);
@@ -406,7 +406,7 @@ Di conseguenza, il programmatore è «costretto» a verificare la correttezza de
 
 # `int` e `unsigned int`
 
--   Usando interi con segno, molti algoritmi diventano più semplici (es., scandire gli elementi di un array a ritroso).
+-   Usando interi con segno, molti algoritmi diventano più semplici.
 
 -   Citazione da [Google Coding Guidelines](https://google.github.io/styleguide/cppguide.html#Integer_Types):
 
@@ -417,7 +417,7 @@ Di conseguenza, il programmatore è «costretto» a verificare la correttezza de
 
 # Cicli `for` su array
 
--   La classe `std::vector` (esercizio 3.1) implementa un metodo `.size()` che restituisce la dimensione degli array come un intero **senza segno** di tipo `int`. Questo è apparentemente sensato: dopotutto, un vettore non può avere un numero negativo di elementi, no?
+-   La classe `std::vector` (esercizio 3.1) implementa un metodo `.size()` che restituisce la dimensione degli array come un intero **senza segno** di tipo `int`.
 
 -   L'uso di `unsigned` per le dimensione degli array produce però più problemi di quanti ne risolva! Per questo motivo, linguaggi più moderni scoraggiano l'uso di `unsigned` (Kotlin 2.0, Nim, Julia…), quando addirittura non lo vietano (Kotlin 1.0).
 
@@ -430,6 +430,7 @@ Di conseguenza, il programmatore è «costretto» a verificare la correttezza de
     ```c++
     std::vector<double> v(3);
 
+    // Nota: ssize(v) anziché v.size() perché `ssize` è una FUNZIONE e non un METODO
     for(int i{}; i < ssize(v); ++i) {
         v[i] = 0.0;
     }
