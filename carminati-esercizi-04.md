@@ -464,25 +464,25 @@ void plot_data_and_fit(const string &filename, const Measurements<T> &data,
   gnuplot.set_ylabel("(r×B)² [m²·T²]");
   gnuplot.show();
 
-  println(stderr, "plot saved in file \"{}\"", filename));
+  println(cerr, "plot saved in file \"{}\"", filename));
 }
 
 int main(int argc, const char *argv[]) {
   if (argc != 2) {
-    println(stderr, "usage: {} DATA_FILE\n", argv[0]);
+    println(cerr, "usage: {} DATA_FILE\n", argv[0]);
     return 1;
   }
   const string file_name{argv[1]};
   ifstream input_file{file_name};
   if (!input_file) {
-    println(stderr, "error, unable to load file \"{}\"", file_name);
+    println(cerr, "error, unable to load file \"{}\"", file_name);
     return 1;
   }
 
   Measurements<float> data;
   read_from_file(input_file, data);
 
-  println(stderr, "{} elements have been read from \"{}\"", ssize(data),
+  println(cerr, "{} elements have been read from \"{}\"", ssize(data),
           file_name);
 
   auto result = linear_fit(data.voltage, data.rb, data.rb_err);
