@@ -203,7 +203,7 @@ template <typename T> void Print(const Vettore<T> & v) {
 }
 
 template <typename T> void Print(const Vettore<T> & v, const char * filename) {
-  ofstream out(filename);
+  ofstream out{filename};
   if(! out) {
     println(cerr, "Non posso creare il file {}", filename);
     exit(1);
@@ -231,7 +231,7 @@ Ecco l'aspetto che potrebbe avere il `main`: come vedete, usiamo il contenitore 
 #include "vettore.h"
 #include "funzioni.h"
 
-using namespace str;
+using namespace std;
 
 int main (int argc, char * argv[]) {
   // Esegui i test sull'implementazione di `Vettore` (v. slide di Tomasi)
