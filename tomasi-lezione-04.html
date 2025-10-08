@@ -187,24 +187,8 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb1-1"><a href="#c
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="ot">assert</span><span class="op">(</span>are_close<span class="op">(</span>stddev<span class="op">(</span>v<span class="op">,</span> <span class="dv">2</span><span class="op">),</span> <span class="fl">1.632993161855452</span><span class="op">));</span></span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="ot">assert</span><span class="op">(</span>are_close<span class="op">(</span>stddev<span class="op">(</span>v<span class="op">,</span> <span class="dv">3</span><span class="op">),</span> <span class="fl">1.5</span><span class="op">));</span></span>
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  println<span class="op">(</span>stderr<span class="op">,</span> <span class="st">&quot;All the tests have passed. Hurrah! 🥳&quot;</span><span class="op">);</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  println<span class="op">(</span>cerr<span class="op">,</span> <span class="st">&quot;All the tests have passed. Hurrah! 🥳&quot;</span><span class="op">);</span></span>
 <span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div></li>
-</ul>
-</section>
-<section id="compilatori-c" class="slide level1">
-<h1>Compilatori C++</h1>
-</section>
-<section id="compilatori-c-1" class="slide level1">
-<h1>Compilatori C++</h1>
-<ul>
-<li><p>Ho aggiunto una <a href="configure-your-laptop.html">pagina</a>
-in cui ho raccolto un po’ di informazioni su come installare compilatori
-C++.</p></li>
-<li><p>Le istruzioni per Windows sono le più estese, ed elencano varie
-modalità per compilare programmi C++ sotto Windows.</p></li>
-<li><p>Ci sono istruzioni (scarne) anche per Linux e Mac OS X.</p></li>
-<li><p>Segnalatemi cosa non funziona, in modo che possa
-correggerlo.</p></li>
 </ul>
 </section>
 <section id="formattazione-di-numeri" class="slide level1">
@@ -252,12 +236,12 @@ inserendo degli argomenti dentro <code>{}</code> dopo i due punti
 (<code>:</code>). Ad esempio, per formattare numeri floating-point con 2
 cifre dopo la virgola si scrive <code>{:.2f}</code></p></li>
 <li><p>Se si vuole usare la notazione scientifica, si usa la lettera
-<code>e</code>: la scrittura <code>{:.5e}</code> indica che si
-richiedono 5 cifre dopo la virgola</p></li>
-<li><p>Si può indicare il numero di caratteri da usare inserendo un
-numero subito dopo <code>:</code>: così <code>{:5}</code> chiede di
-usare almeno 5 caratteri per scrivere il valore. Questo è utile per
-allineare i campi nelle tabelle.</p></li>
+<code>e</code>. Ad esempio, la scrittura <code>{:.5e}</code> indica che
+si richiedono 5 cifre dopo la virgola</p></li>
+<li><p>Si può indicare il numero di caratteri da usare inserendo subito
+dopo <code>:</code> un numero: <code>{:5}</code> chiede di usare almeno
+5 caratteri per scrivere il valore. Questo è utile per allineare i campi
+nelle tabelle.</p></li>
 <li><p>È possibile mettere insieme l’indice (<code>0</code>), l’ampiezza
 (<code>5</code>) e il numero di cifre dopo la virgola (<code>.2</code>)
 scrivendoli uno dopo l’altro: <code>{0:5.2e}</code>.</p></li>
@@ -267,12 +251,13 @@ scrivendoli uno dopo l’altro: <code>{0:5.2e}</code>.</p></li>
 <h1>Stringhe formattate</h1>
 <ul>
 <li><p>Le funzioni <code>print</code> e <code>println</code> stampano
-stringhe a video, sostituendo <code>{}</code> con valori di
+stringhe a video o in un file, sostituendo <code>{}</code> con valori di
 variabili</p></li>
 <li><p>Ci sono però situazioni in cui questa funzionalità serve per
-passare stringhe ad altre funzioni, e non per stamparle a video</p></li>
+passare stringhe ad altre funzioni, e non per stamparle</p></li>
 <li><p>Ad esempio, potreste voler salvare un grafico e usare la
-sostituzione <code>{}</code> nel titolo</p></li>
+sostituzione <code>{}</code> nel titolo: in tal caso la stringa va
+passata a una funzione della libreria grafica</p></li>
 <li><p>Questo è possibile con <code>std::format()</code>, che
 restituisce una stringa formattata (includete
 <code>&lt;format&gt;</code>:</p>
@@ -291,13 +276,13 @@ grafici.</p></li>
 <li><p>Nel laboratorio di TNDS, ROOT è usato come libreria C++, ossia
 come un insieme di classi invocabili all’interno dei vostri
 programmi.</p></li>
-<li><p>Un’alternativa a ROOT, per coloro che hanno avuto problemi a
-installarlo sui propri laptop, è <a
+<li><p>Un’alternativa a ROOT è <a
 href="http://www.gnuplot.info/">Gnuplot</a>:</p>
 <ul>
-<li>È facilmente installabile anche sotto Windows;</li>
+<li>È facilmente installabile sotto qualsiasi piattaforma;</li>
 <li>È usabile anche all’interno di programmi C++, mediante una piccola
-libreria.</li>
+libreria. In tal caso, VSCode lo riconosce senza bisogno di
+configurazione</li>
 </ul></li>
 </ul>
 </section>
@@ -326,11 +311,16 @@ X):</p>
 usarla.</p></li>
 </ul>
 </section>
+<section class="slide level1">
+
+<p><img data-src="images/vscode-hint.png" height="640" /></p>
+</section>
 <section id="vantaggi-di-gplot" class="slide level1">
 <h1>Vantaggi di gplot++</h1>
 <ul>
 <li><p>Visual Studio Code è in grado di visualizzare finestre di aiuto,
-se spostate il mouse sui comandi di plot.</p></li>
+se spostate il mouse sui comandi di plot (vedi immagine
+precedente);</p></li>
 <li><p>Si possono passare direttamente array di vettori di tipo
 <code>std::vector</code>, invece di chiamare ripetutamente
 <code>TGraph::SetPoint</code>;</p></li>
@@ -338,8 +328,8 @@ se spostate il mouse sui comandi di plot.</p></li>
 <code>root-config</code>;</p></li>
 <li><p>Se lavorate sui vostri computer, non serve ricordarsi di eseguire
 <code>source root/bin/thisroot.sh</code>;</p></li>
-<li><p>Occupa appena 9 KB, quindi si può installare una copia dentro
-ogni cartella di esercizi;</p></li>
+<li><p>Bisogna installarlo <strong>dentro ogni cartella che contiene un
+esercizio</strong>, ma occupa appena 9 KB.</p></li>
 </ul>
 </section>
 <section id="semplice-esempio" class="slide level1">
@@ -419,6 +409,10 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb8-1"><a href="#c
 <p><img data-src="images/gplot++-complex.png" style="width:50.0%" /></p>
 <p>Per esempi e documentazione, andate alla pagina <a
 href="https://github.com/ziotom78/gplotpp">github.com/ziotom78/gplotpp</a>.</p>
+</section>
+<section id="animazioni" class="slide level1">
+<h1>Animazioni</h1>
+<p><img data-src="media/gplotpp-animation.gif" /></p>
 </section>
     </div>
   </div>

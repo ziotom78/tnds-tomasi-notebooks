@@ -1528,7 +1528,7 @@ double estimate_stddev_from_mc(RandomGen &rnd, double err_on_vx0, double h,
                                int nsteps, bool debug_print = false);
 ```
 
-Il parametro `err_on_vx0` è il valore in m/s dell'errore sulla stima della velocità iniziale $v_x(t = 0)$. L'implementazione fa uso delle funzioni `mean` e `stderr` che avete implementato nell'[esercizio 3.1](carminati-esercizi-03.html#esercizio-3.1):
+Il parametro `err_on_vx0` è il valore in m/s dell'errore sulla stima della velocità iniziale $v_x(t = 0)$. L'implementazione fa uso delle funzioni `mean` e `stddev` che avete implementato nell'[esercizio 3.1](carminati-esercizi-03.html#esercizio-3.1):
 
 ```c++
 // Be sure to use a *reference* for `RandomGen`!
@@ -1865,7 +1865,7 @@ println("Back to time t = {:.4f} s, x = {:.3e} m, y = {:.3e} m", t,
 if (abs(pos[1]) < 1e-4) {
   println("Ok, we're within 10⁻⁴ m from zero.");
 } else {
-  println(stderr, "ERROR! Use a smaller value for h!");
+  println(cerr, "ERROR! Use a smaller value for h!");
   return 1;
 }
 ```

@@ -186,7 +186,7 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb3-1"><a href="#c
 <span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>  <span class="ot">assert</span><span class="op">(</span>are_close<span class="op">(</span>p<span class="op">.</span>getRho<span class="op">(),</span> <span class="fl">2.2360679774998</span><span class="op">);</span></span>
 <span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>  println<span class="op">(</span>stderr<span class="op">,</span> <span class="st">&quot;The coordinates work correctly! 🥳&quot;</span><span class="op">);</span></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>  println<span class="op">(</span>cerr<span class="op">,</span> <span class="st">&quot;The coordinates work correctly! 🥳&quot;</span><span class="op">);</span></span>
 <span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 </section>
 <section id="esercizio-5.2" class="slide level1">
@@ -229,7 +229,7 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb5-1"><a href="#c
 <span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>  <span class="ot">assert</span><span class="op">(</span>are_close<span class="op">(</span>V<span class="op">.</span>getFy<span class="op">(),</span> <span class="fl">9.915928645917235</span><span class="op">));</span></span>
 <span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>  <span class="ot">assert</span><span class="op">(</span>are_close<span class="op">(</span>V<span class="op">.</span>getFz<span class="op">(),</span> <span class="fl">29.747785937751708</span><span class="op">));</span></span>
 <span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>  println<span class="op">(</span>stderr<span class="op">,</span> <span class="st">&quot;Coulomb&#39;s law works correctly! 🥳&quot;</span><span class="op">);</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>  println<span class="op">(</span>cerr<span class="op">,</span> <span class="st">&quot;Coulomb&#39;s law works correctly! 🥳&quot;</span><span class="op">);</span></span>
 <span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
 <span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> test_newton_law<span class="op">(</span><span class="dt">void</span><span class="op">)</span> <span class="op">{</span></span>
@@ -243,7 +243,7 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb5-1"><a href="#c
 <span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>  <span class="ot">assert</span><span class="op">(</span>are_close<span class="op">(</span>V<span class="op">.</span>getFy<span class="op">(),</span> <span class="fl">0.14717966715968</span><span class="op">));</span></span>
 <span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>  <span class="ot">assert</span><span class="op">(</span>are_close<span class="op">(</span>V<span class="op">.</span>getFz<span class="op">(),</span> <span class="fl">0.44153900147903</span><span class="op">));</span></span>
 <span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>  println<span class="op">(</span>stderr<span class="op">,</span> <span class="st">&quot;Newton&#39;s law works correctly! 🥳&quot;</span><span class="op">);</span></span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>  println<span class="op">(</span>cerr<span class="op">,</span> <span class="st">&quot;Newton&#39;s law works correctly! 🥳&quot;</span><span class="op">);</span></span>
 <span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 </section>
 <section id="inizializzazione-di-variabili-membro" class="slide level1">
@@ -350,6 +350,16 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb12-1"><a href="#
 <span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="co">// ...</span></span>
 <span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code></pre></div></li>
+</ul>
+</section>
+<section id="debugging" class="slide level1">
+<h1>Debugging</h1>
+<ul>
+<li><p>Da quest’anno ho reso disponibile il programma NND, un debugger
+semplice ma adatto agli scopi di queste esercitazioni</p></li>
+<li><p>Vi faccio ora vedere un esempio pratico di debugging</p></li>
+<li><p>Le istruzioni complete sono disponibili in <a
+href="debugging.html">una pagina dedicata</a>.</p></li>
 </ul>
 </section>
     </div>

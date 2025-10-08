@@ -104,6 +104,7 @@ Questo programma utilizza la nuova classe appena creata: richiede di fornire com
 #include "posizione.h"
 
 #include <iostream>
+#include <print>
 #include <string>
 
 using namespace std;
@@ -114,7 +115,7 @@ using namespace std;
 int main(int argc, char *argv[]) {
   // Controlla gli argomenti
   if (argc != 4) {
-    println(stderr, "Usage: {} X Y Z", argv[0]);
+    println(cerr, "Usage: {} X Y Z", argv[0]);
     return -1;
   }
 
@@ -393,9 +394,9 @@ inline CampoVettoriale operator+(const CampoVettoriale &a,
 	  (a.getY() != b.getY()) ||
 	  (a.getZ() != b.getZ())) {
       // print accetta come primo argomento lo stream su cui
-      // scrivere (se non si specifica, usa stdout).
-      // Siccome questo è un messaggio di errore, usiamo stderr
-      println(stderr,
+      // scrivere (se non si specifica, usa cout).
+      // Siccome questo è un messaggio di errore, usiamo cerr
+      println(cerr,
               "Somma di campi vettoriali in punti diversi non ammessa");
       exit(1);
   }
@@ -527,6 +528,7 @@ Questo programma utilizza le nuove classi appena create: richiede di fornire com
 #include "puntomateriale.h"
 #include "campovettoriale.h"
 
+#include <iostream>
 #include <print>
 #include <string>
 
@@ -539,7 +541,7 @@ const double d{1.E-10};
 
 int main(int argc, char * argv[]) {
   if (argc != 4) {
-      println(stderr, "Usage: {} <x> <y> <z>", argv[0]);
+      println(cerr, "Usage: {} <x> <y> <z>", argv[0]);
       exit(1);
   }
 

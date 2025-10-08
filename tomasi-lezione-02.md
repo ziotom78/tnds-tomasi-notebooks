@@ -225,7 +225,7 @@ void test_statistical_functions(void) {
   // Continue from here …
 
   // At the end, be sure to print a message stating that everything was ok
-  std::println(stderr, "All the statistical tests have passed! 🥳");
+  std::println(cerr, "All the statistical tests have passed! 🥳");
 }
 ```
 

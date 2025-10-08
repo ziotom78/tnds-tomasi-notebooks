@@ -26,7 +26,7 @@
 # Uso di metodi virtuali
 
 ```c++
-#include <iostream>
+#include <print>
 
 struct Animal {
   // Dichiaro `greet` come un metodo che può essere sovrascritto
@@ -196,7 +196,7 @@ void test_zeroes() {
 
   assert(are_close(s.CercaZeri(0.0, 1.0, f), 1.0 / 3)); // Do NOT write 1 / 3 !
 
-  println(stderr, "Root finding works correctly! 🥳");
+  println(cerr, "Root finding works correctly! 🥳");
 }
 ```
 
@@ -358,7 +358,7 @@ if (! found) {
        double true_value{result.value()};
        // …
     } else {
-       println(stderr, "Error: {}", result.error());
+       println(cerr, "Error: {}", result.error());
     }
     ```
 
@@ -394,7 +394,7 @@ Bisezione::CercaZeri(double xmin,
     ```c++
     auto result{bisezione.CercaZeri(xmin, xmax, f)};
     if(! result) {
-        println(stderr, "Error: {}", result.error());
+        println(cerr, "Error: {}", result.error());
         return 1;
     }
     double x{result.value()};
@@ -407,6 +407,40 @@ Bisezione::CercaZeri(double xmin,
     double x{result.value()};
     ```
 
+# Altro approccio
+
+Potete sfruttare una caratteristica poco nota del C++: una classe che rappresenta il risultato… definita **nella classe `Bisezione`**!
+
+```c++
+class Solutore {
+public:
+  class Risultato {
+  public:
+    bool found{};
+    double value{};
+  };
+
+  virtual Risultato CercaZeri(double xmin,
+                              double xmax,
+                              const FunzioneBase & f) = 0;
+};
+```
+
+# Altro approccio
+
+-   Nell’implementazione di `CercaZeri` potete scrivere
+
+    ```c++
+    double x; // Qui calcoleremo il risultato
+    // ... Calcoliamo x
+    return Risultato{true, x};
+    ```
+
+-   Nel `main` scriverete invece
+
+    ```c++
+    Solutore::Risultato ris{sol.CercaZeri(0.0, 2.0, fn)};
+    ```
 
 # Esercizio 6.4
 

@@ -246,6 +246,8 @@ Una volta implementate le classi (l'implementazione di Eulero è semplicissima s
 #include "equazioni_differenziali.h"
 
 #include "gplot++.h"
+#include <iostream>
+#include <print>
 #include <string>
 
 int main(int argc, char *argv[]) {
@@ -253,7 +255,7 @@ int main(int argc, char *argv[]) {
   test_euler();
 
   if (argc != 2) {
-    println(stderr, "Uso: {} PASSO", argv[0]);
+    println(cerr, "Uso: {} PASSO", argv[0]);
     return 1;
   }
 

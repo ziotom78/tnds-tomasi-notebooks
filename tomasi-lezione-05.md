@@ -60,7 +60,7 @@ void test_coordinates(void) {
 
   assert(are_close(p.getRho(), 2.2360679774998);
 
-  println(stderr, "The coordinates work correctly! 🥳");
+  println(cerr, "The coordinates work correctly! 🥳");
 }
 ```
 
@@ -102,7 +102,7 @@ void test_coulomb_law(void) {
   assert(are_close(V.getFy(), 9.915928645917235));
   assert(are_close(V.getFz(), 29.747785937751708));
 
-  println(stderr, "Coulomb's law works correctly! 🥳");
+  println(cerr, "Coulomb's law works correctly! 🥳");
 }
 
 void test_newton_law(void) {
@@ -116,7 +116,7 @@ void test_newton_law(void) {
   assert(are_close(V.getFy(), 0.14717966715968));
   assert(are_close(V.getFz(), 0.44153900147903));
 
-  println(stderr, "Newton's law works correctly! 🥳");
+  println(cerr, "Newton's law works correctly! 🥳");
 }
 ```
 
@@ -227,6 +227,13 @@ int main(void) {
     };
     ```
 
+# Debugging
+
+-   Da quest’anno ho reso disponibile il programma NND, un debugger semplice ma adatto agli scopi di queste esercitazioni
+
+-   Vi faccio ora vedere un esempio pratico di debugging
+
+-   Le istruzioni complete sono disponibili in [una pagina dedicata](debugging.html).
 
 ---
 title: Laboratorio di TNDS -- Lezione 5

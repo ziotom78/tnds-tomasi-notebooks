@@ -842,7 +842,7 @@ end
 
     ```c++
 	if (argc != 5) {
-	  std::println(stderr, "Error, 5 parameters are needed: <a> <b> <nstep_max> <prec>");
+	  std::println(cerr, "Error, 5 parameters are needed: <a> <b> <nstep_max> <prec>");
 	  return 1;
 	}
 

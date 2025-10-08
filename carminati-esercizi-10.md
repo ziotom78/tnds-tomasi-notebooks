@@ -440,49 +440,52 @@ $$
 Siccome il programma deve fare molti calcoli, vi consiglio di fornire qualche feedback all'utente:
 
 ```c++
-  const int num_of_estimates{1000};
-  const std::vector num_of_points_list{500, 1000, 5000, 10'000, 50'000, 100'000};
+const int num_of_estimates{1000};
+const std::vector num_of_points_list{500, 1000, 5000, 10'000, 50'000, 100'000};
 
-  Gnuplot plt_histograms{};
+Gnuplot plt_histograms{};
 
-  plt_histograms.redirect_to_png("es10.3_histograms.png", "800,1600");
+plt_histograms.redirect_to_png("es10.3_histograms.png", "800,1600");
 
-  assert( == 6);
+// Il codice sotto richiede che i grafici siano esattamente 6
+// (3 righe e 2 colonne), così è meglio mettere questa verifica:
+// se un giorno ci venisse voglia di aggiungere un nuovo elemento
+// a `num_of_points_list`, ci accorgeremmo subito del problema
+assert(ssize(num_of_points_list) == 6);
 
-  // Useremo 2 colonne per mostrare l'istogramma della media
-  // e di hit-or-miss, e tante righe quanti sono i valori in
-  // "num_of_points_list"
-  plt_histograms.multiplot(ssize(num_of_points_list), 2);
+// Useremo 2 colonne per mostrare l'istogramma della media
+// e di hit-or-miss, e tante righe quanti sono i valori in
+// "num_of_points_list"
+plt_histograms.multiplot(ssize(num_of_points_list), 2);
 
-  // Itera `num_of_points` su tutti i valori di `num_of_points_list`:
-  // prima num_of_points = 500, poi num_of_points = 1000, poi etc.
-  for(auto num_of_points: num_of_points_list) {
-    // Questo è un feedback da dare all'utente. Notare che usiamo
-    // `stderr`, così il messaggio viene stampato subito!
-    println(stderr, "N = {}", num_of_points);
-    vector<double> estimates_mean(num_of_estimates);
-    vector<double> estimates_hom(num_of_estimates);
+// Itera `num_of_points` su tutti i valori di `num_of_points_list`:
+// prima num_of_points = 500, poi num_of_points = 1000, poi etc.
+for(auto num_of_points: num_of_points_list) {
+  // Questo è un feedback da dare all'utente. Notare che usiamo
+  // `cerr`, così il messaggio viene stampato subito!
+  println(cerr, "N = {}", num_of_points);
+  vector<double> estimates_mean(num_of_estimates);
+  vector<double> estimates_hom(num_of_estimates);
 
-    // Esegue molte volte il calcolo dell'integrale per vedere la
-    // variabilità dei risultati
-    for(int k{}; k < ssize(estimates_mean); ++k) {
-      estimates_mean.at(k) = integral_mean(rng, f_sin, 0.0, numbers::pi, num_of_points);
-      estimates_hom.at(k) = integral_hom(rng, f_sin, 0.0, numbers::pi, 1.0, num_of_points);
-    }
-
-    // Mette nella colonna di sinistra l'istogramma delle stime
-    // con il metodo della media…
-    plt_histograms.histogram(estimates_mean, 20,
-                             format("Media, N = {}", num_of_points));
-    plt_histograms.set_xrange(1.8, 2.2);
-    plt_histograms.show();
-
-    // …e nella colonna di destra quello con hit-or-miss
-    plt_histograms.histogram(estimates_hom, 20,
-                             format("Hit-or-miss, N = {}", num_of_points));
-    plt_histograms.set_xrange(1.8, 2.2);
-    plt_histograms.show();
+  // Esegue molte volte il calcolo dell'integrale per vedere la
+  // variabilità dei risultati
+  for(int k{}; k < ssize(estimates_mean); ++k) {
+    estimates_mean.at(k) = integral_mean(rng, f_sin, 0.0, numbers::pi, num_of_points);
+    estimates_hom.at(k) = integral_hom(rng, f_sin, 0.0, numbers::pi, 1.0, num_of_points);
   }
+  // Mette nella colonna di sinistra l'istogramma delle stime
+  // con il metodo della media…
+  plt_histograms.histogram(estimates_mean, 20,
+                           format("Media, N = {}", num_of_points));
+  plt_histograms.set_xrange(1.8, 2.2);
+  plt_histograms.show();
+
+  // …e nella colonna di destra quello con hit-or-miss
+  plt_histograms.histogram(estimates_hom, 20,
+                           format("Hit-or-miss, N = {}", num_of_points));
+  plt_histograms.set_xrange(1.8, 2.2);
+  plt_histograms.show();
+}
 ```
 
 Le distribuzioni attese degli integrali per i diversi valori di $N$ dovrebbero avere questo aspetto:

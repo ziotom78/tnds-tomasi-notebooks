@@ -40,21 +40,9 @@
       assert(are_close(stddev(v, 2), 1.632993161855452));
       assert(are_close(stddev(v, 3), 1.5));
 
-      println(stderr, "All the tests have passed. Hurrah! 🥳");
+      println(cerr, "All the tests have passed. Hurrah! 🥳");
     }
     ```
-
-# Compilatori C++
-
-# Compilatori C++
-
--   Ho aggiunto una [pagina](configure-your-laptop.html) in cui ho raccolto un po' di informazioni su come installare compilatori C++.
-
--   Le istruzioni per Windows sono le più estese, ed elencano varie modalità per compilare programmi C++ sotto Windows.
-
--   Ci sono istruzioni (scarne) anche per Linux e Mac OS X.
-
--   Segnalatemi cosa non funziona, in modo che possa correggerlo.
 
 # Formattazione di numeri
 
@@ -90,17 +78,17 @@
 
 -   È possibile specificare il modo in cui un valore va scritto inserendo degli argomenti dentro `{}` dopo i due punti (`:`). Ad esempio, per formattare numeri floating-point con 2 cifre dopo la virgola si scrive `{:.2f}`
 
--   Se si vuole usare la notazione scientifica, si usa la lettera `e`: la scrittura `{:.5e}` indica che si richiedono 5 cifre dopo la virgola
+-   Se si vuole usare la notazione scientifica, si usa la lettera `e`. Ad esempio, la scrittura `{:.5e}` indica che si richiedono 5 cifre dopo la virgola
 
--   Si può indicare il numero di caratteri da usare inserendo un numero subito dopo `:`: così `{:5}` chiede di usare almeno 5 caratteri per scrivere il valore. Questo è utile per allineare i campi nelle tabelle.
+-   Si può indicare il numero di caratteri da usare inserendo subito dopo `:` un numero: `{:5}` chiede di usare almeno 5 caratteri per scrivere il valore. Questo è utile per allineare i campi nelle tabelle.
 
 -   È possibile mettere insieme l'indice (`0`), l'ampiezza (`5`) e il numero di cifre dopo la virgola (`.2`) scrivendoli uno dopo l'altro: `{0:5.2e}`.
 
 # Stringhe formattate
 
--   Le funzioni `print` e `println` stampano stringhe a video, sostituendo `{}` con valori di variabili
--   Ci sono però situazioni in cui questa funzionalità serve per passare stringhe ad altre funzioni, e non per stamparle a video
--   Ad esempio, potreste voler salvare un grafico e usare la sostituzione `{}` nel titolo
+-   Le funzioni `print` e `println` stampano stringhe a video o in un file, sostituendo `{}` con valori di variabili
+-   Ci sono però situazioni in cui questa funzionalità serve per passare stringhe ad altre funzioni, e non per stamparle
+-   Ad esempio, potreste voler salvare un grafico e usare la sostituzione `{}` nel titolo: in tal caso la stringa va passata a una funzione della libreria grafica
 -   Questo è possibile con `std::format()`, che restituisce una stringa formattata (includete `<format>`:
 
     ```c++
@@ -116,10 +104,10 @@
 
 -   Nel laboratorio di TNDS, ROOT è usato come libreria C++, ossia come un insieme di classi invocabili all'interno dei vostri programmi.
 
--   Un'alternativa a ROOT, per coloro che hanno avuto problemi a installarlo sui propri laptop, è [Gnuplot](http://www.gnuplot.info/):
+-   Un'alternativa a ROOT è [Gnuplot](http://www.gnuplot.info/):
 
-    -   È facilmente installabile anche sotto Windows;
-    -   È usabile anche all'interno di programmi C++, mediante una piccola libreria.
+    -   È facilmente installabile sotto qualsiasi piattaforma;
+    -   È usabile anche all'interno di programmi C++, mediante una piccola libreria. In tal caso, VSCode lo riconosce senza bisogno di configurazione
 
 ---
 
@@ -138,10 +126,14 @@
 
 -   Basta poi scrivere `#include "gplot++.h"` per usarla.
 
+---
+
+![](images/vscode-hint.png){height=640px}
+
 
 # Vantaggi di gplot++
 
--   Visual Studio Code è in grado di visualizzare finestre di aiuto, se spostate il mouse sui comandi di plot.
+-   Visual Studio Code è in grado di visualizzare finestre di aiuto, se spostate il mouse sui comandi di plot (vedi immagine precedente);
 
 -   Si possono passare direttamente array di vettori di tipo `std::vector`, invece di chiamare ripetutamente `TGraph::SetPoint`;
 
@@ -149,7 +141,7 @@
 
 -   Se lavorate sui vostri computer, non serve ricordarsi di eseguire `source root/bin/thisroot.sh`;
 
--   Occupa appena 9 KB, quindi si può installare una copia dentro ogni cartella di esercizi;
+-   Bisogna installarlo **dentro ogni cartella che contiene un esercizio**, ma occupa appena 9 KB.
 
 
 # Semplice esempio
@@ -168,7 +160,6 @@ int main() {
 # Semplice esempio
 
 ![](images/gplot++.png){width=50%}
-
 
 # Salvare i plot in file
 
@@ -232,6 +223,10 @@ int main(void) {
 
 Per esempi e documentazione, andate alla pagina [github.com/ziotom78/gplotpp](https://github.com/ziotom78/gplotpp).
 
+
+# Animazioni
+
+![](media/gplotpp-animation.gif)
 
 ---
 title: Laboratorio di TNDS -- Lezione 4
