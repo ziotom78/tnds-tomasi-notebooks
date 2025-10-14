@@ -74,6 +74,8 @@
     std::println("La posizione è ({0}, {1}, {2})", pos_x, pos_y, pos_z);
     ```
 
+-   Inoltre `print` e `println`, a differenza di `cout <<`, stampano correttamente caratteri come i simboli (`±`), le emoji e le lettere accentate anche in Windows.
+
 # Formattazioni più elaborate
 
 -   È possibile specificare il modo in cui un valore va scritto inserendo degli argomenti dentro `{}` dopo i due punti (`:`). Ad esempio, per formattare numeri floating-point con 2 cifre dopo la virgola si scrive `{:.2f}`
@@ -83,6 +85,23 @@
 -   Si può indicare il numero di caratteri da usare inserendo subito dopo `:` un numero: `{:5}` chiede di usare almeno 5 caratteri per scrivere il valore. Questo è utile per allineare i campi nelle tabelle.
 
 -   È possibile mettere insieme l'indice (`0`), l'ampiezza (`5`) e il numero di cifre dopo la virgola (`.2`) scrivendoli uno dopo l'altro: `{0:5.2e}`.
+
+# Numero di cifre
+
+-   Capita che il numero di cifre da usare per stampare un numero non sia noto a priori, ma vada calcolato nel programma
+
+-   Questo esempio usa `digits` per specificare il numero di cifre:
+
+    ```c++
+    double error{0.001};
+    double value{1.42145};
+    int digits{-static_cast<int>(log10(error))};
+    //                                             #0     #1     #2
+    println("The result is {0:.{2}f} ± {1:.{2}f}", value, error, digits);
+    // Output: "The result is 1.421 ± 0.001"
+    ```
+
+    La scrittura `.{2}f` indica: “formatta il numero come un floating-point, e metti dopo il punto tante cifre quante sono nel parametro #2”
 
 # Stringhe formattate
 
@@ -118,9 +137,9 @@
 
 -   Ho sviluppato una libreria C++ che invoca Gnuplot all'interno di programmi C++. È disponibile all'indirizzo [github.com/ziotom78/gplotpp](https://github.com/ziotom78/gplotpp).
 
--   Se avete anche voi problemi con ROOT, potete provare ad usarla: è più veloce e non richiede installazioni complesse. Inoltre [funziona anche sotto Windows](https://vimeo.com/638098854), se prima [installate Gnuplot nel modo giusto](https://vimeo.com/638098416).
+-   È più veloce di ROOT, occupa pochissimo, non richiede installazioni complesse e funziona bene con VSCode. Inoltre [funziona anche sotto Windows](https://vimeo.com/638098854), se prima [installate Gnuplot nel modo giusto](https://vimeo.com/638098416).
 
--   Sui vostri laptop dovete scaricare il file [gplot++.h](https://raw.githubusercontent.com/ziotom78/gplotpp/master/gplot%2B%2B.h) nella cartella dove vi serve, oppure eseguite (sotto Linux/Mac OS X):
+-   Sui vostri laptop dovete scaricare il file [gplot++.h](https://raw.githubusercontent.com/ziotom78/gplotpp/master/gplot%2B%2B.h) nella cartella dove vi serve (**da ripetere per ogni cartella!**), oppure eseguite (sotto Linux/Mac OS X):
 
     <input type="text" value="curl 'https://raw.githubusercontent.com/ziotom78/gplotpp/master/gplot%2B%2B.h' > gplot++.h" id="installGplotpp" readonly="1" size="60"><button onclick='copyFmtInstallationScript("installGplotpp")'>Copia</button>
 
@@ -221,16 +240,16 @@ int main(void) {
 
 ![](images/gplot++-complex.png){width=50%}
 
-Per esempi e documentazione, andate alla pagina [github.com/ziotom78/gplotpp](https://github.com/ziotom78/gplotpp).
-
 
 # Animazioni
 
 ![](media/gplotpp-animation.gif)
 
+Per esempi e documentazione, andate alla pagina [github.com/ziotom78/gplotpp](https://github.com/ziotom78/gplotpp).
+
 ---
 title: Laboratorio di TNDS -- Lezione 4
-author: Maurizio Tomasi
+author: Maurizio Tomasi ([`maurizio.tomasi@unimi.it`](mailto:maurizio.tomasi@unimi.it))
 date: "Martedì 14 Ottobre 2025"
 theme: white
 progress: true
