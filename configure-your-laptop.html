@@ -262,6 +262,20 @@ Stabilità/Manutenzione
 <pre><code>sudo apt update &amp;&amp; sudo apt install build-essential</code></pre>
 <p>Per Fedora, usate questo comando:</p>
 <pre><code>sudo dnf install g++ gdb</code></pre>
+<p>Dovete verificare di avere almeno il compilatore GCC 14. Attenzione, perché Ubuntu 24.04 installa di default la versione 13, che <strong>non va bene</strong>. Queste sono le istruzioni per installare la versione nuova, che vanno digitate da una finestra di terminale:</p>
+<ul>
+<li><p>Aggiornate tutti i pacchetti:</p>
+<pre><code>sudo apt update</code></pre></li>
+<li><p>Installate G++ 14:</p>
+<pre><code>sudo apt install g++-14</code></pre></li>
+<li><p>Ora avete una versione recente di G++, ma non è ancora quella di default. Se infatti eseguite questa riga, vedrete che <code>g++</code> è ancora associato alla versione 13:</p>
+<pre><code>g++ --version</code></pre></li>
+<li><p>Il comando seguente cambia la versione di default di <code>g++</code> alla 14:</p>
+<pre><code>sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-14 100 \
+--slave /usr/bin/gcc gcc /usr/bin/gcc-14</code></pre></li>
+<li><p>Verificate ora che <code>g++</code> sia stato aggiornato: dovrebbe mostrare la versione 14</p>
+<pre><code>g++ --version</code></pre></li>
+</ul>
 </main>
 
 <script>

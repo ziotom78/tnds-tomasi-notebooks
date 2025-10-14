@@ -212,6 +212,39 @@ Per Fedora, usate questo comando:
 sudo dnf install g++ gdb
 ```
 
+Dovete verificare di avere almeno il compilatore GCC 14. Attenzione, perché Ubuntu 24.04 installa di default la versione 13, che **non va bene**. Queste sono le istruzioni per installare la versione nuova, che vanno digitate da una finestra di terminale:
+
+-   Aggiornate tutti i pacchetti:
+
+    ```
+    sudo apt update
+    ```
+
+-   Installate G++ 14:
+
+    ```
+    sudo apt install g++-14
+    ```
+
+-   Ora avete una versione recente di G++, ma non è ancora quella di default. Se infatti eseguite questa riga, vedrete che `g++` è ancora associato alla versione 13:
+
+    ```
+    g++ --version
+    ```
+
+-   Il comando seguente cambia la versione di default di `g++` alla 14:
+
+    ```
+    sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-14 100 \
+--slave /usr/bin/gcc gcc /usr/bin/gcc-14
+    ```
+
+-   Verificate ora che `g++` sia stato aggiornato: dovrebbe mostrare la versione 14
+
+    ```
+    g++ --version
+    ```
+
 ---
 title: Configurare un compilatore C++ sul proprio portatile
 author: Maurizio Tomasi ([`maurizio.tomasi@unimi.it`](mailto:maurizio.tomasi@unimi.it))
