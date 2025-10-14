@@ -212,7 +212,7 @@ Di seguito un piccolo vademecum per aiutarvi a svolgere nel migliore dei modi l'
 
 ---
 title: Come prepararsi all'esame scritto
-author: Maurizio Tomasi
+author: Maurizio Tomasi ([`maurizio.tomasi@unimi.it`](mailto:maurizio.tomasi@unimi.it))
 date: A.A. 2024−2025
 lang: it-IT
 css:

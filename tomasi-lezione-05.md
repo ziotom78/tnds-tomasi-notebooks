@@ -237,7 +237,7 @@ int main(void) {
 
 ---
 title: Laboratorio di TNDS -- Lezione 5
-author: Maurizio Tomasi
+author: Maurizio Tomasi ([`maurizio.tomasi@unimi.it`](mailto:maurizio.tomasi@unimi.it))
 date: "Martedì 21 ottobre 2025"
 theme: white
 progress: true

@@ -438,6 +438,11 @@ Di conseguenza, il programmatore è «costretto» a verificare la correttezza de
 
 -   Di conseguenza, in questo corso non usate **mai** numeri `unsigned` per iterare sugli elementi dei vettori. Usate sempre `int` e la funzione `ssize()`! (Ma ovviamente dovete [usare un compilatore recente](tomasi-lezione-01.html#config-latest-gcc)…)
 
+# Approfondimento
+
+-   Ho scritto tempo fa un articolo (in inglese) sull’uso di `unsigned int`: <https://ziotom78.github.io/c++/2025/02/02/unsigned-and-c++.html>
+
+-   L’articolo mostra alcuni esempi pratici in cui l’uso di tipi senza segno rende il codice più complicato
 
 # Iteratori nella STL
 
@@ -464,7 +469,7 @@ Di conseguenza, il programmatore è «costretto» a verificare la correttezza de
 
 ---
 title: Laboratorio di TNDS -- Lezione 3
-author: Maurizio Tomasi
+author: Maurizio Tomasi ([`maurizio.tomasi@unimi.it`](mailto:maurizio.tomasi@unimi.it))
 date: Martedì 7 ottobre 2025
 theme: white
 progress: true

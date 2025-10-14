@@ -78,7 +78,7 @@
 <li><p>A fine ciclo disegnamo il grafico.</p></li>
 </ul>
 <p>Potete scaricare i file di dati usando questo link: <a href="https://labtnds.docs.cern.ch/Lezione4/TemperatureMilano.tar.gz">TemperatureMilano.tar.gz</a>.</p>
-<p>Per svolgere questo esercizio (e tutti i successivi) potete chiaramente utilizzare lo strumento di rappresentazione grafica che preferite (GNUPLOT o Matplotlib). In particolare, potete dare un’occhiata al contenuto di ciascun file <code>.txt</code> all’interno dell’archivio <code>TemperatureMilano.tar.gz</code> con il comando <code>plot "NOMEFILE"</code> eseguito dalla linea di comando di <code>gnuplot</code>:</p>
+<p>Per svolgere questo esercizio (e tutti i successivi) potete chiaramente utilizzare come alternativa a ROOT lo strumento di rappresentazione grafica che preferite (GNUPLOT o Matplotlib). In particolare, potete dare un’occhiata al contenuto di ciascun file <code>.txt</code> all’interno dell’archivio <code>TemperatureMilano.tar.gz</code> con il comando <code>plot "NOMEFILE"</code> eseguito dalla linea di comando di <code>gnuplot</code>:</p>
 <p><img src="images/gnuplot-exercise40.png" /></p>
 <h2 id="quale-errore-associare-ai-δ">Quale errore associare ai Δ?</h2>
 <p>In linea di principio lo stimatore corretto sarebbe la deviazione standard dalla media. In questo caso la stima è più complicata, perché i valori di Δ giornalieri non sono scorrelati tra loro. Per ridurre l’impatto della correlazione e quindi utilizzare uno stimatore dell’errore più corretto, potremmo limitarci ad utilizzare una misura ogni 7 giorni: ci aspettiamo infatti che una misura sia solo debolmente correlata a quello che è successo 7 giorni prima.</p>
@@ -108,7 +108,7 @@
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="ot">assert</span><span class="op">(</span>are_close<span class="op">(</span>stddev<span class="op">(</span>v<span class="op">,</span> <span class="dv">2</span><span class="op">),</span> <span class="fl">1.632993161855452</span><span class="op">));</span></span>
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  <span class="ot">assert</span><span class="op">(</span>are_close<span class="op">(</span>stddev<span class="op">(</span>v<span class="op">,</span> <span class="dv">3</span><span class="op">),</span> <span class="fl">1.5</span><span class="op">));</span></span>
 <span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  cerr <span class="op">&lt;&lt;</span> <span class="st">&quot;All the tests have passed. Hurrah! 🥳</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">;</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  println<span class="op">(</span>cerr<span class="op">,</span> <span class="st">&quot;All the tests have passed. Hurrah! 🥳&quot;</span><span class="op">);</span></span>
 <span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 <h2 id="esempio-di-codice-con-gnuplot">Esempio di codice con GnuPlot</h2>
 <p>Ecco come si potrebbe implementare il <code>main()</code> usando la libreria <a href="miscellanea.html#gplotinstall">gplot++</a>; il programma salva il grafico nel file <code>plot.png</code>:</p>
@@ -129,7 +129,7 @@
 <span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>    <span class="dt">double</span> ave<span class="op">{</span>mean<span class="op">(</span>v<span class="op">,</span> stride<span class="op">)};</span></span>
 <span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>    <span class="dt">double</span> err<span class="op">{</span>stddev<span class="op">(</span>v<span class="op">,</span> stride<span class="op">)};</span></span>
 <span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>    cout <span class="op">&lt;&lt;</span> format<span class="op">(</span><span class="st">&quot;Anno </span><span class="sc">{}</span><span class="st"> Δ medio = </span><span class="sc">{:.3f}</span><span class="st"> ± </span><span class="sc">{:.3f}\n</span><span class="st">&quot;</span><span class="op">,</span> year<span class="op">,</span> ave<span class="op">,</span> err<span class="op">);</span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>    println<span class="op">(</span><span class="st">&quot;Anno </span><span class="sc">{}</span><span class="st"> Δ medio = </span><span class="sc">{:.3f}</span><span class="st"> ± </span><span class="sc">{:.3f}</span><span class="st">&quot;</span><span class="op">,</span> year<span class="op">,</span> ave<span class="op">,</span> err<span class="op">);</span></span>
 <span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>    <span class="co">// inserisco media e deviazione standard dalla media nel grafico</span></span>
 <span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>    plt<span class="op">.</span>add_point_yerr<span class="op">(</span>year<span class="op">,</span> ave<span class="op">,</span> err<span class="op">);</span></span>
@@ -176,7 +176,7 @@ Anno 1944 Δ medio = -0.334 ± 2.305
 <span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>    <span class="co">// qui fate i vostri calcoli</span></span>
 <span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>    <span class="co">// …</span></span>
 <span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a>    cout <span class="op">&lt;&lt;</span> format<span class="op">(</span><span class="st">&quot;Anno </span><span class="sc">{}</span><span class="st"> Δ medio = </span><span class="sc">{:+.3f}</span><span class="st"> ± </span><span class="sc">{:.3f}\n</span><span class="st">&quot;</span><span class="op">,</span> i<span class="op">,</span> ave<span class="op">,</span> err<span class="op">);</span></span>
+<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a>    println<span class="op">(</span><span class="st">&quot;Anno </span><span class="sc">{}</span><span class="st"> Δ medio = </span><span class="sc">{:+.3f}</span><span class="st"> ± </span><span class="sc">{:.3f}</span><span class="st">&quot;</span><span class="op">,</span> i<span class="op">,</span> ave<span class="op">,</span> err<span class="op">);</span></span>
 <span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a>    <span class="co">// inserisco media e deviazione standard dalla media nel grafico</span></span>
 <span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a></span>
@@ -235,7 +235,7 @@ B)^2</span>. Provate a scrivere un codice che pemetta di visualizzare i dati rac
 <span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> x<span class="op">,</span> y<span class="op">,</span> err<span class="op">;</span></span>
 <span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> <span class="op">(!</span>fin<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>    cerr <span class="op">&lt;&lt;</span> <span class="st">&quot;Cannot open file &quot;</span> <span class="op">&lt;&lt;</span> filename <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>    println<span class="op">(</span>stderr<span class="op">,</span> <span class="st">&quot;Cannot open file </span><span class="sc">{}</span><span class="st">&quot;</span><span class="op">,</span> filename<span class="op">);</span></span>
 <span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>    exit<span class="op">(</span><span class="dv">1</span><span class="op">);</span></span>
 <span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
 <span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a></span>
@@ -276,18 +276,18 @@ B)^2</span>. Provate a scrivere un codice che pemetta di visualizzare i dati rac
 <span id="cb6-60"><a href="#cb6-60" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-61"><a href="#cb6-61" aria-hidden="true" tabindex="-1"></a>  <span class="co">// create TGraphErrors</span></span>
 <span id="cb6-62"><a href="#cb6-62" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-63"><a href="#cb6-63" aria-hidden="true" tabindex="-1"></a>  TGraphErrors mygraph <span class="op">=</span> DoPlot<span class="op">(</span>myx<span class="op">,</span> myy<span class="op">,</span> myerry<span class="op">);</span></span>
+<span id="cb6-63"><a href="#cb6-63" aria-hidden="true" tabindex="-1"></a>  TGraphErrors mygraph<span class="op">{</span>DoPlot<span class="op">(</span>myx<span class="op">,</span> myy<span class="op">,</span> myerry<span class="op">)};</span></span>
 <span id="cb6-64"><a href="#cb6-64" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-65"><a href="#cb6-65" aria-hidden="true" tabindex="-1"></a>  <span class="co">// fit the TGraphErrors ( linear fit )</span></span>
 <span id="cb6-66"><a href="#cb6-66" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-67"><a href="#cb6-67" aria-hidden="true" tabindex="-1"></a>  TF1 <span class="op">*</span>myfun <span class="op">=</span> <span class="kw">new</span> TF1<span class="op">(</span><span class="st">&quot;fitfun&quot;</span><span class="op">,</span> <span class="st">&quot;[0]*x+[1]&quot;</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">1000</span><span class="op">);</span></span>
 <span id="cb6-68"><a href="#cb6-68" aria-hidden="true" tabindex="-1"></a>  mygraph<span class="op">.</span>Fit<span class="op">(</span>myfun<span class="op">);</span></span>
-<span id="cb6-69"><a href="#cb6-69" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> moe <span class="op">=</span> myfun<span class="op">-&gt;</span>GetParameter<span class="op">(</span><span class="dv">0</span><span class="op">);</span></span>
-<span id="cb6-70"><a href="#cb6-70" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> error <span class="op">=</span> sqrt<span class="op">(</span>pow<span class="op">(</span><span class="fl">1.</span> <span class="op">/</span> moe<span class="op">,</span> <span class="dv">4</span><span class="op">)</span> <span class="op">*</span> pow<span class="op">(</span>myfun<span class="op">-&gt;</span>GetParError<span class="op">(</span><span class="dv">0</span><span class="op">),</span> <span class="dv">2</span><span class="op">));</span></span>
+<span id="cb6-69"><a href="#cb6-69" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> moe<span class="op">{</span>myfun<span class="op">-&gt;</span>GetParameter<span class="op">(</span><span class="dv">0</span><span class="op">)};</span></span>
+<span id="cb6-70"><a href="#cb6-70" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> error<span class="op">{</span>sqrt<span class="op">(</span>pow<span class="op">(</span><span class="fl">1.</span> <span class="op">/</span> moe<span class="op">,</span> <span class="dv">4</span><span class="op">)</span> <span class="op">*</span> pow<span class="op">(</span>myfun<span class="op">-&gt;</span>GetParError<span class="op">(</span><span class="dv">0</span><span class="op">),</span> <span class="dv">2</span><span class="op">))};</span></span>
 <span id="cb6-71"><a href="#cb6-71" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-72"><a href="#cb6-72" aria-hidden="true" tabindex="-1"></a>  cout <span class="op">&lt;&lt;</span> <span class="st">&quot;Valore di e/m dal fit = &quot;</span> <span class="op">&lt;&lt;</span> <span class="fl">1.</span> <span class="op">/</span> moe <span class="op">&lt;&lt;</span> <span class="st">&quot;+/-&quot;</span> <span class="op">&lt;&lt;</span> error <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span>
-<span id="cb6-73"><a href="#cb6-73" aria-hidden="true" tabindex="-1"></a>  cout <span class="op">&lt;&lt;</span> <span class="st">&quot;Valore del chi2 del fit = &quot;</span> <span class="op">&lt;&lt;</span> myfun<span class="op">-&gt;</span>GetChisquare<span class="op">()</span> <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span>
-<span id="cb6-74"><a href="#cb6-74" aria-hidden="true" tabindex="-1"></a>  cout <span class="op">&lt;&lt;</span> <span class="st">&quot;          prob del chi2 = &quot;</span> <span class="op">&lt;&lt;</span> myfun<span class="op">-&gt;</span>GetProb<span class="op">()</span> <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span>
+<span id="cb6-72"><a href="#cb6-72" aria-hidden="true" tabindex="-1"></a>  println<span class="op">(</span><span class="st">&quot;Valore di e/m dal fit = </span><span class="sc">{}</span><span class="st"> ± </span><span class="sc">{}</span><span class="st">&quot;</span><span class="op">,</span> <span class="fl">1.</span> <span class="op">/</span> moe<span class="op">,</span> error<span class="op">);</span></span>
+<span id="cb6-73"><a href="#cb6-73" aria-hidden="true" tabindex="-1"></a>  println<span class="op">(</span><span class="st">&quot;Valore del chi2 del fit = </span><span class="sc">{}</span><span class="st">&quot;</span><span class="op">,</span> myfun<span class="op">-&gt;</span>GetChisquare<span class="op">());</span></span>
+<span id="cb6-74"><a href="#cb6-74" aria-hidden="true" tabindex="-1"></a>  println<span class="op">(</span><span class="st">&quot;          prob del chi2 = </span><span class="sc">{}</span><span class="st">&quot;</span><span class="op">,</span> myfun<span class="op">-&gt;</span>GetProb<span class="op">());</span></span>
 <span id="cb6-75"><a href="#cb6-75" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-76"><a href="#cb6-76" aria-hidden="true" tabindex="-1"></a>  <span class="co">// customise the plot, cosmetics</span></span>
 <span id="cb6-77"><a href="#cb6-77" aria-hidden="true" tabindex="-1"></a></span>
@@ -382,10 +382,10 @@ B)^2</span>. Provate a scrivere un codice che pemetta di visualizzare i dati rac
 <span id="cb7-72"><a href="#cb7-72" aria-hidden="true" tabindex="-1"></a>  T Stys<span class="op">{};</span></span>
 <span id="cb7-73"><a href="#cb7-73" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-74"><a href="#cb7-74" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i<span class="op">{};</span> i <span class="op">&lt;</span> <span class="op">(</span><span class="dt">int</span><span class="op">)</span> num_of_samples<span class="op">;</span> <span class="op">++</span>i<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb7-75"><a href="#cb7-75" aria-hidden="true" tabindex="-1"></a>    <span class="kw">auto</span> x <span class="op">=</span> x_vec<span class="op">.</span>at<span class="op">(</span>i<span class="op">);</span></span>
-<span id="cb7-76"><a href="#cb7-76" aria-hidden="true" tabindex="-1"></a>    <span class="kw">auto</span> y <span class="op">=</span> y_vec<span class="op">.</span>at<span class="op">(</span>i<span class="op">);</span></span>
-<span id="cb7-77"><a href="#cb7-77" aria-hidden="true" tabindex="-1"></a>    <span class="kw">auto</span> y_err <span class="op">=</span> y_err_vec<span class="op">.</span>at<span class="op">(</span>i<span class="op">);</span></span>
-<span id="cb7-78"><a href="#cb7-78" aria-hidden="true" tabindex="-1"></a>    <span class="kw">auto</span> t <span class="op">=</span> <span class="op">(</span>x <span class="op">-</span> Sx <span class="op">/</span> S<span class="op">)</span> <span class="op">/</span> y_err<span class="op">;</span></span>
+<span id="cb7-75"><a href="#cb7-75" aria-hidden="true" tabindex="-1"></a>    <span class="kw">auto</span> x<span class="op">{</span>x_vec<span class="op">.</span>at<span class="op">(</span>i<span class="op">)};</span></span>
+<span id="cb7-76"><a href="#cb7-76" aria-hidden="true" tabindex="-1"></a>    <span class="kw">auto</span> y<span class="op">{</span>y_vec<span class="op">.</span>at<span class="op">(</span>i<span class="op">)};</span></span>
+<span id="cb7-77"><a href="#cb7-77" aria-hidden="true" tabindex="-1"></a>    <span class="kw">auto</span> y_err<span class="op">{</span>y_err_vec<span class="op">.</span>at<span class="op">(</span>i<span class="op">)};</span></span>
+<span id="cb7-78"><a href="#cb7-78" aria-hidden="true" tabindex="-1"></a>    <span class="kw">auto</span> t<span class="op">{(</span>x <span class="op">-</span> Sx <span class="op">/</span> S<span class="op">)</span> <span class="op">/</span> y_err<span class="op">};</span></span>
 <span id="cb7-79"><a href="#cb7-79" aria-hidden="true" tabindex="-1"></a>    Stt <span class="op">+=</span> <span class="bu">std::</span>pow<span class="op">(</span>t<span class="op">,</span> <span class="dv">2</span><span class="op">);</span></span>
 <span id="cb7-80"><a href="#cb7-80" aria-hidden="true" tabindex="-1"></a>    Stys <span class="op">+=</span> t <span class="op">*</span> y <span class="op">/</span> y_err<span class="op">;</span></span>
 <span id="cb7-81"><a href="#cb7-81" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
@@ -474,7 +474,7 @@ B)^2</span>. Provate a scrivere un codice che pemetta di visualizzare i dati rac
 <span id="cb8-74"><a href="#cb8-74" aria-hidden="true" tabindex="-1"></a>  println<span class="op">(</span>cerr<span class="op">,</span> <span class="st">&quot;</span><span class="sc">{}</span><span class="st"> elements have been read from </span><span class="sc">\&quot;{}\&quot;</span><span class="st">&quot;</span><span class="op">,</span> ssize<span class="op">(</span>data<span class="op">),</span></span>
 <span id="cb8-75"><a href="#cb8-75" aria-hidden="true" tabindex="-1"></a>          file_name<span class="op">);</span></span>
 <span id="cb8-76"><a href="#cb8-76" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-77"><a href="#cb8-77" aria-hidden="true" tabindex="-1"></a>  <span class="kw">auto</span> result <span class="op">=</span> linear_fit<span class="op">(</span>data<span class="op">.</span>voltage<span class="op">,</span> data<span class="op">.</span>rb<span class="op">,</span> data<span class="op">.</span>rb_err<span class="op">);</span></span>
+<span id="cb8-77"><a href="#cb8-77" aria-hidden="true" tabindex="-1"></a>  <span class="kw">auto</span> result<span class="op">{</span>linear_fit<span class="op">(</span>data<span class="op">.</span>voltage<span class="op">,</span> data<span class="op">.</span>rb<span class="op">,</span> data<span class="op">.</span>rb_err<span class="op">)};</span></span>
 <span id="cb8-78"><a href="#cb8-78" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-79"><a href="#cb8-79" aria-hidden="true" tabindex="-1"></a>  println<span class="op">(</span><span class="st">&quot;Data have been fitted on a curve y = A + B × x:&quot;</span><span class="op">);</span></span>
 <span id="cb8-80"><a href="#cb8-80" aria-hidden="true" tabindex="-1"></a>  println<span class="op">(</span><span class="st">&quot;A = </span><span class="sc">{:.4e}</span><span class="st"> ± </span><span class="sc">{:.4e}</span><span class="st">&quot;</span><span class="op">,</span> result<span class="op">.</span>a<span class="op">,</span> result<span class="op">.</span>a_err<span class="op">);</span></span>
@@ -574,7 +574,7 @@ S(q) = \sum \left[\frac{Q_i}{k_i} - q\right]^2,
 <span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> val<span class="op">;</span></span>
 <span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> <span class="op">(!</span>fin<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>    cerr <span class="op">&lt;&lt;</span> <span class="st">&quot;Cannot open file &quot;</span> <span class="op">&lt;&lt;</span> filename <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>    println<span class="op">(</span><span class="st">&quot;Cannot open file </span><span class="sc">{}</span><span class="st">&quot;</span><span class="op">,</span> filename<span class="op">);</span></span>
 <span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a>    exit<span class="op">(</span><span class="dv">1</span><span class="op">);</span></span>
 <span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
 <span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a></span>
@@ -645,7 +645,7 @@ S(q) = \sum \left[\frac{Q_i}{k_i} - q\right]^2,
 <span id="cb13-33"><a href="#cb13-33" aria-hidden="true" tabindex="-1"></a>  can1<span class="op">.</span>cd<span class="op">();</span></span>
 <span id="cb13-34"><a href="#cb13-34" aria-hidden="true" tabindex="-1"></a>  TH1F histo<span class="op">{</span><span class="st">&quot;cariche&quot;</span><span class="op">,</span> <span class="st">&quot;Charges distribution&quot;</span><span class="op">,</span> <span class="dv">100</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="fl">20e-19</span><span class="op">};</span></span>
 <span id="cb13-35"><a href="#cb13-35" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i<span class="op">{};</span> i <span class="op">&lt;</span> ssize<span class="op">(</span>charges<span class="op">);</span> i<span class="op">++)</span> <span class="op">{</span></span>
-<span id="cb13-36"><a href="#cb13-36" aria-hidden="true" tabindex="-1"></a>    cout <span class="op">&lt;&lt;</span> charges<span class="op">[</span>i<span class="op">]</span> <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span>
+<span id="cb13-36"><a href="#cb13-36" aria-hidden="true" tabindex="-1"></a>    println<span class="op">(</span><span class="st">&quot;</span><span class="sc">{}</span><span class="st">&quot;</span><span class="op">,</span> charges<span class="op">[</span>i<span class="op">]);</span></span>
 <span id="cb13-37"><a href="#cb13-37" aria-hidden="true" tabindex="-1"></a>    histo<span class="op">.</span>Fill<span class="op">(</span>charges<span class="op">[</span>i<span class="op">]);</span></span>
 <span id="cb13-38"><a href="#cb13-38" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
 <span id="cb13-39"><a href="#cb13-39" aria-hidden="true" tabindex="-1"></a>  histo<span class="op">.</span>Draw<span class="op">();</span></span>
@@ -665,7 +665,7 @@ S(q) = \sum \left[\frac{Q_i}{k_i} - q\right]^2,
 <span id="cb13-53"><a href="#cb13-53" aria-hidden="true" tabindex="-1"></a>    counter<span class="op">++;</span></span>
 <span id="cb13-54"><a href="#cb13-54" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
 <span id="cb13-55"><a href="#cb13-55" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-56"><a href="#cb13-56" aria-hidden="true" tabindex="-1"></a>  cout <span class="op">&lt;&lt;</span> <span class="st">&quot;Found approximate minimum at q = &quot;</span> <span class="op">&lt;&lt;</span> qmin <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span>
+<span id="cb13-56"><a href="#cb13-56" aria-hidden="true" tabindex="-1"></a>  println<span class="op">(</span><span class="st">&quot;Found approximate minimum at q = &quot;</span><span class="op">,</span> qmin<span class="op">);</span></span>
 <span id="cb13-57"><a href="#cb13-57" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-58"><a href="#cb13-58" aria-hidden="true" tabindex="-1"></a>  TCanvas can2<span class="op">{};</span></span>
 <span id="cb13-59"><a href="#cb13-59" aria-hidden="true" tabindex="-1"></a>  can2<span class="op">.</span>cd<span class="op">();</span></span>
@@ -679,11 +679,10 @@ S(q) = \sum \left[\frac{Q_i}{k_i} - q\right]^2,
 <span id="cb13-67"><a href="#cb13-67" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> mycharge<span class="op">{</span>deriv<span class="op">(</span>qmin<span class="op">,</span> charges<span class="op">)};</span></span>
 <span id="cb13-68"><a href="#cb13-68" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> uncer<span class="op">{</span></span>
 <span id="cb13-69"><a href="#cb13-69" aria-hidden="true" tabindex="-1"></a>      sqrt<span class="op">(</span>fun<span class="op">(</span>mycharge<span class="op">,</span> charges<span class="op">)</span> <span class="op">/</span> <span class="op">(</span>ssize<span class="op">(</span>charges<span class="op">)</span> <span class="op">*</span> <span class="op">(</span>ssize<span class="op">(</span>charges<span class="op">)</span> <span class="op">-</span> <span class="dv">1</span><span class="op">)))};</span></span>
-<span id="cb13-70"><a href="#cb13-70" aria-hidden="true" tabindex="-1"></a>  cout <span class="op">&lt;&lt;</span> <span class="st">&quot;Measured charge = &quot;</span> <span class="op">&lt;&lt;</span> mycharge <span class="op">&lt;&lt;</span> <span class="st">&quot; ± &quot;</span> <span class="op">&lt;&lt;</span> uncer <span class="op">&lt;&lt;</span> <span class="st">&quot;(stat only)&quot;</span></span>
-<span id="cb13-71"><a href="#cb13-71" aria-hidden="true" tabindex="-1"></a>       <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span>
-<span id="cb13-72"><a href="#cb13-72" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-73"><a href="#cb13-73" aria-hidden="true" tabindex="-1"></a>  app<span class="op">.</span>Run<span class="op">();</span></span>
-<span id="cb13-74"><a href="#cb13-74" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<span id="cb13-70"><a href="#cb13-70" aria-hidden="true" tabindex="-1"></a>  println<span class="op">(</span><span class="st">&quot;Measured charge = </span><span class="sc">{}</span><span class="st"> ± </span><span class="sc">{}</span><span class="st"> (stat only)&quot;</span><span class="op">,</span> mycharge<span class="op">,</span> uncer<span class="op">);</span></span>
+<span id="cb13-71"><a href="#cb13-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-72"><a href="#cb13-72" aria-hidden="true" tabindex="-1"></a>  app<span class="op">.</span>Run<span class="op">();</span></span>
+<span id="cb13-73"><a href="#cb13-73" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 <p>Vi consiglio di compilare nel <code>Makefile</code> i file <code>esercizio4.1.cpp</code> e <code>common.cpp</code> insieme, anziché creare i file <code>.o</code> e linkarli con un passaggio a parte: è molto più semplice!</p>
 <pre class="make"><code>esercizio4.1: esercizio4.1.cpp common.cpp common.h
     g++ -g3 -Wall -Wextra -Werror --pedantic -std=c++23 -o esercizio4.1 esercizio4.1.cpp common.cpp</code></pre>
@@ -763,7 +762,7 @@ S(q) = \sum \left[\frac{Q_i}{k_i} - q\right]^2,
 <p>In questo esercizio possiamo provare ad approfondire l’uso di contenitori e algoritmi della STL. Proviamo ad affrontare questo problema: dato un set di punti nel piano cerchiamo il percorso che ci permette (partendo dall’origine) di toccare tutti i punti percorrendo la minor distanza possibile. Le coordinate dei punti si trovano in un file. Eventualmente cercate di produrre un grafico del percorso effettuato.</p>
 <ul>
 <li><p>Il file di dati è <a href="https://labtnds.docs.cern.ch/Lezione4/data_points.dat">data_points.dat</a></p></li>
-<li><p>Potete provare a scrivere il codice da soli. In caso potete prendere ispirazione dall’esempio qui sotto che implementa un algoritmo in stile <em>brute force</em> (nel codice si può anche trovare un esempio di overloading di <code>operator&lt;&lt;</code>, utile per semplificare la lettura da file).</p></li>
+<li><p>Potete provare a scrivere il codice da soli. In caso potete prendere ispirazione dall’esempio qui sotto, che implementa un algoritmo in stile <em>brute force</em> (nel codice si può anche trovare un esempio di overloading di <code>operator&lt;&lt;</code>, utile per semplificare la lettura da file).</p></li>
 </ul>
 <h2 id="esempio-di-codice-root-1">Esempio di codice (ROOT)</h2>
 <div class="sourceCode" id="cb17"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;TApplication.h&quot;</span></span>
@@ -821,77 +820,76 @@ S(q) = \sum \left[\frac{Q_i}{k_i} - q\right]^2,
 <span id="cb17-53"><a href="#cb17-53" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
 <span id="cb17-54"><a href="#cb17-54" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb17-55"><a href="#cb17-55" aria-hidden="true" tabindex="-1"></a>  <span class="dt">void</span> printPositions<span class="op">()</span> <span class="op">{</span></span>
-<span id="cb17-56"><a href="#cb17-56" aria-hidden="true" tabindex="-1"></a>    cout <span class="op">&lt;&lt;</span> <span class="st">&quot;Posizione : x = &quot;</span> <span class="op">&lt;&lt;</span> <span class="va">m_x</span> <span class="op">&lt;&lt;</span> <span class="st">&quot; y = &quot;</span> <span class="op">&lt;&lt;</span> <span class="va">m_y</span> <span class="op">&lt;&lt;</span> <span class="st">&quot; z = &quot;</span> <span class="op">&lt;&lt;</span> <span class="va">m_z</span></span>
-<span id="cb17-57"><a href="#cb17-57" aria-hidden="true" tabindex="-1"></a>         <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span>
-<span id="cb17-58"><a href="#cb17-58" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
-<span id="cb17-59"><a href="#cb17-59" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-60"><a href="#cb17-60" aria-hidden="true" tabindex="-1"></a><span class="kw">private</span><span class="op">:</span></span>
-<span id="cb17-61"><a href="#cb17-61" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> <span class="va">m_x</span><span class="op">,</span> <span class="va">m_y</span><span class="op">,</span> <span class="va">m_z</span><span class="op">;</span></span>
-<span id="cb17-62"><a href="#cb17-62" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span>
-<span id="cb17-63"><a href="#cb17-63" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-64"><a href="#cb17-64" aria-hidden="true" tabindex="-1"></a><span class="co">// algoritmo di riordinamento dei vettore di punti</span></span>
-<span id="cb17-65"><a href="#cb17-65" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-66"><a href="#cb17-66" aria-hidden="true" tabindex="-1"></a><span class="kw">template</span> <span class="op">&lt;</span><span class="kw">typename</span> T<span class="op">&gt;</span></span>
-<span id="cb17-67"><a href="#cb17-67" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> findBestPath<span class="op">(</span>T start<span class="op">,</span> T end<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb17-68"><a href="#cb17-68" aria-hidden="true" tabindex="-1"></a>  Posizione ref<span class="op">{};</span></span>
-<span id="cb17-69"><a href="#cb17-69" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> <span class="op">(</span><span class="kw">auto</span> it<span class="op">{</span>start<span class="op">};</span> it <span class="op">!=</span> end<span class="op">;</span> it<span class="op">++)</span> <span class="op">{</span></span>
-<span id="cb17-70"><a href="#cb17-70" aria-hidden="true" tabindex="-1"></a>    sort<span class="op">(</span>it<span class="op">,</span> end<span class="op">,</span> <span class="op">[&amp;](</span>Posizione i<span class="op">,</span> Posizione j<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb17-71"><a href="#cb17-71" aria-hidden="true" tabindex="-1"></a>      <span class="cf">return</span> i<span class="op">.</span>getDistance<span class="op">(</span>ref<span class="op">)</span> <span class="op">&lt;</span> j<span class="op">.</span>getDistance<span class="op">(</span>ref<span class="op">);</span></span>
-<span id="cb17-72"><a href="#cb17-72" aria-hidden="true" tabindex="-1"></a>    <span class="op">});</span></span>
-<span id="cb17-73"><a href="#cb17-73" aria-hidden="true" tabindex="-1"></a>    ref <span class="op">=</span> <span class="op">*</span>it<span class="op">;</span></span>
-<span id="cb17-74"><a href="#cb17-74" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
-<span id="cb17-75"><a href="#cb17-75" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
-<span id="cb17-76"><a href="#cb17-76" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-77"><a href="#cb17-77" aria-hidden="true" tabindex="-1"></a><span class="co">// main</span></span>
-<span id="cb17-78"><a href="#cb17-78" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-79"><a href="#cb17-79" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
-<span id="cb17-80"><a href="#cb17-80" aria-hidden="true" tabindex="-1"></a>  TApplication app<span class="op">{</span><span class="st">&quot;myapp&quot;</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">0</span><span class="op">};</span></span>
-<span id="cb17-81"><a href="#cb17-81" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-82"><a href="#cb17-82" aria-hidden="true" tabindex="-1"></a>  string filename<span class="op">{</span><span class="st">&quot;data_points.dat&quot;</span><span class="op">};</span></span>
-<span id="cb17-83"><a href="#cb17-83" aria-hidden="true" tabindex="-1"></a>  ifstream f<span class="op">{</span>filename<span class="op">};</span></span>
-<span id="cb17-84"><a href="#cb17-84" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-85"><a href="#cb17-85" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> <span class="op">(!</span>f<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb17-86"><a href="#cb17-86" aria-hidden="true" tabindex="-1"></a>    cerr <span class="op">&lt;&lt;</span> <span class="st">&quot;Cannot open file &quot;</span> <span class="op">&lt;&lt;</span> filename <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span>
-<span id="cb17-87"><a href="#cb17-87" aria-hidden="true" tabindex="-1"></a>    exit<span class="op">(</span><span class="dv">1</span><span class="op">);</span></span>
-<span id="cb17-88"><a href="#cb17-88" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
-<span id="cb17-89"><a href="#cb17-89" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-90"><a href="#cb17-90" aria-hidden="true" tabindex="-1"></a>  vector<span class="op">&lt;</span>Posizione<span class="op">&gt;</span> vp<span class="op">{};</span></span>
-<span id="cb17-91"><a href="#cb17-91" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-92"><a href="#cb17-92" aria-hidden="true" tabindex="-1"></a>  Posizione p<span class="op">{};</span></span>
-<span id="cb17-93"><a href="#cb17-93" aria-hidden="true" tabindex="-1"></a>  <span class="cf">while</span> <span class="op">(</span>f<span class="op">.</span>good<span class="op">())</span> <span class="op">{</span></span>
-<span id="cb17-94"><a href="#cb17-94" aria-hidden="true" tabindex="-1"></a>    f <span class="op">&gt;&gt;</span> p<span class="op">;</span></span>
-<span id="cb17-95"><a href="#cb17-95" aria-hidden="true" tabindex="-1"></a>    vp<span class="op">.</span>push_back<span class="op">(</span>p<span class="op">);</span></span>
-<span id="cb17-96"><a href="#cb17-96" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
-<span id="cb17-97"><a href="#cb17-97" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-98"><a href="#cb17-98" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> <span class="op">(</span><span class="kw">auto</span> it<span class="op">{</span>vp<span class="op">.</span>begin<span class="op">()};</span> it <span class="op">!=</span> vp<span class="op">.</span>end<span class="op">();</span> it<span class="op">++)</span></span>
-<span id="cb17-99"><a href="#cb17-99" aria-hidden="true" tabindex="-1"></a>    it<span class="op">-&gt;</span>printPositions<span class="op">();</span></span>
-<span id="cb17-100"><a href="#cb17-100" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-101"><a href="#cb17-101" aria-hidden="true" tabindex="-1"></a>  findBestPath<span class="op">&lt;</span>vector<span class="op">&lt;</span>Posizione<span class="op">&gt;::</span>iterator<span class="op">&gt;(</span>vp<span class="op">.</span>begin<span class="op">(),</span> vp<span class="op">.</span>end<span class="op">());</span></span>
-<span id="cb17-102"><a href="#cb17-102" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-103"><a href="#cb17-103" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> <span class="op">(</span><span class="kw">auto</span> it<span class="op">{</span>vp<span class="op">.</span>begin<span class="op">()};</span> it <span class="op">!=</span> vp<span class="op">.</span>end<span class="op">();</span> it<span class="op">++)</span></span>
-<span id="cb17-104"><a href="#cb17-104" aria-hidden="true" tabindex="-1"></a>    it<span class="op">-&gt;</span>printPositions<span class="op">();</span></span>
-<span id="cb17-105"><a href="#cb17-105" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-106"><a href="#cb17-106" aria-hidden="true" tabindex="-1"></a>  TGraph mygraph<span class="op">{};</span></span>
-<span id="cb17-107"><a href="#cb17-107" aria-hidden="true" tabindex="-1"></a>  mygraph<span class="op">.</span>SetPoint<span class="op">(</span><span class="dv">0</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">0</span><span class="op">);</span></span>
-<span id="cb17-108"><a href="#cb17-108" aria-hidden="true" tabindex="-1"></a>  <span class="dt">int</span> counter<span class="op">{</span><span class="dv">1</span><span class="op">};</span></span>
-<span id="cb17-109"><a href="#cb17-109" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> <span class="op">(</span><span class="kw">auto</span> it<span class="op">{</span>vp<span class="op">.</span>begin<span class="op">()};</span> it <span class="op">!=</span> vp<span class="op">.</span>end<span class="op">();</span> it<span class="op">++)</span> <span class="op">{</span></span>
-<span id="cb17-110"><a href="#cb17-110" aria-hidden="true" tabindex="-1"></a>    mygraph<span class="op">.</span>SetPoint<span class="op">(</span>counter<span class="op">,</span> <span class="op">(*</span>it<span class="op">).</span>GetX<span class="op">(),</span> <span class="op">(*</span>it<span class="op">).</span>GetY<span class="op">());</span></span>
-<span id="cb17-111"><a href="#cb17-111" aria-hidden="true" tabindex="-1"></a>    counter<span class="op">++;</span></span>
-<span id="cb17-112"><a href="#cb17-112" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
-<span id="cb17-113"><a href="#cb17-113" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-114"><a href="#cb17-114" aria-hidden="true" tabindex="-1"></a>  mygraph<span class="op">.</span>GetXaxis<span class="op">()-&gt;</span>SetLimits<span class="op">(-</span><span class="dv">10</span><span class="op">,</span> <span class="dv">10</span><span class="op">);</span></span>
-<span id="cb17-115"><a href="#cb17-115" aria-hidden="true" tabindex="-1"></a>  mygraph<span class="op">.</span>SetMinimum<span class="op">(-</span><span class="dv">10</span><span class="op">);</span></span>
-<span id="cb17-116"><a href="#cb17-116" aria-hidden="true" tabindex="-1"></a>  mygraph<span class="op">.</span>SetMaximum<span class="op">(</span><span class="dv">10</span><span class="op">);</span></span>
-<span id="cb17-117"><a href="#cb17-117" aria-hidden="true" tabindex="-1"></a>  mygraph<span class="op">.</span>GetXaxis<span class="op">()-&gt;</span>SetTitle<span class="op">(</span><span class="st">&quot;X&quot;</span><span class="op">);</span></span>
-<span id="cb17-118"><a href="#cb17-118" aria-hidden="true" tabindex="-1"></a>  mygraph<span class="op">.</span>GetYaxis<span class="op">()-&gt;</span>SetTitle<span class="op">(</span><span class="st">&quot;Y&quot;</span><span class="op">);</span></span>
-<span id="cb17-119"><a href="#cb17-119" aria-hidden="true" tabindex="-1"></a>  mygraph<span class="op">.</span>SetTitle<span class="op">(</span><span class="st">&quot;Percorso&quot;</span><span class="op">);</span></span>
-<span id="cb17-120"><a href="#cb17-120" aria-hidden="true" tabindex="-1"></a>  mygraph<span class="op">.</span>SetMarkerStyle<span class="op">(</span><span class="dv">21</span><span class="op">);</span></span>
-<span id="cb17-121"><a href="#cb17-121" aria-hidden="true" tabindex="-1"></a>  mygraph<span class="op">.</span>SetMarkerSize<span class="op">(</span><span class="dv">1</span><span class="op">);</span></span>
-<span id="cb17-122"><a href="#cb17-122" aria-hidden="true" tabindex="-1"></a>  mygraph<span class="op">.</span>SetLineColor<span class="op">(</span><span class="dv">6</span><span class="op">);</span></span>
-<span id="cb17-123"><a href="#cb17-123" aria-hidden="true" tabindex="-1"></a>  mygraph<span class="op">.</span>Draw<span class="op">(</span><span class="st">&quot;ALP&quot;</span><span class="op">);</span></span>
-<span id="cb17-124"><a href="#cb17-124" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-125"><a href="#cb17-125" aria-hidden="true" tabindex="-1"></a>  app<span class="op">.</span>Run<span class="op">();</span></span>
-<span id="cb17-126"><a href="#cb17-126" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<span id="cb17-56"><a href="#cb17-56" aria-hidden="true" tabindex="-1"></a>    println<span class="op">(</span><span class="st">&quot;Posizione : x = </span><span class="sc">{}</span><span class="st">, y = </span><span class="sc">{}</span><span class="st">, z = </span><span class="sc">{}</span><span class="st">&quot;</span><span class="op">,</span> <span class="va">m_x</span><span class="op">,</span> <span class="va">m_y</span><span class="op">,</span> <span class="va">m_z</span><span class="op">);</span></span>
+<span id="cb17-57"><a href="#cb17-57" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb17-58"><a href="#cb17-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-59"><a href="#cb17-59" aria-hidden="true" tabindex="-1"></a><span class="kw">private</span><span class="op">:</span></span>
+<span id="cb17-60"><a href="#cb17-60" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> <span class="va">m_x</span><span class="op">,</span> <span class="va">m_y</span><span class="op">,</span> <span class="va">m_z</span><span class="op">;</span></span>
+<span id="cb17-61"><a href="#cb17-61" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span>
+<span id="cb17-62"><a href="#cb17-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-63"><a href="#cb17-63" aria-hidden="true" tabindex="-1"></a><span class="co">// algoritmo di riordinamento dei vettore di punti</span></span>
+<span id="cb17-64"><a href="#cb17-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-65"><a href="#cb17-65" aria-hidden="true" tabindex="-1"></a><span class="kw">template</span> <span class="op">&lt;</span><span class="kw">typename</span> T<span class="op">&gt;</span></span>
+<span id="cb17-66"><a href="#cb17-66" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> findBestPath<span class="op">(</span>T start<span class="op">,</span> T end<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb17-67"><a href="#cb17-67" aria-hidden="true" tabindex="-1"></a>  Posizione ref<span class="op">{};</span></span>
+<span id="cb17-68"><a href="#cb17-68" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> <span class="op">(</span><span class="kw">auto</span> it<span class="op">{</span>start<span class="op">};</span> it <span class="op">!=</span> end<span class="op">;</span> it<span class="op">++)</span> <span class="op">{</span></span>
+<span id="cb17-69"><a href="#cb17-69" aria-hidden="true" tabindex="-1"></a>    sort<span class="op">(</span>it<span class="op">,</span> end<span class="op">,</span> <span class="op">[&amp;](</span>Posizione i<span class="op">,</span> Posizione j<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb17-70"><a href="#cb17-70" aria-hidden="true" tabindex="-1"></a>      <span class="cf">return</span> i<span class="op">.</span>getDistance<span class="op">(</span>ref<span class="op">)</span> <span class="op">&lt;</span> j<span class="op">.</span>getDistance<span class="op">(</span>ref<span class="op">);</span></span>
+<span id="cb17-71"><a href="#cb17-71" aria-hidden="true" tabindex="-1"></a>    <span class="op">});</span></span>
+<span id="cb17-72"><a href="#cb17-72" aria-hidden="true" tabindex="-1"></a>    ref <span class="op">=</span> <span class="op">*</span>it<span class="op">;</span></span>
+<span id="cb17-73"><a href="#cb17-73" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb17-74"><a href="#cb17-74" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb17-75"><a href="#cb17-75" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-76"><a href="#cb17-76" aria-hidden="true" tabindex="-1"></a><span class="co">// main</span></span>
+<span id="cb17-77"><a href="#cb17-77" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-78"><a href="#cb17-78" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb17-79"><a href="#cb17-79" aria-hidden="true" tabindex="-1"></a>  TApplication app<span class="op">{</span><span class="st">&quot;myapp&quot;</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">0</span><span class="op">};</span></span>
+<span id="cb17-80"><a href="#cb17-80" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-81"><a href="#cb17-81" aria-hidden="true" tabindex="-1"></a>  string filename<span class="op">{</span><span class="st">&quot;data_points.dat&quot;</span><span class="op">};</span></span>
+<span id="cb17-82"><a href="#cb17-82" aria-hidden="true" tabindex="-1"></a>  ifstream f<span class="op">{</span>filename<span class="op">};</span></span>
+<span id="cb17-83"><a href="#cb17-83" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-84"><a href="#cb17-84" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> <span class="op">(!</span>f<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb17-85"><a href="#cb17-85" aria-hidden="true" tabindex="-1"></a>    println<span class="op">(</span>stderr<span class="op">,</span> <span class="st">&quot;Cannot open file </span><span class="sc">{}</span><span class="st">&quot;</span><span class="op">,</span> filename<span class="op">);</span></span>
+<span id="cb17-86"><a href="#cb17-86" aria-hidden="true" tabindex="-1"></a>    exit<span class="op">(</span><span class="dv">1</span><span class="op">);</span></span>
+<span id="cb17-87"><a href="#cb17-87" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb17-88"><a href="#cb17-88" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-89"><a href="#cb17-89" aria-hidden="true" tabindex="-1"></a>  vector<span class="op">&lt;</span>Posizione<span class="op">&gt;</span> vp<span class="op">{};</span></span>
+<span id="cb17-90"><a href="#cb17-90" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-91"><a href="#cb17-91" aria-hidden="true" tabindex="-1"></a>  Posizione p<span class="op">{};</span></span>
+<span id="cb17-92"><a href="#cb17-92" aria-hidden="true" tabindex="-1"></a>  <span class="cf">while</span> <span class="op">(</span>f<span class="op">.</span>good<span class="op">())</span> <span class="op">{</span></span>
+<span id="cb17-93"><a href="#cb17-93" aria-hidden="true" tabindex="-1"></a>    f <span class="op">&gt;&gt;</span> p<span class="op">;</span></span>
+<span id="cb17-94"><a href="#cb17-94" aria-hidden="true" tabindex="-1"></a>    vp<span class="op">.</span>push_back<span class="op">(</span>p<span class="op">);</span></span>
+<span id="cb17-95"><a href="#cb17-95" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb17-96"><a href="#cb17-96" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-97"><a href="#cb17-97" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> <span class="op">(</span><span class="kw">auto</span> it<span class="op">{</span>vp<span class="op">.</span>begin<span class="op">()};</span> it <span class="op">!=</span> vp<span class="op">.</span>end<span class="op">();</span> it<span class="op">++)</span></span>
+<span id="cb17-98"><a href="#cb17-98" aria-hidden="true" tabindex="-1"></a>    it<span class="op">-&gt;</span>printPositions<span class="op">();</span></span>
+<span id="cb17-99"><a href="#cb17-99" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-100"><a href="#cb17-100" aria-hidden="true" tabindex="-1"></a>  findBestPath<span class="op">&lt;</span>vector<span class="op">&lt;</span>Posizione<span class="op">&gt;::</span>iterator<span class="op">&gt;(</span>vp<span class="op">.</span>begin<span class="op">(),</span> vp<span class="op">.</span>end<span class="op">());</span></span>
+<span id="cb17-101"><a href="#cb17-101" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-102"><a href="#cb17-102" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> <span class="op">(</span><span class="kw">auto</span> it<span class="op">{</span>vp<span class="op">.</span>begin<span class="op">()};</span> it <span class="op">!=</span> vp<span class="op">.</span>end<span class="op">();</span> it<span class="op">++)</span></span>
+<span id="cb17-103"><a href="#cb17-103" aria-hidden="true" tabindex="-1"></a>    it<span class="op">-&gt;</span>printPositions<span class="op">();</span></span>
+<span id="cb17-104"><a href="#cb17-104" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-105"><a href="#cb17-105" aria-hidden="true" tabindex="-1"></a>  TGraph mygraph<span class="op">{};</span></span>
+<span id="cb17-106"><a href="#cb17-106" aria-hidden="true" tabindex="-1"></a>  mygraph<span class="op">.</span>SetPoint<span class="op">(</span><span class="dv">0</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">0</span><span class="op">);</span></span>
+<span id="cb17-107"><a href="#cb17-107" aria-hidden="true" tabindex="-1"></a>  <span class="dt">int</span> counter<span class="op">{</span><span class="dv">1</span><span class="op">};</span></span>
+<span id="cb17-108"><a href="#cb17-108" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> <span class="op">(</span><span class="kw">auto</span> it<span class="op">{</span>vp<span class="op">.</span>begin<span class="op">()};</span> it <span class="op">!=</span> vp<span class="op">.</span>end<span class="op">();</span> it<span class="op">++)</span> <span class="op">{</span></span>
+<span id="cb17-109"><a href="#cb17-109" aria-hidden="true" tabindex="-1"></a>    mygraph<span class="op">.</span>SetPoint<span class="op">(</span>counter<span class="op">,</span> <span class="op">(*</span>it<span class="op">).</span>GetX<span class="op">(),</span> <span class="op">(*</span>it<span class="op">).</span>GetY<span class="op">());</span></span>
+<span id="cb17-110"><a href="#cb17-110" aria-hidden="true" tabindex="-1"></a>    counter<span class="op">++;</span></span>
+<span id="cb17-111"><a href="#cb17-111" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb17-112"><a href="#cb17-112" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-113"><a href="#cb17-113" aria-hidden="true" tabindex="-1"></a>  mygraph<span class="op">.</span>GetXaxis<span class="op">()-&gt;</span>SetLimits<span class="op">(-</span><span class="dv">10</span><span class="op">,</span> <span class="dv">10</span><span class="op">);</span></span>
+<span id="cb17-114"><a href="#cb17-114" aria-hidden="true" tabindex="-1"></a>  mygraph<span class="op">.</span>SetMinimum<span class="op">(-</span><span class="dv">10</span><span class="op">);</span></span>
+<span id="cb17-115"><a href="#cb17-115" aria-hidden="true" tabindex="-1"></a>  mygraph<span class="op">.</span>SetMaximum<span class="op">(</span><span class="dv">10</span><span class="op">);</span></span>
+<span id="cb17-116"><a href="#cb17-116" aria-hidden="true" tabindex="-1"></a>  mygraph<span class="op">.</span>GetXaxis<span class="op">()-&gt;</span>SetTitle<span class="op">(</span><span class="st">&quot;X&quot;</span><span class="op">);</span></span>
+<span id="cb17-117"><a href="#cb17-117" aria-hidden="true" tabindex="-1"></a>  mygraph<span class="op">.</span>GetYaxis<span class="op">()-&gt;</span>SetTitle<span class="op">(</span><span class="st">&quot;Y&quot;</span><span class="op">);</span></span>
+<span id="cb17-118"><a href="#cb17-118" aria-hidden="true" tabindex="-1"></a>  mygraph<span class="op">.</span>SetTitle<span class="op">(</span><span class="st">&quot;Percorso&quot;</span><span class="op">);</span></span>
+<span id="cb17-119"><a href="#cb17-119" aria-hidden="true" tabindex="-1"></a>  mygraph<span class="op">.</span>SetMarkerStyle<span class="op">(</span><span class="dv">21</span><span class="op">);</span></span>
+<span id="cb17-120"><a href="#cb17-120" aria-hidden="true" tabindex="-1"></a>  mygraph<span class="op">.</span>SetMarkerSize<span class="op">(</span><span class="dv">1</span><span class="op">);</span></span>
+<span id="cb17-121"><a href="#cb17-121" aria-hidden="true" tabindex="-1"></a>  mygraph<span class="op">.</span>SetLineColor<span class="op">(</span><span class="dv">6</span><span class="op">);</span></span>
+<span id="cb17-122"><a href="#cb17-122" aria-hidden="true" tabindex="-1"></a>  mygraph<span class="op">.</span>Draw<span class="op">(</span><span class="st">&quot;ALP&quot;</span><span class="op">);</span></span>
+<span id="cb17-123"><a href="#cb17-123" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-124"><a href="#cb17-124" aria-hidden="true" tabindex="-1"></a>  app<span class="op">.</span>Run<span class="op">();</span></span>
+<span id="cb17-125"><a href="#cb17-125" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 </main>
 
 <script>

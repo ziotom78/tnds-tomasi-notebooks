@@ -214,7 +214,7 @@ sudo dnf install g++ gdb
 
 ---
 title: Configurare un compilatore C++ sul proprio portatile
-author: Maurizio Tomasi
+author: Maurizio Tomasi ([`maurizio.tomasi@unimi.it`](mailto:maurizio.tomasi@unimi.it))
 lang: it-IT
 css:
 - ./css/asciinema-player.css

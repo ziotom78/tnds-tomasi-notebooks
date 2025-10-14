@@ -2732,7 +2732,7 @@ in linea con quanto ci aspettavamo, ossia un valore compreso tra 5% e 6%.
 
 ---
 title: Temi d'esame svolti
-author: Maurizio Tomasi
+author: Maurizio Tomasi ([`maurizio.tomasi@unimi.it`](mailto:maurizio.tomasi@unimi.it))
 date: A.A. 2024−2025
 lang: it-IT
 css:

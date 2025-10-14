@@ -69,7 +69,7 @@ Una volta eseguito, ROOT e Gnuplot, più altri utili programmi, saranno installa
 
 ---
 title: Suggerimenti vari
-author: Maurizio Tomasi
+author: Maurizio Tomasi ([`maurizio.tomasi@unimi.it`](mailto:maurizio.tomasi@unimi.it))
 date: A.A. 2024−2025
 lang: it-IT
 css:

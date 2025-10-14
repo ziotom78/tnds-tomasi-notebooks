@@ -163,7 +163,7 @@ NND offre moltissimi altri comandi, che sono disponibili nella guida (premere `?
 
 ---
 title: Fare debug di programming con NND
-author: Maurizio Tomasi
+author: Maurizio Tomasi ([`maurizio.tomasi@unimi.it`](mailto:maurizio.tomasi@unimi.it))
 lang: it-IT
 css:
 - ./css/asciinema-player.css

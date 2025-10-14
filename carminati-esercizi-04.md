@@ -15,7 +15,7 @@ In questa lezione tireremo le somme del lavoro svolto in tutte le sessioni prece
 
 Potete scaricare i file di dati usando questo link: [TemperatureMilano.tar.gz](https://labtnds.docs.cern.ch/Lezione4/TemperatureMilano.tar.gz).
 
-Per svolgere questo esercizio (e tutti i successivi) potete chiaramente utilizzare lo strumento di rappresentazione grafica che preferite (GNUPLOT o Matplotlib). In particolare, potete dare un'occhiata al contenuto di ciascun file `.txt` all'interno dell'archivio `TemperatureMilano.tar.gz` con il comando `plot "NOMEFILE"` eseguito dalla linea di comando di `gnuplot`:
+Per svolgere questo esercizio (e tutti i successivi) potete chiaramente utilizzare come alternativa a ROOT lo strumento di rappresentazione grafica che preferite (GNUPLOT o Matplotlib). In particolare, potete dare un'occhiata al contenuto di ciascun file `.txt` all'interno dell'archivio `TemperatureMilano.tar.gz` con il comando `plot "NOMEFILE"` eseguito dalla linea di comando di `gnuplot`:
 
 ![](images/gnuplot-exercise40.png)
 
@@ -59,7 +59,7 @@ void test_statistics_with_stride() {
   assert(are_close(stddev(v, 2), 1.632993161855452));
   assert(are_close(stddev(v, 3), 1.5));
 
-  cerr << "All the tests have passed. Hurrah! 🥳\n";
+  println(cerr, "All the tests have passed. Hurrah! 🥳");
 }
 ```
 
@@ -85,7 +85,7 @@ int main() {
     double ave{mean(v, stride)};
     double err{stddev(v, stride)};
 
-    cout << format("Anno {} Δ medio = {:.3f} ± {:.3f}\n", year, ave, err);
+    println("Anno {} Δ medio = {:.3f} ± {:.3f}", year, ave, err);
 
     // inserisco media e deviazione standard dalla media nel grafico
     plt.add_point_yerr(year, ave, err);
@@ -144,7 +144,7 @@ int main() {
     // qui fate i vostri calcoli
     // …
 
-    cout << format("Anno {} Δ medio = {:+.3f} ± {:.3f}\n", i, ave, err);
+    println("Anno {} Δ medio = {:+.3f} ± {:.3f}", i, ave, err);
 
     // inserisco media e deviazione standard dalla media nel grafico
 
@@ -229,7 +229,7 @@ void ParseFile(string filename, vector<double> &myx, vector<double> &myy,
   double x, y, err;
 
   if (!fin) {
-    cerr << "Cannot open file " << filename << endl;
+    println(stderr, "Cannot open file {}", filename);
     exit(1);
   }
 
@@ -270,18 +270,18 @@ int main() {
 
   // create TGraphErrors
 
-  TGraphErrors mygraph = DoPlot(myx, myy, myerry);
+  TGraphErrors mygraph{DoPlot(myx, myy, myerry)};
 
   // fit the TGraphErrors ( linear fit )
 
   TF1 *myfun = new TF1("fitfun", "[0]*x+[1]", 0, 1000);
   mygraph.Fit(myfun);
-  double moe = myfun->GetParameter(0);
-  double error = sqrt(pow(1. / moe, 4) * pow(myfun->GetParError(0), 2));
+  double moe{myfun->GetParameter(0)};
+  double error{sqrt(pow(1. / moe, 4) * pow(myfun->GetParError(0), 2))};
 
-  cout << "Valore di e/m dal fit = " << 1. / moe << "+/-" << error << endl;
-  cout << "Valore del chi2 del fit = " << myfun->GetChisquare() << endl;
-  cout << "          prob del chi2 = " << myfun->GetProb() << endl;
+  println("Valore di e/m dal fit = {} ± {}", 1. / moe, error);
+  println("Valore del chi2 del fit = {}", myfun->GetChisquare());
+  println("          prob del chi2 = {}", myfun->GetProb());
 
   // customise the plot, cosmetics
 
@@ -386,10 +386,10 @@ LinearFitResults<T> linear_fit(const std::vector<T> &x_vec,
   T Stys{};
 
   for (int i{}; i < (int) num_of_samples; ++i) {
-    auto x = x_vec.at(i);
-    auto y = y_vec.at(i);
-    auto y_err = y_err_vec.at(i);
-    auto t = (x - Sx / S) / y_err;
+    auto x{x_vec.at(i)};
+    auto y{y_vec.at(i)};
+    auto y_err{y_err_vec.at(i)};
+    auto t{(x - Sx / S) / y_err};
     Stt += std::pow(t, 2);
     Stys += t * y / y_err;
   }
@@ -485,7 +485,7 @@ int main(int argc, const char *argv[]) {
   println(cerr, "{} elements have been read from \"{}\"", ssize(data),
           file_name);
 
-  auto result = linear_fit(data.voltage, data.rb, data.rb_err);
+  auto result{linear_fit(data.voltage, data.rb, data.rb_err)};
 
   println("Data have been fitted on a curve y = A + B × x:");
   println("A = {:.4e} ± {:.4e}", result.a, result.a_err);
@@ -624,7 +624,7 @@ vector<double> ParseFile(string filename) {
   double val;
 
   if (!fin) {
-    cerr << "Cannot open file " << filename << endl;
+    println("Cannot open file {}", filename);
     exit(1);
   }
 
@@ -701,7 +701,7 @@ int main() {
   can1.cd();
   TH1F histo{"cariche", "Charges distribution", 100, 0, 20e-19};
   for (int i{}; i < ssize(charges); i++) {
-    cout << charges[i] << endl;
+    println("{}", charges[i]);
     histo.Fill(charges[i]);
   }
   histo.Draw();
@@ -721,7 +721,7 @@ int main() {
     counter++;
   }
 
-  cout << "Found approximate minimum at q = " << qmin << endl;
+  println("Found approximate minimum at q = ", qmin);
 
   TCanvas can2{};
   can2.cd();
@@ -735,8 +735,7 @@ int main() {
   double mycharge{deriv(qmin, charges)};
   double uncer{
       sqrt(fun(mycharge, charges) / (ssize(charges) * (ssize(charges) - 1)))};
-  cout << "Measured charge = " << mycharge << " ± " << uncer << "(stat only)"
-       << endl;
+  println("Measured charge = {} ± {} (stat only)", mycharge, uncer);
 
   app.Run();
 }
@@ -848,7 +847,7 @@ effettuato.
     [data_points.dat](https://labtnds.docs.cern.ch/Lezione4/data_points.dat)
 
 -   Potete provare a scrivere il codice da soli. In caso potete
-    prendere ispirazione dall'esempio qui sotto che implementa un
+    prendere ispirazione dall'esempio qui sotto, che implementa un
     algoritmo in stile *brute force* (nel codice si può anche trovare
     un esempio di overloading di `operator<<`, utile per semplificare
     la lettura da file).
@@ -912,8 +911,7 @@ public:
   }
 
   void printPositions() {
-    cout << "Posizione : x = " << m_x << " y = " << m_y << " z = " << m_z
-         << endl;
+    println("Posizione : x = {}, y = {}, z = {}", m_x, m_y, m_z);
   }
 
 private:
@@ -942,7 +940,7 @@ int main() {
   ifstream f{filename};
 
   if (!f) {
-	cerr << "Cannot open file " << filename << endl;
+	println(stderr, "Cannot open file {}", filename);
 	exit(1);
   }
 

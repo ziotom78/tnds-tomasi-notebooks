@@ -661,7 +661,7 @@ Vettore v4 = Read(10, "data.dat"); // Move constructor
 
 ---
 title: Laboratorio di TNDS -- Lezione 2
-author: Maurizio Tomasi
+author: Maurizio Tomasi ([`maurizio.tomasi@unimi.it`](mailto:maurizio.tomasi@unimi.it))
 date: Martedì 30 settembre 2025
 css:
 - css/custom.css
