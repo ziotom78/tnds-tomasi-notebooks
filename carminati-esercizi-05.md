@@ -29,12 +29,19 @@ Un paio di punti già che vale la pena ricordare:
 
 class Posizione {
 public:
-  // costruttori
-  Posizione();
+  // Con `= default= si dice al C++ di implementare un costruttore
+  // di default. Qui possiamo farlo perché più sotto abbiamo definito
+  // un valore iniziale per tutti i data membri (m_x, m_y, m_z).
+  Posizione() = default;
   Posizione(double x, double y, double z);
 
-  // distruttore
+  // Distruttore. È completamente inutile, ma lo mettiamo come esempio
   ~Posizione();
+  // Avremmo anche potuto scrivere:
+  //
+  //   ~Posizione() = default;
+  //
+  // e così facendo non avremmo dovuto definire il distruttore nel file .cpp
 
   // metodi
   [[nodiscard]] double getX() const; // Coordinate cartesiane
@@ -47,25 +54,26 @@ public:
   [[nodiscard]] double Distanza(const Posizione &) const; // distanza da un altro punto
 
 private:
-  double m_x, m_y, m_z;
+  double m_x{}, m_y{}, m_z{};  // Inizializzo a zero
 };
 ```
 
 ## File di implementazione delle classe
 
-Qui vediamo un esempio di implementazione della classe (file `posizione.cpp`). Per prima cosa sono definiti i costruttori ed un distruttore, che in questo caso può esser vuoto (nei costruttori non ci sono operazioni di allocazione dinamica della memoria quindi non è necessario implementare regole di distruzione particolari). Noi definiamo comunque il distruttore, perché questo è un esempio didattico; solitamente per classi così semplici però il distruttore si tralascia se il suo corpo è vuoto (`{}`). Successivamente sono implementati tutti i metodi descritti nell'header file:
+Qui vediamo un esempio di implementazione della classe (file `posizione.cpp`). Per prima cosa è definito il costruttore con parametri ed il distruttore, che in questo caso è vuoto (nei costruttori di `Posizione` non ci sono operazioni di allocazione dinamica della memoria, quindi non è necessario implementare regole di distruzione particolari). Noi definiamo comunque il distruttore, perché questo è un esempio didattico; solitamente per classi così semplici però il distruttore si tralascia se il suo corpo è vuoto (`{}`). Successivamente sono implementati tutti i metodi descritti nell'header file:
 
 ```c++
 #include "posizione.h"
 #include <cmath>
 
-// costruttore di default
-Posizione::Posizione() : m_x{}, m_y{}, m_z{} {}
+// Non c’è bisogno di implementare `Posizione::Posizione`, perché
+// con `= default` diciamo al C++ di implementarlo da solo
 
-// costruttore a partire da una terna cartesiana
+// Costruttore a partire da una terna cartesiana
 Posizione::Posizione(double x, double y, double z) : m_x{x}, m_y{y}, m_z{z} {}
 
-// distruttore (puo' essere vuoto)
+// Distruttore (è vuoto, ragion per cui di solito si evita di definirlo,
+// tranne che nelle classi che possono essere derivate)
 Posizione::~Posizione() {}
 
 // Coordinate cartesiane
@@ -74,6 +82,7 @@ double Posizione::getX() const { return m_x; }
 double Posizione::getY() const { return m_y; }
 double Posizione::getZ() const { return m_z; }
 
+//////////////////////////////////////////////////////////////////////
 // Coordinate sferiche
 
 double Posizione::getR() const {
@@ -84,11 +93,14 @@ double Posizione::getPhi() const { return atan2(m_y, m_x); }
 
 double Posizione::getTheta() const { return acos(m_z / getR()); }
 
-// raggio delle coordinate cilindriche
+//////////////////////////////////////////////////////////////////////
+// Raggio delle coordinate cilindriche
 
 double Posizione::getRho() const { return sqrt(m_x * m_x + m_y * m_y); }
 
-// distanza da un altro punto
+//////////////////////////////////////////////////////////////////////
+// Distanza da un altro punto
+
 double Posizione::Distanza(const Posizione &b) const {
   return sqrt(pow(getX() - b.getX(), 2) +
               pow(getY() - b.getY(), 2) +
@@ -151,12 +163,18 @@ Coordinate sferiche: 5.477225575051661, 1.1071487177940904, 0.420534335283965
 
 Utilizziamo l'esempio della classe `Posizione` per riflettere sul concetto di *incapsulamento*. La nostra classe “nasconde” i dati principali (le tre coordinate nel caso specifico) in un set di data-membri privati (`m_x`, `m_y`, `m_z`). Tali data-membri non sono per definizione accessibili al programma principale in modo diretto, ma solo attraverso una serie di metodi pubblici (interfacce) che proteggono il dato da un utilizzo incontrollato. Inoltre la protezione del dato dietro interfacce pubbliche mette al riparo da possibili cambiamenti o correzioni nel design di una classe.
 
-Per fare un esempio, supponiamo che per qualche ragione l'autore della classe decida che è meglio rappresentare la posizione utilizzando una terna di numeri che corrispondono alle coordinate sferiche. Se l'autore della classe adegua di conseguenza le interfacce pubbliche, un eventuale utilizzatore della classe (il nostro `main`) non si accorgerebbe della variazione. Se invece il `main`` avesse avuto libero accesso alle tre coordinate e le avesse utilizzate direttamente, il cambiamento di design della classe avrebbe richiesto rendendo pesanti cambiamenti anche nel `main``.
+Per fare un esempio, supponiamo che per qualche ragione l'autore della classe decida che è meglio rappresentare la posizione utilizzando una terna di numeri che corrispondono alle coordinate sferiche. Se l'autore della classe adegua di conseguenza le interfacce pubbliche, un eventuale utilizzatore della classe (il nostro `main`) non si accorgerebbe della variazione. Se invece il `main` avesse avuto libero accesso alle tre coordinate e le avesse utilizzate direttamente, il cambiamento di design della classe avrebbe richiesto cambiamenti anche nel `main`.
 
 
 ## Una nota sui distruttori
 
 L'implementazione esplicita di un distruttore è spesso necessaria per evitare *memory leaks* quando il costruttore alloca dinamicamente memoria. In caso contrario tipicamente il distruttore sarà vuoto e può essere omesso. Ricordiamoci che se il distruttore viene dichiarato nell'header file della classe allora dobbiamo necessariamente fornirne una implementazione (anche vuota). In questo caso in `posizione.h` ci basta scrivere:
+
+```c++
+~Posizione() = default;
+```
+
+oppure
 
 ```c++
 ~Posizione() {}
@@ -165,18 +183,13 @@ L'implementazione esplicita di un distruttore è spesso necessaria per evitare *
 
 # Esercizio 5.1 - Creazione della classe Particella ed Elettrone {#esercizio-5.1}
 
-Incominciamo a definire due classi che ci permetteranno di rappresentare le sorgenti del campo (elettrico in questo caso).
+Definiamo due classi che ci permetteranno di rappresentare le sorgenti del campo (elettrico in questo caso).
 
 -   Costruiamo una classe `Particella` caratterizzata dall'avere una massa ed una carica, quindi dotata dei seguenti metodi:
-
     #.  Un construttore avente come argomenti massa e carica.
-
     #.  Dei metodi di accesso ai valori di massa e carica.
-
     #.  Un metodo per stampare tali valori.
-
 -   Siccome vogliamo che questa classe sia la classe base di altre classi, dichiareremo i data membri come `protected`.
-
 -   Costruiamo, attraverso il meccanismo di ereditarietà, una classe derivata `Elettrone` che, essendo una `Particella` di massa e carica note (i cui valori sono riportati su [wikipedia](http://it.wikipedia.org/wiki/Elettrone)), ha il solo costruttore di default, che inizializza correttamente i data membri. Modifichiamo il metodo di stampa in modo che indichi che si tratta di un elettrone.
 
 Verifichiamo che le nuovi classi e l'ereditarietà funzioni correttamente:
@@ -198,22 +211,22 @@ Questo è l'header `particella.h` per la classe `Particella`:
 
 class Particella {
 public:
-  // costruttori
-  Particella();
+  // Costruttori
+  Particella() = default;
   Particella(double massa, double carica);
 
-  // distruttore (vuoto, si può anche omettere)
-  ~Particella() {}
+  // Distruttore di default
+  ~Particella() = default;
 
-  // metodi
+  // Metodi
 
   [[nodiscard]] double GetMassa() const { return m_massa; }
   [[nodiscard]] double GetCarica() const { return m_carica; }
   void Print() const;
 
 protected:
-  double m_massa;
-  double m_carica;
+  double m_massa{};
+  double m_carica{};
 };
 ```
 
@@ -253,8 +266,8 @@ public:
       // opportuni,  ma poi non c'e' altro da fare
   }
 
-  // Distruttore (vuoto, si può omettere)
-  ~Elettrone() {}
+  // Distruttore di default
+  ~Elettrone() = default;
 
   void Print() const {
       std::println("Elettrone: m = {}, q = {}", m_massa, m_carica);
@@ -300,14 +313,14 @@ int main() {
 
 ## Domanda
 
-Il programma di esempio contiene un errore, lo trovate?
+Il programma di esempio contiene un errore: provate a capire da cosa è causato.
 
 
 # Esercizio 5.2 - Creazione delle classi `CampoVettoriale` e `PuntoMateriale` {#esercizio-5.2}
 
-Per risolvere problemi relativi all'elettrostatica o alla gravità proviamo ad effettuare una modellizzazione basata su due elementi principali: una rappresentazione del campo vettoriale e una rappresentazione delle sorgenti dei campi vettoriali.
+Per risolvere problemi relativi all'elettrostatica o alla gravità, modelliamo il programma usando due elementi: una rappresentazione del campo vettoriale e una rappresentazione delle sorgenti dei campi vettoriali.
 
-Definiremo quindi una classe `CampoVettoriale`: sono molti i casi in Fisica in cui un vettore è collegato ad un punto dello spazio. Ad esempio una forza ha un punto di applicazione, o i vettori del campo elettrico e campo gravitazionale hanno un valore che varia da punto a punto dello spazio.
+Definiremo quindi una classe `CampoVettoriale`: sono molti i casi in fisica in cui un vettore è collegato ad un punto dello spazio. Ad esempio: una forza ha un punto di applicazione, o i vettori del campo elettrico e campo gravitazionale hanno un valore che varia da punto a punto dello spazio.
 
 Questo esercizio richiede di costruire una classe `CampoVettoriale`, che erediti dalla classe `Posizione` e che aggiunga:
 
@@ -352,8 +365,9 @@ private:
   double m_Fx, m_Fy, m_Fz;
 };
 
-// Somma di due campi vettoriale (in una funzione,
-// non in un metodo!)
+// Somma di due campi vettoriale, implementata stavolta in
+// una funzione che sta *fuori* da `CampoVettoriale` anziché
+// in un metodo di `CampoVettoriale`. Vedi sotto la spiegazione
 inline CampoVettoriale operator+(const CampoVettoriale &a,
                                  const CampoVettoriale &b) {
   // …
@@ -380,8 +394,7 @@ CampoVettoriale CampoVettoriale::operator+(const CampoVettoriale &b) {
 }
 ```
 
-Questa pratica è però scoraggiata negli operatori binari come la somma, perché è poco leggibile: infatti a differenza della forma funzionale, `a` non è esplicito in questo caso (equivale a `*this`).
-
+Questa pratica è però scoraggiata negli operatori binari commutativi come la somma, perché è poco leggibile: infatti a differenza della forma funzionale, `a` non è esplicito in questo caso (equivale a `*this`). Inoltre quest’asimmetria tra `b` (argomento esplicito) e `*this` (argomento implicito) non riflette il fatto che la somma è un’operazione commutativa, e quindi i ruoli del primo e del secondo operando sono paritari.
 
 ### Overloading operatori
 
@@ -390,12 +403,12 @@ Per risolvere facilmente questo tipo di problemi è molto utile ridefinire gli o
 ```c++
 inline CampoVettoriale operator+(const CampoVettoriale &a,
                                  const CampoVettoriale &b) {
+  // Si potrebbe anche usare `are_close` qui, visto che
+  // le coordinate sono numeri double e sono quindi soggette
+  // ad arrotondamenti…
   if ((a.getX() != b.getX()) ||
 	  (a.getY() != b.getY()) ||
 	  (a.getZ() != b.getZ())) {
-      // print accetta come primo argomento lo stream su cui
-      // scrivere (se non si specifica, usa cout).
-      // Siccome questo è un messaggio di errore, usiamo cerr
       println(cerr,
               "Somma di campi vettoriali in punti diversi non ammessa");
       exit(1);
@@ -455,11 +468,11 @@ c = a.operator+=(b);
 
 e corrisponde ai seguenti passaggi:
 
-1. Incremento di `a` del campo `b`;
+1. Incremento di `a` del campo `b` (`a += b`);
 
-2. Una volta che `a` è stato incrementato, assegnamento del valore risultante a `c`.
+2. Una volta che `a` è stato incrementato, assegnamento del valore risultante a `c` (`c = a`, dove `a` è il nuovo valore dopo l’incremento).
 
-Noi non useremo *mai* la scrittura `c = a += b`, perché è difficile da leggere e mai realmente utile; è infatti più chiaro spezzare la riga in due istruzioni:
+Noi non useremo *mai* la scrittura `c = a += b`, perché è difficile da leggere e mai realmente utile; è infatti più leggibile spezzare la riga in due istruzioni:
 
 ```c++
 a += b;
@@ -510,12 +523,12 @@ PuntoMateriale::PuntoMateriale(double massa, double carica,
 }
 ```
 
-Come si può notare in questo esempio la costruzione di `PuntoMateriale` è completamente delegata si costruttori delle classi madre.
+Come si può notare in questo esempio la costruzione di `PuntoMateriale` è completamente delegata ai costruttori delle classi madre.
 
 
 # Esercizio 5.3 - Calcolo del campo elettrico generato da un dipolo (da consegnare) {#esercizio-5.3}
 
-A questo punto possiamo utilizzare tutti gli ingredienti realizzati sopra per affrontare un interessante problema di elettrostatica ovvero lo studio del campo elettrico generato da un dipolo. Per fare questo sviluppiamo un codice che costuisca un dipolo costituito da un elettrone e un protone posizionati ad una distanza $\delta = 10^{-10}\,\text{m}$ e determini:
+Possiamo ora utilizzare quanto realizzato sopra per affrontare un interessante problema di elettrostatica, ovvero lo studio del campo elettrico generato da un dipolo. Sviluppiamo un codice che costuisca un dipolo costituito da un elettrone e un protone posizionati ad una distanza $\delta = 10^{-10}\,\text{m}$ e determini:
 
 #.  il valore del campo elettrico di dipolo prodotto in un punto $P$ le cui coordinate sono inserite da linea di comando;
 #.  disegni l'andamento del modulo del campo elettrico lungo l'asse del dipolo per una distanza da 100 a 1000 volte $\delta$. Che tipo di andamento ha il campo? (Fate riferimento all'approfondimento seguente sulle leggi di potenza qui sotto).
@@ -569,73 +582,90 @@ A partire da questo esempio completare le richieste dell'esercizio:
 
 ## Il `Makefile`
 
-Il numero di classi sta proliferando e quindi anche il `Makefile` diventa sempre più articolato. Questo esempio è pensato per ROOT:
-
-```make
-INCS=`root-config --cflags`
-LIBS=`root-config --libs`
-CXXFLAGS=-g -Wall -Wextra -Werror --pedantic -std=c++23
-
-esercizio_5.3: esercizio_5.3.o posizione.o puntomateriale.o campovettoriale.o particella.o
-       g++ -o esercizio_5.3 esercizio_5.3.o posizione.o puntomateriale.o campovettoriale.o particella.o ${LIBS}
-
-esercizio_5.3.o: esercizio_5.3.cpp particella.h puntomateriale.h posizione.h campovettoriale.h
-       g++ -c esercizio_5.3.cpp -o esercizio_5.3.o ${INCS} ${CXXFLAGS}
-
-particella.o: particella.cpp particella.h
-       g++ -c particella.cpp -o particella.o ${CXXFLAGS}
-
-posizione.o: posizione.cpp posizione.h
-       g++ -c posizione.cpp -o posizione.o ${CXXFLAGS}
-
-puntomateriale.o: puntomateriale.cpp puntomateriale.h posizione.h particella.h
-       g++ -c puntomateriale.cpp -o puntomateriale.o ${CXXFLAGS}
-
-campovettoriale.o: campovettoriale.cpp campovettoriale.h posizione.h
-       g++ -c campovettoriale.cpp -o campovettoriale.o ${CXXFLAGS}
-
-clean:
-       rm -f *.o
-```
-
-Questo invece è il caso in cui usiate gplot++: non c'è più bisogno di usare `INCS` e `LIBS`.
+Il numero di classi sta proliferando e quindi anche il `Makefile` diventa sempre più articolato. Questo è il `Makefile` per chi usa gplot++:
 
 ```make
 CXXFLAGS=-g -Wall -Wextra -Werror --pedantic -std=c++23
 
 esercizio_5.3: esercizio_5.3.o posizione.o puntomateriale.o campovettoriale.o particella.o
-       g++ -o esercizio_5.3 esercizio_5.3.o posizione.o puntomateriale.o campovettoriale.o particella.o
+       g++ -o $@ $^
 
 esercizio_5.3.o: esercizio_5.3.cpp particella.h puntomateriale.h posizione.h campovettoriale.h
-       g++ -c esercizio_5.3.cpp -o esercizio_5.3.o ${CXXFLAGS}
+       g++ -c $< -o $@ ${CXXFLAGS}
 
 particella.o: particella.cpp particella.h
-       g++ -c particella.cpp -o particella.o ${CXXFLAGS}
+       g++ -c $< -o $@ ${CXXFLAGS}
 
 posizione.o: posizione.cpp posizione.h
-       g++ -c posizione.cpp -o posizione.o ${CXXFLAGS}
+       g++ -c $< -o $@ ${CXXFLAGS}
 
 puntomateriale.o: puntomateriale.cpp puntomateriale.h posizione.h particella.h
-       g++ -c puntomateriale.cpp -o puntomateriale.o ${CXXFLAGS}
+       g++ -c $< -o $@ ${CXXFLAGS}
 
 campovettoriale.o: campovettoriale.cpp campovettoriale.h posizione.h
-       g++ -c campovettoriale.cpp -o campovettoriale.o ${CXXFLAGS}
+       g++ -c $< -o $@ ${CXXFLAGS}
 
 clean:
        rm -f *.o
+
+esegui:
+       # Esegui il programma con argomenti di esempio
+       ./esercizio_5.3 1e-10 2e-10 3e-10
 ```
 
-Nel caso in cui decidiate di implementare tutte le classi nei file `.h` e di non usare quindi file `.cpp`, il `Makefile` si semplifica moltissimo. Ecco un esempio (assumendo che usiate gplot++):
+L’aspetto più noioso dei `Makefile` è la necessità di elencare tutti i file `.h` dopo il file `.cpp`; ma al giorno d’oggi si usano strumenti più avanzati di `make`, come [CMake](https://cmake.org/) o [Meson](https://mesonbuild.com/index.html), che automatizzano molto di quanto nei `Makefile` va specificato manualmente.
+
+Nel caso in cui decidiate di implementare tutte le classi nei file `.h` e di non usare quindi file `.cpp` (ottima scelta!), il `Makefile` si semplifica moltissimo. Ecco un esempio, sempre assumendo che usiate gplot++:
 
 ```make
 CXXFLAGS=-g -Wall -Wextra -Werror --pedantic -std=c++23
 
 esercizio_5.3: esercizio_5.3.cpp posizione.h puntomateriale.h campovettoriale.h particella.h
-       g++ -o esercizio_5.3 esercizio_5.3.cpp ${CXXFLAGS}
+       g++ -o $@ $< ${CXXFLAGS}
 
 clean:
        rm -f *.o
+
+esegui:
+       # Esegui il programma con argomenti di esempio
+       ./esercizio_5.3 1e-10 2e-10 3e-10
 ```
+
+Questa invece è la versione nel caso di ROOT, che è più complicata perché bisogna eseguire due volte `root-config`, ricordarsi di usare nei punti appropriati le variabili `INCS` e `LIBS`, e disabilitare il controllo dei warning:
+
+```make
+INCS=`root-config --cflags`
+LIBS=`root-config --libs`
+# Do not use -Werror with ROOT, because it will complain that you
+# want to use C++23
+CXXFLAGS=-g -Wall -Wextra --pedantic -std=c++23
+
+esercizio_5.3: esercizio_5.3.o posizione.o puntomateriale.o campovettoriale.o particella.o
+       g++ -o $@ $^ ${LIBS}
+
+esercizio_5.3.o: esercizio_5.3.cpp particella.h puntomateriale.h posizione.h campovettoriale.h
+       g++ -c $< -o $@ ${INCS} ${CXXFLAGS}
+
+particella.o: particella.cpp particella.h
+       g++ -c $< -o $@ ${INCS} ${CXXFLAGS}
+
+posizione.o: posizione.cpp posizione.h
+       g++ -c $< -o $@ ${INCS} ${CXXFLAGS}
+
+puntomateriale.o: puntomateriale.cpp puntomateriale.h posizione.h particella.h
+       g++ -c $< -o $@ ${INCS} ${CXXFLAGS}
+
+campovettoriale.o: campovettoriale.cpp campovettoriale.h posizione.h
+       g++ -c $< -o $@ ${INCS} ${CXXFLAGS}
+
+clean:
+       rm -f *.o
+
+esegui:
+       # Esegui il programma con argomenti di esempio
+       ./esercizio_5.3 1e-10 2e-10 3e-10
+```
+
 
 ## Leggi di potenza
 
@@ -651,9 +681,9 @@ allora possiamo ricavare $\alpha$ dalla relazione
 
 ## Creazione di plot
 
-Potete fare riferimento a [questa spiegazione](http://labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/lezioneROOT_1819.html) per produrre un grafico dell'andamento del campo usando la classe `TGraph` di ROOT.
+Per creare il grafico potete usare [gplot++](https://github.com/ziotom78/gplotpp), che funziona sotto Mac e Linux ed è semplice da installare anche sotto Windows. Come già spiegato la scorsa settimana, dovete innanzitutto [installare Gnuplot](https://github.com/ziotom78/gplotpp#installing-gnuplot-and-gploth); se avete Windows ma usate la WSL, eseguite `sudo apt install gnuplot`, altrimenti seguite [questa avvertenza](https://github.com/ziotom78/gplotpp#windows).
 
-In alternativa potete usare [gplot++](https://github.com/ziotom78/gplotpp), che funziona sotto Mac e Linux ed è semplice da installare anche sotto Windows. Dovete innanzitutto [installare Gnuplot](https://github.com/ziotom78/gplotpp#installing-gnuplot-and-gploth), seguendo in particolare [questa avvertenza](https://github.com/ziotom78/gplotpp#windows) se usate Windows. Una volta installato Gnuplot, scaricate nella directory del vostro esercizio il file [`gplot++.h`](https://raw.githubusercontent.com/ziotom78/gplotpp/master/gplot%2B%2B.h), oppure se usate Linux o Mac eseguite questa linea di comando nella directory del vostro esercizio:
+Una volta installato Gnuplot, scaricate nella directory del vostro esercizio il file [`gplot++.h`](https://raw.githubusercontent.com/ziotom78/gplotpp/master/gplot%2B%2B.h), oppure se usate Linux o Mac eseguite questa linea di comando nella directory del vostro esercizio:
 
 <input type="text" value="curl 'https://raw.githubusercontent.com/ziotom78/gplotpp/master/gplot%2B%2B.h' > gplot++.h" id="installGplotpp" readonly="1" size="60"><button onclick='copyFmtInstallationScript("installGplotpp")'>Copia</button>
 
@@ -669,12 +699,11 @@ Di seguito viene riportato un esempio:
 
 using namespace std;
 
-const double delta = 1e-10;
+const double delta{1e-10};
 
 // Siccome questo programma non richiede di leggere parametri dalla linea di
-// comando, non c'è bisogno di specificare "argc" e "argv". (Se lo faceste,
-// il compilatore probabilmente emetterebbe qualche tipo di warning, perché
-// l'argomento è stato dichiarato ma mai usato).
+// comando, non c'è bisogno di specificare `argc` e `argv`. (Se lo faceste,
+// la compilazione fallirebbe perché né `argc` né `argv` sarebbero usati).
 int main() {
   vector<double> d_vec; // Vettore delle distanze (asse x)
   vector<double> E_vec; // Vettore dei moduli del campo elettrico (asse y)
@@ -699,8 +728,7 @@ int main() {
   Gnuplot plt{};
 
   // Togliere questa riga se si preferisce che il grafico appaia in una finestra
-  // interattiva (consigliato sul proprio computer o su quelli del laboratorio,
-  // sconsigliato se si usa Repl.it)
+  // interattiva
   plt.redirect_to_png("esercizio05.3.png");
 
   // Disegna le ascisse usando una scala bilogaritmica, così che y ∝ 1/r³ viene
@@ -711,7 +739,8 @@ int main() {
 
   plt.plot(d_vec, E_vec);
 
-  // Ricordarsi di chiamarlo, altrimenti il grafico non verrà salvato/visualizzato
+  // Non dimenticare la chiamata a `show`, altrimenti il grafico non
+  // verrà salvato/visualizzato
   plt.show();
 }
 ```
@@ -720,11 +749,13 @@ Questo è il risultato atteso:
 
 ![](./images/esercizio05.3.png)
 
-Notare che la pendenza della retta sul grafico bilogaritmico è −3: per un ordine di grandezza in più sull'asse $x$ (da 10 a 100&nbsp;nm) ci sono tre ordini di grandezza in meno (da $5 \times 10^5$ a $500\,\text{N/C}$) sull'asse $y$. Questo corrisponde al fatto che se $r \gg \delta$ allora
+Notare che la pendenza della retta sul grafico bilogaritmico è −3, perché per **un** ordine di grandezza in più sull'asse $x$ (da 10 a 100&nbsp;nm) ci sono **tre** ordini di grandezza in meno (da $5 \times 10^5$ a $500\,\text{N/C}$) sull'asse $y$. Questo corrisponde al fatto che se $r \gg \delta$ allora
 $$
 \left|E_\text{dipolo}(r)\right| = \left|k\frac{q^+}{(r + \delta)^2} + k\frac{q^-}{(r - \delta)^2}\right|
 = \left|k\frac{e}{(r + \delta)^2} - k\frac{e}{(r - \delta)^2}\right| \approx \frac{4 k e \delta}{r^3} \propto r^{-3}.
 $$
+
+Se invece volete usare ROOT, dovete usare la classe `TGraph`; fate riferimento a [questa spiegazione](http://labmaster.mi.infn.it/Laboratorio2/labTNDS/lectures_1819/lezioneROOT_1819.html).
 
 
 # Esercizio 5.4 - Campo di multipolo (approfondimento) {#esercizio-5.4}

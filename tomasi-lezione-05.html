@@ -161,8 +161,9 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb1-1"><a href="#c
 terminale</p>
 <div class="sourceCode" id="cb2"><pre
 class="sourceCode sh"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> man atan2</span></code></pre></div></li>
-<li><p>Consultate Wikipedia per comprendere la logica di <a
-href="https://en.wikipedia.org/wiki/Atan2"><code>atan2</code></a>.</p></li>
+<li><p>Consultate <a
+href="https://en.wikipedia.org/wiki/Atan2">Wikipedia</a> per comprendere
+la logica di <code>atan2</code>.</p></li>
 </ul>
 </section>
 <section id="esercizio-5.0-1" class="slide level1">
@@ -250,10 +251,10 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb5-1"><a href="#c
 <section id="inizializzazione-di-variabili-membro" class="slide level1">
 <h1>Inizializzazione di variabili membro</h1>
 </section>
-<section id="inizializzazione-e-assegnamento" class="slide level1">
-<h1>Inizializzazione e assegnamento</h1>
-<p>Per inizializzare i membri di una classe in C++ esistono due
-possibilità:</p>
+<section id="inizializzazione" class="slide level1">
+<h1>Inizializzazione</h1>
+<p>Per inizializzare i membri di una classe in C++ esistono
+<strong>tre</strong> possibilità:</p>
 <div class="sourceCode" id="cb6"><pre
 class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Prova <span class="op">{</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span><span class="op">:</span></span>
@@ -261,32 +262,33 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb6-1"><a href="#c
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="kw">private</span><span class="op">:</span></span>
 <span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> a<span class="op">;</span></span>
 <span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">double</span> b<span class="op">;</span></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>Prova<span class="op">::</span>Prova<span class="op">()</span> <span class="op">:</span> a<span class="op">{</span><span class="dv">1</span><span class="op">}</span> <span class="op">{</span> <span class="co">// Initializer: use &quot;:&quot; *before* the {</span></span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>    b <span class="op">=</span> <span class="fl">5.0</span><span class="op">;</span>            <span class="co">// Old boring assignment</span></span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    <span class="dt">char</span> c<span class="op">{</span><span class="ch">&#39;a&#39;</span><span class="op">};</span>        <span class="co">// The same as in a function</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>Prova<span class="op">::</span>Prova<span class="op">()</span> <span class="op">:</span> a<span class="op">{</span><span class="dv">1</span><span class="op">}</span> <span class="op">{</span> <span class="co">// Initializer: use &quot;:&quot; *before* the {</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>    b <span class="op">=</span> <span class="fl">5.0</span><span class="op">;</span>            <span class="co">// Old boring assignment</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 </section>
-<section id="inizializzazione-e-assegnamento-1" class="slide level1">
-<h1>Inizializzazione e assegnamento</h1>
+<section id="inizializzazione-1" class="slide level1">
+<h1>Inizializzazione</h1>
 <ul>
-<li><p>I due metodi non sono equivalenti!</p></li>
+<li><p>Uno dei metodi è diverso dagli altri due!</p></li>
 <li><p>Costruiamo una classe <code>DaylightPeriod</code> che contiene al
-suo interno due variabili dello stesso tipo <code>Time</code>, ma
+suo interno tre variabili dello stesso tipo <code>Time</code> che sono
 inizializzate in modo diverso:</p>
 <div class="sourceCode" id="cb7"><pre
 class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> DaylightPeriod <span class="op">{</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span><span class="op">:</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Pass two strings as names to distinguish the two objects</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  DaylightPeriod<span class="op">()</span> <span class="op">:</span> dawn<span class="op">{</span><span class="st">&quot;7:00&quot;</span><span class="op">}</span> <span class="op">{</span> sunset <span class="op">=</span> Time<span class="op">(</span><span class="st">&quot;21:00&quot;</span><span class="op">);</span> <span class="op">}</span></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="kw">private</span><span class="op">:</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  DaylightPeriod<span class="op">()</span> <span class="op">:</span> dawn<span class="op">{</span><span class="st">&quot;7:00&quot;</span><span class="op">}</span> <span class="op">{</span> sunset <span class="op">=</span> Time<span class="op">(</span><span class="st">&quot;21:00&quot;</span><span class="op">);</span> <span class="op">}</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="kw">private</span><span class="op">:</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  Time noon<span class="op">{</span><span class="st">&quot;12:00&quot;</span><span class="op">};</span></span>
 <span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  Time dawn<span class="op">,</span> sunset<span class="op">;</span></span>
 <span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code></pre></div></li>
 </ul>
 </section>
-<section id="inizializzazione-e-assegnamento-2" class="slide level1">
-<h1>Inizializzazione e assegnamento</h1>
+<section id="inizializzazione-2" class="slide level1">
+<h1>Inizializzazione</h1>
 <p>Per capire cosa succede, definiamo <code>Time</code> in modo che
 stampi a video un messaggio ogni volta che viene invocato un suo
 metodo.</p>
@@ -303,64 +305,156 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb8-1"><a href="#c
 <span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
 <span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code></pre></div>
 </section>
-<section id="inizializzazione-e-assegnamento-3" class="slide level1">
-<h1>Inizializzazione e assegnamento</h1>
-<p>Se ora creiamo nel <code>main</code> una variabile
-<code>DaylightPeriod</code>, vedremo cosa accade nel costruttore:</p>
+<section id="inizializzazione-3" class="slide level1">
+<h1>Inizializzazione</h1>
+<ul>
+<li><p>Compiliamo ora questo programma ed eseguiamolo:</p>
 <div class="sourceCode" id="cb9"><pre
 class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">(</span><span class="dt">void</span><span class="op">)</span> <span class="op">{</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  DaylightPeriod c<span class="op">{};</span></span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
-</section>
-<section id="risultato" class="slide level1">
-<h1>Risultato</h1>
-<ul>
-<li><p>L’output del programma è il seguente:</p>
-<pre><code>Call to Time constructor with time &quot;7:00&quot;
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div></li>
+<li><p>L’output è il seguente:</p>
+<pre><code>Call to Time constructor with time &quot;12:00&quot;
+Call to Time constructor with time &quot;7:00&quot;
 Time() called with no arguments
 Call to Time constructor with time &quot;21:00&quot;
 Call to Time::operator=</code></pre></li>
+</ul>
+</section>
+<section id="spiegazione" class="slide level1">
+<h1>Spiegazione</h1>
+<ul>
 <li><p>Ricordiamo come abbiamo definito la classe
-<code>DaylightPeriod</code>, e in particolare il costruttore:</p>
+<code>DaylightPeriod</code>:</p>
 <div class="sourceCode" id="cb11"><pre
 class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> DaylightPeriod <span class="op">{</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span><span class="op">:</span></span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  DaylightPeriod<span class="op">()</span> <span class="op">:</span> dawn<span class="op">{</span><span class="st">&quot;7:00&quot;</span><span class="op">}</span> <span class="op">{</span> sunset <span class="op">=</span> Time<span class="op">(</span><span class="st">&quot;21:00&quot;</span><span class="op">);</span> <span class="op">}</span></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="kw">private</span><span class="op">:</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="kw">private</span><span class="op">:</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  Time noon<span class="op">{</span><span class="st">&quot;12:00&quot;</span><span class="op">};</span></span>
 <span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>  Time dawn<span class="op">,</span> sunset<span class="op">;</span></span>
 <span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code></pre></div></li>
+<li><p>L’output rivela che <code>sunset</code> ha richiesto più lavoro
+delle altre due!</p>
+<pre><code>Call to Time constructor with time &quot;12:00&quot;
+Call to Time constructor with time &quot;7:00&quot;
+Time() called with no arguments
+Call to Time constructor with time &quot;21:00&quot;
+Call to Time::operator=</code></pre></li>
 </ul>
 </section>
 <section id="regola-generale" class="slide level1">
 <h1>Regola generale</h1>
 <ul>
-<li><p>Si dovrebbe evitare di inizializzare gli oggetti nel corpo del
-costruttore, perché il C++ richiede che tutte le variabili membro siano
-inizializzate <strong>prima</strong> che il costruttore di una classe
-sia eseguito.</p></li>
-<li><p>Di conseguenza, se si usano i «vecchi» assegnamenti gli oggetti
-con costruttore vengono inizializzati due volte.</p></li>
-<li><p>Se avete scelta, l’inizializzazione con i due punti
-(<code>:</code>) è <strong>sempre</strong> da preferire:</p>
-<div class="sourceCode" id="cb12"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> DaylightPeriod <span class="op">{</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span><span class="op">:</span></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  DaylightPeriod<span class="op">()</span> <span class="op">:</span> dawn<span class="op">{</span><span class="st">&quot;7:00&quot;</span><span class="op">},</span> sunset<span class="op">{</span><span class="st">&quot;21:00&quot;</span><span class="op">}</span> <span class="op">{</span> <span class="op">}</span> <span class="co">// That&#39;s the way!</span></span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="co">// ...</span></span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code></pre></div></li>
+<li><p>Se il valore iniziale non cambia mai, fate come
+<code>noon{"12:00"}</code>:</p>
+<div class="sourceCode" id="cb13"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Point <span class="op">{</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">double</span> x<span class="op">{},</span> y<span class="op">{};</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code></pre></div></li>
+<li><p>Se il valore iniziale è un parametro o dovete chiamare il
+costruttore della classe base, fate come
+<code>: dawn{"7:00"}</code>:</p>
+<div class="sourceCode" id="cb14"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>Point<span class="op">::</span>Point<span class="op">(</span><span class="dt">double</span> new_x<span class="op">,</span> new_y<span class="op">)</span> <span class="op">:</span> x<span class="op">{</span>new_x<span class="op">},</span> y<span class="op">{</span>new_y<span class="op">}</span> <span class="op">{}</span></span></code></pre></div></li>
+<li><p>In ogni altro caso, usate il corpo del costruttore</p></li>
+</ul>
+</section>
+<section id="costruttore-di-default" class="slide level1">
+<h1>Costruttore di default</h1>
+<ul>
+<li><p>Se nella dichiarazione di una classe si scrive
+<code>= default</code> dopo il costruttore, si chiede al C++ di
+implementarlo nel modo migliore possibile:</p>
+<div class="sourceCode" id="cb15"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Point <span class="op">{</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> <span class="va">m_x</span><span class="op">{</span><span class="fl">1.0</span><span class="op">},</span> <span class="va">m_y</span><span class="op">{</span><span class="fl">2.0</span><span class="op">},</span> <span class="va">m_z</span><span class="op">{</span><span class="fl">3.0</span><span class="op">};</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span><span class="op">:</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  Point<span class="op">()</span> <span class="op">=</span> <span class="cf">default</span><span class="op">;</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code></pre></div></li>
+<li><p>Un costruttore definito in questo modo garantisce che
+<code>m_x</code>, <code>m_y</code> e <code>m_z</code> siano
+inizializzate ai valori <code>1.0, 2.0, 3.0</code> e in più abilita
+altre proprietà avanzate se si usano i template o i
+<code>constexpr</code></p></li>
+</ul>
+</section>
+<section id="default-e-delete" class="slide level1">
+<h1><code>default</code> e <code>delete</code></h1>
+<ul>
+<li><p>Si può usare <code>= default</code> anche con i copy constructor,
+i move constructor, e i distruttori, e il significato è lo
+stesso</p></li>
+<li><p>Si può anche specificare <code>= delete</code>, che dice al C++
+di <strong>non</strong> definire un costruttore di default, o un copy
+constructor, o un move constructor:</p>
+<div class="sourceCode" id="cb16"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Point <span class="op">{</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> <span class="va">m_x</span><span class="op">,</span> <span class="va">m_y</span><span class="op">,</span> <span class="va">m_z</span><span class="op">;</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span><span class="op">:</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  Point<span class="op">()</span> <span class="op">=</span> <span class="kw">delete</span><span class="op">;</span>  <span class="co">// Prevent the default constructor from being used</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>  Point<span class="op">(</span><span class="dt">double</span> x<span class="op">,</span> <span class="dt">double</span> y<span class="op">,</span> <span class="dt">double</span> z<span class="op">);</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>  Point<span class="op">(</span><span class="at">const</span> Point <span class="op">&amp;)</span> <span class="op">=</span> <span class="kw">delete</span><span class="op">;</span> <span class="co">// Prevent copy constructors too</span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code></pre></div></li>
+</ul>
+</section>
+<section id="editor" class="slide level1">
+<h1>Editor</h1>
+</section>
+<section id="geany" class="slide level1">
+<h1>Geany</h1>
+<ul>
+<li><p>Dopo le fatiche della scorsa lezione, mi sono documentato su
+alcune alternative a Visual Studio Code che non riempiano a tradimento
+le vostre home directory</p></li>
+<li><p>Ho scoperto che Geany è installato sulle macchine del
+laboratorio, ed è una valida opzione a VSCode</p></li>
+<li><p>Per chi usa il proprio portatile non c’è bisogno di cambiare, ma
+chi invece usa il computer del laboratorio dovrebbe prenderlo in
+considerazione</p></li>
+</ul>
+</section>
+<section id="configurazione" class="slide level1">
+<h1>Configurazione</h1>
+<ul>
+<li><p>Per permettere a Geany di usare il C++23, aprite un terminale ed
+eseguite questa riga:</p>
+<pre><code>/home/comune/labTNDS_programmi/setup-geany</code></pre></li>
+<li><p>Ora potete far partire Geany ed usarlo per compilare codice ed
+eseguirlo</p></li>
+</ul>
+</section>
+<section id="uso" class="slide level1">
+<h1>Uso</h1>
+<ul>
+<li><p>Con <code>Shift+F9</code> eseguite <code>make</code></p></li>
+<li><p>Con <code>F5</code> eseguite <code>make esegui</code>, a patto
+che abbiate definito il target <code>esegui</code> nel vostro
+<code>Makefile</code>! (Questo funziona solo se state editando un file
+C++; se è aperto il <code>Makefile</code>, il tasto non
+funziona).</p></li>
+<li><p>Scegliendo da menu “Build/Auto-format” e premendo Ctrl+R, viene
+riformattato il vostro codice C++</p></li>
+<li><p>Potete attivare molti plug-in interessanti da “Tools / Plugin
+manager”; io vi consiglio Auto-close, Debugger e File Browser.</p></li>
 </ul>
 </section>
 <section id="debugging" class="slide level1">
 <h1>Debugging</h1>
+</section>
+<section id="debugging-1" class="slide level1">
+<h1>Debugging</h1>
 <ul>
 <li><p>Da quest’anno ho reso disponibile il programma NND, un debugger
 semplice ma adatto agli scopi di queste esercitazioni</p></li>
-<li><p>Vi faccio ora vedere un esempio pratico di debugging</p></li>
+<li><p>Potete installarlo nella vostra home con questo comando:</p>
+<pre><code>/home/comune/labTNDS_programmi/install-ndd</code></pre></li>
 <li><p>Le istruzioni complete sono disponibili in <a
 href="debugging.html">una pagina dedicata</a>.</p></li>
+<li><p>Potete scaricarlo da <a
+href="https://github.com/al13n321/nnd/releases">qui</a> per i vostri
+portatili; purtroppo però funziona solo su Linux…</p></li>
 </ul>
 </section>
     </div>

@@ -35,7 +35,7 @@
     $ man atan2
     ```
 
--   Consultate Wikipedia per comprendere la logica di [`atan2`](https://en.wikipedia.org/wiki/Atan2).
+-   Consultate [Wikipedia](https://en.wikipedia.org/wiki/Atan2) per comprendere la logica di `atan2`.
 
 
 # Esercizio 5.0
@@ -122,9 +122,9 @@ void test_newton_law(void) {
 
 # Inizializzazione di variabili membro
 
-# Inizializzazione e assegnamento
+# Inizializzazione
 
-Per inizializzare i membri di una classe in C++ esistono due possibilità:
+Per inizializzare i membri di una classe in C++ esistono **tre** possibilità:
 
 ```c++
 class Prova {
@@ -133,6 +133,7 @@ public:
 private:
     int a;
     double b;
+    char c{'a'};        // The same as in a function
 };
 
 Prova::Prova() : a{1} { // Initializer: use ":" *before* the {
@@ -140,24 +141,24 @@ Prova::Prova() : a{1} { // Initializer: use ":" *before* the {
 }
 ```
 
-# Inizializzazione e assegnamento
+# Inizializzazione
 
--   I due metodi non sono equivalenti!
+-   Uno dei metodi è diverso dagli altri due!
 
--   Costruiamo una classe `DaylightPeriod` che contiene al suo interno due variabili dello stesso tipo `Time`, ma inizializzate in modo diverso:
+-   Costruiamo una classe `DaylightPeriod` che contiene al suo interno tre variabili dello stesso tipo `Time` che sono inizializzate in modo diverso:
 
     ```c++
     class DaylightPeriod {
     public:
-      // Pass two strings as names to distinguish the two objects
       DaylightPeriod() : dawn{"7:00"} { sunset = Time("21:00"); }
 
     private:
+      Time noon{"12:00"};
       Time dawn, sunset;
     };
     ```
 
-# Inizializzazione e assegnamento
+# Inizializzazione
 
 Per capire cosa succede, definiamo `Time` in modo che stampi a video un messaggio ogni volta che viene invocato un suo metodo.
 
@@ -175,65 +176,144 @@ public:
 };
 ```
 
-# Inizializzazione e assegnamento
+# Inizializzazione
 
-Se ora creiamo nel `main` una variabile `DaylightPeriod`, vedremo cosa
-accade nel costruttore:
+-   Compiliamo ora questo programma ed eseguiamolo:
 
-```c++
-int main(void) {
-  DaylightPeriod c{};
-  return 0;
-}
-```
+    ```c++
+    int main(void) {
+      DaylightPeriod c{};
+      return 0;
+    }
+    ```
 
-# Risultato
-
--   L'output del programma è il seguente:
+-   L'output è il seguente:
 
     ```
+    Call to Time constructor with time "12:00"
     Call to Time constructor with time "7:00"
     Time() called with no arguments
     Call to Time constructor with time "21:00"
     Call to Time::operator=
     ```
 
--   Ricordiamo come abbiamo definito la classe `DaylightPeriod`, e in particolare il costruttore:
+# Spiegazione
+
+-   Ricordiamo come abbiamo definito la classe `DaylightPeriod`:
 
     ```c++
     class DaylightPeriod {
     public:
       DaylightPeriod() : dawn{"7:00"} { sunset = Time("21:00"); }
-
     private:
+      Time noon{"12:00"};
       Time dawn, sunset;
     };
     ```
 
+-   L’output rivela che `sunset` ha richiesto più lavoro delle altre due!
+
+    ```
+    Call to Time constructor with time "12:00"
+    Call to Time constructor with time "7:00"
+    Time() called with no arguments
+    Call to Time constructor with time "21:00"
+    Call to Time::operator=
+    ```
+
 # Regola generale
 
--   Si dovrebbe evitare di inizializzare gli oggetti nel corpo del costruttore, perché il C++ richiede che tutte le variabili membro siano inizializzate **prima** che il costruttore di una classe sia eseguito.
-
--   Di conseguenza, se si usano i «vecchi» assegnamenti gli oggetti con costruttore vengono inizializzati due volte.
-
--   Se avete scelta, l'inizializzazione con i due punti (`:`) è **sempre** da preferire:
+-   Se il valore iniziale non cambia mai, fate come `noon{"12:00"}`:
 
     ```c++
-    class DaylightPeriod {
-    public:
-      DaylightPeriod() : dawn{"7:00"}, sunset{"21:00"} { } // That's the way!
-
-      // ...
+    class Point {
+        double x{}, y{};
     };
     ```
+
+-   Se il valore iniziale è un parametro o dovete chiamare il costruttore della classe base, fate come `: dawn{"7:00"}`:
+
+    ```c++
+    Point::Point(double new_x, new_y) : x{new_x}, y{new_y} {}
+    ```
+
+-   In ogni altro caso, usate il corpo del costruttore
+
+# Costruttore di default
+
+-   Se nella dichiarazione di una classe si scrive `= default` dopo il costruttore, si chiede al C++ di implementarlo nel modo migliore possibile:
+
+    ```c++
+    class Point {
+      double m_x{1.0}, m_y{2.0}, m_z{3.0};
+    public:
+      Point() = default;
+    };
+    ```
+
+-   Un costruttore definito in questo modo garantisce che `m_x`, `m_y` e `m_z` siano inizializzate ai valori `1.0, 2.0, 3.0` e in più abilita altre proprietà avanzate se si usano i template o i `constexpr`
+
+# `default` e `delete`
+
+-   Si può usare `= default` anche con i copy constructor, i move constructor, e i distruttori, e il significato è lo stesso
+
+-   Si può anche specificare `= delete`, che dice al C++ di **non** definire un costruttore di default, o un copy constructor, o un move constructor:
+
+    ```c++
+    class Point {
+    double m_x, m_y, m_z;
+    public:
+      Point() = delete;  // Prevent the default constructor from being used
+      Point(double x, double y, double z);
+      Point(const Point &) = delete; // Prevent copy constructors too
+    };
+    ```
+
+# Editor
+
+# Geany
+
+-   Dopo le fatiche della scorsa lezione, mi sono documentato su alcune alternative a Visual Studio Code che non riempiano a tradimento le vostre home directory
+
+-   Ho scoperto che Geany è installato sulle macchine del laboratorio, ed è una valida opzione a VSCode
+
+-   Per chi usa il proprio portatile non c’è bisogno di cambiare, ma chi invece usa il computer del laboratorio dovrebbe prenderlo in considerazione
+
+# Configurazione
+
+-   Per permettere a Geany di usare il C++23, aprite un terminale ed eseguite questa riga:
+
+    ```
+    /home/comune/labTNDS_programmi/setup-geany
+    ```
+
+-   Ora potete far partire Geany ed usarlo per compilare codice ed eseguirlo
+
+# Uso
+
+-   Con `Shift+F9` eseguite `make`
+
+-   Con `F5` eseguite `make esegui`, a patto che abbiate definito il target `esegui` nel vostro `Makefile`! (Questo funziona solo se state editando un file C++; se è aperto il `Makefile`, il tasto non funziona).
+
+-   Scegliendo da menu “Build/Auto-format” e premendo Ctrl+R, viene riformattato il vostro codice C++
+
+-   Potete attivare molti plug-in interessanti da “Tools / Plugin manager”; io vi consiglio Auto-close, Debugger e File Browser.
+
+# Debugging
 
 # Debugging
 
 -   Da quest’anno ho reso disponibile il programma NND, un debugger semplice ma adatto agli scopi di queste esercitazioni
 
--   Vi faccio ora vedere un esempio pratico di debugging
+-   Potete installarlo nella vostra home con questo comando:
+
+    ```
+    /home/comune/labTNDS_programmi/install-ndd
+    ```
 
 -   Le istruzioni complete sono disponibili in [una pagina dedicata](debugging.html).
+
+-   Potete scaricarlo da [qui](https://github.com/al13n321/nnd/releases) per i vostri portatili; purtroppo però funziona solo su Linux…
 
 ---
 title: Laboratorio di TNDS -- Lezione 5
