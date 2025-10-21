@@ -93,7 +93,7 @@ Estratto dall'articolo [C++ is the next C++](https://www.open-std.org/jtc1/sc22/
 ```c++
 void test_coulomb_law(void) {
   // 0.5 µC charge with no mass (irrelevant for the electric field)
-  PuntoMateriale particella1{0.0, 5e-7, 5, 3, -2};
+  PuntoMateriale particella{0.0, 5e-7, 5, 3, -2};
   Posizione p{-2, 4, 1};
 
   CampoVettoriale V{particella.CampoElettrico(p)};
@@ -107,10 +107,10 @@ void test_coulomb_law(void) {
 
 void test_newton_law(void) {
   // 10⁹ tonnes, without charge (irrelevant for the gravitational field)
-  PuntoMateriale particella1{1e12, 0, 5, 3, -2};
+  PuntoMateriale particella{1e12, 0, 5, 3, -2};
   Posizione p{-2, 4, 1};
 
-  CampoVettoriale V{particella.CampoElettrico(p)};
+  CampoVettoriale V{particella.CampoGravitazionale(p)};
 
   assert(are_close(V.getFx(), -1.0302576701177));
   assert(are_close(V.getFy(), 0.14717966715968));
