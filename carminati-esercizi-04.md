@@ -44,7 +44,7 @@ Potreste implementare media e deviazione standard in questo modo:
 
 Ovviamente dovete tenere conto del numero effettivo di campioni che sommate in `accum`: la riga finale deve essere `accum / n`, non certo `accum / ssize(v)`! Il codice per la deviazione standard si calcola allo stesso modo.
 
-**Attenzione:** non è corretto calcolare la media su *tutti* i campioni e la deviazione standard prendendone uno ogni sette, perché i due numeri farebbero riferimento a distribuzioni diverse!
+**Attenzione:** non è corretto calcolare la media su *tutti* i campioni e la deviazione standard invece prendendone uno ogni sette, perché i due numeri farebbero riferimento a distribuzioni diverse!
 
 Vi fornisco il codice per i test:
 
@@ -82,8 +82,10 @@ int main() {
 
     vector v{Read<double>(filename.c_str())};
 
-    double ave{mean(v, stride)};
-    double err{stddev(v, stride)};
+    // Qui inserite i vostri calcoli. Attenzione a calcolare
+    // la deviazione standard DELLA MEDIA!
+    double ave{/* … */};
+    double err{/* … */};
 
     println("Anno {} Δ medio = {:.3f} ± {:.3f}", year, ave, err);
 
@@ -96,15 +98,14 @@ int main() {
 }
 ```
 
-L'output atteso inizia così:
+L'output atteso dovrebbe iniziare così:
 
 ```
 All the tests have passed. Hurrah! 🥳
-Anno 1941 Δ medio = -1.100 ± 2.207
-Anno 1942 Δ medio = -0.033 ± 2.951
-Anno 1943 Δ medio = +0.909 ± 2.322
-Anno 1944 Δ medio = -0.334 ± 2.305
-…
+Anno 1941 Δ medio = -1.100 ± 0.306
+Anno 1942 Δ medio = -0.033 ± 0.409
+Anno 1943 Δ medio = 0.909 ± 0.322
+Anno 1944 Δ medio = -0.334 ± 0.320
 ```
 
 Questo è il grafico atteso:

@@ -96,7 +96,7 @@
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> accum <span class="op">/</span> n<span class="op">;</span></span>
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 <p>Ovviamente dovete tenere conto del numero effettivo di campioni che sommate in <code>accum</code>: la riga finale deve essere <code>accum / n</code>, non certo <code>accum / ssize(v)</code>! Il codice per la deviazione standard si calcola allo stesso modo.</p>
-<p><strong>Attenzione:</strong> non è corretto calcolare la media su <em>tutti</em> i campioni e la deviazione standard prendendone uno ogni sette, perché i due numeri farebbero riferimento a distribuzioni diverse!</p>
+<p><strong>Attenzione:</strong> non è corretto calcolare la media su <em>tutti</em> i campioni e la deviazione standard invece prendendone uno ogni sette, perché i due numeri farebbero riferimento a distribuzioni diverse!</p>
 <p>Vi fornisco il codice per i test:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> test_statistics_with_stride<span class="op">()</span> <span class="op">{</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> v<span class="op">{</span><span class="fl">1.0</span><span class="op">,</span> <span class="fl">2.0</span><span class="op">,</span> <span class="fl">3.0</span><span class="op">,</span> <span class="fl">4.0</span><span class="op">,</span> <span class="fl">5.0</span><span class="op">,</span> <span class="fl">6.0</span><span class="op">};</span></span>
@@ -126,25 +126,26 @@
 <span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>    vector v<span class="op">{</span>Read<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;(</span>filename<span class="op">.</span>c_str<span class="op">())};</span></span>
 <span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>    <span class="dt">double</span> ave<span class="op">{</span>mean<span class="op">(</span>v<span class="op">,</span> stride<span class="op">)};</span></span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>    <span class="dt">double</span> err<span class="op">{</span>stddev<span class="op">(</span>v<span class="op">,</span> stride<span class="op">)};</span></span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>    println<span class="op">(</span><span class="st">&quot;Anno </span><span class="sc">{}</span><span class="st"> Δ medio = </span><span class="sc">{:.3f}</span><span class="st"> ± </span><span class="sc">{:.3f}</span><span class="st">&quot;</span><span class="op">,</span> year<span class="op">,</span> ave<span class="op">,</span> err<span class="op">);</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Qui inserite i vostri calcoli. Attenzione a calcolare</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>    <span class="co">// la deviazione standard DELLA MEDIA!</span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>    <span class="dt">double</span> ave<span class="op">{</span><span class="co">/* … */</span><span class="op">};</span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>    <span class="dt">double</span> err<span class="op">{</span><span class="co">/* … */</span><span class="op">};</span></span>
 <span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>    <span class="co">// inserisco media e deviazione standard dalla media nel grafico</span></span>
-<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>    plt<span class="op">.</span>add_point_yerr<span class="op">(</span>year<span class="op">,</span> ave<span class="op">,</span> err<span class="op">);</span></span>
-<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
-<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>  plt<span class="op">.</span>plot_yerr<span class="op">();</span></span>
-<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>  plt<span class="op">.</span>show<span class="op">();</span></span>
-<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
-<p>L’output atteso inizia così:</p>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>    println<span class="op">(</span><span class="st">&quot;Anno </span><span class="sc">{}</span><span class="st"> Δ medio = </span><span class="sc">{:.3f}</span><span class="st"> ± </span><span class="sc">{:.3f}</span><span class="st">&quot;</span><span class="op">,</span> year<span class="op">,</span> ave<span class="op">,</span> err<span class="op">);</span></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>    <span class="co">// inserisco media e deviazione standard dalla media nel grafico</span></span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>    plt<span class="op">.</span>add_point_yerr<span class="op">(</span>year<span class="op">,</span> ave<span class="op">,</span> err<span class="op">);</span></span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>  plt<span class="op">.</span>plot_yerr<span class="op">();</span></span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>  plt<span class="op">.</span>show<span class="op">();</span></span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p>L’output atteso dovrebbe iniziare così:</p>
 <pre><code>All the tests have passed. Hurrah! 🥳
-Anno 1941 Δ medio = -1.100 ± 2.207
-Anno 1942 Δ medio = -0.033 ± 2.951
-Anno 1943 Δ medio = +0.909 ± 2.322
-Anno 1944 Δ medio = -0.334 ± 2.305
-…</code></pre>
+Anno 1941 Δ medio = -1.100 ± 0.306
+Anno 1942 Δ medio = -0.033 ± 0.409
+Anno 1943 Δ medio = 0.909 ± 0.322
+Anno 1944 Δ medio = -0.334 ± 0.320</code></pre>
 <p>Questo è il grafico atteso:</p>
 <p><img src="images/esercizio04.0.png" /></p>
 <h2 id="esempio-di-codice-con-root">Esempio di codice con ROOT</h2>
