@@ -766,7 +766,7 @@ P_k = \left(r_0 \cos\left(\frac{2\pi k}n\right), r_0 \sin\left(\frac{2\pi k}n\ri
 $$
 dove $r_0$ è il raggio a cui sono messe le cariche.
 
--   Verificare che a grande distanza ($R \gg r_0$) il campo elettrico varia proporzionalmente a $R^{-2 - n/2}$.
+-   Verificare che a grande distanza ($R \gg r_0$) il campo elettrico varia proporzionalmente a $R^{-2 - n/2}$. (ci si può muovere sull'asse $x$ o sull'asse $y$ per semplificare lo studio, mentre sull'asse $z$ ci aspettiamo campo nullo).
 
 -   Valutare fino a quali valori di $n$ si riesce a verificare questa dipendenza.
 

@@ -984,6 +984,10 @@ int main() {
 }
 ```
 
+# Errori comuni
+
+-   Nell’esercizio 4.0, assicuratevi di calcolare la deviazione standard della media, e non la deviazione standard pura e semplice. Se (come dovreste) usate una stride, tenetene conto nel decidere che valore di $\sqrt{N}$ usare.
+
 ---
 title: "Lezione 4"
 author:

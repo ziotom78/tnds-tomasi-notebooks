@@ -125,7 +125,7 @@ struct Cat : public Animal {
 
 # Quando usare puntatori
 
--   Nell'[Esercizio 6.1](./carminati-esercizi-06.html#esercizio-6.0) di oggi si usano i puntatori nel seguente codice:
+-   Nell’[Esercizio 6.0](./carminati-esercizi-06.html#esercizio-6.0) di oggi si usano i puntatori nel seguente codice:
 
     ```c++
     Particella * p{new Particella{1., 2.}};
@@ -181,10 +181,8 @@ $$
 # Verifica dell'algoritmo {#verifica-funzioni-ricerca-zeri}
 
 ```c++
-// You might even pass a reference to `Solutore & s` and call in `main`
-//     test_zeroes(Bisezione{});
-//     test_zeroes(Secante{});
-//     test_zeroes(Newton{});
+// Note that this test is not optimal, because it does not verify that
+// our zero is within the desired precision. How would you improve it?
 void test_zeroes() {
   Bisezione s{};
   Parabola f{3, 5, -2}; // Zeroes for this function are known: x₁ = −2, x₂ = 1/3
@@ -242,15 +240,15 @@ $ ./esercizio-6.3
 fish: Job 1, './esercizio-6.3' terminated by signal SIGABRT (Abort)
 ```
 
-(Se un programma termina invocando `abort()`, eseguendolo all'interno di [NND](debugging.html) in modalità debugging si può ispezionare il valore delle variabili al momento in cui è andato in crash: molto utile per correggere il bug!)
+(Se un programma termina invocando `abort()` ed è stato compilato con `-g3`, eseguendolo all'interno di [NND](debugging.html) o col debugger di [Geany](tomasi-lezione-05.html#geany) si può ispezionare il valore delle variabili al momento in cui è andato in crash: molto utile per correggere il bug!)
 
 # Approcci possibili
 
-1.   Scrivere un messaggio di errore e invocare `abort()`: bene se l'errore è del programmatore, male se l'errore è dell'utente! 😠
+1.   Scrivere un messaggio di errore e invocare `abort()`: bene se l'errore è del programmatore, male se l'errore è dell'utente! 😕
 
-2.   Restituire un valore fissato (es., zero): molto ambiguo, come fa l'utente a sapere se la funzione si annulla veramente per $x = 0$ o se c'è stato un errore? 😠
+2.   Restituire un valore fissato (es., zero): molto ambiguo, come fa l'utente a sapere se la funzione si annulla veramente per $x = 0$ o se c'è stato un errore? 😕
 
-3.   Accettare un parametro aggiuntivo `bool &found` (**reference**!) per `CercaZeri`:
+3.   Accettare un parametro aggiuntivo `bool &found` (**reference**!) per `CercaZeri` 👍:
 
      ```c++
      double CercaZeri(double xmin, double xmax, const FunzioneBase * f, bool &found);
@@ -260,7 +258,7 @@ fish: Job 1, './esercizio-6.3' terminated by signal SIGABRT (Abort)
 
 # Segnalare l'errore
 
-Con il terzo approccio è possibile differenziare la “reazione” all'errore nel `main` dei due esercizi
+Con il terzo approccio è possibile differenziare il modo in cui gestiamo la condizione d’errore nel `main` dei due esercizi
 
 ```c++
 // main() dell'esercizio 6.2 (errore dell'utente):
@@ -287,7 +285,7 @@ if (! found) {
 
 # Uso di `std::expected` (1/5)
 
--   Con il C++23 è stato introdotto il tipo [`std::expected`](https://en.cppreference.com/w/cpp/utility/expected), che è stato mutuato da linguaggi come Rust e OCaml. (Nella compilazione bisogna quindi usare `-std=c++23`, non `-std=c++20`!)
+-   Con il C++23 è stato introdotto il tipo [`std::expected`](https://en.cppreference.com/w/cpp/utility/expected), che è stato mutuato da linguaggi come Rust e OCaml.
 
 -   Il template `std::expected<T, U>` rappresenta il concetto “di solito questa variabile è del tipo `T`, ma se c'è un errore allora è del tipo `U`”:
 
@@ -416,8 +414,10 @@ class Solutore {
 public:
   class Risultato {
   public:
-    bool found{};
-    double value{};
+    bool found{};     // `false` if some error occurred
+    double value{};   // this is meaningful only if found==true
+    // I could add other fields here, like `string error_message`,
+    // or the precision of the result, or the extrema, or…
   };
 
   virtual Risultato CercaZeri(double xmin,
@@ -449,7 +449,7 @@ public:
 -   Questo approccio è importante da imparare:
 
     #.  È applicabile al 99% dei casi della vita reale;
-    #.  Ha preso il sopravvento rispetto alla programmazione OOP usata in ROOT, ed è usato in molte librerie di calcolo numerico moderne ([Armadillo](https://arma.sourceforge.net/), [Eigen](https://eigen.tuxfamily.org/index.php?title=Main_Page), …);
+    #.  È usato in molte librerie di calcolo numerico moderne ([Armadillo](https://arma.sourceforge.net/), [Eigen](https://eigen.tuxfamily.org/index.php?title=Main_Page), …);
     #.  Il codice è più veloce da scrivere e semplice da leggere;
     #.  È anche più veloce da eseguire.
 

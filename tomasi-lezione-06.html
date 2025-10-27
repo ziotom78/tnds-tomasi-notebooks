@@ -277,7 +277,7 @@ oggigiorno è considerata una <strong>pessima</strong> pratica.</p></li>
 <h1>Quando usare puntatori</h1>
 <ul>
 <li><p>Nell’<a
-href="./carminati-esercizi-06.html#esercizio-6.0">Esercizio 6.1</a> di
+href="./carminati-esercizi-06.html#esercizio-6.0">Esercizio 6.0</a> di
 oggi si usano i puntatori nel seguente codice:</p>
 <div class="sourceCode" id="cb6"><pre
 class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>Particella <span class="op">*</span> p<span class="op">{</span><span class="kw">new</span> Particella<span class="op">{</span><span class="fl">1.</span><span class="op">,</span> <span class="fl">2.</span><span class="op">}};</span></span>
@@ -336,23 +336,21 @@ x_{1/2} = \frac{-5 \pm \sqrt{25 + 24}}6 = \begin{cases} -2,\\ \frac13.
 <section id="verifica-funzioni-ricerca-zeri" class="slide level1">
 <h1>Verifica dell’algoritmo</h1>
 <div class="sourceCode" id="cb10"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">// You might even pass a reference to `Solutore &amp; s` and call in `main`</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co">//     test_zeroes(Bisezione{});</span></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="co">//     test_zeroes(Secante{});</span></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="co">//     test_zeroes(Newton{});</span></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> test_zeroes<span class="op">()</span> <span class="op">{</span></span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  Bisezione s<span class="op">{};</span></span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>  Parabola f<span class="op">{</span><span class="dv">3</span><span class="op">,</span> <span class="dv">5</span><span class="op">,</span> <span class="op">-</span><span class="dv">2</span><span class="op">};</span> <span class="co">// Zeroes for this function are known: x₁ = −2, x₂ = 1/3</span></span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>  s<span class="op">.</span>SetPrecisione<span class="op">(</span><span class="fl">1e-8</span><span class="op">);</span></span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>  <span class="ot">assert</span><span class="op">(</span>are_close<span class="op">(</span>s<span class="op">.</span>CercaZeri<span class="op">(-</span><span class="fl">3.0</span><span class="op">,</span> <span class="op">-</span><span class="fl">1.0</span><span class="op">,</span> f<span class="op">),</span> <span class="op">-</span><span class="fl">2.0</span><span class="op">));</span> <span class="co">// Zero is within (a, b)</span></span>
-<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>  <span class="ot">assert</span><span class="op">(</span>are_close<span class="op">(</span>s<span class="op">.</span>CercaZeri<span class="op">(-</span><span class="fl">2.0</span><span class="op">,</span> <span class="fl">0.0</span><span class="op">,</span> f<span class="op">),</span> <span class="op">-</span><span class="fl">2.0</span><span class="op">));</span>  <span class="co">// Zero is at a</span></span>
-<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>  <span class="ot">assert</span><span class="op">(</span>are_close<span class="op">(</span>s<span class="op">.</span>CercaZeri<span class="op">(-</span><span class="fl">4.0</span><span class="op">,</span> <span class="op">-</span><span class="fl">2.0</span><span class="op">,</span> f<span class="op">),</span> <span class="op">-</span><span class="fl">2.0</span><span class="op">));</span> <span class="co">// Zero is at b</span></span>
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Note that this test is not optimal, because it does not verify that</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co">// our zero is within the desired precision. How would you improve it?</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> test_zeroes<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  Bisezione s<span class="op">{};</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  Parabola f<span class="op">{</span><span class="dv">3</span><span class="op">,</span> <span class="dv">5</span><span class="op">,</span> <span class="op">-</span><span class="dv">2</span><span class="op">};</span> <span class="co">// Zeroes for this function are known: x₁ = −2, x₂ = 1/3</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  s<span class="op">.</span>SetPrecisione<span class="op">(</span><span class="fl">1e-8</span><span class="op">);</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>  <span class="ot">assert</span><span class="op">(</span>are_close<span class="op">(</span>s<span class="op">.</span>CercaZeri<span class="op">(-</span><span class="fl">3.0</span><span class="op">,</span> <span class="op">-</span><span class="fl">1.0</span><span class="op">,</span> f<span class="op">),</span> <span class="op">-</span><span class="fl">2.0</span><span class="op">));</span> <span class="co">// Zero is within (a, b)</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>  <span class="ot">assert</span><span class="op">(</span>are_close<span class="op">(</span>s<span class="op">.</span>CercaZeri<span class="op">(-</span><span class="fl">2.0</span><span class="op">,</span> <span class="fl">0.0</span><span class="op">,</span> f<span class="op">),</span> <span class="op">-</span><span class="fl">2.0</span><span class="op">));</span>  <span class="co">// Zero is at a</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>  <span class="ot">assert</span><span class="op">(</span>are_close<span class="op">(</span>s<span class="op">.</span>CercaZeri<span class="op">(-</span><span class="fl">4.0</span><span class="op">,</span> <span class="op">-</span><span class="fl">2.0</span><span class="op">,</span> f<span class="op">),</span> <span class="op">-</span><span class="fl">2.0</span><span class="op">));</span> <span class="co">// Zero is at b</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>  <span class="ot">assert</span><span class="op">(</span>are_close<span class="op">(</span>s<span class="op">.</span>CercaZeri<span class="op">(</span><span class="fl">0.0</span><span class="op">,</span> <span class="fl">1.0</span><span class="op">,</span> f<span class="op">),</span> <span class="fl">1.0</span> <span class="op">/</span> <span class="dv">3</span><span class="op">));</span> <span class="co">// Do NOT write 1 / 3 !</span></span>
 <span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>  <span class="ot">assert</span><span class="op">(</span>are_close<span class="op">(</span>s<span class="op">.</span>CercaZeri<span class="op">(</span><span class="fl">0.0</span><span class="op">,</span> <span class="fl">1.0</span><span class="op">,</span> f<span class="op">),</span> <span class="fl">1.0</span> <span class="op">/</span> <span class="dv">3</span><span class="op">));</span> <span class="co">// Do NOT write 1 / 3 !</span></span>
-<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>  println<span class="op">(</span>cerr<span class="op">,</span> <span class="st">&quot;Root finding works correctly! 🥳&quot;</span><span class="op">);</span></span>
-<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>  println<span class="op">(</span>cerr<span class="op">,</span> <span class="st">&quot;Root finding works correctly! 🥳&quot;</span><span class="op">);</span></span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 </section>
 <section id="determinazione-del-segno" class="slide level1">
 <h1>Determinazione del segno</h1>
@@ -406,22 +404,24 @@ Errore, il teorema degli zeri non è valido nell&#39;intervallo [4, 6]. Usa un a
 
 $ ./esercizio-6.3
 fish: Job 1, &#39;./esercizio-6.3&#39; terminated by signal SIGABRT (Abort)</code></pre>
-<p>(Se un programma termina invocando <code>abort()</code>, eseguendolo
-all’interno di <a href="debugging.html">NND</a> in modalità debugging si
-può ispezionare il valore delle variabili al momento in cui è andato in
-crash: molto utile per correggere il bug!)</p>
+<p>(Se un programma termina invocando <code>abort()</code> ed è stato
+compilato con <code>-g3</code>, eseguendolo all’interno di <a
+href="debugging.html">NND</a> o col debugger di <a
+href="tomasi-lezione-05.html#geany">Geany</a> si può ispezionare il
+valore delle variabili al momento in cui è andato in crash: molto utile
+per correggere il bug!)</p>
 </section>
 <section id="approcci-possibili" class="slide level1">
 <h1>Approcci possibili</h1>
 <ol type="1">
 <li><p>Scrivere un messaggio di errore e invocare <code>abort()</code>:
 bene se l’errore è del programmatore, male se l’errore è dell’utente!
-😠</p></li>
+😕</p></li>
 <li><p>Restituire un valore fissato (es., zero): molto ambiguo, come fa
 l’utente a sapere se la funzione si annulla veramente per <span
-class="math inline">x = 0</span> o se c’è stato un errore? 😠</p></li>
+class="math inline">x = 0</span> o se c’è stato un errore? 😕</p></li>
 <li><p>Accettare un parametro aggiuntivo <code>bool &amp;found</code>
-(<strong>reference</strong>!) per <code>CercaZeri</code>:</p>
+(<strong>reference</strong>!) per <code>CercaZeri</code> 👍:</p>
 <div class="sourceCode" id="cb14"><pre
 class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> CercaZeri<span class="op">(</span><span class="dt">double</span> xmin<span class="op">,</span> <span class="dt">double</span> xmax<span class="op">,</span> <span class="at">const</span> FunzioneBase <span class="op">*</span> f<span class="op">,</span> <span class="dt">bool</span> <span class="op">&amp;</span>found<span class="op">);</span></span></code></pre></div>
 <p>(In alternativa si può dichiarare <code>found</code> variabile membro
@@ -430,8 +430,9 @@ di <code>Solutore</code>).</p></li>
 </section>
 <section id="segnalare-lerrore" class="slide level1">
 <h1>Segnalare l’errore</h1>
-<p>Con il terzo approccio è possibile differenziare la “reazione”
-all’errore nel <code>main</code> dei due esercizi</p>
+<p>Con il terzo approccio è possibile differenziare il modo in cui
+gestiamo la condizione d’errore nel <code>main</code> dei due
+esercizi</p>
 <div class="sourceCode" id="cb15"><pre
 class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co">// main() dell&#39;esercizio 6.2 (errore dell&#39;utente):</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -459,9 +460,7 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb15-1"><a href="#
 <ul>
 <li><p>Con il C++23 è stato introdotto il tipo <a
 href="https://en.cppreference.com/w/cpp/utility/expected"><code>std::expected</code></a>,
-che è stato mutuato da linguaggi come Rust e OCaml. (Nella compilazione
-bisogna quindi usare <code>-std=c++23</code>, non
-<code>-std=c++20</code>!)</p></li>
+che è stato mutuato da linguaggi come Rust e OCaml.</p></li>
 <li><p>Il template <code>std::expected&lt;T, U&gt;</code> rappresenta il
 concetto “di solito questa variabile è del tipo <code>T</code>, ma se
 c’è un errore allora è del tipo <code>U</code>”:</p>
@@ -591,14 +590,16 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb28-1"><a href="#
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span><span class="op">:</span></span>
 <span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">class</span> Risultato <span class="op">{</span></span>
 <span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">public</span><span class="op">:</span></span>
-<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">bool</span> found<span class="op">{};</span></span>
-<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">double</span> value<span class="op">{};</span></span>
-<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>  <span class="op">};</span></span>
-<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a>  <span class="kw">virtual</span> Risultato CercaZeri<span class="op">(</span><span class="dt">double</span> xmin<span class="op">,</span></span>
-<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a>                              <span class="dt">double</span> xmax<span class="op">,</span></span>
-<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a>                              <span class="at">const</span> FunzioneBase <span class="op">&amp;</span> f<span class="op">)</span> <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code></pre></div>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">bool</span> found<span class="op">{};</span>     <span class="co">// `false` if some error occurred</span></span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">double</span> value<span class="op">{};</span>   <span class="co">// this is meaningful only if found==true</span></span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>    <span class="co">// I could add other fields here, like `string error_message`,</span></span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>    <span class="co">// or the precision of the result, or the extrema, or…</span></span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a>  <span class="op">};</span></span>
+<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a>  <span class="kw">virtual</span> Risultato CercaZeri<span class="op">(</span><span class="dt">double</span> xmin<span class="op">,</span></span>
+<span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a>                              <span class="dt">double</span> xmax<span class="op">,</span></span>
+<span id="cb28-13"><a href="#cb28-13" aria-hidden="true" tabindex="-1"></a>                              <span class="at">const</span> FunzioneBase <span class="op">&amp;</span> f<span class="op">)</span> <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb28-14"><a href="#cb28-14" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code></pre></div>
 </section>
 <section id="altro-approccio-1" class="slide level1">
 <h1>Altro approccio</h1>
@@ -623,8 +624,7 @@ che <em>non</em> usa il polimorfismo.</p></li>
 <li><p>Questo approccio è importante da imparare:</p>
 <ol>
 <li>È applicabile al 99% dei casi della vita reale;</li>
-<li>Ha preso il sopravvento rispetto alla programmazione OOP usata in
-ROOT, ed è usato in molte librerie di calcolo numerico moderne (<a
+<li>È usato in molte librerie di calcolo numerico moderne (<a
 href="https://arma.sourceforge.net/">Armadillo</a>, <a
 href="https://eigen.tuxfamily.org/index.php?title=Main_Page">Eigen</a>,
 …);</li>

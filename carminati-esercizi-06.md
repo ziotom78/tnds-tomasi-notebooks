@@ -177,7 +177,7 @@ Ci sono vari modi di implementare una funzione segno da utilizzare nella codific
     }
     ```
 
-    oppure con l'implementazione più compatta ma meno leggibile
+    oppure usando un’implementazione più compatta ma meno leggibile
 
     ```c++
     [[nodiscard]] double sign(double x) {
@@ -309,7 +309,7 @@ Per segnalare condizioni di errore potete usare i suggerimenti spiegati nelle [s
 
 Data una funzione $f(x)$, si dice zero, o radice, di $f$ un elemento $x_0$ del suo dominio tale che $f(x_0) = 0$.
 
-Per trovare numericamente gli zeri della funzione $f(x) = x^2 - 2$ utilizzando il metodo di *bisezione*: è l'algoritmo più semplice, e consiste in una procedura iterativa che, ad ogni ciclo, dimezza l'intervallo in cui si trova lo zero. Dal teorema di Bolzano (o degli zeri) sappiamo che, data una funzione $f$ continua sull'intervallo chiuso $[a,b]$ a valori reali tale che $f(a) \cdot f(b) < 0$, allora esiste un punto $x_0 \in [a, b]$ tale che $f(x_0) = 0$.
+Per trovare numericamente gli zeri della funzione $f(x)$ possiamo utilizzare il metodo della *bisezione*: è l'algoritmo più semplice, e consiste in una procedura iterativa che, ad ogni ciclo, dimezza l'intervallo in cui si trova lo zero. Dal teorema di Bolzano (o degli zeri) sappiamo che, data una funzione $f$ continua sull'intervallo chiuso $[a,b]$ a valori reali tale che $f(a) \cdot f(b) < 0$, allora esiste un punto $x_0 \in [a, b]$ tale che $f(x_0) = 0$.
 
 Definiamo intervallo di incertezza di $f$ un intervallo $[a,b]$ che soddisfa il Teorema di Bolzano. L'idea dell'algoritmo è che se esiste un intervallo di incertezza $[a,b]$ per una funzione $f$, allora ne esiste uno più piccolo (esattamente la metà). L'algoritmo deve avere in input l'intervallo di incertezza di partenza $[a,b]$ ed una precisione (o tolleranza) $\epsilon$ con cui si vuole trovare lo zero di $f$ tale che $\left|b - a\right| < \epsilon$.
 
@@ -317,7 +317,7 @@ Si parte dividendo in due l'intervallo e trovando il punto medio $c = a + (b - a
 
 Ci sono alcuni aspetti da tenere in considerazione:
 
--   Se l'intervallo contiene più di una radice il metodo della bisezione ne troverà solo una.
+-   Se l'intervallo contiene più di una radice, il metodo della bisezione ne troverà solo una.
 
 -   Nell'implementazione delle condizioni di ricerca dall'intervallo di incertezza occorre prestare attenzione alle operazioni tra *floating point* soprattutto in prossimità della radice.
 
@@ -344,6 +344,12 @@ Per impostare il numero di cifre significative nella scrittura a video, il codic
 // We must use a dot '.' before {1}, because we're specifying how many digits
 // should be used for the decimal part
 std::println("x0 = {0:.{1}f}", zero, cifre_significative);
+```
+
+Se non potete/volete usare `print`, dovete importare `<iomanip>` e usare `fixed` e `setprecision()`:
+
+```c++
+cout << fixed << setprecision(cifre_significative) << zero << endl;
 ```
 
 
@@ -399,7 +405,7 @@ Come di consueto, elenco alcuni errori molto comuni che ho trovato negli anni pa
 
 -   Un errore un po' più subdolo è quello di non individuare lo zero se si trova esattamente in mezzo all'intervallo: nell'esempio della funzione $f(x)$ vista sopra, il codice di alcuni studenti non trova una soluzione se si specifica l'intervallo $[-3, -1]$, perché lo zero cade esattamente a metà e il codice non si accorge che $f(c) = 0$ quando $c = (a + b)/2$.
 
--   Mi è capitato di aver visto codici che non si accorgono di aver raggiunto la precisione richiesta, e continuano ad iterare fino al numero massimo di iterazioni `m_nmax`; di solito il problema è la mancanza dell'uso di `fabs()` per calcolare l'ampiezza dell'intervallo $\left|b - a\right|$.
+-   Mi è capitato di vedere codici che non si accorgono di aver raggiunto la precisione richiesta, e continuano ad iterare fino al numero massimo di iterazioni `m_nmax`; di solito il problema è la mancanza dell'uso di `fabs()` per calcolare l'ampiezza dell'intervallo $\left|b - a\right|$. (Attenzione, [nei test forniti nelle slide](tomasi-lezione-06.html#verifica-funzioni-ricerca-zeri) questo non viene verificato: provate a pensare voi a come scrivere un test che controlli questo aspetto!)
 
 -   Se si segue il consiglio presentato nelle [slide di approfondimento](./tomasi-lezione-06.html#gestione-errori) di aggiungere a `CercaZeri` un parametro `bool &found` per indicare se lo zero è stato trovato o no, assicurarsi che sia un **reference** (o almeno un puntatore). Dichiararlo come `bool found` non funziona perché al termine della chiamata a `CercaZeri` il valore di `found` non sarà aggiornato!
 

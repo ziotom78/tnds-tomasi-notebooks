@@ -271,7 +271,7 @@ public:
 
 # Editor
 
-# Geany
+# Geany {#geany}
 
 -   Dopo le fatiche della scorsa lezione, mi sono documentato su alcune alternative a Visual Studio Code che non riempiano a tradimento le vostre home directory
 

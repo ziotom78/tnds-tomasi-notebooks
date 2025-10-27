@@ -1,21 +1,53 @@
 # Esercizi e spiegazioni
 
+[es01]: carminati-esercizi-01.html
+[es02]: carminati-esercizi-02.html
+[es03]: carminati-esercizi-03.html
+[es04]: carminati-esercizi-04.html
+[es05]: carminati-esercizi-05.html
+[es06]: carminati-esercizi-06.html
+[es07]: carminati-esercizi-07.html
+[es08]: carminati-esercizi-08.html
+[es09]: carminati-esercizi-09.html
+[es10]: carminati-esercizi-10.html
+[es11]: carminati-esercizi-11.html
+[es12]: carminati-esercizi-12.html
+
+[slide01]: tomasi-lezione-01.html
+[slide02]: tomasi-lezione-02.html
+[slide03]: tomasi-lezione-03.html
+[slide04]: tomasi-lezione-04.html
+[slide05]: tomasi-lezione-05.html
+[slide06]: tomasi-lezione-06.html
+[slide07]: tomasi-lezione-07.html
+[slide08]: tomasi-lezione-08.html
+[slide09]: tomasi-lezione-09.html
+[slide10]: tomasi-lezione-10.html
+[slide11]: tomasi-lezione-11.html
+[slide12]: tomasi-lezione-12.html
+
+[julia07]: https://ziotom78.github.io/tnds-notebooks/lezione07/
+[julia08]: https://ziotom78.github.io/tnds-notebooks/lezione08/
+[julia10]: https://ziotom78.github.io/tnds-notebooks/lezione10/
+
+[pdf]: 2025-11-12 Equazioni differenziali Tomasi.pdf
+
 <center>
-| Data                                      | Esercizi                                                        | Spiegazione                                                         |
-|-------------------------------------------|-----------------------------------------------------------------|---------------------------------------------------------------------|
-| 23 Settembre 2025                         | [Arrays](carminati-esercizi-01.html)                            | [Lezione 1](tomasi-lezione-01.html)                                 |
-| 30 settembre 2025                         | [Classe `Vettore`](carminati-esercizi-02.html)                  | [Lezione 2](tomasi-lezione-02.html)                                 |
-| 7 Ottobre 2025                            | [Template e `vector`](carminati-esercizi-03.html)               | [Lezione 3](tomasi-lezione-03.html)                                 |
-| 14 Ottobre 2025                           | [Analisi dati](carminati-esercizi-04.html)                      | [Lezione 4](tomasi-lezione-04.html)                                 |
-| 21 Ottobre 2025                           | [Classi ed ereditarietà](carminati-esercizi-05.html)            | [Lezione 5](tomasi-lezione-05.html)                                 |
+| Data       | Esercizi                                  | Spiegazione                                                     |
+|------------|-------------------------------------------|-----------------------------------------------------------------|
+| 2025-09-23 | [Arrays][es01]                            | [Lezione 1][slide01]                                            |
+| 2025-09-30 | [Classe `Vettore`][es02]                  | [Lezione 2][slide02]                                            |
+| 2025-10-07 | [Template e `vector`][es03]               | [Lezione 3][slide03]                                            |
+| 2025-10-14 | [Analisi dati][es04]                      | [Lezione 4][slide04]                                            |
+| 2025-10-21 | [Classi ed ereditarietà][es05]            | [Lezione 5][slide05]                                            |
+| 2025-10-28 | [Ricerca di zeri][es06]                   | [Lezione 6][slide06]                                            |
 <!--
-| 28 Ottobre 2025                           | [Ricerca di zeri](carminati-esercizi-06.html)                   | [Lezione 6](tomasi-lezione-06.html)                                 |
-| 4 Novembre 2025                           | [Quadratura numerica](carminati-esercizi-07.html)               | [Notebook 7](https://ziotom78.github.io/tnds-notebooks/lezione07/)  |
-| 11 Novembre 2025                          | [Equazioni differenziali](carminati-esercizi-08.html)           | [Notebook 8](https://ziotom78.github.io/tnds-notebooks/lezione08/), [slides](tomasi-lezione-08.html) |
-| 18 Novembre 2025                          | Idem                                                            | [Esempio svolto](2025-11-12 Equazioni differenziali Tomasi.pdf)     |
-| 25 Novembre 2025                          | [Numeri pseudo-casuali e integrali](carminati-esercizi-10.html) | [Notebook 10](https://ziotom78.github.io/tnds-notebooks/lezione10/) |
-| 2 Dicembre 2025                           | Idem                                                            | Idem                                                                |
-| 9 Dicembre 2025                           | [Simulazione di esperimenti](carminati-esercizi-12.html)        | [Notebook 10](https://ziotom78.github.io/tnds-notebooks/lezione10/) |
+| 2025-11-04 | [Quadratura numerica][es07]               | [Notebook 7][julia07]                                           |
+| 2025-11-11 | [Equazioni differenziali][es08]           | [Notebook 8][julia08], [slides][slide08], [esempio svolto][pdf] |
+| 2025-11-18 | Idem                                      |                                                                 |
+| 2025-11-25 | [Numeri pseudo-casuali e integrali][es10] | [Notebook 10 & 11][julia10]                                     |
+| 2025-12-02 | Idem                                      | Idem                                                            |
+| 2025-12-09 | [Simulazione di esperimenti][es12]        | [Notebook 10 & 11][julia10]                                     |
 -->
 </center>
 
