@@ -289,15 +289,15 @@ public:
   // Here too we provide two definitions. You must only implement the one you
   // provided in `Solutore`!
 
-  virtual [[nodiscard]] double CercaZeriPointer(double xmin, double xmax,
-                                                const FunzioneBase * f,
-                                                double prec = 1e-3,
-                                                int nmax = 100);
+  [[nodiscard]] double CercaZeriPointer(double xmin, double xmax,
+                                        const FunzioneBase * f,
+                                        double prec = 1e-3,
+                                        int nmax = 100) override;
 
-  virtual [[nodiscard]] double CercaZeriReference(double xmin, double xmax,
-                                                  const FunzioneBase & f,
-                                                  double prec = 1e-3,
-                                                  int nmax = 100);
+  [[nodiscard]] double CercaZeriReference(double xmin, double xmax,
+                                          const FunzioneBase & f,
+                                          double prec = 1e-3,
+                                          int nmax = 100) override;
 };
 ```
 
