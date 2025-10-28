@@ -309,15 +309,24 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb8-1"><a href="#c
 </section>
 <section id="quando-usare-i-puntatori" class="slide level1">
 <h1>Quando usare i puntatori</h1>
-<p>Se non ci si trova nella situazione descritta, è meglio evitare di
-usare i puntatori: il codice è più semplice da leggere, e non c’è
+<ul>
+<li><p>Se non ci si trova nella situazione descritta, è meglio evitare
+di usare i puntatori: il codice è più semplice da leggere, e non c’è
 possibilità di avere <code>segmentation fault</code> causati
 dall’accesso a puntatori nulli.</p>
 <div class="sourceCode" id="cb9"><pre
 class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Far easier and safer!</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>Particella a<span class="op">{</span><span class="fl">1.</span><span class="op">,</span> <span class="fl">2.</span><span class="op">};</span></span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>Elettrone b<span class="op">{};</span></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>Elettrone c<span class="op">{};</span></span></code></pre></div>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>Elettrone c<span class="op">{};</span></span></code></pre></div></li>
+<li><p>Notate che nel C++ moderno è <strong>sempre</strong> possibile
+evitare i puntatori e garantire il polimorfismo dell’esempio 6.1 usando
+i cosiddetti “<a
+href="https://www.youtube.com/watch?v=e2LMAgoqY_k">smart pointers</a>”
+(vedi ad esempio <a
+href="https://en.cppreference.com/w/cpp/memory/unique_ptr/make_unique.html"><code>make_unique</code></a>),
+che mettono al riparo da crash e leak.</p></li>
+</ul>
 </section>
 <section id="esercizio-6.2-bisezione" class="slide level1">
 <h1>Esercizio 6.2 (bisezione)</h1>

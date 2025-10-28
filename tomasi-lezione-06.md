@@ -155,14 +155,16 @@ struct Cat : public Animal {
 
 # Quando usare i puntatori
 
-Se non ci si trova nella situazione descritta, è meglio evitare di usare i puntatori: il codice è più semplice da leggere, e non c'è possibilità di avere `segmentation fault` causati dall'accesso a puntatori nulli.
+-   Se non ci si trova nella situazione descritta, è meglio evitare di usare i puntatori: il codice è più semplice da leggere, e non c'è possibilità di avere `segmentation fault` causati dall'accesso a puntatori nulli.
 
-```c++
-// Far easier and safer!
-Particella a{1., 2.};
-Elettrone b{};
-Elettrone c{};
-```
+    ```c++
+    // Far easier and safer!
+    Particella a{1., 2.};
+    Elettrone b{};
+    Elettrone c{};
+    ```
+
+-   Notate che nel C++ moderno è **sempre** possibile evitare i puntatori e garantire il polimorfismo dell’esempio 6.1 usando i cosiddetti “[smart pointers](https://www.youtube.com/watch?v=e2LMAgoqY_k)” (vedi ad esempio [`make_unique`](https://en.cppreference.com/w/cpp/memory/unique_ptr/make_unique.html)), che mettono al riparo da crash e leak.
 
 # Esercizio 6.2 (bisezione)
 
