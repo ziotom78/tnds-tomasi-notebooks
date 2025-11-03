@@ -59,44 +59,32 @@ using namespace std;
 
 class Integral {
 public:
-  Integral() : m_a{}, m_b{}, m_sign{}, m_h{} {}
+  // Notate che in questa classe non ci sono variabili membro.
+  // Questo è perfettamente legale: stiamo usando le classi
+  // solo per sfruttare le funzioni virtuali!
+  Integral() {}
 
   [[nodiscard]] double integrate(double a, double b, int nstep,
                                  FunzioneBase &f) {
-    // Questo metodo fa molto poco: imposta `a` e
-    // `b`, verifica che a < b, e poi invoca il
-    // metodo virtuale `calculate`, che va ridefinito
-    // nelle classi derivate
-    checkInterval(a, b);
-    return m_sign * calculate(nstep, f);
-  }
+    double true_a{std::min(a, b)};
+    double true_b{std::max(a, b)};
+    double sign{(a < b) ? 1 : -1};
 
-  [[nodiscard]] double getA() const { return m_a; }
-  [[nodiscard]] double getB() const { return m_b; }
-  [[nodiscard]] double getSign() const { return m_sign; }
-  [[nodiscard]] double getH() const { return m_h; }
-  void setH(double h) { m_h = h; }
+    // Ora invochiamo il metodo privato, che fa tutto il lavoro
+    // e può contare sul fatto che a < b
+    return sign * calculate(true_a, true_b, nstep, f);
+  }
 
 private:
   // Questa è la funzione da ridefinire con `override` nelle classi derivate
-  // Essa usa come estremi di integrazione m_a ed m_b, ed è *sempre*
-  // garantito che m_a < m_b (perché se ne occupa `Integral::integrate`)
-  // (Notate che un metodo si può ridefinire nelle classi derivate anche
-  // se è `private`!)
+  // Essa usa come estremi di integrazione a e b, ed è *sempre* garantito
+  // che a < b (perché se ne occupa `Integral::integrate`, vedi sopra)
+  // Notate che un metodo si può ridefinire nelle classi derivate anche
+  // se è `private`!
   //
   // P.S. È inutile usare l’attributo [[nodiscard]] con funzioni virtuali pure,
   // perché non viene ereditato
-  virtual double calculate(int nstep, FunzioneBase &f) = 0;
-
-  void checkInterval(double a, double b) {
-    m_a = std::min(a, b);
-    m_b = std::max(a, b);
-    m_sign = (a < b) ? 1 : -1;
-  }
-
-  double m_a, m_b;
-  double m_sign;
-  double m_h;
+  virtual double calculate(double a, double b, int nstep, FunzioneBase &f) = 0;
 };
 
 // Classe derivata, implementa il metodo mid-point
@@ -105,9 +93,10 @@ public:
   Midpoint() : Integral() {}
 
 private:
-  [[nodiscard]] double calculate(int nstep, FunzioneBase &f) override {
+  [[nodiscard]] double calculate(double a, double b,
+                                 int nstep, FunzioneBase &f) override {
     // Ricordare: in quest'implementazione possiamo
-    // assumere che m_a < m_b, perché il controllo
+    // assumere che a < b, perché il controllo
     // viene fatto da `Integral::integrate`
 
     if (nstep < 0) {
@@ -115,33 +104,32 @@ private:
         exit(1);
     }
 
-    m_h = (getB() - getA()) / nstep;
+    double h{(b - a) / nstep};
     double sum{};
 
     for (int i{}; i < nstep; i++) {
-      sum += f.Eval(m_a + (i + 0.5) * m_h);
+      sum += f.Eval(a + (i + 0.5) * h);
     }
 
-    // Non c'è bisogno di moltiplicare per m_sign,
-    // questo verrà fatto dalla funzione (pubblica)
-    // `Integral::integrate` della classe primitiva
-    return sum * m_h;
+    return sum * h;
   }
 };
 ```
 
 (Attenzione: il codice sopra ha un problema di accessibilità e non compila. Cercate di capire da soli in che modo sistemarlo, e se non riuscite, chiedete al docente o all'assistente).
 
-Notate in che modo il codice implementa il calcolo: il metodo pubblico è `Integral::integrate`, che **non** è virtuale: esso si preoccupa di invocare `Integral::checkInterval` (privato) per verificare gli estremi di integrazione, e poi invoca il metodo privato `Integral::calculate` che fa il conto vero e proprio:
+Notate in che modo il codice implementa il calcolo: il metodo pubblico è `Integral::integrate`, che **non** è virtuale: esso si preoccupa di invocare `Integral::setInterval` (privato) per impostare correttamente gli estremi di integrazione, e poi invoca il metodo privato `Integral::calculate` che fa il conto vero e proprio:
 
 ```c++
 double integrate(double a, double b, int nstep, FunzioneBase &f) {
-  checkInterval(a, b);
-  return m_sign * calculate(nstep, f);
+  // Imposta l’intervallo
+  // ...
+
+  return sign * calculate(a, b, nstep, f);
 }
 ```
 
-In questo modo il metodo `calculate` può usare gli estremi restituiti da `getA()`/`getB()` senza doversi preoccupare del caso $a > b$. Se vi stupisce che il metodo `calculate`, pur essendo dichiarato `private`, possa essere ridefinito nella classe derivata `Midpoint`, considerate che `private` indica chi può **chiamare** il metodo (solo la classe `Integrate` e non le sue derivate), ma non pone restrizioni su chi possa **ridefinirlo**.
+In questo modo il metodo `calculate` pul evitare di preoccuparsi del caso $a > b$. Se vi stupisce che il metodo `calculate`, pur essendo dichiarato `private`, possa essere ridefinito nella classe derivata `Midpoint`, considerate che `private` indica chi può **chiamare** il metodo (solo la classe `Integrate` e non le sue derivate), ma non pone restrizioni su chi possa **ridefinirlo**.
 
 Viene ora fornito un codice per verificare il funzionamento di quanto implementato finora:
 

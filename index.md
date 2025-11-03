@@ -41,8 +41,8 @@
 | 2025-10-14 | [Analisi dati][es04]                      | [Lezione 4][slide04]                                            |
 | 2025-10-21 | [Classi ed ereditarietà][es05]            | [Lezione 5][slide05]                                            |
 | 2025-10-28 | [Ricerca di zeri][es06]                   | [Lezione 6][slide06]                                            |
-<!--
 | 2025-11-04 | [Quadratura numerica][es07]               | [Notebook 7][julia07]                                           |
+<!--
 | 2025-11-11 | [Equazioni differenziali][es08]           | [Notebook 8][julia08], [slides][slide08], [esempio svolto][pdf] |
 | 2025-11-18 | Idem                                      |                                                                 |
 | 2025-11-25 | [Numeri pseudo-casuali e integrali][es10] | [Notebook 10 & 11][julia10]                                     |
