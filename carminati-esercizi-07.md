@@ -121,7 +121,7 @@ private:
 };
 ```
 
-Notate in che modo il codice implementa il calcolo: il metodo pubblico è `Integral::integrate`, che **non** è virtuale: esso si preoccupa di invocare `Integral::setInterval` (privato) per impostare correttamente gli estremi di integrazione, e poi invoca il metodo privato `Integral::calculate` che fa il conto vero e proprio:
+Notate in che modo il codice implementa il calcolo: il metodo pubblico è `Integral::integrate`, che **non** è virtuale: esso si preoccupa di impostare correttamente gli estremi di integrazione, e poi invoca il metodo privato `Integral::calculate` che fa il conto vero e proprio:
 
 ```c++
 double integrate(double a, double b, int nstep, FunzioneBase &f) {
