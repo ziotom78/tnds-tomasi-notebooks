@@ -102,16 +102,44 @@ L'output atteso dovrebbe iniziare così:
 
 ```
 All the tests have passed. Hurrah! 🥳
-Anno 1941 Δ medio = -1.100 ± 0.306
-Anno 1942 Δ medio = -0.033 ± 0.409
-Anno 1943 Δ medio = 0.909 ± 0.322
-Anno 1944 Δ medio = -0.334 ± 0.320
+Anno 1941 Δ medio = -1.100 ± 0.303
+Anno 1942 Δ medio = -0.033 ± 0.405
+Anno 1943 Δ medio = 0.909 ± 0.319
+Anno 1944 Δ medio = -0.334 ± 0.317
 ```
 
 Questo è il grafico atteso:
 
 ![](images/esercizio04.0.png)
 
+**Attenzione**! Nel calcolare la deviazione standard della media, dovete considerare il numero di campioni usati effettivamente per la deviazione standard del campione, che deve tenere conto della stride.
+
+Supponiamo che la stride sia 3, e che voi abbiate 6 campioni. In tal caso, dovreste usare due elementi, indicati da `X` nel disegno qui sotto:
+
+```
++---+---+---+---+---+---+
+| X |   |   | X |   |   |
++---+---+---+---+---+---+
+```
+
+Ma se invece di 6 campioni ne avete 7, ecco che allora usate **tre** elementi:
+
+```
++---+---+---+---+---+---+---+
+| X |   |   | X |   |   | X |
++---+---+---+---+---+---+---+
+```
+
+La formula per avere il numero di elementi su cui normalizzare la deviazione standard, data una lunghezza `ssize(v)` e una `stride`, è
+
+```c++
+(ssize(v) + stride - 1) / stride
+```
+
+dove la divisione è intera. Vedete che nei due casi considerati sopra, con `stride == 3`, il risultato è corretto:
+
+-   Con sei elementi, si ha `ssize(v) == 6` e quindi `(6 + 3 - 1) / 3 = 8 / 3 = 2` (divisione intera)
+-   Con sette elementi, si ha `ssize(v) == 7` e quindi `(7 + 3 - 1) / 3 = 9 / 3 = 3`.
 
 ## Esempio di codice con ROOT
 
