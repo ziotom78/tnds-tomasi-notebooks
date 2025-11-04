@@ -75,6 +75,11 @@ public:
     return sign * calculate(true_a, true_b, nstep, f);
   }
 
+  // Restituisce il passo di integrazione dati gli estremi e gli intervalli
+  [[nodiscard]] double get_h(double a, double b, int nstep) const {
+    return std::fabs(b - a) / nstep;
+  };
+
 private:
   // Questa è la funzione da ridefinire con `override` nelle classi derivate
   // Essa usa come estremi di integrazione a e b, ed è *sempre* garantito
@@ -173,9 +178,9 @@ std::vector<double> errors(ssize(steps));
 double true_value{1};
 println("Passi        Intervallo h  Errore");
 for (size_t i{}; i < ssize(steps); ++i) {
-  double estimated_value{myInt.integrate(steps[i], f)};
+  double estimated_value{myInt.integrate(a, b, steps[i], f)};
   errors[i] = fabs(estimated_value - true_value);
-  step_sizes[i] = myInt.GetH();
+  step_sizes[i] = myInt.get_h(a, b, steps[i]);
   println("{:12d} {:14.8e} {:20.8e}", steps[i], step_sizes[i], errors[i]);
 }
 
@@ -201,10 +206,10 @@ TGraph g_errore{};
 double true_value{1};
 println("Passi        Errore")
 for (int i{}; i < size(steps); i++) {
-  double estimated_value{myInt.integrate(steps[i], f)};
+  double estimated_value{myInt.integrate(a, b, steps[i], f)};
   double err{fabs(estimated_value - true_value)};
   println("{:12d} {:20.8e}", steps[i], err);
-  g_errore.SetPoint(i, myInt.GetH(), err);
+  g_errore.SetPoint(i, myInt.get_h(a, b, steps[i]), err);
 }
 ```
 

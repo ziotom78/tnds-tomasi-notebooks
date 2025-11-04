@@ -122,45 +122,50 @@ x_k = a + \left(k + \frac12 \right) h,\qquad k = 0, 1, \ldots, N - 1.
 <span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> sign <span class="op">*</span> calculate<span class="op">(</span>true_a<span class="op">,</span> true_b<span class="op">,</span> nstep<span class="op">,</span> f<span class="op">);</span></span>
 <span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
 <span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a><span class="kw">private</span><span class="op">:</span></span>
-<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Questa è la funzione da ridefinire con `override` nelle classi derivate</span></span>
-<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Essa usa come estremi di integrazione a e b, ed è *sempre* garantito</span></span>
-<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>  <span class="co">// che a &lt; b (perché se ne occupa `Integral::integrate`, vedi sopra)</span></span>
-<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Notate che un metodo si può ridefinire nelle classi derivate anche</span></span>
-<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>  <span class="co">// se è `private`!</span></span>
-<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>  <span class="co">//</span></span>
-<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>  <span class="co">// P.S. È inutile usare l’attributo [[nodiscard]] con funzioni virtuali pure,</span></span>
-<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>  <span class="co">// perché non viene ereditato</span></span>
-<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>  <span class="kw">virtual</span> <span class="dt">double</span> calculate<span class="op">(</span><span class="dt">double</span> a<span class="op">,</span> <span class="dt">double</span> b<span class="op">,</span> <span class="dt">int</span> nstep<span class="op">,</span> FunzioneBase <span class="op">&amp;</span>f<span class="op">)</span> <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span>
-<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a><span class="co">// Classe derivata, implementa il metodo mid-point</span></span>
-<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Midpoint <span class="op">:</span> <span class="kw">public</span> Integral <span class="op">{</span></span>
-<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span><span class="op">:</span></span>
-<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a>  Midpoint<span class="op">()</span> <span class="op">:</span> Integral<span class="op">()</span> <span class="op">{}</span></span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Restituisce il passo di integrazione dati gli estremi e gli intervalli</span></span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>  <span class="op">[[</span><span class="at">nodiscard</span><span class="op">]]</span> <span class="dt">double</span> get_h<span class="op">(</span><span class="dt">double</span> a<span class="op">,</span> <span class="dt">double</span> b<span class="op">,</span> <span class="dt">int</span> nstep<span class="op">)</span> <span class="at">const</span> <span class="op">{</span></span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="bu">std::</span>fabs<span class="op">(</span>b <span class="op">-</span> a<span class="op">)</span> <span class="op">/</span> nstep<span class="op">;</span></span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>  <span class="op">};</span></span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a><span class="kw">private</span><span class="op">:</span></span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Questa è la funzione da ridefinire con `override` nelle classi derivate</span></span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Essa usa come estremi di integrazione a e b, ed è *sempre* garantito</span></span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>  <span class="co">// che a &lt; b (perché se ne occupa `Integral::integrate`, vedi sopra)</span></span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Notate che un metodo si può ridefinire nelle classi derivate anche</span></span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>  <span class="co">// se è `private`!</span></span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>  <span class="co">//</span></span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>  <span class="co">// P.S. È inutile usare l’attributo [[nodiscard]] con funzioni virtuali pure,</span></span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>  <span class="co">// perché non viene ereditato</span></span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a>  <span class="kw">virtual</span> <span class="dt">double</span> calculate<span class="op">(</span><span class="dt">double</span> a<span class="op">,</span> <span class="dt">double</span> b<span class="op">,</span> <span class="dt">int</span> nstep<span class="op">,</span> FunzioneBase <span class="op">&amp;</span>f<span class="op">)</span> <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span>
 <span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a><span class="kw">private</span><span class="op">:</span></span>
-<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> calculate<span class="op">(</span><span class="dt">double</span> a<span class="op">,</span> <span class="dt">double</span> b<span class="op">,</span></span>
-<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a>                   <span class="dt">int</span> nstep<span class="op">,</span> FunzioneBase <span class="op">&amp;</span>f<span class="op">)</span> <span class="kw">override</span> <span class="op">{</span></span>
-<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Ricordare: in quest&#39;implementazione possiamo</span></span>
-<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a>    <span class="co">// assumere che a &lt; b, perché il controllo</span></span>
-<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a>    <span class="co">// viene fatto da `Integral::integrate`</span></span>
-<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>nstep <span class="op">&lt;</span> <span class="dv">0</span><span class="op">)</span> <span class="op">{</span></span>
-<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a>        cerr <span class="op">&lt;&lt;</span> <span class="st">&quot;Errore, il numero di passi non può essere negativo!</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">;</span></span>
-<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a>        exit<span class="op">(</span><span class="dv">1</span><span class="op">);</span></span>
-<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a><span class="co">// Classe derivata, implementa il metodo mid-point</span></span>
+<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Midpoint <span class="op">:</span> <span class="kw">public</span> Integral <span class="op">{</span></span>
+<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span><span class="op">:</span></span>
+<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a>  Midpoint<span class="op">()</span> <span class="op">:</span> Integral<span class="op">()</span> <span class="op">{}</span></span>
+<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a><span class="kw">private</span><span class="op">:</span></span>
+<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> calculate<span class="op">(</span><span class="dt">double</span> a<span class="op">,</span> <span class="dt">double</span> b<span class="op">,</span></span>
+<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a>                   <span class="dt">int</span> nstep<span class="op">,</span> FunzioneBase <span class="op">&amp;</span>f<span class="op">)</span> <span class="kw">override</span> <span class="op">{</span></span>
+<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Ricordare: in quest&#39;implementazione possiamo</span></span>
+<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a>    <span class="co">// assumere che a &lt; b, perché il controllo</span></span>
+<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a>    <span class="co">// viene fatto da `Integral::integrate`</span></span>
 <span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a>    <span class="dt">double</span> h<span class="op">{(</span>b <span class="op">-</span> a<span class="op">)</span> <span class="op">/</span> nstep<span class="op">};</span></span>
-<span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a>    <span class="dt">double</span> sum<span class="op">{};</span></span>
-<span id="cb2-58"><a href="#cb2-58" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-59"><a href="#cb2-59" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i<span class="op">{};</span> i <span class="op">&lt;</span> nstep<span class="op">;</span> i<span class="op">++)</span> <span class="op">{</span></span>
-<span id="cb2-60"><a href="#cb2-60" aria-hidden="true" tabindex="-1"></a>      sum <span class="op">+=</span> f<span class="op">.</span>Eval<span class="op">(</span>a <span class="op">+</span> <span class="op">(</span>i <span class="op">+</span> <span class="fl">0.5</span><span class="op">)</span> <span class="op">*</span> h<span class="op">);</span></span>
-<span id="cb2-61"><a href="#cb2-61" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb2-62"><a href="#cb2-62" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-63"><a href="#cb2-63" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> sum <span class="op">*</span> h<span class="op">;</span></span>
-<span id="cb2-64"><a href="#cb2-64" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
-<span id="cb2-65"><a href="#cb2-65" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code></pre></div>
+<span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>nstep <span class="op">&lt;</span> <span class="dv">0</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a>        cerr <span class="op">&lt;&lt;</span> <span class="st">&quot;Errore, il numero di passi non può essere negativo!</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">;</span></span>
+<span id="cb2-58"><a href="#cb2-58" aria-hidden="true" tabindex="-1"></a>        exit<span class="op">(</span><span class="dv">1</span><span class="op">);</span></span>
+<span id="cb2-59"><a href="#cb2-59" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb2-60"><a href="#cb2-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-61"><a href="#cb2-61" aria-hidden="true" tabindex="-1"></a>    <span class="dt">double</span> h<span class="op">{(</span>b <span class="op">-</span> a<span class="op">)</span> <span class="op">/</span> nstep<span class="op">};</span></span>
+<span id="cb2-62"><a href="#cb2-62" aria-hidden="true" tabindex="-1"></a>    <span class="dt">double</span> sum<span class="op">{};</span></span>
+<span id="cb2-63"><a href="#cb2-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-64"><a href="#cb2-64" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i<span class="op">{};</span> i <span class="op">&lt;</span> nstep<span class="op">;</span> i<span class="op">++)</span> <span class="op">{</span></span>
+<span id="cb2-65"><a href="#cb2-65" aria-hidden="true" tabindex="-1"></a>      sum <span class="op">+=</span> f<span class="op">.</span>Eval<span class="op">(</span>a <span class="op">+</span> <span class="op">(</span>i <span class="op">+</span> <span class="fl">0.5</span><span class="op">)</span> <span class="op">*</span> h<span class="op">);</span></span>
+<span id="cb2-66"><a href="#cb2-66" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb2-67"><a href="#cb2-67" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-68"><a href="#cb2-68" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> sum <span class="op">*</span> h<span class="op">;</span></span>
+<span id="cb2-69"><a href="#cb2-69" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb2-70"><a href="#cb2-70" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code></pre></div>
 <p>Notate in che modo il codice implementa il calcolo: il metodo pubblico è <code>Integral::integrate</code>, che <strong>non</strong> è virtuale: esso si preoccupa di invocare <code>Integral::setInterval</code> (privato) per impostare correttamente gli estremi di integrazione, e poi invoca il metodo privato <code>Integral::calculate</code> che fa il conto vero e proprio:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> integrate<span class="op">(</span><span class="dt">double</span> a<span class="op">,</span> <span class="dt">double</span> b<span class="op">,</span> <span class="dt">int</span> nstep<span class="op">,</span> FunzioneBase <span class="op">&amp;</span>f<span class="op">)</span> <span class="op">{</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Imposta l’intervallo</span></span>
@@ -206,9 +211,9 @@ x_k = a + \left(k + \frac12 \right) h,\qquad k = 0, 1, \ldots, N - 1.
 <span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> true_value<span class="op">{</span><span class="dv">1</span><span class="op">};</span></span>
 <span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>println<span class="op">(</span><span class="st">&quot;Passi        Intervallo h  Errore&quot;</span><span class="op">);</span></span>
 <span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> <span class="op">(</span><span class="dt">size_t</span> i<span class="op">{};</span> i <span class="op">&lt;</span> ssize<span class="op">(</span>steps<span class="op">);</span> <span class="op">++</span>i<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> estimated_value<span class="op">{</span>myInt<span class="op">.</span>integrate<span class="op">(</span>steps<span class="op">[</span>i<span class="op">],</span> f<span class="op">)};</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> estimated_value<span class="op">{</span>myInt<span class="op">.</span>integrate<span class="op">(</span>a<span class="op">,</span> b<span class="op">,</span> steps<span class="op">[</span>i<span class="op">],</span> f<span class="op">)};</span></span>
 <span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>  errors<span class="op">[</span>i<span class="op">]</span> <span class="op">=</span> fabs<span class="op">(</span>estimated_value <span class="op">-</span> true_value<span class="op">);</span></span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>  step_sizes<span class="op">[</span>i<span class="op">]</span> <span class="op">=</span> myInt<span class="op">.</span>GetH<span class="op">();</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>  step_sizes<span class="op">[</span>i<span class="op">]</span> <span class="op">=</span> myInt<span class="op">.</span>get_h<span class="op">(</span>a<span class="op">,</span> b<span class="op">,</span> steps<span class="op">[</span>i<span class="op">]);</span></span>
 <span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>  println<span class="op">(</span><span class="st">&quot;</span><span class="sc">{:12d}</span><span class="st"> </span><span class="sc">{:14.8e}</span><span class="st"> </span><span class="sc">{:20.8e}</span><span class="st">&quot;</span><span class="op">,</span> steps<span class="op">[</span>i<span class="op">],</span> step_sizes<span class="op">[</span>i<span class="op">],</span> errors<span class="op">[</span>i<span class="op">]);</span></span>
 <span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
 <span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a></span>
@@ -231,10 +236,10 @@ x_k = a + \left(k + \frac12 \right) h,\qquad k = 0, 1, \ldots, N - 1.
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> true_value<span class="op">{</span><span class="dv">1</span><span class="op">};</span></span>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>println<span class="op">(</span><span class="st">&quot;Passi        Errore&quot;</span><span class="op">)</span></span>
 <span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i<span class="op">{};</span> i <span class="op">&lt;</span> size<span class="op">(</span>steps<span class="op">);</span> i<span class="op">++)</span> <span class="op">{</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> estimated_value<span class="op">{</span>myInt<span class="op">.</span>integrate<span class="op">(</span>steps<span class="op">[</span>i<span class="op">],</span> f<span class="op">)};</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> estimated_value<span class="op">{</span>myInt<span class="op">.</span>integrate<span class="op">(</span>a<span class="op">,</span> b<span class="op">,</span> steps<span class="op">[</span>i<span class="op">],</span> f<span class="op">)};</span></span>
 <span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> err<span class="op">{</span>fabs<span class="op">(</span>estimated_value <span class="op">-</span> true_value<span class="op">)};</span></span>
 <span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  println<span class="op">(</span><span class="st">&quot;</span><span class="sc">{:12d}</span><span class="st"> </span><span class="sc">{:20.8e}</span><span class="st">&quot;</span><span class="op">,</span> steps<span class="op">[</span>i<span class="op">],</span> err<span class="op">);</span></span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  <span class="va">g_errore</span><span class="op">.</span>SetPoint<span class="op">(</span>i<span class="op">,</span> myInt<span class="op">.</span>GetH<span class="op">(),</span> err<span class="op">);</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  <span class="va">g_errore</span><span class="op">.</span>SetPoint<span class="op">(</span>i<span class="op">,</span> myInt<span class="op">.</span>get_h<span class="op">(</span>a<span class="op">,</span> b<span class="op">,</span> steps<span class="op">[</span>i<span class="op">]),</span> err<span class="op">);</span></span>
 <span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 <h2 id="e-i-test">E i test?</h2>
 <p>Da oggi non fornirò più direttamente il codice delle funzioni <code>test_??()</code>. Fornirò però una implementazione <em>completa</em> di ogni esercizio scritta nel linguaggio Julia. È un linguaggio molto semplice da leggere, ma il fatto che sia diverso dal C++ impedirà di “barare” facendo copia-e-incolla dei miei esempi.</p>
