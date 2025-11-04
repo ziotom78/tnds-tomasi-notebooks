@@ -156,7 +156,7 @@ x_k = a + \left(k + \frac12 \right) h,\qquad k = 0, 1, \ldots, N - 1.
 <span id="cb2-58"><a href="#cb2-58" aria-hidden="true" tabindex="-1"></a>        exit<span class="op">(</span><span class="dv">1</span><span class="op">);</span></span>
 <span id="cb2-59"><a href="#cb2-59" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
 <span id="cb2-60"><a href="#cb2-60" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-61"><a href="#cb2-61" aria-hidden="true" tabindex="-1"></a>    <span class="dt">double</span> h<span class="op">{(</span>b <span class="op">-</span> a<span class="op">)</span> <span class="op">/</span> nstep<span class="op">};</span></span>
+<span id="cb2-61"><a href="#cb2-61" aria-hidden="true" tabindex="-1"></a>    <span class="dt">double</span> h<span class="op">{</span>get_h<span class="op">(</span>a<span class="op">,</span> b<span class="op">,</span> nstep<span class="op">)};</span></span>
 <span id="cb2-62"><a href="#cb2-62" aria-hidden="true" tabindex="-1"></a>    <span class="dt">double</span> sum<span class="op">{};</span></span>
 <span id="cb2-63"><a href="#cb2-63" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-64"><a href="#cb2-64" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i<span class="op">{};</span> i <span class="op">&lt;</span> nstep<span class="op">;</span> i<span class="op">++)</span> <span class="op">{</span></span>

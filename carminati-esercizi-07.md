@@ -109,7 +109,7 @@ private:
         exit(1);
     }
 
-    double h{(b - a) / nstep};
+    double h{get_h(a, b, nstep)};
     double sum{};
 
     for (int i{}; i < nstep; i++) {
