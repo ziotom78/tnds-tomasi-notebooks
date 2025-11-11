@@ -39,7 +39,7 @@ L'algoritmo può essere implementato con uno schema del tipo *classe madre astra
 -   La classe implementa (tra le varie cose) un metodo virtuale puro
 
     ```c++
-    virtual double calculate(int step, FunzioneBase & f) = 0;
+    virtual double calculate(double a, double b, int step, FunzioneBase & f) = 0;
     ```
 
 -   Il metodo `calculate` è definito come `private` e non può essere invocato all'esterno della classe. Esso viene invocato dal metodo pubblico (stavolta sì!) `integrate`, che si preoccupa di verificare gli estremi `a` e `b` e li scambia se `a > b`.
@@ -98,8 +98,8 @@ public:
   Midpoint() : Integral() {}
 
 private:
-  double calculate(double a, double b,
-                   int nstep, FunzioneBase &f) override {
+  double calculate(double a, double b, int nstep,
+                   FunzioneBase &f) override {
     // Ricordare: in quest'implementazione possiamo
     // assumere che a < b, perché il controllo
     // viene fatto da `Integral::integrate`
@@ -260,7 +260,7 @@ Concludiamo l'esercitazione implementando l'integrazione della funzione $x \sin 
 2.  Possiamo implementare come nei casi precedenti un metodo privato
 
     ```c++
-    double calculate(int nstep, FunzioneBase & f) override { ... }
+    double calculate(double a, double b, int nstep, FunzioneBase & f) override { ... }
     ```
 
 3.  Il punto che ci interessa maggiormente è realizzare un metodo dei trapezi che lavori a precisione fissata. Noi implementeremo il calcolo a precisione fissata solo per il metodo dei trapezi, quindi non toccheremo la classe `Integral`; di conseguenza, implementeremo solo un metodo `integrate_prec` in `Trapezi`:
@@ -277,7 +277,7 @@ Concludiamo l'esercitazione implementando l'integrazione della funzione $x \sin 
     class Trapezoids : public Integral {
     private:
       // Metodo dei trapezi con NUMERO DI PASSI fissato (come negli esercizi 7.0 e 7.1)
-      double calculate(int nstep,
+      double calculate(double a, double b, int nstep,
                        FunzioneBase & f) override { ... }
      // Metodo dei trapezi con PRECISIONE FISSATA (nuovo!). Questo metodo si
       // implementa direttamente come pubblico
