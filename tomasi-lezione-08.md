@@ -39,7 +39,7 @@
 
 # Svantaggio #2: controlli
 
--   È impossibile per il compilatore sapere se due variabili `std::vector` hanno lo stesso numero di elementi
+-   G++ non sa se due `std::vector` hanno lo stesso numero di elementi
 
 -   Dobbiamo verificare noi a mano che le dimensioni di vettori siano compatibili:
 
@@ -65,10 +65,9 @@
       virtual vector<double> Eval(const vector<double> &x) = 0;
     };
 
+    // Che oscillatore è questo? Monodimensionale? Bidimensionale?
     struct OscillatoreArmonico : FunzioneVettorialeBase {
       [[nodiscard]] vector<double> Eval(const vector<double> &x) override {
-        // Lo spazio delle fasi è a 2 dimensioni, ma questo è chiaro solo
-        // se si contano gli elementi del vettore restituito!
         return vector<double>{x[1], -x[0]};
       }
     };
@@ -143,9 +142,13 @@
     std::array a{1.0, 2.0, 3.0, 4.0};             // …"double" and "4" are redundant!
     ```
 
+---
+
+![](images/stack-vs-heap.svg)
+
 # Uso negli esercizi
 
--   L'anno scorso ho proposto agli alunni più volonterosi di usare `std::array`, per questi motivi:
+-   Vi suggerisco caldamente di usare `std::array`:
 
     1.  Il codice è circa 10 volte più veloce, e questo è importante soprattutto se si devono fare Monte Carlo di problemi con equazioni differenziali;
 
@@ -153,7 +156,7 @@
 
     3.  Non è necessario implementare controlli sulla dimensione degli array, perché ci pensa il compilatore.
 
--   Questo è il primo anno in cui ho aggiornato la pagina [carminati-esercizi-08.html](carminati-esercizi-08.html) perché usi `std::array`!
+-   La mia versione degli esercizi [carminati-esercizi-08.html](carminati-esercizi-08.html) usa `std::array`
 
 
 # Controlli
@@ -205,7 +208,7 @@
 
 -   Nel seminario spiego le differenze tra di loro, mostro come sono progettati i rispettivi compilatori, e do indicazioni su come scegliere lo strumento di lavoro migliore.
 
--   Se siete interessati, compilate il Google Form all'indirizzo <https://forms.gle/saJjERRmYR6KxPpe9>: alla fine del semestre contatterò chi l'ha compilato per decidere la data migliore per tutti.
+-   Se siete interessati, compilate il Google Form all'indirizzo <https://forms.gle/6hSRQWh7QNdVj33u6>: alla fine del semestre contatterò chi l'ha compilato per decidere la data migliore per tutti.
 
 ---
 title: "Laboratorio di TNDS -- Lezione 8"

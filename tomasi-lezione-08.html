@@ -156,8 +156,8 @@ occupata da altre variabili.</p></li>
 <section id="svantaggio-2-controlli" class="slide level1">
 <h1>Svantaggio #2: controlli</h1>
 <ul>
-<li><p>È impossibile per il compilatore sapere se due variabili
-<code>std::vector</code> hanno lo stesso numero di elementi</p></li>
+<li><p>G++ non sa se due <code>std::vector</code> hanno lo stesso numero
+di elementi</p></li>
 <li><p>Dobbiamo verificare noi a mano che le dimensioni di vettori siano
 compatibili:</p>
 <div class="sourceCode" id="cb3"><pre
@@ -185,13 +185,12 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb4-1"><a href="#c
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">virtual</span> vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> Eval<span class="op">(</span><span class="at">const</span> vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> <span class="op">&amp;</span>x<span class="op">)</span> <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="kw">struct</span> OscillatoreArmonico <span class="op">:</span> FunzioneVettorialeBase <span class="op">{</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="op">[[</span><span class="at">nodiscard</span><span class="op">]]</span> vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> Eval<span class="op">(</span><span class="at">const</span> vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> <span class="op">&amp;</span>x<span class="op">)</span> <span class="kw">override</span> <span class="op">{</span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Lo spazio delle fasi è a 2 dimensioni, ma questo è chiaro solo</span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    <span class="co">// se si contano gli elementi del vettore restituito!</span></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;{</span>x<span class="op">[</span><span class="dv">1</span><span class="op">],</span> <span class="op">-</span>x<span class="op">[</span><span class="dv">0</span><span class="op">]};</span></span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code></pre></div></li>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co">// Che oscillatore è questo? Monodimensionale? Bidimensionale?</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="kw">struct</span> OscillatoreArmonico <span class="op">:</span> FunzioneVettorialeBase <span class="op">{</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  <span class="op">[[</span><span class="at">nodiscard</span><span class="op">]]</span> vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> Eval<span class="op">(</span><span class="at">const</span> vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> <span class="op">&amp;</span>x<span class="op">)</span> <span class="kw">override</span> <span class="op">{</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> vector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;{</span>x<span class="op">[</span><span class="dv">1</span><span class="op">],</span> <span class="op">-</span>x<span class="op">[</span><span class="dv">0</span><span class="op">]};</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code></pre></div></li>
 </ul>
 </section>
 <section id="uso-di-stdarray" class="slide level1">
@@ -271,11 +270,14 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb9-1"><a href="#c
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="bu">std::</span>array a<span class="op">{</span><span class="fl">1.0</span><span class="op">,</span> <span class="fl">2.0</span><span class="op">,</span> <span class="fl">3.0</span><span class="op">,</span> <span class="fl">4.0</span><span class="op">};</span>             <span class="co">// …&quot;double&quot; and &quot;4&quot; are redundant!</span></span></code></pre></div></li>
 </ul>
 </section>
+<section class="slide level1">
+
+<p><img data-src="images/stack-vs-heap.svg" /></p>
+</section>
 <section id="uso-negli-esercizi" class="slide level1">
 <h1>Uso negli esercizi</h1>
 <ul>
-<li><p>L’anno scorso ho proposto agli alunni più volonterosi di usare
-<code>std::array</code>, per questi motivi:</p>
+<li><p>Vi suggerisco caldamente di usare <code>std::array</code>:</p>
 <ol type="1">
 <li><p>Il codice è circa 10 volte più veloce, e questo è importante
 soprattutto se si devono fare Monte Carlo di problemi con equazioni
@@ -285,9 +287,9 @@ differenziali;</p></li>
 <li><p>Non è necessario implementare controlli sulla dimensione degli
 array, perché ci pensa il compilatore.</p></li>
 </ol></li>
-<li><p>Questo è il primo anno in cui ho aggiornato la pagina <a
-href="carminati-esercizi-08.html">carminati-esercizi-08.html</a> perché
-usi <code>std::array</code>!</p></li>
+<li><p>La mia versione degli esercizi <a
+href="carminati-esercizi-08.html">carminati-esercizi-08.html</a> usa
+<code>std::array</code></p></li>
 </ul>
 </section>
 <section id="controlli" class="slide level1">
@@ -343,8 +345,8 @@ di Febbraio.</p></li>
 progettati i rispettivi compilatori, e do indicazioni su come scegliere
 lo strumento di lavoro migliore.</p></li>
 <li><p>Se siete interessati, compilate il Google Form all’indirizzo <a
-href="https://forms.gle/saJjERRmYR6KxPpe9"
-class="uri">https://forms.gle/saJjERRmYR6KxPpe9</a>: alla fine del
+href="https://forms.gle/6hSRQWh7QNdVj33u6"
+class="uri">https://forms.gle/6hSRQWh7QNdVj33u6</a>: alla fine del
 semestre contatterò chi l’ha compilato per decidere la data migliore per
 tutti.</p></li>
 </ul>

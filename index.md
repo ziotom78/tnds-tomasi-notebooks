@@ -30,7 +30,7 @@
 [julia08]: https://ziotom78.github.io/tnds-notebooks/lezione08/
 [julia10]: https://ziotom78.github.io/tnds-notebooks/lezione10/
 
-[pdf]: 2025-11-12 Equazioni differenziali Tomasi.pdf
+[pdf]: 2025-11-11 Equazioni differenziali Tomasi.pdf
 
 <center>
 | Data       | Esercizi                                  | Spiegazione                                                     |
@@ -42,8 +42,8 @@
 | 2025-10-21 | [Classi ed ereditarietà][es05]            | [Lezione 5][slide05]                                            |
 | 2025-10-28 | [Ricerca di zeri][es06]                   | [Lezione 6][slide06]                                            |
 | 2025-11-04 | [Quadratura numerica][es07]               | [Notebook 7][julia07]                                           |
-<!--
 | 2025-11-11 | [Equazioni differenziali][es08]           | [Notebook 8][julia08], [slides][slide08], [esempio svolto][pdf] |
+<!--
 | 2025-11-18 | Idem                                      |                                                                 |
 | 2025-11-25 | [Numeri pseudo-casuali e integrali][es10] | [Notebook 10 & 11][julia10]                                     |
 | 2025-12-02 | Idem                                      | Idem                                                            |
@@ -51,9 +51,8 @@
 -->
 </center>
 
-<!--
-Link al Google Form per il [seminario su C++, Python e Julia](tomasi-lezione-08.html#/seminario-su-c-python-e-julia): <https://forms.gle/saJjERRmYR6KxPpe9>. [Slides](tomasi-c++-python-julia.html).
--->
+Link al Google Form per il [seminario su C++, Python e Julia](tomasi-lezione-08.html#/seminario-su-c-python-e-julia): <https://forms.gle/6hSRQWh7QNdVj33u6>. [Slides](tomasi-c++-python-julia.html).
+
 
 # Configurare il proprio laptop {#configure-your-laptop}
 
