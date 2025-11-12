@@ -200,6 +200,30 @@
     Eulero<2> myEuler;  // Metodo di Eulero per un'equazione di secondo grado
     ```
 
+# `[[maybe_unused]]` {#maybe_unused}
+
+# Parametri non utilizzati
+
+-   Può capitare che nell’implementazione di un metodo derivato non occorra usare uno dei parametri previsti dal metodo della classe base.
+
+-   Ad esempio, nel codice che svilupperete questa settimana e la prossima dovrete prevedere che la funzione base dipenda sia da $t$ che da $x$ che da $v$; ma nel caso dell’oscillatore armonico libero, il tempo non figura nell’equazione $m \ddot{\mathbf{x}} = -k \mathbf{x}$.
+
+-   Col flag `-Werror` però, G++ si rifiuta di compilare codice che non usi **tutti** i parametri forniti ad una funzione
+
+# `[[maybe_unused]]`
+
+-   L’attributo `[[maybe_unused]]` può essere usato per indicare che in una particolare implementazione uno dei parametri non serve:
+
+    ```c++
+    [[nodiscard]] std::array<double, 2>
+    OscillatoreArmonico::Eval([[maybe_unused]] double t,    // ← !!!
+         const std::array<double, 2> &x) const override {
+      // Implementazione, dove *non* si usa `t`
+    }
+    ```
+
+-   Essendo un attributo come `[[nodiscard]]`, esso **non viene ereditato** (giustamente!), perché dipende dal modo in cui si fornisce quella particolare implementazione del metodo.
+
 # Seminario di fine semestre
 
 # Seminario su C++, Python e Julia

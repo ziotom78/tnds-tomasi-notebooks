@@ -173,7 +173,7 @@ public:
   OscillatoreArmonico(double omega0) : m_omega0{omega0} {}
 
   [[nodiscard]] std::array<double, 2>
-  Eval(double t,
+  Eval([[maybe_unused]] double t,  // *** Vedi annotazione sotto ***
        const std::array<double, 2> &x) const override {
     // Implementare il metodo
   }
@@ -195,7 +195,7 @@ public:
 template <size_t n> class Eulero : public EquazioneDifferenzialeBase<n> {
 public:
   [[nodiscard]] std::array<double, n>
-  Passo(double t, const std::array<double, n> &x, double h,
+  Passo([[maybe_unused]] double t, const std::array<double, n> &x, double h,
         const FunzioneVettorialeBase<n> &f) const override {
     // Implementare il metodo: basta una riga di codice per Eulero!
   }
@@ -238,6 +238,8 @@ inline void test_euler() {
   assert(are_close(x[1], 0.652516, 1e-6));
 }
 ```
+
+Notate l’attributo `[[maybe_unused]]` nel metodo `OscillatoreArmonico::Eval`; una spiegazione del suo uso è presente nelle [slide](tomasi-lezione-08.html#maybe_unused).
 
 Una volta implementate le classi (l'implementazione di Eulero è semplicissima se si usano le operazioni di algebra vettoriale), un possibile programma per risolvere l'esercizio è il seguente:
 

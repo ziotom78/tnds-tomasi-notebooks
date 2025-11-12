@@ -97,6 +97,24 @@
   <link rel="stylesheet" href="reveal.js-5.2.1/dist/theme/white.css" id="theme">
   <link rel="stylesheet" href="./css/custom.css"/>
   <link rel="stylesheet" href="./css/asciinema-player.css"/>
+  <script defer=""
+  src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <link rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css" />
 </head>
 <body>
   <div class="reveal">
@@ -330,6 +348,44 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb12-1"><a href="#
 l’istanza di <code>Eulero</code> così:</p>
 <div class="sourceCode" id="cb13"><pre
 class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>Eulero<span class="op">&lt;</span><span class="dv">2</span><span class="op">&gt;</span> myEuler<span class="op">;</span>  <span class="co">// Metodo di Eulero per un&#39;equazione di secondo grado</span></span></code></pre></div></li>
+</ul>
+</section>
+<section id="maybe_unused" class="slide level1">
+<h1><code>[[maybe_unused]]</code></h1>
+</section>
+<section id="parametri-non-utilizzati" class="slide level1">
+<h1>Parametri non utilizzati</h1>
+<ul>
+<li><p>Può capitare che nell’implementazione di un metodo derivato non
+occorra usare uno dei parametri previsti dal metodo della classe
+base.</p></li>
+<li><p>Ad esempio, nel codice che svilupperete questa settimana e la
+prossima dovrete prevedere che la funzione base dipenda sia da <span
+class="math inline">t</span> che da <span class="math inline">x</span>
+che da <span class="math inline">v</span>; ma nel caso dell’oscillatore
+armonico libero, il tempo non figura nell’equazione <span
+class="math inline">m \ddot{\mathbf{x}} = -k \mathbf{x}</span>.</p></li>
+<li><p>Col flag <code>-Werror</code> però, G++ si rifiuta di compilare
+codice che non usi <strong>tutti</strong> i parametri forniti ad una
+funzione</p></li>
+</ul>
+</section>
+<section id="maybe_unused-1" class="slide level1">
+<h1><code>[[maybe_unused]]</code></h1>
+<ul>
+<li><p>L’attributo <code>[[maybe_unused]]</code> può essere usato per
+indicare che in una particolare implementazione uno dei parametri non
+serve:</p>
+<div class="sourceCode" id="cb14"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="op">[[</span><span class="at">nodiscard</span><span class="op">]]</span> <span class="bu">std::</span>array<span class="op">&lt;</span><span class="dt">double</span><span class="op">,</span> <span class="dv">2</span><span class="op">&gt;</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>OscillatoreArmonico<span class="op">::</span>Eval<span class="op">([[</span><span class="at">maybe_unused</span><span class="op">]]</span> <span class="dt">double</span> t<span class="op">,</span>    <span class="co">// ← !!!</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">const</span> <span class="bu">std::</span>array<span class="op">&lt;</span><span class="dt">double</span><span class="op">,</span> <span class="dv">2</span><span class="op">&gt;</span> <span class="op">&amp;</span>x<span class="op">)</span> <span class="at">const</span> <span class="kw">override</span> <span class="op">{</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Implementazione, dove *non* si usa `t`</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div></li>
+<li><p>Essendo un attributo come <code>[[nodiscard]]</code>, esso
+<strong>non viene ereditato</strong> (giustamente!), perché dipende dal
+modo in cui si fornisce quella particolare implementazione del
+metodo.</p></li>
 </ul>
 </section>
 <section id="seminario-di-fine-semestre" class="slide level1">

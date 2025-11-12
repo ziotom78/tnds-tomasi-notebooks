@@ -15,7 +15,6 @@ Per risolvere questo esercizio si può seguire lo schema seguente:
 
 #.  Scrivere una classe `RandomGen` per la generazione di numeri casuali. La classe dovrà avere un costruttore che accetti un *seed* di input e si faccia carico di inizializzare i parametri del generatore ai valori nominali. La classe dovrà inoltre contenere un metodo che implementi un generatore lineare congruenziale di base e tutti i metodi necessari per le distribuzioni richieste.
 
-
 #.  Preparare un semplice `main` per provare le funzionalità della classe `RandomGen`, producendo quattro istogrammi per le distribuzioni indicate sopra.
 
 
@@ -24,12 +23,14 @@ Per risolvere questo esercizio si può seguire lo schema seguente:
 ```c++
 #pragma once
 
+#include <cinttypes>  // Definisce tipi come std::uint32_t
+
 class RandomGen {
 public:
-  RandomGen(unsigned int seed);
-  void SetA(unsigned int a) { m_a = a; }
-  void SetC(unsigned int c) { m_c = c; }
-  void SetM(unsigned int m) { m_m = m; }
+  RandomGen(std::uint32_t seed);
+  void SetA(std::uint32_t a) { m_a = a; }
+  void SetC(std::uint32_t c) { m_c = c; }
+  void SetM(std::uint32_t m) { m_m = m; }
 
   double Rand();  // Do not use [[nodiscard]]: people might want to throw away numbers!
   double Unif(double xmin, double xmax); // distribuzione uniforme
@@ -38,14 +39,30 @@ public:
   double GausAR(double mean, double sigma); // distribuzione gaussiana (Accept-Reject)
 
 private:
-  unsigned int m_a, m_c, m_m;
-  unsigned int m_seed;
+  std::uint32_t m_a, m_c, m_m;
+  std::uint32_t m_seed;
 };
 ```
 
-Il costruttore deve accettare un `unsigned int` come *seed* di input e inizializzare i parametri del generatore ai valori nominali `m_a = 1664525`, `m_c = 1013904223` e `m_m = 1U << 31`. È possibile usare altri valori per i parametri, come spiegato nella [pagina Wikipedia](https://en.m.wikipedia.org/wiki/Linear_congruential_generator#Parameters_in_common_use), ma vi consiglio di usare questi numeri in modo da poter confrontare i vostri risultati con quelli del [notebook Julia](https://ziotom78.github.io/tnds-notebooks/lezione10/#esercizio_101). (Nel notebook è anche spiegata la strana scrittura `1U << 31`).
+Il costruttore deve accettare un `unsigned int` come *seed* di input e inizializzare i parametri del generatore ai valori nominali `m_a = 1664525`, `m_c = 1013904223` e `m_m = 1U << 31`. È possibile usare altri valori per i parametri, come spiegato nella [pagina Wikipedia](https://en.m.wikipedia.org/wiki/Linear_congruential_generator#Parameters_in_common_use), ma vi consiglio di usare questi numeri in modo da poter confrontare i vostri risultati con quelli del [notebook Julia](https://ziotom78.github.io/tnds-notebooks/lezione10/#esercizio_100). (Nel notebook è anche spiegata la strana scrittura `1U << 31`).
 
-**Attenzione!** Qui è *indispensabile* usare `unsigned int`, perché il generatore lineare congruenziale si appoggia a una precisa semantica per gli *overflow*, che è garantita solo dai tipi `unsigned`. Quello che succede è che la formula matematica sopra spesso genera numeri troppo grandi per stare in 32 bit, ma questo è voluto perché `unsigned` gestisce gli overflow troncando i bit più significativi. Questa cosa *non* è vera per gli interi senza segno.
+**Attenzione!** È indispensabile usare un tipo *unsigned* come `std::uint32_t` nell’implementazione, perché il generatore lineare congruenziale si appoggia a una precisa semantica per gli *overflow*, che è garantita solo dai tipi senza segno. Quello che succede è che la formula matematica sopra spesso genera numeri troppo grandi per stare in 32 bit, ma questo è un effetto desiderato, perché `unsigned` gestisce gli overflow troncando i bit più significativi. Questo comportamento, richiesto dall’algoritmo, *non* è vero per gli interi senza segno come `int` e `std::int32_t`.
+
+## Tipi di dimensione fissata
+
+L’algoritmo di generazione fornito in classe è pensato per lavorare con numeri a 32 bit. Sulle macchine Linux e Windows moderne, il tipo `unsigned int` (così come `int`) è proprio di questa dimensione, ma lo standard C++ non garantisce ciò su **qualsiasi** macchina! Esistono infatti computer dove `unsigned int` ed `int` occupano 16 bit, soprattutto in sistemi *embedded* (schede elettroniche, montate ad esempio dentro strumenti scientifici).
+
+Per essere più sicuri della portabilità del codice, anziché usare `unsigned int` è consigliabile usare il tipo `std::uint32_t` (definito in `<cstdint>`). Esso è definito solo su macchine che supportano numeri a 32 bit, e in quel caso è **sempre** a 32 bit. (Esistono infatti sistemi che non sono in grado di gestire numeri a 32 bit: in quel caso, il nostro codice dovrebbe fallire la compilazione anziché produrre un eseguibile che fa calcoli sbagliati!)
+
+L’header [`<cstdint>`](https://en.cppreference.com/w/cpp/header/cstdint.html) contiene numerosi tipi che specificano esplicitamente la dimensione, come `uint8_t`, `int64_t`, etc. I tipi con dimensione esplicita sono così utili che in molti linguaggi la specifica delle dimensioni in bit di un tipo è incoraggiata ([Rust](https://doc.rust-lang.org/book/ch03-02-data-types.html), [Julia](https://docs.julialang.org/en/v1/manual/integers-and-floating-point-numbers/), [Crystal](https://crystal-lang.org/reference/1.18/syntax_and_semantics/literals/integers.html), [Zig](https://ziglang.org/documentation/master/#Primitive-Types)), se non addirittura obbligatoria ([Ada](https://www.adaic.org/resources/add_content/standards/05rm/html/RM-3-5-4.html), che permette persino di specificare limiti inferiori e superiori **arbitrari**).
+
+In aggiunta a ciò, [`<cstdint>`](https://en.cppreference.com/w/cpp/header/cstdint.html) fornisce anche tipi che specificano di avere *almeno* la dimensione desiderata (es., `uint_least32_t`), e tipi che garantiscono la massima velocità (`int_fast32_t`). Questa è la differenza “filosofica” tra essi:
+
+- `int8_t` indica che si vuole un tipo di **esattamente** 8 bit. Siccome non tutte le macchine supportano numeri a 8 bit, `int8_t` potrebbe non essere definito: in tal caso, un codice che lo usasse non compilerebbe.
+- `int_least8_t` indica che si desidera un tipo che contenga **almeno** 8 bit, evidentemente perché serve per memorizzare numeri positivi o negativi che potrebbero raggiungere al massimo il valore di un centinaio o poco più (un intero a 8 bit può contenere numeri nell’intervallo −128…127). Se la macchina fosse un microcontrollore a 16 bit, probabilmente `int_least8_t` sarebbe un alias a `int16_t`.
+- `int_fast8_t` indica che si vuole usare un tipo che abbia almeno 8 bit, e che sia il tipo **più veloce** sulla macchina a disposizione. Non è infatti detto che un tipo con pochi bit sia più veloce da usare di un tipo con molti bit, perché dipende dall’architettura della CPU e della memoria RAM Ad esempio, sulle macchine del laboratorio, `int_fast8_t` è probabilmente un alias a `int32_t`.
+
+A dimostrazione dell’importanza di garantire su ogni piattaforma una corretta dimensione per le variabili, a partire dal C++23 esiste anche l’header [`<stdfloat>`](https://en.cppreference.com/w/cpp/header/stdfloat.html), che, dove possibile, definisce i tipi `float16_t`, `float32_t` (alias di `float`), `float64_t` (alias di `double`) e `float128_t`.
 
 
 ## `main` per il test del generatore `RandomGen`
@@ -226,10 +243,10 @@ $$
 Qui sotto trovate una implementazione di tale metodo:
 
 ```c++
-double RandomGen::Gaus(double mean, double sigma) {
-  double s{Rand()};
-  double t{Rand()};
-  double x{sqrt(-2 * log(s)) * cos(2 * numbers::pi * t)};
+double RandomGen::Gauss(double mean, double sigma) {
+  const double s{Rand()};
+  const double t{Rand()};
+  const double x{sqrt(-2 * log(s)) * cos(2 * numbers::pi * t)};
   return mean + x * sigma;
 }
 ```
@@ -243,7 +260,7 @@ Il metodo accept-reject può essere utilizzato per generare numeri casuali distr
 
 Il metodo si basa sulla generazione di una coppia di numeri $x \in [a, b], y \in [0, M]$ dove $M$ è un numero maggiore del massimo valore assunto da $f(x)$ nell'intervallo $[a,b]$:
 $$
-f(x) \leq M\,quad \forall x \in [a, b].
+f(x) \leq M\quad \forall x \in [a, b].
 $$
 La coppia $(x, y)$ può essere facilmente generata a partire da due numeri $s$ e $t$ generati uniformemente in $[0,1]$ usando le formule
 
@@ -369,7 +386,7 @@ Come al solito possiamo pensare ad una interfaccia generica `IntegraleMC` dalla 
 class IntegraleMC {
 public:
   // Take the seed
-  IntegraleMC(unsigned int seed) : m_myrand{seed}, m_errore{}, m_punti{} {}
+  IntegraleMC(std::uint32_t seed) : m_myrand{seed}, m_errore{}, m_punti{} {}
   virtual ~IntegraleMC() {}
 
   virtual double Integra(const FunzioneBase & f, double inf, double sup, int punti, double fmax) = 0;
@@ -392,8 +409,6 @@ public:
 ```
 
 Alcune osservazioni:
-
--   Negli anni passati, il codice proposto sopra da Carminati dichiarava all'interno di `IntegraleMC` un **puntatore** a `RandomGen` (ossia, `m_myrand` era dichiarato come `RandomGen * m_myrand`), e questo obbligava ad invocare `new` nel costruttore e `delete` nel distruttore, nonché a definire un costruttore di copia e un *move constructor*. Quest'anno evitiamo di usare il puntatore, e quindi il codice è molto più semplice e più consono alla moderna programmazione C++. Ovviamente, per chiamare il costruttore occorre usare una *initialization list*, che noi ben conosciamo. Carminati propone [questa pagina](https://www.learncpp.com/cpp-tutorial/constructor-member-initializer-lists/) come approfondimento.
 
 -   Per salvare la struttura delle classi virtuale/concreta siamo stati costretti ad aggiungere il campo `fmax` anche ad `IntegraleMedia`, anche se non necessario: serve infatti soltanto per il metodo *hit-or-miss*. In questo caso non è veramente vantaggioso utilizzare questo tipo di schema.
 
@@ -616,7 +631,7 @@ Come di consueto, elenco alcuni errori molto comuni che ho trovato negli anni pa
 
     Alternativamente, se avete implementato un metodo `RandomGen::SetSeed()`, potete invocare `rnd.SetSeed(1)` prima di procedere con i test del metodo successivo.
 
--   Capita spesso che gli studenti, nell'implementare il costruttore `RandomGen::RandomGen(unsigned int seed)`, siano così preoccupati di inizializzare `m_a`, `m_c` e `m_m` ai valori giusti che si dimenticano di inizializzare `m_seed`! Questo porta il loro codice a produrre valori che sono casuali e distribuiti correttamente, ma **non** sono identici a quelli calcolati nel [notebook Julia](https://ziotom78.github.io/tnds-notebooks/lezione10/#esercizio_101), e quindi i test non passano.
+-   Capita spesso che gli studenti, nell'implementare il costruttore `RandomGen::RandomGen(std::uint32_t seed)`, siano così preoccupati di inizializzare `m_a`, `m_c` e `m_m` ai valori giusti che si dimenticano di inizializzare `m_seed`! Questo porta il loro codice a produrre valori che sono casuali e distribuiti correttamente, ma **non** sono identici a quelli calcolati nel [notebook Julia](https://ziotom78.github.io/tnds-notebooks/lezione10/#esercizio_101), e quindi i test non passano.
 
 -   In tutti gli esercizi di oggi dovete generare $N$ numeri casuali, per cui quindi serve implementare un ciclo `for`. Attenzione a **non** creare l'oggetto `RandomGen` all'interno del ciclo `for`, perché in tal caso il generatore parte sempre dallo stesso seme e quindi genera una sequenza di numeri tutti identici tra loro:
 
