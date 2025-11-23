@@ -536,6 +536,21 @@
   
 
     
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Consegna/consegna/" class="md-nav__link">
+        Consegna Esercizi
+      </a>
+    </li>
+  
+
+    
   </ul>
 </nav>
                   </div>
@@ -635,7 +650,7 @@ Per prima cosa impareremo a costruire un generatore di numeri casuali. Lo utiliz
 <li>Preparare un semplice <code>main</code> per provare le funzionalità della classe <code>RandomGen</code> producendo quattro istogrammi per le distribuzioni indicate sopra.</li>
 </ol>
 <details>
-<p><summary>Header file della classe RandomGen:: </summary></p>
+<p><summary>La classe RandomGen:: </summary></p>
 <p><div class="highlight"><pre><span></span><code><span class="cp">#ifndef __RANDOMGEN_H__</span>
 <span class="cp">#define __RANDOMGEN_H__</span>
 
@@ -643,11 +658,11 @@ Per prima cosa impareremo a costruire un generatore di numeri casuali. Lo utiliz
 
 <span class="k">public</span><span class="o">:</span>
 
-<span class="w">  </span><span class="n">RandomGen</span><span class="p">(</span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="p">);</span>
+<span class="w">  </span><span class="n">RandomGen</span><span class="p">(</span><span class="kt">uint32_t</span><span class="p">);</span>
 
-<span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="nf">SetA</span><span class="p">(</span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">a</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="n">m_a</span><span class="o">=</span><span class="n">a</span><span class="p">;}</span>
-<span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="nf">SetC</span><span class="p">(</span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">c</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="n">m_c</span><span class="o">=</span><span class="n">c</span><span class="p">;}</span>
-<span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="nf">SetM</span><span class="p">(</span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">m</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="n">m_m</span><span class="o">=</span><span class="n">m</span><span class="p">;}</span>
+<span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="nf">SetA</span><span class="p">(</span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">a</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="n">m_a</span><span class="o">=</span><span class="n">a</span><span class="p">;}</span>
+<span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="nf">SetC</span><span class="p">(</span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">c</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="n">m_c</span><span class="o">=</span><span class="n">c</span><span class="p">;}</span>
+<span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="nf">SetM</span><span class="p">(</span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">m</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="n">m_m</span><span class="o">=</span><span class="n">m</span><span class="p">;}</span>
 
 <span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="nf">Rand</span><span class="p">(</span><span class="w"> </span><span class="p">);</span><span class="w">                                  </span><span class="c1">// distribuzione uniforme tra 0 e 1</span>
 <span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="nf">Unif</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">xmin</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">xmax</span><span class="p">);</span><span class="w">           </span><span class="c1">// distribuzione uniforme tra xmin e xmax</span>
@@ -657,19 +672,23 @@ Per prima cosa impareremo a costruire un generatore di numeri casuali. Lo utiliz
 
 <span class="w"> </span><span class="k">private</span><span class="o">:</span>
 
-<span class="w">  </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">m_a</span><span class="p">,</span><span class="w"> </span><span class="n">m_c</span><span class="p">,</span><span class="w"> </span><span class="n">m_m</span><span class="p">;</span>
-<span class="w">  </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">m_seed</span><span class="p">;</span>
+<span class="w">  </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">m_a</span><span class="p">,</span><span class="w"> </span><span class="n">m_c</span><span class="p">,</span><span class="w"> </span><span class="n">m_m</span><span class="p">;</span>
+<span class="w">  </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">m_seed</span><span class="p">;</span>
 
 <span class="p">};</span>
 
 <span class="cp">#endif</span>
 </code></pre></div>
-Il costruttore deve accettare un <code>unsigned int</code> come <em>seed</em> di input e farsi carico di inizializzare i parametri del generatore ai valori nominali </p>
+Il costruttore deve accettare un <code>uint32_t</code> (unsigned int a 32 bits) )come <em>seed</em> di input e farsi carico di inizializzare i parametri del generatore ai valori nominali </p>
 <ul>
 <li>m_a = 1664525</li>
 <li>m_c = 1013904223 </li>
-<li>m_m = <script type="math/tex">2^{31}</script>.</li>
+<li>m_m = <script type="math/tex">2^{32}</script>.</li>
 </ul>
+<p>Notate che se utilizziamo <code>uint32_t</code> come tipo di variabile l'operazione di modulo si può ottenere implicitamente :</p>
+<p><div class="highlight"><pre><span></span><code><span class="n">m_seed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">m_a</span><span class="o">*</span><span class="n">m_seed</span><span class="o">+</span><span class="n">m_c</span><span class="p">);</span>
+</code></pre></div>
+dove l'operazione di modulo è omessa perché implicitamente realizzata dall'overflow nel tipo di variabile <code>uint32_t</code>.</p>
 </details>
 <details>
 <p><summary> Main per il test del generatore RandomGen: </summary></p>
