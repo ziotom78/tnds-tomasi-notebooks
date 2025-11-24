@@ -43,9 +43,9 @@
 | 2025-10-28 | [Ricerca di zeri][es06]                   | [Lezione 6][slide06]                                            |
 | 2025-11-04 | [Quadratura numerica][es07]               | [Notebook 7][julia07]                                           |
 | 2025-11-11 | [Equazioni differenziali][es08]           | [Notebook 8][julia08], [slides][slide08], [esempio svolto][pdf] |
-<!--
 | 2025-11-18 | Idem                                      |                                                                 |
 | 2025-11-25 | [Numeri pseudo-casuali e integrali][es10] | [Notebook 10 & 11][julia10]                                     |
+<!--
 | 2025-12-02 | Idem                                      | Idem                                                            |
 | 2025-12-09 | [Simulazione di esperimenti][es12]        | [Notebook 10 & 11][julia10]                                     |
 -->
