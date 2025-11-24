@@ -28,8 +28,6 @@ Per risolvere questo esercizio si può seguire lo schema seguente:
 class RandomGen {
 public:
   RandomGen(std::uint32_t seed);
-  void SetA(std::uint32_t a) { m_a = a; }
-  void SetC(std::uint32_t c) { m_c = c; }
 
   double Rand();  // Do not use [[nodiscard]]: people might want to throw away numbers!
   double Unif(double xmin, double xmax); // distribuzione uniforme

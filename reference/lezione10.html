@@ -660,10 +660,6 @@ Per prima cosa impareremo a costruire un generatore di numeri casuali. Lo utiliz
 
 <span class="w">  </span><span class="n">RandomGen</span><span class="p">(</span><span class="kt">uint32_t</span><span class="p">);</span>
 
-<span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="nf">SetA</span><span class="p">(</span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">a</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="n">m_a</span><span class="o">=</span><span class="n">a</span><span class="p">;}</span>
-<span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="nf">SetC</span><span class="p">(</span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">c</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="n">m_c</span><span class="o">=</span><span class="n">c</span><span class="p">;}</span>
-<span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="nf">SetM</span><span class="p">(</span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">m</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="n">m_m</span><span class="o">=</span><span class="n">m</span><span class="p">;}</span>
-
 <span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="nf">Rand</span><span class="p">(</span><span class="w"> </span><span class="p">);</span><span class="w">                                  </span><span class="c1">// distribuzione uniforme tra 0 e 1</span>
 <span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="nf">Unif</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">xmin</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">xmax</span><span class="p">);</span><span class="w">           </span><span class="c1">// distribuzione uniforme tra xmin e xmax</span>
 <span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="nf">Exp</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">lambda</span><span class="p">);</span><span class="w">                       </span><span class="c1">// distribuzione esponenziale con costante lambda</span>
@@ -672,7 +668,7 @@ Per prima cosa impareremo a costruire un generatore di numeri casuali. Lo utiliz
 
 <span class="w"> </span><span class="k">private</span><span class="o">:</span>
 
-<span class="w">  </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">m_a</span><span class="p">,</span><span class="w"> </span><span class="n">m_c</span><span class="p">,</span><span class="w"> </span><span class="n">m_m</span><span class="p">;</span>
+<span class="w">  </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">m_a</span><span class="p">,</span><span class="w"> </span><span class="n">m_c</span><span class="w"> </span><span class="p">;</span>
 <span class="w">  </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">m_seed</span><span class="p">;</span>
 
 <span class="p">};</span>
