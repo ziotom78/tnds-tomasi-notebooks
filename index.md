@@ -45,10 +45,8 @@
 | 2025-11-11 | [Equazioni differenziali][es08]           | [Notebook 8][julia08], [slides][slide08], [esempio svolto][pdf] |
 | 2025-11-18 | Idem                                      |                                                                 |
 | 2025-11-25 | [Numeri pseudo-casuali e integrali][es10] | [Notebook 10 & 11][julia10]                                     |
-<!--
 | 2025-12-02 | Idem                                      | Idem                                                            |
 | 2025-12-09 | [Simulazione di esperimenti][es12]        | [Notebook 10 & 11][julia10]                                     |
--->
 </center>
 
 Link al Google Form per il [seminario su C++, Python e Julia](tomasi-lezione-08.html#/seminario-su-c-python-e-julia): <https://forms.gle/6hSRQWh7QNdVj33u6>. [Slides](tomasi-c++-python-julia.html).
