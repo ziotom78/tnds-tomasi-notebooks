@@ -227,6 +227,21 @@ This is free software; see the source for copying conditions.  There is NO
 warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.</code></pre></li>
 </ul>
 </section>
+<section id="stile-di-programmazione-c" class="slide level1">
+<h1>“Stile” di programmazione C++</h1>
+<ul>
+<li><p>Il C++ è un linguaggio ricchissimo, e insegnanti diversi usano
+uno stile differente</p></li>
+<li><p>In questo turno del martedì vi suggerirò delle modifiche al
+codice proposto da Carminati che impiegano alcune caratteristiche
+recenti del C++</p></li>
+<li><p>Quando propongo un’alternativa all’implementazione data a lezione
+è sempre perché la considero migliore (più performante / meno facile
+commettere sbagli / più veloce da scrivere)</p></li>
+<li><p>Non è obbligatorio seguire queste mie indicazioni: usate lo stile
+C++ che preferite!</p></li>
+</ul>
+</section>
 <section id="esercizi-per-oggi" class="slide level1">
 <h1>Esercizi per oggi</h1>
 <ul>
@@ -332,42 +347,16 @@ laboratorio!</p></li>
 <section id="sistemare-vscode" class="slide level1">
 <h1>Sistemare VSCode</h1>
 <ul>
-<li><p>Di default VS Code richiede 5 GB di spazio su disco per
-ottimizzare i suggerimenti di completamento della sintassi (vedi <a
-href="https://github.com/microsoft/vscode-cpptools/issues/3347">discussione</a>).</p></li>
-<li><p>Ma gli studenti hanno a disposizione solo 1 GB di spazio nelle
-proprie home.</p></li>
-<li><p>Il problema non si manifesta mai chiaramente (ad esempio col
-messaggio “spazio su disco esaurito”), ma di volta in volta compaiono
-problemi diversi:</p>
-<ul>
-<li>Non riuscite più ad aprire nuovi tab in Firefox;</li>
-<li>Non potete più salvare i file nell’editor;</li>
-<li>Il compilatore non crea l’eseguibile producendo errori
-incomprensibili.</li>
-</ul></li>
-<li><p>È possibile disabilitare la cache o ridurla a un valore
-ragionevole modificando nelle impostazioni di VS Code la voce
-<em>Intellisense cache size</em>.</p></li>
-</ul>
-</section>
-<section class="slide level1">
-
-<iframe src="https://player.vimeo.com/video/630209637?h=fcc3022dd1&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" width="854" height="642" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen title="How to reduce the size of Intellisense cache">
-</iframe>
-</section>
-<section id="usare-visual-studio-code" class="slide level1">
-<h1>Usare Visual Studio Code</h1>
-<ul>
-<li><p>Potete scaricare ed installare <a
-href="https://code.visualstudio.com/">Visual Studio Code</a> anche sul
-vostro portatile: è gratuito e disponibile per Windows, Linux e Mac OS
-X. Per configurarlo in modo che sia usabile con programmi C/C++,
-eseguite dal terminale del vostro computer il comando</p>
-<pre><code>code --install-extension ms-vscode.cpptools</code></pre>
-<p>(Attenzione, se avete installato «Code OSS» il comando non funziona:
-occorre proprio la versione rilasciata da Microsoft per installare
-questa estensione).</p></li>
+<li><p>L’editor preferito dagli studenti è <a
+href="https://code.visualstudio.com/">Visual Studio Code</a>, che però
+sui computer del laboratorio non supporta l’estensione per la
+programmazione C++ a causa del limitato spazio su disco</p></li>
+<li><p>Se usate i computer del laboratorio, vi consiglio di usare Geany
+per editare i vostri programmi. Per configurarlo in modo che supporti il
+C++ 23, aprite un terminale ed eseguite questa riga:</p>
+<pre><code>/home/comune/labTNDS_programmi/setup-geany</code></pre></li>
+<li><p>Se usate il vostro computer portatile personale, VSCode o
+qualsiasi altro editor vanno benissimo.</p></li>
 </ul>
 </section>
 <section id="computer-del-laboratorio-12" class="slide level1">

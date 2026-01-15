@@ -53,6 +53,7 @@
 
     ![](images/gcc09-error.png)
 
+
 # Configurare il compilatore
 
 -   Con il GCC 14 invece, l’errore è il seguente:
@@ -82,6 +83,18 @@
     warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
     ```
 
+
+# “Stile” di programmazione C++
+
+-   Il C++ è un linguaggio ricchissimo, e insegnanti diversi usano uno stile differente
+
+-   In questo turno del martedì vi suggerirò delle modifiche al codice proposto da Carminati che impiegano alcune caratteristiche recenti del C++
+
+-   Quando propongo un’alternativa all’implementazione data a lezione è sempre perché la considero migliore (più performante / meno facile commettere sbagli / più veloce da scrivere)
+
+-   Non è obbligatorio seguire queste mie indicazioni: usate lo stile C++ che preferite!
+
+
 # Esercizi per oggi
 
 -   La spiegazione dettagliata degli esercizi si trova qui: [carminati-esercizi-01.html](carminati-esercizi-01.html).
@@ -94,6 +107,7 @@
     -   [Esercizio 1.3](carminati-esercizi-01.html#esercizio-1.3): Codice di analisi con overloading (variante del precedente)
 
 -   Dovrete leggere i dati dal file [`1941.txt`](1941.txt) (fate click col tasto destro e salvate il link nella vostra cartella di lavoro).
+
 
 # Esercizi per oggi
 
@@ -115,6 +129,7 @@ Mediana = 0.750602
 
 **Nota**: la *varianza* è il quadrato della *deviazione standard*;
 quest'ultima si indica anche con RMS (*Root Mean Square*).
+
 
 # Soluzioni attese
 
@@ -156,6 +171,7 @@ Potete svolgere gli esercizi in uno dei modi seguenti:
 1.   Usando il computer di laboratorio davanti a voi (per chi è in presenza);
 2.   Se avete un portatile con un compilatore C++ installato (ragionevolmente recente), potete svolgere l'esercizio su di esso. Vedete [questa pagina](configure-your-laptop.html) per indicazioni su come installare un compilatore C++ adatto.
 
+
 # Computer di laboratorio
 
 -   **Non** premete quello che sembra essere il pulsante on/off del monitor, perché in realtà **spegne il computer** (e manda una segnalazione al centro di calcolo).
@@ -165,32 +181,15 @@ Potete svolgere gli esercizi in uno dei modi seguenti:
 
 # Sistemare VSCode
 
--   Di default VS Code richiede 5 GB di spazio su disco per ottimizzare i suggerimenti di completamento della sintassi (vedi [discussione](https://github.com/microsoft/vscode-cpptools/issues/3347)).
+-   L’editor preferito dagli studenti è [Visual Studio Code](https://code.visualstudio.com/), che però sui computer del laboratorio non supporta l’estensione per la programmazione C++ a causa del limitato spazio su disco
 
--   Ma gli studenti hanno a disposizione solo 1 GB di spazio nelle proprie home.
-
--   Il problema non si manifesta mai chiaramente (ad esempio col messaggio “spazio su disco esaurito”), ma di volta in volta compaiono problemi diversi:
-
-    -   Non riuscite più ad aprire nuovi tab in Firefox;
-    -   Non potete più salvare i file nell'editor;
-    -   Il compilatore non crea l'eseguibile producendo errori incomprensibili.
-
--   È possibile disabilitare la cache o ridurla a un valore ragionevole modificando nelle impostazioni di VS Code la voce *Intellisense cache size*.
-
----
-
-<iframe src="https://player.vimeo.com/video/630209637?h=fcc3022dd1&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" width="854" height="642" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen title="How to reduce the size of Intellisense cache"></iframe>
-
-
-# Usare Visual Studio Code
-
--   Potete scaricare ed installare [Visual Studio Code](https://code.visualstudio.com/) anche sul vostro portatile: è gratuito e disponibile per Windows, Linux e Mac OS X. Per configurarlo in modo che sia usabile con programmi C/C++, eseguite dal terminale del vostro computer il comando
+-   Se usate i computer del laboratorio, vi consiglio di usare Geany per editare i vostri programmi. Per configurarlo in modo che supporti il C++ 23, aprite un terminale ed eseguite questa riga:
 
     ```
-    code --install-extension ms-vscode.cpptools
+    /home/comune/labTNDS_programmi/setup-geany
     ```
 
-    (Attenzione, se avete installato «Code OSS» il comando non funziona: occorre proprio la versione rilasciata da Microsoft per installare questa estensione).
+-   Se usate il vostro computer portatile personale, VSCode o qualsiasi altro editor vanno benissimo.
 
 
 # Computer del laboratorio (1/2)
@@ -291,7 +290,9 @@ Potete svolgere gli esercizi in uno dei modi seguenti:
 # `[[nodiscard]]`
 
 -   È sicuramente noioso dover scrivere `[[nodiscard]]` prima dei tipi di ritorno di funzioni e metodi
+
 -   Però mette al riparo da errori che sono impossibili in altri linguaggi. Ad esempio, in Ada è **sempre** un errore ignorare un valore di ritorno
+
 -   Volendo si può anche inserire un messaggio:
 
     ```c++
@@ -309,6 +310,7 @@ Potete svolgere gli esercizi in uno dei modi seguenti:
     ```
 
 -   È sufficiente usare `[[nodiscard]]` nel file `.h`: non c’è bisogno di ripeterlo nella definizione all’interno del file C++.
+
 
 # Uso di argc e argv
 
@@ -534,6 +536,7 @@ e di compilarli separatamente. In questo caso la struttura del
 
     (`CXXFLAGS` non serve quando si mettono insieme più file `.o`: la compilazione del codice C++ è già avvenuta).
 
+
 # Variabili automatiche
 
 GNU Make definisce alcune variabili speciali, dette [automatiche](https://www.gnu.org/software/make/manual/html_node/Automatic-Variables.html), che semplificano la scrittura del `Makefile`.
@@ -659,10 +662,10 @@ AsciinemaPlayer.create(
     // etc.
     ```
 
+
 # Motivo #1
 
--   Programmi complessi usano moltissimi `#include`. In questo caso si
-    tende a inserirli in ordine alfabetico, per individuare duplicati:
+-   Programmi complessi usano moltissimi `#include`. In questo caso si tende a inserirli in ordine alfabetico, per individuare duplicati:
 
     ```c++
     #include "subdiv.h"
@@ -675,39 +678,25 @@ AsciinemaPlayer.create(
     #include "vector.h"
     ```
 
--   Formattatori automatici di codice come `clang-format` riordinano
-    gli `#include`, mettendo `newton.h` **prima** di `vectors.h`: errore!
+-   Formattatori automatici di codice come `clang-format` riordinano gli `#include`, mettendo `newton.h` **prima** di `vectors.h`: errore!
+
 
 # Motivo #2
 
--   Ogni `#include` richiede tempo per la compilazione. Di tanto in
-    tanto nei progetti si fa un *purge* degli `#include` inutili: in
-    ogni file, si controlla se ci sono degli header che definiscono
-    cose non usate all'interno del file.
+-   Ogni `#include` richiede tempo per la compilazione. Di tanto in tanto nei progetti si fa un *purge* degli `#include` inutili: in ogni file, si controlla se ci sono degli header che definiscono cose non usate all'interno del file.
 
--   Ad esempio, una riga `#include "mp3.h"` all'interno di un file
-    sorgente in cui non si toccano affatto file MP3!
+-   Ad esempio, una riga `#include "mp3.h"` all'interno di un file sorgente in cui non si toccano affatto file MP3!
 
--   Nel nostro caso, i vettori definiti in `vector.h` potrebbero non
-    essere mai usati esplicitamente in `main.cpp`, magari perché in
-    esso si calcola semplicemente il periodo orbitale di un satellite
-    artificiale. Ma se ci sono dipendenze nascoste (come `newton.h`
-    che dipende da `vector.h`), questo è un problema!
+-   Nel nostro caso, i vettori definiti in `vector.h` potrebbero non essere mai usati esplicitamente in `main.cpp`, magari perché in esso si calcola semplicemente il periodo orbitale di un satellite artificiale. Ma se ci sono dipendenze nascoste (come `newton.h` che dipende da `vector.h`), questo è un problema!
+
 
 # Avvertenza su GNU Make
 
--   Quando avrete svolto gli esercizi di questa lezione, vi sarà
-    chiaro che la scrittura del `Makefile` è un processo lungo e
-    verboso.
+-   Quando avrete svolto gli esercizi di questa lezione, vi sarà chiaro che la scrittura del `Makefile` è un processo lungo e verboso.
 
--   Il comando `make` è stato [inventato nel
-    1976](https://onlinelibrary.wiley.com/doi/10.1002/spe.4380090402) da Stuart Feldman,
-    e funzionava su un computer PDP-11 (vedi slide seguente).
+-   Il comando `make` è stato [inventato nel 1976](https://onlinelibrary.wiley.com/doi/10.1002/spe.4380090402) da Stuart Feldman, e funzionava su un computer PDP-11 (vedi slide seguente).
 
--   Oggi più nessuno (neppure io!) usa GNU Make direttamente per
-    compilare codice C++. Per i vostri progetti futuri (oltre questo
-    corso) vi converrà usare sistemi più evoluti ed agili; tra questi,
-    il più usato in assoluto è [CMake](https://cmake.org/).
+-   Oggi più nessuno (neppure io!) usa GNU Make direttamente per compilare codice C++. Per i vostri progetti futuri (oltre questo corso) vi converrà usare sistemi più evoluti ed agili; tra questi, il più usato in assoluto è [CMake](https://cmake.org/).
 
 
 # Il PDP-11
@@ -727,7 +716,6 @@ AsciinemaPlayer.create(
   </tr>
 </table>
 
----
 
 # Uso di CMake
 
