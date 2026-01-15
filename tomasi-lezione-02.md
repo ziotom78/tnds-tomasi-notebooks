@@ -18,6 +18,13 @@
 -   [Esercizio 2.2](carminati-esercizi-02.html#esercizio-2.2) (da consegnare per l'esame scritto): è lo stesso tipo di esercizio della scorsa lezione, ma ora occorre usare quanto si è scritto per gli esercizi 2.0 e 2.1.
 
 
+# Configurare il compilatore
+
+-   Ricordo a tutti coloro che usano le macchine del laboratorio di configurare il compilatore GCC più recente
+
+-   Le istruzioni sono state date nelle [slide della prima lezione](tomasi-lezione-01.html#config-latest-gcc)
+
+
 # Velocità del codice
 
 # Calcolo della varianza

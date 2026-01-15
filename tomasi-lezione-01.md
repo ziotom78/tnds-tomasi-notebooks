@@ -30,6 +30,42 @@
 
 -   Cosa **molto** importante da fare, una volta per tutte (vedi [questo link](miscellanea.html#gcc))
 
+-   Il compilatore di default sulle macchine del laboratorio è molto vecchio (8.5, del 2021), ma è disponibile una versione più aggiornata (14.2, del 2025)
+
+-   È sempre meglio usare versioni aggiornate dei compilatori, perché i messaggi di errore si fanno sempre più chiari
+
+# Configurare il compilatore
+
+-   Ad esempio, considerate questo programma (sbagliato):
+
+    ```c++
+    #include <iostream>
+
+    class MyClass { public: int val{1}; };
+
+    int main() {
+        MyClass a();
+        std::cout << a.val << "\n";
+    }
+    ```
+
+-   Col compilatore di laboratorio, il messaggio di errore è il seguente:
+
+    ![](images/gcc09-error.png)
+
+# Configurare il compilatore
+
+-   Con il GCC 14 invece, l’errore è il seguente:
+
+    ![](images/gcc14-error.png)
+
+-   In questo caso il compilatore ha capito che il problema era nella riga `MyClass a()`, che non voleva le parentesi (`MyClass a`, oppure `MyClass a{}`).
+
+
+# Configurare il compilatore
+
+-   Potete configurare le macchine del laboratorio perché usino sempre GCC 14 quando vi connettete col vostro utente
+
 -   Aprite la finestra del terminale ed eseguite il comando
 
     ```

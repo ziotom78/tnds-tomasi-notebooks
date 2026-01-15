@@ -13,6 +13,13 @@
 -   [Esercizio 3.2](carminati-esercizi-03.html#esercizio-3.2): Analisi dati con `vector` e visualizzazione dei dati (da consegnare)
 
 
+# Configurare il compilatore
+
+-   Ricordo a tutti coloro che usano le macchine del laboratorio di configurare il compilatore GCC più recente
+
+-   Le istruzioni sono state date nelle [slide della prima lezione](tomasi-lezione-01.html#config-latest-gcc)
+
+
 # Test con `assert`
 
 # Test per esercizio 3.0
