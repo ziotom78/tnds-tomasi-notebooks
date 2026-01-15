@@ -193,9 +193,9 @@ Una volta installata l'applicazione, create una connessione SSH al computer `tol
 
 # Mac OS X
 
-Il sistema operativo Mac OS X già include il compilatore Clang, che potete invocare con `clang++`; esiste anche l'alias `g++`, che non fa altro che invocare `clang++`.
+Il sistema operativo Mac OS X già include il compilatore Clang, che potete invocare con `clang++`; esiste anche l'alias `g++`, che non fa altro che invocare `clang++`. Se avete però una versione vecchia del sistema operativo, potrebbe valere la pena aggiornarli. Installate [XCode dall'App Store](https://apps.apple.com/us/app/xcode/id497799835), che include anche molti strumenti in più.
 
-Se installate [XCode dall'App Store](https://apps.apple.com/us/app/xcode/id497799835), avrete probabilmente a disposizione un compilatore più aggiornato e strumenti in più.
+Attenzione però, perché XCode è molto voluminoso! Se avete problemi di spazio su disco o una cattiva connessione a Internet, è sufficiente installare gli [XCode Command Line Tools](https://developer.apple.com/documentation/xcode/installing-the-command-line-tools/) (che includono solo i compilatori da linea di comando). Sono più che sufficienti per questo laboratorio.
 
 
 # Linux
