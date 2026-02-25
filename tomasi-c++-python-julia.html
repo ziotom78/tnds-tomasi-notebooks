@@ -157,13 +157,13 @@ linguaggio macchina delle CPU.</li>
 <ul>
 <li><strong>Memoria volatile</strong>:
 <ul>
-<li>Registro (qualche kB, 64 bit/ciclo)</li>
+<li>Registro (un centinaio di byte, 64 bit/ciclo)</li>
 <li>Cache (128 kB–128 MB, 40-700 GB/s)</li>
-<li>RAM (4–64 GB, 10 GB/s)</li>
+<li>RAM (4–64 GB, 50 GB/s)</li>
 </ul></li>
 <li><strong>Memoria permanente</strong>:
 <ul>
-<li>Disco fisso SSD (1 GB/s)</li>
+<li>Disco fisso SSD (10 GB/s)</li>
 <li>Disco fisso HDD (120 MB/s)</li>
 </ul></li>
 </ul>
@@ -283,9 +283,8 @@ Quelle più diffuse sono:
 <ul>
 <li>x86_64: usata nella maggior parte dei desktop e dei laptop</li>
 <li>ARM: usata soprattutto nei cellulari e nei tablet, ma anche in
-console di gioco (Nintendo Switch) e alcuni laptop (Chromebooks)</li>
-<li>M1/M2/M3: simili ad ARM, sono montati sui computer Apple più
-recenti</li>
+console di gioco (Nintendo Switch) e alcuni laptop (Chromebooks). Anche
+i chip Apple M1/M2/M3/M4 sono di questo tipo</li>
 </ul></li>
 </ul>
 </section>
@@ -326,7 +325,7 @@ tramite l’assembler a rendere più veloce un loro programma C++</p></li>
 <li><p>Il programma doveva effettuare in modo efficiente una
 moltiplicazione di un intero per il numero 320. Il compilatore generava
 un banale prodotto, ma gli autori si accorsero che <span
-class="math inline">320 = 256 + 64 = 2^8 + 26</span> (vedi i dettagli
+class="math inline">320 = 256 + 64 = 2^8 + 2^6</span> (vedi i dettagli
 nel testo), e sfruttarono operazioni sui bit per rendere il prodotto più
 veloce</p></li>
 <li><p>Ricompilando il loro vecchio codice ai giorni nostri (il libro è
@@ -370,7 +369,7 @@ slide)</li>
 <strong>C++</strong>
 </td>
 <td>
-<strong>Assembler</strong> (x86_64)
+<strong>Assembler</strong> (x86_64, senza ottimizzazioni)
 </td>
 </tr>
 <tr>
@@ -390,7 +389,7 @@ class="sourceCode asm"><code class="sourceCode fasm"><span id="cb3-1"><a href="#
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">jge</span>  LoopEnd   <span class="co">; …then go to LoopEnd</span></span>
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="co">; (loop body: DO NOT MODIFY ecx NOR eax!)</span></span>
 <span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    <span class="bu">add</span>  <span class="kw">eax</span><span class="op">,</span> <span class="dv">1</span>    <span class="co">; eax ← eax + 1</span></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">jmp</span>  LoopTop   <span class="co">; Make the CPU jump back by `n` bytes</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">jmp</span>  LoopTop   <span class="co">; Make the CPU jump back</span></span>
 <span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="fu">LoopEnd:</span></span>
 <span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    <span class="co">; (etc.)</span></span></code></pre></div>
 </td>
@@ -406,7 +405,7 @@ o la RAM: nell’esempio, <code>n</code> era nella RAM mentre
 <li><p>Trovare la scelta ottimale è molto difficile (vedi <a
 href="https://en.wikipedia.org/wiki/Register_allocation">Wikipedia</a>)</p></li>
 <li><p>In passato il C/C++ offriva la parola chiave
-<code>register</code> (oggi deprecata):</p>
+<code>register</code> (rimossa a partire dal C++17):</p>
 <div class="sourceCode" id="cb4"><pre
 class="sourceCode c"><code class="sourceCode c"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> fn<span class="op">(</span><span class="dt">void</span><span class="op">)</span> <span class="op">{</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> a<span class="op">,</span> b<span class="op">;</span></span>
@@ -448,7 +447,6 @@ href="https://github.com/flang-compiler/flang">flang</a> (Fortran), <a
 href="https://crystal-lang.org/">Crystal</a>, <a
 href="https://swift.org/">Swift</a>, <a
 href="https://www.rust-lang.org/">Rust</a>, <a
-href="https://ziglang.org/">Zig</a>, <a
 href="https://julialang.org/">Julia</a></li>
 <li>Altri compilatori implementano un proprio generatore di codice
 assembler: <a href="https://freepascal.org/">FreePascal</a>, <a
@@ -490,7 +488,7 @@ Python</strong></li>
 <tr>
 <td>
 <div class="sourceCode" id="cb5"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;print&gt;</span></span>
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;print&gt;</span><span class="pp">  </span><span class="co">// C++23</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> result<span class="op">{};</span></span>
@@ -502,16 +500,21 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb5-1"><a href="#c
 </td>
 <td>
 <div class="sourceCode" id="cb6"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> <span class="bu">sum</span>(<span class="bu">range</span>(<span class="dv">10_000_000</span>))</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(result)</span></code></pre></div>
+class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> add(l):</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    accum <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> element <span class="kw">in</span> l:</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>        accum <span class="op">+=</span> element</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> accum</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(add(<span class="bu">range</span>(<span class="dv">10_000_000</span>)))</span></code></pre></div>
 </td>
 </tr>
 </table>
 <ul>
 <li>Il programma Python è più veloce da scrivere e più semplice da
 leggere</li>
-<li>Il programma C++ richiede 33 ms per l’esecuzione, quello Python
-150 ms (5 volte più lento!)</li>
+<li>Il programma C++ richiede 11 ms per l’esecuzione, quello Python
+350 ms (30 volte più lento!)</li>
 </ul>
 </section>
 <section id="velocità-di-python" class="slide level1">
@@ -521,8 +524,7 @@ leggere</li>
 nell’assembler di una <strong>macchina virtuale</strong> (la «Python
 virtual machine»)</li>
 <li>Questo codice non viene eseguito dalla CPU ma da un programma C, che
-lo converte <strong>in fase di esecuzione</strong> in una sequenza di
-istruzioni in linguaggio macchina</li>
+interpreta le istruzioni e le esegue una alla volta</li>
 <li>Questo approccio è più lento, ma ha alcuni vantaggi significativi:
 vediamoli in un esempio pratico</li>
 </ul>
@@ -756,7 +758,7 @@ href="https://pandas.pydata.org/">Pandas</a>…</li>
 2013)</li>
 <li>Pensato espressamente per il calcolo scientifico</li>
 <li>Veloce come C++ e facile come Python…?</li>
-<li>Versione corrente: 1.11.4</li>
+<li>Versione corrente: 1.12.5</li>
 </ul>
 </section>
 <section id="dove-si-colloca-julia" class="slide level1">
@@ -835,7 +837,8 @@ per Python in Julia non si specificano i tipi?</p>
 <ul>
 <li><p>Julia, a differenza di Python, compila il codice in linguaggio
 macchina. Ma la compilazione viene effettuata <strong>la prima volta che
-si chiede di eseguire una funzione</strong>.</p></li>
+si chiede di eseguire una funzione</strong>, e solo per i tipi specifici
+usati in quella chiamata</p></li>
 <li><p>Per esempio, nel momento in cui si scrive
 <code>mysum(1, 2)</code>, Julia esegue la compilazione assumendo che
 <code>a</code> e <code>b</code> siano due interi.</p></li>
@@ -867,11 +870,9 @@ AsciinemaPlayer.create(
 <section id="oop-e-julia" class="slide level1">
 <h1>OOP e Julia</h1>
 <ul>
-<li><p>Julia <strong>non</strong> implementa i costrutti
-<em>object-oriented</em> del C++: non ci sono classi né metodi
-virtuali.</p></li>
-<li><p>L’approccio OOP si è infatti dimostrato negli anni poco adatto
-per il calcolo scientifico. Consideriamo ad esempio
+<li><p>Julia <strong>non</strong> supporta le classi.</p></li>
+<li><p>L’approccio OOP “alla C++” si è infatti dimostrato negli anni
+poco adatto per il calcolo scientifico. Consideriamo ad esempio
 <code>FunzioneBase</code>, che ci è servita molte volte:</p>
 <div class="sourceCode" id="cb21"><pre
 class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> FunzioneBase <span class="op">{</span></span>
@@ -990,7 +991,8 @@ class="sourceCode julia"><code class="sourceCode julia"><span id="cb25-1"><a hre
 <li><p>In realtà, anche in C++ è possibile ottenere la versatilità di
 Julia, ma bisogna abbandonare l’approccio OOP.</p></li>
 <li><p>Se si definisse <code>UnitValue</code> come una classe template,
-si potrebbe combinare con la classe <code>Measurement</code>:</p>
+si potrebbe combinare con la classe <code>Measurement</code> (a patto
+però di ridefinire anche gli operatori!):</p>
 <div class="sourceCode" id="cb26"><pre
 class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="kw">template</span><span class="op">&lt;</span><span class="kw">typename</span> T<span class="op">&gt;</span> <span class="kw">struct</span> UnitValue <span class="op">{</span></span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>    T value<span class="op">;</span></span>
@@ -1011,13 +1013,14 @@ href="https://arma.sourceforge.net/">Armadillo</a>…)</p></li>
 <h1>Julia e le macro</h1>
 <ul>
 <li><p>Julia è un linguaggio <em>omoiconico</em> (“medesima
-rappresentazione”), che significa che codice e variabili hanno la stessa
-rappresentazione.</p></li>
+rappresentazione”), che significa che il codice è rappresentato come una
+struttura dati accessibile dal linguaggio stesso.</p></li>
 <li><p>Questa è una caratteristica mutuata dal linguaggio Scheme, da cui
 gli sviluppatori di Julia hanno preso spesso ispirazione. (Il cuore del
 compilatore di Julia è scritto in un dialetto di Scheme!)</p></li>
-<li><p>Le macro sono apparentemente simili alle funzioni del C++, ma
-hanno una importante differenza.</p></li>
+<li><p>Le macro di Julia sono apparentemente simili alle funzioni del
+C++, ma hanno una importante differenza (no, non hanno nulla a che
+vedere con <code>#define</code>!).</p></li>
 </ul>
 </section>
 <section id="esempio-di-funzione" class="slide level1">
@@ -1167,20 +1170,15 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb33-1"><a href="#
 <section id="generare-il-main" class="slide level1">
 <h1>Generare il <code>main</code></h1>
 <ul>
-<li><p>Julia non è adatto per scrivere programmi da linea di comando,
-così mi baserò su <a href="https://nim-lang.org/">Nim</a>, un altro
-linguaggio «omoiconico».</p></li>
 <li><p>La libreria <a
-href="https://github.com/c-blake/cligen">cligen</a> di Nim implementa
-una macro che, se fosse scritta per il C++, si userebbe così:</p>
+href="https://github.com/comonicon/Comonicon.jl">Comonicon.jl</a> (bel
+nome!) implementa una macro, <code>@main</code>, che, se fosse scritta
+per il C++, si userebbe così:</p>
 <div class="sourceCode" id="cb34"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> run_program<span class="op">(</span><span class="dt">double</span> a<span class="op">,</span> <span class="dt">double</span> b<span class="op">,</span> <span class="dt">int</span> nsteps_max<span class="op">,</span> <span class="dt">double</span> prec<span class="op">)</span> <span class="op">{</span></span>
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="er">@</span>main <span class="dt">int</span> run_program<span class="op">(</span><span class="dt">double</span> a<span class="op">,</span> <span class="dt">double</span> b<span class="op">,</span> <span class="dt">int</span> nsteps_max<span class="op">,</span> <span class="dt">double</span> prec<span class="op">)</span> <span class="op">{</span></span>
 <span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Here comes my program</span></span>
-<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
-<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a><span class="co">// Macro call… but C++ has not them, so let&#39;s mimick Julia&#39;s syntax</span></span>
-<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a><span class="er">@</span>define_main<span class="op">(</span>run_program<span class="op">);</span></span></code></pre></div>
-<p>La macro <code>@define_main</code> analizza i parametri di
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p>La macro <code>@main</code> analizza i parametri di
 <code>run_program</code> e genera automaticamente il <code>main</code>,
 usando <code>stod</code> e <code>stoi</code> in modo
 appropriato.</p></li>
@@ -1210,12 +1208,33 @@ $</code></pre>
 <section id="altre-applicazioni" class="slide level1">
 <h1>Altre applicazioni</h1>
 <ul>
-<li><p>Una volta che si ha a disposizione un linguaggio omoiconico, le
-possibilità sono illimitate</p></li>
+<li><p>Julia rende semplice l’implementazione della <em>differentiable
+programming</em>, in cui si possono calcolare automaticamente derivate
+esatte di funzioni o addirittura interi programmi, usando le macro e
+l’omoiconicità</p></li>
 <li><p>Un campo in cui Julia sta prendendo sempre più piede è quello
-dell’intelligenza artificiale</p></li>
-<li><p>Anche la fisica teorica e computazionale sono due campi in cui
-Julia si sta affermando sempre di più</p></li>
+dell’intelligenza artificiale: la differenziabilità è molto utile per
+ottimizzare reti neurali complesse</p></li>
+<li><p>Anche se è un concetto vecchio (è nato col LISP, che risale agli
+anni ’50!), l’enorme potenziale dell’omoiconicità non è stato
+probabilmente ancora ben sfruttato</p></li>
+</ul>
+</section>
+<section id="svantaggi-di-julia" class="slide level1">
+<h1>Svantaggi di Julia</h1>
+<ul>
+<li><p>Al momento è ancora molto complicato produrre degli eseguibili
+stand-alone (come il C++), il che rende complesso far girare programmi
+Julia su cluster HPC.</p></li>
+<li><p>Le librerie Julia tendono a “rompersi” facilmente quando escono a
+nuove versioni del linguaggio. (Ad esempio, Comonicon.jl non funziona
+con la versione più recente di Julia!)</p></li>
+<li><p>Il fatto che il compilatore debba sempre compilare in tempo reale
+le funzioni lo rende a volte lento nel “rispondere”, soprattutto se
+confrontato con Python.</p></li>
+<li><p>Alcuni paradigmi (es., il <em>multiple dispatch</em>, l’abbandono
+delle classi…) può richiedere uno sforzo significativo per chi viene da
+una esperienza di programmazione tradizionale ad oggetti.</p></li>
 </ul>
 </section>
 <section id="approfondimento-di-julia" class="slide level1">
@@ -1228,6 +1247,21 @@ un tipo di matrice con determinate simmetrie</li>
 <li>In un altro video <em>Alan Edelman and Julia Language</em> (<a
 href="https://youtu.be/rZS2LGiurKY">youtu.be/rZS2LGiurKY</a>), lo
 speaker spiega come calcolare efficacemente derivate con Julia</li>
+</ul>
+</section>
+<section id="conclusioni" class="slide level1">
+<h1>Conclusioni</h1>
+<p>Vi fornisco alcune regole generali per scegliere il linguaggio da
+usare nel vostro prossimo progetto:</p>
+<ul>
+<li><p><strong>C++</strong>: Programmi che devono girare molto
+velocemente e devono essere estremamente robusti; potenzialmente
+potreste volerli far girare anche tra anni.</p></li>
+<li><p><strong>Python</strong>: script che risolvono i piccoli problemi
+quotidiani, produzione di grafici e tabelle, uso di pacchetti Python
+standard (Intelligenza Artificiale…)</p></li>
+<li><p><strong>Julia</strong>: ricerca scientifica, nuovi modelli
+fisici, prototipi che richiedono elevata velocità di calcolo</p></li>
 </ul>
 </section>
     </div>

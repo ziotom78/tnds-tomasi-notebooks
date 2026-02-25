@@ -22,11 +22,11 @@
 # Tipi di memoria
 
 -   **Memoria volatile**:
-    -   Registro (qualche kB, 64 bit/ciclo)
+    -   Registro (un centinaio di byte, 64 bit/ciclo)
     -   Cache (128 kB–128 MB, 40-700 GB/s)
-    -   RAM (4–64 GB, 10 GB/s)
+    -   RAM (4–64 GB, 50 GB/s)
 -   **Memoria permanente**:
-    -   Disco fisso SSD (1 GB/s)
+    -   Disco fisso SSD (10 GB/s)
     -   Disco fisso HDD (120 MB/s)
 
 # Memoria volatile
@@ -111,8 +111,7 @@
     -    x86_64: usata nella maggior parte dei desktop e dei laptop
     -    ARM: usata soprattutto nei cellulari e nei tablet, ma anche
          in console di gioco (Nintendo Switch) e alcuni laptop
-         (Chromebooks)
-    -    M1/M2/M3: simili ad ARM, sono montati sui computer Apple più recenti
+         (Chromebooks). Anche i chip Apple M1/M2/M3/M4 sono di questo tipo
 
 # Compilatori
 
@@ -135,7 +134,7 @@
 
 -   Nel Capitolo 8 del bel libro di Bolboacă & Deák “[Debunking C++ myths](https://www.packtpub.com/en-us/product/debunking-c-myths-9781835884799)”, gli autori raccontano che negli anni ’90 riuscirono tramite l’assembler a rendere più veloce un loro programma C++
 
--   Il programma doveva effettuare in modo efficiente una moltiplicazione di un intero per il numero 320. Il compilatore generava un banale prodotto, ma gli autori si accorsero che $320 = 256 + 64 = 2^8 + 26$ (vedi i dettagli nel testo), e sfruttarono operazioni sui bit per rendere il prodotto più veloce
+-   Il programma doveva effettuare in modo efficiente una moltiplicazione di un intero per il numero 320. Il compilatore generava un banale prodotto, ma gli autori si accorsero che $320 = 256 + 64 = 2^8 + 2^6$ (vedi i dettagli nel testo), e sfruttarono operazioni sui bit per rendere il prodotto più veloce
 
 -   Ricompilando il loro vecchio codice ai giorni nostri (il libro è del 2024), gli autori hanno constatato che i compilatori moderni riescono a generare codice ancora più furbo e veloce del loro!
 
@@ -163,7 +162,7 @@
 **C++**
 </td>
 <td>
-**Assembler** (x86_64)
+**Assembler** (x86_64, senza ottimizzazioni)
 </td>
 </tr>
 <tr>
@@ -184,7 +183,7 @@ LoopTop:  ; This is a *label*, not an instruction
     jge  LoopEnd   ; …then go to LoopEnd
     ; (loop body: DO NOT MODIFY ecx NOR eax!)
     add  eax, 1    ; eax ← eax + 1
-    jmp  LoopTop   ; Make the CPU jump back by `n` bytes
+    jmp  LoopTop   ; Make the CPU jump back
 LoopEnd:
     ; (etc.)
 ```
@@ -196,7 +195,7 @@ LoopEnd:
 
 -   Per ogni dato, il compilatore deve decidere se usare un registro o la RAM: nell'esempio, `n` era nella RAM mentre `i` in un registro (`eax`)
 -   Trovare la scelta ottimale è molto difficile (vedi [Wikipedia](https://en.wikipedia.org/wiki/Register_allocation))
--   In passato il C/C++ offriva la parola chiave `register` (oggi deprecata):
+-   In passato il C/C++ offriva la parola chiave `register` (rimossa a partire dal C++17):
 
     ```c
     void fn(void) {
@@ -214,7 +213,7 @@ LoopEnd:
 # Altri linguaggi
 
 -   [GCC](https://gcc.gnu.org/) supporta molti linguaggi oltre al C++, usando lo stesso generatore di codice assembler: C e Objective-C (`gcc`), [D](https://wiki.dlang.org/GDC) (`gdc`), [Go](https://gcc.gnu.org/onlinedocs/gcc-9.3.0/gccgo/) (`gccgo`), [Fortran](https://gcc.gnu.org/onlinedocs/gcc-9.3.0/gfortran/) (`gfortran`), [Ada](https://gcc.gnu.org/onlinedocs/gcc-9.3.0/gnat_ugn/) (`gnat`).
--   La libreria LLVM è impiegata da molti compilatori: [clang](https://clang.llvm.org/) (C/Objective-C/C++), [LDC](https://wiki.dlang.org/LDC) (D), [flang](https://github.com/flang-compiler/flang) (Fortran), [Crystal](https://crystal-lang.org/), [Swift](https://swift.org/), [Rust](https://www.rust-lang.org/), [Zig](https://ziglang.org/), [Julia](https://julialang.org/)
+-   La libreria LLVM è impiegata da molti compilatori: [clang](https://clang.llvm.org/) (C/Objective-C/C++), [LDC](https://wiki.dlang.org/LDC) (D), [flang](https://github.com/flang-compiler/flang) (Fortran), [Crystal](https://crystal-lang.org/), [Swift](https://swift.org/), [Rust](https://www.rust-lang.org/), [Julia](https://julialang.org/)
 -   Altri compilatori implementano un proprio generatore di codice assembler: [FreePascal](https://freepascal.org/), [DMD](https://dlang.org/) (D), [Go](https://golang.org/), [Visual Studio](https://visualstudio.microsoft.com/vs/) (C/C++), etc.
 -   Alcuni linguaggi, come [Nim](https://nim-lang.org/), producono codice C, che va poi compilato da un compilatore C.
 
@@ -241,7 +240,7 @@ LoopEnd:
 <tr>
 <td>
 ```c++
-#include <print>
+#include <print>  // C++23
 
 int main() {
   double result{};
@@ -254,28 +253,26 @@ int main() {
 </td>
 <td>
 ```python
-result = sum(range(10_000_000))
-print(result)
+def add(l):
+    accum = 0
+    for element in l:
+        accum += element
+    return accum
+
+print(add(range(10_000_000)))
 ```
 </td>
 </tr>
 </table>
 
--   Il programma Python è più veloce da scrivere e più semplice da
-    leggere
--   Il programma C++ richiede 33 ms per l'esecuzione, quello Python
-    150 ms (5 volte più lento!)
+-   Il programma Python è più veloce da scrivere e più semplice da leggere
+-   Il programma C++ richiede 11 ms per l'esecuzione, quello Python 350 ms (30 volte più lento!)
 
 # Velocità di Python
 
--   Python non crea programmi nel linguaggio macchina della CPU, ma
-    nell’assembler di una **macchina virtuale** (la «Python virtual
-    machine»)
--   Questo codice non viene eseguito dalla CPU ma da un programma C,
-    che lo converte **in fase di esecuzione** in una sequenza di
-    istruzioni in linguaggio macchina
--   Questo approccio è più lento, ma ha alcuni vantaggi significativi:
-    vediamoli in un esempio pratico
+-   Python non crea programmi nel linguaggio macchina della CPU, ma nell’assembler di una **macchina virtuale** (la «Python virtual machine»)
+-   Questo codice non viene eseguito dalla CPU ma da un programma C, che interpreta le istruzioni e le esegue una alla volta
+-   Questo approccio è più lento, ma ha alcuni vantaggi significativi: vediamoli in un esempio pratico
 
 # Tipi e codice macchina
 
@@ -497,7 +494,7 @@ upper_flange         (T = 301.76 K)
 -   Linguaggio molto recente (versione 0.1 rilasciata a Febbraio 2013)
 -   Pensato espressamente per il calcolo scientifico
 -   Veloce come C++ e facile come Python…?
--   Versione corrente: 1.11.4
+-   Versione corrente: 1.12.5
 
 # Dove si colloca Julia?
 
@@ -570,16 +567,11 @@ per Python in Julia non si specificano i tipi?
 
 # Compilazione in Julia
 
--   Julia, a differenza di Python, compila il codice in linguaggio
-    macchina. Ma la compilazione viene effettuata **la prima volta che
-    si chiede di eseguire una funzione**.
+-   Julia, a differenza di Python, compila il codice in linguaggio macchina. Ma la compilazione viene effettuata **la prima volta che si chiede di eseguire una funzione**, e solo per i tipi specifici usati in quella chiamata
 
--   Per esempio, nel momento in cui si scrive `mysum(1, 2)`, Julia
-    esegue la compilazione assumendo che `a` e `b` siano due interi.
+-   Per esempio, nel momento in cui si scrive `mysum(1, 2)`, Julia esegue la compilazione assumendo che `a` e `b` siano due interi.
 
--   A differenza del C++, la compilazione non viene fatta su un intero
-    file, ma sulle **singole funzioni**: se una funzione non viene mai
-    chiamata, non viene mai compilata in linguaggio macchina.
+-   A differenza del C++, la compilazione non viene fatta su un intero file, ma sulle **singole funzioni**: se una funzione non viene mai chiamata, non viene mai compilata in linguaggio macchina.
 
 # Sessione interattiva
 
@@ -599,9 +591,9 @@ AsciinemaPlayer.create(
 
 # OOP e Julia
 
--   Julia **non** implementa i costrutti *object-oriented* del C++: non ci sono classi né metodi virtuali.
+-   Julia **non** supporta le classi.
 
--   L'approccio OOP si è infatti dimostrato negli anni poco adatto per il calcolo scientifico. Consideriamo ad esempio `FunzioneBase`, che ci è servita molte volte:
+-   L'approccio OOP “alla C++” si è infatti dimostrato negli anni poco adatto per il calcolo scientifico. Consideriamo ad esempio `FunzioneBase`, che ci è servita molte volte:
 
     ```c++
     class FunzioneBase {
@@ -698,7 +690,7 @@ Measurement operator+(Measurement a, Measurement b) {
 
 -   In realtà, anche in C++ è possibile ottenere la versatilità di Julia, ma bisogna abbandonare l'approccio OOP.
 
--   Se si definisse `UnitValue` come una classe template, si potrebbe combinare con la classe `Measurement`:
+-   Se si definisse `UnitValue` come una classe template, si potrebbe combinare con la classe `Measurement` (a patto però di ridefinire anche gli operatori!):
 
     ```c++
     template<typename T> struct UnitValue {
@@ -717,11 +709,11 @@ Measurement operator+(Measurement a, Measurement b) {
 
 # Julia e le macro
 
--   Julia è un linguaggio *omoiconico* (“medesima rappresentazione”), che significa che codice e variabili hanno la stessa rappresentazione.
+-   Julia è un linguaggio *omoiconico* (“medesima rappresentazione”), che significa che il codice è rappresentato come una struttura dati accessibile dal linguaggio stesso.
 
 -   Questa è una caratteristica mutuata dal linguaggio Scheme, da cui gli sviluppatori di Julia hanno preso spesso ispirazione. (Il cuore del compilatore di Julia è scritto in un dialetto di Scheme!)
 
--   Le macro sono apparentemente simili alle funzioni del C++, ma hanno una importante differenza.
+-   Le macro di Julia sono apparentemente simili alle funzioni del C++, ma hanno una importante differenza (no, non hanno nulla a che vedere con `#define`!).
 
 # Esempio di funzione
 
@@ -854,20 +846,15 @@ end
 
 # Generare il `main`
 
--   Julia non è adatto per scrivere programmi da linea di comando, così mi baserò su [Nim](https://nim-lang.org/), un altro linguaggio «omoiconico».
-
--   La libreria [cligen](https://github.com/c-blake/cligen) di Nim implementa una macro che, se fosse scritta per il C++, si userebbe così:
+-   La libreria [Comonicon.jl](https://github.com/comonicon/Comonicon.jl) (bel nome!) implementa una macro, `@main`, che, se fosse scritta per il C++, si userebbe così:
 
     ```c++
-	int run_program(double a, double b, int nsteps_max, double prec) {
+	@main int run_program(double a, double b, int nsteps_max, double prec) {
 	  // Here comes my program
 	}
-
-    // Macro call… but C++ has not them, so let's mimick Julia's syntax
-    @define_main(run_program);
     ```
 
-    La macro `@define_main` analizza i parametri di `run_program` e genera automaticamente il `main`, usando `stod` e `stoi` in modo appropriato.
+    La macro `@main` analizza i parametri di `run_program` e genera automaticamente il `main`, usando `stod` e `stoi` in modo appropriato.
 
 ---
 
@@ -894,19 +881,37 @@ $
 
 # Altre applicazioni
 
--   Una volta che si ha a disposizione un linguaggio omoiconico, le possibilità sono illimitate
+-   Julia rende semplice l’implementazione della *differentiable programming*, in cui si possono calcolare automaticamente derivate esatte di funzioni o addirittura interi programmi, usando le macro e l’omoiconicità
 
--   Un campo in cui Julia sta prendendo sempre più piede è quello dell'intelligenza artificiale
+-   Un campo in cui Julia sta prendendo sempre più piede è quello dell'intelligenza artificiale: la differenziabilità è molto utile per ottimizzare reti neurali complesse
 
--   Anche la fisica teorica e computazionale sono due campi in cui Julia si sta affermando sempre di più
+-   Anche se è un concetto vecchio (è nato col LISP, che risale agli anni ’50!), l’enorme potenziale dell’omoiconicità non è stato probabilmente ancora ben sfruttato
+
+
+# Svantaggi di Julia
+
+-   Al momento è ancora molto complicato produrre degli eseguibili stand-alone (come il C++), il che rende complesso far girare programmi Julia su cluster HPC.
+
+-   Le librerie Julia tendono a “rompersi” facilmente quando escono a nuove versioni del linguaggio. (Ad esempio, Comonicon.jl non funziona con la versione più recente di Julia!)
+
+-   Il fatto che il compilatore debba sempre compilare in tempo reale le funzioni lo rende a volte lento nel “rispondere”, soprattutto se confrontato con Python.
+
+-   Alcuni paradigmi (es., il *multiple dispatch*, l’abbandono delle classi…) può richiedere uno sforzo significativo per chi viene da una esperienza di programmazione tradizionale ad oggetti.
 
 # Approfondimento di Julia
 
 -   Nel video *Julia, the power of language* ([youtu.be/Zb8G6T8JtuM](https://youtu.be/Zb8G6T8JtuM)), lo speaker mostra varie applicazioni di Julia, tra cui l'implementazione di un tipo di matrice con determinate simmetrie
--   In un altro video *Alan Edelman and Julia Language*
-    ([youtu.be/rZS2LGiurKY](https://youtu.be/rZS2LGiurKY)), lo speaker
-    spiega come calcolare efficacemente derivate con Julia
+-   In un altro video *Alan Edelman and Julia Language* ([youtu.be/rZS2LGiurKY](https://youtu.be/rZS2LGiurKY)), lo speaker spiega come calcolare efficacemente derivate con Julia
 
+# Conclusioni
+
+Vi fornisco alcune regole generali per scegliere il linguaggio da usare nel vostro prossimo progetto:
+
+- **C++**: Programmi che devono girare molto velocemente e devono essere estremamente robusti; potenzialmente potreste volerli far girare anche tra anni.
+
+- **Python**: script che risolvono i piccoli problemi quotidiani, produzione di grafici e tabelle, uso di pacchetti Python standard (Intelligenza Artificiale…)
+
+- **Julia**: ricerca scientifica, nuovi modelli fisici, prototipi che richiedono elevata velocità di calcolo
 
 ---
 author: "Maurizio Tomasi"
