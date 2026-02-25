@@ -1,3 +1,8 @@
+
+![](media/seminar-qr-code.svg){height=640px}
+
+<https://ziotom78.github.io/tnds-tomasi-notebooks/tomasi-c++-python-julia.html>
+
 # C++
 
 # Funzionamento di un compilatore
@@ -48,7 +53,7 @@
 #
 
 ----------------------------------------- ------------------- -------------------------
-![](images/criceto.jpg){ height="128px" } Registri (6 kB)     ![](images/concorde.jpg){ height="128px" }
+![](images/criceto.jpg){ height="128px" } Registri (<1 kB)    ![](images/concorde.jpg){ height="128px" }
  ![](images/umbria.png){ height="128px" } RAM (8 GB)          ![](images/corridori.jpg){ height="128px" }
   ![](images/terra.jpg){ height="128px" } HD SSD da 1 TB      ![](images/passeggiata.jpg){ height="128px" }
 ----------------------------------------- ------------------- -------------------------
@@ -125,6 +130,8 @@
 
 <center>![](./images/bp_asm.png)</center>
 
+Esempio di codice Assembler (in verde) all’interno di un programma Pascal (Borland Pascal 7.0).
+
 ---
 
 <center>![](./images/byte-feb-1989-c-compilers.png){height=640px}</center>
@@ -195,7 +202,7 @@ LoopEnd:
 
 -   Per ogni dato, il compilatore deve decidere se usare un registro o la RAM: nell'esempio, `n` era nella RAM mentre `i` in un registro (`eax`)
 -   Trovare la scelta ottimale è molto difficile (vedi [Wikipedia](https://en.wikipedia.org/wiki/Register_allocation))
--   In passato il C/C++ offriva la parola chiave `register` (rimossa a partire dal C++17):
+-   In passato il C/C++ supportava la *keyword* `register` (rimossa col C++17):
 
     ```c
     void fn(void) {
@@ -307,8 +314,9 @@ print(add(range(10_000_000)))
     print(add('a', 'b'))  # Result: 'ab'
     ```
 
--   Come può Python compilare in un linguaggio assembler la funzione
-    `add`, visto che la somma può assumere significati diversi?
+-   Come può Python compilare in un linguaggio assembler la funzione `add`, visto che la somma può assumere significati diversi?
+
+-   La risposta è che Python non produce un vero assembler, ma un “assembler virtuale”, più astratto perché non legato a dell’hardware specifico!
 
 # Compilazione e Python
 
@@ -587,7 +595,7 @@ AsciinemaPlayer.create(
     });
 </script>
 
-# Abbandono della programmazione OOP
+# Julia e la programmazione OOP
 
 # OOP e Julia
 
@@ -914,7 +922,7 @@ Vi fornisco alcune regole generali per scegliere il linguaggio da usare nel vost
 - **Julia**: ricerca scientifica, nuovi modelli fisici, prototipi che richiedono elevata velocità di calcolo
 
 ---
-author: "Maurizio Tomasi"
+author: Maurizio Tomasi ([`maurizio.tomasi@unimi.it`](mailto:maurizio.tomasi@unimi.it))
 title: "C++, Python, Julia"
 date: "Università degli Studi di Milano"
 lang: italian

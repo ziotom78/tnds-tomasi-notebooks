@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="generator" content="pandoc">
-  <meta name="author" content="Maurizio Tomasi">
+  <meta name="author" content="Maurizio Tomasi (maurizio.tomasi@unimi.it)">
   <title>C++, Python, Julia</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -122,10 +122,18 @@
 
 <section id="title-slide">
   <h1 class="title">C++, Python, Julia</h1>
-  <p class="author">Maurizio Tomasi</p>
+  <p class="author">Maurizio Tomasi (<a
+href="mailto:maurizio.tomasi@unimi.it"><code>maurizio.tomasi@unimi.it</code></a>)</p>
   <p class="date">Università degli Studi di Milano</p>
 </section>
 
+<section class="slide level1">
+
+<p><img data-src="media/seminar-qr-code.svg" height="640" /></p>
+<p><a
+href="https://ziotom78.github.io/tnds-tomasi-notebooks/tomasi-c++-python-julia.html"
+class="uri">https://ziotom78.github.io/tnds-tomasi-notebooks/tomasi-c++-python-julia.html</a></p>
+</section>
 <section id="c" class="slide level1">
 <h1>C++</h1>
 </section>
@@ -194,7 +202,7 @@ specificando l’indirizzo numerico</p>
 <tbody>
 <tr>
 <td><img data-src="images/criceto.jpg" height="128" /></td>
-<td style="text-align: left;">Registri (6 kB)</td>
+<td style="text-align: left;">Registri (&lt;1 kB)</td>
 <td><img data-src="images/concorde.jpg" height="128" /></td>
 </tr>
 <tr>
@@ -305,6 +313,8 @@ programmi scritti in altri linguaggi!</p></li>
 <center>
 <img data-src="./images/bp_asm.png" />
 </center>
+<p>Esempio di codice Assembler (in verde) all’interno di un programma
+Pascal (Borland Pascal 7.0).</p>
 </section>
 <section class="slide level1">
 
@@ -404,8 +414,8 @@ o la RAM: nell’esempio, <code>n</code> era nella RAM mentre
 <code>i</code> in un registro (<code>eax</code>)</p></li>
 <li><p>Trovare la scelta ottimale è molto difficile (vedi <a
 href="https://en.wikipedia.org/wiki/Register_allocation">Wikipedia</a>)</p></li>
-<li><p>In passato il C/C++ offriva la parola chiave
-<code>register</code> (rimossa a partire dal C++17):</p>
+<li><p>In passato il C/C++ supportava la <em>keyword</em>
+<code>register</code> (rimossa col C++17):</p>
 <div class="sourceCode" id="cb4"><pre
 class="sourceCode c"><code class="sourceCode c"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> fn<span class="op">(</span><span class="dt">void</span><span class="op">)</span> <span class="op">{</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> a<span class="op">,</span> b<span class="op">;</span></span>
@@ -562,6 +572,9 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb9-1"><a hr
 <li><p>Come può Python compilare in un linguaggio assembler la funzione
 <code>add</code>, visto che la somma può assumere significati
 diversi?</p></li>
+<li><p>La risposta è che Python non produce un vero assembler, ma un
+“assembler virtuale”, più astratto perché non legato a dell’hardware
+specifico!</p></li>
 </ul>
 </section>
 <section id="compilazione-e-python" class="slide level1">
@@ -864,8 +877,8 @@ AsciinemaPlayer.create(
     });
 </script>
 </section>
-<section id="abbandono-della-programmazione-oop" class="slide level1">
-<h1>Abbandono della programmazione OOP</h1>
+<section id="julia-e-la-programmazione-oop" class="slide level1">
+<h1>Julia e la programmazione OOP</h1>
 </section>
 <section id="oop-e-julia" class="slide level1">
 <h1>OOP e Julia</h1>
